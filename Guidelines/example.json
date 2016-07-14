@@ -1,0 +1,57 @@
+{
+"users":{
+  "arjun324":{
+    "firstname":"Arjun",
+    "lastname": "S Kumar",
+    "dob":"14-2-2005",
+    "batting":"right hand",
+    "bowling":"right hand",
+    "order":"middle"
+  }
+},
+"battingcareer ":{
+  "arjun324":{
+    "Matches":123,
+  "innings":116,
+  "notout":12,
+  "runs":1028
+  }
+},
+"bowlingcareer":{
+   "arjun324":{
+    "Matches":123,
+  "wickets":50,
+  "over":100
+  }
+},
+"matches":{
+  "arjun324":{
+  "11-10-2015":{
+    "batting":{
+      "runs":100,
+      "ballsfaced":70,
+      "out":false,
+      "wayOfOut":"none"
+    },
+     "bowling":{
+      "over":10,
+      "wickets":0,
+      "runs":80
+    }
+  },
+    "21-10-2015":{
+    "batting":{
+      "runs":10,
+      "ballsfaced":8,
+      "out":true,
+      "wayOfOut":"runout"
+    },
+      "bowling":{
+      "over":1,
+      "wickets":3,
+      "runs":6
+  }
+}
+}
+}
+}
