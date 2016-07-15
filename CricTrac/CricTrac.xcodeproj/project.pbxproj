@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		46C983901D3922D200DFC607 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C9838F1D3922D200DFC607 /* AppDelegate.swift */; };
-		46C983921D3922D200DFC607 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983911D3922D200DFC607 /* ViewController.swift */; };
 		46C983951D3922D200DFC607 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46C983931D3922D200DFC607 /* Main.storyboard */; };
 		46C983971D3922D200DFC607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46C983961D3922D200DFC607 /* Assets.xcassets */; };
 		46C9839A1D3922D200DFC607 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46C983981D3922D200DFC607 /* LaunchScreen.storyboard */; };
 		46C983A51D3922D200DFC607 /* CricTracTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983A41D3922D200DFC607 /* CricTracTests.swift */; };
+		8958F5F31D392CA40028D5AA /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8958F5F21D392CA40028D5AA /* DashboardVC.swift */; };
+		895F2AD91D395C1F00CCBA77 /* performanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895F2AD81D395C1F00CCBA77 /* performanceCell.swift */; };
 		969786FFCE77D7FA1172017A /* Pods_CricTrac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADA948F8B3E9B5D978AF58E0 /* Pods_CricTrac.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,7 +31,6 @@
 		056D56ED7752D65D58DB4504 /* Pods-CricTrac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CricTrac.release.xcconfig"; path = "Pods/Target Support Files/Pods-CricTrac/Pods-CricTrac.release.xcconfig"; sourceTree = "<group>"; };
 		46C9838C1D3922D200DFC607 /* CricTrac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CricTrac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46C9838F1D3922D200DFC607 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		46C983911D3922D200DFC607 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		46C983941D3922D200DFC607 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		46C983961D3922D200DFC607 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		46C983991D3922D200DFC607 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -39,6 +39,8 @@
 		46C983A41D3922D200DFC607 /* CricTracTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricTracTests.swift; sourceTree = "<group>"; };
 		46C983A61D3922D200DFC607 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		549F76A86F0BF1CECAF26359 /* Pods-CricTrac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CricTrac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CricTrac/Pods-CricTrac.debug.xcconfig"; sourceTree = "<group>"; };
+		8958F5F21D392CA40028D5AA /* DashboardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
+		895F2AD81D395C1F00CCBA77 /* performanceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = performanceCell.swift; sourceTree = "<group>"; };
 		ADA948F8B3E9B5D978AF58E0 /* Pods_CricTrac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CricTrac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -92,8 +94,11 @@
 		46C9838E1D3922D200DFC607 /* CricTrac */ = {
 			isa = PBXGroup;
 			children = (
+				8958F5F51D392CCC0028D5AA /* Model */,
+				8958F5F41D392CC50028D5AA /* Services */,
+				8958F5F11D392B780028D5AA /* Controller */,
+				8958F5F01D39298D0028D5AA /* View */,
 				46C9838F1D3922D200DFC607 /* AppDelegate.swift */,
-				46C983911D3922D200DFC607 /* ViewController.swift */,
 				46C983931D3922D200DFC607 /* Main.storyboard */,
 				46C983961D3922D200DFC607 /* Assets.xcassets */,
 				46C983981D3922D200DFC607 /* LaunchScreen.storyboard */,
@@ -118,6 +123,36 @@
 				056D56ED7752D65D58DB4504 /* Pods-CricTrac.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		8958F5F01D39298D0028D5AA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				895F2AD81D395C1F00CCBA77 /* performanceCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		8958F5F11D392B780028D5AA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8958F5F21D392CA40028D5AA /* DashboardVC.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		8958F5F41D392CC50028D5AA /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		8958F5F51D392CCC0028D5AA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,8 +307,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46C983921D3922D200DFC607 /* ViewController.swift in Sources */,
 				46C983901D3922D200DFC607 /* AppDelegate.swift in Sources */,
+				8958F5F31D392CA40028D5AA /* DashboardVC.swift in Sources */,
+				895F2AD91D395C1F00CCBA77 /* performanceCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
