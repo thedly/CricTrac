@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  CrickTrac
+//  CricTrac
 //
 //  Created by Renjith on 7/15/16.
 //  Copyright © 2016 CricTrac. All rights reserved.

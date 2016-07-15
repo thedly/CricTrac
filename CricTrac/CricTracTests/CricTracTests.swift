@@ -1,15 +1,15 @@
 //
-//  CrickTracTests.swift
-//  CrickTracTests
+//  CricTracTests.swift
+//  CricTracTests
 //
 //  Created by Renjith on 7/15/16.
 //  Copyright © 2016 CricTrac. All rights reserved.
 //
 
 import XCTest
-@testable import CrickTrac
+@testable import CricTrac
 
-class CrickTracTests: XCTestCase {
+class CricTracTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
