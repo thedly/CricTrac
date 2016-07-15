@@ -13,6 +13,7 @@
 		46C983971D3922D200DFC607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46C983961D3922D200DFC607 /* Assets.xcassets */; };
 		46C9839A1D3922D200DFC607 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46C983981D3922D200DFC607 /* LaunchScreen.storyboard */; };
 		46C983A51D3922D200DFC607 /* CricTracTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983A41D3922D200DFC607 /* CricTracTests.swift */; };
+		969786FFCE77D7FA1172017A /* Pods_CricTrac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADA948F8B3E9B5D978AF58E0 /* Pods_CricTrac.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		056D56ED7752D65D58DB4504 /* Pods-CricTrac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CricTrac.release.xcconfig"; path = "Pods/Target Support Files/Pods-CricTrac/Pods-CricTrac.release.xcconfig"; sourceTree = "<group>"; };
 		46C9838C1D3922D200DFC607 /* CricTrac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CricTrac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46C9838F1D3922D200DFC607 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46C983911D3922D200DFC607 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -36,6 +38,8 @@
 		46C983A01D3922D200DFC607 /* CricTracTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CricTracTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		46C983A41D3922D200DFC607 /* CricTracTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricTracTests.swift; sourceTree = "<group>"; };
 		46C983A61D3922D200DFC607 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		549F76A86F0BF1CECAF26359 /* Pods-CricTrac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CricTrac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CricTrac/Pods-CricTrac.debug.xcconfig"; sourceTree = "<group>"; };
+		ADA948F8B3E9B5D978AF58E0 /* Pods_CricTrac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CricTrac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				969786FFCE77D7FA1172017A /* Pods_CricTrac.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,12 +61,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C967E7B250913E6D7917E87 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ADA948F8B3E9B5D978AF58E0 /* Pods_CricTrac.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		46C983831D3922D200DFC607 = {
 			isa = PBXGroup;
 			children = (
 				46C9838E1D3922D200DFC607 /* CricTrac */,
 				46C983A31D3922D200DFC607 /* CricTracTests */,
 				46C9838D1D3922D200DFC607 /* Products */,
+				7E6F0BCB575E577E73E4A55E /* Pods */,
+				0C967E7B250913E6D7917E87 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,6 +111,15 @@
 			path = CricTracTests;
 			sourceTree = "<group>";
 		};
+		7E6F0BCB575E577E73E4A55E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				549F76A86F0BF1CECAF26359 /* Pods-CricTrac.debug.xcconfig */,
+				056D56ED7752D65D58DB4504 /* Pods-CricTrac.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -103,9 +127,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 46C983A91D3922D200DFC607 /* Build configuration list for PBXNativeTarget "CricTrac" */;
 			buildPhases = (
+				82036D2546B5FC2D60598DC7 /* [CP] Check Pods Manifest.lock */,
 				46C983881D3922D200DFC607 /* Sources */,
 				46C983891D3922D200DFC607 /* Frameworks */,
 				46C9838A1D3922D200DFC607 /* Resources */,
+				5E8B1F5C8738D9C8715648D3 /* [CP] Embed Pods Frameworks */,
+				55D88E5487E4EE36E10220C8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -191,6 +218,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		55D88E5487E4EE36E10220C8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CricTrac/Pods-CricTrac-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5E8B1F5C8738D9C8715648D3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CricTrac/Pods-CricTrac-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		82036D2546B5FC2D60598DC7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		46C983881D3922D200DFC607 /* Sources */ = {
@@ -327,6 +402,7 @@
 		};
 		46C983AA1D3922D200DFC607 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 549F76A86F0BF1CECAF26359 /* Pods-CricTrac.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CricTrac/Info.plist;
@@ -338,6 +414,7 @@
 		};
 		46C983AB1D3922D200DFC607 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 056D56ED7752D65D58DB4504 /* Pods-CricTrac.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CricTrac/Info.plist;
@@ -390,6 +467,7 @@
 				46C983AB1D3922D200DFC607 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		46C983AC1D3922D200DFC607 /* Build configuration list for PBXNativeTarget "CricTracTests" */ = {
 			isa = XCConfigurationList;
@@ -398,6 +476,7 @@
 				46C983AE1D3922D200DFC607 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
