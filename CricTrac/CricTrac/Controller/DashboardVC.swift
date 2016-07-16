@@ -8,7 +8,7 @@
 
 import UIKit
 class DashboardVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     var _battingDetails = [String: String]()
     var _bowlingDetails = [String: String]()
     
@@ -62,7 +62,7 @@ class DashboardVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-   
+    
     
     
     
@@ -83,4 +83,4 @@ class DashboardVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     
     
-   }
+}
