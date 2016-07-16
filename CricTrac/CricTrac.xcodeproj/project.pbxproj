@@ -12,9 +12,9 @@
 		46C983971D3922D200DFC607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46C983961D3922D200DFC607 /* Assets.xcassets */; };
 		46C9839A1D3922D200DFC607 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46C983981D3922D200DFC607 /* LaunchScreen.storyboard */; };
 		46C983A51D3922D200DFC607 /* CricTracTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983A41D3922D200DFC607 /* CricTracTests.swift */; };
-		8958F5F31D392CA40028D5AA /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8958F5F21D392CA40028D5AA /* DashboardVC.swift */; };
-		895F2AD91D395C1F00CCBA77 /* performanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895F2AD81D395C1F00CCBA77 /* performanceCell.swift */; };
 		46C983B01D3927F000DFC607 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46C983AF1D3927F000DFC607 /* GoogleService-Info.plist */; };
+		46C983B21D39D82F00DFC607 /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983B11D39D82F00DFC607 /* DashboardVC.swift */; };
+		46C983B61D39D86800DFC607 /* performanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983B51D39D86800DFC607 /* performanceCell.swift */; };
 		969786FFCE77D7FA1172017A /* Pods_CricTrac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADA948F8B3E9B5D978AF58E0 /* Pods_CricTrac.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,9 +40,9 @@
 		46C983A41D3922D200DFC607 /* CricTracTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricTracTests.swift; sourceTree = "<group>"; };
 		46C983A61D3922D200DFC607 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		46C983AF1D3927F000DFC607 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		46C983B11D39D82F00DFC607 /* DashboardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardVC.swift; path = Controller/DashboardVC.swift; sourceTree = "<group>"; };
+		46C983B51D39D86800DFC607 /* performanceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = performanceCell.swift; path = View/performanceCell.swift; sourceTree = "<group>"; };
 		549F76A86F0BF1CECAF26359 /* Pods-CricTrac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CricTrac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CricTrac/Pods-CricTrac.debug.xcconfig"; sourceTree = "<group>"; };
-		8958F5F21D392CA40028D5AA /* DashboardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
-		895F2AD81D395C1F00CCBA77 /* performanceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = performanceCell.swift; sourceTree = "<group>"; };
 		ADA948F8B3E9B5D978AF58E0 /* Pods_CricTrac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CricTrac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -131,7 +131,7 @@
 		8958F5F01D39298D0028D5AA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				895F2AD81D395C1F00CCBA77 /* performanceCell.swift */,
+				46C983B51D39D86800DFC607 /* performanceCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -139,7 +139,7 @@
 		8958F5F11D392B780028D5AA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				8958F5F21D392CA40028D5AA /* DashboardVC.swift */,
+				46C983B11D39D82F00DFC607 /* DashboardVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -312,8 +312,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				46C983901D3922D200DFC607 /* AppDelegate.swift in Sources */,
-				8958F5F31D392CA40028D5AA /* DashboardVC.swift in Sources */,
-				895F2AD91D395C1F00CCBA77 /* performanceCell.swift in Sources */,
+				46C983B21D39D82F00DFC607 /* DashboardVC.swift in Sources */,
+				46C983B61D39D86800DFC607 /* performanceCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
