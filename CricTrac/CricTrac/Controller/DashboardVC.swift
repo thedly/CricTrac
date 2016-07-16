@@ -72,8 +72,7 @@ class DashboardVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         userPerformanceTable.dataSource = self
         userProfileImage.layer.cornerRadius = userProfileImage.frame.size.width / 2
         
-        
-        
+               
         _battingDetails = ["key1": "value1", "key2": "value2", "key3": "value3", "key4": "value4"]
         
         _bowlingDetails = ["bowlingkey1": "value1", "bowlingkey2": "value2", "bowlingkey3": "value3", "bowlingkey4": "value4"]
