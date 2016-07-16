@@ -1,5 +1,4 @@
 PODS:
-  - ACTabScrollView (0.2.4)
   - Firebase (3.3.0):
     - Firebase/Core (= 3.3.0)
   - Firebase/Analytics (3.3.0):
@@ -37,22 +36,11 @@ PODS:
     - GoogleSymbolUtilities (~> 1.0)
 
 DEPENDENCIES:
-  - ACTabScrollView (from `https://github.com/azurechen/ACTabScrollView.git`)
   - Firebase
   - Firebase/Auth
   - Firebase/Database
 
-EXTERNAL SOURCES:
-  ACTabScrollView:
-    :git: https://github.com/azurechen/ACTabScrollView.git
-
-CHECKOUT OPTIONS:
-  ACTabScrollView:
-    :commit: 52a7e857cba19b807b752e5a12a5b5bbe72a805b
-    :git: https://github.com/azurechen/ACTabScrollView.git
-
 SPEC CHECKSUMS:
-  ACTabScrollView: 0ebfd66ebe1eab4e794e3a973c0f2d556dd51ad0
   Firebase: 6250071f0e2440a5c4c67b8cb6b868f868237ac3
   FirebaseAnalytics: 0fd6532cb2c3d03cd5cf26ad295ccb091efd3104
   FirebaseAuth: 5efddc3fae47042b73585f083f956462be4f5b8e
@@ -64,6 +52,6 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
 
-PODFILE CHECKSUM: 75ec583fa4ef276b86533015247076a02d656268
+PODFILE CHECKSUM: 5c3490561c204d4e9590e914c4e73bd4b8411fe8
 
 COCOAPODS: 1.0.1
