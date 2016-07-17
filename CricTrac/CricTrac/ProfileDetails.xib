@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProfileDetails" id="jIU-GT-bSg" customClass="ProfileDetails" customModule="CricTrac" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="350" height="208"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="350" height="208"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="User" translatesAutoresizingMaskIntoConstraints="NO" id="8QS-MA-OuU">
+                        <rect key="frame" x="233" y="25" width="100" height="100"/>
+                        <color key="backgroundColor" red="0.84313725490000002" green="0.63137254899999995" blue="0.23137254900000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="8HH-FS-cbY"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="9j2-NT-qPX"/>
+                            <constraint firstAttribute="width" constant="100" id="L0o-0F-2JP"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="Y0B-7S-UcL"/>
+                            <constraint firstAttribute="height" constant="100" id="kIj-Kg-3TQ"/>
+                            <constraint firstAttribute="height" constant="100" id="kaa-Mk-Zdi"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="9j2-NT-qPX"/>
+                                <exclude reference="L0o-0F-2JP"/>
+                                <exclude reference="Y0B-7S-UcL"/>
+                                <exclude reference="kaa-Mk-Zdi"/>
+                            </mask>
+                        </variation>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="11 years 5 months" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRV-2N-s49">
+                        <rect key="frame" x="235" y="148" width="100" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="ZnO-UU-LMK"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ZnO-UU-LMK"/>
+                            </mask>
+                        </variation>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arjun s Kumar" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ya3-kI-DGN">
+                        <rect key="frame" x="234" y="131" width="100" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="nqw-E5-9r4"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="12"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="lVv-v8-loo">
+                        <rect key="frame" x="8" y="13" width="203" height="153"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="Heg-nu-vTJ">
+                                <rect key="frame" x="0.0" y="0.0" width="203" height="14"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="DOB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDF-Yb-arf">
+                                        <rect key="frame" x="0.0" y="0.0" width="85" height="14"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Feb 14 2005" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prk-2R-2Oe">
+                                        <rect key="frame" x="135" y="0.0" width="68" height="14"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Right Hand Batting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcS-Gb-xVR">
+                                <rect key="frame" x="0.0" y="24" width="203" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="203" id="11s-Pr-7Tn"/>
+                                    <constraint firstAttribute="height" constant="14" id="aKS-U3-FAg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Right Arm Medium" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n8h-V7-cbs">
+                                <rect key="frame" x="0.0" y="48" width="203" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="PEQ-KD-Tx6"/>
+                                    <constraint firstAttribute="width" constant="203" id="iTW-as-mVV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Middle Order Batsman" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJc-Fb-MIV">
+                                <rect key="frame" x="0.0" y="72" width="203" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="203" id="I0k-RD-wbb"/>
+                                    <constraint firstAttribute="height" constant="14" id="IVz-U3-VH5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="80 not out on dec 15th 2015 against Manyata Aditi" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLG-XX-1iP">
+                                <rect key="frame" x="0.0" y="96" width="203" height="57"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="SW1-K7-sqX"/>
+                                    <constraint firstAttribute="width" constant="203" id="wBw-Bh-Gau"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <color key="backgroundColor" red="0.77254901960784317" green="0.77254901960784317" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="oRV-2N-s49" secondAttribute="trailing" constant="15" id="Cff-fT-s8K"/>
+                <constraint firstAttribute="trailing" secondItem="ya3-kI-DGN" secondAttribute="trailing" constant="16" id="Fc9-ts-ixM"/>
+                <constraint firstItem="8QS-MA-OuU" firstAttribute="top" secondItem="jIU-GT-bSg" secondAttribute="top" constant="25" id="MJh-FP-buM"/>
+                <constraint firstItem="8QS-MA-OuU" firstAttribute="leading" secondItem="lVv-v8-loo" secondAttribute="trailing" constant="22" id="UYb-pT-Z4o"/>
+                <constraint firstItem="lVv-v8-loo" firstAttribute="top" secondItem="jIU-GT-bSg" secondAttribute="top" constant="27" id="ZJp-Pt-OXP"/>
+                <constraint firstItem="ya3-kI-DGN" firstAttribute="top" secondItem="8QS-MA-OuU" secondAttribute="bottom" constant="6" id="ahY-kM-2bv"/>
+                <constraint firstAttribute="trailing" secondItem="8QS-MA-OuU" secondAttribute="trailing" constant="17" id="b5m-r9-zcx"/>
+                <constraint firstItem="oRV-2N-s49" firstAttribute="top" secondItem="ya3-kI-DGN" secondAttribute="bottom" constant="2" id="gle-WT-Yjf"/>
+                <constraint firstItem="lVv-v8-loo" firstAttribute="leading" secondItem="jIU-GT-bSg" secondAttribute="leading" constant="8" id="y0n-DB-ed6"/>
+            </constraints>
+            <size key="customSize" width="350" height="208"/>
+            <connections>
+                <outlet property="profileImage" destination="8QS-MA-OuU" id="AiB-8z-pR4"/>
+                <outlet property="profileName" destination="ya3-kI-DGN" id="aOG-Zu-AyH"/>
+            </connections>
+            <point key="canvasLocation" x="546" y="280"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="User" width="50" height="50"/>
+    </resources>
+</document>

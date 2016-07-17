@@ -48,11 +48,11 @@ class DashboardVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
             
             cell.configureCell(currentKey, pValue: currentvalue)
             
-            return cell
+            return UITableViewCell()
         }
         else
         {
-            return performanceCell()
+            return UITableViewCell()
         }
     }
     
@@ -60,6 +60,11 @@ class DashboardVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
+    
+    
+    
+    
+    
     
     
     

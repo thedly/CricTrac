@@ -15,6 +15,10 @@
 		46C983B01D3927F000DFC607 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46C983AF1D3927F000DFC607 /* GoogleService-Info.plist */; };
 		46C983B21D39D82F00DFC607 /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983B11D39D82F00DFC607 /* DashboardVC.swift */; };
 		46C983B61D39D86800DFC607 /* performanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983B51D39D86800DFC607 /* performanceCell.swift */; };
+		892E1A8C1D3B4FB700EBF014 /* parallaxVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892E1A8B1D3B4FB700EBF014 /* parallaxVC.swift */; };
+		892E1A901D3B536B00EBF014 /* ProfileDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892E1A8F1D3B536B00EBF014 /* ProfileDetails.swift */; };
+		892E1A921D3B539200EBF014 /* ProfileDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = 892E1A911D3B539200EBF014 /* ProfileDetails.xib */; };
+		892E1A941D3B56FC00EBF014 /* PerformaceDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892E1A931D3B56FC00EBF014 /* PerformaceDetailsCell.swift */; };
 		969786FFCE77D7FA1172017A /* Pods_CricTrac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADA948F8B3E9B5D978AF58E0 /* Pods_CricTrac.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +47,10 @@
 		46C983B11D39D82F00DFC607 /* DashboardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardVC.swift; path = Controller/DashboardVC.swift; sourceTree = "<group>"; };
 		46C983B51D39D86800DFC607 /* performanceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = performanceCell.swift; path = View/performanceCell.swift; sourceTree = "<group>"; };
 		549F76A86F0BF1CECAF26359 /* Pods-CricTrac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CricTrac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CricTrac/Pods-CricTrac.debug.xcconfig"; sourceTree = "<group>"; };
+		892E1A8B1D3B4FB700EBF014 /* parallaxVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = parallaxVC.swift; sourceTree = "<group>"; };
+		892E1A8F1D3B536B00EBF014 /* ProfileDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDetails.swift; sourceTree = "<group>"; };
+		892E1A911D3B539200EBF014 /* ProfileDetails.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileDetails.xib; sourceTree = "<group>"; };
+		892E1A931D3B56FC00EBF014 /* PerformaceDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformaceDetailsCell.swift; sourceTree = "<group>"; };
 		ADA948F8B3E9B5D978AF58E0 /* Pods_CricTrac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CricTrac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -132,6 +140,8 @@
 			isa = PBXGroup;
 			children = (
 				46C983B51D39D86800DFC607 /* performanceCell.swift */,
+				892E1A8F1D3B536B00EBF014 /* ProfileDetails.swift */,
+				892E1A911D3B539200EBF014 /* ProfileDetails.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -140,6 +150,8 @@
 			isa = PBXGroup;
 			children = (
 				46C983B11D39D82F00DFC607 /* DashboardVC.swift */,
+				892E1A8B1D3B4FB700EBF014 /* parallaxVC.swift */,
+				892E1A931D3B56FC00EBF014 /* PerformaceDetailsCell.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -246,6 +258,7 @@
 				46C983B01D3927F000DFC607 /* GoogleService-Info.plist in Resources */,
 				46C983971D3922D200DFC607 /* Assets.xcassets in Resources */,
 				46C983951D3922D200DFC607 /* Main.storyboard in Resources */,
+				892E1A921D3B539200EBF014 /* ProfileDetails.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,7 +325,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				46C983901D3922D200DFC607 /* AppDelegate.swift in Sources */,
+				892E1A8C1D3B4FB700EBF014 /* parallaxVC.swift in Sources */,
+				892E1A901D3B536B00EBF014 /* ProfileDetails.swift in Sources */,
 				46C983B21D39D82F00DFC607 /* DashboardVC.swift in Sources */,
+				892E1A941D3B56FC00EBF014 /* PerformaceDetailsCell.swift in Sources */,
 				46C983B61D39D86800DFC607 /* performanceCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
