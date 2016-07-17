@@ -14,8 +14,6 @@ class DashboardVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     
     @IBOutlet weak var userPerformanceTable: UITableView!
-    @IBOutlet weak var battingView: UIView!
-    @IBOutlet weak var bowlingView: UIView!
     @IBOutlet weak var userProfileImage: UIImageView!
     @IBOutlet weak var tabs: UISegmentedControl!
     @IBAction func tabIndexChanged(sender: UISegmentedControl) {
@@ -73,9 +71,27 @@ class DashboardVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         userProfileImage.layer.cornerRadius = userProfileImage.frame.size.width / 2
         
                
-        _battingDetails = ["key1": "value1", "key2": "value2", "key3": "value3", "key4": "value4"]
+        _battingDetails = [
+            "Matches": "123",
+            "Innings": "116",
+            "Not Out": "12",
+            "Runs": "1028",
+            "High Score": "80",
+            "Average": "32",
+            "Balls Faced": "-",
+            "SR": "-",
+            "100s": "0",
+            "50s": "1",
+            "4s": "25",
+            "6s": "15"
+        ]
         
-        _bowlingDetails = ["bowlingkey1": "value1", "bowlingkey2": "value2", "bowlingkey3": "value3", "bowlingkey4": "value4"]
+        _bowlingDetails = [
+            "Overs": "12",
+            "Wickets": "5",
+            "Runs Given": "36",
+            "Bowling Average": "24.16"
+        ]
         
     }
     
