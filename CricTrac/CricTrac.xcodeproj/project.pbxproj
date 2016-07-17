@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		46C983901D3922D200DFC607 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C9838F1D3922D200DFC607 /* AppDelegate.swift */; };
-		46C983951D3922D200DFC607 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46C983931D3922D200DFC607 /* Main.storyboard */; };
 		46C983971D3922D200DFC607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46C983961D3922D200DFC607 /* Assets.xcassets */; };
 		46C9839A1D3922D200DFC607 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46C983981D3922D200DFC607 /* LaunchScreen.storyboard */; };
 		46C983A51D3922D200DFC607 /* CricTracTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983A41D3922D200DFC607 /* CricTracTests.swift */; };
@@ -19,6 +18,8 @@
 		892E1A901D3B536B00EBF014 /* ProfileDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892E1A8F1D3B536B00EBF014 /* ProfileDetails.swift */; };
 		892E1A921D3B539200EBF014 /* ProfileDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = 892E1A911D3B539200EBF014 /* ProfileDetails.xib */; };
 		892E1A941D3B56FC00EBF014 /* PerformaceDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892E1A931D3B56FC00EBF014 /* PerformaceDetailsCell.swift */; };
+		892E1A971D3BC8D100EBF014 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 892E1A951D3BC8D100EBF014 /* Main.storyboard */; };
+		892E1A991D3BD0CA00EBF014 /* AddNewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892E1A981D3BD0CA00EBF014 /* AddNewVC.swift */; };
 		969786FFCE77D7FA1172017A /* Pods_CricTrac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADA948F8B3E9B5D978AF58E0 /* Pods_CricTrac.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,7 +37,6 @@
 		056D56ED7752D65D58DB4504 /* Pods-CricTrac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CricTrac.release.xcconfig"; path = "Pods/Target Support Files/Pods-CricTrac/Pods-CricTrac.release.xcconfig"; sourceTree = "<group>"; };
 		46C9838C1D3922D200DFC607 /* CricTrac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CricTrac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46C9838F1D3922D200DFC607 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		46C983941D3922D200DFC607 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		46C983961D3922D200DFC607 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		46C983991D3922D200DFC607 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		46C9839B1D3922D200DFC607 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -51,6 +51,8 @@
 		892E1A8F1D3B536B00EBF014 /* ProfileDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDetails.swift; sourceTree = "<group>"; };
 		892E1A911D3B539200EBF014 /* ProfileDetails.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileDetails.xib; sourceTree = "<group>"; };
 		892E1A931D3B56FC00EBF014 /* PerformaceDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformaceDetailsCell.swift; sourceTree = "<group>"; };
+		892E1A961D3BC8D100EBF014 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		892E1A981D3BD0CA00EBF014 /* AddNewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewVC.swift; sourceTree = "<group>"; };
 		ADA948F8B3E9B5D978AF58E0 /* Pods_CricTrac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CricTrac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -105,12 +107,12 @@
 		46C9838E1D3922D200DFC607 /* CricTrac */ = {
 			isa = PBXGroup;
 			children = (
+				892E1A951D3BC8D100EBF014 /* Main.storyboard */,
 				8958F5F51D392CCC0028D5AA /* Model */,
 				8958F5F41D392CC50028D5AA /* Services */,
 				8958F5F11D392B780028D5AA /* Controller */,
 				8958F5F01D39298D0028D5AA /* View */,
 				46C9838F1D3922D200DFC607 /* AppDelegate.swift */,
-				46C983931D3922D200DFC607 /* Main.storyboard */,
 				46C983961D3922D200DFC607 /* Assets.xcassets */,
 				46C983981D3922D200DFC607 /* LaunchScreen.storyboard */,
 				46C9839B1D3922D200DFC607 /* Info.plist */,
@@ -152,6 +154,7 @@
 				46C983B11D39D82F00DFC607 /* DashboardVC.swift */,
 				892E1A8B1D3B4FB700EBF014 /* parallaxVC.swift */,
 				892E1A931D3B56FC00EBF014 /* PerformaceDetailsCell.swift */,
+				892E1A981D3BD0CA00EBF014 /* AddNewVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 				TargetAttributes = {
 					46C9838B1D3922D200DFC607 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 2986MKJ83K;
 					};
 					46C9839F1D3922D200DFC607 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -255,9 +259,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				46C9839A1D3922D200DFC607 /* LaunchScreen.storyboard in Resources */,
+				892E1A971D3BC8D100EBF014 /* Main.storyboard in Resources */,
 				46C983B01D3927F000DFC607 /* GoogleService-Info.plist in Resources */,
 				46C983971D3922D200DFC607 /* Assets.xcassets in Resources */,
-				46C983951D3922D200DFC607 /* Main.storyboard in Resources */,
 				892E1A921D3B539200EBF014 /* ProfileDetails.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -325,6 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46C983901D3922D200DFC607 /* AppDelegate.swift in Sources */,
+				892E1A991D3BD0CA00EBF014 /* AddNewVC.swift in Sources */,
 				892E1A8C1D3B4FB700EBF014 /* parallaxVC.swift in Sources */,
 				892E1A901D3B536B00EBF014 /* ProfileDetails.swift in Sources */,
 				46C983B21D39D82F00DFC607 /* DashboardVC.swift in Sources */,
@@ -352,20 +357,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		46C983931D3922D200DFC607 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				46C983941D3922D200DFC607 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		46C983981D3922D200DFC607 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				46C983991D3922D200DFC607 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		892E1A951D3BC8D100EBF014 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				892E1A961D3BC8D100EBF014 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -461,10 +466,13 @@
 			baseConfigurationReference = 549F76A86F0BF1CECAF26359 /* Pods-CricTrac.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CricTrac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ct.cricrac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -473,10 +481,13 @@
 			baseConfigurationReference = 056D56ED7752D65D58DB4504 /* Pods-CricTrac.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CricTrac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ct.cricrac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
