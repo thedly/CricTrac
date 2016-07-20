@@ -1,4 +1,5 @@
 PODS:
+  - CSStickyHeaderFlowLayout (0.2.10)
   - Firebase (3.3.0):
     - Firebase/Core (= 3.3.0)
   - Firebase/Analytics (3.3.0):
@@ -37,12 +38,14 @@ PODS:
   - IOStickyHeader (0.3.0)
 
 DEPENDENCIES:
+  - CSStickyHeaderFlowLayout
   - Firebase
   - Firebase/Auth
   - Firebase/Database
   - IOStickyHeader
 
 SPEC CHECKSUMS:
+  CSStickyHeaderFlowLayout: 5366582779d8b7c9ba9b9cc729c218cc23888776
   Firebase: 6250071f0e2440a5c4c67b8cb6b868f868237ac3
   FirebaseAnalytics: 0fd6532cb2c3d03cd5cf26ad295ccb091efd3104
   FirebaseAuth: 5efddc3fae47042b73585f083f956462be4f5b8e
@@ -55,6 +58,6 @@ SPEC CHECKSUMS:
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
   IOStickyHeader: 4550b071f8f3df73a361a3152aab8e5a3bae1ea8
 
-PODFILE CHECKSUM: 7d9ff17cdd631ffde855d861054b61c1d82d7fe2
+PODFILE CHECKSUM: 80a7fd5a9212e4b1bdec1dce826e02679efcc858
 
 COCOAPODS: 1.0.1

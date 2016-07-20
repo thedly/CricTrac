@@ -12,10 +12,11 @@ class ProfileDetails: UICollectionViewCell {
     
     @IBOutlet weak var profileName: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
-       
+    
     override func awakeFromNib() {
         self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width * 0.5
-       
     }
+    
+    
     
 }

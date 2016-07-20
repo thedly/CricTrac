@@ -16,34 +16,48 @@ class parallaxVC: UIViewController, UICollectionViewDataSource, UICollectionView
     
     var headerNib : UINib!;
 
-    let HEADER_TEXT_PERSONAL_INFO = "Personal info"
-    let HEADER_TEXT_PERFORMANCE = "Performance"
-    
     var _battingDetails = [String: String]()
     var _bowlingDetails = [String: String]()
     
     var data = [[String:String]]()
-    
+   
     @IBOutlet weak var headerText: UILabel!
     @IBOutlet weak var fixedHeader: UIView!
     @IBOutlet weak var performanceDetails: UICollectionView!
     
-    
+    var ProfileDetailsInstance: ProfileDetails!
+    var switchDemo: UISwitch!
     @IBOutlet weak var AddNewDataBtn: UIButton!
     
     
+    //addImageBtn.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
     
     @IBAction func tabChanged(sender: UISegmentedControl) {
         adjustLayout()
         
+//        if Tabs.selectedSegmentIndex == 2 {
+//            
+//            
+//            
+//           self.performanceDetails.setContentOffset(CGPointZero, animated: true)
+//            
+//        }
+//        else
+//        {
+//            
+//            self.performanceDetails?.scrollToItemAtIndexPath(NSIndexPath(forItem: 1, inSection: Tabs.selectedSegmentIndex), atScrollPosition: .Top, animated: true)
+//            
+//        }
+        
         
         
     }
-    @IBOutlet weak var Tabs: UISegmentedControl!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        //            self.performanceDetails?.scrollToItemAtIndexPath(NSIndexPath(forItem:  0, inSection: 0), atScrollPosition: .Top, animated: true)
         
         data = [
             [
@@ -93,21 +107,30 @@ class parallaxVC: UIViewController, UICollectionViewDataSource, UICollectionView
         ]
 
         
+//        switchDemo=UISwitch(frame:CGRectMake(150, 300, 0, 0));
+//        switchDemo.on = true
+//        switchDemo.setOn(true, animated: false);
+//        switchDemo.addTarget(self, action: "switchValueDidChange:", forControlEvents: .ValueChanged);
+        
+        
         self.setupCollectionView()
 
     }
 
+//    func switchValueDidChange(sender: UISwitch){
+//        print("switch changed")
+//    }
+    
     func setupCollectionView() {
         
         self.performanceDetails.dataSource = self
         self.performanceDetails.delegate = self
     
         
-adjustLayout()
-    
+        adjustLayout()
+        
         
         self.AddNewDataBtn.hidden = false
-        self.headerText.text = HEADER_TEXT_PERSONAL_INFO
     }
     
 
@@ -118,60 +141,44 @@ adjustLayout()
         
         self.headerNib = UINib(nibName: "ProfileDetails", bundle: NSBundle.mainBundle())
         
+        
+        
         if let layout: IOStickyHeaderFlowLayout = self.performanceDetails.collectionViewLayout as? IOStickyHeaderFlowLayout {
-            layout.parallaxHeaderReferenceSize = CGSizeMake(UIScreen.mainScreen().bounds.size.width, 274)
-            layout.parallaxHeaderMinimumReferenceSize = CGSizeMake(UIScreen.mainScreen().bounds.size.width, 0)
+            layout.parallaxHeaderReferenceSize = CGSizeMake(UIScreen.mainScreen().bounds.size.width + 4, 274)
+            layout.parallaxHeaderMinimumReferenceSize = CGSizeMake(UIScreen.mainScreen().bounds.size.width, 100)
+            
+            
+    
+            
             layout.itemSize = CGSizeMake(UIScreen.mainScreen().bounds.size.width, layout.itemSize.height)
             
             layout.parallaxHeaderAlwaysOnTop = true
-            layout.disableStickyHeaders = true
+            layout.disableStickyHeaders = false
             
             self.performanceDetails.collectionViewLayout = layout
         }
         self.performanceDetails.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, 0)
+        
+        
         self.performanceDetails.registerNib(self.headerNib, forSupplementaryViewOfKind: IOStickyHeaderParallaxHeader, withReuseIdentifier: "ProfileDetails")
         
-        self.performanceDetails.reloadData()
+        
+        
+        
+        //self.performanceDetails.reloadData()
+        
+        
     }
     
     
-        func scrollViewDidScroll(scrollView: UIScrollView) {
-            let scrollOffset = scrollView.contentOffset.y;
-
-            if (scrollOffset >= 274.0)
-            {
-                
-                self.headerText.text = HEADER_TEXT_PERFORMANCE
-            }
-            else
-            {
-                
-                self.headerText.text = HEADER_TEXT_PERSONAL_INFO
-            }
-            
-        }
     
     
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
     // MARK: UICollectionViewDataSource
 
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 2
+        return 1
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -190,34 +197,48 @@ adjustLayout()
         currentKey = data[indexPath.section].keys[index]
         currentvalue = data[indexPath.section][currentKey!]!
         
-        
-        
-        
-        
-        
-        
-        
-        
         cell.configureCell(currentKey!, pValue: currentvalue!)
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(UIScreen.mainScreen().bounds.size.width, 50);
+        return CGSizeMake(UIScreen.mainScreen().bounds.size.width, 34);
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 0;
+    }
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 15.0, bottom: 0, right: 15.0)
+    }
+    func tabsChanged(sender: UISegmentedControl){
+        print("tab changed")
     }
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         switch kind {
-        case IOStickyHeaderParallaxHeader:
-            let cell = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "ProfileDetails", forIndexPath: indexPath) as! ProfileDetails
-            return cell
+        
         case UICollectionElementKindSectionHeader:
             
-            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "performanceHeader", forIndexPath: indexPath) as! UICollectionReusableView
+            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "performanceHeader", forIndexPath: indexPath)
             
-            //headerView.backgroundColor = UIColor.blueColor();
+            let segCtrl = headerView.viewWithTag(200) as! UISegmentedControl
+
+            segCtrl.addTarget(self, action: "tabsChanged:", forControlEvents: .ValueChanged)
             
             return headerView
+        
+        case IOStickyHeaderParallaxHeader:
+            let cell = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "ProfileDetails", forIndexPath: indexPath) as! ProfileDetails
+            
+            return cell
+            
+        case UICollectionElementKindSectionFooter:
+            
+            let footerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "performanceFooter", forIndexPath: indexPath)
+            
+            return footerView
+       
         default:
             assert(false, "Unexpected element kind")
         }

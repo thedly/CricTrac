@@ -84,8 +84,10 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/CSStickyHeaderFlowLayout/CSStickyHeaderFlowLayout.framework"
   install_framework "$BUILT_PRODUCTS_DIR/IOStickyHeader/IOStickyHeader.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/CSStickyHeaderFlowLayout/CSStickyHeaderFlowLayout.framework"
   install_framework "$BUILT_PRODUCTS_DIR/IOStickyHeader/IOStickyHeader.framework"
 fi
