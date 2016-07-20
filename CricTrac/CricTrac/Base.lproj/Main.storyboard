@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="551-sd-9bt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="551-sd-9bt">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -99,13 +99,19 @@
                                 <state key="normal" title="BATTING">
                                     <color key="titleColor" red="0.42745098039215684" green="0.58039215686274503" blue="0.27843137254901962" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="BattingTabSelected:" destination="551-sd-9bt" eventType="touchUpInside" id="3aV-Ti-JS2"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GLl-Ps-VHR">
                                 <rect key="frame" x="112" y="211" width="72" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="BOWLING">
-                                    <color key="titleColor" red="0.84881810899999999" green="0.84881810899999999" blue="0.84881810899999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="BowlingTabSelected:" destination="551-sd-9bt" eventType="touchUpInside" id="eBh-qG-YgA"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ffi-9A-Tge">
                                 <rect key="frame" x="25" y="246" width="67" height="5"/>
@@ -164,6 +170,13 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nrj-El-F7E">
+                                <rect key="frame" x="112" y="246" width="74" height="5"/>
+                                <color key="backgroundColor" red="0.69411764710000001" green="0.14117647059999999" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="5" id="OeV-yu-jE0"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -174,12 +187,15 @@
                             <constraint firstItem="Vs1-Bb-WGn" firstAttribute="leading" secondItem="aCn-QP-HC6" secondAttribute="leading" id="5Jp-mw-nRO"/>
                             <constraint firstItem="SzI-jA-ccR" firstAttribute="top" secondItem="BhL-Fv-ED8" secondAttribute="bottom" constant="34" id="88z-Ho-Sfl"/>
                             <constraint firstItem="PTq-eN-EtG" firstAttribute="leading" secondItem="uew-bT-0yT" secondAttribute="leadingMargin" constant="24" id="Bbu-Xd-X5d"/>
+                            <constraint firstItem="BhL-Fv-ED8" firstAttribute="top" secondItem="Nrj-El-F7E" secondAttribute="bottom" constant="28" id="CNb-4k-0qS"/>
                             <constraint firstItem="iJS-Ij-f0P" firstAttribute="top" secondItem="UbT-1c-N4l" secondAttribute="bottom" constant="20" id="CiX-GH-L1x"/>
                             <constraint firstItem="5IT-4S-ORv" firstAttribute="top" secondItem="6iG-Yc-LoR" secondAttribute="bottom" constant="26" id="ENg-f7-qiR"/>
                             <constraint firstItem="Ffi-9A-Tge" firstAttribute="width" secondItem="Ty6-QK-AyH" secondAttribute="width" id="Ei1-aV-xeV"/>
                             <constraint firstItem="BhL-Fv-ED8" firstAttribute="top" secondItem="Ffi-9A-Tge" secondAttribute="bottom" constant="28" id="Fqr-YR-ilP"/>
                             <constraint firstItem="UbT-1c-N4l" firstAttribute="width" secondItem="uew-bT-0yT" secondAttribute="width" id="Gof-Jq-QuN"/>
+                            <constraint firstItem="Nrj-El-F7E" firstAttribute="leading" secondItem="GLl-Ps-VHR" secondAttribute="leading" id="Grn-F9-Cig"/>
                             <constraint firstItem="4fU-6b-M1c" firstAttribute="centerX" secondItem="uew-bT-0yT" secondAttribute="centerX" id="IyM-UZ-RnT"/>
+                            <constraint firstItem="Nrj-El-F7E" firstAttribute="top" secondItem="GLl-Ps-VHR" secondAttribute="bottom" constant="5" id="J8u-pM-8tT"/>
                             <constraint firstItem="6iG-Yc-LoR" firstAttribute="leading" secondItem="5IT-4S-ORv" secondAttribute="leading" id="JNn-cr-ccM"/>
                             <constraint firstItem="iJS-Ij-f0P" firstAttribute="leading" secondItem="uew-bT-0yT" secondAttribute="leadingMargin" constant="5" id="Kkp-bx-SV2"/>
                             <constraint firstItem="fG2-bg-KBV" firstAttribute="top" secondItem="6iG-Yc-LoR" secondAttribute="top" id="OvK-Uf-k0H"/>
@@ -189,6 +205,7 @@
                             <constraint firstItem="FyD-6a-IRL" firstAttribute="leading" secondItem="aVS-tV-zWM" secondAttribute="leading" id="SWK-NV-Vvg"/>
                             <constraint firstItem="SzI-jA-ccR" firstAttribute="leading" secondItem="6iG-Yc-LoR" secondAttribute="leading" id="Skf-P6-3hq"/>
                             <constraint firstItem="cN0-Ta-ms0" firstAttribute="top" secondItem="PTq-eN-EtG" secondAttribute="bottom" constant="48" id="U56-P4-3nM"/>
+                            <constraint firstItem="Nrj-El-F7E" firstAttribute="width" secondItem="GLl-Ps-VHR" secondAttribute="width" id="WM5-wl-ceC"/>
                             <constraint firstItem="aVS-tV-zWM" firstAttribute="top" secondItem="5IT-4S-ORv" secondAttribute="top" id="YN7-9t-gpC"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BhL-Fv-ED8" secondAttribute="trailing" id="aPe-4G-KRr"/>
                             <constraint firstItem="6iG-Yc-LoR" firstAttribute="top" secondItem="SzI-jA-ccR" secondAttribute="bottom" constant="26" id="eUF-Cp-Hx5"/>
@@ -209,6 +226,12 @@
                             <constraint firstItem="BhL-Fv-ED8" firstAttribute="leading" secondItem="uew-bT-0yT" secondAttribute="leadingMargin" id="zFz-kq-isT"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="BattingBtn" destination="Ty6-QK-AyH" id="On5-Ps-x5l"/>
+                        <outlet property="BattingSelectedIndicator" destination="Ffi-9A-Tge" id="qsA-7b-zN5"/>
+                        <outlet property="BowlingBtn" destination="GLl-Ps-VHR" id="ix5-W8-sd5"/>
+                        <outlet property="BowlingSelectedIndicator" destination="Nrj-El-F7E" id="ADn-Qe-Tne"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="77x-0n-dcf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
