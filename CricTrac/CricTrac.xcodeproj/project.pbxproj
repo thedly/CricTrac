@@ -14,6 +14,7 @@
 		46C983B01D3927F000DFC607 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46C983AF1D3927F000DFC607 /* GoogleService-Info.plist */; };
 		46C983B21D39D82F00DFC607 /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983B11D39D82F00DFC607 /* DashboardVC.swift */; };
 		46C983B61D39D86800DFC607 /* performanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983B51D39D86800DFC607 /* performanceCell.swift */; };
+		46C983BF1D3FC72400DFC607 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983BE1D3FC72400DFC607 /* DashboardViewController.swift */; };
 		892E1A8C1D3B4FB700EBF014 /* parallaxVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892E1A8B1D3B4FB700EBF014 /* parallaxVC.swift */; };
 		892E1A901D3B536B00EBF014 /* ProfileDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892E1A8F1D3B536B00EBF014 /* ProfileDetails.swift */; };
 		892E1A921D3B539200EBF014 /* ProfileDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = 892E1A911D3B539200EBF014 /* ProfileDetails.xib */; };
@@ -46,6 +47,7 @@
 		46C983AF1D3927F000DFC607 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		46C983B11D39D82F00DFC607 /* DashboardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardVC.swift; path = Controller/DashboardVC.swift; sourceTree = "<group>"; };
 		46C983B51D39D86800DFC607 /* performanceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = performanceCell.swift; path = View/performanceCell.swift; sourceTree = "<group>"; };
+		46C983BE1D3FC72400DFC607 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardViewController.swift; path = Controller/DashboardViewController.swift; sourceTree = "<group>"; };
 		549F76A86F0BF1CECAF26359 /* Pods-CricTrac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CricTrac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CricTrac/Pods-CricTrac.debug.xcconfig"; sourceTree = "<group>"; };
 		892E1A8B1D3B4FB700EBF014 /* parallaxVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = parallaxVC.swift; sourceTree = "<group>"; };
 		892E1A8F1D3B536B00EBF014 /* ProfileDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDetails.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				892E1A8B1D3B4FB700EBF014 /* parallaxVC.swift */,
 				892E1A931D3B56FC00EBF014 /* PerformaceDetailsCell.swift */,
 				892E1A981D3BD0CA00EBF014 /* AddNewVC.swift */,
+				46C983BE1D3FC72400DFC607 /* DashboardViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				46C983B21D39D82F00DFC607 /* DashboardVC.swift in Sources */,
 				892E1A941D3B56FC00EBF014 /* PerformaceDetailsCell.swift in Sources */,
 				46C983B61D39D86800DFC607 /* performanceCell.swift in Sources */,
+				46C983BF1D3FC72400DFC607 /* DashboardViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
