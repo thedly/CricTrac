@@ -21,6 +21,12 @@
 		892E1A941D3B56FC00EBF014 /* PerformaceDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892E1A931D3B56FC00EBF014 /* PerformaceDetailsCell.swift */; };
 		892E1A971D3BC8D100EBF014 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 892E1A951D3BC8D100EBF014 /* Main.storyboard */; };
 		892E1A991D3BD0CA00EBF014 /* AddNewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892E1A981D3BD0CA00EBF014 /* AddNewVC.swift */; };
+		8935ADC51D3E640900607C9D /* deleteFileAfterUse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8935ADC41D3E640900607C9D /* deleteFileAfterUse.m */; };
+		8935ADC71D3E654E00607C9D /* CollectionFlowLayoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8935ADC61D3E654E00607C9D /* CollectionFlowLayoutVC.swift */; };
+		8935ADCB1D3E66A300607C9D /* CollectionParallaxHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8935ADC81D3E66A300607C9D /* CollectionParallaxHeader.swift */; };
+		8935ADCC1D3E66A300607C9D /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8935ADC91D3E66A300607C9D /* CollectionViewCell.swift */; };
+		8935ADCD1D3E66A300607C9D /* CollectionViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8935ADCA1D3E66A300607C9D /* CollectionViewSectionHeader.swift */; };
+		89BE22C41D3EA10C00E954D8 /* headerTabs.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89BE22C31D3EA10C00E954D8 /* headerTabs.xib */; };
 		969786FFCE77D7FA1172017A /* Pods_CricTrac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADA948F8B3E9B5D978AF58E0 /* Pods_CricTrac.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +61,13 @@
 		892E1A931D3B56FC00EBF014 /* PerformaceDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformaceDetailsCell.swift; sourceTree = "<group>"; };
 		892E1A961D3BC8D100EBF014 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		892E1A981D3BD0CA00EBF014 /* AddNewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewVC.swift; sourceTree = "<group>"; };
+		8935ADC31D3E640900607C9D /* CricTrac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CricTrac-Bridging-Header.h"; sourceTree = "<group>"; };
+		8935ADC41D3E640900607C9D /* deleteFileAfterUse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = deleteFileAfterUse.m; sourceTree = "<group>"; };
+		8935ADC61D3E654E00607C9D /* CollectionFlowLayoutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionFlowLayoutVC.swift; sourceTree = "<group>"; };
+		8935ADC81D3E66A300607C9D /* CollectionParallaxHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionParallaxHeader.swift; sourceTree = "<group>"; };
+		8935ADC91D3E66A300607C9D /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		8935ADCA1D3E66A300607C9D /* CollectionViewSectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewSectionHeader.swift; sourceTree = "<group>"; };
+		89BE22C31D3EA10C00E954D8 /* headerTabs.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = headerTabs.xib; sourceTree = "<group>"; };
 		ADA948F8B3E9B5D978AF58E0 /* Pods_CricTrac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CricTrac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -88,12 +101,14 @@
 		46C983831D3922D200DFC607 = {
 			isa = PBXGroup;
 			children = (
+				8935ADC41D3E640900607C9D /* deleteFileAfterUse.m */,
 				46C983AF1D3927F000DFC607 /* GoogleService-Info.plist */,
 				46C9838E1D3922D200DFC607 /* CricTrac */,
 				46C983A31D3922D200DFC607 /* CricTracTests */,
 				46C9838D1D3922D200DFC607 /* Products */,
 				7E6F0BCB575E577E73E4A55E /* Pods */,
 				0C967E7B250913E6D7917E87 /* Frameworks */,
+				8935ADC31D3E640900607C9D /* CricTrac-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -146,6 +161,7 @@
 				46C983B51D39D86800DFC607 /* performanceCell.swift */,
 				892E1A8F1D3B536B00EBF014 /* ProfileDetails.swift */,
 				892E1A911D3B539200EBF014 /* ProfileDetails.xib */,
+				89BE22C31D3EA10C00E954D8 /* headerTabs.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -153,11 +169,15 @@
 		8958F5F11D392B780028D5AA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8935ADC81D3E66A300607C9D /* CollectionParallaxHeader.swift */,
+				8935ADC91D3E66A300607C9D /* CollectionViewCell.swift */,
+				8935ADCA1D3E66A300607C9D /* CollectionViewSectionHeader.swift */,
 				46C983B11D39D82F00DFC607 /* DashboardVC.swift */,
 				892E1A8B1D3B4FB700EBF014 /* parallaxVC.swift */,
 				892E1A931D3B56FC00EBF014 /* PerformaceDetailsCell.swift */,
 				892E1A981D3BD0CA00EBF014 /* AddNewVC.swift */,
 				46C983BE1D3FC72400DFC607 /* DashboardViewController.swift */,
+				8935ADC61D3E654E00607C9D /* CollectionFlowLayoutVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -263,6 +283,7 @@
 			files = (
 				46C9839A1D3922D200DFC607 /* LaunchScreen.storyboard in Resources */,
 				892E1A971D3BC8D100EBF014 /* Main.storyboard in Resources */,
+				89BE22C41D3EA10C00E954D8 /* headerTabs.xib in Resources */,
 				46C983B01D3927F000DFC607 /* GoogleService-Info.plist in Resources */,
 				46C983971D3922D200DFC607 /* Assets.xcassets in Resources */,
 				892E1A921D3B539200EBF014 /* ProfileDetails.xib in Resources */,
@@ -332,13 +353,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				46C983901D3922D200DFC607 /* AppDelegate.swift in Sources */,
+				8935ADC51D3E640900607C9D /* deleteFileAfterUse.m in Sources */,
 				892E1A991D3BD0CA00EBF014 /* AddNewVC.swift in Sources */,
+				8935ADC71D3E654E00607C9D /* CollectionFlowLayoutVC.swift in Sources */,
 				892E1A8C1D3B4FB700EBF014 /* parallaxVC.swift in Sources */,
+				8935ADCB1D3E66A300607C9D /* CollectionParallaxHeader.swift in Sources */,
 				892E1A901D3B536B00EBF014 /* ProfileDetails.swift in Sources */,
 				46C983B21D39D82F00DFC607 /* DashboardVC.swift in Sources */,
 				892E1A941D3B56FC00EBF014 /* PerformaceDetailsCell.swift in Sources */,
 				46C983B61D39D86800DFC607 /* performanceCell.swift in Sources */,
 				46C983BF1D3FC72400DFC607 /* DashboardViewController.swift in Sources */,
+				8935ADCC1D3E66A300607C9D /* CollectionViewCell.swift in Sources */,
+				8935ADCD1D3E66A300607C9D /* CollectionViewSectionHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,6 +496,7 @@
 			baseConfigurationReference = 549F76A86F0BF1CECAF26359 /* Pods-CricTrac.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CricTrac/Info.plist;
@@ -477,6 +504,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ct.cricrac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "CricTrac-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -485,6 +514,7 @@
 			baseConfigurationReference = 056D56ED7752D65D58DB4504 /* Pods-CricTrac.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CricTrac/Info.plist;
@@ -492,6 +522,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ct.cricrac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "CricTrac-Bridging-Header.h";
 			};
 			name = Release;
 		};

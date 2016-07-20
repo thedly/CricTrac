@@ -122,20 +122,24 @@ public class IOStickyHeaderFlowLayout: UICollectionViewFlowLayout {
     }
     
     if !self.disableStickyHeaders {
-      lastCells.keyEnumerator().forEach { obj in
-        //      for obj in lastCells.keyEnumerator() {
-        if let indexPath = obj.indexPath {
+      lastCells.forEach { obj in
+       //for obj in lastCells {
+        if let indexPath = obj.value.indexPath {
           let indexPAthKey = indexPath.section
-          
-          var header = headers[indexPAthKey]
-          if header == nil {
-            header = self.layoutAttributesForSupplementaryViewOfKind(UICollectionElementKindSectionHeader, atIndexPath: NSIndexPath(forItem: 0, inSection: indexPath.section))
-            if let header:UICollectionViewLayoutAttributes = header as? UICollectionViewLayoutAttributes {
-              allItems.append(header)
-            }
-          }
-          
-          self.updateHeaderAttributesForLastCellAttributes(header as! UICollectionViewLayoutAttributes, lastCellAttributes: lastCells[indexPAthKey] as! UICollectionViewLayoutAttributes)
+            
+            var header = headers[indexPAthKey]
+                if header == nil {
+                    header = self.layoutAttributesForSupplementaryViewOfKind(UICollectionElementKindSectionHeader, atIndexPath: NSIndexPath(forItem: 0, inSection: indexPath.section))
+                    if let header:UICollectionViewLayoutAttributes = header as? UICollectionViewLayoutAttributes {
+                        allItems.append(header)
+                    }
+                }
+            
+            self.updateHeaderAttributesForLastCellAttributes(header as! UICollectionViewLayoutAttributes, lastCellAttributes: lastCells[indexPAthKey] as! UICollectionViewLayoutAttributes)
+            
+            
+            
+            
         }
       }
     }
@@ -188,6 +192,6 @@ public class IOStickyHeaderFlowLayout: UICollectionViewFlowLayout {
     
     origin.y = maxY
     
-    attributes.frame = CGRectMake(origin.x, origin.y, attributes.frame.size.width, attributes.frame.size.width)
+    attributes.frame = CGRectMake(origin.x, origin.y, attributes.frame.size.width, attributes.frame.size.height)
   }
 }
