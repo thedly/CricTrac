@@ -15,6 +15,8 @@
 		46C983B21D39D82F00DFC607 /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983B11D39D82F00DFC607 /* DashboardVC.swift */; };
 		46C983B61D39D86800DFC607 /* performanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983B51D39D86800DFC607 /* performanceCell.swift */; };
 		46C983BF1D3FC72400DFC607 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983BE1D3FC72400DFC607 /* DashboardViewController.swift */; };
+		46C983C21D4078EB00DFC607 /* utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983C11D4078EB00DFC607 /* utility.swift */; };
+		46C983C41D40968300DFC607 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983C31D40968300DFC607 /* Extentions.swift */; };
 		892E1A8C1D3B4FB700EBF014 /* parallaxVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892E1A8B1D3B4FB700EBF014 /* parallaxVC.swift */; };
 		892E1A901D3B536B00EBF014 /* ProfileDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892E1A8F1D3B536B00EBF014 /* ProfileDetails.swift */; };
 		892E1A921D3B539200EBF014 /* ProfileDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = 892E1A911D3B539200EBF014 /* ProfileDetails.xib */; };
@@ -54,6 +56,8 @@
 		46C983B11D39D82F00DFC607 /* DashboardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardVC.swift; path = Controller/DashboardVC.swift; sourceTree = "<group>"; };
 		46C983B51D39D86800DFC607 /* performanceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = performanceCell.swift; path = View/performanceCell.swift; sourceTree = "<group>"; };
 		46C983BE1D3FC72400DFC607 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardViewController.swift; path = Controller/DashboardViewController.swift; sourceTree = "<group>"; };
+		46C983C11D4078EB00DFC607 /* utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = utility.swift; path = utility/utility.swift; sourceTree = "<group>"; };
+		46C983C31D40968300DFC607 /* Extentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		549F76A86F0BF1CECAF26359 /* Pods-CricTrac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CricTrac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CricTrac/Pods-CricTrac.debug.xcconfig"; sourceTree = "<group>"; };
 		892E1A8B1D3B4FB700EBF014 /* parallaxVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = parallaxVC.swift; sourceTree = "<group>"; };
 		892E1A8F1D3B536B00EBF014 /* ProfileDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDetails.swift; sourceTree = "<group>"; };
@@ -124,6 +128,7 @@
 		46C9838E1D3922D200DFC607 /* CricTrac */ = {
 			isa = PBXGroup;
 			children = (
+				46C983C01D4078B500DFC607 /* utility */,
 				892E1A951D3BC8D100EBF014 /* Main.storyboard */,
 				8958F5F51D392CCC0028D5AA /* Model */,
 				8958F5F41D392CC50028D5AA /* Services */,
@@ -144,6 +149,15 @@
 				46C983A61D3922D200DFC607 /* Info.plist */,
 			);
 			path = CricTracTests;
+			sourceTree = "<group>";
+		};
+		46C983C01D4078B500DFC607 /* utility */ = {
+			isa = PBXGroup;
+			children = (
+				46C983C11D4078EB00DFC607 /* utility.swift */,
+				46C983C31D40968300DFC607 /* Extentions.swift */,
+			);
+			name = utility;
 			sourceTree = "<group>";
 		};
 		7E6F0BCB575E577E73E4A55E /* Pods */ = {
@@ -354,10 +368,12 @@
 			files = (
 				46C983901D3922D200DFC607 /* AppDelegate.swift in Sources */,
 				8935ADC51D3E640900607C9D /* deleteFileAfterUse.m in Sources */,
+				46C983C41D40968300DFC607 /* Extentions.swift in Sources */,
 				892E1A991D3BD0CA00EBF014 /* AddNewVC.swift in Sources */,
 				8935ADC71D3E654E00607C9D /* CollectionFlowLayoutVC.swift in Sources */,
 				892E1A8C1D3B4FB700EBF014 /* parallaxVC.swift in Sources */,
 				8935ADCB1D3E66A300607C9D /* CollectionParallaxHeader.swift in Sources */,
+				46C983C21D4078EB00DFC607 /* utility.swift in Sources */,
 				892E1A901D3B536B00EBF014 /* ProfileDetails.swift in Sources */,
 				46C983B21D39D82F00DFC607 /* DashboardVC.swift in Sources */,
 				892E1A941D3B56FC00EBF014 /* PerformaceDetailsCell.swift in Sources */,

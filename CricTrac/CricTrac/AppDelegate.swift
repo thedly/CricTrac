@@ -8,15 +8,17 @@
 
 import UIKit
 import Firebase
+import KYDrawerController
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
+    var window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         FIRApp.configure()
+        setSliderMenu()
         return true
     }
 
@@ -41,7 +43,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
+    
+    func setSliderMenu(){
+        let dashboardVC = viewControllerFrom("Main", vcid: "DashboardViewController") as! DashboardViewController
+        let drawerViewController = UIViewController()
+        drawerViewController.view.backgroundColor = UIColor.whiteColor()
+        
+        let navigationControl = UINavigationController(rootViewController: dashboardVC )
+        
+        sliderMenu.mainViewController = navigationControl
+        
+        sliderMenu.drawerViewController = drawerViewController
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window?.rootViewController = sliderMenu
+        window?.makeKeyAndVisible()
+    }
 
 }
 
