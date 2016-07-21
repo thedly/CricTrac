@@ -20,6 +20,7 @@ class DashboardViewController: UIViewController,UITabBarDelegate,UITableViewData
     
     var battingDetails: Dictionary<String,String>!
     var bowlingDetails: Dictionary<String,String>!
+    var recentMatches: Dictionary<String,String>!
     
     // MARK: View controller Delegates and related methods
     
@@ -99,19 +100,31 @@ class DashboardViewController: UIViewController,UITabBarDelegate,UITableViewData
         
         if let cell = tableView.dequeueReusableCellWithIdentifier("performanceCell", forIndexPath: indexPath) as? performanceCell {
             
-            var currentKey :String?
-            var currentvalue :String?
             
-            if battingBtn.selected {
-                let index = battingDetails.startIndex.advancedBy(indexPath.row) as DictionaryIndex<String,String>
-                currentKey = battingDetails.keys[index]
-                currentvalue = battingDetails[currentKey!]!
+                var currentKey :String?
+                var currentvalue :String?
+            
+            if indexPath.section == 0
+            {
+            
+                if battingBtn.selected {
+                    let index = battingDetails.startIndex.advancedBy(indexPath.row) as DictionaryIndex<String,String>
+                    currentKey = battingDetails.keys[index]
+                    currentvalue = battingDetails[currentKey!]!
+                }
+                else
+                {
+                    let index = bowlingDetails.startIndex.advancedBy(indexPath.row) as DictionaryIndex<String,String>
+                    currentKey = bowlingDetails.keys[index]
+                    currentvalue = bowlingDetails[currentKey!]!
+                }
             }
             else
             {
-                let index = bowlingDetails.startIndex.advancedBy(indexPath.row) as DictionaryIndex<String,String>
-                currentKey = bowlingDetails.keys[index]
-                currentvalue = bowlingDetails[currentKey!]!
+                let index = recentMatches.startIndex.advancedBy(indexPath.row) as DictionaryIndex<String,String>
+                currentKey = recentMatches.keys[index]
+                currentvalue = recentMatches[currentKey!]!
+                
             }
             
             cell.configureCell(currentKey!, pValue: currentvalue!)
@@ -120,31 +133,58 @@ class DashboardViewController: UIViewController,UITabBarDelegate,UITableViewData
         else
         {
             return UITableViewCell()
+            
+            
+            
         }
         
-//        let cell =  UITableViewCell()
-//        cell.textLabel?.text = "data"
-//        return cell
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return battingBtn.selected ? battingDetails.count : bowlingDetails.count
+        
+
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch(section) {
-            case 2:return "Recent Matches"
-            default :return "hi"
+        if section == 1 {
+            return "Recent Matches"
+        }
+        else
+        {
+            return ""
         }
     }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 1 {
+            let vw = UIView()
+            let headerLbl = UILabel(frame: CGRectMake(20, 10, UIScreen.mainScreen().bounds.size.width, 30))
+            headerLbl.textColor = UIColor(hex: "6D9447")
+            headerLbl.font = UIFont(name: "Helvetica Neue", size: 20)
+            headerLbl.font = UIFont.boldSystemFontOfSize(20)
+            headerLbl.text = "Recent Matches"
+            vw.addSubview(headerLbl)
+            
+            vw.backgroundColor = UIColor.clearColor()
+            return vw
+        }
+        return nil
+ }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return CGFloat.min
+        }
+        return 50
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+        return section == 0 ? battingBtn.selected ? battingDetails.count : bowlingDetails.count : 3
+    }
+ 
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
     }
     
-    
-    
-    
+        
     // MARK: Service Calls
     
     func getPerformanceDetails() {
@@ -168,6 +208,12 @@ class DashboardViewController: UIViewController,UITabBarDelegate,UITableViewData
             "Wickets": "5",
             "Runs_Given": "36",
             "Bowling_Average": "24.16"
+        ]
+        
+        recentMatches = [
+            "Against DPS South": "46",
+            "Against ISB" : "41",
+            "Against JOJO Mysore": "30"
         ]
     }
     
