@@ -198,7 +198,7 @@ class parallaxVC: UIViewController, UICollectionViewDataSource, UICollectionView
         currentvalue = data[indexPath.section][currentKey!]!
         
         cell.configureCell(currentKey!, pValue: currentvalue!)
-        return cell
+        return UICollectionViewCell()
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {

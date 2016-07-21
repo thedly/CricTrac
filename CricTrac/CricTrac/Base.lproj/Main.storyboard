@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -87,6 +87,40 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BhL-Fv-ED8">
                                 <rect key="frame" x="20" y="229" width="560" height="130"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="performanceCell" id="oPv-K5-E5r" customClass="performanceCell" customModule="CricTrac" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="560" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oPv-K5-E5r" id="kJ5-Hr-3go">
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQ6-bi-IYF">
+                                                    <rect key="frame" x="23" y="11" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Szd-wn-AgR">
+                                                    <rect key="frame" x="272" y="11" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="pQ6-bi-IYF" firstAttribute="leading" secondItem="kJ5-Hr-3go" secondAttribute="leadingMargin" constant="15" id="KyY-Mp-m3p"/>
+                                                <constraint firstItem="Szd-wn-AgR" firstAttribute="centerY" secondItem="kJ5-Hr-3go" secondAttribute="centerY" id="c6d-wv-7S1"/>
+                                                <constraint firstItem="pQ6-bi-IYF" firstAttribute="centerY" secondItem="kJ5-Hr-3go" secondAttribute="centerY" id="c7N-WX-bog"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Szd-wn-AgR" secondAttribute="trailing" constant="120" id="wqX-lU-RGW"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="performanceKey" destination="pQ6-bi-IYF" id="HGz-Cr-5FU"/>
+                                            <outlet property="performanceValue" destination="Szd-wn-AgR" id="1qj-DV-HHH"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="551-sd-9bt" id="rgb-LE-BnA"/>
                                     <outlet property="delegate" destination="551-sd-9bt" id="bY2-kg-kqz"/>
@@ -191,6 +225,7 @@
                         <outlet property="BattingSelectedIndicator" destination="Ffi-9A-Tge" id="qsA-7b-zN5"/>
                         <outlet property="BowlingBtn" destination="GLl-Ps-VHR" id="ix5-W8-sd5"/>
                         <outlet property="BowlingSelectedIndicator" destination="Nrj-El-F7E" id="ADn-Qe-Tne"/>
+                        <outlet property="performanceTable" destination="BhL-Fv-ED8" id="q1A-4p-EWC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="77x-0n-dcf" userLabel="First Responder" sceneMemberID="firstResponder"/>
