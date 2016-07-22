@@ -31,6 +31,8 @@
 		8965504B1D4136700010DE16 /* RecentMatchesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8965504A1D4136700010DE16 /* RecentMatchesCell.swift */; };
 		8965504D1D4138F30010DE16 /* RecentMatches.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8965504C1D4138F30010DE16 /* RecentMatches.xib */; };
 		89BE22C41D3EA10C00E954D8 /* headerTabs.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89BE22C31D3EA10C00E954D8 /* headerTabs.xib */; };
+		89FD59C61D41C3AE003EF45C /* SF-UI-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 89FD59C41D41C3AE003EF45C /* SF-UI-Text-Bold.otf */; };
+		89FD59C71D41C3AE003EF45C /* SF-UI-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 89FD59C51D41C3AE003EF45C /* SF-UI-Text-Regular.otf */; };
 		969786FFCE77D7FA1172017A /* Pods_CricTrac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADA948F8B3E9B5D978AF58E0 /* Pods_CricTrac.framework */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +78,8 @@
 		8965504A1D4136700010DE16 /* RecentMatchesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentMatchesCell.swift; sourceTree = "<group>"; };
 		8965504C1D4138F30010DE16 /* RecentMatches.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecentMatches.xib; sourceTree = "<group>"; };
 		89BE22C31D3EA10C00E954D8 /* headerTabs.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = headerTabs.xib; sourceTree = "<group>"; };
+		89FD59C41D41C3AE003EF45C /* SF-UI-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Bold.otf"; sourceTree = "<group>"; };
+		89FD59C51D41C3AE003EF45C /* SF-UI-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Regular.otf"; sourceTree = "<group>"; };
 		ADA948F8B3E9B5D978AF58E0 /* Pods_CricTrac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CricTrac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -158,6 +162,8 @@
 		46C983C01D4078B500DFC607 /* utility */ = {
 			isa = PBXGroup;
 			children = (
+				89FD59C41D41C3AE003EF45C /* SF-UI-Text-Bold.otf */,
+				89FD59C51D41C3AE003EF45C /* SF-UI-Text-Regular.otf */,
 				46C983C11D4078EB00DFC607 /* utility.swift */,
 				46C983C31D40968300DFC607 /* Extentions.swift */,
 			);
@@ -303,10 +309,12 @@
 			files = (
 				46C9839A1D3922D200DFC607 /* LaunchScreen.storyboard in Resources */,
 				892E1A971D3BC8D100EBF014 /* Main.storyboard in Resources */,
+				89FD59C71D41C3AE003EF45C /* SF-UI-Text-Regular.otf in Resources */,
 				8965504D1D4138F30010DE16 /* RecentMatches.xib in Resources */,
 				89BE22C41D3EA10C00E954D8 /* headerTabs.xib in Resources */,
 				46C983B01D3927F000DFC607 /* GoogleService-Info.plist in Resources */,
 				46C983971D3922D200DFC607 /* Assets.xcassets in Resources */,
+				89FD59C61D41C3AE003EF45C /* SF-UI-Text-Bold.otf in Resources */,
 				892E1A921D3B539200EBF014 /* ProfileDetails.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

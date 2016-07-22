@@ -157,8 +157,8 @@ class DashboardViewController: UIViewController,UITabBarDelegate,UITableViewData
             let vw = UIView()
             let headerLbl = UILabel(frame: CGRectMake(20, 10, UIScreen.mainScreen().bounds.size.width, 30))
             headerLbl.textColor = UIColor(hex: "6D9447")
-            headerLbl.font = UIFont(name: "Helvetica Neue", size: 20)
-            headerLbl.font = UIFont.boldSystemFontOfSize(20)
+            headerLbl.font = UIFont(name: "SFUIText-Bold", size: 20)
+            //headerLbl.font = UIFont.boldSystemFontOfSize(20)
             headerLbl.text = "Recent Matches"
             vw.addSubview(headerLbl)
             
@@ -188,14 +188,17 @@ class DashboardViewController: UIViewController,UITabBarDelegate,UITableViewData
     // MARK: Service Calls
     
     func getPerformanceDetails() {
+        
+        // Make API call
+        
         battingDetails = [
             "Matches": "123",
             "Innings": "116",
-            "Not_Out": "12",
+            "Not Out": "12",
             "Runs": "1028",
-            "High_Score": "80",
+            "High Score": "80",
             "Average": "32",
-            "Balls_Faced": "-",
+            "Balls Faced": "-",
             "SR": "-",
             "100s": "0",
             "50s": "1",
@@ -206,8 +209,8 @@ class DashboardViewController: UIViewController,UITabBarDelegate,UITableViewData
         bowlingDetails = [
             "Overs": "12",
             "Wickets": "5",
-            "Runs_Given": "36",
-            "Bowling_Average": "24.16"
+            "Runs Given": "36",
+            "Bowling Average": "24.16"
         ]
         
         recentMatches = [
