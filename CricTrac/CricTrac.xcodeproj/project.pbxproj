@@ -18,6 +18,7 @@
 		46C983C41D40968300DFC607 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983C31D40968300DFC607 /* Extentions.swift */; };
 		892E1A971D3BC8D100EBF014 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 892E1A951D3BC8D100EBF014 /* Main.storyboard */; };
 		8935ADC51D3E640900607C9D /* deleteFileAfterUse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8935ADC41D3E640900607C9D /* deleteFileAfterUse.m */; };
+		8957420F1D43978E0097DF58 /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8957420E1D43978E0097DF58 /* SummaryViewController.swift */; };
 		89FD59C61D41C3AE003EF45C /* SF-UI-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 89FD59C41D41C3AE003EF45C /* SF-UI-Text-Bold.otf */; };
 		89FD59C71D41C3AE003EF45C /* SF-UI-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 89FD59C51D41C3AE003EF45C /* SF-UI-Text-Regular.otf */; };
 		969786FFCE77D7FA1172017A /* Pods_CricTrac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADA948F8B3E9B5D978AF58E0 /* Pods_CricTrac.framework */; };
@@ -52,6 +53,7 @@
 		892E1A961D3BC8D100EBF014 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8935ADC31D3E640900607C9D /* CricTrac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CricTrac-Bridging-Header.h"; sourceTree = "<group>"; };
 		8935ADC41D3E640900607C9D /* deleteFileAfterUse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = deleteFileAfterUse.m; sourceTree = "<group>"; };
+		8957420E1D43978E0097DF58 /* SummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
 		89FD59C41D41C3AE003EF45C /* SF-UI-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Bold.otf"; sourceTree = "<group>"; };
 		89FD59C51D41C3AE003EF45C /* SF-UI-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Regular.otf"; sourceTree = "<group>"; };
 		ADA948F8B3E9B5D978AF58E0 /* Pods_CricTrac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CricTrac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				46C983BE1D3FC72400DFC607 /* DashboardViewController.swift */,
+				8957420E1D43978E0097DF58 /* SummaryViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				46C983C41D40968300DFC607 /* Extentions.swift in Sources */,
 				46C983C21D4078EB00DFC607 /* utility.swift in Sources */,
 				46C983B61D39D86800DFC607 /* performanceCell.swift in Sources */,
+				8957420F1D43978E0097DF58 /* SummaryViewController.swift in Sources */,
 				46C983BF1D3FC72400DFC607 /* DashboardViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -475,7 +479,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 549F76A86F0BF1CECAF26359 /* Pods-CricTrac.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -493,7 +496,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 056D56ED7752D65D58DB4504 /* Pods-CricTrac.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
