@@ -18,9 +18,9 @@ class DashboardViewController: UIViewController,UITabBarDelegate,UITableViewData
     @IBOutlet weak var performanceTable: UITableView!
     // Variables And Constants
     
-    var battingDetails: Dictionary<String,String>!
-    var bowlingDetails: Dictionary<String,String>!
-    var recentMatches: Dictionary<String,String>!
+    var battingDetails: [String:String]!
+    var bowlingDetails: [String:String]!
+    var recentMatches: [String:String]!
     
     // MARK: View controller Delegates and related methods
     
@@ -51,13 +51,24 @@ class DashboardViewController: UIViewController,UITabBarDelegate,UITableViewData
     
     //Sets button for Slide menu, Title and Navigationbar Color
     func setNavigationBarProperties(){
-        let button: UIButton = UIButton(type:.Custom)
-        button.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
-        button.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
-        button.frame = CGRectMake(0, 0, 40, 40)
-        let barButton = UIBarButtonItem(customView: button)
+        let menuButton: UIButton = UIButton(type:.Custom)
+        menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
+        menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+        menuButton.frame = CGRectMake(0, 0, 40, 40)
+        let leftbarButton = UIBarButtonItem(customView: menuButton)
+        
+        
+        let addNewMatchButton: UIButton = UIButton(type:.Custom)
+        addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
+        addNewMatchButton.setTitle("+", forState:.Normal)
+        addNewMatchButton.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 30)
+        addNewMatchButton.addTarget(self, action: #selector(didNewMatchButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+        let righttbarButton = UIBarButtonItem(customView: addNewMatchButton)
+        
         //assign button to navigationbar
-        navigationItem.leftBarButtonItem = barButton
+        
+        navigationItem.leftBarButtonItem = leftbarButton
+         navigationItem.rightBarButtonItem = righttbarButton
         navigationController!.navigationBar.barTintColor = UIColor(hex:"B12420")
         title = "Dashboard"
         let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
@@ -86,6 +97,12 @@ class DashboardViewController: UIViewController,UITabBarDelegate,UITableViewData
     
     func didMenuButtonTapp(){
         sliderMenu.setDrawerState(.Opened, animated: true)
+    }
+    
+    func didNewMatchButtonTapp(){
+        
+        let newMatchVc = viewControllerFrom("Main", vcid: "NewMatchViewController")
+        self.presentViewController(newMatchVc, animated: true) {}
     }
     
     override func didReceiveMemoryWarning() {
