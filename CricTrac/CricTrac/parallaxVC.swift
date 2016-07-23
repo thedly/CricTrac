@@ -240,7 +240,12 @@ class parallaxVC: UIViewController, UICollectionViewDataSource, UICollectionView
             return footerView
        
         default:
+            //Just to make code run adding this 
+            let footerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "performanceFooter", forIndexPath: indexPath)
+            
+            return footerView
             assert(false, "Unexpected element kind")
+            
         }
     }
     
