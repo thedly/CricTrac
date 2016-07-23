@@ -10,10 +10,17 @@ import UIKit
 
 class DashboardViewController: UIViewController,UITabBarDelegate,UITableViewDataSource {
 
-    @IBOutlet weak var BattingBtn: UIButton!
-    @IBOutlet weak var BowlingBtn: UIButton!
-    @IBOutlet weak var BattingSelectedIndicator: UIView!
-    @IBOutlet weak var BowlingSelectedIndicator: UIView!
+    @IBOutlet weak var battingBtn: UIButton!
+    @IBOutlet weak var bowlingBtn: UIButton!
+    @IBOutlet weak var battingSelectedIndicator: UIView!
+    @IBOutlet weak var bowlingSelectedIndicator: UIView!
+    
+    @IBOutlet weak var performanceTable: UITableView!
+    // Variables And Constants
+    
+    var battingDetails: Dictionary<String,String>!
+    var bowlingDetails: Dictionary<String,String>!
+    var recentMatches: Dictionary<String,String>!
     
     // MARK: View controller Delegates and related methods
     
@@ -21,24 +28,25 @@ class DashboardViewController: UIViewController,UITabBarDelegate,UITableViewData
         super.viewDidLoad()
         setNavigationBarProperties()
         initializeView()
+        getPerformanceDetails()
         
         // Do any additional setup after loading the view.
     }
     
     func initializeView() {
-        BowlingSelectedIndicator.hidden = true
-        BattingSelectedIndicator.hidden = false
+        bowlingSelectedIndicator.hidden = true
+        battingSelectedIndicator.hidden = false
         
-        BattingBtn.setTitleColor(UIColorFromRGB(0xD8D8D8), forState: UIControlState.Normal)
-        BowlingBtn.setTitleColor(UIColorFromRGB(0xD8D8D8), forState: UIControlState.Normal)
+        battingBtn.setTitleColor(UIColor(hex:"D8D8D8"), forState: UIControlState.Normal)
+        bowlingBtn.setTitleColor(UIColor(hex:"D8D8D8"), forState: UIControlState.Normal)
         
-        BattingBtn.tintColor = UIColor.clearColor()
-        BowlingBtn.tintColor = UIColor.clearColor()
+        battingBtn.tintColor = UIColor.clearColor()
+        bowlingBtn.tintColor = UIColor.clearColor()
         
-        BowlingBtn.setTitleColor(UIColorFromRGB(0x6D9447), forState: UIControlState.Selected)
-        BattingBtn.setTitleColor(UIColorFromRGB(0x6D9447), forState: UIControlState.Selected)
+        bowlingBtn.setTitleColor(UIColor(hex:"6D9447"), forState: UIControlState.Selected)
+        battingBtn.setTitleColor(UIColor(hex:"6D9447"), forState: UIControlState.Selected)
         
-        BattingBtn.selected = true
+        battingBtn.selected = true
     }
     
     //Sets button for Slide menu, Title and Navigationbar Color
@@ -51,7 +59,7 @@ class DashboardViewController: UIViewController,UITabBarDelegate,UITableViewData
         //assign button to navigationbar
         navigationItem.leftBarButtonItem = barButton
         navigationController!.navigationBar.barTintColor = UIColor(hex:"B12420")
-        title = "CricTrac"
+        title = "Dashboard"
         let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         navigationController!.navigationBar.titleTextAttributes = titleDict
     }
@@ -60,19 +68,20 @@ class DashboardViewController: UIViewController,UITabBarDelegate,UITableViewData
     
     @IBAction func BattingTabSelected(sender: UIButton) {
         
-        BowlingSelectedIndicator.hidden = true
-        BattingSelectedIndicator.hidden = false
-        BattingBtn.selected = true
-        BowlingBtn.selected = false
+        bowlingSelectedIndicator.hidden = true
+        battingSelectedIndicator.hidden = false
+        battingBtn.selected = true
+        bowlingBtn.selected = false
+        performanceTable.reloadData()
         
     }
     @IBAction func BowlingTabSelected(sender: UIButton) {
         
-        BowlingSelectedIndicator.hidden = false
-        BattingSelectedIndicator.hidden = true
-        BattingBtn.selected = false
-        BowlingBtn.selected = true
-        
+        bowlingSelectedIndicator.hidden = false
+        battingSelectedIndicator.hidden = true
+        battingBtn.selected = false
+        bowlingBtn.selected = true
+        performanceTable.reloadData()
     }
     
     func didMenuButtonTapp(){
@@ -89,17 +98,128 @@ class DashboardViewController: UIViewController,UITabBarDelegate,UITableViewData
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         
-        let cell =  UITableViewCell()
-        cell.textLabel?.text = "data"
-        return cell
+        if let cell = tableView.dequeueReusableCellWithIdentifier("performanceCell", forIndexPath: indexPath) as? performanceCell {
+            
+            
+                var currentKey :String?
+                var currentvalue :String?
+            
+            if indexPath.section == 0
+            {
+            
+                if battingBtn.selected {
+                    let index = battingDetails.startIndex.advancedBy(indexPath.row) as DictionaryIndex<String,String>
+                    currentKey = battingDetails.keys[index]
+                    currentvalue = battingDetails[currentKey!]!
+                }
+                else
+                {
+                    let index = bowlingDetails.startIndex.advancedBy(indexPath.row) as DictionaryIndex<String,String>
+                    currentKey = bowlingDetails.keys[index]
+                    currentvalue = bowlingDetails[currentKey!]!
+                }
+            }
+            else
+            {
+                let index = recentMatches.startIndex.advancedBy(indexPath.row) as DictionaryIndex<String,String>
+                currentKey = recentMatches.keys[index]
+                currentvalue = recentMatches[currentKey!]!
+                
+            }
+            
+            cell.configureCell(currentKey!, pValue: currentvalue!)
+            return cell
+        }
+        else
+        {
+            return UITableViewCell()
+            
+            
+            
+        }
+        
+        
+
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 1 {
+            return "Recent Matches"
+        }
+        else
+        {
+            return ""
+        }
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 1 {
+            let vw = UIView()
+            let headerLbl = UILabel(frame: CGRectMake(20, 10, UIScreen.mainScreen().bounds.size.width, 30))
+            headerLbl.textColor = UIColor(hex: "6D9447")
+            headerLbl.font = UIFont(name: "SFUIText-Bold", size: 20)
+            //headerLbl.font = UIFont.boldSystemFontOfSize(20)
+            headerLbl.text = "Recent Matches"
+            vw.addSubview(headerLbl)
+            
+            vw.backgroundColor = UIColor.clearColor()
+            return vw
+        }
+        return nil
+ }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return CGFloat.min
+        }
+        return 50
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return 12
+        return section == 0 ? battingBtn.selected ? battingDetails.count : bowlingDetails.count : 3
+    }
+ 
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
     }
     
+        
+    // MARK: Service Calls
     
-
+    func getPerformanceDetails() {
+        
+        // Make API call
+        
+        battingDetails = [
+            "Matches": "123",
+            "Innings": "116",
+            "Not Out": "12",
+            "Runs": "1028",
+            "High Score": "80",
+            "Average": "32",
+            "Balls Faced": "-",
+            "SR": "-",
+            "100s": "0",
+            "50s": "1",
+            "4s": "25",
+            "6s": "15"
+        ]
+        
+        bowlingDetails = [
+            "Overs": "12",
+            "Wickets": "5",
+            "Runs Given": "36",
+            "Bowling Average": "24.16"
+        ]
+        
+        recentMatches = [
+            "Against DPS South": "46",
+            "Against ISB" : "41",
+            "Against JOJO Mysore": "30"
+        ]
+    }
+    
     
     
     /*

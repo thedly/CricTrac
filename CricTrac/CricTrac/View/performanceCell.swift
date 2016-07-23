@@ -8,13 +8,11 @@
 
 import UIKit
 
-class performanceCell: UICollectionViewCell {
+class performanceCell: UITableViewCell {
 
+    
     @IBOutlet weak var performanceKey: UILabel!
     @IBOutlet weak var performanceValue: UILabel!
-    
-//    @IBOutlet weak var performanceKey: UILabel!
-//    @IBOutlet weak var performanceValue: UILabel!
     
     func configureCell(pKey: String, pValue: String){
         performanceKey.text = pKey
