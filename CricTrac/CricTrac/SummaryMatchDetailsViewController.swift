@@ -12,6 +12,9 @@ class SummaryMatchDetailsViewController: UIViewController, UITableViewDelegate, 
 
     @IBOutlet weak var matchDetailsTbl: UITableView!
     
+    @IBAction func backBtnPressed(sender: UIButton) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     // MARK: - Variables and constants
     
     var matchDetailsData : Dictionary<String,[Dictionary<String,String>]>!

@@ -12,6 +12,9 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     @IBOutlet weak var summaryTbl: UITableView!
     
+    @IBAction func backBtnPressed(sender: UIButton) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         summaryTbl.dataSource = self
