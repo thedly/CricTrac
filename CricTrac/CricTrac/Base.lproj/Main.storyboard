@@ -734,7 +734,7 @@
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dmI-IV-fbC">
+                                            <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dmI-IV-fbC">
                                                 <rect key="frame" x="113" y="853" width="51" height="31"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="49" id="7Mp-Ll-sL4"/>
@@ -755,7 +755,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZXe-PO-0I0">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZXe-PO-0I0" userLabel="DatePicker">
                                                 <rect key="frame" x="479" y="56" width="55" height="36"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="ZXe-PO-0I0" secondAttribute="height" multiplier="23:15" id="3Xs-7X-uzx"/>
@@ -894,10 +894,33 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="OversLabel" destination="8C9-4p-7N2" id="RJq-LQ-cJw"/>
+                        <outlet property="OversText" destination="ffb-16-FY7" id="S4a-1D-q0c"/>
                         <outlet property="battingSelector" destination="pOe-wE-tir" id="TTc-Hq-ZEg"/>
                         <outlet property="bowlingSelector" destination="I2p-Oh-Jnx" id="FfC-ED-Phd"/>
+                        <outlet property="commentsLabel" destination="FSD-Zy-gJl" id="ePb-yn-zCv"/>
+                        <outlet property="commentsText" destination="ueC-8g-38v" id="OMl-rR-9AW"/>
+                        <outlet property="dateLabel" destination="Dm1-T6-CuF" id="6N6-E5-E0y"/>
+                        <outlet property="datePickerButton" destination="ZXe-PO-0I0" id="OsB-Wh-geU"/>
+                        <outlet property="dateTest" destination="rPd-Lu-Igr" id="Q6Y-Bo-paA"/>
+                        <outlet property="dismissLabel" destination="1i9-7y-EEB" id="86c-b3-Ui1"/>
+                        <outlet property="dismissText" destination="Pk0-yT-Tfu" id="SMY-hu-iZt"/>
+                        <outlet property="extraOverLabel" destination="JNt-WI-mOE" id="XUd-nH-LYx"/>
+                        <outlet property="extraOverText" destination="nGc-eZ-Lcc" id="g8G-1r-bSc"/>
                         <outlet property="extraSelector" destination="mP3-qA-fsE" id="0jb-o2-5sa"/>
+                        <outlet property="groundLabel" destination="u4s-sh-iEi" id="OCT-rC-YiT"/>
+                        <outlet property="groundText" destination="iXN-aJ-y7K" id="vLn-3z-6DM"/>
                         <outlet property="matchSelector" destination="NnA-1F-pQa" id="eBf-bF-ncr"/>
+                        <outlet property="matchWonSwitch" destination="dmI-IV-fbC" id="QIt-lD-9sX"/>
+                        <outlet property="opponentLabel" destination="5NK-3X-4ha" id="Vrc-ej-Tvh"/>
+                        <outlet property="opponentText" destination="5F4-OY-2Oy" id="oiA-4C-l2L"/>
+                        <outlet property="resultsLabel" destination="Cpd-5r-tOJ" id="Ow7-6z-gPF"/>
+                        <outlet property="resultsText" destination="fWG-Qh-zuu" id="o4w-JG-vIH"/>
+                        <outlet property="teamLabel" destination="LTB-Ty-oBF" id="ckQ-at-IWq"/>
+                        <outlet property="teamText" destination="VR7-Ns-eOt" id="Q10-AD-pBq"/>
+                        <outlet property="tournamentLabel" destination="gag-Dn-7T2" id="NhT-9Y-1oG"/>
+                        <outlet property="tournamnetText" destination="EHx-4K-7u1" id="8HU-pA-gMr"/>
+                        <outlet property="wicketLabel" destination="eKM-Gi-lNh" id="UQy-cJ-B3G"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B8N-WC-3rW" userLabel="First Responder" sceneMemberID="firstResponder"/>
