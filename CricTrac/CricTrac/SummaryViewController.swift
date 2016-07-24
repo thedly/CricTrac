@@ -57,8 +57,11 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("Selected item")
-    }
+        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc : SummaryMatchDetailsViewController = storyboard.instantiateViewControllerWithIdentifier("SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
+        
+        self.presentViewController(vc, animated: true, completion: nil)
+        }
     
     /*
     // MARK: - Navigation

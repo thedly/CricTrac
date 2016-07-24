@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="KkE-9O-CBz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tNF-CK-tLD">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -25,7 +26,7 @@
         <!--Summary Match Details View Controller-->
         <scene sceneID="C4e-C3-hTB">
             <objects>
-                <viewController id="KkE-9O-CBz" customClass="SummaryMatchDetailsViewController" customModule="CricTrac" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SummaryMatchDetailsViewController" id="KkE-9O-CBz" customClass="SummaryMatchDetailsViewController" customModule="CricTrac" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FRY-MN-8Mj"/>
                         <viewControllerLayoutGuide type="bottom" id="SZB-Pv-qjh"/>
@@ -129,7 +130,7 @@
         <!--Summary View Controller-->
         <scene sceneID="3N3-rf-RgH">
             <objects>
-                <viewController id="tNF-CK-tLD" customClass="SummaryViewController" customModule="CricTrac" sceneMemberID="viewController">
+                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="tNF-CK-tLD" customClass="SummaryViewController" customModule="CricTrac" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kBk-zq-sSn"/>
                         <viewControllerLayoutGuide type="bottom" id="JTs-7E-fm3"/>
