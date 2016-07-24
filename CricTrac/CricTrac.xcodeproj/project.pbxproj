@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		46B6086E1D439E61000FE098 /* NewMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B6086D1D439E61000FE098 /* NewMatchViewController.swift */; };
+		46B608701D44A7D3000FE098 /* NewMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B6086F1D44A7D3000FE098 /* NewMatchViewController.swift */; };
 		46C983901D3922D200DFC607 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C9838F1D3922D200DFC607 /* AppDelegate.swift */; };
 		46C983971D3922D200DFC607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46C983961D3922D200DFC607 /* Assets.xcassets */; };
 		46C9839A1D3922D200DFC607 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46C983981D3922D200DFC607 /* LaunchScreen.storyboard */; };
@@ -38,7 +38,7 @@
 
 /* Begin PBXFileReference section */
 		056D56ED7752D65D58DB4504 /* Pods-CricTrac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CricTrac.release.xcconfig"; path = "Pods/Target Support Files/Pods-CricTrac/Pods-CricTrac.release.xcconfig"; sourceTree = "<group>"; };
-		46B6086D1D439E61000FE098 /* NewMatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewMatchViewController.swift; path = Controller/NewMatchViewController.swift; sourceTree = "<group>"; };
+		46B6086F1D44A7D3000FE098 /* NewMatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewMatchViewController.swift; path = Controller/NewMatchViewController.swift; sourceTree = "<group>"; };
 		46C9838C1D3922D200DFC607 /* CricTrac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CricTrac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46C9838F1D3922D200DFC607 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46C983961D3922D200DFC607 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -170,8 +170,8 @@
 		8958F5F11D392B780028D5AA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				46B6086F1D44A7D3000FE098 /* NewMatchViewController.swift */,
 				46C983BE1D3FC72400DFC607 /* DashboardViewController.swift */,
-
 				8957420E1D43978E0097DF58 /* SummaryViewController.swift */,
 				89CC84FB1D43E4D6007F2402 /* SummaryMatchDetailsViewController.swift */,
 			);
@@ -350,9 +350,8 @@
 			files = (
 				46C983901D3922D200DFC607 /* AppDelegate.swift in Sources */,
 				8935ADC51D3E640900607C9D /* deleteFileAfterUse.m in Sources */,
-
+				46B608701D44A7D3000FE098 /* NewMatchViewController.swift in Sources */,
 				89CC84FC1D43E4D6007F2402 /* SummaryMatchDetailsViewController.swift in Sources */,
-
 				46C983C41D40968300DFC607 /* Extentions.swift in Sources */,
 				46C983C21D4078EB00DFC607 /* utility.swift in Sources */,
 				46C983B61D39D86800DFC607 /* performanceCell.swift in Sources */,
