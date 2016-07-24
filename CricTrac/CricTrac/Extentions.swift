@@ -72,3 +72,15 @@ extension UIView {
             ).instantiateWithOwner(nil, options: nil)[0] as? UIView
     }
 }
+
+extension CALayer {
+    var borderColorFromUIColor: UIColor {
+        get {
+            return UIColor(CGColor: self.borderColor!)
+        } set {
+            self.borderColor = newValue.CGColor
+        }
+    }
+}
+
+
