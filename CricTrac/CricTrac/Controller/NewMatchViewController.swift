@@ -20,10 +20,12 @@ class NewMatchViewController: UIViewController {
     
     @IBOutlet weak var battingSelector: UIView!
     
+    var lastSelectedTab:UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        lastSelectedTab = matchSelector
+       
         // Do any additional setup after loading the view.
     }
 
@@ -40,26 +42,30 @@ class NewMatchViewController: UIViewController {
 
     
     @IBAction func didTapMatch(sender: AnyObject) {
-        hideAllSelectors()
         matchSelector.hidden = false
+        lastSelectedTab?.hidden = true
+        lastSelectedTab = matchSelector
     }
   
     
     @IBAction func didTapBat(sender: AnyObject){
-        hideAllSelectors()
         battingSelector.hidden = false
+        lastSelectedTab?.hidden = true
+        lastSelectedTab = battingSelector
     }
     
     
     @IBAction func didTapBowl(sender: AnyObject) {
-        hideAllSelectors()
         bowlingSelector.hidden = false
+        lastSelectedTab?.hidden = true
+        lastSelectedTab = bowlingSelector
     }
     
     
     @IBAction func didTapExtra(sender: AnyObject) {
-        hideAllSelectors()
         extraSelector.hidden = false
+        lastSelectedTab?.hidden = true
+        lastSelectedTab = extraSelector
     }
     
     func hideAllSelectors(){
