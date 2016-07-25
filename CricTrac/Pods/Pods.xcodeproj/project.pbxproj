@@ -8,44 +8,57 @@
 
 /* Begin PBXBuildFile section */
 		07AFF06C8B4AE2737036729F7373E8F6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
-		095187D19D92E711C84D41157070C767 /* CSStickyHeaderFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 796A5EA353AEBEF506410D7F8D884085 /* CSStickyHeaderFlowLayout.m */; };
-		0AD6E8314A40D7D80603ED1C30392EBF /* KYDrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4EDABDFEC7D7D893AA20F8A962FE61 /* KYDrawerController.swift */; };
+		095187D19D92E711C84D41157070C767 /* CSStickyHeaderFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDC63A5F1F80669056A391D67DA3985 /* CSStickyHeaderFlowLayout.m */; };
+		0AD6E8314A40D7D80603ED1C30392EBF /* KYDrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285CF224ACD22B306F9B4519109DCB69 /* KYDrawerController.swift */; };
 		0B060485F508439173EA7E34F4020FF3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
-		1283FF810941EED86E367EAE06B1DE2D /* CSStickyHeaderFlowLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 211B2CD48C5795C69C1E6D2F8A99374D /* CSStickyHeaderFlowLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		567BDEA0D15A2E9B281D33907F16899C /* CSStickyHeaderFlowLayoutAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = AB30FB091B099A7BFC4BBFC5949F13F0 /* CSStickyHeaderFlowLayoutAttributes.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5775ADAF1FE48D0BA850B0D4231C4CEA /* Pods-CricTrac-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B1CE4655C9E14FF89C786CE4B70B59D /* Pods-CricTrac-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		58CD6D61EE6BE93AE0FB8D7F6BF45DF4 /* KYDrawerController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 640168A24BEE774C01C903D3E20415F0 /* KYDrawerController-dummy.m */; };
-		73A66ABE57B93375BF09839F8E501E80 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
+		0CBA6A438630C06D0497C36DD1D88FBA /* UITextField+fixCaretPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BCDE37D2A4FD105903FD87D33836F6 /* UITextField+fixCaretPosition.swift */; };
+		1283FF810941EED86E367EAE06B1DE2D /* CSStickyHeaderFlowLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B33A748D7301AED11DE87166A8DBC18 /* CSStickyHeaderFlowLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F38D6E2B1FC33F7EF86C00B45E1FD6C /* SkyFloatingLabelTextFieldWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF5F81410000F1C05CBEC38E9FD4DC4 /* SkyFloatingLabelTextFieldWithIcon.swift */; };
+		26CAE8CC850C66ED44FBF2228C07AE09 /* Pods-CricTrac-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 44035752A66B3038815A98FB2FEBC914 /* Pods-CricTrac-dummy.m */; };
+		567BDEA0D15A2E9B281D33907F16899C /* CSStickyHeaderFlowLayoutAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 87E3182BD9F6AFB312DA915B9ADAF169 /* CSStickyHeaderFlowLayoutAttributes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		58CD6D61EE6BE93AE0FB8D7F6BF45DF4 /* KYDrawerController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F1104EAAF7A1DB47B82C5C06194BDC /* KYDrawerController-dummy.m */; };
+		5F3D79B43C9EA7788A7A2E193A97880F /* SkyFloatingLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C57B3EAD6AB24281D13CB4737BF3AD /* SkyFloatingLabelTextField.swift */; };
 		75A3DE11CB0B5E291301804D57F78999 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
-		76E2EE2E22DBCFA7466E6633108615BD /* IOStickyHeader-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F93B73F847987D34783FEA76C1744FD /* IOStickyHeader-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7ED02CD711925EBF88835D9A16CAAA93 /* KYEmbedMainControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D0206642558AC1E57BB3D4890E33D0 /* KYEmbedMainControllerSegue.swift */; };
-		868AE7BF395B1043B45DF46B0E98F7F3 /* Pods-CricTrac-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 44035752A66B3038815A98FB2FEBC914 /* Pods-CricTrac-dummy.m */; };
-		89B74E8B8891F867316F062F7F0340CB /* KYEmbedDrawerControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0684A0DA00ECFB80C6AD2ED3FFDEA5CA /* KYEmbedDrawerControllerSegue.swift */; };
-		8BF92F5AF7E78E494D90B05475DD63C9 /* KYDrawerController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F37305D3907C53D5D18C6FB8C80BCCD /* KYDrawerController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9BFB24F74C37D62DFC93A041FBFB65C7 /* IOStickyHeaderFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8C6FD322BA03683E0F47F75C2A86C3 /* IOStickyHeaderFlowLayout.swift */; };
-		AC45536AC7AEE84501D073F7B1612B5C /* IOStickyHeader-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A65767E68C1DBB1293F6A08A80A4C028 /* IOStickyHeader-dummy.m */; };
-		AC909F21BD5C748CD4372C0457CF3F1A /* CSStickyHeaderFlowLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = C18C5BBDA5DEA443A012AF6A89054F2F /* CSStickyHeaderFlowLayoutAttributes.m */; };
-		C4ABDF207C548E58E309B2B34E433434 /* CSStickyHeaderFlowLayout-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E03E90AD392B021F9D5AD49806D740A7 /* CSStickyHeaderFlowLayout-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C775FBB08DBA6936822E2BC00F18AF4C /* CSStickyHeaderFlowLayout-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C0E874CAB903B116029473298E813C /* CSStickyHeaderFlowLayout-dummy.m */; };
-		D5844F86327DE284D0628ECA8690228B /* IOStickyHeaderFlowLayoutAttibutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605C35B567FBD27897879FAE91531192 /* IOStickyHeaderFlowLayoutAttibutes.swift */; };
+		76E2EE2E22DBCFA7466E6633108615BD /* IOStickyHeader-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DFDBBDCB95C3CE557B1AE7744ED14B6 /* IOStickyHeader-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7977E0D97D42F5CE69068265036E5300 /* SkyFloatingLabelTextField-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3772DD3B8859565DB710D7EC095F704E /* SkyFloatingLabelTextField-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7ED02CD711925EBF88835D9A16CAAA93 /* KYEmbedMainControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFFFF8AFA0A3921848CC73AE3F50FD1 /* KYEmbedMainControllerSegue.swift */; };
+		7EFE66AD2140D3E8F5C34810F19CB34D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
+		89B74E8B8891F867316F062F7F0340CB /* KYEmbedDrawerControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AA52E54FCEC6F6F748789941ED9686 /* KYEmbedDrawerControllerSegue.swift */; };
+		8BF92F5AF7E78E494D90B05475DD63C9 /* KYDrawerController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DA56AD240E29D7241E8FB9DBD9A62FFA /* KYDrawerController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9BFB24F74C37D62DFC93A041FBFB65C7 /* IOStickyHeaderFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8150A6497683371EDB2DF2C021F237B2 /* IOStickyHeaderFlowLayout.swift */; };
+		AC45536AC7AEE84501D073F7B1612B5C /* IOStickyHeader-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B00C3FF7A2C4A9ADBDC7C06C635E821 /* IOStickyHeader-dummy.m */; };
+		AC909F21BD5C748CD4372C0457CF3F1A /* CSStickyHeaderFlowLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E01B6EDF3EC9CBBCFEA3FB882AEEE34 /* CSStickyHeaderFlowLayoutAttributes.m */; };
+		B651013373D07B2A786E37271C63B635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
+		B6E2731723BF6EF5D5D4FE8538A22159 /* Pods-CricTrac-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B1CE4655C9E14FF89C786CE4B70B59D /* Pods-CricTrac-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C4ABDF207C548E58E309B2B34E433434 /* CSStickyHeaderFlowLayout-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A187B9C981EB495E9F5C3C7008F7F78 /* CSStickyHeaderFlowLayout-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C775FBB08DBA6936822E2BC00F18AF4C /* CSStickyHeaderFlowLayout-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB3DBEDDA345E9EDF0C59CD8B4090E0 /* CSStickyHeaderFlowLayout-dummy.m */; };
+		D5844F86327DE284D0628ECA8690228B /* IOStickyHeaderFlowLayoutAttibutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365446FFAA31590F2CD98F4A3F183E1A /* IOStickyHeaderFlowLayoutAttibutes.swift */; };
+		EC484F079640C020830D322FC47C5C13 /* SkyFloatingLabelTextField-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CDFA829B8FE83D0A95A2C5AF7A8B363 /* SkyFloatingLabelTextField-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		02296697284C7B0AD18061B59739F5D8 /* PBXContainerItemProxy */ = {
+		220C3F4D42DCD4BC8A56ED135255CFFE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = B7E6FC3F7BD4E7296010469FA6023E8A;
-			remoteInfo = IOStickyHeader;
+			remoteGlobalIDString = 6D67C920179CB33260080BDAD476220A;
+			remoteInfo = SkyFloatingLabelTextField;
 		};
-		C540B2FD55E9AEEB41CC5F6A99F39754 /* PBXContainerItemProxy */ = {
+		BFE36A456445CE596E08DE9CB8672555 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 30C445E6D8703D94CB06D42EB47820DE;
 			remoteInfo = CSStickyHeaderFlowLayout;
 		};
-		FA1EC3FBDFE9761C7F24E345F636F092 /* PBXContainerItemProxy */ = {
+		CA96712B3F1D942EB96B64D01FEA0A80 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B7E6FC3F7BD4E7296010469FA6023E8A;
+			remoteInfo = IOStickyHeader;
+		};
+		CD5ED6207EB17D62DEE538A96F15490B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
@@ -55,60 +68,70 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0684A0DA00ECFB80C6AD2ED3FFDEA5CA /* KYEmbedDrawerControllerSegue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KYEmbedDrawerControllerSegue.swift; path = KYDrawerController/Classes/KYEmbedDrawerControllerSegue.swift; sourceTree = "<group>"; };
-		1246CBDE33FC89F82982FBE08C264219 /* CSStickyHeaderFlowLayout.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CSStickyHeaderFlowLayout.xcconfig; sourceTree = "<group>"; };
-		14AC04F347D419A4AE958BE592984560 /* KYDrawerController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = KYDrawerController.xcconfig; sourceTree = "<group>"; };
+		00DF9A545592592E0250002CD9764EB9 /* IOStickyHeader-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IOStickyHeader-prefix.pch"; sourceTree = "<group>"; };
+		0C216D4E877ED9AEBEA78378407EFA9F /* GoogleParsingUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleParsingUtilities.framework; path = Frameworks/GoogleParsingUtilities.framework; sourceTree = "<group>"; };
 		19911C9258BBE4F3EB8084FDEB0B9FD7 /* Pods-CricTrac-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CricTrac-acknowledgements.markdown"; sourceTree = "<group>"; };
 		1B1CE4655C9E14FF89C786CE4B70B59D /* Pods-CricTrac-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CricTrac-umbrella.h"; sourceTree = "<group>"; };
-		1B4EDABDFEC7D7D893AA20F8A962FE61 /* KYDrawerController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KYDrawerController.swift; path = KYDrawerController/Classes/KYDrawerController.swift; sourceTree = "<group>"; };
-		211B2CD48C5795C69C1E6D2F8A99374D /* CSStickyHeaderFlowLayout.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CSStickyHeaderFlowLayout.h; path = Classes/CSStickyHeaderFlowLayout.h; sourceTree = "<group>"; };
-		27DEB54AE06002A143D5A372AA298DE4 /* FirebaseAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAuth.framework; path = Frameworks/frameworks/FirebaseAuth.framework; sourceTree = "<group>"; };
-		29D9C6DA2E9A989C4EF282AED4F44A63 /* IOStickyHeader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IOStickyHeader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2CBA1FB7B31F3D299AA98B386B8C3A45 /* GoogleParsingUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleParsingUtilities.framework; path = Frameworks/GoogleParsingUtilities.framework; sourceTree = "<group>"; };
-		2D3E50C19586031EC934607913751BAA /* CSStickyHeaderFlowLayout.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = CSStickyHeaderFlowLayout.modulemap; sourceTree = "<group>"; };
-		38F7A07DD70946DF65BEDF6359079FE1 /* KYDrawerController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KYDrawerController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		40E4C3CC44E5B605FD1FE68D750B49AC /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1CDFA829B8FE83D0A95A2C5AF7A8B363 /* SkyFloatingLabelTextField-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SkyFloatingLabelTextField-dummy.m"; sourceTree = "<group>"; };
+		2168C842BBE45424E3DB64B50EBD8B99 /* KYDrawerController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = KYDrawerController.xcconfig; sourceTree = "<group>"; };
+		285CF224ACD22B306F9B4519109DCB69 /* KYDrawerController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KYDrawerController.swift; path = KYDrawerController/Classes/KYDrawerController.swift; sourceTree = "<group>"; };
+		2B00C3FF7A2C4A9ADBDC7C06C635E821 /* IOStickyHeader-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "IOStickyHeader-dummy.m"; sourceTree = "<group>"; };
+		2B33A748D7301AED11DE87166A8DBC18 /* CSStickyHeaderFlowLayout.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CSStickyHeaderFlowLayout.h; path = Classes/CSStickyHeaderFlowLayout.h; sourceTree = "<group>"; };
+		33AFE0A0A179471D94F0215E965DF725 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		365446FFAA31590F2CD98F4A3F183E1A /* IOStickyHeaderFlowLayoutAttibutes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IOStickyHeaderFlowLayoutAttibutes.swift; path = Pod/Classes/IOStickyHeaderFlowLayoutAttibutes.swift; sourceTree = "<group>"; };
+		3772DD3B8859565DB710D7EC095F704E /* SkyFloatingLabelTextField-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SkyFloatingLabelTextField-umbrella.h"; sourceTree = "<group>"; };
+		3CFFFF8AFA0A3921848CC73AE3F50FD1 /* KYEmbedMainControllerSegue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KYEmbedMainControllerSegue.swift; path = KYDrawerController/Classes/KYEmbedMainControllerSegue.swift; sourceTree = "<group>"; };
+		3FABA406391CAEA1885C23FA91417EA8 /* SkyFloatingLabelTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SkyFloatingLabelTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43A55F2B86C6B225FA3114E294C161EE /* Pods-CricTrac-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CricTrac-frameworks.sh"; sourceTree = "<group>"; };
+		43B095CA3FFBDD2607D045761BB6077E /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = Frameworks/GoogleUtilities.framework; sourceTree = "<group>"; };
 		44035752A66B3038815A98FB2FEBC914 /* Pods-CricTrac-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CricTrac-dummy.m"; sourceTree = "<group>"; };
-		449187C4AF05B0F1F360FAC2F159669E /* CSStickyHeaderFlowLayout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CSStickyHeaderFlowLayout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		456D79EB5608009B61DEDCE20BD10882 /* Pods-CricTrac-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CricTrac-resources.sh"; sourceTree = "<group>"; };
-		458F9B57D5C6947200F23548586E7DD0 /* FirebaseDatabase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseDatabase.framework; path = Frameworks/FirebaseDatabase.framework; sourceTree = "<group>"; };
-		46830CC52037291EA22FDFFB395BBC8B /* KYDrawerController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = KYDrawerController.modulemap; sourceTree = "<group>"; };
+		46496D8FAF19A0172EDA9BA074585C38 /* CSStickyHeaderFlowLayout.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = CSStickyHeaderFlowLayout.modulemap; sourceTree = "<group>"; };
 		4AF6FF1D669E8B82249CF53C0AC2F75D /* Pods-CricTrac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CricTrac.release.xcconfig"; sourceTree = "<group>"; };
-		4D9DDD9747C84359D453104913FDB69E /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSymbolUtilities.framework; path = Frameworks/GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
-		4F37305D3907C53D5D18C6FB8C80BCCD /* KYDrawerController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KYDrawerController-umbrella.h"; sourceTree = "<group>"; };
-		4F93B73F847987D34783FEA76C1744FD /* IOStickyHeader-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IOStickyHeader-umbrella.h"; sourceTree = "<group>"; };
-		605C35B567FBD27897879FAE91531192 /* IOStickyHeaderFlowLayoutAttibutes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IOStickyHeaderFlowLayoutAttibutes.swift; path = Pod/Classes/IOStickyHeaderFlowLayoutAttibutes.swift; sourceTree = "<group>"; };
-		640168A24BEE774C01C903D3E20415F0 /* KYDrawerController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "KYDrawerController-dummy.m"; sourceTree = "<group>"; };
-		70D0206642558AC1E57BB3D4890E33D0 /* KYEmbedMainControllerSegue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KYEmbedMainControllerSegue.swift; path = KYDrawerController/Classes/KYEmbedMainControllerSegue.swift; sourceTree = "<group>"; };
-		796A5EA353AEBEF506410D7F8D884085 /* CSStickyHeaderFlowLayout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CSStickyHeaderFlowLayout.m; path = Classes/CSStickyHeaderFlowLayout.m; sourceTree = "<group>"; };
-		7E012FB955FC759951462E7A11E81E34 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4DAC19144E2253449B74CD0B2FB6ECCC /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSymbolUtilities.framework; path = Frameworks/GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
+		52C1ED88AE17ECD9F685FBB115909615 /* KYDrawerController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KYDrawerController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B28BB98CF6288BE73C2F7272D43D5D0 /* FirebaseAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAuth.framework; path = Frameworks/frameworks/FirebaseAuth.framework; sourceTree = "<group>"; };
+		5C242D4414B72234AA2E7A96A12EE557 /* SkyFloatingLabelTextField.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SkyFloatingLabelTextField.xcconfig; sourceTree = "<group>"; };
+		5E01B6EDF3EC9CBBCFEA3FB882AEEE34 /* CSStickyHeaderFlowLayoutAttributes.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CSStickyHeaderFlowLayoutAttributes.m; path = Classes/CSStickyHeaderFlowLayoutAttributes.m; sourceTree = "<group>"; };
+		5E2044875199F43CC3B0D6EAC8AA1754 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5EAE65A26EB135293B7B919ABFCF0161 /* IOStickyHeader.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = IOStickyHeader.modulemap; sourceTree = "<group>"; };
+		60F1104EAAF7A1DB47B82C5C06194BDC /* KYDrawerController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "KYDrawerController-dummy.m"; sourceTree = "<group>"; };
+		63BCDE37D2A4FD105903FD87D33836F6 /* UITextField+fixCaretPosition.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UITextField+fixCaretPosition.swift"; path = "Sources/UITextField+fixCaretPosition.swift"; sourceTree = "<group>"; };
+		68C772FCA51FAFA261955EAA6EFA2132 /* SkyFloatingLabelTextField-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SkyFloatingLabelTextField-prefix.pch"; sourceTree = "<group>"; };
+		6DF5F81410000F1C05CBEC38E9FD4DC4 /* SkyFloatingLabelTextFieldWithIcon.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SkyFloatingLabelTextFieldWithIcon.swift; path = Sources/SkyFloatingLabelTextFieldWithIcon.swift; sourceTree = "<group>"; };
+		6DFDBBDCB95C3CE557B1AE7744ED14B6 /* IOStickyHeader-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IOStickyHeader-umbrella.h"; sourceTree = "<group>"; };
+		6EDC63A5F1F80669056A391D67DA3985 /* CSStickyHeaderFlowLayout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CSStickyHeaderFlowLayout.m; path = Classes/CSStickyHeaderFlowLayout.m; sourceTree = "<group>"; };
+		70FC394F5FEFF7C8E2489B9715E265F4 /* CSStickyHeaderFlowLayout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CSStickyHeaderFlowLayout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		71A40635DD5D4D52FE5E2566E143FF4B /* KYDrawerController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = KYDrawerController.modulemap; sourceTree = "<group>"; };
 		8029F3F5234D24E1BD8D8D4D5259309D /* Pods-CricTrac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CricTrac.debug.xcconfig"; sourceTree = "<group>"; };
+		8150A6497683371EDB2DF2C021F237B2 /* IOStickyHeaderFlowLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IOStickyHeaderFlowLayout.swift; path = Pod/Classes/IOStickyHeaderFlowLayout.swift; sourceTree = "<group>"; };
+		841ACBCD31BE4548578107C32304AB68 /* FIRInstanceID.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FIRInstanceID.h; path = Headers/Public/FIRInstanceID.h; sourceTree = "<group>"; };
+		8478133DDEC6932240EA52EAE077898F /* IOStickyHeader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IOStickyHeader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		87E3182BD9F6AFB312DA915B9ADAF169 /* CSStickyHeaderFlowLayoutAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CSStickyHeaderFlowLayoutAttributes.h; path = Classes/CSStickyHeaderFlowLayoutAttributes.h; sourceTree = "<group>"; };
+		8A187B9C981EB495E9F5C3C7008F7F78 /* CSStickyHeaderFlowLayout-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CSStickyHeaderFlowLayout-umbrella.h"; sourceTree = "<group>"; };
+		8AF0C1DA003DF7E8A859DB92A0C529C4 /* Firebase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Firebase.h; path = Headers/Firebase.h; sourceTree = "<group>"; };
 		93994862F7F1CC5C2BBB64CF9683D9AB /* Pods-CricTrac-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CricTrac-acknowledgements.plist"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		969FB288F1EF4161909CA1FBD29B6D6A /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = Frameworks/FirebaseInstanceID.framework; sourceTree = "<group>"; };
-		976F878B8815D2D38F3BE5C3B8FB5B1A /* IOStickyHeader.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = IOStickyHeader.xcconfig; sourceTree = "<group>"; };
-		A65767E68C1DBB1293F6A08A80A4C028 /* IOStickyHeader-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "IOStickyHeader-dummy.m"; sourceTree = "<group>"; };
-		AB30FB091B099A7BFC4BBFC5949F13F0 /* CSStickyHeaderFlowLayoutAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CSStickyHeaderFlowLayoutAttributes.h; path = Classes/CSStickyHeaderFlowLayoutAttributes.h; sourceTree = "<group>"; };
-		BD8C6FD322BA03683E0F47F75C2A86C3 /* IOStickyHeaderFlowLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IOStickyHeaderFlowLayout.swift; path = Pod/Classes/IOStickyHeaderFlowLayout.swift; sourceTree = "<group>"; };
-		BE0285784FFDC8877EDC7DA4B9EBF539 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = Frameworks/GoogleUtilities.framework; sourceTree = "<group>"; };
-		C18C5BBDA5DEA443A012AF6A89054F2F /* CSStickyHeaderFlowLayoutAttributes.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CSStickyHeaderFlowLayoutAttributes.m; path = Classes/CSStickyHeaderFlowLayoutAttributes.m; sourceTree = "<group>"; };
-		C44F90EC646D17E7B1BA75C4652F3068 /* IOStickyHeader.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = IOStickyHeader.modulemap; sourceTree = "<group>"; };
-		CBF05918954F8180882FBCC0C1D90E34 /* KYDrawerController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KYDrawerController-prefix.pch"; sourceTree = "<group>"; };
-		CDE781B10F4AAA132E32715750A14829 /* GoogleNetworkingUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleNetworkingUtilities.framework; path = Frameworks/GoogleNetworkingUtilities.framework; sourceTree = "<group>"; };
+		93AA52E54FCEC6F6F748789941ED9686 /* KYEmbedDrawerControllerSegue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KYEmbedDrawerControllerSegue.swift; path = KYDrawerController/Classes/KYEmbedDrawerControllerSegue.swift; sourceTree = "<group>"; };
+		A57AA5121C7F331BA4BC15D362BE82BC /* IOStickyHeader.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = IOStickyHeader.xcconfig; sourceTree = "<group>"; };
+		AF1444C16A97406FDDC2EFBCF2CB4DF7 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAnalytics.framework; path = Frameworks/frameworks/FirebaseAnalytics.framework; sourceTree = "<group>"; };
+		B17373038212E862AC8F341DF8D67DA6 /* FirebaseDatabase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseDatabase.framework; path = Frameworks/FirebaseDatabase.framework; sourceTree = "<group>"; };
+		B2AA1197EF72C5AC594233C004A67FE1 /* SkyFloatingLabelTextField.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SkyFloatingLabelTextField.modulemap; sourceTree = "<group>"; };
+		C2AA60F6630371EC4AE1D0E1386431A4 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = Frameworks/FirebaseInstanceID.framework; sourceTree = "<group>"; };
+		C556B877681C102FD9FB70E1490E3CE4 /* CSStickyHeaderFlowLayout-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CSStickyHeaderFlowLayout-prefix.pch"; sourceTree = "<group>"; };
 		CE5554CFF4BFD6420DBAAA0176E4359C /* Pods-CricTrac.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-CricTrac.modulemap"; sourceTree = "<group>"; };
-		CE8E2325661C36DFFD060569F8BD3165 /* Firebase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Firebase.h; path = Headers/Firebase.h; sourceTree = "<group>"; };
 		CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		D28026E9EAB931FA4C287F45C8AC53C5 /* Pods_CricTrac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CricTrac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D33C785D93CACAC8208DA01E2E10E528 /* CSStickyHeaderFlowLayout-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CSStickyHeaderFlowLayout-prefix.pch"; sourceTree = "<group>"; };
-		D7E04F72BA0E6896D263BB2FD557988C /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAnalytics.framework; path = Frameworks/frameworks/FirebaseAnalytics.framework; sourceTree = "<group>"; };
-		DC26430090C42861863A19157D612B09 /* IOStickyHeader-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IOStickyHeader-prefix.pch"; sourceTree = "<group>"; };
-		DC8F9FD260680032553A01ACFB74C90C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DD6925774F3328F935F5F0E1DE460E76 /* FIRInstanceID.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FIRInstanceID.h; path = Headers/Public/FIRInstanceID.h; sourceTree = "<group>"; };
-		E03E90AD392B021F9D5AD49806D740A7 /* CSStickyHeaderFlowLayout-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CSStickyHeaderFlowLayout-umbrella.h"; sourceTree = "<group>"; };
-		E5C0E874CAB903B116029473298E813C /* CSStickyHeaderFlowLayout-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CSStickyHeaderFlowLayout-dummy.m"; sourceTree = "<group>"; };
+		D70F425A34FA4A1BA2084827F7317B64 /* GoogleInterchangeUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleInterchangeUtilities.framework; path = Frameworks/GoogleInterchangeUtilities.framework; sourceTree = "<group>"; };
+		DA56AD240E29D7241E8FB9DBD9A62FFA /* KYDrawerController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KYDrawerController-umbrella.h"; sourceTree = "<group>"; };
+		DA99F186EC4964CF56FC654666D35FA2 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DBC4321875F2B335BA0336CC1C6971F3 /* GoogleNetworkingUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleNetworkingUtilities.framework; path = Frameworks/GoogleNetworkingUtilities.framework; sourceTree = "<group>"; };
+		DD86B2C72B19905B799449F48B987432 /* KYDrawerController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KYDrawerController-prefix.pch"; sourceTree = "<group>"; };
+		E03674A60F9F5ADB52AEDEFE7B55DD2E /* Pods_CricTrac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CricTrac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5DB7C400D426857AFADA162F1F44877 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F2B14D35ABBA4CA5F7CA5AE1CDF4CF33 /* GoogleInterchangeUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleInterchangeUtilities.framework; path = Frameworks/GoogleInterchangeUtilities.framework; sourceTree = "<group>"; };
+		EBF9F508D16DA11864255DDEDF78A4EA /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4C57B3EAD6AB24281D13CB4737BF3AD /* SkyFloatingLabelTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SkyFloatingLabelTextField.swift; path = Sources/SkyFloatingLabelTextField.swift; sourceTree = "<group>"; };
+		FAB3DBEDDA345E9EDF0C59CD8B4090E0 /* CSStickyHeaderFlowLayout-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CSStickyHeaderFlowLayout-dummy.m"; sourceTree = "<group>"; };
+		FFBD15D055E7EA7E9658AB66B530E9A9 /* CSStickyHeaderFlowLayout.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CSStickyHeaderFlowLayout.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,11 +143,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8FBC833CF2110FB67D0683FAEABE099F /* Frameworks */ = {
+		247FDD4526E05F83A7D0407A21916830 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73A66ABE57B93375BF09839F8E501E80 /* Foundation.framework in Frameworks */,
+				B651013373D07B2A786E37271C63B635 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3729F7EE9D9283C54225BBDF8CBD3655 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EFE66AD2140D3E8F5C34810F19CB34D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,42 +178,83 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		01B50B66AC49085CAA597B69FBE75BAB /* FirebaseDatabase */ = {
+		02498002DDC05D228802D7585B86B99E /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
-				45C50CFE6EC7896929DE134E89FD547F /* Frameworks */,
+				9A6EA91BA692AA5DB9883AE95BD608D7 /* Analytics */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		05FC548AC043BB9B3A72581489D69C44 /* SkyFloatingLabelTextField */ = {
+			isa = PBXGroup;
+			children = (
+				F4C57B3EAD6AB24281D13CB4737BF3AD /* SkyFloatingLabelTextField.swift */,
+				6DF5F81410000F1C05CBEC38E9FD4DC4 /* SkyFloatingLabelTextFieldWithIcon.swift */,
+				63BCDE37D2A4FD105903FD87D33836F6 /* UITextField+fixCaretPosition.swift */,
+				81DE1EF02EE11AB298848DAC154B25A0 /* Support Files */,
+			);
+			path = SkyFloatingLabelTextField;
+			sourceTree = "<group>";
+		};
+		17702528D3EE8BC1FF776E080626D8EF /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				EBF9F508D16DA11864255DDEDF78A4EA /* Info.plist */,
+				71A40635DD5D4D52FE5E2566E143FF4B /* KYDrawerController.modulemap */,
+				2168C842BBE45424E3DB64B50EBD8B99 /* KYDrawerController.xcconfig */,
+				60F1104EAAF7A1DB47B82C5C06194BDC /* KYDrawerController-dummy.m */,
+				DD86B2C72B19905B799449F48B987432 /* KYDrawerController-prefix.pch */,
+				DA56AD240E29D7241E8FB9DBD9A62FFA /* KYDrawerController-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/KYDrawerController";
+			sourceTree = "<group>";
+		};
+		177544C4BDF8A712693E0E3A093A3731 /* FirebaseDatabase */ = {
+			isa = PBXGroup;
+			children = (
+				234833DDB6D7893170B72CBA2EBED67E /* Frameworks */,
 			);
 			path = FirebaseDatabase;
 			sourceTree = "<group>";
 		};
-		17C0B595854FEC3B1C6B119C1F2A2EB3 /* Support Files */ = {
+		18B86819C84836A70BD22A5A3E5511C7 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				2D3E50C19586031EC934607913751BAA /* CSStickyHeaderFlowLayout.modulemap */,
-				1246CBDE33FC89F82982FBE08C264219 /* CSStickyHeaderFlowLayout.xcconfig */,
-				E5C0E874CAB903B116029473298E813C /* CSStickyHeaderFlowLayout-dummy.m */,
-				D33C785D93CACAC8208DA01E2E10E528 /* CSStickyHeaderFlowLayout-prefix.pch */,
-				E03E90AD392B021F9D5AD49806D740A7 /* CSStickyHeaderFlowLayout-umbrella.h */,
-				7E012FB955FC759951462E7A11E81E34 /* Info.plist */,
+				46496D8FAF19A0172EDA9BA074585C38 /* CSStickyHeaderFlowLayout.modulemap */,
+				FFBD15D055E7EA7E9658AB66B530E9A9 /* CSStickyHeaderFlowLayout.xcconfig */,
+				FAB3DBEDDA345E9EDF0C59CD8B4090E0 /* CSStickyHeaderFlowLayout-dummy.m */,
+				C556B877681C102FD9FB70E1490E3CE4 /* CSStickyHeaderFlowLayout-prefix.pch */,
+				8A187B9C981EB495E9F5C3C7008F7F78 /* CSStickyHeaderFlowLayout-umbrella.h */,
+				5E2044875199F43CC3B0D6EAC8AA1754 /* Info.plist */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/CSStickyHeaderFlowLayout";
 			sourceTree = "<group>";
 		};
-		18130712D25E355454425777A97EC25C /* GoogleUtilities */ = {
+		234833DDB6D7893170B72CBA2EBED67E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6555ED07B74653ADE8E958A642956CB7 /* Frameworks */,
-			);
-			path = GoogleUtilities;
-			sourceTree = "<group>";
-		};
-		25064484CEBCABBDB10EB5D18E91A24A /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D7E04F72BA0E6896D263BB2FD557988C /* FirebaseAnalytics.framework */,
+				B17373038212E862AC8F341DF8D67DA6 /* FirebaseDatabase.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2657A45876D14625FFCA2849AE92FFDF /* GoogleParsingUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				CAFA90BE900850A0B635B1DACAD3C5B2 /* Frameworks */,
+			);
+			path = GoogleParsingUtilities;
+			sourceTree = "<group>";
+		};
+		2657ADF5B8C531C589DAF42552A7CE01 /* FirebaseAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				E1685D6D2E8E8A4C8FC16C61E914004B /* Frameworks */,
+			);
+			path = FirebaseAnalytics;
 			sourceTree = "<group>";
 		};
 		32C1E1491F1C3D171E62D0333885ECF8 /* Pods-CricTrac */ = {
@@ -203,26 +275,12 @@
 			path = "Target Support Files/Pods-CricTrac";
 			sourceTree = "<group>";
 		};
-		3499E8990281A9CF5E6D64B2E3C97792 /* Frameworks */ = {
+		365FCA9826832FFB303516DA7C578D1A /* GoogleNetworkingUtilities */ = {
 			isa = PBXGroup;
 			children = (
-				969FB288F1EF4161909CA1FBD29B6D6A /* FirebaseInstanceID.framework */,
+				78D40EA9C78A021BF66E891862F811BA /* Frameworks */,
 			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		39E5B30294DDB42AD28FBC212B283022 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				DC8F9FD260680032553A01ACFB74C90C /* Info.plist */,
-				C44F90EC646D17E7B1BA75C4652F3068 /* IOStickyHeader.modulemap */,
-				976F878B8815D2D38F3BE5C3B8FB5B1A /* IOStickyHeader.xcconfig */,
-				A65767E68C1DBB1293F6A08A80A4C028 /* IOStickyHeader-dummy.m */,
-				DC26430090C42861863A19157D612B09 /* IOStickyHeader-prefix.pch */,
-				4F93B73F847987D34783FEA76C1744FD /* IOStickyHeader-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/IOStickyHeader";
+			path = GoogleNetworkingUtilities;
 			sourceTree = "<group>";
 		};
 		3DCAB2B7CDE207B3958B6CB957FCC758 /* iOS */ = {
@@ -233,6 +291,14 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		3FCF1CDB5C86B73600CAD10B90BA7965 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4DAC19144E2253449B74CD0B2FB6ECCC /* GoogleSymbolUtilities.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		41EC01AC61A946E36F8E522B456D42A1 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,48 +307,71 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		45C50CFE6EC7896929DE134E89FD547F /* Frameworks */ = {
+		4B3495715C58657D6C22AF1E2D97A349 /* GoogleSymbolUtilities */ = {
 			isa = PBXGroup;
 			children = (
-				458F9B57D5C6947200F23548586E7DD0 /* FirebaseDatabase.framework */,
+				3FCF1CDB5C86B73600CAD10B90BA7965 /* Frameworks */,
+			);
+			path = GoogleSymbolUtilities;
+			sourceTree = "<group>";
+		};
+		4D5BC4F94FDCBFAEA60685BF7ACB271F /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				33AFE0A0A179471D94F0215E965DF725 /* Info.plist */,
+				5EAE65A26EB135293B7B919ABFCF0161 /* IOStickyHeader.modulemap */,
+				A57AA5121C7F331BA4BC15D362BE82BC /* IOStickyHeader.xcconfig */,
+				2B00C3FF7A2C4A9ADBDC7C06C635E821 /* IOStickyHeader-dummy.m */,
+				00DF9A545592592E0250002CD9764EB9 /* IOStickyHeader-prefix.pch */,
+				6DFDBBDCB95C3CE557B1AE7744ED14B6 /* IOStickyHeader-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/IOStickyHeader";
+			sourceTree = "<group>";
+		};
+		552C6F62C49F7944068CCA178E5147F3 /* GoogleUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				BD598282AA164DEF71FBBAB7B03858E9 /* Frameworks */,
+			);
+			path = GoogleUtilities;
+			sourceTree = "<group>";
+		};
+		67DAB9188509FD6AB4403680C9B86AA8 /* IOStickyHeader */ = {
+			isa = PBXGroup;
+			children = (
+				8150A6497683371EDB2DF2C021F237B2 /* IOStickyHeaderFlowLayout.swift */,
+				365446FFAA31590F2CD98F4A3F183E1A /* IOStickyHeaderFlowLayoutAttibutes.swift */,
+				4D5BC4F94FDCBFAEA60685BF7ACB271F /* Support Files */,
+			);
+			path = IOStickyHeader;
+			sourceTree = "<group>";
+		};
+		6BCEC63496F01730C99A811832D7705C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C2AA60F6630371EC4AE1D0E1386431A4 /* FirebaseInstanceID.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6555ED07B74653ADE8E958A642956CB7 /* Frameworks */ = {
+		74DAEA8EEC4C09FE4A7D507AA1FFC95B /* KYDrawerController */ = {
 			isa = PBXGroup;
 			children = (
-				BE0285784FFDC8877EDC7DA4B9EBF539 /* GoogleUtilities.framework */,
+				285CF224ACD22B306F9B4519109DCB69 /* KYDrawerController.swift */,
+				93AA52E54FCEC6F6F748789941ED9686 /* KYEmbedDrawerControllerSegue.swift */,
+				3CFFFF8AFA0A3921848CC73AE3F50FD1 /* KYEmbedMainControllerSegue.swift */,
+				17702528D3EE8BC1FF776E080626D8EF /* Support Files */,
+			);
+			path = KYDrawerController;
+			sourceTree = "<group>";
+		};
+		78D40EA9C78A021BF66E891862F811BA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DBC4321875F2B335BA0336CC1C6971F3 /* GoogleNetworkingUtilities.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		710051E4A2F38BE810F87B25648FE43F /* GoogleInterchangeUtilities */ = {
-			isa = PBXGroup;
-			children = (
-				C67A3C0289A030BC820E6FAC76A7EF49 /* Frameworks */,
-			);
-			path = GoogleInterchangeUtilities;
-			sourceTree = "<group>";
-		};
-		736475C1A4803E7F7E12FC8845D50364 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				C8C60117F2E2BBD11B5F7444E8177EE6 /* CSStickyHeaderFlowLayout */,
-				97447EEA2416FDA47F534A69929F3CE7 /* Firebase */,
-				C8F97AC217BE1EF9709F7CBC26494672 /* FirebaseAnalytics */,
-				BCA91CE2F88B1A48E8F9D20DEEDF7794 /* FirebaseAuth */,
-				01B50B66AC49085CAA597B69FBE75BAB /* FirebaseDatabase */,
-				7DB6735B2E794161B23C79D804CCA0C6 /* FirebaseInstanceID */,
-				710051E4A2F38BE810F87B25648FE43F /* GoogleInterchangeUtilities */,
-				87E26E1FCC7617BCE9610A1900A9AFA3 /* GoogleNetworkingUtilities */,
-				C551EFDFB5D7EA285A5FA5CF796C6DD4 /* GoogleParsingUtilities */,
-				93A63EB9AB4FA8F6B8EF555E808BFDAE /* GoogleSymbolUtilities */,
-				18130712D25E355454425777A97EC25C /* GoogleUtilities */,
-				FDBCD888B7650723982FF41267F6236C /* IOStickyHeader */,
-				97B569315E5725DE4D1CFE5A388A4A26 /* KYDrawerController */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
@@ -290,70 +379,52 @@
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				736475C1A4803E7F7E12FC8845D50364 /* Pods */,
-				C7D1DC407D91023738EC45460C9DC7FF /* Products */,
+				E6CB8C4753FA26AB270D3C44B9441967 /* Pods */,
+				FB6BC8255A5C208D86C7E79430AFEB9B /* Products */,
 				41EC01AC61A946E36F8E522B456D42A1 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		7DB6735B2E794161B23C79D804CCA0C6 /* FirebaseInstanceID */ = {
+		81DE1EF02EE11AB298848DAC154B25A0 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				DD6925774F3328F935F5F0E1DE460E76 /* FIRInstanceID.h */,
-				3499E8990281A9CF5E6D64B2E3C97792 /* Frameworks */,
+				DA99F186EC4964CF56FC654666D35FA2 /* Info.plist */,
+				B2AA1197EF72C5AC594233C004A67FE1 /* SkyFloatingLabelTextField.modulemap */,
+				5C242D4414B72234AA2E7A96A12EE557 /* SkyFloatingLabelTextField.xcconfig */,
+				1CDFA829B8FE83D0A95A2C5AF7A8B363 /* SkyFloatingLabelTextField-dummy.m */,
+				68C772FCA51FAFA261955EAA6EFA2132 /* SkyFloatingLabelTextField-prefix.pch */,
+				3772DD3B8859565DB710D7EC095F704E /* SkyFloatingLabelTextField-umbrella.h */,
 			);
-			path = FirebaseInstanceID;
+			name = "Support Files";
+			path = "../Target Support Files/SkyFloatingLabelTextField";
 			sourceTree = "<group>";
 		};
-		87E26E1FCC7617BCE9610A1900A9AFA3 /* GoogleNetworkingUtilities */ = {
+		90311F9D9DD44D3282CC78233012CF60 /* CSStickyHeaderFlowLayout */ = {
 			isa = PBXGroup;
 			children = (
-				C83C1A48138B1351B36B0E3F7E5E0938 /* Frameworks */,
+				2B33A748D7301AED11DE87166A8DBC18 /* CSStickyHeaderFlowLayout.h */,
+				6EDC63A5F1F80669056A391D67DA3985 /* CSStickyHeaderFlowLayout.m */,
+				87E3182BD9F6AFB312DA915B9ADAF169 /* CSStickyHeaderFlowLayoutAttributes.h */,
+				5E01B6EDF3EC9CBBCFEA3FB882AEEE34 /* CSStickyHeaderFlowLayoutAttributes.m */,
+				18B86819C84836A70BD22A5A3E5511C7 /* Support Files */,
 			);
-			path = GoogleNetworkingUtilities;
+			path = CSStickyHeaderFlowLayout;
 			sourceTree = "<group>";
 		};
-		886C9F1DB48E0B60D5DDDE7A927285AB /* Frameworks */ = {
+		98A74E1D7584C5D182B1D6390633448E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				27DEB54AE06002A143D5A372AA298DE4 /* FirebaseAuth.framework */,
+				5B28BB98CF6288BE73C2F7272D43D5D0 /* FirebaseAuth.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		93A63EB9AB4FA8F6B8EF555E808BFDAE /* GoogleSymbolUtilities */ = {
+		9A6EA91BA692AA5DB9883AE95BD608D7 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
-				B5DE4F305A57FAA2F5B1AFF9C3C11059 /* Frameworks */,
+				8AF0C1DA003DF7E8A859DB92A0C529C4 /* Firebase.h */,
 			);
-			path = GoogleSymbolUtilities;
-			sourceTree = "<group>";
-		};
-		97447EEA2416FDA47F534A69929F3CE7 /* Firebase */ = {
-			isa = PBXGroup;
-			children = (
-				CCD97E0D3B71958040FD5218D90ABC38 /* Analytics */,
-			);
-			path = Firebase;
-			sourceTree = "<group>";
-		};
-		97B569315E5725DE4D1CFE5A388A4A26 /* KYDrawerController */ = {
-			isa = PBXGroup;
-			children = (
-				1B4EDABDFEC7D7D893AA20F8A962FE61 /* KYDrawerController.swift */,
-				0684A0DA00ECFB80C6AD2ED3FFDEA5CA /* KYEmbedDrawerControllerSegue.swift */,
-				70D0206642558AC1E57BB3D4890E33D0 /* KYEmbedMainControllerSegue.swift */,
-				CD5DB5A2C0022E1FE6ED7E81752831E2 /* Support Files */,
-			);
-			path = KYDrawerController;
-			sourceTree = "<group>";
-		};
-		B5DE4F305A57FAA2F5B1AFF9C3C11059 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				4D9DDD9747C84359D453104913FDB69E /* GoogleSymbolUtilities.framework */,
-			);
-			name = Frameworks;
+			name = Analytics;
 			sourceTree = "<group>";
 		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
@@ -364,107 +435,94 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		BCA91CE2F88B1A48E8F9D20DEEDF7794 /* FirebaseAuth */ = {
+		BD598282AA164DEF71FBBAB7B03858E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				886C9F1DB48E0B60D5DDDE7A927285AB /* Frameworks */,
+				43B095CA3FFBDD2607D045761BB6077E /* GoogleUtilities.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C096E4A7C491F01ECD542F480D01E51D /* FirebaseInstanceID */ = {
+			isa = PBXGroup;
+			children = (
+				841ACBCD31BE4548578107C32304AB68 /* FIRInstanceID.h */,
+				6BCEC63496F01730C99A811832D7705C /* Frameworks */,
+			);
+			path = FirebaseInstanceID;
+			sourceTree = "<group>";
+		};
+		CAFA90BE900850A0B635B1DACAD3C5B2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0C216D4E877ED9AEBEA78378407EFA9F /* GoogleParsingUtilities.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D2A9D786636121F6C8D3F459D65E81EC /* FirebaseAuth */ = {
+			isa = PBXGroup;
+			children = (
+				98A74E1D7584C5D182B1D6390633448E /* Frameworks */,
 			);
 			path = FirebaseAuth;
 			sourceTree = "<group>";
 		};
-		C551EFDFB5D7EA285A5FA5CF796C6DD4 /* GoogleParsingUtilities */ = {
+		DB084A692CE23F67B7A27EBA5D9B7920 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CE85DD01E14EB7BF15C23AD487FFABDD /* Frameworks */,
-			);
-			path = GoogleParsingUtilities;
-			sourceTree = "<group>";
-		};
-		C67A3C0289A030BC820E6FAC76A7EF49 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				F2B14D35ABBA4CA5F7CA5AE1CDF4CF33 /* GoogleInterchangeUtilities.framework */,
+				D70F425A34FA4A1BA2084827F7317B64 /* GoogleInterchangeUtilities.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C7D1DC407D91023738EC45460C9DC7FF /* Products */ = {
+		E1685D6D2E8E8A4C8FC16C61E914004B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				449187C4AF05B0F1F360FAC2F159669E /* CSStickyHeaderFlowLayout.framework */,
-				29D9C6DA2E9A989C4EF282AED4F44A63 /* IOStickyHeader.framework */,
-				38F7A07DD70946DF65BEDF6359079FE1 /* KYDrawerController.framework */,
-				D28026E9EAB931FA4C287F45C8AC53C5 /* Pods_CricTrac.framework */,
+				AF1444C16A97406FDDC2EFBCF2CB4DF7 /* FirebaseAnalytics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E6CB8C4753FA26AB270D3C44B9441967 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				90311F9D9DD44D3282CC78233012CF60 /* CSStickyHeaderFlowLayout */,
+				02498002DDC05D228802D7585B86B99E /* Firebase */,
+				2657ADF5B8C531C589DAF42552A7CE01 /* FirebaseAnalytics */,
+				D2A9D786636121F6C8D3F459D65E81EC /* FirebaseAuth */,
+				177544C4BDF8A712693E0E3A093A3731 /* FirebaseDatabase */,
+				C096E4A7C491F01ECD542F480D01E51D /* FirebaseInstanceID */,
+				EB77A46EB5C7181513BFFA4A8261F429 /* GoogleInterchangeUtilities */,
+				365FCA9826832FFB303516DA7C578D1A /* GoogleNetworkingUtilities */,
+				2657A45876D14625FFCA2849AE92FFDF /* GoogleParsingUtilities */,
+				4B3495715C58657D6C22AF1E2D97A349 /* GoogleSymbolUtilities */,
+				552C6F62C49F7944068CCA178E5147F3 /* GoogleUtilities */,
+				67DAB9188509FD6AB4403680C9B86AA8 /* IOStickyHeader */,
+				74DAEA8EEC4C09FE4A7D507AA1FFC95B /* KYDrawerController */,
+				05FC548AC043BB9B3A72581489D69C44 /* SkyFloatingLabelTextField */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		EB77A46EB5C7181513BFFA4A8261F429 /* GoogleInterchangeUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				DB084A692CE23F67B7A27EBA5D9B7920 /* Frameworks */,
+			);
+			path = GoogleInterchangeUtilities;
+			sourceTree = "<group>";
+		};
+		FB6BC8255A5C208D86C7E79430AFEB9B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				70FC394F5FEFF7C8E2489B9715E265F4 /* CSStickyHeaderFlowLayout.framework */,
+				8478133DDEC6932240EA52EAE077898F /* IOStickyHeader.framework */,
+				52C1ED88AE17ECD9F685FBB115909615 /* KYDrawerController.framework */,
+				E03674A60F9F5ADB52AEDEFE7B55DD2E /* Pods_CricTrac.framework */,
+				3FABA406391CAEA1885C23FA91417EA8 /* SkyFloatingLabelTextField.framework */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		C83C1A48138B1351B36B0E3F7E5E0938 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				CDE781B10F4AAA132E32715750A14829 /* GoogleNetworkingUtilities.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C8C60117F2E2BBD11B5F7444E8177EE6 /* CSStickyHeaderFlowLayout */ = {
-			isa = PBXGroup;
-			children = (
-				211B2CD48C5795C69C1E6D2F8A99374D /* CSStickyHeaderFlowLayout.h */,
-				796A5EA353AEBEF506410D7F8D884085 /* CSStickyHeaderFlowLayout.m */,
-				AB30FB091B099A7BFC4BBFC5949F13F0 /* CSStickyHeaderFlowLayoutAttributes.h */,
-				C18C5BBDA5DEA443A012AF6A89054F2F /* CSStickyHeaderFlowLayoutAttributes.m */,
-				17C0B595854FEC3B1C6B119C1F2A2EB3 /* Support Files */,
-			);
-			path = CSStickyHeaderFlowLayout;
-			sourceTree = "<group>";
-		};
-		C8F97AC217BE1EF9709F7CBC26494672 /* FirebaseAnalytics */ = {
-			isa = PBXGroup;
-			children = (
-				25064484CEBCABBDB10EB5D18E91A24A /* Frameworks */,
-			);
-			path = FirebaseAnalytics;
-			sourceTree = "<group>";
-		};
-		CCD97E0D3B71958040FD5218D90ABC38 /* Analytics */ = {
-			isa = PBXGroup;
-			children = (
-				CE8E2325661C36DFFD060569F8BD3165 /* Firebase.h */,
-			);
-			name = Analytics;
-			sourceTree = "<group>";
-		};
-		CD5DB5A2C0022E1FE6ED7E81752831E2 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				40E4C3CC44E5B605FD1FE68D750B49AC /* Info.plist */,
-				46830CC52037291EA22FDFFB395BBC8B /* KYDrawerController.modulemap */,
-				14AC04F347D419A4AE958BE592984560 /* KYDrawerController.xcconfig */,
-				640168A24BEE774C01C903D3E20415F0 /* KYDrawerController-dummy.m */,
-				CBF05918954F8180882FBCC0C1D90E34 /* KYDrawerController-prefix.pch */,
-				4F37305D3907C53D5D18C6FB8C80BCCD /* KYDrawerController-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/KYDrawerController";
-			sourceTree = "<group>";
-		};
-		CE85DD01E14EB7BF15C23AD487FFABDD /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				2CBA1FB7B31F3D299AA98B386B8C3A45 /* GoogleParsingUtilities.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		FDBCD888B7650723982FF41267F6236C /* IOStickyHeader */ = {
-			isa = PBXGroup;
-			children = (
-				BD8C6FD322BA03683E0F47F75C2A86C3 /* IOStickyHeaderFlowLayout.swift */,
-				605C35B567FBD27897879FAE91531192 /* IOStickyHeaderFlowLayoutAttibutes.swift */,
-				39E5B30294DDB42AD28FBC212B283022 /* Support Files */,
-			);
-			path = IOStickyHeader;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -480,11 +538,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9D342D7F0182070A9A06821DF27833DC /* Headers */ = {
+		CE9D890CF0A689977988954A037026F1 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5775ADAF1FE48D0BA850B0D4231C4CEA /* Pods-CricTrac-umbrella.h in Headers */,
+				B6E2731723BF6EF5D5D4FE8538A22159 /* Pods-CricTrac-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4B7A905EF36DD2E288286000A1B3291 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7977E0D97D42F5CE69068265036E5300 /* SkyFloatingLabelTextField-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,7 +587,7 @@
 			);
 			name = CSStickyHeaderFlowLayout;
 			productName = CSStickyHeaderFlowLayout;
-			productReference = 449187C4AF05B0F1F360FAC2F159669E /* CSStickyHeaderFlowLayout.framework */;
+			productReference = 70FC394F5FEFF7C8E2489B9715E265F4 /* CSStickyHeaderFlowLayout.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		43F633B3903DE39E43C0B694E1C46B06 /* KYDrawerController */ = {
@@ -538,27 +604,24 @@
 			);
 			name = KYDrawerController;
 			productName = KYDrawerController;
-			productReference = 38F7A07DD70946DF65BEDF6359079FE1 /* KYDrawerController.framework */;
+			productReference = 52C1ED88AE17ECD9F685FBB115909615 /* KYDrawerController.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		AB2CCACFD395958E265EB881DE1C2E25 /* Pods-CricTrac */ = {
+		6D67C920179CB33260080BDAD476220A /* SkyFloatingLabelTextField */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7839EB1403C5DFD490ADE045BAA32F55 /* Build configuration list for PBXNativeTarget "Pods-CricTrac" */;
+			buildConfigurationList = C58A36C5DB7A0EAF3AD60624482BFD80 /* Build configuration list for PBXNativeTarget "SkyFloatingLabelTextField" */;
 			buildPhases = (
-				82AA44016B5F8823727584C3145D6EC7 /* Sources */,
-				8FBC833CF2110FB67D0683FAEABE099F /* Frameworks */,
-				9D342D7F0182070A9A06821DF27833DC /* Headers */,
+				931484733B3276FE90F2377774EDF309 /* Sources */,
+				3729F7EE9D9283C54225BBDF8CBD3655 /* Frameworks */,
+				D4B7A905EF36DD2E288286000A1B3291 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				DEED3EDAB7E79AAF4927BFAFED4F2B33 /* PBXTargetDependency */,
-				87AD177A77DF382A401BD2E0448E1D66 /* PBXTargetDependency */,
-				2BB95EB6D08850ACB9DA9F653445B91A /* PBXTargetDependency */,
 			);
-			name = "Pods-CricTrac";
-			productName = "Pods-CricTrac";
-			productReference = D28026E9EAB931FA4C287F45C8AC53C5 /* Pods_CricTrac.framework */;
+			name = SkyFloatingLabelTextField;
+			productName = SkyFloatingLabelTextField;
+			productReference = 3FABA406391CAEA1885C23FA91417EA8 /* SkyFloatingLabelTextField.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		B7E6FC3F7BD4E7296010469FA6023E8A /* IOStickyHeader */ = {
@@ -575,7 +638,28 @@
 			);
 			name = IOStickyHeader;
 			productName = IOStickyHeader;
-			productReference = 29D9C6DA2E9A989C4EF282AED4F44A63 /* IOStickyHeader.framework */;
+			productReference = 8478133DDEC6932240EA52EAE077898F /* IOStickyHeader.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D4D93653C4C26C12E4BB0FAEC093EF52 /* Pods-CricTrac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 108A4FD763B0A37FFA2CD05AD7D4AED1 /* Build configuration list for PBXNativeTarget "Pods-CricTrac" */;
+			buildPhases = (
+				2D7BDE10D2E282F23D8DDF5CA17A05F7 /* Sources */,
+				247FDD4526E05F83A7D0407A21916830 /* Frameworks */,
+				CE9D890CF0A689977988954A037026F1 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DAADD97CA7BFA87735C488C8B0FAAA75 /* PBXTargetDependency */,
+				8EDF2A38424DA2D3BA614435D2223494 /* PBXTargetDependency */,
+				D4460C8C9F1FA36FFFBB06CEBDAD364B /* PBXTargetDependency */,
+				A497A9FCF8A17F2D765AC55959BECB7D /* PBXTargetDependency */,
+			);
+			name = "Pods-CricTrac";
+			productName = "Pods-CricTrac";
+			productReference = E03674A60F9F5ADB52AEDEFE7B55DD2E /* Pods_CricTrac.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -595,19 +679,28 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = C7D1DC407D91023738EC45460C9DC7FF /* Products */;
+			productRefGroup = FB6BC8255A5C208D86C7E79430AFEB9B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				30C445E6D8703D94CB06D42EB47820DE /* CSStickyHeaderFlowLayout */,
 				B7E6FC3F7BD4E7296010469FA6023E8A /* IOStickyHeader */,
 				43F633B3903DE39E43C0B694E1C46B06 /* KYDrawerController */,
-				AB2CCACFD395958E265EB881DE1C2E25 /* Pods-CricTrac */,
+				D4D93653C4C26C12E4BB0FAEC093EF52 /* Pods-CricTrac */,
+				6D67C920179CB33260080BDAD476220A /* SkyFloatingLabelTextField */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2D7BDE10D2E282F23D8DDF5CA17A05F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				26CAE8CC850C66ED44FBF2228C07AE09 /* Pods-CricTrac-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		456872A30B3268340BACF56A5F670F08 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -628,11 +721,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		82AA44016B5F8823727584C3145D6EC7 /* Sources */ = {
+		931484733B3276FE90F2377774EDF309 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				868AE7BF395B1043B45DF46B0E98F7F3 /* Pods-CricTrac-dummy.m in Sources */,
+				EC484F079640C020830D322FC47C5C13 /* SkyFloatingLabelTextField-dummy.m in Sources */,
+				5F3D79B43C9EA7788A7A2E193A97880F /* SkyFloatingLabelTextField.swift in Sources */,
+				1F38D6E2B1FC33F7EF86C00B45E1FD6C /* SkyFloatingLabelTextFieldWithIcon.swift in Sources */,
+				0CBA6A438630C06D0497C36DD1D88FBA /* UITextField+fixCaretPosition.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -650,30 +746,36 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2BB95EB6D08850ACB9DA9F653445B91A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = KYDrawerController;
-			target = 43F633B3903DE39E43C0B694E1C46B06 /* KYDrawerController */;
-			targetProxy = FA1EC3FBDFE9761C7F24E345F636F092 /* PBXContainerItemProxy */;
-		};
-		87AD177A77DF382A401BD2E0448E1D66 /* PBXTargetDependency */ = {
+		8EDF2A38424DA2D3BA614435D2223494 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = IOStickyHeader;
 			target = B7E6FC3F7BD4E7296010469FA6023E8A /* IOStickyHeader */;
-			targetProxy = 02296697284C7B0AD18061B59739F5D8 /* PBXContainerItemProxy */;
+			targetProxy = CA96712B3F1D942EB96B64D01FEA0A80 /* PBXContainerItemProxy */;
 		};
-		DEED3EDAB7E79AAF4927BFAFED4F2B33 /* PBXTargetDependency */ = {
+		A497A9FCF8A17F2D765AC55959BECB7D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SkyFloatingLabelTextField;
+			target = 6D67C920179CB33260080BDAD476220A /* SkyFloatingLabelTextField */;
+			targetProxy = 220C3F4D42DCD4BC8A56ED135255CFFE /* PBXContainerItemProxy */;
+		};
+		D4460C8C9F1FA36FFFBB06CEBDAD364B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = KYDrawerController;
+			target = 43F633B3903DE39E43C0B694E1C46B06 /* KYDrawerController */;
+			targetProxy = CD5ED6207EB17D62DEE538A96F15490B /* PBXContainerItemProxy */;
+		};
+		DAADD97CA7BFA87735C488C8B0FAAA75 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CSStickyHeaderFlowLayout;
 			target = 30C445E6D8703D94CB06D42EB47820DE /* CSStickyHeaderFlowLayout */;
-			targetProxy = C540B2FD55E9AEEB41CC5F6A99F39754 /* PBXContainerItemProxy */;
+			targetProxy = BFE36A456445CE596E08DE9CB8672555 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		28CC7DCE641710C3F795C51720C4E7B1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 976F878B8815D2D38F3BE5C3B8FB5B1A /* IOStickyHeader.xcconfig */;
+			baseConfigurationReference = A57AA5121C7F331BA4BC15D362BE82BC /* IOStickyHeader.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -700,9 +802,9 @@
 			};
 			name = Release;
 		};
-		357F75A50BFB667E08905A80356B41CB /* Release */ = {
+		2CD18DE0E686365E8596E2D411A62AD9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4AF6FF1D669E8B82249CF53C0AC2F75D /* Pods-CricTrac.release.xcconfig */;
+			baseConfigurationReference = 5C242D4414B72234AA2E7A96A12EE557 /* SkyFloatingLabelTextField.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -713,18 +815,14 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-CricTrac/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/SkyFloatingLabelTextField/SkyFloatingLabelTextField-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SkyFloatingLabelTextField/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-CricTrac/Pods-CricTrac.modulemap";
+				MODULEMAP_FILE = "Target Support Files/SkyFloatingLabelTextField/SkyFloatingLabelTextField.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_CricTrac;
+				PRODUCT_NAME = SkyFloatingLabelTextField;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -773,7 +871,7 @@
 		};
 		585F9F1A3CEA0C0FD739FD02A77C9895 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 976F878B8815D2D38F3BE5C3B8FB5B1A /* IOStickyHeader.xcconfig */;
+			baseConfigurationReference = A57AA5121C7F331BA4BC15D362BE82BC /* IOStickyHeader.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -845,7 +943,7 @@
 		};
 		5F8CDFDA62D83508F8AE1EA5C2F72623 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1246CBDE33FC89F82982FBE08C264219 /* CSStickyHeaderFlowLayout.xcconfig */;
+			baseConfigurationReference = FFBD15D055E7EA7E9658AB66B530E9A9 /* CSStickyHeaderFlowLayout.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -874,7 +972,7 @@
 		};
 		61CF88B318D1BAEF1EADF462DD9225FB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1246CBDE33FC89F82982FBE08C264219 /* CSStickyHeaderFlowLayout.xcconfig */;
+			baseConfigurationReference = FFBD15D055E7EA7E9658AB66B530E9A9 /* CSStickyHeaderFlowLayout.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -901,7 +999,7 @@
 			};
 			name = Debug;
 		};
-		BF9B872B158A067C0AB0D2FCBC286D50 /* Debug */ = {
+		657C36052860EEA4A935E745FDB58DC2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8029F3F5234D24E1BD8D8D4D5259309D /* Pods-CricTrac.debug.xcconfig */;
 			buildSettings = {
@@ -935,9 +1033,72 @@
 			};
 			name = Debug;
 		};
+		B3C40AAB156537DDF36103E339EBA2C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4AF6FF1D669E8B82249CF53C0AC2F75D /* Pods-CricTrac.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-CricTrac/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-CricTrac/Pods-CricTrac.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_CricTrac;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		C880213EBE1C5B4A9CC3DF21E1B29E5A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5C242D4414B72234AA2E7A96A12EE557 /* SkyFloatingLabelTextField.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SkyFloatingLabelTextField/SkyFloatingLabelTextField-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SkyFloatingLabelTextField/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SkyFloatingLabelTextField/SkyFloatingLabelTextField.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = SkyFloatingLabelTextField;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		DAD4F3BECCBEA2B6C72F232BF32801FA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 14AC04F347D419A4AE958BE592984560 /* KYDrawerController.xcconfig */;
+			baseConfigurationReference = 2168C842BBE45424E3DB64B50EBD8B99 /* KYDrawerController.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -967,7 +1128,7 @@
 		};
 		ECC2760A48C83EB4CE0BC075AC318BB0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 14AC04F347D419A4AE958BE592984560 /* KYDrawerController.xcconfig */;
+			baseConfigurationReference = 2168C842BBE45424E3DB64B50EBD8B99 /* KYDrawerController.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -997,6 +1158,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		108A4FD763B0A37FFA2CD05AD7D4AED1 /* Build configuration list for PBXNativeTarget "Pods-CricTrac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				657C36052860EEA4A935E745FDB58DC2 /* Debug */,
+				B3C40AAB156537DDF36103E339EBA2C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1015,11 +1185,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7839EB1403C5DFD490ADE045BAA32F55 /* Build configuration list for PBXNativeTarget "Pods-CricTrac" */ = {
+		C58A36C5DB7A0EAF3AD60624482BFD80 /* Build configuration list for PBXNativeTarget "SkyFloatingLabelTextField" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BF9B872B158A067C0AB0D2FCBC286D50 /* Debug */,
-				357F75A50BFB667E08905A80356B41CB /* Release */,
+				C880213EBE1C5B4A9CC3DF21E1B29E5A /* Debug */,
+				2CD18DE0E686365E8596E2D411A62AD9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
