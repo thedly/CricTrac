@@ -31,7 +31,8 @@ class CTDatePicker: NSObject {
         let toolBar = UIToolbar()
         toolBar.barStyle = .Default
         toolBar.translucent = true
-        toolBar.tintColor = UIColor(hex: "BB4440")
+        toolBar.tintColor = UIColor(hex: "B12420")
+        toolBar.backgroundColor = UIColor.whiteColor()
         toolBar.sizeToFit()
         
         // Adding Button ToolBar
@@ -45,10 +46,10 @@ class CTDatePicker: NSObject {
     }
     
     func doneClick() {
-        let dateFormatter1 = NSDateFormatter()
-        dateFormatter1.dateStyle = .MediumStyle
-        dateFormatter1.timeStyle = .NoStyle
-        inputText.text = dateFormatter1.stringFromDate(datePicker.date)
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = .MediumStyle
+        dateFormatter.timeStyle = .NoStyle
+        inputText.text = dateFormatter.stringFromDate(datePicker.date)
         inputText.resignFirstResponder()
     }
     func cancelClick() {
