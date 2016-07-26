@@ -87,11 +87,7 @@ class NewMatchViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    @IBAction func didPickerValueChange(sender:UIDatePicker){
-        
-    }
-    
+
   
     @IBAction func didTapCancel(sender: UIButton) {
         
