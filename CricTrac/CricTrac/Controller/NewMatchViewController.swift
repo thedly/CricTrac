@@ -11,6 +11,9 @@ import UIKit
 class NewMatchViewController: UIViewController {
 
     
+    
+    @IBOutlet weak var scrollView:UIScrollView!
+    
     @IBOutlet weak var matchView:UIView!
     
     @IBOutlet weak var batView:UIView!
@@ -67,13 +70,16 @@ class NewMatchViewController: UIViewController {
     
     @IBOutlet weak var battingSelector: UIView!
     
+    var datePicker : UIDatePicker!
+    
     var lastSelectedTab:UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         lastSelectedTab = matchSelector
-
+ scrollView.setContentOffset(CGPointZero, animated: true)
         
+        dateTest.inputView = datePicker
         
         // Do any additional setup after loading the view.
     }
@@ -81,6 +87,11 @@ class NewMatchViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    @IBAction func didPickerValueChange(sender:UIDatePicker){
+        
     }
     
   
@@ -94,7 +105,7 @@ class NewMatchViewController: UIViewController {
         matchSelector.hidden = false
         lastSelectedTab?.hidden = true
         lastSelectedTab = matchSelector
-
+        scrollView.setContentOffset(CGPointZero, animated: true)
         matchView.hidden = false
         batView.hidden = true
         bowlView.hidden = true
@@ -106,7 +117,7 @@ class NewMatchViewController: UIViewController {
         battingSelector.hidden = false
         lastSelectedTab?.hidden = true
         lastSelectedTab = battingSelector
-        
+         scrollView.setContentOffset(CGPointZero, animated: true)
        batView.hidden = false
        matchView.hidden = true
        bowlView.hidden = true
@@ -118,7 +129,7 @@ class NewMatchViewController: UIViewController {
         bowlingSelector.hidden = false
         lastSelectedTab?.hidden = true
         lastSelectedTab = bowlingSelector
-        
+         scrollView.setContentOffset(CGPointZero, animated: true)
          bowlView.hidden = false
         batView.hidden = true
         matchView.hidden = true
@@ -131,7 +142,7 @@ class NewMatchViewController: UIViewController {
         extraSelector.hidden = false
         lastSelectedTab?.hidden = true
         lastSelectedTab = extraSelector
-        
+         scrollView.setContentOffset(CGPointZero, animated: true)
    extraView.hidden = false
         bowlView.hidden = true
         batView.hidden = true
@@ -145,15 +156,65 @@ class NewMatchViewController: UIViewController {
         bowlingSelector.hidden = true
         extraSelector.hidden = true
     }
+
+
+}
+
+
+extension NewMatchViewController:UITextFieldDelegate{
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func textFieldDidBeginEditing(textField: UITextField) {
+        let origin = textField.frame.origin
+        let aPoint = CGPoint(x: 0, y: origin.y)
+    scrollView.setContentOffset(aPoint, animated: true)
+        
+        self.pickUpDate(textField)
     }
-    */
-
+    
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool
+    {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+ 
+    
+    func pickUpDate(textField : UITextField){
+        
+        // DatePicker
+        self.datePicker = UIDatePicker(frame:CGRectMake(0, 0, self.view.frame.size.width, 216))
+        self.datePicker.backgroundColor = UIColor.whiteColor()
+        self.datePicker.datePickerMode = UIDatePickerMode.Date
+        textField.inputView = self.datePicker
+        
+        // ToolBar
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .Default
+        toolBar.translucent = true
+        toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 255/255, alpha: 1)
+        toolBar.sizeToFit()
+        
+        // Adding Button ToolBar
+        let doneButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(NewMatchViewController.doneClick))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: #selector(NewMatchViewController.cancelClick))
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.userInteractionEnabled = true
+        textField.inputAccessoryView = toolBar
+        
+    }
+    
+    // MARK:- Button Done and Cancel
+    func doneClick() {
+        let dateFormatter1 = NSDateFormatter()
+        dateFormatter1.dateStyle = .MediumStyle
+        dateFormatter1.timeStyle = .NoStyle
+        //textField_Date.text = dateFormatter1.stringFromDate(datePicker.date)
+        //textField_Date.resignFirstResponder()
+    }
+    func cancelClick() {
+        dateTest.resignFirstResponder()
+    }
+    
 }
