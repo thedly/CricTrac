@@ -10,6 +10,15 @@ import UIKit
 
 class NewMatchViewController: UIViewController {
 
+    
+    @IBOutlet weak var matchView:UIView!
+    
+    @IBOutlet weak var batView:UIView!
+    
+    @IBOutlet weak var bowlView:UIView!
+    
+    @IBOutlet weak var extraView:UIView!
+    
     @IBOutlet weak var dateTest: FloatLabelTextField!
     
     @IBOutlet weak var datePickerButton:UIButton!
@@ -86,7 +95,10 @@ class NewMatchViewController: UIViewController {
         lastSelectedTab?.hidden = true
         lastSelectedTab = matchSelector
 
-          dateTest.placeholder = "Date"
+        matchView.hidden = false
+        batView.hidden = true
+        bowlView.hidden = true
+        extraView.hidden = true
     }
   
     
@@ -95,7 +107,10 @@ class NewMatchViewController: UIViewController {
         lastSelectedTab?.hidden = true
         lastSelectedTab = battingSelector
         
-        dateTest.placeholder = "Balls"
+       batView.hidden = false
+       matchView.hidden = true
+       bowlView.hidden = true
+       extraView.hidden = true
     }
     
     
@@ -104,6 +119,10 @@ class NewMatchViewController: UIViewController {
         lastSelectedTab?.hidden = true
         lastSelectedTab = bowlingSelector
         
+         bowlView.hidden = false
+        batView.hidden = true
+        matchView.hidden = true
+        extraView.hidden = true
 
     }
     
@@ -113,7 +132,10 @@ class NewMatchViewController: UIViewController {
         lastSelectedTab?.hidden = true
         lastSelectedTab = extraSelector
         
-   
+   extraView.hidden = false
+        bowlView.hidden = true
+        batView.hidden = true
+        matchView.hidden = true
         
     }
     
