@@ -12,19 +12,34 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     @IBOutlet weak var summaryTbl: UITableView!
     
+    var summaryData : Dictionary<String,Dictionary<String,String>>!
+    
+    
+    
+    
+    
     @IBAction func backBtnPressed(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        summaryTbl.dataSource = self
-        summaryTbl.delegate = self
+        initializeView()
+        
+        
+        
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func initializeView(){
+        summaryTbl.dataSource = self
+        summaryTbl.delegate = self
+        getSummaryData()
     }
     
     // Mark: - Table delegates
@@ -35,13 +50,31 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return summaryData.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = "data"
-        return cell
+        
+        var dateKey :String!
+        var dateValue: Dictionary<String,String>
+        
+        if let cell = tableView.dequeueReusableCellWithIdentifier("summaryTableViewCell", forIndexPath: indexPath) as? summaryTableViewCell{
+           
+            let index = summaryData.startIndex.advancedBy(indexPath.row)
+            
+                print(indexPath.row)
+                print(summaryData.count)
+                
+                dateKey = summaryData.keys[index]
+                dateValue = summaryData[dateKey!]!
+                
+                cell.configureCell(dateKey, _runs: dateValue["Runs"]!, _fours: dateValue["Fours"]!, _sixes: dateValue["Sixes"]!, _overs: dateValue["Overs"]!, _results: dateValue["Results"]!, _wickets: dateValue["Wickets"]!)
+                return cell
+        }
+        else
+        {
+            return UITableViewCell()
+        }
     }
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
@@ -65,6 +98,48 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         self.presentViewController(vc, animated: true, completion: nil)
         }
+    
+    // MARK: - Service Call
+    
+    
+    func getSummaryData() {
+        summaryData =
+        [
+            "Feb14" : [
+                "Runs" : "21",
+                "Fours" : "2",
+                "Sixes" : "1",
+                "Overs" : "2",
+                "Wickets" : "2",
+                "Results" : "Won"
+            ],
+            "Mar14" : [
+                "Runs" : "44",
+                "Fours" : "4",
+                "Sixes" : "2",
+                "Overs" : "5",
+                "Wickets" : "1",
+                "Results" : "Lost"
+            ],
+            "Apr14" : [
+                "Runs" : "30",
+                "Fours" : "2",
+                "Sixes" : "1",
+                "Overs" : "7",
+                "Wickets" : "1",
+                "Results" : "Won"
+            ],
+            "May14" : [
+                "Runs" : "12",
+                "Fours" : "1",
+                "Sixes" : "0",
+                "Overs" : "2",
+                "Wickets" : "0",
+                "Results" : "Lost"
+            ],
+        ]
+    }
+    
     
     /*
     // MARK: - Navigation

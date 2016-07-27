@@ -15,8 +15,24 @@
             <string>SFUIText-Bold</string>
             <string>SFUIText-Bold</string>
             <string>SFUIText-Bold</string>
+            <string>SFUIText-Bold</string>
+            <string>SFUIText-Bold</string>
+            <string>SFUIText-Bold</string>
+            <string>SFUIText-Bold</string>
+            <string>SFUIText-Bold</string>
+            <string>SFUIText-Bold</string>
+            <string>SFUIText-Bold</string>
+            <string>SFUIText-Bold</string>
+            <string>SFUIText-Bold</string>
+            <string>SFUIText-Bold</string>
         </mutableArray>
         <mutableArray key="SF-UI-Text-Regular.otf">
+            <string>SFUIText-Regular</string>
+            <string>SFUIText-Regular</string>
+            <string>SFUIText-Regular</string>
+            <string>SFUIText-Regular</string>
+            <string>SFUIText-Regular</string>
+            <string>SFUIText-Regular</string>
             <string>SFUIText-Regular</string>
             <string>SFUIText-Regular</string>
             <string>SFUIText-Regular</string>
@@ -74,28 +90,35 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Match Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MjI-yW-H4j">
                                         <rect key="frame" x="197" y="21" width="207" height="21"/>
-                                        <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
+                                        <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EuF-uo-Os6">
-                                        <rect key="frame" x="8" y="12" width="30" height="30"/>
+                                    <button opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iIh-Ve-zFu">
+                                        <rect key="frame" x="8" y="12" width="66" height="30"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="8IO-ho-zKK"/>
-                                            <constraint firstAttribute="height" constant="30" id="bOU-Z9-l8I"/>
+                                            <constraint firstAttribute="width" constant="30" id="cRn-mn-8J4"/>
+                                            <constraint firstAttribute="height" constant="30" id="qap-2a-6Az"/>
                                         </constraints>
-                                        <state key="normal" image="Back"/>
+                                        <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="18"/>
+                                        <state key="normal" title="&lt; Back"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="qap-2a-6Az"/>
+                                                <exclude reference="cRn-mn-8J4"/>
+                                            </mask>
+                                        </variation>
                                         <connections>
-                                            <action selector="backBtnPressed:" destination="tNF-CK-tLD" eventType="touchUpInside" id="UbL-KG-yqd"/>
-                                            <action selector="backBtnPressed:" destination="KkE-9O-CBz" eventType="touchUpInside" id="WVY-b7-GzY"/>
+                                            <action selector="backBtnPressed:" destination="KkE-9O-CBz" eventType="touchUpInside" id="9dJ-Fo-ahs"/>
+                                            <action selector="backBtnPressed:" destination="tNF-CK-tLD" eventType="touchUpInside" id="yke-ZK-LaW"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.69411764710000001" green="0.14117647059999999" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="MjI-yW-H4j" firstAttribute="centerX" secondItem="4PS-Pe-093" secondAttribute="centerX" id="95A-Ux-2Ar"/>
-                                    <constraint firstAttribute="bottom" secondItem="EuF-uo-Os6" secondAttribute="bottom" constant="8" id="Bwb-ef-fiw"/>
-                                    <constraint firstItem="EuF-uo-Os6" firstAttribute="leading" secondItem="4PS-Pe-093" secondAttribute="leading" constant="8" id="MyJ-VM-p5e"/>
+                                    <constraint firstItem="iIh-Ve-zFu" firstAttribute="leading" secondItem="4PS-Pe-093" secondAttribute="leading" constant="8" id="UUc-Eu-aGv"/>
+                                    <constraint firstAttribute="bottom" secondItem="iIh-Ve-zFu" secondAttribute="bottom" constant="2" id="arZ-nb-ZCh"/>
                                     <constraint firstAttribute="height" constant="50" id="bWg-J7-jGA"/>
                                     <constraint firstAttribute="bottom" secondItem="MjI-yW-H4j" secondAttribute="bottom" constant="8" id="kbZ-B3-rll"/>
                                 </constraints>
@@ -196,13 +219,20 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aSg-J1-Jze">
-                                        <rect key="frame" x="8" y="12" width="30" height="30"/>
+                                    <button opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aSg-J1-Jze">
+                                        <rect key="frame" x="8" y="12" width="66" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="FFp-q5-jYQ"/>
                                             <constraint firstAttribute="width" constant="30" id="TTM-Ys-Z72"/>
                                         </constraints>
-                                        <state key="normal" image="Back"/>
+                                        <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="18"/>
+                                        <state key="normal" title="&lt; Back"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="FFp-q5-jYQ"/>
+                                                <exclude reference="TTM-Ys-Z72"/>
+                                            </mask>
+                                        </variation>
                                         <connections>
                                             <action selector="backBtnPressed:" destination="tNF-CK-tLD" eventType="touchUpInside" id="JeX-qf-EEC"/>
                                         </connections>
@@ -213,7 +243,8 @@
                                     <constraint firstItem="aSg-J1-Jze" firstAttribute="leading" secondItem="KBV-Cm-VN3" secondAttribute="leading" constant="8" id="2de-jL-MFr"/>
                                     <constraint firstAttribute="height" constant="50" id="84A-sM-MrB"/>
                                     <constraint firstItem="clx-0Z-5hg" firstAttribute="centerX" secondItem="KBV-Cm-VN3" secondAttribute="centerX" id="HZa-wJ-aMw"/>
-                                    <constraint firstAttribute="bottom" secondItem="aSg-J1-Jze" secondAttribute="bottom" constant="8" id="bg4-E4-96v"/>
+                                    <constraint firstItem="aSg-J1-Jze" firstAttribute="bottom" secondItem="clx-0Z-5hg" secondAttribute="bottom" id="Jit-DT-PNL"/>
+                                    <constraint firstAttribute="bottom" secondItem="aSg-J1-Jze" secondAttribute="bottom" constant="2" id="bg4-E4-96v"/>
                                     <constraint firstAttribute="bottom" secondItem="clx-0Z-5hg" secondAttribute="bottom" constant="8" id="cFH-xc-utj"/>
                                 </constraints>
                             </view>
@@ -246,22 +277,223 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Oub-la-aoU">
-                                <rect key="frame" x="0.0" y="102" width="600" height="498"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Oub-la-aoU">
+                                <rect key="frame" x="0.0" y="158" width="600" height="442"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="summaryTableViewCell" id="mvA-N9-Kej" customClass="summaryTableViewCell" customModule="CricTrac">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mvA-N9-Kej" id="BqZ-Tw-XRQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6mb-w1-hQm">
+                                                    <rect key="frame" x="23" y="11" width="42" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="iiY-nT-syK"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="awi-tg-EdT">
+                                                    <rect key="frame" x="139" y="11" width="240" height="18"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Runs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hix-fo-8aE">
+                                                            <rect key="frame" x="0.0" y="0.0" width="40" height="18"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="40" id="dgG-Qw-SBw"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="fours" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aub-oW-vnv">
+                                                            <rect key="frame" x="40" y="0.0" width="40" height="18"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="40" id="67X-ec-Vhk"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="sixes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dsU-bn-YGw">
+                                                            <rect key="frame" x="80" y="0.0" width="40" height="18"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="40" id="x0W-bR-SUN"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="overs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zWG-CY-PN6">
+                                                            <rect key="frame" x="120" y="0.0" width="40" height="18"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="40" id="95r-CB-2tf"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="wickets" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PEc-YB-6wh">
+                                                            <rect key="frame" x="160" y="0.0" width="40" height="18"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="40" id="IiR-nt-7pN"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="results" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bN5-56-3gq">
+                                                            <rect key="frame" x="200" y="0.0" width="40" height="18"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="40" id="Vtq-Fy-f3a"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="6mb-w1-hQm" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hix-fo-8aE" secondAttribute="leading" constant="-15" id="5eW-fR-FrY"/>
+                                                <constraint firstItem="awi-tg-EdT" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="BqZ-Tw-XRQ" secondAttribute="trailing" constant="15" id="7Fj-ge-QCT"/>
+                                                <constraint firstItem="6mb-w1-hQm" firstAttribute="leading" secondItem="BqZ-Tw-XRQ" secondAttribute="leading" constant="15" id="9MT-Iu-lky"/>
+                                                <constraint firstItem="6mb-w1-hQm" firstAttribute="leading" secondItem="BqZ-Tw-XRQ" secondAttribute="leadingMargin" constant="15" id="S2R-U7-pdB"/>
+                                                <constraint firstItem="awi-tg-EdT" firstAttribute="centerY" secondItem="BqZ-Tw-XRQ" secondAttribute="centerY" id="VuQ-58-Mhn"/>
+                                                <constraint firstItem="6mb-w1-hQm" firstAttribute="centerY" secondItem="BqZ-Tw-XRQ" secondAttribute="centerY" id="Xzk-fX-PVC"/>
+                                                <constraint firstItem="hix-fo-8aE" firstAttribute="leading" secondItem="6mb-w1-hQm" secondAttribute="trailing" constant="15" id="Ycx-HX-Ox0"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="awi-tg-EdT" secondAttribute="trailing" constant="15" id="dHE-VC-sIB"/>
+                                                <constraint firstItem="6mb-w1-hQm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="BqZ-Tw-XRQ" secondAttribute="leading" constant="15" id="eW8-Fk-WWe"/>
+                                                <constraint firstAttribute="trailing" secondItem="awi-tg-EdT" secondAttribute="trailing" constant="15" id="xqd-GB-Sd7"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="S2R-U7-pdB"/>
+                                                    <exclude reference="eW8-Fk-WWe"/>
+                                                    <exclude reference="dHE-VC-sIB"/>
+                                                    <exclude reference="xqd-GB-Sd7"/>
+                                                    <exclude reference="Ycx-HX-Ox0"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="CellDate" destination="6mb-w1-hQm" id="CbM-5M-CMq"/>
+                                            <outlet property="cellFours" destination="Aub-oW-vnv" id="zGa-U3-acR"/>
+                                            <outlet property="cellOvers" destination="zWG-CY-PN6" id="ZGn-EE-IfH"/>
+                                            <outlet property="cellResults" destination="bN5-56-3gq" id="vOj-9v-num"/>
+                                            <outlet property="cellRuns" destination="hix-fo-8aE" id="yOt-cS-m5Z"/>
+                                            <outlet property="cellSixes" destination="dsU-bn-YGw" id="5U0-Ag-syM"/>
+                                            <outlet property="cellWickets" destination="PEc-YB-6wh" id="ait-pX-QCv"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="80i-xC-8Oy">
+                                <rect key="frame" x="0.0" y="108" width="600" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TbO-IG-HYy">
+                                        <rect key="frame" x="17" y="14" width="42" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="8Fb-B0-1a6"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="15"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cWc-wp-Z9P">
+                                        <rect key="frame" x="138" y="17" width="240" height="18"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="R" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yKl-mx-q6b">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="eIW-uk-82Z"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="15"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="4s" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HUN-1k-z9d">
+                                                <rect key="frame" x="40" y="0.0" width="40" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="fQC-f3-UYl"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="15"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="6s" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUq-fJ-h2n">
+                                                <rect key="frame" x="80" y="0.0" width="40" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="K8B-ON-Pul"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="15"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="O" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DrX-bA-TCB">
+                                                <rect key="frame" x="120" y="0.0" width="40" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="CsZ-05-bIJ"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="15"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="W" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYq-05-MbH">
+                                                <rect key="frame" x="160" y="0.0" width="40" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="sWW-Pc-mus"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="15"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Rsl" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IxK-j3-10m">
+                                                <rect key="frame" x="200" y="0.0" width="40" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="7ju-wx-hjb"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="15"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="cWc-wp-Z9P" firstAttribute="centerY" secondItem="80i-xC-8Oy" secondAttribute="centerY" id="7qa-XZ-QXj"/>
+                                    <constraint firstItem="TbO-IG-HYy" firstAttribute="leading" secondItem="80i-xC-8Oy" secondAttribute="leading" constant="15" id="WQt-PI-iXG"/>
+                                    <constraint firstItem="cWc-wp-Z9P" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="80i-xC-8Oy" secondAttribute="trailing" constant="15" id="XcT-qu-izY"/>
+                                    <constraint firstItem="TbO-IG-HYy" firstAttribute="leading" secondItem="80i-xC-8Oy" secondAttribute="leading" constant="15" id="c2v-SM-CMM"/>
+                                    <constraint firstAttribute="height" constant="50" id="qvY-ka-PBm"/>
+                                    <constraint firstItem="TbO-IG-HYy" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yKl-mx-q6b" secondAttribute="leading" constant="-15" id="uij-cd-9VY"/>
+                                    <constraint firstItem="TbO-IG-HYy" firstAttribute="centerY" secondItem="80i-xC-8Oy" secondAttribute="centerY" id="xAO-Gk-JNA"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="c2v-SM-CMM"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="KBV-Cm-VN3" firstAttribute="leading" secondItem="rL5-Gy-1C6" secondAttribute="leading" id="463-1Y-pru"/>
                             <constraint firstItem="Aa9-qh-KW7" firstAttribute="top" secondItem="KBV-Cm-VN3" secondAttribute="bottom" id="7am-be-llZ"/>
                             <constraint firstAttribute="trailing" secondItem="KBV-Cm-VN3" secondAttribute="trailing" id="9SP-hx-z5c"/>
+                            <constraint firstItem="Oub-la-aoU" firstAttribute="top" secondItem="80i-xC-8Oy" secondAttribute="bottom" id="Iex-JV-3pz"/>
                             <constraint firstItem="JTs-7E-fm3" firstAttribute="top" secondItem="Oub-la-aoU" secondAttribute="bottom" id="KMF-Dw-bL6"/>
                             <constraint firstAttribute="trailing" secondItem="Oub-la-aoU" secondAttribute="trailing" id="OCq-1s-ZZj"/>
                             <constraint firstItem="Aa9-qh-KW7" firstAttribute="top" secondItem="KBV-Cm-VN3" secondAttribute="bottom" id="R6a-B5-Cfb"/>
                             <constraint firstItem="Oub-la-aoU" firstAttribute="top" secondItem="Aa9-qh-KW7" secondAttribute="bottom" id="U6H-lG-Tqc"/>
+                            <constraint firstAttribute="trailing" secondItem="80i-xC-8Oy" secondAttribute="trailing" id="Ulf-x0-7co"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Aa9-qh-KW7" secondAttribute="trailing" constant="-20" id="XCr-5C-OgA"/>
+                            <constraint firstItem="80i-xC-8Oy" firstAttribute="leading" secondItem="rL5-Gy-1C6" secondAttribute="leading" id="ZK5-y6-Br7"/>
                             <constraint firstItem="Aa9-qh-KW7" firstAttribute="top" secondItem="KBV-Cm-VN3" secondAttribute="bottom" id="bmq-Y0-wa2"/>
+                            <constraint firstItem="80i-xC-8Oy" firstAttribute="top" secondItem="Aa9-qh-KW7" secondAttribute="bottom" constant="8" id="i6W-k6-IpN"/>
                             <constraint firstItem="KBV-Cm-VN3" firstAttribute="top" secondItem="rL5-Gy-1C6" secondAttribute="top" id="mBF-x3-88T"/>
                             <constraint firstItem="Oub-la-aoU" firstAttribute="leading" secondItem="rL5-Gy-1C6" secondAttribute="leading" id="q4d-L9-fsV"/>
                             <constraint firstItem="Aa9-qh-KW7" firstAttribute="leading" secondItem="rL5-Gy-1C6" secondAttribute="leadingMargin" constant="-20" id="vVZ-RC-IzS"/>
@@ -270,6 +502,7 @@
                             <mask key="constraints">
                                 <exclude reference="7am-be-llZ"/>
                                 <exclude reference="bmq-Y0-wa2"/>
+                                <exclude reference="U6H-lG-Tqc"/>
                             </mask>
                         </variation>
                     </view>
@@ -606,10 +839,10 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SaK-UK-bAF">
                                 <rect key="frame" x="10" y="130" width="580" height="460"/>
                                 <subviews>
-                                    <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AGw-ES-GqB" userLabel="ExtraView">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AGw-ES-GqB" userLabel="ExtraView">
                                         <rect key="frame" x="0.0" y="0.0" width="580" height="845"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Toss" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WlR-fi-ezE" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Toss" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WlR-fi-ezE" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="10" y="30" width="522" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -648,7 +881,7 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="eLX-Jx-6CH"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Batting" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1r3-dH-ZL6" userLabel="FirstBatting" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Batting" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1r3-dH-ZL6" userLabel="FirstBatting" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="10" y="91" width="522" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -681,7 +914,7 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="od3-0y-zcZ"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Score" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LBR-dj-bpJ" userLabel="Score" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Score" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LBR-dj-bpJ" userLabel="Score" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="10" y="152" width="522" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -714,7 +947,7 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="IYa-SY-BhG"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Overs" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZV1-rL-gr9" userLabel="Overs" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Overs" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZV1-rL-gr9" userLabel="Overs" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="10" y="213" width="522" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -747,7 +980,7 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="9Qa-Vj-kIe"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Wickets" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X1z-gf-ioL" userLabel="Wickets" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Wickets" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X1z-gf-ioL" userLabel="Wickets" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="10" y="274" width="522" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -780,7 +1013,7 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="fbD-6N-mQg"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Second Batting" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ASv-u7-SWI" userLabel="SecondBatting" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Second Batting" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ASv-u7-SWI" userLabel="SecondBatting" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="10" y="335" width="522" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -813,7 +1046,7 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="pOp-Gh-JIC"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Score" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h9f-QX-Zsa" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Score" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h9f-QX-Zsa" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="10" y="396" width="522" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -846,7 +1079,7 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="kP0-on-OtC"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Over" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ewJ-6p-HmT" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Over" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ewJ-6p-HmT" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="10" y="457" width="522" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -879,7 +1112,7 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="kdu-b0-Ia0"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Wickets" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GA2-Cy-WjS" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Wickets" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GA2-Cy-WjS" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="10" y="518" width="522" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -912,7 +1145,7 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="PYN-gg-NYY"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Result" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m5s-oz-Vfn" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Result" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m5s-oz-Vfn" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="10" y="579" width="522" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -945,7 +1178,7 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="xkf-RK-107"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Comments" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DqS-NS-8eC" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Comments" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DqS-NS-8eC" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="10" y="640" width="522" height="205"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1049,10 +1282,10 @@
                                             </mask>
                                         </variation>
                                     </view>
-                                    <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DXf-0r-JgH" userLabel="BowlView">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DXf-0r-JgH" userLabel="BowlView">
                                         <rect key="frame" x="0.0" y="0.0" width="580" height="686"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Overs" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PMh-bF-FPp" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Overs" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PMh-bF-FPp" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="10" y="30" width="580" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1091,7 +1324,7 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="iyO-1m-vnB"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Wickets" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tad-cF-e9D" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Wickets" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tad-cF-e9D" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="10" y="91" width="580" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1130,7 +1363,7 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="qk5-ur-lcz"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Runs" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Acf-0U-2ul" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Runs" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Acf-0U-2ul" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="10" y="162" width="580" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1169,7 +1402,7 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="6mL-Zh-h9M"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="No Balls" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pQq-JD-Kup" userLabel="Noballs" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="No Balls" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pQq-JD-Kup" userLabel="Noballs" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="10" y="223" width="580" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1208,7 +1441,7 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="25m-X7-Gav"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Wides" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tHg-Nr-fJg" userLabel="wides" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Wides" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tHg-Nr-fJg" userLabel="wides" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="10" y="284" width="580" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1247,7 +1480,7 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="s0h-qx-STz"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Economy" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rgV-9G-Z0m" userLabel="Economy" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Economy" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rgV-9G-Z0m" userLabel="Economy" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="10" y="345" width="580" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1314,7 +1547,7 @@
                                             <constraint firstItem="Acf-0U-2ul" firstAttribute="leading" secondItem="tad-cF-e9D" secondAttribute="leading" id="yuS-UQ-HFg"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KUT-IX-dDk" userLabel="MatchView">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KUT-IX-dDk" userLabel="MatchView">
                                         <rect key="frame" x="0.0" y="0.0" width="580" height="884"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rPd-Lu-Igr" userLabel="Date" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
@@ -1521,7 +1754,7 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="2az-oE-Qxf"/>
                                                 </connections>
                                             </textField>
-                                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Dismiss" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pk0-yT-Tfu" userLabel="Dismiss" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Dismiss" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pk0-yT-Tfu" userLabel="Dismiss" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="10" y="438" width="522" height="40"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
@@ -1554,7 +1787,7 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="PAP-eJ-sck"/>
                                                 </connections>
                                             </textField>
-                                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Overs" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nGc-eZ-Lcc" userLabel="ExtraOvers" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Overs" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nGc-eZ-Lcc" userLabel="ExtraOvers" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="10" y="498" width="522" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
@@ -1587,7 +1820,7 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="MbE-cW-K0a"/>
                                                 </connections>
                                             </textField>
-                                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Result" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fWG-Qh-zuu" userLabel="Result" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Result" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fWG-Qh-zuu" userLabel="Result" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="10" y="559" width="522" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
@@ -1620,7 +1853,7 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="khp-4r-P3i"/>
                                                 </connections>
                                             </textField>
-                                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ueC-8g-38v" customClass="FloatLabelTextView" customModule="CricTrac" customModuleProvider="target">
+                                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ueC-8g-38v" customClass="FloatLabelTextView" customModule="CricTrac" customModuleProvider="target">
                                                 <rect key="frame" x="10" y="620" width="522" height="164"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1936,7 +2169,7 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="uaF-Fb-ie5"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Dismissal" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Hc-yl-Vpu" userLabel="Dismissal" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Dismissal" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Hc-yl-Vpu" userLabel="Dismissal" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="10" y="458" width="522" height="48"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -2098,7 +2331,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Back" width="50" height="50"/>
         <image name="down" width="32" height="32"/>
         <image name="sachin" width="160" height="206"/>
     </resources>

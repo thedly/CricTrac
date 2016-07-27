@@ -78,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let vc : SummaryViewController = storyboard.instantiateViewControllerWithIdentifier("SummaryViewController") as! SummaryViewController
         
         sliderMenu.mainViewController.presentViewController(vc, animated: true, completion: nil)
-        //sliderMenu.setDrawerState(KYDrawerController.DrawerState.Closed, animated: true)
+        sliderMenu.setDrawerState(KYDrawerController.DrawerState.Closed, animated: true)
     }
 
 }
