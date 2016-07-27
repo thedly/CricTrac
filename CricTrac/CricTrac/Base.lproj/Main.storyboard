@@ -21,12 +21,12 @@
             <string>SFUIText-Bold</string>
             <string>SFUIText-Bold</string>
             <string>SFUIText-Bold</string>
-            <string>SFUIText-Bold</string>
-            <string>SFUIText-Bold</string>
-            <string>SFUIText-Bold</string>
-            <string>SFUIText-Bold</string>
         </mutableArray>
         <mutableArray key="SF-UI-Text-Regular.otf">
+            <string>SFUIText-Regular</string>
+            <string>SFUIText-Regular</string>
+            <string>SFUIText-Regular</string>
+            <string>SFUIText-Regular</string>
             <string>SFUIText-Regular</string>
             <string>SFUIText-Regular</string>
             <string>SFUIText-Regular</string>
@@ -86,11 +86,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4PS-Pe-093">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Match Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MjI-yW-H4j">
                                         <rect key="frame" x="197" y="21" width="207" height="21"/>
-                                        <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="18"/>
+                                        <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -100,7 +100,7 @@
                                             <constraint firstAttribute="width" constant="30" id="cRn-mn-8J4"/>
                                             <constraint firstAttribute="height" constant="30" id="qap-2a-6Az"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="18"/>
+                                        <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
                                         <state key="normal" title="&lt; Back"/>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -114,17 +114,17 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.69411764710000001" green="0.14117647059999999" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.73333333333333328" green="0.26666666666666666" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="MjI-yW-H4j" firstAttribute="centerX" secondItem="4PS-Pe-093" secondAttribute="centerX" id="95A-Ux-2Ar"/>
                                     <constraint firstItem="iIh-Ve-zFu" firstAttribute="leading" secondItem="4PS-Pe-093" secondAttribute="leading" constant="8" id="UUc-Eu-aGv"/>
                                     <constraint firstAttribute="bottom" secondItem="iIh-Ve-zFu" secondAttribute="bottom" constant="2" id="arZ-nb-ZCh"/>
-                                    <constraint firstAttribute="height" constant="50" id="bWg-J7-jGA"/>
+                                    <constraint firstAttribute="height" constant="60" id="bWg-J7-jGA"/>
                                     <constraint firstAttribute="bottom" secondItem="MjI-yW-H4j" secondAttribute="bottom" constant="8" id="kbZ-B3-rll"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="97" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="X9P-Zh-qAo">
-                                <rect key="frame" x="10" y="60" width="580" height="530"/>
+                                <rect key="frame" x="10" y="70" width="580" height="520"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="performanceCell" id="iym-rX-6e4" customClass="performanceCell" customModule="CricTrac">
@@ -211,11 +211,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KBV-Cm-VN3">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Summary" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clx-0Z-5hg">
                                         <rect key="frame" x="187" y="21" width="226" height="21"/>
-                                        <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="18"/>
+                                        <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -225,7 +225,7 @@
                                             <constraint firstAttribute="height" constant="30" id="FFp-q5-jYQ"/>
                                             <constraint firstAttribute="width" constant="30" id="TTM-Ys-Z72"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="18"/>
+                                        <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
                                         <state key="normal" title="&lt; Back"/>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -238,10 +238,10 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.69411764710000001" green="0.14117647059999999" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.73333333333333328" green="0.26666666666666666" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="aSg-J1-Jze" firstAttribute="leading" secondItem="KBV-Cm-VN3" secondAttribute="leading" constant="8" id="2de-jL-MFr"/>
-                                    <constraint firstAttribute="height" constant="50" id="84A-sM-MrB"/>
+                                    <constraint firstAttribute="height" constant="60" id="84A-sM-MrB"/>
                                     <constraint firstItem="clx-0Z-5hg" firstAttribute="centerX" secondItem="KBV-Cm-VN3" secondAttribute="centerX" id="HZa-wJ-aMw"/>
                                     <constraint firstItem="aSg-J1-Jze" firstAttribute="bottom" secondItem="clx-0Z-5hg" secondAttribute="bottom" id="Jit-DT-PNL"/>
                                     <constraint firstAttribute="bottom" secondItem="aSg-J1-Jze" secondAttribute="bottom" constant="2" id="bg4-E4-96v"/>
@@ -249,7 +249,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aa9-qh-KW7">
-                                <rect key="frame" x="0.0" y="50" width="600" height="50"/>
+                                <rect key="frame" x="0.0" y="60" width="600" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Summary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1kP-2q-71i">
                                         <rect key="frame" x="16" y="21" width="221" height="21"/>
@@ -278,7 +278,7 @@
                                 </variation>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Oub-la-aoU">
-                                <rect key="frame" x="0.0" y="158" width="600" height="442"/>
+                                <rect key="frame" x="0.0" y="168" width="600" height="432"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="summaryTableViewCell" id="mvA-N9-Kej" customClass="summaryTableViewCell" customModule="CricTrac">
@@ -392,7 +392,7 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="80i-xC-8Oy">
-                                <rect key="frame" x="0.0" y="108" width="600" height="50"/>
+                                <rect key="frame" x="0.0" y="118" width="600" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TbO-IG-HYy">
                                         <rect key="frame" x="17" y="14" width="42" height="21"/>
