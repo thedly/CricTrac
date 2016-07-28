@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import KYDrawerController
 
 class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -58,6 +59,34 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let indexPath = tableView.indexPathForSelectedRow
+        let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as?MenuTableViewCell
+        
+        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let currentCellText = currentCell!.menuLbl.text!
+        var viewControllerToGoTo : UIViewController!
+        switch currentCellText {
+        case "Summary":
+            viewControllerToGoTo = storyboard.instantiateViewControllerWithIdentifier("SummaryViewController") as! SummaryViewController
+        
+        case "Profile":
+            
+            viewControllerToGoTo = storyboard.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+            
+            
+        default:
+            viewControllerToGoTo = storyboard.instantiateViewControllerWithIdentifier("SummaryViewController") as! SummaryViewController
+        }
+        
+        
+       self.presentViewController(viewControllerToGoTo, animated: true, completion: nil)
+        sliderMenu.setDrawerState(KYDrawerController.DrawerState.Closed, animated: true)
+        
+    }
+    
+    
     
     // MARK: - Make service calls
     
@@ -66,10 +95,11 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             "Dashboard",
             "New Match",
             "Summary",
+            "Profile",
+            "Friends",
             "Statistics",
-            "Invite Friend",
-            "Friend Requests",
-            "Notifications"
+            "Feedback",
+            "About"
         ]
     }
     
