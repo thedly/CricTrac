@@ -46,6 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func setSliderMenu(){
         let dashboardVC = viewControllerFrom("Main", vcid: "DashboardViewController") as! DashboardViewController
+<<<<<<< HEAD
         
         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let menuVC : MenuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
@@ -77,6 +78,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
+=======
+        let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")
+
+>>>>>>> e54ecf0e9ba313e7667f27c19350918e9b54b487
         let navigationControl = UINavigationController(rootViewController: dashboardVC )
         sliderMenu.mainViewController = navigationControl
         sliderMenu.drawerViewController = menuVC
@@ -89,6 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = sliderMenu
         window?.makeKeyAndVisible()
     }
+<<<<<<< HEAD
     
     func summaryClicked(sender: UIButton){
         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -105,5 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         sliderMenu.setDrawerState(KYDrawerController.DrawerState.Closed, animated: true)
 
     }
+=======
+>>>>>>> e54ecf0e9ba313e7667f27c19350918e9b54b487
 }
 
