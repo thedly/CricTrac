@@ -540,13 +540,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello World" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2JY-cM-3K5">
-                                                    <rect key="frame" x="28" y="11" width="545" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="28" y="13" width="545" height="18"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WLC-d3-dCk">
-                                                    <rect key="frame" x="0.0" y="43" width="600" height="1"/>
+                                                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WLC-d3-dCk">
+                                                    <rect key="frame" x="28" y="43" width="544" height="1"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="cjB-dm-TXU"/>
@@ -555,17 +555,19 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottomMargin" secondItem="WLC-d3-dCk" secondAttribute="bottom" id="Gg6-BO-pV7"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="WLC-d3-dCk" secondAttribute="trailing" constant="20" id="I6y-K1-tHg"/>
                                                 <constraint firstItem="WLC-d3-dCk" firstAttribute="width" secondItem="t65-dj-Syt" secondAttribute="width" id="MT6-3K-nEf"/>
+                                                <constraint firstItem="WLC-d3-dCk" firstAttribute="leading" secondItem="2JY-cM-3K5" secondAttribute="leading" id="cOl-Fy-Mwi"/>
                                                 <constraint firstItem="2JY-cM-3K5" firstAttribute="leading" secondItem="t65-dj-Syt" secondAttribute="leadingMargin" constant="20" id="kIQ-5M-kcB"/>
                                                 <constraint firstItem="2JY-cM-3K5" firstAttribute="centerX" secondItem="t65-dj-Syt" secondAttribute="centerX" id="n99-Qz-8jm"/>
                                                 <constraint firstItem="2JY-cM-3K5" firstAttribute="centerY" secondItem="t65-dj-Syt" secondAttribute="centerY" id="rJs-lm-y1F"/>
-                                                <constraint firstItem="WLC-d3-dCk" firstAttribute="centerX" secondItem="t65-dj-Syt" secondAttribute="centerX" id="wFN-73-Eqt"/>
                                                 <constraint firstItem="2JY-cM-3K5" firstAttribute="centerY" secondItem="t65-dj-Syt" secondAttribute="centerY" id="xTk-Px-J01"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
                                                     <exclude reference="rJs-lm-y1F"/>
                                                     <exclude reference="Gg6-BO-pV7"/>
+                                                    <exclude reference="MT6-3K-nEf"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>

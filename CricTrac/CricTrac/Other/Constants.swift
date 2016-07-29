@@ -11,6 +11,10 @@ import Foundation
 let menuData = [
 
     ["title":"New Match","vc":"NewMatchViewController"],
+    ["title":"Profile","vc":"NewMatchViewController"],
     ["title":"Summary","vc":"SummaryMatchDetailsViewController"],
-    ["title":"Summary Match Details","vc":"SummaryViewController"]
+    ["title":"Statistics","vc":"NewMatchViewController"],
+    ["title":"Invite Friends","vc":"NewMatchViewController"],
+    ["title":"Friends Requests","vc":"NewMatchViewController"],
+    ["title":"Notification","vc":"NewMatchViewController"],
 ]
