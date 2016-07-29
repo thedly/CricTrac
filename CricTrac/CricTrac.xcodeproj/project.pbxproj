@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		462DE9F71D478B9E00E31E8F /* CTDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462DE9F61D478B9E00E31E8F /* CTDatePicker.swift */; };
+		4657D5601D4992D7009E0FBE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4657D55F1D4992D7009E0FBE /* Constants.swift */; };
+		4657D5661D499FDD009E0FBE /* SliderMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4657D5651D499FDD009E0FBE /* SliderMenuViewController.swift */; };
+		4657D5681D49A060009E0FBE /* SliderMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4657D5671D49A060009E0FBE /* SliderMenuCell.swift */; };
 		46B608701D44A7D3000FE098 /* NewMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B6086F1D44A7D3000FE098 /* NewMatchViewController.swift */; };
 		46C983901D3922D200DFC607 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C9838F1D3922D200DFC607 /* AppDelegate.swift */; };
 		46C983971D3922D200DFC607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46C983961D3922D200DFC607 /* Assets.xcassets */; };
@@ -42,6 +45,9 @@
 /* Begin PBXFileReference section */
 		056D56ED7752D65D58DB4504 /* Pods-CricTrac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CricTrac.release.xcconfig"; path = "Pods/Target Support Files/Pods-CricTrac/Pods-CricTrac.release.xcconfig"; sourceTree = "<group>"; };
 		462DE9F61D478B9E00E31E8F /* CTDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CTDatePicker.swift; path = utility/CTDatePicker.swift; sourceTree = "<group>"; };
+		4657D55F1D4992D7009E0FBE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Other/Constants.swift; sourceTree = "<group>"; };
+		4657D5651D499FDD009E0FBE /* SliderMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SliderMenuViewController.swift; path = Controller/SliderMenuViewController.swift; sourceTree = "<group>"; };
+		4657D5671D49A060009E0FBE /* SliderMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SliderMenuCell.swift; path = View/SliderMenuCell.swift; sourceTree = "<group>"; };
 		46B6086F1D44A7D3000FE098 /* NewMatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewMatchViewController.swift; path = Controller/NewMatchViewController.swift; sourceTree = "<group>"; };
 		46C9838C1D3922D200DFC607 /* CricTrac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CricTrac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46C9838F1D3922D200DFC607 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +102,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4657D55E1D4992B1009E0FBE /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				4657D55F1D4992D7009E0FBE /* Constants.swift */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
 		46C983831D3922D200DFC607 = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +136,7 @@
 		46C9838E1D3922D200DFC607 /* CricTrac */ = {
 			isa = PBXGroup;
 			children = (
+				4657D55E1D4992B1009E0FBE /* Constants */,
 				46C983C01D4078B500DFC607 /* utility */,
 				8958F5F51D392CCC0028D5AA /* Model */,
 				8958F5F41D392CC50028D5AA /* Services */,
@@ -172,6 +187,7 @@
 				46C983981D3922D200DFC607 /* LaunchScreen.storyboard */,
 				46C983B51D39D86800DFC607 /* performanceCell.swift */,
 				89F4E4B21D48FECD00EFE46E /* summaryTableViewCell.swift */,
+				4657D5671D49A060009E0FBE /* SliderMenuCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -183,6 +199,7 @@
 				46C983BE1D3FC72400DFC607 /* DashboardViewController.swift */,
 				8957420E1D43978E0097DF58 /* SummaryViewController.swift */,
 				89CC84FB1D43E4D6007F2402 /* SummaryMatchDetailsViewController.swift */,
+				4657D5651D499FDD009E0FBE /* SliderMenuViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -365,10 +382,13 @@
 				89F4E4B31D48FECD00EFE46E /* summaryTableViewCell.swift in Sources */,
 				46C983C41D40968300DFC607 /* Extentions.swift in Sources */,
 				46C983C21D4078EB00DFC607 /* utility.swift in Sources */,
+				4657D5681D49A060009E0FBE /* SliderMenuCell.swift in Sources */,
 				462DE9F71D478B9E00E31E8F /* CTDatePicker.swift in Sources */,
 				46C983B61D39D86800DFC607 /* performanceCell.swift in Sources */,
 				8957420F1D43978E0097DF58 /* SummaryViewController.swift in Sources */,
 				46C983BF1D3FC72400DFC607 /* DashboardViewController.swift in Sources */,
+				4657D5661D499FDD009E0FBE /* SliderMenuViewController.swift in Sources */,
+				4657D5601D4992D7009E0FBE /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
