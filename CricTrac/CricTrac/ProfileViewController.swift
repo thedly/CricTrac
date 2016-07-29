@@ -8,19 +8,17 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     lazy var ctDatePicker = CTDatePicker()
     
     @IBOutlet weak var scrollView:UIScrollView!
+    var imgPicker = UIImagePickerController()
     
-    @IBOutlet weak var matchView:UIView!
     
-    @IBOutlet weak var batView:UIView!
+    @IBOutlet weak var miscTblView: UITableView!
     
-    @IBOutlet weak var bowlView:UIView!
-    
-    @IBOutlet weak var extraView:UIView!
+    @IBOutlet weak var profileImg: UIImageView!
     
     @IBOutlet weak var dateTest: UITextField!
     
@@ -76,6 +74,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         lastSelectedTab = matchSelector
+        imgPicker.delegate = self
         scrollView.setContentOffset(CGPointZero, animated: true)
         
         
@@ -88,60 +87,51 @@ class ProfileViewController: UIViewController {
     }
     
     
+    @IBAction func addPhotBtnPressed(sender: AnyObject) {
+        
+        presentViewController(imgPicker, animated: true, completion: nil)
+        
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        print(image)
+        profileImg.image = image
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     
     @IBAction func didTapCancel(sender: UIButton) {
+ dismissViewControllerAnimated(true) {}
+    }
+    
+    
+    @IBAction func didTapPersonal(sender: AnyObject) {
         
-        dismissViewControllerAnimated(true) {}
+        scrollView.setContentOffset(CGPointZero, animated: true)
+       miscTblView.hidden = true
+        scrollView.hidden = false
     }
     
     
-    @IBAction func didTapMatch(sender: AnyObject) {
-        matchSelector.hidden = false
-        lastSelectedTab?.hidden = true
-        lastSelectedTab = matchSelector
+    @IBAction func didTapTeam(sender: AnyObject){
         scrollView.setContentOffset(CGPointZero, animated: true)
-        matchView.hidden = false
-        batView.hidden = true
-        bowlView.hidden = true
-        extraView.hidden = true
+        miscTblView.hidden = false
+        scrollView.hidden = true
     }
     
     
-    @IBAction func didTapBat(sender: AnyObject){
-        battingSelector.hidden = false
-        lastSelectedTab?.hidden = true
-        lastSelectedTab = battingSelector
+    @IBAction func didTapGround(sender: AnyObject) {
         scrollView.setContentOffset(CGPointZero, animated: true)
-        batView.hidden = false
-        matchView.hidden = true
-        bowlView.hidden = true
-        extraView.hidden = true
-    }
-    
-    
-    @IBAction func didTapBowl(sender: AnyObject) {
-        bowlingSelector.hidden = false
-        lastSelectedTab?.hidden = true
-        lastSelectedTab = bowlingSelector
-        scrollView.setContentOffset(CGPointZero, animated: true)
-        bowlView.hidden = false
-        batView.hidden = true
-        matchView.hidden = true
-        extraView.hidden = true
+        miscTblView.hidden = false
+        scrollView.hidden = true
         
     }
     
     
-    @IBAction func didTapExtra(sender: AnyObject) {
-        extraSelector.hidden = false
-        lastSelectedTab?.hidden = true
-        lastSelectedTab = extraSelector
+    @IBAction func didTapOpponent(sender: AnyObject) {
         scrollView.setContentOffset(CGPointZero, animated: true)
-        extraView.hidden = false
-        bowlView.hidden = true
-        batView.hidden = true
-        matchView.hidden = true
-        
+        miscTblView.hidden = false
+        scrollView.hidden = true
     }
     
     func hideAllSelectors(){
