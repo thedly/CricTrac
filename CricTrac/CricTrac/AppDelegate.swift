@@ -46,24 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func setSliderMenu(){
         let dashboardVC = viewControllerFrom("Main", vcid: "DashboardViewController") as! DashboardViewController
-        let drawerViewController = UIViewController()
-        drawerViewController.view.backgroundColor = UIColor.whiteColor()
-        
-        
-        // styling required for these buttons
-        let summaryBtn = UIButton(frame: CGRectMake(0, 20, 130, 100))
-        let summaryBtnBaseLine = UIView(frame: CGRectMake(0, 100, 130, 1))
-        summaryBtnBaseLine.backgroundColor = UIColor(hex: "D8D8D8")
-        summaryBtn.setTitle("Summary", forState: .Normal)
-        summaryBtn.tintColor = UIColor(hex: "D8D8D8")
-        summaryBtn.setTitleColor(UIColor(hex: "000000"), forState: .Normal)
-        summaryBtn.setTitleColor(UIColor.redColor(), forState: .Highlighted)
-        summaryBtn.addTarget(self, action: "summaryClicked:", forControlEvents: .TouchUpInside)
-        drawerViewController.view.addSubview(summaryBtn)
-        drawerViewController.view.addSubview(summaryBtnBaseLine)
-        
-        
-        
+        let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")
+
         let navigationControl = UINavigationController(rootViewController: dashboardVC )
         sliderMenu.mainViewController = navigationControl
         sliderMenu.drawerViewController = drawerViewController
@@ -72,14 +56,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = sliderMenu
         window?.makeKeyAndVisible()
     }
-    
-    func summaryClicked(sender: UIButton){
-        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc : SummaryViewController = storyboard.instantiateViewControllerWithIdentifier("SummaryViewController") as! SummaryViewController
-        
-        sliderMenu.mainViewController.presentViewController(vc, animated: true, completion: nil)
-        sliderMenu.setDrawerState(KYDrawerController.DrawerState.Closed, animated: true)
-    }
-
 }
 
