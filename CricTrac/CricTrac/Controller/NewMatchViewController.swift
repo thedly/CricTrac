@@ -72,12 +72,17 @@ class NewMatchViewController: UIViewController {
     
     
     var lastSelectedTab:UIView?
+    var keyboardHeight:Int?
+    var selectedText:UITextField?
+    
+    var scrollViewTop:CGFloat!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(NewMatchViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         lastSelectedTab = matchSelector
  scrollView.setContentOffset(CGPointZero, animated: true)
-        
+ scrollViewTop = scrollView.frame.origin.y
         
         // Do any additional setup after loading the view.
     }
@@ -87,6 +92,33 @@ class NewMatchViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func keyboardWillShow(sender: NSNotification){
+        
+        if let userInfo = sender.userInfo {
+            if  let  keyboardframe = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue{
+                let keyboardHeight = keyboardframe.CGRectValue().height
+                
+                if selectedText != nil {
+                let viewBottom = view.frame.maxY
+                let textDesiredPosition = viewBottom - keyboardHeight - (selectedText?.frame.height)! - scrollViewTop
+                
+                    if textDesiredPosition < selectedText?.frame.minY {
+                        
+                        let aPoint = CGPoint(x: 0, y: textDesiredPosition)
+                        scrollView.setContentOffset(aPoint, animated: true)
+                        
+                    }
+                    
+                
+                }
+                
+                
+            }
+        }
+        
+        
+        
+    }
 
   
     @IBAction func didTapCancel(sender: UIButton) {
@@ -158,10 +190,9 @@ class NewMatchViewController: UIViewController {
 extension NewMatchViewController:UITextFieldDelegate{
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        let origin = textField.frame.origin
-        let aPoint = CGPoint(x: 0, y: origin.y)
-    scrollView.setContentOffset(aPoint, animated: true)
         
+        selectedText = textField
+
         if textField == dateTest{
         ctDatePicker.showPicker(self, inputText: textField)
         }
