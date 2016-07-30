@@ -128,8 +128,8 @@ class NewMatchViewController: UIViewController {
 
     
     @IBAction func didTapMatch(sender: AnyObject) {
-        matchSelector.hidden = false
         lastSelectedTab?.hidden = true
+        matchSelector.hidden = false
         lastSelectedTab = matchSelector
         scrollView.setContentOffset(CGPointZero, animated: true)
         matchView.hidden = false
@@ -140,8 +140,8 @@ class NewMatchViewController: UIViewController {
   
     
     @IBAction func didTapBat(sender: AnyObject){
-        battingSelector.hidden = false
         lastSelectedTab?.hidden = true
+        battingSelector.hidden = false
         lastSelectedTab = battingSelector
          scrollView.setContentOffset(CGPointZero, animated: true)
        batView.hidden = false
@@ -152,8 +152,8 @@ class NewMatchViewController: UIViewController {
     
     
     @IBAction func didTapBowl(sender: AnyObject) {
-        bowlingSelector.hidden = false
         lastSelectedTab?.hidden = true
+        bowlingSelector.hidden = false
         lastSelectedTab = bowlingSelector
          scrollView.setContentOffset(CGPointZero, animated: true)
          bowlView.hidden = false
@@ -165,8 +165,8 @@ class NewMatchViewController: UIViewController {
     
     
     @IBAction func didTapExtra(sender: AnyObject) {
+         lastSelectedTab?.hidden = true
         extraSelector.hidden = false
-        lastSelectedTab?.hidden = true
         lastSelectedTab = extraSelector
          scrollView.setContentOffset(CGPointZero, animated: true)
    extraView.hidden = false
