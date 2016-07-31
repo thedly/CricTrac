@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -585,22 +586,21 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logged in as" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WxP-eG-xxn">
-                                <rect key="frame" x="104" y="40" width="67" height="15"/>
+                                <rect key="frame" x="100" y="35" width="67" height="15"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
                                 <color key="textColor" red="0.97236786909999995" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arjun S Kumar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="af3-mo-F1C">
-                                <rect key="frame" x="104" y="60" width="97" height="17"/>
+                                <rect key="frame" x="100" y="55" width="97" height="17"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" red="0.97236786909999995" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="sachin" translatesAutoresizingMaskIntoConstraints="NO" id="cmY-mr-c8o">
-                                <rect key="frame" x="32" y="13" width="64" height="64"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sachin" translatesAutoresizingMaskIntoConstraints="NO" id="cmY-mr-c8o">
+                                <rect key="frame" x="30" y="25" width="60" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="64" id="Yzp-vM-SCu"/>
-                                    <constraint firstAttribute="height" constant="64" id="tyX-yj-j8H"/>
+                                    <constraint firstAttribute="width" secondItem="cmY-mr-c8o" secondAttribute="height" multiplier="1:1" id="gMs-c1-tDr"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -615,20 +615,23 @@
                             <constraint firstItem="WxP-eG-xxn" firstAttribute="leading" secondItem="cmY-mr-c8o" secondAttribute="trailing" constant="10" id="0Pb-Zk-GWv"/>
                             <constraint firstItem="af3-mo-F1C" firstAttribute="top" secondItem="WxP-eG-xxn" secondAttribute="bottom" constant="5" id="CWB-B0-Vew"/>
                             <constraint firstItem="cmY-mr-c8o" firstAttribute="top" secondItem="Tvf-Rv-uaR" secondAttribute="bottom" constant="5" id="Da2-Mv-0Sh"/>
+                            <constraint firstItem="kdb-VR-drO" firstAttribute="top" secondItem="cmY-mr-c8o" secondAttribute="bottom" constant="5" id="IpN-9m-Wg6"/>
                             <constraint firstItem="iIK-zW-Buk" firstAttribute="height" secondItem="5uh-j7-xy1" secondAttribute="height" multiplier="0.85" id="LZJ-PP-tIw"/>
                             <constraint firstItem="kdb-VR-drO" firstAttribute="top" secondItem="iIK-zW-Buk" secondAttribute="bottom" id="Lds-dL-bP3"/>
                             <constraint firstItem="cmY-mr-c8o" firstAttribute="centerY" secondItem="5uh-j7-xy1" secondAttribute="centerY" id="MpX-v0-8DY"/>
+                            <constraint firstItem="WxP-eG-xxn" firstAttribute="top" secondItem="cmY-mr-c8o" secondAttribute="top" constant="10" id="RoS-j8-YFC"/>
                             <constraint firstItem="af3-mo-F1C" firstAttribute="leading" secondItem="WxP-eG-xxn" secondAttribute="leading" id="URQ-XZ-bBV"/>
-                            <constraint firstItem="WxP-eG-xxn" firstAttribute="top" secondItem="Tvf-Rv-uaR" secondAttribute="bottom" constant="20" id="UlT-Vx-9Hh"/>
                             <constraint firstItem="iIK-zW-Buk" firstAttribute="centerX" secondItem="5uh-j7-xy1" secondAttribute="centerX" id="YWi-CM-5yL"/>
                             <constraint firstItem="iIK-zW-Buk" firstAttribute="top" secondItem="cmY-mr-c8o" secondAttribute="bottom" constant="5" id="Z1i-KA-gzH"/>
                             <constraint firstItem="iIK-zW-Buk" firstAttribute="width" secondItem="5uh-j7-xy1" secondAttribute="width" id="fin-d3-AaR"/>
+                            <constraint firstItem="cmY-mr-c8o" firstAttribute="top" secondItem="Tvf-Rv-uaR" secondAttribute="bottom" constant="5" id="pUb-7O-5Bs"/>
                             <constraint firstItem="cmY-mr-c8o" firstAttribute="leading" secondItem="5uh-j7-xy1" secondAttribute="leadingMargin" constant="10" id="xiZ-to-PFd"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="Da2-Mv-0Sh"/>
                                 <exclude reference="MpX-v0-8DY"/>
+                                <exclude reference="IpN-9m-Wg6"/>
                             </mask>
                         </variation>
                     </view>
