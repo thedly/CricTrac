@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -625,11 +626,22 @@
                                     <outlet property="delegate" destination="lI5-hx-XnN" id="8Gs-K7-OKl"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logged in as" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WxP-eG-xxn">
+                                <rect key="frame" x="100" y="35" width="67" height="15"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                                <color key="textColor" red="0.97236786909999995" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arjun S Kumar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="af3-mo-F1C">
+                                <rect key="frame" x="100" y="55" width="97" height="17"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                                <color key="textColor" red="0.97236786909999995" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sachin" translatesAutoresizingMaskIntoConstraints="NO" id="cmY-mr-c8o">
-                                <rect key="frame" x="30" y="25" width="64" height="64"/>
+                                <rect key="frame" x="30" y="25" width="60" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="64" id="Yzp-vM-SCu"/>
-                                    <constraint firstAttribute="height" constant="64" id="tyX-yj-j8H"/>
+                                    <constraint firstAttribute="width" secondItem="cmY-mr-c8o" secondAttribute="height" multiplier="1:1" id="gMs-c1-tDr"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -638,36 +650,29 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logged in as" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WxP-eG-xxn">
-                                <rect key="frame" x="104" y="40" width="67" height="15"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
-                                <color key="textColor" red="0.97236786909999995" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arjun S Kumar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="af3-mo-F1C">
-                                <rect key="frame" x="104" y="60" width="97" height="17"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
-                                <color key="textColor" red="0.97236786909999995" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="WxP-eG-xxn" firstAttribute="leading" secondItem="cmY-mr-c8o" secondAttribute="trailing" constant="10" id="0Pb-Zk-GWv"/>
                             <constraint firstItem="af3-mo-F1C" firstAttribute="top" secondItem="WxP-eG-xxn" secondAttribute="bottom" constant="5" id="CWB-B0-Vew"/>
                             <constraint firstItem="cmY-mr-c8o" firstAttribute="top" secondItem="Tvf-Rv-uaR" secondAttribute="bottom" constant="5" id="Da2-Mv-0Sh"/>
+                            <constraint firstItem="kdb-VR-drO" firstAttribute="top" secondItem="cmY-mr-c8o" secondAttribute="bottom" constant="5" id="IpN-9m-Wg6"/>
                             <constraint firstItem="iIK-zW-Buk" firstAttribute="height" secondItem="5uh-j7-xy1" secondAttribute="height" multiplier="0.85" id="LZJ-PP-tIw"/>
                             <constraint firstItem="kdb-VR-drO" firstAttribute="top" secondItem="iIK-zW-Buk" secondAttribute="bottom" id="Lds-dL-bP3"/>
                             <constraint firstItem="cmY-mr-c8o" firstAttribute="centerY" secondItem="5uh-j7-xy1" secondAttribute="centerY" id="MpX-v0-8DY"/>
+                            <constraint firstItem="WxP-eG-xxn" firstAttribute="top" secondItem="cmY-mr-c8o" secondAttribute="top" constant="10" id="RoS-j8-YFC"/>
                             <constraint firstItem="af3-mo-F1C" firstAttribute="leading" secondItem="WxP-eG-xxn" secondAttribute="leading" id="URQ-XZ-bBV"/>
-                            <constraint firstItem="WxP-eG-xxn" firstAttribute="top" secondItem="Tvf-Rv-uaR" secondAttribute="bottom" constant="20" id="UlT-Vx-9Hh"/>
                             <constraint firstItem="iIK-zW-Buk" firstAttribute="centerX" secondItem="5uh-j7-xy1" secondAttribute="centerX" id="YWi-CM-5yL"/>
+                            <constraint firstItem="iIK-zW-Buk" firstAttribute="top" secondItem="cmY-mr-c8o" secondAttribute="bottom" constant="5" id="Z1i-KA-gzH"/>
                             <constraint firstItem="iIK-zW-Buk" firstAttribute="width" secondItem="5uh-j7-xy1" secondAttribute="width" id="fin-d3-AaR"/>
+                            <constraint firstItem="cmY-mr-c8o" firstAttribute="top" secondItem="Tvf-Rv-uaR" secondAttribute="bottom" constant="5" id="pUb-7O-5Bs"/>
                             <constraint firstItem="cmY-mr-c8o" firstAttribute="leading" secondItem="5uh-j7-xy1" secondAttribute="leadingMargin" constant="10" id="xiZ-to-PFd"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="Da2-Mv-0Sh"/>
                                 <exclude reference="MpX-v0-8DY"/>
+                                <exclude reference="IpN-9m-Wg6"/>
                             </mask>
                         </variation>
                     </view>
@@ -895,13 +900,13 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FMZ-17-DmB">
-                                <rect key="frame" x="20" y="80" width="120" height="30"/>
+                                <rect key="frame" x="20" y="80" width="132" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="yj4-5L-kaY"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="MATCH">
-                                    <color key="titleColor" red="0.73333333333333328" green="0.26666666666666666" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.40000000000000002" green="0.47058823529999999" blue="0.08235294118" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <fontDescription key="fontDescription" type="system" pointSize="25"/>
@@ -911,13 +916,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AhU-zQ-xcG">
-                                <rect key="frame" x="150" y="80" width="120" height="30"/>
+                                <rect key="frame" x="162" y="80" width="132" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="jCv-GL-Gqp"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="BAT">
-                                    <color key="titleColor" red="0.73333333333333328" green="0.26666666666666666" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="BATTING">
+                                    <color key="titleColor" red="0.40000000000000002" green="0.47058823529999999" blue="0.08235294118" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <fontDescription key="fontDescription" type="system" pointSize="25"/>
@@ -927,13 +932,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUp-4m-bHh">
-                                <rect key="frame" x="280" y="80" width="120" height="30"/>
+                                <rect key="frame" x="299" y="80" width="132" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="uMs-vM-pX3"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="BOWL">
-                                    <color key="titleColor" red="0.73333333333333328" green="0.26666666666666666" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="BOWLING">
+                                    <color key="titleColor" red="0.40000000000000002" green="0.47058823529999999" blue="0.08235294118" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <fontDescription key="fontDescription" type="system" pointSize="25"/>
@@ -943,13 +948,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BzO-nU-sIX">
-                                <rect key="frame" x="410" y="80" width="120" height="30"/>
+                                <rect key="frame" x="436" y="80" width="132" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="rkh-dV-9Gw"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="EXTRA">
-                                    <color key="titleColor" red="0.73333333333333328" green="0.26666666666666666" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.40000000000000002" green="0.47058823529999999" blue="0.08235294118" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <fontDescription key="fontDescription" type="system" pointSize="25"/>
@@ -959,22 +964,22 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NnA-1F-pQa">
-                                <rect key="frame" x="20" y="115" width="120" height="5"/>
-                                <color key="backgroundColor" red="0.42745098039215684" green="0.58039215686274503" blue="0.27843137254901962" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="20" y="115" width="132" height="5"/>
+                                <color key="backgroundColor" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="5" id="0JV-au-F7e"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pOe-wE-tir">
-                                <rect key="frame" x="150" y="115" width="120" height="5"/>
-                                <color key="backgroundColor" red="0.42745098039215684" green="0.58039215686274503" blue="0.27843137254901962" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="162" y="115" width="132" height="5"/>
+                                <color key="backgroundColor" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="5" id="8RW-gL-Hdw"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I2p-Oh-Jnx">
-                                <rect key="frame" x="280" y="115" width="120" height="5"/>
-                                <color key="backgroundColor" red="0.42745098039215684" green="0.58039215686274503" blue="0.27843137254901962" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="299" y="115" width="132" height="5"/>
+                                <color key="backgroundColor" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="5" id="9ct-e8-J9B"/>
                                     <constraint firstAttribute="height" constant="10" id="faD-xp-qUB"/>
@@ -986,8 +991,8 @@
                                 </variation>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mP3-qA-fsE">
-                                <rect key="frame" x="410" y="115" width="120" height="5"/>
-                                <color key="backgroundColor" red="0.42745098039215684" green="0.58039215686274503" blue="0.27843137254901962" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="436" y="115" width="132" height="5"/>
+                                <color key="backgroundColor" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="6w8-7V-mUw"/>
                                     <constraint firstAttribute="height" constant="5" id="Goj-xl-S78"/>
@@ -999,13 +1004,13 @@
                                 </variation>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SaK-UK-bAF">
-                                <rect key="frame" x="10" y="130" width="580" height="460"/>
+                                <rect key="frame" x="10" y="120" width="580" height="470"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AGw-ES-GqB" userLabel="ExtraView">
-                                        <rect key="frame" x="0.0" y="0.0" width="580" height="845"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="580" height="820"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Toss" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WlR-fi-ezE" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="30" width="522" height="41"/>
+                                                <rect key="frame" x="10" y="5" width="522" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1044,7 +1049,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Batting" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1r3-dH-ZL6" userLabel="FirstBatting" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="91" width="522" height="41"/>
+                                                <rect key="frame" x="10" y="66" width="522" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1077,7 +1082,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Score" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LBR-dj-bpJ" userLabel="Score" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="152" width="522" height="41"/>
+                                                <rect key="frame" x="10" y="127" width="522" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1110,7 +1115,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Overs" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZV1-rL-gr9" userLabel="Overs" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="213" width="522" height="41"/>
+                                                <rect key="frame" x="10" y="188" width="522" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1143,7 +1148,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Wickets" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X1z-gf-ioL" userLabel="Wickets" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="274" width="522" height="41"/>
+                                                <rect key="frame" x="10" y="249" width="522" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1176,7 +1181,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Second Batting" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ASv-u7-SWI" userLabel="SecondBatting" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="335" width="522" height="41"/>
+                                                <rect key="frame" x="10" y="310" width="522" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1209,7 +1214,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Score" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h9f-QX-Zsa" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="396" width="522" height="41"/>
+                                                <rect key="frame" x="10" y="371" width="522" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1242,7 +1247,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Over" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ewJ-6p-HmT" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="457" width="522" height="41"/>
+                                                <rect key="frame" x="10" y="432" width="522" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1275,7 +1280,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Wickets" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GA2-Cy-WjS" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="518" width="522" height="41"/>
+                                                <rect key="frame" x="10" y="493" width="522" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1308,7 +1313,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Result" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m5s-oz-Vfn" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="579" width="522" height="41"/>
+                                                <rect key="frame" x="10" y="554" width="522" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1341,7 +1346,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Comments" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DqS-NS-8eC" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="640" width="522" height="205"/>
+                                                <rect key="frame" x="10" y="615" width="522" height="205"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1405,7 +1410,7 @@
                                             <constraint firstItem="ZV1-rL-gr9" firstAttribute="height" secondItem="LBR-dj-bpJ" secondAttribute="height" id="eQU-aO-IQs"/>
                                             <constraint firstItem="ASv-u7-SWI" firstAttribute="top" secondItem="X1z-gf-ioL" secondAttribute="bottom" constant="20" id="eQe-II-0MV"/>
                                             <constraint firstItem="ASv-u7-SWI" firstAttribute="leading" secondItem="X1z-gf-ioL" secondAttribute="leading" id="ewL-Wv-aLk"/>
-                                            <constraint firstItem="WlR-fi-ezE" firstAttribute="top" secondItem="AGw-ES-GqB" secondAttribute="top" constant="30" id="f0h-l4-uNq"/>
+                                            <constraint firstItem="WlR-fi-ezE" firstAttribute="top" secondItem="AGw-ES-GqB" secondAttribute="top" constant="5" id="f0h-l4-uNq"/>
                                             <constraint firstItem="X1z-gf-ioL" firstAttribute="height" secondItem="ZV1-rL-gr9" secondAttribute="height" id="fH9-kg-0wX"/>
                                             <constraint firstItem="m5s-oz-Vfn" firstAttribute="leading" secondItem="GA2-Cy-WjS" secondAttribute="leading" id="iPL-mp-TSU"/>
                                             <constraint firstItem="m5s-oz-Vfn" firstAttribute="trailing" secondItem="GA2-Cy-WjS" secondAttribute="trailing" id="iVf-cm-2aO"/>
@@ -1445,10 +1450,10 @@
                                         </variation>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DXf-0r-JgH" userLabel="BowlView">
-                                        <rect key="frame" x="0.0" y="0.0" width="580" height="686"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="580" height="661"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Overs" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PMh-bF-FPp" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="30" width="580" height="41"/>
+                                                <rect key="frame" x="10" y="5" width="580" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1487,7 +1492,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Wickets" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tad-cF-e9D" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="91" width="580" height="41"/>
+                                                <rect key="frame" x="10" y="66" width="580" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1526,7 +1531,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Runs" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Acf-0U-2ul" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="162" width="580" height="41"/>
+                                                <rect key="frame" x="10" y="137" width="580" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1565,7 +1570,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="No Balls" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pQq-JD-Kup" userLabel="Noballs" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="223" width="580" height="41"/>
+                                                <rect key="frame" x="10" y="198" width="580" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1604,7 +1609,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Wides" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tHg-Nr-fJg" userLabel="wides" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="284" width="580" height="41"/>
+                                                <rect key="frame" x="10" y="259" width="580" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1643,7 +1648,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Economy" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rgV-9G-Z0m" userLabel="Economy" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="345" width="580" height="41"/>
+                                                <rect key="frame" x="10" y="320" width="580" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1696,7 +1701,7 @@
                                             <constraint firstItem="Acf-0U-2ul" firstAttribute="height" secondItem="tad-cF-e9D" secondAttribute="height" id="Qzh-U8-cDX"/>
                                             <constraint firstItem="tHg-Nr-fJg" firstAttribute="trailing" secondItem="pQq-JD-Kup" secondAttribute="trailing" id="TX0-hX-lmq"/>
                                             <constraint firstItem="pQq-JD-Kup" firstAttribute="height" secondItem="Acf-0U-2ul" secondAttribute="height" id="TdP-L4-Yks"/>
-                                            <constraint firstItem="PMh-bF-FPp" firstAttribute="top" secondItem="DXf-0r-JgH" secondAttribute="top" constant="30" id="Tyu-ZK-sRP"/>
+                                            <constraint firstItem="PMh-bF-FPp" firstAttribute="top" secondItem="DXf-0r-JgH" secondAttribute="top" constant="5" id="Tyu-ZK-sRP"/>
                                             <constraint firstItem="rgV-9G-Z0m" firstAttribute="leading" secondItem="tHg-Nr-fJg" secondAttribute="leading" id="Ukj-oj-rei"/>
                                             <constraint firstItem="pQq-JD-Kup" firstAttribute="top" secondItem="Acf-0U-2ul" secondAttribute="bottom" constant="20" id="Whu-vZ-7rK"/>
                                             <constraint firstItem="pQq-JD-Kup" firstAttribute="trailing" secondItem="Acf-0U-2ul" secondAttribute="trailing" id="cOQ-My-Nd8"/>
@@ -1710,10 +1715,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KUT-IX-dDk" userLabel="MatchView">
-                                        <rect key="frame" x="0.0" y="0.0" width="580" height="884"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="580" height="859"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rPd-Lu-Igr" userLabel="Date" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="30" width="522" height="48"/>
+                                                <rect key="frame" x="10" y="5" width="522" height="48"/>
                                                 <color key="tintColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1752,7 +1757,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Team" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VR7-Ns-eOt" userLabel="Team" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="98" width="522" height="48"/>
+                                                <rect key="frame" x="10" y="73" width="522" height="48"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1785,7 +1790,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Opponent" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5F4-OY-2Oy" userLabel="Opponent" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="166" width="522" height="48"/>
+                                                <rect key="frame" x="10" y="141" width="522" height="48"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1818,7 +1823,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ground" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iXN-aJ-y7K" userLabel="Ground" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="234" width="522" height="48"/>
+                                                <rect key="frame" x="10" y="209" width="522" height="48"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1851,7 +1856,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Overs" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ffb-16-FY7" userLabel="Overs" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="302" width="522" height="48"/>
+                                                <rect key="frame" x="10" y="277" width="522" height="48"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1884,7 +1889,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Tournament" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EHx-4K-7u1" userLabel="Tournament" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="370" width="522" height="48"/>
+                                                <rect key="frame" x="10" y="345" width="522" height="48"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1917,7 +1922,7 @@
                                                 </connections>
                                             </textField>
                                             <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Dismiss" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pk0-yT-Tfu" userLabel="Dismiss" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="438" width="522" height="40"/>
+                                                <rect key="frame" x="10" y="413" width="522" height="40"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1950,7 +1955,7 @@
                                                 </connections>
                                             </textField>
                                             <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Overs" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nGc-eZ-Lcc" userLabel="ExtraOvers" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="498" width="522" height="41"/>
+                                                <rect key="frame" x="10" y="473" width="522" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -1983,7 +1988,7 @@
                                                 </connections>
                                             </textField>
                                             <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Result" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fWG-Qh-zuu" userLabel="Result" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="559" width="522" height="41"/>
+                                                <rect key="frame" x="10" y="534" width="522" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -2016,7 +2021,7 @@
                                                 </connections>
                                             </textField>
                                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ueC-8g-38v" customClass="FloatLabelTextView" customModule="CricTrac" customModuleProvider="target">
-                                                <rect key="frame" x="10" y="620" width="522" height="164"/>
+                                                <rect key="frame" x="10" y="595" width="522" height="164"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -2032,7 +2037,7 @@
                                             <constraint firstItem="rPd-Lu-Igr" firstAttribute="centerY" secondItem="KUT-IX-dDk" secondAttribute="centerY" id="0m2-JI-zyy"/>
                                             <constraint firstItem="rPd-Lu-Igr" firstAttribute="leading" secondItem="KUT-IX-dDk" secondAttribute="leading" constant="10" id="1MO-LU-ofp"/>
                                             <constraint firstItem="rPd-Lu-Igr" firstAttribute="width" secondItem="KUT-IX-dDk" secondAttribute="width" multiplier="0.9" id="4MU-P6-K2s"/>
-                                            <constraint firstItem="rPd-Lu-Igr" firstAttribute="top" secondItem="KUT-IX-dDk" secondAttribute="top" constant="30" id="4Xq-si-1HZ"/>
+                                            <constraint firstItem="rPd-Lu-Igr" firstAttribute="top" secondItem="KUT-IX-dDk" secondAttribute="top" constant="5" id="4Xq-si-1HZ"/>
                                             <constraint firstItem="ffb-16-FY7" firstAttribute="trailing" secondItem="iXN-aJ-y7K" secondAttribute="trailing" id="6Sz-lN-Fb6"/>
                                             <constraint firstItem="nGc-eZ-Lcc" firstAttribute="leading" secondItem="Pk0-yT-Tfu" secondAttribute="leading" id="73A-KV-7ZJ"/>
                                             <constraint firstItem="iXN-aJ-y7K" firstAttribute="height" secondItem="5F4-OY-2Oy" secondAttribute="height" id="7Ku-yO-cgV"/>
@@ -2095,10 +2100,10 @@
                                         </variation>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8U1-1X-niI" userLabel="BatView">
-                                        <rect key="frame" x="0.0" y="0.0" width="580" height="806"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="580" height="713"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Runs" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W5W-X9-syR" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="30" width="580" height="48"/>
+                                                <rect key="frame" x="10" y="5" width="580" height="48"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -2137,7 +2142,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Balls" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ASc-KU-jPn" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="98" width="580" height="48"/>
+                                                <rect key="frame" x="10" y="73" width="580" height="48"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -2176,7 +2181,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="4s" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cf4-Vo-sDE" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="176" width="580" height="48"/>
+                                                <rect key="frame" x="10" y="151" width="285" height="48"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -2214,47 +2219,8 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="86W-gk-QVW"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="6s" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aJk-t9-xr6" userLabel="6s" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="244" width="580" height="48"/>
-                                                <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="titleTextColour">
-                                                        <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="titleActiveTextColour">
-                                                        <color key="value" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="hintYPadding">
-                                                        <real key="value" value="0.0"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="titleYPadding">
-                                                        <real key="value" value="5"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
-                                                        <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
-                                                        <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
-                                                        <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
-                                                        <color key="value" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                                        <color key="value" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <outlet property="delegate" destination="6Ih-6n-xPz" id="KHG-Hb-yv8"/>
-                                                </connections>
-                                            </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Strike Rate" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cnC-AU-OSD" userLabel="StrikeRate" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="312" width="580" height="48"/>
+                                                <rect key="frame" x="10" y="219" width="580" height="48"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -2293,7 +2259,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Position" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oNf-Bq-hgj" userLabel="Position" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="380" width="580" height="48"/>
+                                                <rect key="frame" x="10" y="287" width="580" height="48"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -2332,7 +2298,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Dismissal" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Hc-yl-Vpu" userLabel="Dismissal" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="10" y="458" width="522" height="48"/>
+                                                <rect key="frame" x="10" y="365" width="522" height="48"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -2370,12 +2336,53 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="9ZK-g7-cBk"/>
                                                 </connections>
                                             </textField>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="6s" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aJk-t9-xr6" userLabel="6s" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <rect key="frame" x="305" y="151" width="285" height="48"/>
+                                                <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
+                                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="titleTextColour">
+                                                        <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="titleActiveTextColour">
+                                                        <color key="value" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="hintYPadding">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="titleYPadding">
+                                                        <real key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                                        <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                                        <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
+                                                        <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                                                        <color key="value" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                                        <color key="value" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outlet property="delegate" destination="6Ih-6n-xPz" id="KHG-Hb-yv8"/>
+                                                </connections>
+                                            </textField>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="W5W-X9-syR" firstAttribute="width" secondItem="8U1-1X-niI" secondAttribute="width" id="0ut-qc-Rfj"/>
                                             <constraint firstItem="4Hc-yl-Vpu" firstAttribute="height" secondItem="oNf-Bq-hgj" secondAttribute="height" id="8Vx-YE-gM9"/>
                                             <constraint firstItem="aJk-t9-xr6" firstAttribute="trailing" secondItem="cf4-Vo-sDE" secondAttribute="trailing" id="BTw-lV-B1z"/>
-                                            <constraint firstItem="cnC-AU-OSD" firstAttribute="leading" secondItem="aJk-t9-xr6" secondAttribute="leading" id="CG1-R9-QKf"/>
+                                            <constraint firstItem="cnC-AU-OSD" firstAttribute="leading" secondItem="cf4-Vo-sDE" secondAttribute="leading" id="Dat-y1-61Q"/>
+                                            <constraint firstItem="aJk-t9-xr6" firstAttribute="trailing" secondItem="ASc-KU-jPn" secondAttribute="trailing" id="E83-xv-LnR"/>
+                                            <constraint firstItem="cf4-Vo-sDE" firstAttribute="width" secondItem="ASc-KU-jPn" secondAttribute="width" multiplier="0.5" constant="-5" id="GNG-Mc-sgR"/>
                                             <constraint firstItem="cnC-AU-OSD" firstAttribute="height" secondItem="aJk-t9-xr6" secondAttribute="height" id="Kg6-Qu-hfR"/>
                                             <constraint firstItem="ASc-KU-jPn" firstAttribute="leading" secondItem="W5W-X9-syR" secondAttribute="leading" id="MEv-08-sCd"/>
                                             <constraint firstItem="4Hc-yl-Vpu" firstAttribute="top" secondItem="oNf-Bq-hgj" secondAttribute="bottom" constant="30" id="SwG-IB-nW5"/>
@@ -2384,22 +2391,35 @@
                                             <constraint firstItem="cf4-Vo-sDE" firstAttribute="trailing" secondItem="ASc-KU-jPn" secondAttribute="trailing" id="VYU-bU-z65"/>
                                             <constraint firstAttribute="bottom" secondItem="4Hc-yl-Vpu" secondAttribute="bottom" constant="300" id="VpK-Wn-Stu"/>
                                             <constraint firstItem="ASc-KU-jPn" firstAttribute="height" secondItem="W5W-X9-syR" secondAttribute="height" id="X3X-LG-YUF"/>
-                                            <constraint firstItem="W5W-X9-syR" firstAttribute="top" secondItem="8U1-1X-niI" secondAttribute="top" constant="30" id="X78-lK-EID"/>
+                                            <constraint firstItem="W5W-X9-syR" firstAttribute="top" secondItem="8U1-1X-niI" secondAttribute="top" constant="5" id="X78-lK-EID"/>
                                             <constraint firstItem="cf4-Vo-sDE" firstAttribute="height" secondItem="ASc-KU-jPn" secondAttribute="height" id="ZQI-EW-apt"/>
                                             <constraint firstItem="ASc-KU-jPn" firstAttribute="trailing" secondItem="W5W-X9-syR" secondAttribute="trailing" id="acF-c1-iXX"/>
                                             <constraint firstItem="cnC-AU-OSD" firstAttribute="top" secondItem="aJk-t9-xr6" secondAttribute="bottom" constant="20" id="dMw-e2-UuW"/>
                                             <constraint firstItem="W5W-X9-syR" firstAttribute="leading" secondItem="8U1-1X-niI" secondAttribute="leading" constant="10" id="dxA-Sz-juS"/>
                                             <constraint firstItem="cnC-AU-OSD" firstAttribute="trailing" secondItem="aJk-t9-xr6" secondAttribute="trailing" id="gcT-rN-wyZ"/>
                                             <constraint firstItem="cf4-Vo-sDE" firstAttribute="top" secondItem="ASc-KU-jPn" secondAttribute="bottom" constant="30" id="hVZ-Vt-KG4"/>
+                                            <constraint firstItem="aJk-t9-xr6" firstAttribute="leading" secondItem="cf4-Vo-sDE" secondAttribute="trailing" constant="10" id="meB-N2-ZZI"/>
                                             <constraint firstItem="oNf-Bq-hgj" firstAttribute="leading" secondItem="cnC-AU-OSD" secondAttribute="leading" id="nEH-P1-48c"/>
                                             <constraint firstItem="oNf-Bq-hgj" firstAttribute="height" secondItem="cnC-AU-OSD" secondAttribute="height" id="plb-BZ-2KZ"/>
                                             <constraint firstItem="oNf-Bq-hgj" firstAttribute="top" secondItem="cnC-AU-OSD" secondAttribute="bottom" constant="20" id="pw7-9d-RvS"/>
                                             <constraint firstItem="cf4-Vo-sDE" firstAttribute="leading" secondItem="ASc-KU-jPn" secondAttribute="leading" id="rkc-kI-EII"/>
+                                            <constraint firstItem="cnC-AU-OSD" firstAttribute="centerX" secondItem="cf4-Vo-sDE" secondAttribute="centerX" id="sRf-Sx-QaQ"/>
+                                            <constraint firstItem="aJk-t9-xr6" firstAttribute="top" secondItem="cf4-Vo-sDE" secondAttribute="top" id="uKt-ww-i9s"/>
                                             <constraint firstItem="4Hc-yl-Vpu" firstAttribute="leading" secondItem="oNf-Bq-hgj" secondAttribute="leading" id="wIF-20-r1r"/>
                                             <constraint firstItem="ASc-KU-jPn" firstAttribute="top" secondItem="W5W-X9-syR" secondAttribute="bottom" constant="20" id="wiI-yh-a71"/>
                                             <constraint firstItem="aJk-t9-xr6" firstAttribute="top" secondItem="cf4-Vo-sDE" secondAttribute="bottom" constant="20" id="wx5-K0-6ZI"/>
                                             <constraint firstItem="aJk-t9-xr6" firstAttribute="leading" secondItem="cf4-Vo-sDE" secondAttribute="leading" id="zIb-iR-13o"/>
+                                            <constraint firstItem="aJk-t9-xr6" firstAttribute="width" secondItem="cf4-Vo-sDE" secondAttribute="width" id="znj-s9-X9Q"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="VYU-bU-z65"/>
+                                                <exclude reference="BTw-lV-B1z"/>
+                                                <exclude reference="wx5-K0-6ZI"/>
+                                                <exclude reference="zIb-iR-13o"/>
+                                                <exclude reference="sRf-Sx-QaQ"/>
+                                            </mask>
+                                        </variation>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -2430,7 +2450,7 @@
                             <constraint firstItem="FMZ-17-DmB" firstAttribute="leading" secondItem="6Ck-JB-gcc" secondAttribute="leadingMargin" id="7a5-hE-ISb"/>
                             <constraint firstItem="LNu-o8-vki" firstAttribute="top" secondItem="SaK-UK-bAF" secondAttribute="bottom" constant="10" id="Cbf-aH-oPt"/>
                             <constraint firstItem="mP3-qA-fsE" firstAttribute="top" secondItem="BzO-nU-sIX" secondAttribute="bottom" constant="5" id="DAz-n1-Gkk"/>
-                            <constraint firstItem="BzO-nU-sIX" firstAttribute="leading" secondItem="fUp-4m-bHh" secondAttribute="trailing" constant="10" id="DhJ-0T-j1e"/>
+                            <constraint firstItem="BzO-nU-sIX" firstAttribute="leading" secondItem="fUp-4m-bHh" secondAttribute="trailing" constant="5" id="DhJ-0T-j1e"/>
                             <constraint firstAttribute="trailingMargin" secondItem="dKy-uK-TSq" secondAttribute="trailing" constant="-20" id="GV1-wL-EfT"/>
                             <constraint firstItem="AhU-zQ-xcG" firstAttribute="leading" secondItem="FMZ-17-DmB" secondAttribute="trailing" constant="10" id="Iob-zH-ePr"/>
                             <constraint firstItem="rPd-Lu-Igr" firstAttribute="height" secondItem="6Ck-JB-gcc" secondAttribute="height" multiplier="0.08" id="JlI-YW-gkH"/>
@@ -2442,17 +2462,17 @@
                             <constraint firstItem="pOe-wE-tir" firstAttribute="width" secondItem="AhU-zQ-xcG" secondAttribute="width" id="Zar-kj-yns"/>
                             <constraint firstItem="AhU-zQ-xcG" firstAttribute="width" secondItem="FMZ-17-DmB" secondAttribute="width" id="biN-rt-16s"/>
                             <constraint firstItem="fUp-4m-bHh" firstAttribute="top" secondItem="AhU-zQ-xcG" secondAttribute="top" id="cMX-yy-kUd"/>
-                            <constraint firstItem="FMZ-17-DmB" firstAttribute="width" secondItem="6Ck-JB-gcc" secondAttribute="width" multiplier="0.2" id="g9w-41-ile"/>
+                            <constraint firstItem="FMZ-17-DmB" firstAttribute="width" secondItem="6Ck-JB-gcc" secondAttribute="width" multiplier="0.22" id="g9w-41-ile"/>
                             <constraint firstAttribute="trailingMargin" secondItem="SaK-UK-bAF" secondAttribute="trailing" constant="-10" id="jRu-yD-iX8"/>
                             <constraint firstItem="NnA-1F-pQa" firstAttribute="top" secondItem="FMZ-17-DmB" secondAttribute="bottom" constant="5" id="kt2-xD-7am"/>
                             <constraint firstItem="NnA-1F-pQa" firstAttribute="leading" secondItem="FMZ-17-DmB" secondAttribute="leading" id="lUW-dw-cew"/>
                             <constraint firstItem="FMZ-17-DmB" firstAttribute="top" secondItem="dKy-uK-TSq" secondAttribute="bottom" constant="20" id="mOl-j3-aQy"/>
                             <constraint firstItem="mP3-qA-fsE" firstAttribute="leading" secondItem="BzO-nU-sIX" secondAttribute="leading" id="oCN-F8-lBq"/>
                             <constraint firstItem="I2p-Oh-Jnx" firstAttribute="leading" secondItem="fUp-4m-bHh" secondAttribute="leading" id="ocl-lm-7zb"/>
-                            <constraint firstItem="SaK-UK-bAF" firstAttribute="top" secondItem="NnA-1F-pQa" secondAttribute="bottom" constant="10" id="pg3-Hu-YJp"/>
+                            <constraint firstItem="SaK-UK-bAF" firstAttribute="top" secondItem="NnA-1F-pQa" secondAttribute="bottom" id="pg3-Hu-YJp"/>
                             <constraint firstItem="pOe-wE-tir" firstAttribute="top" secondItem="AhU-zQ-xcG" secondAttribute="bottom" constant="5" id="rJk-e1-Yo2"/>
                             <constraint firstItem="NnA-1F-pQa" firstAttribute="width" secondItem="FMZ-17-DmB" secondAttribute="width" id="uZP-E6-GeK"/>
-                            <constraint firstItem="fUp-4m-bHh" firstAttribute="leading" secondItem="AhU-zQ-xcG" secondAttribute="trailing" constant="10" id="wni-sp-AJV"/>
+                            <constraint firstItem="fUp-4m-bHh" firstAttribute="leading" secondItem="AhU-zQ-xcG" secondAttribute="trailing" constant="5" id="wni-sp-AJV"/>
                             <constraint firstItem="dKy-uK-TSq" firstAttribute="leading" secondItem="FMZ-17-DmB" secondAttribute="trailing" constant="10" id="wuR-19-Ajw"/>
                             <constraint firstItem="dKy-uK-TSq" firstAttribute="top" secondItem="vnH-f3-KtO" secondAttribute="bottom" constant="-20" id="x65-jT-aDT"/>
                             <constraint firstItem="AhU-zQ-xcG" firstAttribute="top" secondItem="FMZ-17-DmB" secondAttribute="top" id="xcu-Hs-AR3"/>

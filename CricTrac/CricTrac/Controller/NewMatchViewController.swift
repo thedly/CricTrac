@@ -72,21 +72,52 @@ class NewMatchViewController: UIViewController {
     
     
     var lastSelectedTab:UIView?
+    var keyboardHeight:Int?
+    var selectedText:UITextField?
+    
+    var scrollViewTop:CGFloat!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(NewMatchViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         lastSelectedTab = matchSelector
  scrollView.setContentOffset(CGPointZero, animated: true)
+ scrollViewTop = scrollView.frame.origin.y
         
+    setSwipe()
         
-        // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
+    
+    
+    func keyboardWillShow(sender: NSNotification){
+        
+        if let userInfo = sender.userInfo {
+            if  let  keyboardframe = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue{
+                let keyboardHeight = keyboardframe.CGRectValue().height
+                
+                if selectedText != nil {
+                let viewBottom = view.frame.maxY
+                let textDesiredPosition = viewBottom - keyboardHeight - (selectedText?.frame.height)! - scrollViewTop
+                
+                    if textDesiredPosition < selectedText?.frame.minY {
+                        
+                        let aPoint = CGPoint(x: 0, y: textDesiredPosition)
+                        scrollView.setContentOffset(aPoint, animated: true)
+                        
+                    }
+                    
+                
+                }
+                
+                
+            }
+        }
+        
+        
+        
+    }
 
   
     @IBAction func didTapCancel(sender: UIButton) {
@@ -96,8 +127,8 @@ class NewMatchViewController: UIViewController {
 
     
     @IBAction func didTapMatch(sender: AnyObject) {
-        matchSelector.hidden = false
         lastSelectedTab?.hidden = true
+        matchSelector.hidden = false
         lastSelectedTab = matchSelector
         scrollView.setContentOffset(CGPointZero, animated: true)
         matchView.hidden = false
@@ -108,8 +139,8 @@ class NewMatchViewController: UIViewController {
   
     
     @IBAction func didTapBat(sender: AnyObject){
-        battingSelector.hidden = false
         lastSelectedTab?.hidden = true
+        battingSelector.hidden = false
         lastSelectedTab = battingSelector
          scrollView.setContentOffset(CGPointZero, animated: true)
        batView.hidden = false
@@ -120,8 +151,8 @@ class NewMatchViewController: UIViewController {
     
     
     @IBAction func didTapBowl(sender: AnyObject) {
-        bowlingSelector.hidden = false
         lastSelectedTab?.hidden = true
+        bowlingSelector.hidden = false
         lastSelectedTab = bowlingSelector
          scrollView.setContentOffset(CGPointZero, animated: true)
          bowlView.hidden = false
@@ -133,8 +164,8 @@ class NewMatchViewController: UIViewController {
     
     
     @IBAction func didTapExtra(sender: AnyObject) {
+         lastSelectedTab?.hidden = true
         extraSelector.hidden = false
-        lastSelectedTab?.hidden = true
         lastSelectedTab = extraSelector
          scrollView.setContentOffset(CGPointZero, animated: true)
    extraView.hidden = false
@@ -151,6 +182,42 @@ class NewMatchViewController: UIViewController {
         extraSelector.hidden = true
     }
 
+    func setSwipe(){
+        
+        var swipe = UISwipeGestureRecognizer(target: self, action: #selector(NewMatchViewController.rightSwipeRecognized(_:)))
+        swipe.direction = UISwipeGestureRecognizerDirection.Right
+        self.view.addGestureRecognizer(swipe)
+        
+        swipe = UISwipeGestureRecognizer(target: self, action: #selector(NewMatchViewController.leftSwipeRecognized(_:)))
+        swipe.direction = UISwipeGestureRecognizerDirection.Left
+        self.view.addGestureRecognizer(swipe)
+    }
+    
+    
+    func rightSwipeRecognized(gesture: UIGestureRecognizer) {
+        
+        switch lastSelectedTab! {
+        case matchSelector: didTapExtra(matchSelector)
+        case battingSelector: didTapMatch(battingSelector)
+        case bowlingSelector: didTapBat(bowlingSelector)
+        case extraSelector: didTapBowl(extraSelector)
+        default: break
+            
+        }
+        
+    }
+    
+    func leftSwipeRecognized(gesture: UIGestureRecognizer) {
+        
+        switch lastSelectedTab! {
+        case matchSelector: didTapBat(matchSelector)
+        case battingSelector: didTapBowl(battingSelector)
+        case bowlingSelector: didTapExtra(bowlingSelector)
+        case extraSelector: didTapMatch(extraSelector)
+        default: break
+            
+        }
+    }
 
 }
 
@@ -158,10 +225,9 @@ class NewMatchViewController: UIViewController {
 extension NewMatchViewController:UITextFieldDelegate{
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        let origin = textField.frame.origin
-        let aPoint = CGPoint(x: 0, y: origin.y)
-    scrollView.setContentOffset(aPoint, animated: true)
         
+        selectedText = textField
+
         if textField == dateTest{
         ctDatePicker.showPicker(self, inputText: textField)
         }

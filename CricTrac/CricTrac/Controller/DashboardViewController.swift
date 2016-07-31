@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import FirebaseAuth
 
 class DashboardViewController: UIViewController,UITabBarDelegate,UITableViewDataSource {
 
@@ -22,6 +24,8 @@ class DashboardViewController: UIViewController,UITabBarDelegate,UITableViewData
     var bowlingDetails: [String:String]!
     var recentMatches: [String:String]!
     
+    var userHasAuthenticated = false
+    
     // MARK: View controller Delegates and related methods
     
     override func viewDidLoad() {
@@ -30,7 +34,46 @@ class DashboardViewController: UIViewController,UITabBarDelegate,UITableViewData
         initializeView()
         getPerformanceDetails()
         
+        
+        
+//         FIRAuth.auth()?.createUserWithEmail("test@ctest.com", password: "pwds12345") { (user, error) in}
+//        
+//         FIRAuth.auth()?.signInWithEmail("test@ctest.com", password: "pwds12345", completion: { (user, error) in
+//         
+//         if user != nil {
+//         
+//         self.userHasAuthenticated = true
+//            
+//            
+//            
+//            self.getData()
+//         }
+//         
+//         })
+        
+        
         // Do any additional setup after loading the view.
+    }
+    
+    func getData(){
+        
+        let rootRef = FIRDatabase.database().referenceFromURL("https://ctest-66a38.firebaseio.com")
+        
+        rootRef.child("TestValue_Renjith").setValue(["test1":["One","Two","Three"]])
+        
+        //rootRef.setValue("TestValue_Renjith")
+        
+       // rootRef.child("users").child("RenjithTestOne").removeValue()
+
+        rootRef.child("TestValue_Renjith").observeEventType(.Value, withBlock: { (snap) in
+            
+            print(snap)
+            
+            }) { (error) in
+                
+                print(error.description)
+        }
+        
     }
     
     func initializeView() {
