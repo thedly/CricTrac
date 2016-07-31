@@ -11,12 +11,13 @@
 		4657D5601D4992D7009E0FBE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4657D55F1D4992D7009E0FBE /* Constants.swift */; };
 		4657D5661D499FDD009E0FBE /* SliderMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4657D5651D499FDD009E0FBE /* SliderMenuViewController.swift */; };
 		4657D5681D49A060009E0FBE /* SliderMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4657D5671D49A060009E0FBE /* SliderMenuCell.swift */; };
+		4657D56A1D4CD7A2009E0FBE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4657D5691D4CD7A2009E0FBE /* GoogleService-Info.plist */; };
+		4657D56C1D4DA4E7009E0FBE /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4657D56B1D4DA4E7009E0FBE /* Enums.swift */; };
 		46B608701D44A7D3000FE098 /* NewMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B6086F1D44A7D3000FE098 /* NewMatchViewController.swift */; };
 		46C983901D3922D200DFC607 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C9838F1D3922D200DFC607 /* AppDelegate.swift */; };
 		46C983971D3922D200DFC607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46C983961D3922D200DFC607 /* Assets.xcassets */; };
 		46C9839A1D3922D200DFC607 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46C983981D3922D200DFC607 /* LaunchScreen.storyboard */; };
 		46C983A51D3922D200DFC607 /* CricTracTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983A41D3922D200DFC607 /* CricTracTests.swift */; };
-		46C983B01D3927F000DFC607 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46C983AF1D3927F000DFC607 /* GoogleService-Info.plist */; };
 		46C983B61D39D86800DFC607 /* performanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983B51D39D86800DFC607 /* performanceCell.swift */; };
 		46C983BF1D3FC72400DFC607 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983BE1D3FC72400DFC607 /* DashboardViewController.swift */; };
 		46C983C21D4078EB00DFC607 /* utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983C11D4078EB00DFC607 /* utility.swift */; };
@@ -48,6 +49,8 @@
 		4657D55F1D4992D7009E0FBE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Other/Constants.swift; sourceTree = "<group>"; };
 		4657D5651D499FDD009E0FBE /* SliderMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SliderMenuViewController.swift; path = Controller/SliderMenuViewController.swift; sourceTree = "<group>"; };
 		4657D5671D49A060009E0FBE /* SliderMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SliderMenuCell.swift; path = View/SliderMenuCell.swift; sourceTree = "<group>"; };
+		4657D5691D4CD7A2009E0FBE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4657D56B1D4DA4E7009E0FBE /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Enums.swift; path = Other/Enums.swift; sourceTree = "<group>"; };
 		46B6086F1D44A7D3000FE098 /* NewMatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewMatchViewController.swift; path = Controller/NewMatchViewController.swift; sourceTree = "<group>"; };
 		46C9838C1D3922D200DFC607 /* CricTrac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CricTrac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46C9838F1D3922D200DFC607 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -57,7 +60,6 @@
 		46C983A01D3922D200DFC607 /* CricTracTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CricTracTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		46C983A41D3922D200DFC607 /* CricTracTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricTracTests.swift; sourceTree = "<group>"; };
 		46C983A61D3922D200DFC607 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		46C983AF1D3927F000DFC607 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		46C983B51D39D86800DFC607 /* performanceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = performanceCell.swift; path = View/performanceCell.swift; sourceTree = "<group>"; };
 		46C983BE1D3FC72400DFC607 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardViewController.swift; path = Controller/DashboardViewController.swift; sourceTree = "<group>"; };
 		46C983C11D4078EB00DFC607 /* utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = utility.swift; path = utility/utility.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				4657D55F1D4992D7009E0FBE /* Constants.swift */,
+				4657D56B1D4DA4E7009E0FBE /* Enums.swift */,
 			);
 			name = Constants;
 			sourceTree = "<group>";
@@ -114,7 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				8935ADC41D3E640900607C9D /* deleteFileAfterUse.m */,
-				46C983AF1D3927F000DFC607 /* GoogleService-Info.plist */,
+				4657D5691D4CD7A2009E0FBE /* GoogleService-Info.plist */,
 				46C9838E1D3922D200DFC607 /* CricTrac */,
 				46C983A31D3922D200DFC607 /* CricTracTests */,
 				46C9838D1D3922D200DFC607 /* Products */,
@@ -307,9 +310,9 @@
 				892E1A971D3BC8D100EBF014 /* Main.storyboard in Resources */,
 				8962F89F1D4666E0008D1AC3 /* Images.xcassets in Resources */,
 				89FD59C71D41C3AE003EF45C /* SF-UI-Text-Regular.otf in Resources */,
-				46C983B01D3927F000DFC607 /* GoogleService-Info.plist in Resources */,
 				46C983971D3922D200DFC607 /* Assets.xcassets in Resources */,
 				89FD59C61D41C3AE003EF45C /* SF-UI-Text-Bold.otf in Resources */,
+				4657D56A1D4CD7A2009E0FBE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,6 +385,7 @@
 				89F4E4B31D48FECD00EFE46E /* summaryTableViewCell.swift in Sources */,
 				46C983C41D40968300DFC607 /* Extentions.swift in Sources */,
 				46C983C21D4078EB00DFC607 /* utility.swift in Sources */,
+				4657D56C1D4DA4E7009E0FBE /* Enums.swift in Sources */,
 				4657D5681D49A060009E0FBE /* SliderMenuCell.swift in Sources */,
 				462DE9F71D478B9E00E31E8F /* CTDatePicker.swift in Sources */,
 				46C983B61D39D86800DFC607 /* performanceCell.swift in Sources */,
@@ -523,7 +527,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				INFOPLIST_FILE = CricTrac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ct.cricrac;

@@ -84,13 +84,12 @@ class NewMatchViewController: UIViewController {
  scrollView.setContentOffset(CGPointZero, animated: true)
  scrollViewTop = scrollView.frame.origin.y
         
-        // Do any additional setup after loading the view.
+    setSwipe()
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    
+    
     
     func keyboardWillShow(sender: NSNotification){
         
@@ -183,6 +182,42 @@ class NewMatchViewController: UIViewController {
         extraSelector.hidden = true
     }
 
+    func setSwipe(){
+        
+        var swipe = UISwipeGestureRecognizer(target: self, action: #selector(NewMatchViewController.rightSwipeRecognized(_:)))
+        swipe.direction = UISwipeGestureRecognizerDirection.Right
+        self.view.addGestureRecognizer(swipe)
+        
+        swipe = UISwipeGestureRecognizer(target: self, action: #selector(NewMatchViewController.leftSwipeRecognized(_:)))
+        swipe.direction = UISwipeGestureRecognizerDirection.Left
+        self.view.addGestureRecognizer(swipe)
+    }
+    
+    
+    func rightSwipeRecognized(gesture: UIGestureRecognizer) {
+        
+        switch lastSelectedTab! {
+        case matchSelector: didTapExtra(matchSelector)
+        case battingSelector: didTapMatch(battingSelector)
+        case bowlingSelector: didTapBat(bowlingSelector)
+        case extraSelector: didTapBowl(extraSelector)
+        default: break
+            
+        }
+        
+    }
+    
+    func leftSwipeRecognized(gesture: UIGestureRecognizer) {
+        
+        switch lastSelectedTab! {
+        case matchSelector: didTapBat(matchSelector)
+        case battingSelector: didTapBowl(battingSelector)
+        case bowlingSelector: didTapExtra(bowlingSelector)
+        case extraSelector: didTapMatch(extraSelector)
+        default: break
+            
+        }
+    }
 
 }
 
