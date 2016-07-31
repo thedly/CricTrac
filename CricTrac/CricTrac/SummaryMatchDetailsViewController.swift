@@ -32,9 +32,9 @@ class SummaryMatchDetailsViewController: UIViewController, UITableViewDelegate, 
     }
     
     func initializeView() {
-        matchDetailsTbl.dataSource = self
-        matchDetailsTbl.delegate = self
-        getMatchDetails()
+        //matchDetailsTbl.dataSource = self
+        //matchDetailsTbl.delegate = self
+        //getMatchDetails()
     }
     
     // MARK: - Table Delegate methods
