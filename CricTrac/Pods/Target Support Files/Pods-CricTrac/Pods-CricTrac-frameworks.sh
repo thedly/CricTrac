@@ -84,14 +84,22 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/Bolts/Bolts.framework"
   install_framework "$BUILT_PRODUCTS_DIR/CSStickyHeaderFlowLayout/CSStickyHeaderFlowLayout.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FBSDKCoreKit/FBSDKCoreKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FBSDKLoginKit/FBSDKLoginKit.framework"
   install_framework "$BUILT_PRODUCTS_DIR/IOStickyHeader/IOStickyHeader.framework"
   install_framework "$BUILT_PRODUCTS_DIR/KYDrawerController/KYDrawerController.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SCLAlertView/SCLAlertView.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/Bolts/Bolts.framework"
   install_framework "$BUILT_PRODUCTS_DIR/CSStickyHeaderFlowLayout/CSStickyHeaderFlowLayout.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FBSDKCoreKit/FBSDKCoreKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FBSDKLoginKit/FBSDKLoginKit.framework"
   install_framework "$BUILT_PRODUCTS_DIR/IOStickyHeader/IOStickyHeader.framework"
   install_framework "$BUILT_PRODUCTS_DIR/KYDrawerController/KYDrawerController.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SCLAlertView/SCLAlertView.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework"
 fi

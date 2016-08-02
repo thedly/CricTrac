@@ -3347,24 +3347,30 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loginwith" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="heW-iM-T3E">
                                 <rect key="frame" x="261" y="215" width="78" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSf-J1-fIr">
-                                <rect key="frame" x="367" y="256" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSf-J1-fIr">
+                                <rect key="frame" x="344" y="256" width="32" height="32"/>
+                                <state key="normal" image="google"/>
+                                <connections>
+                                    <action selector="loginWithGoogle:" destination="DCq-4c-QM9" eventType="touchUpInside" id="yRq-ZA-QFo"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jMn-aG-Kux">
-                                <rect key="frame" x="187" y="256" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jMn-aG-Kux">
+                                <rect key="frame" x="224" y="256" width="32" height="32"/>
+                                <state key="normal" image="facebook"/>
+                                <connections>
+                                    <action selector="loginWithFB:" destination="DCq-4c-QM9" eventType="touchUpInside" id="cIh-op-4YX"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="jMn-aG-Kux" firstAttribute="centerX" secondItem="hBC-52-B1s" secondAttribute="centerX" multiplier="0.7" id="46q-5l-A3E"/>
+                            <constraint firstItem="jMn-aG-Kux" firstAttribute="centerX" secondItem="hBC-52-B1s" secondAttribute="centerX" multiplier="0.8" id="46q-5l-A3E"/>
                             <constraint firstItem="heW-iM-T3E" firstAttribute="centerX" secondItem="hBC-52-B1s" secondAttribute="centerX" id="DLT-4r-ncB"/>
                             <constraint firstItem="jMn-aG-Kux" firstAttribute="top" secondItem="heW-iM-T3E" secondAttribute="bottom" constant="20" id="ICl-X5-jh5"/>
-                            <constraint firstItem="XSf-J1-fIr" firstAttribute="centerX" secondItem="hBC-52-B1s" secondAttribute="centerX" multiplier="1.3" id="dW2-X1-qK5"/>
+                            <constraint firstItem="XSf-J1-fIr" firstAttribute="centerX" secondItem="hBC-52-B1s" secondAttribute="centerX" multiplier="1.2" id="dW2-X1-qK5"/>
                             <constraint firstItem="XSf-J1-fIr" firstAttribute="top" secondItem="jMn-aG-Kux" secondAttribute="top" id="gg3-Zh-JGS"/>
                             <constraint firstItem="heW-iM-T3E" firstAttribute="centerY" secondItem="hBC-52-B1s" secondAttribute="centerY" multiplier="0.75" id="ySz-o1-2vR"/>
                         </constraints>
@@ -3499,6 +3505,8 @@
     <resources>
         <image name="User" width="50" height="50"/>
         <image name="down" width="32" height="32"/>
+        <image name="facebook" width="32" height="32"/>
+        <image name="google" width="32" height="32"/>
         <image name="sachin" width="160" height="206"/>
     </resources>
 </document>
