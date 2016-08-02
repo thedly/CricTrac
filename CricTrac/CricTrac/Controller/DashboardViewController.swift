@@ -160,6 +160,7 @@ class DashboardViewController: UIViewController,UITabBarDelegate,UITableViewData
         
         if let cell = tableView.dequeueReusableCellWithIdentifier("performanceCell", forIndexPath: indexPath) as? performanceCell {
             
+                //print(battingDetails)
             
                 var currentKey :String?
                 var currentvalue :String?
@@ -168,6 +169,7 @@ class DashboardViewController: UIViewController,UITabBarDelegate,UITableViewData
             {
             
                 if battingBtn.selected {
+                    
                     let index = battingDetails.startIndex.advancedBy(indexPath.row) as DictionaryIndex<String,String>
                     currentKey = battingDetails.keys[index]
                     currentvalue = battingDetails[currentKey!]!
@@ -248,6 +250,8 @@ class DashboardViewController: UIViewController,UITabBarDelegate,UITableViewData
     // MARK: Service Calls
     
     func getPerformanceDetails() {
+        
+        
         
         // Make API call
         
