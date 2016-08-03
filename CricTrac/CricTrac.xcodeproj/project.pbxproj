@@ -29,7 +29,6 @@
 		8962F89F1D4666E0008D1AC3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8962F89E1D4666E0008D1AC3 /* Images.xcassets */; };
 		89C8196C1D52362300291A7E /* POCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C8196B1D52362300291A7E /* POCViewController.swift */; };
 		89C8196E1D52429500291A7E /* headerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C8196D1D52429500291A7E /* headerView.swift */; };
-		89C884641D50424100ABE01B /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 89C884631D50424100ABE01B /* data.json */; };
 		89C884661D50479400ABE01B /* orderedDictionaryStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C884651D50479400ABE01B /* orderedDictionaryStruct.swift */; };
 		89CC84FC1D43E4D6007F2402 /* SummaryMatchDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CC84FB1D43E4D6007F2402 /* SummaryMatchDetailsViewController.swift */; };
 		89E83F7A1D4A4FF100232250 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E83F791D4A4FF100232250 /* MenuViewController.swift */; };
@@ -578,7 +577,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				INFOPLIST_FILE = CricTrac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
