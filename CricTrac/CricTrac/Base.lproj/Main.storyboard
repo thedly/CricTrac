@@ -700,10 +700,20 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BIh-DK-PE1">
+                                <rect key="frame" x="522" y="55" width="48" height="30"/>
+                                <state key="normal" title="Logout">
+                                    <color key="titleColor" red="0.97236786909999995" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapLogout:" destination="lI5-hx-XnN" eventType="touchUpInside" id="6h7-4o-Enb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="WxP-eG-xxn" firstAttribute="leading" secondItem="cmY-mr-c8o" secondAttribute="trailing" constant="10" id="0Pb-Zk-GWv"/>
+                            <constraint firstItem="iIK-zW-Buk" firstAttribute="top" secondItem="BIh-DK-PE1" secondAttribute="bottom" constant="5" id="Boq-rr-kV2"/>
                             <constraint firstItem="af3-mo-F1C" firstAttribute="top" secondItem="WxP-eG-xxn" secondAttribute="bottom" constant="5" id="CWB-B0-Vew"/>
                             <constraint firstItem="cmY-mr-c8o" firstAttribute="top" secondItem="Tvf-Rv-uaR" secondAttribute="bottom" constant="5" id="Da2-Mv-0Sh"/>
                             <constraint firstItem="kdb-VR-drO" firstAttribute="top" secondItem="cmY-mr-c8o" secondAttribute="bottom" constant="5" id="IpN-9m-Wg6"/>
@@ -712,8 +722,10 @@
                             <constraint firstItem="cmY-mr-c8o" firstAttribute="centerY" secondItem="5uh-j7-xy1" secondAttribute="centerY" id="MpX-v0-8DY"/>
                             <constraint firstItem="WxP-eG-xxn" firstAttribute="top" secondItem="cmY-mr-c8o" secondAttribute="top" constant="10" id="RoS-j8-YFC"/>
                             <constraint firstItem="af3-mo-F1C" firstAttribute="leading" secondItem="WxP-eG-xxn" secondAttribute="leading" id="URQ-XZ-bBV"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="BIh-DK-PE1" secondAttribute="trailing" constant="10" id="Vth-o9-pRM"/>
                             <constraint firstItem="iIK-zW-Buk" firstAttribute="centerX" secondItem="5uh-j7-xy1" secondAttribute="centerX" id="YWi-CM-5yL"/>
                             <constraint firstItem="iIK-zW-Buk" firstAttribute="top" secondItem="cmY-mr-c8o" secondAttribute="bottom" constant="5" id="Z1i-KA-gzH"/>
+                            <constraint firstItem="BIh-DK-PE1" firstAttribute="top" secondItem="af3-mo-F1C" secondAttribute="top" id="ZKX-6d-0jy"/>
                             <constraint firstItem="iIK-zW-Buk" firstAttribute="width" secondItem="5uh-j7-xy1" secondAttribute="width" id="fin-d3-AaR"/>
                             <constraint firstItem="cmY-mr-c8o" firstAttribute="top" secondItem="Tvf-Rv-uaR" secondAttribute="bottom" constant="5" id="pUb-7O-5Bs"/>
                             <constraint firstItem="cmY-mr-c8o" firstAttribute="leading" secondItem="5uh-j7-xy1" secondAttribute="leadingMargin" constant="10" id="xiZ-to-PFd"/>
@@ -722,6 +734,7 @@
                             <mask key="constraints">
                                 <exclude reference="Da2-Mv-0Sh"/>
                                 <exclude reference="MpX-v0-8DY"/>
+                                <exclude reference="ZKX-6d-0jy"/>
                                 <exclude reference="IpN-9m-Wg6"/>
                             </mask>
                         </variation>

@@ -14,6 +14,9 @@ import FBSDKCoreKit
 import FirebaseDatabase
 import FirebaseAuth
 import GoogleSignIn
+import KRProgressHUD
+
+import SCLAlertView
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,7 +31,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        
+         KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+        
+        if GIDSignIn.sharedInstance().handleURL(url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String, annotation: options [UIApplicationOpenURLOptionsAnnotationKey]) {
+            return true
+        }
+        
+        let fb =  FBSDKApplicationDelegate.sharedInstance().application( app,  openURL: url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String, annotation: options [UIApplicationOpenURLOptionsAnnotationKey])
+        
+        return fb
+        
+    }
+
+    
+
+    
+    
     func application(application: UIApplication, openURL url: NSURL,  sourceApplication: String?,  annotation: AnyObject) -> Bool {
+        
+        KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
         
         if GIDSignIn.sharedInstance().handleURL(url, sourceApplication: sourceApplication, annotation: annotation) {
             return true

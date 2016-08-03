@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
 
@@ -21,6 +22,20 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func didTapLogout(sender: UIButton) {
+        
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        
+        if let _ = userDefaults.valueForKey("loginToken"){
+            
+            userDefaults.removeObjectForKey("loginToken")
+            
+        }
+        
+        
+        SCLAlertView().showInfo("Logout",subTitle: "Data saved is cleared, Kill the app and relaunch for now")
+        
+    }
 
      func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections

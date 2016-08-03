@@ -14,7 +14,7 @@ import FirebaseAuth
 import GoogleSignIn
 import FBSDKCoreKit
 import FBSDKLoginKit
-
+import KRProgressHUD
 import SCLAlertView
 
 class LoginViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelegate {
@@ -50,6 +50,11 @@ class LoginViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelega
     
     func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError?) {
         
+        if error != nil{
+            
+            SCLAlertView().showError("Login Error", subTitle: "Error Occoured")
+            return
+        }
         
         let authentication = user.authentication
         let credential = FIRGoogleAuthProvider.credentialWithIDToken(authentication.idToken,
@@ -59,7 +64,14 @@ class LoginViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelega
             self.navigateToNextScreen()
             }, failure: { (error) in
                 
-                SCLAlertView().showError("Login Error", subTitle: "There is an error in login")
+                KRProgressHUD.dismiss()
+                
+                let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
+                dispatch_after(delay, dispatch_get_main_queue()) {
+                    
+                    SCLAlertView().showError("Login Error", subTitle: error.localizedDescription)
+                }
+                
         })
         
     }
@@ -112,21 +124,32 @@ class LoginViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelega
         
         loginManager.logInWithReadPermissions(["email"], fromViewController: self, handler: { (result, error) in
             if let error = error {
-                //self.showMessagePrompt(error.localizedDescription)
+                
+                SCLAlertView().showError("Login Error", subTitle:error.description)
             }
             else if(result.isCancelled) {
-                print("FBLogin cancelled")
+                
+                SCLAlertView().showError("Login Error", subTitle: "Login Cancelled")
             }
             else {
                 let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
                 
                 
                 firebaseLogin(credential, sucess: { (user) in
+                    
                     self.saveFBToken(FBSDKAccessToken.currentAccessToken().tokenString)
                     self.navigateToNextScreen()
                     }, failure: { (error) in
                         
-                        SCLAlertView().showError("Login Error", subTitle: "There is an error in login")
+                         KRProgressHUD.dismiss()
+                        
+                        let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
+                        dispatch_after(delay, dispatch_get_main_queue()) {
+                           
+                            SCLAlertView().showError("Login Error", subTitle: error.localizedDescription)
+                        }
+                        
+                       
                 })
                 
             }
