@@ -10,6 +10,14 @@ import UIKit
 import Firebase
 import KYDrawerController
 
+import FBSDKCoreKit
+import FirebaseDatabase
+import FirebaseAuth
+import GoogleSignIn
+import KRProgressHUD
+
+import SCLAlertView
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -21,6 +29,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setSliderMenu()
         return true
     }
+    
+    
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        
+         KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+        
+        if GIDSignIn.sharedInstance().handleURL(url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String, annotation: options [UIApplicationOpenURLOptionsAnnotationKey]) {
+            return true
+        }
+        
+        let fb =  FBSDKApplicationDelegate.sharedInstance().application( app,  openURL: url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String, annotation: options [UIApplicationOpenURLOptionsAnnotationKey])
+        
+        return fb
+        
+    }
+
+    
+
+    
+    
+    func application(application: UIApplication, openURL url: NSURL,  sourceApplication: String?,  annotation: AnyObject) -> Bool {
+        
+        KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+        
+        if GIDSignIn.sharedInstance().handleURL(url, sourceApplication: sourceApplication, annotation: annotation) {
+            return true
+        }
+        
+        return FBSDKApplicationDelegate.sharedInstance().application( application,  openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+    }
+    
+    
+    
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -47,51 +88,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setSliderMenu(){
         let dashboardVC = viewControllerFrom("Main", vcid: "DashboardViewController") as! DashboardViewController
 
-        
-//        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//        let menuVC : MenuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
-
-        
-//        let drawerViewController = UIViewController()
-//        drawerViewController.view.backgroundColor = UIColor.whiteColor()
-        
-        
-        // styling required for these buttons
-//        let summaryBtn = UIButton(frame: CGRectMake(0, 20, 130, 100))
-        
-//        summaryBtn.setTitle("Summary", forState: .Normal)
-//        summaryBtn.tintColor = UIColor(hex: "D8D8D8")
-//        summaryBtn.setTitleColor(UIColor(hex: "000000"), forState: .Normal)
-//        summaryBtn.setTitleColor(UIColor.redColor(), forState: .Highlighted)
-//        summaryBtn.addTarget(self, action: "summaryClicked:", forControlEvents: .TouchUpInside)
-//        drawerViewController.view.addSubview(summaryBtn)
-        
-        // styling required for these buttons
-//        let profileBtn = UIButton(frame: CGRectMake(0, 80, 130, 100))
-//        profileBtn.setTitle("Profile", forState: .Normal)
-//        profileBtn.tintColor = UIColor(hex: "D8D8D8")
-//        profileBtn.setTitleColor(UIColor(hex: "000000"), forState: .Normal)
-//        profileBtn.setTitleColor(UIColor.redColor(), forState: .Highlighted)
-//        profileBtn.addTarget(self, action: "profileBtnClicked:", forControlEvents: .TouchUpInside)
-//        drawerViewController.view.addSubview(profileBtn)
-        
-        
-        
-        
-
-        let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")
-
-        let navigationControl = UINavigationController(rootViewController: dashboardVC )
-        sliderMenu.mainViewController = navigationControl
-        sliderMenu.drawerViewController = drawerViewController
-        
-        
-               
-        
-        
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window?.rootViewController = sliderMenu
         window?.makeKeyAndVisible()
+        
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        
+        if let fbCredential = userDefaults.valueForKey("loginToken") {
+
+            
+            let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")
+            
+            let navigationControl = UINavigationController(rootViewController: dashboardVC )
+            sliderMenu.mainViewController = navigationControl
+            sliderMenu.drawerViewController = drawerViewController
+            
+            window?.rootViewController = sliderMenu
+        
+        
+        }
+        else {
+            let loginVC = viewControllerFrom("Main", vcid: "LoginViewController")
+            window?.rootViewController = loginVC
+        }
+        
     }
 
     

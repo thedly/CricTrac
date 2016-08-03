@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseAuth
+import KRProgressHUD
 
 class DashboardViewController: UIViewController,UITabBarDelegate,UITableViewDataSource {
 
@@ -34,6 +35,7 @@ class DashboardViewController: UIViewController,UITabBarDelegate,UITableViewData
         initializeView()
         getPerformanceDetails()
         
+        KRProgressHUD.dismiss()
         
         
 //         FIRAuth.auth()?.createUserWithEmail("test@ctest.com", password: "pwds12345") { (user, error) in}

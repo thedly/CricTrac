@@ -8,10 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		462DE9F71D478B9E00E31E8F /* CTDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462DE9F61D478B9E00E31E8F /* CTDatePicker.swift */; };
+		4642DAA51D5039DD001F039D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4642DAA41D5039DD001F039D /* LoginViewController.swift */; };
+		464EA0261D4F901200252DC1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 464EA0251D4F901200252DC1 /* GoogleService-Info.plist */; };
 		4657D5601D4992D7009E0FBE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4657D55F1D4992D7009E0FBE /* Constants.swift */; };
 		4657D5661D499FDD009E0FBE /* SliderMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4657D5651D499FDD009E0FBE /* SliderMenuViewController.swift */; };
 		4657D5681D49A060009E0FBE /* SliderMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4657D5671D49A060009E0FBE /* SliderMenuCell.swift */; };
-		4657D56A1D4CD7A2009E0FBE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4657D5691D4CD7A2009E0FBE /* GoogleService-Info.plist */; };
 		4657D56C1D4DA4E7009E0FBE /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4657D56B1D4DA4E7009E0FBE /* Enums.swift */; };
 		46B608701D44A7D3000FE098 /* NewMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B6086F1D44A7D3000FE098 /* NewMatchViewController.swift */; };
 		46C983901D3922D200DFC607 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C9838F1D3922D200DFC607 /* AppDelegate.swift */; };
@@ -54,10 +55,11 @@
 /* Begin PBXFileReference section */
 		056D56ED7752D65D58DB4504 /* Pods-CricTrac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CricTrac.release.xcconfig"; path = "Pods/Target Support Files/Pods-CricTrac/Pods-CricTrac.release.xcconfig"; sourceTree = "<group>"; };
 		462DE9F61D478B9E00E31E8F /* CTDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CTDatePicker.swift; path = utility/CTDatePicker.swift; sourceTree = "<group>"; };
+		4642DAA41D5039DD001F039D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		464EA0251D4F901200252DC1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4657D55F1D4992D7009E0FBE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Other/Constants.swift; sourceTree = "<group>"; };
 		4657D5651D499FDD009E0FBE /* SliderMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SliderMenuViewController.swift; path = Controller/SliderMenuViewController.swift; sourceTree = "<group>"; };
 		4657D5671D49A060009E0FBE /* SliderMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SliderMenuCell.swift; path = View/SliderMenuCell.swift; sourceTree = "<group>"; };
-		4657D5691D4CD7A2009E0FBE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4657D56B1D4DA4E7009E0FBE /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Enums.swift; path = Other/Enums.swift; sourceTree = "<group>"; };
 		46B6086F1D44A7D3000FE098 /* NewMatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewMatchViewController.swift; path = Controller/NewMatchViewController.swift; sourceTree = "<group>"; };
 		46C9838C1D3922D200DFC607 /* CricTrac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CricTrac.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,8 +134,8 @@
 		46C983831D3922D200DFC607 = {
 			isa = PBXGroup;
 			children = (
+				464EA0251D4F901200252DC1 /* GoogleService-Info.plist */,
 				8935ADC41D3E640900607C9D /* deleteFileAfterUse.m */,
-				4657D5691D4CD7A2009E0FBE /* GoogleService-Info.plist */,
 				46C9838E1D3922D200DFC607 /* CricTrac */,
 				46C983A31D3922D200DFC607 /* CricTracTests */,
 				46C9838D1D3922D200DFC607 /* Products */,
@@ -225,8 +227,7 @@
 				89F4E4B41D49345300EFE46E /* ProfileViewController.swift */,
 				89E83F791D4A4FF100232250 /* MenuViewController.swift */,
 				4657D5651D499FDD009E0FBE /* SliderMenuViewController.swift */,
-				89C8196B1D52362300291A7E /* POCViewController.swift */,
-				89C8196D1D52429500291A7E /* headerView.swift */,
+				4642DAA41D5039DD001F039D /* LoginViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -331,14 +332,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				46C9839A1D3922D200DFC607 /* LaunchScreen.storyboard in Resources */,
+				464EA0261D4F901200252DC1 /* GoogleService-Info.plist in Resources */,
 				892E1A971D3BC8D100EBF014 /* Main.storyboard in Resources */,
 				8962F89F1D4666E0008D1AC3 /* Images.xcassets in Resources */,
 				89FD59C71D41C3AE003EF45C /* SF-UI-Text-Regular.otf in Resources */,
 				89E83F7E1D4A750000232250 /* DashboardHeaderView.xib in Resources */,
 				46C983971D3922D200DFC607 /* Assets.xcassets in Resources */,
 				89FD59C61D41C3AE003EF45C /* SF-UI-Text-Bold.otf in Resources */,
-				89C884641D50424100ABE01B /* data.json in Resources */,
-				4657D56A1D4CD7A2009E0FBE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +408,7 @@
 				8935ADC51D3E640900607C9D /* deleteFileAfterUse.m in Sources */,
 				89E83F7C1D4A5AD000232250 /* MenuTableViewCell.swift in Sources */,
 				46B608701D44A7D3000FE098 /* NewMatchViewController.swift in Sources */,
+				4642DAA51D5039DD001F039D /* LoginViewController.swift in Sources */,
 				89CC84FC1D43E4D6007F2402 /* SummaryMatchDetailsViewController.swift in Sources */,
 				89F4E4B31D48FECD00EFE46E /* summaryTableViewCell.swift in Sources */,
 				89C884661D50479400ABE01B /* orderedDictionaryStruct.swift in Sources */,
@@ -577,8 +578,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				INFOPLIST_FILE = CricTrac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ct.cricrac;

@@ -10,8 +10,15 @@ target 'CricTrac' do
 pod 'Firebase'
 pod 'Firebase/Database'
 pod 'Firebase/Auth'
+
+pod 'FBSDKLoginKit'
+pod 'GoogleSignIn'
+
 pod 'IOStickyHeader'
 pod 'KYDrawerController'
 pod 'CSStickyHeaderFlowLayout'
 pod 'SkyFloatingLabelTextField', '~> 1.0'
+
+pod 'SCLAlertView'
+pod "KRProgressHUD"
 end

@@ -8,6 +8,7 @@
 
 import Foundation
 import KYDrawerController
+import FirebaseAuth
 
 var sliderMenu = KYDrawerController()
 
@@ -18,7 +19,24 @@ public func viewControllerFrom(storyBoard:String,vcid:String)->UIViewController{
     return storyboard.instantiateViewControllerWithIdentifier(vcid)
 }
 
-//public func UIColorFromRGB(rgbValue: Int) -> UIColor {
-//    return UIColor(red: ((CGFloat)((rgbValue & 0xFF0000) >> 16))/255.0, green: ((CGFloat)((rgbValue & 0x00FF00) >>  8))/255.0, blue: ((CGFloat)((rgbValue & 0x0000FF) >>  0))/255.0, alpha: 1.0)
-//}
+
+
+//MARK :- Firebase Auth
+
+public func firebaseLogin(credential: FIRAuthCredential, sucess:(FIRUser)->Void,failure:(NSError)->Void){
+    
+    FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
+        
+        if user != nil{
+            sucess(user!)
+        }
+        else{
+            failure(error!)
+        }
+        
+    }
+}
+
+
+
 
