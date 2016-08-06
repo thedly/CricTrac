@@ -9,7 +9,7 @@
 import UIKit
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
-
+    
     lazy var ctDatePicker = CTDatePicker()
     
     @IBOutlet weak var scrollView:UIScrollView!
@@ -25,42 +25,30 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     var grounddata: [String]!
     var opponentdata: [String]!
     
-    @IBOutlet weak var dateTest: UITextField!
     
     @IBOutlet weak var datePickerButton:UIButton!
     
     
-    @IBOutlet weak var teamText: UITextField!
     
+    @IBOutlet weak var firstName: UITextField!
     
-    @IBOutlet weak var opponentText: UITextField!
+    @IBOutlet weak var middleName: UITextField!
+    @IBOutlet weak var lastName: UITextField!
     
-    
-    @IBOutlet weak var groundText: UITextField!
-    
-    
-    @IBOutlet weak var OversText: UITextField!
-    
-    
-    @IBOutlet weak var tournamnetText: UITextField!
-    
-    
-    @IBOutlet weak var dismissText: UITextField!
-    
-    
-    
-    @IBOutlet weak var extraOverText: UITextField!
-    
-    
-    @IBOutlet weak var wicketsText: UITextField!
-    
-    
-    @IBOutlet weak var resultsText: UITextField!
+    @IBOutlet weak var dateOfBirth: UITextField!
+    @IBOutlet weak var emailId: UITextField!
+    @IBOutlet weak var playingRole: UITextField!
+    @IBOutlet weak var battingStyle: UITextField!
+    @IBOutlet weak var bowlingStyle: UITextField!
+    @IBOutlet weak var country: UITextField!
+    @IBOutlet weak var state: UITextField!
+    @IBOutlet weak var city: UITextField!
+    @IBOutlet weak var height: UITextField!
+    @IBOutlet weak var nickName: UITextField!
     
     
     
     
-    @IBOutlet weak var commentsText: UITextView!
     
     
     
@@ -68,13 +56,17 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     @IBOutlet weak var teamSelector: UIView!
     
-   
+    
     @IBOutlet weak var groundSelector: UIView!
     
     
     @IBOutlet weak var opponentSelector: UIView!
     
+    var selectedText:UITextField?
+    
+    
     var lastSelectedTab:UIView?
+    var scrollViewTop:CGFloat!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,6 +85,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         profileImg.layer.cornerRadius = 10
         profileImg.clipsToBounds = true
         getMiscDetails()
+        
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ProfileViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        scrollView.setContentOffset(CGPointZero, animated: true)
+        scrollViewTop = scrollView.frame.origin.y
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -114,8 +113,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     
+    
+    
+    
+    
+    
+    
     @IBAction func didTapCancel(sender: UIButton) {
- dismissViewControllerAnimated(true) {}
+        dismissViewControllerAnimated(true) {}
     }
     
     
@@ -123,7 +128,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         scrollView.setContentOffset(CGPointZero, animated: true)
         lastSelectedTab = personalSelector
-       miscTblView.hidden = true
+        miscTblView.hidden = true
         scrollView.hidden = false
         noDataView.hidden = !scrollView.hidden
         hideAllSelectors()
@@ -135,9 +140,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBAction func didTapTeam(sender: AnyObject){
         scrollView.setContentOffset(CGPointZero, animated: true)
         miscTblView.hidden = teamdata.count == 0
-
+        
         scrollView.hidden = true
         noDataView.hidden = !miscTblView.hidden
+        
         lastSelectedTab = teamSelector
         hideAllSelectors()
         teamSelector.hidden = false
@@ -173,9 +179,37 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         teamSelector.hidden = true
         opponentSelector.hidden = true
         groundSelector.hidden = true
+        
     }
     
     
+    func keyboardWillShow(sender: NSNotification){
+        
+        if let userInfo = sender.userInfo {
+            if  let  keyboardframe = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue{
+                let keyboardHeight = keyboardframe.CGRectValue().height
+                
+                if selectedText != nil {
+                    let viewBottom = view.frame.maxY
+                    let textDesiredPosition = viewBottom - keyboardHeight - (selectedText?.frame.height)! - scrollViewTop
+                    
+                    if textDesiredPosition < selectedText?.frame.minY {
+                        
+                        let aPoint = CGPoint(x: 0, y: textDesiredPosition)
+                        scrollView.setContentOffset(aPoint, animated: true)
+                        
+                    }
+                    
+                    
+                }
+                
+                
+            }
+        }
+        
+        
+        
+    }
     
     
     // MARk: - Table delegate functions
@@ -224,17 +258,26 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         return [delete, edit]
     }
     
+    
+    // MARK: - Service calls
+    func getMiscDetails() {
+        teamdata = ["JOJO", "DPS", "INHS"]
+        grounddata = ["D-Pitch, Indiranagar", "St.John's college, Koramangala "]
+        opponentdata = []
+    }
+    
+    
 }
+
 
 
 extension ProfileViewController:UITextFieldDelegate{
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        let origin = textField.frame.origin
-        let aPoint = CGPoint(x: 0, y: origin.y)
-        scrollView.setContentOffset(aPoint, animated: true)
         
-        if textField == dateTest{
+        selectedText = textField
+        
+        if textField == dateOfBirth{
             ctDatePicker.showPicker(self, inputText: textField)
         }
     }
@@ -246,13 +289,9 @@ extension ProfileViewController:UITextFieldDelegate{
         return true
     }
     
-    // MARK: - Service calls
     
     
-    func getMiscDetails() {
-        teamdata = ["JOJO", "DPS", "INHS"]
-        grounddata = ["D-Pitch, Indiranagar", "St.John's college, Koramangala "]
-        opponentdata = []
-    }
-
+    
 }
+
+
