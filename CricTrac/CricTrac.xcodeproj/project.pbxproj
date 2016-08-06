@@ -26,6 +26,7 @@
 		46C983C21D4078EB00DFC607 /* utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983C11D4078EB00DFC607 /* utility.swift */; };
 		46C983C41D40968300DFC607 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983C31D40968300DFC607 /* Extentions.swift */; };
 		46F259FD1D559593001EBEF9 /* BattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F259FC1D559593001EBEF9 /* BattingViewController.swift */; };
+		46F259FF1D55AB30001EBEF9 /* BowlingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F259FE1D55AB30001EBEF9 /* BowlingViewController.swift */; };
 		892E1A971D3BC8D100EBF014 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 892E1A951D3BC8D100EBF014 /* Main.storyboard */; };
 		8935ADC51D3E640900607C9D /* deleteFileAfterUse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8935ADC41D3E640900607C9D /* deleteFileAfterUse.m */; };
 		8957420F1D43978E0097DF58 /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8957420E1D43978E0097DF58 /* SummaryViewController.swift */; };
@@ -79,6 +80,7 @@
 		46C983C11D4078EB00DFC607 /* utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = utility.swift; path = utility/utility.swift; sourceTree = "<group>"; };
 		46C983C31D40968300DFC607 /* Extentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		46F259FC1D559593001EBEF9 /* BattingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BattingViewController.swift; path = Controller/BattingViewController.swift; sourceTree = "<group>"; };
+		46F259FE1D55AB30001EBEF9 /* BowlingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BowlingViewController.swift; path = Controller/BowlingViewController.swift; sourceTree = "<group>"; };
 		549F76A86F0BF1CECAF26359 /* Pods-CricTrac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CricTrac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CricTrac/Pods-CricTrac.debug.xcconfig"; sourceTree = "<group>"; };
 		892E1A961D3BC8D100EBF014 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8935ADC31D3E640900607C9D /* CricTrac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CricTrac-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				4607A2611D5466210090A5BD /* AddMatchDetailsViewController.swift */,
 				4607A2631D54848A0090A5BD /* MatchViewController.swift */,
 				46F259FC1D559593001EBEF9 /* BattingViewController.swift */,
+				46F259FE1D55AB30001EBEF9 /* BowlingViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				4657D56C1D4DA4E7009E0FBE /* Enums.swift in Sources */,
 				4657D5681D49A060009E0FBE /* SliderMenuCell.swift in Sources */,
 				462DE9F71D478B9E00E31E8F /* CTDatePicker.swift in Sources */,
+				46F259FF1D55AB30001EBEF9 /* BowlingViewController.swift in Sources */,
 				46C983B61D39D86800DFC607 /* performanceCell.swift in Sources */,
 				8957420F1D43978E0097DF58 /* SummaryViewController.swift in Sources */,
 				46C983BF1D3FC72400DFC607 /* DashboardViewController.swift in Sources */,
