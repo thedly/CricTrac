@@ -39,9 +39,11 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
         
         let vc1 = viewControllerFrom("Main", vcid: "MatchViewController")
         
+        let nB = viewControllerFrom("Main", vcid: "BattingViewController")
+        
          let vc2 = viewControllerFrom("Main", vcid: "NewMatchViewController")
         
-        return [vc1, vc2,vc2,vc2]
+        return [vc1, nB,vc2,vc2]
     }
 
 
