@@ -12,7 +12,7 @@ import AnimatedTextInput
 
 class MatchViewController: UIViewController,IndicatorInfoProvider {
 
-    @IBOutlet weak var commentsText:AnimatedTextInput!
+   
     
     
     override func viewDidLoad() {
