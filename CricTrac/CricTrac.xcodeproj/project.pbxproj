@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4607A2621D5466220090A5BD /* AddMatchDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4607A2611D5466210090A5BD /* AddMatchDetailsViewController.swift */; };
+		4607A2641D54848A0090A5BD /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4607A2631D54848A0090A5BD /* MatchViewController.swift */; };
 		462DE9F71D478B9E00E31E8F /* CTDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462DE9F61D478B9E00E31E8F /* CTDatePicker.swift */; };
 		4642DAA51D5039DD001F039D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4642DAA41D5039DD001F039D /* LoginViewController.swift */; };
 		464EA0261D4F901200252DC1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 464EA0251D4F901200252DC1 /* GoogleService-Info.plist */; };
@@ -53,6 +55,8 @@
 
 /* Begin PBXFileReference section */
 		056D56ED7752D65D58DB4504 /* Pods-CricTrac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CricTrac.release.xcconfig"; path = "Pods/Target Support Files/Pods-CricTrac/Pods-CricTrac.release.xcconfig"; sourceTree = "<group>"; };
+		4607A2611D5466210090A5BD /* AddMatchDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMatchDetailsViewController.swift; sourceTree = "<group>"; };
+		4607A2631D54848A0090A5BD /* MatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
 		462DE9F61D478B9E00E31E8F /* CTDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CTDatePicker.swift; path = utility/CTDatePicker.swift; sourceTree = "<group>"; };
 		4642DAA41D5039DD001F039D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		464EA0251D4F901200252DC1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -227,6 +231,8 @@
 				89E83F791D4A4FF100232250 /* MenuViewController.swift */,
 				4657D5651D499FDD009E0FBE /* SliderMenuViewController.swift */,
 				4642DAA41D5039DD001F039D /* LoginViewController.swift */,
+				4607A2611D5466210090A5BD /* AddMatchDetailsViewController.swift */,
+				4607A2631D54848A0090A5BD /* MatchViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -403,6 +409,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4607A2641D54848A0090A5BD /* MatchViewController.swift in Sources */,
+				4607A2621D5466220090A5BD /* AddMatchDetailsViewController.swift in Sources */,
 				46C983901D3922D200DFC607 /* AppDelegate.swift in Sources */,
 				8935ADC51D3E640900607C9D /* deleteFileAfterUse.m in Sources */,
 				89E83F7C1D4A5AD000232250 /* MenuTableViewCell.swift in Sources */,

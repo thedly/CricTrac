@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import XLPagerTabStrip
 
-class NewMatchViewController: UIViewController {
+class NewMatchViewController: UIViewController,IndicatorInfoProvider {
 
     lazy var ctDatePicker = CTDatePicker()
     
@@ -241,6 +242,8 @@ extension NewMatchViewController:UITextFieldDelegate{
     }
     
  
-    
+    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "BATTING")
+    }
     
 }

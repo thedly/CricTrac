@@ -1,4 +1,5 @@
 PODS:
+  - AnimatedTextInput (0.3.0)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -60,8 +61,10 @@ PODS:
   - KYDrawerController (1.1.5)
   - SCLAlertView (0.5.9)
   - SkyFloatingLabelTextField (1.2.1)
+  - XLPagerTabStrip (5.0.0)
 
 DEPENDENCIES:
+  - AnimatedTextInput (~> 0.3.0)
   - CSStickyHeaderFlowLayout
   - FBSDKLoginKit
   - Firebase
@@ -73,8 +76,10 @@ DEPENDENCIES:
   - KYDrawerController
   - SCLAlertView
   - SkyFloatingLabelTextField (~> 1.0)
+  - XLPagerTabStrip (~> 5.0)
 
 SPEC CHECKSUMS:
+  AnimatedTextInput: 536cc082097b10a7c6a267856c3deadd7310b258
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   CSStickyHeaderFlowLayout: 5366582779d8b7c9ba9b9cc729c218cc23888776
   FBSDKCoreKit: 6e020b5db0b5bd1e01f5fb0902131befd129a502
@@ -97,7 +102,8 @@ SPEC CHECKSUMS:
   KYDrawerController: 98eb8f8c53164de1098b3ca5c6789f3d8aa86c3e
   SCLAlertView: d7c6a48c7d340e60206d4ed0e8ebcbff3b9d2a44
   SkyFloatingLabelTextField: 3f6610aded18e778df5cfab3b9e12a11b3e014e9
+  XLPagerTabStrip: 87b8b705f9a7178e76a063ffaa2d70045944a965
 
-PODFILE CHECKSUM: 7eb875bb8b321e82d1bb2ed5960a3eaa60c1765e
+PODFILE CHECKSUM: c548f933f25a94da77b6b8e017a06008c575eac4
 
 COCOAPODS: 1.0.1
