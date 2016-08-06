@@ -154,6 +154,7 @@
             <string>SFUIText-Regular</string>
             <string>SFUIText-Regular</string>
             <string>SFUIText-Regular</string>
+            <string>SFUIText-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -3799,10 +3800,10 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V6O-Ap-eim">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nGZ-vv-KDe" userLabel="MatchView">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nGZ-vv-KDe" userLabel="BatView">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="859"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4NF-ZZ-t4H" userLabel="Date" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Runs" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4NF-ZZ-t4H" userLabel="Runs" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="60" y="5" width="480" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -3841,7 +3842,7 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="kme-Ni-aKN"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Team" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="voU-gE-mjK" userLabel="Team" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Balls" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="voU-gE-mjK" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="60" y="66" width="480" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -3874,8 +3875,8 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="Yet-6d-3mg"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Opponent" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y91-Ui-Ozh" userLabel="Opponent" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="60" y="127" width="480" height="41"/>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="4S" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y91-Ui-Ozh" userLabel="4S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <rect key="frame" x="60" y="127" width="235" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -3907,8 +3908,8 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="ng7-Yj-xMT"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ground" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zNo-8F-9Ia" userLabel="Ground" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="60" y="188" width="480" height="41"/>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="6S" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zNo-8F-9Ia" userLabel="6S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <rect key="frame" x="305" y="127" width="235" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -3940,9 +3941,12 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="CXH-1b-ct7"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Overs" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J7a-ME-fzX" userLabel="Overs" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="60" y="249" width="480" height="41"/>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Strike Rate" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J7a-ME-fzX" userLabel="Strikerate" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <rect key="frame" x="60" y="188" width="480" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                                </accessibility>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
                                                 <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done"/>
@@ -3973,8 +3977,8 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="bjC-l1-S8v"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Tournament" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pqw-TY-BH8" userLabel="Tournament" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="60" y="310" width="480" height="41"/>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Position" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pqw-TY-BH8" userLabel="Position" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <rect key="frame" x="60" y="249" width="480" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
@@ -4006,50 +4010,83 @@
                                                     <outlet property="delegate" destination="6Ih-6n-xPz" id="nEl-zi-8uW"/>
                                                 </connections>
                                             </textField>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Dismissal" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h0q-Ih-kpz" userLabel="Dismissal" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <rect key="frame" x="60" y="310" width="480" height="41"/>
+                                                <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
+                                                <textInputTraits key="textInputTraits" spellCheckingType="no" returnKeyType="done"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="titleTextColour">
+                                                        <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="titleActiveTextColour">
+                                                        <color key="value" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                                                        <color key="value" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
+                                                        <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                                        <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                                        <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                                        <color key="value" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outlet property="delegate" destination="6Ih-6n-xPz" id="83P-yk-jg5"/>
+                                                </connections>
+                                            </textField>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="height" secondItem="J7a-ME-fzX" secondAttribute="height" id="5Hu-2j-M4t"/>
+                                            <constraint firstItem="h0q-Ih-kpz" firstAttribute="height" secondItem="Pqw-TY-BH8" secondAttribute="height" id="6fD-ha-hmY"/>
                                             <constraint firstItem="voU-gE-mjK" firstAttribute="height" secondItem="4NF-ZZ-t4H" secondAttribute="height" id="72H-Fm-Gkt"/>
                                             <constraint firstItem="4NF-ZZ-t4H" firstAttribute="top" secondItem="nGZ-vv-KDe" secondAttribute="top" constant="5" id="9M0-f3-G17"/>
                                             <constraint firstAttribute="height" constant="859" id="BiT-sW-UeL"/>
-                                            <constraint firstItem="y91-Ui-Ozh" firstAttribute="height" secondItem="voU-gE-mjK" secondAttribute="height" id="CjS-NF-XFB"/>
-                                            <constraint firstItem="J7a-ME-fzX" firstAttribute="height" secondItem="zNo-8F-9Ia" secondAttribute="height" id="Ddi-mR-tHZ"/>
+                                            <constraint firstItem="J7a-ME-fzX" firstAttribute="leading" secondItem="y91-Ui-Ozh" secondAttribute="leading" id="CJb-tW-OuC"/>
+                                            <constraint firstItem="y91-Ui-Ozh" firstAttribute="width" secondItem="voU-gE-mjK" secondAttribute="width" multiplier="0.5" constant="-5" id="Cgk-0R-M56"/>
                                             <constraint firstItem="voU-gE-mjK" firstAttribute="height" secondItem="4NF-ZZ-t4H" secondAttribute="height" id="E0u-Ze-aG0"/>
-                                            <constraint firstItem="zNo-8F-9Ia" firstAttribute="top" secondItem="y91-Ui-Ozh" secondAttribute="bottom" constant="20" id="Eho-2h-VQ2"/>
                                             <constraint firstItem="Pqw-TY-BH8" firstAttribute="top" secondItem="J7a-ME-fzX" secondAttribute="bottom" constant="20" id="Fsn-eT-PG9"/>
-                                            <constraint firstItem="J7a-ME-fzX" firstAttribute="trailing" secondItem="zNo-8F-9Ia" secondAttribute="trailing" id="Jt4-gE-fbL"/>
-                                            <constraint firstItem="y91-Ui-Ozh" firstAttribute="width" secondItem="voU-gE-mjK" secondAttribute="width" id="Nmo-y6-kvb"/>
+                                            <constraint firstItem="h0q-Ih-kpz" firstAttribute="trailing" secondItem="Pqw-TY-BH8" secondAttribute="trailing" id="KCm-SQ-DRV"/>
+                                            <constraint firstItem="zNo-8F-9Ia" firstAttribute="width" secondItem="y91-Ui-Ozh" secondAttribute="width" id="KeH-Cb-ESP"/>
                                             <constraint firstItem="voU-gE-mjK" firstAttribute="height" secondItem="4NF-ZZ-t4H" secondAttribute="height" id="P99-vu-ATW"/>
+                                            <constraint firstItem="zNo-8F-9Ia" firstAttribute="trailing" secondItem="voU-gE-mjK" secondAttribute="trailing" id="RGf-3v-yDL"/>
                                             <constraint firstItem="voU-gE-mjK" firstAttribute="leading" secondItem="4NF-ZZ-t4H" secondAttribute="leading" id="S2a-5o-7w7"/>
                                             <constraint firstItem="Pqw-TY-BH8" firstAttribute="trailing" secondItem="J7a-ME-fzX" secondAttribute="trailing" id="S4Q-6L-g4b"/>
                                             <constraint firstItem="y91-Ui-Ozh" firstAttribute="top" secondItem="voU-gE-mjK" secondAttribute="bottom" constant="20" id="SEw-cq-0Mu"/>
-                                            <constraint firstItem="J7a-ME-fzX" firstAttribute="leading" secondItem="zNo-8F-9Ia" secondAttribute="leading" id="WOf-RT-zfA"/>
-                                            <constraint firstItem="zNo-8F-9Ia" firstAttribute="trailing" secondItem="y91-Ui-Ozh" secondAttribute="trailing" id="XiZ-ds-feO"/>
+                                            <constraint firstItem="h0q-Ih-kpz" firstAttribute="top" secondItem="Pqw-TY-BH8" secondAttribute="bottom" constant="20" id="SIm-fk-aZw"/>
+                                            <constraint firstItem="J7a-ME-fzX" firstAttribute="trailing" secondItem="zNo-8F-9Ia" secondAttribute="trailing" id="Tcv-Ie-g78"/>
+                                            <constraint firstItem="zNo-8F-9Ia" firstAttribute="top" secondItem="y91-Ui-Ozh" secondAttribute="top" id="UkD-cE-rHj"/>
+                                            <constraint firstItem="J7a-ME-fzX" firstAttribute="top" secondItem="y91-Ui-Ozh" secondAttribute="bottom" constant="20" id="ag4-fo-lRi"/>
+                                            <constraint firstItem="J7a-ME-fzX" firstAttribute="height" secondItem="y91-Ui-Ozh" secondAttribute="height" id="cUL-PV-7Mq"/>
                                             <constraint firstItem="voU-gE-mjK" firstAttribute="leading" secondItem="4NF-ZZ-t4H" secondAttribute="leading" id="d1j-um-B3J"/>
                                             <constraint firstItem="voU-gE-mjK" firstAttribute="trailing" secondItem="4NF-ZZ-t4H" secondAttribute="trailing" id="fj2-6j-eKa"/>
                                             <constraint firstItem="4NF-ZZ-t4H" firstAttribute="centerX" secondItem="nGZ-vv-KDe" secondAttribute="centerX" id="fs5-HQ-JvD"/>
-                                            <constraint firstItem="zNo-8F-9Ia" firstAttribute="leading" secondItem="y91-Ui-Ozh" secondAttribute="leading" id="hOB-vq-Feq"/>
-                                            <constraint firstItem="J7a-ME-fzX" firstAttribute="top" secondItem="zNo-8F-9Ia" secondAttribute="bottom" constant="20" id="mN3-S9-ZJ5"/>
                                             <constraint firstItem="y91-Ui-Ozh" firstAttribute="leading" secondItem="voU-gE-mjK" secondAttribute="leading" id="mYP-Ep-kBo"/>
-                                            <constraint firstItem="y91-Ui-Ozh" firstAttribute="trailing" secondItem="voU-gE-mjK" secondAttribute="trailing" id="oKH-ko-Tpk"/>
                                             <constraint firstItem="Pqw-TY-BH8" firstAttribute="height" secondItem="J7a-ME-fzX" secondAttribute="height" id="oX8-91-jAi"/>
+                                            <constraint firstItem="h0q-Ih-kpz" firstAttribute="leading" secondItem="Pqw-TY-BH8" secondAttribute="leading" id="rD1-04-wPF"/>
                                             <constraint firstItem="voU-gE-mjK" firstAttribute="width" secondItem="4NF-ZZ-t4H" secondAttribute="width" id="swq-8c-UoL"/>
                                             <constraint firstItem="voU-gE-mjK" firstAttribute="trailing" secondItem="4NF-ZZ-t4H" secondAttribute="trailing" id="v8T-i5-X2i"/>
-                                            <constraint firstItem="zNo-8F-9Ia" firstAttribute="height" secondItem="y91-Ui-Ozh" secondAttribute="height" id="vi2-ox-Xz8"/>
                                             <constraint firstItem="y91-Ui-Ozh" firstAttribute="height" secondItem="voU-gE-mjK" secondAttribute="height" id="vs2-89-B1x"/>
                                             <constraint firstItem="Pqw-TY-BH8" firstAttribute="leading" secondItem="J7a-ME-fzX" secondAttribute="leading" id="wkz-d5-VsH"/>
                                             <constraint firstItem="4NF-ZZ-t4H" firstAttribute="width" secondItem="nGZ-vv-KDe" secondAttribute="width" multiplier="0.8" id="yMf-GU-G9E"/>
+                                            <constraint firstItem="zNo-8F-9Ia" firstAttribute="height" secondItem="y91-Ui-Ozh" secondAttribute="height" id="ywc-v5-bpn"/>
                                             <constraint firstItem="voU-gE-mjK" firstAttribute="top" secondItem="4NF-ZZ-t4H" secondAttribute="bottom" constant="20" id="yzN-yc-zin"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="swq-8c-UoL"/>
-                                                <exclude reference="S2a-5o-7w7"/>
-                                                <exclude reference="v8T-i5-X2i"/>
-                                                <exclude reference="P99-vu-ATW"/>
                                                 <exclude reference="72H-Fm-Gkt"/>
-                                                <exclude reference="Nmo-y6-kvb"/>
-                                                <exclude reference="CjS-NF-XFB"/>
+                                                <exclude reference="P99-vu-ATW"/>
+                                                <exclude reference="S2a-5o-7w7"/>
+                                                <exclude reference="swq-8c-UoL"/>
+                                                <exclude reference="v8T-i5-X2i"/>
                                                 <exclude reference="5Hu-2j-M4t"/>
                                             </mask>
                                         </variation>
