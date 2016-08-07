@@ -19,6 +19,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
         settings.style.buttonBarItemTitleColor = UIColor(hex: "#667815")
         buttonBarView.selectedBar.backgroundColor = UIColor(hex: "#B12420")
         settings.style.buttonBarItemFont = UIFont(name: "SFUIText-Regular", size: 15)!
+        
     }
 
     override func didReceiveMemoryWarning() {

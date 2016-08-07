@@ -21,6 +21,7 @@ class ExtraViewController: UIViewController,IndicatorInfoProvider {
          commentsText.type = .multiline
          commentsText.style =  CustomTextInputStyle()
         
+        
         // Do any additional setup after loading the view.
     }
     
