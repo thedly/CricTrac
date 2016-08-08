@@ -130,7 +130,7 @@ class parallaxVC: UIViewController, UICollectionViewDataSource, UICollectionView
         adjustLayout()
         
         
-        self.AddNewDataBtn.hidden = false
+       // self.AddNewDataBtn.hidden = false
     }
     
 
