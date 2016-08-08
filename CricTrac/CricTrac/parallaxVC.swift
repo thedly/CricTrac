@@ -15,74 +15,73 @@ import IOStickyHeader
 class parallaxVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var headerNib : UINib!;
-
+    
     var _battingDetails = [String: String]()
     var _bowlingDetails = [String: String]()
-    
+    var showProfileDetails: Bool = false
     var data = [[String:String]]()
-   
-    @IBOutlet weak var headerText: UILabel!
-    @IBOutlet weak var fixedHeader: UIView!
-    @IBOutlet weak var performanceDetails: UICollectionView!
     
-    var ProfileDetailsInstance: ProfileDetails!
-    var switchDemo: UISwitch!
-    @IBOutlet weak var AddNewDataBtn: UIButton!
+    var battingBtn: UIButton!
+    
+    var bowlingBtn: UIButton!
+    
+    var battingSelector: UIView!
+    
+    var bowlingSelector: UIView!
+    
+    var performanceDetails: UICollectionView!
+    
+    var headerBtnsInitialized: Bool = false
     
     
-    //addImageBtn.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
+    var collapseBtn: UIButton!
     
-    @IBAction func tabChanged(sender: UISegmentedControl) {
-        adjustLayout()
+    
+    func battingTapped(sender: UIButton) {
+        battingBtn.selected = true
+        bowlingBtn.selected = false
+        bowlingSelector.hidden = true
+        battingSelector.hidden = false
+        performanceDetails.resetScrollPositionToTop()
+        performanceDetails.reloadData()
+    }
+    
+    
+    func bowlingTapped(sender: UIButton) {
+        battingBtn.selected = false
+        bowlingBtn.selected = true
+        bowlingSelector.hidden = false
+        battingSelector.hidden = true
+        performanceDetails.resetScrollPositionToTop()
+        performanceDetails.reloadData()
+    }
+    
+    
+    
+    func collapseBtnToggled(sender: UIButton) {
         
-//        if Tabs.selectedSegmentIndex == 2 {
-//            
-//            
-//            
-//           self.performanceDetails.setContentOffset(CGPointZero, animated: true)
-//            
-//        }
-//        else
-//        {
-//            
-//            self.performanceDetails?.scrollToItemAtIndexPath(NSIndexPath(forItem: 1, inSection: Tabs.selectedSegmentIndex), atScrollPosition: .Top, animated: true)
-//            
-//        }
+        showProfileDetails = !showProfileDetails
+        collapseBtn.selected = showProfileDetails
+        
+        let layout: IOStickyHeaderFlowLayout  = self.performanceDetails.collectionViewLayout as! IOStickyHeaderFlowLayout
         
         
+        self.performanceDetails.resetScrollPositionToTop()
+        
+        let scrollTo: CGFloat = self.showProfileDetails == false ? 100.0 : 250.0
+        
+        layout.parallaxHeaderReferenceSize = CGSizeMake(UIScreen.mainScreen().bounds.size.width + 4, scrollTo)
+        layout.parallaxHeaderMinimumReferenceSize = CGSizeMake(UIScreen.mainScreen().bounds.size.width, scrollTo)
         
     }
     
+    
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        //            self.performanceDetails?.scrollToItemAtIndexPath(NSIndexPath(forItem:  0, inSection: 0), atScrollPosition: .Top, animated: true)
-        
-        data = [
-            [
-                "Matches": "123",
-                "Innings": "116",
-                "Not_Out": "12",
-                "Runs": "1028",
-                "High_Score": "80",
-                "Average": "32",
-                "Balls Faced": "-",
-                "SR": "-",
-                "100s": "0",
-                "50s": "1",
-                "4s": "25",
-                "6s": "15"
-            ],
-            [
-                "Overs": "12",
-                "Wickets": "5",
-                "Runs_Given": "36",
-                "Bowling_Average": "24.16"
-            ]
-        
-        ]
-        
         
         _battingDetails = [
             "Matches": "123",
@@ -105,36 +104,60 @@ class parallaxVC: UIViewController, UICollectionViewDataSource, UICollectionView
             "Runs_Given": "36",
             "Bowling_Average": "24.16"
         ]
-
-        
-//        switchDemo=UISwitch(frame:CGRectMake(150, 300, 0, 0));
-//        switchDemo.on = true
-//        switchDemo.setOn(true, animated: false);
-//        switchDemo.addTarget(self, action: "switchValueDidChange:", forControlEvents: .ValueChanged);
         
         
         self.setupCollectionView()
-
+        
     }
-
-//    func switchValueDidChange(sender: UISwitch){
-//        print("switch changed")
-//    }
+    
+    func didMenuButtonTapp(){
+        sliderMenu.setDrawerState(.Opened, animated: true)
+    }
+    
+    func didNewMatchButtonTapp(){
+        
+        let newMatchVc = viewControllerFrom("Main", vcid: "NewMatchViewController")
+        self.presentViewController(newMatchVc, animated: true) {}
+    }
+    
+    //Sets button for Slide menu, Title and Navigationbar Color
+    func setNavigationBarProperties(){
+        let menuButton: UIButton = UIButton(type:.Custom)
+        menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
+        menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+        menuButton.frame = CGRectMake(0, 0, 40, 40)
+        let leftbarButton = UIBarButtonItem(customView: menuButton)
+        
+        
+        let addNewMatchButton: UIButton = UIButton(type:.Custom)
+        addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
+        addNewMatchButton.setTitle("+", forState:.Normal)
+        addNewMatchButton.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 30)
+        addNewMatchButton.addTarget(self, action: #selector(didNewMatchButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+        let righttbarButton = UIBarButtonItem(customView: addNewMatchButton)
+        
+        //assign button to navigationbar
+        
+        navigationItem.leftBarButtonItem = leftbarButton
+        navigationItem.rightBarButtonItem = righttbarButton
+        navigationController!.navigationBar.barTintColor = UIColor(hex:"B12420")
+        title = "Dashboard"
+        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        navigationController!.navigationBar.titleTextAttributes = titleDict
+    }
+    
     
     func setupCollectionView() {
         
         self.performanceDetails.dataSource = self
         self.performanceDetails.delegate = self
-    
         
         adjustLayout()
-        
-        
-       // self.AddNewDataBtn.hidden = false
+        setNavigationBarProperties()
     }
     
-
-
+    
+    
     
     func adjustLayout() {
         
@@ -144,11 +167,14 @@ class parallaxVC: UIViewController, UICollectionViewDataSource, UICollectionView
         
         
         if let layout: IOStickyHeaderFlowLayout = self.performanceDetails.collectionViewLayout as? IOStickyHeaderFlowLayout {
-            layout.parallaxHeaderReferenceSize = CGSizeMake(UIScreen.mainScreen().bounds.size.width + 4, 274)
-            layout.parallaxHeaderMinimumReferenceSize = CGSizeMake(UIScreen.mainScreen().bounds.size.width, 100)
+            
+            let scrollTo: CGFloat = self.showProfileDetails == false ? 100.0 : 250.0
+            
+            layout.parallaxHeaderReferenceSize = CGSizeMake(UIScreen.mainScreen().bounds.size.width + 4, scrollTo)
+            layout.parallaxHeaderMinimumReferenceSize = CGSizeMake(UIScreen.mainScreen().bounds.size.width, scrollTo)
             
             
-    
+            
             
             layout.itemSize = CGSizeMake(UIScreen.mainScreen().bounds.size.width, layout.itemSize.height)
             
@@ -158,7 +184,7 @@ class parallaxVC: UIViewController, UICollectionViewDataSource, UICollectionView
             self.performanceDetails.collectionViewLayout = layout
         }
         self.performanceDetails.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, 0)
-        
+        self.performanceDetails.backgroundColor = UIColor.clearColor()
         
         self.performanceDetails.registerNib(self.headerNib, forSupplementaryViewOfKind: IOStickyHeaderParallaxHeader, withReuseIdentifier: "ProfileDetails")
         
@@ -171,34 +197,66 @@ class parallaxVC: UIViewController, UICollectionViewDataSource, UICollectionView
     }
     
     
-    
+    func initializeHeaderBtns() {
+        
+        
+        battingBtn.setTitleColor(UIColor(hex: "D8D8D8"), forState: .Normal)
+        battingBtn.setTitleColor(UIColor(hex: "6D9447"), forState: .Selected)
+        bowlingBtn.setTitleColor(UIColor(hex: "D8D8D8"), forState: .Normal)
+        bowlingBtn.setTitleColor(UIColor(hex: "6D9447"), forState: .Selected)
+        
+        collapseBtn.setImage(UIImage(named: "up"), forState: .Selected)
+        collapseBtn.setImage(UIImage(named: "down"), forState: .Normal)
+        
+        
+        battingBtn.tintColor = UIColor.clearColor()
+        bowlingBtn.tintColor = UIColor.clearColor()
+        
+        battingBtn.selected = true
+        collapseBtn.selected = showProfileDetails
+        headerBtnsInitialized = true
+        
+    }
     
     
     
     // MARK: UICollectionViewDataSource
-
+    
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return data[section].count
+        return self.bowlingBtn != nil && self.bowlingBtn.selected ? _bowlingDetails.count : _battingDetails.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell: performanceCell = collectionView.dequeueReusableCellWithReuseIdentifier("performanceCell", forIndexPath: indexPath) as! performanceCell
+        let cell: PerformanceCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("PerformanceCollectionViewCell", forIndexPath: indexPath) as! PerformanceCollectionViewCell
         
         var currentKey :String?
         var currentvalue :String?
         
-        let index = data[indexPath.section].startIndex.advancedBy(indexPath.row) as DictionaryIndex<String,String>
         
-        currentKey = data[indexPath.section].keys[index]
-        currentvalue = data[indexPath.section][currentKey!]!
+        if self.bowlingBtn != nil && self.bowlingBtn.selected {
+            let index = _bowlingDetails.startIndex.advancedBy(indexPath.row) as DictionaryIndex<String,String>
+            
+            currentKey = _bowlingDetails.keys[index]
+            currentvalue = _bowlingDetails[currentKey!]!
+        }
+        else
+        {
+            let index = _battingDetails.startIndex.advancedBy(indexPath.row) as DictionaryIndex<String,String>
+            
+            currentKey = _battingDetails.keys[index]
+            currentvalue = _battingDetails[currentKey!]!
+        }
+        
+        
+        
         
         cell.configureCell(currentKey!, pValue: currentvalue!)
-        return UICollectionViewCell()
+        return cell
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -211,23 +269,34 @@ class parallaxVC: UIViewController, UICollectionViewDataSource, UICollectionView
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 15.0, bottom: 0, right: 15.0)
     }
-    func tabsChanged(sender: UISegmentedControl){
-        print("tab changed")
-    }
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         switch kind {
-        
+            
         case UICollectionElementKindSectionHeader:
             
             let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "performanceHeader", forIndexPath: indexPath)
             
-            let segCtrl = headerView.viewWithTag(200) as! UISegmentedControl
-
-            segCtrl.addTarget(self, action: "tabsChanged:", forControlEvents: .ValueChanged)
+            battingBtn = headerView.viewWithTag(1) as! UIButton
+            battingBtn.addTarget(self, action: #selector(parallaxVC.battingTapped(_:)), forControlEvents: .TouchUpInside)
+            
+            bowlingBtn = headerView.viewWithTag(2) as! UIButton
+            bowlingBtn.addTarget(self, action: #selector(parallaxVC.bowlingTapped(_:)), forControlEvents: .TouchUpInside)
+            
+            
+            battingSelector = headerView.viewWithTag(3)
+            bowlingSelector = headerView.viewWithTag(4)
+            
+            collapseBtn = headerView.viewWithTag(5) as! UIButton
+            collapseBtn.addTarget(self, action: #selector(parallaxVC.collapseBtnToggled(_:)), forControlEvents: .TouchUpInside)
+            
+            if !headerBtnsInitialized {
+                initializeHeaderBtns()
+            }
+            
             
             return headerView
-        
+            
         case IOStickyHeaderParallaxHeader:
             let cell = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "ProfileDetails", forIndexPath: indexPath) as! ProfileDetails
             
@@ -238,13 +307,13 @@ class parallaxVC: UIViewController, UICollectionViewDataSource, UICollectionView
             let footerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "performanceFooter", forIndexPath: indexPath)
             
             return footerView
-       
+            
         default:
-            //Just to make code run adding this 
+            //Just to make code run adding this
             let footerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "performanceFooter", forIndexPath: indexPath)
             
             return footerView
-            assert(false, "Unexpected element kind")
+            //assert(false, "Unexpected element kind")
             
         }
     }
