@@ -86,7 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setSliderMenu(){
-        let dashboardVC = viewControllerFrom("Main", vcid: "DashboardViewController") as! DashboardViewController
+        let dashboardVC = viewControllerFrom("Main", vcid: "DashboardBaseViewController") as! DashboardBaseViewController
 
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.makeKeyAndVisible()

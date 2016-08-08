@@ -35,6 +35,9 @@
 		892EA6831D58DFB500BEE5A3 /* PerformanceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892EA6821D58DFB500BEE5A3 /* PerformanceCollectionViewCell.swift */; };
 		892EA6861D58E74B00BEE5A3 /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892EA6841D58E74B00BEE5A3 /* Share.swift */; };
 		892EA6871D58E74B00BEE5A3 /* Share.xib in Resources */ = {isa = PBXBuildFile; fileRef = 892EA6851D58E74B00BEE5A3 /* Share.xib */; };
+		892EA6891D58ED2300BEE5A3 /* DashboardBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892EA6881D58ED2300BEE5A3 /* DashboardBaseViewController.swift */; };
+		892EA68B1D58F4B400BEE5A3 /* DashboardBattingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892EA68A1D58F4B400BEE5A3 /* DashboardBattingDetailsViewController.swift */; };
+		892EA68D1D58F78500BEE5A3 /* DashboardBowlingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892EA68C1D58F78500BEE5A3 /* DashboardBowlingDetailsViewController.swift */; };
 		8935ADC51D3E640900607C9D /* deleteFileAfterUse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8935ADC41D3E640900607C9D /* deleteFileAfterUse.m */; };
 		8957420F1D43978E0097DF58 /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8957420E1D43978E0097DF58 /* SummaryViewController.swift */; };
 		8962F89F1D4666E0008D1AC3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8962F89E1D4666E0008D1AC3 /* Images.xcassets */; };
@@ -96,6 +99,9 @@
 		892EA6821D58DFB500BEE5A3 /* PerformanceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformanceCollectionViewCell.swift; sourceTree = "<group>"; };
 		892EA6841D58E74B00BEE5A3 /* Share.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Share.swift; path = View/Share.swift; sourceTree = "<group>"; };
 		892EA6851D58E74B00BEE5A3 /* Share.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Share.xib; path = View/Share.xib; sourceTree = "<group>"; };
+		892EA6881D58ED2300BEE5A3 /* DashboardBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardBaseViewController.swift; sourceTree = "<group>"; };
+		892EA68A1D58F4B400BEE5A3 /* DashboardBattingDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardBattingDetailsViewController.swift; sourceTree = "<group>"; };
+		892EA68C1D58F78500BEE5A3 /* DashboardBowlingDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardBowlingDetailsViewController.swift; sourceTree = "<group>"; };
 		8935ADC31D3E640900607C9D /* CricTrac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CricTrac-Bridging-Header.h"; sourceTree = "<group>"; };
 		8935ADC41D3E640900607C9D /* deleteFileAfterUse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = deleteFileAfterUse.m; sourceTree = "<group>"; };
 		8957420E1D43978E0097DF58 /* SummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
@@ -255,6 +261,9 @@
 				46F259FC1D559593001EBEF9 /* BattingViewController.swift */,
 				46F259FE1D55AB30001EBEF9 /* BowlingViewController.swift */,
 				46F25A001D55C1C0001EBEF9 /* ExtraViewController.swift */,
+				892EA6881D58ED2300BEE5A3 /* DashboardBaseViewController.swift */,
+				892EA68A1D58F4B400BEE5A3 /* DashboardBattingDetailsViewController.swift */,
+				892EA68C1D58F78500BEE5A3 /* DashboardBowlingDetailsViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -444,6 +453,7 @@
 				89CC84FC1D43E4D6007F2402 /* SummaryMatchDetailsViewController.swift in Sources */,
 				892EA67B1D58DDD100BEE5A3 /* parallaxVC.swift in Sources */,
 				89F4E4B31D48FECD00EFE46E /* summaryTableViewCell.swift in Sources */,
+				892EA68D1D58F78500BEE5A3 /* DashboardBowlingDetailsViewController.swift in Sources */,
 				89C8196C1D52362300291A7E /* POCViewController.swift in Sources */,
 				89C8196E1D52429500291A7E /* headerView.swift in Sources */,
 				46C983C41D40968300DFC607 /* Extentions.swift in Sources */,
@@ -457,9 +467,11 @@
 				46F259FF1D55AB30001EBEF9 /* BowlingViewController.swift in Sources */,
 				46F25A011D55C1C0001EBEF9 /* ExtraViewController.swift in Sources */,
 				46C983B61D39D86800DFC607 /* performanceCell.swift in Sources */,
+				892EA6891D58ED2300BEE5A3 /* DashboardBaseViewController.swift in Sources */,
 				8957420F1D43978E0097DF58 /* SummaryViewController.swift in Sources */,
 				892EA6861D58E74B00BEE5A3 /* Share.swift in Sources */,
 				46C983BF1D3FC72400DFC607 /* DashboardViewController.swift in Sources */,
+				892EA68B1D58F4B400BEE5A3 /* DashboardBattingDetailsViewController.swift in Sources */,
 				4657D5661D499FDD009E0FBE /* SliderMenuViewController.swift in Sources */,
 				46F259FD1D559593001EBEF9 /* BattingViewController.swift in Sources */,
 				4657D5601D4992D7009E0FBE /* Constants.swift in Sources */,
