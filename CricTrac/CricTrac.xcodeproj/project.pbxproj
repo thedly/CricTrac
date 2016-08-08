@@ -33,6 +33,8 @@
 		892EA67E1D58DEBE00BEE5A3 /* ProfileDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892EA67C1D58DEBE00BEE5A3 /* ProfileDetails.swift */; };
 		892EA67F1D58DEBE00BEE5A3 /* ProfileDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = 892EA67D1D58DEBE00BEE5A3 /* ProfileDetails.xib */; };
 		892EA6831D58DFB500BEE5A3 /* PerformanceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892EA6821D58DFB500BEE5A3 /* PerformanceCollectionViewCell.swift */; };
+		892EA6861D58E74B00BEE5A3 /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892EA6841D58E74B00BEE5A3 /* Share.swift */; };
+		892EA6871D58E74B00BEE5A3 /* Share.xib in Resources */ = {isa = PBXBuildFile; fileRef = 892EA6851D58E74B00BEE5A3 /* Share.xib */; };
 		8935ADC51D3E640900607C9D /* deleteFileAfterUse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8935ADC41D3E640900607C9D /* deleteFileAfterUse.m */; };
 		8957420F1D43978E0097DF58 /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8957420E1D43978E0097DF58 /* SummaryViewController.swift */; };
 		8962F89F1D4666E0008D1AC3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8962F89E1D4666E0008D1AC3 /* Images.xcassets */; };
@@ -92,6 +94,8 @@
 		892EA67C1D58DEBE00BEE5A3 /* ProfileDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileDetails.swift; path = View/ProfileDetails.swift; sourceTree = "<group>"; };
 		892EA67D1D58DEBE00BEE5A3 /* ProfileDetails.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfileDetails.xib; path = View/ProfileDetails.xib; sourceTree = "<group>"; };
 		892EA6821D58DFB500BEE5A3 /* PerformanceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformanceCollectionViewCell.swift; sourceTree = "<group>"; };
+		892EA6841D58E74B00BEE5A3 /* Share.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Share.swift; path = View/Share.swift; sourceTree = "<group>"; };
+		892EA6851D58E74B00BEE5A3 /* Share.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Share.xib; path = View/Share.xib; sourceTree = "<group>"; };
 		8935ADC31D3E640900607C9D /* CricTrac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CricTrac-Bridging-Header.h"; sourceTree = "<group>"; };
 		8935ADC41D3E640900607C9D /* deleteFileAfterUse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = deleteFileAfterUse.m; sourceTree = "<group>"; };
 		8957420E1D43978E0097DF58 /* SummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
@@ -218,6 +222,8 @@
 		8958F5F01D39298D0028D5AA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				892EA6841D58E74B00BEE5A3 /* Share.swift */,
+				892EA6851D58E74B00BEE5A3 /* Share.xib */,
 				892EA67C1D58DEBE00BEE5A3 /* ProfileDetails.swift */,
 				892EA67D1D58DEBE00BEE5A3 /* ProfileDetails.xib */,
 				892E1A951D3BC8D100EBF014 /* Main.storyboard */,
@@ -357,6 +363,7 @@
 				892E1A971D3BC8D100EBF014 /* Main.storyboard in Resources */,
 				8962F89F1D4666E0008D1AC3 /* Images.xcassets in Resources */,
 				89FD59C71D41C3AE003EF45C /* SF-UI-Text-Regular.otf in Resources */,
+				892EA6871D58E74B00BEE5A3 /* Share.xib in Resources */,
 				89E83F7E1D4A750000232250 /* DashboardHeaderView.xib in Resources */,
 				46C983971D3922D200DFC607 /* Assets.xcassets in Resources */,
 				89FD59C61D41C3AE003EF45C /* SF-UI-Text-Bold.otf in Resources */,
@@ -451,6 +458,7 @@
 				46F25A011D55C1C0001EBEF9 /* ExtraViewController.swift in Sources */,
 				46C983B61D39D86800DFC607 /* performanceCell.swift in Sources */,
 				8957420F1D43978E0097DF58 /* SummaryViewController.swift in Sources */,
+				892EA6861D58E74B00BEE5A3 /* Share.swift in Sources */,
 				46C983BF1D3FC72400DFC607 /* DashboardViewController.swift in Sources */,
 				4657D5661D499FDD009E0FBE /* SliderMenuViewController.swift in Sources */,
 				46F259FD1D559593001EBEF9 /* BattingViewController.swift in Sources */,

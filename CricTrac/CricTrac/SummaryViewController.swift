@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     @IBOutlet weak var summaryTbl: UITableView!
     
     var summaryData : Dictionary<String,Dictionary<String,String>>!
@@ -30,7 +31,7 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -59,17 +60,17 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
         var dateValue: Dictionary<String,String>
         
         if let cell = tableView.dequeueReusableCellWithIdentifier("summaryTableViewCell", forIndexPath: indexPath) as? summaryTableViewCell{
-           
+            
             let index = summaryData.startIndex.advancedBy(indexPath.row)
             
-                print(indexPath.row)
-                print(summaryData.count)
-                
-                dateKey = summaryData.keys[index]
-                dateValue = summaryData[dateKey!]!
-                
-                cell.configureCell(dateKey, _runs: dateValue["Runs"]!, _fours: dateValue["Fours"]!, _sixes: dateValue["Sixes"]!, _overs: dateValue["Overs"]!, _results: dateValue["Results"]!, _wickets: dateValue["Wickets"]!)
-                return cell
+            print(indexPath.row)
+            print(summaryData.count)
+            
+            dateKey = summaryData.keys[index]
+            dateValue = summaryData[dateKey!]!
+            
+            cell.configureCell(dateKey, _runs: dateValue["Runs"]!, _fours: dateValue["Fours"]!, _sixes: dateValue["Sixes"]!, _overs: dateValue["Overs"]!, _results: dateValue["Results"]!, _wickets: dateValue["Wickets"]!)
+            return cell
         }
         else
         {
@@ -79,17 +80,29 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .Normal, title: "Edit") { action, index in
-            print("edit button tapped")
+            print("delete button tapped")
+            
+            
         }
         edit.backgroundColor = UIColor.lightGrayColor()
         
-        let delete = UITableViewRowAction(style: .Normal, title: "Delete") { action, index in
-            print("delete button tapped")
+        let share = UITableViewRowAction(style: .Normal, title: "Share") { action, index in
+            let popup = SCLAlertView()
+            
+            let viewFrame = UIView.loadFromNibNamed("Share")!
+            viewFrame.frame.size.width = 220
+            viewFrame.frame.size.height = 220
+            
+            popup.customSubview = viewFrame
+            popup.showCustom("SHARE", subTitle: "your story", color: UIColor.darkGrayColor(), icon: UIImage(named: "ShareFilled")!)
+            
+            return
+            
         }
-        delete.backgroundColor = UIColor.redColor()
+        share.backgroundColor = UIColor.blueColor()
         
-        return [delete, edit]
-
+        return [share, edit]
+        
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -97,58 +110,58 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
         let vc : SummaryMatchDetailsViewController = storyboard.instantiateViewControllerWithIdentifier("SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
         
         self.presentViewController(vc, animated: true, completion: nil)
-        }
+    }
     
     // MARK: - Service Call
     
     
     func getSummaryData() {
         summaryData =
-        [
-            "Feb14" : [
-                "Runs" : "21",
-                "Fours" : "2",
-                "Sixes" : "1",
-                "Overs" : "2",
-                "Wickets" : "2",
-                "Results" : "Won"
-            ],
-            "Mar14" : [
-                "Runs" : "44",
-                "Fours" : "4",
-                "Sixes" : "2",
-                "Overs" : "5",
-                "Wickets" : "1",
-                "Results" : "Lost"
-            ],
-            "Apr14" : [
-                "Runs" : "30",
-                "Fours" : "2",
-                "Sixes" : "1",
-                "Overs" : "7",
-                "Wickets" : "1",
-                "Results" : "Won"
-            ],
-            "May14" : [
-                "Runs" : "12",
-                "Fours" : "1",
-                "Sixes" : "0",
-                "Overs" : "2",
-                "Wickets" : "0",
-                "Results" : "Lost"
-            ],
+            [
+                "Feb14" : [
+                    "Runs" : "21",
+                    "Fours" : "2",
+                    "Sixes" : "1",
+                    "Overs" : "2",
+                    "Wickets" : "2",
+                    "Results" : "Won"
+                ],
+                "Mar14" : [
+                    "Runs" : "44",
+                    "Fours" : "4",
+                    "Sixes" : "2",
+                    "Overs" : "5",
+                    "Wickets" : "1",
+                    "Results" : "Lost"
+                ],
+                "Apr14" : [
+                    "Runs" : "30",
+                    "Fours" : "2",
+                    "Sixes" : "1",
+                    "Overs" : "7",
+                    "Wickets" : "1",
+                    "Results" : "Won"
+                ],
+                "May14" : [
+                    "Runs" : "12",
+                    "Fours" : "1",
+                    "Sixes" : "0",
+                    "Overs" : "2",
+                    "Wickets" : "0",
+                    "Results" : "Lost"
+                ],
         ]
     }
     
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
