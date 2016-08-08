@@ -29,6 +29,7 @@
 		46F259FF1D55AB30001EBEF9 /* BowlingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F259FE1D55AB30001EBEF9 /* BowlingViewController.swift */; };
 		46F25A011D55C1C0001EBEF9 /* ExtraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F25A001D55C1C0001EBEF9 /* ExtraViewController.swift */; };
 		892E1A971D3BC8D100EBF014 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 892E1A951D3BC8D100EBF014 /* Main.storyboard */; };
+		892EA67B1D58DDD100BEE5A3 /* parallaxVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892EA67A1D58DDD100BEE5A3 /* parallaxVC.swift */; };
 		8935ADC51D3E640900607C9D /* deleteFileAfterUse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8935ADC41D3E640900607C9D /* deleteFileAfterUse.m */; };
 		8957420F1D43978E0097DF58 /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8957420E1D43978E0097DF58 /* SummaryViewController.swift */; };
 		8962F89F1D4666E0008D1AC3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8962F89E1D4666E0008D1AC3 /* Images.xcassets */; };
@@ -84,6 +85,7 @@
 		46F25A001D55C1C0001EBEF9 /* ExtraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtraViewController.swift; path = Controller/ExtraViewController.swift; sourceTree = "<group>"; };
 		549F76A86F0BF1CECAF26359 /* Pods-CricTrac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CricTrac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CricTrac/Pods-CricTrac.debug.xcconfig"; sourceTree = "<group>"; };
 		892E1A961D3BC8D100EBF014 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		892EA67A1D58DDD100BEE5A3 /* parallaxVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = parallaxVC.swift; sourceTree = "<group>"; };
 		8935ADC31D3E640900607C9D /* CricTrac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CricTrac-Bridging-Header.h"; sourceTree = "<group>"; };
 		8935ADC41D3E640900607C9D /* deleteFileAfterUse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = deleteFileAfterUse.m; sourceTree = "<group>"; };
 		8957420E1D43978E0097DF58 /* SummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 		8958F5F11D392B780028D5AA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				892EA67A1D58DDD100BEE5A3 /* parallaxVC.swift */,
 				46B6086F1D44A7D3000FE098 /* NewMatchViewController.swift */,
 				46C983BE1D3FC72400DFC607 /* DashboardViewController.swift */,
 				8957420E1D43978E0097DF58 /* SummaryViewController.swift */,
@@ -421,6 +424,7 @@
 				46B608701D44A7D3000FE098 /* NewMatchViewController.swift in Sources */,
 				4642DAA51D5039DD001F039D /* LoginViewController.swift in Sources */,
 				89CC84FC1D43E4D6007F2402 /* SummaryMatchDetailsViewController.swift in Sources */,
+				892EA67B1D58DDD100BEE5A3 /* parallaxVC.swift in Sources */,
 				89F4E4B31D48FECD00EFE46E /* summaryTableViewCell.swift in Sources */,
 				89C8196C1D52362300291A7E /* POCViewController.swift in Sources */,
 				89C8196E1D52429500291A7E /* headerView.swift in Sources */,
