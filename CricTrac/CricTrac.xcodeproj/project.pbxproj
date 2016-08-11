@@ -49,6 +49,11 @@
 		8930F0421D5BA20F00C7540B /* UserOpponentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930F0411D5BA20F00C7540B /* UserOpponentDetailsViewController.swift */; };
 		8935ADC51D3E640900607C9D /* deleteFileAfterUse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8935ADC41D3E640900607C9D /* deleteFileAfterUse.m */; };
 		8957420F1D43978E0097DF58 /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8957420E1D43978E0097DF58 /* SummaryViewController.swift */; };
+		895E04011D5CCEDE002E322E /* FriendRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E04001D5CCEDE002E322E /* FriendRequestsViewController.swift */; };
+		895E04031D5CD134002E322E /* FriendRequestsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E04021D5CD134002E322E /* FriendRequestsTableViewCell.swift */; };
+		895E04051D5CE24B002E322E /* FriendSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E04041D5CE24B002E322E /* FriendSearchViewController.swift */; };
+		895E04071D5CE283002E322E /* FriendSuggestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E04061D5CE283002E322E /* FriendSuggestViewController.swift */; };
+		895E04091D5CE33E002E322E /* FriendBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E04081D5CE33E002E322E /* FriendBaseViewController.swift */; };
 		8962F89F1D4666E0008D1AC3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8962F89E1D4666E0008D1AC3 /* Images.xcassets */; };
 		89C8196C1D52362300291A7E /* POCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C8196B1D52362300291A7E /* POCViewController.swift */; };
 		89C8196E1D52429500291A7E /* headerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C8196D1D52429500291A7E /* headerView.swift */; };
@@ -123,6 +128,11 @@
 		8935ADC31D3E640900607C9D /* CricTrac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CricTrac-Bridging-Header.h"; sourceTree = "<group>"; };
 		8935ADC41D3E640900607C9D /* deleteFileAfterUse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = deleteFileAfterUse.m; sourceTree = "<group>"; };
 		8957420E1D43978E0097DF58 /* SummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
+		895E04001D5CCEDE002E322E /* FriendRequestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestsViewController.swift; sourceTree = "<group>"; };
+		895E04021D5CD134002E322E /* FriendRequestsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestsTableViewCell.swift; sourceTree = "<group>"; };
+		895E04041D5CE24B002E322E /* FriendSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendSearchViewController.swift; sourceTree = "<group>"; };
+		895E04061D5CE283002E322E /* FriendSuggestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendSuggestViewController.swift; sourceTree = "<group>"; };
+		895E04081D5CE33E002E322E /* FriendBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendBaseViewController.swift; sourceTree = "<group>"; };
 		8962F89E1D4666E0008D1AC3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		89C8196B1D52362300291A7E /* POCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POCViewController.swift; sourceTree = "<group>"; };
 		89C8196D1D52429500291A7E /* headerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = headerView.swift; sourceTree = "<group>"; };
@@ -261,6 +271,7 @@
 				89E83F7D1D4A750000232250 /* DashboardHeaderView.xib */,
 				4657D5671D49A060009E0FBE /* SliderMenuCell.swift */,
 				892EA6821D58DFB500BEE5A3 /* PerformanceCollectionViewCell.swift */,
+				895E04021D5CD134002E322E /* FriendRequestsTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -290,6 +301,10 @@
 				8930F03D1D5BA0EB00C7540B /* UserTeamDetailsViewController.swift */,
 				8930F03F1D5BA1D600C7540B /* UserGroundDetailsViewController.swift */,
 				8930F0411D5BA20F00C7540B /* UserOpponentDetailsViewController.swift */,
+				895E04001D5CCEDE002E322E /* FriendRequestsViewController.swift */,
+				895E04041D5CE24B002E322E /* FriendSearchViewController.swift */,
+				895E04061D5CE283002E322E /* FriendSuggestViewController.swift */,
+				895E04081D5CE33E002E322E /* FriendBaseViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -470,11 +485,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				895E04031D5CD134002E322E /* FriendRequestsTableViewCell.swift in Sources */,
 				4607A2641D54848A0090A5BD /* MatchViewController.swift in Sources */,
 				8930F0341D5B5D4E00C7540B /* ProfileBaseViewController.swift in Sources */,
 				4607A2621D5466220090A5BD /* AddMatchDetailsViewController.swift in Sources */,
+				895E04051D5CE24B002E322E /* FriendSearchViewController.swift in Sources */,
 				46C983901D3922D200DFC607 /* AppDelegate.swift in Sources */,
 				8935ADC51D3E640900607C9D /* deleteFileAfterUse.m in Sources */,
+				895E04091D5CE33E002E322E /* FriendBaseViewController.swift in Sources */,
 				89E83F7C1D4A5AD000232250 /* MenuTableViewCell.swift in Sources */,
 				46B608701D44A7D3000FE098 /* NewMatchViewController.swift in Sources */,
 				892EA6831D58DFB500BEE5A3 /* PerformanceCollectionViewCell.swift in Sources */,
@@ -485,6 +503,7 @@
 				8930F03C1D5B94C300C7540B /* CTStatePicker.swift in Sources */,
 				46F25A031D5B1AAD001EBEF9 /* Service.swift in Sources */,
 				892EA68D1D58F78500BEE5A3 /* DashboardBowlingDetailsViewController.swift in Sources */,
+				895E04071D5CE283002E322E /* FriendSuggestViewController.swift in Sources */,
 				89C8196C1D52362300291A7E /* POCViewController.swift in Sources */,
 				89C8196E1D52429500291A7E /* headerView.swift in Sources */,
 				46C983C41D40968300DFC607 /* Extentions.swift in Sources */,
@@ -492,6 +511,7 @@
 				8930F0381D5B751500C7540B /* CTCountryPicker.swift in Sources */,
 				89F4E4B51D49345300EFE46E /* ProfileViewController.swift in Sources */,
 				892EA67E1D58DEBE00BEE5A3 /* ProfileDetails.swift in Sources */,
+				895E04011D5CCEDE002E322E /* FriendRequestsViewController.swift in Sources */,
 				89E83F7A1D4A4FF100232250 /* MenuViewController.swift in Sources */,
 				46C983C21D4078EB00DFC607 /* utility.swift in Sources */,
 				4657D56C1D4DA4E7009E0FBE /* Enums.swift in Sources */,
