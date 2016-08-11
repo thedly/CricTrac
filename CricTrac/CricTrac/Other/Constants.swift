@@ -8,6 +8,9 @@
 
 import Foundation
 import AnimatedTextInput
+import Firebase
+
+public var date = 0
 
 let menuData = [
 
@@ -19,6 +22,10 @@ let menuData = [
     ["title":"Friends Requests","vc":"NewMatchViewController"],
     ["title":"Notification","vc":"NewMatchViewController"],
 ]
+
+
+let userDataRef =  FIRDatabase.database().referenceFromURL("https://arjun-innovations.firebaseio.com")
+
 
 struct CustomTextInputStyle: AnimatedTextInputStyle {
     

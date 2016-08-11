@@ -86,30 +86,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setSliderMenu(){
-        let dashboardVC = viewControllerFrom("Main", vcid: "DashboardBaseViewController") as! DashboardBaseViewController
 
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.makeKeyAndVisible()
         
         let userDefaults = NSUserDefaults.standardUserDefaults()
         
-        if let fbCredential = userDefaults.valueForKey("loginToken") {
+        if let credential = userDefaults.valueForKey("loginToken") {
 
             
-            let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")
-            
-            let navigationControl = UINavigationController(rootViewController: dashboardVC )
-            sliderMenu.mainViewController = navigationControl
-            sliderMenu.drawerViewController = drawerViewController
-            
-            window?.rootViewController = sliderMenu
-        
+            if let googleCredentials = credential.valueForKey("googletoken") as? [String:String]{
+                
+                KRProgressHUD.show(message: "Loading...")
+                
+                firebaseLoginWithGoogle(googleCredentials["idToken"]!, accessToken:googleCredentials["accessToken"]! , sucess: { (user) in
+                    
+                    currentUser = user
+                    self.moveToNextScreen()
+                    
+                    }, failure: { (error) in
+                        KRProgressHUD.dismiss()
+                        print(error.localizedDescription)
+                        
+                })
+                
+            }
+            else if let fbCredentials = credential.valueForKey("Facebooktoken") as? [String:String]{
+                
+                 KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+                
+                firebaseLoginWithFacebook(fbCredentials["tokenString"]! , sucess: { (user) in
+                    
+                    currentUser = user
+                    self.moveToNextScreen()
+                    
+                    }, failure: { (error) in
+                        
+                        KRProgressHUD.dismiss()
+                })
+                
+               
+            }
         
         }
-        else {
+
             let loginVC = viewControllerFrom("Main", vcid: "LoginViewController")
             window?.rootViewController = loginVC
-        }
         
     }
 
@@ -128,6 +150,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         sliderMenu.mainViewController.presentViewController(vc, animated: true, completion: nil)
         sliderMenu.setDrawerState(KYDrawerController.DrawerState.Closed, animated: true)
 
+    }
+    
+    
+    
+    func moveToNextScreen(){
+        let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")
+        let dashboardVC = viewControllerFrom("Main", vcid: "DashboardBaseViewController") as! DashboardBaseViewController
+        let navigationControl = UINavigationController(rootViewController: dashboardVC )
+        sliderMenu.mainViewController = navigationControl
+        sliderMenu.drawerViewController = drawerViewController
+        
+        window?.rootViewController = sliderMenu
     }
 
 }

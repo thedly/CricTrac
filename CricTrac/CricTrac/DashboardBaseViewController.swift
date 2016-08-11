@@ -8,6 +8,8 @@
 
 import UIKit
 import XLPagerTabStrip
+import Firebase
+import KRProgressHUD
 
 class DashboardBaseViewController: ButtonBarPagerTabStripViewController {
 
@@ -19,6 +21,8 @@ class DashboardBaseViewController: ButtonBarPagerTabStripViewController {
         buttonBarView.selectedBar.backgroundColor = UIColor(hex: "#B12420")
         settings.style.buttonBarItemFont = UIFont(name: "SFUIText-Regular", size: 15)!
         setNavigationBarProperties()
+        KRProgressHUD.dismiss()
+        setUserData()
         // Do any additional setup after loading the view.
     }
 
@@ -38,6 +42,31 @@ class DashboardBaseViewController: ButtonBarPagerTabStripViewController {
         return [bat, bowl]
     }
 
+    
+    func setUserData(){
+        
+        let rootRef = FIRDatabase.database().referenceFromURL("https://arjun-innovations.firebaseio.com")
+        
+        // rootRef.child("TestValue_Renjith").setValue(["test1":["One","Two","Three"]])
+        
+        //rootRef.setValue("TestValue_Renjith")
+        
+        // rootRef.child("users").child("RenjithTestOne").removeValue()
+        
+       
+        rootRef.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            
+            let userId = currentUser!.uid
+            
+            if !snapshot.hasChild(userId){
+                
+                let userData = [userId:["BattingSum":["data"],"BowlingSum":["data"],"Matches":["data"],"PlayerInfo":["data"]]]
+                rootRef.updateChildValues(userData)
+            }
+            
+        })
+        
+    }
     
     
     // MARK: - functions

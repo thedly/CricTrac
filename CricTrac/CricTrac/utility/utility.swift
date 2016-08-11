@@ -11,6 +11,8 @@ import KYDrawerController
 import FirebaseAuth
 
 var sliderMenu = KYDrawerController()
+var currentUser:FIRUser?
+
 
 public func viewControllerFrom(storyBoard:String,vcid:String)->UIViewController{
     
@@ -19,6 +21,12 @@ public func viewControllerFrom(storyBoard:String,vcid:String)->UIViewController{
     return storyboard.instantiateViewControllerWithIdentifier(vcid)
 }
 
+
+func += <K, V> (inout left: [K:V], right: [K:V]) {
+    for (k, v) in right {
+        left.updateValue(v, forKey: k)
+    }
+}
 
 
 //MARK :- Firebase Auth
@@ -38,5 +46,32 @@ public func firebaseLogin(credential: FIRAuthCredential, sucess:(FIRUser)->Void,
 }
 
 
+public func firebaseLoginWithFacebook(fbToken:String,sucess:(FIRUser)->Void,failure:(NSError)->Void){
+    
+    let credential = FIRFacebookAuthProvider.credentialWithAccessToken(fbToken)
+    firebaseLogin(credential, sucess: { (user) in
+        
+        sucess(user)
+        
+        }) { (error) in
+            
+        failure(error)
+    }
+}
 
+
+
+public func firebaseLoginWithGoogle(idToken:String,accessToken:String,sucess:(FIRUser)->Void,failure:(NSError)->Void){
+    
+    let credential = FIRGoogleAuthProvider.credentialWithIDToken(idToken,
+                                                                 accessToken:accessToken)
+    firebaseLogin(credential, sucess: { (user) in
+        
+        sucess(user)
+        
+    }) { (error) in
+        
+        failure(error)
+    }
+}
 

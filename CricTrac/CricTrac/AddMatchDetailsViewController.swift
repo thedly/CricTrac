@@ -11,6 +11,10 @@ import XLPagerTabStrip
 
 class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
 
+    var matchVC:MatchViewController!
+    var battingVC:BattingViewController!
+    var bowlingVC:BowlingViewController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,7 +23,6 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
         settings.style.buttonBarItemTitleColor = UIColor(hex: "#667815")
         buttonBarView.selectedBar.backgroundColor = UIColor(hex: "#B12420")
         settings.style.buttonBarItemFont = UIFont(name: "SFUIText-Regular", size: 15)!
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,17 +39,30 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
         self.dismissViewControllerAnimated(true) {}
     }
     
+    
+    @IBAction func didTapSave(sender: UIButton) {
+        
+        var data = matchVC.data
+        data += battingVC.data
+        data += bowlingVC.data
+        addMatchData("date \(String(date))",data: data)
+        self.dismissViewControllerAnimated(true) {}
+        
+    }
+    
+   
+    
     override  func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
-        let vc1 = viewControllerFrom("Main", vcid: "MatchViewController")
+        matchVC = viewControllerFrom("Main", vcid: "MatchViewController") as! MatchViewController
         
-        let nB = viewControllerFrom("Main", vcid: "BattingViewController")
+        battingVC = viewControllerFrom("Main", vcid: "BattingViewController") as! BattingViewController
         
-        let bw = viewControllerFrom("Main", vcid: "BowlingViewController")
+        bowlingVC = viewControllerFrom("Main", vcid: "BowlingViewController") as! BowlingViewController
         
          let vc2 = viewControllerFrom("Main", vcid: "ExtraViewController")
         
-        return [vc1, nB,bw,vc2]
+        return [matchVC, battingVC,bowlingVC,vc2]
     }
 
 

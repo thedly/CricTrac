@@ -61,6 +61,7 @@ class LoginViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelega
                                                                      accessToken: authentication.accessToken)
         firebaseLogin(credential, sucess: { (user) in
             self.saveGoogleTocken(authentication.idToken, accessToken: authentication.accessToken)
+            currentUser = user
             self.navigateToNextScreen()
             }, failure: { (error) in
                 
@@ -138,6 +139,7 @@ class LoginViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelega
                 firebaseLogin(credential, sucess: { (user) in
                     
                     self.saveFBToken(FBSDKAccessToken.currentAccessToken().tokenString)
+                    currentUser = user
                     self.navigateToNextScreen()
                     }, failure: { (error) in
                         
@@ -187,7 +189,7 @@ class LoginViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelega
     func navigateToNextScreen(){
         
         let window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
-        let dashboardVC = viewControllerFrom("Main", vcid: "DashboardViewController") as! DashboardViewController
+        let dashboardVC = viewControllerFrom("Main", vcid: "DashboardBaseViewController") as! DashboardBaseViewController
         
         let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")
         

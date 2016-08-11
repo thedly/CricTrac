@@ -15,7 +15,8 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var summaryData : Dictionary<String,Dictionary<String,String>>!
     
-    
+    var matchData:[String:AnyObject]!
+    var matchDataSource = [[String:String]]()
     
     
     
@@ -26,8 +27,6 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()
-        
-        
         
         // Do any additional setup after loading the view.
     }
@@ -40,7 +39,7 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
     func initializeView(){
         summaryTbl.dataSource = self
         summaryTbl.delegate = self
-        getSummaryData()
+        getMatchData()
     }
     
     // Mark: - Table delegates
@@ -51,33 +50,21 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return summaryData.count
+        return matchDataSource.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var dateKey :String!
-        var dateValue: Dictionary<String,String>
         
-        if let cell = tableView.dequeueReusableCellWithIdentifier("summaryTableViewCell", forIndexPath: indexPath) as? summaryTableViewCell{
+        let cell = tableView.dequeueReusableCellWithIdentifier("summaryTableViewCell", forIndexPath: indexPath) as! summaryTableViewCell
             
-            let index = summaryData.startIndex.advancedBy(indexPath.row)
+            let data = matchDataSource[indexPath.row]
             
-            print(indexPath.row)
-            print(summaryData.count)
-            
-            dateKey = summaryData.keys[index]
-            dateValue = summaryData[dateKey!]!
-            
-            cell.configureCell(dateKey, _runs: dateValue["Runs"]!, _fours: dateValue["Fours"]!, _sixes: dateValue["Sixes"]!, _overs: dateValue["Overs"]!, _results: dateValue["Results"]!, _wickets: dateValue["Wickets"]!)
+            cell.configureCell(data["Date"]!, _runs: data["Runs"]!, _fours: data["Fours"]!, _sixes: data["Sixes"]!, _overs: data["Overs"]!, _results:"Not Implemented", _wickets: data["Wickets"]!)
             return cell
-        }
-        else
-        {
-            return UITableViewCell()
-        }
-    }
     
+    }
+        
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .Normal, title: "Edit") { action, index in
             print("delete button tapped")
@@ -113,6 +100,23 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     // MARK: - Service Call
+    
+    
+    func getMatchData(){
+        
+        getAllMatchData { (data) in
+            
+            self.matchData = data
+            self.matchDataSource.removeAll()
+            for (key,val) in data{
+                
+                var dataDict = val as! [String:String]
+                dataDict["key"] = key
+                self.matchDataSource.append(dataDict)
+                self.summaryTbl.reloadData()
+            }
+        }
+    }
     
     
     func getSummaryData() {

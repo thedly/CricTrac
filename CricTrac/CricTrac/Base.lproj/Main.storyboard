@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -3273,6 +3273,9 @@
                                         <state key="normal" title="Save">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="didTapSave:" destination="KYf-RK-Yvs" eventType="touchUpInside" id="hIo-ar-14K"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -3381,7 +3384,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <outlet property="delegate" destination="6Ih-6n-xPz" id="0vC-Hq-VsH"/>
+                                                    <outlet property="delegate" destination="qDe-nu-i1g" id="3bV-Pz-Q7J"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Team" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z3L-eh-00i" userLabel="Team" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
@@ -3414,7 +3417,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <outlet property="delegate" destination="6Ih-6n-xPz" id="Wml-kc-HQh"/>
+                                                    <outlet property="delegate" destination="qDe-nu-i1g" id="R5y-Hg-PBu"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Opponent" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fYP-Fx-0VD" userLabel="Opponent" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
@@ -3447,7 +3450,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <outlet property="delegate" destination="6Ih-6n-xPz" id="B33-nS-HM0"/>
+                                                    <outlet property="delegate" destination="qDe-nu-i1g" id="bSo-pt-Fhg"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ground" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9wD-2m-OQz" userLabel="Ground" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
@@ -3455,7 +3458,7 @@
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done"/>
+                                                <textInputTraits key="textInputTraits" spellCheckingType="no" returnKeyType="done"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="titleTextColour">
                                                         <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
@@ -3480,7 +3483,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <outlet property="delegate" destination="6Ih-6n-xPz" id="TvS-9i-OHZ"/>
+                                                    <outlet property="delegate" destination="qDe-nu-i1g" id="yBi-h4-gke"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Overs" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UqC-G6-aVZ" userLabel="Overs" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
@@ -3513,7 +3516,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <outlet property="delegate" destination="6Ih-6n-xPz" id="j1T-q7-aP5"/>
+                                                    <outlet property="delegate" destination="qDe-nu-i1g" id="dUY-Um-QTS"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Tournament" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OoZ-vw-tId" userLabel="Tournament" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
@@ -3546,7 +3549,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <outlet property="delegate" destination="6Ih-6n-xPz" id="z4a-ks-Of2"/>
+                                                    <outlet property="delegate" destination="qDe-nu-i1g" id="1Fw-hr-e1V"/>
                                                 </connections>
                                             </textField>
                                         </subviews>
@@ -3620,6 +3623,14 @@
                             <constraint firstItem="UdQ-zQ-maD" firstAttribute="height" secondItem="y12-xe-702" secondAttribute="height" id="qit-KS-cQO"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="dateText" destination="kg1-hI-0WI" id="OPG-He-DQX"/>
+                        <outlet property="groundText" destination="9wD-2m-OQz" id="FdU-dr-Agp"/>
+                        <outlet property="opponentText" destination="fYP-Fx-0VD" id="Xj2-ud-ICR"/>
+                        <outlet property="oversText" destination="UqC-G6-aVZ" id="wY3-uM-aj9"/>
+                        <outlet property="teamText" destination="z3L-eh-00i" id="TIb-Rh-POa"/>
+                        <outlet property="tournamentText" destination="OoZ-vw-tId" id="JAu-1a-JZO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JoA-qD-crd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -4327,6 +4338,15 @@
                             <constraint firstItem="V6O-Ap-eim" firstAttribute="height" secondItem="SnO-yC-rOP" secondAttribute="height" id="rtI-um-15B"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="ballsText" destination="voU-gE-mjK" id="7Jx-yb-xa4"/>
+                        <outlet property="dismissalText" destination="h0q-Ih-kpz" id="DNQ-ia-6Ba"/>
+                        <outlet property="foursText" destination="y91-Ui-Ozh" id="o8Z-ho-EVO"/>
+                        <outlet property="positionText" destination="Pqw-TY-BH8" id="dBa-iG-hkg"/>
+                        <outlet property="runsText" destination="4NF-ZZ-t4H" id="4HC-Vj-QZF"/>
+                        <outlet property="sixesText" destination="zNo-8F-9Ia" id="b2p-b8-z99"/>
+                        <outlet property="strikeRateText" destination="J7a-ME-fzX" id="CH5-kn-obG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9NR-0Z-ObI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -5583,6 +5603,14 @@
                             <constraint firstItem="qCU-1G-wq8" firstAttribute="height" secondItem="Zyl-Tq-ZXc" secondAttribute="height" id="lRI-Ll-Mli"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="economyText" destination="mV4-a6-8lZ" id="48U-tc-MwC"/>
+                        <outlet property="noballText" destination="EsA-Fa-EdD" id="AO6-ZJ-Rc1"/>
+                        <outlet property="oversText" destination="gyR-EB-iAt" id="wwt-R8-3ET"/>
+                        <outlet property="runsText" destination="EVa-W5-Onh" id="f6z-J8-PYc"/>
+                        <outlet property="wicketsText" destination="jdx-dj-6nJ" id="dFs-Jf-S6A"/>
+                        <outlet property="widesText" destination="Yms-zf-rfI" id="jjY-vg-8WB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qwv-Tw-eP4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

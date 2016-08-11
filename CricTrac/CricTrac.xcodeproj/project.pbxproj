@@ -28,6 +28,7 @@
 		46F259FD1D559593001EBEF9 /* BattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F259FC1D559593001EBEF9 /* BattingViewController.swift */; };
 		46F259FF1D55AB30001EBEF9 /* BowlingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F259FE1D55AB30001EBEF9 /* BowlingViewController.swift */; };
 		46F25A011D55C1C0001EBEF9 /* ExtraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F25A001D55C1C0001EBEF9 /* ExtraViewController.swift */; };
+		46F25A031D5B1AAD001EBEF9 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F25A021D5B1AAD001EBEF9 /* Service.swift */; };
 		892E1A971D3BC8D100EBF014 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 892E1A951D3BC8D100EBF014 /* Main.storyboard */; };
 		892EA67B1D58DDD100BEE5A3 /* parallaxVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892EA67A1D58DDD100BEE5A3 /* parallaxVC.swift */; };
 		892EA67E1D58DEBE00BEE5A3 /* ProfileDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892EA67C1D58DEBE00BEE5A3 /* ProfileDetails.swift */; };
@@ -91,6 +92,7 @@
 		46F259FC1D559593001EBEF9 /* BattingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BattingViewController.swift; path = Controller/BattingViewController.swift; sourceTree = "<group>"; };
 		46F259FE1D55AB30001EBEF9 /* BowlingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BowlingViewController.swift; path = Controller/BowlingViewController.swift; sourceTree = "<group>"; };
 		46F25A001D55C1C0001EBEF9 /* ExtraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtraViewController.swift; path = Controller/ExtraViewController.swift; sourceTree = "<group>"; };
+		46F25A021D5B1AAD001EBEF9 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Service.swift; path = Other/Service.swift; sourceTree = "<group>"; };
 		549F76A86F0BF1CECAF26359 /* Pods-CricTrac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CricTrac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CricTrac/Pods-CricTrac.debug.xcconfig"; sourceTree = "<group>"; };
 		892E1A961D3BC8D100EBF014 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		892EA67A1D58DDD100BEE5A3 /* parallaxVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = parallaxVC.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 		8958F5F41D392CC50028D5AA /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				46F25A021D5B1AAD001EBEF9 /* Service.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 				89CC84FC1D43E4D6007F2402 /* SummaryMatchDetailsViewController.swift in Sources */,
 				892EA67B1D58DDD100BEE5A3 /* parallaxVC.swift in Sources */,
 				89F4E4B31D48FECD00EFE46E /* summaryTableViewCell.swift in Sources */,
+				46F25A031D5B1AAD001EBEF9 /* Service.swift in Sources */,
 				892EA68D1D58F78500BEE5A3 /* DashboardBowlingDetailsViewController.swift in Sources */,
 				89C8196C1D52362300291A7E /* POCViewController.swift in Sources */,
 				89C8196E1D52429500291A7E /* headerView.swift in Sources */,
