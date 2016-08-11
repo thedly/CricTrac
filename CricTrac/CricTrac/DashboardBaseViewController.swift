@@ -77,7 +77,7 @@ class DashboardBaseViewController: ButtonBarPagerTabStripViewController {
     
     func didNewMatchButtonTapp(){
         
-        let newMatchVc = viewControllerFrom("Main", vcid: "NewMatchViewController")
+        let newMatchVc = viewControllerFrom("Main", vcid: "AddMatchDetailsViewController")
         self.presentViewController(newMatchVc, animated: true) {}
     }
     
