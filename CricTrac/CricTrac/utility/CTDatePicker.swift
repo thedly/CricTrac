@@ -47,7 +47,7 @@ class CTDatePicker: NSObject {
     
     func doneClick() {
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = .MediumStyle
+        dateFormatter.dateStyle = .ShortStyle
         dateFormatter.timeStyle = .NoStyle
         inputText.text = dateFormatter.stringFromDate(datePicker.date)
         inputText.resignFirstResponder()
