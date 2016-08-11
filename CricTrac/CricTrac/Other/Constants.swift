@@ -15,7 +15,7 @@ public var date = 0
 let menuData = [
 
     ["title":"New Match","vc":"AddMatchDetailsViewController"],
-    ["title":"Profile","vc":"ProfileViewController"],
+    ["title":"Profile","vc":"ProfileBaseViewController"],
     ["title":"Summary","vc":"SummaryViewController"],
     ["title":"Statistics","vc":"NewMatchViewController"],
     ["title":"Invite Friends","vc":"NewMatchViewController"],
