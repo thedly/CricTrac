@@ -22,7 +22,6 @@ class DashboardBaseViewController: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarItemFont = UIFont(name: "SFUIText-Regular", size: 15)!
         setNavigationBarProperties()
         KRProgressHUD.dismiss()
-        setUserData()
         // Do any additional setup after loading the view.
     }
 

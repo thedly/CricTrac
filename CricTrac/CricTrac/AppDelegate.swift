@@ -10,6 +10,9 @@ import UIKit
 import Firebase
 import KYDrawerController
 
+import Fabric
+import Crashlytics
+
 import FBSDKCoreKit
 import FirebaseDatabase
 import FirebaseAuth
@@ -26,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         FIRApp.configure()
+        Fabric.with([Crashlytics.self])
         setSliderMenu()
         return true
     }
