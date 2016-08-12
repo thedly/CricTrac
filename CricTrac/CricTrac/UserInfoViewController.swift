@@ -139,7 +139,7 @@ extension UserInfoViewController:UITextFieldDelegate{
             state.text = String()
         }
         else if textField == state {
-            ctStatePicker.showPicker(self, inputText: textField, InputISO: ctCountryPicker.SelectedISO)
+            ctStatePicker.showPicker(self, inputText: textField, states: ctCountryPicker.States)
         }
     }
     

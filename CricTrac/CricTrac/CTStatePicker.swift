@@ -24,16 +24,15 @@ class CTStatePicker: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
         return _selectedState ?? String()
     }
     
-    func showPicker(parent:UIViewController,inputText:UITextField, InputISO: String){
+    func showPicker(parent:UIViewController,inputText:UITextField, states: [String]){
         
-        if InputISO == "" {
+        if states.count == 0 {
             return
         }
         
         self.inputText = inputText
         self.parent = parent
-        self.inputISO = InputISO
-        pickerData = getStatesByISO(self.inputISO)
+        pickerData = states
         
         if statePicker == nil {
             statePicker = UIPickerView(frame: CGRectMake(0,0,parent.view.frame.size.width, 216))
@@ -69,25 +68,7 @@ class CTStatePicker: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
         inputText.resignFirstResponder()
     }
     
-    func getStatesByISO(_iso : String) -> [String] {
-        do {
-            let states = try CSV(name: NSBundle.mainBundle().pathForResource("data", ofType: "csv")!)
-            let iso : String = (_iso)
-            
-            var filteredStatesByISO = [String]()
-            
-            states.enumerateAsArray { array in
-                if array[4] == iso {
-                    filteredStatesByISO.append(array[2])
-                }
-            }
-            return filteredStatesByISO
-        }
-        catch let error as NSError {
-            print(error.debugDescription)
-            return [String]()
-        }
-    }
+    
     
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
