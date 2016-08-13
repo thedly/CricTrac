@@ -6,7 +6,10 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
+  - Crashlytics (3.7.3):
+    - Fabric (~> 1.6.3)
   - CSStickyHeaderFlowLayout (0.2.10)
+  - Fabric (1.6.8)
   - FBSDKCoreKit (4.14.0):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.14.0):
@@ -67,7 +70,9 @@ PODS:
 
 DEPENDENCIES:
   - AnimatedTextInput (~> 0.3.0)
+  - Crashlytics
   - CSStickyHeaderFlowLayout
+  - Fabric
   - FBSDKLoginKit
   - Firebase
   - Firebase/Auth
@@ -85,7 +90,9 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AnimatedTextInput: ee6963df42320fb311f23e32f014811711920cc8
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  Crashlytics: 76f6beaff70acf226139582c09c78461597c2b98
   CSStickyHeaderFlowLayout: 5366582779d8b7c9ba9b9cc729c218cc23888776
+  Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
   FBSDKCoreKit: 6e020b5db0b5bd1e01f5fb0902131befd129a502
   FBSDKLoginKit: da563567a108050ef83739c8c8c001ee9e25fa13
   Firebase: 754562547af419cc2f4b15247fee419081924bc2
@@ -110,6 +117,6 @@ SPEC CHECKSUMS:
   SwiftCSV: 8b64b738fc54567d229acb17ce6d584e0dd27560
   XLPagerTabStrip: 87b8b705f9a7178e76a063ffaa2d70045944a965
 
-PODFILE CHECKSUM: 66421f51b5cd49840d9a1da1f81ca1ac9d0c012d
+PODFILE CHECKSUM: 631f0b2ddd9272112a397df6de30daae36740a10
 
 COCOAPODS: 1.0.1
