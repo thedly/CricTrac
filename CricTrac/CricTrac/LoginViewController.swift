@@ -62,6 +62,7 @@ class LoginViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelega
         firebaseLogin(credential, sucess: { (user) in
             self.saveGoogleTocken(authentication.idToken, accessToken: authentication.accessToken)
             currentUser = user
+            enableSync()
             self.navigateToNextScreen()
             }, failure: { (error) in
                 
@@ -140,6 +141,7 @@ class LoginViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelega
                     
                     self.saveFBToken(FBSDKAccessToken.currentAccessToken().tokenString)
                     currentUser = user
+                    enableSync()
                     self.navigateToNextScreen()
                     }, failure: { (error) in
                         

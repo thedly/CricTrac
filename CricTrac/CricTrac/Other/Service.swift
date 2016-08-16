@@ -12,7 +12,7 @@ import Firebase
 func addMatchData(key:NSString,data:[String:String]){
     
     
-    let ref = userDataRef.child(currentUser!.uid).child("Matches").childByAutoId()
+    let ref = fireBaseRef.child(currentUser!.uid).child("Matches").childByAutoId()
     ref.setValue(data)
     
 }
@@ -21,7 +21,7 @@ func getAllMatchData(sucessBlock:([String:AnyObject])->Void){
     
     
     
-   userDataRef.child(currentUser!.uid).child("Matches").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+   fireBaseRef.child(currentUser!.uid).child("Matches").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
     
     if let data = snapshot.value! as? [String:AnyObject]{
         
@@ -31,4 +31,9 @@ func getAllMatchData(sucessBlock:([String:AnyObject])->Void){
         sucessBlock([:])
     }
     })
+}
+
+func enableSync(){
+    
+    fireBaseRef.child(currentUser!.uid).keepSynced(true)
 }

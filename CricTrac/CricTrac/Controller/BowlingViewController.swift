@@ -23,7 +23,7 @@ class BowlingViewController: UIViewController,IndicatorInfoProvider {
     
     var data:[String:String]{
         
-        return ["OversBalled":oversText.text!,"Wickets":wicketsText.text!,"RunsGiven":runsText.text!,"Noballs":noballText.text!,"Wides":widesText.text!]
+        return ["OversBalled":oversText.textVal,"Wickets":wicketsText.textVal,"RunsGiven":runsText.textVal,"Noballs":noballText.textVal,"Wides":widesText.text!]
     }
     
     
@@ -45,5 +45,8 @@ class BowlingViewController: UIViewController,IndicatorInfoProvider {
         return IndicatorInfo(title: "BOWLING")
     }
     
-    
+    func allRequiredFieldsHaveFilledProperly()->Bool{
+        
+        return false
+    }
 }

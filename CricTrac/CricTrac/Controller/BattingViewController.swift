@@ -23,7 +23,8 @@ class BattingViewController: UIViewController,IndicatorInfoProvider {
     
     var data:[String:String]{
         
-        return ["Runs":runsText.text!,"Balls":ballsText.text!,"Fours":foursText.text!,"Sixes":sixesText.text!,"Position":positionText.text!,"Dismissal":dismissalText.text!]
+        
+        return ["Runs":runsText.textVal,"Balls":ballsText.textVal,"Fours":foursText.textVal,"Sixes":sixesText.textVal,"Position":positionText.textVal,"Dismissal":dismissalText.textVal]
     }
     
     
@@ -45,5 +46,9 @@ class BattingViewController: UIViewController,IndicatorInfoProvider {
         return IndicatorInfo(title: "BATTING")
     }
 
+    func allRequiredFieldsHaveFilledProperly()->Bool{
+        
+        return false
+    }
 
 }

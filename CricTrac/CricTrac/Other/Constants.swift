@@ -24,7 +24,7 @@ let menuData = [
 ]
 
 
-let userDataRef =  FIRDatabase.database().referenceFromURL("https://arjun-innovations.firebaseio.com")
+let fireBaseRef =  FIRDatabase.database().referenceFromURL("https://arjun-innovations.firebaseio.com")
 
 
 struct CustomTextInputStyle: AnimatedTextInputStyle {

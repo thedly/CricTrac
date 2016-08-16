@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         FIRApp.configure()
+        FIRDatabase.database().persistenceEnabled = true
         Fabric.with([Crashlytics.self])
         setSliderMenu()
         return true

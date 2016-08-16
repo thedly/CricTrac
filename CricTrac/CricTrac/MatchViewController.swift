@@ -27,7 +27,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider {
     
     var data:[String:String]{
         
-        return ["Date":dateText.text!,"Team":teamText.text!,"Opponent":opponentText.text!,"Ground":groundText.text!,"Overs":oversText.text!,"Tournamnet":tournamentText.text!]
+        return ["Date":dateText.textVal,"Team":teamText.textVal,"Opponent":opponentText.textVal,"Ground":groundText.textVal,"Overs":oversText.textVal,"Tournamnet":tournamentText.textVal]
     }
     
     override func viewDidLoad() {
@@ -46,6 +46,23 @@ class MatchViewController: UIViewController,IndicatorInfoProvider {
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "MATCH")
+    }
+    
+    var allRequiredFieldsHaveNotFilledProperly:Bool{
+        
+        if !(dateText.text?.hasDataPresent)!{
+            return true
+        }
+        else if !(teamText.text?.hasDataPresent)!{
+            
+            return true
+        }
+        else if !(opponentText.text?.hasDataPresent)!{
+            
+            return true
+        }
+        
+        return false
     }
     
 }

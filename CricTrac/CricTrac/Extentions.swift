@@ -62,6 +62,22 @@ extension String {
     var length: Int {
         return self.characters.count
     }
+    
+    var trimWhiteSpace:String{
+       return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+    }
+    
+    var hasDataPresent:Bool{
+        
+        let value = self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        if value.length > 0 {
+            return true
+        }
+        else{
+            return false
+        }
+
+    }
 }
 
 extension UIView {
@@ -90,4 +106,20 @@ extension UIScrollView {
     }
 }
 
+extension UITextField{
+    
+    var textVal:String{
+        
+        if  (self.text?.length < 1) || self.text == nil{
+            
+            return "NA"
+        }
+        else{
+            
+            return self.text!
+        }
+        
+        
+    }
+}
 

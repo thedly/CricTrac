@@ -8,12 +8,14 @@
 
 import UIKit
 import XLPagerTabStrip
+import SCLAlertView
 
 class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
 
     var matchVC:MatchViewController!
     var battingVC:BattingViewController!
     var bowlingVC:BowlingViewController!
+    var extraVC:ExtraViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,11 +44,31 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
     
     @IBAction func didTapSave(sender: UIButton) {
         
-        var data = matchVC.data
-        data += battingVC.data
-        data += bowlingVC.data
-        addMatchData("date \(String(date))",data: data)
-        self.dismissViewControllerAnimated(true) {}
+        
+        if validateMatchDetails(){
+            
+            var data = [String:String]()
+            if let _ = matchVC?.view{
+                
+                data += matchVC.data
+            }
+            if let _ = battingVC?.view{
+                
+                data += battingVC.data
+            }
+            if let _ = bowlingVC?.view{
+                
+                data += bowlingVC.data
+            }
+            if let _ = extraVC?.view{
+                
+                data += extraVC.data
+            }
+
+            addMatchData("date \(String(date))",data: data)
+            self.dismissViewControllerAnimated(true) {}
+    
+        }
         
     }
     
@@ -60,11 +82,48 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
         
         bowlingVC = viewControllerFrom("Main", vcid: "BowlingViewController") as! BowlingViewController
         
-         let vc2 = viewControllerFrom("Main", vcid: "ExtraViewController")
+         extraVC = viewControllerFrom("Main", vcid: "ExtraViewController") as! ExtraViewController
         
-        return [matchVC, battingVC,bowlingVC,vc2]
+        return [matchVC, battingVC,bowlingVC,extraVC]
     }
 
+    
+    
+    func validateMatchDetails()->Bool{
+        
+        var pageName = ""
+        
+        if matchVC.allRequiredFieldsHaveNotFilledProperly{
+            
+           pageName = "Match Details"
+        }
+        else{
+            return true
+        }
+        
+         SCLAlertView().showWarning("Error", subTitle: "Some Fields are not filled properly in \(pageName). Plaese fill it and try saving")
+        
+        return false
+    }
+    
+    func validateBattingInfo()->Bool{
+        
+        return false
+    }
+    func validateBawlingInfo()->Bool{
+        
+        return false
+    }
+    
+    func validateExtraInfo()->Bool{
+        
+        return false
+    }
+    
+    func validateBasicInfo()->Bool{
+        
+        return false
+    }
 
     /*
     // MARK: - Navigation
