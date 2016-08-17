@@ -8,7 +8,6 @@
 
 import SwiftCountryPicker
 
-import SwiftCSV
 
 class CTStatePicker: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
     

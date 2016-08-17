@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import IOStickyHeader
+
 class ProfileDetails: UICollectionViewCell {
     
     @IBOutlet weak var profileName: UILabel!

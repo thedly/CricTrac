@@ -69,7 +69,7 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         country.delegate = self
         state.delegate = self
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ProfileViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserInfoViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         scrollView.setContentOffset(CGPointZero, animated: true)
         scrollViewTop = scrollView.frame.origin.y
     }

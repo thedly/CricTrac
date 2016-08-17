@@ -9,7 +9,6 @@
 import UIKit
 import SwiftCountryPicker
 
-import SwiftCSV
 
 class CTCountryPicker: NSObject {
     

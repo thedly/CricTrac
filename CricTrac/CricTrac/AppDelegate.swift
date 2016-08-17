@@ -139,24 +139,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = loginVC
         
     }
-
-    
-    func summaryClicked(sender: UIButton){
-        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc : SummaryViewController = storyboard.instantiateViewControllerWithIdentifier("SummaryViewController") as! SummaryViewController
-        
-        sliderMenu.mainViewController.presentViewController(vc, animated: true, completion: nil)
-        sliderMenu.setDrawerState(KYDrawerController.DrawerState.Closed, animated: true)
-    }
-    func profileBtnClicked(sender: UIButton) {
-        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc : ProfileViewController = storyboard.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
-        
-        sliderMenu.mainViewController.presentViewController(vc, animated: true, completion: nil)
-        sliderMenu.setDrawerState(KYDrawerController.DrawerState.Closed, animated: true)
-
-    }
-    
     
     
     func moveToNextScreen(){
