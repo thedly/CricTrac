@@ -24,16 +24,16 @@ class CTStatePicker: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
         return _selectedState ?? String()
     }
     
-    func showPicker(parent:UIViewController,inputText:UITextField, InputISO: String){
+    func showPicker(parent:UIViewController,inputText:UITextField, iso: String){
         
-        if InputISO == "" {
+        if iso == "" {
             return
         }
         
         self.inputText = inputText
         self.parent = parent
-        self.inputISO = InputISO
-        pickerData = getStatesByISO(self.inputISO)
+        self.inputISO = iso
+        pickerData = getStatesByISO(iso)
         
         if statePicker == nil {
             statePicker = UIPickerView(frame: CGRectMake(0,0,parent.view.frame.size.width, 216))
@@ -69,25 +69,7 @@ class CTStatePicker: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
         inputText.resignFirstResponder()
     }
     
-    func getStatesByISO(_iso : String) -> [String] {
-        do {
-            let states = try CSV(name: NSBundle.mainBundle().pathForResource("data", ofType: "csv")!)
-            let iso : String = (_iso)
-            
-            var filteredStatesByISO = [String]()
-            
-            states.enumerateAsArray { array in
-                if array[4] == iso {
-                    filteredStatesByISO.append(array[2])
-                }
-            }
-            return filteredStatesByISO
-        }
-        catch let error as NSError {
-            print(error.debugDescription)
-            return [String]()
-        }
-    }
+    
     
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -104,6 +86,26 @@ class CTStatePicker: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
         _selectedState = pickerData[row]
     }
     
+    
+    func getStatesByISO(_iso : String) -> [String] {
+        do {
+            var filteredStates = [String]()
+            if let path = NSBundle.mainBundle().pathForResource("country-states", ofType: "plist") {
+                let statelist = NSArray(contentsOfFile: path) as! [[String:String]]
+                
+                for item in statelist {
+                    if item["ISO"] == inputISO {
+                        filteredStates.append(item["State"]!)
+                    }
+                }
+            }
+            return filteredStates
+        }
+        catch let error as NSError {
+            print(error.debugDescription)
+            return [String]()
+        }
+    }
 }
 
 

@@ -18,7 +18,7 @@ let menuData = [
     ["title":"Profile","vc":"ProfileBaseViewController"],
     ["title":"Summary","vc":"SummaryViewController"],
     ["title":"Statistics","vc":"NewMatchViewController"],
-    ["title":"Invite Friends","vc":"NewMatchViewController"],
+    ["title":"Invite Friends","vc":"FriendBaseViewController"],
     ["title":"Friends Requests","vc":"NewMatchViewController"],
     ["title":"Notification","vc":"NewMatchViewController"],
 ]

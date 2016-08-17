@@ -89,6 +89,7 @@ class DashboardBattingDetailsViewController: UIViewController,IndicatorInfoProvi
         if section == 1 {
             let vw = UIView()
             let headerLbl = UILabel(frame: CGRectMake(20, 10, UIScreen.mainScreen().bounds.size.width, 30))
+            headerLbl.backgroundColor = UIColor.whiteColor()
             headerLbl.textColor = UIColor(hex: "6D9447")
             headerLbl.font = UIFont(name: "SFUIText-Bold", size: 20)
             //headerLbl.font = UIFont.boldSystemFontOfSize(20)

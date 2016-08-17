@@ -89,6 +89,7 @@ class DashboardBowlingDetailsViewController: UIViewController,IndicatorInfoProvi
             let vw = UIView()
             let headerLbl = UILabel(frame: CGRectMake(20, 10, UIScreen.mainScreen().bounds.size.width, 30))
             headerLbl.textColor = UIColor(hex: "6D9447")
+            headerLbl.backgroundColor = UIColor.whiteColor()
             headerLbl.font = UIFont(name: "SFUIText-Bold", size: 20)
             //headerLbl.font = UIFont.boldSystemFontOfSize(20)
             headerLbl.text = "Recent Matches"

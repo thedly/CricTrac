@@ -21,7 +21,7 @@ class DashboardBaseViewController: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarItemTitleColor = UIColor(hex: "#667815")
         buttonBarView.selectedBar.backgroundColor = UIColor(hex: "#B12420")
         settings.style.buttonBarItemFont = UIFont(name: "SFUIText-Regular", size: 15)!
-        setNavigationBarProperties()
+        //setNavigationBarProperties()
         KRProgressHUD.dismiss()
         // Do any additional setup after loading the view.
     }
@@ -68,43 +68,8 @@ class DashboardBaseViewController: ButtonBarPagerTabStripViewController {
         
     }
     
+        
     
-    // MARK: - functions
-    
-    func didMenuButtonTapp(){
-        sliderMenu.setDrawerState(.Opened, animated: true)
-    }
-    
-    func didNewMatchButtonTapp(){
-        
-        let newMatchVc = viewControllerFrom("Main", vcid: "AddMatchDetailsViewController")
-        self.presentViewController(newMatchVc, animated: true) {}
-    }
-    
-    func setNavigationBarProperties(){
-        let menuButton: UIButton = UIButton(type:.Custom)
-        menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
-        menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
-        menuButton.frame = CGRectMake(0, 0, 40, 40)
-        let leftbarButton = UIBarButtonItem(customView: menuButton)
-        
-        
-        let addNewMatchButton: UIButton = UIButton(type:.Custom)
-        addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
-        addNewMatchButton.setTitle("+", forState:.Normal)
-        addNewMatchButton.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 30)
-        addNewMatchButton.addTarget(self, action: #selector(didNewMatchButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
-        let righttbarButton = UIBarButtonItem(customView: addNewMatchButton)
-        
-        //assign button to navigationbar
-        
-        navigationItem.leftBarButtonItem = leftbarButton
-        navigationItem.rightBarButtonItem = righttbarButton
-        navigationController!.navigationBar.barTintColor = UIColor(hex:"B12420")
-        title = "Dashboard"
-        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        navigationController!.navigationBar.titleTextAttributes = titleDict
-    }
     
     
 

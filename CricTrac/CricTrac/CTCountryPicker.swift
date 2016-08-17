@@ -16,7 +16,7 @@ class CTCountryPicker: NSObject {
     var countryPicker: CountryPicker!
     var inputText:UITextField!
     var parent:UIViewController!
-    
+    private var states: [String]!
     var SelectedCountry: String {
         if countryPicker != nil , let _selectedCountry = countryPicker.pickedCountry! as? Country {
             return _selectedCountry.name
@@ -35,6 +35,17 @@ class CTCountryPicker: NSObject {
         {
             return String()
         }
+    }
+    
+    var States: [String] {
+        if let _states = states as? [String] {
+            return _states
+        }
+        else
+        {
+            return [String]()
+        }
+        
     }
     
     func showPicker(parent:UIViewController,inputText:UITextField){
@@ -72,5 +83,7 @@ class CTCountryPicker: NSObject {
     func cancelClick() {
         inputText.resignFirstResponder()
     }
+    
+    
     
 }
