@@ -77,9 +77,9 @@ extension MatchViewController:UITextFieldDelegate{
         if textField == dateText{
             ctDatePicker.showPicker(self, inputText: textField)
         }
-        else if textField == groundText || textField == tournamentText || textField == opponentText{
-            
-            addSuggstionBox(textField,dataSource: states)
+        else if textField == teamText{
+        
+            addSuggstionBox(textField,dataSource: teamNames)
         }
         
     }

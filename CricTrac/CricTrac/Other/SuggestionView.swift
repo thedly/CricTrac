@@ -129,7 +129,7 @@ func removeSuggestion(){
 func addSuggstionBox(textField:UITextField,dataSource:[String]){
     
     let suggBox = sBox
-    suggBox.setDataSource(states)
+    suggBox.setDataSource(dataSource)
     suggBox.textField = textField
     suggBox.oldDelegate = textField.delegate
     suggBox.hidden = true

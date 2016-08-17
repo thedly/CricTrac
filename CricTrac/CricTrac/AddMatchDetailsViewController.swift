@@ -9,6 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 import SCLAlertView
+import KRProgressHUD
 
 class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
 
@@ -19,7 +20,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        getUserData()
         // Do any additional setup after loading the view.
         settings.style.buttonBarItemBackgroundColor = UIColor.whiteColor()
         settings.style.buttonBarItemTitleColor = UIColor(hex: "#667815")
@@ -27,14 +28,35 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
         settings.style.buttonBarItemFont = UIFont(name: "SFUIText-Regular", size: 15)!
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+
+    func getUserData(){
+
+        KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+        getAllUserData { (userData) in
+        
+            if let grounds = userData["Grounds"] as? [String:String]{
+                
+                groundNames = grounds.map({ (key,value) in value })
+                
+            }
+            
+            if let grounds = userData["Teams"] as? [String:String]{
+                
+                teamNames = grounds.map({ (key,value) in value })
+                
+            }
+            
+            if let grounds = userData["OppositTeams"] as? [String:String]{
+                
+                opponentTeams = grounds.map({ (key,value) in value })
+                
+            }
+            KRProgressHUD.dismiss()
+        }
         
         
-        
-      
     }
+    
     
     @IBAction func DidtapCancelButton(sender: AnyObject) {
         
@@ -65,6 +87,11 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
                 data += extraVC.data
             }
 
+            let teamName = data["Team"]!
+            if !teamNames.contains(teamName){
+                addNewTeamName(teamName)
+            }
+            
             addMatchData("date \(String(date))",data: data)
             self.dismissViewControllerAnimated(true) {}
     

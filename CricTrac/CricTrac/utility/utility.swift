@@ -13,6 +13,10 @@ import FirebaseAuth
 var sliderMenu = KYDrawerController()
 var currentUser:FIRUser?
 
+var groundNames = [String]()
+var teamNames = [String]()
+var opponentTeams = [String]()
+
 
 public func viewControllerFrom(storyBoard:String,vcid:String)->UIViewController{
     

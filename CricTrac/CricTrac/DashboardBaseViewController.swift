@@ -15,6 +15,7 @@ class DashboardBaseViewController: ButtonBarPagerTabStripViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         // Do any additional setup after loading the view.
         settings.style.buttonBarItemBackgroundColor = UIColor.whiteColor()
         settings.style.buttonBarItemTitleColor = UIColor(hex: "#667815")
