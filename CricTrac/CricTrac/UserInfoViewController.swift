@@ -10,7 +10,7 @@
 import UIKit
 import XLPagerTabStrip
 
-class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, IndicatorInfoProvider  {
+class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
     
     lazy var ctDatePicker = CTDatePicker()
     lazy var ctCountryPicker = CTCountryPicker()
@@ -19,8 +19,18 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var scrollView:UIScrollView!
     
    
+    @IBOutlet weak var genderText: UILabel!
+    @IBAction func genderSelectionPressed(sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            self.genderText.text = "Male"
+        }
+        else
+        {
+            self.genderText.text = "Female"
+        }
+        
+    }
     
-    @IBOutlet weak var profileImg: UIImageView!
     
     var teamdata: [String]!
     var grounddata: [String]!
@@ -63,8 +73,6 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     
     func initializeView(){
         
-        profileImg.layer.cornerRadius = 10
-        profileImg.clipsToBounds = true
         dateOfBirth.delegate = self
         country.delegate = self
         state.delegate = self
@@ -77,57 +85,6 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    
-    @IBAction func addPhotBtnPressed(sender: AnyObject) {
-        
-        
-        
-        let alertController = UIAlertController(title: nil, message: "Change your picture", preferredStyle: .ActionSheet)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
-            // ...
-        }
-        alertController.addAction(cancelAction)
-        
-        let TakePictureAction = UIAlertAction(title: "Take Photo", style: .Default) { (action) in
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
-                var imagePicker = UIImagePickerController()
-                imagePicker.delegate = self
-                imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
-                imagePicker.allowsEditing = false
-                self.presentViewController(imagePicker, animated: true, completion: nil)
-            }
-        }
-        
-        alertController.addAction(TakePictureAction)
-        
-        let chooseExistingAction = UIAlertAction(title: "Choose Existing", style: .Default) { (action) in
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
-                var imagePicker = UIImagePickerController()
-                imagePicker.delegate = self
-                imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
-                imagePicker.allowsEditing = false
-                self.presentViewController(imagePicker, animated: true, completion: nil)
-            }
-        }
-        
-        alertController.addAction(chooseExistingAction)
-        
-        
-        self.presentViewController(alertController, animated: true) {
-            // ...
-        }
-        
-        //presentViewController(imgPicker, animated: true, completion: nil)
-        
-    }
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        print(image)
-        profileImg.image = image
-        dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func didTapCancel(sender: UIButton) {

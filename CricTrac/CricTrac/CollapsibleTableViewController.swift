@@ -11,7 +11,7 @@ import UIKit
 import XMExpandableTableView
 import XLPagerTabStrip
 
-class CollapsibleTableViewController: XMExpandableTableView {
+class CollapsibleTableViewController: XMExpandableTableView,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet var mainTable: UITableView!
     
@@ -73,11 +73,50 @@ class CollapsibleTableViewController: XMExpandableTableView {
     @IBOutlet weak var UserName: UILabel!
     
     
+    @IBAction func editImageBtnPressed(sender: AnyObject) {
+        
+        let alertController = UIAlertController(title: nil, message: "Change your picture", preferredStyle: .ActionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+            // ...
+        }
+        alertController.addAction(cancelAction)
+        
+        let TakePictureAction = UIAlertAction(title: "Take Photo", style: .Default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
+                imagePicker.allowsEditing = false
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+            }
+        }
+        
+        alertController.addAction(TakePictureAction)
+        
+        let chooseExistingAction = UIAlertAction(title: "Choose Existing", style: .Default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+                imagePicker.allowsEditing = false
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+            }
+        }
+        
+        alertController.addAction(chooseExistingAction)
+        
+        
+        self.presentViewController(alertController, animated: true) {
+            // ...
+        }
+
+    }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         super.tableView(tableView, didSelectRowAtIndexPath: indexPath)
         
-        var currentCell = tableView.cellForRowAtIndexPath(indexPath)
+        let currentCell = tableView.cellForRowAtIndexPath(indexPath)
         
         currentCell!.contentView.backgroundColor = UIColor.clearColor()
         
@@ -181,6 +220,18 @@ class CollapsibleTableViewController: XMExpandableTableView {
         let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         navigationController!.navigationBar.titleTextAttributes = titleDict
     }
+    
+    
+    
+    //MARK: - Image picker delegate
+    
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        print(image)
+        profileImage.image = image
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     
     
 }
