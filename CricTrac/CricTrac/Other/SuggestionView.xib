@@ -12,7 +12,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TWE-us-X9P">
-                    <rect key="frame" x="0.0" y="0.0" width="570" height="600"/>
+                    <rect key="frame" x="0.0" y="0.0" width="550" height="600"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="iN0-l3-epB" id="06R-Lc-dhZ"/>
@@ -20,12 +20,11 @@
                     </connections>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4J-jB-TAW">
-                    <rect key="frame" x="575" y="5" width="10" height="10"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="10" id="Kdu-4y-nc9"/>
-                        <constraint firstAttribute="height" constant="10" id="VPn-wz-uCx"/>
-                    </constraints>
-                    <state key="normal" image="close"/>
+                    <rect key="frame" x="555" y="0.0" width="34" height="30"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                    <state key="normal" title="close">
+                        <color key="titleColor" red="0.69411764710000001" green="0.14117647059999999" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="didCancel:" destination="-1" eventType="touchUpInside" id="FXa-7p-Qer"/>
                         <action selector="didCancel:" destination="iN0-l3-epB" eventType="touchUpOutside" id="OSn-OF-tgo"/>
@@ -37,10 +36,10 @@
             <constraints>
                 <constraint firstItem="TWE-us-X9P" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="62x-ww-19o"/>
                 <constraint firstItem="p4J-jB-TAW" firstAttribute="leading" secondItem="TWE-us-X9P" secondAttribute="trailing" constant="5" id="F0P-Id-KHF"/>
-                <constraint firstItem="TWE-us-X9P" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" constant="-30" id="SFB-ks-EwT"/>
+                <constraint firstItem="TWE-us-X9P" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" constant="-50" id="SFB-ks-EwT"/>
                 <constraint firstItem="TWE-us-X9P" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="YUm-zp-7tb"/>
                 <constraint firstItem="TWE-us-X9P" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="if9-Wv-ayC"/>
-                <constraint firstItem="p4J-jB-TAW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="q6M-vs-qqn"/>
+                <constraint firstItem="p4J-jB-TAW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="q6M-vs-qqn"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <connections>
@@ -48,7 +47,4 @@
             </connections>
         </view>
     </objects>
-    <resources>
-        <image name="close" width="16" height="16"/>
-    </resources>
 </document>

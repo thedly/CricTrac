@@ -44,13 +44,12 @@ class SuggestionView: UIView,UITableViewDelegate,UITableViewDataSource,UITextFie
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        return 20
+        return 30
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         textField?.text = filturedData![indexPath.row]
-        textField?.delegate = oldDelegate
-        self.removeFromSuperview()
+        self.hidden = true
     }
     
     func textFieldShouldEndEditing(textField: UITextField) -> Bool{
@@ -63,7 +62,7 @@ class SuggestionView: UIView,UITableViewDelegate,UITableViewDataSource,UITextFie
     
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool{
-        
+        self.hidden = false
         var newString = ""
         
         if string == ""{
@@ -79,9 +78,17 @@ class SuggestionView: UIView,UITableViewDelegate,UITableViewDataSource,UITextFie
         }
         if newString != ""{
         filturedData = dataSource!.filter() { $0.rangeOfString(newString, options: [.DiacriticInsensitiveSearch, .CaseInsensitiveSearch]) != nil }
+            
+            if filturedData?.count == 0{
+                self.hidden = true
+            }
+            else{
+                self.hidden = false
+            }
+            
         }
         else{
-           filturedData = dataSource!
+           self.hidden = true
         }
         suggestionTable.reloadData()
         return true
@@ -125,7 +132,7 @@ func addSuggstionBox(textField:UITextField,dataSource:[String]){
     suggBox.setDataSource(states)
     suggBox.textField = textField
     suggBox.oldDelegate = textField.delegate
-    
+    suggBox.hidden = true
     let theFrame = textField.frame
     suggBox.frame = CGRectMake(theFrame.minX, theFrame.maxY, theFrame.width, 20)
     
@@ -141,7 +148,7 @@ func addSuggstionBox(textField:UITextField,dataSource:[String]){
    let heightConstraint =   NSLayoutConstraint(item: suggBox, attribute:
         .Height, relatedBy: .Equal, toItem: nil,
                  attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
-                 constant: 50)
+                 constant: 100)
     
     let widthConstraint = NSLayoutConstraint(item: suggBox, attribute:
         .Width , relatedBy: .Equal, toItem: textField,
