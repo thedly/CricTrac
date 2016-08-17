@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
     
     lazy var ctDatePicker = CTDatePicker()
     
@@ -17,7 +17,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     @IBOutlet weak var noDataView: UIView!
     
-    @IBOutlet weak var miscTblView: UITableView!
+    @IBOutlet weak var miscTblView: UICollectionView!
     
     @IBOutlet weak var profileImg: UIImageView!
     
@@ -48,6 +48,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     
     
+    @IBOutlet weak var mainScrollView: UIScrollView!
     
     
     
@@ -71,19 +72,25 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        profileImg.layer.cornerRadius = profileImg.frame.size.width/2
+        profileImg.clipsToBounds = true
         
-        initializeView()
+        miscTblView.dataSource = self
+        miscTblView.delegate = self
+        
+        miscTblView.backgroundColor = UIColor.clearColor()
+        
+        
+        //initializeView()
         // Do any additional setup after loading the view.
     }
     
     func initializeView(){
         lastSelectedTab = personalSelector
         imgPicker.delegate = self
-        miscTblView.dataSource = self
-        miscTblView.delegate = self
+        
         scrollView.setContentOffset(CGPointZero, animated: true)
-        profileImg.layer.cornerRadius = 10
-        profileImg.clipsToBounds = true
+        
         getMiscDetails()
         
         
@@ -114,7 +121,18 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     
     
+    @IBAction func scrollToTop(sender: AnyObject) {
+        
+        
+        mainScrollView.setContentOffset(CGPointZero, animated: true)
+    }
     
+    @IBAction func scrollToBottom(sender: AnyObject) {
+        
+        var bottomOffset: CGPoint = CGPointMake(0, self.mainScrollView.contentSize.height - self.mainScrollView.bounds.size.height);
+        
+        mainScrollView.setContentOffset(bottomOffset, animated: true)
+    }
     
     
     
@@ -214,49 +232,26 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     // MARk: - Table delegate functions
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch lastSelectedTab! {
-        case opponentSelector:
-            return opponentdata.count
-        case teamSelector:
-            return teamdata.count
-        case groundSelector:
-            return grounddata.count
-        default:
-            return 0
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 15
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        if let cell: FriendsCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("FriendsCollectionViewCell", forIndexPath: indexPath) as! FriendsCollectionViewCell {
+            
+            cell.configureCell("Sajith", friendTeamName: "hello", friendProfileImage: "")
+            return cell
+        }
+        else
+        {
+            return UICollectionViewCell()
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        
-        switch lastSelectedTab! {
-        case groundSelector:
-            cell.textLabel?.text = grounddata[indexPath.row]
-        case teamSelector:
-            cell.textLabel?.text = teamdata[indexPath.row]
-        case opponentSelector:
-            cell.textLabel?.text = opponentdata[indexPath.row]
-        default:
-            break
-        }
-        return cell
-    }
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let edit = UITableViewRowAction(style: .Normal, title: "Edit") { action, index in
-            print("edit button tapped")
-        }
-        edit.backgroundColor = UIColor.lightGrayColor()
-        let delete = UITableViewRowAction(style: .Normal, title: "Delete") { action, index in
-            print("delete button tapped")
-        }
-        delete.backgroundColor = UIColor.redColor()
-        return [delete, edit]
-    }
     
     
     // MARK: - Service calls

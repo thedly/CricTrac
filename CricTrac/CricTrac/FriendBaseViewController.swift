@@ -30,13 +30,17 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController {
     
     override  func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
+        let friends = viewControllerFrom("Main", vcid: "FriendsViewController")
+        
+        let invite = viewControllerFrom("Main", vcid: "FriendsInviteViewController")
+        
         let friendReq = viewControllerFrom("Main", vcid: "FriendRequestsViewController")
         
         let friendSug = viewControllerFrom("Main", vcid: "FriendSuggestViewController")
         
         let friendSea = viewControllerFrom("Main", vcid: "FriendSearchViewController")
         
-        return [friendReq, friendSug, friendSea]
+        return [friends, friendReq, friendSug, friendSea, invite]
     }
     /*
     // MARK: - Navigation

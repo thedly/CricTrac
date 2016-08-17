@@ -78,31 +78,12 @@ class CTCountryPicker: NSObject {
     
     func doneClick() {
         inputText.text = countryPicker.pickedCountry?.name
-        self.states = getStatesByISO((countryPicker.pickedCountry?.iso)!)
         inputText.resignFirstResponder()
     }
     func cancelClick() {
         inputText.resignFirstResponder()
     }
     
-    func getStatesByISO(_iso : String) -> [String] {
-        do {
-            let states = try CSV(name: NSBundle.mainBundle().pathForResource("data", ofType: "csv")!)
-            let iso : String = (_iso)
-            
-            var filteredStatesByISO = [String]()
-            
-            states.enumerateAsArray { array in
-                if array[4] == iso {
-                    filteredStatesByISO.append(array[2])
-                }
-            }
-            return filteredStatesByISO
-        }
-        catch let error as NSError {
-            print(error.debugDescription)
-            return [String]()
-        }
-    }
+    
     
 }

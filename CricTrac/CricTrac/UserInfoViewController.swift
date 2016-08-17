@@ -17,7 +17,6 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     lazy var ctStatePicker = CTStatePicker()
     
     @IBOutlet weak var scrollView:UIScrollView!
-    var imgPicker = UIImagePickerController()
     
    
     
@@ -63,7 +62,7 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func initializeView(){
-        imgPicker.delegate = self
+        
         profileImg.layer.cornerRadius = 10
         profileImg.clipsToBounds = true
         dateOfBirth.delegate = self
@@ -83,7 +82,45 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     
     @IBAction func addPhotBtnPressed(sender: AnyObject) {
         
-        presentViewController(imgPicker, animated: true, completion: nil)
+        
+        
+        let alertController = UIAlertController(title: nil, message: "Change your picture", preferredStyle: .ActionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+            // ...
+        }
+        alertController.addAction(cancelAction)
+        
+        let TakePictureAction = UIAlertAction(title: "Take Photo", style: .Default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+                var imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
+                imagePicker.allowsEditing = false
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+            }
+        }
+        
+        alertController.addAction(TakePictureAction)
+        
+        let chooseExistingAction = UIAlertAction(title: "Choose Existing", style: .Default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
+                var imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+                imagePicker.allowsEditing = false
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+            }
+        }
+        
+        alertController.addAction(chooseExistingAction)
+        
+        
+        self.presentViewController(alertController, animated: true) {
+            // ...
+        }
+        
+        //presentViewController(imgPicker, animated: true, completion: nil)
         
     }
     
@@ -111,7 +148,7 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
                 
                 if selectedText != nil {
                     let viewBottom = view.frame.maxY
-                    let textDesiredPosition = viewBottom - keyboardHeight - (selectedText?.frame.height)! - scrollViewTop
+                    let textDesiredPosition = viewBottom - keyboardHeight - (selectedText?.frame.height)! - scrollViewTop - 100.0
                     
                     if textDesiredPosition < selectedText?.frame.minY {
                         
@@ -139,7 +176,7 @@ extension UserInfoViewController:UITextFieldDelegate{
             state.text = String()
         }
         else if textField == state {
-            ctStatePicker.showPicker(self, inputText: textField, states: ctCountryPicker.States)
+            ctStatePicker.showPicker(self, inputText: textField, iso: ctCountryPicker.SelectedISO)
         }
     }
     

@@ -160,7 +160,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func moveToNextScreen(){
         let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")
-        let dashboardVC = viewControllerFrom("Main", vcid: "DashboardBaseViewController") as! DashboardBaseViewController
+        let dashboardVC = viewControllerFrom("Main", vcid: "CollapsibleTableViewController") as! CollapsibleTableViewController
         let navigationControl = UINavigationController(rootViewController: dashboardVC )
         sliderMenu.mainViewController = navigationControl
         sliderMenu.drawerViewController = drawerViewController

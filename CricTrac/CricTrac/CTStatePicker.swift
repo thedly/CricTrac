@@ -24,15 +24,16 @@ class CTStatePicker: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
         return _selectedState ?? String()
     }
     
-    func showPicker(parent:UIViewController,inputText:UITextField, states: [String]){
+    func showPicker(parent:UIViewController,inputText:UITextField, iso: String){
         
-        if states.count == 0 {
+        if iso == "" {
             return
         }
         
         self.inputText = inputText
         self.parent = parent
-        pickerData = states
+        self.inputISO = iso
+        pickerData = getStatesByISO(iso)
         
         if statePicker == nil {
             statePicker = UIPickerView(frame: CGRectMake(0,0,parent.view.frame.size.width, 216))
@@ -85,6 +86,26 @@ class CTStatePicker: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
         _selectedState = pickerData[row]
     }
     
+    
+    func getStatesByISO(_iso : String) -> [String] {
+        do {
+            var filteredStates = [String]()
+            if let path = NSBundle.mainBundle().pathForResource("country-states", ofType: "plist") {
+                let statelist = NSArray(contentsOfFile: path) as! [[String:String]]
+                
+                for item in statelist {
+                    if item["ISO"] == inputISO {
+                        filteredStates.append(item["State"]!)
+                    }
+                }
+            }
+            return filteredStates
+        }
+        catch let error as NSError {
+            print(error.debugDescription)
+            return [String]()
+        }
+    }
 }
 
 
