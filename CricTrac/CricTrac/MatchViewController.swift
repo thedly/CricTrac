@@ -21,6 +21,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider {
     @IBOutlet weak var tournamentText:UITextField!
     
     
+    
     let ctDatePicker = CTDatePicker()
     
     //var data = ["key1":"value1","key2":"value2","key3":"value3","key4":"value4"]
@@ -33,8 +34,8 @@ class MatchViewController: UIViewController,IndicatorInfoProvider {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // commentsText.type = .multiline
-        // commentsText.style =  CustomTextInputStyle()
+        
+        
         
         // Do any additional setup after loading the view.
     }
@@ -76,12 +77,19 @@ extension MatchViewController:UITextFieldDelegate{
         if textField == dateText{
             ctDatePicker.showPicker(self, inputText: textField)
         }
+        else if textField == groundText || textField == tournamentText || textField == opponentText{
+            
+            addSuggstionBox(textField,dataSource: states)
+        }
+        
     }
+    
+    
     
     
     func textFieldShouldReturn(textField: UITextField) -> Bool
     {
-        textField.resignFirstResponder()
+        //textField.resignFirstResponder()
         return true
     }
 }

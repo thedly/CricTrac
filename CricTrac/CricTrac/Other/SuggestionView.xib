@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SuggestionView" customModule="CricTrac" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SuggestionView" customModule="CricTrac" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TWE-us-X9P">
+                    <rect key="frame" x="0.0" y="0.0" width="570" height="600"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="iN0-l3-epB" id="06R-Lc-dhZ"/>
+                        <outlet property="delegate" destination="iN0-l3-epB" id="WBf-7x-qjC"/>
+                    </connections>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4J-jB-TAW">
+                    <rect key="frame" x="575" y="5" width="10" height="10"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="10" id="Kdu-4y-nc9"/>
+                        <constraint firstAttribute="height" constant="10" id="VPn-wz-uCx"/>
+                    </constraints>
+                    <state key="normal" image="close"/>
+                    <connections>
+                        <action selector="didCancel:" destination="-1" eventType="touchUpInside" id="FXa-7p-Qer"/>
+                        <action selector="didCancel:" destination="iN0-l3-epB" eventType="touchUpOutside" id="OSn-OF-tgo"/>
+                        <action selector="didCancel:" destination="iN0-l3-epB" eventType="touchDown" id="Y1g-vQ-yOJ"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="TWE-us-X9P" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="62x-ww-19o"/>
+                <constraint firstItem="p4J-jB-TAW" firstAttribute="leading" secondItem="TWE-us-X9P" secondAttribute="trailing" constant="5" id="F0P-Id-KHF"/>
+                <constraint firstItem="TWE-us-X9P" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" constant="-30" id="SFB-ks-EwT"/>
+                <constraint firstItem="TWE-us-X9P" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="YUm-zp-7tb"/>
+                <constraint firstItem="TWE-us-X9P" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="if9-Wv-ayC"/>
+                <constraint firstItem="p4J-jB-TAW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="q6M-vs-qqn"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <connections>
+                <outlet property="suggestionTable" destination="TWE-us-X9P" id="JsQ-Ry-Ftw"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="close" width="16" height="16"/>
+    </resources>
+</document>

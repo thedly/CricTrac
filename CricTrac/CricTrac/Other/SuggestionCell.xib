@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SuggestionCell" customModule="CricTrac" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="suggCell" rowHeight="22" id="V0K-GN-jFV" customClass="SuggestionCell" customModule="CricTrac" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="528" height="22"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="V0K-GN-jFV" id="AUb-Jf-cPb">
+                <rect key="frame" x="0.0" y="0.0" width="528" height="21"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AEG-cT-trY">
+                        <rect key="frame" x="3" y="3" width="32" height="16"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="0.63741918103448281" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="AEG-cT-trY" firstAttribute="centerY" secondItem="AUb-Jf-cPb" secondAttribute="centerY" id="Ihs-aP-lYO"/>
+                    <constraint firstItem="AEG-cT-trY" firstAttribute="leading" secondItem="AUb-Jf-cPb" secondAttribute="leadingMargin" constant="-5" id="rBE-5K-k8g"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="contentlabel" destination="AEG-cT-trY" id="9NM-IR-pYj"/>
+            </connections>
+            <point key="canvasLocation" x="334" y="179"/>
+        </tableViewCell>
+    </objects>
+</document>

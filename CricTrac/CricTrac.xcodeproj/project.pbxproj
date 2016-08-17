@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		460068911D6367CE007C9457 /* SuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460068901D6367CE007C9457 /* SuggestionView.swift */; };
+		460068971D637638007C9457 /* SuggestionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 460068961D637638007C9457 /* SuggestionView.xib */; };
+		460068991D638496007C9457 /* SuggestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 460068981D638496007C9457 /* SuggestionCell.xib */; };
+		4600689B1D638545007C9457 /* SuggestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4600689A1D638545007C9457 /* SuggestionCell.swift */; };
 		4607A2621D5466220090A5BD /* AddMatchDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4607A2611D5466210090A5BD /* AddMatchDetailsViewController.swift */; };
 		4607A2641D54848A0090A5BD /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4607A2631D54848A0090A5BD /* MatchViewController.swift */; };
 		462DE9F71D478B9E00E31E8F /* CTDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462DE9F61D478B9E00E31E8F /* CTDatePicker.swift */; };
@@ -75,6 +79,10 @@
 
 /* Begin PBXFileReference section */
 		056D56ED7752D65D58DB4504 /* Pods-CricTrac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CricTrac.release.xcconfig"; path = "Pods/Target Support Files/Pods-CricTrac/Pods-CricTrac.release.xcconfig"; sourceTree = "<group>"; };
+		460068901D6367CE007C9457 /* SuggestionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SuggestionView.swift; path = Other/SuggestionView.swift; sourceTree = "<group>"; };
+		460068961D637638007C9457 /* SuggestionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SuggestionView.xib; path = Other/SuggestionView.xib; sourceTree = "<group>"; };
+		460068981D638496007C9457 /* SuggestionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SuggestionCell.xib; path = Other/SuggestionCell.xib; sourceTree = "<group>"; };
+		4600689A1D638545007C9457 /* SuggestionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SuggestionCell.swift; path = Other/SuggestionCell.swift; sourceTree = "<group>"; };
 		4607A2611D5466210090A5BD /* AddMatchDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMatchDetailsViewController.swift; sourceTree = "<group>"; };
 		4607A2631D54848A0090A5BD /* MatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
 		462DE9F61D478B9E00E31E8F /* CTDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CTDatePicker.swift; path = utility/CTDatePicker.swift; sourceTree = "<group>"; };
@@ -173,6 +181,17 @@
 			name = Constants;
 			sourceTree = "<group>";
 		};
+		466DB86B1D63660800EFB775 /* Suggestion */ = {
+			isa = PBXGroup;
+			children = (
+				460068901D6367CE007C9457 /* SuggestionView.swift */,
+				460068961D637638007C9457 /* SuggestionView.xib */,
+				460068981D638496007C9457 /* SuggestionCell.xib */,
+				4600689A1D638545007C9457 /* SuggestionCell.swift */,
+			);
+			name = Suggestion;
+			sourceTree = "<group>";
+		};
 		46C983831D3922D200DFC607 = {
 			isa = PBXGroup;
 			children = (
@@ -225,6 +244,7 @@
 		46C983C01D4078B500DFC607 /* utility */ = {
 			isa = PBXGroup;
 			children = (
+				466DB86B1D63660800EFB775 /* Suggestion */,
 				8930F0391D5B824E00C7540B /* data.csv */,
 				89FD59C41D41C3AE003EF45C /* SF-UI-Text-Bold.otf */,
 				89FD59C51D41C3AE003EF45C /* SF-UI-Text-Regular.otf */,
@@ -396,11 +416,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				46C9839A1D3922D200DFC607 /* LaunchScreen.storyboard in Resources */,
+				460068991D638496007C9457 /* SuggestionCell.xib in Resources */,
 				8930F03A1D5B824E00C7540B /* data.csv in Resources */,
 				464EA0261D4F901200252DC1 /* GoogleService-Info.plist in Resources */,
 				892E1A971D3BC8D100EBF014 /* Main.storyboard in Resources */,
 				8962F89F1D4666E0008D1AC3 /* Images.xcassets in Resources */,
 				89FD59C71D41C3AE003EF45C /* SF-UI-Text-Regular.otf in Resources */,
+				460068971D637638007C9457 /* SuggestionView.xib in Resources */,
 				892EA6871D58E74B00BEE5A3 /* Share.xib in Resources */,
 				89E83F7E1D4A750000232250 /* DashboardHeaderView.xib in Resources */,
 				46C983971D3922D200DFC607 /* Assets.xcassets in Resources */,
@@ -495,6 +517,7 @@
 				4642DAA51D5039DD001F039D /* LoginViewController.swift in Sources */,
 				89CC84FC1D43E4D6007F2402 /* SummaryMatchDetailsViewController.swift in Sources */,
 				892EA67B1D58DDD100BEE5A3 /* parallaxVC.swift in Sources */,
+				4600689B1D638545007C9457 /* SuggestionCell.swift in Sources */,
 				89F4E4B31D48FECD00EFE46E /* summaryTableViewCell.swift in Sources */,
 				8930F03C1D5B94C300C7540B /* CTStatePicker.swift in Sources */,
 				46F25A031D5B1AAD001EBEF9 /* Service.swift in Sources */,
@@ -506,6 +529,7 @@
 				8930F0381D5B751500C7540B /* CTCountryPicker.swift in Sources */,
 				89F4E4B51D49345300EFE46E /* ProfileViewController.swift in Sources */,
 				892EA67E1D58DEBE00BEE5A3 /* ProfileDetails.swift in Sources */,
+				460068911D6367CE007C9457 /* SuggestionView.swift in Sources */,
 				89E83F7A1D4A4FF100232250 /* MenuViewController.swift in Sources */,
 				46C983C21D4078EB00DFC607 /* utility.swift in Sources */,
 				4657D56C1D4DA4E7009E0FBE /* Enums.swift in Sources */,
