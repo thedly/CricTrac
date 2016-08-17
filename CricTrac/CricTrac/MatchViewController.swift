@@ -81,6 +81,14 @@ extension MatchViewController:UITextFieldDelegate{
         
             addSuggstionBox(textField,dataSource: teamNames)
         }
+        else if textField == groundText{
+            
+            addSuggstionBox(textField,dataSource: groundNames)
+        }
+        else if textField == opponentText{
+            
+            addSuggstionBox(textField,dataSource: opponentTeams)
+        }
         
     }
     

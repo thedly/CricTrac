@@ -92,6 +92,22 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
                 addNewTeamName(teamName)
             }
             
+            let oppoTeamName = data["Team"]!
+            if !opponentTeams.contains(oppoTeamName){
+                addNewOppoSitTeamName(teamName)
+            }
+            
+            let groundName = data["Ground"]!
+            
+            if groundName != "NA"{
+            
+            if !groundNames.contains(groundName){
+                addNewGroundName(teamName)
+                }
+            }
+            
+            //OppositTeams
+            
             addMatchData("date \(String(date))",data: data)
             self.dismissViewControllerAnimated(true) {}
     

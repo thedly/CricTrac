@@ -41,9 +41,14 @@ func addNewGroundName(groundName:String){
     ref.setValue(groundName)
 }
 
-func addNewTeamName(groundName:String){
+func addNewTeamName(teamName:String){
     let ref = fireBaseRef.child(currentUser!.uid).child("Teams").childByAutoId()
-    ref.setValue(groundName)
+    ref.setValue(teamName)
+}
+
+func addNewOppoSitTeamName(oTeamName:String){
+    let ref = fireBaseRef.child(currentUser!.uid).child("OppositTeams").childByAutoId()
+    ref.setValue(oTeamName)
 }
 
 
