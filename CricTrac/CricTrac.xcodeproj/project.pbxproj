@@ -20,6 +20,10 @@
 		4657D5661D499FDD009E0FBE /* SliderMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4657D5651D499FDD009E0FBE /* SliderMenuViewController.swift */; };
 		4657D5681D49A060009E0FBE /* SliderMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4657D5671D49A060009E0FBE /* SliderMenuCell.swift */; };
 		4657D56C1D4DA4E7009E0FBE /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4657D56B1D4DA4E7009E0FBE /* Enums.swift */; };
+		4668E4C51D68078200E36CB0 /* XMExpandableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4668E4C41D68078200E36CB0 /* XMExpandableTableViewController.swift */; };
+		4668E4C71D680FC200E36CB0 /* SummaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4668E4C61D680FC200E36CB0 /* SummaryCell.xib */; };
+		4668E4C91D68105700E36CB0 /* SummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4668E4C81D68105700E36CB0 /* SummaryCell.swift */; };
+		4668E4CB1D68110500E36CB0 /* MatchSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4668E4CA1D68110500E36CB0 /* MatchSummaryViewController.swift */; };
 		46B608701D44A7D3000FE098 /* NewMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B6086F1D44A7D3000FE098 /* NewMatchViewController.swift */; };
 		46C983901D3922D200DFC607 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C9838F1D3922D200DFC607 /* AppDelegate.swift */; };
 		46C983971D3922D200DFC607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46C983961D3922D200DFC607 /* Assets.xcassets */; };
@@ -94,6 +98,11 @@
 		4657D5651D499FDD009E0FBE /* SliderMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SliderMenuViewController.swift; path = Controller/SliderMenuViewController.swift; sourceTree = "<group>"; };
 		4657D5671D49A060009E0FBE /* SliderMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SliderMenuCell.swift; path = View/SliderMenuCell.swift; sourceTree = "<group>"; };
 		4657D56B1D4DA4E7009E0FBE /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Enums.swift; path = Other/Enums.swift; sourceTree = "<group>"; };
+		4668E4C21D676E0600E36CB0 /* XMExpandableTableView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XMExpandableTableView.framework; path = "../../../../Library/Developer/Xcode/DerivedData/CricTrac-drlumagwxucovddcfimsbubojjfq/Build/Products/Debug-iphonesimulator/XMExpandableTableView/XMExpandableTableView.framework"; sourceTree = "<group>"; };
+		4668E4C41D68078200E36CB0 /* XMExpandableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XMExpandableTableViewController.swift; path = CricTrac/Other/XMExpandableTableViewController.swift; sourceTree = "<group>"; };
+		4668E4C61D680FC200E36CB0 /* SummaryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SummaryCell.xib; path = View/SummaryCell.xib; sourceTree = "<group>"; };
+		4668E4C81D68105700E36CB0 /* SummaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SummaryCell.swift; path = View/SummaryCell.swift; sourceTree = "<group>"; };
+		4668E4CA1D68110500E36CB0 /* MatchSummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MatchSummaryViewController.swift; path = Controller/MatchSummaryViewController.swift; sourceTree = "<group>"; };
 		46B6086F1D44A7D3000FE098 /* NewMatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewMatchViewController.swift; path = Controller/NewMatchViewController.swift; sourceTree = "<group>"; };
 		46C9838C1D3922D200DFC607 /* CricTrac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CricTrac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46C9838F1D3922D200DFC607 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -171,6 +180,7 @@
 		0C967E7B250913E6D7917E87 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4668E4C21D676E0600E36CB0 /* XMExpandableTableView.framework */,
 				ADA948F8B3E9B5D978AF58E0 /* Pods_CricTrac.framework */,
 			);
 			name = Frameworks;
@@ -199,6 +209,7 @@
 		46C983831D3922D200DFC607 = {
 			isa = PBXGroup;
 			children = (
+				4668E4C41D68078200E36CB0 /* XMExpandableTableViewController.swift */,
 				464EA0251D4F901200252DC1 /* GoogleService-Info.plist */,
 				8935ADC41D3E640900607C9D /* deleteFileAfterUse.m */,
 				46C9838E1D3922D200DFC607 /* CricTrac */,
@@ -283,6 +294,8 @@
 				4657D5671D49A060009E0FBE /* SliderMenuCell.swift */,
 				895E04021D5CD134002E322E /* FriendRequestsTableViewCell.swift */,
 				890B42C61D60472C00736F03 /* CollapsibleTableViewCell.swift */,
+				4668E4C61D680FC200E36CB0 /* SummaryCell.xib */,
+				4668E4C81D68105700E36CB0 /* SummaryCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -316,6 +329,7 @@
 				890B42C41D60430100736F03 /* CollapsibleTableViewController.swift */,
 				899206231D61BA0700F99A97 /* FriendsViewController.swift */,
 				899206251D61BA6700F99A97 /* FriendsInviteViewController.swift */,
+				4668E4CA1D68110500E36CB0 /* MatchSummaryViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -436,6 +450,7 @@
 				89FD59C71D41C3AE003EF45C /* SF-UI-Text-Regular.otf in Resources */,
 				460068971D637638007C9457 /* SuggestionView.xib in Resources */,
 				46C983971D3922D200DFC607 /* Assets.xcassets in Resources */,
+				4668E4C71D680FC200E36CB0 /* SummaryCell.xib in Resources */,
 				89FD59C61D41C3AE003EF45C /* SF-UI-Text-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -527,10 +542,12 @@
 				895E04091D5CE33E002E322E /* FriendBaseViewController.swift in Sources */,
 				89E83F7C1D4A5AD000232250 /* MenuTableViewCell.swift in Sources */,
 				890B42C51D60430100736F03 /* CollapsibleTableViewController.swift in Sources */,
+				4668E4CB1D68110500E36CB0 /* MatchSummaryViewController.swift in Sources */,
 				46B608701D44A7D3000FE098 /* NewMatchViewController.swift in Sources */,
 				4642DAA51D5039DD001F039D /* LoginViewController.swift in Sources */,
 				89CC84FC1D43E4D6007F2402 /* SummaryMatchDetailsViewController.swift in Sources */,
 				4600689B1D638545007C9457 /* SuggestionCell.swift in Sources */,
+				4668E4C51D68078200E36CB0 /* XMExpandableTableViewController.swift in Sources */,
 				89F4E4B31D48FECD00EFE46E /* summaryTableViewCell.swift in Sources */,
 				8930F03C1D5B94C300C7540B /* CTStatePicker.swift in Sources */,
 				46F25A031D5B1AAD001EBEF9 /* Service.swift in Sources */,
@@ -551,6 +568,7 @@
 				462DE9F71D478B9E00E31E8F /* CTDatePicker.swift in Sources */,
 				46F259FF1D55AB30001EBEF9 /* BowlingViewController.swift in Sources */,
 				46F25A011D55C1C0001EBEF9 /* ExtraViewController.swift in Sources */,
+				4668E4C91D68105700E36CB0 /* SummaryCell.swift in Sources */,
 				46C983B61D39D86800DFC607 /* performanceCell.swift in Sources */,
 				892EA6891D58ED2300BEE5A3 /* DashboardBaseViewController.swift in Sources */,
 				890B42C71D60472C00736F03 /* CollapsibleTableViewCell.swift in Sources */,

@@ -8,10 +8,9 @@
 
 
 import UIKit
-import XMExpandableTableView
 import XLPagerTabStrip
 
-class CollapsibleTableViewController: XMExpandableTableView,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet var mainTable: UITableView!
     
@@ -41,10 +40,9 @@ class CollapsibleTableViewController: XMExpandableTableView,UIImagePickerControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        loadInitialValues()
         profileImage.layer.cornerRadius = profileImage.frame.size.width/2
         profileImage.clipsToBounds = true
-        
         
         
         setNavigationBarProperties()

@@ -191,7 +191,7 @@ class LoginViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelega
     func navigateToNextScreen(){
         
         let window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
-        let dashboardVC = viewControllerFrom("Main", vcid: "DashboardBaseViewController") as! DashboardBaseViewController
+        let dashboardVC = viewControllerFrom("Main", vcid: "CollapsibleTableViewController") as! CollapsibleTableViewController
         
         let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")
         

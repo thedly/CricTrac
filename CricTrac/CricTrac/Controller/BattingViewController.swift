@@ -19,10 +19,11 @@ class BattingViewController: UIViewController,IndicatorInfoProvider {
     @IBOutlet weak var strikeRateText:UITextField!
     @IBOutlet weak var positionText:UITextField!
     @IBOutlet weak var dismissalText:UITextField!
-    
+    @IBOutlet weak var scrollView:UIScrollView!
+    var selectedText:UITextField!
     
     var data:[String:String]{
-        
+    
         
         return ["Runs":runsText.textVal,"Balls":ballsText.textVal,"Fours":foursText.textVal,"Sixes":sixesText.textVal,"Position":positionText.textVal,"Dismissal":dismissalText.textVal]
     }
@@ -31,8 +32,7 @@ class BattingViewController: UIViewController,IndicatorInfoProvider {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // commentsText.type = .multiline
-        // commentsText.style =  CustomTextInputStyle()
+
         
         // Do any additional setup after loading the view.
     }
@@ -52,3 +52,22 @@ class BattingViewController: UIViewController,IndicatorInfoProvider {
     }
 
 }
+
+
+extension BattingViewController:UITextFieldDelegate{
+    
+    
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        self.selectedText = textField
+        
+        if textField == dismissalText{
+            addSuggstionBox(textField, dataSource: dismissals, showSuggestions: true)
+        }
+}
+    
+    
+
+   
+}
+
