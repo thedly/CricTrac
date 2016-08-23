@@ -13,7 +13,6 @@ import Firebase
 //MARK:- Match Data
 func addMatchData(key:NSString,data:[String:String]){
     
-    
     let ref = fireBaseRef.child(currentUser!.uid).child("Matches").childByAutoId()
     ref.setValue(data)
     
