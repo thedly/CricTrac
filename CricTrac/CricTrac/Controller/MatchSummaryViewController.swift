@@ -88,7 +88,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         if let date = data["Date"]{
         let dateArray = date.characters.split{$0 == "/"}.map(String.init)
-        aCell.machYear.text = "20"+dateArray[2]
+        aCell.machYear.text = dateArray[2]
         aCell.matchdate.text = dateArray[0]
         aCell.matchMonth.text = dateArray[1].monthName
         }
@@ -115,7 +115,9 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         aCell.fours.text = "Fours: "+result
         }
         
-        return SummaryCell()
+        aCell.selectionStyle = .None
+        
+        return aCell
     }
     
     
