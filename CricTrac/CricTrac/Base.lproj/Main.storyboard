@@ -5858,10 +5858,10 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csd-cf-Zdu">
-                                                    <rect key="frame" x="551" y="23" width="16" height="16"/>
+                                                    <rect key="frame" x="562" y="8" width="20" height="20"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="16" id="MmO-Kg-iex"/>
-                                                        <constraint firstAttribute="width" constant="16" id="ajq-kK-aF6"/>
+                                                        <constraint firstAttribute="height" constant="20" id="MmO-Kg-iex"/>
+                                                        <constraint firstAttribute="width" constant="20" id="ajq-kK-aF6"/>
                                                     </constraints>
                                                     <state key="normal" title="Button" image="EditPencil-100"/>
                                                     <connections>
@@ -5870,6 +5870,7 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="6Mk-J8-7q0" firstAttribute="top" secondItem="Tb9-X7-6FV" secondAttribute="top" id="08K-Ns-KPR"/>
                                                 <constraint firstItem="csd-cf-Zdu" firstAttribute="top" secondItem="VCW-Xo-Sgo" secondAttribute="topMargin" constant="15" id="0Ui-BX-wWg"/>
                                                 <constraint firstItem="1Vr-hi-dwa" firstAttribute="top" secondItem="VCW-Xo-Sgo" secondAttribute="topMargin" constant="18" id="0hC-kv-Hd9"/>
                                                 <constraint firstItem="bgP-8S-QyA" firstAttribute="leading" secondItem="VCW-Xo-Sgo" secondAttribute="leadingMargin" constant="15" id="3gl-hc-gOg"/>
@@ -5898,7 +5899,7 @@
                                                 <constraint firstItem="hMt-ec-EZe" firstAttribute="top" secondItem="LHV-dR-IhO" secondAttribute="bottom" constant="8" id="T0u-oC-heV"/>
                                                 <constraint firstItem="Tb9-X7-6FV" firstAttribute="height" secondItem="6Mk-J8-7q0" secondAttribute="height" id="TW1-mO-QFR"/>
                                                 <constraint firstItem="3Pw-9c-bQh" firstAttribute="width" secondItem="bgP-8S-QyA" secondAttribute="width" id="URj-K5-po3"/>
-                                                <constraint firstItem="csd-cf-Zdu" firstAttribute="top" secondItem="VCW-Xo-Sgo" secondAttribute="topMargin" constant="15" id="UYL-bI-KGo"/>
+                                                <constraint firstItem="csd-cf-Zdu" firstAttribute="top" secondItem="VCW-Xo-Sgo" secondAttribute="topMargin" id="UYL-bI-KGo"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="2Lj-eL-at2" secondAttribute="trailing" constant="50" id="Usj-XY-nos"/>
                                                 <constraint firstItem="LHV-dR-IhO" firstAttribute="centerX" secondItem="VCW-Xo-Sgo" secondAttribute="centerX" id="W3a-39-NUd"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="6Mk-J8-7q0" secondAttribute="bottom" id="W4t-Ho-07b"/>
@@ -5906,7 +5907,7 @@
                                                 <constraint firstItem="Tb9-X7-6FV" firstAttribute="top" secondItem="6Mk-J8-7q0" secondAttribute="top" id="Zcl-8v-ne2"/>
                                                 <constraint firstItem="LHV-dR-IhO" firstAttribute="centerX" secondItem="1Vr-hi-dwa" secondAttribute="centerX" id="aEs-ro-v2q"/>
                                                 <constraint firstItem="bgP-8S-QyA" firstAttribute="centerY" secondItem="LHV-dR-IhO" secondAttribute="centerY" id="bzL-2e-JdW"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="csd-cf-Zdu" secondAttribute="trailing" constant="15" id="ecD-RP-TzO"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="csd-cf-Zdu" secondAttribute="trailing" id="ecD-RP-TzO"/>
                                                 <constraint firstItem="csd-cf-Zdu" firstAttribute="top" secondItem="VCW-Xo-Sgo" secondAttribute="topMargin" constant="1" id="ejs-L3-5rH"/>
                                                 <constraint firstItem="c4r-N1-Mh5" firstAttribute="height" secondItem="6Mk-J8-7q0" secondAttribute="height" id="fCh-1R-hn4"/>
                                                 <constraint firstItem="1Vr-hi-dwa" firstAttribute="leading" secondItem="3Pw-9c-bQh" secondAttribute="trailing" constant="15" id="fXA-nd-uHn"/>
@@ -5931,6 +5932,7 @@
                                                 <constraint firstItem="6Mk-J8-7q0" firstAttribute="leading" secondItem="c4r-N1-Mh5" secondAttribute="trailing" constant="15" id="uat-bD-uTd"/>
                                                 <constraint firstItem="1Vr-hi-dwa" firstAttribute="top" secondItem="VCW-Xo-Sgo" secondAttribute="topMargin" constant="15" id="v3x-89-KtD"/>
                                                 <constraint firstItem="LHV-dR-IhO" firstAttribute="top" secondItem="1Vr-hi-dwa" secondAttribute="bottom" constant="8" id="xWA-jU-ZvU"/>
+                                                <constraint firstItem="6Mk-J8-7q0" firstAttribute="bottom" secondItem="Tb9-X7-6FV" secondAttribute="bottom" id="yLy-b8-3tw"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
