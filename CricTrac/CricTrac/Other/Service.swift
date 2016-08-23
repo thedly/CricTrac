@@ -11,6 +11,19 @@ import Firebase
 
 
 //MARK:- Match Data
+
+func loadInitialValues(){
+    
+    
+    fireBaseRef.child("Dismissals").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let value = snapshot.value as? [String]{
+        dismissals = value
+        }
+    })
+    
+}
+
 func addMatchData(key:NSString,data:[String:String]){
     
     let ref = fireBaseRef.child(currentUser!.uid).child("Matches").childByAutoId()
@@ -70,3 +83,8 @@ func enableSync(){
     
     fireBaseRef.child(currentUser!.uid).keepSynced(true)
 }
+
+
+
+//fireBaseRef.child("Dismissals").setValue(["BOWLED","CAUGHT","HANDLED THE BALL","HIT WICKET","HIT THE BALL TWICE","LEG BEFORE WICKET (LBW)","OBSTRUCTING THE FIELD","RUN OUT","RETIRED","TIMED OUT"])
+

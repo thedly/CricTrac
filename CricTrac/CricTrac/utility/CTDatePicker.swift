@@ -46,9 +46,12 @@ class CTDatePicker: NSObject {
     }
     
     func doneClick() {
+        let gbDateFormat = NSDateFormatter.dateFormatFromTemplate("MMddyyyy", options: 0, locale: NSLocale(localeIdentifier: "en-GB"))
+
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = .ShortStyle
+        dateFormatter.dateStyle = .MediumStyle
         dateFormatter.timeStyle = .NoStyle
+        dateFormatter.dateFormat = gbDateFormat
         inputText.text = dateFormatter.stringFromDate(datePicker.date)
         inputText.resignFirstResponder()
     }

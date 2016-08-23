@@ -126,13 +126,13 @@ func removeSuggestion(){
 
 
 
-func addSuggstionBox(textField:UITextField,dataSource:[String]){
+func addSuggstionBox(textField:UITextField,dataSource:[String],showSuggestions:Bool = false){
     
     let suggBox = sBox
     suggBox.setDataSource(dataSource)
     suggBox.textField = textField
     suggBox.oldDelegate = textField.delegate
-    suggBox.hidden = true
+    suggBox.hidden = !showSuggestions
     let theFrame = textField.frame
     suggBox.frame = CGRectMake(theFrame.minX, theFrame.maxY, theFrame.width, 20)
     

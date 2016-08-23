@@ -1,0 +1,10 @@
+framework module AnimatedTextInput {
+  umbrella header "AnimatedTextInput-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module AnimatedTextInput.__Swift {
+    exclude header "AnimatedTextInput-Swift.h"
+}

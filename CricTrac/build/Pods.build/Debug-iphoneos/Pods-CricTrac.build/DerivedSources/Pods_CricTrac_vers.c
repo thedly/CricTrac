@@ -1,0 +1,1 @@
+ const unsigned char Pods_CricTracVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:Pods_CricTrac  PROJECT:Pods-1" "\n"; const double Pods_CricTracVersionNumber __attribute__ ((used)) = (double)1.;

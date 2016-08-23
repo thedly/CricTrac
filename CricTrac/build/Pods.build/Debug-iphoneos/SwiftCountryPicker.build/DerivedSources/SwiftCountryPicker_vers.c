@@ -1,0 +1,1 @@
+ const unsigned char SwiftCountryPickerVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:SwiftCountryPicker  PROJECT:Pods-1" "\n"; const double SwiftCountryPickerVersionNumber __attribute__ ((used)) = (double)1.;

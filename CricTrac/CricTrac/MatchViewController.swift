@@ -20,7 +20,9 @@ class MatchViewController: UIViewController,IndicatorInfoProvider {
     @IBOutlet weak var oversText:UITextField!
     @IBOutlet weak var tournamentText:UITextField!
     
+    @IBOutlet weak var scrollView:UIScrollView!
     
+    var selectedText:UITextField!
     
     let ctDatePicker = CTDatePicker()
     
@@ -35,6 +37,8 @@ class MatchViewController: UIViewController,IndicatorInfoProvider {
         super.viewDidLoad()
         
         
+     
+        //scrollViewTop = scrollView.frame.origin.y
         
         
         // Do any additional setup after loading the view.
@@ -44,6 +48,9 @@ class MatchViewController: UIViewController,IndicatorInfoProvider {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+
+    
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "MATCH")
@@ -73,7 +80,7 @@ extension MatchViewController:UITextFieldDelegate{
     
     func textFieldDidBeginEditing(textField: UITextField) {
         
-        
+        selectedText = textField
         if textField == dateText{
             ctDatePicker.showPicker(self, inputText: textField)
         }
