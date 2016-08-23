@@ -772,10 +772,10 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iyP-xV-2zo">
                                                 <rect key="frame" x="10" y="508" width="580" height="250"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="z2c-zJ-hR7">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="z2c-zJ-hR7">
                                                         <rect key="frame" x="177" y="152" width="227" height="16"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Achievements :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4B-pe-813">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Achievements :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4B-pe-813">
                                                                 <rect key="frame" x="0.0" y="0.0" width="87" height="16"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="143" id="lCz-Nq-NbS"/>
@@ -789,7 +789,7 @@
                                                                     </mask>
                                                                 </variation>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Best Fielder" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aBJ-I6-qrX">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best Fielder" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aBJ-I6-qrX">
                                                                 <rect key="frame" x="107" y="0.0" width="120" height="16"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="120" id="4Qo-R9-H2f"/>
@@ -3981,7 +3981,7 @@
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done"/>
+                                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="titleTextColour">
                                                         <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
@@ -4012,7 +4012,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <outlet property="delegate" destination="6Ih-6n-xPz" id="kme-Ni-aKN"/>
+                                                    <outlet property="delegate" destination="0Xv-7d-mqi" id="cOL-Ru-vks"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Balls" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="voU-gE-mjK" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
@@ -4020,7 +4020,7 @@
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done"/>
+                                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="titleTextColour">
                                                         <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
@@ -4045,7 +4045,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <outlet property="delegate" destination="6Ih-6n-xPz" id="Yet-6d-3mg"/>
+                                                    <outlet property="delegate" destination="0Xv-7d-mqi" id="IeP-L6-84K"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="4S" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y91-Ui-Ozh" userLabel="4S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
@@ -4053,7 +4053,7 @@
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done"/>
+                                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="titleTextColour">
                                                         <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
@@ -4078,7 +4078,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <outlet property="delegate" destination="6Ih-6n-xPz" id="ng7-Yj-xMT"/>
+                                                    <outlet property="delegate" destination="0Xv-7d-mqi" id="0SY-OP-s70"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="6S" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zNo-8F-9Ia" userLabel="6S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
@@ -4086,7 +4086,7 @@
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done"/>
+                                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="titleTextColour">
                                                         <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
@@ -4111,10 +4111,10 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <outlet property="delegate" destination="6Ih-6n-xPz" id="CXH-1b-ct7"/>
+                                                    <outlet property="delegate" destination="0Xv-7d-mqi" id="vMn-lO-fX3"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Strike Rate" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J7a-ME-fzX" userLabel="Strikerate" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Strike Rate" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J7a-ME-fzX" userLabel="Strikerate" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="60" y="188" width="480" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <accessibility key="accessibilityConfiguration">
@@ -4122,7 +4122,7 @@
                                                 </accessibility>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done"/>
+                                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="titleTextColour">
                                                         <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
@@ -4147,7 +4147,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <outlet property="delegate" destination="6Ih-6n-xPz" id="bjC-l1-S8v"/>
+                                                    <outlet property="delegate" destination="0Xv-7d-mqi" id="b3M-rK-TN6"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Position" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pqw-TY-BH8" userLabel="Position" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
@@ -4155,7 +4155,7 @@
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done"/>
+                                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="titleTextColour">
                                                         <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
@@ -4180,7 +4180,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <outlet property="delegate" destination="6Ih-6n-xPz" id="nEl-zi-8uW"/>
+                                                    <outlet property="delegate" destination="0Xv-7d-mqi" id="W3n-0S-m3n"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Dismissal" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h0q-Ih-kpz" userLabel="Dismissal" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
@@ -4188,7 +4188,7 @@
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" spellCheckingType="no" returnKeyType="done"/>
+                                                <textInputTraits key="textInputTraits" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="titleTextColour">
                                                         <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
@@ -4213,7 +4213,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <outlet property="delegate" destination="0Xv-7d-mqi" id="yPz-EA-JS9"/>
+                                                    <outlet property="delegate" destination="0Xv-7d-mqi" id="qxt-Li-W2U"/>
                                                 </connections>
                                             </textField>
                                         </subviews>
@@ -5193,7 +5193,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <outlet property="delegate" destination="6Ih-6n-xPz" id="J0Y-pZ-mKQ"/>
+                                                    <outlet property="delegate" destination="AAK-Kb-E6X" id="gfo-2G-AYf"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Wickets" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jdx-dj-6nJ" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
@@ -5226,7 +5226,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <outlet property="delegate" destination="6Ih-6n-xPz" id="0Hx-pK-rdJ"/>
+                                                    <outlet property="delegate" destination="AAK-Kb-E6X" id="ffw-r0-MVw"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Runs" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EVa-W5-Onh" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
@@ -5259,7 +5259,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <outlet property="delegate" destination="6Ih-6n-xPz" id="tiH-Du-wMQ"/>
+                                                    <outlet property="delegate" destination="AAK-Kb-E6X" id="cUY-aY-bVW"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="No balls" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EsA-Fa-EdD" userLabel="No Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
@@ -5292,7 +5292,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <outlet property="delegate" destination="6Ih-6n-xPz" id="K58-Eb-Mnd"/>
+                                                    <outlet property="delegate" destination="AAK-Kb-E6X" id="i65-Jl-Ka9"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Wides" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yms-zf-rfI" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
@@ -5325,7 +5325,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <outlet property="delegate" destination="6Ih-6n-xPz" id="uqM-Zc-4db"/>
+                                                    <outlet property="delegate" destination="AAK-Kb-E6X" id="vNl-A6-sk2"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Economy" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mV4-a6-8lZ" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
@@ -5358,7 +5358,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <outlet property="delegate" destination="6Ih-6n-xPz" id="MMD-9v-0fY"/>
+                                                    <outlet property="delegate" destination="AAK-Kb-E6X" id="HCx-OF-nSk"/>
                                                 </connections>
                                             </textField>
                                         </subviews>
@@ -5430,8 +5430,8 @@
                     <connections>
                         <outlet property="economyText" destination="mV4-a6-8lZ" id="48U-tc-MwC"/>
                         <outlet property="noballText" destination="EsA-Fa-EdD" id="AO6-ZJ-Rc1"/>
-                        <outlet property="oversText" destination="gyR-EB-iAt" id="wwt-R8-3ET"/>
-                        <outlet property="runsText" destination="EVa-W5-Onh" id="f6z-J8-PYc"/>
+                        <outlet property="oversText" destination="gyR-EB-iAt" id="ls6-sg-jAS"/>
+                        <outlet property="runsText" destination="EVa-W5-Onh" id="FKC-vT-HPI"/>
                         <outlet property="wicketsText" destination="jdx-dj-6nJ" id="dFs-Jf-S6A"/>
                         <outlet property="widesText" destination="Yms-zf-rfI" id="jjY-vg-8WB"/>
                     </connections>
@@ -5605,19 +5605,19 @@
                                                         <constraint firstAttribute="height" constant="16" id="oUH-Ra-S6Z"/>
                                                     </constraints>
                                                 </imageView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="equalCentering" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="c4r-N1-Mh5">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="c4r-N1-Mh5">
                                                     <rect key="frame" x="23" y="130" width="427" height="134"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="2Ix-dB-FXr">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="2Ix-dB-FXr">
                                                             <rect key="frame" x="0.0" y="0.0" width="427" height="38"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Batting Style" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OYf-ml-oXF">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Batting Style" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OYf-ml-oXF">
                                                                     <rect key="frame" x="0.0" y="0.0" width="73" height="15"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Right-hand" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I92-Hn-WUA">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Right-hand" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I92-Hn-WUA">
                                                                     <rect key="frame" x="0.0" y="20" width="85" height="18"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="140" id="Cgz-Tz-FyP"/>
@@ -5635,16 +5635,16 @@
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="EOu-up-HOo">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="EOu-up-HOo">
                                                             <rect key="frame" x="0.0" y="48" width="427" height="38"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Bowling Style" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m3W-2P-MOG">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bowling Style" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m3W-2P-MOG">
                                                                     <rect key="frame" x="0.0" y="0.0" width="427" height="15"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Slow-left arm-chinaman" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DL4-zY-7xZ">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slow-left arm-chinaman" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DL4-zY-7xZ">
                                                                     <rect key="frame" x="0.0" y="20" width="427" height="18"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="140" id="3vF-Yl-Azf"/>
@@ -5662,16 +5662,16 @@
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ScS-hf-9V0">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ScS-hf-9V0">
                                                             <rect key="frame" x="0.0" y="96" width="427" height="38"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Playing Role" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zNZ-O0-oWj">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playing Role" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zNZ-O0-oWj">
                                                                     <rect key="frame" x="0.0" y="0.0" width="427" height="15"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Middle-order batsman" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fJ-NY-CIe">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Middle-order batsman" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fJ-NY-CIe">
                                                                     <rect key="frame" x="0.0" y="20" width="427" height="18"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="140" id="bAq-Md-hG9"/>
@@ -5731,7 +5731,7 @@
                                                         </mask>
                                                     </variation>
                                                 </imageView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hMt-ec-EZe">
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hMt-ec-EZe">
                                                     <rect key="frame" x="179" y="78" width="117" height="16"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MarkerFilled-100" translatesAutoresizingMaskIntoConstraints="NO" id="Pe8-vw-avo">
@@ -5741,7 +5741,7 @@
                                                                 <constraint firstAttribute="height" constant="16" id="xzb-hg-RPl"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Bangalore, India" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ri0-FE-LnA">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bangalore, India" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ri0-FE-LnA">
                                                             <rect key="frame" x="26" y="0.0" width="91" height="16"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -5749,19 +5749,19 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="equalCentering" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Tb9-X7-6FV">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Tb9-X7-6FV">
                                                     <rect key="frame" x="481" y="126" width="96" height="134"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="n1n-gt-r4s">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="n1n-gt-r4s">
                                                             <rect key="frame" x="0.0" y="0.0" width="96" height="38"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Alias" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Afo-Gm-KEk">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alias" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Afo-Gm-KEk">
                                                                     <rect key="frame" x="0.0" y="0.0" width="96" height="15"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Arjun" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UW4-92-V18">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arjun" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UW4-92-V18">
                                                                     <rect key="frame" x="0.0" y="20" width="96" height="18"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="140" id="W4D-so-FvN"/>
@@ -5779,16 +5779,16 @@
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jdd-4k-r2F">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jdd-4k-r2F">
                                                             <rect key="frame" x="0.0" y="48" width="96" height="38"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Age" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LAS-Ro-kTR">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LAS-Ro-kTR">
                                                                     <rect key="frame" x="0.0" y="0.0" width="96" height="15"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="14" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kJ-GV-ofR">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="14" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kJ-GV-ofR">
                                                                     <rect key="frame" x="0.0" y="20" width="96" height="18"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="140" id="Alb-Jf-T5c"/>
@@ -5806,16 +5806,16 @@
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="KN7-H4-1Ic">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="KN7-H4-1Ic">
                                                             <rect key="frame" x="0.0" y="96" width="96" height="38"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Height" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZI-8C-H0r">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Height" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZI-8C-H0r">
                                                                     <rect key="frame" x="0.0" y="0.0" width="96" height="15"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="4' 6&quot;" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nId-l3-vr9">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4' 6&quot;" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nId-l3-vr9">
                                                                     <rect key="frame" x="0.0" y="20" width="96" height="18"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="140" id="7VQ-qd-kBA"/>

@@ -96,6 +96,10 @@ extension MatchViewController:UITextFieldDelegate{
             
             addSuggstionBox(textField,dataSource: opponentTeams)
         }
+        else if textField == tournamentText{
+            
+            addSuggstionBox(textField,dataSource: tournaments)
+        }
         
     }
     

@@ -9,11 +9,11 @@
 import UIKit
 
 import XLPagerTabStrip
-
+import SkyFloatingLabelTextField
 
 class BowlingViewController: UIViewController,IndicatorInfoProvider {
     
-    @IBOutlet weak var oversText:UITextField!
+    @IBOutlet weak var oversText:SkyFloatingLabelTextField!
     @IBOutlet weak var wicketsText:UITextField!
     @IBOutlet weak var runsText:UITextField!
     @IBOutlet weak var noballText:UITextField!
@@ -24,6 +24,28 @@ class BowlingViewController: UIViewController,IndicatorInfoProvider {
     var data:[String:String]{
         
         return ["OversBalled":oversText.textVal,"Wickets":wicketsText.textVal,"RunsGiven":runsText.textVal,"Noballs":noballText.textVal,"Wides":widesText.text!]
+    }
+    
+    
+    var allRequiredFieldsHaveFilledProperly:Bool{
+        if oversText.text?.trimWhiteSpace.length > 0{
+            return true
+        }
+        else{
+            if wicketsText.text?.trimWhiteSpace.length > 0{
+                
+                return false
+            }
+            if runsText.text?.trimWhiteSpace.length > 0{
+                
+                return false
+            }
+            if noballText.text?.trimWhiteSpace.length > 0{
+                
+                return false
+            }
+            return true
+        }
     }
     
     
@@ -44,9 +66,17 @@ class BowlingViewController: UIViewController,IndicatorInfoProvider {
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "BOWLING")
     }
+}
+
+extension BowlingViewController:UITextFieldDelegate{
     
-    func allRequiredFieldsHaveFilledProperly()->Bool{
+    func textFieldDidEndEditing(textField: UITextField){
         
-        return false
+        if allRequiredFieldsHaveFilledProperly{
+            oversText.errorMessage = ""
+        }
+        else{
+            oversText.errorMessage = "Overs cant be empty"
+        }
     }
 }

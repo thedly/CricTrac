@@ -51,6 +51,11 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
                 opponentTeams = grounds.map({ (key,value) in value })
                 
             }
+            
+            if let tournamnet = userData["Tournaments"] as? [String:String]{
+                
+                tournaments = tournamnet.map({ (key,value) in value })
+            }
             KRProgressHUD.dismiss()
         }
         
@@ -97,6 +102,13 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
                 addNewOppoSitTeamName(oppoTeamName)
             }
             
+            if let tournament = data[""]{
+            if !tournaments.contains(tournament){
+                
+                addNewOppoSitTeamName(tournament)
+            }
+            }
+            
             let groundName = data["Ground"]!
             
             if groundName != "-"{
@@ -140,6 +152,12 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
             
            pageName = "Match Details"
         }
+        else if !battingVC.allRequiredFieldsHaveFilledProperly {
+             pageName = "Batting Details"
+        }
+        else if  !bowlingVC.allRequiredFieldsHaveFilledProperly {
+            pageName = "Bowling Details"
+        }
         else{
             return true
         }
@@ -149,24 +167,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
         return false
     }
     
-    func validateBattingInfo()->Bool{
-        
-        return false
-    }
-    func validateBawlingInfo()->Bool{
-        
-        return false
-    }
-    
-    func validateExtraInfo()->Bool{
-        
-        return false
-    }
-    
-    func validateBasicInfo()->Bool{
-        
-        return false
-    }
+
 
     /*
     // MARK: - Navigation
