@@ -15,30 +15,9 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
     lazy var ctDatePicker = CTDatePicker()
     lazy var ctCountryPicker = CTCountryPicker()
     lazy var ctStatePicker = CTStatePicker()
-    
+    lazy var ctHeightPicker = HeightPicker()
+    lazy var ctDataPicker = DataPicker()
     @IBOutlet weak var scrollView:UIScrollView!
-    
-   
-    @IBOutlet weak var genderText: UILabel!
-    @IBAction func genderSelectionPressed(sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
-            self.genderText.text = "Male"
-        }
-        else
-        {
-            self.genderText.text = "Female"
-        }
-        
-    }
-    
-    
-    var teamdata: [String]!
-    var grounddata: [String]!
-    var opponentdata: [String]!
-    
-    
-    @IBOutlet weak var datePickerButton:UIButton!
-    
     
     
     @IBOutlet weak var firstName: UITextField!
@@ -80,6 +59,12 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
         dateOfBirth.delegate = self
         country.delegate = self
         state.delegate = self
+        height.delegate = self
+        gender.delegate = self
+        playingRole.delegate = self
+        battingStyle.delegate = self
+        bowlingStyle.delegate = self
+        playingLevel.delegate = self
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserInfoViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         scrollView.setContentOffset(CGPointZero, animated: true)
@@ -139,6 +124,25 @@ extension UserInfoViewController:UITextFieldDelegate{
         else if textField == state {
             ctStatePicker.showPicker(self, inputText: textField, iso: ctCountryPicker.SelectedISO)
         }
+        else if textField == height{
+            ctHeightPicker.showPicker(self, inputText: textField)
+        }
+        else if  textField == gender{
+            ctDataPicker.showPicker(self, inputText: textField, data: genders)
+        }
+        else if  textField == playingRole{
+            ctDataPicker.showPicker(self, inputText: textField, data: PlayingRoles)
+        }
+        else if  textField == battingStyle{
+            ctDataPicker.showPicker(self, inputText: textField, data: BattingStyles)
+        }
+        else if  textField == bowlingStyle{
+            ctDataPicker.showPicker(self, inputText: textField, data: BowlingStyles)
+        }
+        else if textField == playingLevel {
+            ctDataPicker.showPicker(self, inputText: textField, data: PlayingLevels)
+        }
+
     }
     
     

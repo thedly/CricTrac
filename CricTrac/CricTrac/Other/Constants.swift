@@ -49,6 +49,82 @@ struct CustomTextInputStyle: AnimatedTextInputStyle {
     let yHintPositionOffset: CGFloat = 7
 }
 
+let heights = [
+    [
+        "4 feet",
+        "5 feet",
+        "6 feet",
+        "7 feet"
+    ],
+    [
+        "0 inches",
+        "1 inches",
+        "2 inches",
+        "3 inches",
+        "4 inches",
+        "5 inches",
+        "6 inches",
+        "7 inches",
+        "8 inches",
+        "9 inches",
+        "10 inches",
+        "11 inches",
+    ]
+]
+
+let genders = ["Male", "Female", "Other", "Don't like to mention"]
+
+let PlayingRoles = [
+    "Batsman",
+    "Bowler",
+    "Wicketkeeper",
+    "Wicketkeeper batsman",
+    "All-rounder",
+    "Opening batsman",
+    "Top-order batsman",
+    "Middle-order batsman",
+    "Lower-order batsman",
+    "Bowling all-rounder"
+]
+
+let BattingStyles = [
+    "Right-hand",
+    "Left-hand"
+]
+
+let BowlingStyles = [
+    "Right-arm fast",
+    "Right-arm fast-medium",
+    "Right-arm off-break",
+    "Right-arm medium",
+    "Right-arm leg-break",
+    "Left-arm fast",
+    "Left-arm fast-medium",
+    "Left-arm medium",
+    "Left-arm off-break",
+    "Left-arm leg-break",
+    "Slow-left arm-orthodox",
+    "Slow-left arm-chinaman"
+]
+
+let PlayingLevels = [
+    "Club",
+    "School",
+    "College",
+    "District",
+    "Zonal",
+    "Province",
+    "County",
+    "State",
+    "National",
+    "International",
+    "First Class",
+    "I am a Coach",
+    "I am a Cricket Fan",
+    "I am an Observer",
+    "I don’t play Cricket",
+    "Others"
+]
 
 let states = ["Alabama",
               "Alaska",
