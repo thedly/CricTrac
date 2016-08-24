@@ -9,6 +9,7 @@
 
 import UIKit
 import XLPagerTabStrip
+import XMExpandableTableView
 
 class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -192,6 +193,10 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
     }
 
     
+    @IBAction func editProfilePressed(sender: AnyObject) {
+        let editProfileVc = viewControllerFrom("Main", vcid: "UserInfoViewController")
+        self.presentViewController(editProfileVc, animated: true) {}
+    }
     func setNavigationBarProperties(){
         let menuButton: UIButton = UIButton(type:.Custom)
         menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)

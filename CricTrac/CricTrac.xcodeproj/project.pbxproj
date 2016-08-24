@@ -20,7 +20,6 @@
 		4657D5661D499FDD009E0FBE /* SliderMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4657D5651D499FDD009E0FBE /* SliderMenuViewController.swift */; };
 		4657D5681D49A060009E0FBE /* SliderMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4657D5671D49A060009E0FBE /* SliderMenuCell.swift */; };
 		4657D56C1D4DA4E7009E0FBE /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4657D56B1D4DA4E7009E0FBE /* Enums.swift */; };
-		4668E4C51D68078200E36CB0 /* XMExpandableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4668E4C41D68078200E36CB0 /* XMExpandableTableViewController.swift */; };
 		4668E4C71D680FC200E36CB0 /* SummaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4668E4C61D680FC200E36CB0 /* SummaryCell.xib */; };
 		4668E4C91D68105700E36CB0 /* SummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4668E4C81D68105700E36CB0 /* SummaryCell.swift */; };
 		4668E4CB1D68110500E36CB0 /* MatchSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4668E4CA1D68110500E36CB0 /* MatchSummaryViewController.swift */; };
@@ -53,7 +52,6 @@
 		8930F03E1D5BA0EB00C7540B /* UserTeamDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930F03D1D5BA0EB00C7540B /* UserTeamDetailsViewController.swift */; };
 		8930F0401D5BA1D600C7540B /* UserGroundDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930F03F1D5BA1D600C7540B /* UserGroundDetailsViewController.swift */; };
 		8930F0421D5BA20F00C7540B /* UserOpponentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930F0411D5BA20F00C7540B /* UserOpponentDetailsViewController.swift */; };
-		8935ADC51D3E640900607C9D /* deleteFileAfterUse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8935ADC41D3E640900607C9D /* deleteFileAfterUse.m */; };
 		895522691D5F0052008F3760 /* country-states.plist in Resources */ = {isa = PBXBuildFile; fileRef = 895522681D5F0052008F3760 /* country-states.plist */; };
 		8957420F1D43978E0097DF58 /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8957420E1D43978E0097DF58 /* SummaryViewController.swift */; };
 		895E04011D5CCEDE002E322E /* FriendRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E04001D5CCEDE002E322E /* FriendRequestsViewController.swift */; };
@@ -100,7 +98,6 @@
 		4657D5671D49A060009E0FBE /* SliderMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SliderMenuCell.swift; path = View/SliderMenuCell.swift; sourceTree = "<group>"; };
 		4657D56B1D4DA4E7009E0FBE /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Enums.swift; path = Other/Enums.swift; sourceTree = "<group>"; };
 		4668E4C21D676E0600E36CB0 /* XMExpandableTableView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XMExpandableTableView.framework; path = "../../../../Library/Developer/Xcode/DerivedData/CricTrac-drlumagwxucovddcfimsbubojjfq/Build/Products/Debug-iphonesimulator/XMExpandableTableView/XMExpandableTableView.framework"; sourceTree = "<group>"; };
-		4668E4C41D68078200E36CB0 /* XMExpandableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XMExpandableTableViewController.swift; path = CricTrac/Other/XMExpandableTableViewController.swift; sourceTree = "<group>"; };
 		4668E4C61D680FC200E36CB0 /* SummaryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SummaryCell.xib; path = View/SummaryCell.xib; sourceTree = "<group>"; };
 		4668E4C81D68105700E36CB0 /* SummaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SummaryCell.swift; path = View/SummaryCell.swift; sourceTree = "<group>"; };
 		4668E4CA1D68110500E36CB0 /* MatchSummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MatchSummaryViewController.swift; path = Controller/MatchSummaryViewController.swift; sourceTree = "<group>"; };
@@ -139,7 +136,6 @@
 		8930F03F1D5BA1D600C7540B /* UserGroundDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserGroundDetailsViewController.swift; sourceTree = "<group>"; };
 		8930F0411D5BA20F00C7540B /* UserOpponentDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserOpponentDetailsViewController.swift; sourceTree = "<group>"; };
 		8935ADC31D3E640900607C9D /* CricTrac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CricTrac-Bridging-Header.h"; sourceTree = "<group>"; };
-		8935ADC41D3E640900607C9D /* deleteFileAfterUse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = deleteFileAfterUse.m; sourceTree = "<group>"; };
 		895522681D5F0052008F3760 /* country-states.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "country-states.plist"; sourceTree = "<group>"; };
 		8957420E1D43978E0097DF58 /* SummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
 		895E04001D5CCEDE002E322E /* FriendRequestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestsViewController.swift; sourceTree = "<group>"; };
@@ -211,9 +207,7 @@
 		46C983831D3922D200DFC607 = {
 			isa = PBXGroup;
 			children = (
-				4668E4C41D68078200E36CB0 /* XMExpandableTableViewController.swift */,
 				464EA0251D4F901200252DC1 /* GoogleService-Info.plist */,
-				8935ADC41D3E640900607C9D /* deleteFileAfterUse.m */,
 				46C9838E1D3922D200DFC607 /* CricTrac */,
 				46C983A31D3922D200DFC607 /* CricTracTests */,
 				46C9838D1D3922D200DFC607 /* Products */,
@@ -549,7 +543,6 @@
 				895E04051D5CE24B002E322E /* FriendSearchViewController.swift in Sources */,
 				899206261D61BA6700F99A97 /* FriendsInviteViewController.swift in Sources */,
 				46C983901D3922D200DFC607 /* AppDelegate.swift in Sources */,
-				8935ADC51D3E640900607C9D /* deleteFileAfterUse.m in Sources */,
 				895E04091D5CE33E002E322E /* FriendBaseViewController.swift in Sources */,
 				89E83F7C1D4A5AD000232250 /* MenuTableViewCell.swift in Sources */,
 				890B42C51D60430100736F03 /* CollapsibleTableViewController.swift in Sources */,
@@ -558,7 +551,6 @@
 				4642DAA51D5039DD001F039D /* LoginViewController.swift in Sources */,
 				89CC84FC1D43E4D6007F2402 /* SummaryMatchDetailsViewController.swift in Sources */,
 				4600689B1D638545007C9457 /* SuggestionCell.swift in Sources */,
-				4668E4C51D68078200E36CB0 /* XMExpandableTableViewController.swift in Sources */,
 				89F4E4B31D48FECD00EFE46E /* summaryTableViewCell.swift in Sources */,
 				46FA41D41D6D3F68006635C6 /* MatchDetailsTrackable.swift in Sources */,
 				8930F03C1D5B94C300C7540B /* CTStatePicker.swift in Sources */,

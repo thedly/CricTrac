@@ -56,6 +56,10 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
     @IBOutlet weak var city: UITextField!
     @IBOutlet weak var height: UITextField!
     @IBOutlet weak var nickName: UITextField!
+    @IBOutlet weak var gender: UITextField!
+    @IBOutlet weak var playingLevel: UITextField!
+    
+    @IBOutlet weak var mobile: UITextField!
     
     var selectedText:UITextField?
     
@@ -105,7 +109,7 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
                 
                 if selectedText != nil {
                     let viewBottom = view.frame.maxY
-                    let textDesiredPosition = viewBottom - keyboardHeight - (selectedText?.frame.height)! - scrollViewTop - 100.0
+                    let textDesiredPosition = viewBottom - keyboardHeight - (selectedText?.frame.height)! - scrollViewTop
                     
                     if textDesiredPosition < selectedText?.frame.minY {
                         

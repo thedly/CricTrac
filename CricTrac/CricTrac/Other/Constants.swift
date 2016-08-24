@@ -14,13 +14,19 @@ public var date = 0
 
 let menuData = [
 
+    ["title":"Stonewall","vc":"AddMatchDetailsViewController"],
+    ["title":"Sightscreen","vc":"AddMatchDetailsViewController"],
     ["title":"New Match","vc":"AddMatchDetailsViewController"],
-    ["title":"Profile","vc":"ProfileBaseViewController"],
-    ["title":"Summary","vc":"MatchSummaryViewController"],
+    ["title":"Match Summary","vc":"MatchSummaryViewController"],
+    ["title":"Dugout","vc":"FriendBaseViewController"],
+    ["title":"Profile","vc":"UserInfoViewController"],
     ["title":"Statistics","vc":"NewMatchViewController"],
-    ["title":"Invite Friends","vc":"FriendBaseViewController"],
-    ["title":"Friends Requests","vc":"NewMatchViewController"],
     ["title":"Notification","vc":"SummaryViewController"],
+    ["title":"Settings","vc":"NewMatchViewController"],
+    ["title":"Feedback","vc":"SummaryViewController"],
+    ["title":"Help & Support","vc":"SummaryViewController"],
+    ["title":"About","vc":"SummaryViewController"],
+    
 ]
 
 

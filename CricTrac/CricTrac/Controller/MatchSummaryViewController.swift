@@ -48,9 +48,9 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             self.matchDataSource.removeAll()
             for (key,val) in data{
                 
-                var dataDict = val as! [String:String]
-                dataDict["key"] = key
-                self.matchDataSource.append(dataDict)
+                //var dataDict = val as! [String:String]
+                //dataDict["key"] = key
+                self.matchDataSource.append(val as! [String : String])
                 self.matchSummaryTable.reloadData()
             }
             KRProgressHUD.dismiss()
