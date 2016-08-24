@@ -58,6 +58,12 @@ class SuggestionView: UIView,UITableViewDelegate,UITableViewDataSource,UITextFie
         return true
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        self.removeFromSuperview()
+        textField.delegate = oldDelegate
+        return true
+    }
     
     
     

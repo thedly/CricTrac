@@ -8,11 +8,11 @@
 
 import UIKit
 import XLPagerTabStrip
-
+import SkyFloatingLabelTextField
 
 class BattingViewController: UIViewController,IndicatorInfoProvider {
     
-    @IBOutlet weak var runsText:UITextField!
+    @IBOutlet weak var runsText:SkyFloatingLabelTextField!
     @IBOutlet weak var ballsText:UITextField!
     @IBOutlet weak var foursText:UITextField!
     @IBOutlet weak var sixesText:UITextField!
@@ -29,10 +29,40 @@ class BattingViewController: UIViewController,IndicatorInfoProvider {
     }
     
     
+    var allRequiredFieldsHaveFilledProperly:Bool{
+        _ = view
+        if runsText.text?.trimWhiteSpace.length > 0{
+            return true
+        }
+        else{
+            if ballsText.text?.trimWhiteSpace.length > 0{
+                
+                return false
+            }
+            if foursText.text?.trimWhiteSpace.length > 0{
+                
+                return false
+            }
+            if sixesText.text?.trimWhiteSpace.length > 0{
+                
+                return false
+            }
+            if positionText.text?.trimWhiteSpace.length > 0{
+                
+                return false
+            }
+            if dismissalText.text?.trimWhiteSpace.length > 0{
+                
+                return false
+            }
+            return true
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+     runsText.errorColor = UIColor.redColor()
         
         // Do any additional setup after loading the view.
     }
@@ -46,16 +76,19 @@ class BattingViewController: UIViewController,IndicatorInfoProvider {
         return IndicatorInfo(title: "BATTING")
     }
 
-    func allRequiredFieldsHaveFilledProperly()->Bool{
-        
-        return false
-    }
+    
 
+    
+    
 }
 
 
 extension BattingViewController:UITextFieldDelegate{
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
     
     func textFieldDidBeginEditing(textField: UITextField) {
@@ -66,8 +99,39 @@ extension BattingViewController:UITextFieldDelegate{
         }
 }
     
-    
+    func textFieldDidEndEditing(textField: UITextField){
+        
+        if allRequiredFieldsHaveFilledProperly{
+            runsText.errorMessage = ""
+        }
+        else{
+            runsText.errorMessage = "Runs cant be empty"
+        }
+        
+        if textField == runsText || textField == ballsText{
+          
+           calculateStrikeRate()
+        }
+    }
 
+    func calculateStrikeRate(){
+        
+        if runsText.text?.trimWhiteSpace.length == 0{
+            strikeRateText.text = ""
+        }
+        else if ballsText.text?.trimWhiteSpace.length == 0{
+            strikeRateText.text = ""
+        }
+        else{
+            
+            if let runs = Int((runsText.text?.trimWhiteSpace)!){
+                if let balls = Int((ballsText.text?.trimWhiteSpace)!){
+                    strikeRateText.text = "\(runs*100 / balls)"
+                }
+                
+            }
+        }
+    }
    
 }
 

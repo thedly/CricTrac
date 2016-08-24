@@ -9,11 +9,11 @@
 import UIKit
 
 import XLPagerTabStrip
-
+import SkyFloatingLabelTextField
 
 class BowlingViewController: UIViewController,IndicatorInfoProvider {
     
-    @IBOutlet weak var oversText:UITextField!
+    @IBOutlet weak var oversText:SkyFloatingLabelTextField!
     @IBOutlet weak var wicketsText:UITextField!
     @IBOutlet weak var runsText:UITextField!
     @IBOutlet weak var noballText:UITextField!
@@ -24,6 +24,29 @@ class BowlingViewController: UIViewController,IndicatorInfoProvider {
     var data:[String:String]{
         
         return ["OversBalled":oversText.textVal,"Wickets":wicketsText.textVal,"RunsGiven":runsText.textVal,"Noballs":noballText.textVal,"Wides":widesText.text!]
+    }
+    
+    
+    var allRequiredFieldsHaveFilledProperly:Bool{
+        _ = view
+        if oversText.text?.trimWhiteSpace.length > 0{
+            return true
+        }
+        else{
+            if wicketsText.text?.trimWhiteSpace.length > 0{
+                
+                return false
+            }
+            if runsText.text?.trimWhiteSpace.length > 0{
+                
+                return false
+            }
+            if noballText.text?.trimWhiteSpace.length > 0{
+                
+                return false
+            }
+            return true
+        }
     }
     
     
@@ -45,8 +68,47 @@ class BowlingViewController: UIViewController,IndicatorInfoProvider {
         return IndicatorInfo(title: "BOWLING")
     }
     
-    func allRequiredFieldsHaveFilledProperly()->Bool{
+    func calculateEconomy(){
         
-        return false
+        if runsText.text?.trimWhiteSpace.length == 0{
+            economyText.text = ""
+        }
+        else if oversText.text?.trimWhiteSpace.length == 0{
+            economyText.text = ""
+        }
+        else{
+            
+            if let runs = Double((runsText.text?.trimWhiteSpace)!){
+                if let overs = Double((oversText.text?.trimWhiteSpace)!){
+                    economyText.text = "\(runs / overs)"
+                }
+                
+            }
+        }
     }
 }
+
+extension BowlingViewController:UITextFieldDelegate{
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField){
+        
+        if allRequiredFieldsHaveFilledProperly{
+            oversText.errorMessage = ""
+        }
+        else{
+            oversText.errorMessage = "Overs cant be empty"
+        }
+        
+        if textField == oversText || textField == runsText{
+            
+            calculateEconomy()
+        }
+        
+        
+    }
+    }

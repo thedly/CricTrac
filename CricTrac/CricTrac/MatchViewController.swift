@@ -10,7 +10,7 @@ import UIKit
 import XLPagerTabStrip
 import AnimatedTextInput
 
-class MatchViewController: UIViewController,IndicatorInfoProvider {
+class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTrackable {
     
     
     @IBOutlet weak var dateText:UITextField!
@@ -78,6 +78,12 @@ class MatchViewController: UIViewController,IndicatorInfoProvider {
 
 extension MatchViewController:UITextFieldDelegate{
     
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
     func textFieldDidBeginEditing(textField: UITextField) {
         
         selectedText = textField
@@ -96,16 +102,12 @@ extension MatchViewController:UITextFieldDelegate{
             
             addSuggstionBox(textField,dataSource: opponentTeams)
         }
+        else if textField == tournamentText{
+            
+            addSuggstionBox(textField,dataSource: tournaments)
+        }
         
     }
     
-    
-    
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool
-    {
-        //textField.resignFirstResponder()
-        return true
-    }
 }
 

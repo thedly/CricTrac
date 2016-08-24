@@ -101,11 +101,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         }
         if let result = data["Result"]{
             
-        if result == "-"{
-            aCell.result.text = "No Result Entered"
-            }
-        else{
-        aCell.result.text = result
+        if result != "-"{
+            aCell.result.text = result
             }
         }
         if let result = data["Sixes"]{

@@ -51,6 +51,11 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
                 opponentTeams = grounds.map({ (key,value) in value })
                 
             }
+            
+            if let tournamnet = userData["Tournaments"] as? [String:String]{
+                
+                tournaments = tournamnet.map({ (key,value) in value })
+            }
             KRProgressHUD.dismiss()
         }
         
@@ -97,6 +102,15 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
                 addNewOppoSitTeamName(oppoTeamName)
             }
             
+            let tournament = data["Tournamnet"]!
+            
+            if tournament != "-"{
+                if !tournaments.contains(tournament){
+                 addNewTournamnetName(tournament)
+                }
+            }
+            
+            
             let groundName = data["Ground"]!
             
             if groundName != "-"{
@@ -127,6 +141,8 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
         
          extraVC = viewControllerFrom("Main", vcid: "ExtraViewController") as! ExtraViewController
         
+        extraVC.matchDetails = matchVC
+        
         return [matchVC, battingVC,bowlingVC,extraVC]
     }
 
@@ -140,6 +156,12 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
             
            pageName = "Match Details"
         }
+        else if !battingVC.allRequiredFieldsHaveFilledProperly {
+             pageName = "Batting Details"
+        }
+        else if  !bowlingVC.allRequiredFieldsHaveFilledProperly {
+            pageName = "Bowling Details"
+        }
         else{
             return true
         }
@@ -149,24 +171,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
         return false
     }
     
-    func validateBattingInfo()->Bool{
-        
-        return false
-    }
-    func validateBawlingInfo()->Bool{
-        
-        return false
-    }
-    
-    func validateExtraInfo()->Bool{
-        
-        return false
-    }
-    
-    func validateBasicInfo()->Bool{
-        
-        return false
-    }
+
 
     /*
     // MARK: - Navigation

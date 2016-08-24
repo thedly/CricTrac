@@ -128,18 +128,23 @@ extension UserInfoViewController:UITextFieldDelegate{
             ctHeightPicker.showPicker(self, inputText: textField)
         }
         else if  textField == gender{
+            resignFirstResponder()
             ctDataPicker.showPicker(self, inputText: textField, data: genders)
         }
         else if  textField == playingRole{
+            ctDataPicker = DataPicker()
             ctDataPicker.showPicker(self, inputText: textField, data: PlayingRoles)
         }
         else if  textField == battingStyle{
+            ctDataPicker = DataPicker()
             ctDataPicker.showPicker(self, inputText: textField, data: BattingStyles)
         }
         else if  textField == bowlingStyle{
+            ctDataPicker = DataPicker()
             ctDataPicker.showPicker(self, inputText: textField, data: BowlingStyles)
         }
         else if textField == playingLevel {
+            ctDataPicker = DataPicker()
             ctDataPicker.showPicker(self, inputText: textField, data: PlayingLevels)
         }
 

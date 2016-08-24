@@ -22,6 +22,13 @@ func loadInitialValues(){
         }
     })
     
+    fireBaseRef.child("Results").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let value = snapshot.value as? [String]{
+            results = value
+        }
+    })
+    
 }
 
 func addMatchData(key:NSString,data:[String:String]){
@@ -63,6 +70,10 @@ func addNewOppoSitTeamName(oTeamName:String){
     ref.setValue(oTeamName)
 }
 
+func addNewTournamnetName(tournamnet:String){
+    let ref = fireBaseRef.child(currentUser!.uid).child("Tournaments").childByAutoId()
+    ref.setValue(tournamnet)
+}
 
 func getAllUserData(sucessBlock:(AnyObject)->Void){
     
