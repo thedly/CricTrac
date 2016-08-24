@@ -141,6 +141,8 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
         
          extraVC = viewControllerFrom("Main", vcid: "ExtraViewController") as! ExtraViewController
         
+        extraVC.matchDetails = matchVC
+        
         return [matchVC, battingVC,bowlingVC,extraVC]
     }
 

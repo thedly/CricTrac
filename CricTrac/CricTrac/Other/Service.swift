@@ -22,6 +22,13 @@ func loadInitialValues(){
         }
     })
     
+    fireBaseRef.child("Results").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let value = snapshot.value as? [String]{
+            results = value
+        }
+    })
+    
 }
 
 func addMatchData(key:NSString,data:[String:String]){

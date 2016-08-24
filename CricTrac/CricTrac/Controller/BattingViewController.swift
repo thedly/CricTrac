@@ -85,6 +85,10 @@ class BattingViewController: UIViewController,IndicatorInfoProvider {
 
 extension BattingViewController:UITextFieldDelegate{
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
     
     func textFieldDidBeginEditing(textField: UITextField) {

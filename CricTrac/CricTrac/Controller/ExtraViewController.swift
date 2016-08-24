@@ -24,6 +24,8 @@ class ExtraViewController: UIViewController,IndicatorInfoProvider {
     @IBOutlet weak var secondWicketsText:UITextField!
     @IBOutlet weak var resultText:UITextField!
     
+    weak var matchDetails:MatchDetailsTrackable?
+    var teams = [String]()
     
     var data:[String:String]{
         
@@ -41,6 +43,12 @@ class ExtraViewController: UIViewController,IndicatorInfoProvider {
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(animated: Bool) {
+        
+        setTeamData()
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -53,6 +61,37 @@ class ExtraViewController: UIViewController,IndicatorInfoProvider {
     func allRequiredFieldsHaveFilledProperly()->Bool{
         
         return false
+    }
+    
+    func setTeamData(){
+        
+        teams.removeAll()
+        if matchDetails?.opponentText.text?.trimWhiteSpace.length > 0{
+            
+            if matchDetails?.teamText.text?.trimWhiteSpace.length > 0{
+                
+                teams.append((matchDetails?.teamText.text?.trimWhiteSpace)!)
+                teams.append((matchDetails?.opponentText.text?.trimWhiteSpace)!)
+            }
+        }
+    }
+}
+
+extension ExtraViewController:UITextFieldDelegate{
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        
+        if textField == tossText || textField == firstBatText || textField == secondBatText{
+            addSuggstionBox(textField, dataSource: teams, showSuggestions: true)
+        }
+        else if textField == resultText{
+            addSuggstionBox(textField, dataSource: results, showSuggestions: true)
+        }
+}
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
 }

@@ -67,9 +67,33 @@ class BowlingViewController: UIViewController,IndicatorInfoProvider {
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "BOWLING")
     }
+    
+    func calculateEconomy(){
+        
+        if runsText.text?.trimWhiteSpace.length == 0{
+            economyText.text = ""
+        }
+        else if oversText.text?.trimWhiteSpace.length == 0{
+            economyText.text = ""
+        }
+        else{
+            
+            if let runs = Double((runsText.text?.trimWhiteSpace)!){
+                if let overs = Double((oversText.text?.trimWhiteSpace)!){
+                    economyText.text = "\(runs / overs)"
+                }
+                
+            }
+        }
+    }
 }
 
 extension BowlingViewController:UITextFieldDelegate{
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
     func textFieldDidEndEditing(textField: UITextField){
         
@@ -79,5 +103,12 @@ extension BowlingViewController:UITextFieldDelegate{
         else{
             oversText.errorMessage = "Overs cant be empty"
         }
+        
+        if textField == oversText || textField == runsText{
+            
+            calculateEconomy()
+        }
+        
+        
     }
-}
+    }

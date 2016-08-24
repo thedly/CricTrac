@@ -47,8 +47,6 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
         
         setNavigationBarProperties()
         
-                
-        
         self.tableView.scrollEnabled = false
         
         // Adding rows to the model

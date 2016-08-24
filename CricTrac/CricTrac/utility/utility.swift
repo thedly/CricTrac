@@ -18,6 +18,8 @@ var teamNames = [String]()
 var opponentTeams = [String]()
 var dismissals = [String]()
 var tournaments = [String]()
+var results = [String]()
+
 
 public func viewControllerFrom(storyBoard:String,vcid:String)->UIViewController{
     
