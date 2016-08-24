@@ -102,12 +102,14 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
                 addNewOppoSitTeamName(oppoTeamName)
             }
             
-            if let tournament = data[""]{
-            if !tournaments.contains(tournament){
-                
-                addNewOppoSitTeamName(tournament)
+            let tournament = data["Tournamnet"]!
+            
+            if tournament != "-"{
+                if !tournaments.contains(tournament){
+                 addNewTournamnetName(tournament)
+                }
             }
-            }
+            
             
             let groundName = data["Ground"]!
             

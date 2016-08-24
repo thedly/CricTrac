@@ -30,6 +30,7 @@ class BattingViewController: UIViewController,IndicatorInfoProvider {
     
     
     var allRequiredFieldsHaveFilledProperly:Bool{
+        _ = view
         if runsText.text?.trimWhiteSpace.length > 0{
             return true
         }

@@ -28,6 +28,7 @@ class BowlingViewController: UIViewController,IndicatorInfoProvider {
     
     
     var allRequiredFieldsHaveFilledProperly:Bool{
+        _ = view
         if oversText.text?.trimWhiteSpace.length > 0{
             return true
         }
