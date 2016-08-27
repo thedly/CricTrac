@@ -20,6 +20,11 @@ var dismissals = [String]()
 var tournaments = [String]()
 var results = [String]()
 
+var BattingStyles = [String]()
+var BowlingStyles = [String]()
+var PlayingRoles = [String]()
+var PlayingLevels = [String]()
+var genders = [String]()
 
 public func viewControllerFrom(storyBoard:String,vcid:String)->UIViewController{
     

@@ -17,6 +17,27 @@ class SummaryMatchDetailsViewController: UIViewController, UITableViewDelegate, 
     }
     // MARK: - Variables and constants
     
+    @IBOutlet weak var batRuns: UILabel!
+    @IBOutlet weak var ballsFaced: UILabel!
+    @IBOutlet weak var sixes: UILabel!
+    
+    @IBOutlet weak var tournamentName: UILabel!
+    @IBOutlet weak var overs: UILabel!
+    @IBOutlet weak var totalWickets: UILabel!
+    
+    @IBOutlet weak var fours: UILabel!
+    @IBOutlet weak var result: UILabel!
+    
+    var _batRuns = String()
+    var _ballsFaced = String()
+    var _sixes = String()
+    var _fours = String()
+    var _tournamentName = String()
+    var _overs = String()
+    var _result = String()
+    var _totalWickets = String()
+    var _matchMonth = String()
+    
     var matchDetailsData : Dictionary<String,[Dictionary<String,String>]>!
     
     override func viewDidLoad() {
@@ -32,6 +53,14 @@ class SummaryMatchDetailsViewController: UIViewController, UITableViewDelegate, 
     }
     
     func initializeView() {
+        
+        batRuns.text = _batRuns
+        fours.text = _fours
+        sixes.text = _sixes
+        overs.text = _overs
+        tournamentName.text = _tournamentName
+        totalWickets.text = _totalWickets
+        
         //matchDetailsTbl.dataSource = self
         //matchDetailsTbl.delegate = self
         //getMatchDetails()

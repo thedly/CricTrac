@@ -45,6 +45,10 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
         profileImage.layer.cornerRadius = profileImage.frame.size.width/2
         profileImage.clipsToBounds = true
         
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("imageTapped:"))
+        profileImage.userInteractionEnabled = true
+        profileImage.addGestureRecognizer(tapGestureRecognizer)
+        
         
         setNavigationBarProperties()
         
@@ -66,9 +70,23 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
     // MARK: - Table view data source
     
     
-    
     @IBOutlet weak var UserName: UILabel!
     
+    @IBAction func imageTapped(sender: UITapGestureRecognizer) {
+        let imageView = sender.view as! UIImageView
+        let newImageView = UIImageView(image: imageView.image)
+        newImageView.frame = self.view.frame
+        newImageView.backgroundColor = .blackColor()
+        newImageView.contentMode = .ScaleAspectFit
+        newImageView.userInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: "dismissFullscreenImage:")
+        newImageView.addGestureRecognizer(tap)
+        self.view.addSubview(newImageView)
+    }
+    
+    func dismissFullscreenImage(sender: UITapGestureRecognizer) {
+        sender.view?.removeFromSuperview()
+    }
     
     @IBAction func editImageBtnPressed(sender: AnyObject) {
         

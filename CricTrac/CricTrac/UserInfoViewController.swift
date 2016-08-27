@@ -17,6 +17,7 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
     lazy var ctStatePicker = CTStatePicker()
     lazy var ctHeightPicker = HeightPicker()
     lazy var ctDataPicker = DataPicker()
+    var profileDetailsExists:Bool = false
     @IBOutlet weak var scrollView:UIScrollView!
     
     
@@ -46,6 +47,9 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
     var lastSelectedTab:UIView?
     var scrollViewTop:CGFloat!
     
+    var profileData:[String:AnyObject]!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,6 +57,13 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
         initializeView()
         // Do any additional setup after loading the view.
     }
+    
+    
+    var data:[String:String]{
+        
+        return ["FirstName":firstName.textVal,"MiddleName":middleName.textVal,"LastName":lastName.textVal,"DateOfBirth":dateOfBirth.textVal,"Email":emailId.textVal,"Mobile":mobile.textVal,"Gender":gender.textVal,"PlayingLevel":playingLevel.textVal,"PlayingRole":playingRole.textVal,"BattingStyle":battingStyle.textVal,"BowlingStyle":bowlingStyle.textVal,"Country":country.textVal,"State":state.textVal,"City":city.textVal,"Height":height.textVal,"NickName":nickName.textVal]
+    }
+    
     
     func initializeView(){
         
@@ -65,10 +76,62 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
         battingStyle.delegate = self
         bowlingStyle.delegate = self
         playingLevel.delegate = self
+        city.delegate = self
+        emailId.delegate = self
+        nickName.delegate = self
+        firstName.delegate = self
+        lastName.delegate = self
+        middleName.delegate = self
+        
+        loadInitialProfileValues()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserInfoViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         scrollView.setContentOffset(CGPointZero, animated: true)
         scrollViewTop = scrollView.frame.origin.y
+        
+        
+        getAllProfileData { (data) in
+            
+            
+            self.profileData = data
+            
+            for (_,val) in data{
+                
+                var dataDict = val as! [String:String]
+                
+                if dataDict.count > 0 {
+                    
+                    self.profileDetailsExists = true
+                    
+                    self.firstName.text = dataDict["FirstName"]
+                    self.middleName.text = dataDict["MiddleName"]
+                    self.lastName.text = dataDict["LastName"]
+                    self.dateOfBirth.text = dataDict["DateOfBirth"]
+                    self.emailId.text = dataDict["Email"]
+                    self.mobile.text = dataDict["Mobile"]
+                    self.gender.text = dataDict["Gender"]
+                    self.playingLevel.text = dataDict["PlayingLevel"]
+                    self.playingRole.text = dataDict["PlayingRole"]
+                    self.battingStyle.text = dataDict["BattingStyle"]
+                    self.bowlingStyle.text = dataDict["BowlingStyle"]
+                    self.country.text = dataDict["Country"]
+                    self.state.text = dataDict["State"]
+                    self.city.text = dataDict["City"]
+                    self.height.text = dataDict["Height"]
+                    self.nickName.text = dataDict["NickName"]
+                    
+                }
+                
+                
+            }
+
+            
+            
+            
+            
+           
+        }
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -80,11 +143,21 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
         dismissViewControllerAnimated(true) {}
     }
     
+    @IBAction func addUserBtnPressed(sender: AnyObject) {
+        
+        let data = self.data
+        addUserProfileData(data, userExists: self.profileDetailsExists)
+        
+
+    }
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "USER")
     }
     
-    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
     func keyboardWillShow(sender: NSNotification){
         
@@ -92,17 +165,9 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
             if  let  keyboardframe = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue{
                 let keyboardHeight = keyboardframe.CGRectValue().height
                 
-                if selectedText != nil {
-                    let viewBottom = view.frame.maxY
-                    let textDesiredPosition = viewBottom - keyboardHeight - (selectedText?.frame.height)! - scrollViewTop
-                    
-                    if textDesiredPosition < selectedText?.frame.minY {
-                        
-                        let aPoint = CGPoint(x: 0, y: textDesiredPosition)
-                        scrollView.setContentOffset(aPoint, animated: true)
-                        
-                    }
-                }
+                    var contentInset:UIEdgeInsets = self.scrollView.contentInset
+                    contentInset.bottom = keyboardHeight + 10
+                    self.scrollView.contentInset = contentInset
             }
         }
     }
@@ -148,13 +213,6 @@ extension UserInfoViewController:UITextFieldDelegate{
             ctDataPicker.showPicker(self, inputText: textField, data: PlayingLevels)
         }
 
-    }
-    
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool
-    {
-        textField.resignFirstResponder()
-        return true
     }
     
     

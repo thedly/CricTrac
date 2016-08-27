@@ -13,6 +13,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
 
     @IBOutlet var matchSummaryTable:UITableView!
     
+    
+    var runs = String?()
     var matchData:[String:AnyObject]!
     var matchDataSource = [[String:String]]()
     
@@ -21,7 +23,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         super.viewDidLoad()
 
         getMatchData()
-         matchSummaryTable.registerNib(UINib.init(nibName:"SummaryCell", bundle: nil), forCellReuseIdentifier: "SummaryCell")
+    matchSummaryTable.registerNib(UINib.init(nibName:"SummaryCell", bundle: nil), forCellReuseIdentifier: "SummaryCell")
         
         // Do any additional setup after loading the view.
     }
@@ -48,10 +50,12 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             self.matchDataSource.removeAll()
             for (key,val) in data{
                 
-                //var dataDict = val as! [String:String]
-                //dataDict["key"] = key
-                self.matchDataSource.append(val as! [String : String])
-                self.matchSummaryTable.reloadData()
+                if var dataDict: [String : String] = val as? [String : String] {
+                    dataDict["key"] = key
+                    self.matchDataSource.append(dataDict)
+                    self.matchSummaryTable.reloadData()
+                }
+                
             }
             KRProgressHUD.dismiss()
         }
@@ -65,9 +69,9 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
          let data = matchDataSource[indexPath.row]
         
         
-        if let runs = data["Runs"]{
+        if runs == data["Runs"]{
             
-            aCell.totalRuns.text = "Runs: "+runs
+            aCell.totalRuns.text = "Runs: "+runs!
         }
         if let wickets = data["Wickets"]{
             
@@ -127,6 +131,31 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         return getCellForRow(indexPath)
+    }
+    
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        var summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
+        
+        
+        let currentCell = tableView.cellForRowAtIndexPath(indexPath)! as! SummaryCell
+        
+        print(currentCell.sixes.text)
+        
+        summaryDetailsVC._sixes = currentCell.sixes.text!
+        summaryDetailsVC._ballsFaced = currentCell.ballsFaced.text!
+        summaryDetailsVC._fours = currentCell.fours.text!
+        //summaryDetailsVC._batRuns = currentCell.machYear.text!
+        //summaryDetailsVC._matchMonth = currentCell.matchdate.text!
+        summaryDetailsVC._matchMonth = currentCell.matchMonth.text!
+        summaryDetailsVC._overs = currentCell.overs.text!
+        summaryDetailsVC._result = currentCell.result.text!
+        summaryDetailsVC._batRuns = currentCell.totalRuns.text!
+        summaryDetailsVC._totalWickets = currentCell.totalWickets.text!
+        summaryDetailsVC._tournamentName = currentCell.tournamentName.text!
+        
+            presentViewController(summaryDetailsVC, animated: true, completion: nil)
+        
     }
 
 }

@@ -96,6 +96,77 @@ func enableSync(){
 }
 
 
+// MARK: - Profile
+
+func loadInitialProfileValues(){
+    
+    
+    fireBaseRef.child("BattingStyle").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let value = snapshot.value as? [String]{
+            BattingStyles = value
+        }
+    })
+    
+    fireBaseRef.child("PlayingRole").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let value = snapshot.value as? [String]{
+            PlayingRoles = value
+        }
+    })
+    
+    fireBaseRef.child("PlayingLevel").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let value = snapshot.value as? [String]{
+            PlayingLevels = value
+        }
+    })
+    
+    fireBaseRef.child("Gender").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let value = snapshot.value as? [String]{
+            genders = value
+        }
+    })
+    
+    fireBaseRef.child("BowlingStyle").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let value = snapshot.value as? [String]{
+            BowlingStyles = value
+        }
+    })
+    
+    
+}
+
+
+func addUserProfileData(data:[String:String], userExists:Bool){
+    let ref = fireBaseRef.child(currentUser!.uid).child("UserProfile").childByAutoId()
+    if userExists {
+        ref.setValue(data)
+    }
+    else
+    {
+        ref.updateChildValues(data)
+    }
+    
+    
+    
+}
+
+func getAllProfileData(sucessBlock:([String:AnyObject])->Void){
+    
+    fireBaseRef.child(currentUser!.uid).child("UserProfile").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let data = snapshot.value{
+            
+            sucessBlock(data as! [String : AnyObject])
+        }
+        else{
+            sucessBlock([:])
+        }
+    })
+}
 
 //fireBaseRef.child("Dismissals").setValue(["BOWLED","CAUGHT","HANDLED THE BALL","HIT WICKET","HIT THE BALL TWICE","LEG BEFORE WICKET (LBW)","OBSTRUCTING THE FIELD","RUN OUT","RETIRED","TIMED OUT"])
 
