@@ -20,6 +20,17 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
     
     @IBOutlet weak var profileImage: UIImageView!
     
+    @IBOutlet weak var battingStyle: UILabel!
+    @IBOutlet weak var bowlingStyle: UILabel!
+    @IBOutlet weak var location: UILabel!
+    @IBOutlet weak var height: UILabel!
+    @IBOutlet weak var age: UILabel!
+    @IBOutlet weak var alias: UILabel!
+    @IBOutlet weak var username: UILabel!
+    @IBOutlet weak var playingRole: UILabel!
+    
+    
+    @IBOutlet weak var activityInd: UIActivityIndicatorView!
     @IBAction func collapseBtnPressed(sender: AnyObject) {
         
         let rowToSelect:NSIndexPath = NSIndexPath(forRow: 0, inSection: 0);  //slecting 0th row with 0th section
@@ -45,9 +56,13 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
         profileImage.layer.cornerRadius = profileImage.frame.size.width/2
         profileImage.clipsToBounds = true
         
-        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("imageTapped:"))
-        profileImage.userInteractionEnabled = true
-        profileImage.addGestureRecognizer(tapGestureRecognizer)
+        activityInd.layer.cornerRadius = profileImage.frame.size.width/2
+        activityInd.clipsToBounds = true
+        
+        
+//        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("imageTapped:"))
+//        profileImage.userInteractionEnabled = true
+//        profileImage.addGestureRecognizer(tapGestureRecognizer)
         
         
         setNavigationBarProperties()
@@ -56,12 +71,14 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
         
         // Adding rows to the model
         super.rowModel.addRow(0, collapsedHeight: 115, expandedHeight: 282)
-        //super.rowModel.addRow(1, collapsedHeight: 83, expandedHeight: 174)
-        
-        // Setting the standard collapsed height to the default 44.
         super.rowModel.standardCollapsedHeight = 44
-        //super.rowModel.addRow(2, collapsedHeight: super.rowModel.standardCollapsedHeight, expandedHeight: super.rowModel.standardCollapsedHeight)
+
+        
+        setUIValues()
+        
     }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -74,6 +91,12 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
     
     @IBAction func imageTapped(sender: UITapGestureRecognizer) {
         let imageView = sender.view as! UIImageView
+//        let navBarView = UIView(frame: CGRectMake(0, 0, (sender.view?.frame.size.width)!, 50))
+//        navBarView.backgroundColor = UIColor(hex: "#D4D4D4")
+//        let editBtn = UIButton(frame: CGRectMake((sender.view?.frame.size.width)! - 100, 10, 50, 20))
+//        editBtn.setBackgroundImage(UIImage(named: "EditPencil-100"), forState: .Normal)
+//        navBarView.addSubview(editBtn)
+        
         let newImageView = UIImageView(image: imageView.image)
         newImageView.frame = self.view.frame
         newImageView.backgroundColor = .blackColor()
@@ -81,6 +104,7 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
         newImageView.userInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: "dismissFullscreenImage:")
         newImageView.addGestureRecognizer(tap)
+//        self.view.addSubview(navBarView)
         self.view.addSubview(newImageView)
     }
     
@@ -120,6 +144,37 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
         }
         
         alertController.addAction(chooseExistingAction)
+        
+        
+        let chooseFromFacebookAction = UIAlertAction(title: "Choose Default", style: .Default) { (action) in
+            
+            self.activityInd.startAnimating()
+            
+            let image:UIImage = getImageFromFacebook()
+            
+            self.profileImage.image = image
+            
+            addProfileImageData(image)
+            self.activityInd.stopAnimating()
+        }
+        
+        alertController.addAction(chooseFromFacebookAction)
+        
+        
+        let removePhotoAction = UIAlertAction(title: "Remove Photo", style: .Default) { (action) in
+            
+            let image:UIImage = UIImage(named: "User")!
+            
+            self.profileImage.image = image
+            addProfileImageData(image)
+            
+        }
+        
+        alertController.addAction(removePhotoAction)
+        
+        
+        
+        
         
         
         self.presentViewController(alertController, animated: true) {
@@ -215,6 +270,24 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
         let editProfileVc = viewControllerFrom("Main", vcid: "UserInfoViewController")
         self.presentViewController(editProfileVc, animated: true) {}
     }
+    
+    //MARK: - Image picker delegate
+    
+    
+    
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        print(image)
+        profileImage.image = image
+        
+        addProfileImageData(image)
+        
+        
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    //MARK: - Functions
+    
     func setNavigationBarProperties(){
         let menuButton: UIButton = UIButton(type:.Custom)
         menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
@@ -240,18 +313,63 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
         navigationController!.navigationBar.titleTextAttributes = titleDict
     }
     
-    
-    
-    //MARK: - Image picker delegate
-    
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        print(image)
-        profileImage.image = image
-        dismissViewControllerAnimated(true, completion: nil)
+    func getAge(birthdate:String) -> String{
+        let dateFormater = NSDateFormatter()
+        dateFormater.dateFormat = "dd/MM/yyyy"
+        let birthdayDate = dateFormater.dateFromString(birthdate)
+        let calendar: NSCalendar! = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        let now: NSDate! = NSDate()
+        let calcAge = calendar.components(.Year, fromDate: birthdayDate!, toDate: now, options: [])
+        let age = calcAge.year
+        return String(age)
     }
     
-    
+    func setUIValues() {
+        activityInd.startAnimating()
+        getImageFromFirebase { (data) in
+            self.profileImage.image = data
+            self.activityInd.stopAnimating()
+        }
+        
+        
+        getAllProfileData { (data) in
+            
+            profileData = data as! [String:String]
+                
+                if profileData.count > 0 {
+                    
+                    var optionalMiddleName: String = " " + profileData["MiddleName"]! + " " as String
+                    
+                    optionalMiddleName.replace(" -", withString: "")
+                    
+                    self.username.text = (profileData["FirstName"]! + optionalMiddleName + profileData["LastName"]!).capitalizedString
+                    
+                    let dob:String = profileData["DateOfBirth"]! as String
+                    
+                    self.age.text = self.getAge(dob)
+                    
+                    self.alias.text = profileData["NickName"]
+                    self.playingRole.text = profileData["PlayingRole"]
+                    self.battingStyle.text = profileData["BattingStyle"]
+                    self.bowlingStyle.text = profileData["BowlingStyle"]
+                    
+                    self.location.text = profileData["City"]! + ", "+profileData["Country"]!
+                    
+                    var height: String = profileData["Height"]! as String
+                    height.replace("feet", withString: "\'")
+                    height.replace("inches", withString: "\"")
+                    
+                    self.height.text = height
+                }
+            
+            
+            
+            
+            
+            
+        }
+    }
+
     
 }
 

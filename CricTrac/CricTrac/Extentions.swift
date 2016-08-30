@@ -126,6 +126,21 @@ extension UIScrollView {
     }
 }
 
+extension String
+{
+    mutating func replace(originalString:String, withString newString:String)
+    {
+        let replacedString = self.stringByReplacingOccurrencesOfString(originalString, withString: newString)
+        self = replacedString
+    }
+}
+extension String
+{
+    func trim() -> String
+    {
+        return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+    }
+}
 extension UITextField{
     
     var textVal:String{

@@ -19,7 +19,7 @@ var opponentTeams = [String]()
 var dismissals = [String]()
 var tournaments = [String]()
 var results = [String]()
-
+var profileData = [String:String]()
 var BattingStyles = [String]()
 var BowlingStyles = [String]()
 var PlayingRoles = [String]()

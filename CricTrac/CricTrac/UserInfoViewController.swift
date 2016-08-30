@@ -47,7 +47,7 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
     var lastSelectedTab:UIView?
     var scrollViewTop:CGFloat!
     
-    var profileData:[String:AnyObject]!
+    
     
     
     override func viewDidLoad() {
@@ -90,46 +90,28 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
         scrollViewTop = scrollView.frame.origin.y
         
         
-        getAllProfileData { (data) in
+        if profileData.count > 0 {
             
-            
-            self.profileData = data
-            
-            for (_,val) in data{
-                
-                var dataDict = val as! [String:String]
-                
-                if dataDict.count > 0 {
                     
                     self.profileDetailsExists = true
                     
-                    self.firstName.text = dataDict["FirstName"]
-                    self.middleName.text = dataDict["MiddleName"]
-                    self.lastName.text = dataDict["LastName"]
-                    self.dateOfBirth.text = dataDict["DateOfBirth"]
-                    self.emailId.text = dataDict["Email"]
-                    self.mobile.text = dataDict["Mobile"]
-                    self.gender.text = dataDict["Gender"]
-                    self.playingLevel.text = dataDict["PlayingLevel"]
-                    self.playingRole.text = dataDict["PlayingRole"]
-                    self.battingStyle.text = dataDict["BattingStyle"]
-                    self.bowlingStyle.text = dataDict["BowlingStyle"]
-                    self.country.text = dataDict["Country"]
-                    self.state.text = dataDict["State"]
-                    self.city.text = dataDict["City"]
-                    self.height.text = dataDict["Height"]
-                    self.nickName.text = dataDict["NickName"]
-                    
-                }
-                
-                
-            }
-
+                    self.firstName.text = profileData["FirstName"]
+                    self.middleName.text = profileData["MiddleName"]
+                    self.lastName.text = profileData["LastName"]
+                    self.dateOfBirth.text = profileData["DateOfBirth"]
+                    self.emailId.text = profileData["Email"]
+                    self.mobile.text = profileData["Mobile"]
+                    self.gender.text = profileData["Gender"]
+                    self.playingLevel.text = profileData["PlayingLevel"]
+                    self.playingRole.text = profileData["PlayingRole"]
+                    self.battingStyle.text = profileData["BattingStyle"]
+                    self.bowlingStyle.text = profileData["BowlingStyle"]
+                    self.country.text = profileData["Country"]
+                    self.state.text = profileData["State"]
+                    self.city.text = profileData["City"]
+                    self.height.text = profileData["Height"]
+                    self.nickName.text = profileData["NickName"]
             
-            
-            
-            
-           
         }
 
     }
@@ -146,9 +128,15 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
     @IBAction func addUserBtnPressed(sender: AnyObject) {
         
         let data = self.data
-        addUserProfileData(data, userExists: self.profileDetailsExists)
         
-
+        
+        
+        addUserProfileData(data, sucessBlock: {data in
+            
+            
+            
+        })
+        dismissViewControllerAnimated(true, completion: nil)
     }
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "USER")
@@ -216,6 +204,7 @@ extension UserInfoViewController:UITextFieldDelegate{
     }
     
     
+   
     
     
 }

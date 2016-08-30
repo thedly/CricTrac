@@ -9,7 +9,6 @@
 import Foundation
 import Firebase
 
-
 //MARK:- Match Data
 
 func loadInitialValues(){
@@ -28,7 +27,6 @@ func loadInitialValues(){
             results = value
         }
     })
-    
 }
 
 func addMatchData(key:NSString,data:[String:String]){
@@ -36,6 +34,27 @@ func addMatchData(key:NSString,data:[String:String]){
     let ref = fireBaseRef.child(currentUser!.uid).child("Matches").childByAutoId()
     ref.setValue(data)
     
+}
+
+func addProfileImageData(profileDp:UIImage){
+    
+    let imageData:NSData = UIImageJPEGRepresentation(profileDp, 0.8)!
+    
+    let metaData = FIRStorageMetadata()
+    metaData.contentType = "image/jpg"
+    
+    
+    let filePath = "\(FIRAuth.auth()?.currentUser?.uid)/UserProfile/profileImage"
+    
+    storageRef.child(filePath).putData(imageData, metadata: metaData){(metaData,error) in
+        if let error = error {
+            print(error.localizedDescription)
+            return
+        }else{
+            print("Successfully uploaded profile image")
+        
+        }
+    }
 }
 
 func getAllMatchData(sucessBlock:([String:AnyObject])->Void){
@@ -140,33 +159,59 @@ func loadInitialProfileValues(){
 }
 
 
-func addUserProfileData(data:[String:String], userExists:Bool){
-    let ref = fireBaseRef.child(currentUser!.uid).child("UserProfile").childByAutoId()
-    if userExists {
-        ref.setValue(data)
-    }
-    else
-    {
-        ref.updateChildValues(data)
-    }
-    
-    
-    
+func addUserProfileData(data:[String:String], sucessBlock:(AnyObject)->Void){
+    let ref = fireBaseRef.child(currentUser!.uid).child("UserProfile")
+    ref.setValue(data)
+    sucessBlock(data)
 }
 
 func getAllProfileData(sucessBlock:([String:AnyObject])->Void){
     
     fireBaseRef.child(currentUser!.uid).child("UserProfile").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
         
-        if let data = snapshot.value{
+        if let data: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
             
-            sucessBlock(data as! [String : AnyObject])
+            sucessBlock(data)
         }
         else{
             sucessBlock([:])
         }
     })
 }
+
+func getImageFromFacebook() -> UIImage{
+    
+    var profileImage = UIImage()
+   
+    if let url  = currentUser?.photoURL,
+        data = NSData(contentsOfURL: url)
+    {
+        profileImage = UIImage(data: data)!
+    }
+   return profileImage
+}
+
+func getImageFromFirebase(sucessBlock:(UIImage)->Void){
+    
+    
+    let filePath = "\(FIRAuth.auth()?.currentUser?.uid)/UserProfile/profileImage"
+    
+    
+    let profileImgRef  = storageRef.child(filePath)
+    
+    
+    profileImgRef.downloadURLWithCompletion({ (url, error) in
+                    if let userurl  = url,
+                data = NSData(contentsOfURL: userurl)
+            {
+                sucessBlock(UIImage(data: data)!)
+            }
+        
+        
+    })
+    
+}
+
 
 //fireBaseRef.child("Dismissals").setValue(["BOWLED","CAUGHT","HANDLED THE BALL","HIT WICKET","HIT THE BALL TWICE","LEG BEFORE WICKET (LBW)","OBSTRUCTING THE FIELD","RUN OUT","RETIRED","TIMED OUT"])
 

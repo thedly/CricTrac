@@ -123,6 +123,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 firebaseLoginWithFacebook(fbCredentials["tokenString"]! , sucess: { (user) in
                     
                     currentUser = user
+                    
                     self.moveToNextScreen()
                     
                     }, failure: { (error) in
