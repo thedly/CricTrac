@@ -338,11 +338,8 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
                 
                 if profileData.count > 0 {
                     
-                    var optionalMiddleName: String = " " + profileData["MiddleName"]! + " " as String
                     
-                    optionalMiddleName.replace(" -", withString: "")
-                    
-                    self.username.text = (profileData["FirstName"]! + optionalMiddleName + profileData["LastName"]!).capitalizedString
+                    self.username.text = (profileData["FirstName"]! + " " + profileData["LastName"]!).capitalizedString
                     
                     let dob:String = profileData["DateOfBirth"]! as String
                     
@@ -354,12 +351,7 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
                     self.bowlingStyle.text = profileData["BowlingStyle"]
                     
                     self.location.text = profileData["City"]! + ", "+profileData["Country"]!
-                    
-                    var height: String = profileData["Height"]! as String
-                    height.replace("feet", withString: "\'")
-                    height.replace("inches", withString: "\"")
-                    
-                    self.height.text = height
+                
                 }
             
             
