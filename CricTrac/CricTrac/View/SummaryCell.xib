@@ -186,6 +186,9 @@
                     <exclude reference="4d3-Hq-KKd"/>
                 </mask>
             </variation>
+            <connections>
+                <outlet property="tournamentName" destination="y3H-Jk-wug" id="iGP-9R-iol"/>
+            </connections>
             <point key="canvasLocation" x="247" y="135.5"/>
         </view>
     </objects>

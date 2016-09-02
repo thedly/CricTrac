@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class SummaryMatchDetailsViewController: UIViewController {
 
@@ -28,8 +29,7 @@ class SummaryMatchDetailsViewController: UIViewController {
     @IBOutlet weak var tournamentName: UILabel!
     @IBOutlet weak var overs: UILabel!
     @IBOutlet weak var totalWickets: UILabel!
-    
-    
+
     @IBOutlet weak var wides: UILabel!
     @IBOutlet weak var batPos: UILabel!
     @IBOutlet weak var fours: UILabel!
@@ -47,18 +47,31 @@ class SummaryMatchDetailsViewController: UIViewController {
     
     var matchDetailsData : [String:String]!
     
+    @IBAction func deleteActionPressed(sender: UIButton) {
+        
+        let popup = SCLAlertView()
+        
+        popup.addButton("Yes Delete") {
+            print("delete clicked")
+        }
+    
+        popup.showTitle("Delete", subTitle: "match details ?", style: SCLAlertViewStyle.Notice, closeButtonTitle: "Cancel", circleIconImage: UIImage(named: "Delete-100")!, animationStyle: SCLAnimationStyle.TopToBottom)
+        
+        
+        return
+    }
     @IBAction func ShareActionPressed(sender: UIButton) {
         
         
         UIGraphicsBeginImageContext(self.screenshot.bounds.size);
         self.screenshot.layer.renderInContext(UIGraphicsGetCurrentContext()!)
-        var screenShot = UIGraphicsGetImageFromCurrentImageContext();
+        let screenShot = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
     
-        var itemsToShare = screenShot
+        let itemsToShare = screenShot
         
         
-        var actCtrl = UIActivityViewController(activityItems: [itemsToShare], applicationActivities: nil)
+        let actCtrl = UIActivityViewController(activityItems: [itemsToShare], applicationActivities: nil)
         
         
         actCtrl.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeMessage, UIActivityTypeMail]

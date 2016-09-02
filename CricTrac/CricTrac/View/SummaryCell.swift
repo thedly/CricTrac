@@ -11,6 +11,7 @@ import UIKit
 class SummaryCell: UITableViewCell {
 
     
+    @IBOutlet weak var tournamentName: UILabel!
     @IBOutlet weak var header1Lbl: UILabel!
     @IBOutlet weak var header2Lbl: UILabel!
     @IBOutlet weak var header3Lbl: UILabel!

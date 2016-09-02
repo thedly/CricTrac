@@ -18,6 +18,7 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
     
     @IBOutlet weak var containerView: UIView!
     
+    @IBOutlet weak var teamName: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     
     @IBOutlet weak var battingStyle: UILabel!
@@ -346,17 +347,17 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
                 if profileData.count > 0 {
                     
                     
-                    self.username.text = (profileData["FirstName"]! + " " + profileData["LastName"]!).capitalizedString
+                    
                     
                     let dob:String = profileData["DateOfBirth"]! as String
                     
-                    self.age.text = self.getAge(dob)
+                    self.username.text = (profileData["FirstName"]! + " " + profileData["LastName"]! + "  (\(self.getAge(dob)))").capitalizedString
                     
-                    self.alias.text = profileData["NickName"]
+                    
                     self.playingRole.text = profileData["PlayingRole"]
                     self.battingStyle.text = profileData["BattingStyle"]
                     self.bowlingStyle.text = profileData["BowlingStyle"]
-                    
+                    self.teamName.text = profileData["TeamName"]
                     self.location.text = profileData["City"]! + ", "+profileData["Country"]!
                 
                 }

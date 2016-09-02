@@ -14,11 +14,11 @@ public var date = 0
 
 let menuData = [
 
-    ["title":"Stonewall","vc":"AddMatchDetailsViewController"],
-    ["title":"Sightscreen","vc":"AddMatchDetailsViewController"],
+    ["title":"Timeline","vc":"AddMatchDetailsViewController"],
+    ["title":"Dashboard","vc":"AddMatchDetailsViewController"],
     ["title":"New Match","vc":"AddMatchDetailsViewController"],
     ["title":"Match Summary","vc":"MatchSummaryViewController"],
-    ["title":"Dugout","vc":"FriendBaseViewController"],
+    ["title":"Friends","vc":"FriendBaseViewController"],
     ["title":"Profile","vc":"UserInfoViewController"],
     ["title":"Statistics","vc":"NewMatchViewController"],
     ["title":"Notification","vc":"SummaryViewController"],

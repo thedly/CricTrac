@@ -78,16 +78,21 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             //aCell.totalWickets.text = "Wickets: "+wickets
         }
         
-        if let tournament = data["Tournamnet"]{
-            
-            if tournament == "-"{
+//        if let tournament = data["Tournamnet"]{
+//            
+//            
+//            
+//        }
+        
+        
+        if let opponent = data["Opponent"]{
+            if opponent == "-"{
                 
-               // aCell.tournamentName.text = "Unamed Tournament"
+                aCell.tournamentName.text = "VS Unknown"
             }
             else{
-                //aCell.tournamentName.text = tournament
+                aCell.tournamentName.text = "VS \(opponent)"
             }
-            
         }
         
         if let date = data["Date"]{
