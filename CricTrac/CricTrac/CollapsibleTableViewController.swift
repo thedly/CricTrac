@@ -52,6 +52,9 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
         loadInitialValues()
         profileImage.layer.cornerRadius = profileImage.frame.size.width/2
         profileImage.clipsToBounds = true
@@ -78,8 +81,11 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
         
     }
     
-    
-    
+    func stopAnimation() {
+        if self.activityInd.isAnimating() {
+            self.activityInd.stopAnimating()
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -326,6 +332,7 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
     
     func setUIValues() {
         activityInd.startAnimating()
+        NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: #selector(CollapsibleTableViewController.stopAnimation), userInfo: nil, repeats: false)
         getImageFromFirebase { (data) in
             self.profileImage.image = data
             self.activityInd.stopAnimating()
@@ -353,8 +360,6 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
                     self.location.text = profileData["City"]! + ", "+profileData["Country"]!
                 
                 }
-            
-            
             
             
             

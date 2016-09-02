@@ -97,7 +97,6 @@ func addNewTournamnetName(tournamnet:String){
 func getAllUserData(sucessBlock:(AnyObject)->Void){
     
     fireBaseRef.child(currentUser!.uid).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-        
         if let data = snapshot.value{
             
             sucessBlock(data)

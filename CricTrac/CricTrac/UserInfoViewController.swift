@@ -9,6 +9,7 @@
 
 import UIKit
 import XLPagerTabStrip
+import SkyFloatingLabelTextField
 
 class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
     
@@ -23,7 +24,6 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
     
     @IBOutlet weak var firstName: UITextField!
     
-    @IBOutlet weak var middleName: UITextField!
     @IBOutlet weak var lastName: UITextField!
     
     @IBOutlet weak var dateOfBirth: UITextField!
@@ -34,11 +34,9 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
     @IBOutlet weak var country: UITextField!
     @IBOutlet weak var state: UITextField!
     @IBOutlet weak var city: UITextField!
-    @IBOutlet weak var height: UITextField!
-    @IBOutlet weak var nickName: UITextField!
     @IBOutlet weak var gender: UITextField!
-    @IBOutlet weak var playingLevel: UITextField!
     
+    @IBOutlet weak var teamName: UITextField!
     @IBOutlet weak var mobile: UITextField!
     
     var selectedText:UITextField?
@@ -61,7 +59,7 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
     
     var data:[String:String]{
         
-        return ["FirstName":firstName.textVal,"MiddleName":middleName.textVal,"LastName":lastName.textVal,"DateOfBirth":dateOfBirth.textVal,"Email":emailId.textVal,"Mobile":mobile.textVal,"Gender":gender.textVal,"PlayingLevel":playingLevel.textVal,"PlayingRole":playingRole.textVal,"BattingStyle":battingStyle.textVal,"BowlingStyle":bowlingStyle.textVal,"Country":country.textVal,"State":state.textVal,"City":city.textVal,"Height":height.textVal,"NickName":nickName.textVal]
+        return ["FirstName":firstName.textVal,"LastName":lastName.textVal,"DateOfBirth":dateOfBirth.textVal,"Email":emailId.textVal,"Mobile":mobile.textVal,"Gender":gender.textVal,"PlayingRole":playingRole.textVal,"BattingStyle":battingStyle.textVal,"BowlingStyle":bowlingStyle.textVal,"Country":country.textVal,"State":state.textVal,"City":city.textVal,"TeamName":teamName.textVal]
     }
     
     
@@ -70,18 +68,15 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
         dateOfBirth.delegate = self
         country.delegate = self
         state.delegate = self
-        height.delegate = self
         gender.delegate = self
         playingRole.delegate = self
         battingStyle.delegate = self
         bowlingStyle.delegate = self
-        playingLevel.delegate = self
         city.delegate = self
         emailId.delegate = self
-        nickName.delegate = self
         firstName.delegate = self
         lastName.delegate = self
-        middleName.delegate = self
+        teamName.delegate = self
         
         loadInitialProfileValues()
         
@@ -90,30 +85,35 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
         scrollViewTop = scrollView.frame.origin.y
         
         
-        if profileData.count > 0 {
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
             
+            getAllProfileData { (data) in
+                
+                profileData = data as! [String:String]
+                
+                if profileData.count > 0 {
+                    
                     
                     self.profileDetailsExists = true
                     
                     self.firstName.text = profileData["FirstName"]
-                    self.middleName.text = profileData["MiddleName"]
                     self.lastName.text = profileData["LastName"]
                     self.dateOfBirth.text = profileData["DateOfBirth"]
                     self.emailId.text = profileData["Email"]
                     self.mobile.text = profileData["Mobile"]
                     self.gender.text = profileData["Gender"]
-                    self.playingLevel.text = profileData["PlayingLevel"]
                     self.playingRole.text = profileData["PlayingRole"]
                     self.battingStyle.text = profileData["BattingStyle"]
                     self.bowlingStyle.text = profileData["BowlingStyle"]
                     self.country.text = profileData["Country"]
                     self.state.text = profileData["State"]
                     self.city.text = profileData["City"]
-                    self.height.text = profileData["Height"]
-                    self.nickName.text = profileData["NickName"]
-            
+                    self.teamName.text = profileData["TeamName"]
+                }
         }
-
     }
     
     override func didReceiveMemoryWarning() {
@@ -126,18 +126,97 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
     }
     
     @IBAction func addUserBtnPressed(sender: AnyObject) {
+        if validateProfileData() {
+            let data = self.data
+            addUserProfileData(data, sucessBlock: {data in
+                
+            })
+            dismissViewControllerAnimated(true, completion: nil)
+        }
         
-        let data = self.data
-        
-        
-        
-        addUserProfileData(data, sucessBlock: {data in
-            
-            
-            
-        })
-        dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    func validateProfileData() -> Bool {
+        var detailsValid = true
+        if !(firstName.text?.hasDataPresent)! || firstName.text?.length > 25 {
+            (firstName as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
+            (firstName as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
+            detailsValid = false
+        }
+        else
+        {
+            (firstName as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#D4D4D4")
+            (firstName as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#6D9447")
+        }
+        
+        if !(dateOfBirth.text?.hasDataPresent)! || dateOfBirth.text?.length > 25 {
+            (dateOfBirth as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
+            (dateOfBirth as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
+            detailsValid = false
+        }
+        else
+        {
+            (dateOfBirth as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#D4D4D4")
+            (dateOfBirth as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#6D9447")
+        }
+        
+        if !(emailId.text?.hasDataPresent)! {
+            (emailId as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
+            (emailId as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
+            detailsValid = false
+        }
+        else
+        {
+            (emailId as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#D4D4D4")
+            (emailId as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#6D9447")
+        }
+        
+        if !(mobile.text?.hasDataPresent)! || mobile.text?.length != 10 {
+            (mobile as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
+            (mobile as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
+            detailsValid = false
+        }
+        else
+        {
+            (mobile as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#D4D4D4")
+            (mobile as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#6D9447")
+        }
+        
+        if !(country.text?.hasDataPresent)! || country.text?.length > 25 {
+            (country as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
+            (country as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
+            detailsValid = false
+        }
+        else
+        {
+            (country as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#D4D4D4")
+            (country as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#6D9447")
+        }
+        
+        if !(state.text?.hasDataPresent)! || state.text?.length > 25 {
+            (state as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
+            (state as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
+            detailsValid = false
+        }
+        else
+        {
+            (state as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#D4D4D4")
+            (state as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#6D9447")
+        }
+        
+        if !(city.text?.hasDataPresent)! || city.text?.length > 25 {
+            (city as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
+            (city as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
+            detailsValid = false
+        }
+        else
+        {
+            (city as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#D4D4D4")
+            (city as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#6D9447")
+        }
+        return detailsValid
+    }
+    
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "USER")
     }
@@ -177,9 +256,6 @@ extension UserInfoViewController:UITextFieldDelegate{
         else if textField == state {
             ctStatePicker.showPicker(self, inputText: textField, iso: ctCountryPicker.SelectedISO)
         }
-        else if textField == height{
-            ctHeightPicker.showPicker(self, inputText: textField)
-        }
         else if  textField == gender{
             resignFirstResponder()
             ctDataPicker.showPicker(self, inputText: textField, data: genders)
@@ -196,11 +272,6 @@ extension UserInfoViewController:UITextFieldDelegate{
             ctDataPicker = DataPicker()
             ctDataPicker.showPicker(self, inputText: textField, data: BowlingStyles)
         }
-        else if textField == playingLevel {
-            ctDataPicker = DataPicker()
-            ctDataPicker.showPicker(self, inputText: textField, data: PlayingLevels)
-        }
-
     }
     
     

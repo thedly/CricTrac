@@ -8,10 +8,11 @@
 
 import UIKit
 
-class SummaryMatchDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SummaryMatchDetailsViewController: UIViewController {
 
     @IBOutlet weak var matchDetailsTbl: UITableView!
     
+    @IBOutlet weak var screenShot: UIView!
     @IBAction func backBtnPressed(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -21,25 +22,49 @@ class SummaryMatchDetailsViewController: UIViewController, UITableViewDelegate, 
     @IBOutlet weak var ballsFaced: UILabel!
     @IBOutlet weak var sixes: UILabel!
     
+    @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var matchBetween: UILabel!
+    @IBOutlet weak var ground: UILabel!
     @IBOutlet weak var tournamentName: UILabel!
     @IBOutlet weak var overs: UILabel!
     @IBOutlet weak var totalWickets: UILabel!
     
+    
+    @IBOutlet weak var wides: UILabel!
+    @IBOutlet weak var batPos: UILabel!
     @IBOutlet weak var fours: UILabel!
     @IBOutlet weak var result: UILabel!
+   
+    @IBOutlet weak var toss: UILabel!
+    @IBOutlet weak var economy: UILabel!
+    @IBOutlet weak var noBalls: UILabel!
+    @IBOutlet weak var dismissal: UILabel!
     
-    var _batRuns = String()
-    var _ballsFaced = String()
-    var _sixes = String()
-    var _fours = String()
-    var _tournamentName = String()
-    var _overs = String()
-    var _result = String()
-    var _totalWickets = String()
-    var _matchMonth = String()
+    @IBOutlet weak var screenshot: UIView!
+   
+    @IBOutlet weak var runsGiven: UILabel!
+    @IBOutlet weak var oversBowled: UILabel!
     
-    var matchDetailsData : Dictionary<String,[Dictionary<String,String>]>!
+    var matchDetailsData : [String:String]!
     
+    @IBAction func ShareActionPressed(sender: UIButton) {
+        
+        
+        UIGraphicsBeginImageContext(self.screenshot.bounds.size);
+        self.screenshot.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        var screenShot = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    
+        var itemsToShare = screenShot
+        
+        
+        var actCtrl = UIActivityViewController(activityItems: [itemsToShare], applicationActivities: nil)
+        
+        
+        actCtrl.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeMessage, UIActivityTypeMail]
+        
+        presentViewController(actCtrl, animated: true, completion: nil)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()
@@ -54,113 +79,125 @@ class SummaryMatchDetailsViewController: UIViewController, UITableViewDelegate, 
     
     func initializeView() {
         
-        batRuns.text = _batRuns
-        fours.text = _fours
-        sixes.text = _sixes
-        overs.text = _overs
-        tournamentName.text = _tournamentName
-        totalWickets.text = _totalWickets
         
-        //matchDetailsTbl.dataSource = self
-        //matchDetailsTbl.delegate = self
-        //getMatchDetails()
+        if let Runs = matchDetailsData["Runs"] {
+            batRuns.text = Runs
+        }
+        if let Fours = matchDetailsData["Fours"] {
+            fours.text = Fours
+        }
+        if let Sixes = matchDetailsData["Sixes"] {
+            sixes.text = Sixes
+        }
+        if let Overs = matchDetailsData["Overs"] {
+            overs.text = "\(Overs) overs"
+        }
+
+        if let Ground = matchDetailsData["Ground"] {
+            ground.text = "@ \(Ground)"
+        }
+        
+        if let res = matchDetailsData["Result"] {
+            if res != "-" {
+                result.text = res
+            }
+            else
+            {
+                result.text = "Results NA"
+            }
+            
+        }
+        
+        if let toss = matchDetailsData["Toss"]{
+            
+            if toss != "-" {
+                self.toss.text = "Toss won by \(toss)"
+            }
+            else
+            {
+                self.toss.text = "Toss details NA"
+            }
+        }
+        
+        if let tournament = matchDetailsData["Tournamnet"]{
+            
+            if tournament == "-"{
+                if let opponent = matchDetailsData["Opponent"] {
+                    tournamentName.text = "VS \(opponent)"
+                }
+                else
+                {
+                    tournamentName.text = "Unknown Tournament"
+                }
+            }
+            else{
+                tournamentName.text = tournament
+            }
+            
+        }
+        
+        if let homeTeam = matchDetailsData["Team"] {
+            if homeTeam != "-" {
+                matchBetween.text = homeTeam
+            }
+            else
+            {
+                matchBetween.text = "Unknown"
+            }
+            
+            if let opponent = matchDetailsData["Opponent"] {
+                if opponent != "-" {
+                    matchBetween.text?.appendContentsOf("\n VS \n \(opponent)")
+                }
+                else
+                {
+                    matchBetween.text?.appendContentsOf("\n VS \n Unknown")
+                }
+            }
+            
+        }
+        
+        if let wicketstaken = matchDetailsData["Wickets"] {
+            totalWickets.text = wicketstaken
+        }
+        
+        if let Balls = matchDetailsData["Balls"] {
+            ballsFaced.text = Balls
+        }
+        if let Position = matchDetailsData["Position"] {
+            batPos.text = Position
+        }
+        if let Dismissal = matchDetailsData["Dismissal"] {
+            dismissal.text = Dismissal.lowercaseString
+        }
+        if let OversBalled = matchDetailsData["OversBalled"] {
+            oversBowled.text = OversBalled
+        }
+        
+        if let RunsGiven = matchDetailsData["RunsGiven"] {
+            runsGiven.text = RunsGiven
+        }
+        if let Wides = matchDetailsData["Wides"] {
+            wides.text = Wides
+        }
+        if let Noballs = matchDetailsData["Noballs"] {
+            noBalls.text = Noballs
+        }
+        
+        if let date = matchDetailsData["Date"]{
+            let dateArray = date.characters.split{$0 == "/"}.map(String.init)
+            self.date.text = "\(dateArray[0]) \(dateArray[1].monthName) \(dateArray[2])"
+        }
+    
     }
     
     // MARK: - Table Delegate methods
     
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return Array(matchDetailsData.values).count
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Array(matchDetailsData.values)[section].count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCellWithIdentifier("performanceCell", forIndexPath: indexPath) as? performanceCell {
-            
-            let dict: Dictionary<String,String> = Array(matchDetailsData.values)[indexPath.section][indexPath.row]
-            let value = dict.values.first
-            let key = dict.keys.first
-            cell.configureCell(key!, pValue: value!)
-            return cell
-        }
-        else
-        {
-            return UITableViewCell()
-        }
-        
-        
-    }
-    
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 10.0
-    }
-    
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50.0
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 50
-    }
-    
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRectMake(0, 0, 200, 20))
-        headerView.backgroundColor = UIColor.whiteColor()
-        
-        let headerBaseLine = UIView(frame: CGRectMake(10, 50, UIScreen.mainScreen().bounds.size.width - 50, 1.0))
-        headerBaseLine.backgroundColor = UIColor(hex: "D8D8D8")
-        
-        let headerLbl = UILabel(frame: CGRectMake(20, 10, UIScreen.mainScreen().bounds.size.width, 30))
-        headerLbl.textColor = UIColor(hex: "6D9447")
-        headerLbl.font = UIFont(name: "SFUIText-Regular", size: 20)
-        //headerLbl.font = UIFont.boldSystemFontOfSize(20)
-        headerLbl.text = Array(matchDetailsData.keys)[section]
-
-        headerView.addSubview(headerLbl)
-        headerView.addSubview(headerBaseLine)
-        
-        return headerView
-    }
-    
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerView = UIView(frame: CGRectMake(0, 0, 200, 20))
-        footerView.backgroundColor = UIColor(hex: "D8D8D8")
-        
-        return footerView
-    }
     
     //MARK: - Service Calls 
     
     
-    func getMatchDetails() {
-        matchDetailsData = [
-            "Schedule" : [
-                ["Date" : "21st July 2016"],
-                ["Teams": "DPS vs JOJO"],
-                ["Venue": "INHS, Indiranagar"],
-                ["Overs": "20 overs"],
-                ["Tournament": "Under 14 cricket championship"]
-            ],
-            "Batting" : [
-                ["Runs" : "11"],
-                ["Balls": "12"],
-                ["Six": "1 six"],
-                ["Four": "3 fours"]
-            ],
-            "Bowling" : [
-                ["Overs" : "3 overs"],
-                ["Wickets": "2 wickets"],
-                ["Runs Given": "12 runs"]
-            ],
-            "Summary" : [
-                ["Toss" : "JOJO"],
-                ["Summary": "JOJO Beat DPS by 12 runs"]
-            ]
-        ]
-    }
     
     
     /*

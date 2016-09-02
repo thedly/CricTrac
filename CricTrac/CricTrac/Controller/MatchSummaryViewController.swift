@@ -135,8 +135,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
         
+        summaryDetailsVC.matchDetailsData = matchDataSource[indexPath.row]
         
-        let currentCell = tableView.cellForRowAtIndexPath(indexPath)! as! SummaryCell
         
         //print(currentCell.sixes.text)
         
