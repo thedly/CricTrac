@@ -32,6 +32,7 @@
 		46C983BF1D3FC72400DFC607 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983BE1D3FC72400DFC607 /* DashboardViewController.swift */; };
 		46C983C21D4078EB00DFC607 /* utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983C11D4078EB00DFC607 /* utility.swift */; };
 		46C983C41D40968300DFC607 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983C31D40968300DFC607 /* Extentions.swift */; };
+		46CE472E1D7A787D00EA63E2 /* CTAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CE472D1D7A787D00EA63E2 /* CTAlertViewController.swift */; };
 		46F259FD1D559593001EBEF9 /* BattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F259FC1D559593001EBEF9 /* BattingViewController.swift */; };
 		46F259FF1D55AB30001EBEF9 /* BowlingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F259FE1D55AB30001EBEF9 /* BowlingViewController.swift */; };
 		46F25A011D55C1C0001EBEF9 /* ExtraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F25A001D55C1C0001EBEF9 /* ExtraViewController.swift */; };
@@ -116,6 +117,7 @@
 		46C983BE1D3FC72400DFC607 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardViewController.swift; path = Controller/DashboardViewController.swift; sourceTree = "<group>"; };
 		46C983C11D4078EB00DFC607 /* utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = utility.swift; path = utility/utility.swift; sourceTree = "<group>"; };
 		46C983C31D40968300DFC607 /* Extentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
+		46CE472D1D7A787D00EA63E2 /* CTAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CTAlertViewController.swift; path = utility/CTAlertViewController.swift; sourceTree = "<group>"; };
 		46F259FC1D559593001EBEF9 /* BattingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BattingViewController.swift; path = Controller/BattingViewController.swift; sourceTree = "<group>"; };
 		46F259FE1D55AB30001EBEF9 /* BowlingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BowlingViewController.swift; path = Controller/BowlingViewController.swift; sourceTree = "<group>"; };
 		46F25A001D55C1C0001EBEF9 /* ExtraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtraViewController.swift; path = Controller/ExtraViewController.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				89FD59C51D41C3AE003EF45C /* SF-UI-Text-Regular.otf */,
 				46C983C11D4078EB00DFC607 /* utility.swift */,
 				46C983C31D40968300DFC607 /* Extentions.swift */,
+				46CE472D1D7A787D00EA63E2 /* CTAlertViewController.swift */,
 				462DE9F61D478B9E00E31E8F /* CTDatePicker.swift */,
 				8930F0371D5B751500C7540B /* CTCountryPicker.swift */,
 				8930F03B1D5B94C300C7540B /* CTStatePicker.swift */,
@@ -561,6 +564,7 @@
 				46FA41D41D6D3F68006635C6 /* MatchDetailsTrackable.swift in Sources */,
 				8930F03C1D5B94C300C7540B /* CTStatePicker.swift in Sources */,
 				46F25A031D5B1AAD001EBEF9 /* Service.swift in Sources */,
+				46CE472E1D7A787D00EA63E2 /* CTAlertViewController.swift in Sources */,
 				892EA68D1D58F78500BEE5A3 /* DashboardBowlingDetailsViewController.swift in Sources */,
 				895E04071D5CE283002E322E /* FriendSuggestViewController.swift in Sources */,
 				89C8196C1D52362300291A7E /* POCViewController.swift in Sources */,

@@ -8,8 +8,9 @@
 
 import UIKit
 import SCLAlertView
+import KRProgressHUD
 
-class SummaryMatchDetailsViewController: UIViewController {
+class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
 
     @IBOutlet weak var matchDetailsTbl: UITableView!
     
@@ -47,19 +48,46 @@ class SummaryMatchDetailsViewController: UIViewController {
     
     var matchDetailsData : [String:String]!
     
+    
+    
     @IBAction func deleteActionPressed(sender: UIButton) {
         
-        let popup = SCLAlertView()
-        
-        popup.addButton("Yes Delete") {
-            print("delete clicked")
-        }
-    
-        popup.showTitle("Delete", subTitle: "match details ?", style: SCLAlertViewStyle.Notice, closeButtonTitle: "Cancel", circleIconImage: UIImage(named: "Delete-100")!, animationStyle: SCLAnimationStyle.TopToBottom)
-        
-        
-        return
+        showCTAlert("Match Data will be Permanantly Deleted from the Database")
+       
     }
+    
+    
+    func cancelClicked() {
+        
+    }
+    
+    func okClicked() {
+        
+    deleteMatch()
+        
+    }
+    
+    func deleteMatch(){
+        
+        KRProgressHUD.show(progressHUDStyle: .White, message: "Deleting...")
+        let matchKey = matchDetailsData["key"]!
+        
+        deleteMatchData(matchKey) { (error) in
+            
+            KRProgressHUD.dismiss()
+            
+            if error != nil{
+                SCLAlertView().showError("Error",subTitle:error!.localizedDescription)
+            }
+            else{
+                NSNotificationCenter.defaultCenter().postNotificationName("MatchDataChanged", object: self)
+                self.dismissViewControllerAnimated(true, completion: { })
+            }
+        }
+        
+    }
+    
+    
     @IBAction func ShareActionPressed(sender: UIButton) {
         
         

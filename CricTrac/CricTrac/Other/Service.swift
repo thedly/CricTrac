@@ -212,5 +212,17 @@ func getImageFromFirebase(sucessBlock:(UIImage)->Void){
 }
 
 
+//MARK:- Delete Match
+
+func deleteMatchData(matchId:String, callback:(error:NSError?)->Void ){
+    
+    let ref = fireBaseRef.child(currentUser!.uid).child("Matches").child(matchId)
+    
+    ref.removeValueWithCompletionBlock { (error, dataRef) in
+        callback(error: error)
+    }
+    
+}
+
 //fireBaseRef.child("Dismissals").setValue(["BOWLED","CAUGHT","HANDLED THE BALL","HIT WICKET","HIT THE BALL TWICE","LEG BEFORE WICKET (LBW)","OBSTRUCTING THE FIELD","RUN OUT","RETIRED","TIMED OUT"])
 
