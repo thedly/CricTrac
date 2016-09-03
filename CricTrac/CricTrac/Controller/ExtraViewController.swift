@@ -27,6 +27,8 @@ class ExtraViewController: UIViewController,IndicatorInfoProvider {
     weak var matchDetails:MatchDetailsTrackable?
     var teams = [String]()
     
+    weak var parent:MatchParent?
+    
     var data:[String:String]{
         
         return ["Toss":tossText.textVal,"FirstBat":firstBatText.textVal,"FirstScore":firstScoreText.textVal,"FirstWickets":firstWicketsText.textVal,"SecondBat":secondBatText.textVal, "SecondScore":secondScoreText.textVal,"SecondWickets":secondWicketsText.textVal,"Result":resultText.textVal,"Comments":commentsText.text!]

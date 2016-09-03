@@ -211,6 +211,15 @@ func getImageFromFirebase(sucessBlock:(UIImage)->Void){
     
 }
 
+//MARK:- Update  Match
+
+func updateMatchData(key:String,data:[String:String]){
+    
+    let ref = fireBaseRef.child(currentUser!.uid).child("Matches").child(key)
+    ref.updateChildValues(data)
+    
+}
+
 
 //MARK:- Delete Match
 

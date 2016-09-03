@@ -26,6 +26,8 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     
     let ctDatePicker = CTDatePicker()
     
+    weak var parent:MatchParent?
+    
     //var data = ["key1":"value1","key2":"value2","key3":"value3","key4":"value4"]
     
     var data:[String:String]{

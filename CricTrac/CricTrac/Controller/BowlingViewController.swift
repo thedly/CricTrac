@@ -21,6 +21,8 @@ class BowlingViewController: UIViewController,IndicatorInfoProvider {
     @IBOutlet weak var economyText:UITextField!
     
     
+    weak var parent:MatchParent?
+    
     var data:[String:String]{
         
         return ["OversBalled":oversText.textVal,"Wickets":wicketsText.textVal,"RunsGiven":runsText.textVal,"Noballs":noballText.textVal,"Wides":widesText.text!]

@@ -22,6 +22,8 @@ class BattingViewController: UIViewController,IndicatorInfoProvider {
     @IBOutlet weak var scrollView:UIScrollView!
     var selectedText:UITextField!
     
+    weak var parent:MatchParent?
+    
     var data:[String:String]{
     
         
