@@ -25,6 +25,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         getMatchData()
     matchSummaryTable.registerNib(UINib.init(nibName:"SummaryCell", bundle: nil), forCellReuseIdentifier: "SummaryCell")
         matchSummaryTable.allowsSelection = true
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MatchSummaryViewController.newDataAdded), name: "MatchDataChanged" , object: nil)
         // Do any additional setup after loading the view.
     }
 
@@ -33,6 +35,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         // Dispose of any resources that can be recreated.
     }
     
+    
+    func newDataAdded(){
+        getMatchData()
+    }
 
     @IBAction func didTapCancel(sender: UIButton) {
         
@@ -101,7 +107,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 let totalBalls = Double(balls)!
                 if totalBalls > 0{
                     
-                    aCell.sumThree.text =  String(format: "%.2f",(totalruns!/totalBalls))
+                    aCell.sumThree.text =  String(format: "%.0f",(totalruns!/totalBalls*100))
                 }
             }
             else{
@@ -146,11 +152,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
         
         summaryDetailsVC.matchDetailsData = matchDataSource[indexPath.row]
-        
-
-        
             presentViewController(summaryDetailsVC, animated: true, completion: nil)
-        
+        CFRunLoopWakeUp(CFRunLoopGetCurrent())
     }
 
 }
