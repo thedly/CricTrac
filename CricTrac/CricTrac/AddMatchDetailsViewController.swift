@@ -11,12 +11,21 @@ import XLPagerTabStrip
 import SCLAlertView
 import KRProgressHUD
 
-class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
-
+class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchParent  {
+    
     var matchVC:MatchViewController!
     var battingVC:BattingViewController!
     var bowlingVC:BowlingViewController!
     var extraVC:ExtraViewController!
+    
+    var selecetedData:[String:String]?
+    
+    @IBOutlet weak var saveButton:UIButton!
+    
+    var dataHasChangedAfterLastSave = false
+    var dataAdded = false
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,14 +35,23 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
         settings.style.buttonBarItemTitleColor = UIColor(hex: "#667815")
         buttonBarView.selectedBar.backgroundColor = UIColor(hex: "#B12420")
         settings.style.buttonBarItemFont = UIFont(name: "SFUIText-Regular", size: 15)!
+        dataHasChangedAfterLastSave = false
     }
-
-
+    
+    func dataChangedAfterLastSave(){
+        
+        dataHasChangedAfterLastSave = true
+        saveButton.setTitle("Save", forState: .Normal)
+    }
+    
+    
+    
+    
     func getUserData(){
-
+        
         KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
         getAllUserData { (userData) in
-        
+            
             if let grounds = userData["Grounds"] as? [String:String]{
                 
                 groundNames = grounds.map({ (key,value) in value })
@@ -65,6 +83,32 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
     
     @IBAction func DidtapCancelButton(sender: AnyObject) {
         
+        if dataHasChangedAfterLastSave || dataAdded {
+            
+            let appearance = SCLAlertView.SCLAppearance(
+                showCloseButton: false
+            )
+            
+            let alertView = SCLAlertView(appearance: appearance)
+            
+            alertView.addButton("OK", target:self, selector:#selector(AddMatchDetailsViewController.continueToDismiss))
+            
+            alertView.addButton("Cancel", action: { })
+            
+            alertView.showNotice("Warning", subTitle: "All Data will be lost if you continue")
+            
+            
+        }
+        else{
+            
+            self.dismissViewControllerAnimated(true) {}
+        }
+        
+    }
+    
+    
+    func continueToDismiss(){
+        
         self.dismissViewControllerAnimated(true) {}
     }
     
@@ -91,7 +135,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
                 
                 data += extraVC.data
             }
-
+            
             let teamName = data["Team"]!
             if !teamNames.contains(teamName){
                 addNewTeamName(teamName)
@@ -106,7 +150,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
             
             if tournament != "-"{
                 if !tournaments.contains(tournament){
-                 addNewTournamnetName(tournament)
+                    addNewTournamnetName(tournament)
                 }
             }
             
@@ -114,22 +158,34 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
             let groundName = data["Ground"]!
             
             if groundName != "-"{
-            
-            if !groundNames.contains(groundName){
-                addNewGroundName(groundName)
+                
+                if !groundNames.contains(groundName){
+                    addNewGroundName(groundName)
                 }
             }
             
             //OppositTeams
+            if !dataHasChangedAfterLastSave {
+                if selecetedData == nil{
+                    addMatchData("date \(String(date))",data: data)
+                }else{
+                    updateMatchData(selecetedData!["key"]!, data: data)
+                    NSNotificationCenter.defaultCenter().postNotificationName("MatchDataChanged", object: self)
+                }
+                self.dismissViewControllerAnimated(true) {}
+            }
+            else{
+                
+                saveButton.setTitle("Done", forState: .Normal)
+                dataHasChangedAfterLastSave = false
+            }
             
-            addMatchData("date \(String(date))",data: data)
-            self.dismissViewControllerAnimated(true) {}
-    
+            dataAdded = true
         }
         
     }
     
-   
+    
     
     override  func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
@@ -139,13 +195,16 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
         
         bowlingVC = viewControllerFrom("Main", vcid: "BowlingViewController") as! BowlingViewController
         
-         extraVC = viewControllerFrom("Main", vcid: "ExtraViewController") as! ExtraViewController
+        extraVC = viewControllerFrom("Main", vcid: "ExtraViewController") as! ExtraViewController
         
         extraVC.matchDetails = matchVC
-        
+        matchVC.parent = self
+        battingVC.parent = self
+        bowlingVC.parent = self
+        extraVC.parent = self
         return [matchVC, battingVC,bowlingVC,extraVC]
     }
-
+    
     
     
     func validateMatchDetails()->Bool{
@@ -154,10 +213,10 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
         
         if matchVC.allRequiredFieldsHaveNotFilledProperly{
             
-           pageName = "Match Details"
+            pageName = "Match Details"
         }
         else if !battingVC.allRequiredFieldsHaveFilledProperly {
-             pageName = "Batting Details"
+            pageName = "Batting Details"
         }
         else if  !bowlingVC.allRequiredFieldsHaveFilledProperly {
             pageName = "Bowling Details"
@@ -166,21 +225,21 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController  {
             return true
         }
         
-         SCLAlertView().showWarning("Error", subTitle: "Some Fields are not filled properly in \(pageName). Plaese fill it and try saving")
+        SCLAlertView().showWarning("Error", subTitle: "Some Fields are not filled properly in \(pageName). Plaese fill it and try saving")
         
         return false
     }
     
-
-
+    
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

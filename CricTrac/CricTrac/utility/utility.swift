@@ -34,6 +34,14 @@ public func viewControllerFrom(storyBoard:String,vcid:String)->UIViewController{
 }
 
 
+public func viewController(vcid:String)->UIViewController{
+    
+    let storyboard = UIStoryboard(name:"Main", bundle: nil)
+    
+    return storyboard.instantiateViewControllerWithIdentifier(vcid)
+}
+
+
 func += <K, V> (inout left: [K:V], right: [K:V]) {
     for (k, v) in right {
         left.updateValue(v, forKey: k)

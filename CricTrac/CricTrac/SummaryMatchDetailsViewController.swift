@@ -88,6 +88,15 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
     }
     
     
+    @IBAction func didTapEditButton(sender: AnyObject) {
+        
+        let editMatch = viewController("AddMatchDetailsViewController") as! AddMatchDetailsViewController
+        editMatch.selecetedData = matchDetailsData
+        
+        presentViewController(editMatch, animated: true) {}
+    }
+    
+    
     @IBAction func ShareActionPressed(sender: UIButton) {
         
         
