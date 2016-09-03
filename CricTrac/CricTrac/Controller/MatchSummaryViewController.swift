@@ -24,7 +24,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
 
         getMatchData()
     matchSummaryTable.registerNib(UINib.init(nibName:"SummaryCell", bundle: nil), forCellReuseIdentifier: "SummaryCell")
-        
+        matchSummaryTable.allowsSelection = true
         // Do any additional setup after loading the view.
     }
 
