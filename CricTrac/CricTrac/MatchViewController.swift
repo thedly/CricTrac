@@ -37,13 +37,18 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if ((parent?.selecetedData) != nil){ loadEditData() }
+    }
+    
+    
+    func loadEditData(){
         
-        
-     
-        //scrollViewTop = scrollView.frame.origin.y
-        
-        
-        // Do any additional setup after loading the view.
+        dateText.textVal = parent!.selecetedData!["Date"]!
+        tournamentText.textVal = parent!.selecetedData!["Tournamnet"]!
+        teamText.textVal = parent!.selecetedData!["Team"]!
+        opponentText.textVal = parent!.selecetedData!["Opponent"]!
+        groundText.textVal = parent!.selecetedData!["Ground"]!
+        oversText.textVal = parent!.selecetedData!["Overs"]!
     }
     
     override func didReceiveMemoryWarning() {
@@ -51,7 +56,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -93,7 +98,7 @@ extension MatchViewController:UITextFieldDelegate{
             ctDatePicker.showPicker(self, inputText: textField)
         }
         else if textField == teamText{
-        
+            
             addSuggstionBox(textField,dataSource: teamNames)
         }
         else if textField == groundText{
@@ -109,6 +114,14 @@ extension MatchViewController:UITextFieldDelegate{
             addSuggstionBox(textField,dataSource: tournaments)
         }
         
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        
+        if textField.text?.trimWhiteSpace.length > 0{
+            
+            parent?.dataChangedAfterLastSave()
+        }
     }
     
 }

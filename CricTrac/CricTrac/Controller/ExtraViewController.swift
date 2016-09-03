@@ -13,7 +13,7 @@ import AnimatedTextInput
 
 class ExtraViewController: UIViewController,IndicatorInfoProvider {
     
-     @IBOutlet weak var commentsText:AnimatedTextInput!
+    @IBOutlet weak var commentsText:AnimatedTextInput!
     
     @IBOutlet weak var tossText:UITextField!
     @IBOutlet weak var firstBatText:UITextField!
@@ -38,17 +38,31 @@ class ExtraViewController: UIViewController,IndicatorInfoProvider {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         commentsText.type = .multiline
-         commentsText.style =  CustomTextInputStyle()
+        commentsText.type = .multiline
+        commentsText.style =  CustomTextInputStyle()
+        if ((parent?.selecetedData) != nil){ loadEditData() }
         
         
         // Do any additional setup after loading the view.
     }
     
+    
     override func viewDidAppear(animated: Bool) {
-        
         setTeamData()
+    }
+    
+    func loadEditData(){
         
+        tossText.textVal = parent!.selecetedData!["Toss"]!
+        firstBatText.textVal = parent!.selecetedData!["FirstBat"]!
+        firstScoreText.textVal = parent!.selecetedData!["FirstScore"]!
+        firstWicketsText.textVal = parent!.selecetedData!["FirstWickets"]!
+        secondBatText.textVal = parent!.selecetedData!["SecondBat"]!
+        
+        secondScoreText.textVal = parent!.selecetedData!["SecondScore"]!
+        secondWicketsText.textVal = parent!.selecetedData!["SecondWickets"]!
+        resultText.textVal = parent!.selecetedData!["Result"]!
+        commentsText.text = parent!.selecetedData!["Comments"]!
     }
     
     override func didReceiveMemoryWarning() {
@@ -84,16 +98,24 @@ extension ExtraViewController:UITextFieldDelegate{
     func textFieldDidBeginEditing(textField: UITextField) {
         
         if textField == tossText || textField == firstBatText || textField == secondBatText{
-            addSuggstionBox(textField, dataSource: teams, showSuggestions: true)
+            if teams.count>0 {
+                showPicker(self, inputText: textField, data: teams)
+            }
         }
         else if textField == resultText{
-            addSuggstionBox(textField, dataSource: results, showSuggestions: true)
+            showPicker(self, inputText: textField, data: results)
         }
-}
+    }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
     
+    func textFieldDidEndEditing(textField: UITextField) {
+        if textField.text?.trimWhiteSpace.length > 0{
+            
+            parent?.dataChangedAfterLastSave()
+        }
+    }
 }

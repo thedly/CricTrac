@@ -141,19 +141,31 @@ extension String
         return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
     }
 }
+
+
 extension UITextField{
     
     var textVal:String{
         
-        if  (self.text?.length < 1) || self.text == nil{
-            
-            return "-"
+        get{
+            if  (self.text?.length < 1) || self.text == nil{
+                
+                return "-"
+            }
+            else{
+                
+                return self.text!
+            }
         }
-        else{
+        set (newVal){
             
-            return self.text!
+            
+            if newVal == "-"{
+                text = ""
+            }else{
+                text = newVal
+            }
         }
-        
-        
     }
+    
 }

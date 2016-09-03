@@ -25,7 +25,7 @@ class BattingViewController: UIViewController,IndicatorInfoProvider {
     weak var parent:MatchParent?
     
     var data:[String:String]{
-    
+        
         
         return ["Runs":runsText.textVal,"Balls":ballsText.textVal,"Fours":foursText.textVal,"Sixes":sixesText.textVal,"Position":positionText.textVal,"Dismissal":dismissalText.textVal]
     }
@@ -64,22 +64,33 @@ class BattingViewController: UIViewController,IndicatorInfoProvider {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-     runsText.errorColor = UIColor.redColor()
+        runsText.errorColor = UIColor.redColor()
+        
+        if ((parent?.selecetedData) != nil){ loadEditData() }
         
         // Do any additional setup after loading the view.
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    
+    func loadEditData(){
+        
+        runsText.textVal = parent!.selecetedData!["Runs"]!
+        ballsText.textVal = parent!.selecetedData!["Balls"]!
+        foursText.textVal = parent!.selecetedData!["Fours"]!
+        sixesText.textVal = parent!.selecetedData!["Sixes"]!
+        strikeRateText.textVal = parent!.selecetedData!["Ground"]!
+        positionText.textVal = parent!.selecetedData!["Position"]!
+        dismissalText.textVal = parent!.selecetedData!["Dismissal"]!
+        setStrikeRate()
     }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "BATTING")
     }
-
     
-
+    
+    
     
     
 }
@@ -97,9 +108,10 @@ extension BattingViewController:UITextFieldDelegate{
         self.selectedText = textField
         
         if textField == dismissalText{
-            addSuggstionBox(textField, dataSource: dismissals, showSuggestions: true)
+            //addSuggstionBox(textField, dataSource: dismissals, showSuggestions: true)
+            showPicker(self, inputText: textField, data: dismissals)
         }
-}
+    }
     
     func textFieldDidEndEditing(textField: UITextField){
         
@@ -111,11 +123,16 @@ extension BattingViewController:UITextFieldDelegate{
         }
         
         if textField == runsText || textField == ballsText{
-          
-           calculateStrikeRate()
+            
+            calculateStrikeRate()
+        }
+        
+        if textField.text?.trimWhiteSpace.length > 0{
+            
+            parent?.dataChangedAfterLastSave()
         }
     }
-
+    
     func calculateStrikeRate(){
         
         if runsText.text?.trimWhiteSpace.length == 0{
@@ -125,15 +142,19 @@ extension BattingViewController:UITextFieldDelegate{
             strikeRateText.text = ""
         }
         else{
-            
-            if let runs = Int((runsText.text?.trimWhiteSpace)!){
-                if let balls = Int((ballsText.text?.trimWhiteSpace)!){
-                    strikeRateText.text = "\(runs*100 / balls)"
-                }
-                
-            }
+            setStrikeRate()
         }
     }
-   
+    
+    func setStrikeRate(){
+        
+        if let runs = Int((runsText.text?.trimWhiteSpace)!){
+            if let balls = Int((ballsText.text?.trimWhiteSpace)!){
+                strikeRateText.text = "\(runs*100 / balls)"
+            }
+            
+        }
+    }
+    
 }
 

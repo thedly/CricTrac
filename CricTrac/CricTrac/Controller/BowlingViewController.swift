@@ -20,7 +20,6 @@ class BowlingViewController: UIViewController,IndicatorInfoProvider {
     @IBOutlet weak var widesText:UITextField!
     @IBOutlet weak var economyText:UITextField!
     
-    
     weak var parent:MatchParent?
     
     var data:[String:String]{
@@ -55,10 +54,18 @@ class BowlingViewController: UIViewController,IndicatorInfoProvider {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // commentsText.type = .multiline
-        // commentsText.style =  CustomTextInputStyle()
+        if ((parent?.selecetedData) != nil){ loadEditData() }
+    }
+    
+    
+    func loadEditData(){
         
-        // Do any additional setup after loading the view.
+        oversText.textVal = parent!.selecetedData!["OversBalled"]!
+        wicketsText.textVal = parent!.selecetedData!["Wickets"]!
+        runsText.textVal = parent!.selecetedData!["RunsGiven"]!
+        noballText.textVal = parent!.selecetedData!["Noballs"]!
+        widesText.textVal = parent!.selecetedData!["Wides"]!
+        calculateEconomy()
     }
     
     override func didReceiveMemoryWarning() {
@@ -111,6 +118,9 @@ extension BowlingViewController:UITextFieldDelegate{
             calculateEconomy()
         }
         
-        
+        if textField.text?.trimWhiteSpace.length > 0{
+            
+            parent?.dataChangedAfterLastSave()
+        }
     }
-    }
+}
