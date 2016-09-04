@@ -100,10 +100,37 @@ class DashboardBowlingDetailsViewController: UIViewController,IndicatorInfoProvi
             }
             
             
-            self.bowlingAverage.text = String(Double(Int(self.totalRunsGiven.text!)!/Int(self.totalWickets.text!)!))
-            self.bowlingEconomy.text = String(Double(Int(self.totalRunsGiven.text!)!/Int(self.totalOvers.text!)!))
             
-            self.recentBest.attributedText = top3MatchesArray.joinWithSeparator("\n")
+            if self.totalRunsGiven.text != nil && self.totalRunsGiven.text != "-" && self.totalWickets.text != nil && self.totalWickets.text != "-", let totRunsGiven = Int(self.totalRunsGiven.text!), let totWickets = Int(self.totalWickets.text!) {
+                
+                if totWickets > 0 {
+                    self.bowlingAverage.text = String(Float(totRunsGiven/totWickets))
+                }
+                
+            
+            }
+            
+            
+            
+            
+            if self.totalRunsGiven.text != nil && self.totalRunsGiven.text != "-" && self.totalOvers.text != nil && self.totalOvers.text != "-", let runsGiven = Int(self.totalRunsGiven.text!), let overs = Int(self.totalOvers.text!) {
+                
+                if overs > 0 {
+                    self.bowlingEconomy.text = String(Float(runsGiven/overs))
+                }
+                
+            
+            }
+            
+            if top3MatchesArray.count > 0 {
+                self.recentBest.attributedText = top3MatchesArray.joinWithSeparator("\n")
+            }
+           
+            
+            
+            
+            
+            
         }
     }
     
