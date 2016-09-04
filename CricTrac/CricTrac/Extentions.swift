@@ -169,3 +169,39 @@ extension UITextField{
     }
     
 }
+
+extension NSMutableAttributedString {
+    func bold(text:String) -> NSMutableAttributedString {
+        let attrs:[String:AnyObject] = [NSFontAttributeName : UIFont(name: "SFUIText-Bold", size: 17)!]
+        let boldString = NSMutableAttributedString(string:"\(text)", attributes:attrs)
+        self.appendAttributedString(boldString)
+        return self
+    }
+    
+    func normal(text:String)->NSMutableAttributedString {
+        let attrs:[String:AnyObject] = [NSFontAttributeName : UIFont(name: "SFUIText-Regular", size: 15)!]
+        let normal =  NSAttributedString(string: text, attributes:attrs)
+        self.appendAttributedString(normal)
+        return self
+    }
+}
+
+extension SequenceType where Generator.Element: NSAttributedString {
+    func joinWithSeparator(separator: NSAttributedString) -> NSAttributedString {
+        var isFirst = true
+        return self.reduce(NSMutableAttributedString()) {
+            (r, e) in
+            if isFirst {
+                isFirst = false
+            } else {
+                r.appendAttributedString(separator)
+            }
+            r.appendAttributedString(e)
+            return r
+        }
+    }
+    
+    func joinWithSeparator(separator: String) -> NSAttributedString {
+        return joinWithSeparator(NSAttributedString(string: separator))
+    }
+}

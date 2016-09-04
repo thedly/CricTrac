@@ -35,15 +35,8 @@ class DashboardBattingDetailsViewController: UIViewController,IndicatorInfoProvi
     @IBOutlet weak var best: UILabel!
     
     @IBOutlet weak var ballsFacedDuringBat: UILabel!
-    @IBOutlet weak var recentBest1: UILabel!
-    @IBOutlet weak var recentBest2: UILabel!
-    @IBOutlet weak var recentBest3: UILabel!
-
-    @IBOutlet weak var recentBestAgainst1: UILabel!
-    @IBOutlet weak var recentBestAgainst2: UILabel!
-    @IBOutlet weak var recentBestAgainst3: UILabel!
     
-    
+    @IBOutlet weak var recentBest: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,6 +79,24 @@ class DashboardBattingDetailsViewController: UIViewController,IndicatorInfoProvi
                     matchDataSource.append(value)
                 }
             }
+            print(matchDataSource)
+            
+            let df = NSDateFormatter()
+            df.dateFormat = "dd/MM/yyyy"
+            
+            matchDataSource.sortInPlace{
+                if $0["Date"] != nil && $1["Date"] != nil, let firstDate = $0["Date"], let seconddate = $1["Date"] {
+                    return df.dateFromString(firstDate)!.compare(df.dateFromString(seconddate)!) == .OrderedDescending
+                }
+                return false
+                
+            }
+            
+            
+            //matchDataSource.sortInPlace({ $0.Date.compare($1.Date) == NSComparisonResult.OrderedDescending })
+            print("after sorting")
+            
+            print(matchDataSource)
             KRProgressHUD.dismiss()
             self.setUIElements()
             
@@ -96,6 +107,7 @@ class DashboardBattingDetailsViewController: UIViewController,IndicatorInfoProvi
     func setUIElements() {
         if matchDataSource.count > 0 {
             var runs = [Int]()
+            var top3MatchesArray = [NSMutableAttributedString]()
             self.battingMatches.text = String(matchDataSource.count)
             self.notOuts.text = String(0)
             self.sixes.text = String(0)
@@ -103,6 +115,9 @@ class DashboardBattingDetailsViewController: UIViewController,IndicatorInfoProvi
             self.fifties.text = String(0)
             self.hundreds.text = String(0)
             self.ballsFacedDuringBat.text = String(0)
+            self.battingInnings.text = String(0)
+            self.battingAverage.text = String(0)
+            var top3MatchCount = 0
             for matchData in matchDataSource {
                 
                 if matchData["Dismissal"] != nil && !dismissals.contains(matchData["Dismissal"]!){
@@ -113,6 +128,12 @@ class DashboardBattingDetailsViewController: UIViewController,IndicatorInfoProvi
                 
                 if let curruns = matchData["Runs"] {
                     runs.append(Int(curruns)!)
+                }
+                
+                if matchData["Runs"] != nil && matchData["Runs"] != "-" && matchData["Runs"] != "0" {
+                    var inningsCount = Int(self.battingInnings.text!)!
+                    inningsCount = inningsCount + 1
+                    self.battingInnings.text = String(inningsCount)
                 }
                 
                 if matchData["Sixes"] != nil && matchData["Sixes"] != "-"{
@@ -144,13 +165,53 @@ class DashboardBattingDetailsViewController: UIViewController,IndicatorInfoProvi
                     self.hundreds.text = String(hundredCount)
                 }
                 
+                if matchData["Dismissal"] != nil && matchData["Runs"] != nil && matchData["Runs"] != "-" && matchData["Opponent"] != nil && matchData["Opponent"] != "-" && top3MatchCount < 3, let runsScored = matchData["Runs"], let opponentFaced = matchData["Opponent"], let dismissedBy = matchData["Dismissal"] {
+                    top3MatchCount = top3MatchCount + 1
+                    
+                    let formattedString = NSMutableAttributedString()
+                    
+                    if dismissedBy != "-" {
+                        formattedString.bold("\(runsScored) ").normal(" against \(opponentFaced)\n")
+                    }
+                    else
+                    {
+                        formattedString.bold("\(runsScored)* ").normal(" against \(opponentFaced)\n")
+                    }
+                    
+                    
+                    top3MatchesArray.append(formattedString)
+                }
+                
+            }
+            
+            if runs.count > 0 && self.notOuts.text != nil && self.notOuts.text != "-" , let notOuts = Int(self.notOuts.text!) {
+                var notOutsAvg = (runs.count - notOuts)
+                var avg = runs.reduce(0, combine: +)
+                
+                if notOutsAvg > 0 {
+                    avg = avg/notOutsAvg
+                }
+               
+                self.battingAverage.text = String(Float(avg))
+            }
+            
+            if runs.count > 0 && self.ballsFacedDuringBat.text != nil && self.ballsFacedDuringBat.text != "-" {
+                self.strikeRate.text = String(Float((runs.reduce(0, combine: +)/(Int(self.ballsFacedDuringBat.text!)!))*100))
+            }
+            
+            if runs.count > 0 {
+                self.highScore.text = String(runs.reduce(Int.min, combine: { max($0, $1) }))
+            }
+            
+            if top3MatchesArray.count > 0 {
+                self.recentBest.attributedText = top3MatchesArray.joinWithSeparator("\n")
             }
             
             
-            self.battingAverage.text = String(runs.reduce(0, combine: +)/(runs.count - Int(self.notOuts.text!)!))
-            self.strikeRate.text = String((runs.reduce(0, combine: +)/(Int(self.ballsFacedDuringBat.text!)!))*100)
-            self.highScore.text = String(runs.reduce(Int.min, combine: { max($0, $1) }))
-            self.battingInnings.text = String(runs.reduce(0, combine: +))
+            
+            
+            
+            
         }
     }
     
