@@ -25,6 +25,7 @@ var BowlingStyles = [String]()
 var PlayingRoles = [String]()
 var PlayingLevels = [String]()
 var genders = [String]()
+var matchDataSource = [[String:String]]()
 
 public func viewControllerFrom(storyBoard:String,vcid:String)->UIViewController{
     
