@@ -136,23 +136,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                 data += extraVC.data
             }
             
-            let teamName = data["Team"]!
-            if !teamNames.contains(teamName){
-                addNewTeamName(teamName)
-            }
-            
-            let oppoTeamName = data["Opponent"]!
-            if !opponentTeams.contains(oppoTeamName){
-                addNewOppoSitTeamName(oppoTeamName)
-            }
-            
-            let tournament = data["Tournamnet"]!
-            
-            if tournament != "-"{
-                if !tournaments.contains(tournament){
-                    addNewTournamnetName(tournament)
-                }
-            }
+           
             
             
             let groundName = data["Ground"]!
@@ -168,6 +152,26 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             if !dataHasChangedAfterLastSave {
                 if selecetedData == nil{
                     addMatchData("date \(String(date))",data: data)
+                    
+                    let teamName = data["Team"]!
+                    if !teamNames.contains(teamName){
+                        addNewTeamName(teamName)
+                    }
+                    
+                    let oppoTeamName = data["Opponent"]!
+                    if !opponentTeams.contains(oppoTeamName){
+                        addNewOppoSitTeamName(oppoTeamName)
+                    }
+                    
+                    let tournament = data["Tournamnet"]!
+                    
+                    if tournament != "-"{
+                        if !tournaments.contains(tournament){
+                            addNewTournamnetName(tournament)
+                        }
+                    }
+                    
+                    
                 }else{
                     updateMatchData(selecetedData!["key"]!, data: data)
                     NSNotificationCenter.defaultCenter().postNotificationName("MatchDataChanged", object: self)

@@ -8,7 +8,7 @@
 
 import Foundation
 import Firebase
-
+import SCLAlertView
 //MARK:- Match Data
 
 func loadInitialValues(){
@@ -231,6 +231,35 @@ func deleteMatchData(matchId:String, callback:(error:NSError?)->Void ){
         callback(error: error)
     }
     
+}
+
+//MARK:- Login
+
+func loginWithMailAndPassword(userName:String,password:String,callBack:(user:FIRUser?,error:NSError?)->Void){
+    
+    
+    
+    FIRAuth.auth()?.signInWithEmail(userName, password: password) { (user, error) in
+
+        
+        if error?.code == 17011{
+            
+            FIRAuth.auth()?.createUserWithEmail(userName, password: password) { (user, error) in
+                
+                 callBack(user: user,error: error)
+                if error == nil{
+                    SCLAlertView().showInfo("User Created", subTitle: "")
+                }
+                
+            }
+            
+        }
+        else {callBack(user: user,error: error) }
+    
+    }
+    
+    
+   
 }
 
 //fireBaseRef.child("Dismissals").setValue(["BOWLED","CAUGHT","HANDLED THE BALL","HIT WICKET","HIT THE BALL TWICE","LEG BEFORE WICKET (LBW)","OBSTRUCTING THE FIELD","RUN OUT","RETIRED","TIMED OUT"])

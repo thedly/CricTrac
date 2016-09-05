@@ -19,6 +19,10 @@ import SCLAlertView
 
 class LoginViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelegate {
     
+    
+    @IBOutlet weak var username:UITextField!
+    @IBOutlet weak var password:UITextField!
+    
     let loginManager = FBSDKLoginManager()
 
     override func viewDidLoad() {
@@ -35,6 +39,26 @@ class LoginViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelega
         
     }
 
+    @IBAction func loginWithUserNamePassword(){
+        
+    loginWithMailAndPassword((username.text?.trimWhiteSpace)!, password: (password.text?.trimWhiteSpace)!) { (user, error) in
+        
+        if error != nil{
+            
+            SCLAlertView().showError("Login Error", subTitle: error!.localizedDescription)
+            
+           
+        }
+        else {
+            currentUser = user
+            enableSync()
+            self.navigateToNextScreen()
+            
+        }
+        
+        }
+        
+    }
    
 
     
