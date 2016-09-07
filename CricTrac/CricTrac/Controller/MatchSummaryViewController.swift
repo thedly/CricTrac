@@ -25,7 +25,6 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         getMatchData()
     matchSummaryTable.registerNib(UINib.init(nibName:"SummaryCell", bundle: nil), forCellReuseIdentifier: "SummaryCell")
         matchSummaryTable.allowsSelection = true
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MatchSummaryViewController.newDataAdded), name: "MatchDataChanged" , object: nil)
         // Do any additional setup after loading the view.
     }

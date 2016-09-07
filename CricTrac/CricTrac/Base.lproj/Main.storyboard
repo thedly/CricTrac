@@ -59,23 +59,8 @@
             <string>SFUIText-Bold</string>
             <string>SFUIText-Bold</string>
             <string>SFUIText-Bold</string>
-            <string>SFUIText-Bold</string>
-            <string>SFUIText-Bold</string>
-            <string>SFUIText-Bold</string>
-            <string>SFUIText-Bold</string>
-            <string>SFUIText-Bold</string>
-            <string>SFUIText-Bold</string>
-            <string>SFUIText-Bold</string>
-            <string>SFUIText-Bold</string>
         </mutableArray>
         <mutableArray key="SF-UI-Text-Regular.otf">
-            <string>SFUIText-Regular</string>
-            <string>SFUIText-Regular</string>
-            <string>SFUIText-Regular</string>
-            <string>SFUIText-Regular</string>
-            <string>SFUIText-Regular</string>
-            <string>SFUIText-Regular</string>
-            <string>SFUIText-Regular</string>
             <string>SFUIText-Regular</string>
             <string>SFUIText-Regular</string>
             <string>SFUIText-Regular</string>
@@ -5205,17 +5190,17 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y0V-rG-LP9">
-                                <rect key="frame" x="224" y="243" width="152" height="30"/>
+                                <rect key="frame" x="224" y="193" width="152" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h5N-Ry-xNg">
-                                <rect key="frame" x="224" y="293" width="152" height="30"/>
+                                <rect key="frame" x="224" y="243" width="152" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wfw-7U-fqh">
-                                <rect key="frame" x="281" y="343" width="38" height="30"/>
+                                <rect key="frame" x="281" y="293" width="38" height="30"/>
                                 <state key="normal" title="Login">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -5226,7 +5211,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Y0V-rG-LP9" firstAttribute="top" secondItem="jMn-aG-Kux" secondAttribute="bottom" constant="60" id="0Fm-GD-bQu"/>
+                            <constraint firstItem="Y0V-rG-LP9" firstAttribute="top" secondItem="jMn-aG-Kux" secondAttribute="bottom" constant="10" id="0Fm-GD-bQu"/>
                             <constraint firstItem="h5N-Ry-xNg" firstAttribute="trailing" secondItem="Y0V-rG-LP9" secondAttribute="trailing" id="1Ff-4z-ogF"/>
                             <constraint firstItem="jMn-aG-Kux" firstAttribute="centerX" secondItem="hBC-52-B1s" secondAttribute="centerX" multiplier="0.8" id="46q-5l-A3E"/>
                             <constraint firstItem="h5N-Ry-xNg" firstAttribute="leading" secondItem="Y0V-rG-LP9" secondAttribute="leading" id="6lp-gI-ge9"/>
