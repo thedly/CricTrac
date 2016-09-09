@@ -24,7 +24,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     
     var dataHasChangedAfterLastSave = false
     var dataAdded = false
-    
+    var data = [String:String]()
     
     
     override func viewDidLoad() {
@@ -116,37 +116,34 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     @IBAction func didTapSave(sender: UIButton) {
         
         
-        if validateMatchDetails(){
+        if validateMatchDetails() {
             
-            var data = [String:String]()
-            if let _ = matchVC?.view{
+            
+            if dataHasChangedAfterLastSave{
+            
+            if  matchVC?.view != nil{
                 
                 data += matchVC.data
             }
-            if let _ = battingVC?.view{
+            if battingVC?.view != nil{
                 
                 data += battingVC.data
             }
-            if let _ = bowlingVC?.view{
+            if bowlingVC?.view != nil{
                 
                 data += bowlingVC.data
             }
-            if let _ = extraVC?.view{
+            if extraVC?.view != nil{
                 
                 data += extraVC.data
             }
-            
+            }
            
             
             
             let groundName = data["Ground"]!
             
-            if groundName != "-"{
-                
-                if !groundNames.contains(groundName){
-                    addNewGroundName(groundName)
-                }
-            }
+          
             
             //OppositTeams
             if !dataHasChangedAfterLastSave {
@@ -156,11 +153,13 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                     let teamName = data["Team"]!
                     if !teamNames.contains(teamName){
                         addNewTeamName(teamName)
+                        teamNames.append(teamName)
                     }
                     
                     let oppoTeamName = data["Opponent"]!
                     if !opponentTeams.contains(oppoTeamName){
                         addNewOppoSitTeamName(oppoTeamName)
+                        opponentTeams.append(oppoTeamName)
                     }
                     
                     let tournament = data["Tournamnet"]!
@@ -168,6 +167,14 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                     if tournament != "-"{
                         if !tournaments.contains(tournament){
                             addNewTournamnetName(tournament)
+                            tournaments.append(tournament)
+                        }
+                    }
+                    if groundName != "-"{
+                        
+                        if !groundNames.contains(groundName){
+                            addNewGroundName(groundName)
+                            groundNames.append(groundName)
                         }
                     }
                     

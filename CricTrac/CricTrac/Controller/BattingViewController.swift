@@ -148,11 +148,12 @@ extension BattingViewController:UITextFieldDelegate{
     
     func setStrikeRate(){
         
-        if let runs = Int((runsText.text?.trimWhiteSpace)!){
-            if let balls = Int((ballsText.text?.trimWhiteSpace)!){
-                strikeRateText.text = "\(runs*100 / balls)"
+        if let runs = Double((runsText.text?.trimWhiteSpace)!){
+            if let balls = Double((ballsText.text?.trimWhiteSpace)!){
+                
+                strikeRateText.text = String(format: "%.0f",(runs*100 / balls))
             }
-            
+           
         }
     }
     

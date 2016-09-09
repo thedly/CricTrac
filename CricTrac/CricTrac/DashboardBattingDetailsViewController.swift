@@ -73,13 +73,13 @@ class DashboardBattingDetailsViewController: UIViewController,IndicatorInfoProvi
             let df = NSDateFormatter()
             df.dateFormat = "dd/MM/yyyy"
             
-            matchDataSource.sortInPlace{
-                if $0["Date"] != nil && $1["Date"] != nil, let firstDate = $0["Date"], let seconddate = $1["Date"] {
-                    return df.dateFromString(firstDate)!.compare(df.dateFromString(seconddate)!) == .OrderedDescending
-                }
-                return false
-                
-            }
+//            matchDataSource.sortInPlace{
+//                if $0["Date"] != nil && $1["Date"] != nil, let firstDate = $0["Date"], let seconddate = $1["Date"] {
+//                    return df.dateFromString(firstDate)!.compare(df.dateFromString(seconddate)!) == .OrderedDescending
+//                }
+//                return false
+//                
+//            }
             
             
            

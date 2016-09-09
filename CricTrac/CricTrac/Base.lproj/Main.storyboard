@@ -4180,7 +4180,7 @@
                                                     <outlet property="delegate" destination="0Xv-7d-mqi" id="vMn-lO-fX3"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Strike Rate" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J7a-ME-fzX" userLabel="Strikerate" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Strike Rate" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J7a-ME-fzX" userLabel="Strikerate" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="60" y="188" width="480" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <accessibility key="accessibilityConfiguration">
@@ -5425,7 +5425,7 @@
                                                     <outlet property="delegate" destination="AAK-Kb-E6X" id="vNl-A6-sk2"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Economy" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mV4-a6-8lZ" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Economy" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mV4-a6-8lZ" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="60" y="310" width="480" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
