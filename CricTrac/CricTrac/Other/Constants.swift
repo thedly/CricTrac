@@ -25,10 +25,20 @@ let menuData = [
     ["title":"Settings","vc":"NewMatchViewController"],
     ["title":"Feedback","vc":"SummaryViewController"],
     ["title":"Help & Support","vc":"SummaryViewController"],
-    ["title":"About","vc":"SummaryViewController"],
+    ["title":"Version: \(versionAndBuildNumber)","vc":"SummaryViewController"],
     
 ]
 
+
+var versionAndBuildNumber:String{
+
+    let nsObject: AnyObject? = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"]
+    
+    let build = NSBundle.mainBundle().objectForInfoDictionaryKey(kCFBundleVersionKey as String) as! String
+    
+    return  (nsObject as! String)+" || Build: "+build
+
+}
 
 let fireBaseRef =  FIRDatabase.database().referenceFromURL("https://arjun-innovations.firebaseio.com")
 
