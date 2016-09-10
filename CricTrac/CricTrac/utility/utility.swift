@@ -26,6 +26,7 @@ var PlayingRoles = [String]()
 var PlayingLevels = [String]()
 var genders = [String]()
 var matchDataSource = [[String:String]]()
+var profileDataChanged: Bool = false
 
 public func viewControllerFrom(storyBoard:String,vcid:String)->UIViewController{
     

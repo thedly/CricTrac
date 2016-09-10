@@ -17,12 +17,33 @@ class CTCountryPicker: NSObject {
     var parent:UIViewController!
     private var states: [String]!
     var SelectedCountry: String {
-        if countryPicker != nil , let _selectedCountry = countryPicker.pickedCountry! as? Country {
-            return _selectedCountry.name
+        
+        get{
+            if countryPicker != nil , let _selectedCountry = countryPicker.pickedCountry! as? Country {
+                return _selectedCountry.name
+            }
+            else
+            {
+                return String()
+            }
         }
-        else
-        {
-            return String()
+        
+        set {
+            
+            if countryPicker == nil {
+                countryPicker = CountryPicker(frame: CGRectMake(0,0,UIScreen.mainScreen().bounds.width, 216))
+                countryPicker.backgroundColor = UIColor.whiteColor()
+            }
+            
+            var indexPos = 0
+            
+            if newValue != "" && newValue != "-" {
+                indexPos = countryPicker.countryData.indexOf({$0.name == newValue})!
+                countryPicker.pickedCountry = countryPicker.countryData.filter({$0.name == newValue}).first
+            }
+            
+            countryPicker.selectRow(indexPos, inComponent: 0, animated: true)
+            
         }
     }
     
@@ -51,10 +72,7 @@ class CTCountryPicker: NSObject {
         
         self.inputText = inputText
         self.parent = parent
-        if countryPicker == nil {
-            countryPicker = CountryPicker(frame: CGRectMake(0,0,parent.view.frame.size.width, 216))
-            countryPicker.backgroundColor = UIColor.whiteColor()
-        }
+        
         inputText.inputView = countryPicker
         
         // ToolBar

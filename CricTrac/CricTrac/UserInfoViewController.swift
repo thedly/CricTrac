@@ -112,6 +112,9 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
                     self.state.text = profileData["State"]
                     self.city.text = profileData["City"]
                     self.teamName.text = profileData["TeamName"]
+                    
+                    self.ctCountryPicker.SelectedCountry = profileData["Country"]!
+                    
                 }
         }
     }
@@ -129,7 +132,7 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
         if validateProfileData() {
             let data = self.data
             addUserProfileData(data, sucessBlock: {data in
-                
+                profileDataChanged = true
             })
             dismissViewControllerAnimated(true, completion: nil)
         }
@@ -258,26 +261,30 @@ extension UserInfoViewController:UITextFieldDelegate{
         }
         else if textField == country {
             ctCountryPicker.showPicker(self, inputText: textField)
-            state.text = String()
+            //state.text = String()
         }
         else if textField == state {
             ctStatePicker.showPicker(self, inputText: textField, iso: ctCountryPicker.SelectedISO)
         }
         else if  textField == gender{
-            resignFirstResponder()
-            ctDataPicker.showPicker(self, inputText: textField, data: genders)
+            ctDataPicker = DataPicker()
+            let indexPos = genders.indexOf(gender.text!) ?? 0
+            ctDataPicker.showPicker(self, inputText: textField, data: genders,selectedValueIndex: indexPos)
         }
         else if  textField == playingRole{
             ctDataPicker = DataPicker()
-            ctDataPicker.showPicker(self, inputText: textField, data: PlayingRoles)
+            let indexPos = PlayingRoles.indexOf(playingRole.text!) ?? 0
+            ctDataPicker.showPicker(self, inputText: textField, data: PlayingRoles, selectedValueIndex: indexPos)
         }
         else if  textField == battingStyle{
             ctDataPicker = DataPicker()
-            ctDataPicker.showPicker(self, inputText: textField, data: BattingStyles)
+            let indexPos = BattingStyles.indexOf(battingStyle.text!) ?? 0
+            ctDataPicker.showPicker(self, inputText: textField, data: BattingStyles,selectedValueIndex: indexPos)
         }
         else if  textField == bowlingStyle{
             ctDataPicker = DataPicker()
-            ctDataPicker.showPicker(self, inputText: textField, data: BowlingStyles)
+            let indexPos = BowlingStyles.indexOf(bowlingStyle.text!) ?? 0
+            ctDataPicker.showPicker(self, inputText: textField, data: BowlingStyles, selectedValueIndex: indexPos)
         }
     }
     

@@ -25,7 +25,7 @@ class DataPicker: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
         return _selectedValue ?? String()
     }
     
-    func showPicker(parent:UIViewController,inputText:UITextField, data: [String]){
+    func showPicker(parent:UIViewController,inputText:UITextField, data: [String], selectedValueIndex: Int){
         
         self.inputText = inputText
         self.parent = parent
@@ -36,6 +36,8 @@ class DataPicker: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
             dataPicker.backgroundColor = UIColor.whiteColor()
             dataPicker.dataSource = self
             dataPicker.delegate = self
+            dataPicker.selectRow(selectedValueIndex, inComponent: 0, animated: true)
+            _selectedValue = pickerData[selectedValueIndex]
         }
         inputText.inputView = dataPicker
         

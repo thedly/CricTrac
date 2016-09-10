@@ -39,6 +39,9 @@ class CTStatePicker: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
             statePicker.backgroundColor = UIColor.whiteColor()
             statePicker.dataSource = self
             statePicker.delegate = self
+            let indexPos = pickerData.indexOf(inputText.text ?? "-") ?? 0
+            statePicker.selectRow(indexPos, inComponent: 0, animated: true)
+            _selectedState = pickerData[indexPos]
         }
         inputText.inputView = statePicker
         

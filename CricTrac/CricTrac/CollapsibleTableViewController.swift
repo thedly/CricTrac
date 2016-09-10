@@ -161,7 +161,7 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
             
             self.profileImage.image = image
             
-            addProfileImageData(image)
+            addProfileImageData(self.resizeImage(image, newWidth: 200))
             self.activityInd.stopAnimating()
         }
         
@@ -173,7 +173,7 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
             let image:UIImage = UIImage(named: "User")!
             
             self.profileImage.image = image
-            addProfileImageData(image)
+            addProfileImageData(self.resizeImage(image, newWidth: 200))
             
         }
         
@@ -271,6 +271,18 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
         let newMatchVc = viewControllerFrom("Main", vcid: "AddMatchDetailsViewController")
         self.presentViewController(newMatchVc, animated: true) {}
     }
+    
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+        
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
 
     
     @IBAction func editProfilePressed(sender: AnyObject) {
@@ -287,7 +299,9 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
         print(image)
         profileImage.image = image
         
-        addProfileImageData(image)
+        
+        
+        addProfileImageData(resizeImage(image, newWidth: 200))
         
         
         dismissViewControllerAnimated(true, completion: nil)
@@ -339,33 +353,49 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
             self.activityInd.stopAnimating()
         }
         
+        setDashboardProfileData()
         
+        
+    }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        if profileDataChanged {
+            setDashboardProfileData()
+            profileDataChanged = false
+        }
+    }
+    
+    func setDashboardProfileData(){
         getAllProfileData { (data) in
             
             profileData = data as! [String:String]
+            
+            if profileData.count > 0 {
                 
-                if profileData.count > 0 {
-                    
-                    
-                    
-                    
-                    let dob:String = profileData["DateOfBirth"]! as String
-                    
-                    self.username.text = (profileData["FirstName"]! + " " + profileData["LastName"]! + "  (\(self.getAge(dob)))").capitalizedString
-                    
-                    
-                    self.playingRole.text = profileData["PlayingRole"]
-                    self.battingStyle.text = profileData["BattingStyle"]
-                    self.bowlingStyle.text = profileData["BowlingStyle"]
-                    self.teamName.text = profileData["TeamName"]
-                    self.location.text = profileData["City"]! + ", "+profileData["Country"]!
                 
-                }
+                
+                
+                let dob:String = profileData["DateOfBirth"]! as String
+                
+                self.username.text = (profileData["FirstName"]! + " " + profileData["LastName"]! + "  (\(self.getAge(dob)))").capitalizedString
+                
+                
+                self.playingRole.text = profileData["PlayingRole"]
+                self.battingStyle.text = profileData["BattingStyle"]
+                self.bowlingStyle.text = profileData["BowlingStyle"]
+                self.teamName.text = profileData["TeamName"]
+                self.location.text = profileData["City"]! + ", "+profileData["Country"]!
+                
+            }
             
             
             
             
         }
+    
     }
 
     
