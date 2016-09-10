@@ -137,11 +137,12 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
     }
     
     func validateProfileData() -> Bool {
-        var detailsValid = true
+        //var detailsValid = true
         if !(firstName.text?.hasDataPresent)! || firstName.text?.length > 25 {
             (firstName as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
             (firstName as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
-            detailsValid = false
+            firstName.becomeFirstResponder()
+            return false
         }
         else
         {
@@ -152,7 +153,8 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
         if !(dateOfBirth.text?.hasDataPresent)! || dateOfBirth.text?.length > 25 {
             (dateOfBirth as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
             (dateOfBirth as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
-            detailsValid = false
+            dateOfBirth.becomeFirstResponder()
+            return false
         }
         else
         {
@@ -163,7 +165,8 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
         if !(emailId.text?.hasDataPresent)! {
             (emailId as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
             (emailId as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
-            detailsValid = false
+            emailId.becomeFirstResponder()
+            return false
         }
         else
         {
@@ -174,7 +177,8 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
         if !(mobile.text?.hasDataPresent)! || mobile.text?.length != 10 {
             (mobile as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
             (mobile as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
-            detailsValid = false
+            mobile.becomeFirstResponder()
+            return false
         }
         else
         {
@@ -185,7 +189,8 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
         if !(country.text?.hasDataPresent)! || country.text?.length > 25 {
             (country as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
             (country as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
-            detailsValid = false
+            country.becomeFirstResponder()
+            return false
         }
         else
         {
@@ -196,7 +201,8 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
         if !(state.text?.hasDataPresent)! || state.text?.length > 25 {
             (state as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
             (state as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
-            detailsValid = false
+            state.becomeFirstResponder()
+            return false
         }
         else
         {
@@ -207,14 +213,15 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
         if !(city.text?.hasDataPresent)! || city.text?.length > 25 {
             (city as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
             (city as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
-            detailsValid = false
+            city.becomeFirstResponder()
+            return false
         }
         else
         {
             (city as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#D4D4D4")
             (city as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#6D9447")
         }
-        return detailsValid
+        return true
     }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
