@@ -235,11 +235,24 @@ func deleteMatchData(matchId:String, callback:(error:NSError?)->Void ){
 
 //MARK:- Login
 
-func loginWithMailAndPassword(userName:String,password:String,callBack:(user:FIRUser?,error:NSError?)->Void){
+func loginWithMailAndPassword( userName:String,password:String,callBack:(user:FIRUser?,error:NSError?)->Void){
+    
+    var uname = userName
+    
+    if uname == ""{
+        
+        uname = "r@test1.com"
+    }
+    
+    var pward = password
+    
+    if pward == ""{
+        
+        pward = "test123"
+    }
     
     
-    
-    FIRAuth.auth()?.signInWithEmail(userName, password: password) { (user, error) in
+    FIRAuth.auth()?.signInWithEmail(uname, password: pward) { (user, error) in
 
         
         if error?.code == 17011{

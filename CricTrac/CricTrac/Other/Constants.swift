@@ -14,7 +14,7 @@ public var date = 0
 
 let menuData = [
 
-    ["title":"Timeline","vc":"AddMatchDetailsViewController"],
+    ["title":"Timeline","vc":"timeline"],
     ["title":"Dashboard","vc":"AddMatchDetailsViewController"],
     ["title":"New Match","vc":"AddMatchDetailsViewController"],
     ["title":"Match Summary","vc":"MatchSummaryViewController"],

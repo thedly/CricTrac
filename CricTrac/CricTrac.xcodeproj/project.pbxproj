@@ -25,6 +25,7 @@
 		4668E4CB1D68110500E36CB0 /* MatchSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4668E4CA1D68110500E36CB0 /* MatchSummaryViewController.swift */; };
 		466AD3FA1D7A869B0033289C /* NewMatchParent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466AD3F91D7A869B0033289C /* NewMatchParent.swift */; };
 		466AD3FC1D7A8EC10033289C /* CTPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466AD3FB1D7A8EC10033289C /* CTPicker.swift */; };
+		46B0D66B1D8B881500C93247 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B0D66A1D8B881500C93247 /* TimeLineViewController.swift */; };
 		46B608701D44A7D3000FE098 /* NewMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B6086F1D44A7D3000FE098 /* NewMatchViewController.swift */; };
 		46C983901D3922D200DFC607 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C9838F1D3922D200DFC607 /* AppDelegate.swift */; };
 		46C983971D3922D200DFC607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46C983961D3922D200DFC607 /* Assets.xcassets */; };
@@ -108,6 +109,7 @@
 		4668E4CA1D68110500E36CB0 /* MatchSummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MatchSummaryViewController.swift; path = Controller/MatchSummaryViewController.swift; sourceTree = "<group>"; };
 		466AD3F91D7A869B0033289C /* NewMatchParent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewMatchParent.swift; path = Other/NewMatchParent.swift; sourceTree = "<group>"; };
 		466AD3FB1D7A8EC10033289C /* CTPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CTPicker.swift; path = utility/CTPicker.swift; sourceTree = "<group>"; };
+		46B0D66A1D8B881500C93247 /* TimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeLineViewController.swift; path = Controller/TimeLineViewController.swift; sourceTree = "<group>"; };
 		46B6086F1D44A7D3000FE098 /* NewMatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewMatchViewController.swift; path = Controller/NewMatchViewController.swift; sourceTree = "<group>"; };
 		46C9838C1D3922D200DFC607 /* CricTrac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CricTrac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46C9838F1D3922D200DFC607 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 				899206231D61BA0700F99A97 /* FriendsViewController.swift */,
 				899206251D61BA6700F99A97 /* FriendsInviteViewController.swift */,
 				4668E4CA1D68110500E36CB0 /* MatchSummaryViewController.swift */,
+				46B0D66A1D8B881500C93247 /* TimeLineViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -578,6 +581,7 @@
 				89C8196E1D52429500291A7E /* headerView.swift in Sources */,
 				46C983C41D40968300DFC607 /* Extentions.swift in Sources */,
 				8930F03E1D5BA0EB00C7540B /* UserTeamDetailsViewController.swift in Sources */,
+				46B0D66B1D8B881500C93247 /* TimeLineViewController.swift in Sources */,
 				466AD3FC1D7A8EC10033289C /* CTPicker.swift in Sources */,
 				8930F0381D5B751500C7540B /* CTCountryPicker.swift in Sources */,
 				892EA67E1D58DEBE00BEE5A3 /* ProfileDetails.swift in Sources */,

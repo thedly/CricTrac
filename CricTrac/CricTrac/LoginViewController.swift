@@ -41,6 +41,8 @@ class LoginViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelega
 
     @IBAction func loginWithUserNamePassword(){
         
+        
+        
     loginWithMailAndPassword((username.text?.trimWhiteSpace)!, password: (password.text?.trimWhiteSpace)!) { (user, error) in
         
         if error != nil{
