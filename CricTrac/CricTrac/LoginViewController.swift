@@ -41,12 +41,13 @@ class LoginViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelega
 
     @IBAction func loginWithUserNamePassword(){
         
-        
+        KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
         
     loginWithMailAndPassword((username.text?.trimWhiteSpace)!, password: (password.text?.trimWhiteSpace)!) { (user, error) in
         
         if error != nil{
             
+            KRProgressHUD.dismiss()
             SCLAlertView().showError("Login Error", subTitle: error!.localizedDescription)
             
            
@@ -228,6 +229,7 @@ class LoginViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelega
         window?.rootViewController = sliderMenu
         
         self.presentViewController(sliderMenu, animated: true) {}
+        KRProgressHUD.dismiss()
     }
 
 }
