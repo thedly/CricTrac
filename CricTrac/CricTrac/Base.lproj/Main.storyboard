@@ -6286,14 +6286,14 @@
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SH7-Kp-Zc5">
                                 <rect key="frame" x="30" y="70" width="540" height="530"/>
-                                <color key="backgroundColor" red="0.82352941176470584" green="0.82352941176470584" blue="0.82352941176470584" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="eVj-wD-gkz" id="uG9-H1-VMq"/>
                                     <outlet property="delegate" destination="eVj-wD-gkz" id="kfF-1q-PJd"/>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.82352941176470584" green="0.82352941176470584" blue="0.82352941176470584" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="SH7-Kp-Zc5" firstAttribute="top" secondItem="bU2-hu-lUJ" secondAttribute="bottom" constant="10" id="DI0-e3-JSA"/>
                             <constraint firstItem="SH7-Kp-Zc5" firstAttribute="width" secondItem="Lhb-My-zXm" secondAttribute="width" multiplier="0.9" id="KYQ-Vw-J3a"/>
