@@ -235,7 +235,7 @@ func deleteMatchData(matchId:String, callback:(error:NSError?)->Void ){
 
 //MARK:- Login
 
-func loginWithMailAndPassword( userName:String,password:String,callBack:(user:FIRUser?,error:NSError?)->Void){
+func loginWithMailAndPassword(userName:String,password:String,callBack:(user:FIRUser?,error:NSError?)->Void){
     
     var uname = userName
     
@@ -254,25 +254,28 @@ func loginWithMailAndPassword( userName:String,password:String,callBack:(user:FI
     
     FIRAuth.auth()?.signInWithEmail(uname, password: pward) { (user, error) in
 
-        
-        if error?.code == 17011{
-            
-            FIRAuth.auth()?.createUserWithEmail(userName, password: password) { (user, error) in
-                
-                 callBack(user: user,error: error)
-                if error == nil{
-                    SCLAlertView().showInfo("User Created", subTitle: "")
-                }
-                
-            }
-            
-        }
-        else {callBack(user: user,error: error) }
+        callBack(user: user,error: error)
     
     }
     
     
    
+}
+
+func registerWithEmailAndPassword(userName:String,password:String,callBack:(user:FIRUser?,error:NSError?)->Void) {
+    //if error?.code == 17011{
+    
+    
+        FIRAuth.auth()?.createUserWithEmail(userName, password: password) { (user, error) in
+            
+            callBack(user: user,error: error)
+            if error == nil{
+                SCLAlertView().showInfo("User Created", subTitle: "")
+            }
+            
+        }
+        
+    //}
 }
 
 //fireBaseRef.child("Dismissals").setValue(["BOWLED","CAUGHT","HANDLED THE BALL","HIT WICKET","HIT THE BALL TWICE","LEG BEFORE WICKET (LBW)","OBSTRUCTING THE FIELD","RUN OUT","RETIRED","TIMED OUT"])

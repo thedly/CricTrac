@@ -43,6 +43,8 @@
 		46FA41D41D6D3F68006635C6 /* MatchDetailsTrackable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FA41D31D6D3F68006635C6 /* MatchDetailsTrackable.swift */; };
 		890B42C51D60430100736F03 /* CollapsibleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890B42C41D60430100736F03 /* CollapsibleTableViewController.swift */; };
 		890B42C71D60472C00736F03 /* CollapsibleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890B42C61D60472C00736F03 /* CollapsibleTableViewCell.swift */; };
+		89129C4A1D904F89009488FE /* LoginBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89129C491D904F89009488FE /* LoginBaseViewController.swift */; };
+		89129C4C1D90501B009488FE /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89129C4B1D90501B009488FE /* RegisterViewController.swift */; };
 		892E1A971D3BC8D100EBF014 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 892E1A951D3BC8D100EBF014 /* Main.storyboard */; };
 		892EA67E1D58DEBE00BEE5A3 /* ProfileDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892EA67C1D58DEBE00BEE5A3 /* ProfileDetails.swift */; };
 		892EA6891D58ED2300BEE5A3 /* DashboardBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892EA6881D58ED2300BEE5A3 /* DashboardBaseViewController.swift */; };
@@ -132,6 +134,8 @@
 		549F76A86F0BF1CECAF26359 /* Pods-CricTrac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CricTrac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CricTrac/Pods-CricTrac.debug.xcconfig"; sourceTree = "<group>"; };
 		890B42C41D60430100736F03 /* CollapsibleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewController.swift; sourceTree = "<group>"; };
 		890B42C61D60472C00736F03 /* CollapsibleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewCell.swift; sourceTree = "<group>"; };
+		89129C491D904F89009488FE /* LoginBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginBaseViewController.swift; sourceTree = "<group>"; };
+		89129C4B1D90501B009488FE /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		892E1A961D3BC8D100EBF014 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		892EA67C1D58DEBE00BEE5A3 /* ProfileDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileDetails.swift; path = View/ProfileDetails.swift; sourceTree = "<group>"; };
 		892EA6881D58ED2300BEE5A3 /* DashboardBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardBaseViewController.swift; sourceTree = "<group>"; };
@@ -353,6 +357,8 @@
 				899206251D61BA6700F99A97 /* FriendsInviteViewController.swift */,
 				4668E4CA1D68110500E36CB0 /* MatchSummaryViewController.swift */,
 				46B0D66A1D8B881500C93247 /* TimeLineViewController.swift */,
+				89129C491D904F89009488FE /* LoginBaseViewController.swift */,
+				89129C4B1D90501B009488FE /* RegisterViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -572,6 +578,7 @@
 				89F4E4B31D48FECD00EFE46E /* summaryTableViewCell.swift in Sources */,
 				46FA41D41D6D3F68006635C6 /* MatchDetailsTrackable.swift in Sources */,
 				8930F03C1D5B94C300C7540B /* CTStatePicker.swift in Sources */,
+				89129C4A1D904F89009488FE /* LoginBaseViewController.swift in Sources */,
 				46F25A031D5B1AAD001EBEF9 /* Service.swift in Sources */,
 				46CE472E1D7A787D00EA63E2 /* CTAlertViewController.swift in Sources */,
 				892EA68D1D58F78500BEE5A3 /* DashboardBowlingDetailsViewController.swift in Sources */,
@@ -594,6 +601,7 @@
 				462DE9F71D478B9E00E31E8F /* CTDatePicker.swift in Sources */,
 				46F259FF1D55AB30001EBEF9 /* BowlingViewController.swift in Sources */,
 				46F25A011D55C1C0001EBEF9 /* ExtraViewController.swift in Sources */,
+				89129C4C1D90501B009488FE /* RegisterViewController.swift in Sources */,
 				4668E4C91D68105700E36CB0 /* SummaryCell.swift in Sources */,
 				46C983B61D39D86800DFC607 /* performanceCell.swift in Sources */,
 				892EA6891D58ED2300BEE5A3 /* DashboardBaseViewController.swift in Sources */,

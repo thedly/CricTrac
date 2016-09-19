@@ -1,12 +1,13 @@
 //
-//  LoginViewController.swift
+//  RegisterViewController.swift
 //  CricTrac
 //
-//  Created by Renjith on 8/2/16.
+//  Created by Tejas Hedly on 19/09/16.
 //  Copyright © 2016 CricTrac. All rights reserved.
 //
 
 import UIKit
+import XLPagerTabStrip
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
@@ -16,61 +17,67 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import KRProgressHUD
 import SCLAlertView
-import XLPagerTabStrip
 
-class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDelegate, GIDSignInUIDelegate {
-    
-    
+class RegisterViewController: UIViewController,IndicatorInfoProvider,GIDSignInDelegate, GIDSignInUIDelegate {
+
     @IBOutlet weak var facebookBtn: UIButton!
     
     @IBOutlet weak var googleBtn: UIButton!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+    }
+
+    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Register")
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     
     @IBOutlet weak var username:UITextField!
     @IBOutlet weak var password:UITextField!
     
     let loginManager = FBSDKLoginManager()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
-    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "Sign In")
-    }
-    
-     // MARK:- GoogleSignIn
+    // MARK:- GoogleSignIn
     
     @IBAction func loginWithGoogle(sender: UIButton) {
         googleBtn.enabled = false
         loginWithGoogle()
         
     }
-
+    
     @IBAction func loginWithUserNamePassword(){
         
         KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
         
-    loginWithMailAndPassword((username.text?.trimWhiteSpace)!, password: (password.text?.trimWhiteSpace)!) { (user, error) in
         
-        if error != nil{
+        registerWithEmailAndPassword((username.text?.trimWhiteSpace)!, password: (password.text?.trimWhiteSpace)!) { (user, error) in
             
-            KRProgressHUD.dismiss()
-            SCLAlertView().showError("Login Error", subTitle: error!.localizedDescription)
+            if error != nil{
+                
+                KRProgressHUD.dismiss()
+                SCLAlertView().showError("Registration Error", subTitle: error!.localizedDescription)
+                
+                
+            }
+            else {
+                currentUser = user
+                enableSync()
+                self.navigateToNextScreen()
+                
+            }
             
-           
-        }
-        else {
-            currentUser = user
-            enableSync()
-            self.navigateToNextScreen()
-            
-        }
-        
         }
         
     }
-   
-
+    
+    
     
     func loginWithGoogle(){
         
@@ -85,9 +92,8 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError?) {
         
         if error != nil{
-            
-            SCLAlertView().showError("Login Error", subTitle: "Error Occoured")
             self.googleBtn.enabled = true
+            SCLAlertView().showError("Login Error", subTitle: "Error Occoured")
             return
         }
         
@@ -105,9 +111,8 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
                 
                 let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
                 dispatch_after(delay, dispatch_get_main_queue()) {
-                    
-                    SCLAlertView().showError("Login Error", subTitle: error.localizedDescription)
                     self.googleBtn.enabled = true
+                    SCLAlertView().showError("Login Error", subTitle: error.localizedDescription)
                 }
                 
         })
@@ -116,12 +121,12 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     
     
     func saveGoogleTocken(idToken:String,accessToken:String ){
-
+        
         let userDefaults = NSUserDefaults.standardUserDefaults()
-         let googleTokens = ["idToken":idToken,"accessToken":accessToken]
-
+        let googleTokens = ["idToken":idToken,"accessToken":accessToken]
+        
         var facebookToken:[String:String]!
-
+        
         
         if let loginToken = userDefaults.valueForKey("loginToken") as? [String:AnyObject]{
             
@@ -134,16 +139,16 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         
         var token = [String:AnyObject]()
         if facebookToken != nil{
-        token["Facebooktoken"] = facebookToken
+            token["Facebooktoken"] = facebookToken
         }
         token["googletoken"] = googleTokens
         
         userDefaults.setValue(token, forKey: "loginToken")
         
         userDefaults.synchronize()
-
-
-
+        
+        
+        
     }
     
     
@@ -152,7 +157,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     
     
     @IBAction func loginWithFB(sender: UIButton) {
-        facebookBtn.enabled = false
+        self.facebookBtn.enabled = false
         loginWithFacebook()
     }
     
@@ -162,14 +167,12 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         
         loginManager.logInWithReadPermissions(["email"], fromViewController: self, handler: { (result, error) in
             if let error = error {
-                
-                SCLAlertView().showError("Login Error", subTitle:error.description)
                 self.facebookBtn.enabled = true
+                SCLAlertView().showError("Login Error", subTitle:error.description)
             }
             else if(result.isCancelled) {
-                
-                SCLAlertView().showError("Login Error", subTitle: "Login Cancelled")
                 self.facebookBtn.enabled = true
+                SCLAlertView().showError("Login Error", subTitle: "Login Cancelled")
             }
             else {
                 let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
@@ -183,16 +186,15 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
                     self.navigateToNextScreen()
                     }, failure: { (error) in
                         
-                         KRProgressHUD.dismiss()
+                        KRProgressHUD.dismiss()
                         
                         let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
                         dispatch_after(delay, dispatch_get_main_queue()) {
-                           
-                            SCLAlertView().showError("Login Error", subTitle: error.localizedDescription)
                             self.facebookBtn.enabled = true
+                            SCLAlertView().showError("Login Error", subTitle: error.localizedDescription)
                         }
                         
-                       
+                        
                 })
                 
             }
@@ -237,12 +239,24 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         let navigationControl = UINavigationController(rootViewController: dashboardVC )
         sliderMenu.mainViewController = navigationControl
         sliderMenu.drawerViewController = drawerViewController
-        facebookBtn.enabled = true
-        googleBtn.enabled = true
+        self.googleBtn.enabled = true
+        self.facebookBtn.enabled = true
         window?.rootViewController = sliderMenu
         
         self.presentViewController(sliderMenu, animated: true) {}
         KRProgressHUD.dismiss()
     }
+
+    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
 
 }
