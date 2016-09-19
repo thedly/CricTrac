@@ -10,12 +10,29 @@ import UIKit
 
 class TimeLineViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
 
+    @IBOutlet weak var timeLineTable: UITableView!
+    
+    let  refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+       
+        refreshControl.attributedTitle = NSAttributedString(string: "Loading New Posts")
+        refreshControl.addTarget(self, action: #selector(TimeLineViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        timeLineTable.addSubview(refreshControl)
+        
         // Do any additional setup after loading the view.
     }
 
+    
+    func refresh(sender:AnyObject) {
+        
+        for _ in 1...10000000{}
+        refreshControl.endRefreshing()
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -44,8 +61,25 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        return 100
+        return 200
     }
+    
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+            if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height)
+            {
+//                if !isNewDataLoading{
+
+                //Get New Data
+                
+//                    }
+                
+                print("")
+                
+                }
+            }
+    
     
     
 //    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
