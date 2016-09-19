@@ -13,6 +13,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     @IBOutlet weak var timeLineTable: UITableView!
     
     let  refreshControl = UIRefreshControl()
+    var totalPosts = 5
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +69,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
      func numberOfSectionsInTableView(tableView: UITableView) -> Int{
         
-        return 10
+        return totalPosts
     }
     
      func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -90,7 +91,8 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 //Get New Data
                 
 //                    }
-                
+                totalPosts += 1
+                timeLineTable.reloadData()
                 print("")
                 
                 }
