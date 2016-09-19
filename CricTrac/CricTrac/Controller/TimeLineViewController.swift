@@ -22,6 +22,11 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         refreshControl.addTarget(self, action: #selector(TimeLineViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         timeLineTable.addSubview(refreshControl)
         
+        
+          timeLineTable.registerNib(UINib.init(nibName:"AddPostTableViewCell", bundle: nil), forCellReuseIdentifier: "addpost")
+        
+        timeLineTable.registerNib(UINib.init(nibName:"APostTableViewCell", bundle: nil), forCellReuseIdentifier: "aPost")
+        
         // Do any additional setup after loading the view.
     }
 
@@ -45,7 +50,18 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let acell = UITableViewCell()
+        
+        var acell = UITableViewCell()
+        
+        if indexPath.section == 0{
+            
+             acell =  timeLineTable.dequeueReusableCellWithIdentifier("addpost", forIndexPath: indexPath)
+        }
+        else{
+            acell =  timeLineTable.dequeueReusableCellWithIdentifier("aPost", forIndexPath: indexPath)
+        }
+        
+        
         acell.backgroundColor = .whiteColor()
         return acell
     }
@@ -60,7 +76,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        
+        if indexPath.section == 0{return 150}
         return 200
     }
     

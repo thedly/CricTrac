@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="aPost" selectionStyle="default" indentationWidth="10" rowHeight="248" id="KGk-i7-Jjw" customClass="APostTableViewCell" customModule="CricTrac" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="552" height="248"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="552" height="247"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sachin" translatesAutoresizingMaskIntoConstraints="NO" id="F5q-Ml-KiJ">
+                        <rect key="frame" x="18" y="18" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="9Kb-IG-FQG"/>
+                            <constraint firstAttribute="height" constant="50" id="lmI-HV-eaz"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arjun S" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UIx-fb-WlC">
+                        <rect key="frame" x="78" y="18" width="46" height="16"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
+                        <color key="textColor" red="0.69411764710000001" green="0.14117647059999999" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="asJ-kQ-Jqv">
+                        <rect key="frame" x="18" y="88" width="516" height="141"/>
+                        <mutableString key="text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</mutableString>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="asJ-kQ-Jqv" firstAttribute="top" secondItem="F5q-Ml-KiJ" secondAttribute="bottom" constant="20" id="Eep-kB-RGE"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="asJ-kQ-Jqv" secondAttribute="bottom" constant="10" id="HoM-EX-31Y"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="asJ-kQ-Jqv" secondAttribute="trailing" constant="10" id="IKC-oE-dBY"/>
+                    <constraint firstItem="F5q-Ml-KiJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="OH8-MV-NUh"/>
+                    <constraint firstItem="asJ-kQ-Jqv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="W9b-p3-XR6"/>
+                    <constraint firstItem="UIx-fb-WlC" firstAttribute="leading" secondItem="F5q-Ml-KiJ" secondAttribute="trailing" constant="10" id="aRe-hf-mwr"/>
+                    <constraint firstItem="UIx-fb-WlC" firstAttribute="top" secondItem="F5q-Ml-KiJ" secondAttribute="top" id="tGJ-Em-tkk"/>
+                    <constraint firstItem="F5q-Ml-KiJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="yrX-ea-YCr"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="355" y="311"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="sachin" width="160" height="206"/>
+    </resources>
+</document>
