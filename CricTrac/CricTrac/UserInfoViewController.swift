@@ -189,29 +189,29 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
             (mobile as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#6D9447")
         }
         
-        if !(country.text?.hasDataPresent)! || country.text?.length > 25 {
-            (country as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
-            (country as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
-            country.becomeFirstResponder()
-            return false
-        }
-        else
-        {
-            (country as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#D4D4D4")
-            (country as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#6D9447")
-        }
+//        if !(country.text?.hasDataPresent)! || country.text?.length > 50 {
+//            (country as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
+//            (country as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
+//            country.becomeFirstResponder()
+//            return false
+//        }
+//        else
+//        {
+//            (country as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#D4D4D4")
+//            (country as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#6D9447")
+//        }
         
-        if !(state.text?.hasDataPresent)! || state.text?.length > 25 {
-            (state as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
-            (state as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
-            state.becomeFirstResponder()
-            return false
-        }
-        else
-        {
-            (state as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#D4D4D4")
-            (state as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#6D9447")
-        }
+//        if !(state.text?.hasDataPresent)! || state.text?.length > 25 {
+//            (state as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
+//            (state as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
+//            state.becomeFirstResponder()
+//            return false
+//        }
+//        else
+//        {
+//            (state as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#D4D4D4")
+//            (state as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#6D9447")
+//        }
         
         if !(city.text?.hasDataPresent)! || city.text?.length > 25 {
             (city as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")

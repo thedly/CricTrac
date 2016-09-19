@@ -18,13 +18,12 @@ pod 'FBSDKLoginKit'
 pod 'GoogleSignIn'
 
 
-pod 'KYDrawerController'
+pod 'KYDrawerController’, :git => ‘https://github.com/ykyouhei/KYDrawerController.git', :branch => ‘develop’
 
 pod 'SkyFloatingLabelTextField', '~> 1.0'
 
 pod 'SCLAlertView'
-pod 'KRProgressHUD'
-
+pod 'KRProgressHUD', :git => 'https://github.com/krimpedance/KRProgressHUD.git', :branch => 'swift2.3'
 pod 'XLPagerTabStrip', '~> 5.0'
 pod 'AnimatedTextInput', '~> 0.3.0'
 pod 'SwiftCountryPicker'

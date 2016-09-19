@@ -159,14 +159,14 @@ func loadInitialProfileValues(){
 
 
 func addUserProfileData(data:[String:String], sucessBlock:(AnyObject)->Void){
-    let ref = fireBaseRef.child(currentUser!.uid).child("UserProfile")
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
     ref.setValue(data)
     sucessBlock(data)
 }
 
 func getAllProfileData(sucessBlock:([String:AnyObject])->Void){
     
-    fireBaseRef.child(currentUser!.uid).child("UserProfile").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+    fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
         
         if let data: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
             
