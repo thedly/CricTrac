@@ -12,13 +12,16 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
 
     @IBOutlet weak var timeLineTable: UITableView!
     
+    var timelineDS = [[String:String]]()
+    
     let  refreshControl = UIRefreshControl()
     var totalPosts = 5
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       
+        
+       loadTimeLineData()
         refreshControl.attributedTitle = NSAttributedString(string: "Loading New Posts")
         refreshControl.addTarget(self, action: #selector(TimeLineViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         timeLineTable.addSubview(refreshControl)
@@ -32,12 +35,42 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     }
 
     
+    
     func refresh(sender:AnyObject) {
         
         for _ in 1...10000000{}
         refreshControl.endRefreshing()
     }
     
+    
+    func loadTimeLineData(){
+        
+        loadTimeline { (timeline) in
+            
+            
+            if let timelinedata = timeline as? [String:[String:String]]{
+                
+                for (_,val) in timelinedata{
+                    
+                    self.timelineDS.append(val)
+                    
+                }
+                
+                self.timeLineTable.reloadData()
+                
+                loadAllPostIds({
+                    
+                    loadTimelineFromId({ (timeline,postId) in
+                        
+                        self.timelineDS.append(timeline as! [String : String])
+                        
+                    })
+                    
+                })
+            }
+            
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -59,7 +92,12 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
              acell =  timeLineTable.dequeueReusableCellWithIdentifier("addpost", forIndexPath: indexPath)
         }
         else{
-            acell =  timeLineTable.dequeueReusableCellWithIdentifier("aPost", forIndexPath: indexPath)
+           let  postCell =  timeLineTable.dequeueReusableCellWithIdentifier("aPost", forIndexPath: indexPath) as! APostTableViewCell
+            
+            let data = timelineDS[indexPath.section-1]
+            postCell.post.text = data["post"]
+            acell = postCell
+            
         }
         
         
@@ -69,7 +107,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
      func numberOfSectionsInTableView(tableView: UITableView) -> Int{
         
-        return totalPosts
+        return timelineDS.count+1
     }
     
      func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -86,14 +124,15 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         
             if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height)
             {
-//                if !isNewDataLoading{
 
-                //Get New Data
-                
-//                    }
-                totalPosts += 1
+
                 timeLineTable.reloadData()
-                print("")
+
+                loadTimelineFromId({ (timeline,postId) in
+                    
+                    self.timelineDS.append(timeline as! [String : String])
+                    
+                })
                 
                 }
             }

@@ -10,6 +10,7 @@ import UIKit
 
 class APostTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var post: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

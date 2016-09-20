@@ -47,6 +47,9 @@
                     <constraint firstItem="F5q-Ml-KiJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="yrX-ea-YCr"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="post" destination="asJ-kQ-Jqv" id="YEO-VY-ALn"/>
+            </connections>
             <point key="canvasLocation" x="355" y="311"/>
         </tableViewCell>
     </objects>
