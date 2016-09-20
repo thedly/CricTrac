@@ -189,7 +189,7 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
             (mobile as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#6D9447")
         }
         
-        if !(country.text?.hasDataPresent)! || country.text?.length > 25 {
+        if !(country.text?.hasDataPresent)! || country.text?.length > 50 {
             (country as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
             (country as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
             country.becomeFirstResponder()
@@ -201,7 +201,7 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
             (country as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#6D9447")
         }
         
-        if !(state.text?.hasDataPresent)! || state.text?.length > 25 {
+        if !(state.text?.hasDataPresent)! || state.text?.length > 50 {
             (state as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
             (state as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
             state.becomeFirstResponder()

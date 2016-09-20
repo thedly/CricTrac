@@ -331,8 +331,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "256"
             endingLineNumber = "256"
-            landmarkName = "tableView(_:didDeselectRowAtIndexPath:)"
-            landmarkType = "5">
+            landmarkName = "tableView(tableView:didDeselectRowAtIndexPath:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -491,8 +491,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "193"
             endingLineNumber = "193"
-            landmarkName = "tableView(_:didSelectRowAtIndexPath:)"
-            landmarkType = "5">
+            landmarkName = "tableView(tableView:didSelectRowAtIndexPath:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -507,8 +507,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "194"
             endingLineNumber = "194"
-            landmarkName = "tableView(_:didSelectRowAtIndexPath:)"
-            landmarkType = "5">
+            landmarkName = "tableView(tableView:didSelectRowAtIndexPath:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -636,7 +636,7 @@
             startingLineNumber = "88"
             endingLineNumber = "88"
             landmarkName = "stopAnimation()"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -652,7 +652,7 @@
             startingLineNumber = "87"
             endingLineNumber = "87"
             landmarkName = "stopAnimation()"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -747,8 +747,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "338"
             endingLineNumber = "338"
-            landmarkName = "getAge(_:)"
-            landmarkType = "5">
+            landmarkName = "getAge(birthdate:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -795,8 +795,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "366"
             endingLineNumber = "366"
-            landmarkName = "viewDidAppear(_:)"
-            landmarkType = "5">
+            landmarkName = "viewDidAppear(animated:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -861,6 +861,70 @@
             endingLineNumber = "45"
             landmarkName = "CTCountryPicker"
             landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CricTrac/Other/Service.swift"
+            timestampString = "495999496.483257"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "269"
+            endingLineNumber = "269"
+            landmarkName = "registerWithEmailAndPassword(_:password:callBack:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CricTrac.registerWithEmailAndPassword (Swift.String, password : Swift.String, callBack : (user : Swift.Optional&lt;__ObjC.FIRUser&gt;, error : Swift.Optional&lt;__ObjC.NSError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "CricTrac"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tejashedly/Documents/crictrac_ios/CricTrac/CricTrac/Other/Service.swift"
+                  timestampString = "495998960.865276"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "268"
+                  endingLineNumber = "268"
+                  offsetFromSymbolStart = "51">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CricTrac.(registerWithEmailAndPassword (Swift.String, password : Swift.String, callBack : (user : Swift.Optional&lt;__ObjC.FIRUser&gt;, error : Swift.Optional&lt;__ObjC.NSError&gt;) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "CricTrac"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tejashedly/Documents/crictrac_ios/CricTrac/CricTrac/Other/Service.swift"
+                  timestampString = "495998960.865414"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "270"
+                  endingLineNumber = "270"
+                  offsetFromSymbolStart = "34">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CricTrac/Other/Service.swift"
+            timestampString = "495999496.483257"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "271"
+            endingLineNumber = "271"
+            landmarkName = "registerWithEmailAndPassword(_:password:callBack:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

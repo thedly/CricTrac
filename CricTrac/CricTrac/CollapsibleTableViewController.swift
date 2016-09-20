@@ -281,7 +281,7 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return newImage
+        return newImage!
     }
 
     

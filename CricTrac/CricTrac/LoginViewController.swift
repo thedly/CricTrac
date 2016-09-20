@@ -16,9 +16,14 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import KRProgressHUD
 import SCLAlertView
+import XLPagerTabStrip
 
-class LoginViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelegate {
+class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDelegate, GIDSignInUIDelegate {
     
+    
+    @IBOutlet weak var facebookBtn: UIButton!
+    
+    @IBOutlet weak var googleBtn: UIButton!
     
     @IBOutlet weak var username:UITextField!
     @IBOutlet weak var password:UITextField!
@@ -29,12 +34,14 @@ class LoginViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelega
         super.viewDidLoad()
     }
     
-    
+    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Sign In")
+    }
     
      // MARK:- GoogleSignIn
     
     @IBAction func loginWithGoogle(sender: UIButton) {
-        
+        googleBtn.enabled = false
         loginWithGoogle()
         
     }
@@ -80,6 +87,7 @@ class LoginViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelega
         if error != nil{
             
             SCLAlertView().showError("Login Error", subTitle: "Error Occoured")
+            self.googleBtn.enabled = true
             return
         }
         
@@ -99,6 +107,7 @@ class LoginViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelega
                 dispatch_after(delay, dispatch_get_main_queue()) {
                     
                     SCLAlertView().showError("Login Error", subTitle: error.localizedDescription)
+                    self.googleBtn.enabled = true
                 }
                 
         })
@@ -143,7 +152,7 @@ class LoginViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelega
     
     
     @IBAction func loginWithFB(sender: UIButton) {
-        
+        facebookBtn.enabled = false
         loginWithFacebook()
     }
     
@@ -155,10 +164,12 @@ class LoginViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelega
             if let error = error {
                 
                 SCLAlertView().showError("Login Error", subTitle:error.description)
+                self.facebookBtn.enabled = true
             }
             else if(result.isCancelled) {
                 
                 SCLAlertView().showError("Login Error", subTitle: "Login Cancelled")
+                self.facebookBtn.enabled = true
             }
             else {
                 let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
@@ -178,6 +189,7 @@ class LoginViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelega
                         dispatch_after(delay, dispatch_get_main_queue()) {
                            
                             SCLAlertView().showError("Login Error", subTitle: error.localizedDescription)
+                            self.facebookBtn.enabled = true
                         }
                         
                        
@@ -225,7 +237,8 @@ class LoginViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelega
         let navigationControl = UINavigationController(rootViewController: dashboardVC )
         sliderMenu.mainViewController = navigationControl
         sliderMenu.drawerViewController = drawerViewController
-        
+        facebookBtn.enabled = true
+        googleBtn.enabled = true
         window?.rootViewController = sliderMenu
         
         self.presentViewController(sliderMenu, animated: true) {}

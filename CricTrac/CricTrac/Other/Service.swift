@@ -159,14 +159,14 @@ func loadInitialProfileValues(){
 
 
 func addUserProfileData(data:[String:String], sucessBlock:(AnyObject)->Void){
-    let ref = fireBaseRef.child(currentUser!.uid).child("UserProfile")
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
     ref.setValue(data)
     sucessBlock(data)
 }
 
 func getAllProfileData(sucessBlock:([String:AnyObject])->Void){
     
-    fireBaseRef.child(currentUser!.uid).child("UserProfile").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+    fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
         
         if let data: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
             
@@ -235,7 +235,7 @@ func deleteMatchData(matchId:String, callback:(error:NSError?)->Void ){
 
 //MARK:- Login
 
-func loginWithMailAndPassword( userName:String,password:String,callBack:(user:FIRUser?,error:NSError?)->Void){
+func loginWithMailAndPassword(userName:String,password:String,callBack:(user:FIRUser?,error:NSError?)->Void){
     
     var uname = userName
     
@@ -254,20 +254,7 @@ func loginWithMailAndPassword( userName:String,password:String,callBack:(user:FI
     
     FIRAuth.auth()?.signInWithEmail(uname, password: pward) { (user, error) in
 
-        
-        if error?.code == 17011{
-            
-            FIRAuth.auth()?.createUserWithEmail(userName, password: password) { (user, error) in
-                
-                 callBack(user: user,error: error)
-                if error == nil{
-                    SCLAlertView().showInfo("User Created", subTitle: "")
-                }
-                
-            }
-            
-        }
-        else {callBack(user: user,error: error) }
+        callBack(user: user,error: error)
     
     }
     
@@ -338,6 +325,22 @@ func loadTimelineFromId(callback: (timeline:[String:AnyObject],postId:String)->V
 
 
 
+
+func registerWithEmailAndPassword(userName:String,password:String,callBack:(user:FIRUser?,error:NSError?)->Void) {
+    //if error?.code == 17011{
+    
+    
+        FIRAuth.auth()?.createUserWithEmail(userName, password: password) { (user, error) in
+            
+            callBack(user: user,error: error)
+            if error == nil{
+                SCLAlertView().showInfo("User Created", subTitle: "")
+            }
+            
+        }
+        
+    //}
+}
 
 //fireBaseRef.child("Dismissals").setValue(["BOWLED","CAUGHT","HANDLED THE BALL","HIT WICKET","HIT THE BALL TWICE","LEG BEFORE WICKET (LBW)","OBSTRUCTING THE FIELD","RUN OUT","RETIRED","TIMED OUT"])
 

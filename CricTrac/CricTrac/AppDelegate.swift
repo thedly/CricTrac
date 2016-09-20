@@ -136,7 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         }
 
-            let loginVC = viewControllerFrom("Main", vcid: "LoginViewController")
+            let loginVC = viewControllerFrom("Main", vcid: "LoginBaseViewController")
             window?.rootViewController = loginVC
         
     }

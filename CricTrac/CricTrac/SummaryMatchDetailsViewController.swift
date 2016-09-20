@@ -108,7 +108,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
         let itemsToShare = screenShot
         
         
-        let actCtrl = UIActivityViewController(activityItems: [itemsToShare], applicationActivities: nil)
+        let actCtrl = UIActivityViewController(activityItems: [itemsToShare!], applicationActivities: nil)
         
         
         actCtrl.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeMessage, UIActivityTypeMail]
