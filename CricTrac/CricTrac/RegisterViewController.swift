@@ -230,7 +230,8 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,GIDSignInDe
     }
     
     func navigateToNextScreen(){
-        
+        self.googleBtn.enabled = true
+        self.facebookBtn.enabled = true
         let window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
         let dashboardVC = viewControllerFrom("Main", vcid: "CollapsibleTableViewController") as! CollapsibleTableViewController
         
@@ -239,8 +240,7 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,GIDSignInDe
         let navigationControl = UINavigationController(rootViewController: dashboardVC )
         sliderMenu.mainViewController = navigationControl
         sliderMenu.drawerViewController = drawerViewController
-        self.googleBtn.enabled = true
-        self.facebookBtn.enabled = true
+        
         window?.rootViewController = sliderMenu
         
         self.presentViewController(sliderMenu, animated: true) {}
