@@ -261,6 +261,70 @@ func loginWithMailAndPassword(userName:String,password:String,callBack:(user:FIR
     
    
 }
+func loadTimeline(callback: (timeline:[String:AnyObject])->Void){
+   
+        fireBaseRef.child(currentUser!.uid).child("TimelineDetailed").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+      
+            if let data: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
+                
+                callback(timeline: data)
+            }
+            else{
+                callback(timeline: [:])
+            }
+        
+        
+    })
+}
+
+
+func loadAllPostIds(callback: ()->Void){
+    fetchedIndex = 0
+    fireBaseRef.child(currentUser!.uid).child("TimelineIDs").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        
+        if let data = snapshot.value as? [String : String] {
+            
+            for (_,value) in data{
+                
+                loadedTimelineIds.append(value)
+            }
+            
+            callback()
+        }
+        
+    })
+    
+}
+
+
+var loadedTimelineIds = [String]()
+var fetchedIndex = 0
+
+func loadTimelineFromId(callback: (timeline:[String:AnyObject],postId:String)->Void){
+    
+    
+    if loadedTimelineIds.count > fetchedIndex {
+        
+        let postId = loadedTimelineIds[fetchedIndex]
+        
+       fireBaseRef.child("TimelinePosts").child(postId).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let data: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
+            
+            callback(timeline: data,postId:postId)
+        }
+        })
+    }
+    
+   fetchedIndex += 1
+    
+}
+
+
+
+
 
 func registerWithEmailAndPassword(userName:String,password:String,callBack:(user:FIRUser?,error:NSError?)->Void) {
     //if error?.code == 17011{
@@ -279,4 +343,100 @@ func registerWithEmailAndPassword(userName:String,password:String,callBack:(user
 }
 
 //fireBaseRef.child("Dismissals").setValue(["BOWLED","CAUGHT","HANDLED THE BALL","HIT WICKET","HIT THE BALL TWICE","LEG BEFORE WICKET (LBW)","OBSTRUCTING THE FIELD","RUN OUT","RETIRED","TIMED OUT"])
+
+public func addTimelineData(){
+     /*
+    
+    var ref = fireBaseRef.child(currentUser!.uid).child("TimelineDetailed").childByAutoId()
+    
+    var data:[String:String] = ["post":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.","User":(currentUser?.uid)!,"postid":"-KS2CNMS03F--DUbm8Bz"]
+    
+    ref.setValue(data)
+    
+    data = ["post":"Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like.","User":(currentUser?.uid)!,"postid":"-KS2EAh7hG6dZo-LRYDA"]
+     ref = fireBaseRef.child(currentUser!.uid).child("TimelineDetailed").childByAutoId()
+    ref.setValue(data)
+    
+    
+    data = ["post":"t was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.","User":(currentUser?.uid)!,"postid":"-KS2EAh7hG6dZo-LRYDB"]
+   ref = fireBaseRef.child(currentUser!.uid).child("TimelineDetailed").childByAutoId()
+    ref.setValue(data)
+    
+    data = ["post":"Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words,","User":(currentUser?.uid)!,"postid":"-KS2EAh7hG6dZo-LRYDC"]
+    
+    ref = fireBaseRef.child(currentUser!.uid).child("TimelineDetailed").childByAutoId()
+    ref.setValue(data)
+    
+     data = ["post":"consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero,","User":(currentUser?.uid)!,"postid":"-KS2EAh8Vv10TDPSr1LS"]
+    
+    ref = fireBaseRef.child(currentUser!.uid).child("TimelineDetailed").childByAutoId()
+    ref.setValue(data)
+    
+    
+    ref = fireBaseRef.child(currentUser!.uid).child("TimelineIDs").childByAutoId()
+    
+    ref.setValue("-KS2EAh8Vv10TDPSr1LT")
+    
+    ref = fireBaseRef.child(currentUser!.uid).child("TimelineIDs").childByAutoId()
+    
+    ref.setValue("-KS2EAh8Vv10TDPSr1LU")
+    
+    
+    ref = fireBaseRef.child(currentUser!.uid).child("TimelineIDs").childByAutoId()
+    
+    ref.setValue("-KS2EAh8Vv10TDPSr1LV")
+    
+    
+    ref = fireBaseRef.child(currentUser!.uid).child("TimelineIDs").childByAutoId()
+    
+    ref.setValue("-KS2EAh8Vv10TDPSr1LW")
+    
+    
+    ref = fireBaseRef.child(currentUser!.uid).child("TimelineIDs").childByAutoId()
+    
+    ref.setValue("-KS2EAh9AzfDpZT2nLMc")
+    
+   
+    var data:[String:String] = ["post":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.","User":(currentUser?.uid)!]
+    var ref = fireBaseRef.child("TimelinePosts").childByAutoId()
+    ref.setValue(data)
+    
+    data = ["post":"Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like.","User":(currentUser?.uid)!]
+     ref = fireBaseRef.child("TimelinePosts").childByAutoId()
+    ref.setValue(data)
+    
+    data = ["post":"t was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.","User":(currentUser?.uid)!]
+    ref = fireBaseRef.child("TimelinePosts").childByAutoId()
+    ref.setValue(data)
+    
+    data = ["post":"Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words,","User":(currentUser?.uid)!]
+    ref = fireBaseRef.child("TimelinePosts").childByAutoId()
+    ref.setValue(data)
+    
+    data = ["post":"consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero,","User":(currentUser?.uid)!]
+    ref = fireBaseRef.child("TimelinePosts").childByAutoId()
+    ref.setValue(data)
+    
+    
+    data = ["post":"written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line in section 1.10.32.","User":(currentUser?.uid)!]
+    ref = fireBaseRef.child("TimelinePosts").childByAutoId()
+    ref.setValue(data)
+    
+    
+    data = ["post":"The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from de Finibus Bonorum et Malorum by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.","User":(currentUser?.uid)!]
+    ref = fireBaseRef.child("TimelinePosts").childByAutoId()
+    ref.setValue(data)
+    
+    
+    data = ["post":"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.","User":(currentUser?.uid)!]
+    ref = fireBaseRef.child("TimelinePosts").childByAutoId()
+    ref.setValue(data)
+    
+    
+    data = ["post":"All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.","User":(currentUser?.uid)!]
+    ref = fireBaseRef.child("TimelinePosts").childByAutoId()
+    ref.setValue(data)
+    
+    */
+}
 

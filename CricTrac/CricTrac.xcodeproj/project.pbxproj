@@ -36,6 +36,10 @@
 		46C983C21D4078EB00DFC607 /* utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983C11D4078EB00DFC607 /* utility.swift */; };
 		46C983C41D40968300DFC607 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C983C31D40968300DFC607 /* Extentions.swift */; };
 		46CE472E1D7A787D00EA63E2 /* CTAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CE472D1D7A787D00EA63E2 /* CTAlertViewController.swift */; };
+		46DE32C51D900C9F0024CD82 /* AddPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DE32C31D900C9F0024CD82 /* AddPostTableViewCell.swift */; };
+		46DE32C61D900C9F0024CD82 /* AddPostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46DE32C41D900C9F0024CD82 /* AddPostTableViewCell.xib */; };
+		46DE32CB1D90152F0024CD82 /* APostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DE32C91D90152F0024CD82 /* APostTableViewCell.swift */; };
+		46DE32CC1D90152F0024CD82 /* APostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46DE32CA1D90152F0024CD82 /* APostTableViewCell.xib */; };
 		46F259FD1D559593001EBEF9 /* BattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F259FC1D559593001EBEF9 /* BattingViewController.swift */; };
 		46F259FF1D55AB30001EBEF9 /* BowlingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F259FE1D55AB30001EBEF9 /* BowlingViewController.swift */; };
 		46F25A011D55C1C0001EBEF9 /* ExtraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F25A001D55C1C0001EBEF9 /* ExtraViewController.swift */; };
@@ -126,6 +130,10 @@
 		46C983C11D4078EB00DFC607 /* utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = utility.swift; path = utility/utility.swift; sourceTree = "<group>"; };
 		46C983C31D40968300DFC607 /* Extentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		46CE472D1D7A787D00EA63E2 /* CTAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CTAlertViewController.swift; path = utility/CTAlertViewController.swift; sourceTree = "<group>"; };
+		46DE32C31D900C9F0024CD82 /* AddPostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddPostTableViewCell.swift; path = View/AddPostTableViewCell.swift; sourceTree = "<group>"; };
+		46DE32C41D900C9F0024CD82 /* AddPostTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddPostTableViewCell.xib; path = View/AddPostTableViewCell.xib; sourceTree = "<group>"; };
+		46DE32C91D90152F0024CD82 /* APostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APostTableViewCell.swift; path = View/APostTableViewCell.swift; sourceTree = "<group>"; };
+		46DE32CA1D90152F0024CD82 /* APostTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APostTableViewCell.xib; path = View/APostTableViewCell.xib; sourceTree = "<group>"; };
 		46F259FC1D559593001EBEF9 /* BattingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BattingViewController.swift; path = Controller/BattingViewController.swift; sourceTree = "<group>"; };
 		46F259FE1D55AB30001EBEF9 /* BowlingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BowlingViewController.swift; path = Controller/BowlingViewController.swift; sourceTree = "<group>"; };
 		46F25A001D55C1C0001EBEF9 /* ExtraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtraViewController.swift; path = Controller/ExtraViewController.swift; sourceTree = "<group>"; };
@@ -322,6 +330,10 @@
 				890B42C61D60472C00736F03 /* CollapsibleTableViewCell.swift */,
 				4668E4C61D680FC200E36CB0 /* SummaryCell.xib */,
 				4668E4C81D68105700E36CB0 /* SummaryCell.swift */,
+				46DE32C31D900C9F0024CD82 /* AddPostTableViewCell.swift */,
+				46DE32C41D900C9F0024CD82 /* AddPostTableViewCell.xib */,
+				46DE32C91D90152F0024CD82 /* APostTableViewCell.swift */,
+				46DE32CA1D90152F0024CD82 /* APostTableViewCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -470,6 +482,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				46C9839A1D3922D200DFC607 /* LaunchScreen.storyboard in Resources */,
+				46DE32CC1D90152F0024CD82 /* APostTableViewCell.xib in Resources */,
+				46DE32C61D900C9F0024CD82 /* AddPostTableViewCell.xib in Resources */,
 				460068991D638496007C9457 /* SuggestionCell.xib in Resources */,
 				8930F03A1D5B824E00C7540B /* data.csv in Resources */,
 				464EA0261D4F901200252DC1 /* GoogleService-Info.plist in Resources */,
@@ -605,9 +619,11 @@
 				4668E4C91D68105700E36CB0 /* SummaryCell.swift in Sources */,
 				46C983B61D39D86800DFC607 /* performanceCell.swift in Sources */,
 				892EA6891D58ED2300BEE5A3 /* DashboardBaseViewController.swift in Sources */,
+				46DE32CB1D90152F0024CD82 /* APostTableViewCell.swift in Sources */,
 				890B42C71D60472C00736F03 /* CollapsibleTableViewCell.swift in Sources */,
 				8957420F1D43978E0097DF58 /* SummaryViewController.swift in Sources */,
 				8930F0421D5BA20F00C7540B /* UserOpponentDetailsViewController.swift in Sources */,
+				46DE32C51D900C9F0024CD82 /* AddPostTableViewCell.swift in Sources */,
 				46C983BF1D3FC72400DFC607 /* DashboardViewController.swift in Sources */,
 				892EA68B1D58F4B400BEE5A3 /* DashboardBattingDetailsViewController.swift in Sources */,
 				89E6084D1D6D4ADC00F6BD11 /* CTDataPicker.swift in Sources */,

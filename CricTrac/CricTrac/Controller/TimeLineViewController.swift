@@ -12,19 +12,29 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
 
     @IBOutlet weak var timeLineTable: UITableView!
     
+    var timelineDS = [[String:String]]()
+    
     let  refreshControl = UIRefreshControl()
+    var totalPosts = 5
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       
+        
+       loadTimeLineData()
         refreshControl.attributedTitle = NSAttributedString(string: "Loading New Posts")
         refreshControl.addTarget(self, action: #selector(TimeLineViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         timeLineTable.addSubview(refreshControl)
         
+        
+          timeLineTable.registerNib(UINib.init(nibName:"AddPostTableViewCell", bundle: nil), forCellReuseIdentifier: "addpost")
+        
+        timeLineTable.registerNib(UINib.init(nibName:"APostTableViewCell", bundle: nil), forCellReuseIdentifier: "aPost")
+        
         // Do any additional setup after loading the view.
     }
 
+    
     
     func refresh(sender:AnyObject) {
         
@@ -32,6 +42,35 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         refreshControl.endRefreshing()
     }
     
+    
+    func loadTimeLineData(){
+        
+        loadTimeline { (timeline) in
+            
+            
+            if let timelinedata = timeline as? [String:[String:String]]{
+                
+                for (_,val) in timelinedata{
+                    
+                    self.timelineDS.append(val)
+                    
+                }
+                
+                self.timeLineTable.reloadData()
+                
+                loadAllPostIds({
+                    
+                    loadTimelineFromId({ (timeline,postId) in
+                        
+                        self.timelineDS.append(timeline as! [String : String])
+                        
+                    })
+                    
+                })
+            }
+            
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -45,14 +84,30 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let acell = UITableViewCell()
+        
+        var acell = UITableViewCell()
+        
+        if indexPath.section == 0{
+            
+             acell =  timeLineTable.dequeueReusableCellWithIdentifier("addpost", forIndexPath: indexPath)
+        }
+        else{
+           let  postCell =  timeLineTable.dequeueReusableCellWithIdentifier("aPost", forIndexPath: indexPath) as! APostTableViewCell
+            
+            let data = timelineDS[indexPath.section-1]
+            postCell.post.text = data["post"]
+            acell = postCell
+            
+        }
+        
+        
         acell.backgroundColor = .whiteColor()
         return acell
     }
     
      func numberOfSectionsInTableView(tableView: UITableView) -> Int{
         
-        return 10
+        return timelineDS.count+1
     }
     
      func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -60,7 +115,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        
+        if indexPath.section == 0{return 150}
         return 200
     }
     
@@ -69,13 +124,15 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         
             if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height)
             {
-//                if !isNewDataLoading{
 
-                //Get New Data
-                
-//                    }
-                
-                print("")
+
+                timeLineTable.reloadData()
+
+                loadTimelineFromId({ (timeline,postId) in
+                    
+                    self.timelineDS.append(timeline as! [String : String])
+                    
+                })
                 
                 }
             }
