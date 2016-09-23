@@ -49,6 +49,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
     var matchDetailsData : [String:String]!
     
     
+    @IBOutlet weak var summarizedView: UIView!
     
     @IBAction func deleteActionPressed(sender: UIButton) {
         
@@ -117,9 +118,52 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeView()
+        setUIBackground()
+        
+        
+        
+        //initializeView()
         
         // Do any additional setup after loading the view.
+    }
+    
+    func setUIBackground() {
+        
+        if topColor == "" {
+            topColor = "#84CC00"
+        }
+        
+        if bottomColor == "" {
+            bottomColor = "#4D9D00"
+        }
+        
+        
+        self.summarizedView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
+        
+        
+        let background = CAGradientLayer().setGradientBackground(UIColor(hex: "\(topColor)").CGColor, bottomColor: UIColor(hex: "\(bottomColor)").CGColor)
+        background.frame = self.view.bounds
+        self.view.layer.insertSublayer(background, atIndex: 0)
+        
+    }
+    
+    func updateTheme() {
+        
+        self.summarizedView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
+        
+        let newbackground = CAGradientLayer().setGradientBackground(UIColor(hex: "\(topColor)").CGColor, bottomColor: UIColor(hex: "\(bottomColor)").CGColor)
+        newbackground.frame = self.view.bounds
+
+        self.view.layer.replaceSublayer(self.view.layer.sublayers![0], with: newbackground)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        if appThemeChanged {
+            updateTheme()
+            appThemeChanged = false;
+        }
     }
 
     override func didReceiveMemoryWarning() {

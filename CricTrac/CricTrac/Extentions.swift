@@ -47,8 +47,28 @@ extension UIColor {
             blue: (CGFloat(b)/255),
             alpha:alpha)
     }
+    
+    func darkerColorForColor(color:UIColor) -> UIColor {
+        var r: CGFloat = 0, g:CGFloat = 0, b:CGFloat = 0, a:CGFloat = 0
+        if color.getRed(&r, green: &g, blue: &b, alpha: &a){
+            return UIColor(red: max(r - 0.2, 0.0), green: max(g - 0.2, 0.0), blue: max(b - 0.2, 0.0), alpha: a)
+        }
+        return UIColor()
+    }
 }
 
+extension CAGradientLayer {
+    func setGradientBackground(topColor:CGColor, bottomColor:CGColor) -> CAGradientLayer{
+        let colorTop = topColor
+        let colorBottom = bottomColor
+        
+        let gradientColor = CAGradientLayer()
+        gradientColor.colors = [colorTop, colorBottom]
+        gradientColor.locations = [0.0, 1.0]
+        return gradientColor
+    }
+
+}
 
 extension String {
     static func className(aClass: AnyClass) -> String {

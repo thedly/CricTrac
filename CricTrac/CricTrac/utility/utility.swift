@@ -28,6 +28,10 @@ var genders = [String]()
 var matchDataSource = [[String:String]]()
 var profileDataChanged: Bool = false
 
+var topColor = String()
+var bottomColor = String()
+var appThemeChanged: Bool = false
+
 public func viewControllerFrom(storyBoard:String,vcid:String)->UIViewController{
     
     let storyboard = UIStoryboard(name:storyBoard, bundle: nil)
