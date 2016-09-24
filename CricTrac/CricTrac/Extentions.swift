@@ -191,15 +191,15 @@ extension UITextField{
 }
 
 extension NSMutableAttributedString {
-    func bold(text:String) -> NSMutableAttributedString {
-        let attrs:[String:AnyObject] = [NSFontAttributeName : UIFont(name: "SFUIText-Bold", size: 17)!]
+    func bold(text:String, fontName:String, fontSize:CGFloat) -> NSMutableAttributedString {
+        let attrs:[String:AnyObject] = [NSFontAttributeName : UIFont(name: fontName, size: fontSize)!]
         let boldString = NSMutableAttributedString(string:"\(text)", attributes:attrs)
         self.appendAttributedString(boldString)
         return self
     }
     
-    func normal(text:String)->NSMutableAttributedString {
-        let attrs:[String:AnyObject] = [NSFontAttributeName : UIFont(name: "SFUIText-Regular", size: 15)!]
+    func normal(text:String, fontName:String, fontSize:CGFloat)->NSMutableAttributedString {
+        let attrs:[String:AnyObject] = [NSFontAttributeName : UIFont(name: fontName, size: fontSize)!]
         let normal =  NSAttributedString(string: text, attributes:attrs)
         self.appendAttributedString(normal)
         return self

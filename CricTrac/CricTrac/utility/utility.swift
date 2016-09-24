@@ -28,8 +28,8 @@ var genders = [String]()
 var matchDataSource = [[String:String]]()
 var profileDataChanged: Bool = false
 
-var topColor = String()
-var bottomColor = String()
+var topColor = topColorDefault
+var bottomColor = bottomColorDefault
 var appThemeChanged: Bool = false
 
 public func viewControllerFrom(storyBoard:String,vcid:String)->UIViewController{
@@ -39,6 +39,23 @@ public func viewControllerFrom(storyBoard:String,vcid:String)->UIViewController{
     return storyboard.instantiateViewControllerWithIdentifier(vcid)
 }
 
+
+public func setUIBackgroundTheme(baseView: UIView) {
+    
+    
+    let background = CAGradientLayer().setGradientBackground(UIColor(hex: "\(topColor)").CGColor, bottomColor: UIColor(hex: "\(bottomColor)").CGColor)
+    background.frame = baseView.bounds
+    baseView.layer.insertSublayer(background, atIndex: 0)
+    
+}
+
+func updateBackgroundTheme(baseView: UIView) {
+    
+    let newbackground = CAGradientLayer().setGradientBackground(UIColor(hex: "\(topColor)").CGColor, bottomColor: UIColor(hex: "\(bottomColor)").CGColor)
+    newbackground.frame = baseView.bounds
+    
+    baseView.layer.replaceSublayer(baseView.layer.sublayers![0], with: newbackground)
+}
 
 public func viewController(vcid:String)->UIViewController{
     

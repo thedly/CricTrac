@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         FIRDatabase.database().persistenceEnabled = true
         Fabric.with([Crashlytics.self])
-        //setSliderMenu()
+        setSliderMenu()
         return true
     }
     

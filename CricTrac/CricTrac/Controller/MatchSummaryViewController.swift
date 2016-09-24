@@ -21,11 +21,13 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setUIBackgroundTheme(self.view)
         getMatchData()
-    matchSummaryTable.registerNib(UINib.init(nibName:"SummaryCell", bundle: nil), forCellReuseIdentifier: "SummaryCell")
+    matchSummaryTable.registerNib(UINib.init(nibName:"SummaryDetailsCell", bundle: nil), forCellReuseIdentifier: "SummaryDetailsCell")
         matchSummaryTable.allowsSelection = true
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MatchSummaryViewController.newDataAdded), name: "MatchDataChanged" , object: nil)
+        matchSummaryTable.separatorStyle = .None
+        
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MatchSummaryViewController.newDataAdded), name: "MatchDataChanged" , object: nil)
         // Do any additional setup after loading the view.
     }
 
@@ -34,6 +36,14 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        if appThemeChanged {
+            updateBackgroundTheme(self.view)
+            appThemeChanged = false;
+        }
+    }
     
     func newDataAdded(){
         getMatchData()
@@ -71,69 +81,70 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         }
     }
 
-    func getCellForRow(indexPath:NSIndexPath)->SummaryCell{
+    
+    
+    
+    func getCellForRow(indexPath:NSIndexPath)->SummaryDetailsCell{
         
         
-        let aCell =  matchSummaryTable.dequeueReusableCellWithIdentifier("SummaryCell", forIndexPath: indexPath) as! SummaryCell
+        let aCell =  matchSummaryTable.dequeueReusableCellWithIdentifier("SummaryDetailsCell", forIndexPath: indexPath) as! SummaryDetailsCell
+        
+        aCell.backgroundColor = UIColor.clearColor()
         
         let data = matchDataSource[indexPath.row]
         
         var totalruns:Double?
-        
+
         if let runs = data["Runs"]{
-            
-            aCell.sumOne.text = runs
+            aCell.battingViewHidden = (runs == "0" || runs == "-") ? true : false
+            //aCell.battingView.hidden = aCell.bowlingViewHidden
+            aCell.totalRuns.text = runs
             totalruns = Double(runs)
         }
-        if let wickets = data["Wickets"]{
-            
-            //aCell.totalWickets.text = "Wickets: "+wickets
+        if let wickets = data["Wickets"], let balls = data["OversBalled"]  {
+            aCell.bowlingViewHidden = (balls == "0" || balls == "-") ? true : false
+            aCell.BallsBowledWithWicketsTaken.text = "\(wickets)-\(balls)"
+            aCell.oversAndEconomy.text = "\(balls)"
         }
         
         
         
         if let date = data["Date"]{
             let dateArray = date.characters.split{$0 == "/"}.map(String.init)
-            aCell.matchDate.text = dateArray[0]+" "+dateArray[1].monthName+" "+dateArray[2]
+            aCell.matchDateAndVenue.text = "\(dateArray[0]) \(dateArray[1].monthName) \(dateArray[2])".capitalizedString
         }
         
-        //        if let overs = data["OversBalled"]{
-        //        aCell.overs.text = "Overs: "+overs
-        //        }
         if let balls = data["Balls"]{
-            aCell.sumTwo.text = balls
+            
             if totalruns != nil{
                 let totalBalls = Double(balls)!
                 if totalBalls > 0{
-                    
-                    aCell.sumThree.text =  String(format: "%.0f",(totalruns!/totalBalls*100))
+                    aCell.BallsAndStrikeRate.text =  String(format: "%.0f",(totalruns!/totalBalls*100))
                 }
             }
-            else{
-                aCell.sumThree.text = "-"
-            }
+            
+
+            
         }
         
         
         if let opponent  = data["Opponent"]{
-            aCell.oponentName.text = "vs "+opponent
+            aCell.oponentName.text = opponent.uppercaseString
         }
+        
+        
         if let venue = data["Ground"]{
-            aCell.matchVenue.text = venue
+            aCell.matchDateAndVenue.text = ("\(aCell.matchDateAndVenue.text), @ \(venue)").uppercaseString
         }
         else{
-            aCell.matchVenue.text = ""
+            aCell.matchDateAndVenue.text = "\(aCell.matchDateAndVenue.text), @ NA".uppercaseString
         }
         
         aCell.selectionStyle = .None
-        aCell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+    
         return aCell
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        
-        return 60
-    }
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
@@ -143,14 +154,29 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     
    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        return getCellForRow(indexPath)
+        
+        let currentCell = getCellForRow(indexPath)
+        
+        
+        if currentCell.bowlingViewHidden || currentCell.battingViewHidden {
+            tableView.rowHeight = 120
+        }
+        else
+        {
+            tableView.rowHeight = 200
+            
+        }
+        
+        return currentCell
+        
+        
     }
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
         
-        summaryDetailsVC.matchDetailsData = matchDataSource[indexPath.row]
+       // summaryDetailsVC.matchDetailsData = matchDataSource[indexPath.row]
             presentViewController(summaryDetailsVC, animated: true, completion: nil)
         CFRunLoopWakeUp(CFRunLoopGetCurrent())
     }

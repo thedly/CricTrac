@@ -61,29 +61,8 @@ struct CustomTextInputStyle: AnimatedTextInputStyle {
     let yHintPositionOffset: CGFloat = 7
 }
 
-let heights = [
-    [
-        "4 feet",
-        "5 feet",
-        "6 feet",
-        "7 feet"
-    ],
-    [
-        "0 inches",
-        "1 inches",
-        "2 inches",
-        "3 inches",
-        "4 inches",
-        "5 inches",
-        "6 inches",
-        "7 inches",
-        "8 inches",
-        "9 inches",
-        "10 inches",
-        "11 inches",
-    ]
-]
-
+let topColorDefault = "#84CC00"
+let bottomColorDefault = "#4D9D00"
 
 let states = ["Alabama",
               "Alaska",

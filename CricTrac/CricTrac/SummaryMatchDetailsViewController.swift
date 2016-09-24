@@ -97,6 +97,9 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
         presentViewController(editMatch, animated: true) {}
     }
     
+    @IBAction func didTapCancel(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     
     @IBAction func ShareActionPressed(sender: UIButton) {
         
@@ -118,50 +121,22 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUIBackground()
+        setUIBackgroundTheme(self.view)
         
-        
+        self.summarizedView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
         
         //initializeView()
         
         // Do any additional setup after loading the view.
     }
     
-    func setUIBackground() {
-        
-        if topColor == "" {
-            topColor = "#84CC00"
-        }
-        
-        if bottomColor == "" {
-            bottomColor = "#4D9D00"
-        }
-        
-        
-        self.summarizedView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
-        
-        
-        let background = CAGradientLayer().setGradientBackground(UIColor(hex: "\(topColor)").CGColor, bottomColor: UIColor(hex: "\(bottomColor)").CGColor)
-        background.frame = self.view.bounds
-        self.view.layer.insertSublayer(background, atIndex: 0)
-        
-    }
-    
-    func updateTheme() {
-        
-        self.summarizedView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
-        
-        let newbackground = CAGradientLayer().setGradientBackground(UIColor(hex: "\(topColor)").CGColor, bottomColor: UIColor(hex: "\(bottomColor)").CGColor)
-        newbackground.frame = self.view.bounds
-
-        self.view.layer.replaceSublayer(self.view.layer.sublayers![0], with: newbackground)
-    }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         
         if appThemeChanged {
-            updateTheme()
+            updateBackgroundTheme(self.view)
+             self.summarizedView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
             appThemeChanged = false;
         }
     }

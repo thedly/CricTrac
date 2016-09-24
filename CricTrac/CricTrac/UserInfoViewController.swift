@@ -16,7 +16,6 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
     lazy var ctDatePicker = CTDatePicker()
     lazy var ctCountryPicker = CTCountryPicker()
     lazy var ctStatePicker = CTStatePicker()
-    lazy var ctHeightPicker = HeightPicker()
     lazy var ctDataPicker = DataPicker()
     var profileDetailsExists:Bool = false
     @IBOutlet weak var scrollView:UIScrollView!
