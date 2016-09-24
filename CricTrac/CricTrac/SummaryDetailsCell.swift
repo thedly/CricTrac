@@ -27,16 +27,21 @@ class SummaryDetailsCell: UITableViewCell {
     
     @IBOutlet weak var bowlingView: UIView!
     
-    @IBOutlet weak var bowlingHeightConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var battingHeightConsraint: NSLayoutConstraint!
+    @IBOutlet weak var vsView: UIView!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         self.baseView.layer.cornerRadius = 10
         self.baseView.clipsToBounds = true
         self.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
-        self.baseView.alpha = 0.6
+        
+        
+        
+        
+        
         
         // Initialization code
     }

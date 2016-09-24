@@ -41,6 +41,8 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
     @IBOutlet weak var noBalls: UILabel!
     @IBOutlet weak var dismissal: UILabel!
     
+    @IBOutlet weak var awayTeam: UILabel!
+    @IBOutlet weak var homeTeam: UILabel!
     @IBOutlet weak var screenshot: UIView!
    
     @IBOutlet weak var runsGiven: UILabel!
@@ -125,7 +127,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
         
         self.summarizedView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
         
-        //initializeView()
+        initializeView()
         
         // Do any additional setup after loading the view.
     }
@@ -159,12 +161,12 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
             sixes.text = Sixes
         }
         if let Overs = matchDetailsData["Overs"] {
-            overs.text = "\(Overs) overs"
+            overs.text = Overs
         }
 
-        if let Ground = matchDetailsData["Ground"] {
-            ground.text = "@ \(Ground)"
-        }
+//        if let Ground = matchDetailsData["Ground"] {
+//            ground.text = "@ \(Ground)"
+//        }
         
         if let res = matchDetailsData["Result"] {
             if res != "-" {
@@ -205,29 +207,41 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
             
         }
         
-        if let homeTeam = matchDetailsData["Team"] {
-            if homeTeam != "-" {
-                matchBetween.text = homeTeam
+        if let hTeam = matchDetailsData["Team"] {
+            if hTeam != "-" {
+                homeTeam.text = hTeam
             }
             else
             {
-                matchBetween.text = "Unknown"
+                homeTeam.text = "Unknown"
             }
             
             if let opponent = matchDetailsData["Opponent"] {
                 if opponent != "-" {
-                    matchBetween.text?.appendContentsOf("\n VS \n \(opponent)")
+                    awayTeam.text = opponent
                 }
                 else
                 {
-                    matchBetween.text?.appendContentsOf("\n VS \n Unknown")
+                    awayTeam.text = "Unknown"
                 }
             }
             
         }
         
         if let wicketstaken = matchDetailsData["Wickets"] {
-            totalWickets.text = wicketstaken
+            
+            if let RunsGiven = matchDetailsData["RunsGiven"] {
+                
+                 totalWickets.text = "\(wicketstaken)-\(RunsGiven)"
+            }
+            else
+            
+            {
+                totalWickets.text = "\(wicketstaken)-NA"
+            }
+
+            
+           
         }
         
         if let Balls = matchDetailsData["Balls"] {
@@ -236,16 +250,13 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
         if let Position = matchDetailsData["Position"] {
             batPos.text = Position
         }
-        if let Dismissal = matchDetailsData["Dismissal"] {
-            dismissal.text = Dismissal.lowercaseString
-        }
-        if let OversBalled = matchDetailsData["OversBalled"] {
-            oversBowled.text = OversBalled
-        }
+//        if let Dismissal = matchDetailsData["Dismissal"] {
+//            dismissal.text = Dismissal.lowercaseString
+//        }
+//        if let OversBalled = matchDetailsData["OversBalled"] {
+//            oversBowled.text = OversBalled
+//        }
         
-        if let RunsGiven = matchDetailsData["RunsGiven"] {
-            runsGiven.text = RunsGiven
-        }
         if let Wides = matchDetailsData["Wides"] {
             wides.text = Wides
         }
@@ -253,10 +264,10 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
             noBalls.text = Noballs
         }
         
-        if let date = matchDetailsData["Date"]{
-            let dateArray = date.characters.split{$0 == "/"}.map(String.init)
-            self.date.text = "\(dateArray[0]) \(dateArray[1].monthName) \(dateArray[2])"
-        }
+//        if let date = matchDetailsData["Date"]{
+//            let dateArray = date.characters.split{$0 == "/"}.map(String.init)
+//            self.date.text = "\(dateArray[0]) \(dateArray[1].monthName) \(dateArray[2])"
+//        }
     
     }
     

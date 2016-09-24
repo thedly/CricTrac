@@ -97,15 +97,35 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
 
         if let runs = data["Runs"]{
             aCell.battingViewHidden = (runs == "0" || runs == "-") ? true : false
-            //aCell.battingView.hidden = aCell.bowlingViewHidden
+            aCell.battingView.hidden = aCell.battingViewHidden
+            aCell.BallsAndStrikeRate.hidden = aCell.battingViewHidden
+            
             aCell.totalRuns.text = runs
             totalruns = Double(runs)
         }
         if let wickets = data["Wickets"], let balls = data["OversBalled"]  {
             aCell.bowlingViewHidden = (balls == "0" || balls == "-") ? true : false
-            aCell.BallsBowledWithWicketsTaken.text = "\(wickets)-\(balls)"
-            aCell.oversAndEconomy.text = "\(balls)"
-        }
+            aCell.bowlingView.hidden = aCell.bowlingViewHidden
+            aCell.BallsBowledWithWicketsTaken.hidden = aCell.bowlingViewHidden
+            
+            if !aCell.bowlingViewHidden {
+                var formattedStringCollection = [NSMutableAttributedString]()
+                
+                let ballsformattedString = NSMutableAttributedString()
+                let economyformattedString = NSMutableAttributedString()
+                
+                ballsformattedString.bold("\(Int(balls)! * 6) ", fontName: appFont_black, fontSize: 20).normal("BALLS", fontName: appFont_regular, fontSize: 10)
+                
+                economyformattedString.bold("\(Int(balls)! * 6) ", fontName: appFont_black, fontSize: 20).normal("BALLS", fontName: appFont_regular, fontSize: 10)
+                
+                formattedStringCollection.append(ballsformattedString)
+                formattedStringCollection.append(economyformattedString)
+                
+                aCell.BallsBowledWithWicketsTaken.text = "\(wickets)-\(balls)"
+                aCell.oversAndEconomy.attributedText = formattedStringCollection.joinWithSeparator("    ")
+
+            }
+   }
         
         
         
@@ -118,8 +138,23 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             
             if totalruns != nil{
                 let totalBalls = Double(balls)!
+                
                 if totalBalls > 0{
-                    aCell.BallsAndStrikeRate.text =  String(format: "%.0f",(totalruns!/totalBalls*100))
+                    var formattedStringCollection = [NSMutableAttributedString]()
+                    
+                    let strikeRateformattedString = NSMutableAttributedString()
+                    let ballsformattedString = NSMutableAttributedString()
+                    
+                    ballsformattedString.bold("\(totalBalls) ", fontName: appFont_black, fontSize: 20).normal("BALLS", fontName: appFont_regular, fontSize: 10)
+                    
+                    strikeRateformattedString.bold("\(Double(round(100*(totalruns!/totalBalls*100))/100)) ", fontName: appFont_black, fontSize: 20).normal("SR", fontName: appFont_regular, fontSize: 10)
+                    
+                    formattedStringCollection.append(ballsformattedString)
+                    formattedStringCollection.append(strikeRateformattedString)
+
+                    
+                    
+                    aCell.BallsAndStrikeRate.attributedText = formattedStringCollection.joinWithSeparator("    ")
                 }
             }
             
@@ -157,9 +192,12 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         let currentCell = getCellForRow(indexPath)
         
+        currentCell.vsView.backgroundColor = UIColor().darkerColorForColor(currentCell.baseView.backgroundColor!)
+        
+        currentCell.baseView.alpha = 0.6
         
         if currentCell.bowlingViewHidden || currentCell.battingViewHidden {
-            tableView.rowHeight = 120
+            tableView.rowHeight = 130
         }
         else
         {
@@ -176,7 +214,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
         
-       // summaryDetailsVC.matchDetailsData = matchDataSource[indexPath.row]
+       summaryDetailsVC.matchDetailsData = matchDataSource[indexPath.row]
             presentViewController(summaryDetailsVC, animated: true, completion: nil)
         CFRunLoopWakeUp(CFRunLoopGetCurrent())
     }

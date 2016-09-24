@@ -63,6 +63,10 @@ struct CustomTextInputStyle: AnimatedTextInputStyle {
 
 let topColorDefault = "#84CC00"
 let bottomColorDefault = "#4D9D00"
+let appFont_black = "SourceSansPro-Black"
+let appFont_bold = "SourceSansPro-Bold"
+let appFont_regular = "SourceSansPro-Regular"
+let appFont_light = "SourceSansPro-Light"
 
 let states = ["Alabama",
               "Alaska",
