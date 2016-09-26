@@ -50,6 +50,8 @@
 		89129C4A1D904F89009488FE /* LoginBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89129C491D904F89009488FE /* LoginBaseViewController.swift */; };
 		89129C4C1D90501B009488FE /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89129C4B1D90501B009488FE /* RegisterViewController.swift */; };
 		8917AE241D94466900E6BC1A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8917AE231D94466900E6BC1A /* SettingsViewController.swift */; };
+		8922042D1D97A3A6005F555B /* FriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8922042C1D97A3A6005F555B /* FriendsCell.xib */; };
+		8922042F1D97A7EC005F555B /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8922042E1D97A7EC005F555B /* FriendsCell.swift */; };
 		892E1A971D3BC8D100EBF014 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 892E1A951D3BC8D100EBF014 /* Main.storyboard */; };
 		892EA67E1D58DEBE00BEE5A3 /* ProfileDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892EA67C1D58DEBE00BEE5A3 /* ProfileDetails.swift */; };
 		892EA6891D58ED2300BEE5A3 /* DashboardBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892EA6881D58ED2300BEE5A3 /* DashboardBaseViewController.swift */; };
@@ -160,6 +162,8 @@
 		89129C491D904F89009488FE /* LoginBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginBaseViewController.swift; sourceTree = "<group>"; };
 		89129C4B1D90501B009488FE /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8917AE231D94466900E6BC1A /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		8922042C1D97A3A6005F555B /* FriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsCell.xib; sourceTree = "<group>"; };
+		8922042E1D97A7EC005F555B /* FriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
 		892E1A961D3BC8D100EBF014 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		892EA67C1D58DEBE00BEE5A3 /* ProfileDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileDetails.swift; path = View/ProfileDetails.swift; sourceTree = "<group>"; };
 		892EA6881D58ED2300BEE5A3 /* DashboardBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardBaseViewController.swift; sourceTree = "<group>"; };
@@ -386,6 +390,8 @@
 				46DE32CA1D90152F0024CD82 /* APostTableViewCell.xib */,
 				894F8B801D95673800B3E936 /* SummaryDetailsCell.xib */,
 				89AB5D451D95839C00AA3481 /* SummaryDetailsCell.swift */,
+				8922042C1D97A3A6005F555B /* FriendsCell.xib */,
+				8922042E1D97A7EC005F555B /* FriendsCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -538,6 +544,7 @@
 				894CA2A21D96150A0043D3D1 /* SourceSansPro-BoldIt.otf in Resources */,
 				46C9839A1D3922D200DFC607 /* LaunchScreen.storyboard in Resources */,
 				46DE32CC1D90152F0024CD82 /* APostTableViewCell.xib in Resources */,
+				8922042D1D97A3A6005F555B /* FriendsCell.xib in Resources */,
 				46DE32C61D900C9F0024CD82 /* AddPostTableViewCell.xib in Resources */,
 				894CA2A71D96150A0043D3D1 /* SourceSansPro-LightIt.otf in Resources */,
 				460068991D638496007C9457 /* SuggestionCell.xib in Resources */,
@@ -673,6 +680,7 @@
 				8930F03E1D5BA0EB00C7540B /* UserTeamDetailsViewController.swift in Sources */,
 				46B0D66B1D8B881500C93247 /* TimeLineViewController.swift in Sources */,
 				466AD3FC1D7A8EC10033289C /* CTPicker.swift in Sources */,
+				8922042F1D97A7EC005F555B /* FriendsCell.swift in Sources */,
 				8930F0381D5B751500C7540B /* CTCountryPicker.swift in Sources */,
 				892EA67E1D58DEBE00BEE5A3 /* ProfileDetails.swift in Sources */,
 				460068911D6367CE007C9457 /* SuggestionView.swift in Sources */,

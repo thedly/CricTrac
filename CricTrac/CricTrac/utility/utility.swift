@@ -28,6 +28,8 @@ var genders = [String]()
 var matchDataSource = [[String:String]]()
 var profileDataChanged: Bool = false
 
+var CurrentTheme: String = defaultTheme
+
 var topColor = topColorDefault
 var bottomColor = bottomColorDefault
 var appThemeChanged: Bool = false

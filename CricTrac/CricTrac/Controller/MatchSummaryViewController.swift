@@ -130,8 +130,14 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         
         if let date = data["Date"]{
+            
             let dateArray = date.characters.split{$0 == "/"}.map(String.init)
-            aCell.matchDateAndVenue.text = "\(dateArray[0]) \(dateArray[1].monthName) \(dateArray[2])".capitalizedString
+            let dateString: String! = "\(dateArray[0]) \(dateArray[1].monthName) \(dateArray[2])"
+            aCell.matchDateAndVenue.text = dateString ?? "NA"
+            
+            
+            
+            
         }
         
         if let balls = data["Balls"]{
@@ -169,10 +175,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         
         if let venue = data["Ground"]{
-            aCell.matchDateAndVenue.text = ("\(aCell.matchDateAndVenue.text), @ \(venue)").uppercaseString
+            aCell.matchDateAndVenue.text = ("\(aCell.matchDateAndVenue.text!), @ \(venue)").uppercaseString
         }
         else{
-            aCell.matchDateAndVenue.text = "\(aCell.matchDateAndVenue.text), @ NA".uppercaseString
+            aCell.matchDateAndVenue.text = "\(aCell.matchDateAndVenue.text!), @ NA".uppercaseString
         }
         
         aCell.selectionStyle = .None
@@ -212,7 +218,21 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! SummaryDetailsCell
+        
+        
+        
         let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
+        
+        if cell.battingViewHidden {
+            summaryDetailsVC.battingViewHidden = true
+        }
+        
+        if cell.bowlingViewHidden {
+            summaryDetailsVC.bowlingViewHidden = true
+        }
+        
         
        summaryDetailsVC.matchDetailsData = matchDataSource[indexPath.row]
             presentViewController(summaryDetailsVC, animated: true, completion: nil)

@@ -14,7 +14,10 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
 
     @IBOutlet weak var matchDetailsTbl: UITableView!
     
-    @IBOutlet weak var screenShot: UIView!
+    
+    @IBOutlet weak var screenShotHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var ScreenShot: UIView!
     @IBAction func backBtnPressed(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -43,13 +46,20 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
     
     @IBOutlet weak var awayTeam: UILabel!
     @IBOutlet weak var homeTeam: UILabel!
-    @IBOutlet weak var screenshot: UIView!
-   
+    
     @IBOutlet weak var runsGiven: UILabel!
     @IBOutlet weak var oversBowled: UILabel!
     
     var matchDetailsData : [String:String]!
     
+    var battingViewHidden : Bool! = false
+    var bowlingViewHidden : Bool!  = false
+
+    
+    
+    @IBOutlet weak var battingView: UIView!
+    
+    @IBOutlet weak var bowlingView: UIView!
     
     @IBOutlet weak var summarizedView: UIView!
     
@@ -105,9 +115,9 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
     
     @IBAction func ShareActionPressed(sender: UIButton) {
         
-        
-        UIGraphicsBeginImageContext(self.screenshot.bounds.size);
-        self.screenshot.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        print(self.ScreenShot.bounds.size)
+        UIGraphicsBeginImageContext(self.ScreenShot.bounds.size);
+        self.ScreenShot.layer.renderInContext(UIGraphicsGetCurrentContext()!)
         let screenShot = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
     
@@ -162,6 +172,18 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
         }
         if let Overs = matchDetailsData["Overs"] {
             overs.text = Overs
+        }
+        
+        if (bowlingViewHidden == true) {
+            self.bowlingView.hidden = true
+            
+            self.screenShotHeightConstraint.constant -= 200
+            
+        }
+        
+        if (battingViewHidden == true) {
+            self.battingView.hidden = true
+            self.screenShotHeightConstraint.constant -= 200
         }
 
 //        if let Ground = matchDetailsData["Ground"] {

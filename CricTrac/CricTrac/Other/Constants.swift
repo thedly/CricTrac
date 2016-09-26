@@ -22,7 +22,7 @@ let menuData = [
     ["title":"Profile","vc":"UserInfoViewController"],
     ["title":"Statistics","vc":"NewMatchViewController"],
     ["title":"Notification","vc":"SummaryViewController"],
-    ["title":"Settings","vc":"NewMatchViewController"],
+    ["title":"Settings","vc":"SettingsViewController"],
     ["title":"Feedback","vc":"SummaryViewController"],
     ["title":"Help & Support","vc":"SummaryViewController"],
     ["title":"Version: \(versionAndBuildNumber)","vc":"SummaryViewController"],
@@ -63,6 +63,7 @@ struct CustomTextInputStyle: AnimatedTextInputStyle {
 
 let topColorDefault = "#84CC00"
 let bottomColorDefault = "#4D9D00"
+let defaultTheme = "MeanGreen"
 let appFont_black = "SourceSansPro-Black"
 let appFont_bold = "SourceSansPro-Bold"
 let appFont_regular = "SourceSansPro-Regular"
