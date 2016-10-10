@@ -4,12 +4,8 @@
         <deployment identifier="iOS"/>
         <development version="7000" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="SF-UI-Text-Regular.otf">
-            <string>SFUIText-Regular</string>
-        </mutableArray>
-    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
@@ -19,27 +15,57 @@
                         <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                    <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="6B" translatesAutoresizingMaskIntoConstraints="NO" id="vkA-pn-Q5f">
-                                <rect key="frame" x="144" y="144" width="313" height="313"/>
+                            <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cricket Filled-100" translatesAutoresizingMaskIntoConstraints="NO" id="ll4-8O-XCH">
+                                <rect key="frame" x="244" y="260" width="418" height="433"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="418" id="lNe-bC-t0x"/>
+                                    <constraint firstAttribute="height" constant="433" id="nsP-Wd-Syr"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CricTrac" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w3S-aS-9BE">
-                                <rect key="frame" x="257" y="477" width="87" height="27"/>
-                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="22"/>
-                                <color key="textColor" red="0.69411764710000001" green="0.14117647059999999" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CricTrac_Img" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5wI-ei-qo3">
+                                <rect key="frame" x="184" y="142" width="250" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="7Mm-8a-6LP"/>
+                                    <constraint firstAttribute="width" constant="100" id="aGM-P0-zm3"/>
+                                    <constraint firstAttribute="width" constant="250" id="fVk-eq-2mo"/>
+                                    <constraint firstAttribute="height" constant="100" id="qEb-s6-bnz"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="aGM-P0-zm3"/>
+                                        <exclude reference="qEb-s6-bnz"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cricket Filled-100" translatesAutoresizingMaskIntoConstraints="NO" id="3e4-QC-nAc">
+                                <rect key="frame" x="274" y="86" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="GXF-r9-89j"/>
+                                    <constraint firstAttribute="width" constant="70" id="peV-ft-n9B"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="vkA-pn-Q5f" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="VhD-LR-F5x"/>
-                            <constraint firstItem="w3S-aS-9BE" firstAttribute="top" secondItem="vkA-pn-Q5f" secondAttribute="bottom" constant="20" id="WRZ-dk-CHT"/>
-                            <constraint firstItem="vkA-pn-Q5f" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="iIa-D4-jGp"/>
-                            <constraint firstItem="w3S-aS-9BE" firstAttribute="centerX" secondItem="vkA-pn-Q5f" secondAttribute="centerX" id="ohW-jy-UrL"/>
+                            <constraint firstItem="3e4-QC-nAc" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="-51" id="2TY-5h-FdW"/>
+                            <constraint firstItem="5wI-ei-qo3" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" constant="9" id="3xD-jc-Hbh"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="3e4-QC-nAc" secondAttribute="bottom" constant="-54" id="aEX-aH-dLf"/>
+                            <constraint firstItem="3e4-QC-nAc" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" constant="9" id="bUb-fK-eSU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ll4-8O-XCH" secondAttribute="trailing" constant="-82" id="cqe-4P-wDB"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="ll4-8O-XCH" secondAttribute="bottom" constant="-93" id="eCs-lY-dAt"/>
+                            <constraint firstItem="5wI-ei-qo3" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-113" id="tGs-7E-4u8"/>
+                            <constraint firstItem="3e4-QC-nAc" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-179" id="xIo-HJ-AiG"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="2TY-5h-FdW"/>
+                                <exclude reference="aEX-aH-dLf"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -66,6 +92,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="6B" width="313" height="313"/>
+        <image name="CricTrac_Img" width="262" height="56"/>
+        <image name="Cricket Filled-100" width="100" height="100"/>
     </resources>
 </document>

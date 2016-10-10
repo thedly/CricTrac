@@ -55,6 +55,7 @@ class BowlingViewController: UIViewController,IndicatorInfoProvider {
         super.viewDidLoad()
         
         if ((parent?.selecetedData) != nil){ loadEditData() }
+        setUIBackgroundTheme(self.view)
     }
     
     

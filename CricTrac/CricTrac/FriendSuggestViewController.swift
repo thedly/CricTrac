@@ -27,9 +27,14 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     // MARK: - Methods
     
     func initializeView() {
+        SuggestsTblview.registerNib(UINib.init(nibName:"FriendSuggestionsCell", bundle: nil), forCellReuseIdentifier: "FriendSuggestionsCell")
+        
+        SuggestsTblview.allowsSelection = false
+        SuggestsTblview.separatorStyle = .None
         SuggestsTblview.dataSource = self
         SuggestsTblview.delegate = self
-        SuggestsTblview.allowsSelection = false
+        
+        setUIBackgroundTheme(self.view)
     }
     
     
@@ -44,26 +49,28 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         return 1
     }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 100
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCellWithIdentifier("FriendRequestsTableViewCell", forIndexPath: indexPath) as? FriendRequestsTableViewCell {
-            
-            let friendProfileName = "Sajith"
-            let friendProfileTeam = "DPS, Bangalore"
-            
-            cell.configureCell(friendProfileName, friendTeamName: friendProfileTeam, friendProfileImage: "")
-            return cell
-        }
-        else
-        {
-            return FriendRequestsTableViewCell()
-        }
+        
+        
+        return getCellForRow(indexPath)
+        
     }
     
-    
+    func getCellForRow(indexPath:NSIndexPath)->FriendSuggestionsCell{
+        
+        
+        let aCell =  SuggestsTblview.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as! FriendSuggestionsCell
+        aCell.backgroundColor = UIColor.clearColor()
+        return aCell
+    }
     
     /*
      // MARK: - Navigation

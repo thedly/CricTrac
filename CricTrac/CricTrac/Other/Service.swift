@@ -60,7 +60,7 @@ func addProfileImageData(profileDp:UIImage){
 
 func updateMetaData(profileImgUrl: NSURL) {
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
-    let profileImageObject = [ "ProfileImageUrl"    : profileImgUrl.absoluteString,]
+    let profileImageObject: [NSObject:AnyObject] = [ "ProfileImageUrl"    : profileImgUrl.absoluteString]
     ref.updateChildValues(profileImageObject)
     print("Image url updated successfully")
 }
@@ -353,6 +353,32 @@ func registerWithEmailAndPassword(userName:String,password:String,callBack:(user
         
     //}
 }
+
+
+func addThemeData(theme: String, sucessBlock:()->Void){
+    
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").child("theme")
+    ref.setValue(theme)
+    sucessBlock()
+    
+}
+
+func getUserThemeData(sucessBlock:(theme: String)->Void){
+    
+    fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").child("theme").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            if let data: String = snapshot.value as? String {
+                sucessBlock(theme: data)
+            }
+            else
+            {
+                sucessBlock(theme: "")
+            }
+    
+        })
+}
+
+
+
 
 //fireBaseRef.child("Dismissals").setValue(["BOWLED","CAUGHT","HANDLED THE BALL","HIT WICKET","HIT THE BALL TWICE","LEG BEFORE WICKET (LBW)","OBSTRUCTING THE FIELD","RUN OUT","RETIRED","TIMED OUT"])
 

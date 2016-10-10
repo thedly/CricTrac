@@ -104,6 +104,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
     @IBAction func didTapEditButton(sender: AnyObject) {
         
         let editMatch = viewController("AddMatchDetailsViewController") as! AddMatchDetailsViewController
+        
         editMatch.selecetedData = matchDetailsData
         
         presentViewController(editMatch, animated: true) {}
@@ -145,12 +146,6 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        
-        if appThemeChanged {
-            updateBackgroundTheme(self.view)
-             self.summarizedView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
-            appThemeChanged = false;
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -190,27 +185,18 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
 //            ground.text = "@ \(Ground)"
 //        }
         
-        if let res = matchDetailsData["Result"] {
-            if res != "-" {
-                result.text = res
-            }
-            else
-            {
-                result.text = "Results NA"
-            }
-            
-        }
         
-        if let toss = matchDetailsData["Toss"]{
-            
-            if toss != "-" {
-                self.toss.text = "Toss won by \(toss)"
-            }
-            else
-            {
-                self.toss.text = "Toss details NA"
-            }
-        }
+        
+//        if let toss = matchDetailsData["Toss"]{
+//            
+//            if toss != "-" {
+//                self.toss.text = "Toss won by \(toss)"
+//            }
+//            else
+//            {
+//                self.toss.text = "Toss details NA"
+//            }
+//        }
         
         if let tournament = matchDetailsData["Tournamnet"]{
             
@@ -228,6 +214,9 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
             }
             
         }
+        
+        var firstTeamScore = "-"
+        var secondTeamScore = "-"
         
         if let hTeam = matchDetailsData["Team"] {
             if hTeam != "-" {
@@ -248,6 +237,39 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
                 }
             }
             
+            
+            
+            
+            if let firstScore = matchDetailsData["FirstScore"] {
+                if let firstWickets = matchDetailsData["FirstWickets"] {
+                    homeTeam.text?.appendContentsOf("\n\(firstScore)/\(firstWickets)")
+                }
+                
+                firstTeamScore = firstScore
+            }
+            
+            if let secondScore = matchDetailsData["SecondScore"] {
+                if let secondWickets = matchDetailsData["SecondWickets"] {
+                    awayTeam.text?.appendContentsOf("\n\(secondScore)/\(secondWickets)")
+                }
+                
+                secondTeamScore = secondScore
+            }
+
+        }
+        
+        
+        if let firstScore = Int(firstTeamScore), let secondScore = Int(secondTeamScore) {
+            if firstScore > secondScore {
+                result.text = "\(matchDetailsData["Team"]!) Won the match by \(firstScore - secondScore) runs"
+            }
+            else if firstScore < secondScore
+            {
+                result.text = "\(matchDetailsData["Opponent"]!) Won the match by \(secondScore - firstScore) runs"
+            }
+            else if firstScore == secondScore {
+                result.text = "Match tied"
+            }
         }
         
         if let wicketstaken = matchDetailsData["Wickets"] {

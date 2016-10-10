@@ -22,22 +22,32 @@ class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var duskView: UIView!
     
+    @IBOutlet weak var turquoiseView: UIView!
+    
+    @IBOutlet weak var instagramView: UIView!
+    
+    @IBOutlet weak var mangoView: UIView!
+    
+    @IBOutlet weak var hersheysView: UIView!
+    
+   
+    @IBOutlet weak var cocktailView: UIView!
+    
+    @IBOutlet weak var earthlyView: UIView!
+    
+    
+    
+    
     var themes = [UIView]()
     
-    private var _topColor:String = topColor
-    private var _bottomColor:String = topColor
     private var _currentTheme:String = CurrentTheme
     
+    var userDefaults = NSUserDefaults.standardUserDefaults()
     
     @IBAction func changeColorPressed(sender: AnyObject) {
-        
-        topColor = "#\(_topColor)"
-        bottomColor = "#\(_bottomColor)"
-        appThemeChanged = true
         CurrentTheme = _currentTheme
+        userDefaults.setValue(CurrentTheme, forKeyPath: "userTheme")
         dismissViewControllerAnimated(true, completion: nil)
-        
-       
     }
     
     override func viewDidLoad() {
@@ -70,19 +80,51 @@ class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
         
         let defaulttap = UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.handledefaulttap(_:)))
         dawntap.delegate = self
+        
+        
+        
+        
+        let earthlytap = UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.handleEarthlyTap(_:)))
+        sunsettap.delegate = self
+        
+        let cocktailtap = UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.handleCocktailTap(_:)))
+        dusktap.delegate = self
+        
+        
+        
+        
+        
+        
+        
+        let hersheystap = UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.handleHersheysTap(_:)))
+        dawntap.delegate = self
+        
+        let mangotap = UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.handleMangotap(_:)))
+        dawntap.delegate = self
+        
+        let instagramtap = UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.handleInstagramTap(_:)))
+        sunsettap.delegate = self
+        
+        let turquoisetap = UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.handleTurquoiseTap(_:)))
+        dusktap.delegate = self
+        
        
         defaultView.alpha = CurrentTheme == "MeanGreen" ? 1.0 : 0.5
-        
         sunsetView.alpha = CurrentTheme == "Sunset" ? 1.0 : 0.5
-        
         dawnView.alpha = CurrentTheme == "Dawn" ? 1.0 : 0.5
-        
         duskView.alpha = CurrentTheme == "Dusk" ? 1.0 : 0.5
+        
+        cocktailView.alpha = CurrentTheme == "Cocktail" ? 1.0 : 0.5
+        earthlyView.alpha = CurrentTheme == "Earthly" ? 1.0 : 0.5
+        mangoView.alpha = CurrentTheme == "Mango" ? 1.0 : 0.5
+        turquoiseView.alpha = CurrentTheme == "Turquoise" ? 1.0 : 0.5
+        
+        instagramView.alpha = CurrentTheme == "Instagram" ? 1.0 : 0.5
+        hersheysView.alpha = CurrentTheme == "Hersheys" ? 1.0 : 0.5
         
         
         sunsetView.userInteractionEnabled = true
         sunsetView.addGestureRecognizer(sunsettap)
-        
         
         dawnView.userInteractionEnabled = true
         dawnView.addGestureRecognizer(dawntap)
@@ -90,8 +132,26 @@ class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
         duskView.userInteractionEnabled = true
         duskView.addGestureRecognizer(dusktap)
         
+        instagramView.userInteractionEnabled = true
+        instagramView.addGestureRecognizer(instagramtap)
+        
+        cocktailView.userInteractionEnabled = true
+        cocktailView.addGestureRecognizer(cocktailtap)
+        
+        turquoiseView.userInteractionEnabled = true
+        turquoiseView.addGestureRecognizer(turquoisetap)
+        
+        mangoView.userInteractionEnabled = true
+        mangoView.addGestureRecognizer(mangotap)
+        
+        hersheysView.userInteractionEnabled = true
+        hersheysView.addGestureRecognizer(hersheystap)
+        
         defaultView.userInteractionEnabled = true
         defaultView.addGestureRecognizer(defaulttap)
+        
+        earthlyView.userInteractionEnabled = true
+        earthlyView.addGestureRecognizer(earthlytap)
         
         
         // view.userInteractionEnabled = true
@@ -102,38 +162,61 @@ class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
     func handleDuskTap(sender: UITapGestureRecognizer? = nil) {
         fadeViews()
         duskView.alpha = 1.0
-        
-        _topColor = "000000"
-        _bottomColor = "434343"
         _currentTheme = "Dusk"
     }
     
     func handleDawnTap(sender: UITapGestureRecognizer? = nil) {
         fadeViews()
         dawnView.alpha = 1.0
-        
-        _topColor = "4DA0B0"
-        _bottomColor = "D39D38"
         _currentTheme = "Dawn"
-        
     }
 
     func handleSunsetTap(sender: UITapGestureRecognizer? = nil) {
         fadeViews()
         sunsetView.alpha = 1.0
-        
-        _topColor = "FF9500"
-        _bottomColor = "FF5E3A"
         _currentTheme = "Sunset"
     }
     
     func handledefaulttap(sender: UITapGestureRecognizer? = nil) {
         fadeViews()
         defaultView.alpha = 1.0
-        
-        _topColor = "84CC00"
-        _bottomColor = "4D9D00"
         _currentTheme = "MeanGreen"
+    }
+    
+    func handleTurquoiseTap(sender: UITapGestureRecognizer? = nil) {
+        fadeViews()
+        turquoiseView.alpha = 1.0
+        _currentTheme = "Turquoise"
+    }
+    
+    func handleInstagramTap(sender: UITapGestureRecognizer? = nil) {
+        fadeViews()
+        instagramView.alpha = 1.0
+        _currentTheme = "Instagram"
+    }
+    
+    func handleHersheysTap(sender: UITapGestureRecognizer? = nil) {
+        fadeViews()
+        hersheysView.alpha = 1.0
+        _currentTheme = "Hersheys"
+    }
+    
+    func handleMangotap(sender: UITapGestureRecognizer? = nil) {
+        fadeViews()
+        mangoView.alpha = 1.0
+        _currentTheme = "Mango"
+    }
+    
+    func handleEarthlyTap(sender: UITapGestureRecognizer? = nil) {
+        fadeViews()
+        earthlyView.alpha = 1.0
+        _currentTheme = "Earthly"
+    }
+    
+    func handleCocktailTap(sender: UITapGestureRecognizer? = nil) {
+        fadeViews()
+        cocktailView.alpha = 1.0
+        _currentTheme = "Cocktail"
     }
 
     
@@ -144,6 +227,14 @@ class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
         dawnView.alpha = 0.5
         sunsetView.alpha = 0.5
         duskView.alpha = 0.5
+        
+        earthlyView.alpha = 0.5
+        instagramView.alpha = 0.5
+        mangoView.alpha = 0.5
+        cocktailView.alpha = 0.5
+        
+        hersheysView.alpha = 0.5
+        turquoiseView.alpha = 0.5
     }
     
     override func didReceiveMemoryWarning() {

@@ -61,9 +61,56 @@ struct CustomTextInputStyle: AnimatedTextInputStyle {
     let yHintPositionOffset: CGFloat = 7
 }
 
-let topColorDefault = "#84CC00"
-let bottomColorDefault = "#4D9D00"
+
+
+let themeColors = [
+    "Dawn" : [
+        "topColor" : "#4DA0B0",
+        "bottomColor" : "#D39D38",
+    ],
+    "MeanGreen" : [
+        "topColor" : "#84CC00",
+        "bottomColor" : "#4D9D00",
+    ],
+    "Dusk" : [
+        "topColor" : "#000000",
+        "bottomColor": "#434343"
+    ],
+    "Sunset": [
+        "topColor": "#FF9500",
+        "bottomColor": "#FF5E3A"
+    ],
+    "Turquoise": [
+        "topColor": "#136a8a",
+        "bottomColor": "#267871"
+    ],
+    "Instagram": [
+        "topColor": "#517fa4",
+        "bottomColor": "#243949"
+    ],
+    "Mango": [
+        "topColor": "#ffb347",
+        "bottomColor": "#ffcc33"
+    ],
+    "Hersheys": [
+        "topColor": "#1e130c",
+        "bottomColor": "#9a8478"
+    ],
+    "Cocktail": [
+        "topColor": "#D38312",
+        "bottomColor": "#A83279"
+    ],
+    "Earthly": [
+        "topColor": "#649173",
+        "bottomColor": "#DBD5A4"
+    ]
+]
+
+
+
 let defaultTheme = "MeanGreen"
+let topColorDefault = themeColors[CurrentTheme]!["topColor"]!
+let bottomColorDefault = themeColors[CurrentTheme]!["bottomColor"]!
 let appFont_black = "SourceSansPro-Black"
 let appFont_bold = "SourceSansPro-Bold"
 let appFont_regular = "SourceSansPro-Regular"

@@ -38,11 +38,6 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        
-        if appThemeChanged {
-            updateBackgroundTheme(self.view)
-            appThemeChanged = false;
-        }
     }
     
     func newDataAdded(){
@@ -103,7 +98,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             aCell.totalRuns.text = runs
             totalruns = Double(runs)
         }
-        if let wickets = data["Wickets"], let balls = data["OversBalled"]  {
+        if let wickets = data["Wickets"], let balls = data["OversBalled"], let runs = data["Runs"]   {
             aCell.bowlingViewHidden = (balls == "0" || balls == "-") ? true : false
             aCell.bowlingView.hidden = aCell.bowlingViewHidden
             aCell.BallsBowledWithWicketsTaken.hidden = aCell.bowlingViewHidden
@@ -116,7 +111,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 
                 ballsformattedString.bold("\(Int(balls)! * 6) ", fontName: appFont_black, fontSize: 20).normal("BALLS", fontName: appFont_regular, fontSize: 10)
                 
-                economyformattedString.bold("\(Int(balls)! * 6) ", fontName: appFont_black, fontSize: 20).normal("BALLS", fontName: appFont_regular, fontSize: 10)
+                economyformattedString.bold("\(Float(runs)!/Float(balls)!) ", fontName: appFont_black, fontSize: 20).normal("ECONOMY", fontName: appFont_regular, fontSize: 10)
                 
                 formattedStringCollection.append(ballsformattedString)
                 formattedStringCollection.append(economyformattedString)

@@ -14,9 +14,10 @@ import KRProgressHUD
 class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchParent  {
     
     var matchVC:MatchViewController!
-    var battingVC:BattingViewController!
-    var bowlingVC:BowlingViewController!
-    var extraVC:ExtraViewController!
+    
+    var battingBowlingViewController: BattingBowlingViewController!
+    
+    var resVC: MatchResultsViewController!
     
     var selecetedData:[String:String]?
     
@@ -31,11 +32,13 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         super.viewDidLoad()
         getUserData()
         // Do any additional setup after loading the view.
-        settings.style.buttonBarItemBackgroundColor = UIColor.whiteColor()
-        settings.style.buttonBarItemTitleColor = UIColor(hex: "#667815")
-        buttonBarView.selectedBar.backgroundColor = UIColor(hex: "#B12420")
-        settings.style.buttonBarItemFont = UIFont(name: "SFUIText-Regular", size: 15)!
+        settings.style.buttonBarItemBackgroundColor = UIColor.clearColor()
+        settings.style.buttonBarItemTitleColor = UIColor.whiteColor()
+        
+        buttonBarView.selectedBar.backgroundColor = UIColor.whiteColor()
+        settings.style.buttonBarItemFont = UIFont(name: appFont_bold, size: 15)!
         dataHasChangedAfterLastSave = false
+        setUIBackgroundTheme(self.view)
     }
     
     func dataChangedAfterLastSave(){
@@ -125,23 +128,21 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                 
                 data += matchVC.data
             }
-            if battingVC?.view != nil{
+            if battingBowlingViewController?.view != nil{
                 
-                data += battingVC.data
+                data += battingBowlingViewController.BattingData
+                data += battingBowlingViewController.BowlingData
             }
-            if bowlingVC?.view != nil{
-                
-                data += bowlingVC.data
+            if resVC?.view != nil{
+               data += resVC.data
             }
-            if extraVC?.view != nil{
-                
-                data += extraVC.data
-            }
-            }
+        }
            
+            var groundName = "-"
             
-            
-            let groundName = data["Ground"]!
+            if let ground = data["Ground"] {
+                groundName = ground
+            }
             
           
             
@@ -202,18 +203,21 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         
         matchVC = viewControllerFrom("Main", vcid: "MatchViewController") as! MatchViewController
         
-        battingVC = viewControllerFrom("Main", vcid: "BattingViewController") as! BattingViewController
+//        battingVC = viewControllerFrom("Main", vcid: "BattingViewController") as! BattingViewController
+//        
+//        bowlingVC = viewControllerFrom("Main", vcid: "BowlingViewController") as! BowlingViewController
         
-        bowlingVC = viewControllerFrom("Main", vcid: "BowlingViewController") as! BowlingViewController
+        battingBowlingViewController = viewControllerFrom("Main", vcid: "BattingBowlingViewController") as! BattingBowlingViewController
         
-        extraVC = viewControllerFrom("Main", vcid: "ExtraViewController") as! ExtraViewController
+        //extraVC = viewControllerFrom("Main", vcid: "ExtraViewController") as! ExtraViewController
         
-        extraVC.matchDetails = matchVC
+        resVC = viewControllerFrom("Main", vcid: "MatchResultsViewController") as! MatchResultsViewController
+        
+        //extraVC.matchDetails = matchVC
         matchVC.parent = self
-        battingVC.parent = self
-        bowlingVC.parent = self
-        extraVC.parent = self
-        return [matchVC, battingVC,bowlingVC,extraVC]
+        battingBowlingViewController.parent = self
+        resVC.parent = self
+        return [matchVC, battingBowlingViewController,resVC]
     }
     
     
@@ -226,11 +230,8 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             
             pageName = "Match Details"
         }
-        else if !battingVC.allRequiredFieldsHaveFilledProperly {
-            pageName = "Batting Details"
-        }
-        else if  !bowlingVC.allRequiredFieldsHaveFilledProperly {
-            pageName = "Bowling Details"
+        else if !battingBowlingViewController.allRequiredFieldsHaveFilledProperly {
+            pageName = "Batting and Bowling Details"
         }
         else{
             return true

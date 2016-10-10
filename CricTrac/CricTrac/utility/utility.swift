@@ -28,11 +28,19 @@ var genders = [String]()
 var matchDataSource = [[String:String]]()
 var profileDataChanged: Bool = false
 
-var CurrentTheme: String = defaultTheme
-
+private var _currentTheme: String = defaultTheme
 var topColor = topColorDefault
 var bottomColor = bottomColorDefault
-var appThemeChanged: Bool = false
+
+var CurrentTheme: String {
+    set
+    {
+        _currentTheme = newValue
+        topColor = themeColors[_currentTheme]!["topColor"]!
+        bottomColor = themeColors[_currentTheme]!["bottomColor"]!
+    }
+    get { return _currentTheme }
+}
 
 public func viewControllerFrom(storyBoard:String,vcid:String)->UIViewController{
     

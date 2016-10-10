@@ -21,6 +21,7 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController {
         buttonBarView.selectedBar.backgroundColor = UIColor.whiteColor()
         
         
+        
         settings.style.buttonBarItemFont = UIFont(name: appFont_bold, size: 15)!
         setUIBackgroundTheme(self.view)
         // Do any additional setup after loading the view.
@@ -35,15 +36,12 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController {
         
         let friends = viewControllerFrom("Main", vcid: "FriendsViewController")
         
-        let invite = viewControllerFrom("Main", vcid: "FriendsInviteViewController")
-        
         let friendReq = viewControllerFrom("Main", vcid: "FriendRequestsViewController")
         
         let friendSug = viewControllerFrom("Main", vcid: "FriendSuggestViewController")
         
-        let friendSea = viewControllerFrom("Main", vcid: "FriendSearchViewController")
         
-        return [friends, friendReq, friendSug, friendSea, invite]
+        return [friends, friendReq, friendSug]
     }
     /*
     // MARK: - Navigation

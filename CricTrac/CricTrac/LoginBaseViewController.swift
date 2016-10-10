@@ -16,12 +16,14 @@ class LoginBaseViewController: ButtonBarPagerTabStripViewController {
         
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        settings.style.buttonBarItemBackgroundColor = UIColor(hex: "#D4D4D4")
-        settings.style.buttonBarItemTitleColor = UIColor(hex: "#667815")
-        buttonBarView.selectedBar.backgroundColor = UIColor(hex: "#B12420")
-        settings.style.buttonBarItemFont = UIFont(name: "SFUIText-Regular", size: 15)!
-        // Do any additional setup after loading the view.
-
+        
+        settings.style.buttonBarItemBackgroundColor = UIColor.clearColor()
+        settings.style.buttonBarItemTitleColor = UIColor.whiteColor()
+        buttonBarView.selectedBar.backgroundColor = UIColor.whiteColor()
+        settings.style.buttonBarItemFont = UIFont(name: appFont_bold, size: 15)!
+        setUIBackgroundTheme(self.view)
+                // Do any additional setup after loading the view.
+        
         
         // Do any additional setup after loading the view.
     }
