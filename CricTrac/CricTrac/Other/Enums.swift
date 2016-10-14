@@ -8,3 +8,8 @@
 
 import Foundation
 
+enum userProfileType : String {
+    case Player = "Player"
+    case Coach = "Coach"
+    case Fan = "Cricket Fan"
+}

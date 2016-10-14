@@ -34,13 +34,11 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         setUIBackgroundTheme(self.view)
-        username.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
-        password.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
         
+        setColorForViewsWithSameTag(self.view)
+               
         
-        loginBtn.setTitleColor(UIColor().darkerColorForColor(UIColor(hex: bottomColor)), forState: .Normal)
-        
-    }
+            }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Sign In")

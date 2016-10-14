@@ -136,6 +136,14 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
         super.viewDidLoad()
         setUIBackgroundTheme(self.view)
         
+        setColorForViewsWithSameTag(battingView)
+        setColorForViewsWithSameTag(bowlingView)
+    
+        
+//        for view in viewsWithSameTagId {
+//            view?.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
+//        }
+        
         self.summarizedView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
         
         initializeView()

@@ -33,6 +33,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRDatabase.database().persistenceEnabled = true
         Fabric.with([Crashlytics.self])
         setSliderMenu()
+        
+        let refreshedToken = FIRInstanceID.instanceID().token()
+        
         return true
     }
     
@@ -46,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Connect to FCM since connection may have failed when attempted before having a token.
-        //connectToFcm()
+       //connectToFcm()
         
         
         

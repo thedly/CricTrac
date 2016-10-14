@@ -38,19 +38,19 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
     
     var allRequiredFieldsHaveFilledProperly:Bool{
         _ = view
-        if oversText.text?.trimWhiteSpace.length > 0{
+        if oversText.text?.trimWhiteSpace.length > 0 && runsGivenText.text?.trimWhiteSpace.length > 0{
             return true
         }
         else{
             
             
-            if ballsText.text?.trimWhiteSpace.length > 0 && foursText.text?.trimWhiteSpace.length > 0 && sixesText.text?.trimWhiteSpace.length > 0 && positionText.text?.trimWhiteSpace.length > 0 && dismissalText.text?.trimWhiteSpace.length > 0 {
-                    return true
-            }
-            
-            else if wicketsText.text?.trimWhiteSpace.length > 0 && runsText.text?.trimWhiteSpace.length > 0 && noballText.text?.trimWhiteSpace.length > 0 {
-                return true
-            }
+//            if ballsText.text?.trimWhiteSpace.length > 0 && foursText.text?.trimWhiteSpace.length > 0 && sixesText.text?.trimWhiteSpace.length > 0 && positionText.text?.trimWhiteSpace.length > 0 && dismissalText.text?.trimWhiteSpace.length > 0 {
+//                    return true
+//            }
+//            
+//            else if wicketsText.text?.trimWhiteSpace.length > 0 && runsText.text?.trimWhiteSpace.length > 0 && noballText.text?.trimWhiteSpace.length > 0 {
+//                return true
+//            }
             
             
             return false

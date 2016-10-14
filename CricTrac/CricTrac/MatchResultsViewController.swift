@@ -115,7 +115,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
     
     var data:[String:String]{
         
-        return ["Toss":tossText,"FirstBat":firstBatText,"FirstScore":firstScoreText.textVal,"FirstWickets":firstWicketsText.textVal,"SecondBat":secondBatText, "SecondScore":secondScoreText.textVal,"SecondWickets":secondWicketsText.textVal,"Result":resultText.textVal,"FirstOvers":firstOversText.textVal,"SecondOvers":secondOversText.textVal]
+        return ["Toss":tossText ?? "-","FirstBat":firstBatText,"FirstScore":firstScoreText.textVal,"FirstWickets":firstWicketsText.textVal,"SecondBat":secondBatText, "SecondScore":secondScoreText.textVal,"SecondWickets":secondWicketsText.textVal,"Result":resultText.textVal,"FirstOvers":firstOversText.textVal,"SecondOvers":secondOversText.textVal]
     }
     
     

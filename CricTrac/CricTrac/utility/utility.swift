@@ -59,6 +59,37 @@ public func setUIBackgroundTheme(baseView: UIView) {
     
 }
 
+func setColorForViewsWithSameTag(baseView: UIView) {
+    for view in baseView.subviews {
+        if view.accessibilityIdentifier == "greyMatter" {
+            if let lbl: UILabel = view as? UILabel {
+                lbl.textColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
+                lbl.backgroundColor = UIColor.clearColor()
+            }
+            else if let btn: UIButton = view as? UIButton {
+                btn.setTitleColor(UIColor().darkerColorForColor(UIColor(hex: bottomColor)), forState: .Normal)
+            }
+            else
+            {
+                view.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
+            }
+        }
+        else if view.accessibilityIdentifier == "whiteMatter" {
+            if let lbl: UILabel = view as? UILabel {
+                lbl.textColor = UIColor().lighterColorForColor(UIColor(hex: topColor))
+                lbl.backgroundColor = UIColor.clearColor()
+            }
+            else if let btn: UIButton = view as? UIButton {
+                btn.setTitleColor(UIColor().lighterColorForColor(UIColor(hex: topColor)), forState: .Normal)
+            }
+            else
+            {
+                view.backgroundColor = UIColor().lighterColorForColor(UIColor(hex: topColor))
+            }
+        }
+    }
+}
+
 func updateBackgroundTheme(baseView: UIView) {
     
     let newbackground = CAGradientLayer().setGradientBackground(UIColor(hex: "\(topColor)").CGColor, bottomColor: UIColor(hex: "\(bottomColor)").CGColor)

@@ -7,22 +7,92 @@
 //
 
 import UIKit
-import XLPagerTabStrip
 
-class ProfileBaseViewController: ButtonBarPagerTabStripViewController {
+class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate {
     
-    @IBAction func DidtapCancelButton(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
+   
+    
+    @IBAction func nextBtnPressed(sender: AnyObject) {
+        var toViewController: UIViewController
+        switch profileDetailsData?.profileDetails["UserType"] {
+        case userProfileType.Player.rawValue? :
+            toViewController = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
+        case userProfileType.Coach.rawValue? :
+            toViewController = viewControllerFrom("Main", vcid: "CoachExperienceViewController")
+        case userProfileType.Fan.rawValue? :
+            toViewController = viewControllerFrom("Main", vcid: "CricketFanViewController")
+        default:
+            toViewController = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
+        }
+        toViewController.transitioningDelegate = self.transitionManager
+        presentViewController(toViewController, animated: true, completion: nil)
     }
+    
+    @IBOutlet weak var playerTextView: radioSelectView!
+    @IBOutlet weak var coachTextView: radioSelectView!
+    @IBOutlet weak var cricketFanTextView: radioSelectView!
+    
+    let transitionManager = TransitionManager.sharedInstance
+    
+    private weak var profileDetailsData : ProfileDetailsProtocol?
+    
+    func handleProfileTap(sender: UITapGestureRecognizer? = nil) {
+        deselectAll(self.view)
+        playerTextView.isSelected = true
+        profileDetailsData?.profileDetails["UserType"] = userProfileType.Player.rawValue
+    }
+    
+    func handleCoachTap(sender: UITapGestureRecognizer? = nil) {
+        deselectAll(self.view)
+        coachTextView.isSelected = true
+        profileDetailsData?.profileDetails["UserType"] = userProfileType.Coach.rawValue
+    }
+    
+    func handleFanTap(sender: UITapGestureRecognizer? = nil) {
+        deselectAll(self.view)
+        cricketFanTextView.isSelected = true
+        profileDetailsData?.profileDetails["UserType"] = userProfileType.Fan.rawValue
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    func setupControls() {
+        
+        let playertap = UITapGestureRecognizer(target: self, action: #selector(ProfileBaseViewController.handleProfileTap(_:)))
+        playertap.delegate = self
+        
+        let coachtap = UITapGestureRecognizer(target: self, action: #selector(ProfileBaseViewController.handleCoachTap(_:)))
+        coachtap.delegate = self
+        
+        let fantap = UITapGestureRecognizer(target: self, action: #selector(ProfileBaseViewController.handleFanTap(_:)))
+        fantap.delegate = self
+
+        
+        
+        playerTextView.userInteractionEnabled = true
+        playerTextView.addGestureRecognizer(playertap)
+        
+        coachTextView.userInteractionEnabled = true
+        coachTextView.addGestureRecognizer(coachtap)
+        
+        cricketFanTextView.userInteractionEnabled = true
+        cricketFanTextView.addGestureRecognizer(fantap)
+        
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        settings.style.buttonBarItemBackgroundColor = UIColor.whiteColor()
-        settings.style.buttonBarItemTitleColor = UIColor(hex: "#667815")
-        buttonBarView.selectedBar.backgroundColor = UIColor(hex: "#B12420")
-        settings.style.buttonBarItemFont = UIFont(name: "SFUIText-Regular", size: 15)!
+        setUIBackgroundTheme(self.view)
+        setupControls()
         // Do any additional setup after loading the view.
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -30,20 +100,15 @@ class ProfileBaseViewController: ButtonBarPagerTabStripViewController {
     }
     
     
-    override  func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        
-        let userInfo = viewControllerFrom("Main", vcid: "UserInfoViewController")
-        
-        let userTeam = viewControllerFrom("Main", vcid: "UserTeamDetailsViewController")
-        
-        let userGround = viewControllerFrom("Main", vcid: "UserGroundDetailsViewController")
-        
-        let userOpponent = viewControllerFrom("Main", vcid: "UserOpponentDetailsViewController")
-        
-        return [userInfo, userTeam, userGround, userOpponent]
+    func deselectAll(baseView: UIView) {
+        for view in baseView.subviews {
+            if view.accessibilityIdentifier == "radioSelect" {
+                if let lbl: radioSelectView = view as? radioSelectView {
+                    lbl.isSelected = false;
+                }
+            }
+        }
     }
-    
-    
     
     
     

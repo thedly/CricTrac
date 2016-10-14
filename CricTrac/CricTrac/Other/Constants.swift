@@ -19,7 +19,7 @@ let menuData = [
     ["title":"New Match","vc":"AddMatchDetailsViewController"],
     ["title":"Match Summary","vc":"MatchSummaryViewController"],
     ["title":"Friends","vc":"FriendBaseViewController"],
-    ["title":"Profile","vc":"UserInfoViewController"],
+    ["title":"Profile","vc":"ProfileBaseViewController"],
     ["title":"Statistics","vc":"NewMatchViewController"],
     ["title":"Notification","vc":"SummaryViewController"],
     ["title":"Settings","vc":"SettingsViewController"],
@@ -73,8 +73,8 @@ let themeColors = [
         "bottomColor" : "#4D9D00",
     ],
     "Dusk" : [
-        "topColor" : "#000000",
-        "bottomColor": "#434343"
+        "topColor" : "#434343",
+        "bottomColor": "#000000"
     ],
     "Sunset": [
         "topColor": "#FF9500",
@@ -89,20 +89,20 @@ let themeColors = [
         "bottomColor": "#243949"
     ],
     "Mango": [
-        "topColor": "#ffb347",
-        "bottomColor": "#ffcc33"
+        "topColor": "#ffcc33",
+        "bottomColor": "#ffb347"
     ],
     "Hersheys": [
-        "topColor": "#1e130c",
-        "bottomColor": "#9a8478"
+        "topColor": "#9a8478",
+        "bottomColor": "#1e130c"
     ],
     "Cocktail": [
         "topColor": "#D38312",
         "bottomColor": "#A83279"
     ],
     "Earthly": [
-        "topColor": "#649173",
-        "bottomColor": "#DBD5A4"
+        "topColor": "#DBD5A4",
+        "bottomColor": "#649173"
     ]
 ]
 

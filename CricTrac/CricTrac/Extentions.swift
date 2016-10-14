@@ -55,6 +55,14 @@ extension UIColor {
         }
         return UIColor()
     }
+    
+    func lighterColorForColor(color:UIColor) -> UIColor {
+        var r: CGFloat = 0, g:CGFloat = 0, b:CGFloat = 0, a:CGFloat = 0
+        if color.getRed(&r, green: &g, blue: &b, alpha: &a){
+            return UIColor(red: max(r + 0.2, 0.0), green: max(g + 0.2, 0.0), blue: max(b + 0.2, 0.0), alpha: a)
+        }
+        return UIColor()
+    }
 }
 
 extension CAGradientLayer {
@@ -223,5 +231,14 @@ extension SequenceType where Generator.Element: NSAttributedString {
     
     func joinWithSeparator(separator: String) -> NSAttributedString {
         return joinWithSeparator(NSAttributedString(string: separator))
+    }
+}
+
+extension UIView {
+    func getViewsByTag(tag:Int) -> Array<UIView?>{
+        return subviews.filter { ($0 as UIView).tag == tag } as [UIView]
+    }
+    func getViewsByIdentifier(id:String) -> Array<UIView?>{
+        return subviews.filter { ($0 as UIView).accessibilityIdentifier == id } as [UIView]
     }
 }
