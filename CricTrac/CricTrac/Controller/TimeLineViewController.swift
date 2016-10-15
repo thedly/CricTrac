@@ -24,23 +24,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         
      
         
-//        var ref = fireBaseRef.child(currentUser!.uid).child("TFriends").childByAutoId()
-//        
-//        ref.setValue("eZ7ic5UXXfbB6GcSDO2KomoPFiJ2")
-//        
-//        ref = fireBaseRef.child(currentUser!.uid).child("TFriends").childByAutoId()
-//        
-//        ref.setValue("rsgQDYKV6bfq3S9chiKF59ISYHv1")
-//        
-//        
-//        ref = fireBaseRef.child(currentUser!.uid).child("TFriends").childByAutoId()
-//        
-//        ref.setValue("DlBC7WeVUsgUazge3AqqQUtu4h52")
-//        
-//        
-//        
-//       
-//        
+        
         
         
         //loadTimeLineData()
@@ -66,7 +50,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             
         }
         
-        loadAllNewPosts()
+        //loadAllNewPosts()
         
         // Do any additional setup after loading the view.
     }

@@ -234,6 +234,15 @@ extension SequenceType where Generator.Element: NSAttributedString {
     }
 }
 
+extension UIView {
+    func getViewsByTag(tag:Int) -> Array<UIView?>{
+        return subviews.filter { ($0 as UIView).tag == tag } as [UIView]
+    }
+    func getViewsByIdentifier(id:String) -> Array<UIView?>{
+        return subviews.filter { ($0 as UIView).accessibilityIdentifier == id } as [UIView]
+    }
+}
+
 extension UIImageView{
     
     public func loadImage(urlString: String,postId:String) {

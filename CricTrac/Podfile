@@ -25,7 +25,7 @@ pod 'KYDrawerController’, :git => ‘https://github.com/ykyouhei/KYDrawerContr
 
 pod 'SkyFloatingLabelTextField', '~> 1.0'
 
-pod 'SCLAlertView'
+pod 'SCLAlertView',  :git => 'https://github.com/vikmeup/SCLAlertView-Swift.git', :branch => 'swift-2.3'
 pod 'KRProgressHUD', :git => 'https://github.com/krimpedance/KRProgressHUD.git', :branch => 'swift2.3'
 pod 'XLPagerTabStrip', '~> 5.0'
 pod 'AnimatedTextInput', '~> 0.3.0'

@@ -401,13 +401,11 @@ func registerWithEmailAndPassword(userName:String,password:String,callBack:(user
 
 var newPostIds = [String]()
 
-func loadAllNewPosts(){
+func addThemeData(theme: String, sucessBlock:()->Void){
     
-    fireBaseRef.child(currentUser!.uid).child("TimelineIDs").observeEventType(.ChildAdded, withBlock: { snapshot in
-        
-        newPostIds.append(snapshot.value as! String)
-        
-    })
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").child("theme")
+    ref.setValue(theme)
+    sucessBlock()
     
 }
 
@@ -461,7 +459,22 @@ func getAllFriends(){
         
     })
     
+        }
+
+func getUserThemeData(sucessBlock:(theme: String)->Void){
+    
+    fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").child("theme").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        if let data: String = snapshot.value as? String {
+            sucessBlock(theme: data)
+        }
+        else
+        {
+            sucessBlock(theme: "")
+        }
+        
+    })
 }
+
 
  //MARK: - Add Post
 
