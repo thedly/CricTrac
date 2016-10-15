@@ -1,28 +1,19 @@
 //
-//  AddPostTableViewCell.swift
+//  ImagePostTableViewCell.swift
 //  CricTrac
 //
-//  Created by Renjith on 9/19/16.
+//  Created by Renjith on 9/22/16.
 //  Copyright © 2016 CricTrac. All rights reserved.
 //
 
 import UIKit
 
-class AddPostTableViewCell: UITableViewCell {
+class ImagePostTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var newPostButton: UIButton!
-    @IBOutlet weak var newPostText: UITextField!
-    
+    @IBOutlet weak var imagePost: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    }
-    
-    
-    
-    @IBAction func didTapPostButton(sender: AnyObject) {
-        
-        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

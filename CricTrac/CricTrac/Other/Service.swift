@@ -9,6 +9,7 @@
 import Foundation
 import Firebase
 import SCLAlertView
+import KRProgressHUD
 //MARK:- Match Data
 
 func loadInitialValues(){
@@ -276,11 +277,55 @@ func loadTimeline(callback: (timeline:[String:AnyObject])->Void){
         
         
     })
+    
+    
+}
+
+public func loadTimeLineFromIDS(callback: (timeline:[[String:String]])->Void){
+    
+    loadAllPostIds {
+        
+        var timeLine = [[String:String]]()
+        
+        var postCount = loadedTimelineIds.count-1
+        
+        if postCount >= 5{
+            
+            postCount = 4
+        }
+        
+        
+            for postindex in 0...postCount{
+                
+                let postId = loadedTimelineIds[postindex]
+                
+                fireBaseRef.child("TimelinePosts").child(postId).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+                    
+                    if let data = snapshot.value as? String {
+                        
+                        //let arrayElement = [["postId":postId],["post":data]]
+                        //timeLine.append(["postId":postId])
+                        timeLine.append(["post":data])
+                        
+                        if postindex == postCount{
+                            
+                            callback(timeline: timeLine)
+                            
+                        }
+                    }
+                })
+                
+            }
+        
+    }
+    
 }
 
 
+
+
 func loadAllPostIds(callback: ()->Void){
-    fetchedIndex = 0
+    loadedTimelineIds.removeAll()
     fireBaseRef.child(currentUser!.uid).child("TimelineIDs").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
         
         
@@ -342,6 +387,94 @@ func registerWithEmailAndPassword(userName:String,password:String,callBack:(user
     //}
 }
 
+var newPostIds = [String]()
+
+func loadAllNewPosts(){
+    
+    fireBaseRef.child(currentUser!.uid).child("TimelineIDs").observeEventType(.ChildAdded, withBlock: { snapshot in
+        
+        newPostIds.append(snapshot.value as! String)
+        
+    })
+    
+}
+
+
+public func updateTimeLineFromIDS(callback: (timeline:[[String:String]])->Void){
+    
+  
+        
+        var timeLine = [[String:String]]()
+        
+        let postCount = newPostIds.count-1
+    
+        for postindex in 0...postCount{
+            
+            let postId = newPostIds[postindex]
+            
+            fireBaseRef.child("TimelinePosts").child(postId).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+                
+                if let data = snapshot.value as? String {
+                    
+                    timeLine.insert(["post":data], atIndex: 0)
+                    
+                    if postindex == postCount{
+                        
+                        callback(timeline: timeLine)
+                        
+                    }
+                }
+            })
+            
+        }
+        
+    }
+
+
+ //MARK: - Friends
+
+var friendsDataArray = [String]()
+
+func getAllFriends(){
+    
+    fireBaseRef.child(currentUser!.uid).child("TFriends").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let data = snapshot.value as? [String : String] {
+            
+            for (_,value) in data{
+                
+                friendsDataArray.append(value)
+            }
+        }
+        
+    })
+    
+}
+
+ //MARK: - Add Post
+
+
+func addNewPost(postText:String){
+    
+    KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+    
+    let ref = fireBaseRef.child("TimelinePosts").childByAutoId()
+    
+    ref.setValue(postText)
+    
+    let postKey = ref.key
+    
+    for friend in friendsDataArray{
+        
+        let ref = fireBaseRef.child(friend).child("TimelineIDs").childByAutoId()
+        
+        ref.setValue(postKey)
+    }
+    KRProgressHUD.dismiss()
+    
+}
+
+
 //fireBaseRef.child("Dismissals").setValue(["BOWLED","CAUGHT","HANDLED THE BALL","HIT WICKET","HIT THE BALL TWICE","LEG BEFORE WICKET (LBW)","OBSTRUCTING THE FIELD","RUN OUT","RETIRED","TIMED OUT"])
 
 public func addTimelineData(){
@@ -396,10 +529,12 @@ public func addTimelineData(){
     
     ref.setValue("-KS2EAh9AzfDpZT2nLMc")
     
-   
-    var data:[String:String] = ["post":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.","User":(currentUser?.uid)!]
+
+     
+    var data:[String:String] = ["postImage":"https://firebasestorage.googleapis.com/v0/b/arjun-innovations.appspot.com/o/TestImages%2Fone.jpg?alt=media&token=57b0217a-840c-4146-85b5-48cb6a36b639","User":(currentUser?.uid)!]
     var ref = fireBaseRef.child("TimelinePosts").childByAutoId()
     ref.setValue(data)
+    
     
     data = ["post":"Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like.","User":(currentUser?.uid)!]
      ref = fireBaseRef.child("TimelinePosts").childByAutoId()

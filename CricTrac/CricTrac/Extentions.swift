@@ -205,3 +205,33 @@ extension SequenceType where Generator.Element: NSAttributedString {
         return joinWithSeparator(NSAttributedString(string: separator))
     }
 }
+
+extension UIImageView{
+    
+    public func loadImage(urlString: String,postId:String) {
+        
+        let filePath = documentsDirectory.stringByAppendingPathComponent("cachedImages/\(postId).png")
+        if fileExists(filePath){
+            
+            let image = UIImage(contentsOfFile:filePath)
+            self.image = image
+        }
+        else{
+        NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: urlString)!, completionHandler: { (data, response, error) -> Void in
+            
+            if error != nil {
+                print(error)
+                return
+            }
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                let image = UIImage(data: data!)
+                self.image = image
+                saveToCachedImages(image!, imageName:postId)
+            })
+            
+        }).resume()
+        }
+    }
+    
+}
+

@@ -64,11 +64,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
             enableSync()
             self.navigateToNextScreen()
             
-        }
-        
-        }
-        
-    }
+        } } }
    
 
     
