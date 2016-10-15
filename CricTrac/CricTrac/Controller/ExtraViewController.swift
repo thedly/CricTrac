@@ -42,7 +42,7 @@ class ExtraViewController: UIViewController,IndicatorInfoProvider {
         commentsText.style =  CustomTextInputStyle()
         if ((parent?.selecetedData) != nil){ loadEditData() }
         
-        
+        setUIBackgroundTheme(self.view)
         // Do any additional setup after loading the view.
     }
     

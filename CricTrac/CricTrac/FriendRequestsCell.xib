@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="SourceSansPro-Bold.otf">
+            <string>SourceSansPro-Bold</string>
+            <string>SourceSansPro-Bold</string>
+            <string>SourceSansPro-Bold</string>
+        </mutableArray>
+        <mutableArray key="SourceSansPro-Regular.otf">
+            <string>SourceSansPro-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="FriendRequestsCell" id="jT1-Y6-D7M" customClass="FriendRequestsCell" customModule="CricTrac" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="538" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="We3-Yk-pYO">
+                    <rect key="frame" x="10" y="10" width="518" height="90"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sachin" translatesAutoresizingMaskIntoConstraints="NO" id="map-2l-fvr">
+                            <rect key="frame" x="5" y="13" width="64" height="64"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="64" id="2gM-j2-C6d"/>
+                                <constraint firstAttribute="width" constant="64" id="Zbr-01-LM9"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="32"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAJITH KUMAR" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0n2-7X-gh7">
+                            <rect key="frame" x="77" y="13" width="79" height="16"/>
+                            <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="12"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="E8R-yd-gKu">
+                            <rect key="frame" x="423" y="17" width="65" height="66"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8uw-ie-Jm4">
+                                    <rect key="frame" x="0.0" y="0.0" width="65" height="28"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="28" id="7AU-tW-mzP"/>
+                                        <constraint firstAttribute="width" constant="65" id="vTG-FP-a0y"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="12"/>
+                                    <state key="normal" title="CONFIRM">
+                                        <color key="titleColor" red="0.40784313729999999" green="0.73333333329999995" blue="0.0078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="10"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1NE-7K-Jr1">
+                                    <rect key="frame" x="0.0" y="38" width="65" height="28"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="28" id="dto-2E-XhD"/>
+                                        <constraint firstAttribute="width" constant="65" id="och-bC-0MM"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="12"/>
+                                    <state key="normal" title="REJECT">
+                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="10"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </button>
+                            </subviews>
+                        </stackView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DELHI PUBLIC SCHOOL" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGY-xF-mWO">
+                            <rect key="frame" x="77" y="32" width="97" height="13"/>
+                            <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="10"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.40784313729999999" green="0.73333333329999995" blue="0.0078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="map-2l-fvr" firstAttribute="centerY" secondItem="We3-Yk-pYO" secondAttribute="centerY" id="3BE-1X-o4S"/>
+                        <constraint firstItem="FGY-xF-mWO" firstAttribute="trailing" secondItem="0n2-7X-gh7" secondAttribute="trailing" id="4fS-Ga-8Iv"/>
+                        <constraint firstItem="FGY-xF-mWO" firstAttribute="trailing" secondItem="0n2-7X-gh7" secondAttribute="trailing" id="B99-cL-udJ"/>
+                        <constraint firstItem="FGY-xF-mWO" firstAttribute="top" secondItem="0n2-7X-gh7" secondAttribute="bottom" id="DqJ-rY-GMG"/>
+                        <constraint firstItem="map-2l-fvr" firstAttribute="leading" secondItem="We3-Yk-pYO" secondAttribute="leading" constant="5" id="JL2-fq-IGQ"/>
+                        <constraint firstItem="0n2-7X-gh7" firstAttribute="top" secondItem="map-2l-fvr" secondAttribute="top" constant="18" id="JQe-wz-1yl"/>
+                        <constraint firstItem="FGY-xF-mWO" firstAttribute="leading" secondItem="0n2-7X-gh7" secondAttribute="leading" id="Zb2-8T-900"/>
+                        <constraint firstItem="0n2-7X-gh7" firstAttribute="leading" secondItem="map-2l-fvr" secondAttribute="trailing" constant="8" id="iBr-qT-idq"/>
+                        <constraint firstItem="FGY-xF-mWO" firstAttribute="leading" secondItem="0n2-7X-gh7" secondAttribute="leading" id="ify-wU-qW3"/>
+                        <constraint firstItem="E8R-yd-gKu" firstAttribute="centerY" secondItem="map-2l-fvr" secondAttribute="centerY" id="jqi-Mz-Kc4"/>
+                        <constraint firstItem="0n2-7X-gh7" firstAttribute="top" secondItem="map-2l-fvr" secondAttribute="top" id="lmS-fs-Yko"/>
+                        <constraint firstItem="0n2-7X-gh7" firstAttribute="leading" secondItem="map-2l-fvr" secondAttribute="trailing" constant="8" id="mQY-FU-i5L"/>
+                        <constraint firstAttribute="trailing" secondItem="E8R-yd-gKu" secondAttribute="trailing" constant="30" id="uBO-83-Upg"/>
+                        <constraint firstItem="0n2-7X-gh7" firstAttribute="leading" secondItem="map-2l-fvr" secondAttribute="trailing" constant="8" id="wKo-6L-RzQ"/>
+                        <constraint firstItem="FGY-xF-mWO" firstAttribute="top" secondItem="0n2-7X-gh7" secondAttribute="bottom" constant="3" id="yBP-I0-9lQ"/>
+                        <constraint firstItem="FGY-xF-mWO" firstAttribute="centerX" secondItem="0n2-7X-gh7" secondAttribute="centerX" id="zw5-ca-Twh"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="clipToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="JQe-wz-1yl"/>
+                            <exclude reference="mQY-FU-i5L"/>
+                            <exclude reference="wKo-6L-RzQ"/>
+                            <exclude reference="4fS-Ga-8Iv"/>
+                            <exclude reference="B99-cL-udJ"/>
+                            <exclude reference="DqJ-rY-GMG"/>
+                            <exclude reference="ify-wU-qW3"/>
+                            <exclude reference="zw5-ca-Twh"/>
+                        </mask>
+                    </variation>
+                </view>
+            </subviews>
+            <accessibility key="accessibilityConfiguration" identifier="FriendRequestsCell"/>
+            <constraints>
+                <constraint firstItem="We3-Yk-pYO" firstAttribute="top" secondItem="jT1-Y6-D7M" secondAttribute="top" constant="10" id="N7w-1R-rTO"/>
+                <constraint firstItem="We3-Yk-pYO" firstAttribute="leading" secondItem="jT1-Y6-D7M" secondAttribute="leading" constant="10" id="Z5k-pt-MhN"/>
+                <constraint firstAttribute="bottom" secondItem="We3-Yk-pYO" secondAttribute="bottom" id="cDC-JU-hSY"/>
+                <constraint firstAttribute="trailing" secondItem="We3-Yk-pYO" secondAttribute="trailing" constant="10" id="lD4-5l-d2J"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="baseView" destination="We3-Yk-pYO" id="klb-w1-YNE"/>
+                <outlet property="rejectBtn" destination="1NE-7K-Jr1" id="oF6-h7-DuQ"/>
+            </connections>
+            <point key="canvasLocation" x="326" y="270"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="sachin" width="160" height="206"/>
+    </resources>
+</document>

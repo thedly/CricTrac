@@ -11,7 +11,7 @@ import Foundation
 protocol MatchParent:class {
     
     var selecetedData:[String:String]?{get set}
-    
+    var matchVC:MatchViewController! {get set}
     func dataChangedAfterLastSave()
 }
 

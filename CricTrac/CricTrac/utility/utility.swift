@@ -28,6 +28,20 @@ var genders = [String]()
 var matchDataSource = [[String:String]]()
 var profileDataChanged: Bool = false
 
+private var _currentTheme: String = defaultTheme
+var topColor = topColorDefault
+var bottomColor = bottomColorDefault
+
+var CurrentTheme: String {
+    set
+    {
+        _currentTheme = newValue
+        topColor = themeColors[_currentTheme]!["topColor"]!
+        bottomColor = themeColors[_currentTheme]!["bottomColor"]!
+    }
+    get { return _currentTheme }
+}
+
 public func viewControllerFrom(storyBoard:String,vcid:String)->UIViewController{
     
     let storyboard = UIStoryboard(name:storyBoard, bundle: nil)
@@ -35,6 +49,54 @@ public func viewControllerFrom(storyBoard:String,vcid:String)->UIViewController{
     return storyboard.instantiateViewControllerWithIdentifier(vcid)
 }
 
+
+public func setUIBackgroundTheme(baseView: UIView) {
+    
+    
+    let background = CAGradientLayer().setGradientBackground(UIColor(hex: "\(topColor)").CGColor, bottomColor: UIColor(hex: "\(bottomColor)").CGColor)
+    background.frame = baseView.bounds
+    baseView.layer.insertSublayer(background, atIndex: 0)
+    
+}
+
+func setColorForViewsWithSameTag(baseView: UIView) {
+    for view in baseView.subviews {
+        if view.accessibilityIdentifier == "greyMatter" {
+            if let lbl: UILabel = view as? UILabel {
+                lbl.textColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
+                lbl.backgroundColor = UIColor.clearColor()
+            }
+            else if let btn: UIButton = view as? UIButton {
+                btn.setTitleColor(UIColor().darkerColorForColor(UIColor(hex: bottomColor)), forState: .Normal)
+            }
+            else
+            {
+                view.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
+            }
+        }
+        else if view.accessibilityIdentifier == "whiteMatter" {
+            if let lbl: UILabel = view as? UILabel {
+                lbl.textColor = UIColor().lighterColorForColor(UIColor(hex: topColor))
+                lbl.backgroundColor = UIColor.clearColor()
+            }
+            else if let btn: UIButton = view as? UIButton {
+                btn.setTitleColor(UIColor().lighterColorForColor(UIColor(hex: topColor)), forState: .Normal)
+            }
+            else
+            {
+                view.backgroundColor = UIColor().lighterColorForColor(UIColor(hex: topColor))
+            }
+        }
+    }
+}
+
+func updateBackgroundTheme(baseView: UIView) {
+    
+    let newbackground = CAGradientLayer().setGradientBackground(UIColor(hex: "\(topColor)").CGColor, bottomColor: UIColor(hex: "\(bottomColor)").CGColor)
+    newbackground.frame = baseView.bounds
+    
+    baseView.layer.replaceSublayer(baseView.layer.sublayers![0], with: newbackground)
+}
 
 public func viewController(vcid:String)->UIViewController{
     

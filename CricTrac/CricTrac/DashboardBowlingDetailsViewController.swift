@@ -92,7 +92,7 @@ class DashboardBowlingDetailsViewController: UIViewController,IndicatorInfoProvi
                     
                     let formattedString = NSMutableAttributedString()
                     
-                    formattedString.bold("\(wicketstaken)").normal(" wickets against \(opponentFaced)\n")
+                    formattedString.bold("\(wicketstaken)",fontName: "SFUIText-Bold", fontSize: 17).normal(" wickets against \(opponentFaced)\n", fontName: "SFUIText-Regular", fontSize: 15)
                     
                     top3MatchesArray.append(formattedString)
                 }

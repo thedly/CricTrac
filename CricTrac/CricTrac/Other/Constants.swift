@@ -19,10 +19,10 @@ let menuData = [
     ["title":"New Match","vc":"AddMatchDetailsViewController"],
     ["title":"Match Summary","vc":"MatchSummaryViewController"],
     ["title":"Friends","vc":"FriendBaseViewController"],
-    ["title":"Profile","vc":"UserInfoViewController"],
+    ["title":"Profile","vc":"ProfileBaseViewController"],
     ["title":"Statistics","vc":"NewMatchViewController"],
     ["title":"Notification","vc":"SummaryViewController"],
-    ["title":"Settings","vc":"NewMatchViewController"],
+    ["title":"Settings","vc":"SettingsViewController"],
     ["title":"Feedback","vc":"SummaryViewController"],
     ["title":"Help & Support","vc":"SummaryViewController"],
     ["title":"Version: \(versionAndBuildNumber)","vc":"SummaryViewController"],
@@ -61,29 +61,60 @@ struct CustomTextInputStyle: AnimatedTextInputStyle {
     let yHintPositionOffset: CGFloat = 7
 }
 
-let heights = [
-    [
-        "4 feet",
-        "5 feet",
-        "6 feet",
-        "7 feet"
+
+
+let themeColors = [
+    "Dawn" : [
+        "topColor" : "#4DA0B0",
+        "bottomColor" : "#D39D38",
     ],
-    [
-        "0 inches",
-        "1 inches",
-        "2 inches",
-        "3 inches",
-        "4 inches",
-        "5 inches",
-        "6 inches",
-        "7 inches",
-        "8 inches",
-        "9 inches",
-        "10 inches",
-        "11 inches",
+    "MeanGreen" : [
+        "topColor" : "#84CC00",
+        "bottomColor" : "#4D9D00",
+    ],
+    "Dusk" : [
+        "topColor" : "#434343",
+        "bottomColor": "#000000"
+    ],
+    "Sunset": [
+        "topColor": "#FF9500",
+        "bottomColor": "#FF5E3A"
+    ],
+    "Turquoise": [
+        "topColor": "#136a8a",
+        "bottomColor": "#267871"
+    ],
+    "Instagram": [
+        "topColor": "#517fa4",
+        "bottomColor": "#243949"
+    ],
+    "Mango": [
+        "topColor": "#ffcc33",
+        "bottomColor": "#ffb347"
+    ],
+    "Hersheys": [
+        "topColor": "#9a8478",
+        "bottomColor": "#1e130c"
+    ],
+    "Cocktail": [
+        "topColor": "#D38312",
+        "bottomColor": "#A83279"
+    ],
+    "Earthly": [
+        "topColor": "#DBD5A4",
+        "bottomColor": "#649173"
     ]
 ]
 
+
+
+let defaultTheme = "MeanGreen"
+let topColorDefault = themeColors[CurrentTheme]!["topColor"]!
+let bottomColorDefault = themeColors[CurrentTheme]!["bottomColor"]!
+let appFont_black = "SourceSansPro-Black"
+let appFont_bold = "SourceSansPro-Bold"
+let appFont_regular = "SourceSansPro-Regular"
+let appFont_light = "SourceSansPro-Light"
 
 let states = ["Alabama",
               "Alaska",

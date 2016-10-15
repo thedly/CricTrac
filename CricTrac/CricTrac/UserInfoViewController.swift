@@ -11,12 +11,11 @@ import UIKit
 import XLPagerTabStrip
 import SkyFloatingLabelTextField
 
-class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
+class UserInfoViewController: UIViewController  {
     
     lazy var ctDatePicker = CTDatePicker()
     lazy var ctCountryPicker = CTCountryPicker()
     lazy var ctStatePicker = CTStatePicker()
-    lazy var ctHeightPicker = HeightPicker()
     lazy var ctDataPicker = DataPicker()
     var profileDetailsExists:Bool = false
     @IBOutlet weak var scrollView:UIScrollView!
@@ -28,19 +27,15 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
     
     @IBOutlet weak var dateOfBirth: UITextField!
     @IBOutlet weak var emailId: UITextField!
-    @IBOutlet weak var playingRole: UITextField!
-    @IBOutlet weak var battingStyle: UITextField!
-    @IBOutlet weak var bowlingStyle: UITextField!
     @IBOutlet weak var country: UITextField!
     @IBOutlet weak var state: UITextField!
     @IBOutlet weak var city: UITextField!
     @IBOutlet weak var gender: UITextField!
-    
-    @IBOutlet weak var teamName: UITextField!
     @IBOutlet weak var mobile: UITextField!
     
     var selectedText:UITextField?
     
+    let transitionManager = TransitionManager.sharedInstance
     
     var lastSelectedTab:UIView?
     var scrollViewTop:CGFloat!
@@ -48,10 +43,24 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
     
     
     
+    @IBAction func goNextPage(sender: AnyObject) {
+        
+        let toViewController = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
+        toViewController.transitioningDelegate = self.transitionManager
+        presentViewController(toViewController, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func goPreviousPage(sender: AnyObject) {
+        
+        dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        setUIBackgroundTheme(self.view)
         initializeView()
         // Do any additional setup after loading the view.
     }
@@ -59,7 +68,7 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
     
     var data:[String:String]{
         
-        return ["FirstName":firstName.textVal,"LastName":lastName.textVal,"DateOfBirth":dateOfBirth.textVal,"Email":emailId.textVal,"Mobile":mobile.textVal,"Gender":gender.textVal,"PlayingRole":playingRole.textVal,"BattingStyle":battingStyle.textVal,"BowlingStyle":bowlingStyle.textVal,"Country":country.textVal,"State":state.textVal,"City":city.textVal,"TeamName":teamName.textVal]
+        return ["FirstName":firstName.textVal,"LastName":lastName.textVal,"DateOfBirth":dateOfBirth.textVal,"Email":emailId.textVal,"Mobile":mobile.textVal,"Gender":gender.textVal,"Country":country.textVal,"State":state.textVal,"City":city.textVal]
     }
     
     
@@ -69,14 +78,10 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
         country.delegate = self
         state.delegate = self
         gender.delegate = self
-        playingRole.delegate = self
-        battingStyle.delegate = self
-        bowlingStyle.delegate = self
         city.delegate = self
         emailId.delegate = self
         firstName.delegate = self
         lastName.delegate = self
-        teamName.delegate = self
         
         loadInitialProfileValues()
         
@@ -90,33 +95,28 @@ class UserInfoViewController: UIViewController,IndicatorInfoProvider  {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
             
-            getAllProfileData { (data) in
-                
-                profileData = data as! [String:String]
-                
-                if profileData.count > 0 {
-                    
-                    
-                    self.profileDetailsExists = true
-                    
-                    self.firstName.text = profileData["FirstName"]
-                    self.lastName.text = profileData["LastName"]
-                    self.dateOfBirth.text = profileData["DateOfBirth"]
-                    self.emailId.text = profileData["Email"]
-                    self.mobile.text = profileData["Mobile"]
-                    self.gender.text = profileData["Gender"]
-                    self.playingRole.text = profileData["PlayingRole"]
-                    self.battingStyle.text = profileData["BattingStyle"]
-                    self.bowlingStyle.text = profileData["BowlingStyle"]
-                    self.country.text = profileData["Country"]
-                    self.state.text = profileData["State"]
-                    self.city.text = profileData["City"]
-                    self.teamName.text = profileData["TeamName"]
-                    
-                    self.ctCountryPicker.SelectedCountry = profileData["Country"]!
-                    
-                }
-        }
+//            getAllProfileData { (data) in
+//                
+//                profileData = data as! [String:String]
+//                
+//                if profileData.count > 0 {
+//                    
+//                    
+//                    self.profileDetailsExists = true
+//                    
+//                    self.firstName.text = profileData["FirstName"]
+//                    self.lastName.text = profileData["LastName"]
+//                    self.dateOfBirth.text = profileData["DateOfBirth"]
+//                    self.emailId.text = profileData["Email"]
+//                    self.mobile.text = profileData["Mobile"]
+//                    self.gender.text = profileData["Gender"]
+//                    self.country.text = profileData["Country"]
+//                    self.state.text = profileData["State"]
+//                    self.city.text = profileData["City"]
+//                    self.ctCountryPicker.SelectedCountry = profileData["Country"]!
+//                    
+//                }
+//        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -271,27 +271,7 @@ extension UserInfoViewController:UITextFieldDelegate{
             let indexPos = genders.indexOf(gender.text!) ?? 0
             ctDataPicker.showPicker(self, inputText: textField, data: genders,selectedValueIndex: indexPos)
         }
-        else if  textField == playingRole{
-            ctDataPicker = DataPicker()
-            let indexPos = PlayingRoles.indexOf(playingRole.text!) ?? 0
-            ctDataPicker.showPicker(self, inputText: textField, data: PlayingRoles, selectedValueIndex: indexPos)
-        }
-        else if  textField == battingStyle{
-            ctDataPicker = DataPicker()
-            let indexPos = BattingStyles.indexOf(battingStyle.text!) ?? 0
-            ctDataPicker.showPicker(self, inputText: textField, data: BattingStyles,selectedValueIndex: indexPos)
-        }
-        else if  textField == bowlingStyle{
-            ctDataPicker = DataPicker()
-            let indexPos = BowlingStyles.indexOf(bowlingStyle.text!) ?? 0
-            ctDataPicker.showPicker(self, inputText: textField, data: BowlingStyles, selectedValueIndex: indexPos)
-        }
     }
-    
-    
-   
-    
-    
 }
 
 

@@ -14,7 +14,10 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
 
     @IBOutlet weak var matchDetailsTbl: UITableView!
     
-    @IBOutlet weak var screenShot: UIView!
+    
+    @IBOutlet weak var screenShotHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var ScreenShot: UIView!
     @IBAction func backBtnPressed(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -41,14 +44,24 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
     @IBOutlet weak var noBalls: UILabel!
     @IBOutlet weak var dismissal: UILabel!
     
-    @IBOutlet weak var screenshot: UIView!
-   
+    @IBOutlet weak var awayTeam: UILabel!
+    @IBOutlet weak var homeTeam: UILabel!
+    
     @IBOutlet weak var runsGiven: UILabel!
     @IBOutlet weak var oversBowled: UILabel!
     
     var matchDetailsData : [String:String]!
     
+    var battingViewHidden : Bool! = false
+    var bowlingViewHidden : Bool!  = false
+
     
+    
+    @IBOutlet weak var battingView: UIView!
+    
+    @IBOutlet weak var bowlingView: UIView!
+    
+    @IBOutlet weak var summarizedView: UIView!
     
     @IBAction func deleteActionPressed(sender: UIButton) {
         
@@ -91,17 +104,21 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
     @IBAction func didTapEditButton(sender: AnyObject) {
         
         let editMatch = viewController("AddMatchDetailsViewController") as! AddMatchDetailsViewController
+        
         editMatch.selecetedData = matchDetailsData
         
         presentViewController(editMatch, animated: true) {}
     }
     
+    @IBAction func didTapCancel(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     
     @IBAction func ShareActionPressed(sender: UIButton) {
         
-        
-        UIGraphicsBeginImageContext(self.screenshot.bounds.size);
-        self.screenshot.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        print(self.ScreenShot.bounds.size)
+        UIGraphicsBeginImageContext(self.ScreenShot.bounds.size);
+        self.ScreenShot.layer.renderInContext(UIGraphicsGetCurrentContext()!)
         let screenShot = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
     
@@ -117,9 +134,26 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUIBackgroundTheme(self.view)
+        
+        setColorForViewsWithSameTag(battingView)
+        setColorForViewsWithSameTag(bowlingView)
+    
+        
+//        for view in viewsWithSameTagId {
+//            view?.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
+//        }
+        
+        self.summarizedView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
+        
         initializeView()
         
         // Do any additional setup after loading the view.
+    }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -140,34 +174,37 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
             sixes.text = Sixes
         }
         if let Overs = matchDetailsData["Overs"] {
-            overs.text = "\(Overs) overs"
+            overs.text = Overs
+        }
+        
+        if (bowlingViewHidden == true) {
+            self.bowlingView.hidden = true
+            
+            self.screenShotHeightConstraint.constant -= 200
+            
+        }
+        
+        if (battingViewHidden == true) {
+            self.battingView.hidden = true
+            self.screenShotHeightConstraint.constant -= 200
         }
 
-        if let Ground = matchDetailsData["Ground"] {
-            ground.text = "@ \(Ground)"
-        }
+//        if let Ground = matchDetailsData["Ground"] {
+//            ground.text = "@ \(Ground)"
+//        }
         
-        if let res = matchDetailsData["Result"] {
-            if res != "-" {
-                result.text = res
-            }
-            else
-            {
-                result.text = "Results NA"
-            }
-            
-        }
         
-        if let toss = matchDetailsData["Toss"]{
-            
-            if toss != "-" {
-                self.toss.text = "Toss won by \(toss)"
-            }
-            else
-            {
-                self.toss.text = "Toss details NA"
-            }
-        }
+        
+//        if let toss = matchDetailsData["Toss"]{
+//            
+//            if toss != "-" {
+//                self.toss.text = "Toss won by \(toss)"
+//            }
+//            else
+//            {
+//                self.toss.text = "Toss details NA"
+//            }
+//        }
         
         if let tournament = matchDetailsData["Tournamnet"]{
             
@@ -186,29 +223,77 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
             
         }
         
-        if let homeTeam = matchDetailsData["Team"] {
-            if homeTeam != "-" {
-                matchBetween.text = homeTeam
+        var firstTeamScore = "-"
+        var secondTeamScore = "-"
+        
+        if let hTeam = matchDetailsData["Team"] {
+            if hTeam != "-" {
+                homeTeam.text = hTeam
             }
             else
             {
-                matchBetween.text = "Unknown"
+                homeTeam.text = "Unknown"
             }
             
             if let opponent = matchDetailsData["Opponent"] {
                 if opponent != "-" {
-                    matchBetween.text?.appendContentsOf("\n VS \n \(opponent)")
+                    awayTeam.text = opponent
                 }
                 else
                 {
-                    matchBetween.text?.appendContentsOf("\n VS \n Unknown")
+                    awayTeam.text = "Unknown"
                 }
             }
             
+            
+            
+            
+            if let firstScore = matchDetailsData["FirstScore"] {
+                if let firstWickets = matchDetailsData["FirstWickets"] {
+                    homeTeam.text?.appendContentsOf("\n\(firstScore)/\(firstWickets)")
+                }
+                
+                firstTeamScore = firstScore
+            }
+            
+            if let secondScore = matchDetailsData["SecondScore"] {
+                if let secondWickets = matchDetailsData["SecondWickets"] {
+                    awayTeam.text?.appendContentsOf("\n\(secondScore)/\(secondWickets)")
+                }
+                
+                secondTeamScore = secondScore
+            }
+
+        }
+        
+        
+        if let firstScore = Int(firstTeamScore), let secondScore = Int(secondTeamScore) {
+            if firstScore > secondScore {
+                result.text = "\(matchDetailsData["Team"]!) Won the match by \(firstScore - secondScore) runs"
+            }
+            else if firstScore < secondScore
+            {
+                result.text = "\(matchDetailsData["Opponent"]!) Won the match by \(secondScore - firstScore) runs"
+            }
+            else if firstScore == secondScore {
+                result.text = "Match tied"
+            }
         }
         
         if let wicketstaken = matchDetailsData["Wickets"] {
-            totalWickets.text = wicketstaken
+            
+            if let RunsGiven = matchDetailsData["RunsGiven"] {
+                
+                 totalWickets.text = "\(wicketstaken)-\(RunsGiven)"
+            }
+            else
+            
+            {
+                totalWickets.text = "\(wicketstaken)-NA"
+            }
+
+            
+           
         }
         
         if let Balls = matchDetailsData["Balls"] {
@@ -217,16 +302,13 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
         if let Position = matchDetailsData["Position"] {
             batPos.text = Position
         }
-        if let Dismissal = matchDetailsData["Dismissal"] {
-            dismissal.text = Dismissal.lowercaseString
-        }
-        if let OversBalled = matchDetailsData["OversBalled"] {
-            oversBowled.text = OversBalled
-        }
+//        if let Dismissal = matchDetailsData["Dismissal"] {
+//            dismissal.text = Dismissal.lowercaseString
+//        }
+//        if let OversBalled = matchDetailsData["OversBalled"] {
+//            oversBowled.text = OversBalled
+//        }
         
-        if let RunsGiven = matchDetailsData["RunsGiven"] {
-            runsGiven.text = RunsGiven
-        }
         if let Wides = matchDetailsData["Wides"] {
             wides.text = Wides
         }
@@ -234,10 +316,10 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
             noBalls.text = Noballs
         }
         
-        if let date = matchDetailsData["Date"]{
-            let dateArray = date.characters.split{$0 == "/"}.map(String.init)
-            self.date.text = "\(dateArray[0]) \(dateArray[1].monthName) \(dateArray[2])"
-        }
+//        if let date = matchDetailsData["Date"]{
+//            let dateArray = date.characters.split{$0 == "/"}.map(String.init)
+//            self.date.text = "\(dateArray[0]) \(dateArray[1].monthName) \(dateArray[2])"
+//        }
     
     }
     

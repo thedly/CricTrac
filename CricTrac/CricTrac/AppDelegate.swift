@@ -29,12 +29,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         FIRApp.configure()
+        registerForPushNotifications(application)
         FIRDatabase.database().persistenceEnabled = true
         Fabric.with([Crashlytics.self])
         setSliderMenu()
+        
+        let refreshedToken = FIRInstanceID.instanceID().token()
+        
         return true
     }
     
+    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
+        
+    }
+    
+    func tokenRefreshNotification(notification: NSNotification) {
+        if let refreshedToken = FIRInstanceID.instanceID().token() {
+            print("InstanceID token: \(refreshedToken)")
+        }
+        
+        // Connect to FCM since connection may have failed when attempted before having a token.
+       //connectToFcm()
+        
+        
+        
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject],
+                     fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        // If you are receiving a notification message while your app is in the background,
+        // this callback will not be fired till the user taps on the notification launching the application.
+        // TODO: Handle data of notification
+        
+        // Print message ID.
+        print("Message ID: \(userInfo["gcm.message_id"]!)")
+        
+        // Print full message.
+        print("%@", userInfo)
+    }
+
+    
+    func registerForPushNotifications(application: UIApplication) {
+        let notificationSettings = UIUserNotificationSettings(
+            forTypes: [.Badge, .Sound, .Alert], categories: nil)
+        application.registerUserNotificationSettings(notificationSettings)
+    }
     
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
         
@@ -94,63 +133,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.makeKeyAndVisible()
-        
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        
-        if let credential = userDefaults.valueForKey("loginToken") {
-
-            
-            if let googleCredentials = credential.valueForKey("googletoken") as? [String:String]{
-                
-                KRProgressHUD.show(message: "Loading...")
-                
-                firebaseLoginWithGoogle(googleCredentials["idToken"]!, accessToken:googleCredentials["accessToken"]! , sucess: { (user) in
-                    
-                    currentUser = user
-                    self.moveToNextScreen()
-                    
-                    }, failure: { (error) in
-                        KRProgressHUD.dismiss()
-                        print(error.localizedDescription)
-                        
-                })
-                
-            }
-            else if let fbCredentials = credential.valueForKey("Facebooktoken") as? [String:String]{
-                
-                 KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
-                
-                firebaseLoginWithFacebook(fbCredentials["tokenString"]! , sucess: { (user) in
-                    
-                    currentUser = user
-                    
-                    self.moveToNextScreen()
-                    
-                    }, failure: { (error) in
-                        
-                        KRProgressHUD.dismiss()
-                })
-                
-               
-            }
-        
-        }
-
-            let loginVC = viewControllerFrom("Main", vcid: "LoginBaseViewController")
-            window?.rootViewController = loginVC
-        
+        let splashScreenVC = viewControllerFrom("Main", vcid: "SplashScreenViewController")
+        window?.rootViewController = splashScreenVC
     }
-    
-    
-    func moveToNextScreen(){
-        let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")
-        let dashboardVC = viewControllerFrom("Main", vcid: "CollapsibleTableViewController") as! CollapsibleTableViewController
-        let navigationControl = UINavigationController(rootViewController: dashboardVC )
-        sliderMenu.mainViewController = navigationControl
-        sliderMenu.drawerViewController = drawerViewController
-        
-        window?.rootViewController = sliderMenu
-    }
-
 }
 

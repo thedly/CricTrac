@@ -52,10 +52,18 @@ func addProfileImageData(profileDp:UIImage){
             print(error.localizedDescription)
             return
         }else{
-            print("Successfully uploaded profile image")
+            
+            updateMetaData(metaData!.downloadURL()!)
         
         }
     }
+}
+
+func updateMetaData(profileImgUrl: NSURL) {
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
+    let profileImageObject: [NSObject:AnyObject] = [ "ProfileImageUrl"    : profileImgUrl.absoluteString]
+    ref.updateChildValues(profileImageObject)
+    print("Image url updated successfully")
 }
 
 func getAllMatchData(sucessBlock:([String:AnyObject])->Void){
@@ -191,24 +199,28 @@ func getImageFromFacebook() -> UIImage{
    return profileImage
 }
 
-func getImageFromFirebase(sucessBlock:(UIImage)->Void){
+
+
+func getImageFromFirebase(imagePath: String ,sucessBlock:(UIImage)->Void){
     
     
-    let filePath = "\(FIRAuth.auth()?.currentUser?.uid)/UserProfile/profileImage"
+    if let url = NSURL(string: imagePath) {
+        if let data = NSData(contentsOfURL: url) {
+            sucessBlock(UIImage(data: data)!)
+        }
+    }
     
     
-    let profileImgRef  = storageRef.child(filePath)
     
-    
-    profileImgRef.downloadURLWithCompletion({ (url, error) in
-                    if let userurl  = url,
-                data = NSData(contentsOfURL: userurl)
-            {
-                sucessBlock(UIImage(data: data)!)
-            }
-        
-        
-    })
+//    profileImgRef.downloadURLWithCompletion({ (url, error) in
+//                    if let userurl  = url,
+//                data = NSData(contentsOfURL: userurl)
+//            {
+//                sucessBlock(UIImage(data: data)!)
+//            }
+//        
+//        
+//    })
     
 }
 

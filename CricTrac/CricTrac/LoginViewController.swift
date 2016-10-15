@@ -28,16 +28,29 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     @IBOutlet weak var username:UITextField!
     @IBOutlet weak var password:UITextField!
     
+    @IBOutlet weak var loginBtn: UIButton!
     let loginManager = FBSDKLoginManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
+        setUIBackgroundTheme(self.view)
+        
+        setColorForViewsWithSameTag(self.view)
+               
+        
+            }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Sign In")
     }
     
+    @IBAction func registerBtnTapped(sender: UIButton) {
+        
+        let registerVC = viewControllerFrom("Main", vcid: "RegisterViewController")
+        
+        self.presentViewController(registerVC, animated: true, completion: nil)
+        
+    }
      // MARK:- GoogleSignIn
     
     @IBAction func loginWithGoogle(sender: UIButton) {

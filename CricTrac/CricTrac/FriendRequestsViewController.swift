@@ -27,15 +27,28 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     // MARK: - Methods
     
     func initializeView() {
+        RequestsTblview.registerNib(UINib.init(nibName:"FriendRequestsCell", bundle: nil), forCellReuseIdentifier: "FriendRequestsCell")
+        
+        RequestsTblview.allowsSelection = false
+        RequestsTblview.separatorStyle = .None
         RequestsTblview.dataSource = self
         RequestsTblview.delegate = self
-        RequestsTblview.allowsSelection = false
+        
+        setUIBackgroundTheme(self.view)
+
     }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "REQUESTS")
     }
     
+    func getCellForRow(indexPath:NSIndexPath)->FriendRequestsCell{
+        
+        
+        let aCell =  RequestsTblview.dequeueReusableCellWithIdentifier("FriendRequestsCell", forIndexPath: indexPath) as! FriendRequestsCell
+        aCell.backgroundColor = UIColor.clearColor()
+        return aCell
+    }
     
     // MARK: - Table delegate functions
     
@@ -44,24 +57,21 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         return 1
     }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 100
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCellWithIdentifier("FriendRequestsTableViewCell", forIndexPath: indexPath) as? FriendRequestsTableViewCell {
-            
-            let friendProfileName = "Sajith"
-            let friendProfileTeam = "DPS, Bangalore"
-            
-            cell.configureCell(friendProfileName, friendTeamName: friendProfileTeam, friendProfileImage: "")
-            return cell
-        }
-        else
-        {
-            return FriendRequestsTableViewCell()
-        }
+        
+        
+        return getCellForRow(indexPath)
+        
     }
+
     
    
 

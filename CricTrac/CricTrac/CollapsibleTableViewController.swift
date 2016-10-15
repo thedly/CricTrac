@@ -348,10 +348,7 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
     func setUIValues() {
         activityInd.startAnimating()
         NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: #selector(CollapsibleTableViewController.stopAnimation), userInfo: nil, repeats: false)
-        getImageFromFirebase { (data) in
-            self.profileImage.image = data
-            self.activityInd.stopAnimating()
-        }
+        
         
         setDashboardProfileData()
         
@@ -388,6 +385,14 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
                 self.bowlingStyle.text = profileData["BowlingStyle"]
                 self.teamName.text = profileData["TeamName"]
                 self.location.text = profileData["City"]! + ", "+profileData["Country"]!
+                
+                if let profileImgUrl = profileData["ProfileImageUrl"] {
+                    getImageFromFirebase(profileImgUrl) { (data) in
+                        self.profileImage.image = data
+                        self.activityInd.stopAnimating()
+                    }
+                }
+                
                 
             }
             

@@ -38,6 +38,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     override func viewDidLoad() {
         super.viewDidLoad()
         if ((parent?.selecetedData) != nil){ loadEditData() }
+        setUIBackgroundTheme(self.view)
     }
     
     

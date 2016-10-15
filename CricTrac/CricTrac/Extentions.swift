@@ -47,8 +47,36 @@ extension UIColor {
             blue: (CGFloat(b)/255),
             alpha:alpha)
     }
+    
+    func darkerColorForColor(color:UIColor) -> UIColor {
+        var r: CGFloat = 0, g:CGFloat = 0, b:CGFloat = 0, a:CGFloat = 0
+        if color.getRed(&r, green: &g, blue: &b, alpha: &a){
+            return UIColor(red: max(r - 0.2, 0.0), green: max(g - 0.2, 0.0), blue: max(b - 0.2, 0.0), alpha: a)
+        }
+        return UIColor()
+    }
+    
+    func lighterColorForColor(color:UIColor) -> UIColor {
+        var r: CGFloat = 0, g:CGFloat = 0, b:CGFloat = 0, a:CGFloat = 0
+        if color.getRed(&r, green: &g, blue: &b, alpha: &a){
+            return UIColor(red: max(r + 0.2, 0.0), green: max(g + 0.2, 0.0), blue: max(b + 0.2, 0.0), alpha: a)
+        }
+        return UIColor()
+    }
 }
 
+extension CAGradientLayer {
+    func setGradientBackground(topColor:CGColor, bottomColor:CGColor) -> CAGradientLayer{
+        let colorTop = topColor
+        let colorBottom = bottomColor
+        
+        let gradientColor = CAGradientLayer()
+        gradientColor.colors = [colorTop, colorBottom]
+        gradientColor.locations = [0.0, 1.0]
+        return gradientColor
+    }
+
+}
 
 extension String {
     static func className(aClass: AnyClass) -> String {
@@ -171,15 +199,15 @@ extension UITextField{
 }
 
 extension NSMutableAttributedString {
-    func bold(text:String) -> NSMutableAttributedString {
-        let attrs:[String:AnyObject] = [NSFontAttributeName : UIFont(name: "SFUIText-Bold", size: 17)!]
+    func bold(text:String, fontName:String, fontSize:CGFloat) -> NSMutableAttributedString {
+        let attrs:[String:AnyObject] = [NSFontAttributeName : UIFont(name: fontName, size: fontSize)!]
         let boldString = NSMutableAttributedString(string:"\(text)", attributes:attrs)
         self.appendAttributedString(boldString)
         return self
     }
     
-    func normal(text:String)->NSMutableAttributedString {
-        let attrs:[String:AnyObject] = [NSFontAttributeName : UIFont(name: "SFUIText-Regular", size: 15)!]
+    func normal(text:String, fontName:String, fontSize:CGFloat)->NSMutableAttributedString {
+        let attrs:[String:AnyObject] = [NSFontAttributeName : UIFont(name: fontName, size: fontSize)!]
         let normal =  NSAttributedString(string: text, attributes:attrs)
         self.appendAttributedString(normal)
         return self

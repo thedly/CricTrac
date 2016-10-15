@@ -34,7 +34,7 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         
         let window = UIWindow()
         
-        let loginBaseViewController = viewControllerFrom("Main", vcid: "LoginBaseViewController")
+        let loginBaseViewController = viewControllerFrom("Main", vcid: "LoginViewController")
         
         window.rootViewController = loginBaseViewController
         self.presentViewController(loginBaseViewController, animated: true) {

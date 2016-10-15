@@ -22,11 +22,15 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,GIDSignInDe
 
     @IBOutlet weak var facebookBtn: UIButton!
     
+    @IBAction func closeRegisterViewTapped(sender: AnyObject) {
+        
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     @IBOutlet weak var googleBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setUIBackgroundTheme(self.view)
         // Do any additional setup after loading the view.
     }
 
@@ -230,7 +234,8 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,GIDSignInDe
     }
     
     func navigateToNextScreen(){
-        
+        self.googleBtn.enabled = true
+        self.facebookBtn.enabled = true
         let window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
         let dashboardVC = viewControllerFrom("Main", vcid: "CollapsibleTableViewController") as! CollapsibleTableViewController
         

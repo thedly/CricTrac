@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="SourceSansPro-Bold.otf">
+            <string>SourceSansPro-Bold</string>
+            <string>SourceSansPro-Bold</string>
+            <string>SourceSansPro-Bold</string>
+            <string>SourceSansPro-Bold</string>
+            <string>SourceSansPro-Bold</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DragView" customModule="CricTrac" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ujG-ql-WUY">
+                    <rect key="frame" x="10" y="70" width="180" height="5"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="5" id="GmY-qo-qHh"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BANGALORE CRICKETERS CLUB" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uxX-Za-gmO">
+                    <rect key="frame" x="10" y="10" width="180" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="vxa-zd-bac"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOSS WON" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uq4-bi-Wc1">
+                    <rect key="frame" x="20" y="95" width="108" height="22"/>
+                    <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ok Filled-100" translatesAutoresizingMaskIntoConstraints="NO" id="0HC-LU-CCd">
+                    <rect key="frame" x="148" y="90" width="32" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="32" id="1X2-m3-9ca"/>
+                        <constraint firstAttribute="height" constant="32" id="qFO-P1-zhV"/>
+                    </constraints>
+                </imageView>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="SCORE" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s7v-du-9hK" userLabel="FirstScore" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                    <rect key="frame" x="20" y="142" width="160" height="42"/>
+                    <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="15"/>
+                    <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleTextColour">
+                            <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleActiveTextColour">
+                            <color key="value" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                            <color key="value" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
+                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OVERS" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kZR-zn-BpB" userLabel="FirstScore" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                    <rect key="frame" x="20" y="204" width="160" height="42"/>
+                    <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="15"/>
+                    <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleTextColour">
+                            <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleActiveTextColour">
+                            <color key="value" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                            <color key="value" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
+                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="WICKETS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hEv-hY-6g6" userLabel="FirstScore" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                    <rect key="frame" x="50" y="266" width="100" height="42"/>
+                    <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="15"/>
+                    <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleTextColour">
+                            <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleActiveTextColour">
+                            <color key="value" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                            <color key="value" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
+                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AfE-qT-gH3">
+                    <rect key="frame" x="160" y="277" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="nVF-E1-Dp4"/>
+                        <constraint firstAttribute="height" constant="20" id="rT0-r9-Mo6"/>
+                    </constraints>
+                    <state key="normal" image="Plus-100"/>
+                    <connections>
+                        <action selector="incrementWicketsPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="kBz-8B-tlT"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CXa-J7-QIu">
+                    <rect key="frame" x="20" y="277" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="XGw-PE-Fe6"/>
+                        <constraint firstAttribute="height" constant="20" id="ky4-GO-GxT"/>
+                    </constraints>
+                    <state key="normal" image="Minus-100"/>
+                    <connections>
+                        <action selector="decrementWicketsPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="vLA-cS-Hq6"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.51764705879999995" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="hEv-hY-6g6" firstAttribute="leading" secondItem="CXa-J7-QIu" secondAttribute="trailing" constant="10" id="1f9-Kh-LEK"/>
+                <constraint firstItem="hEv-hY-6g6" firstAttribute="top" secondItem="kZR-zn-BpB" secondAttribute="bottom" constant="20" id="6J6-Zs-2Ei"/>
+                <constraint firstAttribute="trailing" secondItem="s7v-du-9hK" secondAttribute="trailing" constant="20" id="BuI-bp-MJG"/>
+                <constraint firstItem="CXa-J7-QIu" firstAttribute="top" secondItem="kZR-zn-BpB" secondAttribute="bottom" constant="20" id="CeW-Bx-UbM"/>
+                <constraint firstAttribute="trailing" secondItem="kZR-zn-BpB" secondAttribute="trailing" constant="20" id="Ezw-0Q-2hc"/>
+                <constraint firstItem="kZR-zn-BpB" firstAttribute="top" secondItem="s7v-du-9hK" secondAttribute="bottom" constant="20" id="F7Q-Gb-L9d"/>
+                <constraint firstItem="Uq4-bi-Wc1" firstAttribute="top" secondItem="ujG-ql-WUY" secondAttribute="bottom" constant="20" id="Fm4-fm-M1H"/>
+                <constraint firstItem="0HC-LU-CCd" firstAttribute="top" secondItem="ujG-ql-WUY" secondAttribute="bottom" constant="20" id="HZD-Lx-yNb"/>
+                <constraint firstItem="ujG-ql-WUY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="HdQ-1E-gE4"/>
+                <constraint firstAttribute="trailing" secondItem="uxX-Za-gmO" secondAttribute="trailing" constant="10" id="JGl-VN-CaY"/>
+                <constraint firstAttribute="trailing" secondItem="0HC-LU-CCd" secondAttribute="trailing" constant="20" id="LkV-w9-wYn"/>
+                <constraint firstAttribute="trailing" secondItem="ujG-ql-WUY" secondAttribute="trailing" constant="10" id="OfT-e3-WEj"/>
+                <constraint firstItem="0HC-LU-CCd" firstAttribute="centerY" secondItem="Uq4-bi-Wc1" secondAttribute="centerY" id="SDm-zx-NFB"/>
+                <constraint firstItem="s7v-du-9hK" firstAttribute="top" secondItem="0HC-LU-CCd" secondAttribute="bottom" constant="20" id="T0a-H1-rAX"/>
+                <constraint firstItem="CXa-J7-QIu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="TB0-j3-JLu"/>
+                <constraint firstItem="Uq4-bi-Wc1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="TKe-vd-vr6"/>
+                <constraint firstAttribute="trailing" secondItem="AfE-qT-gH3" secondAttribute="trailing" constant="20" id="VcO-TR-fkX"/>
+                <constraint firstItem="uxX-Za-gmO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="WDo-Fn-mPf"/>
+                <constraint firstAttribute="trailing" secondItem="0HC-LU-CCd" secondAttribute="trailing" constant="20" id="bES-5Z-qcp"/>
+                <constraint firstItem="AfE-qT-gH3" firstAttribute="leading" secondItem="hEv-hY-6g6" secondAttribute="trailing" constant="10" id="i1i-OO-rUx"/>
+                <constraint firstItem="s7v-du-9hK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="jbZ-Kx-Ysd"/>
+                <constraint firstItem="kZR-zn-BpB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="mWH-ux-upb"/>
+                <constraint firstItem="uxX-Za-gmO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="puv-ar-7Cy"/>
+                <constraint firstItem="0HC-LU-CCd" firstAttribute="leading" secondItem="Uq4-bi-Wc1" secondAttribute="trailing" constant="20" id="qe6-KQ-1cI"/>
+                <constraint firstItem="AfE-qT-gH3" firstAttribute="centerY" secondItem="hEv-hY-6g6" secondAttribute="centerY" id="wN3-Vs-sMC"/>
+                <constraint firstItem="ujG-ql-WUY" firstAttribute="top" secondItem="uxX-Za-gmO" secondAttribute="bottom" constant="10" id="wmd-e4-LsK"/>
+                <constraint firstItem="hEv-hY-6g6" firstAttribute="centerY" secondItem="CXa-J7-QIu" secondAttribute="centerY" id="xbf-xS-k5x"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="HZD-Lx-yNb"/>
+                    <exclude reference="LkV-w9-wYn"/>
+                    <exclude reference="CeW-Bx-UbM"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="oversPlayed" destination="kZR-zn-BpB" id="xlD-8b-Ixk"/>
+                <outlet property="teamName" destination="uxX-Za-gmO" id="a0O-tF-BgO"/>
+                <outlet property="tossWonBtn" destination="0HC-LU-CCd" id="Yuh-t5-TbS"/>
+                <outlet property="totalScore" destination="s7v-du-9hK" id="7YH-3v-owe"/>
+                <outlet property="wicketsFallen" destination="hEv-hY-6g6" id="xia-U2-NfX"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="Minus-100" width="100" height="100"/>
+        <image name="Ok Filled-100" width="100" height="100"/>
+        <image name="Plus-100" width="100" height="100"/>
+    </resources>
+</document>

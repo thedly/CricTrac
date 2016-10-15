@@ -158,11 +158,11 @@ class DashboardBattingDetailsViewController: UIViewController,IndicatorInfoProvi
                     let formattedString = NSMutableAttributedString()
                     
                     if dismissedBy != "-" {
-                        formattedString.bold("\(runsScored) ").normal(" against \(opponentFaced)\n")
+                        formattedString.bold("\(runsScored) ", fontName: "SFUIText-Bold", fontSize: 17).normal(" against \(opponentFaced)\n", fontName: "SFUIText-Regular", fontSize: 15)
                     }
                     else
                     {
-                        formattedString.bold("\(runsScored)* ").normal(" against \(opponentFaced)\n")
+                        formattedString.bold("\(runsScored)* ", fontName: "SFUIText-Bold", fontSize: 17).normal(" against \(opponentFaced)\n", fontName: "SFUIText-Regular", fontSize: 15)
                     }
                     
                     
