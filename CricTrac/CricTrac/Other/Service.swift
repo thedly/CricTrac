@@ -31,7 +31,7 @@ func loadInitialValues(){
 
 func addMatchData(key:NSString,data:[String:String]){
     
-    let ref = fireBaseRef.child(currentUser!.uid).child("Matches").childByAutoId()
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").childByAutoId()
     ref.setValue(data)
     
 }
@@ -67,7 +67,7 @@ func updateMetaData(profileImgUrl: NSURL) {
 
 func getAllMatchData(sucessBlock:([String:AnyObject])->Void){
     
-   fireBaseRef.child(currentUser!.uid).child("Matches").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+   fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
     
     if let data = snapshot.value! as? [String:AnyObject]{
         
@@ -83,28 +83,28 @@ func getAllMatchData(sucessBlock:([String:AnyObject])->Void){
 //MARK:- Ground
 
 func addNewGroundName(groundName:String){
-    let ref = fireBaseRef.child(currentUser!.uid).child("Grounds").childByAutoId()
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Grounds").childByAutoId()
     ref.setValue(groundName)
 }
 
 func addNewTeamName(teamName:String){
-    let ref = fireBaseRef.child(currentUser!.uid).child("Teams").childByAutoId()
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Teams").childByAutoId()
     ref.setValue(teamName)
 }
 
 func addNewOppoSitTeamName(oTeamName:String){
-    let ref = fireBaseRef.child(currentUser!.uid).child("OppositTeams").childByAutoId()
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("OppositTeams").childByAutoId()
     ref.setValue(oTeamName)
 }
 
 func addNewTournamnetName(tournamnet:String){
-    let ref = fireBaseRef.child(currentUser!.uid).child("Tournaments").childByAutoId()
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Tournaments").childByAutoId()
     ref.setValue(tournamnet)
 }
 
 func getAllUserData(sucessBlock:(AnyObject)->Void){
     
-    fireBaseRef.child(currentUser!.uid).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+    fireBaseRef.child("Users").child(currentUser!.uid).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
         if let data = snapshot.value{
             
             sucessBlock(data)
@@ -227,7 +227,7 @@ func getImageFromFirebase(imagePath: String ,sucessBlock:(UIImage)->Void){
 
 func updateMatchData(key:String,data:[String:String]){
     
-    let ref = fireBaseRef.child(currentUser!.uid).child("Matches").child(key)
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").child(key)
     ref.updateChildValues(data)
     
 }
@@ -237,7 +237,7 @@ func updateMatchData(key:String,data:[String:String]){
 
 func deleteMatchData(matchId:String, callback:(error:NSError?)->Void ){
     
-    let ref = fireBaseRef.child(currentUser!.uid).child("Matches").child(matchId)
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").child(matchId)
     
     ref.removeValueWithCompletionBlock { (error, dataRef) in
         callback(error: error)
@@ -353,30 +353,6 @@ func registerWithEmailAndPassword(userName:String,password:String,callBack:(user
         
     //}
 }
-
-
-func addThemeData(theme: String, sucessBlock:()->Void){
-    
-    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").child("theme")
-    ref.setValue(theme)
-    sucessBlock()
-    
-}
-
-func getUserThemeData(sucessBlock:(theme: String)->Void){
-    
-    fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").child("theme").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-            if let data: String = snapshot.value as? String {
-                sucessBlock(theme: data)
-            }
-            else
-            {
-                sucessBlock(theme: "")
-            }
-    
-        })
-}
-
 
 
 

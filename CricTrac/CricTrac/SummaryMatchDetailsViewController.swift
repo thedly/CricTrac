@@ -173,9 +173,27 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
         if let Sixes = matchDetailsData["Sixes"] {
             sixes.text = Sixes
         }
-        if let Overs = matchDetailsData["Overs"] {
-            overs.text = Overs
+        if let Overs = matchDetailsData["OversBalled"] { // in overs eg: 2, 3, 4
+            
+            if let oversInt = Int(Overs) {
+                
+                let totalBalls = 6*oversInt
+                
+                let oversFromBallsInt = Int(totalBalls/6) // 12, 18
+                let oversFromBallsRealRemaining = totalBalls - (6*oversFromBallsInt)
+                
+                
+                if let RunsGiven = matchDetailsData["RunsGiven"] {
+                    let ec = (Double(RunsGiven)!/Double(totalBalls)).roundToPlaces(2)
+                    economy.text = String(ec)
+                }
+                overs.text = String("\(oversFromBallsInt).\(oversFromBallsRealRemaining)")
+            }
+            
         }
+        
+        
+        
         
         if (bowlingViewHidden == true) {
             self.bowlingView.hidden = true
@@ -250,7 +268,9 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
             
             if let firstScore = matchDetailsData["FirstScore"] {
                 if let firstWickets = matchDetailsData["FirstWickets"] {
-                    homeTeam.text?.appendContentsOf("\n\(firstScore)/\(firstWickets)")
+                    
+                    let firstTeamOvers = matchDetailsData["FirstOvers"] ?? "-"
+                    homeTeam.text?.appendContentsOf("\n\(firstScore)/\(firstWickets)\n(\(firstTeamOvers))")
                 }
                 
                 firstTeamScore = firstScore
@@ -258,7 +278,10 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
             
             if let secondScore = matchDetailsData["SecondScore"] {
                 if let secondWickets = matchDetailsData["SecondWickets"] {
-                    awayTeam.text?.appendContentsOf("\n\(secondScore)/\(secondWickets)")
+                    
+                    let secondTeamOvers = matchDetailsData["SecondOvers"] ?? "-"
+                    
+                    awayTeam.text?.appendContentsOf("\n\(secondScore)/\(secondWickets)\n(\(secondTeamOvers))")
                 }
                 
                 secondTeamScore = secondScore

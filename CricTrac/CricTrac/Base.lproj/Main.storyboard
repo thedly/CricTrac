@@ -277,7 +277,6 @@
             <string>SourceSansPro-Bold</string>
             <string>SourceSansPro-Bold</string>
             <string>SourceSansPro-Bold</string>
-            <string>SourceSansPro-Bold</string>
         </mutableArray>
         <mutableArray key="SourceSansPro-Regular.otf">
             <string>SourceSansPro-Regular</string>
@@ -5734,13 +5733,13 @@
                                                         <constraint firstAttribute="height" constant="16" id="oUH-Ra-S6Z"/>
                                                     </constraints>
                                                 </imageView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="equalCentering" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="c4r-N1-Mh5">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="c4r-N1-Mh5">
                                                     <rect key="frame" x="23" y="123" width="443" height="134"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hdb-US-Hru">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hdb-US-Hru">
                                                             <rect key="frame" x="0.0" y="0.0" width="443" height="38"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Batting Style" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OYf-ml-oXF">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Batting Style" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OYf-ml-oXF">
                                                                     <rect key="frame" x="0.0" y="0.0" width="443" height="15"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="443" id="45Y-4o-b5H"/>
@@ -5749,7 +5748,7 @@
                                                                     <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="NA" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I92-Hn-WUA">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NA" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I92-Hn-WUA">
                                                                     <rect key="frame" x="0.0" y="20" width="443" height="18"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="140" id="Cgz-Tz-FyP"/>
@@ -5770,16 +5769,16 @@
                                                                 <constraint firstAttribute="width" constant="443" id="fj8-n0-BF0"/>
                                                             </constraints>
                                                         </stackView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="zg4-Fb-Mtm">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="zg4-Fb-Mtm">
                                                             <rect key="frame" x="0.0" y="48" width="443" height="38"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Bowling Style" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m3W-2P-MOG">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bowling Style" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m3W-2P-MOG">
                                                                     <rect key="frame" x="0.0" y="0.0" width="443" height="15"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
                                                                     <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="NA" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DL4-zY-7xZ">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NA" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DL4-zY-7xZ">
                                                                     <rect key="frame" x="0.0" y="20" width="443" height="18"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="140" id="3vF-Yl-Azf"/>
@@ -5797,16 +5796,16 @@
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="y7b-ud-MwE">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="y7b-ud-MwE">
                                                             <rect key="frame" x="0.0" y="96" width="443" height="38"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Playing Role" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zNZ-O0-oWj">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playing Role" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zNZ-O0-oWj">
                                                                     <rect key="frame" x="0.0" y="0.0" width="443" height="15"/>
                                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
                                                                     <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="NA" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fJ-NY-CIe">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NA" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fJ-NY-CIe">
                                                                     <rect key="frame" x="0.0" y="20" width="443" height="18"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="140" id="bAq-Md-hG9"/>
@@ -9264,7 +9263,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cbq-kR-OTY" userLabel="BatView">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OVERS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0mL-Ud-EZh" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="BALLS FACED" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0mL-Ud-EZh" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="340" y="72" width="240" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -9297,14 +9296,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tey-CU-vX6" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="20" y="72" width="240" height="41"/>
-                                                <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                                            </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="RUNS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x2V-5v-hev" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" placeholder="RUNS TAKEN" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x2V-5v-hev" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="20" y="72" width="240" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -9401,7 +9393,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="POSITION" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NSq-XX-qow" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="BATTING POSITION" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NSq-XX-qow" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="20" y="215" width="240" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -9500,7 +9492,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="6S" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WBU-Si-SBd" userLabel="6S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="6s" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WBU-Si-SBd" userLabel="6S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="400" y="143" width="120" height="42"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -9535,7 +9527,7 @@
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="6s"/>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="4S" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mcK-yi-ifH" userLabel="4S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="4s" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mcK-yi-ifH" userLabel="4S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="80" y="143" width="120" height="42"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -9615,7 +9607,7 @@
                                                     <action selector="incrementFours:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="Bcc-9N-h96"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" placeholder="WICKETS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="esn-g4-4VA" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" placeholder="WICKETS TAKEN" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="esn-g4-4VA" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="400" y="358" width="120" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -9648,7 +9640,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OVERS BOWLED" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fud-iT-rhg" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" placeholder="OVERS BOWLED" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fud-iT-rhg" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="20" y="358" width="240" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -9681,7 +9673,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="6S" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zrU-8R-qlg" userLabel="6S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="NO BALLS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zrU-8R-qlg" userLabel="6S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="400" y="429" width="120" height="42"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -9834,15 +9826,12 @@
                                             <constraint firstItem="0mL-Ud-EZh" firstAttribute="top" secondItem="x2V-5v-hev" secondAttribute="top" id="0xb-sA-VGJ"/>
                                             <constraint firstItem="WBU-Si-SBd" firstAttribute="centerX" secondItem="0mL-Ud-EZh" secondAttribute="centerX" id="16x-Fe-Zs2"/>
                                             <constraint firstItem="oDG-7W-Ndm" firstAttribute="trailing" secondItem="esn-g4-4VA" secondAttribute="trailing" id="1HE-VU-isd"/>
-                                            <constraint firstItem="x2V-5v-hev" firstAttribute="height" secondItem="tey-CU-vX6" secondAttribute="height" id="240-xD-Qpd"/>
                                             <constraint firstItem="wiR-Fz-Dh5" firstAttribute="top" secondItem="WBU-Si-SBd" secondAttribute="bottom" constant="30" id="2Vj-Xs-URF"/>
-                                            <constraint firstItem="x2V-5v-hev" firstAttribute="centerY" secondItem="tey-CU-vX6" secondAttribute="centerY" constant="42" id="2hb-gk-gft"/>
                                             <constraint firstItem="zrU-8R-qlg" firstAttribute="leading" secondItem="cF5-r0-yl0" secondAttribute="trailing" constant="5" id="2qI-j2-rXX"/>
                                             <constraint firstItem="zrU-8R-qlg" firstAttribute="centerX" secondItem="esn-g4-4VA" secondAttribute="centerX" id="38T-nj-cxu"/>
                                             <constraint firstItem="0mL-Ud-EZh" firstAttribute="centerX" secondItem="WBU-Si-SBd" secondAttribute="centerX" id="3Bd-2c-O2z"/>
                                             <constraint firstItem="1Ap-lV-PAS" firstAttribute="centerY" secondItem="mcK-yi-ifH" secondAttribute="centerY" constant="10" id="3df-bR-l96"/>
                                             <constraint firstItem="kqo-Fi-Uvg" firstAttribute="leading" secondItem="DT2-GD-CpS" secondAttribute="trailing" constant="5" id="3si-9Q-azh"/>
-                                            <constraint firstItem="x2V-5v-hev" firstAttribute="width" secondItem="tey-CU-vX6" secondAttribute="width" id="3uG-aA-vvO"/>
                                             <constraint firstItem="ZyJ-jq-TlP" firstAttribute="centerY" secondItem="esn-g4-4VA" secondAttribute="centerY" constant="10" id="4UG-t2-cLR"/>
                                             <constraint firstItem="fud-iT-rhg" firstAttribute="leading" secondItem="NSq-XX-qow" secondAttribute="leading" id="5nX-ph-QWd"/>
                                             <constraint firstItem="mcK-yi-ifH" firstAttribute="centerX" secondItem="x2V-5v-hev" secondAttribute="centerX" id="6Ab-l2-kSB"/>
@@ -9864,7 +9853,6 @@
                                             <constraint firstItem="1Ap-lV-PAS" firstAttribute="trailing" secondItem="mcK-yi-ifH" secondAttribute="trailing" id="D89-fj-9Pr"/>
                                             <constraint firstItem="mcK-yi-ifH" firstAttribute="trailing" secondItem="x2V-5v-hev" secondAttribute="trailing" id="DB4-hU-4qy"/>
                                             <constraint firstItem="oDG-7W-Ndm" firstAttribute="bottom" secondItem="3mI-8g-PyH" secondAttribute="bottom" id="DZK-lm-RDi"/>
-                                            <constraint firstAttribute="trailing" secondItem="tey-CU-vX6" secondAttribute="trailing" constant="15" id="Dej-Vl-3PW"/>
                                             <constraint firstItem="GJT-lK-73k" firstAttribute="centerY" secondItem="kqo-Fi-Uvg" secondAttribute="centerY" constant="10" id="EoI-p3-rOG"/>
                                             <constraint firstItem="WBU-Si-SBd" firstAttribute="centerY" secondItem="PPk-lg-n4Y" secondAttribute="centerY" constant="-10" id="FyO-hV-sA3"/>
                                             <constraint firstItem="4ac-1k-3YC" firstAttribute="top" secondItem="x2V-5v-hev" secondAttribute="bottom" constant="35" id="GKc-wb-mh8"/>
@@ -9873,7 +9861,6 @@
                                             <constraint firstItem="fKe-Yg-seb" firstAttribute="leading" secondItem="wiR-Fz-Dh5" secondAttribute="leading" id="IFt-9h-MmK"/>
                                             <constraint firstItem="fud-iT-rhg" firstAttribute="trailing" secondItem="NSq-XX-qow" secondAttribute="trailing" id="IMw-RU-cIs"/>
                                             <constraint firstItem="WBU-Si-SBd" firstAttribute="top" secondItem="mcK-yi-ifH" secondAttribute="top" id="IQV-Uv-rF6"/>
-                                            <constraint firstItem="x2V-5v-hev" firstAttribute="trailing" secondItem="tey-CU-vX6" secondAttribute="trailing" id="ImF-qU-BUR"/>
                                             <constraint firstItem="x2V-5v-hev" firstAttribute="leading" secondItem="Cbq-kR-OTY" secondAttribute="leading" constant="20" id="JQr-qs-gMl"/>
                                             <constraint firstItem="WBU-Si-SBd" firstAttribute="width" secondItem="mcK-yi-ifH" secondAttribute="width" id="JqE-24-wDE"/>
                                             <constraint firstItem="kqo-Fi-Uvg" firstAttribute="centerX" secondItem="fud-iT-rhg" secondAttribute="centerX" id="KE0-F7-j4w"/>
@@ -9885,13 +9872,11 @@
                                             <constraint firstItem="0mL-Ud-EZh" firstAttribute="bottom" secondItem="x2V-5v-hev" secondAttribute="bottom" id="LAv-PO-a6I"/>
                                             <constraint firstItem="oDG-7W-Ndm" firstAttribute="top" secondItem="3mI-8g-PyH" secondAttribute="top" id="LzE-2s-Ujn"/>
                                             <constraint firstItem="mcK-yi-ifH" firstAttribute="centerX" secondItem="x2V-5v-hev" secondAttribute="centerX" id="MhL-xl-Kh3"/>
-                                            <constraint firstItem="x2V-5v-hev" firstAttribute="top" secondItem="tey-CU-vX6" secondAttribute="bottom" constant="-10" id="NWL-lD-73Y"/>
                                             <constraint firstItem="3mI-8g-PyH" firstAttribute="top" secondItem="kqo-Fi-Uvg" secondAttribute="bottom" constant="30" id="Nyz-dp-ijp"/>
                                             <constraint firstItem="3mI-8g-PyH" firstAttribute="trailing" secondItem="fud-iT-rhg" secondAttribute="trailing" id="Pba-gD-OC2"/>
                                             <constraint firstItem="oDG-7W-Ndm" firstAttribute="leading" secondItem="esn-g4-4VA" secondAttribute="leading" id="PqY-Ic-AVd"/>
                                             <constraint firstItem="WBU-Si-SBd" firstAttribute="top" secondItem="mcK-yi-ifH" secondAttribute="top" id="R57-DW-hhH"/>
                                             <constraint firstItem="1Ap-lV-PAS" firstAttribute="bottom" secondItem="4ac-1k-3YC" secondAttribute="bottom" id="Rwf-t4-l7e"/>
-                                            <constraint firstItem="x2V-5v-hev" firstAttribute="leading" secondItem="tey-CU-vX6" secondAttribute="leading" id="S8P-3d-0kn"/>
                                             <constraint firstItem="x2V-5v-hev" firstAttribute="top" secondItem="Xjv-1E-8rg" secondAttribute="bottom" constant="20" id="SHa-Xd-0io"/>
                                             <constraint firstItem="NSq-XX-qow" firstAttribute="leading" secondItem="x2V-5v-hev" secondAttribute="leading" id="T02-6y-Eiw"/>
                                             <constraint firstItem="0mL-Ud-EZh" firstAttribute="width" secondItem="x2V-5v-hev" secondAttribute="width" id="Tjf-jp-O9d"/>
@@ -9918,11 +9903,9 @@
                                             <constraint firstItem="mcK-yi-ifH" firstAttribute="top" secondItem="x2V-5v-hev" secondAttribute="bottom" constant="30" id="d7A-OW-SKW"/>
                                             <constraint firstItem="kqo-Fi-Uvg" firstAttribute="top" secondItem="fud-iT-rhg" secondAttribute="bottom" constant="30" id="dRk-sL-wiV"/>
                                             <constraint firstItem="0mL-Ud-EZh" firstAttribute="leading" secondItem="WBU-Si-SBd" secondAttribute="leading" id="dex-l0-VqY"/>
-                                            <constraint firstItem="tey-CU-vX6" firstAttribute="top" secondItem="Cbq-kR-OTY" secondAttribute="top" constant="8" id="dw6-yP-aHF"/>
                                             <constraint firstItem="esn-g4-4VA" firstAttribute="leading" secondItem="WBU-Si-SBd" secondAttribute="leading" id="dyI-4l-2Eu"/>
                                             <constraint firstItem="WBU-Si-SBd" firstAttribute="bottom" secondItem="mcK-yi-ifH" secondAttribute="bottom" id="eGy-29-lNE"/>
                                             <constraint firstItem="x2V-5v-hev" firstAttribute="width" secondItem="Cbq-kR-OTY" secondAttribute="width" multiplier="0.4" id="eru-Ne-H7o"/>
-                                            <constraint firstItem="x2V-5v-hev" firstAttribute="centerX" secondItem="tey-CU-vX6" secondAttribute="centerX" constant="-173" id="evV-rh-WEc"/>
                                             <constraint firstAttribute="height" constant="800" id="f7L-JR-zSs"/>
                                             <constraint firstItem="mcK-yi-ifH" firstAttribute="height" secondItem="0mL-Ud-EZh" secondAttribute="height" id="fLv-t7-eH9"/>
                                             <constraint firstItem="mcK-yi-ifH" firstAttribute="leading" secondItem="x2V-5v-hev" secondAttribute="leading" id="fQW-pS-hsK"/>
@@ -9934,11 +9917,9 @@
                                             <constraint firstItem="FYS-vQ-aKI" firstAttribute="centerY" secondItem="zrU-8R-qlg" secondAttribute="centerY" constant="10" id="gwm-d5-GeK"/>
                                             <constraint firstItem="4ac-1k-3YC" firstAttribute="leading" secondItem="mcK-yi-ifH" secondAttribute="leading" id="h5R-bR-kb9"/>
                                             <constraint firstItem="x2V-5v-hev" firstAttribute="width" secondItem="Cbq-kR-OTY" secondAttribute="width" multiplier="0.4" id="hBx-4A-qNe"/>
-                                            <constraint firstItem="tey-CU-vX6" firstAttribute="centerY" secondItem="x2V-5v-hev" secondAttribute="centerY" id="hGt-vH-bFo"/>
                                             <constraint firstItem="1Ap-lV-PAS" firstAttribute="leading" secondItem="mcK-yi-ifH" secondAttribute="trailing" constant="5" id="hI0-dm-tAO"/>
                                             <constraint firstItem="mcK-yi-ifH" firstAttribute="leading" secondItem="x2V-5v-hev" secondAttribute="leading" id="hZK-kN-mLY"/>
                                             <constraint firstItem="oDG-7W-Ndm" firstAttribute="trailing" secondItem="wiR-Fz-Dh5" secondAttribute="trailing" id="hz9-Ze-XB7"/>
-                                            <constraint firstItem="tey-CU-vX6" firstAttribute="centerX" secondItem="x2V-5v-hev" secondAttribute="centerX" id="hzT-g5-y2l"/>
                                             <constraint firstItem="mcK-yi-ifH" firstAttribute="centerY" secondItem="4ac-1k-3YC" secondAttribute="centerY" constant="-10" id="iyF-Uj-tCL"/>
                                             <constraint firstItem="WBU-Si-SBd" firstAttribute="centerX" secondItem="0mL-Ud-EZh" secondAttribute="centerX" id="jaj-6e-W1E"/>
                                             <constraint firstItem="wiR-Fz-Dh5" firstAttribute="width" secondItem="NSq-XX-qow" secondAttribute="width" id="kFX-fD-6o7"/>
@@ -9976,14 +9957,7 @@
                                             <mask key="constraints">
                                                 <exclude reference="L3B-oK-UfZ"/>
                                                 <exclude reference="XOe-k1-fj9"/>
-                                                <exclude reference="Dej-Vl-3PW"/>
-                                                <exclude reference="dw6-yP-aHF"/>
-                                                <exclude reference="2hb-gk-gft"/>
-                                                <exclude reference="ImF-qU-BUR"/>
-                                                <exclude reference="NWL-lD-73Y"/>
-                                                <exclude reference="S8P-3d-0kn"/>
                                                 <exclude reference="SHa-Xd-0io"/>
-                                                <exclude reference="evV-rh-WEc"/>
                                                 <exclude reference="hBx-4A-qNe"/>
                                                 <exclude reference="6Ab-l2-kSB"/>
                                                 <exclude reference="6dY-fv-iqW"/>
@@ -10067,15 +10041,15 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="ballsText" destination="0mL-Ud-EZh" id="Dap-WU-OoU"/>
+                        <outlet property="ballsPlayedText" destination="0mL-Ud-EZh" id="nfp-YF-AGC"/>
                         <outlet property="dismissalText" destination="wiR-Fz-Dh5" id="uU6-wF-KbM"/>
                         <outlet property="economyText" destination="oDG-7W-Ndm" id="bg0-Xv-SD3"/>
                         <outlet property="foursText" destination="mcK-yi-ifH" id="df1-bl-mtU"/>
                         <outlet property="noballText" destination="zrU-8R-qlg" id="Ch9-hh-CGK"/>
                         <outlet property="oversText" destination="fud-iT-rhg" id="lwX-be-AOX"/>
                         <outlet property="positionText" destination="NSq-XX-qow" id="drI-gI-qdB"/>
-                        <outlet property="runsGivenText" destination="tey-CU-vX6" id="vaa-I8-hmE"/>
-                        <outlet property="runsText" destination="3mI-8g-PyH" id="Qy7-As-TOb"/>
+                        <outlet property="runsGivenText" destination="3mI-8g-PyH" id="9a5-sx-lpe"/>
+                        <outlet property="runsText" destination="x2V-5v-hev" id="NWF-PG-dQv"/>
                         <outlet property="scrollView" destination="dvL-k9-FYE" id="SxB-uf-cpB"/>
                         <outlet property="sixesText" destination="WBU-Si-SBd" id="tzr-Uj-npK"/>
                         <outlet property="strikeRateText" destination="fKe-Yg-seb" id="DVD-fn-zEA"/>
@@ -10619,6 +10593,13 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ok Filled-100" translatesAutoresizingMaskIntoConstraints="NO" id="hjb-tq-mSe">
+                                                <rect key="frame" x="292" y="38" width="16" height="16"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="16" id="fwk-6G-AO8"/>
+                                                    <constraint firstAttribute="width" constant="16" id="qT3-ny-3D3"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="n2A-51-gez" firstAttribute="leading" secondItem="21T-q4-E0r" secondAttribute="leading" constant="10" id="157-uM-YPF"/>
@@ -10633,6 +10614,7 @@
                                             <constraint firstAttribute="trailing" secondItem="gw3-t9-nyz" secondAttribute="trailing" constant="10" id="Eor-Qy-q10"/>
                                             <constraint firstItem="LtK-ZQ-9nD" firstAttribute="leading" secondItem="GYX-3q-xuR" secondAttribute="trailing" constant="10" id="Hkc-cL-K7E"/>
                                             <constraint firstItem="JnP-UA-THP" firstAttribute="leading" secondItem="21T-q4-E0r" secondAttribute="leading" constant="10" id="INa-r8-vH8"/>
+                                            <constraint firstItem="hjb-tq-mSe" firstAttribute="centerY" secondItem="LtK-ZQ-9nD" secondAttribute="centerY" id="JYB-sd-OOY"/>
                                             <constraint firstItem="GYX-3q-xuR" firstAttribute="leading" secondItem="21T-q4-E0r" secondAttribute="leading" constant="10" id="Kxw-fL-9HB"/>
                                             <constraint firstAttribute="height" constant="859" id="PQ6-UY-hnl"/>
                                             <constraint firstItem="LtK-ZQ-9nD" firstAttribute="centerX" secondItem="21T-q4-E0r" secondAttribute="centerX" id="Uox-c4-f9K"/>
@@ -10652,6 +10634,7 @@
                                             <constraint firstAttribute="trailing" secondItem="PvG-dd-rht" secondAttribute="trailing" constant="10" id="qOx-oj-QgM"/>
                                             <constraint firstItem="gw3-t9-nyz" firstAttribute="top" secondItem="f4j-pU-o4w" secondAttribute="bottom" constant="20" id="qcd-Jy-NFD"/>
                                             <constraint firstItem="f4j-pU-o4w" firstAttribute="centerX" secondItem="GYX-3q-xuR" secondAttribute="centerX" id="qkF-eQ-jlK"/>
+                                            <constraint firstItem="hjb-tq-mSe" firstAttribute="centerX" secondItem="LtK-ZQ-9nD" secondAttribute="centerX" id="uCv-sw-NPA"/>
                                             <constraint firstAttribute="trailing" secondItem="PvG-dd-rht" secondAttribute="trailing" constant="109" id="vty-6c-nkd"/>
                                             <constraint firstItem="n2A-51-gez" firstAttribute="top" secondItem="JnP-UA-THP" secondAttribute="bottom" constant="20" id="xd0-up-d7I"/>
                                         </constraints>
@@ -10695,6 +10678,7 @@
                         <outlet property="firstTeamTitle" destination="Fpe-Vb-haE" id="29S-wG-bmx"/>
                         <outlet property="firstTeamTossBtn" destination="avD-9t-kin" id="v97-Nf-FBh"/>
                         <outlet property="firstWicketsText" destination="k4r-9E-hog" id="yp1-NT-DTW"/>
+                        <outlet property="isTeambattingSetBtn" destination="hjb-tq-mSe" id="3UE-tZ-JK5"/>
                         <outlet property="refreshBtn" destination="LtK-ZQ-9nD" id="zqB-gh-crl"/>
                         <outlet property="resultText" destination="gw3-t9-nyz" id="oAh-eT-Ihc"/>
                         <outlet property="secondBattingHeaderText" destination="PvG-dd-rht" id="lTK-w1-kcG"/>

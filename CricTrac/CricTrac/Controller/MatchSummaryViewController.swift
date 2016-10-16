@@ -98,7 +98,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             aCell.totalRuns.text = runs
             totalruns = Double(runs)
         }
-        if let wickets = data["Wickets"], let balls = data["OversBalled"], let runs = data["Runs"]   {
+        if let wickets = data["Wickets"], let balls = data["OversBalled"], let runsGiven = data["RunsGiven"]   {
             aCell.bowlingViewHidden = (balls == "0" || balls == "-") ? true : false
             aCell.bowlingView.hidden = aCell.bowlingViewHidden
             aCell.BallsBowledWithWicketsTaken.hidden = aCell.bowlingViewHidden
@@ -111,7 +111,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 
                 ballsformattedString.bold("\(Int(balls)! * 6) ", fontName: appFont_black, fontSize: 20).normal("BALLS", fontName: appFont_regular, fontSize: 10)
                 
-                economyformattedString.bold("\(Float(runs)!/Float(balls)!) ", fontName: appFont_black, fontSize: 20).normal("ECONOMY", fontName: appFont_regular, fontSize: 10)
+                economyformattedString.bold("\(Float(runsGiven)!/Float(balls)!) ", fontName: appFont_black, fontSize: 20).normal("ECONOMY", fontName: appFont_regular, fontSize: 10)
                 
                 formattedStringCollection.append(ballsformattedString)
                 formattedStringCollection.append(economyformattedString)
@@ -137,7 +137,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         if let balls = data["Balls"]{
             
-            if totalruns != nil{
+            if totalruns != nil && balls != "-"{
                 let totalBalls = Double(balls)!
                 
                 if totalBalls > 0{

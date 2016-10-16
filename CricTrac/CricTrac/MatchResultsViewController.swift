@@ -27,11 +27,14 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
     var firstBatText: String!
     var secondBatText: String!
     
+    private var inEditMode: Bool = false
     
     let fullRotation = CGFloat(M_PI * 2)
     
     @IBOutlet weak var refreshBtn: UIButton!
 
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -73,7 +76,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
         secondBattingHeaderText.attributedText = secondBattingformattedStringCollection.joinWithSeparator("\n")
         
         
-        if ((parent?.selecetedData) != nil){ loadEditData() }
+        if ((parent?.selecetedData) != nil){ inEditMode = true; loadEditData() }
         
         setUIBackgroundTheme(self.view)
         
@@ -98,6 +101,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
     
     var tossText: String!
     
+    @IBOutlet weak var isTeambattingSetBtn: UIImageView!
     @IBOutlet weak var secondBattingHeaderText: UILabel!
     @IBOutlet weak var firstBattingHeaderText: UILabel!
     @IBOutlet weak var firstOversText: UITextField!
@@ -172,6 +176,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
         
         firstTeamTossBtn.alpha = 0.2
         secondTeamTossBtn.alpha = 0.2
+        isTeambattingSetBtn.alpha = 0.3
         
         if tossText == firstBatText {
             firstTeamTossBtn.alpha = 1.0
@@ -181,6 +186,9 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
             secondTeamTossBtn.alpha = 1.0
         }
         
+        if firstBatText != "-" {
+            self.isTeambattingSetBtn.alpha = 1.0
+        }
         
         secondScoreText.textVal = parent!.selecetedData!["SecondScore"]!
         secondWicketsText.textVal = parent!.selecetedData!["SecondWickets"]!
@@ -194,11 +202,16 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
     
     func setTeamData(){
         
-        if let matchVCInstance = parent?.matchVC {
+        
+        if !inEditMode, let matchVCInstance = parent?.matchVC {
             firstTeamTitle.text = matchVCInstance.teamText.text
             secondTeamTitle.text = matchVCInstance.opponentText.text
         }
         
+        firstBatText = firstTeamTitle.text
+        secondBatText = secondTeamTitle.text
+        
+        self.isTeambattingSetBtn.alpha = (firstBatText == "-" || firstBatText == "") ? 0.3 : 1.0
         
         
         teams.removeAll()
@@ -232,34 +245,42 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
 
     @IBAction func swapBtnPressed(sender: AnyObject) {
         
+        if (self.firstBatText != "-" && self.firstBatText != "") {
+            firstBatText = firstTeamTitle.text
+            secondBatText = secondTeamTitle.text
+            
+            let tempbattingtext = firstBatText
+            
+            firstBatText = secondBatText
+            
+            secondBatText = tempbattingtext
+            
+            let tempPt = FirstBattingView.center
+            
+            UIView.animateWithDuration(1.0,
+                                       delay: 0.0,
+                                       options: .AllowUserInteraction,
+                                       animations: {
+                                        self.FirstBattingView.center = self.SecondBattingView.center
+                },
+                                       completion: { finished in
+                                        
+            })
+            
+            UIView.animateWithDuration(1.0,
+                                       delay: 0.0,
+                                       options: .AllowUserInteraction,
+                                       animations: {
+                                        self.SecondBattingView.center = tempPt
+                },
+                                       completion: { finished in
+                                        
+            })
+            
+            animateBtn();
+        }
         
-        let tempbattingtext = firstBatText
         
-        firstBatText = secondBatText
-        
-        secondBatText = tempbattingtext
-        
-        let tempPt = FirstBattingView.center
-        
-        UIView.animateWithDuration(1.0,
-                                   delay: 0.0,
-                                   options: .AllowUserInteraction,
-                                   animations: {
-                                    self.FirstBattingView.center = self.SecondBattingView.center
-            },
-                                   completion: { finished in
-                                    print("Bug moved right!")
-        })
-        
-        UIView.animateWithDuration(1.0,
-                                   delay: 0.0,
-                                   options: .AllowUserInteraction,
-                                   animations: {
-                                    self.SecondBattingView.center = tempPt
-            },
-                                   completion: { finished in
-                                    print("Bug moved right!")
-        })
         
         
 //        FirstBattingView.layer.addAnimation(animateSwap(SecondBattingView.center), forKey: "animate position along path")
@@ -267,7 +288,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
 //        SecondBattingView.layer.addAnimation(animateSwap(tempPt), forKey: "animate position along path")
         
         
-        animateBtn();
+        
     }
     /*
     // MARK: - Navigation
@@ -302,7 +323,9 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
     self.refreshBtn.transform = CGAffineTransformMakeRotation(3/3 * self.fullRotation)
     })
     
-    }, completion: nil)
+        }, completion: {_ in
+            self.isTeambattingSetBtn.alpha = (self.firstBatText == "-" || self.firstBatText == "") ? 0.3 : 1.0
+    })
     }
     
     func animateSwap(pointToMoveTo: CGPoint) -> CAKeyframeAnimation {

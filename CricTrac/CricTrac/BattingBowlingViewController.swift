@@ -12,8 +12,9 @@ import SkyFloatingLabelTextField
 
 class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
     
-    @IBOutlet weak var runsGivenText:SkyFloatingLabelTextField!
-    @IBOutlet weak var ballsText:UITextField!
+
+    @IBOutlet weak var runsText: SkyFloatingLabelTextField!
+    @IBOutlet weak var ballsPlayedText:UITextField!
     @IBOutlet weak var foursText:UITextField!
     @IBOutlet weak var sixesText:UITextField!
     @IBOutlet weak var strikeRateText:UITextField!
@@ -23,41 +24,86 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
     
     @IBOutlet weak var oversText:SkyFloatingLabelTextField!
     @IBOutlet weak var wicketsText:UITextField!
-    @IBOutlet weak var runsText:UITextField!
     @IBOutlet weak var noballText:UITextField!
     @IBOutlet weak var widesText:UITextField!
     @IBOutlet weak var economyText:UITextField!
     
+    @IBOutlet weak var runsGivenText: UITextField!
     weak var parent:MatchParent?
     
     var BowlingData:[String:String]{
         
-        return ["OversBalled":oversText.textVal,"Wickets":wicketsText.textVal,"RunsGiven":runsText.textVal,"Noballs":noballText.textVal,"Wides":widesText.text!]
+        return ["OversBalled":oversText.textVal,"Wickets":wicketsText.textVal,"RunsGiven":runsGivenText.textVal,"Noballs":noballText.textVal,"Wides":widesText.text!]
     }
     
+    var allRequiredFieldsHaveFilledProperly: Bool {
+        if let runText = runsText, let overText = oversText {
+            ValidateScore()
+            validateOvers()
+            return runText.errorMessage?.length == 0  && overText.errorMessage?.length == 0
+        }
+        return false
+    }
     
-    var allRequiredFieldsHaveFilledProperly:Bool{
-        _ = view
-        if oversText.text?.trimWhiteSpace.length > 0 && runsGivenText.text?.trimWhiteSpace.length > 0{
-            return true
+    func ValidateScore() -> Void {
+        
+        if let runText = runsText {
+            if runText.text?.trimWhiteSpace.length > 0  {
+                if let foursScored = foursText.text, let sixesScored = sixesText.text
+                {
+                    var sum = 0
+                    if foursScored.trimWhiteSpace.length > 0, let foursInt = Int(foursScored) {
+                        sum += (4*foursInt)
+                    }
+                    if sixesScored.trimWhiteSpace.length > 0, let sixesInt = Int(sixesScored) {
+                        sum += (6*sixesInt)
+                    }
+                    
+                    if sum > Int(runText.text!)! {
+                        runsText.errorMessage = "Invalid Runs"
+                    }
+                    else
+                    {
+                        runsText.errorMessage = ""
+                    }
+                }
+            }
+            else
+            {
+                runsText.errorMessage = "Runs Empty"
+            }
         }
-        else{
-            
-            
-//            if ballsText.text?.trimWhiteSpace.length > 0 && foursText.text?.trimWhiteSpace.length > 0 && sixesText.text?.trimWhiteSpace.length > 0 && positionText.text?.trimWhiteSpace.length > 0 && dismissalText.text?.trimWhiteSpace.length > 0 {
-//                    return true
-//            }
-//            
-//            else if wicketsText.text?.trimWhiteSpace.length > 0 && runsText.text?.trimWhiteSpace.length > 0 && noballText.text?.trimWhiteSpace.length > 0 {
-//                return true
-//            }
-            
-            
-            return false
+    }
+    
+    func validateOvers() -> Void {
+        
+        if let overText = oversText {
+            if overText.text!.trimWhiteSpace.length > 0 {
+                if let widesBowled = widesText.text, let noBallsBowled = noballText.text
+                {
+                    var sum = 0
+                    if widesBowled.trimWhiteSpace.length > 0, let widesInt = Int(widesBowled) {
+                        sum += widesInt
+                    }
+                    
+                    if noBallsBowled.trimWhiteSpace.length > 0, let noBallsInt = Int(noBallsBowled) {
+                        sum += noBallsInt
+                    }
+                    
+                    if sum > Int(oversText.text!)! {
+                        oversText.errorMessage = "Invalid Overs"
+                    }
+                    else
+                    {
+                        oversText.errorMessage = ""
+                    }
+                }
+            }
+            else
+            {
+                oversText.errorMessage = "Overs Empty"
+            }
         }
-        
-        
-        
     }
     
     @IBAction func incrementWickets(sender: AnyObject) {
@@ -107,13 +153,13 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
     var BattingData:[String:String]{
         
         
-        return ["Runs":runsText.textVal,"Balls":ballsText.textVal,"Fours":foursText.textVal,"Sixes":sixesText.textVal,"Position":positionText.textVal,"Dismissal":dismissalText.textVal]
+        return ["Runs":runsText.textVal,"Balls":ballsPlayedText.textVal,"Fours":foursText.textVal,"Sixes":sixesText.textVal,"Position":positionText.textVal,"Dismissal":dismissalText.textVal]
     }
     
     func loadEditData(){
         
         runsText.textVal = parent!.selecetedData!["Runs"]!
-        ballsText.textVal = parent!.selecetedData!["Balls"]!
+        ballsPlayedText.textVal = parent!.selecetedData!["Balls"]!
         foursText.textVal = parent!.selecetedData!["Fours"]!
         sixesText.textVal = parent!.selecetedData!["Sixes"]!
         strikeRateText.textVal = parent!.selecetedData!["Ground"]!
@@ -124,7 +170,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
         
         oversText.textVal = parent!.selecetedData!["OversBalled"]!
         wicketsText.textVal = parent!.selecetedData!["Wickets"]!
-        runsText.textVal = parent!.selecetedData!["RunsGiven"]!
+        runsGivenText.textVal = parent!.selecetedData!["RunsGiven"]!
         noballText.textVal = parent!.selecetedData!["Noballs"]!
         widesText.textVal = parent!.selecetedData!["Wides"]!
         calculateEconomy()
@@ -134,7 +180,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        runsGivenText.errorColor = UIColor.redColor()
+        runsText.errorColor = UIColor.redColor()
         if ((parent?.selecetedData) != nil){ loadEditData() }
         setUIBackgroundTheme(self.view)
         // Do any additional setup after loading the view.
@@ -143,8 +189,8 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
         runsText.delegate = self
         oversText.delegate = self
         
-        runsGivenText.delegate = self
-        ballsText.delegate = self
+        runsText.delegate = self
+        ballsPlayedText.delegate = self
         foursText.delegate = self
         sixesText.delegate = self
         strikeRateText.delegate = self
@@ -239,14 +285,9 @@ extension BattingBowlingViewController:UITextFieldDelegate{
     func textFieldDidEndEditing(textField: UITextField){
         
         if textField.tag == 1 {
-            if allRequiredFieldsHaveFilledProperly{
-                runsGivenText.errorMessage = ""
-            }
-            else{
-                runsGivenText.errorMessage = "Runs cant be empty"
-            }
+            ValidateScore()
             
-            if textField == runsText || textField == ballsText{
+            if textField == runsText || textField == ballsPlayedText{
                 
                 calculateStrikeRate()
             }
@@ -257,13 +298,7 @@ extension BattingBowlingViewController:UITextFieldDelegate{
             }
         }
         else if textField.tag == 2 {
-            if allRequiredFieldsHaveFilledProperly{
-                oversText.errorMessage = ""
-            }
-            else{
-                oversText.errorMessage = "Overs cant be empty"
-            }
-            
+            validateOvers()
             if textField == oversText || textField == runsText{
                 
                 calculateEconomy()
@@ -284,7 +319,7 @@ extension BattingBowlingViewController:UITextFieldDelegate{
         if runsText.text?.trimWhiteSpace.length == 0{
             strikeRateText.text = ""
         }
-        else if ballsText.text?.trimWhiteSpace.length == 0{
+        else if ballsPlayedText.text?.trimWhiteSpace.length == 0{
             strikeRateText.text = ""
         }
         else{
@@ -296,7 +331,7 @@ extension BattingBowlingViewController:UITextFieldDelegate{
     func setStrikeRate(){
         
         if let runs = Double((runsText.text?.trimWhiteSpace)!){
-            if let balls = Double((ballsText.text?.trimWhiteSpace)!){
+            if let balls = Double((ballsPlayedText.text?.trimWhiteSpace)!){
                 
                 strikeRateText.text = String(format: "%.0f",(runs*100 / balls))
             }

@@ -67,6 +67,7 @@
 		8930F03E1D5BA0EB00C7540B /* UserTeamDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930F03D1D5BA0EB00C7540B /* UserTeamDetailsViewController.swift */; };
 		8930F0401D5BA1D600C7540B /* UserGroundDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930F03F1D5BA1D600C7540B /* UserGroundDetailsViewController.swift */; };
 		8930F0421D5BA20F00C7540B /* UserOpponentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930F0411D5BA20F00C7540B /* UserOpponentDetailsViewController.swift */; };
+		893E9EA11DB2629C00D63AB8 /* MenuTransitionOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893E9EA01DB2629C00D63AB8 /* MenuTransitionOperator.swift */; };
 		894CA29E1D96150A0043D3D1 /* SIL Open Font License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 894CA2911D96150A0043D3D1 /* SIL Open Font License.txt */; };
 		894CA29F1D96150A0043D3D1 /* SourceSansPro-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 894CA2921D96150A0043D3D1 /* SourceSansPro-Black.otf */; };
 		894CA2A01D96150A0043D3D1 /* SourceSansPro-BlackIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 894CA2931D96150A0043D3D1 /* SourceSansPro-BlackIt.otf */; };
@@ -193,6 +194,7 @@
 		8930F03F1D5BA1D600C7540B /* UserGroundDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserGroundDetailsViewController.swift; sourceTree = "<group>"; };
 		8930F0411D5BA20F00C7540B /* UserOpponentDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserOpponentDetailsViewController.swift; sourceTree = "<group>"; };
 		8935ADC31D3E640900607C9D /* CricTrac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CricTrac-Bridging-Header.h"; sourceTree = "<group>"; };
+		893E9EA01DB2629C00D63AB8 /* MenuTransitionOperator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTransitionOperator.swift; sourceTree = "<group>"; };
 		894CA2911D96150A0043D3D1 /* SIL Open Font License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "SIL Open Font License.txt"; sourceTree = "<group>"; };
 		894CA2921D96150A0043D3D1 /* SourceSansPro-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Black.otf"; sourceTree = "<group>"; };
 		894CA2931D96150A0043D3D1 /* SourceSansPro-BlackIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-BlackIt.otf"; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 				89E6084C1D6D4ADC00F6BD11 /* CTDataPicker.swift */,
 				892CE2D11D9EBEF2001E098E /* DragView.swift */,
 				89067D741DAEA89C0021F463 /* TransitionManager.swift */,
+				893E9EA01DB2629C00D63AB8 /* MenuTransitionOperator.swift */,
 			);
 			name = utility;
 			sourceTree = "<group>";
@@ -692,6 +695,7 @@
 				897194CB1DA34DFD00478F82 /* AddMatchDetailsViewController.swift in Sources */,
 				895E04031D5CD134002E322E /* FriendRequestsTableViewCell.swift in Sources */,
 				4607A2641D54848A0090A5BD /* MatchViewController.swift in Sources */,
+				893E9EA11DB2629C00D63AB8 /* MenuTransitionOperator.swift in Sources */,
 				892CE2D21D9EBEF2001E098E /* DragView.swift in Sources */,
 				8930F0341D5B5D4E00C7540B /* ProfileBaseViewController.swift in Sources */,
 				899206241D61BA0700F99A97 /* FriendsViewController.swift in Sources */,
