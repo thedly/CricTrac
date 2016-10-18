@@ -186,6 +186,27 @@ func getAllProfileData(sucessBlock:([String:AnyObject])->Void){
     })
 }
 
+func getAllProfiles(sucessBlock:([[String:AnyObject]])->Void){
+    
+    fireBaseRef.child("Users").observeEventType(.Value, withBlock: { (snapshot) in
+        var users: [[String: AnyObject]] = []
+        if let data: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
+            
+            for (key, value) in data {
+                if var profile = value["UserProfile"] as? [String : AnyObject] {
+                    profile["UserId"] = key
+                    users.append(profile)
+                }
+            }
+            
+            sucessBlock(users)
+        }
+        else{
+            sucessBlock([[:]])
+        }
+    })
+}
+
 func getImageFromFacebook() -> UIImage{
     
     var profileImage = UIImage()

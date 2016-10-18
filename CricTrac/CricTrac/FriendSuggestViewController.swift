@@ -45,6 +45,27 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     // MARK: - Table delegate functions
     
     
+        
+    @IBAction func getAllProfilesBtnPressed(sender: AnyObject) {
+        getAllProfiles({ resultObj in
+            
+            for profile in resultObj {
+                
+                if let _imageUrl = profile["ProfileImageUrl"] as? String where _imageUrl != ""  {
+                    getImageFromFirebase(_imageUrl) { (data) in
+                        UserProfilesImages[_imageUrl] = data
+                    }
+                }
+            }
+            
+            
+            
+            
+            UserProfilesData = resultObj
+            self.SuggestsTblview.reloadData()
+        })
+        
+    }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -54,7 +75,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return UserProfilesData.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -68,8 +89,15 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         
         
         let aCell =  SuggestsTblview.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as! FriendSuggestionsCell
+        
+        aCell.configureCell(UserProfilesData[indexPath.row])
         aCell.backgroundColor = UIColor.clearColor()
         return aCell
+        
+        
+        
+        
+        
     }
     
     /*

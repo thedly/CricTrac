@@ -14,11 +14,11 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate 
     
     @IBAction func nextBtnPressed(sender: AnyObject) {
         var toViewController: UIViewController
-        switch profileDetailsData?.profileDetails["UserType"] {
+        switch profileData["UserType"] {
         case userProfileType.Player.rawValue? :
             toViewController = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
         case userProfileType.Coach.rawValue? :
-            toViewController = viewControllerFrom("Main", vcid: "CoachExperienceViewController")
+            toViewController = viewControllerFrom("Main", vcid: "CoachingExperienceViewController")
         case userProfileType.Fan.rawValue? :
             toViewController = viewControllerFrom("Main", vcid: "CricketFanViewController")
         default:
@@ -34,30 +34,33 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate 
     
     let transitionManager = TransitionManager.sharedInstance
     
-    private weak var profileDetailsData : ProfileDetailsProtocol?
+    
     
     func handleProfileTap(sender: UITapGestureRecognizer? = nil) {
         deselectAll(self.view)
         playerTextView.isSelected = true
-        profileDetailsData?.profileDetails["UserType"] = userProfileType.Player.rawValue
+        profileData["UserType"] = userProfileType.Player.rawValue
     }
     
     func handleCoachTap(sender: UITapGestureRecognizer? = nil) {
         deselectAll(self.view)
         coachTextView.isSelected = true
-        profileDetailsData?.profileDetails["UserType"] = userProfileType.Coach.rawValue
+        profileData["UserType"] = userProfileType.Coach.rawValue
     }
     
     func handleFanTap(sender: UITapGestureRecognizer? = nil) {
         deselectAll(self.view)
         cricketFanTextView.isSelected = true
-        profileDetailsData?.profileDetails["UserType"] = userProfileType.Fan.rawValue
+        profileData["UserType"] = userProfileType.Fan.rawValue
     }
     
     
     
     
     
+    @IBAction func disPressCancel(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     
     
     

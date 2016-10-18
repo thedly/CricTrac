@@ -183,7 +183,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
                 let oversFromBallsRealRemaining = totalBalls - (6*oversFromBallsInt)
                 
                 
-                if let RunsGiven = matchDetailsData["RunsGiven"] {
+                if let RunsGiven = matchDetailsData["RunsGiven"] where RunsGiven != "-" {
                     let ec = (Double(RunsGiven)!/Double(totalBalls)).roundToPlaces(2)
                     economy.text = String(ec)
                 }

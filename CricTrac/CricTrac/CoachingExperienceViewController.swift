@@ -12,10 +12,13 @@ class CoachingExperienceViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setUIBackgroundTheme(self.view)
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func backBtnPressed(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

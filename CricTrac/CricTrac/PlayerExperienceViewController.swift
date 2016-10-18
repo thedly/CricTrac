@@ -24,7 +24,6 @@ class PlayerExperienceViewController: UIViewController {
     
     let transitionManager = TransitionManager.sharedInstance
     
-    private weak var profileDetailsData : ProfileDetailsProtocol?
     
     @IBAction func goPreviousPage(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)

@@ -33,6 +33,12 @@ class UserInfoViewController: UIViewController  {
     @IBOutlet weak var gender: UITextField!
     @IBOutlet weak var mobile: UITextField!
     
+    @IBOutlet weak var teamName: UITextField!
+    @IBOutlet weak var bowlingStyle: UITextField!
+    @IBOutlet weak var battingStyle: UITextField!
+    @IBOutlet weak var playingRole: UITextField!
+    
+    
     var selectedText:UITextField?
     
     let transitionManager = TransitionManager.sharedInstance
@@ -68,7 +74,7 @@ class UserInfoViewController: UIViewController  {
     
     var data:[String:String]{
         
-        return ["FirstName":firstName.textVal,"LastName":lastName.textVal,"DateOfBirth":dateOfBirth.textVal,"Email":emailId.textVal,"Mobile":mobile.textVal,"Gender":gender.textVal,"Country":country.textVal,"State":state.textVal,"City":city.textVal]
+        return ["FirstName":firstName.textVal,"LastName":lastName.textVal,"DateOfBirth":dateOfBirth.textVal,"Email":emailId.textVal,"Mobile":mobile.textVal,"Gender":gender.textVal,"Country":country.textVal,"State":state.textVal,"City":city.textVal, "TeamName": teamName.textVal, "BattingStyle": battingStyle.textVal, "BowlingStyle": bowlingStyle.textVal, "PlayingRole": playingRole.textVal]
     }
     
     
@@ -83,6 +89,11 @@ class UserInfoViewController: UIViewController  {
         firstName.delegate = self
         lastName.delegate = self
         
+        playingRole.delegate = self
+        bowlingStyle.delegate = self
+        battingStyle.delegate = self
+        teamName.delegate = self
+        
         loadInitialProfileValues()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserInfoViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
@@ -95,28 +106,33 @@ class UserInfoViewController: UIViewController  {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
             
-//            getAllProfileData { (data) in
-//                
-//                profileData = data as! [String:String]
-//                
-//                if profileData.count > 0 {
-//                    
-//                    
-//                    self.profileDetailsExists = true
-//                    
-//                    self.firstName.text = profileData["FirstName"]
-//                    self.lastName.text = profileData["LastName"]
-//                    self.dateOfBirth.text = profileData["DateOfBirth"]
-//                    self.emailId.text = profileData["Email"]
-//                    self.mobile.text = profileData["Mobile"]
-//                    self.gender.text = profileData["Gender"]
-//                    self.country.text = profileData["Country"]
-//                    self.state.text = profileData["State"]
-//                    self.city.text = profileData["City"]
-//                    self.ctCountryPicker.SelectedCountry = profileData["Country"]!
-//                    
-//                }
-//        }
+            getAllProfileData { (data) in
+                
+                profileData = data as! [String:String]
+                
+                if profileData.count > 0 {
+                    
+                    
+                    self.profileDetailsExists = true
+                    
+                    self.firstName.text = profileData["FirstName"]
+                    self.lastName.text = profileData["LastName"]
+                    self.dateOfBirth.text = profileData["DateOfBirth"]
+                    self.emailId.text = profileData["Email"]
+                    self.mobile.text = profileData["Mobile"]
+                    self.gender.text = profileData["Gender"]
+                    self.country.text = profileData["Country"]
+                    self.state.text = profileData["State"]
+                    self.city.text = profileData["City"]
+                    self.ctCountryPicker.SelectedCountry = profileData["Country"]!
+                    
+                    self.teamName.text = profileData["TeamName"]
+                    self.battingStyle.text = profileData["BattingStyle"]
+                    self.bowlingStyle.text = profileData["BowlingStyle"]
+                    self.playingRole.text = profileData["PlayingRole"]
+                    
+                }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -270,6 +286,21 @@ extension UserInfoViewController:UITextFieldDelegate{
             ctDataPicker = DataPicker()
             let indexPos = genders.indexOf(gender.text!) ?? 0
             ctDataPicker.showPicker(self, inputText: textField, data: genders,selectedValueIndex: indexPos)
+        }
+        else if  textField == playingRole{
+            ctDataPicker = DataPicker()
+            let indexPos = PlayingRoles.indexOf(playingRole.text!) ?? 0
+            ctDataPicker.showPicker(self, inputText: textField, data: PlayingRoles,selectedValueIndex: indexPos)
+        }
+        else if  textField == battingStyle{
+            ctDataPicker = DataPicker()
+            let indexPos = BattingStyles.indexOf(battingStyle.text!) ?? 0
+            ctDataPicker.showPicker(self, inputText: textField, data: BattingStyles,selectedValueIndex: indexPos)
+        }
+        else if  textField == bowlingStyle{
+            ctDataPicker = DataPicker()
+            let indexPos = BowlingStyles.indexOf(bowlingStyle.text!) ?? 0
+            ctDataPicker.showPicker(self, inputText: textField, data: BowlingStyles,selectedValueIndex: indexPos)
         }
     }
 }

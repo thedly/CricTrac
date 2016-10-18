@@ -6,8 +6,3 @@
 //  Copyright © 2016 CricTrac. All rights reserved.
 //
 
-import Foundation
-
-protocol ProfileDetailsProtocol: class {
-    var profileDetails : [String: String] {get set}
-}
