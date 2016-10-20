@@ -483,7 +483,7 @@ func addNewPost(postText:String){
     
     KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
     
-    let ref = fireBaseRef.child("TimelinePosts").childByAutoId()
+    var ref = fireBaseRef.child("TimelinePosts").childByAutoId()
     
     ref.setValue(postText)
     
@@ -491,10 +491,15 @@ func addNewPost(postText:String){
     
     for friend in friendsDataArray{
         
-        let ref = fireBaseRef.child(friend).child("TimelineIDs").childByAutoId()
+        let ref = fireBaseRef.child("Users").child(friend).child("TimelineIDs").childByAutoId()
         
         ref.setValue(postKey)
     }
+    
+     ref = fireBaseRef.child("Users").child(currentUser!.uid).child("SelfTimelineIDs").childByAutoId()
+    
+    ref.setValue(postKey)
+    
     KRProgressHUD.dismiss()
     
 }
