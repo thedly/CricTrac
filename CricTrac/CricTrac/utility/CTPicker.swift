@@ -50,7 +50,7 @@ class CTPicker: NSObject {
         toolBar.userInteractionEnabled = true
         inputText.inputAccessoryView = toolBar
         inputText.inputView = pickerView
-        selecetedData = dataSource[0]
+        selecetedData = dataSource.count > 0 ? dataSource[0] : ""
     }
 
     func doneClick() {

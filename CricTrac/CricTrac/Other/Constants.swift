@@ -19,7 +19,7 @@ let menuData = [
     ["title":"New Match","vc":"AddMatchDetailsViewController"],
     ["title":"Match Summary","vc":"MatchSummaryViewController"],
     ["title":"Friends","vc":"FriendBaseViewController"],
-    ["title":"Profile","vc":"UserInfoViewController"],
+    ["title":"Profile","vc":"ProfileBaseViewController"],
     ["title":"Statistics","vc":"NewMatchViewController"],
     ["title":"Notification","vc":"SummaryViewController"],
     ["title":"Settings","vc":"SettingsViewController"],

@@ -17,7 +17,8 @@ class FriendSuggestionsCell: UITableViewCell {
     @IBOutlet weak var userProfileView: UIImageView!
     
     @IBOutlet weak var AddFriendBtn: UIButton!
-    private var _userObj = [String:AnyObject]()
+    private var _userObj: Profile!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,10 +39,25 @@ class FriendSuggestionsCell: UITableViewCell {
     
     func AddFriendBtnPressed(sender: UIButton) {
         
-        var currentRequest  = self._userObj
-        print(currentRequest)
         
-        //Send Friend Request
+        if let loggedInUser = UserProfilesData.filter({ $0.id == currentUser?.uid }).first {
+            
+            let friendRequestData  = ["sentRequestData":
+            
+            ["City": _userObj.City, "Club": _userObj.TeamName, "Name": _userObj.fullName, "SentTo": _userObj.id, "SentDateTime": "\(currentTimeMillis())"],
+            
+            "ReceivedRequestData" : ["City": loggedInUser.City, "Club": loggedInUser.TeamName, "Name": loggedInUser.fullName, "ReceivedFrom": loggedInUser.id, "ReceievedDateTime": "\(currentTimeMillis())"]
+            ]
+            
+            AddSentRequestData(friendRequestData, callback: { sentRequestId in
+            print(sentRequestId)
+            })
+            
+            
+            
+            //Send Friend Request
+        }
+        
         
     }
     override func setSelected(selected: Bool, animated: Bool) {
@@ -50,34 +66,15 @@ class FriendSuggestionsCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureCell(userProfileObject: [String:AnyObject]) {
+    func configureCell(userProfileObject: Profile) {
         
         self._userObj = userProfileObject
         
-        var fullName = ""
-        var fullTeamName = ""
-        var fullImagePath = ""
-        
-        var currentProfile = userProfileObject
-        
-        if let fname = currentProfile["FirstName"], let lname = currentProfile["LastName"] {
-            fullName = "\(fname) \(lname)"
-        }
-        
-        if let teamName = currentProfile["TeamName"] {
-            fullTeamName = "\(teamName)"
-        }
-        
-        if let imapgePath = currentProfile["ProfileImageUrl"] {
-            fullImagePath = "\(imapgePath)"
-        }
+        self.userName.text = userProfileObject.fullName
+        self.userTeam.text = userProfileObject.TeamName
+        self.userProfileView.image = extractImages(userProfileObject.ProfileImageUrl)
         
         
-        
-        
-        self.userName.text = fullName
-        self.userTeam.text = fullTeamName
-        self.userProfileView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: fullImagePath)!)!) //extractImages(fullImagePath)
         
         self.AddFriendBtn.addTarget(self, action: #selector(FriendSuggestionsCell.AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
     }
@@ -89,5 +86,6 @@ class FriendSuggestionsCell: UITableViewCell {
         return UIImage(named: "User")!
     }
 
+    
 
 }

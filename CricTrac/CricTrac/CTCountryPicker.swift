@@ -16,7 +16,7 @@ class CTCountryPicker: NSObject {
     var inputText:UITextField!
     var parent:UIViewController!
     private var states: [String]!
-    var SelectedCountry: String {
+    var SelectedCountry: String? {
         
         get{
             if countryPicker != nil , let _selectedCountry = countryPicker.pickedCountry! as? Country {

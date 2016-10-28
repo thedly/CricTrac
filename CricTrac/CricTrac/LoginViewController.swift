@@ -44,6 +44,14 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         return IndicatorInfo(title: "Sign In")
     }
     
+    @IBAction func forgotPwdBtnPressed(sender: AnyObject) {
+        
+        let forgotPwdVC = viewControllerFrom("Main", vcid: "ForgotPasswordViewController")
+        
+        self.presentViewController(forgotPwdVC, animated: true, completion: nil)
+        
+    }
+    
     @IBAction func registerBtnTapped(sender: UIButton) {
         
         let registerVC = viewControllerFrom("Main", vcid: "RegisterViewController")
@@ -60,9 +68,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     }
 
     @IBAction func loginWithUserNamePassword(){
-        
         KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
-        
     loginWithMailAndPassword((username.text?.trimWhiteSpace)!, password: (password.text?.trimWhiteSpace)!) { (user, error) in
         
         if error != nil{
@@ -73,10 +79,16 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
            
         }
         else {
-            currentUser = user
-            enableSync()
-            self.navigateToNextScreen()
-            
+            KRProgressHUD.dismiss()
+            if user!.emailVerified{
+                currentUser = user
+                enableSync()
+                self.navigateToNextScreen()
+            }
+            else
+            {
+                SCLAlertView().showError("Login Error", subTitle: "This email is has not been verified yet")
+            }
         }
         
         }

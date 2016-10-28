@@ -21,6 +21,20 @@ func loadInitialValues(){
         }
     })
     
+    fireBaseRef.child("AgeGroup").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let value = snapshot.value as? [String]{
+            AgeGroupData = value
+        }
+    })
+
+    fireBaseRef.child("PlayingLevel").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let value = snapshot.value as? [String]{
+            PlayingLevels = value
+        }
+    })
+    
     fireBaseRef.child("Results").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
         
         if let value = snapshot.value as? [String]{
@@ -141,12 +155,7 @@ func loadInitialProfileValues(){
         }
     })
     
-    fireBaseRef.child("PlayingLevel").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-        
-        if let value = snapshot.value as? [String]{
-            PlayingLevels = value
-        }
-    })
+    
     
     fireBaseRef.child("Gender").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
         
@@ -366,13 +375,53 @@ func registerWithEmailAndPassword(userName:String,password:String,callBack:(user
         FIRAuth.auth()?.createUserWithEmail(userName, password: password) { (user, error) in
             
             callBack(user: user,error: error)
-            if error == nil{
-                SCLAlertView().showInfo("User Created", subTitle: "")
-            }
+            
             
         }
         
     //}
+}
+
+
+// MARK: - Friends
+
+
+
+public func AddSentRequestData(data: [String:[String:String]], callback:(data:String)->Void) {
+    
+    var dataToBeManipulated = data
+    
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("SentRequest").childByAutoId()
+    ref.setValue(dataToBeManipulated["sentRequestData"], withCompletionBlock: { error, newlyCreateddata in
+        
+        var createdId = [String: AnyObject]()
+        createdId["SentRequestId"] = newlyCreateddata.key
+        
+        ref.updateChildValues(createdId)
+        
+        let receivedRequestRef = fireBaseRef.child("Users").child(dataToBeManipulated["sentRequestData"]!["SentTo"]!).child("ReceivedRequest").childByAutoId()
+        
+        dataToBeManipulated["ReceivedRequestData"]!["SentRequestId"] = newlyCreateddata.key
+        
+        receivedRequestRef.setValue(data["ReceivedRequestData"], withCompletionBlock: { error, newlyCreatedReceivedRequestData in
+            
+            var createdId = [String: AnyObject]()
+            createdId["RequestId"] = newlyCreatedReceivedRequestData.key
+            
+            
+            receivedRequestRef.updateChildValues(createdId)
+            
+            callback(data: newlyCreatedReceivedRequestData.key)
+        })
+        
+        
+        
+        
+        
+    })
+    
+    
+    
 }
 
 

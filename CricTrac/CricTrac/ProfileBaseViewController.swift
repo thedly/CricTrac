@@ -14,12 +14,12 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate 
     
     @IBAction func nextBtnPressed(sender: AnyObject) {
         var toViewController: UIViewController
-        switch profileData["UserType"] {
-        case userProfileType.Player.rawValue? :
+        switch profileData.userType {
+        case userProfileType.Player.rawValue :
             toViewController = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
-        case userProfileType.Coach.rawValue? :
+        case userProfileType.Coach.rawValue :
             toViewController = viewControllerFrom("Main", vcid: "CoachingExperienceViewController")
-        case userProfileType.Fan.rawValue? :
+        case userProfileType.Fan.rawValue :
             toViewController = viewControllerFrom("Main", vcid: "CricketFanViewController")
         default:
             toViewController = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
@@ -39,19 +39,19 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate 
     func handleProfileTap(sender: UITapGestureRecognizer? = nil) {
         deselectAll(self.view)
         playerTextView.isSelected = true
-        profileData["UserType"] = userProfileType.Player.rawValue
+        profileData.userType = userProfileType.Player.rawValue
     }
     
     func handleCoachTap(sender: UITapGestureRecognizer? = nil) {
         deselectAll(self.view)
         coachTextView.isSelected = true
-        profileData["UserType"] = userProfileType.Coach.rawValue
+        profileData.userType = userProfileType.Coach.rawValue
     }
     
     func handleFanTap(sender: UITapGestureRecognizer? = nil) {
         deselectAll(self.view)
         cricketFanTextView.isSelected = true
-        profileData["UserType"] = userProfileType.Fan.rawValue
+        profileData.userType = userProfileType.Fan.rawValue
     }
     
     

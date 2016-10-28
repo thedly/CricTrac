@@ -63,7 +63,7 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,GIDSignInDe
         
         registerWithEmailAndPassword((username.text?.trimWhiteSpace)!, password: (password.text?.trimWhiteSpace)!) { (user, error) in
             
-            if error != nil{
+            if error == nil {
                 
                 KRProgressHUD.dismiss()
                 SCLAlertView().showError("Registration Error", subTitle: error!.localizedDescription)
@@ -71,9 +71,34 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,GIDSignInDe
                 
             }
             else {
-                currentUser = user
-                enableSync()
-                self.navigateToNextScreen()
+                //currentUser = user
+                //enableSync()
+                
+                if error != nil {
+                    
+                    user?.sendEmailVerificationWithCompletion() { error in
+                        KRProgressHUD.dismiss()
+                        if let error = error {
+                            SCLAlertView().showError("Error", subTitle: "Email was not sent")
+                            // An error happened.
+                        } else {
+                            
+                            self.dismissViewControllerAnimated(true, completion: {
+                                SCLAlertView().showInfo("Verify email", subTitle: "An email has been sent for verification")
+                            })
+                            
+                            
+                            // Email sent.
+                        }
+                    }
+                    
+                    
+                }
+                
+                
+                
+                
+                //self.navigateToNextScreen()
                 
             }
             
@@ -234,8 +259,15 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,GIDSignInDe
     }
     
     func navigateToNextScreen(){
-        self.googleBtn.enabled = true
-        self.facebookBtn.enabled = true
+        
+        if let gBtn = self.googleBtn {
+            gBtn.enabled = true
+        }
+        
+        if let fBtn = self.facebookBtn {
+            fBtn.enabled = true
+        }
+        
         let window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
         let dashboardVC = viewControllerFrom("Main", vcid: "CollapsibleTableViewController") as! CollapsibleTableViewController
         

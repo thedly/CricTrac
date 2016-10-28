@@ -19,12 +19,13 @@ var opponentTeams = [String]()
 var dismissals = [String]()
 var tournaments = [String]()
 var results = [String]()
-var profileData = [String:String]()
-var UserProfilesData = [[String:AnyObject]]()
+var profileData = Profile(usrObj: [String:String]())
+var UserProfilesData = [Profile]()
 var UserProfilesImages = [String: UIImage]()
 var BattingStyles = [String]()
 var BowlingStyles = [String]()
 var PlayingRoles = [String]()
+var AgeGroupData = [String]()
 var PlayingLevels = [String]()
 var genders = [String]()
 var matchDataSource = [[String:String]]()
@@ -33,6 +34,8 @@ var profileDataChanged: Bool = false
 private var _currentTheme: String = defaultTheme
 var topColor = topColorDefault
 var bottomColor = bottomColorDefault
+
+var background: CAGradientLayer!
 
 var CurrentTheme: String {
     set
@@ -57,6 +60,20 @@ public func setUIBackgroundTheme(baseView: UIView) {
     
     let background = CAGradientLayer().setGradientBackground(UIColor(hex: "\(topColor)").CGColor, bottomColor: UIColor(hex: "\(bottomColor)").CGColor)
     background.frame = baseView.bounds
+    baseView.layer.insertSublayer(background, atIndex: 0)
+    
+}
+
+public func setCustomUIBackgroundTheme(baseView: UIView, _topColor:String, _bottomColor: String  ) {
+    
+    
+    
+    
+    
+    background = CAGradientLayer().setGradientBackground(UIColor(hex: "\(_topColor)").CGColor, bottomColor: UIColor(hex: "\(_bottomColor)").CGColor)
+    background.frame = baseView.bounds
+    
+    
     baseView.layer.insertSublayer(background, atIndex: 0)
     
 }
@@ -160,4 +177,11 @@ public func firebaseLoginWithGoogle(idToken:String,accessToken:String,sucess:(FI
         failure(error)
     }
 }
+
+public func currentTimeMillis() -> Int64{
+    let nowDouble = NSDate().timeIntervalSince1970
+    return Int64(nowDouble*1000)
+}
+
+
 

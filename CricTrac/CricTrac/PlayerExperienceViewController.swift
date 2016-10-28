@@ -8,14 +8,26 @@
 
 import UIKit
 
-class PlayerExperienceViewController: UIViewController {
+class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var playingRole: UITextField!
     @IBOutlet weak var battingStyle: UITextField!
     @IBOutlet weak var bowlingStyle: UITextField!
     @IBOutlet weak var teamName: UITextField!
     
+    @IBOutlet weak var pastTeamName: UITextField!
+    
+    
+    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var currentTeams: UITableView!
+    
+    @IBOutlet weak var pastTeams: UITableView!
+    
     lazy var ctDataPicker = DataPicker()
+    
+    var teamNames = ["New Horizon public school", "National public school", "Delhi public school"]
+    
+    var pastTeamNames = ["Bangalore public school", "Ryan International school"]
     
     var data:[String:String]{
         
@@ -41,7 +53,103 @@ class PlayerExperienceViewController: UIViewController {
         battingStyle.delegate = self
         bowlingStyle.delegate = self
         teamName.delegate = self
+        
+        
+        currentTeams.allowsSelection = false
+        currentTeams.separatorStyle = .None
+        currentTeams.dataSource = self
+        currentTeams.delegate = self
+        
+        pastTeams.allowsSelection = false
+        pastTeams.separatorStyle = .None
+        pastTeams.dataSource = self
+        pastTeams.delegate = self
+        
+        
     }
+    
+    func deleteTeamFromCurrentTeams(sender: UIButton) {
+        let but = sender
+        let view = but.superview!
+        let cell = view.superview as! CurrentTeamsTableViewCell
+        
+        if let tblView = cell.superview?.superview as? UITableView {
+            
+            if tblView.isEqual(self.currentTeams) {
+                let indexPath = currentTeams.indexPathForCell(cell)
+                teamNames.removeAtIndex((indexPath?.row)!)
+                currentTeams.reloadData()
+            }
+            else {
+                let indexPath = pastTeams.indexPathForCell(cell)
+                pastTeamNames.removeAtIndex((indexPath?.row)!)
+                pastTeams.reloadData()
+            }
+        }
+        
+        
+    }
+    
+    
+    @IBAction func addPastTeamsPressed(sender: AnyObject) {
+        
+        if pastTeamName.text?.trimWhiteSpace != "" && pastTeamName.text?.trimWhiteSpace != "-" {
+            pastTeamNames.append(pastTeamName.textVal)
+            pastTeamName.text = ""
+            pastTeams.reloadData()
+        }
+    }
+    
+    
+    @IBAction func addTeamsPressed(sender: AnyObject) {
+        if teamName.text?.trimWhiteSpace != "" && teamName.text?.trimWhiteSpace != "-" {
+            teamNames.append(teamName.textVal)
+            teamName.text = ""
+            
+            currentTeams.reloadData()
+        }
+        
+        
+    }
+   
+    func getCellForRow(indexPath:NSIndexPath)->UITableViewCell{
+        if let aCell =  currentTeams.dequeueReusableCellWithIdentifier("CurrentTeamsTableViewCell", forIndexPath: indexPath) as? CurrentTeamsTableViewCell {
+            
+            aCell.backgroundColor = UIColor.clearColor()
+            
+            
+            
+            aCell.teamName.text = teamNames[indexPath.row]
+            
+            aCell.deleteTeamBtn.addTarget(self, action: "deleteTeamFromCurrentTeams:", forControlEvents: .TouchUpInside)
+            return aCell
+        }
+        else
+        {
+            return UITableViewCell()
+        }
+        
+        
+    }
+
+    func getCellForPastTeamsRow(indexPath:NSIndexPath)->UITableViewCell{
+        if let aCell =  pastTeams.dequeueReusableCellWithIdentifier("CurrentTeamsTableViewCell", forIndexPath: indexPath) as? CurrentTeamsTableViewCell {
+            
+            aCell.backgroundColor = UIColor.clearColor()
+            
+            aCell.teamName.text = pastTeamNames[indexPath.row]
+            
+            aCell.deleteTeamBtn.addTarget(self, action: "deleteTeamFromCurrentTeams:", forControlEvents: .TouchUpInside)
+            return aCell
+        }
+        else
+        {
+            return UITableViewCell()
+        }
+        
+        
+    }
+
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
@@ -62,14 +170,38 @@ class PlayerExperienceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUIBackgroundTheme(self.view)
-        
-        //initializeView()
+        initializeView()
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView.isEqual(currentTeams) {
+            return teamNames.count
+        }
+        return pastTeamNames.count
+        
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 20
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        if tableView.isEqual(currentTeams) {
+            return getCellForRow(indexPath)
+        }
+        return getCellForPastTeamsRow(indexPath)
     }
 }
 

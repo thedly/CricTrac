@@ -51,6 +51,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
             
             for profile in resultObj {
                 
+                UserProfilesData.append(Profile(usrObj: profile))
                 if let _imageUrl = profile["ProfileImageUrl"] as? String where _imageUrl != ""  {
                     getImageFromFirebase(_imageUrl) { (data) in
                         UserProfilesImages[_imageUrl] = data
@@ -61,7 +62,6 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
             
             
             
-            UserProfilesData = resultObj
             self.SuggestsTblview.reloadData()
         })
         

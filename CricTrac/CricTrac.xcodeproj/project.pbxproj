@@ -42,8 +42,10 @@
 		46FA41D41D6D3F68006635C6 /* MatchDetailsTrackable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FA41D31D6D3F68006635C6 /* MatchDetailsTrackable.swift */; };
 		89067D731DAE9D120021F463 /* radioSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89067D721DAE9D120021F463 /* radioSelectView.swift */; };
 		89067D751DAEA89C0021F463 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89067D741DAEA89C0021F463 /* TransitionManager.swift */; };
+		8909FACB1DB9B49900066FC5 /* DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8909FACA1DB9B49900066FC5 /* DoneButton.swift */; };
 		890B42C51D60430100736F03 /* CollapsibleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890B42C41D60430100736F03 /* CollapsibleTableViewController.swift */; };
 		890B42C71D60472C00736F03 /* CollapsibleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890B42C61D60472C00736F03 /* CollapsibleTableViewCell.swift */; };
+		890EA2F11DB92BD100FB40DB /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890EA2F01DB92BD100FB40DB /* ForgotPasswordViewController.swift */; };
 		89129C4A1D904F89009488FE /* LoginBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89129C491D904F89009488FE /* LoginBaseViewController.swift */; };
 		89129C4C1D90501B009488FE /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89129C4B1D90501B009488FE /* RegisterViewController.swift */; };
 		8915BEED1DAD160F00171BF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8915BEEC1DAD160F00171BF9 /* GoogleService-Info.plist */; };
@@ -67,6 +69,7 @@
 		8930F03E1D5BA0EB00C7540B /* UserTeamDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930F03D1D5BA0EB00C7540B /* UserTeamDetailsViewController.swift */; };
 		8930F0401D5BA1D600C7540B /* UserGroundDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930F03F1D5BA1D600C7540B /* UserGroundDetailsViewController.swift */; };
 		8930F0421D5BA20F00C7540B /* UserOpponentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930F0411D5BA20F00C7540B /* UserOpponentDetailsViewController.swift */; };
+		893DAD4A1DB660AC00CC1875 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DAD491DB660AC00CC1875 /* Profile.swift */; };
 		893E9EA11DB2629C00D63AB8 /* MenuTransitionOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893E9EA01DB2629C00D63AB8 /* MenuTransitionOperator.swift */; };
 		894CA29E1D96150A0043D3D1 /* SIL Open Font License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 894CA2911D96150A0043D3D1 /* SIL Open Font License.txt */; };
 		894CA29F1D96150A0043D3D1 /* SourceSansPro-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 894CA2921D96150A0043D3D1 /* SourceSansPro-Black.otf */; };
@@ -101,6 +104,8 @@
 		897E43551DA40054006B889A /* MatchResultsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 897E43541DA40054006B889A /* MatchResultsView.xib */; };
 		899206241D61BA0700F99A97 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899206231D61BA0700F99A97 /* FriendsViewController.swift */; };
 		899206261D61BA6700F99A97 /* FriendsInviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899206251D61BA6700F99A97 /* FriendsInviteViewController.swift */; };
+		8997D56C1DBCFCA000F201B6 /* CurrentTeamsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8997D56B1DBCFCA000F201B6 /* CurrentTeamsTableViewCell.swift */; };
+		8997D56E1DBD21BC00F201B6 /* ThemeColorsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8997D56D1DBD21BC00F201B6 /* ThemeColorsCollectionViewCell.swift */; };
 		89AB5D461D95839C00AA3481 /* SummaryDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AB5D451D95839C00AA3481 /* SummaryDetailsCell.swift */; };
 		89C8196C1D52362300291A7E /* POCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C8196B1D52362300291A7E /* POCViewController.swift */; };
 		89C8196E1D52429500291A7E /* headerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C8196D1D52429500291A7E /* headerView.swift */; };
@@ -168,8 +173,10 @@
 		549F76A86F0BF1CECAF26359 /* Pods-CricTrac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CricTrac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CricTrac/Pods-CricTrac.debug.xcconfig"; sourceTree = "<group>"; };
 		89067D721DAE9D120021F463 /* radioSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = radioSelectView.swift; sourceTree = "<group>"; };
 		89067D741DAEA89C0021F463 /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
+		8909FACA1DB9B49900066FC5 /* DoneButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoneButton.swift; sourceTree = "<group>"; };
 		890B42C41D60430100736F03 /* CollapsibleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewController.swift; sourceTree = "<group>"; };
 		890B42C61D60472C00736F03 /* CollapsibleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewCell.swift; sourceTree = "<group>"; };
+		890EA2F01DB92BD100FB40DB /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		89129C491D904F89009488FE /* LoginBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginBaseViewController.swift; sourceTree = "<group>"; };
 		89129C4B1D90501B009488FE /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8915BEEC1DAD160F00171BF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -194,6 +201,7 @@
 		8930F03F1D5BA1D600C7540B /* UserGroundDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserGroundDetailsViewController.swift; sourceTree = "<group>"; };
 		8930F0411D5BA20F00C7540B /* UserOpponentDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserOpponentDetailsViewController.swift; sourceTree = "<group>"; };
 		8935ADC31D3E640900607C9D /* CricTrac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CricTrac-Bridging-Header.h"; sourceTree = "<group>"; };
+		893DAD491DB660AC00CC1875 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		893E9EA01DB2629C00D63AB8 /* MenuTransitionOperator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTransitionOperator.swift; sourceTree = "<group>"; };
 		894CA2911D96150A0043D3D1 /* SIL Open Font License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "SIL Open Font License.txt"; sourceTree = "<group>"; };
 		894CA2921D96150A0043D3D1 /* SourceSansPro-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Black.otf"; sourceTree = "<group>"; };
@@ -228,6 +236,8 @@
 		897E43541DA40054006B889A /* MatchResultsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchResultsView.xib; sourceTree = "<group>"; };
 		899206231D61BA0700F99A97 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		899206251D61BA6700F99A97 /* FriendsInviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsInviteViewController.swift; sourceTree = "<group>"; };
+		8997D56B1DBCFCA000F201B6 /* CurrentTeamsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentTeamsTableViewCell.swift; sourceTree = "<group>"; };
+		8997D56D1DBD21BC00F201B6 /* ThemeColorsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeColorsCollectionViewCell.swift; sourceTree = "<group>"; };
 		89AB5D451D95839C00AA3481 /* SummaryDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryDetailsCell.swift; sourceTree = "<group>"; };
 		89C8196B1D52362300291A7E /* POCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POCViewController.swift; sourceTree = "<group>"; };
 		89C8196D1D52429500291A7E /* headerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = headerView.swift; sourceTree = "<group>"; };
@@ -315,6 +325,7 @@
 		46C9838E1D3922D200DFC607 /* CricTrac */ = {
 			isa = PBXGroup;
 			children = (
+				893DAD481DB6608E00CC1875 /* Models */,
 				46FA41D21D6D3F2F006635C6 /* Protocols */,
 				4657D55E1D4992B1009E0FBE /* Constants */,
 				46C983C01D4078B500DFC607 /* utility */,
@@ -359,6 +370,7 @@
 				892CE2D11D9EBEF2001E098E /* DragView.swift */,
 				89067D741DAEA89C0021F463 /* TransitionManager.swift */,
 				893E9EA01DB2629C00D63AB8 /* MenuTransitionOperator.swift */,
+				8909FACA1DB9B49900066FC5 /* DoneButton.swift */,
 			);
 			name = utility;
 			sourceTree = "<group>";
@@ -380,6 +392,14 @@
 				056D56ED7752D65D58DB4504 /* Pods-CricTrac.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		893DAD481DB6608E00CC1875 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				893DAD491DB660AC00CC1875 /* Profile.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		894CA2761D9614B30043D3D1 /* Fonts_SourceSansPro */ = {
@@ -430,6 +450,8 @@
 				895376991DAB8BF200DDB3A6 /* FriendSuggestionsCell.xib */,
 				8953769B1DAB8C8E00DDB3A6 /* FriendSuggestionsCell.swift */,
 				89067D721DAE9D120021F463 /* radioSelectView.swift */,
+				8997D56B1DBCFCA000F201B6 /* CurrentTeamsTableViewCell.swift */,
+				8997D56D1DBD21BC00F201B6 /* ThemeColorsCollectionViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -472,6 +494,7 @@
 				89D7D9D11DAFD97D0069D536 /* PlayerExperienceViewController.swift */,
 				89D7D9D31DAFEAB80069D536 /* CoachingExperienceViewController.swift */,
 				8951D52E1DB08BF5005D101A /* CricketFanViewController.swift */,
+				890EA2F01DB92BD100FB40DB /* ForgotPasswordViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -692,6 +715,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8997D56E1DBD21BC00F201B6 /* ThemeColorsCollectionViewCell.swift in Sources */,
 				897194CB1DA34DFD00478F82 /* AddMatchDetailsViewController.swift in Sources */,
 				895E04031D5CD134002E322E /* FriendRequestsTableViewCell.swift in Sources */,
 				4607A2641D54848A0090A5BD /* MatchViewController.swift in Sources */,
@@ -712,6 +736,7 @@
 				890B42C51D60430100736F03 /* CollapsibleTableViewController.swift in Sources */,
 				4668E4CB1D68110500E36CB0 /* MatchSummaryViewController.swift in Sources */,
 				46B608701D44A7D3000FE098 /* NewMatchViewController.swift in Sources */,
+				8909FACB1DB9B49900066FC5 /* DoneButton.swift in Sources */,
 				4642DAA51D5039DD001F039D /* LoginViewController.swift in Sources */,
 				89CC84FC1D43E4D6007F2402 /* SummaryMatchDetailsViewController.swift in Sources */,
 				4600689B1D638545007C9457 /* SuggestionCell.swift in Sources */,
@@ -733,9 +758,11 @@
 				46C983C41D40968300DFC607 /* Extentions.swift in Sources */,
 				8930F03E1D5BA0EB00C7540B /* UserTeamDetailsViewController.swift in Sources */,
 				46B0D66B1D8B881500C93247 /* TimeLineViewController.swift in Sources */,
+				8997D56C1DBCFCA000F201B6 /* CurrentTeamsTableViewCell.swift in Sources */,
 				466AD3FC1D7A8EC10033289C /* CTPicker.swift in Sources */,
 				8922042F1D97A7EC005F555B /* FriendsCell.swift in Sources */,
 				8930F0381D5B751500C7540B /* CTCountryPicker.swift in Sources */,
+				890EA2F11DB92BD100FB40DB /* ForgotPasswordViewController.swift in Sources */,
 				892EA67E1D58DEBE00BEE5A3 /* ProfileDetails.swift in Sources */,
 				460068911D6367CE007C9457 /* SuggestionView.swift in Sources */,
 				895E04011D5CCEDE002E322E /* FriendRequestsViewController.swift in Sources */,
@@ -760,6 +787,7 @@
 				892EA68B1D58F4B400BEE5A3 /* DashboardBattingDetailsViewController.swift in Sources */,
 				89E6084D1D6D4ADC00F6BD11 /* CTDataPicker.swift in Sources */,
 				4657D5661D499FDD009E0FBE /* SliderMenuViewController.swift in Sources */,
+				893DAD4A1DB660AC00CC1875 /* Profile.swift in Sources */,
 				895376981DAB865B00DDB3A6 /* FriendRequestsCell.swift in Sources */,
 				4657D5601D4992D7009E0FBE /* Constants.swift in Sources */,
 				8930411A1D9E0C3B00F0E29C /* BattingBowlingViewController.swift in Sources */,

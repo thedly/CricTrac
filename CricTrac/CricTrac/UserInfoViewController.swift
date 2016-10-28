@@ -108,30 +108,27 @@ class UserInfoViewController: UIViewController  {
             
             getAllProfileData { (data) in
                 
-                profileData = data as! [String:String]
+                profileData = Profile(usrObj: data)
                 
-                if profileData.count > 0 {
-                    
-                    
+                
                     self.profileDetailsExists = true
                     
-                    self.firstName.text = profileData["FirstName"]
-                    self.lastName.text = profileData["LastName"]
-                    self.dateOfBirth.text = profileData["DateOfBirth"]
-                    self.emailId.text = profileData["Email"]
-                    self.mobile.text = profileData["Mobile"]
-                    self.gender.text = profileData["Gender"]
-                    self.country.text = profileData["Country"]
-                    self.state.text = profileData["State"]
-                    self.city.text = profileData["City"]
-                    self.ctCountryPicker.SelectedCountry = profileData["Country"]!
+                    self.firstName.text = profileData.FirstName
+                    self.lastName.text = profileData.LastName
+                    self.dateOfBirth.text = profileData.DateOfBirth
+                    self.emailId.text = profileData.Email
+                    self.mobile.text = profileData.Mobile
+                    self.gender.text = profileData.Gender
+                    self.country.text = profileData.Country
+                    self.state.text = profileData.State
+                    self.city.text = profileData.City
+                    self.ctCountryPicker.SelectedCountry = profileData.Country
                     
-                    self.teamName.text = profileData["TeamName"]
-                    self.battingStyle.text = profileData["BattingStyle"]
-                    self.bowlingStyle.text = profileData["BowlingStyle"]
-                    self.playingRole.text = profileData["PlayingRole"]
-                    
-                }
+                    self.teamName.text = profileData.TeamName
+                    self.battingStyle.text = profileData.BattingStyle
+                    self.bowlingStyle.text = profileData.BowlingStyle
+                    self.playingRole.text = profileData.PlayingRole
+                   
         }
     }
     

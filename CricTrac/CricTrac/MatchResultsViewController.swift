@@ -41,6 +41,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
         firstBatText = firstTeamTitle.text
         secondBatText = secondTeamTitle.text
         
+        
         firstOversText.delegate = self
         firstScoreText.delegate = self
         firstWicketsText.delegate = self
@@ -202,14 +203,28 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
     
     func setTeamData(){
         
+        firstBatText = firstTeamTitle.text
+        secondBatText = secondTeamTitle.text
+        tossText = firstBatText
         
         if !inEditMode, let matchVCInstance = parent?.matchVC {
             firstTeamTitle.text = matchVCInstance.teamText.text
             secondTeamTitle.text = matchVCInstance.opponentText.text
         }
         
-        firstBatText = firstTeamTitle.text
-        secondBatText = secondTeamTitle.text
+        
+        
+        if tossText == firstBatText {
+            firstTeamTossBtn.alpha = 1.0
+            secondTeamTossBtn.alpha = 0.2
+        }
+        else
+        {
+            firstTeamTossBtn.alpha = 0.2
+            secondTeamTossBtn.alpha = 1.0
+        }
+        
+        
         
         self.isTeambattingSetBtn.alpha = (firstBatText == "-" || firstBatText == "") ? 0.3 : 1.0
         

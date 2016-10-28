@@ -26,14 +26,14 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
     @IBOutlet weak var wicketsText:UITextField!
     @IBOutlet weak var noballText:UITextField!
     @IBOutlet weak var widesText:UITextField!
-    @IBOutlet weak var economyText:UITextField!
     
+    @IBOutlet weak var maidensText: UITextField!
     @IBOutlet weak var runsGivenText: UITextField!
     weak var parent:MatchParent?
     
     var BowlingData:[String:String]{
         
-        return ["OversBalled":oversText.textVal,"Wickets":wicketsText.textVal,"RunsGiven":runsGivenText.textVal,"Noballs":noballText.textVal,"Wides":widesText.text!]
+        return ["OversBalled":oversText.textVal,"Wickets":wicketsText.textVal,"RunsGiven":runsGivenText.textVal,"Noballs":noballText.textVal,"Wides":widesText.text!, "Maidens": maidensText.textVal]
     }
     
     var allRequiredFieldsHaveFilledProperly: Bool {
@@ -42,7 +42,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
             validateOvers()
             return runText.errorMessage?.length == 0  && overText.errorMessage?.length == 0
         }
-        return false
+        return true
     }
     
     func ValidateScore() -> Void {
@@ -70,7 +70,15 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
             }
             else
             {
-                runsText.errorMessage = "Runs Empty"
+                if Int(foursText.textVal) > 0 || Int(sixesText.textVal) > 0 {
+                    runsText.errorMessage = "Runs Empty"
+                }
+                else
+                {
+                    runsText.errorMessage = ""
+                }
+                
+                
             }
         }
     }
@@ -90,7 +98,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
                         sum += noBallsInt
                     }
                     
-                    if sum > Int(oversText.text!)! {
+                    if sum > Int(Float(oversText.text!)!) {
                         oversText.errorMessage = "Invalid Overs"
                     }
                     else
@@ -101,11 +109,34 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
             }
             else
             {
-                oversText.errorMessage = "Overs Empty"
+                if Int(widesText.textVal) > 0 || Int(noballText.textVal) > 0 {
+                    oversText.errorMessage = "Overs Empty"
+                }
+                else
+                {
+                    oversText.errorMessage = ""
+                }
+                
+                
             }
         }
+        
     }
     
+    @IBAction func decrementMaidens(sender: UIButton) {
+        self.incrementDecrementOperation(maidensText, isIncrement: false)
+    }
+    @IBAction func incrementMaidens(sender: UIButton) {
+        self.incrementDecrementOperation(maidensText, isIncrement: true)
+    }
+    @IBAction func incrementPosition(sender: AnyObject) {
+        self.incrementDecrementOperation(positionText, isIncrement: true)
+        
+    }
+    
+    @IBAction func decrementPosition(sender: UIButton) {
+        self.incrementDecrementOperation(positionText, isIncrement: false)
+    }
     @IBAction func incrementWickets(sender: AnyObject) {
         self.incrementDecrementOperation(wicketsText, isIncrement: true)
     }
@@ -173,7 +204,12 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
         runsGivenText.textVal = parent!.selecetedData!["RunsGiven"]!
         noballText.textVal = parent!.selecetedData!["Noballs"]!
         widesText.textVal = parent!.selecetedData!["Wides"]!
-        calculateEconomy()
+        
+        if let mt = parent!.selecetedData!["Wides"] {
+            maidensText.textVal = mt
+        }
+        
+//        calculateEconomy()
 
     }
     
@@ -188,6 +224,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
         dismissalText.delegate = self
         runsText.delegate = self
         oversText.delegate = self
+        oversText.keyboardType = UIKeyboardType.DecimalPad
         
         runsText.delegate = self
         ballsPlayedText.delegate = self
@@ -202,7 +239,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
         runsText.delegate = self
         noballText.delegate = self
         widesText.delegate = self
-        economyText.delegate = self
+        maidensText.delegate = self
         
         
     }
@@ -225,24 +262,24 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
     }
     */
     
-    func calculateEconomy(){
-        
-        if runsText.text?.trimWhiteSpace.length == 0{
-            economyText.text = ""
-        }
-        else if oversText.text?.trimWhiteSpace.length == 0{
-            economyText.text = ""
-        }
-        else{
-            
-            if let runs = Double((runsText.text?.trimWhiteSpace)!){
-                if let overs = Double((oversText.text?.trimWhiteSpace)!){
-                    economyText.text = "\(runs / overs)"
-                }
-                
-            }
-        }
-    }
+//    func calculateEconomy(){
+//        
+//        if runsText.text?.trimWhiteSpace.length == 0{
+//            economyText.text = ""
+//        }
+//        else if oversText.text?.trimWhiteSpace.length == 0{
+//            economyText.text = ""
+//        }
+//        else{
+//            
+//            if let runs = Double((runsText.text?.trimWhiteSpace)!){
+//                if let overs = Double((oversText.text?.trimWhiteSpace)!){
+//                    economyText.text = "\(runs / overs)"
+//                }
+//                
+//            }
+//        }
+//    }
     
     func incrementDecrementOperation(controlText: UITextField, isIncrement: Bool) {
         if isIncrement {
@@ -276,6 +313,10 @@ extension BattingBowlingViewController:UITextFieldDelegate{
     func textFieldDidBeginEditing(textField: UITextField) {
         self.selectedText = textField
         
+        if textField.accessibilityIdentifier == "textWithNumPad" {
+            AddDoneButtonTo(textField)
+        }
+        
         if textField == dismissalText{
             //addSuggstionBox(textField, dataSource: dismissals, showSuggestions: true)
             showPicker(self, inputText: textField, data: dismissals)
@@ -299,10 +340,10 @@ extension BattingBowlingViewController:UITextFieldDelegate{
         }
         else if textField.tag == 2 {
             validateOvers()
-            if textField == oversText || textField == runsText{
-                
-                calculateEconomy()
-            }
+//            if textField == oversText || textField == runsText{
+//                
+//                calculateEconomy()
+//            }
             
             if textField.text?.trimWhiteSpace.length > 0{
                 
@@ -338,5 +379,30 @@ extension BattingBowlingViewController:UITextFieldDelegate{
             
         }
     }
+    
+    
+    func AddDoneButtonTo(inputText:UITextField) {
+        
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .Default
+        toolBar.translucent = true
+        toolBar.tintColor = UIColor(hex: "B12420")
+        toolBar.backgroundColor = UIColor.whiteColor()
+        toolBar.sizeToFit()
+        
+        // Adding Button ToolBar
+        let doneButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(BattingBowlingViewController.donePressed))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: #selector(BattingBowlingViewController.donePressed))
+        
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.userInteractionEnabled = true
+        inputText.inputAccessoryView = toolBar
+    }
+    
+    func donePressed() {
+        selectedText.resignFirstResponder()
+    }
+
     
 }

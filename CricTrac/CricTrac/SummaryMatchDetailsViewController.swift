@@ -47,6 +47,8 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
     @IBOutlet weak var awayTeam: UILabel!
     @IBOutlet weak var homeTeam: UILabel!
     
+    @IBOutlet weak var strikeRateText: UILabel!
+    
     @IBOutlet weak var runsGiven: UILabel!
     @IBOutlet weak var oversBowled: UILabel!
     
@@ -161,6 +163,30 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    func calculateStrikeRate(){
+        
+        if batRuns.text?.trimWhiteSpace.length == 0{
+           strikeRateText.text = ""
+        }
+        else if ballsFaced.text?.trimWhiteSpace.length == 0{
+            strikeRateText.text = ""
+        }
+        else{
+            setStrikeRate()
+        }
+    }
+    
+    func setStrikeRate(){
+        
+        if let runs = Double((batRuns.text?.trimWhiteSpace)!){
+            if let balls = Double((ballsFaced.text?.trimWhiteSpace)!){
+                
+                strikeRateText.text = String(format: "%.0f",(runs*100 / balls))
+            }
+            
+        }
+    }
+    
     func initializeView() {
         
         
@@ -173,6 +199,14 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
         if let Sixes = matchDetailsData["Sixes"] {
             sixes.text = Sixes
         }
+        
+        if let eco = matchDetailsData["Economy"] {
+            economy.text = eco
+        }
+        
+        
+        calculateStrikeRate()
+        
         if let Overs = matchDetailsData["OversBalled"] { // in overs eg: 2, 3, 4
             
             if let oversInt = Int(Overs) {
@@ -182,11 +216,6 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
                 let oversFromBallsInt = Int(totalBalls/6) // 12, 18
                 let oversFromBallsRealRemaining = totalBalls - (6*oversFromBallsInt)
                 
-                
-                if let RunsGiven = matchDetailsData["RunsGiven"] where RunsGiven != "-" {
-                    let ec = (Double(RunsGiven)!/Double(totalBalls)).roundToPlaces(2)
-                    economy.text = String(ec)
-                }
                 overs.text = String("\(oversFromBallsInt).\(oversFromBallsRealRemaining)")
             }
             
@@ -322,9 +351,9 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
         if let Balls = matchDetailsData["Balls"] {
             ballsFaced.text = Balls
         }
-        if let Position = matchDetailsData["Position"] {
-            batPos.text = Position
-        }
+//        if let Position = matchDetailsData["Position"] {
+//            batPos.text = Position
+//        }
 //        if let Dismissal = matchDetailsData["Dismissal"] {
 //            dismissal.text = Dismissal.lowercaseString
 //        }
@@ -337,6 +366,14 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
         }
         if let Noballs = matchDetailsData["Noballs"] {
             noBalls.text = Noballs
+        }
+        
+        if let grnd = matchDetailsData["Ground"] {
+            self.ground.text = grnd
+        }
+        
+        if let dat = matchDetailsData["Date"] {
+            self.date.text = dat
         }
         
 //        if let date = matchDetailsData["Date"]{

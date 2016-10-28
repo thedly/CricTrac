@@ -37,7 +37,7 @@ class DataPicker: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
             dataPicker.dataSource = self
             dataPicker.delegate = self
             dataPicker.selectRow(selectedValueIndex, inComponent: 0, animated: true)
-            _selectedValue = pickerData[selectedValueIndex]
+            _selectedValue = pickerData.count > 0 ? pickerData[selectedValueIndex] : ""
         }
         inputText.inputView = dataPicker
         

@@ -335,14 +335,22 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
     }
     
     func getAge(birthdate:String) -> String{
-        let dateFormater = NSDateFormatter()
-        dateFormater.dateFormat = "dd/MM/yyyy"
-        let birthdayDate = dateFormater.dateFromString(birthdate)
-        let calendar: NSCalendar! = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        let now: NSDate! = NSDate()
-        let calcAge = calendar.components(.Year, fromDate: birthdayDate!, toDate: now, options: [])
-        let age = calcAge.year
-        return String(age)
+        
+        if birthdate.length > 0 {
+            let dateFormater = NSDateFormatter()
+            dateFormater.dateFormat = "dd/MM/yyyy"
+            let birthdayDate = dateFormater.dateFromString(birthdate)
+            let calendar: NSCalendar! = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+            let now: NSDate! = NSDate()
+            let calcAge = calendar.components(.Year, fromDate: birthdayDate!, toDate: now, options: [])
+            let age = calcAge.year
+            return String(age)
+        }
+        else
+        {
+            return ""
+        }
+        
     }
     
     func setUIValues() {
@@ -368,33 +376,30 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
     func setDashboardProfileData(){
         getAllProfileData { (data) in
             
-            profileData = data as! [String:String]
+            profileData = Profile(usrObj: data) //data as! [String:String]
             
-            if profileData.count > 0 {
+            
+                
+            
+                    self.username.text = (profileData.fullName + "  (\(self.getAge(profileData.DateOfBirth)))").capitalizedString
+            
                 
                 
+                self.playingRole.text = profileData.PlayingRole
+                self.battingStyle.text = profileData.BattingStyle
+                self.bowlingStyle.text = profileData.BowlingStyle
+                self.teamName.text = profileData.TeamName
+                self.location.text = profileData.City + ", "+profileData.Country
                 
-                
-                let dob:String = profileData["DateOfBirth"]! as String
-                
-                self.username.text = (profileData["FirstName"]! + " " + profileData["LastName"]! + "  (\(self.getAge(dob)))").capitalizedString
-                
-                
-                self.playingRole.text = profileData["PlayingRole"]
-                self.battingStyle.text = profileData["BattingStyle"]
-                self.bowlingStyle.text = profileData["BowlingStyle"]
-                self.teamName.text = profileData["TeamName"]
-                self.location.text = profileData["City"]! + ", "+profileData["Country"]!
-                
-                if let profileImgUrl = profileData["ProfileImageUrl"] {
-                    getImageFromFirebase(profileImgUrl) { (data) in
+                if profileData.ProfileImageUrl.length > 0 {
+                    getImageFromFirebase(profileData.ProfileImageUrl) { (data) in
                         self.profileImage.image = data
                         self.activityInd.stopAnimating()
                     }
                 }
                 
                 
-            }
+            
             
             
             

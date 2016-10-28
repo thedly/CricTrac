@@ -109,9 +109,13 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 let ballsformattedString = NSMutableAttributedString()
                 let economyformattedString = NSMutableAttributedString()
                 
-                ballsformattedString.bold("\(Int(balls)! * 6) ", fontName: appFont_black, fontSize: 20).normal("BALLS", fontName: appFont_regular, fontSize: 10)
+                ballsformattedString.bold("\(balls) ", fontName: appFont_black, fontSize: 20).normal("OVERS", fontName: appFont_regular, fontSize: 10)
                 
-                economyformattedString.bold("\(Float(runsGiven)!/Float(balls)!) ", fontName: appFont_black, fontSize: 20).normal("ECONOMY", fontName: appFont_regular, fontSize: 10)
+                
+                var eco = "\(Float(runsGiven)!/Float(balls)!) "
+                    matchDataSource[indexPath.row]["Economy"] = eco
+                
+                economyformattedString.bold(eco, fontName: appFont_black, fontSize: 20).normal("ECONOMY", fontName: appFont_regular, fontSize: 10)
                 
                 formattedStringCollection.append(ballsformattedString)
                 formattedStringCollection.append(economyformattedString)
@@ -126,9 +130,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         if let date = data["Date"]{
             
-            let dateArray = date.characters.split{$0 == "/"}.map(String.init)
-            let dateString: String! = "\(dateArray[0]) \(dateArray[1].monthName) \(dateArray[2])"
-            aCell.matchDateAndVenue.text = dateString ?? "NA"
+            //let dateString: String! = "\(dateArray[0]) \(dateArray[1].monthName) \(dateArray[2])"
+            aCell.matchDateAndVenue.text = date ?? "NA"
             
             
             
@@ -146,7 +149,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                     let strikeRateformattedString = NSMutableAttributedString()
                     let ballsformattedString = NSMutableAttributedString()
                     
-                    ballsformattedString.bold("\(totalBalls) ", fontName: appFont_black, fontSize: 20).normal("BALLS", fontName: appFont_regular, fontSize: 10)
+                    ballsformattedString.bold("\(Int(totalBalls)) ", fontName: appFont_black, fontSize: 20).normal("BALLS", fontName: appFont_regular, fontSize: 10)
                     
                     strikeRateformattedString.bold("\(Double(round(100*(totalruns!/totalBalls*100))/100)) ", fontName: appFont_black, fontSize: 20).normal("SR", fontName: appFont_regular, fontSize: 10)
                     
@@ -170,10 +173,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         
         if let venue = data["Ground"]{
-            aCell.matchDateAndVenue.text = ("\(aCell.matchDateAndVenue.text!), @ \(venue)").uppercaseString
+            aCell.matchDateAndVenue.text = ("\(aCell.matchDateAndVenue.text!) @ \(venue)").uppercaseString
         }
         else{
-            aCell.matchDateAndVenue.text = "\(aCell.matchDateAndVenue.text!), @ NA".uppercaseString
+            aCell.matchDateAndVenue.text = "\(aCell.matchDateAndVenue.text!) @ NA".uppercaseString
         }
         
         aCell.selectionStyle = .None
@@ -198,11 +201,11 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         currentCell.baseView.alpha = 0.6
         
         if currentCell.bowlingViewHidden || currentCell.battingViewHidden {
-            tableView.rowHeight = 130
+            tableView.rowHeight = 100
         }
         else
         {
-            tableView.rowHeight = 200
+            tableView.rowHeight = 150
             
         }
         

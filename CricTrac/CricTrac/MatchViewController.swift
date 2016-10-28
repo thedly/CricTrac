@@ -20,11 +20,15 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     @IBOutlet weak var oversText:UITextField!
     @IBOutlet weak var tournamentText:UITextField!
     
+    @IBOutlet weak var ageGroup: UITextField!
+    @IBOutlet weak var playingLevel: UITextField!
     @IBOutlet weak var scrollView:UIScrollView!
     
     var selectedText:UITextField!
     
     let ctDatePicker = CTDatePicker()
+    let ctDataPicker = CTPicker()
+    let DoneButtonClassInstance = DoneButtonClass()
     
     weak var parent:MatchParent?
     
@@ -32,12 +36,16 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     
     var data:[String:String]{
         
-        return ["Date":dateText.textVal,"Team":teamText.textVal,"Opponent":opponentText.textVal,"Ground":groundText.textVal,"Overs":oversText.textVal,"Tournamnet":tournamentText.textVal]
+        return ["Date":dateText.textVal,"Team":teamText.textVal,"Opponent":opponentText.textVal,"Ground":groundText.textVal,"Overs":oversText.textVal,"Tournamnet":tournamentText.textVal, "AgeGroup": ageGroup.textVal, "PlayingLevel": playingLevel.textVal]
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         if ((parent?.selecetedData) != nil){ loadEditData() }
+        
+        oversText.keyboardType = UIKeyboardType.DecimalPad
+        DoneButtonClassInstance.AddDoneButtonTo(oversText)
+        
         setUIBackgroundTheme(self.view)
     }
     
@@ -50,6 +58,16 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         opponentText.textVal = parent!.selecetedData!["Opponent"]!
         groundText.textVal = parent!.selecetedData!["Ground"]!
         oversText.textVal = parent!.selecetedData!["Overs"]!
+        
+        if let ag = parent!.selecetedData!["AgeGroup"] {
+            ageGroup.textVal = ag
+        }
+        
+        if let pl = parent!.selecetedData!["PlayingLevel"] {
+            playingLevel.textVal = pl
+        }
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -97,6 +115,12 @@ extension MatchViewController:UITextFieldDelegate{
         selectedText = textField
         if textField == dateText{
             ctDatePicker.showPicker(self, inputText: textField)
+        }
+        else if textField == ageGroup {
+            ctDataPicker.showPicker(self, inputText: textField, data: AgeGroupData )
+        }
+        else if textField == playingLevel {
+            ctDataPicker.showPicker(self, inputText: textField, data: PlayingLevels )
         }
         else if textField == teamText{
             
