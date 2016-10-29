@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="imagepost" rowHeight="398" id="KGk-i7-Jjw" customClass="ImagePostTableViewCell" customModule="CricTrac" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="711" height="398"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="711" height="397"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sachin" translatesAutoresizingMaskIntoConstraints="NO" id="8uf-4n-Rr8">
+                        <rect key="frame" x="18" y="18" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="FgZ-qR-6F1"/>
+                            <constraint firstAttribute="height" constant="50" id="dTk-Lr-Gnm"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arjun S" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZs-OX-Zlb">
+                        <rect key="frame" x="78" y="18" width="46" height="16"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loadimage" translatesAutoresizingMaskIntoConstraints="NO" id="o30-oB-PUG">
+                        <rect key="frame" x="78" y="63" width="555" height="271"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="o30-oB-PUG" secondAttribute="height" multiplier="593:289" id="twx-3J-8lX"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="8uf-4n-Rr8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="6oX-81-BF7"/>
+                    <constraint firstItem="8uf-4n-Rr8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="L6v-ld-W7p"/>
+                    <constraint firstItem="uZs-OX-Zlb" firstAttribute="leading" secondItem="8uf-4n-Rr8" secondAttribute="trailing" constant="10" id="OHg-Rj-Tlh"/>
+                    <constraint firstItem="uZs-OX-Zlb" firstAttribute="top" secondItem="8uf-4n-Rr8" secondAttribute="top" id="Qpf-fW-1xi"/>
+                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="o30-oB-PUG" secondAttribute="trailing" constant="10" id="Vo5-qf-oxO"/>
+                    <constraint firstItem="o30-oB-PUG" firstAttribute="leading" secondItem="8uf-4n-Rr8" secondAttribute="trailing" constant="10" id="cMa-lu-CWD"/>
+                    <constraint firstItem="o30-oB-PUG" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="sA6-iU-KMU"/>
+                    <constraint firstItem="o30-oB-PUG" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="ySe-wj-9I3"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="imagePost" destination="o30-oB-PUG" id="d0j-IM-KDZ"/>
+            </connections>
+            <point key="canvasLocation" x="453.5" y="351"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="loadimage" width="624" height="365"/>
+        <image name="sachin" width="160" height="206"/>
+    </resources>
+</document>

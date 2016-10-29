@@ -276,7 +276,8 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,GIDSignInDe
         let navigationControl = UINavigationController(rootViewController: dashboardVC )
         sliderMenu.mainViewController = navigationControl
         sliderMenu.drawerViewController = drawerViewController
-        
+       // self.googleBtn.enabled = true
+        //self.facebookBtn.enabled = true
         window?.rootViewController = sliderMenu
         
         self.presentViewController(sliderMenu, animated: true) {}

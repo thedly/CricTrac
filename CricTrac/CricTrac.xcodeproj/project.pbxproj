@@ -39,6 +39,8 @@
 		46DE32CB1D90152F0024CD82 /* APostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DE32C91D90152F0024CD82 /* APostTableViewCell.swift */; };
 		46DE32CC1D90152F0024CD82 /* APostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46DE32CA1D90152F0024CD82 /* APostTableViewCell.xib */; };
 		46F25A031D5B1AAD001EBEF9 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F25A021D5B1AAD001EBEF9 /* Service.swift */; };
+		46F36E361D93801900EA9C6A /* ImagePostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F36E341D93801900EA9C6A /* ImagePostTableViewCell.swift */; };
+		46F36E371D93801900EA9C6A /* ImagePostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46F36E351D93801900EA9C6A /* ImagePostTableViewCell.xib */; };
 		46FA41D41D6D3F68006635C6 /* MatchDetailsTrackable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FA41D31D6D3F68006635C6 /* MatchDetailsTrackable.swift */; };
 		89067D731DAE9D120021F463 /* radioSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89067D721DAE9D120021F463 /* radioSelectView.swift */; };
 		89067D751DAEA89C0021F463 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89067D741DAEA89C0021F463 /* TransitionManager.swift */; };
@@ -169,6 +171,8 @@
 		46DE32C91D90152F0024CD82 /* APostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APostTableViewCell.swift; path = View/APostTableViewCell.swift; sourceTree = "<group>"; };
 		46DE32CA1D90152F0024CD82 /* APostTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = APostTableViewCell.xib; path = View/APostTableViewCell.xib; sourceTree = "<group>"; };
 		46F25A021D5B1AAD001EBEF9 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Service.swift; path = Other/Service.swift; sourceTree = "<group>"; };
+		46F36E341D93801900EA9C6A /* ImagePostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImagePostTableViewCell.swift; path = View/ImagePostTableViewCell.swift; sourceTree = "<group>"; };
+		46F36E351D93801900EA9C6A /* ImagePostTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImagePostTableViewCell.xib; path = View/ImagePostTableViewCell.xib; sourceTree = "<group>"; };
 		46FA41D31D6D3F68006635C6 /* MatchDetailsTrackable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MatchDetailsTrackable.swift; path = Other/MatchDetailsTrackable.swift; sourceTree = "<group>"; };
 		549F76A86F0BF1CECAF26359 /* Pods-CricTrac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CricTrac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CricTrac/Pods-CricTrac.debug.xcconfig"; sourceTree = "<group>"; };
 		89067D721DAE9D120021F463 /* radioSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = radioSelectView.swift; sourceTree = "<group>"; };
@@ -440,6 +444,8 @@
 				46DE32C41D900C9F0024CD82 /* AddPostTableViewCell.xib */,
 				46DE32C91D90152F0024CD82 /* APostTableViewCell.swift */,
 				46DE32CA1D90152F0024CD82 /* APostTableViewCell.xib */,
+				46F36E341D93801900EA9C6A /* ImagePostTableViewCell.swift */,
+				46F36E351D93801900EA9C6A /* ImagePostTableViewCell.xib */,
 				894F8B801D95673800B3E936 /* SummaryDetailsCell.xib */,
 				89AB5D451D95839C00AA3481 /* SummaryDetailsCell.swift */,
 				8922042C1D97A3A6005F555B /* FriendsCell.xib */,
@@ -633,6 +639,7 @@
 				8915BEED1DAD160F00171BF9 /* GoogleService-Info.plist in Resources */,
 				894CA2A61D96150A0043D3D1 /* SourceSansPro-Light.otf in Resources */,
 				46C983971D3922D200DFC607 /* Assets.xcassets in Resources */,
+				46F36E371D93801900EA9C6A /* ImagePostTableViewCell.xib in Resources */,
 				4668E4C71D680FC200E36CB0 /* SummaryCell.xib in Resources */,
 				89FD59C61D41C3AE003EF45C /* SF-UI-Text-Bold.otf in Resources */,
 				894F8B811D95673800B3E936 /* SummaryDetailsCell.xib in Resources */,

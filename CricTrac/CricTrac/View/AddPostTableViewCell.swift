@@ -10,9 +10,19 @@ import UIKit
 
 class AddPostTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var newPostButton: UIButton!
+    @IBOutlet weak var newPostText: UITextField!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+    
+    
+    
+    @IBAction func didTapPostButton(sender: AnyObject) {
+        
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

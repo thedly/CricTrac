@@ -45,21 +45,46 @@ let fireBaseRef =  FIRDatabase.database().referenceFromURL("https://arjun-innova
 
 let storageRef = FIRStorage.storage().referenceForURL("gs://arjun-innovations.appspot.com")
 
-struct CustomTextInputStyle: AnimatedTextInputStyle {
-    
-    let activeColor =   UIColor(hex: "#B12420")
-    let inactiveColor = UIColor(hex: "#667815")
-    let errorColor = UIColor.redColor()
-    let textInputFont = UIFont.systemFontOfSize(14)
-    let textInputFontColor = UIColor.blackColor()
-    let placeholderMinFontSize: CGFloat = 15
-    let counterLabelFont: UIFont? = UIFont.systemFontOfSize(9)
-    let leftMargin: CGFloat = 0
-    let topMargin: CGFloat = 40
-    let rightMargin: CGFloat = 0
-    let bottomMargin: CGFloat = 00
-    let yHintPositionOffset: CGFloat = 7
+/*
+ 
+ struct CustomTextInputStyle: AnimatedTextInputStyle {
+ 
+ var activeColor =   UIColor(hex: "#B12420")
+ var inactiveColor = UIColor(hex: "#667815")
+ var errorColor = UIColor.redColor()
+ var lineInactiveColor = UIColor.redColor()
+ var textInputFont = UIFont.systemFontOfSize(14)
+ var textInputFontColor = UIColor.blackColor()
+ var placeholderMinFontSize: CGFloat = 15
+ var counterLabelFont: UIFont? = UIFont.systemFontOfSize(9)
+ var leftMargin: CGFloat = 0
+ var topMargin: CGFloat = 40
+ var rightMargin: CGFloat = 0
+ var  bottomMargin: CGFloat = 00
+ var yHintPositionOffset: CGFloat = 7
+ var yPlaceholderPositionOffset = 0
+ }
+ 
+ */
+
+
+ struct CustomTextInputStyle: AnimatedTextInputStyle  {
+    var activeColor =   UIColor(hex: "#B12420")
+    var inactiveColor = UIColor(hex: "#667815")
+    var lineInactiveColor = UIColor.redColor()
+    var errorColor = UIColor.redColor()
+    var textInputFont = UIFont.systemFontOfSize(14)
+    var textInputFontColor = UIColor.blackColor()
+    var placeholderMinFontSize: CGFloat = 15
+    var counterLabelFont: UIFont? = UIFont.systemFontOfSize(9)
+    var leftMargin: CGFloat = 0
+    var topMargin: CGFloat = 40
+    var rightMargin: CGFloat = 0
+    var bottomMargin: CGFloat = 00
+    var yHintPositionOffset: CGFloat = 7
+    var yPlaceholderPositionOffset: CGFloat = 0
 }
+
 
 
 
