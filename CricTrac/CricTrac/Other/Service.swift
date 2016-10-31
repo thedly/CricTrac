@@ -429,6 +429,47 @@ func registerWithEmailAndPassword(userName:String,password:String,callBack:(user
 
 var newPostIds = [String]()
 
+
+func addThemeData(theme: String, sucessBlock:()->Void){
+    
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").child("theme")
+    ref.setValue(theme)
+    sucessBlock()
+    
+}
+
+
+public func updateTimeLineFromIDS(callback: (timeline:[[String:String]])->Void){
+    
+    
+    
+    var timeLine = [[String:String]]()
+    
+    let postCount = newPostIds.count-1
+    
+    for postindex in 0...postCount{
+        
+        let postId = newPostIds[postindex]
+        
+        fireBaseRef.child("TimelinePosts").child(postId).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            
+            if let data = snapshot.value as? String {
+                
+                timeLine.insert(["post":data], atIndex: 0)
+                
+                if postindex == postCount{
+                    
+                    callback(timeline: timeLine)
+                    
+                }
+            }
+        })
+        
+    }
+    
+}
+
+
 // MARK: - Friends
 
 
@@ -448,27 +489,39 @@ public func AddSentRequestData(data: [String:[String:String]], callback:(data:St
         let receivedRequestRef = fireBaseRef.child("Users").child(dataToBeManipulated["sentRequestData"]!["SentTo"]!).child("ReceivedRequest").childByAutoId()
         
         dataToBeManipulated["ReceivedRequestData"]!["SentRequestId"] = newlyCreateddata.key
-        
         receivedRequestRef.setValue(data["ReceivedRequestData"], withCompletionBlock: { error, newlyCreatedReceivedRequestData in
-            
             var createdId = [String: AnyObject]()
             createdId["RequestId"] = newlyCreatedReceivedRequestData.key
-            
-            
             receivedRequestRef.updateChildValues(createdId)
             
             callback(data: newlyCreatedReceivedRequestData.key)
         })
         
+    })
+}
+ //MARK: - Friends
+
+var friendsDataArray = [String]()
+
+func getAllFriends(){
+    
+    fireBaseRef.child(currentUser!.uid).child("TFriends").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
         
+        if let data = snapshot.value as? [String : String] {
+            
+            for (_,value) in data{
+                
+                friendsDataArray.append(value)
+            }
+        }
         
         
         
     })
     
-    
-    
-}
+        }
+
+   
 
 
  //MARK: - Add Post
@@ -499,9 +552,25 @@ func addNewPost(postText:String){
     
 }
 
+
 //fireBaseRef.child("Dismissals").setValue(["BOWLED","CAUGHT","HANDLED THE BALL","HIT WICKET","HIT THE BALL TWICE","LEG BEFORE WICKET (LBW)","OBSTRUCTING THE FIELD","RUN OUT","RETIRED","TIMED OUT"])
 
-public func addTimelineData(){
+//public func addTimelineData(){
+//    
+//    fireBaseRef.child("TimelinePosts").child(postId).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+//        
+//        if let data = snapshot.value as? String {
+//            
+//            timeLine.insert(["post":data], atIndex: 0)
+//            
+//            if postindex == postCount{
+//                
+//                callback(timeline: timeLine)
+//                
+//            }
+//        }
+//    })
+//}
      /*
     
     var ref = fireBaseRef.child(currentUser!.uid).child("TimelineDetailed").childByAutoId()
@@ -597,5 +666,5 @@ public func addTimelineData(){
     ref.setValue(data)
     
     */
-}
+
 

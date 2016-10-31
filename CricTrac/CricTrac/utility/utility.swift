@@ -184,4 +184,68 @@ public func currentTimeMillis() -> Int64{
 }
 
 
+public func directoryExistsInsideDocuments(name:String)->Bool{
+    
+    let fileManager = NSFileManager()
+    var isDir : ObjCBool = false
+    let docPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+    if fileManager.fileExistsAtPath(docPath+"/\(name)", isDirectory:&isDir) {
+        if isDir {
+            return true
+        } else {
+            return false
+        }
+    } else {
+        return false
+    }
+    
+}
+
+
+public func fileExists(url:String)->Bool{
+    
+    let fileManager = NSFileManager()
+    var isDir : ObjCBool = false
+ 
+    if fileManager.fileExistsAtPath(url, isDirectory:&isDir) {
+        if isDir {
+            return false
+        } else {
+            return true
+        }
+    } else {
+        return false
+    }
+    
+}
+
+
+public func createDirectoryInsideDocuments(name:String)->Bool{
+    
+    let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+    let documentsDirectory: AnyObject = paths[0]
+    let dataPath = documentsDirectory.stringByAppendingPathComponent(name)
+    
+    do {
+        try NSFileManager.defaultManager().createDirectoryAtPath(dataPath, withIntermediateDirectories: false, attributes: nil)
+        return true
+    } catch _ as NSError {
+        return false
+    }
+}
+
+var documentsDirectory:AnyObject {
+    return NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+}
+
+func saveToCachedImages(image:UIImage,imageName:String){
+
+        if let data = UIImagePNGRepresentation(image) {
+            let filename = documentsDirectory.stringByAppendingPathComponent("cachedImages/\(imageName).png")
+             data.writeToFile(filename, atomically: false)
+        }
+}
+
+
+
 
