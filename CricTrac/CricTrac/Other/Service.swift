@@ -537,16 +537,7 @@ func addNewPost(postText:String){
     
     let postKey = ref.key
     
-    for friend in friendsDataArray{
-        
-        let ref = fireBaseRef.child("Users").child(friend).child("TimelineIDs").childByAutoId()
-        
-        ref.setValue(postKey)
-    }
     
-     ref = fireBaseRef.child("Users").child(currentUser!.uid).child("SelfTimelineIDs").childByAutoId()
-    
-    ref.setValue(postKey)
     
     KRProgressHUD.dismiss()
     

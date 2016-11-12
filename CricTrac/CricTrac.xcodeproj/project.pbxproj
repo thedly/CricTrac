@@ -23,6 +23,7 @@
 		4668E4CB1D68110500E36CB0 /* MatchSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4668E4CA1D68110500E36CB0 /* MatchSummaryViewController.swift */; };
 		466AD3FA1D7A869B0033289C /* NewMatchParent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466AD3F91D7A869B0033289C /* NewMatchParent.swift */; };
 		466AD3FC1D7A8EC10033289C /* CTPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466AD3FB1D7A8EC10033289C /* CTPicker.swift */; };
+		466F6B061DCD8DEF00A18AAE /* XMExpandableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466F6B051DCD8DEF00A18AAE /* XMExpandableTableView.swift */; };
 		46B0D66B1D8B881500C93247 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B0D66A1D8B881500C93247 /* TimeLineViewController.swift */; };
 		46B608701D44A7D3000FE098 /* NewMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B6086F1D44A7D3000FE098 /* NewMatchViewController.swift */; };
 		46C983901D3922D200DFC607 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C9838F1D3922D200DFC607 /* AppDelegate.swift */; };
@@ -151,6 +152,7 @@
 		4668E4CA1D68110500E36CB0 /* MatchSummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MatchSummaryViewController.swift; path = Controller/MatchSummaryViewController.swift; sourceTree = "<group>"; };
 		466AD3F91D7A869B0033289C /* NewMatchParent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewMatchParent.swift; path = Other/NewMatchParent.swift; sourceTree = "<group>"; };
 		466AD3FB1D7A8EC10033289C /* CTPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CTPicker.swift; path = utility/CTPicker.swift; sourceTree = "<group>"; };
+		466F6B051DCD8DEF00A18AAE /* XMExpandableTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMExpandableTableView.swift; sourceTree = "<group>"; };
 		46B0D66A1D8B881500C93247 /* TimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeLineViewController.swift; path = Controller/TimeLineViewController.swift; sourceTree = "<group>"; };
 		46B6086F1D44A7D3000FE098 /* NewMatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewMatchViewController.swift; path = Controller/NewMatchViewController.swift; sourceTree = "<group>"; };
 		46C9838C1D3922D200DFC607 /* CricTrac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CricTrac.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -357,6 +359,7 @@
 		46C983C01D4078B500DFC607 /* utility */ = {
 			isa = PBXGroup;
 			children = (
+				466F6B051DCD8DEF00A18AAE /* XMExpandableTableView.swift */,
 				894CA2761D9614B30043D3D1 /* Fonts_SourceSansPro */,
 				466DB86B1D63660800EFB775 /* Suggestion */,
 				895522681D5F0052008F3760 /* country-states.plist */,
@@ -769,6 +772,7 @@
 				466AD3FC1D7A8EC10033289C /* CTPicker.swift in Sources */,
 				8922042F1D97A7EC005F555B /* FriendsCell.swift in Sources */,
 				8930F0381D5B751500C7540B /* CTCountryPicker.swift in Sources */,
+				466F6B061DCD8DEF00A18AAE /* XMExpandableTableView.swift in Sources */,
 				890EA2F11DB92BD100FB40DB /* ForgotPasswordViewController.swift in Sources */,
 				892EA67E1D58DEBE00BEE5A3 /* ProfileDetails.swift in Sources */,
 				460068911D6367CE007C9457 /* SuggestionView.swift in Sources */,
@@ -795,11 +799,8 @@
 				89E6084D1D6D4ADC00F6BD11 /* CTDataPicker.swift in Sources */,
 				4657D5661D499FDD009E0FBE /* SliderMenuViewController.swift in Sources */,
 				893DAD4A1DB660AC00CC1875 /* Profile.swift in Sources */,
-
-                46F36E361D93801900EA9C6A /* ImagePostTableViewCell.swift in Sources */,
-                89E6084B1D6D407000F6BD11 /* CTHeightPicker.swift in Sources */,
-                46F259FD1D559593001EBEF9 /* BattingViewController.swift in Sources */,
-                895376981DAB865B00DDB3A6 /* FriendRequestsCell.swift in Sources */,
+				46F36E361D93801900EA9C6A /* ImagePostTableViewCell.swift in Sources */,
+				895376981DAB865B00DDB3A6 /* FriendRequestsCell.swift in Sources */,
 				4657D5601D4992D7009E0FBE /* Constants.swift in Sources */,
 				8930411A1D9E0C3B00F0E29C /* BattingBowlingViewController.swift in Sources */,
 				8930F0401D5BA1D600C7540B /* UserGroundDetailsViewController.swift in Sources */,

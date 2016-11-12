@@ -13,21 +13,21 @@ PODS:
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.17.0):
     - FBSDKCoreKit
-  - Firebase (3.8.0):
-    - Firebase/Core (= 3.8.0)
-  - Firebase/Auth (3.8.0):
+  - Firebase (3.9.0):
+    - Firebase/Core (= 3.9.0)
+  - Firebase/Auth (3.9.0):
     - Firebase/Core
     - FirebaseAuth (= 3.0.6)
-  - Firebase/Core (3.8.0):
+  - Firebase/Core (3.9.0):
     - FirebaseAnalytics (= 3.5.1)
     - FirebaseCore (= 3.4.4)
-  - Firebase/Database (3.8.0):
+  - Firebase/Database (3.9.0):
     - Firebase/Core
     - FirebaseDatabase (= 3.1.0)
-  - Firebase/Messaging (3.8.0):
+  - Firebase/Messaging (3.9.0):
     - Firebase/Core
     - FirebaseMessaging (= 1.2.1)
-  - Firebase/Storage (3.8.0):
+  - Firebase/Storage (3.9.0):
     - Firebase/Core
     - FirebaseStorage (= 1.0.4)
   - FirebaseAnalytics (3.5.1):
@@ -90,7 +90,6 @@ PODS:
   - SkyFloatingLabelTextField (1.2.1)
   - SwiftCountryPicker (1.0.0)
   - XLPagerTabStrip (5.1.0)
-  - XMExpandableTableView (0.1.0)
 
 DEPENDENCIES:
   - AnimatedTextInput (~> 0.3.0)
@@ -111,7 +110,6 @@ DEPENDENCIES:
   - SkyFloatingLabelTextField (~> 1.0)
   - SwiftCountryPicker
   - XLPagerTabStrip (~> 5.0)
-  - XMExpandableTableView
 
 EXTERNAL SOURCES:
   KRProgressHUD:
@@ -142,7 +140,7 @@ SPEC CHECKSUMS:
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   FBSDKCoreKit: 30a21d2d7b92984b3d80497113433c00824c35e9
   FBSDKLoginKit: 42b7129ac0373ca99eaf4cbebf4d07bd42371f59
-  Firebase: fdbecadb7b5cbef2774852d4fa659b9daf11f2af
+  Firebase: ff77ffb77b317c3720fef57a60e9335cebf962e6
   FirebaseAnalytics: 6e58fc9b397664369ac7617fb0ba93fab6ba7b5b
   FirebaseAuth: 96e9674ff31d6e1f826d53e26aa003a57cab0295
   FirebaseCore: d0ed25f27b6f9158eccc439f1be6f92e81207e28
@@ -163,8 +161,7 @@ SPEC CHECKSUMS:
   SkyFloatingLabelTextField: 3f6610aded18e778df5cfab3b9e12a11b3e014e9
   SwiftCountryPicker: 18f69fe0301412de373d3d2043fea38a6053ca91
   XLPagerTabStrip: 9191deaa2336735b7c47beb21e42be537fa4242a
-  XMExpandableTableView: 40569d1be8ee6efa9a48793f9a476ad109c4336f
 
-PODFILE CHECKSUM: aef495ea8ba91ba438e32729245984d87b9eb667
+PODFILE CHECKSUM: 2a41177b3473177aa3614412222e0d8b6099ff54
 
 COCOAPODS: 1.0.1

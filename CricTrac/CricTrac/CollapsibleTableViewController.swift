@@ -9,7 +9,6 @@
 
 import UIKit
 import XLPagerTabStrip
-import XMExpandableTableView
 
 class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
