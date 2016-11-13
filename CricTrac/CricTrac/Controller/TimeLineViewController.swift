@@ -24,7 +24,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         
      
         
-        
+         getDataFromNJS()
         
         
         //loadTimeLineData()

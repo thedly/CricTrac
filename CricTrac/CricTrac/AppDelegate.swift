@@ -36,6 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let refreshedToken = FIRInstanceID.instanceID().token()
         
+       
+        
         return true
     }
     

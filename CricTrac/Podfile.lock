@@ -89,6 +89,7 @@ PODS:
   - SCLAlertView (0.6.0)
   - SkyFloatingLabelTextField (1.2.1)
   - SwiftCountryPicker (1.0.0)
+  - SwiftyJSON (2.4.0)
   - XLPagerTabStrip (5.1.0)
 
 DEPENDENCIES:
@@ -109,6 +110,7 @@ DEPENDENCIES:
   - SCLAlertView (from `https://github.com/vikmeup/SCLAlertView-Swift.git`, branch `swift-2.3`)
   - SkyFloatingLabelTextField (~> 1.0)
   - SwiftCountryPicker
+  - SwiftyJSON (= 2.4.0)
   - XLPagerTabStrip (~> 5.0)
 
 EXTERNAL SOURCES:
@@ -160,8 +162,9 @@ SPEC CHECKSUMS:
   SCLAlertView: 0f6b3c23a48b4993564ff1dd3c065782e4b2b687
   SkyFloatingLabelTextField: 3f6610aded18e778df5cfab3b9e12a11b3e014e9
   SwiftCountryPicker: 18f69fe0301412de373d3d2043fea38a6053ca91
+  SwiftyJSON: 96918c1bf505efa50c4f72957018dd3452090c9c
   XLPagerTabStrip: 9191deaa2336735b7c47beb21e42be537fa4242a
 
-PODFILE CHECKSUM: 2a41177b3473177aa3614412222e0d8b6099ff54
+PODFILE CHECKSUM: b677bc2870bcbc28df1d1b810ac925be8d5e3422
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.1

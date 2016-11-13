@@ -43,6 +43,7 @@
 		46F36E361D93801900EA9C6A /* ImagePostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F36E341D93801900EA9C6A /* ImagePostTableViewCell.swift */; };
 		46F36E371D93801900EA9C6A /* ImagePostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46F36E351D93801900EA9C6A /* ImagePostTableViewCell.xib */; };
 		46FA41D41D6D3F68006635C6 /* MatchDetailsTrackable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FA41D31D6D3F68006635C6 /* MatchDetailsTrackable.swift */; };
+		46FDA5BD1DD81D19008F2BC0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FDA5BC1DD81D19008F2BC0 /* NetworkManager.swift */; };
 		89067D731DAE9D120021F463 /* radioSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89067D721DAE9D120021F463 /* radioSelectView.swift */; };
 		89067D751DAEA89C0021F463 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89067D741DAEA89C0021F463 /* TransitionManager.swift */; };
 		8909FACB1DB9B49900066FC5 /* DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8909FACA1DB9B49900066FC5 /* DoneButton.swift */; };
@@ -176,6 +177,7 @@
 		46F36E341D93801900EA9C6A /* ImagePostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImagePostTableViewCell.swift; path = View/ImagePostTableViewCell.swift; sourceTree = "<group>"; };
 		46F36E351D93801900EA9C6A /* ImagePostTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImagePostTableViewCell.xib; path = View/ImagePostTableViewCell.xib; sourceTree = "<group>"; };
 		46FA41D31D6D3F68006635C6 /* MatchDetailsTrackable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MatchDetailsTrackable.swift; path = Other/MatchDetailsTrackable.swift; sourceTree = "<group>"; };
+		46FDA5BC1DD81D19008F2BC0 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkManager.swift; path = Other/NetworkManager.swift; sourceTree = "<group>"; };
 		549F76A86F0BF1CECAF26359 /* Pods-CricTrac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CricTrac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CricTrac/Pods-CricTrac.debug.xcconfig"; sourceTree = "<group>"; };
 		89067D721DAE9D120021F463 /* radioSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = radioSelectView.swift; sourceTree = "<group>"; };
 		89067D741DAEA89C0021F463 /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
@@ -512,6 +514,7 @@
 			isa = PBXGroup;
 			children = (
 				46F25A021D5B1AAD001EBEF9 /* Service.swift */,
+				46FDA5BC1DD81D19008F2BC0 /* NetworkManager.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -715,7 +718,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -777,6 +780,7 @@
 				892EA67E1D58DEBE00BEE5A3 /* ProfileDetails.swift in Sources */,
 				460068911D6367CE007C9457 /* SuggestionView.swift in Sources */,
 				895E04011D5CCEDE002E322E /* FriendRequestsViewController.swift in Sources */,
+				46FDA5BD1DD81D19008F2BC0 /* NetworkManager.swift in Sources */,
 				46C983C21D4078EB00DFC607 /* utility.swift in Sources */,
 				4657D56C1D4DA4E7009E0FBE /* Enums.swift in Sources */,
 				4657D5681D49A060009E0FBE /* SliderMenuCell.swift in Sources */,

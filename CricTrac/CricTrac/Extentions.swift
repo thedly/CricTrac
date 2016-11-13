@@ -126,6 +126,11 @@ extension String {
         }
         
     }
+    
+    var timelinePost:String{
+    
+        return self+"/BowlingStyle"
+    }
 }
 
 extension UIView {
