@@ -129,7 +129,7 @@ extension String {
     
     var timelinePost:String{
     
-        return self+"/BowlingStyle"
+        return self+"/newPost"
     }
 }
 

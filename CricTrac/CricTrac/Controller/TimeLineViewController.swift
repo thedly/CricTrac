@@ -23,13 +23,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         super.viewDidLoad()
         
      
-        
-         getDataFromNJS()
-        
-        
-        //loadTimeLineData()
-        loadTimline()
-        getAllFriends()
+       
         
         refreshControl.attributedTitle = NSAttributedString(string: "Loading New Posts")
         refreshControl.addTarget(self, action: #selector(TimeLineViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)

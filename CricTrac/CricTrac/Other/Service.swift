@@ -531,13 +531,13 @@ func addNewPost(postText:String){
     
     KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
     
-    var ref = fireBaseRef.child("TimelinePosts").childByAutoId()
+    let ref = fireBaseRef.child("TimelinePosts").childByAutoId()
     
     ref.setValue(postText)
     
     let postKey = ref.key
     
-    
+    updateTimelineWithNewPost(postKey)
     
     KRProgressHUD.dismiss()
     

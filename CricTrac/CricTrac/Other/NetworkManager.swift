@@ -33,9 +33,18 @@ func getDataFromNJS(){
     
 }
 
-func updateFriendTimeline(postId:String){
+func updateTimelineWithNewPost(postId:String){
     
+    let timelineURL = serverBaseURL+"/user/\(currentUser!.uid)/newPost/\(postId)"
     
+    let request = NSMutableURLRequest(URL: NSURL(string:timelineURL)!)
+    request.HTTPMethod = "POST"
+    
+    dataTask = defaultSession.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+     
+    })
+    
+    dataTask?.resume()
     
 }
 
