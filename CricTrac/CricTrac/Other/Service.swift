@@ -439,35 +439,7 @@ func addThemeData(theme: String, sucessBlock:()->Void){
 }
 
 
-public func updateTimeLineFromIDS(callback: (timeline:[[String:String]])->Void){
-    
-    
-    
-    var timeLine = [[String:String]]()
-    
-    let postCount = newPostIds.count-1
-    
-    for postindex in 0...postCount{
-        
-        let postId = newPostIds[postindex]
-        
-        fireBaseRef.child("TimelinePosts").child(postId).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-            
-            if let data = snapshot.value as? String {
-                
-                timeLine.insert(["post":data], atIndex: 0)
-                
-                if postindex == postCount{
-                    
-                    callback(timeline: timeLine)
-                    
-                }
-            }
-        })
-        
-    }
-    
-}
+
 
 
 // MARK: - Friends
@@ -531,15 +503,19 @@ func addNewPost(postText:String){
     
     KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
     
+    let addedTime = "\(NSDate().timeIntervalSince1970 * 1000)"
+    let timelineDict:[String:String] = ["AddedTime":addedTime,"CommentCount":"0","LikeCount":"0","OwnerID":currentUser!.uid,"OwnerName":(currentUser?.displayName) ?? "","isDeleted":"0","Post":postText]
+    
     let ref = fireBaseRef.child("TimelinePosts").childByAutoId()
     
-    ref.setValue(postText)
+    ref.setValue(timelineDict)
     
     let postKey = ref.key
     
-    updateTimelineWithNewPost(postKey)
-    
-    KRProgressHUD.dismiss()
+    updateTimelineWithNewPost(postKey) { (resultError) in
+        
+        KRProgressHUD.dismiss()
+    }
     
 }
 

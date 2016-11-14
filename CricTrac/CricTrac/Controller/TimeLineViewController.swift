@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class TimeLineViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
 
@@ -19,11 +20,13 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     let  refreshControl = UIRefreshControl()
     var totalPosts = 5
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
      
-       
+        loadTimeline()
         
         refreshControl.attributedTitle = NSAttributedString(string: "Loading New Posts")
         refreshControl.addTarget(self, action: #selector(TimeLineViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
@@ -53,58 +56,24 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
     func refresh(sender:AnyObject) {
         
-        
-        updateTimeLineFromIDS { (timeline) in
-            
-            self.timelineDS += timeline
-            self.timeLineTable.reloadData()
-            self.refreshControl.endRefreshing()
-        }
+
         
         
     }
     
     
-    func loadTimline(){
+    func loadTimeline(){
         
-        loadTimeLineFromIDS { (timeline) in
-            self.timelineDS = timeline
+        getLatestTimelines({ (result) in
+            
+            timelineData = result
             self.timeLineTable.reloadData()
             
-        }
+            }) { (error) in }
     }
     
     
-    func loadTimeLineData(){
-        
-        loadTimeline { (timeline) in
-            
-            
-            if let timelinedata = timeline as? [String:[String:String]]{
-                
-                for (_,val) in timelinedata{
-                    
-                    self.timelineDS.append(val)
-                    
-                }
-                
-                self.timeLineTable.reloadData()
-                
-                loadAllPostIds({
-                    
-                    loadTimelineFromId({ (timeline,postId) in
-                        
-                        var timeLineDic = timeline as! [String : String]
-                        timeLineDic["postId"] = postId
-                        self.timelineDS.append(timeLineDic )
-                        
-                    })
-                    
-                })
-            }
-            
-        }
-    }
+   
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -141,12 +110,15 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         }
         else{
             
-             let data = timelineDS[indexPath.section-1]
             
-            if let imageurl = data["postImage"]{
+            
+           let data = timelineData!.dictionaryValue["timeline"]!.arrayValue[indexPath.section-1]
+            
+            
+            if let imageurl = data.dictionaryValue["postImage"]?.string {
                 
                  let imageCell =  timeLineTable.dequeueReusableCellWithIdentifier("imagepost", forIndexPath: indexPath) as! ImagePostTableViewCell
-                let postid = data["postId"]
+                let postid = data.dictionaryValue["postId"]?.stringValue
                 imageCell.imagePost.image = nil
                 imageCell.imagePost.loadImage(imageurl, postId:postid!)
                 
@@ -157,7 +129,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 
                 let  postCell =  timeLineTable.dequeueReusableCellWithIdentifier("aPost", forIndexPath: indexPath) as! APostTableViewCell
                 
-                postCell.post.text = data["post"]
+                postCell.post.text = data.dictionaryValue["Post"]?.stringValue
                 acell = postCell
                 
             }
@@ -170,7 +142,11 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
      func numberOfSectionsInTableView(tableView: UITableView) -> Int{
         
-        return timelineDS.count+1
+        if timelineData == nil{
+            return 1
+        }
+        
+        return timelineData!.count+1
     }
     
      func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -185,21 +161,21 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
-            if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height)
-            {
-
-
-                timeLineTable.reloadData()
-
-                loadTimelineFromId({ (timeline,postId) in
-                    
-                    var timeLineDic = timeline as! [String : String]
-                    timeLineDic["postId"] = postId
-                    self.timelineDS.append(timeLineDic )
-                    
-                })
-                
-                }
+//            if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height)
+//            {
+//
+//
+//                timeLineTable.reloadData()
+//
+//                loadTimelineFromId({ (timeline,postId) in
+//                    
+//                    var timeLineDic = timeline as! [String : String]
+//                    timeLineDic["postId"] = postId
+//                    self.timelineDS.append(timeLineDic )
+//                    
+//                })
+//                
+//                }
             }
     
     

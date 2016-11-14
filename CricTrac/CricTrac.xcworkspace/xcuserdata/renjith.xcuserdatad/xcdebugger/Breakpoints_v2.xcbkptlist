@@ -83,54 +83,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CricTrac/Controller/TimeLineViewController.swift"
-            timestampString = "500733679.535834"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "loadTimeLineData()"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CricTrac.TimeLineViewController.loadTimline () -&gt; ()"
-                  moduleName = "CricTrac"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/renjith/Projects/CricTrackNew/crictrac_ios/CricTrac/CricTrac/Controller/TimeLineViewController.swift"
-                  timestampString = "497196054.459585"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "83"
-                  endingLineNumber = "83"
-                  offsetFromSymbolStart = "12">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CricTrac.TimeLineViewController.(loadTimline () -&gt; ()).(closure #1)"
-                  moduleName = "CricTrac"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/renjith/Projects/CricTrackNew/crictrac_ios/CricTrac/CricTrac/Controller/TimeLineViewController.swift"
-                  timestampString = "497196054.459811"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "84"
-                  endingLineNumber = "84"
-                  offsetFromSymbolStart = "16">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "CricTrac/Other/Service.swift"
             timestampString = "497195706.062441"
             startingColumnNumber = "9223372036854775807"
@@ -315,6 +267,38 @@
                   offsetFromSymbolStart = "497">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CricTrac/Controller/TimeLineViewController.swift"
+            timestampString = "500789732.648456"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "loadTimeline()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CricTrac/Controller/TimeLineViewController.swift"
+            timestampString = "500789764.237691"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
+            landmarkName = "numberOfSectionsInTableView(_:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

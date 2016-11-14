@@ -33,7 +33,7 @@ func getDataFromNJS(){
     
 }
 
-func updateTimelineWithNewPost(postId:String){
+func updateTimelineWithNewPost(postId:String,result:(resultError:NSError?)->Void){
     
     let timelineURL = serverBaseURL+"/user/\(currentUser!.uid)/newPost/\(postId)"
     
@@ -41,9 +41,28 @@ func updateTimelineWithNewPost(postId:String){
     request.HTTPMethod = "POST"
     
     dataTask = defaultSession.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+        
+        result(resultError: error)
      
     })
     
+    dataTask?.resume()
+    
+}
+
+func getLatestTimelines(sucess:(JSON)->Void,failure:(NSError?)->Void){
+    
+    let timelineURL = NSURL(string:serverBaseURL+"/timeline/\(currentUser!.uid)")!
+    
+    dataTask = defaultSession.dataTaskWithURL(timelineURL, completionHandler: { (data, response, error) in
+        
+        if error != nil{
+            failure(error)
+        }else{
+            
+            let parsedData = JSON(data:data!)
+            sucess(parsedData)
+        }})
     dataTask?.resume()
     
 }

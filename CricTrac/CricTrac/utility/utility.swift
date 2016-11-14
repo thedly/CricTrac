@@ -9,6 +9,7 @@
 import Foundation
 import KYDrawerController
 import FirebaseAuth
+import SwiftyJSON
 
 var sliderMenu = KYDrawerController()
 var currentUser:FIRUser?
@@ -30,6 +31,8 @@ var PlayingLevels = [String]()
 var genders = [String]()
 var matchDataSource = [[String:String]]()
 var profileDataChanged: Bool = false
+
+var timelineData:JSON?
 
 private var _currentTheme: String = defaultTheme
 var topColor = topColorDefault
