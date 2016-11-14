@@ -31,7 +31,7 @@ var PlayingLevels = [String]()
 var genders = [String]()
 var matchDataSource = [[String:String]]()
 var profileDataChanged: Bool = false
-
+var ThemeChanged: Bool = false
 var timelineData:JSON?
 
 private var _currentTheme: String = defaultTheme

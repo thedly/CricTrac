@@ -42,16 +42,16 @@ class FriendSuggestionsCell: UITableViewCell {
         
         if let loggedInUser = UserProfilesData.filter({ $0.id == currentUser?.uid }).first {
             
-            let friendRequestData  = ["sentRequestData":
-            
-            ["City": _userObj.City, "Club": _userObj.TeamName, "Name": _userObj.fullName, "SentTo": _userObj.id, "SentDateTime": "\(currentTimeMillis())"],
-            
-            "ReceivedRequestData" : ["City": loggedInUser.City, "Club": loggedInUser.TeamName, "Name": loggedInUser.fullName, "ReceivedFrom": loggedInUser.id, "ReceievedDateTime": "\(currentTimeMillis())"]
-            ]
-            
-            AddSentRequestData(friendRequestData, callback: { sentRequestId in
-            print(sentRequestId)
-            })
+//            let friendRequestData  = ["sentRequestData":
+//            
+//            ["City": _userObj.City, "Club": _userObj.TeamName, "Name": _userObj.fullName, "SentTo": _userObj.id, "SentDateTime": "\(currentTimeMillis())"],
+//            
+//            "ReceivedRequestData" : ["City": loggedInUser.City, "Club": loggedInUser.TeamName, "Name": loggedInUser.fullName, "ReceivedFrom": loggedInUser.id, "ReceievedDateTime": "\(currentTimeMillis())"]
+//            ]
+//            
+//            AddSentRequestData(friendRequestData, callback: { sentRequestId in
+//            print(sentRequestId)
+//            })
             
             
             
@@ -71,7 +71,7 @@ class FriendSuggestionsCell: UITableViewCell {
         self._userObj = userProfileObject
         
         self.userName.text = userProfileObject.fullName
-        self.userTeam.text = userProfileObject.TeamName
+//        self.userTeam.text = userProfileObject.TeamName
         self.userProfileView.image = extractImages(userProfileObject.ProfileImageUrl)
         
         

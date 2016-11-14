@@ -176,7 +176,7 @@ func loadInitialProfileValues(){
 }
 
 
-func addUserProfileData(data:[String:String], sucessBlock:(AnyObject)->Void){
+func addUserProfileData(data:[String:AnyObject], sucessBlock:(AnyObject)->Void){
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
     ref.setValue(data)
     sucessBlock(data)

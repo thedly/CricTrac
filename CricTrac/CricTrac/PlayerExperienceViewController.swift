@@ -25,13 +25,16 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     
     lazy var ctDataPicker = DataPicker()
     
-    var teamNames = ["New Horizon public school", "National public school", "Delhi public school"]
+    var teamNames = ["NHPS","DPS"]
     
-    var pastTeamNames = ["Bangalore public school", "Ryan International school"]
+    var pastTeamNames = ["NHPS","DPS"]
     
-    var data:[String:String]{
+    
+    var nextVC: UIViewController!
+    
+    var data:[String:AnyObject]{
         
-        return ["PlayingRole":playingRole.textVal,"BattingStyle":battingStyle.textVal,"BowlingStyle":bowlingStyle.textVal,"TeamName":teamName.textVal]
+        return ["PlayingRole":playingRole.textVal,"BattingStyle":battingStyle.textVal,"BowlingStyle":bowlingStyle.textVal,"CurrentTeamsAsPlayer":teamNames, "PastTeamsAsPlayer": pastTeamNames]
     }
     
     let transitionManager = TransitionManager.sharedInstance
@@ -43,10 +46,30 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     @IBAction func goNextPage(sender: AnyObject) {
-        let toViewController = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
-        toViewController.transitioningDelegate = self.transitionManager
-        presentViewController(toViewController, animated: true, completion: nil)
-    }
+        
+        
+        profileData.PlayingRole = self.data["PlayingRole"] as! String
+        profileData.BattingStyle = self.data["BattingStyle"] as! String
+        profileData.BowlingStyle = self.data["BowlingStyle"] as! String
+        profileData.CurrentTeamsAsPlayer = self.data["CurrentTeamsAsPlayer"] as! [String]
+        profileData.PastTeamsAsPlayer = self.data["PastTeamsAsPlayer"] as! [String]
+        profileData.userType = userProfileType.Player.rawValue
+        
+        addUserProfileData(profileData.ProfileObject) { (AnyObject) in
+            var vc: UIViewController = self.presentingViewController!;
+            while ((vc.presentingViewController) != nil) {
+                
+                vc = vc.presentingViewController!;
+                if ((vc.presentingViewController?.isEqual(viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController)) != nil){
+                    break;
+                }
+            }
+            
+            vc.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+
+        }
+        
+            }
     
     func initializeView() {
         playingRole.delegate = self
@@ -77,7 +100,7 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
             
             if tblView.isEqual(self.currentTeams) {
                 let indexPath = currentTeams.indexPathForCell(cell)
-                teamNames.removeAtIndex((indexPath?.row)!)
+                self.teamNames.removeAtIndex((indexPath?.row)!)
                 currentTeams.reloadData()
             }
             else {
@@ -153,18 +176,18 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-//        
-//        getAllProfileData { (data) in
-//            
-//            profileData = data as! [String:String]
-//            
-//            if profileData.count > 0 {
-//                self.playingRole.text = profileData["PlayingRole"]
-//                self.battingStyle.text = profileData["BattingStyle"]
-//                self.bowlingStyle.text = profileData["BowlingStyle"]
-//                self.teamName.text = profileData["TeamName"]
-//            }
-//        }
+        
+        
+            if profileData.FirstName.length > 0 {
+                self.playingRole.text = profileData.PlayingRole
+                self.battingStyle.text = profileData.BattingStyle
+                self.bowlingStyle.text = profileData.BowlingStyle
+                self.teamNames = profileData.CurrentTeamsAsPlayer
+                self.pastTeamNames = profileData.PastTeamsAsPlayer
+                currentTeams.reloadData()
+                pastTeams.reloadData()
+            }
+        
     }
     
     override func viewDidLoad() {

@@ -256,7 +256,7 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider/*,GIDSignIn
         }
         
         let window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
-        let dashboardVC = viewControllerFrom("Main", vcid: "CollapsibleTableViewController") as! CollapsibleTableViewController
+        let dashboardVC = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
         
         let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")
         

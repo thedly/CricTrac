@@ -119,6 +119,7 @@
 		89E6084D1D6D4ADC00F6BD11 /* CTDataPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E6084C1D6D4ADC00F6BD11 /* CTDataPicker.swift */; };
 		89E83F7C1D4A5AD000232250 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E83F7B1D4A5AD000232250 /* MenuTableViewCell.swift */; };
 		89F4E4B31D48FECD00EFE46E /* summaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F4E4B21D48FECD00EFE46E /* summaryTableViewCell.swift */; };
+		89F9911E1DDA1BEF00E5F440 /* UserDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F9911D1DDA1BEF00E5F440 /* UserDashboardViewController.swift */; };
 		89FD59C61D41C3AE003EF45C /* SF-UI-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 89FD59C41D41C3AE003EF45C /* SF-UI-Text-Bold.otf */; };
 		89FD59C71D41C3AE003EF45C /* SF-UI-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 89FD59C51D41C3AE003EF45C /* SF-UI-Text-Regular.otf */; };
 		969786FFCE77D7FA1172017A /* Pods_CricTrac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADA948F8B3E9B5D978AF58E0 /* Pods_CricTrac.framework */; };
@@ -255,6 +256,7 @@
 		89E6084C1D6D4ADC00F6BD11 /* CTDataPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTDataPicker.swift; sourceTree = "<group>"; };
 		89E83F7B1D4A5AD000232250 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		89F4E4B21D48FECD00EFE46E /* summaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = summaryTableViewCell.swift; sourceTree = "<group>"; };
+		89F9911D1DDA1BEF00E5F440 /* UserDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDashboardViewController.swift; sourceTree = "<group>"; };
 		89FD59C41D41C3AE003EF45C /* SF-UI-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Bold.otf"; sourceTree = "<group>"; };
 		89FD59C51D41C3AE003EF45C /* SF-UI-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Regular.otf"; sourceTree = "<group>"; };
 		ADA948F8B3E9B5D978AF58E0 /* Pods_CricTrac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CricTrac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -470,6 +472,7 @@
 		8958F5F11D392B780028D5AA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				89F9911D1DDA1BEF00E5F440 /* UserDashboardViewController.swift */,
 				897194CA1DA34DFD00478F82 /* AddMatchDetailsViewController.swift */,
 				46B6086F1D44A7D3000FE098 /* NewMatchViewController.swift */,
 				46C983BE1D3FC72400DFC607 /* DashboardViewController.swift */,
@@ -718,7 +721,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -767,6 +770,7 @@
 				895E04071D5CE283002E322E /* FriendSuggestViewController.swift in Sources */,
 				89C8196C1D52362300291A7E /* POCViewController.swift in Sources */,
 				466AD3FA1D7A869B0033289C /* NewMatchParent.swift in Sources */,
+				89F9911E1DDA1BEF00E5F440 /* UserDashboardViewController.swift in Sources */,
 				89C8196E1D52429500291A7E /* headerView.swift in Sources */,
 				46C983C41D40968300DFC607 /* Extentions.swift in Sources */,
 				8930F03E1D5BA0EB00C7540B /* UserTeamDetailsViewController.swift in Sources */,

@@ -91,7 +91,7 @@ class SplashScreenViewController: UIViewController {
         
         if IsAuthorized {
             let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")
-            let dashboardVC = viewControllerFrom("Main", vcid: "CollapsibleTableViewController") as! CollapsibleTableViewController
+            let dashboardVC = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
             
             let navigationControl = UINavigationController(rootViewController: dashboardVC )
             sliderMenu.mainViewController = navigationControl

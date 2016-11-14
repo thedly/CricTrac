@@ -33,6 +33,11 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var Hobies: UITableView!
     
     
+    var data:[String:AnyObject]{
+        
+        return ["FavouritePlayerAsAFan":favouritePlayer.textVal,"HobbiesAsAFan":HobbiesList, "InterestedSportsAsAFan":InterestedSportsNamesList,"SupportingTeamsAsAFan": supportingTeamNamesList]
+    }
+    
     var supportingTeamNamesList = ["New Horizon public school", "National public school", "Delhi public school"]
     
     var InterestedSportsNamesList = ["Bangalore public school", "Ryan International school"]
@@ -60,6 +65,30 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
         Hobies.delegate = self
     }
 
+    @IBAction func CreateFanBtnPressed(sender: AnyObject) {
+        
+        
+        profileData.FavouritePlayerAsAFan =  self.data["FavouritePlayerAsAFan"] as! String
+        profileData.SupportingTeamsAsAFan = self.data["SupportingTeamsAsAFan"] as! [String]
+        profileData.InterestedSportsAsAFan = self.data["InterestedSportsAsAFan"] as! [String]
+        profileData.HobbiesAsAFan =  self.data["HobbiesAsAFan"] as! [String]
+        
+        addUserProfileData(profileData.ProfileObject) { (AnyObject) in
+            var vc: UIViewController = self.presentingViewController!;
+            while ((vc.presentingViewController) != nil) {
+                
+                vc = vc.presentingViewController!;
+                if ((vc.presentingViewController?.isEqual(viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController)) != nil){
+                    break;
+                }
+            }
+            
+            vc.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+            
+        }
+        
+    }
+    
     @IBAction func backBtnPressed(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }

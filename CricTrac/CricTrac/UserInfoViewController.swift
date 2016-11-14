@@ -13,6 +13,7 @@ import SkyFloatingLabelTextField
 
 class UserInfoViewController: UIViewController  {
     
+    
     lazy var ctDatePicker = CTDatePicker()
     lazy var ctCountryPicker = CTCountryPicker()
     lazy var ctStatePicker = CTStatePicker()
@@ -33,10 +34,10 @@ class UserInfoViewController: UIViewController  {
     @IBOutlet weak var gender: UITextField!
     @IBOutlet weak var mobile: UITextField!
     
-    @IBOutlet weak var teamName: UITextField!
-    @IBOutlet weak var bowlingStyle: UITextField!
-    @IBOutlet weak var battingStyle: UITextField!
-    @IBOutlet weak var playingRole: UITextField!
+//    @IBOutlet weak var teamName: UITextField!
+//    @IBOutlet weak var bowlingStyle: UITextField!
+//    @IBOutlet weak var battingStyle: UITextField!
+//    @IBOutlet weak var playingRole: UITextField!
     
     
     var selectedText:UITextField?
@@ -46,16 +47,10 @@ class UserInfoViewController: UIViewController  {
     var lastSelectedTab:UIView?
     var scrollViewTop:CGFloat!
     
+    var NextVC : UIViewController!
     
     
-    
-    @IBAction func goNextPage(sender: AnyObject) {
-        
-        let toViewController = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
-        toViewController.transitioningDelegate = self.transitionManager
-        presentViewController(toViewController, animated: true, completion: nil)
-        
-    }
+   
     
     @IBAction func goPreviousPage(sender: AnyObject) {
         
@@ -74,7 +69,7 @@ class UserInfoViewController: UIViewController  {
     
     var data:[String:String]{
         
-        return ["FirstName":firstName.textVal,"LastName":lastName.textVal,"DateOfBirth":dateOfBirth.textVal,"Email":emailId.textVal,"Mobile":mobile.textVal,"Gender":gender.textVal,"Country":country.textVal,"State":state.textVal,"City":city.textVal, "TeamName": teamName.textVal, "BattingStyle": battingStyle.textVal, "BowlingStyle": bowlingStyle.textVal, "PlayingRole": playingRole.textVal]
+        return ["FirstName":firstName.textVal,"LastName":lastName.textVal,"DateOfBirth":dateOfBirth.textVal,"Email":emailId.textVal,"Mobile":mobile.textVal,"Gender":gender.textVal,"Country":country.textVal,"State":state.textVal,"City":city.textVal]
     }
     
     
@@ -89,12 +84,12 @@ class UserInfoViewController: UIViewController  {
         firstName.delegate = self
         lastName.delegate = self
         
-        playingRole.delegate = self
-        bowlingStyle.delegate = self
-        battingStyle.delegate = self
-        teamName.delegate = self
+//        playingRole.delegate = self
+//        bowlingStyle.delegate = self
+//        battingStyle.delegate = self
+//        teamName.delegate = self
         
-        loadInitialProfileValues()
+        
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserInfoViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         scrollView.setContentOffset(CGPointZero, animated: true)
@@ -106,9 +101,7 @@ class UserInfoViewController: UIViewController  {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
             
-            getAllProfileData { (data) in
-                
-                profileData = Profile(usrObj: data)
+        
                 
                 
                     self.profileDetailsExists = true
@@ -124,13 +117,13 @@ class UserInfoViewController: UIViewController  {
                     self.city.text = profileData.City
                     self.ctCountryPicker.SelectedCountry = profileData.Country
                     
-                    self.teamName.text = profileData.TeamName
-                    self.battingStyle.text = profileData.BattingStyle
-                    self.bowlingStyle.text = profileData.BowlingStyle
-                    self.playingRole.text = profileData.PlayingRole
-                   
+//                    self.teamName.text = profileData.TeamName
+//                    self.battingStyle.text = profileData.BattingStyle
+//                    self.bowlingStyle.text = profileData.BowlingStyle
+//                    self.playingRole.text = profileData.PlayingRole
+                
         }
-    }
+   
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -143,11 +136,28 @@ class UserInfoViewController: UIViewController  {
     
     @IBAction func addUserBtnPressed(sender: AnyObject) {
         if validateProfileData() {
-            let data = self.data
-            addUserProfileData(data, sucessBlock: {data in
-                profileDataChanged = true
-            })
-            dismissViewControllerAnimated(true, completion: nil)
+            
+            profileData.FirstName = self.data["FirstName"]!
+            profileData.LastName = self.data["LastName"]!
+            profileData.DateOfBirth = self.data["DateOfBirth"]!
+            profileData.Email = self.data["Email"]!
+            profileData.Mobile = self.data["Mobile"]!
+            profileData.Gender = self.data["Gender"]!
+            profileData.Country = self.data["Country"]!
+            profileData.State = self.data["State"]!
+            profileData.City = self.data["City"]!
+            
+            
+            let toViewController = NextVC
+            
+            
+            
+            toViewController!.transitioningDelegate = self.transitionManager
+            presentViewController(toViewController!, animated: true, completion: nil)
+            
+            
+            
+            //dismissViewControllerAnimated(true, completion: nil)
         }
         
     }
@@ -284,21 +294,21 @@ extension UserInfoViewController:UITextFieldDelegate{
             let indexPos = genders.indexOf(gender.text!) ?? 0
             ctDataPicker.showPicker(self, inputText: textField, data: genders,selectedValueIndex: indexPos)
         }
-        else if  textField == playingRole{
-            ctDataPicker = DataPicker()
-            let indexPos = PlayingRoles.indexOf(playingRole.text!) ?? 0
-            ctDataPicker.showPicker(self, inputText: textField, data: PlayingRoles,selectedValueIndex: indexPos)
-        }
-        else if  textField == battingStyle{
-            ctDataPicker = DataPicker()
-            let indexPos = BattingStyles.indexOf(battingStyle.text!) ?? 0
-            ctDataPicker.showPicker(self, inputText: textField, data: BattingStyles,selectedValueIndex: indexPos)
-        }
-        else if  textField == bowlingStyle{
-            ctDataPicker = DataPicker()
-            let indexPos = BowlingStyles.indexOf(bowlingStyle.text!) ?? 0
-            ctDataPicker.showPicker(self, inputText: textField, data: BowlingStyles,selectedValueIndex: indexPos)
-        }
+//        else if  textField == playingRole{
+//            ctDataPicker = DataPicker()
+//            let indexPos = PlayingRoles.indexOf(playingRole.text!) ?? 0
+//            ctDataPicker.showPicker(self, inputText: textField, data: PlayingRoles,selectedValueIndex: indexPos)
+//        }
+//        else if  textField == battingStyle{
+//            ctDataPicker = DataPicker()
+//            let indexPos = BattingStyles.indexOf(battingStyle.text!) ?? 0
+//            ctDataPicker.showPicker(self, inputText: textField, data: BattingStyles,selectedValueIndex: indexPos)
+//        }
+//        else if  textField == bowlingStyle{
+//            ctDataPicker = DataPicker()
+//            let indexPos = BowlingStyles.indexOf(bowlingStyle.text!) ?? 0
+//            ctDataPicker.showPicker(self, inputText: textField, data: BowlingStyles,selectedValueIndex: indexPos)
+//        }
     }
 }
 

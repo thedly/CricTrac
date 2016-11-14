@@ -18,12 +18,21 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     
     @IBOutlet weak var pastTeams: UITableView!
     
+    @IBOutlet weak var CoachingLevel: UITextField!
+    
+    @IBOutlet weak var Certifications: UITextField!
+    
+    @IBOutlet weak var Experience: UITextField!
+    
+    var data:[String:AnyObject]{
+        
+        return ["CoachingCertifications":Certifications.textVal,"CoachingExperience":Experience.textVal,"CoachingLevel":CoachingLevel.textVal,"CurrentTeamsAsCoach":teamNames, "PastTeamsAsCoach": pastTeamNames]
+    }
+    
     
     var teamNames = ["New Horizon public school", "National public school", "Delhi public school"]
     
     var pastTeamNames = ["Bangalore public school", "Ryan International school"]
-    
-    
     
     
     override func viewDidLoad() {
@@ -42,13 +51,56 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         pastTeams.delegate = self
         
     }
-
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        if profileData.FirstName.length > 0 {
+            self.CoachingLevel.text = profileData.CoachingLevel
+            self.Certifications.text = profileData.CoachingCertifications
+            self.Experience.text = profileData.CoachingExperience
+            self.teamNames = profileData.CurrentTeamsAsCoach
+            self.pastTeamNames = profileData.PastTeamsAsCoach
+            currentTeams.reloadData()
+            pastTeams.reloadData()
+        }
+    }
+    
     @IBAction func backBtnPressed(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func CreateCoachingProfileBtnPressed(sender: AnyObject) {
+        
+        profileData.CoachingCertifications = self.data["CoachingCertifications"] as! String
+        profileData.CoachingExperience = self.data["CoachingExperience"] as! String
+        profileData.CoachingLevel = self.data["CoachingLevel"] as! String
+        profileData.CurrentTeamsAsCoach = self.data["CurrentTeamsAsCoach"] as! [String]
+        profileData.PastTeamsAsCoach = self.data["PastTeamsAsCoach"] as! [String]
+        profileData.userType = userProfileType.Coach.rawValue
+        
+        addUserProfileData(profileData.ProfileObject) { (AnyObject) in
+            
+            var vc: UIViewController = self.presentingViewController!;
+            while ((vc.presentingViewController) != nil) {
+                
+                vc = vc.presentingViewController!;
+                if ((vc.presentingViewController?.isEqual(viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController)) != nil){
+                    break;
+                }
+            }
+            
+            vc.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+            
+        }
+
+        
+        
+        
     }
     
     
@@ -117,6 +169,24 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     }
     
     func getCellForPastTeamsRow(indexPath:NSIndexPath)->UITableViewCell{
+        if let aCell =  pastTeams.dequeueReusableCellWithIdentifier("CurrentTeamsTableViewCell", forIndexPath: indexPath) as? CurrentTeamsTableViewCell {
+            
+            aCell.backgroundColor = UIColor.clearColor()
+            
+            aCell.teamName.text = pastTeamNames[indexPath.row]
+            
+            aCell.deleteTeamBtn.addTarget(self, action: "deleteTeamFromCurrentTeams:", forControlEvents: .TouchUpInside)
+            return aCell
+        }
+        else
+        {
+            return UITableViewCell()
+        }
+        
+        
+    }
+    
+    func getCellForPlayedTeamsRow(indexPath:NSIndexPath)->UITableViewCell{
         if let aCell =  pastTeams.dequeueReusableCellWithIdentifier("CurrentTeamsTableViewCell", forIndexPath: indexPath) as? CurrentTeamsTableViewCell {
             
             aCell.backgroundColor = UIColor.clearColor()

@@ -387,7 +387,7 @@ class CollapsibleTableViewController:XMExpandableTableView,UIImagePickerControll
                 self.playingRole.text = profileData.PlayingRole
                 self.battingStyle.text = profileData.BattingStyle
                 self.bowlingStyle.text = profileData.BowlingStyle
-                self.teamName.text = profileData.TeamName
+//                self.teamName.text = profileData.TeamName
                 self.location.text = profileData.City + ", "+profileData.Country
                 
                 if profileData.ProfileImageUrl.length > 0 {

@@ -10,10 +10,14 @@ import UIKit
 
 class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate {
     
+    var ProfileBaseDetails: [String:AnyObject]!
+    var NextVC: UIViewController!
    
     
     @IBAction func nextBtnPressed(sender: AnyObject) {
+        let nextViewController = viewControllerFrom("Main", vcid: "UserInfoViewController") as! UserInfoViewController
         var toViewController: UIViewController
+        
         switch profileData.userType {
         case userProfileType.Player.rawValue :
             toViewController = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
@@ -24,8 +28,11 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate 
         default:
             toViewController = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
         }
-        toViewController.transitioningDelegate = self.transitionManager
-        presentViewController(toViewController, animated: true, completion: nil)
+        
+        NextVC = toViewController
+        nextViewController.NextVC = toViewController
+        nextViewController.transitioningDelegate = self.transitionManager
+        presentViewController(nextViewController, animated: true, completion: nil)
     }
     
     @IBOutlet weak var playerTextView: radioSelectView!
@@ -66,6 +73,34 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate 
     
     func setupControls() {
         
+        getAllProfileData { (data) in
+            
+            profileData = Profile(usrObj: data)
+            
+            if profileData.userType.length > 0 {
+            switch profileData.userType {
+                case userProfileType.Coach.rawValue:
+                    self.coachTextView.isSelected = true
+                    self.playerTextView.isSelected = false
+                    self.cricketFanTextView.isSelected = false
+                case userProfileType.Player.rawValue:
+                    self.playerTextView.isSelected = true
+                    self.coachTextView.isSelected = false
+                    self.cricketFanTextView.isSelected = false
+                case userProfileType.Fan.rawValue:
+                    self.cricketFanTextView.isSelected = true
+                    self.playerTextView.isSelected = false
+                    self.coachTextView.isSelected = false
+                default:
+                    self.playerTextView.isSelected = true
+                    self.coachTextView.isSelected = false
+                    self.cricketFanTextView.isSelected = false
+                }
+                
+            }
+        }
+        
+        
         let playertap = UITapGestureRecognizer(target: self, action: #selector(ProfileBaseViewController.handleProfileTap(_:)))
         playertap.delegate = self
         
@@ -93,6 +128,10 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate 
         super.viewDidLoad()
         setUIBackgroundTheme(self.view)
         setupControls()
+        loadInitialProfileValues()
+        
+        
+        
         // Do any additional setup after loading the view.
     }
     
