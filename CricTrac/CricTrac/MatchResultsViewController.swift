@@ -20,9 +20,9 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
     
     @IBOutlet weak var secondTeamTossBtn: UIButton!
     
-    @IBOutlet weak var FirstBattingView: DragView!
+    @IBOutlet weak var FirstBattingView: UIView!
     
-    @IBOutlet weak var SecondBattingView: DragView!
+    @IBOutlet weak var SecondBattingView: UIView!
     
     var firstBatText: String!
     var secondBatText: String!

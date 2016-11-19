@@ -20,12 +20,12 @@ let menuData = [
     ["title":"Match Summary","vc":"MatchSummaryViewController"],
     ["title":"Friends","vc":"FriendBaseViewController"],
     ["title":"Profile","vc":"ProfileBaseViewController"],
-    ["title":"Statistics","vc":"NewMatchViewController"],
-    ["title":"Notification","vc":"SummaryViewController"],
+    ["title":"Statistics","vc":"AddMatchDetailsViewController"],
+    ["title":"Notification","vc":"MatchSummaryViewController"],
     ["title":"Settings","vc":"SettingsViewController"],
-    ["title":"Feedback","vc":"SummaryViewController"],
-    ["title":"Help & Support","vc":"SummaryViewController"],
-    ["title":"Version: \(versionAndBuildNumber)","vc":"SummaryViewController"],
+    ["title":"Feedback","vc":"MatchSummaryViewController"],
+    ["title":"Help & Support","vc":"MatchSummaryViewController"],
+    ["title":"Version: \(versionAndBuildNumber)","vc":"MatchSummaryViewController"],
     
 ]
 
