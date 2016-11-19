@@ -104,8 +104,8 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         
         if indexPath.section == 0{
             let cell = timeLineTable.dequeueReusableCellWithIdentifier("addpost", forIndexPath: indexPath) as! AddPostTableViewCell
-            cell.newPostButton.addTarget(self, action: #selector(addPost) , forControlEvents: .TouchUpInside)
-            newPostText = cell.newPostText
+           // cell.newPostButton.addTarget(self, action: #selector(addPost) , forControlEvents: .TouchUpInside)
+            //newPostText = cell.newPostText
              acell =  cell
         }
         else{
@@ -136,7 +136,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             
         }
         
-        acell.backgroundColor = .whiteColor()
+        acell.backgroundColor = UIColor.clearColor()
         return acell
     }
     
@@ -154,8 +154,8 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 0{return 150}
-        return 200
+        if indexPath.section == 0{return 125}
+        return 175
     }
     
     
