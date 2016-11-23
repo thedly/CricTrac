@@ -12,6 +12,7 @@
 		460068991D638496007C9457 /* SuggestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 460068981D638496007C9457 /* SuggestionCell.xib */; };
 		4600689B1D638545007C9457 /* SuggestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4600689A1D638545007C9457 /* SuggestionCell.swift */; };
 		4607A2641D54848A0090A5BD /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4607A2631D54848A0090A5BD /* MatchViewController.swift */; };
+		461F5A5F1DE136D600B4616F /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F5A5E1DE136D600B4616F /* Theme.swift */; };
 		462DE9F71D478B9E00E31E8F /* CTDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462DE9F61D478B9E00E31E8F /* CTDatePicker.swift */; };
 		4642DAA51D5039DD001F039D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4642DAA41D5039DD001F039D /* LoginViewController.swift */; };
 		4657D5601D4992D7009E0FBE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4657D55F1D4992D7009E0FBE /* Constants.swift */; };
@@ -24,6 +25,7 @@
 		466AD3FA1D7A869B0033289C /* NewMatchParent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466AD3F91D7A869B0033289C /* NewMatchParent.swift */; };
 		466AD3FC1D7A8EC10033289C /* CTPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466AD3FB1D7A8EC10033289C /* CTPicker.swift */; };
 		466F6B061DCD8DEF00A18AAE /* XMExpandableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466F6B051DCD8DEF00A18AAE /* XMExpandableTableView.swift */; };
+		46AE388F1DE4761E00FB9E23 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE388E1DE4761E00FB9E23 /* NewPostViewController.swift */; };
 		46B0D66B1D8B881500C93247 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B0D66A1D8B881500C93247 /* TimeLineViewController.swift */; };
 		46B608701D44A7D3000FE098 /* NewMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B6086F1D44A7D3000FE098 /* NewMatchViewController.swift */; };
 		46C983901D3922D200DFC607 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C9838F1D3922D200DFC607 /* AppDelegate.swift */; };
@@ -142,6 +144,7 @@
 		460068981D638496007C9457 /* SuggestionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SuggestionCell.xib; path = Other/SuggestionCell.xib; sourceTree = "<group>"; };
 		4600689A1D638545007C9457 /* SuggestionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SuggestionCell.swift; path = Other/SuggestionCell.swift; sourceTree = "<group>"; };
 		4607A2631D54848A0090A5BD /* MatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
+		461F5A5E1DE136D600B4616F /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		462DE9F61D478B9E00E31E8F /* CTDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CTDatePicker.swift; path = utility/CTDatePicker.swift; sourceTree = "<group>"; };
 		4642DAA41D5039DD001F039D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4657D55F1D4992D7009E0FBE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Other/Constants.swift; sourceTree = "<group>"; };
@@ -155,6 +158,7 @@
 		466AD3F91D7A869B0033289C /* NewMatchParent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewMatchParent.swift; path = Other/NewMatchParent.swift; sourceTree = "<group>"; };
 		466AD3FB1D7A8EC10033289C /* CTPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CTPicker.swift; path = utility/CTPicker.swift; sourceTree = "<group>"; };
 		466F6B051DCD8DEF00A18AAE /* XMExpandableTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMExpandableTableView.swift; sourceTree = "<group>"; };
+		46AE388E1DE4761E00FB9E23 /* NewPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewPostViewController.swift; path = Controller/NewPostViewController.swift; sourceTree = "<group>"; };
 		46B0D66A1D8B881500C93247 /* TimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeLineViewController.swift; path = Controller/TimeLineViewController.swift; sourceTree = "<group>"; };
 		46B6086F1D44A7D3000FE098 /* NewMatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewMatchViewController.swift; path = Controller/NewMatchViewController.swift; sourceTree = "<group>"; };
 		46C9838C1D3922D200DFC607 /* CricTrac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CricTrac.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -290,6 +294,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		461F5A5D1DE136A000B4616F /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				461F5A5E1DE136D600B4616F /* Theme.swift */,
+			);
+			name = Theme;
+			sourceTree = "<group>";
+		};
 		4657D55E1D4992B1009E0FBE /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -335,6 +347,7 @@
 		46C9838E1D3922D200DFC607 /* CricTrac */ = {
 			isa = PBXGroup;
 			children = (
+				461F5A5D1DE136A000B4616F /* Theme */,
 				893DAD481DB6608E00CC1875 /* Models */,
 				46FA41D21D6D3F2F006635C6 /* Protocols */,
 				4657D55E1D4992B1009E0FBE /* Constants */,
@@ -509,6 +522,7 @@
 				89D7D9D31DAFEAB80069D536 /* CoachingExperienceViewController.swift */,
 				8951D52E1DB08BF5005D101A /* CricketFanViewController.swift */,
 				890EA2F01DB92BD100FB40DB /* ForgotPasswordViewController.swift */,
+				46AE388E1DE4761E00FB9E23 /* NewPostViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -782,6 +796,7 @@
 				466F6B061DCD8DEF00A18AAE /* XMExpandableTableView.swift in Sources */,
 				890EA2F11DB92BD100FB40DB /* ForgotPasswordViewController.swift in Sources */,
 				892EA67E1D58DEBE00BEE5A3 /* ProfileDetails.swift in Sources */,
+				46AE388F1DE4761E00FB9E23 /* NewPostViewController.swift in Sources */,
 				460068911D6367CE007C9457 /* SuggestionView.swift in Sources */,
 				895E04011D5CCEDE002E322E /* FriendRequestsViewController.swift in Sources */,
 				46FDA5BD1DD81D19008F2BC0 /* NetworkManager.swift in Sources */,
@@ -808,6 +823,7 @@
 				4657D5661D499FDD009E0FBE /* SliderMenuViewController.swift in Sources */,
 				893DAD4A1DB660AC00CC1875 /* Profile.swift in Sources */,
 				46F36E361D93801900EA9C6A /* ImagePostTableViewCell.swift in Sources */,
+				461F5A5F1DE136D600B4616F /* Theme.swift in Sources */,
 				895376981DAB865B00DDB3A6 /* FriendRequestsCell.swift in Sources */,
 				4657D5601D4992D7009E0FBE /* Constants.swift in Sources */,
 				8930411A1D9E0C3B00F0E29C /* BattingBowlingViewController.swift in Sources */,

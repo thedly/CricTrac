@@ -9,7 +9,7 @@
 import UIKit
 import KRProgressHUD
 
-class UserDashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class UserDashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,ThemeChangeable {
 
     //MARK: - Variable declaration
     
@@ -46,23 +46,13 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     @IBOutlet weak var recentBestBowling: UILabel!
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
-        
-        if ThemeChanged {
-            setUIBackgroundTheme(self.view)
-            setColorForViewsWithSameTag(baseView)
-            ThemeChanged = false
-        }
-        
-        
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUIBackgroundTheme(self.view)
-        setColorForViewsWithSameTag(baseView)
+        //setUIBackgroundTheme(self.view)
+        //setColorForViewsWithSameTag(baseView)
         
         userProfileImage.layer.cornerRadius = userProfileImage.bounds.size.width/2
         MatchesView.layer.cornerRadius = 10
@@ -78,7 +68,15 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         setBowlingUIElements()
         
+        setBackgroundColor()
+        
         // Do any additional setup after loading the view.
+    }
+    
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        MatchesView.backgroundColor = currentTheme.boxColor
+        //baseView.backgroundColor = UIColor.clearColor()
     }
 
     override func didReceiveMemoryWarning() {
