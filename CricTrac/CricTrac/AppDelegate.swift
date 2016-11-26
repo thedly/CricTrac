@@ -36,8 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let refreshedToken = FIRInstanceID.instanceID().token()
         
-       
-        setCurrentTheme(.sunSet)
         
         setDefaultAppThems()
         

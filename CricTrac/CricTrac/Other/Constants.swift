@@ -42,7 +42,10 @@ var versionAndBuildNumber:String{
 
 //MARK:-URLS
 
-let fireBaseRef =  FIRDatabase.database().referenceFromURL("https://arjun-innovations.firebaseio.com")
+//let fireBaseRef =  FIRDatabase.database().referenceFromURL("https://arjun-innovations.firebaseio.com")
+
+let fireBaseRef =  FIRDatabase.database().reference()
+
 
 let storageRef = FIRStorage.storage().referenceForURL("gs://arjun-innovations.appspot.com")
 

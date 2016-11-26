@@ -14,6 +14,7 @@
 		4607A2641D54848A0090A5BD /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4607A2631D54848A0090A5BD /* MatchViewController.swift */; };
 		461F5A5F1DE136D600B4616F /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F5A5E1DE136D600B4616F /* Theme.swift */; };
 		462DE9F71D478B9E00E31E8F /* CTDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462DE9F61D478B9E00E31E8F /* CTDatePicker.swift */; };
+		4633C9991DE996740062877C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4633C9981DE996740062877C /* GoogleService-Info.plist */; };
 		4642DAA51D5039DD001F039D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4642DAA41D5039DD001F039D /* LoginViewController.swift */; };
 		4657D5601D4992D7009E0FBE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4657D55F1D4992D7009E0FBE /* Constants.swift */; };
 		4657D5661D499FDD009E0FBE /* SliderMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4657D5651D499FDD009E0FBE /* SliderMenuViewController.swift */; };
@@ -55,7 +56,6 @@
 		890EA2F11DB92BD100FB40DB /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890EA2F01DB92BD100FB40DB /* ForgotPasswordViewController.swift */; };
 		89129C4A1D904F89009488FE /* LoginBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89129C491D904F89009488FE /* LoginBaseViewController.swift */; };
 		89129C4C1D90501B009488FE /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89129C4B1D90501B009488FE /* RegisterViewController.swift */; };
-		8915BEED1DAD160F00171BF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8915BEEC1DAD160F00171BF9 /* GoogleService-Info.plist */; };
 		8917AE241D94466900E6BC1A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8917AE231D94466900E6BC1A /* SettingsViewController.swift */; };
 		8922042D1D97A3A6005F555B /* FriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8922042C1D97A3A6005F555B /* FriendsCell.xib */; };
 		8922042F1D97A7EC005F555B /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8922042E1D97A7EC005F555B /* FriendsCell.swift */; };
@@ -147,6 +147,7 @@
 		4607A2631D54848A0090A5BD /* MatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
 		461F5A5E1DE136D600B4616F /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		462DE9F61D478B9E00E31E8F /* CTDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CTDatePicker.swift; path = utility/CTDatePicker.swift; sourceTree = "<group>"; };
+		4633C9981DE996740062877C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4642DAA41D5039DD001F039D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4657D55F1D4992D7009E0FBE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Other/Constants.swift; sourceTree = "<group>"; };
 		4657D5651D499FDD009E0FBE /* SliderMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SliderMenuViewController.swift; path = Controller/SliderMenuViewController.swift; sourceTree = "<group>"; };
@@ -194,7 +195,6 @@
 		890EA2F01DB92BD100FB40DB /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		89129C491D904F89009488FE /* LoginBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginBaseViewController.swift; sourceTree = "<group>"; };
 		89129C4B1D90501B009488FE /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
-		8915BEEC1DAD160F00171BF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8917AE231D94466900E6BC1A /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8922042C1D97A3A6005F555B /* FriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsCell.xib; sourceTree = "<group>"; };
 		8922042E1D97A7EC005F555B /* FriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
@@ -327,7 +327,7 @@
 		46C983831D3922D200DFC607 = {
 			isa = PBXGroup;
 			children = (
-				8915BEEC1DAD160F00171BF9 /* GoogleService-Info.plist */,
+				4633C9981DE996740062877C /* GoogleService-Info.plist */,
 				46C9838E1D3922D200DFC607 /* CricTrac */,
 				46C983A31D3922D200DFC607 /* CricTracTests */,
 				46C9838D1D3922D200DFC607 /* Products */,
@@ -645,6 +645,7 @@
 				8922042D1D97A3A6005F555B /* FriendsCell.xib in Resources */,
 				46DE32C61D900C9F0024CD82 /* AddPostTableViewCell.xib in Resources */,
 				894CA2A71D96150A0043D3D1 /* SourceSansPro-LightIt.otf in Resources */,
+				4633C9991DE996740062877C /* GoogleService-Info.plist in Resources */,
 				460068991D638496007C9457 /* SuggestionCell.xib in Resources */,
 				894CA2A91D96150A0043D3D1 /* SourceSansPro-Semibold.otf in Resources */,
 				894CA29F1D96150A0043D3D1 /* SourceSansPro-Black.otf in Resources */,
@@ -662,7 +663,6 @@
 				894CA2A51D96150A0043D3D1 /* SourceSansPro-It.otf in Resources */,
 				894CA29E1D96150A0043D3D1 /* SIL Open Font License.txt in Resources */,
 				8953769A1DAB8BF200DDB3A6 /* FriendSuggestionsCell.xib in Resources */,
-				8915BEED1DAD160F00171BF9 /* GoogleService-Info.plist in Resources */,
 				894CA2A61D96150A0043D3D1 /* SourceSansPro-Light.otf in Resources */,
 				46C983971D3922D200DFC607 /* Assets.xcassets in Resources */,
 				46F36E371D93801900EA9C6A /* ImagePostTableViewCell.xib in Resources */,
