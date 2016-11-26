@@ -10,6 +10,7 @@ import Foundation
 import Firebase
 import SCLAlertView
 import KRProgressHUD
+import SwiftyJSON
 //MARK:- Match Data
 
 func loadInitialValues(){
@@ -499,7 +500,7 @@ func getAllFriends(){
  //MARK: - Add Post
 
 
-func addNewPost(postText:String){
+func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
     
     KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
     
@@ -512,12 +513,18 @@ func addNewPost(postText:String){
     
     let postKey = ref.key
     
+    let returnData = ["timeline":["Post":postText,"postKey":postKey]]
+    
+    sucess(data: returnData)
+    
     updateTimelineWithNewPost(postKey) { (resultError) in
         
         KRProgressHUD.dismiss()
     }
     
 }
+
+
 
 
 //fireBaseRef.child("Dismissals").setValue(["BOWLED","CAUGHT","HANDLED THE BALL","HIT WICKET","HIT THE BALL TWICE","LEG BEFORE WICKET (LBW)","OBSTRUCTING THE FIELD","RUN OUT","RETIRED","TIMED OUT"])

@@ -26,6 +26,7 @@
 		466AD3FC1D7A8EC10033289C /* CTPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466AD3FB1D7A8EC10033289C /* CTPicker.swift */; };
 		466F6B061DCD8DEF00A18AAE /* XMExpandableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466F6B051DCD8DEF00A18AAE /* XMExpandableTableView.swift */; };
 		46AE388F1DE4761E00FB9E23 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE388E1DE4761E00FB9E23 /* NewPostViewController.swift */; };
+		46AE38931DE6735000FB9E23 /* PostSendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE38921DE6735000FB9E23 /* PostSendable.swift */; };
 		46B0D66B1D8B881500C93247 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B0D66A1D8B881500C93247 /* TimeLineViewController.swift */; };
 		46B608701D44A7D3000FE098 /* NewMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B6086F1D44A7D3000FE098 /* NewMatchViewController.swift */; };
 		46C983901D3922D200DFC607 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C9838F1D3922D200DFC607 /* AppDelegate.swift */; };
@@ -159,6 +160,7 @@
 		466AD3FB1D7A8EC10033289C /* CTPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CTPicker.swift; path = utility/CTPicker.swift; sourceTree = "<group>"; };
 		466F6B051DCD8DEF00A18AAE /* XMExpandableTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMExpandableTableView.swift; sourceTree = "<group>"; };
 		46AE388E1DE4761E00FB9E23 /* NewPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewPostViewController.swift; path = Controller/NewPostViewController.swift; sourceTree = "<group>"; };
+		46AE38921DE6735000FB9E23 /* PostSendable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostSendable.swift; path = Other/PostSendable.swift; sourceTree = "<group>"; };
 		46B0D66A1D8B881500C93247 /* TimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeLineViewController.swift; path = Controller/TimeLineViewController.swift; sourceTree = "<group>"; };
 		46B6086F1D44A7D3000FE098 /* NewMatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewMatchViewController.swift; path = Controller/NewMatchViewController.swift; sourceTree = "<group>"; };
 		46C9838C1D3922D200DFC607 /* CricTrac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CricTrac.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -405,6 +407,7 @@
 				466AD3F91D7A869B0033289C /* NewMatchParent.swift */,
 				46FA41D31D6D3F68006635C6 /* MatchDetailsTrackable.swift */,
 				8951D52C1DB07D5F005D101A /* ProfileDetailsProtocol.swift */,
+				46AE38921DE6735000FB9E23 /* PostSendable.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -782,6 +785,7 @@
 				89D7D9D41DAFEAB80069D536 /* CoachingExperienceViewController.swift in Sources */,
 				8951D52D1DB07D5F005D101A /* ProfileDetailsProtocol.swift in Sources */,
 				895E04071D5CE283002E322E /* FriendSuggestViewController.swift in Sources */,
+				46AE38931DE6735000FB9E23 /* PostSendable.swift in Sources */,
 				89C8196C1D52362300291A7E /* POCViewController.swift in Sources */,
 				466AD3FA1D7A869B0033289C /* NewMatchParent.swift in Sources */,
 				89F9911E1DDA1BEF00E5F440 /* UserDashboardViewController.swift in Sources */,

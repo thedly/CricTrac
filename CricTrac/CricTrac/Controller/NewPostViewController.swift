@@ -15,6 +15,8 @@ class NewPostViewController: UIViewController {
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var postContent: UITextView!
     
+    weak var sendPostDelegate:PostSendable?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,6 +38,17 @@ class NewPostViewController: UIViewController {
         
         dismissViewControllerAnimated(true) {}
     }
+    
+    
+    @IBAction func sendNewPostToTimline(sender:UIButton){
+        
+        if let postText = postContent.text{
+        sendPostDelegate?.sendNewPost(postText)
+        }
+        
+        dismissViewControllerAnimated(true) {}
+    }
+    
     /*
     // MARK: - Navigation
 
