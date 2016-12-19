@@ -95,42 +95,52 @@ let themeColors = [
     "Dawn" : [
         "topColor" : "#4DA0B0",
         "bottomColor" : "#D39D38",
+        "theme":"dawn"
     ],
     "MeanGreen" : [
         "topColor" : "#84CC00",
         "bottomColor" : "#4D9D00",
+        "theme":"meanGreen"
     ],
     "Dusk" : [
         "topColor" : "#434343",
-        "bottomColor": "#000000"
+        "bottomColor": "#000000",
+        "theme":"dusk"
     ],
     "Sunset": [
         "topColor": "#FF9500",
-        "bottomColor": "#FF5E3A"
+        "bottomColor": "#FF5E3A",
+        "theme":"sunSet"
     ],
     "Turquoise": [
         "topColor": "#136a8a",
-        "bottomColor": "#267871"
+        "bottomColor": "#267871",
+        "theme":"turquoise"
     ],
     "Instagram": [
         "topColor": "#517fa4",
-        "bottomColor": "#243949"
+        "bottomColor": "#243949",
+        "theme":"instagram"
     ],
     "Mango": [
         "topColor": "#ffcc33",
-        "bottomColor": "#ffb347"
+        "bottomColor": "#ffb347",
+        "theme":"mango"
     ],
     "Hersheys": [
         "topColor": "#9a8478",
-        "bottomColor": "#1e130c"
+        "bottomColor": "#1e130c",
+        "theme":"hersheys"
     ],
     "Cocktail": [
         "topColor": "#D38312",
-        "bottomColor": "#A83279"
+        "bottomColor": "#A83279",
+        "theme":"cocktail"
     ],
     "Earthly": [
         "topColor": "#DBD5A4",
-        "bottomColor": "#649173"
+        "bottomColor": "#649173",
+        "theme":"earthly"
     ]
 ]
 

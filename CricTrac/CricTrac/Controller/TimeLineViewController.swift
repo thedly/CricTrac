@@ -9,9 +9,11 @@
 import UIKit
 import SwiftyJSON
 
-class TimeLineViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+class TimeLineViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable {
 
     @IBOutlet weak var timeLineTable: UITableView!
+    
+    var currentTheme:CTTheme!
     
     var newPostText:UITextField?
     
@@ -25,6 +27,9 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setBackgroundColor()
+        
+        //setUIBackgroundTheme(view)
      
         loadTimeline()
         
@@ -52,6 +57,13 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         // Do any additional setup after loading the view.
     }
 
+    
+    func changeThemeSettigs(){
+        currentTheme = cricTracTheme.currentTheme
+        timeLineTable.backgroundView?.backgroundColor = UIColor.clearColor()
+        timeLineTable.backgroundColor = UIColor.clearColor()
+        timeLineTable.reloadData()
+    }
     
     
     func refresh(sender:AnyObject) {
@@ -104,8 +116,8 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         
         if indexPath.section == 0{
             let cell = timeLineTable.dequeueReusableCellWithIdentifier("addpost", forIndexPath: indexPath) as! AddPostTableViewCell
-            cell.newPostButton.addTarget(self, action: #selector(addPost) , forControlEvents: .TouchUpInside)
-            newPostText = cell.newPostText
+           // cell.newPostButton.addTarget(self, action: #selector(addPost) , forControlEvents: .TouchUpInside)
+            //newPostText = cell.newPostText
              acell =  cell
         }
         else{
@@ -136,7 +148,9 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             
         }
         
-        acell.backgroundColor = .whiteColor()
+        acell.contentView.backgroundColor = currentTheme.boxColor
+        acell.backgroundColor = UIColor.clearColor()
+        acell.selectionStyle = .None
         return acell
     }
     
@@ -154,8 +168,18 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 0{return 150}
-        return 200
+        if indexPath.section == 0{return 125}
+        return 175
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        //NewPostViewController
+        let newPost = viewControllerFrom("Main", vcid: "NewPostViewController")
+        
+        newPost.modalPresentationStyle = .OverCurrentContext
+        presentViewController(newPost, animated: true, completion: nil)
+        
     }
     
     

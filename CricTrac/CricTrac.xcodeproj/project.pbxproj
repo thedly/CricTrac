@@ -12,6 +12,7 @@
 		460068991D638496007C9457 /* SuggestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 460068981D638496007C9457 /* SuggestionCell.xib */; };
 		4600689B1D638545007C9457 /* SuggestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4600689A1D638545007C9457 /* SuggestionCell.swift */; };
 		4607A2641D54848A0090A5BD /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4607A2631D54848A0090A5BD /* MatchViewController.swift */; };
+		461F5A5F1DE136D600B4616F /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F5A5E1DE136D600B4616F /* Theme.swift */; };
 		462DE9F71D478B9E00E31E8F /* CTDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462DE9F61D478B9E00E31E8F /* CTDatePicker.swift */; };
 		4642DAA51D5039DD001F039D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4642DAA41D5039DD001F039D /* LoginViewController.swift */; };
 		4657D5601D4992D7009E0FBE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4657D55F1D4992D7009E0FBE /* Constants.swift */; };
@@ -126,6 +127,7 @@
 		460068981D638496007C9457 /* SuggestionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SuggestionCell.xib; path = Other/SuggestionCell.xib; sourceTree = "<group>"; };
 		4600689A1D638545007C9457 /* SuggestionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SuggestionCell.swift; path = Other/SuggestionCell.swift; sourceTree = "<group>"; };
 		4607A2631D54848A0090A5BD /* MatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
+		461F5A5E1DE136D600B4616F /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		462DE9F61D478B9E00E31E8F /* CTDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CTDatePicker.swift; path = utility/CTDatePicker.swift; sourceTree = "<group>"; };
 		4642DAA41D5039DD001F039D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4657D55F1D4992D7009E0FBE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Other/Constants.swift; sourceTree = "<group>"; };
@@ -258,6 +260,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		461F5A5D1DE136A000B4616F /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				461F5A5E1DE136D600B4616F /* Theme.swift */,
+			);
+			name = Theme;
+			sourceTree = "<group>";
+		};
 		4657D55E1D4992B1009E0FBE /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,6 +313,7 @@
 		46C9838E1D3922D200DFC607 /* CricTrac */ = {
 			isa = PBXGroup;
 			children = (
+				461F5A5D1DE136A000B4616F /* Theme */,
 				893DAD481DB6608E00CC1875 /* Models */,
 				46FA41D21D6D3F2F006635C6 /* Protocols */,
 				4657D55E1D4992B1009E0FBE /* Constants */,
@@ -461,6 +472,7 @@
 				89D7D9D31DAFEAB80069D536 /* CoachingExperienceViewController.swift */,
 				8951D52E1DB08BF5005D101A /* CricketFanViewController.swift */,
 				890EA2F01DB92BD100FB40DB /* ForgotPasswordViewController.swift */,
+				46AE388E1DE4761E00FB9E23 /* NewPostViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -725,6 +737,7 @@
 				8930F0381D5B751500C7540B /* CTCountryPicker.swift in Sources */,
 				890EA2F11DB92BD100FB40DB /* ForgotPasswordViewController.swift in Sources */,
 				892EA67E1D58DEBE00BEE5A3 /* ProfileDetails.swift in Sources */,
+				46AE388F1DE4761E00FB9E23 /* NewPostViewController.swift in Sources */,
 				460068911D6367CE007C9457 /* SuggestionView.swift in Sources */,
 				895E04011D5CCEDE002E322E /* FriendRequestsViewController.swift in Sources */,
 				46FDA5BD1DD81D19008F2BC0 /* NetworkManager.swift in Sources */,
@@ -745,6 +758,7 @@
 				4657D5661D499FDD009E0FBE /* SliderMenuViewController.swift in Sources */,
 				893DAD4A1DB660AC00CC1875 /* Profile.swift in Sources */,
 				46F36E361D93801900EA9C6A /* ImagePostTableViewCell.swift in Sources */,
+				461F5A5F1DE136D600B4616F /* Theme.swift in Sources */,
 				895376981DAB865B00DDB3A6 /* FriendRequestsCell.swift in Sources */,
 				4657D5601D4992D7009E0FBE /* Constants.swift in Sources */,
 				8930411A1D9E0C3B00F0E29C /* BattingBowlingViewController.swift in Sources */,

@@ -15,6 +15,7 @@ class ThemeColorsCollectionViewCell: UICollectionViewCell {
     
     var cellTopColor : String!
     var cellBottomColor : String!
+    var theme:String!
     
     private var _cellIsSelected: Bool = false
     
