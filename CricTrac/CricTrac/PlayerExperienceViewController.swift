@@ -51,9 +51,9 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         profileData.PlayingRole = self.data["PlayingRole"] as! String
         profileData.BattingStyle = self.data["BattingStyle"] as! String
         profileData.BowlingStyle = self.data["BowlingStyle"] as! String
-        profileData.CurrentTeamsAsPlayer = self.data["CurrentTeamsAsPlayer"] as! [String]
-        profileData.PastTeamsAsPlayer = self.data["PastTeamsAsPlayer"] as! [String]
-        profileData.userType = userProfileType.Player.rawValue
+        profileData.PlayerCurrentTeams = self.data["PlayerCurrentTeams"] as! [String]
+        profileData.PlayerPastTeams = self.data["PlayerPastTeams"] as! [String]
+        profileData.UserProfile = userProfileType.Player.rawValue
         
         addUserProfileData(profileData.ProfileObject) { (AnyObject) in
             var vc: UIViewController = self.presentingViewController!;
@@ -182,8 +182,8 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
                 self.playingRole.text = profileData.PlayingRole
                 self.battingStyle.text = profileData.BattingStyle
                 self.bowlingStyle.text = profileData.BowlingStyle
-                self.teamNames = profileData.CurrentTeamsAsPlayer
-                self.pastTeamNames = profileData.PastTeamsAsPlayer
+                self.teamNames = profileData.PlayerCurrentTeams
+                self.pastTeamNames = profileData.PlayerPastTeams
                 currentTeams.reloadData()
                 pastTeams.reloadData()
             }

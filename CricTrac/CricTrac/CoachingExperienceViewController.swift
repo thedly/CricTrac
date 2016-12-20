@@ -57,10 +57,10 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         
         if profileData.FirstName.length > 0 {
             self.CoachingLevel.text = profileData.CoachingLevel
-            self.Certifications.text = profileData.CoachingCertifications
-            self.Experience.text = profileData.CoachingExperience
-            self.teamNames = profileData.CurrentTeamsAsCoach
-            self.pastTeamNames = profileData.PastTeamsAsCoach
+            self.Certifications.text = profileData.Certifications
+            self.Experience.text = profileData.Experience
+            self.teamNames = profileData.CoachCurrentTeams
+            self.pastTeamNames = profileData.CoachPastTeams
             currentTeams.reloadData()
             pastTeams.reloadData()
         }
@@ -76,12 +76,12 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     
     @IBAction func CreateCoachingProfileBtnPressed(sender: AnyObject) {
         
-        profileData.CoachingCertifications = self.data["CoachingCertifications"] as! String
-        profileData.CoachingExperience = self.data["CoachingExperience"] as! String
+        profileData.Certifications = self.data["Certifications"] as! String
+        profileData.Experience = self.data["Experience"] as! String
         profileData.CoachingLevel = self.data["CoachingLevel"] as! String
-        profileData.CurrentTeamsAsCoach = self.data["CurrentTeamsAsCoach"] as! [String]
-        profileData.PastTeamsAsCoach = self.data["PastTeamsAsCoach"] as! [String]
-        profileData.userType = userProfileType.Coach.rawValue
+        profileData.CoachCurrentTeams = self.data["CoachCurrentTeams"] as! [String]
+        profileData.CoachPastTeams = self.data["CoachPastTeams"] as! [String]
+        profileData.UserProfile = userProfileType.Coach.rawValue
         
         addUserProfileData(profileData.ProfileObject) { (AnyObject) in
             

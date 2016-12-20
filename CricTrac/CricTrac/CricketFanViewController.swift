@@ -68,10 +68,10 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBAction func CreateFanBtnPressed(sender: AnyObject) {
         
         
-        profileData.FavouritePlayerAsAFan =  self.data["FavouritePlayerAsAFan"] as! String
-        profileData.SupportingTeamsAsAFan = self.data["SupportingTeamsAsAFan"] as! [String]
-        profileData.InterestedSportsAsAFan = self.data["InterestedSportsAsAFan"] as! [String]
-        profileData.HobbiesAsAFan =  self.data["HobbiesAsAFan"] as! [String]
+        profileData.FavouritePlayers =  self.data["FavouritePlayerAsAFan"] as! String
+        profileData.SupportingTeams = self.data["SupportingTeamsAsAFan"] as! [String]
+        profileData.InterestedSports = self.data["InterestedSportsAsAFan"] as! [String]
+        profileData.Hobbies =  self.data["HobbiesAsAFan"] as! [String]
         
         addUserProfileData(profileData.ProfileObject) { (AnyObject) in
             var vc: UIViewController = self.presentingViewController!;

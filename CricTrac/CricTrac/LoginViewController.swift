@@ -254,6 +254,11 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     
     func navigateToNextScreen(){
         
+        getAllProfileData({ data in
+            profileData = Profile(usrObj: data)
+        })
+        
+        
         let window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
         let dashboardVC = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
         
@@ -266,8 +271,13 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         googleBtn.enabled = true
         window?.rootViewController = sliderMenu
         
+        
+        
+        
         self.presentViewController(sliderMenu, animated: true) {}
         KRProgressHUD.dismiss()
+        
+        
     }
 
 }

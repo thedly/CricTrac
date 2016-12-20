@@ -91,6 +91,7 @@
 		8962F89F1D4666E0008D1AC3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8962F89E1D4666E0008D1AC3 /* Images.xcassets */; };
 		896407CE1DA7FE51002212EB /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896407CD1DA7FE51002212EB /* SplashScreenViewController.swift */; };
 		897194CB1DA34DFD00478F82 /* AddMatchDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897194CA1DA34DFD00478F82 /* AddMatchDetailsViewController.swift */; };
+		89836C5E1E08081D00ABDCA9 /* ProfileReadOnlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89836C5D1E08081D00ABDCA9 /* ProfileReadOnlyViewController.swift */; };
 		899206241D61BA0700F99A97 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899206231D61BA0700F99A97 /* FriendsViewController.swift */; };
 		899206261D61BA6700F99A97 /* FriendsInviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899206251D61BA6700F99A97 /* FriendsInviteViewController.swift */; };
 		8997D56C1DBCFCA000F201B6 /* CurrentTeamsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8997D56B1DBCFCA000F201B6 /* CurrentTeamsTableViewCell.swift */; };
@@ -213,6 +214,7 @@
 		8962F89E1D4666E0008D1AC3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		896407CD1DA7FE51002212EB /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		897194CA1DA34DFD00478F82 /* AddMatchDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMatchDetailsViewController.swift; sourceTree = "<group>"; };
+		89836C5D1E08081D00ABDCA9 /* ProfileReadOnlyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileReadOnlyViewController.swift; sourceTree = "<group>"; };
 		899206231D61BA0700F99A97 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		899206251D61BA6700F99A97 /* FriendsInviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsInviteViewController.swift; sourceTree = "<group>"; };
 		8997D56B1DBCFCA000F201B6 /* CurrentTeamsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentTeamsTableViewCell.swift; sourceTree = "<group>"; };
@@ -472,7 +474,7 @@
 				89D7D9D31DAFEAB80069D536 /* CoachingExperienceViewController.swift */,
 				8951D52E1DB08BF5005D101A /* CricketFanViewController.swift */,
 				890EA2F01DB92BD100FB40DB /* ForgotPasswordViewController.swift */,
-				46AE388E1DE4761E00FB9E23 /* NewPostViewController.swift */,
+				89836C5D1E08081D00ABDCA9 /* ProfileReadOnlyViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -725,6 +727,7 @@
 				8917AE241D94466900E6BC1A /* SettingsViewController.swift in Sources */,
 				89D7D9D41DAFEAB80069D536 /* CoachingExperienceViewController.swift in Sources */,
 				895E04071D5CE283002E322E /* FriendSuggestViewController.swift in Sources */,
+				89836C5E1E08081D00ABDCA9 /* ProfileReadOnlyViewController.swift in Sources */,
 				89C8196C1D52362300291A7E /* POCViewController.swift in Sources */,
 				466AD3FA1D7A869B0033289C /* NewMatchParent.swift in Sources */,
 				89F9911E1DDA1BEF00E5F440 /* UserDashboardViewController.swift in Sources */,
@@ -737,7 +740,6 @@
 				8930F0381D5B751500C7540B /* CTCountryPicker.swift in Sources */,
 				890EA2F11DB92BD100FB40DB /* ForgotPasswordViewController.swift in Sources */,
 				892EA67E1D58DEBE00BEE5A3 /* ProfileDetails.swift in Sources */,
-				46AE388F1DE4761E00FB9E23 /* NewPostViewController.swift in Sources */,
 				460068911D6367CE007C9457 /* SuggestionView.swift in Sources */,
 				895E04011D5CCEDE002E322E /* FriendRequestsViewController.swift in Sources */,
 				46FDA5BD1DD81D19008F2BC0 /* NetworkManager.swift in Sources */,
