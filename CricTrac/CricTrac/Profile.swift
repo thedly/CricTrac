@@ -43,6 +43,12 @@ class Profile {
     var ProfileImageUrl: String
     var fullName: String
     var UserProfile: String
+    var UserStatus: String
+    
+    var UserAddedDate: String
+    var UserEditedDate: String
+    var UserLastLoggedin: String
+    
     
     init(usrObj : [String: AnyObject]) {
         
@@ -63,7 +69,7 @@ class Profile {
         
         self.ProfileImageUrl = (usrObj["ProfileImageUrl"] ?? "") as! String
         
-        self.UserProfile = (usrObj["UserType"] ?? "") as! String
+        self.UserProfile = (usrObj["UserProfile"] ?? "") as! String
         
         
         self.CoachingLevel = (usrObj["CoachingLevel"] ?? "") as! String
@@ -82,6 +88,13 @@ class Profile {
         self.SupportingTeams = (usrObj["SupportingTeams"] ?? []) as! [String]
         self.InterestedSports = (usrObj["InterestedSports"] ?? []) as! [String]
         self.Hobbies = (usrObj["Hobbies"] ?? []) as! [String]
+        
+        self.UserStatus = (usrObj["UserStatus"] ?? userStatus.Free.rawValue) as! String
+        
+        self.UserAddedDate = (usrObj["UserAddedDate"] ?? "") as! String
+        self.UserEditedDate = (usrObj["UserEditedDate"] ?? "") as! String
+        self.UserLastLoggedin = (usrObj["UserLastLoggedin"] ?? "") as! String
+        
         
     }
     
@@ -120,6 +133,10 @@ class Profile {
             "Experience": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.Experience: "",
             
             "Certifications": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.Certifications: "",
+            "UserStatus": self.UserStatus,
+            "UserAddedDate" : self.UserAddedDate,
+            "UserEditedDate" : self.UserEditedDate,
+            "UserLastLoggedin": self.UserLastLoggedin
         ]
     }
     

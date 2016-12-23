@@ -12,10 +12,15 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
 
     @IBOutlet weak var teamName: UITextField!
     
+    @IBOutlet weak var teamsPlayedForTxt: UITextField!
     @IBOutlet weak var pastTeamName: UITextField!
     
     @IBOutlet weak var currentTeams: UITableView!
     
+    
+    
+    @IBOutlet weak var CoachPlayedForTbl: UITableView!
+
     @IBOutlet weak var pastTeams: UITableView!
     
     @IBOutlet weak var CoachingLevel: UITextField!
@@ -26,13 +31,16 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     
     var data:[String:AnyObject]{
         
-        return ["CoachingCertifications":Certifications.textVal,"CoachingExperience":Experience.textVal,"CoachingLevel":CoachingLevel.textVal,"CurrentTeamsAsCoach":teamNames, "PastTeamsAsCoach": pastTeamNames]
+        return ["Certifications":Certifications.textVal,"Experience":Experience.textVal,"CoachingLevel":CoachingLevel.textVal,"CoachCurrentTeams":teamNames, "CoachPastTeams": pastTeamNames, "CoachPlayedFor": CoachPlayedFor]
     }
     
     
-    var teamNames = ["New Horizon public school", "National public school", "Delhi public school"]
+    var teamNames = [""]
     
-    var pastTeamNames = ["Bangalore public school", "Ryan International school"]
+    
+    var CoachPlayedFor = [""]
+    
+    var pastTeamNames = [""]
     
     
     override func viewDidLoad() {
@@ -49,6 +57,13 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         pastTeams.separatorStyle = .None
         pastTeams.dataSource = self
         pastTeams.delegate = self
+        
+        CoachPlayedForTbl.allowsSelection = false
+        CoachPlayedForTbl.separatorStyle = .None
+        CoachPlayedForTbl.dataSource = self
+        CoachPlayedForTbl.delegate = self
+        
+        
         
     }
     
@@ -83,7 +98,10 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         profileData.CoachPastTeams = self.data["CoachPastTeams"] as! [String]
         profileData.UserProfile = userProfileType.Coach.rawValue
         
-        addUserProfileData(profileData.ProfileObject) { (AnyObject) in
+        addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
+            
+            profileData = Profile(usrObj: data)
+            
             
             var vc: UIViewController = self.presentingViewController!;
             while ((vc.presentingViewController) != nil) {
@@ -116,6 +134,13 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
                 teamNames.removeAtIndex((indexPath?.row)!)
                 currentTeams.reloadData()
             }
+            else if tblView.isEqual(self.CoachPlayedForTbl){
+                
+                let indexPath = CoachPlayedForTbl.indexPathForCell(cell)
+                CoachPlayedFor.removeAtIndex((indexPath?.row)!)
+                CoachPlayedForTbl.reloadData()
+                
+            }
             else {
                 let indexPath = pastTeams.indexPathForCell(cell)
                 pastTeamNames.removeAtIndex((indexPath?.row)!)
@@ -147,6 +172,21 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         
         
     }
+    
+    @IBAction func addTeamsPlayedForPressed(sender: AnyObject) {
+        if teamsPlayedForTxt.text?.trimWhiteSpace != "" && teamsPlayedForTxt.text?.trimWhiteSpace != "-" {
+            CoachPlayedFor.append(teamsPlayedForTxt.textVal)
+            teamsPlayedForTxt.text = ""
+            
+            CoachPlayedForTbl.reloadData()
+        }
+        
+        
+    }
+    
+    
+    
+    
     
     func getCellForRow(indexPath:NSIndexPath)->UITableViewCell{
         if let aCell =  currentTeams.dequeueReusableCellWithIdentifier("CurrentTeamsTableViewCell", forIndexPath: indexPath) as? CurrentTeamsTableViewCell {
@@ -187,11 +227,11 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     }
     
     func getCellForPlayedTeamsRow(indexPath:NSIndexPath)->UITableViewCell{
-        if let aCell =  pastTeams.dequeueReusableCellWithIdentifier("CurrentTeamsTableViewCell", forIndexPath: indexPath) as? CurrentTeamsTableViewCell {
+        if let aCell =  CoachPlayedForTbl.dequeueReusableCellWithIdentifier("CurrentTeamsTableViewCell", forIndexPath: indexPath) as? CurrentTeamsTableViewCell {
             
             aCell.backgroundColor = UIColor.clearColor()
             
-            aCell.teamName.text = pastTeamNames[indexPath.row]
+            aCell.teamName.text = CoachPlayedFor[indexPath.row]
             
             aCell.deleteTeamBtn.addTarget(self, action: "deleteTeamFromCurrentTeams:", forControlEvents: .TouchUpInside)
             return aCell
@@ -209,6 +249,9 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         if tableView.isEqual(currentTeams) {
             return teamNames.count
         }
+        else if tableView.isEqual(CoachPlayedForTbl) {
+            return CoachPlayedFor.count
+        }
         return pastTeamNames.count
         
     }
@@ -225,6 +268,9 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         
         if tableView.isEqual(currentTeams) {
             return getCellForRow(indexPath)
+        }
+        else if tableView.isEqual(CoachPlayedForTbl) {
+            return getCellForPlayedTeamsRow(indexPath)
         }
         return getCellForPastTeamsRow(indexPath)
     }

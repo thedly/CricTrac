@@ -259,6 +259,11 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         })
         
         
+        if currentUser != nil {
+            updateLastLogin()
+        }
+        
+        
         let window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
         let dashboardVC = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
         

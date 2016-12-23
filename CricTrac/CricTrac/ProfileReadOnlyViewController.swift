@@ -42,10 +42,23 @@ class ProfileReadOnlyViewController: UIViewController {
     @IBOutlet weak var FanFavouritePlayer: UILabel!
     @IBOutlet weak var FanHobbies: UILabel!
     
+    let transitionManager = TransitionManager.sharedInstance
+    
+    @IBAction func CloseProfilePressed(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    @IBAction func EditProfilePressed(sender: AnyObject) {
+        
+        let vc = viewControllerFrom("Main", vcid: "ProfileBaseViewController")
+        vc.transitioningDelegate = self.transitionManager
+        
+        presentViewController(vc, animated: true, completion: nil)        
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        
-        
         
         if profileData.fullName != " " {
             

@@ -73,19 +73,9 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate 
     
     func setupControls() {
         
-        getAllProfileData { (data) in
+        
             
-            profileData = Profile(usrObj: data)
-            
-            if profileData.fullName != " " {
-                let readOnlyVC = viewControllerFrom("Main", vcid: "ProfileReadOnlyViewController")
-                self.presentViewController(readOnlyVC, animated: true, completion: nil)
-            }
-            
-            
-            
-            
-            else if profileData.UserProfile.length > 0 {
+            if profileData.UserProfile.length > 0 {
             switch profileData.UserProfile {
                 case userProfileType.Coach.rawValue:
                     self.coachTextView.isSelected = true
@@ -106,7 +96,7 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate 
                 }
                 
             }
-        }
+      
         
         
         let playertap = UITapGestureRecognizer(target: self, action: #selector(ProfileBaseViewController.handleProfileTap(_:)))

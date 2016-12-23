@@ -34,7 +34,7 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     
     var data:[String:AnyObject]{
         
-        return ["PlayingRole":playingRole.textVal,"BattingStyle":battingStyle.textVal,"BowlingStyle":bowlingStyle.textVal,"CurrentTeamsAsPlayer":teamNames, "PastTeamsAsPlayer": pastTeamNames]
+        return ["PlayingRole":playingRole.textVal,"BattingStyle":battingStyle.textVal,"BowlingStyle":bowlingStyle.textVal,"PlayerCurrentTeams":teamNames, "PlayerPastTeams": pastTeamNames]
     }
     
     let transitionManager = TransitionManager.sharedInstance
@@ -55,7 +55,11 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         profileData.PlayerPastTeams = self.data["PlayerPastTeams"] as! [String]
         profileData.UserProfile = userProfileType.Player.rawValue
         
-        addUserProfileData(profileData.ProfileObject) { (AnyObject) in
+        addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
+            
+            profileData = Profile(usrObj: data)
+            
+            
             var vc: UIViewController = self.presentingViewController!;
             while ((vc.presentingViewController) != nil) {
                 

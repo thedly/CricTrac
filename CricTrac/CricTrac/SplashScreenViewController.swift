@@ -90,6 +90,16 @@ class SplashScreenViewController: UIViewController {
     func moveToNextScreen(IsAuthorized: Bool){
         
         if IsAuthorized {
+            
+            getAllProfileData({ data in
+                profileData = Profile(usrObj: data)
+            })
+            
+            
+            if currentUser != nil {
+                updateLastLogin()
+            }
+            
             let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")
             let dashboardVC = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
             

@@ -13,3 +13,10 @@ enum userProfileType : String {
     case Coach = "Coach"
     case Fan = "Cricket Fan"
 }
+
+enum userStatus : String {
+    case Free = "Free"
+    case Premium = "Premium"
+    case Inactive = "Inactive"
+    case Suspended = "Suspended"
+}

@@ -35,7 +35,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var data:[String:AnyObject]{
         
-        return ["FavouritePlayerAsAFan":favouritePlayer.textVal,"HobbiesAsAFan":HobbiesList, "InterestedSportsAsAFan":InterestedSportsNamesList,"SupportingTeamsAsAFan": supportingTeamNamesList]
+        return ["FavouritePlayers":favouritePlayer.textVal,"Hobbies":HobbiesList, "InterestedSports":InterestedSportsNamesList,"SupportingTeams": supportingTeamNamesList]
     }
     
     var supportingTeamNamesList = ["New Horizon public school", "National public school", "Delhi public school"]
@@ -68,12 +68,15 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBAction func CreateFanBtnPressed(sender: AnyObject) {
         
         
-        profileData.FavouritePlayers =  self.data["FavouritePlayerAsAFan"] as! String
-        profileData.SupportingTeams = self.data["SupportingTeamsAsAFan"] as! [String]
-        profileData.InterestedSports = self.data["InterestedSportsAsAFan"] as! [String]
-        profileData.Hobbies =  self.data["HobbiesAsAFan"] as! [String]
+        profileData.FavouritePlayers =  self.data["FavouritePlayers"] as! String
+        profileData.SupportingTeams = self.data["SupportingTeams"] as! [String]
+        profileData.InterestedSports = self.data["InterestedSports"] as! [String]
+        profileData.Hobbies =  self.data["Hobbies"] as! [String]
         
-        addUserProfileData(profileData.ProfileObject) { (AnyObject) in
+        addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
+            
+            profileData = Profile(usrObj: data)
+            
             var vc: UIViewController = self.presentingViewController!;
             while ((vc.presentingViewController) != nil) {
                 
