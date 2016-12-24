@@ -120,7 +120,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
     
     var data:[String:String]{
         
-        return ["Toss":tossText ?? "-","FirstBat":firstBatText,"FirstScore":firstScoreText.textVal,"FirstWickets":firstWicketsText.textVal,"SecondBat":secondBatText, "SecondScore":secondScoreText.textVal,"SecondWickets":secondWicketsText.textVal,"Result":resultText.textVal,"FirstOvers":firstOversText.textVal,"SecondOvers":secondOversText.textVal]
+        return ["TossWonBy":tossText ?? "-","FirstBatting":firstBatText,"FirstBattingScore":firstScoreText.textVal,"FirstBattingWickets":firstWicketsText.textVal,"SecondBatting":secondBatText, "SecondBattingScore":secondScoreText.textVal,"SecondBattingWickets":secondWicketsText.textVal,"Result":resultText.textVal,"FirstBattingOvers":firstOversText.textVal,"SecondBattingOvers":secondOversText.textVal]
     }
     
     
@@ -161,14 +161,14 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
     func loadEditData(){
         
         tossText = "-"
-        if let toss = parent!.selecetedData!["Toss"] {
+        if let toss = parent!.selecetedData!["TossWonBy"] {
             tossText = toss
         }
         
-        firstBatText = parent!.selecetedData!["FirstBat"]! ?? "-"
-        firstScoreText.textVal = parent!.selecetedData!["FirstScore"]! ?? "-"
-        firstWicketsText.textVal = parent!.selecetedData!["FirstWickets"]! ?? "-"
-        secondBatText = parent!.selecetedData!["SecondBat"]! ?? "-"
+        firstBatText = parent!.selecetedData!["FirstBatting"]! ?? "-"
+        firstScoreText.textVal = parent!.selecetedData!["FirstBattingScore"]! ?? "-"
+        firstWicketsText.textVal = parent!.selecetedData!["FirstBattingWickets"]! ?? "-"
+        secondBatText = parent!.selecetedData!["SecondBatting"]! ?? "-"
         
         
         firstTeamTitle.text = firstBatText
@@ -191,8 +191,8 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
             self.isTeambattingSetBtn.alpha = 1.0
         }
         
-        secondScoreText.textVal = parent!.selecetedData!["SecondScore"]!
-        secondWicketsText.textVal = parent!.selecetedData!["SecondWickets"]!
+        secondScoreText.textVal = parent!.selecetedData!["SecondBattingScore"]!
+        secondWicketsText.textVal = parent!.selecetedData!["SecondBattingWickets"]!
         resultText.textVal = parent!.selecetedData!["Result"]!
     }
     

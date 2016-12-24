@@ -36,7 +36,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     
     var data:[String:String]{
         
-        return ["Date":dateText.textVal,"Team":teamText.textVal,"Opponent":opponentText.textVal,"Ground":groundText.textVal,"Overs":oversText.textVal,"Tournamnet":tournamentText.textVal, "AgeGroup": ageGroup.textVal, "PlayingLevel": playingLevel.textVal]
+        return ["MatchDate":dateText.textVal,"Team":teamText.textVal,"Opponent":opponentText.textVal,"Ground":groundText.textVal,"MatchOvers":oversText.textVal,"Tournamnet":tournamentText.textVal/*, "AgeGroup": ageGroup.textVal, "PlayingLevel": playingLevel.textVal*/]
     }
     
     override func viewDidLoad() {
@@ -52,20 +52,20 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     
     func loadEditData(){
         
-        dateText.textVal = parent!.selecetedData!["Date"]!
+        dateText.textVal = parent!.selecetedData!["MatchDate"]!
         tournamentText.textVal = parent!.selecetedData!["Tournamnet"]!
         teamText.textVal = parent!.selecetedData!["Team"]!
         opponentText.textVal = parent!.selecetedData!["Opponent"]!
         groundText.textVal = parent!.selecetedData!["Ground"]!
-        oversText.textVal = parent!.selecetedData!["Overs"]!
+        oversText.textVal = parent!.selecetedData!["MatchOvers"]!
         
-        if let ag = parent!.selecetedData!["AgeGroup"] {
-            ageGroup.textVal = ag
-        }
-        
-        if let pl = parent!.selecetedData!["PlayingLevel"] {
-            playingLevel.textVal = pl
-        }
+//        if let ag = parent!.selecetedData!["AgeGroup"] {
+//            ageGroup.textVal = ag
+//        }
+//        
+//        if let pl = parent!.selecetedData!["PlayingLevel"] {
+//            playingLevel.textVal = pl
+//        }
         
         
     }
