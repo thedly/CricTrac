@@ -9,8 +9,8 @@
 import UIKit
 import SwiftyJSON
 
-class TimeLineViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable {
-
+class TimeLineViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable,PostSendable{
+    
     @IBOutlet weak var timeLineTable: UITableView!
     
     var currentTheme:CTTheme!
@@ -30,7 +30,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         setBackgroundColor()
         
         //setUIBackgroundTheme(view)
-     
+        
         loadTimeline()
         
         refreshControl.attributedTitle = NSAttributedString(string: "Loading New Posts")
@@ -38,7 +38,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         timeLineTable.addSubview(refreshControl)
         
         
-          timeLineTable.registerNib(UINib.init(nibName:"AddPostTableViewCell", bundle: nil), forCellReuseIdentifier: "addpost")
+        timeLineTable.registerNib(UINib.init(nibName:"AddPostTableViewCell", bundle: nil), forCellReuseIdentifier: "addpost")
         
         timeLineTable.registerNib(UINib.init(nibName:"ImagePostTableViewCell", bundle: nil), forCellReuseIdentifier: "imagepost")
         
@@ -56,7 +56,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         
         // Do any additional setup after loading the view.
     }
-
+    
     
     func changeThemeSettigs(){
         currentTheme = cricTracTheme.currentTheme
@@ -68,11 +68,33 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
     func refresh(sender:AnyObject) {
         
-
+    }
+    
+    func addObserverToTimeline(){
         
         
     }
     
+    func sendNewPost(text:String){
+        
+        addNewPost(text) { data in
+            
+            
+            
+            var timelineDta = timelineData!.dictionaryValue["timeline"]!.arrayObject
+            
+            let pageKey = timelineData!.dictionaryValue["pageKey"]!.stringValue as AnyObject
+            
+            timelineDta?.insert(data["timeline"]!, atIndex: 0)
+            
+            let newResultDict:[String:AnyObject] = ["timeline":timelineDta!,"pageKey":pageKey]
+            
+            timelineData = JSON(newResultDict)
+            
+            self.timeLineTable.reloadData()
+            
+        }
+    }
     
     func loadTimeline(){
         
@@ -81,11 +103,11 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             timelineData = result
             self.timeLineTable.reloadData()
             
-            }) { (error) in }
+        }) { (error) in }
     }
     
     
-   
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -93,22 +115,11 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     
-    func addPost(){
-        
-       let post = newPostText?.text?.trimWhiteSpace
-       
-        if post?.length > 0{
-            
-          addNewPost(post!)
-        }
-        
-    }
-    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         
@@ -116,20 +127,20 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         
         if indexPath.section == 0{
             let cell = timeLineTable.dequeueReusableCellWithIdentifier("addpost", forIndexPath: indexPath) as! AddPostTableViewCell
-           // cell.newPostButton.addTarget(self, action: #selector(addPost) , forControlEvents: .TouchUpInside)
+            // cell.newPostButton.addTarget(self, action: #selector(addPost) , forControlEvents: .TouchUpInside)
             //newPostText = cell.newPostText
-             acell =  cell
+            acell =  cell
         }
         else{
             
             
             
-           let data = timelineData!.dictionaryValue["timeline"]!.arrayValue[indexPath.section-1]
+            let data = timelineData!.dictionaryValue["timeline"]!.arrayValue[indexPath.section-1]
             
             
             if let imageurl = data.dictionaryValue["postImage"]?.string {
                 
-                 let imageCell =  timeLineTable.dequeueReusableCellWithIdentifier("imagepost", forIndexPath: indexPath) as! ImagePostTableViewCell
+                let imageCell =  timeLineTable.dequeueReusableCellWithIdentifier("imagepost", forIndexPath: indexPath) as! ImagePostTableViewCell
                 let postid = data.dictionaryValue["postId"]?.stringValue
                 imageCell.imagePost.image = nil
                 imageCell.imagePost.loadImage(imageurl, postId:postid!)
@@ -154,7 +165,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         return acell
     }
     
-     func numberOfSectionsInTableView(tableView: UITableView) -> Int{
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int{
         
         if timelineData == nil{
             return 1
@@ -163,7 +174,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         return timelineData!.count+1
     }
     
-     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 5
     }
     
@@ -174,48 +185,49 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        //NewPostViewController
-        let newPost = viewControllerFrom("Main", vcid: "NewPostViewController")
-        
-        newPost.modalPresentationStyle = .OverCurrentContext
-        presentViewController(newPost, animated: true, completion: nil)
+        if indexPath.row == 0{
+            let newPost = viewControllerFrom("Main", vcid: "NewPostViewController") as! NewPostViewController
+            newPost.sendPostDelegate = self
+            newPost.modalPresentationStyle = .OverCurrentContext
+            presentViewController(newPost, animated: true, completion: nil)
+        }
         
     }
     
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
-//            if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height)
-//            {
-//
-//
-//                timeLineTable.reloadData()
-//
-//                loadTimelineFromId({ (timeline,postId) in
-//                    
-//                    var timeLineDic = timeline as! [String : String]
-//                    timeLineDic["postId"] = postId
-//                    self.timelineDS.append(timeLineDic )
-//                    
-//                })
-//                
-//                }
-            }
+        //            if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height)
+        //            {
+        //
+        //
+        //                timeLineTable.reloadData()
+        //
+        //                loadTimelineFromId({ (timeline,postId) in
+        //
+        //                    var timeLineDic = timeline as! [String : String]
+        //                    timeLineDic["postId"] = postId
+        //                    self.timelineDS.append(timeLineDic )
+        //
+        //                })
+        //
+        //                }
+    }
     
     
     
-//    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        
-//        return 15
-//    }
+    //    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    //
+    //        return 15
+    //    }
     
-//    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        
-//        let aView = UIView(frame: CGRectMake(0, 0, view.frame.width, 10) )
-//        aView.backgroundColor = UIColor.clearColor()
-//        
-//        return aView
-//    }
+    //    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    //
+    //        let aView = UIView(frame: CGRectMake(0, 0, view.frame.width, 10) )
+    //        aView.backgroundColor = UIColor.clearColor()
+    //
+    //        return aView
+    //    }
     
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
@@ -227,18 +239,18 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
     @IBAction func exit(sender: UIButton) {
         
-        dismissViewControllerAnimated(true) { 
+        dismissViewControllerAnimated(true) {
             
         }
     }
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
