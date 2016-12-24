@@ -177,10 +177,44 @@ func loadInitialProfileValues(){
 }
 
 
-func addUserProfileData(data:[String:AnyObject], sucessBlock:(AnyObject)->Void){
+func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject])->Void){
+    
+    var dataToBeModified = data
+    
+    let formatter = NSDateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    
+    dataToBeModified["UserLastLoggedin"] = data["UserLastLoggedin"]
+    
+    if profileData.fullName == " "
+    {
+        dataToBeModified["UserAddedDate"] = formatter.stringFromDate(NSDate())
+        dataToBeModified["UserEditedDate"] = formatter.stringFromDate(NSDate())
+    }
+    else
+    {
+        dataToBeModified["UserAddedDate"] = data["UserAddedDate"]
+        dataToBeModified["UserEditedDate"] = formatter.stringFromDate(NSDate())
+    }
+    
+    
+    
+    
+    
+    
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
-    ref.setValue(data)
-    sucessBlock(data)
+    ref.setValue(dataToBeModified)
+    sucessBlock(dataToBeModified)
+}
+
+func updateLastLogin(){
+    
+    let formatter = NSDateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+
+    
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").child("UserLastLoggedin")
+    ref.setValue(formatter.stringFromDate(NSDate()))
 }
 
 func getAllProfileData(sucessBlock:([String:AnyObject])->Void){

@@ -190,7 +190,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
     func initializeView() {
         
         
-        if let Runs = matchDetailsData["Runs"] {
+        if let Runs = matchDetailsData["RunsTaken"] {
             batRuns.text = Runs
         }
         if let Fours = matchDetailsData["Fours"] {
@@ -207,7 +207,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
         
         calculateStrikeRate()
         
-        if let Overs = matchDetailsData["OversBalled"] { // in overs eg: 2, 3, 4
+        if let Overs = matchDetailsData["OversBowled"] { // in overs eg: 2, 3, 4
             
             if let oversInt = Int(Overs) {
                 
@@ -295,20 +295,20 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
             
             
             
-            if let firstScore = matchDetailsData["FirstScore"] {
-                if let firstWickets = matchDetailsData["FirstWickets"] {
+            if let firstScore = matchDetailsData["FirstBattingScore"] {
+                if let firstWickets = matchDetailsData["FirstBowlingWickets"] {
                     
-                    let firstTeamOvers = matchDetailsData["FirstOvers"] ?? "-"
+                    let firstTeamOvers = matchDetailsData["FirstBattingOvers"] ?? "-"
                     homeTeam.text?.appendContentsOf("\n\(firstScore)/\(firstWickets)\n(\(firstTeamOvers))")
                 }
                 
                 firstTeamScore = firstScore
             }
             
-            if let secondScore = matchDetailsData["SecondScore"] {
-                if let secondWickets = matchDetailsData["SecondWickets"] {
+            if let secondScore = matchDetailsData["SecondBattingScore"] {
+                if let secondWickets = matchDetailsData["SecondBowlingWickets"] {
                     
-                    let secondTeamOvers = matchDetailsData["SecondOvers"] ?? "-"
+                    let secondTeamOvers = matchDetailsData["SecondBattingOvers"] ?? "-"
                     
                     awayTeam.text?.appendContentsOf("\n\(secondScore)/\(secondWickets)\n(\(secondTeamOvers))")
                 }
@@ -332,7 +332,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
             }
         }
         
-        if let wicketstaken = matchDetailsData["Wickets"] {
+        if let wicketstaken = matchDetailsData["WicketsTaken"] {
             
             if let RunsGiven = matchDetailsData["RunsGiven"] {
                 
@@ -348,7 +348,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
            
         }
         
-        if let Balls = matchDetailsData["Balls"] {
+        if let Balls = matchDetailsData["BallsFaced"] {
             ballsFaced.text = Balls
         }
 //        if let Position = matchDetailsData["Position"] {
@@ -364,7 +364,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
         if let Wides = matchDetailsData["Wides"] {
             wides.text = Wides
         }
-        if let Noballs = matchDetailsData["Noballs"] {
+        if let Noballs = matchDetailsData["NoBalls"] {
             noBalls.text = Noballs
         }
         
@@ -372,7 +372,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
             self.ground.text = grnd
         }
         
-        if let dat = matchDetailsData["Date"] {
+        if let dat = matchDetailsData["MatchDate"] {
             self.date.text = dat
         }
         
