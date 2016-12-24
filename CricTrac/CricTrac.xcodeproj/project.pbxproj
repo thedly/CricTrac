@@ -83,6 +83,8 @@
 		8953769A1DAB8BF200DDB3A6 /* FriendSuggestionsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 895376991DAB8BF200DDB3A6 /* FriendSuggestionsCell.xib */; };
 		8953769C1DAB8C8E00DDB3A6 /* FriendSuggestionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8953769B1DAB8C8E00DDB3A6 /* FriendSuggestionsCell.swift */; };
 		895522691D5F0052008F3760 /* country-states.plist in Resources */ = {isa = PBXBuildFile; fileRef = 895522681D5F0052008F3760 /* country-states.plist */; };
+		8955DA2B1E0ED13A00891937 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8955DA2A1E0ED13A00891937 /* NewPostViewController.swift */; };
+		8955DA2D1E0ED1B200891937 /* PostSendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8955DA2C1E0ED1B200891937 /* PostSendable.swift */; };
 		895E04011D5CCEDE002E322E /* FriendRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E04001D5CCEDE002E322E /* FriendRequestsViewController.swift */; };
 		895E04031D5CD134002E322E /* FriendRequestsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E04021D5CD134002E322E /* FriendRequestsTableViewCell.swift */; };
 		895E04051D5CE24B002E322E /* FriendSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E04041D5CE24B002E322E /* FriendSearchViewController.swift */; };
@@ -206,6 +208,8 @@
 		895376991DAB8BF200DDB3A6 /* FriendSuggestionsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendSuggestionsCell.xib; sourceTree = "<group>"; };
 		8953769B1DAB8C8E00DDB3A6 /* FriendSuggestionsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendSuggestionsCell.swift; sourceTree = "<group>"; };
 		895522681D5F0052008F3760 /* country-states.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "country-states.plist"; sourceTree = "<group>"; };
+		8955DA2A1E0ED13A00891937 /* NewPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewPostViewController.swift; path = Controller/NewPostViewController.swift; sourceTree = "<group>"; };
+		8955DA2C1E0ED1B200891937 /* PostSendable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostSendable.swift; path = Other/PostSendable.swift; sourceTree = "<group>"; };
 		895E04001D5CCEDE002E322E /* FriendRequestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestsViewController.swift; sourceTree = "<group>"; };
 		895E04021D5CD134002E322E /* FriendRequestsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestsTableViewCell.swift; sourceTree = "<group>"; };
 		895E04041D5CE24B002E322E /* FriendSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendSearchViewController.swift; sourceTree = "<group>"; };
@@ -368,6 +372,7 @@
 		46FA41D21D6D3F2F006635C6 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				8955DA2C1E0ED1B200891937 /* PostSendable.swift */,
 				466AD3F91D7A869B0033289C /* NewMatchParent.swift */,
 				46FA41D31D6D3F68006635C6 /* MatchDetailsTrackable.swift */,
 			);
@@ -447,6 +452,7 @@
 		8958F5F11D392B780028D5AA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8955DA2A1E0ED13A00891937 /* NewPostViewController.swift */,
 				89F9911D1DDA1BEF00E5F440 /* UserDashboardViewController.swift */,
 				897194CA1DA34DFD00478F82 /* AddMatchDetailsViewController.swift */,
 				46B6086F1D44A7D3000FE098 /* NewMatchViewController.swift */,
@@ -718,6 +724,7 @@
 				89CC84FC1D43E4D6007F2402 /* SummaryMatchDetailsViewController.swift in Sources */,
 				4600689B1D638545007C9457 /* SuggestionCell.swift in Sources */,
 				89F4E4B31D48FECD00EFE46E /* summaryTableViewCell.swift in Sources */,
+				8955DA2D1E0ED1B200891937 /* PostSendable.swift in Sources */,
 				89D7D9D21DAFD97E0069D536 /* PlayerExperienceViewController.swift in Sources */,
 				46FA41D41D6D3F68006635C6 /* MatchDetailsTrackable.swift in Sources */,
 				8930F03C1D5B94C300C7540B /* CTStatePicker.swift in Sources */,
@@ -754,6 +761,7 @@
 				8951D52F1DB08BF5005D101A /* CricketFanViewController.swift in Sources */,
 				46C983B61D39D86800DFC607 /* performanceCell.swift in Sources */,
 				46DE32CB1D90152F0024CD82 /* APostTableViewCell.swift in Sources */,
+				8955DA2B1E0ED13A00891937 /* NewPostViewController.swift in Sources */,
 				890B42C71D60472C00736F03 /* CollapsibleTableViewCell.swift in Sources */,
 				46DE32C51D900C9F0024CD82 /* AddPostTableViewCell.swift in Sources */,
 				89E6084D1D6D4ADC00F6BD11 /* CTDataPicker.swift in Sources */,
