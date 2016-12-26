@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="SourceSansPro-Black.otf">
+            <string>SourceSansPro-Black</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="SliderMenuViewCell" id="NfV-Nb-Oqe" customClass="SliderMenuViewCell" customModule="CricTrac" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="538" height="123"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OaP-FR-RfR">
+                    <rect key="frame" x="10" y="10" width="518" height="113"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sachin" translatesAutoresizingMaskIntoConstraints="NO" id="CIy-7C-CiV">
+                            <rect key="frame" x="10" y="41" width="32" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="32" id="91M-EV-ODQ"/>
+                                <constraint firstAttribute="width" constant="32" id="B55-Ky-VzU"/>
+                                <constraint firstAttribute="height" constant="32" id="KY7-Tx-qhm"/>
+                                <constraint firstAttribute="width" constant="32" id="Um8-II-CC2"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="32" id="ehz-ZW-AdD"/>
+                                <constraint firstAttribute="width" constant="32" id="l2l-V6-3t8"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="y66-Dn-Mkn"/>
+                                <constraint firstAttribute="height" constant="32" id="ydB-eZ-Ntt"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="32"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="B55-Ky-VzU"/>
+                                    <exclude reference="KY7-Tx-qhm"/>
+                                    <exclude reference="ehz-ZW-AdD"/>
+                                    <exclude reference="l2l-V6-3t8"/>
+                                    <exclude reference="y66-Dn-Mkn"/>
+                                    <exclude reference="ydB-eZ-Ntt"/>
+                                </mask>
+                            </variation>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAJITH KUMAR" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfe-Z5-mXR">
+                            <rect key="frame" x="52" y="48" width="101" height="19"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="298" id="dhX-Fg-dTl"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="15"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="dhX-Fg-dTl"/>
+                                </mask>
+                            </variation>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="CIy-7C-CiV" firstAttribute="centerY" secondItem="OaP-FR-RfR" secondAttribute="centerY" id="978-pg-uKN"/>
+                        <constraint firstItem="dfe-Z5-mXR" firstAttribute="leading" secondItem="CIy-7C-CiV" secondAttribute="trailing" constant="8" id="BFb-Mk-A7U"/>
+                        <constraint firstItem="dfe-Z5-mXR" firstAttribute="leading" secondItem="CIy-7C-CiV" secondAttribute="trailing" constant="10" id="J7Q-dX-jn3"/>
+                        <constraint firstItem="dfe-Z5-mXR" firstAttribute="top" secondItem="CIy-7C-CiV" secondAttribute="top" id="L0k-ye-q0j"/>
+                        <constraint firstItem="CIy-7C-CiV" firstAttribute="leading" secondItem="OaP-FR-RfR" secondAttribute="leading" constant="5" id="MBj-uv-cYM"/>
+                        <constraint firstItem="dfe-Z5-mXR" firstAttribute="leading" secondItem="OaP-FR-RfR" secondAttribute="leading" constant="77" id="R93-yU-3J5"/>
+                        <constraint firstItem="dfe-Z5-mXR" firstAttribute="leading" secondItem="CIy-7C-CiV" secondAttribute="trailing" constant="8" id="T6k-VR-CTI"/>
+                        <constraint firstItem="CIy-7C-CiV" firstAttribute="centerY" secondItem="OaP-FR-RfR" secondAttribute="centerY" id="auS-T1-B2G"/>
+                        <constraint firstItem="CIy-7C-CiV" firstAttribute="leading" secondItem="OaP-FR-RfR" secondAttribute="leading" constant="10" id="gXw-sq-sof"/>
+                        <constraint firstItem="dfe-Z5-mXR" firstAttribute="centerY" secondItem="CIy-7C-CiV" secondAttribute="centerY" id="l9g-Hv-ZFG"/>
+                        <constraint firstItem="dfe-Z5-mXR" firstAttribute="leading" secondItem="CIy-7C-CiV" secondAttribute="trailing" constant="8" id="lCt-7X-7zP"/>
+                        <constraint firstItem="dfe-Z5-mXR" firstAttribute="top" secondItem="CIy-7C-CiV" secondAttribute="top" constant="18" id="mzT-ly-sa5"/>
+                        <constraint firstItem="dfe-Z5-mXR" firstAttribute="top" secondItem="OaP-FR-RfR" secondAttribute="top" constant="13" id="oCw-P6-GH4"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="MBj-uv-cYM"/>
+                            <exclude reference="BFb-Mk-A7U"/>
+                            <exclude reference="L0k-ye-q0j"/>
+                            <exclude reference="R93-yU-3J5"/>
+                            <exclude reference="T6k-VR-CTI"/>
+                            <exclude reference="lCt-7X-7zP"/>
+                            <exclude reference="mzT-ly-sa5"/>
+                            <exclude reference="oCw-P6-GH4"/>
+                        </mask>
+                    </variation>
+                </view>
+            </subviews>
+            <accessibility key="accessibilityConfiguration" identifier="FriendsCell"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="OaP-FR-RfR" secondAttribute="trailing" constant="10" id="1Ok-wT-8lI"/>
+                <constraint firstItem="OaP-FR-RfR" firstAttribute="top" secondItem="NfV-Nb-Oqe" secondAttribute="top" constant="10" id="G8f-sl-xrG"/>
+                <constraint firstAttribute="bottom" secondItem="OaP-FR-RfR" secondAttribute="bottom" id="Jtc-Ek-uRp"/>
+                <constraint firstItem="OaP-FR-RfR" firstAttribute="leading" secondItem="NfV-Nb-Oqe" secondAttribute="leading" constant="10" id="yJ0-JP-xtn"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="baseView" destination="OaP-FR-RfR" id="lPP-lT-808"/>
+                <outlet property="menuIcon" destination="CIy-7C-CiV" id="3Wa-so-Ab3"/>
+                <outlet property="menuName" destination="dfe-Z5-mXR" id="Ava-Nr-VNc"/>
+            </connections>
+            <point key="canvasLocation" x="163" y="188.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="sachin" width="160" height="206"/>
+    </resources>
+</document>

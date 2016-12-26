@@ -60,24 +60,32 @@ func addProfileImageData(profileDp:UIImage){
     metaData.contentType = "image/jpg"
     
     
-    let filePath = "\(FIRAuth.auth()?.currentUser?.uid)/UserProfile/profileImage"
+//    if let usrId = FIRAuth.auth()?.currentUser?.uid {
     
-    storageRef.child(filePath).putData(imageData, metadata: metaData){(metaData,error) in
-        if let error = error {
-            print(error.localizedDescription)
-            return
-        }else{
-            
-            updateMetaData(metaData!.downloadURL()!)
-        
+        let filePath = "\(FIRAuth.auth()?.currentUser?.uid)/UserProfile/profileImage"
+        storageRef.child(filePath).putData(imageData, metadata: metaData){(metaData,error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }else{
+                
+                updateMetaData(metaData!.downloadURL()!)
+                
+            }
         }
-    }
+//    }
+    
+    
 }
 
 func updateMetaData(profileImgUrl: NSURL) {
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
     let profileImageObject: [NSObject:AnyObject] = [ "ProfileImageUrl"    : profileImgUrl.absoluteString]
     ref.updateChildValues(profileImageObject)
+    if profileData.ProfileImageUrl == "" {
+        profileData.ProfileImageUrl = profileImgUrl.absoluteString
+    }
+    
     print("Image url updated successfully")
 }
 

@@ -31,6 +31,9 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     @IBOutlet weak var loginBtn: UIButton!
     let loginManager = FBSDKLoginManager()
 
+    
+    var profileImage: UIImage?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUIBackgroundTheme(self.view)
@@ -254,9 +257,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     
     func navigateToNextScreen(){
         
-        getAllProfileData({ data in
-            profileData = Profile(usrObj: data)
-        })
+        
         
         
         if currentUser != nil {

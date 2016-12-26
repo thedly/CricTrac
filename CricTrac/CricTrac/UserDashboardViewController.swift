@@ -140,8 +140,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         navigationItem.leftBarButtonItem = leftbarButton
         navigationItem.rightBarButtonItem = righttbarButton
-        navigationController!.navigationBar.barTintColor = UIColor.clearColor()
-        title = "Dashboard"
+        navigationController!.navigationBar.barTintColor = UIColor(hex: topColor)
+        title = "DASHBOARD"
         let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         navigationController!.navigationBar.titleTextAttributes = titleDict
     }
@@ -277,7 +277,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             var top3MatchCount = 0
             for matchData in matchDataSource {
                 
-                if matchData["OversBalled"] != nil && matchData["OversBalled"] != "-", let oversbowled = matchData["OversBalled"]  {
+                if matchData["OversBowled"] != nil && matchData["OversBowled"] != "-", let oversbowled = matchData["OversBowled"]  {
 //                    var oversCount = Int(self.totalOvers.text!)!
 //                    var inningsCount = Int(self.bowlingInnings.text!)!
 //                    inningsCount = inningsCount + 1
@@ -287,7 +287,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 }
                 
                 
-                if matchData["Wickets"] != nil && matchData["Wickets"] != "-", let wicketsTaken = matchData["Wickets"]{
+                if matchData["WicketsTaken"] != nil && matchData["WicketsTaken"] != "-", let wicketsTaken = matchData["WicketsTaken"]{
                     var wicketCount = Int(self.totalWickets.text!)!
                     wicketCount = wicketCount + Int(wicketsTaken)!
                     self.totalWickets.text = String(wicketCount)
@@ -299,7 +299,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
 //                    self.totalRunsGiven.text = String(runsGivenCount)
                 }
                 
-                if matchData["Wickets"] != nil && matchData["Wickets"] != "-" && matchData["Opponent"] != nil && matchData["Opponent"] != "-" && top3MatchCount < 3, let wicketstaken = matchData["Wickets"], let opponentFaced = matchData["Opponent"] {
+                if matchData["WicketsTaken"] != nil && matchData["WicketsTaken"] != "-" && matchData["Opponent"] != nil && matchData["Opponent"] != "-" && top3MatchCount < 3, let wicketstaken = matchData["Wickets"], let opponentFaced = matchData["Opponent"] {
                     top3MatchCount = top3MatchCount + 1
                     
                     let formattedString = NSMutableAttributedString()

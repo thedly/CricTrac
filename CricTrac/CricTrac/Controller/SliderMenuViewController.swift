@@ -11,9 +11,39 @@ import SCLAlertView
 
 class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
 
+    
+    @IBOutlet var baseView: UIView!
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var profileImage: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        userName.text = currentUser?.displayName
+        baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
+        
+        getAllProfileData({ data in
+            profileData = Profile(usrObj: data)
+            
+            if profileData.ProfileImageUrl == "" {
+                let userDefaults = NSUserDefaults.standardUserDefaults()
+                if let token = userDefaults.valueForKey("loginToken") {
+                    if token["Facebooktoken"] != nil || token["googletoken"] != nil{
+                        let profileimage = getImageFromFacebook()
+                        addProfileImageData(profileimage)
+                    }
+                }
+            }
+            
+            getImageFromFirebase(profileData.ProfileImageUrl) { (imgData) in
+                self.profileImage.image = imgData
+            }
 
+            
+        })
+        
+        
+        
         // Do any additional setup after loading the view.
     }
 
@@ -58,9 +88,17 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
     
     
      func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("menuitem", forIndexPath: indexPath) as! SliderMenuCell
+        
+        
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("SliderMenuViewCell", forIndexPath: indexPath) as! SliderMenuViewCell
         let itemTitle = menuData[indexPath.row]["title"]
-        cell.menuItemName.text = itemTitle
+        
+        let menuIcon = UIImage(named: menuData[indexPath.row]["img"]!)
+        
+        cell.menuName.text = itemTitle
+        cell.menuIcon.image = menuIcon
+        
         return cell
     }
     
@@ -68,7 +106,7 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         
         var vcName = menuData[indexPath.row]["vc"]
         
-        if menuData[indexPath.row]["title"] == "Profile" && profileData.fullName != " "{
+        if menuData[indexPath.row]["title"] == "PROFILE" && profileData.fullName != " "{
             vcName = "ProfileReadOnlyViewController"
         }
         

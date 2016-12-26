@@ -91,21 +91,19 @@ class SplashScreenViewController: UIViewController {
         
         if IsAuthorized {
             
-            getAllProfileData({ data in
-                profileData = Profile(usrObj: data)
-            })
-            
             
             if currentUser != nil {
                 updateLastLogin()
             }
             
             let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")
+            
             let dashboardVC = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
             
             let navigationControl = UINavigationController(rootViewController: dashboardVC )
             sliderMenu.mainViewController = navigationControl
             sliderMenu.drawerViewController = drawerViewController
+            
             window?.rootViewController = sliderMenu
             
         }

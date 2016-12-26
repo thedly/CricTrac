@@ -343,7 +343,10 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
             {
                 totalWickets.text = "\(wicketstaken)-NA"
             }
-
+            
+            
+            
+            
             
            
         }

@@ -14,18 +14,18 @@ public var date = 0
 
 let menuData = [
 
-    ["title":"Timeline","vc":"timeline"],
-    ["title":"Dashboard","vc":"AddMatchDetailsViewController"],
-    ["title":"New Match","vc":"AddMatchDetailsViewController"],
-    ["title":"Match Summary","vc":"MatchSummaryViewController"],
-    ["title":"Friends","vc":"FriendBaseViewController"],
-    ["title":"Profile","vc":  "ProfileBaseViewController"],
-    ["title":"Statistics","vc":"AddMatchDetailsViewController"],
-    ["title":"Notification","vc":"MatchSummaryViewController"],
-    ["title":"Settings","vc":"SettingsViewController"],
-    ["title":"Feedback","vc":"MatchSummaryViewController"],
-    ["title":"Help & Support","vc":"MatchSummaryViewController"],
-    ["title":"Version: \(versionAndBuildNumber)","vc":"MatchSummaryViewController"],
+    ["title":"TIMELINE","vc":"timeline", "img": "Menu_TimeLine"],
+    ["title":"DASHBOARD","vc":"AddMatchDetailsViewController", "img": "Menu_Dashboard"],
+    ["title":"NEW MATCH","vc":"AddMatchDetailsViewController", "img": "Menu_AddMatch"],
+    ["title":"MATCH SUMMARY","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
+    ["title":"FRIENDS","vc":"FriendBaseViewController", "img": "Menu_Friends"],
+    ["title":"PROFILE","vc":  "ProfileBaseViewController", "img": "Menu_Profile"],
+    ["title":"STATISTICS","vc":"AddMatchDetailsViewController", "img": "Menu_Statistics"],
+    ["title":"NOTIFICATION","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
+    ["title":"SETTINGS","vc":"SettingsViewController", "img": "Menu_Settings"],
+    ["title":"FEEDBACK","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
+    ["title":"HELP & SUPPORT","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
+    ["title":"VERSION: \(versionAndBuildNumber)","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
     
 ]
 

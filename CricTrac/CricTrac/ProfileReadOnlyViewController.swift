@@ -51,7 +51,11 @@ class ProfileReadOnlyViewController: UIViewController {
     
     @IBAction func EditProfilePressed(sender: AnyObject) {
         
-        let vc = viewControllerFrom("Main", vcid: "ProfileBaseViewController")
+        let vc = viewControllerFrom("Main", vcid: "UserInfoEditViewController") as! UserInfoViewController
+        
+        
+        
+        
         vc.transitioningDelegate = self.transitionManager
         
         presentViewController(vc, animated: true, completion: nil)        
@@ -62,30 +66,30 @@ class ProfileReadOnlyViewController: UIViewController {
         
         if profileData.fullName != " " {
             
-            self.NameText.text = profileData.fullName
-            self.DOBText.text = profileData.DateOfBirth
-            self.EmailText.text = profileData.Email
-            self.MobileText.text = profileData.Mobile
-            self.GenderText.text = profileData.Gender
-            self.CountryText.text = profileData.Country
-            self.StateText.text = profileData.State
-            self.CityText.text = profileData.City
+            self.NameText.text = profileData.fullName.uppercaseString
+            self.DOBText.text = profileData.DateOfBirth.uppercaseString
+            self.EmailText.text = profileData.Email.uppercaseString
+            self.MobileText.text = profileData.Mobile.uppercaseString
+            self.GenderText.text = profileData.Gender.uppercaseString
+            self.CountryText.text = profileData.Country.uppercaseString
+            self.StateText.text = profileData.State.uppercaseString
+            self.CityText.text = profileData.City.uppercaseString
             
-            self.PlayerCurrentTeams.text = profileData.PlayerCurrentTeams.joinWithSeparator(",")
-            self.PlayerPastTeams.text = profileData.PlayerPastTeams.joinWithSeparator(",")
-            self.PlayerBattingStyle.text = profileData.BattingStyle
-            self.PlayerBowlingStyle.text = profileData.BowlingStyle
+            self.PlayerCurrentTeams.text = profileData.PlayerCurrentTeams.joinWithSeparator(",").uppercaseString
+            self.PlayerPastTeams.text = profileData.PlayerPastTeams.joinWithSeparator(",").uppercaseString
+            self.PlayerBattingStyle.text = profileData.BattingStyle.uppercaseString
+            self.PlayerBowlingStyle.text = profileData.BowlingStyle.uppercaseString
             
-            self.CoachCurrentTeams.text = profileData.CoachCurrentTeams.joinWithSeparator(",")
-            self.CoachPastTeams.text = profileData.CoachPastTeams.joinWithSeparator(",")
-            self.CoachCoachingLevel.text = profileData.CoachingLevel
-            self.CoachCertifications.text = profileData.Certifications
-            self.CoachExperience.text = profileData.Experience
+            self.CoachCurrentTeams.text = profileData.CoachCurrentTeams.joinWithSeparator(",").uppercaseString
+            self.CoachPastTeams.text = profileData.CoachPastTeams.joinWithSeparator(",").uppercaseString
+            self.CoachCoachingLevel.text = profileData.CoachingLevel.uppercaseString
+            self.CoachCertifications.text = profileData.Certifications.uppercaseString
+            self.CoachExperience.text = profileData.Experience.uppercaseString
             
-            self.FanSupportingTeams.text = profileData.SupportingTeams.joinWithSeparator(",")
-            self.FanInterestedSports.text = profileData.InterestedSports.joinWithSeparator(",")
-            self.FanFavouritePlayer.text = profileData.FavouritePlayers
-            self.FanHobbies.text = profileData.Hobbies.joinWithSeparator(",")
+            self.FanSupportingTeams.text = profileData.SupportingTeams.joinWithSeparator(",").uppercaseString
+            self.FanInterestedSports.text = profileData.InterestedSports.joinWithSeparator(",").uppercaseString
+            self.FanFavouritePlayer.text = profileData.FavouritePlayers.uppercaseString
+            self.FanHobbies.text = profileData.Hobbies.joinWithSeparator(",").uppercaseString
             
             
             self.CoachingExperienceView.hidden = profileData.UserProfile != userProfileType.Coach.rawValue
