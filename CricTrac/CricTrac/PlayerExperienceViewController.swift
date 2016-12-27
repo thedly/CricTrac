@@ -25,9 +25,9 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     
     lazy var ctDataPicker = DataPicker()
     
-    var teamNames = ["NHPS","DPS"]
+    var teamNames = [""]
     
-    var pastTeamNames = ["NHPS","DPS"]
+    var pastTeamNames = [""]
     
     
     var nextVC: UIViewController!

@@ -34,6 +34,7 @@ class Profile {
     var PlayerPastTeams: [String]
     var CoachPastTeams: [String]
     var CoachCurrentTeams: [String]
+    var CoachPlayedFor: [String]
     var SupportingTeams: [String]
     var InterestedSports: [String]
     var Hobbies: [String]
@@ -94,7 +95,7 @@ class Profile {
         self.UserAddedDate = (usrObj["UserAddedDate"] ?? "") as! String
         self.UserEditedDate = (usrObj["UserEditedDate"] ?? "") as! String
         self.UserLastLoggedin = (usrObj["UserLastLoggedin"] ?? "") as! String
-        
+        self.CoachPlayedFor = (usrObj["CoachPlayedFor"] ?? []) as! [String]
         
     }
     
@@ -124,7 +125,7 @@ class Profile {
             "CoachPastTeams": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.CoachPastTeams: [],
             "SupportingTeams": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.SupportingTeams: [],
             "InterestedSports": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.InterestedSports: [],
-            
+            "CoachPlayedFor": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.CoachPlayedFor : [],
             "Hobbies": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.Hobbies : [],
             
             

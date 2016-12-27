@@ -38,11 +38,11 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
         return ["FavouritePlayers":favouritePlayer.textVal,"Hobbies":HobbiesList, "InterestedSports":InterestedSportsNamesList,"SupportingTeams": supportingTeamNamesList]
     }
     
-    var supportingTeamNamesList = ["New Horizon public school", "National public school", "Delhi public school"]
+    var supportingTeamNamesList = [""]
     
-    var InterestedSportsNamesList = ["Bangalore public school", "Ryan International school"]
+    var InterestedSportsNamesList = [""]
     
-    var HobbiesList = ["New Horizon public school", "National public school", "Delhi public school"]
+    var HobbiesList = [""]
     
     override func viewDidLoad() {
         super.viewDidLoad()

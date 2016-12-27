@@ -15,6 +15,8 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
     @IBOutlet var baseView: UIView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,26 +24,7 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         userName.text = currentUser?.displayName
         baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
         
-        getAllProfileData({ data in
-            profileData = Profile(usrObj: data)
-            
-            if profileData.ProfileImageUrl == "" {
-                let userDefaults = NSUserDefaults.standardUserDefaults()
-                if let token = userDefaults.valueForKey("loginToken") {
-                    if token["Facebooktoken"] != nil || token["googletoken"] != nil{
-                        let profileimage = getImageFromFacebook()
-                        addProfileImageData(profileimage)
-                    }
-                }
-            }
-            
-            getImageFromFirebase(profileData.ProfileImageUrl) { (imgData) in
-                self.profileImage.image = imgData
-            }
-
-            
-        })
-        
+        self.profileImage.image = LoggedInUserImage
         
         
         // Do any additional setup after loading the view.

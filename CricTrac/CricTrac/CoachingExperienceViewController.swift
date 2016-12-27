@@ -75,9 +75,11 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
             self.Certifications.text = profileData.Certifications
             self.Experience.text = profileData.Experience
             self.teamNames = profileData.CoachCurrentTeams
+            self.CoachPlayedFor = profileData.CoachPlayedFor
             self.pastTeamNames = profileData.CoachPastTeams
             currentTeams.reloadData()
             pastTeams.reloadData()
+            CoachPlayedForTbl.reloadData()
         }
     }
     
@@ -96,6 +98,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         profileData.CoachingLevel = self.data["CoachingLevel"] as! String
         profileData.CoachCurrentTeams = self.data["CoachCurrentTeams"] as! [String]
         profileData.CoachPastTeams = self.data["CoachPastTeams"] as! [String]
+        profileData.CoachPlayedFor = self.data["CoachPlayedFor"] as! [String]
         profileData.UserProfile = userProfileType.Coach.rawValue
         
         addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in

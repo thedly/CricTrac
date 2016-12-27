@@ -324,7 +324,7 @@ extension UserInfoViewController:UITextFieldDelegate{
             //state.text = String()
         }
             
-        else if  textField == userProfileInfo {
+        else if userProfileInfo != nil && textField == userProfileInfo {
             ctDataPicker = DataPicker()
             let indexPos = userProfiles.indexOf(profileData.UserProfile) ?? 0
             ctDataPicker.showPicker(self, inputText: textField, data: userProfiles,selectedValueIndex: indexPos)

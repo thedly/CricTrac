@@ -150,6 +150,7 @@ let themeColors = [
 
 
 let defaultTheme = "MeanGreen"
+let defaultProfileImage = "sachin"
 let topColorDefault = themeColors[CurrentTheme]!["topColor"]!
 let bottomColorDefault = themeColors[CurrentTheme]!["bottomColor"]!
 let appFont_black = "SourceSansPro-Black"

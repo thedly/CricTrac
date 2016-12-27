@@ -24,6 +24,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
    
     
    
+    @IBOutlet weak var PlayerLocation: UILabel!
+    @IBOutlet weak var PlayerName: UILabel!
     @IBOutlet weak var totalRunsScored: UILabel!
     @IBOutlet weak var baseView: UIView!
     @IBOutlet weak var TeamsTable: UICollectionView!
@@ -116,6 +118,21 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             
             let df = NSDateFormatter()
             df.dateFormat = "dd/MM/yyyy"
+            
+            
+            self.PlayerName.text = currentUser?.displayName?.uppercaseString
+            
+            
+            let formattedString = NSMutableAttributedString()
+            
+            
+            let locationText = formattedString.bold("\(profileData.City.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(profileData.State.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(profileData.Country.uppercaseString) ", fontName: appFont_black, fontSize: 15)
+          
+            
+            
+            self.PlayerLocation.attributedText = locationText
+            
+            self.userProfileImage.image = LoggedInUserImage
             
             self.setUIElements()
             self.setBowlingUIElements()
@@ -415,7 +432,24 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     // MARK: - Collection view delegates
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return profileData.PlayerCurrentTeams.count //themeColors.count
+        
+        var valueToReturn = 0
+        
+        switch profileData.UserProfile {
+        case userProfileType.Player.rawValue:
+            valueToReturn = profileData.PlayerCurrentTeams.count
+            break
+        case userProfileType.Coach.rawValue:
+            valueToReturn = profileData.CoachCurrentTeams.count
+            break
+        case userProfileType.Fan.rawValue:
+            valueToReturn = profileData.SupportingTeams.count
+            break
+        default:
+            valueToReturn = 0
+            break
+        }
+        return valueToReturn // //themeColors.count
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
