@@ -26,6 +26,8 @@
 		466AD3FA1D7A869B0033289C /* NewMatchParent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466AD3F91D7A869B0033289C /* NewMatchParent.swift */; };
 		466AD3FC1D7A8EC10033289C /* CTPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466AD3FB1D7A8EC10033289C /* CTPicker.swift */; };
 		466F6B061DCD8DEF00A18AAE /* XMExpandableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466F6B051DCD8DEF00A18AAE /* XMExpandableTableView.swift */; };
+		46ACE0C51E0FA744004118A4 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46ACE0C41E0FA744004118A4 /* CommentsViewController.swift */; };
+		46ACE0C71E0FF625004118A4 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46ACE0C61E0FF625004118A4 /* CommentTableViewCell.swift */; };
 		46AE388F1DE4761E00FB9E23 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE388E1DE4761E00FB9E23 /* NewPostViewController.swift */; };
 		46AE38931DE6735000FB9E23 /* PostSendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE38921DE6735000FB9E23 /* PostSendable.swift */; };
 		46B0D66B1D8B881500C93247 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B0D66A1D8B881500C93247 /* TimeLineViewController.swift */; };
@@ -160,6 +162,8 @@
 		466AD3F91D7A869B0033289C /* NewMatchParent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewMatchParent.swift; path = Other/NewMatchParent.swift; sourceTree = "<group>"; };
 		466AD3FB1D7A8EC10033289C /* CTPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CTPicker.swift; path = utility/CTPicker.swift; sourceTree = "<group>"; };
 		466F6B051DCD8DEF00A18AAE /* XMExpandableTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMExpandableTableView.swift; sourceTree = "<group>"; };
+		46ACE0C41E0FA744004118A4 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		46ACE0C61E0FF625004118A4 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentTableViewCell.swift; path = View/CommentTableViewCell.swift; sourceTree = "<group>"; };
 		46AE388E1DE4761E00FB9E23 /* NewPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewPostViewController.swift; path = Controller/NewPostViewController.swift; sourceTree = "<group>"; };
 		46AE38921DE6735000FB9E23 /* PostSendable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostSendable.swift; path = Other/PostSendable.swift; sourceTree = "<group>"; };
 		46B0D66A1D8B881500C93247 /* TimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeLineViewController.swift; path = Controller/TimeLineViewController.swift; sourceTree = "<group>"; };
@@ -481,6 +485,7 @@
 				89067D721DAE9D120021F463 /* radioSelectView.swift */,
 				8997D56B1DBCFCA000F201B6 /* CurrentTeamsTableViewCell.swift */,
 				8997D56D1DBD21BC00F201B6 /* ThemeColorsCollectionViewCell.swift */,
+				46ACE0C61E0FF625004118A4 /* CommentTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -526,6 +531,7 @@
 				8951D52E1DB08BF5005D101A /* CricketFanViewController.swift */,
 				890EA2F01DB92BD100FB40DB /* ForgotPasswordViewController.swift */,
 				46AE388E1DE4761E00FB9E23 /* NewPostViewController.swift */,
+				46ACE0C41E0FA744004118A4 /* CommentsViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -751,6 +757,7 @@
 				8997D56E1DBD21BC00F201B6 /* ThemeColorsCollectionViewCell.swift in Sources */,
 				897194CB1DA34DFD00478F82 /* AddMatchDetailsViewController.swift in Sources */,
 				895E04031D5CD134002E322E /* FriendRequestsTableViewCell.swift in Sources */,
+				46ACE0C51E0FA744004118A4 /* CommentsViewController.swift in Sources */,
 				4607A2641D54848A0090A5BD /* MatchViewController.swift in Sources */,
 				893E9EA11DB2629C00D63AB8 /* MenuTransitionOperator.swift in Sources */,
 				892CE2D21D9EBEF2001E098E /* DragView.swift in Sources */,
@@ -822,6 +829,7 @@
 				8930F0421D5BA20F00C7540B /* UserOpponentDetailsViewController.swift in Sources */,
 				46DE32C51D900C9F0024CD82 /* AddPostTableViewCell.swift in Sources */,
 				46C983BF1D3FC72400DFC607 /* DashboardViewController.swift in Sources */,
+				46ACE0C71E0FF625004118A4 /* CommentTableViewCell.swift in Sources */,
 				892EA68B1D58F4B400BEE5A3 /* DashboardBattingDetailsViewController.swift in Sources */,
 				89E6084D1D6D4ADC00F6BD11 /* CTDataPicker.swift in Sources */,
 				4657D5661D499FDD009E0FBE /* SliderMenuViewController.swift in Sources */,
@@ -967,7 +975,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = CricTrac/Info.plist;
@@ -988,8 +996,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = CricTrac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

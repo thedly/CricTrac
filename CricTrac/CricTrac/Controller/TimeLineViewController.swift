@@ -180,18 +180,24 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0{return 125}
-        return 175
+        return 225
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if indexPath.row == 0{
+        if indexPath.section  == 0{
             let newPost = viewControllerFrom("Main", vcid: "NewPostViewController") as! NewPostViewController
             newPost.sendPostDelegate = self
             newPost.modalPresentationStyle = .OverCurrentContext
             presentViewController(newPost, animated: true, completion: nil)
         }
-        
+        else{
+            
+            let newPost = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
+            newPost.postData =  timelineData!.dictionaryValue["timeline"]!.arrayValue[indexPath.section-1]
+            presentViewController(newPost, animated: true, completion: nil)
+            
+        }
     }
     
     

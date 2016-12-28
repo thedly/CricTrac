@@ -512,8 +512,8 @@ func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
     ref.setValue(timelineDict)
     
     let postKey = ref.key
-    
-    let returnData = ["timeline":["Post":postText,"postKey":postKey]]
+    //njith
+    let returnData = ["timeline":["Post":postText,"postId":postKey]]
     
     sucess(data: returnData)
     
@@ -524,7 +524,39 @@ func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
     
 }
 
+func addNewComment(postId:String,comment:String){
+    
+    let ref = fireBaseRef.child("TimelinePosts").child(postId).child("TimelineComments").childByAutoId()
+    
+    let commentDict:[String:String] = ["OwnerId":(currentUser?.displayName) ?? "","Comment":comment,"OwnerID":currentUser!.uid,"OwnerName":(currentUser?.displayName) ?? "","isDeleted":"0"]
+    
+    ref.setValue(commentDict)
+    
+}
 
+func getAllComments(postId:String,sucess:(data:[[String:String]])->Void){
+    
+    let ref = fireBaseRef.child("TimelinePosts").child(postId).child("TimelineComments")
+    
+    ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let data = snapshot.value as? [String:[String:String]] {
+            
+            var result = [[String:String]]()
+            for (key,value) in data{
+                var dataval = value
+                dataval["postId"] = key
+                result.append(dataval)
+            }
+            
+            sucess(data: result)
+        }
+        
+        
+        
+    })
+    
+}
 
 
 //fireBaseRef.child("Dismissals").setValue(["BOWLED","CAUGHT","HANDLED THE BALL","HIT WICKET","HIT THE BALL TWICE","LEG BEFORE WICKET (LBW)","OBSTRUCTING THE FIELD","RUN OUT","RETIRED","TIMED OUT"])
