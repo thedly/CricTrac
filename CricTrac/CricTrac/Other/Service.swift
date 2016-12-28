@@ -60,24 +60,32 @@ func addProfileImageData(profileDp:UIImage){
     metaData.contentType = "image/jpg"
     
     
-    let filePath = "\(FIRAuth.auth()?.currentUser?.uid)/UserProfile/profileImage"
+//    if let usrId = FIRAuth.auth()?.currentUser?.uid {
     
-    storageRef.child(filePath).putData(imageData, metadata: metaData){(metaData,error) in
-        if let error = error {
-            print(error.localizedDescription)
-            return
-        }else{
-            
-            updateMetaData(metaData!.downloadURL()!)
-        
+        let filePath = "\(FIRAuth.auth()?.currentUser?.uid)/UserProfile/profileImage"
+        storageRef.child(filePath).putData(imageData, metadata: metaData){(metaData,error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }else{
+                
+                updateMetaData(metaData!.downloadURL()!)
+                
+            }
         }
-    }
+//    }
+    
+    
 }
 
 func updateMetaData(profileImgUrl: NSURL) {
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
     let profileImageObject: [NSObject:AnyObject] = [ "ProfileImageUrl"    : profileImgUrl.absoluteString]
     ref.updateChildValues(profileImageObject)
+    if profileData.ProfileImageUrl == "" {
+        profileData.ProfileImageUrl = profileImgUrl.absoluteString
+    }
+    
     print("Image url updated successfully")
 }
 
@@ -177,10 +185,44 @@ func loadInitialProfileValues(){
 }
 
 
-func addUserProfileData(data:[String:AnyObject], sucessBlock:(AnyObject)->Void){
+func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject])->Void){
+    
+    var dataToBeModified = data
+    
+    let formatter = NSDateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    
+    dataToBeModified["UserLastLoggedin"] = data["UserLastLoggedin"]
+    
+    if profileData.fullName == " "
+    {
+        dataToBeModified["UserAddedDate"] = formatter.stringFromDate(NSDate())
+        dataToBeModified["UserEditedDate"] = formatter.stringFromDate(NSDate())
+    }
+    else
+    {
+        dataToBeModified["UserAddedDate"] = data["UserAddedDate"]
+        dataToBeModified["UserEditedDate"] = formatter.stringFromDate(NSDate())
+    }
+    
+    
+    
+    
+    
+    
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
-    ref.setValue(data)
-    sucessBlock(data)
+    ref.setValue(dataToBeModified)
+    sucessBlock(dataToBeModified)
+}
+
+func updateLastLogin(){
+    
+    let formatter = NSDateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+
+    
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").child("UserLastLoggedin")
+    ref.setValue(formatter.stringFromDate(NSDate()))
 }
 
 func getAllProfileData(sucessBlock:([String:AnyObject])->Void){

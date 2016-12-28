@@ -11,9 +11,22 @@ import SCLAlertView
 
 class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
 
+    
+    @IBOutlet var baseView: UIView!
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var profileImage: UIImageView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
+        userName.text = currentUser?.displayName
+        baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
+        
+        self.profileImage.image = LoggedInUserImage
+        
+        
         // Do any additional setup after loading the view.
     }
 
@@ -58,15 +71,30 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
     
     
      func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("menuitem", forIndexPath: indexPath) as! SliderMenuCell
+        
+        
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("SliderMenuViewCell", forIndexPath: indexPath) as! SliderMenuViewCell
         let itemTitle = menuData[indexPath.row]["title"]
-        cell.menuItemName.text = itemTitle
+        
+        let menuIcon = UIImage(named: menuData[indexPath.row]["img"]!)
+        
+        cell.menuName.text = itemTitle
+        cell.menuIcon.image = menuIcon
+        
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let vcName = menuData[indexPath.row]["vc"]
+        var vcName = menuData[indexPath.row]["vc"]
+        
+        if menuData[indexPath.row]["title"] == "PROFILE" && profileData.fullName != " "{
+            vcName = "ProfileReadOnlyViewController"
+        }
+        
+        
+        
         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let vc  = storyboard.instantiateViewControllerWithIdentifier(vcName!)
         sliderMenu.mainViewController.presentViewController(vc, animated: true, completion: nil)

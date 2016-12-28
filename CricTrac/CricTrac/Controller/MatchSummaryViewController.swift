@@ -90,7 +90,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         var totalruns:Double?
 
-        if let runs = data["Runs"]{
+        if let runs = data["RunsTaken"]{
             aCell.battingViewHidden = (runs == "0" || runs == "-") ? true : false
             aCell.battingView.hidden = aCell.battingViewHidden
             aCell.BallsAndStrikeRate.hidden = aCell.battingViewHidden
@@ -98,7 +98,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             aCell.totalRuns.text = runs
             totalruns = Double(runs)
         }
-        if let wickets = data["Wickets"], let balls = data["OversBalled"], let runsGiven = data["RunsGiven"]   {
+        if let wickets = data["WicketsTaken"], let balls = data["OversBowled"], let runsGiven = data["RunsGiven"]   {
             aCell.bowlingViewHidden = (balls == "0" || balls == "-") ? true : false
             aCell.bowlingView.hidden = aCell.bowlingViewHidden
             aCell.BallsBowledWithWicketsTaken.hidden = aCell.bowlingViewHidden
@@ -128,7 +128,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         
         
-        if let date = data["Date"]{
+        if let date = data["MatchDate"]{
             
             //let dateString: String! = "\(dateArray[0]) \(dateArray[1].monthName) \(dateArray[2])"
             aCell.matchDateAndVenue.text = date ?? "NA"
@@ -138,7 +138,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             
         }
         
-        if let balls = data["Balls"]{
+        if let balls = data["BallsFaced"]{
             
             if totalruns != nil && balls != "-"{
                 let totalBalls = Double(balls)!

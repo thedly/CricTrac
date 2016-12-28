@@ -22,18 +22,26 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     // MARK: - Plumbing
     
    
+    
+   
+    @IBOutlet weak var PlayerLocation: UILabel!
+    @IBOutlet weak var PlayerName: UILabel!
+    @IBOutlet weak var totalRunsScored: UILabel!
     @IBOutlet weak var baseView: UIView!
     @IBOutlet weak var TeamsTable: UICollectionView!
     @IBOutlet weak var MatchesView: UIView!
     @IBOutlet weak var userProfileImage: UIImageView!
     @IBOutlet weak var battingMatches: UILabel!
     @IBOutlet weak var battingInnings: UILabel!
-    @IBOutlet weak var notOuts: UILabel!
+//    @IBOutlet weak var notOuts: UILabel!
     @IBOutlet weak var highScore: UILabel!
     @IBOutlet weak var battingAverage: UILabel!
     @IBOutlet weak var strikeRate: UILabel!
     @IBOutlet weak var hundreds: UILabel!
     @IBOutlet weak var fifties: UILabel!
+    
+    @IBOutlet weak var sixes: UILabel!
+    @IBOutlet weak var fours: UILabel!
     
     @IBOutlet weak var recentBest: UILabel!
     @IBOutlet weak var ballsFacedDuringBat: UILabel!
@@ -44,15 +52,19 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     @IBOutlet weak var bowlingAverage: UILabel!
     @IBOutlet weak var bowlingEconomy: UILabel!
     
+    @IBOutlet weak var TotalThreeWicketsPerMatch: UILabel!
     @IBOutlet weak var recentBestBowling: UILabel!
     
+    @IBOutlet weak var TotalMaidens: UILabel!
+    @IBOutlet weak var TotalFiveWicketsPerMatch: UILabel!
 
+    @IBOutlet weak var PlayerOversBowld: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //setUIBackgroundTheme(self.view)
-        //setColorForViewsWithSameTag(baseView)
+        setUIBackgroundTheme(self.view)
+        setColorForViewsWithSameTag(baseView)
         
         userProfileImage.layer.cornerRadius = userProfileImage.bounds.size.width/2
         MatchesView.layer.cornerRadius = 10
@@ -66,9 +78,10 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         setNavigationBarProperties();
         getMatchData()
         
-        setBowlingUIElements()
         
-        setBackgroundColor()
+        
+        
+        //setBackgroundColor()
         
         // Do any additional setup after loading the view.
     }
@@ -106,8 +119,23 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             let df = NSDateFormatter()
             df.dateFormat = "dd/MM/yyyy"
             
-            self.setUIElements()
             
+            self.PlayerName.text = currentUser?.displayName?.uppercaseString
+            
+            
+            let formattedString = NSMutableAttributedString()
+            
+            
+            let locationText = formattedString.bold("\(profileData.City.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(profileData.State.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(profileData.Country.uppercaseString) ", fontName: appFont_black, fontSize: 15)
+          
+            
+            
+            self.PlayerLocation.attributedText = locationText
+            
+            self.userProfileImage.image = LoggedInUserImage
+            
+            self.setUIElements()
+            self.setBowlingUIElements()
             KRProgressHUD.dismiss()
         }
     }
@@ -140,8 +168,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         navigationItem.leftBarButtonItem = leftbarButton
         navigationItem.rightBarButtonItem = righttbarButton
-        navigationController!.navigationBar.barTintColor = UIColor.clearColor()
-        title = "Dashboard"
+        navigationController!.navigationBar.barTintColor = UIColor(hex: topColor)
+        title = "DASHBOARD"
         let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         navigationController!.navigationBar.titleTextAttributes = titleDict
     }
@@ -150,74 +178,84 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     func setUIElements() {
         KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
         if matchDataSource.count > 0 {
-            var runs = [Int]()
+            var totalPlayerRuns = [Int]()
+            
+            var totalNotOuts = Int(0)
+            
             var top3MatchesArray = [NSMutableAttributedString]()
             self.battingMatches.text = String(matchDataSource.count)
-            self.notOuts.text = String(0)
+//            self.notOuts.text = String(0)
             self.fifties.text = String(0)
             self.hundreds.text = String(0)
             self.ballsFacedDuringBat.text = String(0)
             self.battingInnings.text = String(0)
             self.battingAverage.text = String(0)
+            
+            self.sixes.text = String(0)
+            self.fours.text = String(0)
+            
+            
             var top3MatchCount = 0
             for matchData in matchDataSource {
                 
                 if matchData["Dismissal"] != nil && !dismissals.contains(matchData["Dismissal"]!){
-                    var dismissalCount = Int(self.notOuts.text!)!
+                    var dismissalCount = totalNotOuts
                     dismissalCount = dismissalCount + 1
-                    self.notOuts.text = String(dismissalCount)
+                    totalNotOuts = dismissalCount
                 }
                 
-                if matchData["Runs"] != nil  && matchData["Runs"] != "-", let curruns = matchData["Runs"] {
-                    runs.append(Int(curruns)!)
+                if matchData["RunsTaken"] != nil  && matchData["RunsTaken"] != "-", let curruns = matchData["RunsTaken"] {
+                    totalPlayerRuns.append(Int(curruns)!)
                 }
                 
-                if matchData["Runs"] != nil && matchData["Runs"] != "-" && matchData["Runs"] != "0" {
+                if matchData["RunsTaken"] != nil && matchData["RunsTaken"] != "-" && matchData["RunsTaken"] != "0" {
                     var inningsCount = Int(self.battingInnings.text!)!
                     inningsCount = inningsCount + 1
                     self.battingInnings.text = String(inningsCount)
                 }
                 
-//                if matchData["Sixes"] != nil && matchData["Sixes"] != "-"{
-//                    var sixCount = Int(self.sixes.text!)!
-//                    sixCount = sixCount + 1
-//                    self.sixes.text = String(sixCount)
-//                }
-//                
-//                if matchData["Fours"] != nil && matchData["Fours"] != "-"{
-//                    var fourCount = Int(self.fours.text!)!
-//                    fourCount = fourCount + 1
-//                    self.fours.text = String(fourCount)
-//                }
+                if matchData["Sixes"] != nil && matchData["Sixes"] != "-", let sixes = matchData["Sixes"] {
+                    var sixCount = Int(sixes)!
+                    sixCount = sixCount + 1
+                    self.sixes.text = String(sixCount)
+                }
+
+                if matchData["Fours"] != nil && matchData["Fours"] != "-"{
+                    var fourCount = Int(self.fours.text!)!
+                    fourCount = fourCount + 1
+                    self.fours.text = String(fourCount)
+                }
                 
-                if matchData["Balls"] != nil && matchData["Balls"] != "-", let ballCount = matchData["Balls"]{
+                if matchData["BallsFaced"] != nil && matchData["BallsFaced"] != "-", let ballCount = matchData["BallsFaced"]{
                     var ballsCount = Int(self.ballsFacedDuringBat.text!)!
                     ballsCount = ballsCount + Int(ballCount)!
                     self.ballsFacedDuringBat.text = String(ballsCount)
                 }
-                if matchData["Runs"] != nil && matchData["Runs"] != "-" && Int(matchData["Runs"]!)! >= 50 && Int(matchData["Runs"]!)! < 100 {
+                if matchData["RunsTaken"] != nil && matchData["RunsTaken"] != "-" && Int(matchData["RunsTaken"]!)! >= 50 && Int(matchData["RunsTaken"]!)! < 100 {
                     var fiftyCount = Int(self.fifties.text!)!
                     fiftyCount = fiftyCount + 1
                     self.fifties.text = String(fiftyCount)
                 }
                 
-                if matchData["Runs"] != nil && matchData["Runs"] != "-" && Int(matchData["Runs"]!)! >= 100 {
+                if matchData["RunsTaken"] != nil && matchData["RunsTaken"] != "-" && Int(matchData["RunsTaken"]!)! >= 100 {
                     var hundredCount = Int(self.hundreds.text!)!
                     hundredCount = hundredCount + 1
                     self.hundreds.text = String(hundredCount)
                 }
                 
-                if matchData["Dismissal"] != nil && matchData["Runs"] != nil && matchData["Runs"] != "-" && matchData["Opponent"] != nil && matchData["Opponent"] != "-" && top3MatchCount < 3, let runsScored = matchData["Runs"], let opponentFaced = matchData["Opponent"], let dismissedBy = matchData["Dismissal"] {
+                if matchData["Dismissal"] != nil && matchData["RunsTaken"] != nil && matchData["RunsTaken"] != "-" && matchData["Opponent"] != nil && matchData["Opponent"] != "-" && top3MatchCount < 3, let runsScored = matchData["RunsTaken"], let opponentFaced = matchData["Opponent"], let dismissedBy = matchData["Dismissal"] {
                     top3MatchCount = top3MatchCount + 1
                     
                     let formattedString = NSMutableAttributedString()
                     
                     if dismissedBy != "-" {
-                        formattedString.bold("\(runsScored) ", fontName: "SFUIText-Bold", fontSize: 17).normal(" against \(opponentFaced)\n", fontName: "SFUIText-Regular", fontSize: 15)
+                        formattedString.bold("\(runsScored) ", fontName: appFont_bold, fontSize: 17).normal(" against \(opponentFaced)\n", fontName: appFont_regular, fontSize: 15)
+                        self.highScore.text = "\(runsScored)"
                     }
                     else
                     {
-                        formattedString.bold("\(runsScored)* ", fontName: "SFUIText-Bold", fontSize: 17).normal(" against \(opponentFaced)\n", fontName: "SFUIText-Regular", fontSize: 15)
+                        formattedString.bold("\(runsScored)* ", fontName: appFont_bold, fontSize: 17).normal(" against \(opponentFaced)\n", fontName: appFont_regular, fontSize: 15)
+                        self.highScore.text = "\(runsScored)*"
                     }
                     
                     
@@ -226,9 +264,10 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 KRProgressHUD.dismiss()
             }
             
-            if runs.count > 0 && self.notOuts.text != nil && self.notOuts.text != "-" , let notOuts = Int(self.notOuts.text!) {
-                let notOutsAvg = (runs.count - notOuts)
-                var avg = runs.reduce(0, combine: +)
+            if totalPlayerRuns.count > 0 {
+                let notOuts = totalNotOuts
+                let notOutsAvg = (totalPlayerRuns.count - notOuts)
+                var avg = totalPlayerRuns.reduce(0, combine: +)
                 
                 if notOutsAvg > 0 {
                     avg = avg/notOutsAvg
@@ -237,14 +276,18 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 self.battingAverage.text = String(Float(avg))
             }
             
-            if runs.count > 0 && self.ballsFacedDuringBat.text != nil && self.ballsFacedDuringBat.text != "-" {
+            if totalPlayerRuns.count > 0 && self.ballsFacedDuringBat.text != nil && self.ballsFacedDuringBat.text != "-" {
                 
                 let ballsFacedDureingbat = Int(self.ballsFacedDuringBat.text!)!
                 
-                var totalruns = runs.reduce(0, combine: +)
+                var totalruns = totalPlayerRuns.reduce(0, combine: +)
                 
+                self.totalRunsScored.text = "\(totalruns)"
                 
                 if ballsFacedDureingbat > 0 {
+                    
+                    self.ballsFacedDuringBat.text = "\(ballsFacedDureingbat)"
+                    
                     totalruns = totalruns/ballsFacedDureingbat
                 }
                 
@@ -252,9 +295,9 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 
             }
             
-            if runs.count > 0 {
-                self.highScore.text = String(runs.reduce(Int.min, combine: { max($0, $1) }))
-            }
+//            if totalPlayerRuns.count > 0 {
+//                self.highScore.text = String(totalPlayerRuns.reduce(Int.min, combine: { max($0, $1) }))
+//            }
             
             if top3MatchesArray.count > 0 {
                 self.recentBest.attributedText = top3MatchesArray.joinWithSeparator("\n")
@@ -272,44 +315,87 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             self.bowlingEconomy.text = String(0)
             self.bowlingAverage.text = String(0)
             self.totalWickets.text = String(0)
+            
+            self.TotalThreeWicketsPerMatch.text = String(0)
+            self.TotalFiveWicketsPerMatch.text = String(0)
+            
+            self.TotalMaidens.text = String(0)
+            
 //            self.totalRunsGiven.text = String(0)
             var top3MatchesArray = [NSMutableAttributedString]()
             var top3MatchCount = 0
+            
+            var totalOversBowled = 0
+            var totalMaidensBowled = 0
+            var total3WPerMatch = 0
+            var total5WPerMatch = 0
+            var wicketCount = 0
+            var runsGivenCount = 0
+            var totalEconomy = [Float]()
+            
             for matchData in matchDataSource {
                 
-                if matchData["OversBalled"] != nil && matchData["OversBalled"] != "-", let oversbowled = matchData["OversBalled"]  {
-//                    var oversCount = Int(self.totalOvers.text!)!
-//                    var inningsCount = Int(self.bowlingInnings.text!)!
-//                    inningsCount = inningsCount + 1
-//                    oversCount = oversCount + Int(oversbowled)!
-//                    self.totalOvers.text = String(oversCount)
-//                    self.bowlingInnings.text = String(oversCount)
+                if matchData["OversBowled"] != nil && matchData["OversBowled"] != "-", let oversbowled = matchData["OversBowled"]  {
+                    totalOversBowled += Int(oversbowled)!
+                    
+                    if matchData["RunsGiven"] != nil && matchData["RunsGiven"] != "-", let runsGiven = matchData["RunsGiven"]{
+                        
+//                        if runsGiven == 0 {
+//                            totalMaidensBowled += 1
+//                        }
+                        
+                        if Int(oversbowled) > 0 {
+                            totalEconomy.append(Float(Int(runsGiven)!/Int(oversbowled)!))
+                        }
+                        
+                    }
+
+                    
+                    
+                    
                 }
-                
                 
                 if matchData["Wickets"] != nil && matchData["Wickets"] != "-", let wicketsTaken = matchData["Wickets"]{
-                    var wicketCount = Int(self.totalWickets.text!)!
-                    wicketCount = wicketCount + Int(wicketsTaken)!
-                    self.totalWickets.text = String(wicketCount)
+                    
+                    if Int(wicketsTaken) > 3 {
+                       total3WPerMatch += 1
+                    }
+                    
+                    if Int(wicketsTaken) > 5 {
+                        total5WPerMatch += 1
+                    }
+                    
+                    
+                    wicketCount += Int(wicketsTaken)!
+                    
                 }
                 
-                if matchData["RunsGiven"] != nil && matchData["RunsGiven"] != "-", let runsGiven = matchData["RunsGiven"]{
-//                    var runsGivenCount = Int(self.totalRunsGiven.text!)!
-//                    runsGivenCount = runsGivenCount + Int(runsGiven)!
-//                    self.totalRunsGiven.text = String(runsGivenCount)
-                }
+                
                 
                 if matchData["Wickets"] != nil && matchData["Wickets"] != "-" && matchData["Opponent"] != nil && matchData["Opponent"] != "-" && top3MatchCount < 3, let wicketstaken = matchData["Wickets"], let opponentFaced = matchData["Opponent"] {
                     top3MatchCount = top3MatchCount + 1
                     
                     let formattedString = NSMutableAttributedString()
                     
-                    formattedString.bold("\(wicketstaken)",fontName: "SFUIText-Bold", fontSize: 17).normal(" wickets against \(opponentFaced)\n", fontName: "SFUIText-Regular", fontSize: 15)
+                    formattedString.bold("\(wicketstaken)",fontName: appFont_bold, fontSize: 17).normal(" wicket(s) against \(opponentFaced)\n", fontName: appFont_regular, fontSize: 15)
                     
                     top3MatchesArray.append(formattedString)
                 }
-                
             }
+            
+            self.PlayerOversBowld.text =  "\(totalOversBowled)"
+            self.totalWickets.text = String(wicketCount)
+            self.TotalThreeWicketsPerMatch.text = String(total3WPerMatch)
+            self.TotalFiveWicketsPerMatch.text = String(total5WPerMatch)
+            
+            self.bowlingEconomy.text = String(totalEconomy.reduce(0, combine: +)/Float(matchDataSource.count))
+            
+            if top3MatchesArray.count > 0 {
+                self.recentBestBowling.attributedText = top3MatchesArray.joinWithSeparator("\n")
+            }
+            
+            
+            
             
             
             
@@ -325,18 +411,9 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             
             
             
-//            if self.totalRunsGiven.text != nil && self.totalRunsGiven.text != "-" && self.totalOvers.text != nil && self.totalOvers.text != "-", let runsGiven = Int(self.totalRunsGiven.text!), let overs = Int(self.totalOvers.text!) {
-//                
-//                if overs > 0 {
-//                    self.bowlingEconomy.text = String(Float(runsGiven/overs))
-//                }
-//                
-//                
-//            }
             
-            if top3MatchesArray.count > 0 {
-                self.recentBestBowling.attributedText = top3MatchesArray.joinWithSeparator("\n")
-            }
+            
+            
             
             
             
@@ -344,6 +421,10 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             
             
         }
+        
+        
+        
+        
     }
 
     
@@ -351,23 +432,40 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     // MARK: - Collection view delegates
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return themeColors.count
+        
+        var valueToReturn = 0
+        
+        switch profileData.UserProfile {
+        case userProfileType.Player.rawValue:
+            valueToReturn = profileData.PlayerCurrentTeams.count
+            break
+        case userProfileType.Coach.rawValue:
+            valueToReturn = profileData.CoachCurrentTeams.count
+            break
+        case userProfileType.Fan.rawValue:
+            valueToReturn = profileData.SupportingTeams.count
+            break
+        default:
+            valueToReturn = 0
+            break
+        }
+        return valueToReturn // //themeColors.count
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
         
-        let allCells = collectionView.visibleCells() as! [ThemeColorsCollectionViewCell]
-        
-        allCells.forEach({ cell in
-            cell.cellIsSelected = false
-        })
-        
-        let currentCell = collectionView.cellForItemAtIndexPath(indexPath) as! ThemeColorsCollectionViewCell
-        
-        currentCell.cellIsSelected = true
-        _currentTheme = currentCell.ThemeTitle.text!
-        self.view.backgroundColor = currentCell.contentView.backgroundColor
+//        let allCells = collectionView.visibleCells() as! [ThemeColorsCollectionViewCell]
+//        
+//        allCells.forEach({ cell in
+//            cell.cellIsSelected = false
+//        })
+//        
+//        let currentCell = collectionView.cellForItemAtIndexPath(indexPath) as! ThemeColorsCollectionViewCell
+//        
+//        currentCell.cellIsSelected = true
+//        _currentTheme = currentCell.ThemeTitle.text!
+//        self.view.backgroundColor = currentCell.contentView.backgroundColor
         
     }
     

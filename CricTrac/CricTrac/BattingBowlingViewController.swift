@@ -33,7 +33,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
     
     var BowlingData:[String:String]{
         
-        return ["OversBalled":oversText.textVal,"Wickets":wicketsText.textVal,"RunsGiven":runsGivenText.textVal,"Noballs":noballText.textVal,"Wides":widesText.text!, "Maidens": maidensText.textVal]
+        return ["OversBowled":oversText.textVal,"Wickets":wicketsText.textVal,"RunsGiven":runsGivenText.textVal,"NoBalls":noballText.textVal,"Wides":widesText.text!, "Maidens": maidensText.textVal]
     }
     
     var allRequiredFieldsHaveFilledProperly: Bool {
@@ -184,13 +184,13 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
     var BattingData:[String:String]{
         
         
-        return ["Runs":runsText.textVal,"Balls":ballsPlayedText.textVal,"Fours":foursText.textVal,"Sixes":sixesText.textVal,"Position":positionText.textVal,"Dismissal":dismissalText.textVal]
+        return ["RunsTaken":runsText.textVal,"BallsFaced":ballsPlayedText.textVal,"Fours":foursText.textVal,"Sixes":sixesText.textVal,"Position":positionText.textVal,"Dismissal":dismissalText.textVal]
     }
     
     func loadEditData(){
         
-        runsText.textVal = parent!.selecetedData!["Runs"]!
-        ballsPlayedText.textVal = parent!.selecetedData!["Balls"]!
+        runsText.textVal = parent!.selecetedData!["RunsTaken"]!
+        ballsPlayedText.textVal = parent!.selecetedData!["BallsFaced"]!
         foursText.textVal = parent!.selecetedData!["Fours"]!
         sixesText.textVal = parent!.selecetedData!["Sixes"]!
         strikeRateText.textVal = parent!.selecetedData!["Ground"]!
@@ -199,10 +199,10 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
         setStrikeRate()
         
         
-        oversText.textVal = parent!.selecetedData!["OversBalled"]!
+        oversText.textVal = parent!.selecetedData!["OversBowled"]!
         wicketsText.textVal = parent!.selecetedData!["Wickets"]!
         runsGivenText.textVal = parent!.selecetedData!["RunsGiven"]!
-        noballText.textVal = parent!.selecetedData!["Noballs"]!
+        noballText.textVal = parent!.selecetedData!["NoBalls"]!
         widesText.textVal = parent!.selecetedData!["Wides"]!
         
         if let mt = parent!.selecetedData!["Wides"] {

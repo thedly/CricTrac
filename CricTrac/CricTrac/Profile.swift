@@ -25,24 +25,31 @@ class Profile {
     var PlayingRole: String
     var State: String
     
-    var CoachingExperience: String
-    var CoachingCertifications: String
+    var Experience: String
+    var Certifications: String
     var CoachingLevel: String
     
     
-    var CurrentTeamsAsPlayer: [String]
-    var PastTeamsAsPlayer: [String]
-    var CurrentTeamsAsCoach: [String]
-    var PastTeamsAsCoach: [String]
-    var SupportingTeamsAsAFan: [String]
-    var InterestedSportsAsAFan: [String]
-    var HobbiesAsAFan: [String]
+    var PlayerCurrentTeams: [String]
+    var PlayerPastTeams: [String]
+    var CoachPastTeams: [String]
+    var CoachCurrentTeams: [String]
+    var CoachPlayedFor: [String]
+    var SupportingTeams: [String]
+    var InterestedSports: [String]
+    var Hobbies: [String]
     
-    var FavouritePlayerAsAFan: String
+    var FavouritePlayers: String
     
     var ProfileImageUrl: String
     var fullName: String
-    var userType: String
+    var UserProfile: String
+    var UserStatus: String
+    
+    var UserAddedDate: String
+    var UserEditedDate: String
+    var UserLastLoggedin: String
+    
     
     init(usrObj : [String: AnyObject]) {
         
@@ -63,25 +70,32 @@ class Profile {
         
         self.ProfileImageUrl = (usrObj["ProfileImageUrl"] ?? "") as! String
         
-        self.userType = (usrObj["UserType"] ?? "") as! String
+        self.UserProfile = (usrObj["UserProfile"] ?? "") as! String
         
         
         self.CoachingLevel = (usrObj["CoachingLevel"] ?? "") as! String
-        self.CoachingExperience = (usrObj["CoachingExperience"] ?? "") as! String
-        self.CoachingCertifications = (usrObj["CoachingCertifications"] ?? "") as! String
+        self.Experience = (usrObj["Experience"] ?? "") as! String
+        self.Certifications = (usrObj["Certifications"] ?? "") as! String
         
         
         self.fullName = "\(self.FirstName) \(self.LastName)"
         
-        self.FavouritePlayerAsAFan = (usrObj["FavouritePlayerAsAFan"] ?? "") as! String
+        self.FavouritePlayers = (usrObj["FavouritePlayers"] ?? "") as! String
         
-        self.CurrentTeamsAsPlayer = (usrObj["CurrentTeamsAsPlayer"] ?? []) as! [String]
-        self.PastTeamsAsPlayer = (usrObj["PastTeamsAsPlayer"] ?? []) as! [String]
-        self.CurrentTeamsAsCoach = (usrObj["CurrentTeamsAsCoach"] ?? []) as! [String]
-        self.PastTeamsAsCoach = (usrObj["PastTeamsAsCoach"] ?? []) as! [String]
-        self.SupportingTeamsAsAFan = (usrObj["SupportingTeamsAsAFan"] ?? []) as! [String]
-        self.InterestedSportsAsAFan = (usrObj["InterestedSportsAsAFan"] ?? []) as! [String]
-        self.HobbiesAsAFan = (usrObj["HobbiesAsAFan"] ?? []) as! [String]
+        self.PlayerCurrentTeams = (usrObj["PlayerCurrentTeams"] ?? []) as! [String]
+        self.PlayerPastTeams = (usrObj["PlayerPastTeams"] ?? []) as! [String]
+        self.CoachCurrentTeams = (usrObj["CoachCurrentTeams"] ?? []) as! [String]
+        self.CoachPastTeams = (usrObj["CoachPastTeams"] ?? []) as! [String]
+        self.SupportingTeams = (usrObj["SupportingTeams"] ?? []) as! [String]
+        self.InterestedSports = (usrObj["InterestedSports"] ?? []) as! [String]
+        self.Hobbies = (usrObj["Hobbies"] ?? []) as! [String]
+        
+        self.UserStatus = (usrObj["UserStatus"] ?? userStatus.Free.rawValue) as! String
+        
+        self.UserAddedDate = (usrObj["UserAddedDate"] ?? "") as! String
+        self.UserEditedDate = (usrObj["UserEditedDate"] ?? "") as! String
+        self.UserLastLoggedin = (usrObj["UserLastLoggedin"] ?? "") as! String
+        self.CoachPlayedFor = (usrObj["CoachPlayedFor"] ?? []) as! [String]
         
     }
     
@@ -103,23 +117,27 @@ class Profile {
             "PlayingRole":self.PlayingRole,
             "PlayingLevel":self.PlayingLevel,
             "ProfileImageUrl": self.ProfileImageUrl ,
-            "UserType": self.userType,
-            "FavouritePlayerAsAFan": self.userType == String(userProfileType.Fan.rawValue) ? self.FavouritePlayerAsAFan : "",
-            "CurrentTeamsAsPlayer": self.userType == String(userProfileType.Player.rawValue) ? self.CurrentTeamsAsPlayer : [],
-            "PastTeamsAsPlayer": self.userType == String(userProfileType.Player.rawValue) ? self.PastTeamsAsPlayer: [],
-            "CurrentTeamsAsCoach": self.userType == String(userProfileType.Coach.rawValue) ? self.CurrentTeamsAsCoach: [],
-            "PastTeamsAsCoach": self.userType == String(userProfileType.Coach.rawValue) ? self.PastTeamsAsCoach: [],
-            "SupportingTeamsAsAFan": self.userType == String(userProfileType.Fan.rawValue) ? self.SupportingTeamsAsAFan: [],
-            "InterestedSportsAsAFan": self.userType == String(userProfileType.Fan.rawValue) ? self.InterestedSportsAsAFan: [],
+            "UserProfile": self.UserProfile,
+            "FavouritePlayers": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.FavouritePlayers : "",
+            "PlayerCurrentTeams": self.UserProfile == String(userProfileType.Player.rawValue) ? self.PlayerCurrentTeams : [],
+            "PlayerPastTeams": self.UserProfile == String(userProfileType.Player.rawValue) ? self.PlayerPastTeams: [],
+            "CoachCurrentTeams": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.CoachCurrentTeams: [],
+            "CoachPastTeams": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.CoachPastTeams: [],
+            "SupportingTeams": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.SupportingTeams: [],
+            "InterestedSports": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.InterestedSports: [],
+            "CoachPlayedFor": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.CoachPlayedFor : [],
+            "Hobbies": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.Hobbies : [],
             
-            "HobbiesAsAFan": self.userType == String(userProfileType.Fan.rawValue) ? self.HobbiesAsAFan : [],
             
+            "CoachingLevel": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.CoachingLevel: "",
             
-            "CoachingLevel": self.userType == String(userProfileType.Coach.rawValue) ? self.CoachingLevel: "",
+            "Experience": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.Experience: "",
             
-            "CoachingExperience": self.userType == String(userProfileType.Coach.rawValue) ? self.CoachingExperience: "",
-            
-            "CoachingCertifications": self.userType == String(userProfileType.Coach.rawValue) ? self.CoachingCertifications: "",
+            "Certifications": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.Certifications: "",
+            "UserStatus": self.UserStatus,
+            "UserAddedDate" : self.UserAddedDate,
+            "UserEditedDate" : self.UserEditedDate,
+            "UserLastLoggedin": self.UserLastLoggedin
         ]
     }
     

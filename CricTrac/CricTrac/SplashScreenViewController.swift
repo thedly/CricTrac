@@ -12,7 +12,7 @@ import KRProgressHUD
 class SplashScreenViewController: UIViewController {
 
     var window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
-    
+    var myGroup = dispatch_group_create()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -90,13 +90,50 @@ class SplashScreenViewController: UIViewController {
     func moveToNextScreen(IsAuthorized: Bool){
         
         if IsAuthorized {
+            
+            
+            if currentUser != nil {
+                updateLastLogin()
+            }
+            
+            
+            dispatch_group_enter(myGroup)
+            getAllProfileData({ data in
+                profileData = Profile(usrObj: data)
+                dispatch_group_leave(self.myGroup)
+                
+                if profileData.ProfileImageUrl == "" {
+                    let userDefaults = NSUserDefaults.standardUserDefaults()
+                    if let token = userDefaults.valueForKey("loginToken") {
+                        if token["Facebooktoken"] != nil || token["googletoken"] != nil{
+                            let profileimage = getImageFromFacebook()
+                            addProfileImageData(profileimage)
+                            
+                        }
+                    }
+                }
+                else
+                {
+                    getImageFromFirebase(profileData.ProfileImageUrl) { (imgData) in
+                        LoggedInUserImage = imgData
+                    }
+                }
+                
+                
+                
+            })
+            
             let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")
+            
             let dashboardVC = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
             
             let navigationControl = UINavigationController(rootViewController: dashboardVC )
             sliderMenu.mainViewController = navigationControl
             sliderMenu.drawerViewController = drawerViewController
-            window?.rootViewController = sliderMenu
+            
+            self.window?.rootViewController = sliderMenu
+            
+            
             
         }
         else
@@ -105,9 +142,14 @@ class SplashScreenViewController: UIViewController {
             window?.rootViewController = loginVC
         }
         
-        KRProgressHUD.dismiss()
-        self.presentViewController((window?.rootViewController)!, animated: true, completion: nil)
-    }
+        dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
+            KRProgressHUD.dismiss()
+            self.presentViewController((self.window?.rootViewController)!, animated: true, completion: nil)
+
+        })
+
+        
+            }
 
     
     /*

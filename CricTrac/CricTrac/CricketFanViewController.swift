@@ -35,14 +35,14 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var data:[String:AnyObject]{
         
-        return ["FavouritePlayerAsAFan":favouritePlayer.textVal,"HobbiesAsAFan":HobbiesList, "InterestedSportsAsAFan":InterestedSportsNamesList,"SupportingTeamsAsAFan": supportingTeamNamesList]
+        return ["FavouritePlayers":favouritePlayer.textVal,"Hobbies":HobbiesList, "InterestedSports":InterestedSportsNamesList,"SupportingTeams": supportingTeamNamesList]
     }
     
-    var supportingTeamNamesList = ["New Horizon public school", "National public school", "Delhi public school"]
+    var supportingTeamNamesList = [""]
     
-    var InterestedSportsNamesList = ["Bangalore public school", "Ryan International school"]
+    var InterestedSportsNamesList = [""]
     
-    var HobbiesList = ["New Horizon public school", "National public school", "Delhi public school"]
+    var HobbiesList = [""]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,12 +68,15 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBAction func CreateFanBtnPressed(sender: AnyObject) {
         
         
-        profileData.FavouritePlayerAsAFan =  self.data["FavouritePlayerAsAFan"] as! String
-        profileData.SupportingTeamsAsAFan = self.data["SupportingTeamsAsAFan"] as! [String]
-        profileData.InterestedSportsAsAFan = self.data["InterestedSportsAsAFan"] as! [String]
-        profileData.HobbiesAsAFan =  self.data["HobbiesAsAFan"] as! [String]
+        profileData.FavouritePlayers =  self.data["FavouritePlayers"] as! String
+        profileData.SupportingTeams = self.data["SupportingTeams"] as! [String]
+        profileData.InterestedSports = self.data["InterestedSports"] as! [String]
+        profileData.Hobbies =  self.data["Hobbies"] as! [String]
         
-        addUserProfileData(profileData.ProfileObject) { (AnyObject) in
+        addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
+            
+            profileData = Profile(usrObj: data)
+            
             var vc: UIViewController = self.presentingViewController!;
             while ((vc.presentingViewController) != nil) {
                 

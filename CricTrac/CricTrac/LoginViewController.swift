@@ -31,6 +31,9 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     @IBOutlet weak var loginBtn: UIButton!
     let loginManager = FBSDKLoginManager()
 
+    var myGroup = dispatch_group_create()
+    var profileImage: UIImage?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUIBackgroundTheme(self.view)
@@ -254,20 +257,65 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     
     func navigateToNextScreen(){
         
-        let window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
-        let dashboardVC = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
         
-        let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")
         
-        let navigationControl = UINavigationController(rootViewController: dashboardVC )
-        sliderMenu.mainViewController = navigationControl
-        sliderMenu.drawerViewController = drawerViewController
-        facebookBtn.enabled = true
-        googleBtn.enabled = true
-        window?.rootViewController = sliderMenu
+        
+        if currentUser != nil {
+            updateLastLogin()
+        }
+        
+        
+        
+        
+        
+        dispatch_group_enter(myGroup)
+        getAllProfileData({ data in
+            profileData = Profile(usrObj: data)
+            dispatch_group_leave(self.myGroup)
+            
+            if profileData.ProfileImageUrl == "" {
+                let userDefaults = NSUserDefaults.standardUserDefaults()
+                if let token = userDefaults.valueForKey("loginToken") {
+                    if token["Facebooktoken"] != nil || token["googletoken"] != nil{
+                        let profileimage = getImageFromFacebook()
+                        addProfileImageData(profileimage)
+                        
+                    }
+                }
+            }
+            else
+            {
+                getImageFromFirebase(profileData.ProfileImageUrl) { (imgData) in
+                    LoggedInUserImage = imgData
+                }
+            }
+            
+            
+            
+            
+        })
+        
+        
+        dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
+            
+            let window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
+            let dashboardVC = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
+            
+            let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")
+            
+            let navigationControl = UINavigationController(rootViewController: dashboardVC )
+            sliderMenu.mainViewController = navigationControl
+            sliderMenu.drawerViewController = drawerViewController
+            self.facebookBtn.enabled = true
+            self.googleBtn.enabled = true
+            window?.rootViewController = sliderMenu
+            
+        })
         
         self.presentViewController(sliderMenu, animated: true) {}
         KRProgressHUD.dismiss()
+        
+        
     }
 
 }

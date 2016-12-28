@@ -19,8 +19,13 @@ class UserInfoViewController: UIViewController  {
     lazy var ctStatePicker = CTStatePicker()
     lazy var ctDataPicker = DataPicker()
     var profileDetailsExists:Bool = false
+    
+    
+    var userProfiles = [String]()
+    
     @IBOutlet weak var scrollView:UIScrollView!
     
+    @IBOutlet weak var userProfileInfo: UITextField!
     
     @IBOutlet weak var firstName: UITextField!
     
@@ -49,7 +54,7 @@ class UserInfoViewController: UIViewController  {
     
     var NextVC : UIViewController!
     
-    
+    var userProfile : String!
    
     
     @IBAction func goPreviousPage(sender: AnyObject) {
@@ -84,6 +89,17 @@ class UserInfoViewController: UIViewController  {
         firstName.delegate = self
         lastName.delegate = self
         
+        if userProfileInfo != nil {
+            
+            for profile in userProfileType.allValues {
+                userProfiles.append(profile.rawValue)
+            }
+            
+            
+            userProfileInfo.delegate = self
+        }
+        
+        
 //        playingRole.delegate = self
 //        bowlingStyle.delegate = self
 //        battingStyle.delegate = self
@@ -101,7 +117,7 @@ class UserInfoViewController: UIViewController  {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
             
-        
+                    
                 
                 
                     self.profileDetailsExists = true
@@ -116,7 +132,11 @@ class UserInfoViewController: UIViewController  {
                     self.state.text = profileData.State
                     self.city.text = profileData.City
                     self.ctCountryPicker.SelectedCountry = profileData.Country
-                    
+        
+        if self.userProfileInfo != nil {
+            self.userProfileInfo.text = profileData.UserProfile
+        }
+        
 //                    self.teamName.text = profileData.TeamName
 //                    self.battingStyle.text = profileData.BattingStyle
 //                    self.bowlingStyle.text = profileData.BowlingStyle
@@ -146,6 +166,20 @@ class UserInfoViewController: UIViewController  {
             profileData.Country = self.data["Country"]!
             profileData.State = self.data["State"]!
             profileData.City = self.data["City"]!
+            
+            if userProfileInfo != nil {
+                switch userProfileInfo.text! {
+                case userProfileType.Player.rawValue :
+                    NextVC = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
+                case userProfileType.Coach.rawValue :
+                    NextVC = viewControllerFrom("Main", vcid: "CoachingExperienceViewController")
+                case userProfileType.Fan.rawValue :
+                    NextVC = viewControllerFrom("Main", vcid: "CricketFanViewController")
+                default:
+                    NextVC = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
+                }
+
+            }
             
             
             let toViewController = NextVC
@@ -218,6 +252,9 @@ class UserInfoViewController: UIViewController  {
             country.becomeFirstResponder()
             return false
         }
+        
+        
+            
         else
         {
             (country as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#D4D4D4")
@@ -286,6 +323,14 @@ extension UserInfoViewController:UITextFieldDelegate{
             ctCountryPicker.showPicker(self, inputText: textField)
             //state.text = String()
         }
+            
+        else if userProfileInfo != nil && textField == userProfileInfo {
+            ctDataPicker = DataPicker()
+            let indexPos = userProfiles.indexOf(profileData.UserProfile) ?? 0
+            ctDataPicker.showPicker(self, inputText: textField, data: userProfiles,selectedValueIndex: indexPos)
+        }
+            
+            
         else if textField == state {
             ctStatePicker.showPicker(self, inputText: textField, iso: ctCountryPicker.SelectedISO)
         }

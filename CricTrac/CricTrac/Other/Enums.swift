@@ -12,4 +12,13 @@ enum userProfileType : String {
     case Player = "Player"
     case Coach = "Coach"
     case Fan = "Cricket Fan"
+    
+    static let allValues = [Player, Coach, Fan]
+}
+
+enum userStatus : String {
+    case Free = "Free"
+    case Premium = "Premium"
+    case Inactive = "Inactive"
+    case Suspended = "Suspended"
 }

@@ -25,16 +25,16 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     
     lazy var ctDataPicker = DataPicker()
     
-    var teamNames = ["NHPS","DPS"]
+    var teamNames = [""]
     
-    var pastTeamNames = ["NHPS","DPS"]
+    var pastTeamNames = [""]
     
     
     var nextVC: UIViewController!
     
     var data:[String:AnyObject]{
         
-        return ["PlayingRole":playingRole.textVal,"BattingStyle":battingStyle.textVal,"BowlingStyle":bowlingStyle.textVal,"CurrentTeamsAsPlayer":teamNames, "PastTeamsAsPlayer": pastTeamNames]
+        return ["PlayingRole":playingRole.textVal,"BattingStyle":battingStyle.textVal,"BowlingStyle":bowlingStyle.textVal,"PlayerCurrentTeams":teamNames, "PlayerPastTeams": pastTeamNames]
     }
     
     let transitionManager = TransitionManager.sharedInstance
@@ -51,11 +51,15 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         profileData.PlayingRole = self.data["PlayingRole"] as! String
         profileData.BattingStyle = self.data["BattingStyle"] as! String
         profileData.BowlingStyle = self.data["BowlingStyle"] as! String
-        profileData.CurrentTeamsAsPlayer = self.data["CurrentTeamsAsPlayer"] as! [String]
-        profileData.PastTeamsAsPlayer = self.data["PastTeamsAsPlayer"] as! [String]
-        profileData.userType = userProfileType.Player.rawValue
+        profileData.PlayerCurrentTeams = self.data["PlayerCurrentTeams"] as! [String]
+        profileData.PlayerPastTeams = self.data["PlayerPastTeams"] as! [String]
+        profileData.UserProfile = userProfileType.Player.rawValue
         
-        addUserProfileData(profileData.ProfileObject) { (AnyObject) in
+        addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
+            
+            profileData = Profile(usrObj: data)
+            
+            
             var vc: UIViewController = self.presentingViewController!;
             while ((vc.presentingViewController) != nil) {
                 
@@ -182,8 +186,8 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
                 self.playingRole.text = profileData.PlayingRole
                 self.battingStyle.text = profileData.BattingStyle
                 self.bowlingStyle.text = profileData.BowlingStyle
-                self.teamNames = profileData.CurrentTeamsAsPlayer
-                self.pastTeamNames = profileData.PastTeamsAsPlayer
+                self.teamNames = profileData.PlayerCurrentTeams
+                self.pastTeamNames = profileData.PlayerPastTeams
                 currentTeams.reloadData()
                 pastTeams.reloadData()
             }
