@@ -26,6 +26,7 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         
         self.profileImage.image = LoggedInUserImage
         
+        loadInitialValues();
         
         // Do any additional setup after loading the view.
     }

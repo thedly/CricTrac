@@ -127,7 +127,6 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUIBackgroundTheme(self.view)
-        loadInitialProfileValues()
         setupControls();
         
         

@@ -43,6 +43,55 @@ func loadInitialValues(){
             results = value
         }
     })
+    
+    fireBaseRef.child("Achievements").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let value = snapshot.value as? [String]{
+            Achievements = value
+        }
+    })
+    
+    fireBaseRef.child("BattingStyle").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let value = snapshot.value as? [String]{
+            BattingStyles = value
+        }
+    })
+    
+    fireBaseRef.child("PlayingRole").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let value = snapshot.value as? [String]{
+            PlayingRoles = value
+        }
+    })
+    
+    fireBaseRef.child("MatchStage").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let value = snapshot.value as? [String]{
+            MatchStage = value
+        }
+    })
+    
+    fireBaseRef.child("Gender").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let value = snapshot.value as? [String]{
+            genders = value
+        }
+    })
+    
+    fireBaseRef.child("BowlingStyle").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let value = snapshot.value as? [String]{
+            BowlingStyles = value
+        }
+    })
+    
+    fireBaseRef.child("Ground").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let value = snapshot.value as? [String]{
+            groundNames = value
+        }
+    })
 }
 
 func addMatchData(key:NSString,data:[String:String]){
@@ -148,41 +197,6 @@ func enableSync(){
 
 // MARK: - Profile
 
-func loadInitialProfileValues(){
-    
-    
-    fireBaseRef.child("BattingStyle").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-        
-        if let value = snapshot.value as? [String]{
-            BattingStyles = value
-        }
-    })
-    
-    fireBaseRef.child("PlayingRole").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-        
-        if let value = snapshot.value as? [String]{
-            PlayingRoles = value
-        }
-    })
-    
-    
-    
-    fireBaseRef.child("Gender").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-        
-        if let value = snapshot.value as? [String]{
-            genders = value
-        }
-    })
-    
-    fireBaseRef.child("BowlingStyle").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-        
-        if let value = snapshot.value as? [String]{
-            BowlingStyles = value
-        }
-    })
-    
-    
-}
 
 
 func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject])->Void){

@@ -13,6 +13,7 @@ import AnimatedTextInput
 class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTrackable {
     
     
+    @IBOutlet weak var stage: UITextField!
     @IBOutlet weak var dateText:UITextField!
     @IBOutlet weak var teamText:UITextField!
     @IBOutlet weak var opponentText:UITextField!
@@ -36,7 +37,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     
     var data:[String:String]{
         
-        return ["MatchDate":dateText.textVal,"Team":teamText.textVal,"Opponent":opponentText.textVal,"Ground":groundText.textVal,"MatchOvers":oversText.textVal,"Tournamnet":tournamentText.textVal/*, "AgeGroup": ageGroup.textVal, "PlayingLevel": playingLevel.textVal*/]
+        return ["MatchDate":dateText.textVal,"Team":teamText.textVal,"Opponent":opponentText.textVal,"Ground":groundText.textVal,"MatchOvers":oversText.textVal,"Tournamnet":tournamentText.textVal, "AgeGroup": ageGroup.textVal, "PlayingLevel": playingLevel.textVal, "Stage": stage.textVal ]
     }
     
     override func viewDidLoad() {
@@ -59,13 +60,16 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         groundText.textVal = parent!.selecetedData!["Ground"]!
         oversText.textVal = parent!.selecetedData!["MatchOvers"]!
         
-//        if let ag = parent!.selecetedData!["AgeGroup"] {
-//            ageGroup.textVal = ag
-//        }
-//        
-//        if let pl = parent!.selecetedData!["PlayingLevel"] {
-//            playingLevel.textVal = pl
-//        }
+        if let ag = parent!.selecetedData!["AgeGroup"] {
+            ageGroup.textVal = ag
+        }
+
+        if let pl = parent!.selecetedData!["PlayingLevel"] {
+            playingLevel.textVal = pl
+        }
+        if let pl = parent!.selecetedData!["Stage"] {
+            stage.textVal = pl
+        }
         
         
     }
@@ -127,16 +131,16 @@ extension MatchViewController:UITextFieldDelegate{
             addSuggstionBox(textField,dataSource: teamNames)
         }
         else if textField == groundText{
-            
-            addSuggstionBox(textField,dataSource: groundNames)
+            ctDataPicker.showPicker(self, inputText: textField, data: groundNames )
         }
         else if textField == opponentText{
-            
             addSuggstionBox(textField,dataSource: opponentTeams)
         }
         else if textField == tournamentText{
-            
             addSuggstionBox(textField,dataSource: tournaments)
+        }
+        else if textField == stage {
+            ctDataPicker.showPicker(self, inputText: textField, data: MatchStage )
         }
         
     }

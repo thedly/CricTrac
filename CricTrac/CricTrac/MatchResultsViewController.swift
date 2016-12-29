@@ -20,6 +20,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
     
     @IBOutlet weak var secondTeamTossBtn: UIButton!
     
+    @IBOutlet weak var AchievementsText: UITextField!
     @IBOutlet weak var FirstBattingView: UIView!
     
     @IBOutlet weak var SecondBattingView: UIView!
@@ -49,6 +50,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
         secondScoreText.delegate = self
         secondWicketsText.delegate = self
         resultText.delegate = self
+        AchievementsText.delegate = self
         
         let resultsViewHolder = UIView(frame: CGRectMake(0, 30, UIScreen.mainScreen().bounds.width, 100))
         
@@ -362,7 +364,12 @@ extension MatchResultsViewController:UITextFieldDelegate{
         if textField == resultText{
             showPicker(self, inputText: textField, data: results)
         }
+        else if textField == AchievementsText {
+            showPicker(self, inputText: textField, data: Achievements)
+        }
     }
+    
+    
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()

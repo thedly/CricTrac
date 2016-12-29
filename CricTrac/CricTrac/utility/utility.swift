@@ -28,9 +28,13 @@ var BattingStyles = [String]()
 var BowlingStyles = [String]()
 var PlayingRoles = [String]()
 var AgeGroupData = [String]()
+
+var Achievements = [String]()
+
+
 var PlayingLevels = [String]()
 var genders = [String]()
-
+var MatchStage = [String]()
 var matchDataSource = [[String:String]]()
 var profileDataChanged: Bool = false
 var ThemeChanged: Bool = false
