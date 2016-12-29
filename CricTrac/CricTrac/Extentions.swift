@@ -183,7 +183,12 @@ extension String
     }
 }
 
-
+extension String
+{
+    subscript (i: Int) -> Character {
+        return self[self.startIndex.advancedBy(i)]
+    }
+}
 extension UITextField{
     
     var textVal:String{

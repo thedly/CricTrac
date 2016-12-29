@@ -67,6 +67,7 @@
 		893823B61E113AE000BCD0CD /* SliderMenuViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 893823B51E113AE000BCD0CD /* SliderMenuViewCell.xib */; };
 		893DAD4A1DB660AC00CC1875 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DAD491DB660AC00CC1875 /* Profile.swift */; };
 		893E9EA11DB2629C00D63AB8 /* MenuTransitionOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893E9EA01DB2629C00D63AB8 /* MenuTransitionOperator.swift */; };
+		894625001E1580E700FE79C2 /* TeamCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894624FF1E1580E700FE79C2 /* TeamCollectionViewCell.swift */; };
 		894CA29E1D96150A0043D3D1 /* SIL Open Font License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 894CA2911D96150A0043D3D1 /* SIL Open Font License.txt */; };
 		894CA29F1D96150A0043D3D1 /* SourceSansPro-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 894CA2921D96150A0043D3D1 /* SourceSansPro-Black.otf */; };
 		894CA2A01D96150A0043D3D1 /* SourceSansPro-BlackIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 894CA2931D96150A0043D3D1 /* SourceSansPro-BlackIt.otf */; };
@@ -197,6 +198,7 @@
 		893823B51E113AE000BCD0CD /* SliderMenuViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderMenuViewCell.xib; sourceTree = "<group>"; };
 		893DAD491DB660AC00CC1875 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		893E9EA01DB2629C00D63AB8 /* MenuTransitionOperator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTransitionOperator.swift; sourceTree = "<group>"; };
+		894624FF1E1580E700FE79C2 /* TeamCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamCollectionViewCell.swift; sourceTree = "<group>"; };
 		894CA2911D96150A0043D3D1 /* SIL Open Font License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "SIL Open Font License.txt"; sourceTree = "<group>"; };
 		894CA2921D96150A0043D3D1 /* SourceSansPro-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Black.otf"; sourceTree = "<group>"; };
 		894CA2931D96150A0043D3D1 /* SourceSansPro-BlackIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-BlackIt.otf"; sourceTree = "<group>"; };
@@ -457,6 +459,7 @@
 				46ACE0C61E0FF625004118A4 /* CommentTableViewCell.swift */,
 				893823B31E113ACE00BCD0CD /* SliderMenuViewCell.swift */,
 				893823B51E113AE000BCD0CD /* SliderMenuViewCell.xib */,
+				894624FF1E1580E700FE79C2 /* TeamCollectionViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -758,6 +761,7 @@
 				46C983C41D40968300DFC607 /* Extentions.swift in Sources */,
 				46B0D66B1D8B881500C93247 /* TimeLineViewController.swift in Sources */,
 				8997D56C1DBCFCA000F201B6 /* CurrentTeamsTableViewCell.swift in Sources */,
+				894625001E1580E700FE79C2 /* TeamCollectionViewCell.swift in Sources */,
 				466AD3FC1D7A8EC10033289C /* CTPicker.swift in Sources */,
 				8922042F1D97A7EC005F555B /* FriendsCell.swift in Sources */,
 				8930F0381D5B751500C7540B /* CTCountryPicker.swift in Sources */,

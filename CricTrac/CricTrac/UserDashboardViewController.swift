@@ -64,7 +64,6 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         super.viewDidLoad()
         
         setUIBackgroundTheme(self.view)
-        setColorForViewsWithSameTag(baseView)
         
         userProfileImage.layer.cornerRadius = userProfileImage.bounds.size.width/2
         MatchesView.layer.cornerRadius = 10
@@ -470,28 +469,52 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("ThemeColorsCollectionViewCell", forIndexPath: indexPath) as? ThemeColorsCollectionViewCell {
+        if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("TeamCollectionViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
             
             
-            let intIndex = indexPath.row // where intIndex < myDictionary.count
-            let index = themeColors.startIndex.advancedBy(intIndex) // index 1
+//            let intIndex = indexPath.row // where intIndex < myDictionary.count
+//            let index = themeColors.startIndex.advancedBy(intIndex) // index 1
             
             //aCell.ThemeTitle.text = themeColors.keys[index]
             
             
-            if let colorObject = themeColors[themeColors.keys[index]] {
+//            if let colorObject = themeColors[themeColors.keys[index]] {
+//                
+                aCell.TeamImage.image = UIImage()
+            
+            var teamNameToReturn = ""
+            
+            switch profileData.UserProfile {
+            case userProfileType.Player.rawValue:
+                teamNameToReturn = profileData.PlayerCurrentTeams[indexPath.row]
+                break
+            case userProfileType.Coach.rawValue:
+                teamNameToReturn = profileData.CoachCurrentTeams[indexPath.row]
+                break
+            case userProfileType.Fan.rawValue:
+                teamNameToReturn = profileData.SupportingTeams[indexPath.row]
+                break
+            default:
+                teamNameToReturn = ""
+                break
+            }
+            
+            
+            
+                aCell.TeamName.text = teamNameToReturn
+            
+            
+                aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+            
+            
                 
-                aCell.cellTopColor = colorObject["topColor"]!
-                aCell.cellBottomColor = colorObject["bottomColor"]!
-                
-                
-                setCustomUIBackgroundTheme(aCell.contentView, _topColor: colorObject["topColor"]!, _bottomColor: colorObject["bottomColor"]!)
+            
                 return aCell
-            }
-            else
-            {
-                return ThemeColorsCollectionViewCell()
-            }
+//            }
+//            else
+//            {
+//                return ThemeColorsCollectionViewCell()
+//            }
         }
         return ThemeColorsCollectionViewCell()
     }
@@ -504,5 +527,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
 
 }
