@@ -24,6 +24,9 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
    
     
    
+    
+    @IBOutlet weak var winPerc: UILabel!
+    @IBOutlet weak var BB: UILabel!
     @IBOutlet weak var PlayerLocation: UILabel!
     @IBOutlet weak var PlayerName: UILabel!
     @IBOutlet weak var totalRunsScored: UILabel!
@@ -193,6 +196,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             self.sixes.text = String(0)
             self.fours.text = String(0)
             
+            self.BB.text = String(0)
+            self.winPerc.text = String(0)
             
             var top3MatchCount = 0
             for matchData in matchDataSource {
@@ -248,12 +253,12 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                     let formattedString = NSMutableAttributedString()
                     
                     if dismissedBy != "-" {
-                        formattedString.bold("\(runsScored) ", fontName: appFont_bold, fontSize: 17).normal(" against \(opponentFaced)\n", fontName: appFont_regular, fontSize: 15)
+                        formattedString.bold("\(runsScored) ", fontName: appFont_black, fontSize: 26).normal(" against \(opponentFaced.uppercaseString)\n", fontName: appFont_black, fontSize: 15)
                         self.highScore.text = "\(runsScored)"
                     }
                     else
                     {
-                        formattedString.bold("\(runsScored)* ", fontName: appFont_bold, fontSize: 17).normal(" against \(opponentFaced)\n", fontName: appFont_regular, fontSize: 15)
+                        formattedString.bold("\(runsScored)* ", fontName: appFont_black, fontSize: 26).normal(" against \(opponentFaced.uppercaseString)\n", fontName: appFont_black, fontSize: 15)
                         self.highScore.text = "\(runsScored)*"
                     }
                     
@@ -376,7 +381,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                     
                     let formattedString = NSMutableAttributedString()
                     
-                    formattedString.bold("\(wicketstaken)",fontName: appFont_bold, fontSize: 17).normal(" wicket(s) against \(opponentFaced)\n", fontName: appFont_regular, fontSize: 15)
+                    formattedString.bold("\(wicketstaken)",fontName: appFont_black, fontSize: 26).normal(" Wicket(s) against \(opponentFaced.uppercaseString)\n", fontName: appFont_black, fontSize: 15)
                     
                     top3MatchesArray.append(formattedString)
                 }
