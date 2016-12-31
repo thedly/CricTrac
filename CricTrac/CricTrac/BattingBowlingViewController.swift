@@ -33,7 +33,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
     
     var BowlingData:[String:String]{
         
-        return ["OversBowled":oversText.textVal,"Wickets":wicketsText.textVal,"RunsGiven":runsGivenText.textVal,"NoBalls":noballText.textVal,"Wides":widesText.text!, "Maidens": maidensText.textVal]
+        return ["OversBowled":oversText.textVal,"WicketsTaken":wicketsText.textVal,"RunsGiven":runsGivenText.textVal,"NoBalls":noballText.textVal,"Wides":widesText.text!, "Maidens": maidensText.textVal]
     }
     
     var allRequiredFieldsHaveFilledProperly: Bool {
@@ -200,7 +200,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
         
         
         oversText.textVal = parent!.selecetedData!["OversBowled"]!
-        wicketsText.textVal = parent!.selecetedData!["Wickets"]!
+        wicketsText.textVal = parent!.selecetedData!["WicketsTaken"]!
         runsGivenText.textVal = parent!.selecetedData!["RunsGiven"]!
         noballText.textVal = parent!.selecetedData!["NoBalls"]!
         widesText.textVal = parent!.selecetedData!["Wides"]!

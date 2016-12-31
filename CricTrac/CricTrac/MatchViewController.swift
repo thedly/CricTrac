@@ -37,7 +37,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     
     var data:[String:String]{
         
-        return ["MatchDate":dateText.textVal,"Team":teamText.textVal,"Opponent":opponentText.textVal,"Ground":groundText.textVal,"MatchOvers":oversText.textVal,"Tournamnet":tournamentText.textVal, "AgeGroup": ageGroup.textVal, "PlayingLevel": playingLevel.textVal, "Stage": stage.textVal ]
+        return ["MatchDate":dateText.textVal,"Team":teamText.textVal,"Opponent":opponentText.textVal,"Ground":groundText.textVal,"MatchOvers":oversText.textVal,"Tournamnet":tournamentText.textVal, "AgeGroup": ageGroup.textVal, "Level": playingLevel.textVal, "Stage": stage.textVal ]
     }
     
     override func viewDidLoad() {
@@ -64,7 +64,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
             ageGroup.textVal = ag
         }
 
-        if let pl = parent!.selecetedData!["PlayingLevel"] {
+        if let pl = parent!.selecetedData!["Level"] {
             playingLevel.textVal = pl
         }
         if let pl = parent!.selecetedData!["Stage"] {
@@ -127,11 +127,10 @@ extension MatchViewController:UITextFieldDelegate{
             ctDataPicker.showPicker(self, inputText: textField, data: PlayingLevels )
         }
         else if textField == teamText{
-            
             addSuggstionBox(textField,dataSource: teamNames)
         }
         else if textField == groundText{
-            ctDataPicker.showPicker(self, inputText: textField, data: groundNames )
+            addSuggstionBox(textField,dataSource: groundNames)
         }
         else if textField == opponentText{
             addSuggstionBox(textField,dataSource: opponentTeams)

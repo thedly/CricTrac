@@ -20,12 +20,17 @@ class CTPicker: NSObject {
     super.init()
     pickerView.dataSource = self
     pickerView.delegate = self
+    
     }
     
     func showPicker(parent:UIViewController,inputText:UITextField,data:[String]){
         
         self.inputText = inputText
         self.parent = parent
+        if dataSource != nil {
+            dataSource.removeAll()
+        }
+        
         dataSource = data
         
 

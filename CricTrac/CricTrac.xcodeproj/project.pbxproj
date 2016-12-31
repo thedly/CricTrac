@@ -48,6 +48,7 @@
 		89067D751DAEA89C0021F463 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89067D741DAEA89C0021F463 /* TransitionManager.swift */; };
 		8909FACB1DB9B49900066FC5 /* DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8909FACA1DB9B49900066FC5 /* DoneButton.swift */; };
 		890B42C71D60472C00736F03 /* CollapsibleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890B42C61D60472C00736F03 /* CollapsibleTableViewCell.swift */; };
+		890CC72B1E162F73005D139A /* DashboardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890CC72A1E162F73005D139A /* DashboardData.swift */; };
 		890EA2F11DB92BD100FB40DB /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890EA2F01DB92BD100FB40DB /* ForgotPasswordViewController.swift */; };
 		89129C4A1D904F89009488FE /* LoginBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89129C491D904F89009488FE /* LoginBaseViewController.swift */; };
 		89129C4C1D90501B009488FE /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89129C4B1D90501B009488FE /* RegisterViewController.swift */; };
@@ -178,6 +179,7 @@
 		89067D741DAEA89C0021F463 /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		8909FACA1DB9B49900066FC5 /* DoneButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoneButton.swift; sourceTree = "<group>"; };
 		890B42C61D60472C00736F03 /* CollapsibleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewCell.swift; sourceTree = "<group>"; };
+		890CC72A1E162F73005D139A /* DashboardData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardData.swift; sourceTree = "<group>"; };
 		890EA2F01DB92BD100FB40DB /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		89129C491D904F89009488FE /* LoginBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginBaseViewController.swift; sourceTree = "<group>"; };
 		89129C4B1D90501B009488FE /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 			isa = PBXGroup;
 			children = (
 				893DAD491DB660AC00CC1875 /* Profile.swift */,
+				890CC72A1E162F73005D139A /* DashboardData.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -791,6 +794,7 @@
 				893DAD4A1DB660AC00CC1875 /* Profile.swift in Sources */,
 				46F36E361D93801900EA9C6A /* ImagePostTableViewCell.swift in Sources */,
 				461F5A5F1DE136D600B4616F /* Theme.swift in Sources */,
+				890CC72B1E162F73005D139A /* DashboardData.swift in Sources */,
 				895376981DAB865B00DDB3A6 /* FriendRequestsCell.swift in Sources */,
 				4657D5601D4992D7009E0FBE /* Constants.swift in Sources */,
 				8930411A1D9E0C3B00F0E29C /* BattingBowlingViewController.swift in Sources */,

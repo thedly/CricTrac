@@ -31,6 +31,7 @@ var AgeGroupData = [String]()
 
 var Achievements = [String]()
 
+var DashboardDetails : DashboardData!
 
 var PlayingLevels = [String]()
 var genders = [String]()

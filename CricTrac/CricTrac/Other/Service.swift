@@ -96,8 +96,12 @@ func loadInitialValues(){
 
 func addMatchData(key:NSString,data:[String:String]){
     
+    var dataToBeModified = data
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").childByAutoId()
-    ref.setValue(data)
+    dataToBeModified["MatchId"] = ref.key
+    ref.setValue(dataToBeModified)
+    
+    UpdateDashboardDetails()
     
 }
 
@@ -152,6 +156,19 @@ func getAllMatchData(sucessBlock:([String:AnyObject])->Void){
     })
 }
 
+func getAllDashboardData(sucessBlock:([String:AnyObject])->Void){
+    
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Dashboard").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let data = snapshot.value! as? [String:AnyObject]{
+            
+            sucessBlock(data)
+        }
+        else{
+            sucessBlock([:])
+        }
+    })
+}
 
 //MARK:- Ground
 
@@ -212,6 +229,8 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
     {
         dataToBeModified["UserAddedDate"] = formatter.stringFromDate(NSDate())
         dataToBeModified["UserEditedDate"] = formatter.stringFromDate(NSDate())
+        createDashboardData(DashboardData(dataObj: [String:String]()).dashboardData)
+        
     }
     else
     {
@@ -228,6 +247,42 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
     ref.setValue(dataToBeModified)
     sucessBlock(dataToBeModified)
 }
+
+func UpdateDashboardDetails(){
+    
+    if let usrId = currentUser?.uid {
+        let requestUrl = "\(DashboardDataUpdateUrl)\(usrId)"
+        let request = NSMutableURLRequest(URL: NSURL(string: requestUrl)!)
+        request.HTTPMethod = "POST"
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+            guard error == nil && data != nil else {                                                          // check for fundamental networking error
+                print("error=\(error)")
+                return
+            }
+            
+            if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+            }
+            
+            let responseString = String(data: data!, encoding: NSUTF8StringEncoding)
+            print("responseString = \(responseString)")
+        }
+        task.resume()
+    }
+    
+    
+    
+    
+}
+
+
+func createDashboardData(dashboardData: [String: AnyObject]){
+    
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Dashboard")
+    ref.setValue(dashboardData)
+}
+
 
 func updateLastLogin(){
     
@@ -317,6 +372,7 @@ func updateMatchData(key:String,data:[String:String]){
     
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").child(key)
     ref.updateChildValues(data)
+    UpdateDashboardDetails()
     
 }
 

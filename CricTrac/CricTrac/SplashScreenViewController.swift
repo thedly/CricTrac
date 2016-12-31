@@ -123,33 +123,51 @@ class SplashScreenViewController: UIViewController {
                 
             })
             
-            let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")
-            
-            let dashboardVC = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
-            
-            let navigationControl = UINavigationController(rootViewController: dashboardVC )
-            sliderMenu.mainViewController = navigationControl
-            sliderMenu.drawerViewController = drawerViewController
-            
-            self.window?.rootViewController = sliderMenu
-            
-            
+            dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
+                
+                let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")
+                
+                let dashboardVC = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
+                
+                let navigationControl = UINavigationController(rootViewController: dashboardVC )
+                sliderMenu.mainViewController = navigationControl
+                sliderMenu.drawerViewController = drawerViewController
+                
+                self.window?.rootViewController = sliderMenu
+                
+                let profileVC = viewControllerFrom("Main", vcid: "ProfileBaseViewController") as! ProfileBaseViewController
+                
+                
+                if profileData.fullName == " " {
+                    self.presentViewController(profileVC, animated: true) { KRProgressHUD.dismiss() }
+                }
+                else
+                {
+                    KRProgressHUD.dismiss()
+                    self.presentViewController((self.window?.rootViewController)!, animated: true, completion: nil)
+                }
+                
+                
+                
+                
+            })
+
             
         }
         else
         {
             let loginVC = viewControllerFrom("Main", vcid: "LoginViewController")
             window?.rootViewController = loginVC
+            
+            self.presentViewController((self.window?.rootViewController)!, animated: true, completion: nil)
+            
         }
         
-        dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
-            KRProgressHUD.dismiss()
-            self.presentViewController((self.window?.rootViewController)!, animated: true, completion: nil)
-
-        })
-
+        
         
             }
+    
+    
 
     
     /*

@@ -66,7 +66,7 @@ class Profile {
         self.Gender = (usrObj["Gender"]  ?? "") as! String
         self.Mobile = (usrObj["Mobile"] ?? "") as! String
         self.PlayingRole = (usrObj["PlayingRole"]  ?? "") as! String
-        self.PlayingLevel = (usrObj["PlayingLevel"] ?? "") as! String
+        self.PlayingLevel = (usrObj["Level"] ?? "") as! String
         
         self.ProfileImageUrl = (usrObj["ProfileImageUrl"] ?? "") as! String
         
@@ -115,7 +115,7 @@ class Profile {
             "Gender": self.Gender,
             "Mobile": self.Mobile,
             "PlayingRole":self.PlayingRole,
-            "PlayingLevel":self.PlayingLevel,
+            "Level":self.PlayingLevel,
             "ProfileImageUrl": self.ProfileImageUrl ,
             "UserProfile": self.UserProfile,
             "FavouritePlayers": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.FavouritePlayers : "",

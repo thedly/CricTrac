@@ -301,6 +301,9 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
             let window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
             let dashboardVC = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
             
+            
+            let profileVC = viewControllerFrom("Main", vcid: "ProfileBaseViewController") as! ProfileBaseViewController
+            
             let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")
             
             let navigationControl = UINavigationController(rootViewController: dashboardVC )
@@ -310,10 +313,21 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
             self.googleBtn.enabled = true
             window?.rootViewController = sliderMenu
             
+            
+            if profileData.fullName == " " {
+                self.presentViewController(profileVC, animated: true) { KRProgressHUD.dismiss() }
+            }
+            else
+            {
+                self.presentViewController(sliderMenu, animated: true) { KRProgressHUD.dismiss() }
+            }
+            
+            
+            
+            
         })
         
-        self.presentViewController(sliderMenu, animated: true) {}
-        KRProgressHUD.dismiss()
+        
         
         
     }
