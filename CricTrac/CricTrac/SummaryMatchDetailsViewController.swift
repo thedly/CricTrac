@@ -52,6 +52,12 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
     @IBOutlet weak var runsGiven: UILabel!
     @IBOutlet weak var oversBowled: UILabel!
     
+    
+    @IBOutlet weak var achievements: UILabel!
+    @IBOutlet weak var level: UILabel!
+    
+    @IBOutlet weak var ageGroup: UILabel!
+    
     var matchDetailsData : [String:String]!
     
     var battingViewHidden : Bool! = false
@@ -221,6 +227,12 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
             self.date.text = dat
         }
         
+        
+        if let dat = matchDetailsData["Achievements"] {
+            self.achievements.text = dat
+        }
+        
+        
         calculateStrikeRate()
         
         if let Overs = matchDetailsData["OversBowled"] { // in overs eg: 2, 3, 4
@@ -271,18 +283,47 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
         
         if let tournament = matchDetailsData["Tournamnet"]{
             
+            let formattedString = NSMutableAttributedString()
+            
+            var tournamentText = NSAttributedString()
+            
+            
+            var level = ""
+            var group = ""
+            
+            if let dat = matchDetailsData["Level"] {
+                level.appendContentsOf("\(dat) level")
+            }
+            
+            if let dat = matchDetailsData["AgeGroup"] {
+                group.appendContentsOf("\(dat)")
+                
+            }
+            
+            
+            
             if tournament == "-"{
                 if let opponent = matchDetailsData["Opponent"] {
-                    tournamentName.text = "VS \(opponent)"
+                    
+                    tournamentText = formattedString.bold("VS \(opponent)", fontName: appFont_black, fontSize: 17).bold("\n[\(group), \(level)]", fontName: appFont_bold, fontSize: 13)
+                    
                 }
                 else
                 {
-                    tournamentName.text = "Unknown Tournament"
+                    tournamentText = formattedString.bold("Unknown Tournament", fontName: appFont_black, fontSize: 17).bold("\n[\(group), \(level)]", fontName: appFont_bold, fontSize: 13)
+                    
                 }
             }
             else{
-                tournamentName.text = tournament
+                
+                tournamentText = formattedString.bold("\(tournament)", fontName: appFont_black, fontSize: 17).bold("\n[\(group), \(level)]", fontName: appFont_bold, fontSize: 13)
+                
             }
+            
+            
+            tournamentName.attributedText = tournamentText
+            
+            
             
         }
         

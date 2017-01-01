@@ -107,7 +107,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                         matchVenueAndDate.appendContentsOf(date as? String ?? "NA")
                     }
                     if let venue = value["Ground"]{
-                        matchVenueAndDate.appendContentsOf(", at \(venue)")
+                        matchVenueAndDate.appendContentsOf("\n@ \(venue)")
                     }
                     
                     if let opponent  = value["Opponent"]{

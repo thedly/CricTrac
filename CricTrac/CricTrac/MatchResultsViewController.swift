@@ -122,7 +122,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
     
     var data:[String:String]{
         
-        return ["TossWonBy":tossText ?? "-","FirstBatting":firstBatText,"FirstBattingScore":firstScoreText.textVal,"FirstBattingWickets":firstWicketsText.textVal,"SecondBatting":secondBatText, "SecondBattingScore":secondScoreText.textVal,"SecondBattingWickets":secondWicketsText.textVal,"Result":resultText.textVal,"FirstBattingOvers":firstOversText.textVal,"SecondBattingOvers":secondOversText.textVal]
+        return ["TossWonBy":tossText ?? "-","FirstBatting":firstBatText,"FirstBattingScore":firstScoreText.textVal,"FirstBattingWickets":firstWicketsText.textVal,"SecondBatting":secondBatText, "SecondBattingScore":secondScoreText.textVal,"SecondBattingWickets":secondWicketsText.textVal,"Result":resultText.textVal,"FirstBattingOvers":firstOversText.textVal,"SecondBattingOvers":secondOversText.textVal,"Achievements": AchievementsText.textVal]
     }
     
     
@@ -172,6 +172,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
         firstWicketsText.textVal = parent!.selecetedData!["FirstBattingWickets"]! ?? "-"
         secondBatText = parent!.selecetedData!["SecondBatting"]! ?? "-"
         
+        AchievementsText.text = parent?.selecetedData!["Achievements"] ?? "-"
         
         firstTeamTitle.text = firstBatText
         secondTeamTitle.text = secondBatText
