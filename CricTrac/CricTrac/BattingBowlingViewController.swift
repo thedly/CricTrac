@@ -40,7 +40,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
         if let runText = runsText, let overText = oversText {
             ValidateScore()
             validateOvers()
-            return runText.errorMessage?.length == 0  && overText.errorMessage?.length == 0
+            return runText.errorMessage?.length == 0 
         }
         return true
     }
@@ -48,7 +48,32 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
     func ValidateScore() -> Void {
         
         if let runText = runsText {
-            if runText.text?.trimWhiteSpace.length > 0  {
+            if runText.text?.trimWhiteSpace.length > 0 && Int(runText.text!)! > 0  {
+                
+                
+                
+                if let foursScored = foursText.text {
+                    foursText.text = foursScored != "-" ? foursScored : "0"
+                }
+                
+                if let sixesScored = sixesText.text {
+                    sixesText.text = sixesScored != "-" ? sixesScored : "0"
+                }
+                
+                if let dismissal = dismissalText.text {
+                    dismissalText.text = dismissal != "-" ? dismissal : "not out"
+                }
+                
+                if let position = positionText.text {
+                    positionText.text = position != "-" ? position : "0"
+                }
+                
+                if let ballsPlayed = ballsPlayedText.text {
+                    ballsPlayedText.text = ballsPlayed != "-" ? ballsPlayed : "0"
+                }
+                
+                
+                
                 if let foursScored = foursText.text, let sixesScored = sixesText.text
                 {
                     var sum = 0
@@ -67,16 +92,42 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
                         runsText.errorMessage = ""
                     }
                 }
+                
+                
+                
+                
+                foursText.userInteractionEnabled = true
+                sixesText.userInteractionEnabled = true
+                positionText.userInteractionEnabled = true
+                dismissalText.userInteractionEnabled = true
+                ballsPlayedText.userInteractionEnabled = true
+                
+                runsText.errorMessage = ""
+                
             }
             else
             {
-                if Int(foursText.textVal) > 0 || Int(sixesText.textVal) > 0 {
-                    runsText.errorMessage = "Runs Empty"
-                }
-                else
-                {
-                    runsText.errorMessage = ""
-                }
+                
+                self.view.endEditing(true)
+                
+                foursText.text = "-"
+                sixesText.text = "-"
+                dismissalText.text = "-"
+                positionText.text = "-"
+                dismissalText.text = "-"
+                ballsPlayedText.text = "-"
+                
+                foursText.userInteractionEnabled = false
+                sixesText.userInteractionEnabled = false
+                dismissalText.userInteractionEnabled = false
+                positionText.userInteractionEnabled = false
+                dismissalText.userInteractionEnabled = false
+                ballsPlayedText.userInteractionEnabled = false
+                
+                
+                runsText.errorMessage = "Runs Empty"
+                
+                
                 
                 
             }
@@ -86,37 +137,80 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
     func validateOvers() -> Void {
         
         if let overText = oversText {
-            if overText.text!.trimWhiteSpace.length > 0 {
-                if let widesBowled = widesText.text, let noBallsBowled = noballText.text
-                {
-                    var sum = 0
-                    if widesBowled.trimWhiteSpace.length > 0, let widesInt = Int(widesBowled) {
-                        sum += widesInt
-                    }
-                    
-                    if noBallsBowled.trimWhiteSpace.length > 0, let noBallsInt = Int(noBallsBowled) {
-                        sum += noBallsInt
-                    }
-                    
-                    if sum > Int(Float(oversText.text!)!) {
-                        oversText.errorMessage = "Invalid Overs"
-                    }
-                    else
-                    {
-                        oversText.errorMessage = ""
-                    }
-                }
+            if overText.text!.trimWhiteSpace.length == 0 || Int(overText.text!) <= 0 {
+                
+                self.view.endEditing(true)
+                
+                widesText.text = "-"
+                noballText.text = "-"
+                wicketsText.text = "-"
+                maidensText.text = "-"
+                runsGivenText.text = "-"
+                
+                
+                
+                widesText.userInteractionEnabled = false
+                noballText.userInteractionEnabled = false
+                wicketsText.userInteractionEnabled = false
+                maidensText.userInteractionEnabled = false
+                runsGivenText.userInteractionEnabled = false
+                
+//                if let widesBowled = widesText.text, let noBallsBowled = noballText.text
+//                {
+//                    var sum = 0
+//                    if widesBowled.trimWhiteSpace.length > 0, let widesInt = Int(widesBowled) {
+//                        sum += widesInt
+//                    }
+//                    
+//                    if noBallsBowled.trimWhiteSpace.length > 0, let noBallsInt = Int(noBallsBowled) {
+//                        sum += noBallsInt
+//                    }
+//                    
+//                    if sum > Int(Float(oversText.text!)!) {
+//                        oversText.errorMessage = "Invalid Overs"
+//                    }
+//                    else
+//                    {
+//                        oversText.errorMessage = ""
+//                    }
+//                }
             }
             else
             {
-                if Int(widesText.textVal) > 0 || Int(noballText.textVal) > 0 {
-                    oversText.errorMessage = "Overs Empty"
-                }
-                else
-                {
-                    oversText.errorMessage = ""
+//                if Int(widesText.textVal) > 0 || Int(noballText.textVal) > 0 {
+//                    oversText.errorMessage = "Overs Empty"
+//                }
+//                else
+//                {
+//                    oversText.errorMessage = ""
+//                }
+//                
+                if let wides = widesText.text {
+                    widesText.text = wides != "-" ? wides : "0"
                 }
                 
+                if let noball = noballText.text {
+                    noballText.text = noball != "-" ? noball : "0"
+                }
+                
+                if let wickets = wicketsText.text {
+                    wicketsText.text = wickets != "-" ? wickets : "0"
+                }
+                
+                if let maidens = maidensText.text {
+                    maidensText.text = maidens != "-" ? maidens : "0"
+                }
+                
+                if let runsgiven = runsGivenText.text {
+                    runsGivenText.text = runsgiven != "-" ? runsgiven : "0"
+                }
+
+                
+                widesText.userInteractionEnabled = true
+                noballText.userInteractionEnabled = true
+                wicketsText.userInteractionEnabled = true
+                maidensText.userInteractionEnabled = true
+                runsGivenText.userInteractionEnabled = true
                 
             }
         }

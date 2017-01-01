@@ -97,9 +97,21 @@ func loadInitialValues(){
 func addMatchData(key:NSString,data:[String:String]){
     
     var dataToBeModified = data
+    
+    let formatter = NSDateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    
+    dataToBeModified["MatchAddedDate"] = formatter.stringFromDate(NSDate())
+    dataToBeModified["MatchEditedDate"] = formatter.stringFromDate(NSDate())
+    
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").childByAutoId()
     dataToBeModified["MatchId"] = ref.key
     ref.setValue(dataToBeModified)
+    
+    
+    
+    
+    
     
     UpdateDashboardDetails()
     
@@ -370,8 +382,17 @@ func getImageFromFirebase(imagePath: String ,sucessBlock:(UIImage)->Void){
 
 func updateMatchData(key:String,data:[String:String]){
     
+    var dataToBeModified = data
+    
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").child(key)
-    ref.updateChildValues(data)
+    
+    let formatter = NSDateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    
+    dataToBeModified["MatchEditedDate"] = formatter.stringFromDate(NSDate())
+    
+    
+    ref.updateChildValues(dataToBeModified)
     UpdateDashboardDetails()
     
 }

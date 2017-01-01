@@ -11,37 +11,22 @@ import UIKit
 class SummaryDetailsCell: UITableViewCell {
 
     @IBOutlet weak var baseView: UIView!
-    
+
     @IBOutlet weak var oponentName: UILabel!
-    
-    @IBOutlet weak var BallsAndStrikeRate: UILabel!
-    @IBOutlet weak var totalRuns: UILabel!
-    @IBOutlet weak var matchDateAndVenue: UILabel!
-    
-    @IBOutlet weak var oversAndEconomy: UILabel!
-    @IBOutlet weak var BallsBowledWithWicketsTaken: UILabel!
-    @IBOutlet weak var battingView: UIView!
-    
-    var bowlingViewHidden:Bool = true
-    var battingViewHidden:Bool = true
-    
-    @IBOutlet weak var bowlingView: UIView!
-    
-    
+    @IBOutlet weak var BattingOrBowlingScore: UILabel!
     @IBOutlet weak var vsView: UIView!
     
+    @IBOutlet weak var matchDateAndVenue: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         self.baseView.layer.cornerRadius = 10
         self.baseView.clipsToBounds = true
-        self.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
-        
-        
-        
-        
-        
+        self.baseView.backgroundColor = UIColor.blackColor()
+        self.baseView.alpha = 0.3
+        self.selectionStyle = .None
+        self.vsView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: "#660000"))
         
         // Initialization code
     }

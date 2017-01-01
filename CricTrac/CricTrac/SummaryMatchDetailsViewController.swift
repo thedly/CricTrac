@@ -146,7 +146,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
 //            view?.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
 //        }
         
-        self.summarizedView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
+        //self.summarizedView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
         
         initializeView()
         
@@ -181,7 +181,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
         if let runs = Double((batRuns.text?.trimWhiteSpace)!){
             if let balls = Double((ballsFaced.text?.trimWhiteSpace)!){
                 
-                strikeRateText.text = String(format: "%.0f",(runs*100 / balls))
+                strikeRateText.text = String(format: "%.0f",((runs*100)/balls))
             }
             
         }
@@ -203,7 +203,23 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
         if let eco = matchDetailsData["Economy"] {
             economy.text = eco
         }
+        if let Balls = matchDetailsData["BallsFaced"] {
+            ballsFaced.text = Balls
+        }
+        if let Wides = matchDetailsData["Wides"] {
+            wides.text = Wides
+        }
+        if let Noballs = matchDetailsData["NoBalls"] {
+            noBalls.text = Noballs
+        }
         
+        if let grnd = matchDetailsData["Ground"] {
+            self.ground.text = grnd
+        }
+        
+        if let dat = matchDetailsData["MatchDate"] {
+            self.date.text = dat
+        }
         
         calculateStrikeRate()
         
@@ -227,13 +243,13 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
         if (bowlingViewHidden == true) {
             self.bowlingView.hidden = true
             
-            self.screenShotHeightConstraint.constant -= 200
+            self.screenShotHeightConstraint.constant -= 240
             
         }
         
         if (battingViewHidden == true) {
             self.battingView.hidden = true
-            self.screenShotHeightConstraint.constant -= 200
+            self.screenShotHeightConstraint.constant -= 240
         }
 
 //        if let Ground = matchDetailsData["Ground"] {
@@ -296,7 +312,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
             
             
             if let firstScore = matchDetailsData["FirstBattingScore"] {
-                if let firstWickets = matchDetailsData["FirstBowlingWickets"] {
+                if let firstWickets = matchDetailsData["FirstBattingWickets"] {
                     
                     let firstTeamOvers = matchDetailsData["FirstBattingOvers"] ?? "-"
                     homeTeam.text?.appendContentsOf("\n\(firstScore)/\(firstWickets)\n(\(firstTeamOvers))")
@@ -306,7 +322,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
             }
             
             if let secondScore = matchDetailsData["SecondBattingScore"] {
-                if let secondWickets = matchDetailsData["SecondBowlingWickets"] {
+                if let secondWickets = matchDetailsData["SecondBattingWickets"] {
                     
                     let secondTeamOvers = matchDetailsData["SecondBattingOvers"] ?? "-"
                     
@@ -321,11 +337,11 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
         
         if let firstScore = Int(firstTeamScore), let secondScore = Int(secondTeamScore) {
             if firstScore > secondScore {
-                result.text = "\(matchDetailsData["Team"]!) Won the match by \(firstScore - secondScore) runs"
+                result.text = "\(matchDetailsData["Team"]!) Won"
             }
             else if firstScore < secondScore
             {
-                result.text = "\(matchDetailsData["Opponent"]!) Won the match by \(secondScore - firstScore) runs"
+                result.text = "\(matchDetailsData["Opponent"]!) Won"
             }
             else if firstScore == secondScore {
                 result.text = "Match tied"
@@ -351,9 +367,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
            
         }
         
-        if let Balls = matchDetailsData["BallsFaced"] {
-            ballsFaced.text = Balls
-        }
+        
 //        if let Position = matchDetailsData["Position"] {
 //            batPos.text = Position
 //        }
@@ -364,20 +378,6 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
 //            oversBowled.text = OversBalled
 //        }
         
-        if let Wides = matchDetailsData["Wides"] {
-            wides.text = Wides
-        }
-        if let Noballs = matchDetailsData["NoBalls"] {
-            noBalls.text = Noballs
-        }
-        
-        if let grnd = matchDetailsData["Ground"] {
-            self.ground.text = grnd
-        }
-        
-        if let dat = matchDetailsData["MatchDate"] {
-            self.date.text = dat
-        }
         
 //        if let date = matchDetailsData["Date"]{
 //            let dateArray = date.characters.split{$0 == "/"}.map(String.init)
