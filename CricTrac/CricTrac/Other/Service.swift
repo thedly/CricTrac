@@ -143,6 +143,9 @@ func addProfileImageData(profileDp:UIImage){
     
 }
 
+
+
+
 func updateMetaData(profileImgUrl: NSURL) {
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
     let profileImageObject: [NSObject:AnyObject] = [ "ProfileImageUrl"    : profileImgUrl.absoluteString]
@@ -217,6 +220,18 @@ func getAllUserData(sucessBlock:(AnyObject)->Void){
     })
 }
 
+func getAllUserProfileInfo(){
+    
+    fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        if let data = snapshot.value as? [String : String]{
+            
+            loggedInUserInfo = data
+        }
+        else{
+            
+        }
+    })
+}
 
 func enableSync(){
     
@@ -637,16 +652,17 @@ func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
     
     KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
     
+    let userName = loggedInUserName ?? "No Name"
+    
     let addedTime = "\(NSDate().timeIntervalSince1970 * 1000)"
-    let timelineDict:[String:String] = ["AddedTime":addedTime,"CommentCount":"0","LikeCount":"0","OwnerID":currentUser!.uid,"OwnerName":(currentUser?.displayName) ?? "","isDeleted":"0","Post":postText]
+    let timelineDict:[String:String] = ["AddedTime":addedTime,"CommentCount":"0","LikeCount":"0","OwnerID":currentUser!.uid,"OwnerName":userName,"isDeleted":"0","Post":postText]
     
     let ref = fireBaseRef.child("TimelinePosts").childByAutoId()
     
     ref.setValue(timelineDict)
     
     let postKey = ref.key
-    //njith
-    let returnData = ["timeline":["Post":postText,"postId":postKey]]
+    let returnData = ["timeline":["Post":postText,"CommentCount":"0","LikeCount":"0","OwnerName":userName,"postId":postKey]]
     
     sucess(data: returnData)
     

@@ -12,6 +12,15 @@ import Firebase
 
 public var date = 0
 
+public var loggedInUserInfo = [String:String]()
+
+public var loggedInUserName:String?{
+
+    guard let firstName = loggedInUserInfo["FirstName"] else {return nil}
+    guard let lastName =  loggedInUserInfo["LastName"] else { return nil}
+    return firstName + " " + lastName
+}
+
 let menuData = [
 
     ["title":"TIMELINE","vc":"timeline", "img": "Menu_TimeLine"],
@@ -50,6 +59,9 @@ var versionAndBuildNumber:String{
     return  (nsObject as! String)+" || Build: "+build
 
 }
+
+
+
 
 //MARK:-URLS
 

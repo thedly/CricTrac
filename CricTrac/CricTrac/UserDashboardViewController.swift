@@ -167,7 +167,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         getAllDashboardData { (data) in
             
-            DashboardDetails = DashboardData(dataObj: data)
+            //DashboardDetails = DashboardData(dataObj: data)
             
             
             let df = NSDateFormatter()

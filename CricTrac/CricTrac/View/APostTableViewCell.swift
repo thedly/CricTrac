@@ -10,6 +10,7 @@ import UIKit
 
 class APostTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var postOwnerName: UILabel!
     @IBOutlet weak var post: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
