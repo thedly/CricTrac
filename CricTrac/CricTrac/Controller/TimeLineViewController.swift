@@ -32,7 +32,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         //setUIBackgroundTheme(view)
         
         loadTimeline()
-        
+        getAllUserProfileInfo()
         refreshControl.attributedTitle = NSAttributedString(string: "Loading New Posts")
         refreshControl.addTarget(self, action: #selector(TimeLineViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         timeLineTable.addSubview(refreshControl)
@@ -96,11 +96,29 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         }
     }
     
+    
+    
     func loadTimeline(){
         
         getLatestTimelines({ (result) in
             
-            timelineData = result
+            timelineData = result.dictionaryValue["timeline"]
+            if let key = result.dictionaryValue["pageKey"]?.stringValue{
+                
+                pageKey = key
+                
+                LoadTimeline(key, sucess: { (data) in
+                    
+                    pageKey = data.dictionaryValue["pageKey"]?.stringValue
+                    
+                    timelineData = JSON(timelineData!.arrayObject! + data.dictionaryValue["timeline"]!.arrayObject!)
+                    
+                    }, failure: { (error) in
+                        
+                        
+                })
+            }
+            //LoadTimeline()
             self.timeLineTable.reloadData()
             
         }) { (error) in }
@@ -135,7 +153,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             
             
             
-            let data = timelineData!.dictionaryValue["timeline"]!.arrayValue[indexPath.section-1]
+            let data = timelineData!.arrayValue[indexPath.section-1]
             
             
             if let imageurl = data.dictionaryValue["postImage"]?.string {
@@ -153,6 +171,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 let  postCell =  timeLineTable.dequeueReusableCellWithIdentifier("aPost", forIndexPath: indexPath) as! APostTableViewCell
                 
                 postCell.post.text = data.dictionaryValue["Post"]?.stringValue
+                postCell.postOwnerName.text = data.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
                 acell = postCell
                 
             }
@@ -194,7 +213,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         else{
             
             let newPost = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
-            newPost.postData =  timelineData!.dictionaryValue["timeline"]!.arrayValue[indexPath.section-1]
+            newPost.postData =  timelineData!.arrayValue[indexPath.section-1]
             presentViewController(newPost, animated: true, completion: nil)
             
         }
@@ -203,21 +222,23 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
-        //            if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height)
-        //            {
-        //
-        //
-        //                timeLineTable.reloadData()
-        //
-        //                loadTimelineFromId({ (timeline,postId) in
-        //
-        //                    var timeLineDic = timeline as! [String : String]
-        //                    timeLineDic["postId"] = postId
-        //                    self.timelineDS.append(timeLineDic )
-        //
-        //                })
-        //
-        //                }
+                    if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height)
+                    {
+        
+        
+                        timeLineTable.reloadData()
+        
+                        LoadTimeline(pageKey!, sucess: { (data) in
+                            
+                            pageKey = data.dictionaryValue["pageKey"]?.stringValue
+                            
+                            timelineData = JSON(timelineData!.arrayObject! + data.dictionaryValue["timeline"]!.arrayObject!)
+                            
+                            }, failure: { (error) in
+                                
+                                
+                        })
+                        }
     }
     
     
