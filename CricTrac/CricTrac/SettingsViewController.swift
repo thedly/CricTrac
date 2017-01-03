@@ -14,6 +14,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var SettingsTableView: UITableView!
     
     
+    @IBAction func closeBtnPressed(sender: AnyObject) {
+        
+        dismissViewControllerAnimated(true, completion: nil)
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,9 +31,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func initializeView() {
         
         SettingsTableView.registerNib(UINib.init(nibName:"SettingsViewCell", bundle: nil), forCellReuseIdentifier: "SettingsViewCell")
-        
-        //SettingsTableView.allowsSelection = false
-        
         SettingsTableView.separatorStyle = .SingleLine
         SettingsTableView.dataSource = self
         SettingsTableView.delegate = self
@@ -74,11 +76,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var vcName = menuData[indexPath.row]["vc"]
+        let vcName = settingsMenuData[indexPath.row]["vc"]
         
         
         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc  = storyboard.instantiateViewControllerWithIdentifier(vcName!)
+        let vc  = storyboard.instantiateViewControllerWithIdentifier(vcName! as! String)
         presentViewController(vc, animated: true, completion: nil)
     }
     
