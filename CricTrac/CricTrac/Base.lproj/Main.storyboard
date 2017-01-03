@@ -5056,7 +5056,6 @@
                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
                                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="text" value="NOT OUT"/>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="STRIKE RATE" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fKe-Yg-seb" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
@@ -5092,7 +5091,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" placeholder="POSITION" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NSq-XX-qow" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="POSITION" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NSq-XX-qow" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="80" y="215" width="120" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
@@ -5192,7 +5191,6 @@
                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
                                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="text" value="0"/>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="6s"/>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
@@ -5229,7 +5227,6 @@
                                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="4s"/>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="text" value="0"/>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BATTING DETAILS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xjv-1E-8rg">
@@ -5299,7 +5296,7 @@
                                                     <action selector="incrementPosition:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="unW-jw-BgJ"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" placeholder="WICKETS TAKEN" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="esn-g4-4VA" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="WICKETS TAKEN" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="esn-g4-4VA" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="400" y="358" width="120" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
@@ -5399,7 +5396,6 @@
                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
                                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="text" value="0"/>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="NO BALLS"/>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
@@ -5436,7 +5432,6 @@
                                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="WIDES"/>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="text" value="0"/>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DT2-GD-CpS">
@@ -5516,7 +5511,7 @@
                                                     <action selector="decrementSixes:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="rfb-Jl-LSg"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" placeholder="MAIDENS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oDG-7W-Ndm" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="MAIDENS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oDG-7W-Ndm" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="400" y="429" width="120" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>

@@ -47,29 +47,29 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
     
     func ValidateScore() -> Void {
         
-        if let runText = runsText {
-            if runText.text?.trimWhiteSpace.length > 0 && Int(runText.text!)! > 0  {
+        if let runText = runsText.text {
+            if runText.trimWhiteSpace.length > 0 && Int(runText)! > 0  {
                 
                 
                 
                 if let foursScored = foursText.text {
-                    foursText.text = foursScored != "-" ? foursScored : "0"
+                    foursText.text = foursScored != "-" && foursScored.length > 0 ? foursScored : "0"
                 }
                 
                 if let sixesScored = sixesText.text {
-                    sixesText.text = sixesScored != "-" ? sixesScored : "0"
+                    sixesText.text = sixesScored != "-" && sixesScored.length > 0 ? sixesScored : "0"
                 }
                 
                 if let dismissal = dismissalText.text {
-                    dismissalText.text = dismissal != "-" ? dismissal : "not out"
+                    dismissalText.text = dismissal != "-" && dismissal.length > 0 ? dismissal : dismissals[0]
                 }
                 
                 if let position = positionText.text {
-                    positionText.text = position != "-" ? position : "0"
+                    positionText.text = position != "-" && position.length > 0 ? position : "1"
                 }
                 
                 if let ballsPlayed = ballsPlayedText.text {
-                    ballsPlayedText.text = ballsPlayed != "-" ? ballsPlayed : "0"
+                    ballsPlayedText.text = ballsPlayed != "-" && ballsPlayed.length > 0 ? ballsPlayed : runText
                 }
                 
                 
@@ -84,7 +84,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
                         sum += (6*sixesInt)
                     }
                     
-                    if sum > Int(runText.text!)! {
+                    if sum > Int(runText)! {
                         runsText.errorMessage = "Invalid Runs"
                     }
                     else
@@ -186,23 +186,23 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
 //                }
 //                
                 if let wides = widesText.text {
-                    widesText.text = wides != "-" ? wides : "0"
+                    widesText.text = wides != "-" && wides.length > 0  ? wides : "0"
                 }
                 
                 if let noball = noballText.text {
-                    noballText.text = noball != "-" ? noball : "0"
+                    noballText.text = noball != "-" && noball.length > 0 ? noball : "0"
                 }
                 
                 if let wickets = wicketsText.text {
-                    wicketsText.text = wickets != "-" ? wickets : "0"
+                    wicketsText.text = wickets != "-" && wickets.length > 0 ? wickets : "0"
                 }
                 
                 if let maidens = maidensText.text {
-                    maidensText.text = maidens != "-" ? maidens : "0"
+                    maidensText.text = maidens != "-" && maidens.length > 0 ? maidens : "0"
                 }
                 
                 if let runsgiven = runsGivenText.text {
-                    runsGivenText.text = runsgiven != "-" ? runsgiven : "0"
+                    runsGivenText.text = runsgiven != "-" && runsgiven.length > 0 ? runsgiven : "0"
                 }
 
                 
