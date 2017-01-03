@@ -113,7 +113,15 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     
                     pageKey = data.dictionaryValue["pageKey"]?.stringValue
                     
-                    timelineData = JSON(timelineData!.arrayObject! + data.dictionaryValue["timeline"]!.arrayObject!)
+                    
+                    if let timelineArrayObj = timelineData!.arrayObject, let dictionaryTimelineObj = data.dictionaryValue["timeline"], let dictionaryTimelineArrayObj = dictionaryTimelineObj.arrayObject {
+                        
+                        
+                         timelineData = JSON(timelineArrayObj + dictionaryTimelineArrayObj)
+                        
+                    }
+                    
+                   
                     
                     }, failure: { (error) in
                         
@@ -187,28 +195,28 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             
             
             
-            if let timeLineValues = timelineData?.dictionaryValue["timeline"] where timeLineValues.count > 0, let data = timeLineValues.arrayValue[indexPath.section-1] as? JSON {
-                if let imageurl = data.dictionaryValue["postImage"]?.string {
-                    
-                    let imageCell =  timeLineTable.dequeueReusableCellWithIdentifier("imagepost", forIndexPath: indexPath) as! ImagePostTableViewCell
-                    let postid = data.dictionaryValue["postId"]?.stringValue
-                    imageCell.imagePost.image = nil
-                    imageCell.imagePost.loadImage(imageurl, postId:postid!)
-                    
-                    acell = imageCell
-                    
-                }
-                else{
-                    
-                    let  postCell =  timeLineTable.dequeueReusableCellWithIdentifier("aPost", forIndexPath: indexPath) as! APostTableViewCell
-                    
-                    postCell.post.text = data.dictionaryValue["Post"]?.stringValue
-                    acell = postCell
-                    
-                }
+            let data = timelineData!.arrayValue[indexPath.section-1]
+            
+            
+            if let imageurl = data.dictionaryValue["postImage"]?.string {
+                
+                let imageCell =  timeLineTable.dequeueReusableCellWithIdentifier("imagepost", forIndexPath: indexPath) as! ImagePostTableViewCell
+                let postid = data.dictionaryValue["postId"]?.stringValue
+                imageCell.imagePost.image = nil
+                imageCell.imagePost.loadImage(imageurl, postId:postid!)
+                
+                acell = imageCell
+                
             }
-            
-            
+            else{
+                
+                let  postCell =  timeLineTable.dequeueReusableCellWithIdentifier("aPost", forIndexPath: indexPath) as! APostTableViewCell
+                
+                postCell.post.text = data.dictionaryValue["Post"]?.stringValue
+                postCell.postOwnerName.text = data.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
+                acell = postCell
+                
+            }
             
             
         }

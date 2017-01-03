@@ -75,7 +75,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="53" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efA-kH-jAy">
-                            <rect key="frame" x="0.0" y="14" width="203" height="63"/>
+                            <rect key="frame" x="0.0" y="14" width="232" height="63"/>
                             <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="50"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -88,7 +88,7 @@
                         <constraint firstItem="efA-kH-jAy" firstAttribute="leading" secondItem="LR6-d8-nCz" secondAttribute="leading" id="2L0-kW-dF6"/>
                         <constraint firstAttribute="trailing" secondItem="aWf-eg-Bxn" secondAttribute="trailing" constant="5" id="2Qc-xF-tmF"/>
                         <constraint firstItem="aWf-eg-Bxn" firstAttribute="centerY" secondItem="juz-ti-m9S" secondAttribute="centerY" id="I5H-NV-Pn7"/>
-                        <constraint firstItem="efA-kH-jAy" firstAttribute="width" secondItem="LR6-d8-nCz" secondAttribute="width" multiplier="0.35" id="NJ7-Qd-UMX"/>
+                        <constraint firstItem="efA-kH-jAy" firstAttribute="width" secondItem="LR6-d8-nCz" secondAttribute="width" multiplier="0.4" id="NJ7-Qd-UMX"/>
                         <constraint firstItem="aWf-eg-Bxn" firstAttribute="width" secondItem="LR6-d8-nCz" secondAttribute="width" multiplier="0.55" id="Otw-r4-LRs"/>
                         <constraint firstItem="juz-ti-m9S" firstAttribute="top" secondItem="LR6-d8-nCz" secondAttribute="top" constant="10" id="TJO-NQ-nCa"/>
                         <constraint firstItem="0rp-zH-tn4" firstAttribute="leading" secondItem="aWf-eg-Bxn" secondAttribute="leading" id="YZ7-Mw-n9c"/>

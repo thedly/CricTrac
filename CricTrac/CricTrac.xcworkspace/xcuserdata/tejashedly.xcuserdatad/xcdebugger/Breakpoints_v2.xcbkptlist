@@ -411,7 +411,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "307"
             endingLineNumber = "307"
-            landmarkName = "updateLastLogin()"
+            landmarkName = "createDashboardData(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -506,7 +506,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "355"
-            endingLineNumber = "355">
+            endingLineNumber = "355"
+            landmarkName = "getAllProfiles(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -793,7 +795,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "450"
             endingLineNumber = "450"
-            landmarkName = "loadTimeline(_:)"
+            landmarkName = "loginWithMailAndPassword(_:password:callBack:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -809,7 +811,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "452"
             endingLineNumber = "452"
-            landmarkName = "loadTimeline(_:)"
+            landmarkName = "loginWithMailAndPassword(_:password:callBack:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -873,7 +875,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "365"
             endingLineNumber = "365"
-            landmarkName = "getImageFromFirebase(_:sucessBlock:)"
+            landmarkName = "getImageFromFacebook()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1807,7 +1809,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "331"
             endingLineNumber = "331"
-            landmarkName = "getAllProfiles(_:)"
+            landmarkName = "getAllProfileData(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1839,7 +1841,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "558"
             endingLineNumber = "558"
-            landmarkName = "registerWithEmailAndPassword(_:password:callBack:)"
+            landmarkName = "loadTimelineFromId(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1854,7 +1856,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "545"
-            endingLineNumber = "545">
+            endingLineNumber = "545"
+            landmarkName = "loadTimelineFromId(_:)"
+            landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -2739,7 +2743,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "361"
             endingLineNumber = "361"
-            landmarkName = "getImageFromFirebase(_:sucessBlock:)"
+            landmarkName = "getImageFromFacebook()"
             landmarkType = "7">
             <Locations>
                <Location
@@ -3105,7 +3109,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "233"
             endingLineNumber = "233"
-            landmarkName = "addUserProfileData(_:sucessBlock:)"
+            landmarkName = "getAllUserProfileInfo()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3169,7 +3173,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "267"
             endingLineNumber = "267"
-            landmarkName = "UpdateDashboardDetails()"
+            landmarkName = "addUserProfileData(_:sucessBlock:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3217,7 +3221,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "311"
             endingLineNumber = "311"
-            landmarkName = "getAllProfileData(_:)"
+            landmarkName = "createDashboardData(_:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -3512,16 +3516,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CricTrac/Controller/TimeLineViewController.swift"
-            timestampString = "504983036.95051"
+            timestampString = "505139793.502329"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
-            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
+            landmarkName = "tableView(_:numberOfRowsInSection:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3532,12 +3536,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CricTrac/Controller/TimeLineViewController.swift"
-            timestampString = "504983039.627955"
+            timestampString = "505139793.502329"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
-            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
+            landmarkName = "tableView(_:numberOfRowsInSection:)"
             landmarkType = "5">
             <Locations>
                <Location
