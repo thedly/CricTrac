@@ -52,7 +52,7 @@
 		890EA2F11DB92BD100FB40DB /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890EA2F01DB92BD100FB40DB /* ForgotPasswordViewController.swift */; };
 		89129C4A1D904F89009488FE /* LoginBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89129C491D904F89009488FE /* LoginBaseViewController.swift */; };
 		89129C4C1D90501B009488FE /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89129C4B1D90501B009488FE /* RegisterViewController.swift */; };
-		8917AE241D94466900E6BC1A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8917AE231D94466900E6BC1A /* SettingsViewController.swift */; };
+		8917AE241D94466900E6BC1A /* ThemeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8917AE231D94466900E6BC1A /* ThemeSettingsViewController.swift */; };
 		8922042D1D97A3A6005F555B /* FriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8922042C1D97A3A6005F555B /* FriendsCell.xib */; };
 		8922042F1D97A7EC005F555B /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8922042E1D97A7EC005F555B /* FriendsCell.swift */; };
 		892CE2D41D9EC126001E098E /* MatchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892CE2D31D9EC126001E098E /* MatchResultsViewController.swift */; };
@@ -64,6 +64,9 @@
 		8930F0381D5B751500C7540B /* CTCountryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930F0371D5B751500C7540B /* CTCountryPicker.swift */; };
 		8930F03A1D5B824E00C7540B /* data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 8930F0391D5B824E00C7540B /* data.csv */; };
 		8930F03C1D5B94C300C7540B /* CTStatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930F03B1D5B94C300C7540B /* CTStatePicker.swift */; };
+		89358AFB1E19773E00A1A6F0 /* SettingsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89358AF91E19773E00A1A6F0 /* SettingsViewCell.swift */; };
+		89358AFC1E19773E00A1A6F0 /* SettingsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89358AFA1E19773E00A1A6F0 /* SettingsViewCell.xib */; };
+		89358AFE1E197B4800A1A6F0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89358AFD1E197B4800A1A6F0 /* SettingsViewController.swift */; };
 		893823B41E113ACE00BCD0CD /* SliderMenuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893823B31E113ACE00BCD0CD /* SliderMenuViewCell.swift */; };
 		893823B61E113AE000BCD0CD /* SliderMenuViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 893823B51E113AE000BCD0CD /* SliderMenuViewCell.xib */; };
 		893DAD4A1DB660AC00CC1875 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DAD491DB660AC00CC1875 /* Profile.swift */; };
@@ -184,7 +187,7 @@
 		890EA2F01DB92BD100FB40DB /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		89129C491D904F89009488FE /* LoginBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginBaseViewController.swift; sourceTree = "<group>"; };
 		89129C4B1D90501B009488FE /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
-		8917AE231D94466900E6BC1A /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		8917AE231D94466900E6BC1A /* ThemeSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeSettingsViewController.swift; sourceTree = "<group>"; };
 		8922042C1D97A3A6005F555B /* FriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsCell.xib; sourceTree = "<group>"; };
 		8922042E1D97A7EC005F555B /* FriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
 		892CE2D31D9EC126001E098E /* MatchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchResultsViewController.swift; sourceTree = "<group>"; };
@@ -196,6 +199,9 @@
 		8930F0371D5B751500C7540B /* CTCountryPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTCountryPicker.swift; sourceTree = "<group>"; };
 		8930F0391D5B824E00C7540B /* data.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data.csv; sourceTree = "<group>"; };
 		8930F03B1D5B94C300C7540B /* CTStatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTStatePicker.swift; sourceTree = "<group>"; };
+		89358AF91E19773E00A1A6F0 /* SettingsViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewCell.swift; sourceTree = "<group>"; };
+		89358AFA1E19773E00A1A6F0 /* SettingsViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewCell.xib; sourceTree = "<group>"; };
+		89358AFD1E197B4800A1A6F0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8935ADC31D3E640900607C9D /* CricTrac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CricTrac-Bridging-Header.h"; sourceTree = "<group>"; };
 		893823B31E113ACE00BCD0CD /* SliderMenuViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderMenuViewCell.swift; sourceTree = "<group>"; };
 		893823B51E113AE000BCD0CD /* SliderMenuViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderMenuViewCell.xib; sourceTree = "<group>"; };
@@ -466,6 +472,8 @@
 				893823B31E113ACE00BCD0CD /* SliderMenuViewCell.swift */,
 				893823B51E113AE000BCD0CD /* SliderMenuViewCell.xib */,
 				894624FF1E1580E700FE79C2 /* TeamCollectionViewCell.swift */,
+				89358AF91E19773E00A1A6F0 /* SettingsViewCell.swift */,
+				89358AFA1E19773E00A1A6F0 /* SettingsViewCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -494,7 +502,7 @@
 				46B0D66A1D8B881500C93247 /* TimeLineViewController.swift */,
 				89129C491D904F89009488FE /* LoginBaseViewController.swift */,
 				89129C4B1D90501B009488FE /* RegisterViewController.swift */,
-				8917AE231D94466900E6BC1A /* SettingsViewController.swift */,
+				8917AE231D94466900E6BC1A /* ThemeSettingsViewController.swift */,
 				893041191D9E0C3B00F0E29C /* BattingBowlingViewController.swift */,
 				892CE2D31D9EC126001E098E /* MatchResultsViewController.swift */,
 				89D7D9D11DAFD97D0069D536 /* PlayerExperienceViewController.swift */,
@@ -504,6 +512,7 @@
 				46AE388E1DE4761E00FB9E23 /* NewPostViewController.swift */,
 				46ACE0C41E0FA744004118A4 /* CommentsViewController.swift */,
 				89836C5D1E08081D00ABDCA9 /* ProfileReadOnlyViewController.swift */,
+				89358AFD1E197B4800A1A6F0 /* SettingsViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -625,6 +634,7 @@
 				894CA2A71D96150A0043D3D1 /* SourceSansPro-LightIt.otf in Resources */,
 				4633C9991DE996740062877C /* GoogleService-Info.plist in Resources */,
 				460068991D638496007C9457 /* SuggestionCell.xib in Resources */,
+				89358AFC1E19773E00A1A6F0 /* SettingsViewCell.xib in Resources */,
 				894CA2A91D96150A0043D3D1 /* SourceSansPro-Semibold.otf in Resources */,
 				894CA29F1D96150A0043D3D1 /* SourceSansPro-Black.otf in Resources */,
 				8930F03A1D5B824E00C7540B /* data.csv in Resources */,
@@ -757,7 +767,7 @@
 				89129C4A1D904F89009488FE /* LoginBaseViewController.swift in Sources */,
 				46F25A031D5B1AAD001EBEF9 /* Service.swift in Sources */,
 				46CE472E1D7A787D00EA63E2 /* CTAlertViewController.swift in Sources */,
-				8917AE241D94466900E6BC1A /* SettingsViewController.swift in Sources */,
+				8917AE241D94466900E6BC1A /* ThemeSettingsViewController.swift in Sources */,
 				89D7D9D41DAFEAB80069D536 /* CoachingExperienceViewController.swift in Sources */,
 				895E04071D5CE283002E322E /* FriendSuggestViewController.swift in Sources */,
 				89836C5E1E08081D00ABDCA9 /* ProfileReadOnlyViewController.swift in Sources */,
@@ -791,7 +801,9 @@
 				8955DA2B1E0ED13A00891937 /* NewPostViewController.swift in Sources */,
 				890B42C71D60472C00736F03 /* CollapsibleTableViewCell.swift in Sources */,
 				893823B41E113ACE00BCD0CD /* SliderMenuViewCell.swift in Sources */,
+				89358AFE1E197B4800A1A6F0 /* SettingsViewController.swift in Sources */,
 				46DE32C51D900C9F0024CD82 /* AddPostTableViewCell.swift in Sources */,
+				89358AFB1E19773E00A1A6F0 /* SettingsViewCell.swift in Sources */,
 				46ACE0C71E0FF625004118A4 /* CommentTableViewCell.swift in Sources */,
 				89E6084D1D6D4ADC00F6BD11 /* CTDataPicker.swift in Sources */,
 				4657D5661D499FDD009E0FBE /* SliderMenuViewController.swift in Sources */,

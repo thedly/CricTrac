@@ -67,7 +67,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                 
             }
             
-            if let grounds = userData["OppositTeams"] as? [String:String]{
+            if let grounds = userData["Opponents"] as? [String:String]{
                 
                 opponentTeams = grounds.map({ (key,value) in value })
                 

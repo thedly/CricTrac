@@ -82,18 +82,18 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                         }
                     }
                     
-                    if let wicketsTaken = value["WicketsTaken"], let balls = value["OversBowled"] {
+                    if let wicketsTaken = value["WicketsTaken"], let runsGiven = value["RunsGiven"] {
                         
                         
-                        mData.BowlingSectionHidden = (balls == "-")
+                        mData.BowlingSectionHidden = (runsGiven == "-")
                         
                         
                         if mData.BowlingSectionHidden == false {
                             if battingBowlingScore.length > 0 {
-                                battingBowlingScore.appendContentsOf("\n\(wicketsTaken)-\(balls)")
+                                battingBowlingScore.appendContentsOf("\n\(wicketsTaken)-\(runsGiven)")
                             }
                             else{
-                                battingBowlingScore.appendContentsOf("\(wicketsTaken)-\(balls)")
+                                battingBowlingScore.appendContentsOf("\(wicketsTaken)-\(runsGiven)")
                             }
                             
                             

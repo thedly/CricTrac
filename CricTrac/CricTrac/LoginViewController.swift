@@ -299,7 +299,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
             
             let window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
-            let dashboardVC = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
+            let dashboardVC = viewControllerFrom("Main", vcid: "timeline") as! TimeLineViewController
             
             
             let profileVC = viewControllerFrom("Main", vcid: "ProfileBaseViewController") as! ProfileBaseViewController

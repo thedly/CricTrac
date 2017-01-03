@@ -137,7 +137,7 @@ protocol ThemeChangeable{
 
 extension ThemeChangeable where Self:UIViewController{
     
-       func setBackgroundColor(){
+    func setBackgroundColor(){
     
         let gradient = cricTracTheme.currentTheme.backGroundGradientLayer
         gradient.frame = view.bounds

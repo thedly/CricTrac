@@ -19,6 +19,10 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     var recentMatchesBowling: [String:String]!
     private var _currentTheme:String = CurrentTheme
     
+    
+    var clearColor = UIColor.clearColor()
+    var darkerThemeColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
+    
     // MARK: - Plumbing
     
    
@@ -93,8 +97,12 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
 
     
     
+    @IBAction func CloseDashboardPressed(sender: UIButton) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     
     
+    @IBOutlet weak var TopMenu: UIView!
     @IBOutlet weak var FirstRecentMatchBowlingScore: UILabel!
     @IBOutlet weak var FirstRecentMatchBowlingOpponent: UILabel!
     
@@ -127,7 +135,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         
         
-        setNavigationBarProperties();
+        
         //getMatchData()
         
         setDashboardData()
@@ -299,41 +307,21 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
     }
     
+    func scrollViewDidScrollToTop(scrollView: UIScrollView) {
+        if (scrollView.contentOffset.y > 300) {
+            if TopMenu.backgroundColor != darkerThemeColor {
+                TopMenu.backgroundColor = darkerThemeColor
+            }
+        }
+        else {
+            if TopMenu.backgroundColor != clearColor {
+                TopMenu.backgroundColor = clearColor
+            }
+        }
 
-    func didMenuButtonTapp(){
-        sliderMenu.setDrawerState(.Opened, animated: true)
     }
-    
-    func didNewMatchButtonTapp(){
-        let newMatchVc = viewControllerFrom("Main", vcid: "AddMatchDetailsViewController")
-        self.presentViewController(newMatchVc, animated: true) {}
-    }
-    
-    func setNavigationBarProperties(){
-        let menuButton: UIButton = UIButton(type:.Custom)
-        menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
-        menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
-        menuButton.frame = CGRectMake(0, 0, 40, 40)
-        let leftbarButton = UIBarButtonItem(customView: menuButton)
+
         
-        
-        let addNewMatchButton: UIButton = UIButton(type:.Custom)
-        addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
-        addNewMatchButton.setTitle("+", forState:.Normal)
-        addNewMatchButton.titleLabel?.font = UIFont(name: appFont_bold, size: 30)
-        addNewMatchButton.addTarget(self, action: #selector(didNewMatchButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
-        let righttbarButton = UIBarButtonItem(customView: addNewMatchButton)
-        
-        //assign button to navigationbar
-        
-        navigationItem.leftBarButtonItem = leftbarButton
-        navigationItem.rightBarButtonItem = righttbarButton
-        navigationController!.navigationBar.barTintColor = UIColor(hex: topColor)
-        title = "DASHBOARD"
-        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        navigationController!.navigationBar.titleTextAttributes = titleDict
-    }
-    
     
     
     // MARK: - Collection view delegates
