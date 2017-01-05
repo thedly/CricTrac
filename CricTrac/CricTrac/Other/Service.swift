@@ -198,7 +198,7 @@ func addNewTeamName(teamName:String){
 }
 
 func addNewOppoSitTeamName(oTeamName:String){
-    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("OppositTeams").childByAutoId()
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Opponents").childByAutoId()
     ref.setValue(oTeamName)
 }
 

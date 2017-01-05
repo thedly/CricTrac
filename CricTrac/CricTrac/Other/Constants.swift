@@ -24,7 +24,7 @@ public var loggedInUserName:String?{
 let menuData = [
 
     ["title":"TIMELINE","vc":"timeline", "img": "Menu_TimeLine"],
-    ["title":"DASHBOARD","vc":"AddMatchDetailsViewController", "img": "Menu_Dashboard"],
+    ["title":"DASHBOARD","vc":"UserDashboardViewController", "img": "Menu_Dashboard"],
     ["title":"NEW MATCH","vc":"AddMatchDetailsViewController", "img": "Menu_AddMatch"],
     ["title":"MATCH SUMMARY","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
     ["title":"FRIENDS","vc":"FriendBaseViewController", "img": "Menu_Friends"],
@@ -36,6 +36,17 @@ let menuData = [
     ["title":"HELP & SUPPORT","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
     ["title":"VERSION: \(versionAndBuildNumber)","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
     
+]
+
+let settingsMenuData = [
+    
+    ["title":"Show profile picture","vc":"ProfileBaseViewController", "img": "Menu_TimeLine", "desc": "Show profile picture to other users", "IsSwitchVisible": true],
+    ["title":"Media Auto-Download","vc":"UserDashboardViewController", "img": "Menu_Dashboard", "desc": "Selecting no will auto-download media only while you are using wi-fi", "IsSwitchVisible": false],
+    ["title":"Offline Matches","vc":"AddMatchDetailsViewController", "img": "Menu_AddMatch", "desc": "Matches to be downloaded for offline view", "IsSwitchVisible": false],
+    ["title":"App Theme","vc":"ThemeSettingsViewController", "img": "Menu_Summary", "desc": "Choose desired theme color for your app", "IsSwitchVisible": false],
+    ["title":"Change Password","vc":"FriendBaseViewController", "img": "Menu_Friends", "desc": "", "IsSwitchVisible": false],
+    ["title":"FAQ","vc":  "ProfileBaseViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false],
+    ["title":"Terms & Conditions","vc":"AddMatchDetailsViewController", "img": "Menu_Statistics", "desc": "", "IsSwitchVisible": false]
 ]
 
 

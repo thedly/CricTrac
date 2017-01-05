@@ -21,7 +21,7 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         super.viewDidLoad()
         
         
-        userName.text = currentUser?.displayName
+        userName.text = profileData.fullName
         baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
         
         self.profileImage.image = LoggedInUserImage

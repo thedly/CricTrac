@@ -87,6 +87,7 @@ class SplashScreenViewController: UIViewController {
         }
     }
     
+    
     func moveToNextScreen(IsAuthorized: Bool){
         
         if IsAuthorized {
@@ -127,7 +128,7 @@ class SplashScreenViewController: UIViewController {
                 
                 let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")
                 
-                let dashboardVC = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
+                let dashboardVC = viewControllerFrom("Main", vcid: "timeline") as! TimeLineViewController
                 
                 let navigationControl = UINavigationController(rootViewController: dashboardVC )
                 sliderMenu.mainViewController = navigationControl

@@ -27,6 +27,8 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setNavigationBarProperties();
+        
         setBackgroundColor()
         
         //setUIBackgroundTheme(view)
@@ -111,7 +113,15 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     
                     pageKey = data.dictionaryValue["pageKey"]?.stringValue
                     
-                    timelineData = JSON(timelineData!.arrayObject! + data.dictionaryValue["timeline"]!.arrayObject!)
+                    
+                    if let timelineArrayObj = timelineData!.arrayObject, let dictionaryTimelineObj = data.dictionaryValue["timeline"], let dictionaryTimelineArrayObj = dictionaryTimelineObj.arrayObject {
+                        
+                        
+                         timelineData = JSON(timelineArrayObj + dictionaryTimelineArrayObj)
+                        
+                    }
+                    
+                   
                     
                     }, failure: { (error) in
                         
@@ -124,7 +134,39 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         }) { (error) in }
     }
     
+    func didMenuButtonTapp(){
+        sliderMenu.setDrawerState(.Opened, animated: true)
+    }
     
+    func didNewMatchButtonTapp(){
+        let newMatchVc = viewControllerFrom("Main", vcid: "AddMatchDetailsViewController")
+        self.presentViewController(newMatchVc, animated: true) {}
+    }
+    
+    func setNavigationBarProperties(){
+        let menuButton: UIButton = UIButton(type:.Custom)
+        menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
+        menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+        menuButton.frame = CGRectMake(0, 0, 40, 40)
+        let leftbarButton = UIBarButtonItem(customView: menuButton)
+        
+        
+        let addNewMatchButton: UIButton = UIButton(type:.Custom)
+        addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
+        addNewMatchButton.setTitle("+", forState:.Normal)
+        addNewMatchButton.titleLabel?.font = UIFont(name: appFont_bold, size: 30)
+        addNewMatchButton.addTarget(self, action: #selector(didNewMatchButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+        let righttbarButton = UIBarButtonItem(customView: addNewMatchButton)
+        
+        //assign button to navigationbar
+        
+        navigationItem.leftBarButtonItem = leftbarButton
+        navigationItem.rightBarButtonItem = righttbarButton
+        navigationController!.navigationBar.barTintColor = UIColor(hex: topColor)
+        title = "TIMELINE"
+        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        navigationController!.navigationBar.titleTextAttributes = titleDict
+    }
     
     
     override func didReceiveMemoryWarning() {
@@ -175,6 +217,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 acell = postCell
                 
             }
+            
             
         }
         
