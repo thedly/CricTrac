@@ -163,6 +163,7 @@ func getAllMatchData(sucessBlock:([String:AnyObject])->Void){
     
     if let data = snapshot.value! as? [String:AnyObject]{
         
+        
         sucessBlock(data)
     }
     else{

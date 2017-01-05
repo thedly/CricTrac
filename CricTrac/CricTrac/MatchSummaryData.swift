@@ -11,9 +11,10 @@ import Foundation
 class MatchSummaryData {
     
     var opponentName: String!
-    var battingBowlingScore: String!
+    var battingBowlingScore: NSMutableAttributedString!
     var matchDateAndVenue: String!
     var BattingSectionHidden: Bool!
     var BowlingSectionHidden: Bool!
+    var matchDate: NSDate!
     
 }

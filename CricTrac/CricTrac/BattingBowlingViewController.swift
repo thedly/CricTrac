@@ -12,6 +12,23 @@ import SkyFloatingLabelTextField
 
 class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
     
+    
+    var OversBowled: String! = "-"
+    var WicketsTaken: String! = "-"
+    var RunsGiven: String! = "-"
+    var NoBalls: String! = "-"
+    var Wides: String! = "-"
+    var Maidens: String! = "-"
+    
+    var RunsTaken: String! = "-"
+    var BallsFaced: String! = "-"
+    var Fours: String! = "-"
+    var Sixes: String! = "-"
+    var Position: String! = "-"
+    var Dismissal: String! = "-"
+    
+    
+    
 
     @IBOutlet weak var runsText: SkyFloatingLabelTextField!
     @IBOutlet weak var ballsPlayedText:UITextField!
@@ -33,7 +50,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
     
     var BowlingData:[String:String]{
         
-        return ["OversBowled":oversText.textVal,"WicketsTaken":wicketsText.textVal,"RunsGiven":runsGivenText.textVal,"NoBalls":noballText.textVal,"Wides":widesText.text!, "Maidens": maidensText.textVal]
+        return ["OversBowled":OversBowled,"WicketsTaken":WicketsTaken,"RunsGiven":RunsGiven,"NoBalls":NoBalls,"Wides":Wides, "Maidens": Maidens]
     }
     
     var allRequiredFieldsHaveFilledProperly: Bool {
@@ -50,26 +67,26 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
         if let runText = runsText.text {
             if runText.trimWhiteSpace.length > 0 && Int(runText)! > 0  {
                 
-                
+                RunsTaken = runText
                 
                 if let foursScored = foursText.text {
-                    foursText.text = foursScored != "-" && foursScored.length > 0 ? foursScored : "0"
+                    Fours = foursScored != "-" && foursScored.length > 0 ? foursScored : "0"
                 }
                 
                 if let sixesScored = sixesText.text {
-                    sixesText.text = sixesScored != "-" && sixesScored.length > 0 ? sixesScored : "0"
+                    Sixes = sixesScored != "-" && sixesScored.length > 0 ? sixesScored : "0"
                 }
                 
                 if let dismissal = dismissalText.text {
-                    dismissalText.text = dismissal != "-" && dismissal.length > 0 ? dismissal : dismissals[0]
+                    Dismissal = dismissal != "-" && dismissal.length > 0 ? dismissal : dismissals[0]
                 }
                 
                 if let position = positionText.text {
-                    positionText.text = position != "-" && position.length > 0 ? position : "1"
+                    Position = position != "-" && position.length > 0 ? position : "1"
                 }
                 
                 if let ballsPlayed = ballsPlayedText.text {
-                    ballsPlayedText.text = ballsPlayed != "-" && ballsPlayed.length > 0 ? ballsPlayed : runText
+                    BallsFaced = ballsPlayed != "-" && ballsPlayed.length > 0 ? ballsPlayed : runText
                 }
                 
                 
@@ -102,14 +119,13 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
                 dismissalText.userInteractionEnabled = true
                 ballsPlayedText.userInteractionEnabled = true
                 
-                runsText.errorMessage = ""
                 
             }
             else
             {
                 
                 self.view.endEditing(true)
-                
+                RunsTaken = "-"
                 foursText.text = "-"
                 sixesText.text = "-"
                 dismissalText.text = "-"
@@ -123,11 +139,6 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
                 positionText.userInteractionEnabled = false
                 dismissalText.userInteractionEnabled = false
                 ballsPlayedText.userInteractionEnabled = false
-                
-                
-                runsText.errorMessage = "Runs Empty"
-                
-                
                 
                 
             }
@@ -186,23 +197,23 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
 //                }
 //                
                 if let wides = widesText.text {
-                    widesText.text = wides != "-" && wides.length > 0  ? wides : "0"
+                    Wides = wides != "-" && wides.length > 0  ? wides : "0"
                 }
                 
                 if let noball = noballText.text {
-                    noballText.text = noball != "-" && noball.length > 0 ? noball : "0"
+                    NoBalls = noball != "-" && noball.length > 0 ? noball : "0"
                 }
                 
                 if let wickets = wicketsText.text {
-                    wicketsText.text = wickets != "-" && wickets.length > 0 ? wickets : "0"
+                    WicketsTaken = wickets != "-" && wickets.length > 0 ? wickets : "0"
                 }
                 
                 if let maidens = maidensText.text {
-                    maidensText.text = maidens != "-" && maidens.length > 0 ? maidens : "0"
+                    Maidens = maidens != "-" && maidens.length > 0 ? maidens : "0"
                 }
                 
                 if let runsgiven = runsGivenText.text {
-                    runsGivenText.text = runsgiven != "-" && runsgiven.length > 0 ? runsgiven : "0"
+                    RunsGiven = runsgiven != "-" && runsgiven.length > 0 ? runsgiven : "0"
                 }
 
                 
@@ -278,7 +289,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
     var BattingData:[String:String]{
         
         
-        return ["RunsTaken":runsText.textVal,"BallsFaced":ballsPlayedText.textVal,"Fours":foursText.textVal,"Sixes":sixesText.textVal,"Position":positionText.textVal,"Dismissal":dismissalText.textVal]
+        return ["RunsTaken":RunsTaken,"BallsFaced":BallsFaced,"Fours":Fours,"Sixes":Sixes,"Position":Position,"Dismissal":Dismissal]
     }
     
     func loadEditData(){

@@ -22,12 +22,20 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     var clearColor = UIColor.clearColor()
     var darkerThemeColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
-    
+    var matches = [MatchSummaryData]()
     // MARK: - Plumbing
     
    
     
-   
+    @IBOutlet weak var firstRecentMatchDateAndVenue: UILabel!
+
+    @IBOutlet weak var secondRecentMatchDateAndVenue: UILabel!
+    
+    @IBOutlet weak var firstRecentMatchScoreCard: UILabel!
+    @IBOutlet weak var secondRecentMatchScoreCard: UILabel!
+    @IBOutlet weak var firstRecentMatchOpponentName: UILabel!
+    @IBOutlet weak var secondRecentMatchOpponentName: UILabel!
+    
     
     @IBOutlet weak var winPerc: UILabel!
     @IBOutlet weak var BB: UILabel!
@@ -167,9 +175,123 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     // MARK: - Methods
     
     
+    func getMatchData(){
+        
+        KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+        getAllMatchData { (data) in
+            
+            
+            for (key,val) in data{
+                
+                //var dataDict = val as! [String:String]
+                //dataDict["key"] = key
+                
+                if  var value = val as? [String : String]{
+                    
+                    value += ["key":key]
+                    
+                    var battingBowlingScore = NSMutableAttributedString()
+                    var matchVenueAndDate = ""
+                    var opponentName = ""
+                    
+                    let mData = MatchSummaryData()
+                    if let runsTaken = value["RunsTaken"]{
+                        
+                        mData.BattingSectionHidden = (runsTaken == "-")
+                        
+                        if mData.BattingSectionHidden == false {
+                            
+                            battingBowlingScore.bold(runsTaken, fontName: appFont_black, fontSize: 30).bold("\nRUNS", fontName: appFont_black, fontSize: 12)
+                            
+                        }
+                    }
+                    
+                    if let wicketsTaken = value["WicketsTaken"], let runsGiven = value["RunsGiven"] {
+                        
+                        
+                        mData.BowlingSectionHidden = (runsGiven == "-")
+                        
+                        
+                        if mData.BowlingSectionHidden == false {
+                            if battingBowlingScore.length > 0 {
+                                
+                                battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 30).bold("\nWICKETS", fontName: appFont_black, fontSize: 12)
+                                
+                            }
+                            else{
+                                battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 53).bold("\nWICKETS", fontName: appFont_black, fontSize: 12)
+                            }
+                            
+                            
+                        }
+                        
+                    }
+                    
+                    
+                    if battingBowlingScore.length == 0 {
+                        battingBowlingScore.bold("DNP", fontName: appFont_black, fontSize: 30)
+                    }
+                    
+                    
+                    
+                    if let date = value["MatchDate"]{
+                        
+                        
+                        
+                        var DateFormatter = NSDateFormatter()
+                        DateFormatter.dateFormat = "dd MM yyyy"
+                        DateFormatter.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
+                        var dateFromString = DateFormatter.dateFromString(date)
+                        
+                        mData.matchDate = dateFromString
+                        
+                        
+                        matchVenueAndDate.appendContentsOf(date as? String ?? "NA")
+                    }
+                    if let venue = value["Ground"]{
+                        matchVenueAndDate.appendContentsOf("\n@ \(venue)")
+                    }
+                    
+                    if let opponent  = value["Opponent"]{
+                        opponentName = opponent.uppercaseString
+                    }
+                    
+                    
+                    mData.battingBowlingScore = battingBowlingScore
+                    mData.matchDateAndVenue = matchVenueAndDate
+                    mData.opponentName = opponentName
+                    
+                    self.matches.append(mData)
+                    
+                }
+            }
+            
+            self.matches.sortInPlace({ $0.matchDate.compare($1.matchDate) == NSComparisonResult.OrderedDescending })
+            
+            
+            
+            self.firstRecentMatchScoreCard.attributedText = self.matches[0].battingBowlingScore
+            self.secondRecentMatchScoreCard.attributedText = self.matches[1].battingBowlingScore
+            
+            self.firstRecentMatchOpponentName.text = self.matches[0].opponentName
+            self.secondRecentMatchOpponentName.text = self.matches[1].opponentName
+            
+            self.firstRecentMatchDateAndVenue.text = self.matches[0].matchDateAndVenue
+            self.secondRecentMatchDateAndVenue.text = self.matches[1].matchDateAndVenue
+            
+            
+            KRProgressHUD.dismiss()
+            
+            
+        }
+    }
+
+    
+    
     func setDashboardData(){
         
         KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+        
         
         getAllDashboardData { (data) in
             
@@ -285,6 +407,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
+        
+        getMatchData()
         
         setDashboardData()
         

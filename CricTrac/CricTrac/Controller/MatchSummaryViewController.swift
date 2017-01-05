@@ -66,19 +66,19 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                     value += ["key":key]
                     
                     self.matchDataSource.append(value)
-                    var battingBowlingScore = ""
+                    var battingBowlingScore = NSMutableAttributedString()
                     var matchVenueAndDate = ""
                     var opponentName = ""
                     
                     let mData = MatchSummaryData()
-                    
-                    
                     if let runsTaken = value["RunsTaken"]{
                         
                         mData.BattingSectionHidden = (runsTaken == "-")
                         
                         if mData.BattingSectionHidden == false {
-                            battingBowlingScore.appendContentsOf(runsTaken)
+                            
+                            battingBowlingScore.bold(runsTaken, fontName: appFont_black, fontSize: 30).bold("\nRUNS", fontName: appFont_black, fontSize: 12)
+                            
                         }
                     }
                     
@@ -90,10 +90,12 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                         
                         if mData.BowlingSectionHidden == false {
                             if battingBowlingScore.length > 0 {
-                                battingBowlingScore.appendContentsOf("\n\(wicketsTaken)-\(runsGiven)")
+                                
+                                battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 30).bold("\nWICKETS", fontName: appFont_black, fontSize: 12)
+                                
                             }
                             else{
-                                battingBowlingScore.appendContentsOf("\(wicketsTaken)-\(runsGiven)")
+                                battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 53).bold("\nWICKETS", fontName: appFont_black, fontSize: 12)
                             }
                             
                             
@@ -102,8 +104,24 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                     }
                     
                     
+                    if battingBowlingScore.length == 0 {
+                        battingBowlingScore.bold("DNP", fontName: appFont_black, fontSize: 30)
+                    }
+                    
+                    
                     
                     if let date = value["MatchDate"]{
+                        
+                        
+                        
+                        var DateFormatter = NSDateFormatter()
+                        DateFormatter.dateFormat = "dd MM yyyy"
+                        DateFormatter.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
+                        var dateFromString = DateFormatter.dateFromString(date)
+                        
+                        mData.matchDate = dateFromString
+                        
+                        
                         matchVenueAndDate.appendContentsOf(date as? String ?? "NA")
                     }
                     if let venue = value["Ground"]{
@@ -123,6 +141,9 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                     
                 }
             }
+            
+            self.matches.sortInPlace({ $0.matchDate.compare($1.matchDate) == NSComparisonResult.OrderedDescending })
+            
             KRProgressHUD.dismiss()
             self.matchSummaryTable.reloadData()
             
@@ -139,7 +160,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             
             if let currentMatch = matches[indexPath.row] as? MatchSummaryData {
                 
-                aCell.BattingOrBowlingScore.text = currentMatch.battingBowlingScore
+                aCell.BattingOrBowlingScore.attributedText = currentMatch.battingBowlingScore
                 aCell.matchDateAndVenue.text = currentMatch.matchDateAndVenue
                 aCell.oponentName.text = currentMatch.opponentName
             }
