@@ -73,7 +73,8 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     @IBAction func postNewComment(sender: AnyObject) {
         
-        dataSource.append(["OwnerName":"Another Friend","Comment":commentBox.text])
+        
+        dataSource.append(["OwnerName":loggedInUserName ?? "Another Friend","Comment":commentBox.text])
         
         let postId = postData!.dictionaryValue["postId"]?.stringValue
         addNewComment(postId!, comment: commentBox.text)

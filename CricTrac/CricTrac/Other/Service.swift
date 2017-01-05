@@ -678,7 +678,7 @@ func addNewComment(postId:String,comment:String){
     
     let ref = fireBaseRef.child("TimelinePosts").child(postId).child("TimelineComments").childByAutoId()
     
-    let commentDict:[String:String] = ["OwnerId":(currentUser?.displayName) ?? "","Comment":comment,"OwnerID":currentUser!.uid,"OwnerName":(currentUser?.displayName) ?? "","isDeleted":"0"]
+    let commentDict:[String:String] = ["Comment":comment,"OwnerID":currentUser!.uid,"OwnerName":loggedInUserName ?? "","isDeleted":"0"]
     
     ref.setValue(commentDict)
     
