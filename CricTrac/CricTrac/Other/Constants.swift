@@ -12,12 +12,12 @@ import Firebase
 
 public var date = 0
 
-public var loggedInUserInfo = [String:String]()
+public var loggedInUserInfo = [String:AnyObject]()
 
 public var loggedInUserName:String?{
 
-    guard let firstName = loggedInUserInfo["FirstName"] else {return nil}
-    guard let lastName =  loggedInUserInfo["LastName"] else { return nil}
+    guard let firstName = loggedInUserInfo["FirstName"] as? String else {return nil}
+    guard let lastName =  loggedInUserInfo["LastName"] as? String else { return nil}
     return firstName + " " + lastName
 }
 

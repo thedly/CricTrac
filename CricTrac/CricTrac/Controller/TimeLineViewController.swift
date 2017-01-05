@@ -81,15 +81,15 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             
             
             
-            var timelineDta = timelineData!.dictionaryValue["timeline"]!.arrayObject
+            var timelineDta = timelineData!.arrayValue
             
-            let pageKey = timelineData!.dictionaryValue["pageKey"]!.stringValue as AnyObject
+           // let pageKey = timelineData!.dictionaryValue["pageKey"]!.stringValue as AnyObject
             
-            timelineDta?.insert(data["timeline"]!, atIndex: 0)
+            timelineDta.insert(JSON(data["timeline"]!), atIndex: 0)
             
-            let newResultDict:[String:AnyObject] = ["timeline":timelineDta!,"pageKey":pageKey]
+            //let newResultDict:[String:AnyObject] = ["timeline":timelineDta,"pageKey":pageKey]
             
-            timelineData = JSON(newResultDict)
+           timelineData = JSON(timelineDta)
             
             self.timeLineTable.reloadData()
             

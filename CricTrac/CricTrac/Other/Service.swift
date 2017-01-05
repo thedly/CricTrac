@@ -223,7 +223,8 @@ func getAllUserData(sucessBlock:(AnyObject)->Void){
 func getAllUserProfileInfo(){
     
     fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-        if let data = snapshot.value as? [String : String]{
+        print(snapshot)
+        if let data = snapshot.value as? [String : AnyObject]{
             
             loggedInUserInfo = data
         }
