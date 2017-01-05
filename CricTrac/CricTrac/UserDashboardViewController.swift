@@ -296,7 +296,6 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         getAllDashboardData { (data) in
             
             DashboardDetails = DashboardData(dataObj: data)
-            
             if DashboardDetails != nil {
                 self.winPerc.text = DashboardDetails.WinPercentage
                 self.BB.text = DashboardDetails.TopBowling1stMatchScore
