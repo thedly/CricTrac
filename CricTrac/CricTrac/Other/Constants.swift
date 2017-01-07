@@ -40,13 +40,17 @@ let menuData = [
 
 let settingsMenuData = [
     
-    ["title":"Show profile picture","vc":"ProfileBaseViewController", "img": "Menu_TimeLine", "desc": "Show profile picture to other users", "IsSwitchVisible": true],
-    ["title":"Media Auto-Download","vc":"UserDashboardViewController", "img": "Menu_Dashboard", "desc": "Selecting no will auto-download media only while you are using wi-fi", "IsSwitchVisible": false],
-    ["title":"Offline Matches","vc":"AddMatchDetailsViewController", "img": "Menu_AddMatch", "desc": "Matches to be downloaded for offline view", "IsSwitchVisible": false],
+    //["title":"Show profile picture","vc":"ProfileBaseViewController", "img": "Menu_TimeLine", "desc": "Show profile picture to other users", "IsSwitchVisible": true],
+    //["title":"Media Auto-Download","vc":"UserDashboardViewController", "img": "Menu_Dashboard", "desc": "Selecting no will auto-download media only while you are using wi-fi", "IsSwitchVisible": false],
+    //["title":"Offline Matches","vc":"AddMatchDetailsViewController", "img": "Menu_AddMatch", "desc": "Matches to be downloaded for offline view", "IsSwitchVisible": false],
     ["title":"App Theme","vc":"ThemeSettingsViewController", "img": "Menu_Summary", "desc": "Choose desired theme color for your app", "IsSwitchVisible": false],
     ["title":"Change Password","vc":"FriendBaseViewController", "img": "Menu_Friends", "desc": "", "IsSwitchVisible": false],
     ["title":"FAQ","vc":  "ProfileBaseViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false],
-    ["title":"Terms & Conditions","vc":"AddMatchDetailsViewController", "img": "Menu_Statistics", "desc": "", "IsSwitchVisible": false]
+    ["title":"Feedback","vc":  "ProfileBaseViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false],
+    ["title":"Rate this app","vc":  "ProfileBaseViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false],
+    ["title":"Terms & Conditions","vc":"AddMatchDetailsViewController", "img": "Menu_Statistics", "desc": "", "IsSwitchVisible": false],
+    ["title":"Privacy policy","vc":  "ProfileBaseViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false],
+    ["title":"About","vc":  "ProfileBaseViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false],
 ]
 
 
