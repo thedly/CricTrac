@@ -98,11 +98,11 @@ func addMatchData(key:NSString,data:[String:String]){
     
     var dataToBeModified = data
     
-    let formatter = NSDateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    //let formatter = NSDateFormatter()
+    //formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     
-    dataToBeModified["MatchAddedDate"] = formatter.stringFromDate(NSDate())
-    dataToBeModified["MatchEditedDate"] = formatter.stringFromDate(NSDate())
+    dataToBeModified["MatchAddedDate"] = NSDate().getCurrentTimeStamp() // formatter.stringFromDate(NSDate())
+    dataToBeModified["MatchEditedDate"] = NSDate().getCurrentTimeStamp()// formatter.stringFromDate(NSDate())
     
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").childByAutoId()
     dataToBeModified["MatchId"] = ref.key
@@ -249,22 +249,22 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
     
     var dataToBeModified = data
     
-    let formatter = NSDateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//    let formatter = NSDateFormatter()
+//    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     
     dataToBeModified["UserLastLoggedin"] = data["UserLastLoggedin"]
     
     if profileData.fullName == " "
     {
-        dataToBeModified["UserAddedDate"] = formatter.stringFromDate(NSDate())
-        dataToBeModified["UserEditedDate"] = formatter.stringFromDate(NSDate())
-        createDashboardData(DashboardData(dataObj: [String:String]()).dashboardData)
+        dataToBeModified["UserAddedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
+        dataToBeModified["UserEditedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
+        createDashboardData(DashboardData(dataObj: [String:AnyObject]()).dashboardData)
         
     }
     else
     {
         dataToBeModified["UserAddedDate"] = data["UserAddedDate"]
-        dataToBeModified["UserEditedDate"] = formatter.stringFromDate(NSDate())
+        dataToBeModified["UserEditedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
     }
     
     
@@ -315,12 +315,8 @@ func createDashboardData(dashboardData: [String: AnyObject]){
 
 func updateLastLogin(){
     
-    let formatter = NSDateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-
-    
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").child("UserLastLoggedin")
-    ref.setValue(formatter.stringFromDate(NSDate()))
+    ref.setValue(NSDate().getCurrentTimeStamp())
 }
 
 func getAllProfileData(sucessBlock:([String:AnyObject])->Void){
@@ -403,10 +399,10 @@ func updateMatchData(key:String,data:[String:String]){
     
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").child(key)
     
-    let formatter = NSDateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    //let formatter = NSDateFormatter()
+    //formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     
-    dataToBeModified["MatchEditedDate"] = formatter.stringFromDate(NSDate())
+    dataToBeModified["MatchEditedDate"] = NSDate().getCurrentTimeStamp() //formatter.stringFromDate(NSDate())
     
     
     ref.updateChildValues(dataToBeModified)

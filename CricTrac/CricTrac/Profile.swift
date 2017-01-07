@@ -104,7 +104,6 @@ class Profile {
         return [
             "FirstName" : self.FirstName,
             "LastName" : self.LastName,
-            "UserId" : self.id,
             "BattingStyle": self.BattingStyle,
             "BowlingStyle": self.BowlingStyle,
             "City": self.City,

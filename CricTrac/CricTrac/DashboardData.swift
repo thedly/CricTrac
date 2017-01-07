@@ -68,70 +68,70 @@ class DashboardData {
     var TotalWickets: String!
     var TotalWides: String!
     var TotalWins: String!
-    var WinPercentage: String?
+    var WinPercentage: String!
     
     
-    init(dataObj: [String: AnyObject]){
-        self.BattingInnings = String(dataObj["BattingInnings"]!) ?? "0"
-        self.BowlingInnings = String(dataObj["BowlingInnings"]!) ?? "0"
-        self.ChaseWinPercentage = String(dataObj["ChaseWinPercentage"]!) ?? "0"
-        self.FirstBattingCount = String(dataObj["FirstBattingCount"]!) ?? "0"
-        self.FirstBattingWins = String(dataObj["FirstBattingWins"]!) ?? "0"
-        self.SecondBattingCount = String(dataObj["SecondBattingCount"]!) ?? "0"
-        self.SecondBattingWins = String(dataObj["SecondBattingWins"]!) ?? "0"
-        self.TopBatting1stMatch = String(dataObj["TopBatting1stMatch"]!) ?? "0"
-        self.TopBatting1stMatchDate = String(dataObj["TopBatting1stMatchDate"]!) ?? "-"
-        self.TopBatting1stMatchGround = String(dataObj["TopBatting1stMatchGround"]!) ?? "-"
-        self.TopBatting1stMatchOpp = String(dataObj["TopBatting1stMatchOpp"]!) ?? "-"
-        self.TopBatting1stMatchScore = String(dataObj["TopBatting1stMatchScore"]!) ?? "0"
-        self.TopBatting2ndMatch = String(dataObj["TopBatting2ndMatch"]!) ?? "0"
-        self.TopBatting2ndMatchDate = String(dataObj["TopBatting2ndMatchDate"]!) ?? "-"
-        self.TopBatting2ndMatchGround = String(dataObj["TopBatting2ndMatchGround"]!) ?? "-"
-        self.TopBatting2ndMatchOpp = String(dataObj["TopBatting2ndMatchOpp"]!) ?? "-"
-        self.TopBatting2ndMatchScore = String(dataObj["TopBatting2ndMatchScore"]!) ?? "0"
-        self.TopBatting3rdMatch = String(dataObj["TopBatting3rdMatch"]!) ?? "0"
-        self.TopBatting3rdMatchDate = String(dataObj["TopBatting3rdMatchDate"]!) ?? "-"
-        self.TopBatting3rdMatchGround = String(dataObj["TopBatting3rdMatchGround"]!) ?? "-"
-        self.TopBatting3rdMatchOpp = String(dataObj["TopBatting3rdMatchOpp"]!) ?? "-"
-        self.TopBatting3rdMatchScore = String(dataObj["TopBatting3rdMatchScore"]!) ?? "0"
-        self.TopBowling1stMatchID = String(dataObj["TopBowling1stMatchID"]!) ?? "0"
-        self.TopBowling1stMatchScore = String(dataObj["TopBowling1stMatchScore"]!) ?? "0-0"
-        self.TopBowling1stMatchOpp = String(dataObj["TopBowling1stMatchOpp"]!) ?? "-"
-        self.TopBowling1stMatchDate = String(dataObj["TopBowling1stMatchDate"]!) ?? "-"
-        self.TopBowling1stMatchGround = String(dataObj["TopBowling1stMatchGround"]!) ?? "-"
-        self.TopBowling2ndMatchID = String(dataObj["TopBowling2ndMatchID"]!) ?? "0"
-        self.TopBowling2ndMatchScore = String(dataObj["TopBowling2ndMatchScore"]!) ?? "0-0"
-        self.TopBowling2ndMatchDate = String(dataObj["TopBowling2ndMatchDate"]!) ?? "-"
-        self.TopBowling2ndMatchGround = String(dataObj["TopBowling2ndMatchGround"]!) ?? "-"
-        self.TopBowling2ndMatchOpp = String(dataObj["TopBowling2ndMatchOpp"]!) ?? "-"
-        self.TopBowling3rdMatchID = String(dataObj["TopBowling3rdMatchID"]!) ?? "0"
-        self.TopBowling3rdMatchScore = String(dataObj["TopBowling3rdMatchScore"]!) ?? "0-0"
-        self.TopBowling3rdMatchDate = String(dataObj["TopBowling3rdMatchDate"]!) ?? "-"
-        self.TopBowling3rdMatchOpp = String(dataObj["TopBowling3rdMatchOpp"]!) ?? "-"
-        self.TopBowling3rdMatchGround = String(dataObj["TopBowling3rdMatchGround"]!) ?? "-"
-        self.Total100s = String(dataObj["Total100s"]!) ?? "0"
-        self.Total3Wkts = String(dataObj["Total3Wkts"]!) ?? "0"
-        self.Total4s = String(dataObj["Total4s"]!) ?? "0"
-        self.Total50s = String(dataObj["Total50s"]!) ?? "0"
-        self.Total5Wkts = String(dataObj["Total5Wkts"]!) ?? "0"
-        self.Total6s = String(dataObj["Total6s"]!) ?? "0"
-        self.TotalBallsFaced = String(dataObj["TotalBallsFaced"]!) ?? "0"
-        self.TotalBattingAverage = String(dataObj["TotalBattingAverage"]!) ?? "0"
-        self.TotalBowlingAverage = String(dataObj["TotalBowlingAverage"]!) ?? "0"
-        self.TotalDucks = String(dataObj["TotalDucks"]!) ?? ""
-        self.TotalEconomy = String(dataObj["TotalEconomy"]!) ?? "0"
-        self.TotalMaidens = String(dataObj["TotalMaidens"]!) ?? "0"
-        self.TotalMatches = String(dataObj["TotalMatches"]!) ?? "0"
-        self.TotalNBs = String(dataObj["TotalNBs"]!) ?? "0"
-        self.TotalNotOut = String(dataObj["TotalNotOut"]!) ?? "0"
-        self.TotalOvers = String(dataObj["TotalOvers"]!) ?? "0"
-        self.TotalRuns = String(dataObj["TotalRuns"]!) ?? "0"
-        self.TotalRunsGiven = String(dataObj["TotalRunsGiven"]!) ?? "0"
-        self.TotalStrikeRate = String(dataObj["TotalStrikeRate"]!) ?? "0"
-        self.TotalWickets = String(dataObj["TotalWickets"]!) ?? "0"
-        self.TotalWides = String(dataObj["TotalWides"]!) ?? "0"
-        self.TotalWins = String(dataObj["TotalWins"]!) ?? "0"
-        self.WinPercentage = String(dataObj["WinPercentage"]!) ?? "0"
+    init(dataObj: [String: AnyObject!]){
+        self.BattingInnings = String(dataObj["BattingInnings"] ?? "0")
+        self.BowlingInnings = String(dataObj["BowlingInnings"] ?? "0")
+        self.ChaseWinPercentage = String(dataObj["ChaseWinPercentage"] ??  "0")
+        self.FirstBattingCount = String(dataObj["FirstBattingCount"] ??  "0")
+        self.FirstBattingWins = String(dataObj["FirstBattingWins"] ??  "0")
+        self.SecondBattingCount = String(dataObj["SecondBattingCount"] ??  "0")
+        self.SecondBattingWins = String(dataObj["SecondBattingWins"] ??  "0")
+        self.TopBatting1stMatch = String(dataObj["TopBatting1stMatch"] ??  "0")
+        self.TopBatting1stMatchDate = String(dataObj["TopBatting1stMatchDate"] ?? "-")
+        self.TopBatting1stMatchGround = String(dataObj["TopBatting1stMatchGround"] ?? "-")
+        self.TopBatting1stMatchOpp = String(dataObj["TopBatting1stMatchOpp"] ?? "-")
+        self.TopBatting1stMatchScore = String(dataObj["TopBatting1stMatchScore"] ??  "0")
+        self.TopBatting2ndMatch = String(dataObj["TopBatting2ndMatch"] ??  "0")
+        self.TopBatting2ndMatchDate = String(dataObj["TopBatting2ndMatchDate"] ?? "-")
+        self.TopBatting2ndMatchGround = String(dataObj["TopBatting2ndMatchGround"] ?? "-")
+        self.TopBatting2ndMatchOpp = String(dataObj["TopBatting2ndMatchOpp"] ?? "-")
+        self.TopBatting2ndMatchScore = String(dataObj["TopBatting2ndMatchScore"] ??  "0")
+        self.TopBatting3rdMatch = String(dataObj["TopBatting3rdMatch"] ??  "0")
+        self.TopBatting3rdMatchDate = String(dataObj["TopBatting3rdMatchDate"] ?? "-")
+        self.TopBatting3rdMatchGround = String(dataObj["TopBatting3rdMatchGround"] ?? "-")
+        self.TopBatting3rdMatchOpp = String(dataObj["TopBatting3rdMatchOpp"] ?? "-")
+        self.TopBatting3rdMatchScore = String(dataObj["TopBatting3rdMatchScore"] ??  "0")
+        self.TopBowling1stMatchID = String(dataObj["TopBowling1stMatchID"] ??  "0")
+        self.TopBowling1stMatchScore = String(dataObj["TopBowling1stMatchScore"] ?? "0-0")
+        self.TopBowling1stMatchOpp = String(dataObj["TopBowling1stMatchOpp"] ?? "-")
+        self.TopBowling1stMatchDate = String(dataObj["TopBowling1stMatchDate"] ?? "-")
+        self.TopBowling1stMatchGround = String(dataObj["TopBowling1stMatchGround"] ?? "-")
+        self.TopBowling2ndMatchID = String(dataObj["TopBowling2ndMatchID"] ??  "0")
+        self.TopBowling2ndMatchScore = String(dataObj["TopBowling2ndMatchScore"] ?? "0-0")
+        self.TopBowling2ndMatchDate = String(dataObj["TopBowling2ndMatchDate"] ?? "-")
+        self.TopBowling2ndMatchGround = String(dataObj["TopBowling2ndMatchGround"] ?? "-")
+        self.TopBowling2ndMatchOpp = String(dataObj["TopBowling2ndMatchOpp"] ?? "-")
+        self.TopBowling3rdMatchID = String(dataObj["TopBowling3rdMatchID"] ??  "0")
+        self.TopBowling3rdMatchScore = String(dataObj["TopBowling3rdMatchScore"] ?? "0-0")
+        self.TopBowling3rdMatchDate = String(dataObj["TopBowling3rdMatchDate"] ?? "-")
+        self.TopBowling3rdMatchOpp = String(dataObj["TopBowling3rdMatchOpp"] ?? "-")
+        self.TopBowling3rdMatchGround = String(dataObj["TopBowling3rdMatchGround"] ?? "-")
+        self.Total100s = String(dataObj["Total100s"] ??  "0")
+        self.Total3Wkts = String(dataObj["Total3Wkts"] ??  "0")
+        self.Total4s = String(dataObj["Total4s"] ??  "0")
+        self.Total50s = String(dataObj["Total50s"] ??  "0")
+        self.Total5Wkts = String(dataObj["Total5Wkts"] ??  "0")
+        self.Total6s = String(dataObj["Total6s"] ??  "0")
+        self.TotalBallsFaced = String(dataObj["TotalBallsFaced"] ??  "0")
+        self.TotalBattingAverage = String(dataObj["TotalBattingAverage"] ??  "0")
+        self.TotalBowlingAverage = String(dataObj["TotalBowlingAverage"] ??  "0")
+        self.TotalDucks = String(dataObj["TotalDucks"] ?? "")
+        self.TotalEconomy = String(dataObj["TotalEconomy"] ??  "0")
+        self.TotalMaidens = String(dataObj["TotalMaidens"] ??  "0")
+        self.TotalMatches = String(dataObj["TotalMatches"] ??  "0")
+        self.TotalNBs = String(dataObj["TotalNBs"] ??  "0")
+        self.TotalNotOut = String(dataObj["TotalNotOut"] ??  "0")
+        self.TotalOvers = String(dataObj["TotalOvers"] ??  "0")
+        self.TotalRuns = String(dataObj["TotalRuns"] ??  "0")
+        self.TotalRunsGiven = String(dataObj["TotalRunsGiven"] ??  "0")
+        self.TotalStrikeRate = String(dataObj["TotalStrikeRate"] ??  "0")
+        self.TotalWickets = String(dataObj["TotalWickets"] ??  "0")
+        self.TotalWides = String(dataObj["TotalWides"] ??  "0")
+        self.TotalWins = String(dataObj["TotalWins"] ??  "0")
+        self.WinPercentage = String(dataObj["WinPercentage"] ??  "0")
     }
     
     var dashboardData: [String: String] {

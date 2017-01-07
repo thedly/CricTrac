@@ -239,7 +239,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                         
                         
                         var DateFormatter = NSDateFormatter()
-                        DateFormatter.dateFormat = "dd MM yyyy"
+                        DateFormatter.dateFormat = "dd-MM-yyyy"
                         DateFormatter.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
                         var dateFromString = DateFormatter.dateFromString(date)
                         

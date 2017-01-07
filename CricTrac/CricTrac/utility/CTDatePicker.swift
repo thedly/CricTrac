@@ -52,7 +52,10 @@ class CTDatePicker: NSObject {
         dateFormatter.dateStyle = .MediumStyle
         dateFormatter.timeStyle = .NoStyle
         dateFormatter.dateFormat = gbDateFormat
-        inputText.text = dateFormatter.stringFromDate(datePicker.date)
+        
+        var selectedDate = dateFormatter.stringFromDate(datePicker.date)
+        
+        inputText.text = selectedDate.replaceStr(" ", withString: "-")
         inputText.resignFirstResponder()
     }
     func cancelClick() {
