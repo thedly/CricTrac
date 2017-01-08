@@ -29,6 +29,9 @@ var BowlingStyles = [String]()
 var PlayingRoles = [String]()
 var AgeGroupData = [String]()
 
+var friendsDataArray = [Friends]()
+var friendsRequestsData = [ReceivedFriendRequest]()
+
 var Achievements = [String]()
 
 var DashboardDetails : DashboardData!
@@ -62,6 +65,13 @@ public func viewControllerFrom(storyBoard:String,vcid:String)->UIViewController{
     let storyboard = UIStoryboard(name:storyBoard, bundle: nil)
     
     return storyboard.instantiateViewControllerWithIdentifier(vcid)
+}
+
+public func extractImages(userId:String) -> UIImage {
+    if userId != "" {
+        return UserProfilesImages[userId] ?? UIImage(named: "User")!
+    }
+    return UIImage(named: "User")!
 }
 
 

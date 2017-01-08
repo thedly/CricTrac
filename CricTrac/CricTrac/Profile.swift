@@ -51,6 +51,8 @@ class Profile {
     var UserLastLoggedin: String
     
     
+    
+    
     init(usrObj : [String: AnyObject]) {
         
         self.FirstName = (usrObj["FirstName"] ?? "") as! String
@@ -75,7 +77,7 @@ class Profile {
         
         self.CoachingLevel = (usrObj["CoachingLevel"] ?? "") as! String
         self.Experience = (usrObj["Experience"] ?? "") as! String
-        self.Certifications = (usrObj["Certifications"] ?? "") as! String
+        self.Certifications = (String(usrObj["Certifications"]) ?? "") as! String
         
         
         self.fullName = "\(self.FirstName) \(self.LastName)"
@@ -92,9 +94,9 @@ class Profile {
         
         self.UserStatus = (usrObj["UserStatus"] ?? userStatus.Free.rawValue) as! String
         
-        self.UserAddedDate = (usrObj["UserAddedDate"] ?? "") as! String
-        self.UserEditedDate = (usrObj["UserEditedDate"] ?? "") as! String
-        self.UserLastLoggedin = (usrObj["UserLastLoggedin"] ?? "") as! String
+        self.UserAddedDate = (String(usrObj["UserAddedDate"]) ?? "") as! String
+        self.UserEditedDate = (String(usrObj["UserEditedDate"]) ?? "") as! String
+        self.UserLastLoggedin = (String(usrObj["UserLastLoggedin"]) ?? "") as! String
         self.CoachPlayedFor = (usrObj["CoachPlayedFor"] ?? []) as! [String]
         
     }

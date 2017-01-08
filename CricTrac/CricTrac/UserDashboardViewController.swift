@@ -269,15 +269,23 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             self.matches.sortInPlace({ $0.matchDate.compare($1.matchDate) == NSComparisonResult.OrderedDescending })
             
             
+            if self.matches.count > 0 {
+                self.firstRecentMatchScoreCard.attributedText = self.matches[0].battingBowlingScore
+                
+                
+                self.firstRecentMatchOpponentName.text = self.matches[0].opponentName
+                
+                self.firstRecentMatchDateAndVenue.text = self.matches[0].matchDateAndVenue
+                
+                if self.matches.count > 1 {
+                    self.secondRecentMatchScoreCard.attributedText = self.matches[1].battingBowlingScore
+                    self.secondRecentMatchOpponentName.text = self.matches[1].opponentName
+                    self.secondRecentMatchDateAndVenue.text = self.matches[1].matchDateAndVenue
+                }
+                
+            }
             
-            self.firstRecentMatchScoreCard.attributedText = self.matches[0].battingBowlingScore
-            self.secondRecentMatchScoreCard.attributedText = self.matches[1].battingBowlingScore
             
-            self.firstRecentMatchOpponentName.text = self.matches[0].opponentName
-            self.secondRecentMatchOpponentName.text = self.matches[1].opponentName
-            
-            self.firstRecentMatchDateAndVenue.text = self.matches[0].matchDateAndVenue
-            self.secondRecentMatchDateAndVenue.text = self.matches[1].matchDateAndVenue
             
             
             KRProgressHUD.dismiss()

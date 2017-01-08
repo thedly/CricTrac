@@ -38,6 +38,29 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
 
     }
     
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        friendsRequestsData.removeAll()
+        getAllFriendRequests { (data) in
+            
+            
+            for (_, req) in data {
+                var reqData = ReceivedFriendRequest(dataObj: req as! [String : AnyObject])
+                friendsRequestsData.append(reqData)
+                self.RequestsTblview.reloadData()
+            }
+            
+            
+            
+
+            
+            
+            // do something here
+        }
+    }
+    
+    
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "REQUESTS")
     }
@@ -46,6 +69,11 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         
         
         let aCell =  RequestsTblview.dequeueReusableCellWithIdentifier("FriendRequestsCell", forIndexPath: indexPath) as! FriendRequestsCell
+        
+        aCell.FriendName.text = friendsRequestsData[indexPath.row].Name
+        aCell.FriendCity.text = friendsRequestsData[indexPath.row].City
+        aCell.FriendProfileImage.image = extractImages(friendsRequestsData[indexPath.row].ReceivedFrom)
+        
         aCell.backgroundColor = UIColor.clearColor()
         return aCell
     }
@@ -62,7 +90,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return friendsRequestsData.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

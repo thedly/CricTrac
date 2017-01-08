@@ -92,6 +92,26 @@ func loadInitialValues(){
             groundNames = value
         }
     })
+    
+    getAllProfiles({ resultObj in
+        UserProfilesData.removeAll()
+        for profile in resultObj {
+            
+            var currentProfile = Profile(usrObj: profile)
+            
+            
+            UserProfilesData.append(currentProfile)
+            if let _imageUrl = profile["ProfileImageUrl"] as? String where _imageUrl != ""  {
+                
+                let userId = profile["UserId"] as! String
+                
+                getImageFromFirebase(_imageUrl) { (data) in
+                    UserProfilesImages[userId] = data
+                }
+            }
+        }
+    })
+    
 }
 
 func addMatchData(key:NSString,data:[String:String]){
@@ -600,10 +620,9 @@ public func AddSentRequestData(data: [String:[String:String]], callback:(data:St
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("SentRequest").childByAutoId()
     ref.setValue(dataToBeManipulated["sentRequestData"], withCompletionBlock: { error, newlyCreateddata in
         
-        var createdId = [String: AnyObject]()
-        createdId["SentRequestId"] = newlyCreateddata.key
+        var sentcreatedId = [String: AnyObject]()
+        sentcreatedId["SentRequestId"] = newlyCreateddata.key
         
-        ref.updateChildValues(createdId)
         
         let receivedRequestRef = fireBaseRef.child("Users").child(dataToBeManipulated["sentRequestData"]!["SentTo"]!).child("ReceivedRequest").childByAutoId()
         
@@ -611,7 +630,18 @@ public func AddSentRequestData(data: [String:[String:String]], callback:(data:St
         receivedRequestRef.setValue(data["ReceivedRequestData"], withCompletionBlock: { error, newlyCreatedReceivedRequestData in
             var createdId = [String: AnyObject]()
             createdId["RequestId"] = newlyCreatedReceivedRequestData.key
+            
+            createdId["SentRequestId"] = newlyCreateddata.key
+            
+            
             receivedRequestRef.updateChildValues(createdId)
+            
+            
+            sentcreatedId["ReceivedRequestIdOther"] = newlyCreatedReceivedRequestData.key
+            
+            ref.updateChildValues(sentcreatedId)
+            
+            
             
             callback(data: newlyCreatedReceivedRequestData.key)
         })
@@ -620,17 +650,31 @@ public func AddSentRequestData(data: [String:[String:String]], callback:(data:St
 }
  //MARK: - Friends
 
-var friendsDataArray = [String]()
+
+func getAllFriendRequests(sucessBlock:([String: AnyObject])->Void){
+    
+    fireBaseRef.child("Users").child(currentUser!.uid).child("ReceivedRequest").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let data = snapshot.value as? [String : AnyObject] {
+            
+            sucessBlock(data)
+        }
+        else{
+            sucessBlock([:])
+        }
+    })
+}
+
 
 func getAllFriends(){
     
-    fireBaseRef.child(currentUser!.uid).child("TFriends").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+    fireBaseRef.child(currentUser!.uid).child("Friends").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
         
-        if let data = snapshot.value as? [String : String] {
+        if let data = snapshot.value as? [String : AnyObject] {
             
-            for (_,value) in data{
+            for (_,friend) in data{
                 
-                friendsDataArray.append(value)
+                friendsDataArray.append(Friends(dataObj: friend as! [String : String]))
             }
         }
         

@@ -37,29 +37,6 @@ class FriendSuggestionsCell: UITableViewCell {
     }
 
     
-    func AddFriendBtnPressed(sender: UIButton) {
-        
-        
-        if let loggedInUser = UserProfilesData.filter({ $0.id == currentUser?.uid }).first {
-            
-//            let friendRequestData  = ["sentRequestData":
-//            
-//            ["City": _userObj.City, "Club": _userObj.TeamName, "Name": _userObj.fullName, "SentTo": _userObj.id, "SentDateTime": "\(currentTimeMillis())"],
-//            
-//            "ReceivedRequestData" : ["City": loggedInUser.City, "Club": loggedInUser.TeamName, "Name": loggedInUser.fullName, "ReceivedFrom": loggedInUser.id, "ReceievedDateTime": "\(currentTimeMillis())"]
-//            ]
-//            
-//            AddSentRequestData(friendRequestData, callback: { sentRequestId in
-//            print(sentRequestId)
-//            })
-            
-            
-            
-            //Send Friend Request
-        }
-        
-        
-    }
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -72,19 +49,13 @@ class FriendSuggestionsCell: UITableViewCell {
         
         self.userName.text = userProfileObject.fullName
 //        self.userTeam.text = userProfileObject.TeamName
-        self.userProfileView.image = extractImages(userProfileObject.ProfileImageUrl)
+        self.userProfileView.image = extractImages(userProfileObject.id)
         
         
         
-        self.AddFriendBtn.addTarget(self, action: #selector(FriendSuggestionsCell.AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
     }
     
-    func extractImages(_imageUrl:String) -> UIImage {
-        if _imageUrl != "" {
-            return UserProfilesImages[_imageUrl]!
-        }
-        return UIImage(named: "User")!
-    }
+    
 
     
 

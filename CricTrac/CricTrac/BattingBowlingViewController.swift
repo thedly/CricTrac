@@ -125,6 +125,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
             {
                 
                 self.view.endEditing(true)
+                
                 RunsTaken = "-"
                 foursText.text = "-"
                 sixesText.text = "-"
@@ -147,10 +148,12 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
     
     func validateOvers() -> Void {
         
-        if let overText = oversText {
-            if overText.text!.trimWhiteSpace.length == 0 || Int(overText.text!) <= 0 {
+        if let overText = oversText.text {
+            if overText.length == 0 || Int(overText) <= 0 {
                 
                 self.view.endEditing(true)
+                
+                OversBowled = overText
                 
                 widesText.text = "-"
                 noballText.text = "-"

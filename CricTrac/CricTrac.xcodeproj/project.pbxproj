@@ -102,6 +102,9 @@
 		8962F89F1D4666E0008D1AC3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8962F89E1D4666E0008D1AC3 /* Images.xcassets */; };
 		896407CE1DA7FE51002212EB /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896407CD1DA7FE51002212EB /* SplashScreenViewController.swift */; };
 		897194CB1DA34DFD00478F82 /* AddMatchDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897194CA1DA34DFD00478F82 /* AddMatchDetailsViewController.swift */; };
+		897C414C1E21FD4B005F1231 /* ReceivedFriendRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897C414B1E21FD4B005F1231 /* ReceivedFriendRequest.swift */; };
+		897C414E1E21FF16005F1231 /* SentFriendRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897C414D1E21FF16005F1231 /* SentFriendRequest.swift */; };
+		897C41501E21FFA4005F1231 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897C414F1E21FFA4005F1231 /* Friends.swift */; };
 		89836C5E1E08081D00ABDCA9 /* ProfileReadOnlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89836C5D1E08081D00ABDCA9 /* ProfileReadOnlyViewController.swift */; };
 		898786431E18BAFD008967AD /* MatchSummaryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898786421E18BAFD008967AD /* MatchSummaryData.swift */; };
 		899206241D61BA0700F99A97 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899206231D61BA0700F99A97 /* FriendsViewController.swift */; };
@@ -238,6 +241,9 @@
 		8962F89E1D4666E0008D1AC3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		896407CD1DA7FE51002212EB /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		897194CA1DA34DFD00478F82 /* AddMatchDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMatchDetailsViewController.swift; sourceTree = "<group>"; };
+		897C414B1E21FD4B005F1231 /* ReceivedFriendRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceivedFriendRequest.swift; sourceTree = "<group>"; };
+		897C414D1E21FF16005F1231 /* SentFriendRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentFriendRequest.swift; sourceTree = "<group>"; };
+		897C414F1E21FFA4005F1231 /* Friends.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
 		89836C5D1E08081D00ABDCA9 /* ProfileReadOnlyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileReadOnlyViewController.swift; sourceTree = "<group>"; };
 		898786421E18BAFD008967AD /* MatchSummaryData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchSummaryData.swift; sourceTree = "<group>"; };
 		899206231D61BA0700F99A97 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
@@ -415,6 +421,9 @@
 				893DAD491DB660AC00CC1875 /* Profile.swift */,
 				890CC72A1E162F73005D139A /* DashboardData.swift */,
 				898786421E18BAFD008967AD /* MatchSummaryData.swift */,
+				897C414B1E21FD4B005F1231 /* ReceivedFriendRequest.swift */,
+				897C414D1E21FF16005F1231 /* SentFriendRequest.swift */,
+				897C414F1E21FFA4005F1231 /* Friends.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -781,6 +790,7 @@
 				894625001E1580E700FE79C2 /* TeamCollectionViewCell.swift in Sources */,
 				466AD3FC1D7A8EC10033289C /* CTPicker.swift in Sources */,
 				8922042F1D97A7EC005F555B /* FriendsCell.swift in Sources */,
+				897C414C1E21FD4B005F1231 /* ReceivedFriendRequest.swift in Sources */,
 				8930F0381D5B751500C7540B /* CTCountryPicker.swift in Sources */,
 				890EA2F11DB92BD100FB40DB /* ForgotPasswordViewController.swift in Sources */,
 				892EA67E1D58DEBE00BEE5A3 /* ProfileDetails.swift in Sources */,
@@ -794,10 +804,12 @@
 				462DE9F71D478B9E00E31E8F /* CTDatePicker.swift in Sources */,
 				89067D731DAE9D120021F463 /* radioSelectView.swift in Sources */,
 				89067D751DAEA89C0021F463 /* TransitionManager.swift in Sources */,
+				897C414E1E21FF16005F1231 /* SentFriendRequest.swift in Sources */,
 				89129C4C1D90501B009488FE /* RegisterViewController.swift in Sources */,
 				8951D52F1DB08BF5005D101A /* CricketFanViewController.swift in Sources */,
 				46C983B61D39D86800DFC607 /* performanceCell.swift in Sources */,
 				46DE32CB1D90152F0024CD82 /* APostTableViewCell.swift in Sources */,
+				897C41501E21FFA4005F1231 /* Friends.swift in Sources */,
 				8955DA2B1E0ED13A00891937 /* NewPostViewController.swift in Sources */,
 				890B42C71D60472C00736F03 /* CollapsibleTableViewCell.swift in Sources */,
 				893823B41E113ACE00BCD0CD /* SliderMenuViewCell.swift in Sources */,
