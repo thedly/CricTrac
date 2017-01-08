@@ -38,8 +38,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         super.viewDidLoad()
         setUIBackgroundTheme(self.view)
         
-        setColorForViewsWithSameTag(self.view)
-               
+            
         
             }
     
