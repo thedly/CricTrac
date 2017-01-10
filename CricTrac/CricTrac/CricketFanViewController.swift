@@ -76,18 +76,25 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
         addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
             
             profileData = Profile(usrObj: data)
+
+            var SplashScreenVC = viewControllerFrom("Main", vcid: "SplashScreenViewController") as! SplashScreenViewController
             
-            var vc: UIViewController = self.presentingViewController!;
-            while ((vc.presentingViewController) != nil) {
-                
-                vc = vc.presentingViewController!;
-                if ((vc.presentingViewController?.isEqual(viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController)) != nil){
-                    break;
-                }
-            }
             
-            vc.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+            self.presentViewController(SplashScreenVC, animated: true, completion: nil)
+
             
+//            var vc: UIViewController = self.presentingViewController!;
+//            while ((vc.presentingViewController) != nil) {
+//                
+//                vc = vc.presentingViewController!;
+//                if ((vc.presentingViewController?.isEqual(viewControllerFrom("Main", vcid: "ProfileBaseViewController") as! ProfileBaseViewController)) != nil){
+//                    break;
+//                }
+//            }
+//            
+//            vc.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+
+           
         }
         
     }

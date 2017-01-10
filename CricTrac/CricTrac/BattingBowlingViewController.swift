@@ -57,7 +57,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
         if let runText = runsText, let overText = oversText {
             ValidateScore()
             validateOvers()
-            return runText.errorMessage?.length == 0 
+            return true
         }
         return true
     }
@@ -91,24 +91,24 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
                 
                 
                 
-                if let foursScored = foursText.text, let sixesScored = sixesText.text
-                {
-                    var sum = 0
-                    if foursScored.trimWhiteSpace.length > 0, let foursInt = Int(foursScored) {
-                        sum += (4*foursInt)
-                    }
-                    if sixesScored.trimWhiteSpace.length > 0, let sixesInt = Int(sixesScored) {
-                        sum += (6*sixesInt)
-                    }
-                    
-                    if sum > Int(runText)! {
-                        runsText.errorMessage = "Invalid Runs"
-                    }
-                    else
-                    {
-                        runsText.errorMessage = ""
-                    }
-                }
+//                if let foursScored = foursText.text, let sixesScored = sixesText.text
+//                {
+//                    var sum = 0
+//                    if foursScored.trimWhiteSpace.length > 0, let foursInt = Int(foursScored) {
+//                        sum += (4*foursInt)
+//                    }
+//                    if sixesScored.trimWhiteSpace.length > 0, let sixesInt = Int(sixesScored) {
+//                        sum += (6*sixesInt)
+//                    }
+//                    
+//                    if sum > Int(runText)! {
+//                        runsText.errorMessage = "Invalid Runs"
+//                    }
+//                    else
+//                    {
+//                        runsText.errorMessage = ""
+//                    }
+//                }
                 
                 
                 
@@ -127,18 +127,16 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
                 self.view.endEditing(true)
                 
                 RunsTaken = "-"
-                foursText.text = "-"
-                sixesText.text = "-"
-                dismissalText.text = "-"
-                positionText.text = "-"
-                dismissalText.text = "-"
-                ballsPlayedText.text = "-"
+                Fours = "-"
+                Sixes = "-"
+                Dismissal = "-"
+                Position = "-"
+                BallsFaced = "-"
                 
                 foursText.userInteractionEnabled = false
                 sixesText.userInteractionEnabled = false
                 dismissalText.userInteractionEnabled = false
                 positionText.userInteractionEnabled = false
-                dismissalText.userInteractionEnabled = false
                 ballsPlayedText.userInteractionEnabled = false
                 
                 
@@ -155,11 +153,11 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
                 
                 OversBowled = overText
                 
-                widesText.text = "-"
-                noballText.text = "-"
-                wicketsText.text = "-"
-                maidensText.text = "-"
-                runsGivenText.text = "-"
+                Wides = "-"
+                NoBalls = "-"
+                WicketsTaken = "-"
+                Maidens = "-"
+                RunsGiven = "-"
                 
                 
                 
@@ -199,6 +197,8 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
 //                    oversText.errorMessage = ""
 //                }
 //                
+                OversBowled = oversText.text
+                
                 if let wides = widesText.text {
                     Wides = wides != "-" && wides.length > 0  ? wides : "0"
                 }

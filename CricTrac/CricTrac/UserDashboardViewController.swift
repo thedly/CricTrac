@@ -27,6 +27,18 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
    
     
+    @IBOutlet weak var FirstRecentMatchSummary: UIView!
+    
+    
+    @IBOutlet weak var SecondRecentMatchSummary: UIView!
+    
+    
+    @IBOutlet weak var recentMatchesNotAvailable: UILabel!
+    
+    @IBOutlet weak var topBattingNotAvailable: UILabel!
+    
+    @IBOutlet weak var topBowlingNotAvailable: UILabel!
+    
     @IBOutlet weak var firstRecentMatchDateAndVenue: UILabel!
 
     @IBOutlet weak var secondRecentMatchDateAndVenue: UILabel!
@@ -141,6 +153,10 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         TeamsTable.delegate = self
         TeamsTable.dataSource = self
         
+        
+        
+        
+        
         let df = NSDateFormatter()
         df.dateFormat = "dd/MM/yyyy"
         self.PlayerName.text = profileData.fullName.uppercaseString
@@ -177,6 +193,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     func getMatchData(){
         
+        recentMatchesNotAvailable.hidden = true
         KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
         getAllMatchData { (data) in
             
@@ -277,13 +294,30 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 
                 self.firstRecentMatchDateAndVenue.text = self.matches[0].matchDateAndVenue
                 
+                self.FirstRecentMatchSummary.hidden = false
+                
                 if self.matches.count > 1 {
                     self.secondRecentMatchScoreCard.attributedText = self.matches[1].battingBowlingScore
                     self.secondRecentMatchOpponentName.text = self.matches[1].opponentName
                     self.secondRecentMatchDateAndVenue.text = self.matches[1].matchDateAndVenue
+                    
+                    self.SecondRecentMatchSummary.hidden = (self.matches[1].battingBowlingScore == nil || self.matches[1].battingBowlingScore == "0")
+                    
                 }
                 
             }
+            else
+            {
+                self.FirstRecentMatchSummary.hidden = true
+                self.SecondRecentMatchSummary.hidden = true
+                self.recentMatchesNotAvailable.hidden = false
+            }
+            
+            
+            
+            
+            
+            
             
             
             
@@ -299,6 +333,9 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     func setDashboardData(){
         
         KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+        
+        topBattingNotAvailable.hidden = true
+        topBowlingNotAvailable.hidden = true
         
         
         getAllDashboardData { (data) in
@@ -354,6 +391,9 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 self.SecondRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling2ndMatchScore == nil || DashboardDetails.TopBowling2ndMatchScore == "0-0")
                 
                 
+                self.topBattingNotAvailable.hidden = (!self.FirstRecentMatchView.hidden && !self.SecondRecentMatchView.hidden)
+                self.topBowlingNotAvailable.hidden = (!self.FirstRecentMatchBowlingView.hidden && !self.SecondRecentMatchBowlingView.hidden)
+                                
                 
                 if !self.FirstRecentMatchView.hidden {
                     self.FirstRecentMatchScore.text = DashboardDetails.TopBatting1stMatchScore

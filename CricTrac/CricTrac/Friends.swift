@@ -16,12 +16,12 @@ class Friends {
     var Name: String?
     var UserId: String?
     
-    init(dataObj: [String: String]) {
-        self.City = dataObj["City"] ?? "-"
-        self.Club = dataObj["Club"] ?? "-"
-        self.Name = dataObj["Name"] ?? "-"
-        self.FriendshipDateTime =  dataObj["FriendshipDateTime"] ?? "-"
-        self.UserId = dataObj["UserId"] ?? "-"
+    init(dataObj: [String: AnyObject]) {
+        self.City = String(dataObj["City"] ?? "-")
+        self.Club = String(dataObj["Club"] ?? "-")
+        self.Name = String(dataObj["Name"] ?? "-")
+        self.FriendshipDateTime =  String(dataObj["FriendshipDateTime"] ?? "-")
+        self.UserId = String(dataObj["UserId"] ?? "-")
     }
     
     var FriendRequestObject : [String: String] {

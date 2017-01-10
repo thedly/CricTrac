@@ -666,18 +666,17 @@ func getAllFriendRequests(sucessBlock:([String: AnyObject])->Void){
 }
 
 
-func getAllFriends(){
+func getAllFriends(sucessBlock:([String: AnyObject])->Void){
     
     fireBaseRef.child(currentUser!.uid).child("Friends").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
         
         if let data = snapshot.value as? [String : AnyObject] {
             
-            for (_,friend) in data{
-                
-                friendsDataArray.append(Friends(dataObj: friend as! [String : String]))
-            }
+            sucessBlock(data)
         }
-        
+        else{
+            sucessBlock([:])
+        }
         
         
     })

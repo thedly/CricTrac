@@ -134,6 +134,9 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="FriendCity" destination="kT0-yC-VTv" id="Srr-70-G2T"/>
+                <outlet property="FriendName" destination="OwB-r5-Jcf" id="R93-Ux-e5p"/>
+                <outlet property="FriendProfileImage" destination="wgR-tg-bQW" id="QKK-9V-2EY"/>
                 <outlet property="baseView" destination="LZb-9t-zB4" id="fmr-kt-rh8"/>
             </connections>
             <point key="canvasLocation" x="326" y="270"/>

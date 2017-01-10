@@ -43,10 +43,39 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        friendsDataArray.removeAll()
+        getAllFriends { (data) in
+            
+            
+            for (_, req) in data {
+                var reqData = Friends(dataObj: req as! [String : AnyObject])
+                friendsDataArray.append(reqData)
+                self.SuggestsTblview.reloadData()
+            }
+            
+            
+            
+            
+            
+            
+            // do something here
+        }
+    }
+
+    
     func getCellForRow(indexPath:NSIndexPath)->FriendsCell{
         
         
         let aCell =  SuggestsTblview.dequeueReusableCellWithIdentifier("FriendsCell", forIndexPath: indexPath) as! FriendsCell
+        
+        
+        aCell.FriendName.text = friendsDataArray[indexPath.row].Name
+        aCell.FriendCity.text = friendsDataArray[indexPath.row].City
+        aCell.FriendProfileImage.image = extractImages(friendsDataArray[indexPath.row].Name!)
+        
+        
         aCell.backgroundColor = UIColor.clearColor()
         return aCell
     }
@@ -68,7 +97,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return friendsDataArray.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
