@@ -710,6 +710,50 @@ func getAllComments(postId:String,sucess:(data:[[String:String]])->Void){
 }
 
 
+func likePost(postId:String)->[String:[String:String]]{
+    
+    let ref = fireBaseRef.child("TimelinePosts").child(postId).child("Likes").childByAutoId()
+    let likeDict:[String:String] = ["OwnerID":currentUser!.uid,"OwnerName":loggedInUserName ?? ""]
+    ref.setValue(likeDict)
+    return [ref.key:likeDict]
+}
+
+
+func likeOrUnlike(postId:String,like:(likeDict:[String:[String:String]])->Void,unlike:(Void)->Void){
+    
+    let ref = fireBaseRef.child("TimelinePosts").child(postId).child("Likes")
+    
+    ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let data = snapshot.value as? [String:[String:String]] {
+            
+            let result = data.filter { return  $0.1["OwnerID"] == currentUser!.uid }
+            
+            if result.count > 0 {
+                
+                let ref = fireBaseRef.child("TimelinePosts").child(postId).child("Likes").child(result[0].0)
+                ref.removeValue()
+                unlike()
+                
+            }else{
+                
+                like(likeDict: likePost(postId))
+            }
+            
+        }else{
+            
+            like(likeDict: likePost(postId))
+        }
+        
+        
+        
+        
+    })
+    
+}
+
+
+
 //fireBaseRef.child("Dismissals").setValue(["BOWLED","CAUGHT","HANDLED THE BALL","HIT WICKET","HIT THE BALL TWICE","LEG BEFORE WICKET (LBW)","OBSTRUCTING THE FIELD","RUN OUT","RETIRED","TIMED OUT"])
 
 //public func addTimelineData(){

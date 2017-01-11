@@ -24,9 +24,11 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        likeDic.removeAll()
         setNavigationBarProperties();
         
         setBackgroundColor()
@@ -93,8 +95,10 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             
            timelineData = JSON(timelineDta)
             
-            self.timeLineTable.reloadData()
-            
+            dispatch_async(dispatch_get_main_queue(),{
+                
+                self.timeLineTable.reloadData()
+            })
         }
     }
     
@@ -128,8 +132,11 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                         
                 })
             }
-            //LoadTimeline()
-            self.timeLineTable.reloadData()
+            
+            dispatch_async(dispatch_get_main_queue(),{
+                
+                self.timeLineTable.reloadData()
+            })
             
         }) { (error) in }
     }
@@ -212,8 +219,56 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 
                 let  postCell =  timeLineTable.dequeueReusableCellWithIdentifier("aPost", forIndexPath: indexPath) as! APostTableViewCell
                 
+                postCell.totalLikeCount = 0
                 postCell.post.text = data.dictionaryValue["Post"]?.stringValue
                 postCell.postOwnerName.text = data.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
+                
+                var commentsCount = 0
+                
+                if let value = data.dictionaryValue["TimelineComments"]?.count{
+                    
+                   commentsCount = value
+                }
+                
+                 postCell.commentCount.setTitle("\(commentsCount) COMMENTS", forState: .Normal)
+                
+                
+                postCell.postId = data.dictionaryValue["postId"]?.stringValue
+                
+                var likesCount = 0
+                
+                var likeColor = UIColor.grayColor()
+                
+                if let likes = data.dictionaryValue["Likes"]?.dictionaryObject as? [String:[String:String]]{
+                    
+                    likesCount = likes.count
+                    
+                    postCell.totalLikeCount = likesCount
+                    
+                    if let currentUserLikedThePost = likeDic[postCell.postId!]{
+                        
+                        if currentUserLikedThePost{
+                            
+                            likeColor = UIColor.yellowColor()
+                        }
+                        
+                    }else{
+                        
+                        let result = likes.filter{ return  $0.1["OwnerID"] == currentUser!.uid }
+                        if result.count > 0 {
+                            likeColor = UIColor.yellowColor()
+                            likeDic[postCell.postId!] = true
+                        }else{
+                            
+                            likeDic[postCell.postId!] = false
+                        }
+                        
+                    }
+                }
+                
+                postCell.likeCount.setTitle("\(likesCount) LIKES", forState: .Normal)
+                postCell.likeButton.titleLabel?.textColor = likeColor
+
                 acell = postCell
                 
             }
@@ -313,6 +368,9 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             
         }
     }
+    
+    
+    
     /*
      // MARK: - Navigation
      
