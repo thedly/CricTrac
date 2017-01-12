@@ -156,6 +156,10 @@ func addProfileImageData(profileDp:UIImage){
                 
                 updateMetaData(metaData!.downloadURL()!)
                 
+                
+                LoggedInUserImage = profileDp
+                
+                
             }
         }
 //    }
@@ -173,6 +177,8 @@ func updateMetaData(profileImgUrl: NSURL) {
     if profileData.ProfileImageUrl == "" {
         profileData.ProfileImageUrl = profileImgUrl.absoluteString
     }
+    
+    
     
     print("Image url updated successfully")
 }

@@ -190,6 +190,30 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     // MARK: - Methods
     
+    @IBAction func imageTapped(sender: UITapGestureRecognizer) {
+        let imageView = sender.view as! UIImageView
+        //        let navBarView = UIView(frame: CGRectMake(0, 0, (sender.view?.frame.size.width)!, 50))
+        //        navBarView.backgroundColor = UIColor(hex: "#D4D4D4")
+        //        let editBtn = UIButton(frame: CGRectMake((sender.view?.frame.size.width)! - 100, 10, 50, 20))
+        //        editBtn.setBackgroundImage(UIImage(named: "EditPencil-100"), forState: .Normal)
+        //        navBarView.addSubview(editBtn)
+        
+        let newImageView = UIImageView(image: imageView.image)
+        newImageView.frame = self.view.frame
+        newImageView.backgroundColor = .blackColor()
+        newImageView.contentMode = .ScaleAspectFit
+        newImageView.userInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: "dismissFullscreenImage:")
+        newImageView.addGestureRecognizer(tap)
+        //        self.view.addSubview(navBarView)
+        self.view.addSubview(newImageView)
+    }
+    
+    func dismissFullscreenImage(sender: UITapGestureRecognizer) {
+        sender.view?.removeFromSuperview()
+    }
+    
+    
     
     func getMatchData(){
         
@@ -285,6 +309,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             
             self.matches.sortInPlace({ $0.matchDate.compare($1.matchDate) == NSComparisonResult.OrderedDescending })
             
+            self.SecondRecentMatchSummary.hidden = true
+            self.FirstRecentMatchSummary.hidden = true
             
             if self.matches.count > 0 {
                 self.firstRecentMatchScoreCard.attributedText = self.matches[0].battingBowlingScore
@@ -391,8 +417,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 self.SecondRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling2ndMatchScore == nil || DashboardDetails.TopBowling2ndMatchScore == "0-0")
                 
                 
-                self.topBattingNotAvailable.hidden = (!self.FirstRecentMatchView.hidden && !self.SecondRecentMatchView.hidden)
-                self.topBowlingNotAvailable.hidden = (!self.FirstRecentMatchBowlingView.hidden && !self.SecondRecentMatchBowlingView.hidden)
+                self.topBattingNotAvailable.hidden = !(self.FirstRecentMatchView.hidden && self.SecondRecentMatchView.hidden)
+                self.topBowlingNotAvailable.hidden = !(self.FirstRecentMatchBowlingView.hidden && self.SecondRecentMatchBowlingView.hidden)
                                 
                 
                 if !self.FirstRecentMatchView.hidden {

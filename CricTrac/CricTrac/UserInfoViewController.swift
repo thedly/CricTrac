@@ -137,7 +137,7 @@ class UserInfoViewController: UIViewController  {
         else
         {
             
-            if let displayName = (currentUser?.displayName)! as? String {
+            if let displayName = (currentUser?.displayName) where displayName.length > 0  {
                 
                 var fullNameArr = displayName.characters.split{$0 == " "}.map(String.init)
                 self.firstName.text = fullNameArr[0]

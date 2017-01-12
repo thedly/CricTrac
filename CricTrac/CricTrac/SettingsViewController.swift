@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,ThemeChangeable {
 
     
     @IBOutlet weak var SettingsTableView: UITableView!
@@ -19,6 +19,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         dismissViewControllerAnimated(true, completion: nil)
         
     }
+    
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,7 +41,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         SettingsTableView.dataSource = self
         SettingsTableView.delegate = self
         
-        setUIBackgroundTheme(self.view)
+        setBackgroundColor()
+        
+        //setUIBackgroundTheme(self.view)
         
     }
     
@@ -52,7 +60,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let menuIcon = UIImage(named: settingsMenuData[indexPath.row]["img"]! as! String)
         
         let menuDesc = settingsMenuData[indexPath.row]["desc"] as! String
-        let selectedValue = "hello World"
+        
+        var selectedValue = String()
+        
+        if settingsMenuData[indexPath.row]["vc"] == "ThemeSettingsViewController" {
+            selectedValue = cricTracTheme.currentThemeTxt
+        }
+        
         
         let toggleConfig = settingsMenuData[indexPath.row]["IsSwitchVisible"] as! Bool
         
@@ -77,11 +91,22 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let vcName = settingsMenuData[indexPath.row]["vc"]
-        
-        
         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc  = storyboard.instantiateViewControllerWithIdentifier(vcName! as! String)
-        presentViewController(vc, animated: true, completion: nil)
+        
+        
+        if vcName == "StaticPageViewController" {
+            let viewCtrl = storyboard.instantiateViewControllerWithIdentifier(vcName! as! String) as! StaticPageViewController
+            
+            viewCtrl.pageToLoad = settingsMenuData[indexPath.row]["contentToDisplay"] as! String
+            viewCtrl.pageHeaderText = (settingsMenuData[indexPath.row]["title"] as! String).uppercaseString
+            
+            presentViewController(viewCtrl, animated: true, completion: nil)
+        }
+        else
+        {
+            var vc  = storyboard.instantiateViewControllerWithIdentifier(vcName! as! String)
+            presentViewController(vc, animated: true, completion: nil)
+        }
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
