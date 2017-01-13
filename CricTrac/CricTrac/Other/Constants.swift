@@ -23,7 +23,7 @@ public var loggedInUserName:String?{
 
 let menuData = [
 
-//    ["title":"TIMELINE","vc":"timeline", "img": "Menu_TimeLine"],
+    ["title":"TIMELINE","vc":"timeline", "img": "Menu_TimeLine"],
     ["title":"DASHBOARD","vc":"UserDashboardViewController", "img": "Menu_Dashboard"],
     ["title":"NEW MATCH","vc":"AddMatchDetailsViewController", "img": "Menu_AddMatch"],
     ["title":"MATCH SUMMARY","vc":"MatchSummaryViewController", "img": "Menu_Summary"],

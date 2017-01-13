@@ -255,7 +255,13 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider/*,GIDSignIn
             fBtn.enabled = true
         }
         
-        let window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
+        var window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
+        
+        if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let currentwindow = app.window {
+            
+            window = currentwindow
+        }
+        
         let dashboardVC = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
         
         let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")

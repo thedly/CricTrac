@@ -101,7 +101,7 @@ func loadInitialValues(){
             
             
             UserProfilesData.append(currentProfile)
-            if let _imageUrl = profile["ProfileImageUrl"] as? String where _imageUrl != ""  {
+            if let _imageUrl = profile["ProfileImageURL"] as? String where _imageUrl != ""  {
                 
                 let userId = profile["UserId"] as! String
                 
@@ -172,10 +172,10 @@ func addProfileImageData(profileDp:UIImage){
 
 func updateMetaData(profileImgUrl: NSURL) {
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
-    let profileImageObject: [NSObject:AnyObject] = [ "ProfileImageUrl"    : profileImgUrl.absoluteString]
+    let profileImageObject: [NSObject:AnyObject] = [ "ProfileImageURL"    : profileImgUrl.absoluteString]
     ref.updateChildValues(profileImageObject)
-    if profileData.ProfileImageUrl == "" {
-        profileData.ProfileImageUrl = profileImgUrl.absoluteString
+    if profileData.ProfileImageURL == "" {
+        profileData.ProfileImageURL = profileImgUrl.absoluteString
     }
     
     
@@ -278,7 +278,6 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
 //    let formatter = NSDateFormatter()
 //    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     
-    dataToBeModified["UserLastLoggedin"] = data["UserLastLoggedin"]
     
     if profileData.fullName == " "
     {
@@ -289,15 +288,11 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
     }
     else
     {
-        dataToBeModified["UserAddedDate"] = data["UserAddedDate"]
+       
         dataToBeModified["UserEditedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
     }
     
-    
-    
-    
-    
-    
+
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
     ref.setValue(dataToBeModified)
     sucessBlock(dataToBeModified)
@@ -466,6 +461,8 @@ func loginWithMailAndPassword(userName:String,password:String,callBack:(user:FIR
         
         pward = "test123"
     }
+    
+    
     
     
     FIRAuth.auth()?.signInWithEmail(uname, password: pward) { (user, error) in

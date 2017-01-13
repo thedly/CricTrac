@@ -70,7 +70,7 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         
-        self.profileImage.image = LoggedInUserImage
+//        self.profileImage.image = LoggedInUserImage
         
         if profileData.fullName != " " {
             
@@ -96,7 +96,7 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
             
             self.FanSupportingTeams.text = profileData.SupportingTeams.joinWithSeparator(",").uppercaseString
             self.FanInterestedSports.text = profileData.InterestedSports.joinWithSeparator(",").uppercaseString
-            self.FanFavouritePlayer.text = profileData.FavouritePlayers.uppercaseString
+            self.FanFavouritePlayer.text = profileData.FavoritePlayers.uppercaseString
             self.FanHobbies.text = profileData.Hobbies.joinWithSeparator(",").uppercaseString
             
             
@@ -119,14 +119,14 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
         setUIBackgroundTheme(self.view)
         
         
-        profileImage.layer.cornerRadius = profileImage.frame.size.width/2
-        profileImage.clipsToBounds = true
-        
-        activityInd.layer.cornerRadius = profileImage.frame.size.width/2
-        activityInd.clipsToBounds = true
-        
-        editBtn.layer.cornerRadius = editBtn.frame.size.width/2
-        editBtn.clipsToBounds = true
+//        profileImage.layer.cornerRadius = profileImage.frame.size.width/2
+//        profileImage.clipsToBounds = true
+//        
+//        activityInd.layer.cornerRadius = profileImage.frame.size.width/2
+//        activityInd.clipsToBounds = true
+//        
+//        editBtn.layer.cornerRadius = editBtn.frame.size.width/2
+//        editBtn.clipsToBounds = true
         
         
         

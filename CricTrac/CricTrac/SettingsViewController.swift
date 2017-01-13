@@ -38,6 +38,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
         SettingsTableView.registerNib(UINib.init(nibName:"SettingsViewCell", bundle: nil), forCellReuseIdentifier: "SettingsViewCell")
         SettingsTableView.separatorStyle = .SingleLine
+        
         SettingsTableView.dataSource = self
         SettingsTableView.delegate = self
         

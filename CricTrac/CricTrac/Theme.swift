@@ -66,7 +66,7 @@ struct AppTheme{
     var currentTheme:CTTheme!
     var currentThemeTxt : String! {
         get {
-            return NSUserDefaults.standardUserDefaults().objectForKey("selectedTheme") as? String
+            return (NSUserDefaults.standardUserDefaults().objectForKey("selectedTheme") ?? "meanGreen") as? String
         }
     }
     

@@ -75,6 +75,17 @@ public func extractImages(userId:String) -> UIImage {
 }
 
 
+public func getRootViewController() -> UIViewController {
+    
+    let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")
+    let dashboardVC = viewControllerFrom("Main", vcid: "timeline") as! TimeLineViewController
+    let navigationControl = UINavigationController(rootViewController: dashboardVC )
+    sliderMenu.mainViewController = navigationControl
+    sliderMenu.drawerViewController = drawerViewController
+    
+    return sliderMenu
+}
+
 public func setUIBackgroundTheme(baseView: UIView) {
     
     

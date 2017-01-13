@@ -35,7 +35,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var data:[String:AnyObject]{
         
-        return ["FavouritePlayers":favouritePlayer.textVal,"Hobbies":HobbiesList, "InterestedSports":InterestedSportsNamesList,"SupportingTeams": supportingTeamNamesList]
+        return ["FavoritePlayers":favouritePlayer.textVal,"Hobbies":HobbiesList, "InterestedSports":InterestedSportsNamesList,"SupportingTeams": supportingTeamNamesList]
     }
     
     var supportingTeamNamesList = [""]
@@ -68,7 +68,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBAction func CreateFanBtnPressed(sender: AnyObject) {
         
         
-        profileData.FavouritePlayers =  self.data["FavouritePlayers"] as! String
+        profileData.FavoritePlayers =  self.data["FavoritePlayers"] as! String
         profileData.SupportingTeams = self.data["SupportingTeams"] as! [String]
         profileData.InterestedSports = self.data["InterestedSports"] as! [String]
         profileData.Hobbies =  self.data["Hobbies"] as! [String]
@@ -77,24 +77,17 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
             
             profileData = Profile(usrObj: data)
 
-            var SplashScreenVC = viewControllerFrom("Main", vcid: "SplashScreenViewController") as! SplashScreenViewController
+            var window = UIWindow(frame: UIScreen.mainScreen().bounds)
+            
+            if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let currentwindow = app.window {
+                
+                window = currentwindow
+            }
             
             
-            self.presentViewController(SplashScreenVC, animated: true, completion: nil)
-
+            let rootViewController: UIViewController = getRootViewController()
             
-//            var vc: UIViewController = self.presentingViewController!;
-//            while ((vc.presentingViewController) != nil) {
-//                
-//                vc = vc.presentingViewController!;
-//                if ((vc.presentingViewController?.isEqual(viewControllerFrom("Main", vcid: "ProfileBaseViewController") as! ProfileBaseViewController)) != nil){
-//                    break;
-//                }
-//            }
-//            
-//            vc.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
-
-           
+            window.rootViewController = rootViewController
         }
         
     }

@@ -59,13 +59,26 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
             
             profileData = Profile(usrObj: data)
             
+            var window = UIWindow(frame: UIScreen.mainScreen().bounds)
             
-//            var vc: UIViewController = self.presentingViewController!;
-//            
-            var SplashScreenVC = viewControllerFrom("Main", vcid: "SplashScreenViewController") as! SplashScreenViewController
+            if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let currentwindow = app.window {
+                
+                window = currentwindow
+            }
             
             
-            self.presentViewController(SplashScreenVC, animated: true, completion: nil)
+            if window.rootViewController == sliderMenu {
+                window.rootViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+            }
+            else
+            {
+                let rootViewController: UIViewController = getRootViewController()
+                window.rootViewController = rootViewController
+            }
+            
+            
+            
+            
             
 //            while ((vc.presentingViewController) != nil) {
 //                
