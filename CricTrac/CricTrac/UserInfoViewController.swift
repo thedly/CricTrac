@@ -212,7 +212,6 @@ class UserInfoViewController: UIViewController  {
             let toViewController = NextVC
             
             
-            
             toViewController!.transitioningDelegate = self.transitionManager
             presentViewController(toViewController!, animated: true, completion: nil)
             

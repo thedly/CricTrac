@@ -206,7 +206,7 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         super.viewDidAppear(true)
         
         
-            if profileData.FirstName.length > 0 {
+            if profileData.FirstName.length > 0  {
                 self.playingRole.text = profileData.PlayingRole
                 self.battingStyle.text = profileData.BattingStyle
                 self.bowlingStyle.text = profileData.BowlingStyle

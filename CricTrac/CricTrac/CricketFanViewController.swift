@@ -32,10 +32,12 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet weak var Hobies: UITableView!
     
+    @IBOutlet weak var FavouritePlayerTbl: UITableView!
+    
     
     var data:[String:AnyObject]{
         
-        return ["FavoritePlayers":favouritePlayer.textVal,"Hobbies":HobbiesList, "InterestedSports":InterestedSportsNamesList,"SupportingTeams": supportingTeamNamesList]
+        return ["FavoritePlayers":favouritePlayerList,"Hobbies":HobbiesList, "InterestedSports":InterestedSportsNamesList,"SupportingTeams": supportingTeamNamesList]
     }
     
     var supportingTeamNamesList = [""]
@@ -43,6 +45,8 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     var InterestedSportsNamesList = [""]
     
     var HobbiesList = [""]
+    
+    var favouritePlayerList = [""]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,31 +67,43 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
         Hobies.separatorStyle = .None
         Hobies.dataSource = self
         Hobies.delegate = self
+        
+        
+        FavouritePlayerTbl.allowsSelection = false
+        FavouritePlayerTbl.separatorStyle = .None
+        FavouritePlayerTbl.dataSource = self
+        FavouritePlayerTbl.delegate = self
     }
 
     @IBAction func CreateFanBtnPressed(sender: AnyObject) {
         
         
-        profileData.FavoritePlayers =  self.data["FavoritePlayers"] as! String
+        profileData.FavoritePlayers =  self.data["FavoritePlayers"] as! [String]
         profileData.SupportingTeams = self.data["SupportingTeams"] as! [String]
         profileData.InterestedSports = self.data["InterestedSports"] as! [String]
         profileData.Hobbies =  self.data["Hobbies"] as! [String]
+        profileData.UserProfile = userProfileType.Fan.rawValue
+        
         
         addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
             
             profileData = Profile(usrObj: data)
-
+            
             var window = UIWindow(frame: UIScreen.mainScreen().bounds)
             
             if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let currentwindow = app.window {
                 
                 window = currentwindow
             }
-            
-            
-            let rootViewController: UIViewController = getRootViewController()
-            
-            window.rootViewController = rootViewController
+
+            if window.rootViewController == sliderMenu {
+                window.rootViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+            }
+            else
+            {
+                let rootViewController: UIViewController = getRootViewController()
+                window.rootViewController = rootViewController
+            }
         }
         
     }
@@ -162,6 +178,18 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
         
         
     }
+    
+    @IBAction func addFavouritePlayerPressed(sender: AnyObject) {
+        
+        if favouritePlayer.text?.trimWhiteSpace != "" && favouritePlayer.text?.trimWhiteSpace != "-" {
+            favouritePlayerList.append(favouritePlayer.textVal)
+            favouritePlayer.text = ""
+            
+            FavouritePlayerTbl.reloadData()
+        }
+        
+        
+    }
 
     
     func getCellSupportingTeamsRow(indexPath:NSIndexPath)->UITableViewCell{
@@ -222,6 +250,24 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
+    func getCellForFavouritePlayersRow(indexPath:NSIndexPath)->UITableViewCell{
+        if let aCell =  FavouritePlayerTbl.dequeueReusableCellWithIdentifier("CurrentTeamsTableViewCell", forIndexPath: indexPath) as? CurrentTeamsTableViewCell {
+            
+            aCell.backgroundColor = UIColor.clearColor()
+            
+            aCell.teamName.text = favouritePlayerList[indexPath.row]
+            
+            aCell.deleteTeamBtn.addTarget(self, action: #selector(CricketFanViewController.deleteTeamFromCurrentTeams(_:)), forControlEvents: .TouchUpInside)
+            return aCell
+        }
+        else
+        {
+            return UITableViewCell()
+        }
+        
+        
+    }
+    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.isEqual(SupportingTeams) {
@@ -229,6 +275,9 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         else if tableView.isEqual(InterestedSports) {
             return InterestedSportsNamesList.count
+        }
+        else if tableView.isEqual(FavouritePlayerTbl) {
+            return favouritePlayerList.count
         }
         return HobbiesList.count
         
@@ -249,6 +298,9 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         else if tableView.isEqual(InterestedSports) {
             return getCellForInterestedTeams(indexPath)
+        }
+        else if tableView.isEqual(FavouritePlayerTbl) {
+            return getCellForFavouritePlayersRow(indexPath)
         }
         return getCellForHobbiesRow(indexPath)
     }

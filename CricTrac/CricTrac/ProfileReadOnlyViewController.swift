@@ -96,7 +96,7 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
             
             self.FanSupportingTeams.text = profileData.SupportingTeams.joinWithSeparator(",").uppercaseString
             self.FanInterestedSports.text = profileData.InterestedSports.joinWithSeparator(",").uppercaseString
-            self.FanFavouritePlayer.text = profileData.FavoritePlayers.uppercaseString
+            self.FanFavouritePlayer.text = profileData.FavoritePlayers.joinWithSeparator(",")
             self.FanHobbies.text = profileData.Hobbies.joinWithSeparator(",").uppercaseString
             
             

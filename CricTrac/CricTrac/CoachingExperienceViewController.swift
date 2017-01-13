@@ -112,11 +112,16 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
                 window = currentwindow
             }
             
-            //            var vc: UIViewController = self.presentingViewController!;
-            //
-            let rootViewController: UIViewController = getRootViewController()
             
-            window.rootViewController = rootViewController
+            if window.rootViewController == sliderMenu {
+                window.rootViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+            }
+            else
+            {
+                let rootViewController: UIViewController = getRootViewController()
+                window.rootViewController = rootViewController
+            }
+
             
 
 

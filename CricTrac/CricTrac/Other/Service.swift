@@ -279,6 +279,8 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
 //    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     
     
+    dataToBeModified["UserLastLoggedin"] = NSDate().getCurrentTimeStamp()
+    
     if profileData.fullName == " "
     {
         dataToBeModified["UserAddedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
