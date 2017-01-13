@@ -92,17 +92,37 @@ func loadInitialValues(){
             groundNames = value
         }
     })
+    
+    getAllProfiles({ resultObj in
+        UserProfilesData.removeAll()
+        for profile in resultObj {
+            
+            var currentProfile = Profile(usrObj: profile)
+            
+            
+            UserProfilesData.append(currentProfile)
+            if let _imageUrl = profile["ProfileImageUrl"] as? String where _imageUrl != ""  {
+                
+                let userId = profile["UserId"] as! String
+                
+                getImageFromFirebase(_imageUrl) { (data) in
+                    UserProfilesImages[userId] = data
+                }
+            }
+        }
+    })
+    
 }
 
 func addMatchData(key:NSString,data:[String:String]){
     
     var dataToBeModified = data
     
-    let formatter = NSDateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    //let formatter = NSDateFormatter()
+    //formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     
-    dataToBeModified["MatchAddedDate"] = formatter.stringFromDate(NSDate())
-    dataToBeModified["MatchEditedDate"] = formatter.stringFromDate(NSDate())
+    dataToBeModified["MatchAddedDate"] = NSDate().getCurrentTimeStamp() // formatter.stringFromDate(NSDate())
+    dataToBeModified["MatchEditedDate"] = NSDate().getCurrentTimeStamp()// formatter.stringFromDate(NSDate())
     
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").childByAutoId()
     dataToBeModified["MatchId"] = ref.key
@@ -249,22 +269,22 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
     
     var dataToBeModified = data
     
-    let formatter = NSDateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//    let formatter = NSDateFormatter()
+//    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     
     dataToBeModified["UserLastLoggedin"] = data["UserLastLoggedin"]
     
     if profileData.fullName == " "
     {
-        dataToBeModified["UserAddedDate"] = formatter.stringFromDate(NSDate())
-        dataToBeModified["UserEditedDate"] = formatter.stringFromDate(NSDate())
-        createDashboardData(DashboardData(dataObj: [String:String]()).dashboardData)
+        dataToBeModified["UserAddedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
+        dataToBeModified["UserEditedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
+        createDashboardData(DashboardData(dataObj: [String:AnyObject]()).dashboardData)
         
     }
     else
     {
         dataToBeModified["UserAddedDate"] = data["UserAddedDate"]
-        dataToBeModified["UserEditedDate"] = formatter.stringFromDate(NSDate())
+        dataToBeModified["UserEditedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
     }
     
     
@@ -315,12 +335,8 @@ func createDashboardData(dashboardData: [String: AnyObject]){
 
 func updateLastLogin(){
     
-    let formatter = NSDateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-
-    
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").child("UserLastLoggedin")
-    ref.setValue(formatter.stringFromDate(NSDate()))
+    ref.setValue(NSDate().getCurrentTimeStamp())
 }
 
 func getAllProfileData(sucessBlock:([String:AnyObject])->Void){
@@ -403,10 +419,10 @@ func updateMatchData(key:String,data:[String:String]){
     
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").child(key)
     
-    let formatter = NSDateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    //let formatter = NSDateFormatter()
+    //formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     
-    dataToBeModified["MatchEditedDate"] = formatter.stringFromDate(NSDate())
+    dataToBeModified["MatchEditedDate"] = NSDate().getCurrentTimeStamp() //formatter.stringFromDate(NSDate())
     
     
     ref.updateChildValues(dataToBeModified)
@@ -604,10 +620,9 @@ public func AddSentRequestData(data: [String:[String:String]], callback:(data:St
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("SentRequest").childByAutoId()
     ref.setValue(dataToBeManipulated["sentRequestData"], withCompletionBlock: { error, newlyCreateddata in
         
-        var createdId = [String: AnyObject]()
-        createdId["SentRequestId"] = newlyCreateddata.key
+        var sentcreatedId = [String: AnyObject]()
+        sentcreatedId["SentRequestId"] = newlyCreateddata.key
         
-        ref.updateChildValues(createdId)
         
         let receivedRequestRef = fireBaseRef.child("Users").child(dataToBeManipulated["sentRequestData"]!["SentTo"]!).child("ReceivedRequest").childByAutoId()
         
@@ -615,7 +630,18 @@ public func AddSentRequestData(data: [String:[String:String]], callback:(data:St
         receivedRequestRef.setValue(data["ReceivedRequestData"], withCompletionBlock: { error, newlyCreatedReceivedRequestData in
             var createdId = [String: AnyObject]()
             createdId["RequestId"] = newlyCreatedReceivedRequestData.key
+            
+            createdId["SentRequestId"] = newlyCreateddata.key
+            
+            
             receivedRequestRef.updateChildValues(createdId)
+            
+            
+            sentcreatedId["ReceivedRequestIdOther"] = newlyCreatedReceivedRequestData.key
+            
+            ref.updateChildValues(sentcreatedId)
+            
+            
             
             callback(data: newlyCreatedReceivedRequestData.key)
         })
@@ -624,20 +650,33 @@ public func AddSentRequestData(data: [String:[String:String]], callback:(data:St
 }
  //MARK: - Friends
 
-var friendsDataArray = [String]()
 
-func getAllFriends(){
+func getAllFriendRequests(sucessBlock:([String: AnyObject])->Void){
     
-    fireBaseRef.child(currentUser!.uid).child("TFriends").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+    fireBaseRef.child("Users").child(currentUser!.uid).child("ReceivedRequest").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
         
-        if let data = snapshot.value as? [String : String] {
+        if let data = snapshot.value as? [String : AnyObject] {
             
-            for (_,value) in data{
-                
-                friendsDataArray.append(value)
-            }
+            sucessBlock(data)
         }
+        else{
+            sucessBlock([:])
+        }
+    })
+}
+
+
+func getAllFriends(sucessBlock:([String: AnyObject])->Void){
+    
+    fireBaseRef.child(currentUser!.uid).child("Friends").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
         
+        if let data = snapshot.value as? [String : AnyObject] {
+            
+            sucessBlock(data)
+        }
+        else{
+            sucessBlock([:])
+        }
         
         
     })
@@ -732,8 +771,12 @@ func likeOrUnlike(postId:String,like:(likeDict:[String:[String:String]])->Void,u
             if result.count > 0 {
                 
                 let ref = fireBaseRef.child("TimelinePosts").child(postId).child("Likes").child(result[0].0)
-                ref.removeValue()
-                unlike()
+                ref.removeValueWithCompletionBlock({ (error, ref) in
+                    if error == nil{
+                        unlike()
+                    }
+                })
+                
                 
             }else{
                 

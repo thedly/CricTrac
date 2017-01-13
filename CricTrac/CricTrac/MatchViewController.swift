@@ -54,7 +54,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     func loadEditData(){
         
         dateText.textVal = parent!.selecetedData!["MatchDate"]!
-        tournamentText.textVal = parent!.selecetedData!["Tournamnet"]!
+        tournamentText.textVal = parent!.selecetedData!["Tournamnet"] ?? ""
         teamText.textVal = parent!.selecetedData!["Team"]!
         opponentText.textVal = parent!.selecetedData!["Opponent"]!
         groundText.textVal = parent!.selecetedData!["Ground"]!

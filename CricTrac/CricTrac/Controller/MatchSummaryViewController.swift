@@ -71,6 +71,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                     var opponentName = ""
                     
                     let mData = MatchSummaryData()
+                    
+                    mData.matchId = key
+                    
+                    
                     if let runsTaken = value["RunsTaken"]{
                         
                         mData.BattingSectionHidden = (runsTaken == "-")
@@ -115,7 +119,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                         
                         
                         var DateFormatter = NSDateFormatter()
-                        DateFormatter.dateFormat = "dd MM yyyy"
+                        DateFormatter.dateFormat = "dd-MM-yyyy"
                         DateFormatter.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
                         var dateFromString = DateFormatter.dateFromString(date)
                         
@@ -143,7 +147,6 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             }
             
             self.matches.sortInPlace({ $0.matchDate.compare($1.matchDate) == NSComparisonResult.OrderedDescending })
-            
             KRProgressHUD.dismiss()
             self.matchSummaryTable.reloadData()
             
@@ -199,7 +202,11 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         summaryDetailsVC.bowlingViewHidden = matches[indexPath.row].BowlingSectionHidden
         
         
-       summaryDetailsVC.matchDetailsData = matchDataSource[indexPath.row]
+        var selectedDataSource = matchDataSource.filter { (dat) -> Bool in
+            return dat["MatchId"] == matches[indexPath.row].matchId
+        }
+        
+       summaryDetailsVC.matchDetailsData = selectedDataSource.first
             presentViewController(summaryDetailsVC, animated: true, completion: nil)
         CFRunLoopWakeUp(CFRunLoopGetCurrent())
     }

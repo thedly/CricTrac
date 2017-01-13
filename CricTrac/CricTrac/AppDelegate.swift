@@ -16,7 +16,7 @@ import Crashlytics
 import FBSDKCoreKit
 import FirebaseDatabase
 import FirebaseAuth
-//import GoogleSignIn
+import GoogleSignIn
 import KRProgressHUD
 
 import SCLAlertView
@@ -26,7 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
 
-
+    
+    
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         FIRApp.configure()
         registerForPushNotifications(application)
@@ -78,33 +80,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerUserNotificationSettings(notificationSettings)
     }
     
-    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
-        
-         KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
-        
-//        if GIDSignIn.sharedInstance().handleURL(url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String, annotation: options [UIApplicationOpenURLOptionsAnnotationKey]) {
-//            return true
-//        }
-        
-        let fb =  FBSDKApplicationDelegate.sharedInstance().application( app,  openURL: url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String, annotation: options [UIApplicationOpenURLOptionsAnnotationKey])
-        
-        return fb
-        
-    }
+//    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+//        
+//         KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+//        
+////        if GIDSignIn.sharedInstance().handleURL(url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String, annotation: options [UIApplicationOpenURLOptionsAnnotationKey]) {
+////            return true
+////        }
+//        
+////        let fb =  FBSDKApplicationDelegate.sharedInstance().application( app,  openURL: url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String, annotation: options [UIApplicationOpenURLOptionsAnnotationKey])
+//        
+////        return fb
+//        
+//        
+//        let checkFB = FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String, annotation: options [UIApplicationOpenURLOptionsAnnotationKey])
+//        
+//        
+//        let checkGoogle = GIDSignIn.sharedInstance().handleURL(url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String,annotation: options [UIApplicationOpenURLOptionsAnnotationKey])
+//        return checkGoogle || checkFB
+//
+//        
+//        
+//    }
 
     
-
     
     
     func application(application: UIApplication, openURL url: NSURL,  sourceApplication: String?,  annotation: AnyObject) -> Bool {
         
         KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
         
-//        if GIDSignIn.sharedInstance().handleURL(url, sourceApplication: sourceApplication, annotation: annotation) {
-//            return true
-//        }
         
-        return FBSDKApplicationDelegate.sharedInstance().application( application,  openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+        let checkFB = FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+        let checkGoogle = GIDSignIn.sharedInstance().handleURL(url, sourceApplication: sourceApplication,annotation: annotation)
+        return checkGoogle || checkFB
+        
+        //return FBSDKApplicationDelegate.sharedInstance().application( application,  openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }
     
     

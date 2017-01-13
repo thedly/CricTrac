@@ -89,6 +89,10 @@ class UserInfoViewController: UIViewController  {
         firstName.delegate = self
         lastName.delegate = self
         
+        
+        emailId.userInteractionEnabled = false
+        
+        
         if userProfileInfo != nil {
             
             for profile in userProfileType.allValues {
@@ -121,11 +125,34 @@ class UserInfoViewController: UIViewController  {
                 
                 
                     self.profileDetailsExists = true
-                    
-                    self.firstName.text = profileData.FirstName
-                    self.lastName.text = profileData.LastName
+        
+        if let fName = profileData.FirstName as? String where fName.length > 0, let lName = profileData.LastName as? String where lName.length > 0 {
+            
+            
+            self.firstName.text = fName
+            self.lastName.text = lName
+            
+            
+        }
+        else
+        {
+            
+            if let displayName = currentUser?.displayName {
+                
+                var fullNameArr = displayName.characters.split{$0 == " "}.map(String.init)
+                self.firstName.text = fullNameArr[0]
+                self.lastName.text = fullNameArr.count > 1 ? fullNameArr[1] : nil
+                
+                
+                
+            }
+            
+        }
+        
+        
+        
                     self.dateOfBirth.text = profileData.DateOfBirth
-                    self.emailId.text = profileData.Email
+                    self.emailId.text = currentUser?.email  //profileData.Email
                     self.mobile.text = profileData.Mobile
                     self.gender.text = profileData.Gender
                     self.country.text = profileData.Country

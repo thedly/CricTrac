@@ -290,3 +290,21 @@ extension UIImageView{
     
 }
 
+extension NSDate {
+    public func getCurrentTimeStamp() -> String {
+        return round(NSDate().timeIntervalSince1970).cleanValue
+    }
+}
+
+extension Double {
+    var cleanValue: String {
+        return self % 1 == 0 ? String(format: "%.0f", self) : String(self)
+    }
+}
+extension String
+{
+    func replaceStr(target: String, withString: String) -> String
+    {
+        return self.stringByReplacingOccurrencesOfString(target, withString: withString, options: NSStringCompareOptions.LiteralSearch, range: nil)
+    }
+}

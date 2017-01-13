@@ -21,7 +21,7 @@ class Profile {
     var Gender: String
     var LastName: String
     var Mobile: String
-    var PlayingLevel: String
+    //var PlayingLevel: String
     var PlayingRole: String
     var State: String
     
@@ -46,9 +46,11 @@ class Profile {
     var UserProfile: String
     var UserStatus: String
     
-    var UserAddedDate: String
-    var UserEditedDate: String
-    var UserLastLoggedin: String
+    var UserAddedDate: String!
+    var UserEditedDate: String!
+    var UserLastLoggedin: String!
+    
+    
     
     
     init(usrObj : [String: AnyObject]) {
@@ -66,7 +68,7 @@ class Profile {
         self.Gender = (usrObj["Gender"]  ?? "") as! String
         self.Mobile = (usrObj["Mobile"] ?? "") as! String
         self.PlayingRole = (usrObj["PlayingRole"]  ?? "") as! String
-        self.PlayingLevel = (usrObj["Level"] ?? "") as! String
+        //self.PlayingLevel = (usrObj["Level"] ?? "") as! String
         
         self.ProfileImageUrl = (usrObj["ProfileImageUrl"] ?? "") as! String
         
@@ -75,7 +77,7 @@ class Profile {
         
         self.CoachingLevel = (usrObj["CoachingLevel"] ?? "") as! String
         self.Experience = (usrObj["Experience"] ?? "") as! String
-        self.Certifications = (usrObj["Certifications"] ?? "") as! String
+        self.Certifications = (String(usrObj["Certifications"]) ?? "") as! String
         
         
         self.fullName = "\(self.FirstName) \(self.LastName)"
@@ -92,9 +94,9 @@ class Profile {
         
         self.UserStatus = (usrObj["UserStatus"] ?? userStatus.Free.rawValue) as! String
         
-        self.UserAddedDate = (usrObj["UserAddedDate"] ?? "") as! String
-        self.UserEditedDate = (usrObj["UserEditedDate"] ?? "") as! String
-        self.UserLastLoggedin = (usrObj["UserLastLoggedin"] ?? "") as! String
+        self.UserAddedDate = (String(usrObj["UserAddedDate"]) ?? "") as! String
+        self.UserEditedDate = (String(usrObj["UserEditedDate"]) ?? "") as! String
+        self.UserLastLoggedin = (String(usrObj["UserLastLoggedin"]) ?? "") as! String
         self.CoachPlayedFor = (usrObj["CoachPlayedFor"] ?? []) as! [String]
         
     }
@@ -104,7 +106,6 @@ class Profile {
         return [
             "FirstName" : self.FirstName,
             "LastName" : self.LastName,
-            "UserId" : self.id,
             "BattingStyle": self.BattingStyle,
             "BowlingStyle": self.BowlingStyle,
             "City": self.City,
@@ -115,7 +116,7 @@ class Profile {
             "Gender": self.Gender,
             "Mobile": self.Mobile,
             "PlayingRole":self.PlayingRole,
-            "Level":self.PlayingLevel,
+            //"Level":self.PlayingLevel,
             "ProfileImageUrl": self.ProfileImageUrl ,
             "UserProfile": self.UserProfile,
             "FavouritePlayers": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.FavouritePlayers : "",

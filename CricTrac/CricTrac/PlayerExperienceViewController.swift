@@ -60,16 +60,27 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
             profileData = Profile(usrObj: data)
             
             
-            var vc: UIViewController = self.presentingViewController!;
-            while ((vc.presentingViewController) != nil) {
-                
-                vc = vc.presentingViewController!;
-                if ((vc.presentingViewController?.isEqual(viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController)) != nil){
-                    break;
-                }
-            }
+//            var vc: UIViewController = self.presentingViewController!;
+//            
+            var SplashScreenVC = viewControllerFrom("Main", vcid: "SplashScreenViewController") as! SplashScreenViewController
             
-            vc.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+            
+            self.presentViewController(SplashScreenVC, animated: true, completion: nil)
+            
+//            while ((vc.presentingViewController) != nil) {
+//                
+//                vc = vc.presentingViewController!;
+//                if ((vc.presentingViewController?.isEqual(viewControllerFrom("Main", vcid: "ProfileBaseViewController") as! ProfileBaseViewController)) != nil){
+//                    break;
+//                }
+//            }
+//            
+//            vc.presentingViewController!.dismissViewControllerAnimated(true, completion: { 
+//                
+//            })
+            
+            
+            
 
         }
         

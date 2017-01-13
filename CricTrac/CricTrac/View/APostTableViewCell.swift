@@ -21,6 +21,8 @@ class APostTableViewCell: UITableViewCell {
     
     var postId:String?
     var totalLikeCount = 0
+    var index:Int?
+    var currentUserHasLikedThePost = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,12 +39,15 @@ class APostTableViewCell: UITableViewCell {
         self.likeButton.titleLabel?.textColor = UIColor.yellowColor()
         self.totalLikeCount += 1
         self.likeCount.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
+        self.currentUserHasLikedThePost = true
         
         }) {
             self.removeLikeFromArray()
             self.likeButton.titleLabel?.textColor = UIColor.grayColor()
             self.totalLikeCount -= 1
             self.likeCount.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
+            self.currentUserHasLikedThePost = false
+
         }
         }
     }
@@ -52,7 +57,7 @@ class APostTableViewCell: UITableViewCell {
     
     func removeLikeFromArray(){
         
-        var likes = timelineData!.arrayObject![0]["Likes"] as! [String:[String:String]]
+        var likes = timelineData!.arrayObject![index!]["Likes"] as! [String:[String:String]]
         let keys =  likes.filter{key,val in
             
             return val["OwnerID"]! == currentUser!.uid
@@ -66,7 +71,7 @@ class APostTableViewCell: UITableViewCell {
             
             likes.removeValueForKey(keys[0])
             
-            timelineData![0]["Likes"] = JSON(likes)
+            timelineData![index!]["Likes"] = JSON(likes)
         }
         
         
@@ -74,7 +79,7 @@ class APostTableViewCell: UITableViewCell {
     
     func addLikeToDataArray(likeArray:[String:[String:String]]){
         
-        timelineData![0]["Likes"] = JSON(likeArray)
+        timelineData![index!]["Likes"] = JSON(likeArray)
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
