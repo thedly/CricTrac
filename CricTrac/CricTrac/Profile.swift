@@ -39,9 +39,9 @@ class Profile {
     var InterestedSports: [String]
     var Hobbies: [String]
     
-    var FavouritePlayers: String
+    var FavoritePlayers: String
     
-    var ProfileImageUrl: String
+    var ProfileImageURL: String
     var fullName: String
     var UserProfile: String
     var UserStatus: String
@@ -70,7 +70,7 @@ class Profile {
         self.PlayingRole = (usrObj["PlayingRole"]  ?? "") as! String
         //self.PlayingLevel = (usrObj["Level"] ?? "") as! String
         
-        self.ProfileImageUrl = (usrObj["ProfileImageUrl"] ?? "") as! String
+        self.ProfileImageURL = (usrObj["ProfileImageURL"] ?? "") as! String
         
         self.UserProfile = (usrObj["UserProfile"] ?? "") as! String
         
@@ -82,7 +82,7 @@ class Profile {
         
         self.fullName = "\(self.FirstName) \(self.LastName)"
         
-        self.FavouritePlayers = (usrObj["FavouritePlayers"] ?? "") as! String
+        self.FavoritePlayers = (usrObj["FavoritePlayers"] ?? "") as! String
         
         self.PlayerCurrentTeams = (usrObj["PlayerCurrentTeams"] ?? []) as! [String]
         self.PlayerPastTeams = (usrObj["PlayerPastTeams"] ?? []) as! [String]
@@ -117,9 +117,9 @@ class Profile {
             "Mobile": self.Mobile,
             "PlayingRole":self.PlayingRole,
             //"Level":self.PlayingLevel,
-            "ProfileImageUrl": self.ProfileImageUrl ,
+            "ProfileImageURL": self.ProfileImageURL ,
             "UserProfile": self.UserProfile,
-            "FavouritePlayers": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.FavouritePlayers : "",
+            "FavoritePlayers": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.FavoritePlayers : "",
             "PlayerCurrentTeams": self.UserProfile == String(userProfileType.Player.rawValue) ? self.PlayerCurrentTeams : [],
             "PlayerPastTeams": self.UserProfile == String(userProfileType.Player.rawValue) ? self.PlayerPastTeams: [],
             "CoachCurrentTeams": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.CoachCurrentTeams: [],
