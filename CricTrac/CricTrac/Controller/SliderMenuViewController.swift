@@ -46,11 +46,17 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
             
         }
         
-        let window = UIWindow()
+        var currentwindow = UIWindow()
+        
+        if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let window = app.window {
+            
+            currentwindow = window
+        }
+        
         
         let loginBaseViewController = viewControllerFrom("Main", vcid: "LoginViewController")
         
-        window.rootViewController = loginBaseViewController
+        currentwindow.rootViewController = loginBaseViewController
         self.presentViewController(loginBaseViewController, animated: true) {
              SCLAlertView().showInfo("Logout",subTitle: "Data saved is cleared, Kill the app and relaunch for now")
         }

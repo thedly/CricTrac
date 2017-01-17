@@ -8,12 +8,17 @@
 
 import UIKit
 
-class ProfileReadOnlyViewController: UIViewController {
+class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var PersonalInfoView: UIView!
     @IBOutlet weak var PlayerExperienceView: UIView!
     @IBOutlet weak var CoachingExperienceView: UIView!
     @IBOutlet weak var CricketFanView: UIView!
+    
+    @IBOutlet weak var profileImage: UIImageView!
+    
+    @IBOutlet weak var activityInd: UIActivityIndicatorView!
+    
     
     
     
@@ -42,6 +47,7 @@ class ProfileReadOnlyViewController: UIViewController {
     @IBOutlet weak var FanFavouritePlayer: UILabel!
     @IBOutlet weak var FanHobbies: UILabel!
     
+    @IBOutlet weak var editBtn: UIButton!
     let transitionManager = TransitionManager.sharedInstance
     
     @IBAction func CloseProfilePressed(sender: AnyObject) {
@@ -63,6 +69,8 @@ class ProfileReadOnlyViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
+        
+//        self.profileImage.image = LoggedInUserImage
         
         if profileData.fullName != " " {
             
@@ -88,7 +96,7 @@ class ProfileReadOnlyViewController: UIViewController {
             
             self.FanSupportingTeams.text = profileData.SupportingTeams.joinWithSeparator(",").uppercaseString
             self.FanInterestedSports.text = profileData.InterestedSports.joinWithSeparator(",").uppercaseString
-            self.FanFavouritePlayer.text = profileData.FavouritePlayers.uppercaseString
+            self.FanFavouritePlayer.text = profileData.FavoritePlayers.joinWithSeparator(",")
             self.FanHobbies.text = profileData.Hobbies.joinWithSeparator(",").uppercaseString
             
             
@@ -99,11 +107,29 @@ class ProfileReadOnlyViewController: UIViewController {
         }
     }
     
+    func stopAnimation() {
+        if self.activityInd.isAnimating() {
+            self.activityInd.stopAnimating()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUIBackgroundTheme(self.view)
+        
+        
+//        profileImage.layer.cornerRadius = profileImage.frame.size.width/2
+//        profileImage.clipsToBounds = true
+//        
+//        activityInd.layer.cornerRadius = profileImage.frame.size.width/2
+//        activityInd.clipsToBounds = true
+//        
+//        editBtn.layer.cornerRadius = editBtn.frame.size.width/2
+//        editBtn.clipsToBounds = true
+        
+        
+        
         
         setColorForViewsWithSameTag(PersonalInfoView)
         setColorForViewsWithSameTag(PlayerExperienceView)
@@ -116,6 +142,89 @@ class ProfileReadOnlyViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func editImageBtnPressed(sender: AnyObject) {
+        
+        let alertController = UIAlertController(title: nil, message: "Change your picture", preferredStyle: .ActionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+            // ...
+        }
+        alertController.addAction(cancelAction)
+        
+        let TakePictureAction = UIAlertAction(title: "Take Photo", style: .Default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
+                imagePicker.allowsEditing = false
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+            }
+        }
+        
+        alertController.addAction(TakePictureAction)
+        
+        let chooseExistingAction = UIAlertAction(title: "Choose Existing", style: .Default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+                imagePicker.allowsEditing = false
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+            }
+        }
+        
+        alertController.addAction(chooseExistingAction)
+        
+        
+        let chooseFromFacebookAction = UIAlertAction(title: "Choose Default", style: .Default) { (action) in
+            
+            self.activityInd.startAnimating()
+            
+            let image:UIImage = getImageFromFacebook()
+            
+            self.profileImage.image = image
+            
+            addProfileImageData(self.resizeImage(image, newWidth: 200))
+            self.activityInd.stopAnimating()
+        }
+        
+        alertController.addAction(chooseFromFacebookAction)
+        
+        
+        let removePhotoAction = UIAlertAction(title: "Remove Photo", style: .Default) { (action) in
+            
+            let image:UIImage = UIImage(named: "User")!
+            
+            self.profileImage.image = image
+            addProfileImageData(self.resizeImage(image, newWidth: 200))
+            
+        }
+        
+        alertController.addAction(removePhotoAction)
+        
+        
+        
+        
+        
+        
+        self.presentViewController(alertController, animated: true) {
+            // ...
+        }
+        
+    }
+    
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+        
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
     }
     
 

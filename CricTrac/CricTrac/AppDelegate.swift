@@ -146,6 +146,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setSliderMenu(){
 
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+        if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let currentwindow = app.window {
+            
+            window = currentwindow
+        }
+        
+        
+        
         window?.makeKeyAndVisible()
         let splashScreenVC = viewControllerFrom("Main", vcid: "SplashScreenViewController")
         window?.rootViewController = splashScreenVC

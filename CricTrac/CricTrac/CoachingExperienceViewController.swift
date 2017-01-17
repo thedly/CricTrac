@@ -105,22 +105,25 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
             
             profileData = Profile(usrObj: data)
             
-            var SplashScreenVC = viewControllerFrom("Main", vcid: "SplashScreenViewController") as! SplashScreenViewController
+            var window = UIWindow(frame: UIScreen.mainScreen().bounds)
+            
+            if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let currentwindow = app.window {
+                
+                window = currentwindow
+            }
             
             
-            self.presentViewController(SplashScreenVC, animated: true, completion: nil)
+            if window.rootViewController == sliderMenu {
+                window.rootViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+            }
+            else
+            {
+                let rootViewController: UIViewController = getRootViewController()
+                window.rootViewController = rootViewController
+            }
 
             
-//            var vc: UIViewController = self.presentingViewController!;
-//            while ((vc.presentingViewController) != nil) {
-//                
-//                vc = vc.presentingViewController!;
-//                if ((vc.presentingViewController?.isEqual(viewControllerFrom("Main", vcid: "ProfileBaseViewController") as! ProfileBaseViewController)) != nil){
-//                    break;
-//                }
-//            }
-//            
-//            vc.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+
 
             
             

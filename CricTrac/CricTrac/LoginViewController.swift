@@ -71,6 +71,9 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
 
     @IBAction func loginWithUserNamePassword(){
         KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+        
+        
+        
     loginWithMailAndPassword((username.text?.trimWhiteSpace)!, password: (password.text?.trimWhiteSpace)!) { (user, error) in
         
         if error != nil{
@@ -84,6 +87,15 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
             KRProgressHUD.dismiss()
             if user!.emailVerified{
                 currentUser = user
+                
+                let userDefaults = NSUserDefaults.standardUserDefaults()
+                
+//                currentUser?..getTokenForcingRefresh(true) {idToken, error in
+//                    if error == nil {
+//                        self.saveEmailToken(idToken!)
+//                    }
+//                }
+                
                 enableSync()
                 self.navigateToNextScreen()
             }
@@ -97,7 +109,46 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         
     }
    
+    
+    func saveEmailToken(idToken:String){
+        
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        
+        var googleTokens: [String:String]!
+        
+        var facebookToken:[String:String]!
+        
+        var emailToken = ["tokenString":idToken]
+        
+        if let loginToken = userDefaults.valueForKey("loginToken") as? [String:AnyObject]{
+            
+            if let fbtoken = loginToken["Facebooktoken"]{
+                
+                facebookToken = fbtoken as! [String : String]
+            }
+            if let googletoken = loginToken["googletoken"]{
+                
+                googleTokens = googletoken as! [String : String]
+            }
+            
+        }
+        
+        var token = [String:AnyObject]()
+        
+        token["Facebooktoken"] = facebookToken
+        token["googletoken"] = googleTokens
+        token["emailToken"] = emailToken
+        
+        userDefaults.setValue(token, forKey: "loginToken")
+        
+        userDefaults.synchronize()
+        
+        
+        
+    }
 
+    
+    
     
     func loginWithGoogle(){
         
@@ -164,7 +215,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         token["Facebooktoken"] = facebookToken
         }
         token["googletoken"] = googleTokens
-        
+        token["emailToken"] = nil
         userDefaults.setValue(token, forKey: "loginToken")
         
         userDefaults.synchronize()
@@ -248,7 +299,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
             token["googletoken"] = googleToken
         }
         token["Facebooktoken"] = fbTokens
-        
+        token["emailToken"] = nil
         userDefaults.setValue(token, forKey: "loginToken")
         
         userDefaults.synchronize()
@@ -272,7 +323,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
             profileData = Profile(usrObj: data)
             dispatch_group_leave(self.myGroup)
             
-            if profileData.ProfileImageUrl == "" {
+            if profileData.ProfileImageURL == "" {
                 let userDefaults = NSUserDefaults.standardUserDefaults()
                 if let token = userDefaults.valueForKey("loginToken") {
                     if token["Facebooktoken"] != nil || token["googletoken"] != nil{
@@ -284,7 +335,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
             }
             else
             {
-                getImageFromFirebase(profileData.ProfileImageUrl) { (imgData) in
+                getImageFromFirebase(profileData.ProfileImageURL) { (imgData) in
                     LoggedInUserImage = imgData
                 }
             }
@@ -297,28 +348,36 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         
         dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
             
-            let window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
-            let dashboardVC = viewControllerFrom("Main", vcid: "timeline") as! TimeLineViewController
+            var window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
+            
+            if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let currentwindow = app.window {
+                
+                window = currentwindow
+            }
+            
+            
+            let rootViewController: UIViewController = getRootViewController()
             
             
             let profileVC = viewControllerFrom("Main", vcid: "ProfileBaseViewController") as! ProfileBaseViewController
             
-            let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")
             
-            let navigationControl = UINavigationController(rootViewController: dashboardVC )
-            sliderMenu.mainViewController = navigationControl
-            sliderMenu.drawerViewController = drawerViewController
             self.facebookBtn.enabled = true
             self.googleBtn.enabled = true
-            window?.rootViewController = sliderMenu
+            
             
             
             if profileData.fullName == " " {
+                
+                KRProgressHUD.dismiss()
+                window?.rootViewController = profileVC
                 self.presentViewController(profileVC, animated: true) { KRProgressHUD.dismiss() }
             }
             else
             {
-                self.presentViewController(sliderMenu, animated: true) { KRProgressHUD.dismiss() }
+                KRProgressHUD.dismiss()
+                window?.rootViewController = rootViewController
+                self.presentViewController(rootViewController, animated: true) { KRProgressHUD.dismiss() }
             }
             
             

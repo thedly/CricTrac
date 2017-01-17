@@ -151,7 +151,6 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
                 
                 self.view.endEditing(true)
                 
-                OversBowled = overText
                 
                 Wides = "-"
                 NoBalls = "-"

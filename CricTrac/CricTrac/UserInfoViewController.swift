@@ -137,7 +137,8 @@ class UserInfoViewController: UIViewController  {
         else
         {
             
-            if let displayName = currentUser?.displayName {
+
+            if let displayName = (currentUser?.displayName) where displayName.length > 0  {
                 
                 var fullNameArr = displayName.characters.split{$0 == " "}.map(String.init)
                 self.firstName.text = fullNameArr[0]
@@ -210,7 +211,6 @@ class UserInfoViewController: UIViewController  {
             
             
             let toViewController = NextVC
-            
             
             
             toViewController!.transitioningDelegate = self.transitionManager
