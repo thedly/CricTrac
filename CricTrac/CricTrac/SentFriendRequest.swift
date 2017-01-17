@@ -14,7 +14,7 @@ class SentFriendRequest {
     var Club: String?
     var Name: String?
     var ReceivedRequestIdOther: String?
-    var SentDateTime: String?
+    var SentDateTime: AnyObject?
     var SentRequestId: String?
     var SentTo: String?
     
@@ -25,7 +25,7 @@ class SentFriendRequest {
             "City": datObj.City!,
             "Club": datObj.Club!,
             "Name": datObj.Name!,
-            "SentDateTime": datObj.SentDateTime!,
+            "SentDateTime": datObj.SentDateTime! as! String,
             "SentTo": datObj.SentTo!
         ]
     }

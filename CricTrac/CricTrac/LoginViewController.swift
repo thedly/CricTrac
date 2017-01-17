@@ -310,7 +310,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         
         
         
-        if currentUser != nil {
+        if currentUser != nil && profileData.userExists {
             updateLastLogin()
         }
         
@@ -367,7 +367,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
             
             
             
-            if profileData.fullName == " " {
+            if !profileData.userExists {
                 
                 KRProgressHUD.dismiss()
                 window?.rootViewController = profileVC

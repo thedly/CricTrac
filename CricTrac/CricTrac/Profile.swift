@@ -26,7 +26,7 @@ class Profile {
     var State: String
     
     var Experience: String
-    var Certifications: String
+    var Certifications: [String]
     var CoachingLevel: String
     
     
@@ -51,9 +51,11 @@ class Profile {
     var UserLastLoggedin: String
     
     
-    
+    var userExists: Bool
     
     init(usrObj : [String: AnyObject]) {
+        
+        self.userExists = usrObj.count > 0
         
         self.FirstName = (usrObj["FirstName"] ?? "") as! String
         self.LastName = (usrObj["LastName"] ?? "") as! String
@@ -77,7 +79,7 @@ class Profile {
         
         self.CoachingLevel = (usrObj["CoachingLevel"] ?? "") as! String
         self.Experience = (usrObj["Experience"] ?? "") as! String
-        self.Certifications = (String(usrObj["Certifications"]) ?? "") as! String
+        self.Certifications = (usrObj["Certifications"] ?? []) as! [String]
         
         
         self.fullName = "\(self.FirstName) \(self.LastName)"
@@ -134,7 +136,7 @@ class Profile {
             
             "Experience": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.Experience: "",
             
-            "Certifications": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.Certifications: "",
+            "Certifications": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.Certifications: [],
             "UserStatus": self.UserStatus,
             "UserAddedDate" : self.UserAddedDate,
             "UserEditedDate" : self.UserEditedDate,

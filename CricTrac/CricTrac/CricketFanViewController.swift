@@ -89,6 +89,8 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
             
             profileData = Profile(usrObj: data)
             
+            updateMetaData(userImageMetaData)
+            
             var window = UIWindow(frame: UIScreen.mainScreen().bounds)
             
             if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let currentwindow = app.window {

@@ -20,10 +20,14 @@ var opponentTeams = [String]()
 var dismissals = [String]()
 var tournaments = [String]()
 var results = [String]()
+
+
+
 var profileData = Profile(usrObj: [String:String]())
 var LoggedInUserImage = UIImage(named: defaultProfileImage)
 var UserProfilesData = [Profile]()
 var UserProfilesImages = [String: UIImage]()
+var userImageMetaData = NSURL()
 var BattingStyles = [String]()
 var BowlingStyles = [String]()
 var PlayingRoles = [String]()

@@ -114,7 +114,7 @@ func loadInitialValues(){
     
 }
 
-func addMatchData(key:NSString,data:[String:String]){
+func addMatchData(key:NSString,data:[String:AnyObject]){
     
     var dataToBeModified = data
     
@@ -154,8 +154,7 @@ func addProfileImageData(profileDp:UIImage){
                 return
             }else{
                 
-                updateMetaData(metaData!.downloadURL()!)
-                
+                userImageMetaData = (metaData?.downloadURL())!
                 
                 LoggedInUserImage = profileDp
                 
@@ -171,11 +170,14 @@ func addProfileImageData(profileDp:UIImage){
 
 
 func updateMetaData(profileImgUrl: NSURL) {
-    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
-    let profileImageObject: [NSObject:AnyObject] = [ "ProfileImageURL"    : profileImgUrl.absoluteString]
-    ref.updateChildValues(profileImageObject)
-    if profileData.ProfileImageURL == "" {
-        profileData.ProfileImageURL = profileImgUrl.absoluteString
+    
+    if profileData.userExists {
+        let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
+        let profileImageObject: [NSObject:AnyObject] = [ "ProfileImageURL"    : profileImgUrl.absoluteString]
+        ref.updateChildValues(profileImageObject)
+        if profileData.ProfileImageURL == "" {
+            profileData.ProfileImageURL = profileImgUrl.absoluteString
+        }
     }
     
     
@@ -281,7 +283,9 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
     
     dataToBeModified["UserLastLoggedin"] = NSDate().getCurrentTimeStamp()
     
-    if profileData.fullName == " "
+    
+    
+    if !profileData.userExists
     {
         dataToBeModified["UserAddedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
         dataToBeModified["UserEditedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
@@ -294,9 +298,12 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
         dataToBeModified["UserEditedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
     }
     
-
+    
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
     ref.setValue(dataToBeModified)
+    
+    
+    
     sucessBlock(dataToBeModified)
 }
 
@@ -343,6 +350,8 @@ func updateLastLogin(){
 }
 
 func getAllProfileData(sucessBlock:([String:AnyObject])->Void){
+    
+    
     
     fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
         
@@ -416,7 +425,7 @@ func getImageFromFirebase(imagePath: String ,sucessBlock:(UIImage)->Void){
 
 //MARK:- Update  Match
 
-func updateMatchData(key:String,data:[String:String]){
+func updateMatchData(key:String,data:[String:AnyObject]){
     
     var dataToBeModified = data
     
@@ -581,7 +590,17 @@ func loadTimelineFromId(callback: (timeline:[String:AnyObject],postId:String)->V
     
 }
 
-
+func DoesUserExist() -> Bool {
+    
+    
+    fireBaseRef.child("Users").child(currentUser!.uid).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        return snapshot.hasChild("UserProfile")
+        
+    })
+    
+    return false
+}
 
 
 

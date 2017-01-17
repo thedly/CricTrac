@@ -72,7 +72,7 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
         
 //        self.profileImage.image = LoggedInUserImage
         
-        if profileData.fullName != " " {
+        if profileData.userExists {
             
             self.NameText.text = profileData.fullName.uppercaseString
             self.DOBText.text = profileData.DateOfBirth.uppercaseString
@@ -91,7 +91,7 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
             self.CoachCurrentTeams.text = profileData.CoachCurrentTeams.joinWithSeparator(",").uppercaseString
             self.CoachPastTeams.text = profileData.CoachPastTeams.joinWithSeparator(",").uppercaseString
             self.CoachCoachingLevel.text = profileData.CoachingLevel.uppercaseString
-            self.CoachCertifications.text = profileData.Certifications.uppercaseString
+            self.CoachCertifications.text = profileData.Certifications.joinWithSeparator(",").uppercaseString
             self.CoachExperience.text = profileData.Experience.uppercaseString
             
             self.FanSupportingTeams.text = profileData.SupportingTeams.joinWithSeparator(",").uppercaseString
@@ -104,12 +104,6 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
             self.CricketFanView.hidden = profileData.UserProfile != userProfileType.Fan.rawValue
             self.PlayerExperienceView.hidden = profileData.UserProfile != userProfileType.Player.rawValue
             
-        }
-    }
-    
-    func stopAnimation() {
-        if self.activityInd.isAnimating() {
-            self.activityInd.stopAnimating()
         }
     }
     
@@ -144,88 +138,9 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func editImageBtnPressed(sender: AnyObject) {
-        
-        let alertController = UIAlertController(title: nil, message: "Change your picture", preferredStyle: .ActionSheet)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
-            // ...
-        }
-        alertController.addAction(cancelAction)
-        
-        let TakePictureAction = UIAlertAction(title: "Take Photo", style: .Default) { (action) in
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
-                let imagePicker = UIImagePickerController()
-                imagePicker.delegate = self
-                imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
-                imagePicker.allowsEditing = false
-                self.presentViewController(imagePicker, animated: true, completion: nil)
-            }
-        }
-        
-        alertController.addAction(TakePictureAction)
-        
-        let chooseExistingAction = UIAlertAction(title: "Choose Existing", style: .Default) { (action) in
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
-                let imagePicker = UIImagePickerController()
-                imagePicker.delegate = self
-                imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
-                imagePicker.allowsEditing = false
-                self.presentViewController(imagePicker, animated: true, completion: nil)
-            }
-        }
-        
-        alertController.addAction(chooseExistingAction)
-        
-        
-        let chooseFromFacebookAction = UIAlertAction(title: "Choose Default", style: .Default) { (action) in
-            
-            self.activityInd.startAnimating()
-            
-            let image:UIImage = getImageFromFacebook()
-            
-            self.profileImage.image = image
-            
-            addProfileImageData(self.resizeImage(image, newWidth: 200))
-            self.activityInd.stopAnimating()
-        }
-        
-        alertController.addAction(chooseFromFacebookAction)
-        
-        
-        let removePhotoAction = UIAlertAction(title: "Remove Photo", style: .Default) { (action) in
-            
-            let image:UIImage = UIImage(named: "User")!
-            
-            self.profileImage.image = image
-            addProfileImageData(self.resizeImage(image, newWidth: 200))
-            
-        }
-        
-        alertController.addAction(removePhotoAction)
-        
-        
-        
-        
-        
-        
-        self.presentViewController(alertController, animated: true) {
-            // ...
-        }
-        
-    }
     
-    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
-        
-        let scale = newWidth / image.size.width
-        let newHeight = image.size.height * scale
-        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
-        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage!
-    }
+    
+    
     
 
     /*

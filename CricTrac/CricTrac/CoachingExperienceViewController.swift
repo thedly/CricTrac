@@ -18,6 +18,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     @IBOutlet weak var currentTeams: UITableView!
     
     
+    @IBOutlet weak var CertificationsTbl: UITableView!
     
     @IBOutlet weak var CoachPlayedForTbl: UITableView!
 
@@ -31,12 +32,13 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     
     var data:[String:AnyObject]{
         
-        return ["Certifications":Certifications.textVal,"Experience":Experience.textVal,"CoachingLevel":CoachingLevel.textVal,"CoachCurrentTeams":teamNames, "CoachPastTeams": pastTeamNames, "CoachPlayedFor": CoachPlayedFor]
+        return ["Certifications":CertificationsList,"Experience":Experience.textVal,"CoachingLevel":CoachingLevel.textVal,"CoachCurrentTeams":teamNames, "CoachPastTeams": pastTeamNames, "CoachPlayedFor": CoachPlayedFor]
     }
     
     
     var teamNames = [""]
     
+    var CertificationsList = [""]
     
     var CoachPlayedFor = [""]
     
@@ -63,6 +65,11 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         CoachPlayedForTbl.dataSource = self
         CoachPlayedForTbl.delegate = self
         
+        CertificationsTbl.allowsSelection = false
+        CertificationsTbl.separatorStyle = .None
+        CertificationsTbl.dataSource = self
+        CertificationsTbl.delegate = self
+
         
         
     }
@@ -72,14 +79,16 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         
         if profileData.FirstName.length > 0 {
             self.CoachingLevel.text = profileData.CoachingLevel
-            self.Certifications.text = profileData.Certifications
+            self.CertificationsList = profileData.Certifications
             self.Experience.text = profileData.Experience
             self.teamNames = profileData.CoachCurrentTeams
             self.CoachPlayedFor = profileData.CoachPlayedFor
             self.pastTeamNames = profileData.CoachPastTeams
+            
             currentTeams.reloadData()
             pastTeams.reloadData()
             CoachPlayedForTbl.reloadData()
+            CertificationsTbl.reloadData()
         }
     }
     
@@ -93,7 +102,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     
     @IBAction func CreateCoachingProfileBtnPressed(sender: AnyObject) {
         
-        profileData.Certifications = self.data["Certifications"] as! String
+        profileData.Certifications = self.data["Certifications"] as! [String]
         profileData.Experience = self.data["Experience"] as! String
         profileData.CoachingLevel = self.data["CoachingLevel"] as! String
         profileData.CoachCurrentTeams = self.data["CoachCurrentTeams"] as! [String]
@@ -104,6 +113,8 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
             
             profileData = Profile(usrObj: data)
+            
+            updateMetaData(userImageMetaData)
             
             var window = UIWindow(frame: UIScreen.mainScreen().bounds)
             
@@ -121,12 +132,6 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
                 let rootViewController: UIViewController = getRootViewController()
                 window.rootViewController = rootViewController
             }
-
-            
-
-
-            
-            
         }
 
         
@@ -196,8 +201,39 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         
         
     }
+
+    @IBAction func addCertificationsPressed(sender: AnyObject) {
+        if Certifications.text?.trimWhiteSpace != "" && Certifications.text?.trimWhiteSpace != "-" {
+            CertificationsList.append(Certifications.textVal)
+            Certifications.text = ""
+            
+            CertificationsTbl.reloadData()
+        }
+        
+        
+    }
+
     
     
+    func getCellForCertifications(indexPath:NSIndexPath)->UITableViewCell{
+        if let aCell =  CertificationsTbl.dequeueReusableCellWithIdentifier("CurrentTeamsTableViewCell", forIndexPath: indexPath) as? CurrentTeamsTableViewCell {
+            
+            aCell.backgroundColor = UIColor.clearColor()
+            
+            
+            
+            aCell.teamName.text = CertificationsList[indexPath.row]
+            
+            aCell.deleteTeamBtn.addTarget(self, action: "deleteTeamFromCurrentTeams:", forControlEvents: .TouchUpInside)
+            return aCell
+        }
+        else
+        {
+            return UITableViewCell()
+        }
+        
+        
+    }
     
     
     
@@ -265,6 +301,9 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         else if tableView.isEqual(CoachPlayedForTbl) {
             return CoachPlayedFor.count
         }
+        else if tableView.isEqual(CertificationsTbl){
+            return CertificationsList.count
+        }
         return pastTeamNames.count
         
     }
@@ -285,6 +324,10 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         else if tableView.isEqual(CoachPlayedForTbl) {
             return getCellForPlayedTeamsRow(indexPath)
         }
+        else if tableView.isEqual(CertificationsTbl) {
+            return getCellForCertifications(indexPath)
+        }
+
         return getCellForPastTeamsRow(indexPath)
     }
 

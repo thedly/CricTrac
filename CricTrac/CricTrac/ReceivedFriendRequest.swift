@@ -12,7 +12,7 @@ class ReceivedFriendRequest {
     var City: String!
     var Club: String!
     var Name: String!
-    var ReceivedDateTime: String!
+    var ReceivedDateTime: AnyObject!
     var ReceivedFrom: String!
     var RequestId: String!
     var SentRequestId: String!
@@ -40,7 +40,7 @@ class ReceivedFriendRequest {
         "City": datObject.City!,
         "Club": datObject.Club!,
         "Name": datObject.Name!,
-        "ReceivedDateTime": datObject.ReceivedDateTime!,
+        "ReceivedDateTime": datObject.ReceivedDateTime! as! String,
         "ReceivedFrom": datObject.ReceivedFrom!,
         
         ]

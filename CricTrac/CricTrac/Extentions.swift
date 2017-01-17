@@ -8,6 +8,10 @@
 
 import Foundation
 import UIKit
+
+import Firebase
+
+
 extension UIColor {
     
     convenience init(hex: String) {
@@ -291,8 +295,9 @@ extension UIImageView{
 }
 
 extension NSDate {
-    public func getCurrentTimeStamp() -> String {
-        return round(NSDate().timeIntervalSince1970).cleanValue
+    public func getCurrentTimeStamp() -> AnyObject {
+        
+        return [".sv":"timestamp"]
     }
 }
 

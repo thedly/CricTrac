@@ -156,7 +156,7 @@ class SplashScreenViewController: UIViewController {
                 let profileVC = viewControllerFrom("Main", vcid: "ProfileBaseViewController") as! ProfileBaseViewController
                 
                 
-                if profileData.fullName == " " {
+                if !profileData.userExists {
                     KRProgressHUD.dismiss()
                     self.window?.rootViewController = profileVC
                     self.presentViewController(profileVC, animated: true) { KRProgressHUD.dismiss() }

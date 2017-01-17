@@ -8,8 +8,9 @@
 
 import UIKit
 import KRProgressHUD
+import FirebaseAuth
 
-class UserDashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,ThemeChangeable {
+class UserDashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ThemeChangeable {
 
     //MARK: - Variable declaration
     
@@ -128,6 +129,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     @IBOutlet weak var FirstRecentMatchBowlingDateAndLocation: UILabel!
     
+    @IBOutlet weak var activityInd: UIActivityIndicatorView!
     
     
     @IBOutlet weak var SecondRecentMatchBowlingScore: UILabel!
@@ -136,10 +138,105 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     @IBOutlet weak var SecondRecentMatchBowlingDateAndLocation: UILabel!
     
     
+    @IBAction func editImageBtnPressed(sender: AnyObject) {
+        
+        let alertController = UIAlertController(title: nil, message: "Change your picture", preferredStyle: .ActionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+            // ...
+        }
+        alertController.addAction(cancelAction)
+        
+        let TakePictureAction = UIAlertAction(title: "Take Photo", style: .Default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
+                imagePicker.allowsEditing = false
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+            }
+        }
+        
+        alertController.addAction(TakePictureAction)
+        
+        let chooseExistingAction = UIAlertAction(title: "Choose Existing", style: .Default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+                imagePicker.allowsEditing = false
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+            }
+        }
+        
+        alertController.addAction(chooseExistingAction)
+        
+        
+        let chooseFromFacebookAction = UIAlertAction(title: "Choose Default", style: .Default) { (action) in
+            
+            var userProviderData = currentUser?.providerData
+            
+            for usr: FIRUserInfo in userProviderData! {
+                if (usr.providerID == "facebook.com" || usr.providerID == "google.com") {
+                    
+                    self.activityInd.startAnimating()
+                    
+                    let image:UIImage = getImageFromFacebook()
+                    
+                    self.userProfileImage.image = image
+                    
+                    addProfileImageData(self.resizeImage(image, newWidth: 200))
+                    self.activityInd.stopAnimating()
+
+                }
+            }
+            
+            
+            
+            
+         }
+        
+        alertController.addAction(chooseFromFacebookAction)
+        
+        
+        let removePhotoAction = UIAlertAction(title: "Remove Photo", style: .Default) { (action) in
+            
+            let image:UIImage = UIImage(named: "User")!
+            
+            self.userProfileImage.image = image
+            addProfileImageData(self.resizeImage(image, newWidth: 200))
+            
+        }
+        
+        alertController.addAction(removePhotoAction)
+        
+        
+        
+        
+        
+        
+        self.presentViewController(alertController, animated: true) {
+            // ...
+        }
+        
+    }
     
     
+    func stopAnimation() {
+        if self.activityInd.isAnimating() {
+            self.activityInd.stopAnimating()
+        }
+    }
     
-    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        
+        self.userProfileImage.image = image
+        self.dismissViewControllerAnimated(true) { 
+            addProfileImageData(self.resizeImage(image, newWidth: 200))
+        }
+        
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -174,6 +271,18 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         //setBackgroundColor()
         
         // Do any additional setup after loading the view.
+    }
+    
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+        
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
     }
     
     func changeThemeSettigs() {
