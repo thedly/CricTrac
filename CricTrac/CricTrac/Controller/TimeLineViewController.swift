@@ -24,6 +24,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,7 +70,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
     
     func refresh(sender:AnyObject) {
-        
+        loadTimeline()
     }
     
     func addObserverToTimeline(){
@@ -93,8 +94,10 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             
            timelineData = JSON(timelineDta)
             
-            self.timeLineTable.reloadData()
-            
+            dispatch_async(dispatch_get_main_queue(),{
+                
+                self.timeLineTable.reloadData()
+            })
         }
     }
     
@@ -125,13 +128,26 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     
                     }, failure: { (error) in
                         
-                        
+                        dispatch_async(dispatch_get_main_queue(),{
+                            
+                            self.refreshControl.endRefreshing()
+                        })
                 })
             }
-            //LoadTimeline()
-            self.timeLineTable.reloadData()
+            
+            dispatch_async(dispatch_get_main_queue(),{
+                
+                self.refreshControl.endRefreshing()
+                
+                self.timeLineTable.reloadData()
+            })
             
         }) { (error) in }
+        
+        dispatch_async(dispatch_get_main_queue(),{
+            
+            self.refreshControl.endRefreshing()
+        })
     }
     
     func didMenuButtonTapp(){
@@ -212,8 +228,40 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 
                 let  postCell =  timeLineTable.dequeueReusableCellWithIdentifier("aPost", forIndexPath: indexPath) as! APostTableViewCell
                 
+                postCell.totalLikeCount = 0
                 postCell.post.text = data.dictionaryValue["Post"]?.stringValue
                 postCell.postOwnerName.text = data.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
+                postCell.index = indexPath.section-1
+                var commentsCount = 0
+                
+                if let value = data.dictionaryValue["TimelineComments"]?.count{
+                    
+                   commentsCount = value
+                }
+                
+                 postCell.commentCount.setTitle("\(commentsCount) COMMENTS", forState: .Normal)
+                
+                
+                postCell.postId = data.dictionaryValue["postId"]?.stringValue
+                
+                var likesCount = 0
+                
+                var likeColor = UIColor.grayColor()
+                
+                if let likes = data.dictionaryValue["Likes"]?.dictionaryObject as? [String:[String:String]]{
+                    
+                    let result = likes.filter{ return  $0.1["OwnerID"] == currentUser!.uid }
+                    if result.count > 0 {
+                        likeColor = UIColor.yellowColor()
+                    }
+                    likesCount = likes.count
+                    
+                    postCell.totalLikeCount = likesCount
+                    
+                }
+                
+                postCell.likeCount.setTitle("\(likesCount) LIKES", forState: .Normal)
+                postCell.likeButton.titleLabel?.textColor = likeColor
                 acell = postCell
                 
             }
@@ -267,20 +315,21 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         
                     if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height)
                     {
-        
-        
                         timeLineTable.reloadData()
         
-                        LoadTimeline(pageKey!, sucess: { (data) in
+                        if let key = pageKey{
                             
-                            pageKey = data.dictionaryValue["pageKey"]?.stringValue
-                            
-                            timelineData = JSON(timelineData!.arrayObject! + data.dictionaryValue["timeline"]!.arrayObject!)
-                            
-                            }, failure: { (error) in
+                            LoadTimeline(key, sucess: { (data) in
                                 
+                                pageKey = data.dictionaryValue["pageKey"]?.stringValue
                                 
-                        })
+                                timelineData = JSON(timelineData!.arrayObject! + data.dictionaryValue["timeline"]!.arrayObject!)
+                                
+                                }, failure: { (error) in
+                                    
+                                    
+                            })
+                        }
                         }
     }
     
@@ -313,6 +362,9 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             
         }
     }
+    
+    
+    
     /*
      // MARK: - Navigation
      

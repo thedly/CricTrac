@@ -60,6 +60,9 @@
                         <state key="normal" title="LIKE" image="like">
                             <color key="titleColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="0.5" colorSpace="calibratedRGB"/>
                         </state>
+                        <connections>
+                            <action selector="DidTapLikeButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="agF-KY-l8o"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FYt-Kg-9A5">
                         <rect key="frame" x="418" y="223" width="111" height="18"/>
@@ -145,6 +148,9 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="commentCount" destination="HT5-zA-qQ7" id="Had-c4-nAz"/>
+                <outlet property="likeButton" destination="sao-ME-HsA" id="Pbc-eS-yt8"/>
+                <outlet property="likeCount" destination="LYJ-aE-uqd" id="31I-ad-R46"/>
                 <outlet property="post" destination="asJ-kQ-Jqv" id="YEO-VY-ALn"/>
                 <outlet property="postOwnerName" destination="UIx-fb-WlC" id="iUJ-as-4hm"/>
             </connections>

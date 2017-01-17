@@ -47,6 +47,7 @@ var matchDataSource = [[String:String]]()
 var profileDataChanged: Bool = false
 var ThemeChanged: Bool = false
 var timelineData:JSON?
+var likeCountDic = [String:Int]()
 
 private var _currentTheme: String = defaultTheme
 var topColor = topColorDefault
