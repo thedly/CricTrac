@@ -211,6 +211,15 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         alertController.addAction(removePhotoAction)
         
         
+        let viewPhotoAction = UIAlertAction(title: "View Photo", style: .Default) { (action) in
+            
+           self.viewImage()
+            
+        }
+        
+        alertController.addAction(viewPhotoAction)
+        
+        
         
         
         
@@ -298,6 +307,24 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     
     // MARK: - Methods
+    
+    
+    
+    func viewImage(){
+        
+        let newImageView = UIImageView(image: userProfileImage.image)
+        newImageView.frame = self.view.frame
+        newImageView.backgroundColor = .blackColor()
+        newImageView.contentMode = .ScaleAspectFit
+        newImageView.userInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: "dismissFullscreenImage:")
+        newImageView.addGestureRecognizer(tap)
+        //        self.view.addSubview(navBarView)
+        self.view.addSubview(newImageView)
+        
+    }
+    
+    
     
     @IBAction func imageTapped(sender: UITapGestureRecognizer) {
         let imageView = sender.view as! UIImageView
