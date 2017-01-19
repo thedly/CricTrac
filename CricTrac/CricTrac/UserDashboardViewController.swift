@@ -713,12 +713,12 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 break
             }
             
-            
-            
+            if teamNameToReturn != "" {
                 aCell.TeamName.text = teamNameToReturn
-            
-            
                 aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+            }
+            
+            
             
             
                 

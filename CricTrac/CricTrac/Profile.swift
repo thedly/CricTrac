@@ -42,6 +42,9 @@ class Profile {
     var FavoritePlayers: [String]
     
     var ProfileImageURL: String
+    
+    var CoverPhotoURL: String
+    
     var fullName: String
     var UserProfile: String
     var UserStatus: String
@@ -72,7 +75,10 @@ class Profile {
         self.PlayingRole = (usrObj["PlayingRole"]  ?? "") as! String
         //self.PlayingLevel = (usrObj["Level"] ?? "") as! String
         
-        self.ProfileImageURL = (usrObj["ProfileImageURL"] ?? "") as! String
+        self.ProfileImageURL = (usrObj["ProfileImageURL"] ?? String(userImageMetaData ?? "")) as! String
+        
+        self.CoverPhotoURL = (usrObj["CoverPhotoURL"] ?? String(userCoverPhotoMetaData ?? "")) as! String
+        
         
         self.UserProfile = (usrObj["UserProfile"] ?? "") as! String
         
@@ -105,43 +111,92 @@ class Profile {
     
     
     var ProfileObject: [String:AnyObject] {
-        return [
-            "FirstName" : self.FirstName,
-            "LastName" : self.LastName,
-            "BattingStyle": self.BattingStyle,
-            "BowlingStyle": self.BowlingStyle,
-            "City": self.City,
-            "Country": self.Country,
-            "State": self.State,
-            "DateOfBirth": self.DateOfBirth,
-            "Email": self.Email,
-            "Gender": self.Gender,
-            "Mobile": self.Mobile,
-            "PlayingRole":self.PlayingRole,
-            //"Level":self.PlayingLevel,
-            "ProfileImageURL": self.ProfileImageURL ,
-            "UserProfile": self.UserProfile,
-            "FavoritePlayers": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.FavoritePlayers : [],
-            "PlayerCurrentTeams": self.UserProfile == String(userProfileType.Player.rawValue) ? self.PlayerCurrentTeams : [],
-            "PlayerPastTeams": self.UserProfile == String(userProfileType.Player.rawValue) ? self.PlayerPastTeams: [],
-            "CoachCurrentTeams": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.CoachCurrentTeams: [],
-            "CoachPastTeams": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.CoachPastTeams: [],
-            "SupportingTeams": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.SupportingTeams: [],
-            "InterestedSports": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.InterestedSports: [],
-            "CoachPlayedFor": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.CoachPlayedFor : [],
-            "Hobbies": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.Hobbies : [],
+        
+        
+        if self.UserProfile == String(userProfileType.Fan.rawValue) {
+            return [
+                "FirstName" : self.FirstName,
+                "LastName" : self.LastName,
+                "City": self.City,
+                "Country": self.Country,
+                "State": self.State,
+                "DateOfBirth": self.DateOfBirth,
+                "Email": self.Email,
+                "Gender": self.Gender,
+                "Mobile": self.Mobile,
+                "ProfileImageURL": self.ProfileImageURL ,
+                "UserProfile": self.UserProfile,
+                "CoverPhotoURL" : self.CoverPhotoURL,
+                "FavoritePlayers": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.FavoritePlayers : [],
+                "SupportingTeams": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.SupportingTeams: [],
+                "InterestedSports": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.InterestedSports: [],
+                "Hobbies": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.Hobbies : [],
+                "UserStatus": self.UserStatus,
+                "UserAddedDate" : self.UserAddedDate,
+                "UserEditedDate" : self.UserEditedDate,
+                "UserLastLoggedin": self.UserLastLoggedin
+            ]
+        }
+        else if self.UserProfile == String(userProfileType.Player.rawValue) {
             
+            return [
+                "FirstName" : self.FirstName,
+                "LastName" : self.LastName,
+                "BattingStyle": self.BattingStyle,
+                "BowlingStyle": self.BowlingStyle,
+                "City": self.City,
+                "Country": self.Country,
+                "State": self.State,
+                "DateOfBirth": self.DateOfBirth,
+                "Email": self.Email,
+                "Gender": self.Gender,
+                "Mobile": self.Mobile,
+                "PlayingRole":self.PlayingRole,
+                //"Level":self.PlayingLevel,
+                "ProfileImageURL": self.ProfileImageURL ,
+                "CoverPhotoURL" : self.CoverPhotoURL,
+                "UserProfile": self.UserProfile,
+                
+                "PlayerCurrentTeams": self.UserProfile == String(userProfileType.Player.rawValue) ? self.PlayerCurrentTeams : [],
+                "PlayerPastTeams": self.UserProfile == String(userProfileType.Player.rawValue) ? self.PlayerPastTeams: [],
+                "UserStatus": self.UserStatus,
+                "UserAddedDate" : self.UserAddedDate,
+                "UserEditedDate" : self.UserEditedDate,
+                "UserLastLoggedin": self.UserLastLoggedin
+            ]
+        
+        }
+        else {
             
-            "CoachingLevel": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.CoachingLevel: "",
-            
-            "Experience": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.Experience: "",
-            
-            "Certifications": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.Certifications: [],
-            "UserStatus": self.UserStatus,
-            "UserAddedDate" : self.UserAddedDate,
-            "UserEditedDate" : self.UserEditedDate,
-            "UserLastLoggedin": self.UserLastLoggedin
-        ]
+            return [
+                "FirstName" : self.FirstName,
+                "LastName" : self.LastName,
+                "City": self.City,
+                "Country": self.Country,
+                "State": self.State,
+                "DateOfBirth": self.DateOfBirth,
+                "Email": self.Email,
+                "Gender": self.Gender,
+                "Mobile": self.Mobile,
+                "PlayingRole":self.PlayingRole,
+                //"Level":self.PlayingLevel,
+                "ProfileImageURL": self.ProfileImageURL ,
+                "CoverPhotoURL" : self.CoverPhotoURL,
+                "UserProfile": self.UserProfile,
+                
+                "CoachCurrentTeams": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.CoachCurrentTeams: [],
+                "CoachPastTeams": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.CoachPastTeams: [],
+                "CoachPlayedFor": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.CoachPlayedFor : [],
+                "CoachingLevel": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.CoachingLevel: "",
+                "Experience": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.Experience: "",
+                "Certifications": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.Certifications: [],
+                "UserStatus": self.UserStatus,
+                "UserAddedDate" : self.UserAddedDate,
+                "UserEditedDate" : self.UserEditedDate,
+                "UserLastLoggedin": self.UserLastLoggedin
+            ]
+        }
+        
     }
     
     

@@ -83,21 +83,21 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
             self.StateText.text = profileData.State.uppercaseString
             self.CityText.text = profileData.City.uppercaseString
             
-            self.PlayerCurrentTeams.text = profileData.PlayerCurrentTeams.joinWithSeparator(",").uppercaseString
-            self.PlayerPastTeams.text = profileData.PlayerPastTeams.joinWithSeparator(",").uppercaseString
+            self.PlayerCurrentTeams.text = profileData.PlayerCurrentTeams.joinWithSeparator("\n").uppercaseString
+            self.PlayerPastTeams.text = profileData.PlayerPastTeams.joinWithSeparator("\n").uppercaseString
             self.PlayerBattingStyle.text = profileData.BattingStyle.uppercaseString
             self.PlayerBowlingStyle.text = profileData.BowlingStyle.uppercaseString
             
-            self.CoachCurrentTeams.text = profileData.CoachCurrentTeams.joinWithSeparator(",").uppercaseString
-            self.CoachPastTeams.text = profileData.CoachPastTeams.joinWithSeparator(",").uppercaseString
+            self.CoachCurrentTeams.text = profileData.CoachCurrentTeams.joinWithSeparator("\n").uppercaseString
+            self.CoachPastTeams.text = profileData.CoachPastTeams.joinWithSeparator("\n").uppercaseString
             self.CoachCoachingLevel.text = profileData.CoachingLevel.uppercaseString
-            self.CoachCertifications.text = profileData.Certifications.joinWithSeparator(",").uppercaseString
+            self.CoachCertifications.text = profileData.Certifications.joinWithSeparator("\n").uppercaseString
             self.CoachExperience.text = profileData.Experience.uppercaseString
             
-            self.FanSupportingTeams.text = profileData.SupportingTeams.joinWithSeparator(",").uppercaseString
-            self.FanInterestedSports.text = profileData.InterestedSports.joinWithSeparator(",").uppercaseString
-            self.FanFavouritePlayer.text = profileData.FavoritePlayers.joinWithSeparator(",")
-            self.FanHobbies.text = profileData.Hobbies.joinWithSeparator(",").uppercaseString
+            self.FanSupportingTeams.text = profileData.SupportingTeams.joinWithSeparator("\n").uppercaseString
+            self.FanInterestedSports.text = profileData.InterestedSports.joinWithSeparator("\n").uppercaseString
+            self.FanFavouritePlayer.text = profileData.FavoritePlayers.joinWithSeparator("\n")
+            self.FanHobbies.text = profileData.Hobbies.joinWithSeparator("\n").uppercaseString
             
             
             self.CoachingExperienceView.hidden = profileData.UserProfile != userProfileType.Coach.rawValue

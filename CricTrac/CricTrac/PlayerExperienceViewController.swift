@@ -147,7 +147,7 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     @IBAction func addPastTeamsPressed(sender: AnyObject) {
         
         if pastTeamName.text?.trimWhiteSpace != "" && pastTeamName.text?.trimWhiteSpace != "-" {
-            pastTeamNames.append(pastTeamName.textVal)
+            pastTeamNames.append(pastTeamName.textVal.trim())
             pastTeamName.text = ""
             pastTeams.reloadData()
         }
@@ -156,7 +156,7 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     
     @IBAction func addTeamsPressed(sender: AnyObject) {
         if teamName.text?.trimWhiteSpace != "" && teamName.text?.trimWhiteSpace != "-" {
-            teamNames.append(teamName.textVal)
+            teamNames.append(teamName.textVal.trim())
             teamName.text = ""
             
             currentTeams.reloadData()

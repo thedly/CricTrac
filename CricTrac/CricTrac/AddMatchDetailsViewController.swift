@@ -19,7 +19,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     
     var resVC: MatchResultsViewController!
     
-    var selecetedData:[String:String]?
+    var selecetedData:[String:AnyObject]?
     
     @IBOutlet weak var saveButton:UIButton!
     
@@ -181,7 +181,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                     
                     
                 }else{
-                    updateMatchData(selecetedData!["key"]!, data: data)
+                    updateMatchData(selecetedData!["key"]! as! String, data: data)
                     NSNotificationCenter.defaultCenter().postNotificationName("MatchDataChanged", object: self)
                 }
                 self.dismissViewControllerAnimated(true) {}

@@ -14,7 +14,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     @IBOutlet var matchSummaryTable:UITableView!
     
     var matchData:[String:AnyObject]!
-    var matchDataSource = [[String:String]]()
+    var matchDataSource = [[String:AnyObject]]()
     var matches = [MatchSummaryData]()
     
     override func viewDidLoad() {
@@ -61,7 +61,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 //var dataDict = val as! [String:String]
                 //dataDict["key"] = key
                 
-                if  var value = val as? [String : String]{
+                if  var value = val as? [String : AnyObject]{
                     
                     value += ["key":key]
                     
@@ -77,11 +77,11 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                     
                     if let runsTaken = value["RunsTaken"]{
                         
-                        mData.BattingSectionHidden = (runsTaken == "-")
+                        mData.BattingSectionHidden = (runsTaken as! String == "-")
                         
                         if mData.BattingSectionHidden == false {
                             
-                            battingBowlingScore.bold(runsTaken, fontName: appFont_black, fontSize: 30).bold("\nRUNS", fontName: appFont_black, fontSize: 12)
+                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 30).bold("\nRUNS", fontName: appFont_black, fontSize: 12)
                             
                         }
                     }
@@ -89,7 +89,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                     if let wicketsTaken = value["WicketsTaken"], let runsGiven = value["RunsGiven"] {
                         
                         
-                        mData.BowlingSectionHidden = (runsGiven == "-")
+                        mData.BowlingSectionHidden = (runsGiven as! String == "-")
                         
                         
                         if mData.BowlingSectionHidden == false {
@@ -121,7 +121,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                         var DateFormatter = NSDateFormatter()
                         DateFormatter.dateFormat = "dd-MM-yyyy"
                         DateFormatter.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
-                        var dateFromString = DateFormatter.dateFromString(date)
+                        var dateFromString = DateFormatter.dateFromString(date as! String)
                         
                         mData.matchDate = dateFromString
                         
@@ -203,7 +203,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         
         var selectedDataSource = matchDataSource.filter { (dat) -> Bool in
-            return dat["MatchId"] == matches[indexPath.row].matchId
+            return dat["MatchId"] as! String == matches[indexPath.row].matchId
         }
         
        summaryDetailsVC.matchDetailsData = selectedDataSource.first

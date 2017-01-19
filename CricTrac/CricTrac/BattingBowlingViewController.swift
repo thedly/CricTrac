@@ -296,24 +296,24 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
     
     func loadEditData(){
         
-        runsText.textVal = parent!.selecetedData!["RunsTaken"]!
-        ballsPlayedText.textVal = parent!.selecetedData!["BallsFaced"]!
-        foursText.textVal = parent!.selecetedData!["Fours"]!
-        sixesText.textVal = parent!.selecetedData!["Sixes"]!
-        strikeRateText.textVal = parent!.selecetedData!["Ground"]!
-        positionText.textVal = parent!.selecetedData!["Position"]!
-        dismissalText.textVal = parent!.selecetedData!["Dismissal"]!
+        runsText.textVal = parent!.selecetedData!["RunsTaken"]! as! String
+        ballsPlayedText.textVal = parent!.selecetedData!["BallsFaced"]! as! String
+        foursText.textVal = parent!.selecetedData!["Fours"]! as! String
+        sixesText.textVal = parent!.selecetedData!["Sixes"]! as! String
+        strikeRateText.textVal = parent!.selecetedData!["Ground"]! as! String
+        positionText.textVal = parent!.selecetedData!["Position"]! as! String
+        dismissalText.textVal = parent!.selecetedData!["Dismissal"]! as! String
         setStrikeRate()
         
         
-        oversText.textVal = parent!.selecetedData!["OversBowled"]!
-        wicketsText.textVal = parent!.selecetedData!["WicketsTaken"]!
-        runsGivenText.textVal = parent!.selecetedData!["RunsGiven"]!
-        noballText.textVal = parent!.selecetedData!["NoBalls"]!
-        widesText.textVal = parent!.selecetedData!["Wides"]!
+        oversText.textVal = parent!.selecetedData!["OversBowled"]! as! String
+        wicketsText.textVal = parent!.selecetedData!["WicketsTaken"]! as! String
+        runsGivenText.textVal = parent!.selecetedData!["RunsGiven"]! as! String
+        noballText.textVal = parent!.selecetedData!["NoBalls"]! as! String
+        widesText.textVal = parent!.selecetedData!["Wides"]! as! String
         
         if let mt = parent!.selecetedData!["Wides"] {
-            maidensText.textVal = mt
+            maidensText.textVal = mt as! String
         }
         
 //        calculateEconomy()

@@ -58,7 +58,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
     
     @IBOutlet weak var ageGroup: UILabel!
     
-    var matchDetailsData : [String:String]!
+    var matchDetailsData : [String:AnyObject]!
     
     var battingViewHidden : Bool! = false
     var bowlingViewHidden : Bool!  = false
@@ -91,7 +91,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
     func deleteMatch(){
         
         KRProgressHUD.show(progressHUDStyle: .White, message: "Deleting...")
-        let matchKey = matchDetailsData["key"]!
+        let matchKey = matchDetailsData["key"]! as! String
         
         deleteMatchData(matchKey) { (error) in
             
@@ -197,45 +197,45 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
         
         
         if let Runs = matchDetailsData["RunsTaken"] {
-            batRuns.text = Runs
+            batRuns.text = Runs as! String
         }
         if let Fours = matchDetailsData["Fours"] {
-            fours.text = Fours
+            fours.text = Fours as! String
         }
         if let Sixes = matchDetailsData["Sixes"] {
-            sixes.text = Sixes
+            sixes.text = Sixes as! String
         }
         
         if let eco = matchDetailsData["Economy"] {
-            economy.text = eco
+            economy.text = eco as! String
         }
         if let Balls = matchDetailsData["BallsFaced"] {
-            ballsFaced.text = Balls
+            ballsFaced.text = Balls as! String
         }
         if let Wides = matchDetailsData["Wides"] {
-            wides.text = Wides
+            wides.text = Wides as! String
         }
         if let Noballs = matchDetailsData["NoBalls"] {
-            noBalls.text = Noballs
+            noBalls.text = Noballs as! String
         }
         
         if let grnd = matchDetailsData["Ground"] {
-            self.ground.text = grnd
+            self.ground.text = grnd as! String
         }
         
         if let dat = matchDetailsData["MatchDate"] {
-            self.date.text = dat
+            self.date.text = dat as! String
         }
         
         
         if let dat = matchDetailsData["Achievements"] {
-            self.achievements.text = dat
+            self.achievements.text = dat as! String
         }
         
         
         calculateStrikeRate()
         
-        if let Overs = matchDetailsData["OversBowled"] { // in overs eg: 2, 3, 4
+        if let Overs: String = matchDetailsData["OversBowled"] as! String { // in overs eg: 2, 3, 4
             
             if let oversInt = Int(Overs) {
                 
@@ -302,7 +302,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
             
             
             
-            if tournament == "-"{
+            if tournament as! String == "-"{
                 if let opponent = matchDetailsData["Opponent"] {
                     
                     tournamentText = formattedString.bold("VS \(opponent)", fontName: appFont_black, fontSize: 17).bold("\n[\(group), \(level)]", fontName: appFont_bold, fontSize: 13)
@@ -330,18 +330,18 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
         var firstTeamScore = "-"
         var secondTeamScore = "-"
         
-        if let hTeam = matchDetailsData["Team"] {
+        if let hTeam: String = matchDetailsData["Team"] as! String {
             if hTeam != "-" {
-                homeTeam.text = hTeam
+                homeTeam.text = hTeam as! String
             }
             else
             {
                 homeTeam.text = "Unknown"
             }
             
-            if let opponent = matchDetailsData["Opponent"] {
+            if let opponent: String = matchDetailsData["Opponent"] as! String {
                 if opponent != "-" {
-                    awayTeam.text = opponent
+                    awayTeam.text = opponent as! String
                 }
                 else
                 {
@@ -359,7 +359,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
                     homeTeam.text?.appendContentsOf("\n\(firstScore)/\(firstWickets)\n(\(firstTeamOvers))")
                 }
                 
-                firstTeamScore = firstScore
+                firstTeamScore = firstScore as! String
             }
             
             if let secondScore = matchDetailsData["SecondBattingScore"] {
@@ -370,7 +370,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
                     awayTeam.text?.appendContentsOf("\n\(secondScore)/\(secondWickets)\n(\(secondTeamOvers))")
                 }
                 
-                secondTeamScore = secondScore
+                secondTeamScore = secondScore as! String
             }
 
         }

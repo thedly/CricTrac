@@ -32,7 +32,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     
     var data:[String:AnyObject]{
         
-        return ["Certifications":CertificationsList,"Experience":Experience.textVal,"CoachingLevel":CoachingLevel.textVal,"CoachCurrentTeams":teamNames, "CoachPastTeams": pastTeamNames, "CoachPlayedFor": CoachPlayedFor]
+        return ["Certifications":CertificationsList,"Experience":Experience.textVal.trim(),"CoachingLevel":CoachingLevel.textVal.trim(),"CoachCurrentTeams":teamNames, "CoachPastTeams": pastTeamNames, "CoachPlayedFor": CoachPlayedFor]
     }
     
     
@@ -173,7 +173,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     @IBAction func addPastTeamsPressed(sender: AnyObject) {
         
         if pastTeamName.text?.trimWhiteSpace != "" && pastTeamName.text?.trimWhiteSpace != "-" {
-            pastTeamNames.append(pastTeamName.textVal)
+            pastTeamNames.append(pastTeamName.textVal.trim())
             pastTeamName.text = ""
             pastTeams.reloadData()
         }
@@ -182,7 +182,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     
     @IBAction func addTeamsPressed(sender: AnyObject) {
         if teamName.text?.trimWhiteSpace != "" && teamName.text?.trimWhiteSpace != "-" {
-            teamNames.append(teamName.textVal)
+            teamNames.append(teamName.textVal.trim())
             teamName.text = ""
             
             currentTeams.reloadData()
@@ -193,7 +193,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     
     @IBAction func addTeamsPlayedForPressed(sender: AnyObject) {
         if teamsPlayedForTxt.text?.trimWhiteSpace != "" && teamsPlayedForTxt.text?.trimWhiteSpace != "-" {
-            CoachPlayedFor.append(teamsPlayedForTxt.textVal)
+            CoachPlayedFor.append(teamsPlayedForTxt.textVal.trim())
             teamsPlayedForTxt.text = ""
             
             CoachPlayedForTbl.reloadData()
@@ -204,7 +204,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
 
     @IBAction func addCertificationsPressed(sender: AnyObject) {
         if Certifications.text?.trimWhiteSpace != "" && Certifications.text?.trimWhiteSpace != "-" {
-            CertificationsList.append(Certifications.textVal)
+            CertificationsList.append(Certifications.textVal.trim())
             Certifications.text = ""
             
             CertificationsTbl.reloadData()

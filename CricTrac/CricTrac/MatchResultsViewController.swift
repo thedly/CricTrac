@@ -164,15 +164,15 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
         
         tossText = "-"
         if let toss = parent!.selecetedData!["TossWonBy"] {
-            tossText = toss
+            tossText = toss as! String
         }
         
-        firstBatText = parent!.selecetedData!["FirstBatting"]! ?? "-"
-        firstScoreText.textVal = parent!.selecetedData!["FirstBattingScore"]! ?? "-"
-        firstWicketsText.textVal = parent!.selecetedData!["FirstBattingWickets"]! ?? "-"
-        secondBatText = parent!.selecetedData!["SecondBatting"]! ?? "-"
+        firstBatText = parent!.selecetedData!["FirstBatting"]! as! String ?? "-"
+        firstScoreText.textVal = parent!.selecetedData!["FirstBattingScore"]! as! String ?? "-"
+        firstWicketsText.textVal = parent!.selecetedData!["FirstBattingWickets"]! as! String ?? "-"
+        secondBatText = parent!.selecetedData!["SecondBatting"]! as! String ?? "-"
         
-        AchievementsText.text = parent?.selecetedData!["Achievements"] ?? "-"
+        AchievementsText.text = parent?.selecetedData!["Achievements"] as! String ?? "-"
         
         firstTeamTitle.text = firstBatText
         secondTeamTitle.text = secondBatText
@@ -194,9 +194,9 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
             self.isTeambattingSetBtn.alpha = 1.0
         }
         
-        secondScoreText.textVal = parent!.selecetedData!["SecondBattingScore"]!
-        secondWicketsText.textVal = parent!.selecetedData!["SecondBattingWickets"]!
-        resultText.textVal = parent!.selecetedData!["Result"]!
+        secondScoreText.textVal = parent!.selecetedData!["SecondBattingScore"]! as! String
+        secondWicketsText.textVal = parent!.selecetedData!["SecondBattingWickets"]! as! String
+        resultText.textVal = parent!.selecetedData!["Result"]! as! String
     }
     
     func allRequiredFieldsHaveFilledProperly()->Bool{

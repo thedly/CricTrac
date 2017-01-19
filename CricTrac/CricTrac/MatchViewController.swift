@@ -53,22 +53,22 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     
     func loadEditData(){
         
-        dateText.textVal = parent!.selecetedData!["MatchDate"]!
-        tournamentText.textVal = parent!.selecetedData!["Tournamnet"] ?? ""
-        teamText.textVal = parent!.selecetedData!["Team"]!
-        opponentText.textVal = parent!.selecetedData!["Opponent"]!
-        groundText.textVal = parent!.selecetedData!["Ground"]!
-        oversText.textVal = parent!.selecetedData!["MatchOvers"]!
+        dateText.textVal = parent!.selecetedData!["MatchDate"]! as! String
+        tournamentText.textVal = (parent!.selecetedData!["Tournamnet"] ?? "") as! String
+        teamText.textVal = parent!.selecetedData!["Team"]! as! String
+        opponentText.textVal = parent!.selecetedData!["Opponent"]! as! String
+        groundText.textVal = parent!.selecetedData!["Ground"]! as! String
+        oversText.textVal = parent!.selecetedData!["MatchOvers"]! as! String
         
         if let ag = parent!.selecetedData!["AgeGroup"] {
-            ageGroup.textVal = ag
+            ageGroup.textVal = ag as! String
         }
 
         if let pl = parent!.selecetedData!["Level"] {
-            playingLevel.textVal = pl
+            playingLevel.textVal = pl as! String
         }
         if let pl = parent!.selecetedData!["Stage"] {
-            stage.textVal = pl
+            stage.textVal = pl as! String
         }
         
         

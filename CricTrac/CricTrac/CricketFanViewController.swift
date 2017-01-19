@@ -48,6 +48,26 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var favouritePlayerList = [""]
     
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        if profileData.FirstName.length > 0 {
+            
+            self.favouritePlayerList = profileData.FavoritePlayers
+            self.HobbiesList = profileData.Hobbies
+            self.InterestedSportsNamesList = profileData.InterestedSports
+            self.supportingTeamNamesList = profileData.SupportingTeams
+            
+            self.FavouritePlayerTbl.reloadData()
+            self.Hobies.reloadData()
+            self.InterestedSports.reloadData()
+            self.SupportingTeams.reloadData()
+        }
+    }
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUIBackgroundTheme(self.view)
@@ -135,6 +155,11 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
                 InterestedSportsNamesList.removeAtIndex((indexPath?.row)!)
                 InterestedSports.reloadData()
             }
+            else if tblView.isEqual(self.FavouritePlayerTbl) {
+                let indexPath = FavouritePlayerTbl.indexPathForCell(cell)
+                favouritePlayerList.removeAtIndex((indexPath?.row)!)
+                FavouritePlayerTbl.reloadData()
+            }
             else {
                 let indexPath = Hobies.indexPathForCell(cell)
                 HobbiesList.removeAtIndex((indexPath?.row)!)
@@ -149,7 +174,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBAction func addInterestedSportsPressed(sender: AnyObject) {
         
         if InterestedSportsNames.text?.trimWhiteSpace != "" && InterestedSportsNames.text?.trimWhiteSpace != "-" {
-            InterestedSportsNamesList.append(InterestedSportsNames.textVal)
+            InterestedSportsNamesList.append(InterestedSportsNames.textVal.trim())
             InterestedSportsNames.text = ""
             InterestedSports.reloadData()
         }
@@ -159,7 +184,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBAction func addSupportingTeamsPressed(sender: AnyObject) {
         
         if SupportingTeamNames.text?.trimWhiteSpace != "" && SupportingTeamNames.text?.trimWhiteSpace != "-" {
-            supportingTeamNamesList.append(SupportingTeamNames.textVal)
+            supportingTeamNamesList.append(SupportingTeamNames.textVal.trim())
             SupportingTeamNames.text = ""
             
             SupportingTeams.reloadData()
@@ -172,7 +197,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBAction func addHobbiesPressed(sender: AnyObject) {
         
         if HobbiesNames.text?.trimWhiteSpace != "" && HobbiesNames.text?.trimWhiteSpace != "-" {
-            HobbiesList.append(HobbiesNames.textVal)
+            HobbiesList.append(HobbiesNames.textVal.trim())
             HobbiesNames.text = ""
             
             Hobies.reloadData()
@@ -184,7 +209,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBAction func addFavouritePlayerPressed(sender: AnyObject) {
         
         if favouritePlayer.text?.trimWhiteSpace != "" && favouritePlayer.text?.trimWhiteSpace != "-" {
-            favouritePlayerList.append(favouritePlayer.textVal)
+            favouritePlayerList.append(favouritePlayer.textVal.trim())
             favouritePlayer.text = ""
             
             FavouritePlayerTbl.reloadData()
