@@ -11,12 +11,21 @@ import FirebaseAuth
 import SCLAlertView
 import KRProgressHUD
 
-class ForgotPasswordViewController: UIViewController {
+class ForgotPasswordViewController: UIViewController,ThemeChangeable {
 
     @IBOutlet weak var resetLinkEmailTxt: UITextField!
+    
+    
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUIBackgroundTheme(self.view)
+        //setUIBackgroundTheme(self.view)
+        setBackgroundColor()
         // Do any additional setup after loading the view.
     }
 

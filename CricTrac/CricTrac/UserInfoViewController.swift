@@ -11,7 +11,7 @@ import UIKit
 import XLPagerTabStrip
 import SkyFloatingLabelTextField
 
-class UserInfoViewController: UIViewController  {
+class UserInfoViewController: UIViewController,ThemeChangeable  {
     
     
     lazy var ctDatePicker = CTDatePicker()
@@ -63,10 +63,15 @@ class UserInfoViewController: UIViewController  {
         
     }
     
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setUIBackgroundTheme(self.view)
+        setBackgroundColor()
+        //setUIBackgroundTheme(self.view)
         initializeView()
         // Do any additional setup after loading the view.
     }

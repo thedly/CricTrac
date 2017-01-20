@@ -22,8 +22,8 @@ class FriendsCell: UITableViewCell {
         
         self.baseView.layer.cornerRadius = 10
         self.baseView.clipsToBounds = true
-        self.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
-        self.baseView.alpha = 0.8
+        self.baseView.backgroundColor = UIColor.blackColor()
+        self.baseView.alpha = 0.3
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

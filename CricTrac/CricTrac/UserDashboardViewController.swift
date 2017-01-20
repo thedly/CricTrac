@@ -250,7 +250,9 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUIBackgroundTheme(self.view)
+        setBackgroundColor()
+        
+        //setUIBackgroundTheme(self.view)
         
         userProfileImage.layer.cornerRadius = userProfileImage.bounds.size.width/2
         MatchesView.layer.cornerRadius = 10

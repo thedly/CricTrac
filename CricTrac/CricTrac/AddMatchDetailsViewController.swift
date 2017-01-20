@@ -11,7 +11,7 @@ import XLPagerTabStrip
 import SCLAlertView
 import KRProgressHUD
 
-class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchParent  {
+class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchParent,ThemeChangeable  {
     
     var matchVC:MatchViewController!
     
@@ -27,6 +27,10 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     var dataAdded = false
     var data = [String:String]()
     
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +42,8 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         buttonBarView.selectedBar.backgroundColor = UIColor.whiteColor()
         settings.style.buttonBarItemFont = UIFont(name: appFont_bold, size: 15)!
         dataHasChangedAfterLastSave = false
-        setUIBackgroundTheme(self.view)
+        //setUIBackgroundTheme(self.view)
+        setBackgroundColor()
     }
     
     func dataChangedAfterLastSave(){

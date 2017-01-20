@@ -10,7 +10,7 @@ import UIKit
 import XLPagerTabStrip
 
 
-class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
+class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeChangeable {
 
     
     @IBOutlet weak var firstTeamTitle: UILabel!
@@ -35,6 +35,10 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
     @IBOutlet weak var refreshBtn: UIButton!
 
 
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,11 +85,21 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider {
         
         if ((parent?.selecetedData) != nil){ inEditMode = true; loadEditData() }
         
-        setUIBackgroundTheme(self.view)
+        //setBackgroundColor()
         
-        FirstBattingView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
+        self.view.backgroundColor = UIColor.clearColor()
         
-        SecondBattingView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
+        //setUIBackgroundTheme(self.view)
+        
+        FirstBattingView.backgroundColor = UIColor.blackColor() //UIColor().darkerColorForColor(UIColor(hex: bottomColor))
+        
+        FirstBattingView.alpha = 0.3
+        
+        SecondBattingView.backgroundColor = UIColor.blackColor()
+        
+        SecondBattingView.alpha = 0.3
+        
+        //UIColor().darkerColorForColor(UIColor(hex: bottomColor))
 
        
     

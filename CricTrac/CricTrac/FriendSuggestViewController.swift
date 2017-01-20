@@ -9,7 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 
-class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider {
+class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider,ThemeChangeable {
     
     @IBOutlet weak var SuggestsTblview: UITableView!
     override func viewDidLoad() {
@@ -26,6 +26,11 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     
     // MARK: - Methods
     
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
+    
     func initializeView() {
         SuggestsTblview.registerNib(UINib.init(nibName:"FriendSuggestionsCell", bundle: nil), forCellReuseIdentifier: "FriendSuggestionsCell")
         
@@ -34,7 +39,10 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         SuggestsTblview.dataSource = self
         SuggestsTblview.delegate = self
         
-        setUIBackgroundTheme(self.view)
+        self.view.backgroundColor = UIColor.clearColor()
+        
+        //setBackgroundColor()
+        //setUIBackgroundTheme(self.view)
     }
     
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CoachingExperienceViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CoachingExperienceViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,ThemeChangeable {
 
     @IBOutlet weak var teamName: UITextField!
     
@@ -45,9 +45,18 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     var pastTeamNames = [""]
     
     
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUIBackgroundTheme(self.view)
+        
+        setBackgroundColor()
+        
+        //setUIBackgroundTheme(self.view)
         // Do any additional setup after loading the view.
         
         currentTeams.allowsSelection = false

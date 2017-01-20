@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,ThemeChangeable {
 
     @IBOutlet weak var playingRole: UITextField!
     @IBOutlet weak var battingStyle: UITextField!
@@ -220,9 +220,15 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         
     }
     
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUIBackgroundTheme(self.view)
+        setBackgroundColor()
+        //setUIBackgroundTheme(self.view)
         initializeView()
         // Do any additional setup after loading the view.
     }

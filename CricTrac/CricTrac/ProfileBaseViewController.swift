@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate {
+class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,ThemeChangeable {
     
     var ProfileBaseDetails: [String:AnyObject]!
     var NextVC: UIViewController!
@@ -123,10 +123,17 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate 
     }
     
    
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUIBackgroundTheme(self.view)
+        
+        setBackgroundColor()
+        
+        //setUIBackgroundTheme(self.view)
         setupControls();
         
         

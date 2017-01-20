@@ -18,7 +18,7 @@ import KRProgressHUD
 import SCLAlertView
 import XLPagerTabStrip
 
-class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDelegate, GIDSignInUIDelegate {
+class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDelegate, GIDSignInUIDelegate,ThemeChangeable {
     
     
     @IBOutlet weak var facebookBtn: UIButton!
@@ -34,9 +34,16 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     var myGroup = dispatch_group_create()
     var profileImage: UIImage?
     
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUIBackgroundTheme(self.view)
+        
+        setBackgroundColor()
+        //setUIBackgroundTheme(self.view)
         
         
         

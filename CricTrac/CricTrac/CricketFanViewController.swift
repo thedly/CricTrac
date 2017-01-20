@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CricketFanViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CricketFanViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,ThemeChangeable {
     
     
 //    var data:[String:String]{
@@ -66,11 +66,16 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
 
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUIBackgroundTheme(self.view)
+        setBackgroundColor()
+        //setUIBackgroundTheme(self.view)
         // Do any additional setup after loading the view.
         
         SupportingTeams.allowsSelection = false

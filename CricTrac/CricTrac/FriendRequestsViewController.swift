@@ -9,7 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 
-class FriendRequestsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider {
+class FriendRequestsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider,ThemeChangeable {
 
     @IBOutlet weak var RequestsTblview: UITableView!
     override func viewDidLoad() {
@@ -25,6 +25,10 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     // MARK: - Methods
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
     
     func initializeView() {
         RequestsTblview.registerNib(UINib.init(nibName:"FriendRequestsCell", bundle: nil), forCellReuseIdentifier: "FriendRequestsCell")
@@ -33,9 +37,9 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         RequestsTblview.separatorStyle = .None
         RequestsTblview.dataSource = self
         RequestsTblview.delegate = self
-        
-        setUIBackgroundTheme(self.view)
-
+        //setBackgroundColor()
+        //setUIBackgroundTheme(self.view)
+        self.view.backgroundColor = UIColor.clearColor()
     }
     
     

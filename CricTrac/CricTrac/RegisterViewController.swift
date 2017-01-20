@@ -18,7 +18,7 @@ import FBSDKLoginKit
 import KRProgressHUD
 import SCLAlertView
 
-class RegisterViewController: UIViewController,IndicatorInfoProvider/*,GIDSignInDelegate, GIDSignInUIDelegate*/ {
+class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChangeable /*,GIDSignInDelegate, GIDSignInUIDelegate*/ {
     
     @IBOutlet weak var facebookBtn: UIButton!
     
@@ -28,9 +28,18 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider/*,GIDSignIn
     }
     @IBOutlet weak var googleBtn: UIButton!
     
+    
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUIBackgroundTheme(self.view)
+        
+        setBackgroundColor()
+        
+        //setUIBackgroundTheme(self.view)
         // Do any additional setup after loading the view.
     }
     

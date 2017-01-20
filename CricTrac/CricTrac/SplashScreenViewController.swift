@@ -10,11 +10,14 @@ import UIKit
 import KRProgressHUD
 import FirebaseAuth
 
-class SplashScreenViewController: UIViewController {
+class SplashScreenViewController: UIViewController,ThemeChangeable {
 
     var window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
     
-    
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
     
     var myGroup = dispatch_group_create()
     override func viewDidLoad() {
@@ -29,7 +32,9 @@ class SplashScreenViewController: UIViewController {
             CurrentTheme = usrTheme as! String
         }
         
-        setUIBackgroundTheme(self.view)
+        setBackgroundColor()
+        
+        //setUIBackgroundTheme(self.view)
         // Do any additional setup after loading the view.
     }
     

@@ -9,7 +9,7 @@
 import UIKit
 import KRProgressHUD
 
-class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable {
 
     @IBOutlet var matchSummaryTable:UITableView!
     
@@ -17,9 +17,17 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     var matchDataSource = [[String:AnyObject]]()
     var matches = [MatchSummaryData]()
     
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUIBackgroundTheme(self.view)
+        
+        setBackgroundColor()
+        
+        //setUIBackgroundTheme(self.view)
         getMatchData()
     matchSummaryTable.registerNib(UINib.init(nibName:"SummaryDetailsCell", bundle: nil), forCellReuseIdentifier: "SummaryDetailsCell")
         matchSummaryTable.allowsSelection = true

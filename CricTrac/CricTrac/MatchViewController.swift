@@ -10,7 +10,7 @@ import UIKit
 import XLPagerTabStrip
 import AnimatedTextInput
 
-class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTrackable {
+class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTrackable,ThemeChangeable {
     
     
     @IBOutlet weak var stage: UITextField!
@@ -40,6 +40,11 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         return ["MatchDate":dateText.textVal,"Team":teamText.textVal,"Opponent":opponentText.textVal,"Ground":groundText.textVal,"MatchOvers":oversText.textVal,"Tournamnet":tournamentText.textVal, "AgeGroup": ageGroup.textVal, "Level": playingLevel.textVal, "Stage": stage.textVal ]
     }
     
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if ((parent?.selecetedData) != nil){ loadEditData() }
@@ -47,7 +52,11 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         oversText.keyboardType = UIKeyboardType.DecimalPad
         DoneButtonClassInstance.AddDoneButtonTo(oversText)
         
-        setUIBackgroundTheme(self.view)
+        self.view.backgroundColor = UIColor.clearColor()
+        
+        //setBackgroundColor()
+        
+        //setUIBackgroundTheme(self.view)
     }
     
     

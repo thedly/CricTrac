@@ -1323,14 +1323,13 @@
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SH7-Kp-Zc5">
                                 <rect key="frame" x="15" y="70" width="570" height="530"/>
-                                <color key="backgroundColor" red="0.50588235290000005" green="0.78823529410000004" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="eVj-wD-gkz" id="uG9-H1-VMq"/>
                                     <outlet property="delegate" destination="eVj-wD-gkz" id="kfF-1q-PJd"/>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.52156862745098043" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="SH7-Kp-Zc5" firstAttribute="top" secondItem="bU2-hu-lUJ" secondAttribute="bottom" constant="10" id="DI0-e3-JSA"/>
                             <constraint firstItem="SH7-Kp-Zc5" firstAttribute="width" secondItem="Lhb-My-zXm" secondAttribute="width" multiplier="0.95" id="KYQ-Vw-J3a"/>

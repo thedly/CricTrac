@@ -10,12 +10,19 @@
 import UIKit
 import XLPagerTabStrip
 
-class FriendsInviteViewController: UIViewController,IndicatorInfoProvider {
+class FriendsInviteViewController: UIViewController,IndicatorInfoProvider,ThemeChangeable {
+    
+    
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
+    
     
     @IBOutlet weak var friendSearchTbl: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setBackgroundColor()
         // Do any additional setup after loading the view.
     }
     

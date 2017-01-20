@@ -9,12 +9,19 @@
 import UIKit
 import XLPagerTabStrip
 
-class FriendSearchViewController: UIViewController,IndicatorInfoProvider {
+class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeChangeable {
 
     @IBOutlet weak var friendSearchTbl: UITableView!
+    
+    
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setBackgroundColor()
         // Do any additional setup after loading the view.
     }
 

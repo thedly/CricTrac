@@ -10,7 +10,7 @@ import UIKit
 import XLPagerTabStrip
 import SkyFloatingLabelTextField
 
-class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
+class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,ThemeChangeable {
     
     
     var OversBowled: String! = "-"
@@ -320,12 +320,19 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
 
     }
     
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         runsText.errorColor = UIColor.redColor()
         if ((parent?.selecetedData) != nil){ loadEditData() }
-        setUIBackgroundTheme(self.view)
+        
+        //setBackgroundColor()
+        self.view.backgroundColor = UIColor.clearColor()
+        //setUIBackgroundTheme(self.view)
         // Do any additional setup after loading the view.
         
         dismissalText.delegate = self

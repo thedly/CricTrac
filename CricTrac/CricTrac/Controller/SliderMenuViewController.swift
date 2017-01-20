@@ -9,20 +9,25 @@
 import UIKit
 import SCLAlertView
 
-class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable {
 
     
     @IBOutlet var baseView: UIView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setBackgroundColor()
         
         userName.text = profileData.fullName
-        baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
+        //baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
         
         self.profileImage.image = LoggedInUserImage
         

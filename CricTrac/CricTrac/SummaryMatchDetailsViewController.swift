@@ -10,7 +10,7 @@ import UIKit
 import SCLAlertView
 import KRProgressHUD
 
-class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
+class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeChangeable {
 
     @IBOutlet weak var matchDetailsTbl: UITableView!
     
@@ -140,9 +140,18 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate {
         
         presentViewController(actCtrl, animated: true, completion: nil)
     }
+    
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUIBackgroundTheme(self.view)
+        
+        setBackgroundColor()
+        
+        //setUIBackgroundTheme(self.view)
         
         setColorForViewsWithSameTag(battingView)
         setColorForViewsWithSameTag(bowlingView)

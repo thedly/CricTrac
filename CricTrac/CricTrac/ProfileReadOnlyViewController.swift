@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,ThemeChangeable {
 
     @IBOutlet weak var PersonalInfoView: UIView!
     @IBOutlet weak var PlayerExperienceView: UIView!
@@ -54,6 +54,10 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
     
     @IBAction func EditProfilePressed(sender: AnyObject) {
         
@@ -110,8 +114,8 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUIBackgroundTheme(self.view)
-        
+        //setUIBackgroundTheme(self.view)
+        setBackgroundColor()
         
 //        profileImage.layer.cornerRadius = profileImage.frame.size.width/2
 //        profileImage.clipsToBounds = true
