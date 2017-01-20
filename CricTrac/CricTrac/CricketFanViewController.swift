@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import KRProgressHUD
+
 
 class CricketFanViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,ThemeChangeable {
     
     
+    @IBOutlet weak var scrollView: UIScrollView!
 //    var data:[String:String]{
 //        
 //        return ["PlayingRole":playingRole.textVal,"BattingStyle":battingStyle.textVal,"BowlingStyle":bowlingStyle.textVal,"TeamName":teamName.textVal]
@@ -35,6 +38,8 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var FavouritePlayerTbl: UITableView!
     
     
+    var selectedText: UITextField!
+    
     var data:[String:AnyObject]{
         
         return ["FavoritePlayers":favouritePlayerList,"Hobbies":HobbiesList, "InterestedSports":InterestedSportsNamesList,"SupportingTeams": supportingTeamNamesList]
@@ -48,6 +53,8 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var favouritePlayerList = [""]
     
+    var scrollViewTop:CGFloat!
+
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
@@ -98,11 +105,18 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
         FavouritePlayerTbl.separatorStyle = .None
         FavouritePlayerTbl.dataSource = self
         FavouritePlayerTbl.delegate = self
+        
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserInfoViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        scrollView.setContentOffset(CGPointZero, animated: true)
+        scrollViewTop = scrollView.frame.origin.y
+
+        
     }
 
     @IBAction func CreateFanBtnPressed(sender: AnyObject) {
         
-        
+        KRProgressHUD.showText("Updating ...")
         profileData.FavoritePlayers =  self.data["FavoritePlayers"] as! [String]
         profileData.SupportingTeams = self.data["SupportingTeams"] as! [String]
         profileData.InterestedSports = self.data["InterestedSports"] as! [String]
@@ -124,12 +138,16 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
             }
 
             if window.rootViewController == sliderMenu {
-                window.rootViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+                window.rootViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: {
+                    KRProgressHUD.dismiss()
+                
+                })
             }
             else
             {
                 let rootViewController: UIViewController = getRootViewController()
                 window.rootViewController = rootViewController
+                KRProgressHUD.dismiss()
             }
         }
         
@@ -175,6 +193,19 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
+    func keyboardWillShow(sender: NSNotification){
+        
+        if let userInfo = sender.userInfo {
+            if  let  keyboardframe = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue{
+                let keyboardHeight = keyboardframe.CGRectValue().height
+                
+                var contentInset:UIEdgeInsets = self.scrollView.contentInset
+                contentInset.bottom = keyboardHeight + 10
+                self.scrollView.contentInset = contentInset
+            }
+        }
+    }
+
     
     @IBAction func addInterestedSportsPressed(sender: AnyObject) {
         
@@ -338,7 +369,35 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     }
 
     
-
+    func textFieldDidBeginEditing(textField: UITextField) {
+        
+        self.selectedText = textField
+        AddDoneButtonTo(textField)
+    }
+    
+    func AddDoneButtonTo(inputText:UITextField) {
+        
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .Default
+        toolBar.translucent = true
+        toolBar.tintColor = UIColor(hex: "B12420")
+        toolBar.backgroundColor = UIColor.whiteColor()
+        toolBar.sizeToFit()
+        
+        // Adding Button ToolBar
+        let doneButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(CricketFanViewController.donePressed))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: #selector(CricketFanViewController.donePressed))
+        
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.userInteractionEnabled = true
+        inputText.inputAccessoryView = toolBar
+    }
+    
+    func donePressed() {
+        selectedText.resignFirstResponder()
+    }
+    
     /*
     // MARK: - Navigation
 

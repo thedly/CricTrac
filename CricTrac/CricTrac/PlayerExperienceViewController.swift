@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import KRProgressHUD
 
 class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,ThemeChangeable {
 
+    @IBOutlet weak var ScrollView: UIScrollView!
     @IBOutlet weak var playingRole: UITextField!
     @IBOutlet weak var battingStyle: UITextField!
     @IBOutlet weak var bowlingStyle: UITextField!
@@ -17,6 +19,7 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     
     @IBOutlet weak var pastTeamName: UITextField!
     
+    var selectedText: UITextField!
     
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var currentTeams: UITableView!
@@ -27,8 +30,12 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     
     var teamNames = [""]
     
+    var scrollViewTop:CGFloat!
+
+    
     var pastTeamNames = [""]
     
+    var window = UIWindow(frame: UIScreen.mainScreen().bounds)
     
     var nextVC: UIViewController!
     
@@ -47,7 +54,6 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     
     @IBAction func goNextPage(sender: AnyObject) {
         
-        
         profileData.PlayingRole = self.data["PlayingRole"] as! String
         profileData.BattingStyle = self.data["BattingStyle"] as! String
         profileData.BowlingStyle = self.data["BowlingStyle"] as! String
@@ -61,21 +67,17 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
             
             updateMetaData(userImageMetaData)
             
-            var window = UIWindow(frame: UIScreen.mainScreen().bounds)
             
-            if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let currentwindow = app.window {
+            if self.window.rootViewController == sliderMenu {
                 
-                window = currentwindow
-            }
-            
-            
-            if window.rootViewController == sliderMenu {
-                window.rootViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+                
+                self.window.rootViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
             }
             else
             {
                 let rootViewController: UIViewController = getRootViewController()
-                window.rootViewController = rootViewController
+                self.window.rootViewController = rootViewController
+                
             }
             
             
@@ -119,6 +121,18 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         pastTeams.delegate = self
         
         
+        
+        if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let currentwindow = app.window {
+            
+            window = currentwindow
+        }
+        
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserInfoViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        ScrollView.setContentOffset(CGPointZero, animated: true)
+        scrollViewTop = ScrollView.frame.origin.y
+
+        
     }
     
     func deleteTeamFromCurrentTeams(sender: UIButton) {
@@ -143,6 +157,19 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         
     }
     
+    func keyboardWillShow(sender: NSNotification){
+        
+        if let userInfo = sender.userInfo {
+            if  let  keyboardframe = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue{
+                let keyboardHeight = keyboardframe.CGRectValue().height
+                
+                var contentInset:UIEdgeInsets = self.ScrollView.contentInset
+                contentInset.bottom = keyboardHeight + 10
+                self.ScrollView.contentInset = contentInset
+            }
+        }
+    }
+
     
     @IBAction func addPastTeamsPressed(sender: AnyObject) {
         
@@ -228,6 +255,9 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackgroundColor()
+        
+        
+        
         //setUIBackgroundTheme(self.view)
         initializeView()
         // Do any additional setup after loading the view.
@@ -262,11 +292,38 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         }
         return getCellForPastTeamsRow(indexPath)
     }
+    
+    func AddDoneButtonTo(inputText:UITextField) {
+        
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .Default
+        toolBar.translucent = true
+        toolBar.tintColor = UIColor(hex: "B12420")
+        toolBar.backgroundColor = UIColor.whiteColor()
+        toolBar.sizeToFit()
+        
+        // Adding Button ToolBar
+        let doneButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(PlayerExperienceViewController.donePressed))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: #selector(PlayerExperienceViewController.donePressed))
+        
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.userInteractionEnabled = true
+        inputText.inputAccessoryView = toolBar
+    }
+
+    func donePressed() {
+        selectedText.resignFirstResponder()
+    }
 }
 
 extension PlayerExperienceViewController:UITextFieldDelegate{
     
+    
     func textFieldDidBeginEditing(textField: UITextField) {
+    
+        self.selectedText = textField
+        AddDoneButtonTo(textField)
         
         if  textField == playingRole{
             ctDataPicker = DataPicker()

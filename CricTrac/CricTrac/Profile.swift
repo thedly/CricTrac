@@ -49,9 +49,9 @@ class Profile {
     var UserProfile: String
     var UserStatus: String
     
-    var UserAddedDate: String
-    var UserEditedDate: String
-    var UserLastLoggedin: String
+    var UserAddedDate: AnyObject
+    var UserEditedDate: AnyObject
+    var UserLastLoggedin: AnyObject
     
     
     var userExists: Bool
@@ -102,9 +102,9 @@ class Profile {
         
         self.UserStatus = (usrObj["UserStatus"] ?? userStatus.Free.rawValue) as! String
         
-        self.UserAddedDate = "\((usrObj["UserAddedDate"]) ?? String())"
-        self.UserEditedDate = "\((usrObj["UserEditedDate"]) ?? String())"
-        self.UserLastLoggedin = "\((usrObj["UserLastLoggedin"]) ?? String())"
+        self.UserAddedDate =  ((usrObj["UserAddedDate"]) ?? String())
+        self.UserEditedDate = ((usrObj["UserEditedDate"]) ?? String())
+        self.UserLastLoggedin = ((usrObj["UserLastLoggedin"]) ?? String())
         self.CoachPlayedFor = (usrObj["CoachPlayedFor"] ?? []) as! [String]
         
     }
@@ -178,8 +178,6 @@ class Profile {
                 "Email": self.Email,
                 "Gender": self.Gender,
                 "Mobile": self.Mobile,
-                "PlayingRole":self.PlayingRole,
-                //"Level":self.PlayingLevel,
                 "ProfileImageURL": self.ProfileImageURL ,
                 "CoverPhotoURL" : self.CoverPhotoURL,
                 "UserProfile": self.UserProfile,

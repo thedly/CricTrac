@@ -275,6 +275,8 @@ func enableSync(){
 
 func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject])->Void){
     
+    KRProgressHUD.showText("Updating ...")
+    
     var dataToBeModified = data
     
 //    let formatter = NSDateFormatter()
@@ -294,7 +296,6 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
     }
     else
     {
-       
         dataToBeModified["UserEditedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
     }
     
@@ -302,8 +303,7 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
     ref.setValue(dataToBeModified)
     
-    
-    
+    KRProgressHUD.dismiss()
     sucessBlock(dataToBeModified)
 }
 

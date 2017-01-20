@@ -298,7 +298,9 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
-        MatchesView.backgroundColor = currentTheme.boxColor
+        MatchesView.backgroundColor = UIColor.blackColor()
+        MatchesView.alpha = 0.3
+        //currentTheme.boxColor
         //baseView.backgroundColor = UIColor.clearColor()
     }
 

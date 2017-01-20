@@ -20,6 +20,7 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
     @IBOutlet weak var activityInd: UIActivityIndicatorView!
     
     
+    @IBOutlet weak var PlayingRole: UILabel!
     
     
     @IBOutlet weak var NameText: UILabel!
@@ -91,6 +92,9 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
             self.PlayerPastTeams.text = profileData.PlayerPastTeams.joinWithSeparator("\n").uppercaseString
             self.PlayerBattingStyle.text = profileData.BattingStyle.uppercaseString
             self.PlayerBowlingStyle.text = profileData.BowlingStyle.uppercaseString
+            
+            self.PlayingRole.text = profileData.PlayingRole.uppercaseString
+            
             
             self.CoachCurrentTeams.text = profileData.CoachCurrentTeams.joinWithSeparator("\n").uppercaseString
             self.CoachPastTeams.text = profileData.CoachPastTeams.joinWithSeparator("\n").uppercaseString

@@ -27,7 +27,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     var Position: String! = "-"
     var Dismissal: String! = "-"
     
-    
+    var selectedText:UITextField!
     
 
     @IBOutlet weak var runsText: SkyFloatingLabelTextField!
@@ -286,7 +286,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     }
    
     
-    var selectedText:UITextField!
+    
     
     var BattingData:[String:String]{
         

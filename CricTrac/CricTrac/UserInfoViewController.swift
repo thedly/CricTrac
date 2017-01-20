@@ -20,6 +20,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     lazy var ctDataPicker = DataPicker()
     var profileDetailsExists:Bool = false
     
+    var selectedText:UITextField!
     
     var userProfiles = [String]()
     
@@ -45,7 +46,6 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
 //    @IBOutlet weak var playingRole: UITextField!
     
     
-    var selectedText:UITextField?
     
     let transitionManager = TransitionManager.sharedInstance
     
@@ -328,6 +328,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         return true
     }
     
+    
     func keyboardWillShow(sender: NSNotification){
         
         if let userInfo = sender.userInfo {
@@ -340,6 +341,32 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
             }
         }
     }
+    
+    
+    func AddDoneButtonTo(inputText:UITextField) {
+        
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .Default
+        toolBar.translucent = true
+        toolBar.tintColor = UIColor(hex: "B12420")
+        toolBar.backgroundColor = UIColor.whiteColor()
+        toolBar.sizeToFit()
+        
+        // Adding Button ToolBar
+        let doneButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(UserInfoViewController.donePressed))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: #selector(UserInfoViewController.donePressed))
+        
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.userInteractionEnabled = true
+        inputText.inputAccessoryView = toolBar
+    }
+    
+    func donePressed() {
+        selectedText.resignFirstResponder()
+    }
+
+    
 }
 
 extension UserInfoViewController:UITextFieldDelegate{
@@ -347,6 +374,7 @@ extension UserInfoViewController:UITextFieldDelegate{
     func textFieldDidBeginEditing(textField: UITextField) {
         
         selectedText = textField
+        AddDoneButtonTo(textField)
         
         if textField == dateOfBirth{
             ctDatePicker.showPicker(self, inputText: textField)

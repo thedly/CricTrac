@@ -8,10 +8,11 @@
 
 import UIKit
 
-class CoachingExperienceViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,ThemeChangeable {
+class CoachingExperienceViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, ThemeChangeable {
 
     @IBOutlet weak var teamName: UITextField!
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var teamsPlayedForTxt: UITextField!
     @IBOutlet weak var pastTeamName: UITextField!
     
@@ -30,11 +31,14 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     
     @IBOutlet weak var Experience: UITextField!
     
+    var selectedText: UITextField!
+    
     var data:[String:AnyObject]{
         
         return ["Certifications":CertificationsList,"Experience":Experience.textVal.trim(),"CoachingLevel":CoachingLevel.textVal.trim(),"CoachCurrentTeams":teamNames, "CoachPastTeams": pastTeamNames, "CoachPlayedFor": CoachPlayedFor]
     }
-    
+    var scrollViewTop:CGFloat!
+
     
     var teamNames = [""]
     
@@ -79,7 +83,13 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         CertificationsTbl.dataSource = self
         CertificationsTbl.delegate = self
 
+        Experience.delegate = self
         
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserInfoViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        scrollView.setContentOffset(CGPointZero, animated: true)
+        scrollViewTop = scrollView.frame.origin.y
+
         
     }
     
@@ -147,6 +157,20 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         
         
     }
+    
+    func keyboardWillShow(sender: NSNotification){
+        
+        if let userInfo = sender.userInfo {
+            if  let  keyboardframe = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue{
+                let keyboardHeight = keyboardframe.CGRectValue().height
+                
+                var contentInset:UIEdgeInsets = self.scrollView.contentInset
+                contentInset.bottom = keyboardHeight + 10
+                self.scrollView.contentInset = contentInset
+            }
+        }
+    }
+
     
     
     func deleteTeamFromCurrentTeams(sender: UIButton) {
@@ -325,6 +349,12 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         return 1
     }
     
+    func textFieldDidBeginEditing(textField: UITextField) {
+        
+        self.selectedText = textField
+        AddDoneButtonTo(textField)
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if tableView.isEqual(currentTeams) {
@@ -340,8 +370,28 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         return getCellForPastTeamsRow(indexPath)
     }
 
-    
+    func AddDoneButtonTo(inputText:UITextField) {
+        
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .Default
+        toolBar.translucent = true
+        toolBar.tintColor = UIColor(hex: "B12420")
+        toolBar.backgroundColor = UIColor.whiteColor()
+        toolBar.sizeToFit()
+        
+        // Adding Button ToolBar
+        let doneButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(CoachingExperienceViewController.donePressed))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: #selector(CoachingExperienceViewController.donePressed))
+        
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.userInteractionEnabled = true
+        inputText.inputAccessoryView = toolBar
+    }
 
+    func donePressed() {
+        selectedText.resignFirstResponder()
+    }
     /*
     // MARK: - Navigation
 
