@@ -231,7 +231,7 @@ func addNewOppoSitTeamName(oTeamName:String){
     ref.setValue(oTeamName)
 }
 
-func addNewTournamnetName(tournamnet:String){
+func addNewTournamentName(tournamnet:String){
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Tournaments").childByAutoId()
     ref.setValue(tournamnet)
 }

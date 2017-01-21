@@ -290,7 +290,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
 //            }
 //        }
         
-        if let tournament = matchDetailsData["Tournamnet"]{
+        if let tournament = matchDetailsData["Tournament"]{
             
             let formattedString = NSMutableAttributedString()
             

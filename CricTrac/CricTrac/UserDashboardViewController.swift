@@ -367,7 +367,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 //var dataDict = val as! [String:String]
                 //dataDict["key"] = key
                 
-                if  var value = val as? [String : String]{
+                if  var value = val as? [String : AnyObject]{
                     
                     value += ["key":key]
                     
@@ -378,11 +378,11 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                     let mData = MatchSummaryData()
                     if let runsTaken = value["RunsTaken"]{
                         
-                        mData.BattingSectionHidden = (runsTaken == "-")
+                        mData.BattingSectionHidden = (runsTaken as! String == "-")
                         
                         if mData.BattingSectionHidden == false {
                             
-                            battingBowlingScore.bold(runsTaken, fontName: appFont_black, fontSize: 30).bold("\nRUNS", fontName: appFont_black, fontSize: 12)
+                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 30).bold("\nRUNS", fontName: appFont_black, fontSize: 12)
                             
                         }
                     }
@@ -390,7 +390,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                     if let wicketsTaken = value["WicketsTaken"], let runsGiven = value["RunsGiven"] {
                         
                         
-                        mData.BowlingSectionHidden = (runsGiven == "-")
+                        mData.BowlingSectionHidden = (runsGiven as! String == "-")
                         
                         
                         if mData.BowlingSectionHidden == false {
@@ -422,7 +422,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                         var DateFormatter = NSDateFormatter()
                         DateFormatter.dateFormat = "dd-MM-yyyy"
                         DateFormatter.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
-                        var dateFromString = DateFormatter.dateFromString(date)
+                        var dateFromString = DateFormatter.dateFromString(date as! String)
                         
                         mData.matchDate = dateFromString
                         
@@ -547,7 +547,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 self.FirstRecentMatchView.hidden = (DashboardDetails.TopBatting1stMatchScore == nil || DashboardDetails.TopBatting1stMatchScore == "0")
                 
                 
-                self.SecondRecentMatchView.hidden = (DashboardDetails.TopBatting2ndMatchScore == nil || DashboardDetails.TopBatting1stMatchScore == "0")
+                self.SecondRecentMatchView.hidden = (DashboardDetails.TopBatting2ndMatchScore == nil || DashboardDetails.TopBatting2ndMatchScore == "0")
                 
                 
                 

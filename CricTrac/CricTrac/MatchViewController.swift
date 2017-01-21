@@ -37,7 +37,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     
     var data:[String:String]{
         
-        return ["MatchDate":dateText.textVal,"Team":teamText.textVal,"Opponent":opponentText.textVal,"Ground":groundText.textVal,"MatchOvers":oversText.textVal,"Tournamnet":tournamentText.textVal, "AgeGroup": ageGroup.textVal, "Level": playingLevel.textVal, "Stage": stage.textVal ]
+        return ["MatchDate":dateText.textVal,"Team":teamText.textVal,"Opponent":opponentText.textVal,"Ground":groundText.textVal,"MatchOvers":oversText.textVal,"Tournament":tournamentText.textVal, "AgeGroup": ageGroup.textVal, "Level": playingLevel.textVal, "Stage": stage.textVal ]
     }
     
     func changeThemeSettigs() {
@@ -63,7 +63,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     func loadEditData(){
         
         dateText.textVal = parent!.selecetedData!["MatchDate"]! as! String
-        tournamentText.textVal = (parent!.selecetedData!["Tournamnet"] ?? "") as! String
+        tournamentText.textVal = (parent!.selecetedData!["Tournament"] ?? "") as! String
         teamText.textVal = parent!.selecetedData!["Team"]! as! String
         opponentText.textVal = parent!.selecetedData!["Opponent"]! as! String
         groundText.textVal = parent!.selecetedData!["Ground"]! as! String

@@ -101,8 +101,26 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         
         var vcName = menuData[indexPath.row]["vc"]
         
-        if menuData[indexPath.row]["title"] == "PROFILE" && profileData.fullName != " "{
+        if menuData[indexPath.row]["title"] == "PROFILE" && profileData.userExists {
             vcName = "ProfileReadOnlyViewController"
+        }
+        else if menuData[indexPath.row]["title"] == "DASHBOARD" {
+            
+            switch profileData.UserProfile {
+            case userProfileType.Player.rawValue :
+                vcName = "UserDashboardViewController"
+                break
+            case userProfileType.Coach.rawValue :
+                vcName = "CoachDashboardViewController"
+                break
+            case userProfileType.Fan.rawValue :
+                vcName = "FanDashboardViewController"
+                break
+            default:
+                vcName = "UserDashboardViewController"
+                break
+                
+            }
         }
         
         
