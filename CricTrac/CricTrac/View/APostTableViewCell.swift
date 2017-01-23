@@ -13,6 +13,8 @@ class APostTableViewCell: UITableViewCell {
 
     @IBOutlet weak var postOwnerName: UILabel!
     @IBOutlet weak var post: UILabel!
+    @IBOutlet weak var postOwnerCity: UILabel!
+
     @IBOutlet weak var likeCount: UIButton!
     
     @IBOutlet weak var likeButton: UIButton!

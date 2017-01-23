@@ -11,6 +11,7 @@ import SwiftyJSON
 class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var clubName: UILabel!
+    @IBOutlet weak var userCity: UILabel!
     
     @IBOutlet weak var postText: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
@@ -33,6 +34,18 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
         let postId = postData!.dictionaryValue["postId"]?.stringValue
         
+        userName.text = postData!.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
+        
+        let friendId = postData!["OwnerID"].stringValue
+        
+        fetchFriendDetail(friendId, sucess: { (data) in
+            
+            dispatch_async(dispatch_get_main_queue(),{
+                self.userCity.text = data
+                
+            })
+            
+        })
         getAllComments(postId!) { (data) in
             
             self.dataSource = data

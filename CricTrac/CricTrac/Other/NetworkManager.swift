@@ -52,6 +52,7 @@ func updateTimelineWithNewPost(postId:String,result:(resultError:NSError?)->Void
 
 var pageKey:String?
 
+
 func getLatestTimelines(sucess:(JSON)->Void,failure:(NSError?)->Void){
     
     let timelineURL = NSURL(string:serverBaseURL+"/timeline/\(currentUser!.uid)")!

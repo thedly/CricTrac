@@ -244,7 +244,6 @@ func getAllUserData(sucessBlock:(AnyObject)->Void){
 func getAllUserProfileInfo(){
     
     fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-        print(snapshot)
         if let data = snapshot.value as? [String : AnyObject]{
             
             loggedInUserInfo = data
@@ -253,6 +252,17 @@ func getAllUserProfileInfo(){
             
         }
     })
+}
+//Users/1Gx1xGkrLchZY9ZRZXZu52Bf8Z43/UserProfile/City
+
+func fetchFriendDetail(id:String,sucess:(city:String)->Void){
+    
+    fireBaseRef.child("Users").child(id).child("UserProfile").child("City").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        if let data = snapshot.value as? String{
+            sucess(city: data)
+        }
+    })
+    
 }
 
 func enableSync(){

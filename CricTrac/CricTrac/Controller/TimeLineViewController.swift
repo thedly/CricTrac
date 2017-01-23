@@ -213,6 +213,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             
             let data = timelineData!.arrayValue[indexPath.section-1]
             
+          
             
             if let imageurl = data.dictionaryValue["postImage"]?.string {
                 
@@ -228,6 +229,18 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 
                 let  postCell =  timeLineTable.dequeueReusableCellWithIdentifier("aPost", forIndexPath: indexPath) as! APostTableViewCell
                 
+                let friendId = data["OwnerID"].stringValue
+                    
+                    fetchFriendDetail(friendId, sucess: { (data) in
+                        
+                        friendsCity[friendId] = data
+                        dispatch_async(dispatch_get_main_queue(),{
+                            
+                            postCell.postOwnerCity.text = data
+                            
+                        })
+                        
+                    })
                 postCell.totalLikeCount = 0
                 postCell.post.text = data.dictionaryValue["Post"]?.stringValue
                 postCell.postOwnerName.text = data.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"

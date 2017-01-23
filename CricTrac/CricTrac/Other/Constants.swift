@@ -13,6 +13,7 @@ import Firebase
 public var date = 0
 
 public var loggedInUserInfo = [String:AnyObject]()
+var friendsCity = [String:String]()
 
 public var loggedInUserName:String?{
 
