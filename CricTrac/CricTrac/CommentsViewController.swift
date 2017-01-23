@@ -38,14 +38,23 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
         let friendId = postData!["OwnerID"].stringValue
         
-        fetchFriendDetail(friendId, sucess: { (data) in
+        if let city = friendsCity[friendId]{
             
-            dispatch_async(dispatch_get_main_queue(),{
-                self.userCity.text = data
+            self.userCity.text = city
+            
+        }else{
+            
+            fetchFriendDetail(friendId, sucess: { (city) in
+                friendsCity[friendId] = city
+                dispatch_async(dispatch_get_main_queue(),{
+                    self.userCity.text = city
+                    
+                })
                 
             })
-            
-        })
+        }
+        
+       
         getAllComments(postId!) { (data) in
             
             self.dataSource = data

@@ -1718,7 +1718,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="clubName" destination="D9P-aX-LdM" id="fgu-v9-aX0"/>
                         <outlet property="commentBox" destination="ObJ-p5-GlG" id="gZw-0S-umg"/>
                         <outlet property="commnetButton" destination="Z7y-ZM-26g" id="EEM-i1-3SA"/>
                         <outlet property="likeButton" destination="Rp6-Sj-09q" id="URl-8I-Sxj"/>
@@ -1726,6 +1725,7 @@
                         <outlet property="postText" destination="c9O-EV-d3A" id="LAW-zS-Qbv"/>
                         <outlet property="profileImage" destination="tOi-Xp-t4M" id="GyD-AI-Wor"/>
                         <outlet property="tableView" destination="qrd-T9-CRm" id="G9A-QQ-qUN"/>
+                        <outlet property="userCity" destination="D9P-aX-LdM" id="Cfy-gT-HM2"/>
                         <outlet property="userName" destination="MZ7-ow-So3" id="kdq-fh-ZBh"/>
                     </connections>
                 </viewController>
