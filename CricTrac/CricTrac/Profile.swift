@@ -10,102 +10,167 @@ import Foundation
 
 class Profile {
     
-    var id: String
-    var BattingStyle: String
-    var BowlingStyle: String
-    var City: String
-    var Country: String
-    var DateOfBirth: String
-    var Email: String
-    var FirstName: String
-    var Gender: String
-    var LastName: String
-    var Mobile: String
+    var id: String = ""
+    var BattingStyle: String = ""
+    var BowlingStyle: String = ""
+    var City: String = ""
+    var Country: String = ""
+    var DateOfBirth: String = ""
+    var Email: String = ""
+    var FirstName: String = ""
+    var Gender: String = ""
+    var LastName: String = ""
+    var Mobile: String = ""
     //var PlayingLevel: String
-    var PlayingRole: String
-    var State: String
+    var PlayingRole: String = ""
+    var State: String = ""
     
-    var Experience: String
-    var Certifications: [String]
-    var CoachingLevel: String
-    
-    
-    var PlayerCurrentTeams: [String]
-    var PlayerPastTeams: [String]
-    var CoachPastTeams: [String]
-    var CoachCurrentTeams: [String]
-    var CoachPlayedFor: [String]
-    var SupportingTeams: [String]
-    var InterestedSports: [String]
-    var Hobbies: [String]
-    
-    var FavoritePlayers: [String]
-    
-    var ProfileImageURL: String
-    
-    var CoverPhotoURL: String
-    
-    var fullName: String
-    var UserProfile: String
-    var UserStatus: String
-    
-    var UserAddedDate: AnyObject
-    var UserEditedDate: AnyObject
-    var UserLastLoggedin: AnyObject
+    var Experience: String = ""
+    var Certifications: [String] = []
+    var CoachingLevel: String = ""
     
     
-    var userExists: Bool
+    var PlayerCurrentTeams: [String] = []
+    var PlayerPastTeams: [String] = []
+    var CoachPastTeams: [String] = []
+    var CoachCurrentTeams: [String] = []
+    var CoachPlayedFor: [String] = []
+    var SupportingTeams: [String] = []
+    var InterestedSports: [String] = []
+    var Hobbies: [String] = []
+    
+    var FavoritePlayers: [String] = []
+    
+    var ProfileImageURL: String = ""
+    
+    var CoverPhotoURL: String = ""
+    
+    var fullName: String = ""
+    var UserProfile: String = ""
+    var UserStatus: String = ""
+    
+    var UserAddedDate: AnyObject = ""
+    var UserEditedDate: AnyObject = ""
+    var UserLastLoggedin: AnyObject = ""
+    
+    
+    var userExists: Bool = false
     
     init(usrObj : [String: AnyObject]) {
         
         self.userExists = usrObj.count > 0
         
-        self.FirstName = (usrObj["FirstName"] ?? "") as! String
-        self.LastName = (usrObj["LastName"] ?? "") as! String
-        self.id = (usrObj["UserId"] ?? "") as! String
-        self.BattingStyle = (usrObj["BattingStyle"] ?? "") as! String
-        self.BowlingStyle = (usrObj["BowlingStyle"]  ?? "") as! String
-        self.City = (usrObj["City"]  ?? "") as! String
-        self.Country = (usrObj["Country"]  ?? "") as! String
-        self.State = (usrObj["State"] ?? "") as! String
-        self.DateOfBirth = (usrObj["DateOfBirth"]  ?? "") as! String
-        self.Email = (usrObj["Email"]  ?? "") as! String
-        self.Gender = (usrObj["Gender"]  ?? "") as! String
-        self.Mobile = (usrObj["Mobile"] ?? "") as! String
-        self.PlayingRole = (usrObj["PlayingRole"]  ?? "") as! String
-        //self.PlayingLevel = (usrObj["Level"] ?? "") as! String
-        
-        self.ProfileImageURL = (usrObj["ProfileImageURL"] ?? String(userImageMetaData ?? "")) as! String
-        
-        self.CoverPhotoURL = (usrObj["CoverPhotoURL"] ?? String(userCoverPhotoMetaData ?? "")) as! String
         
         
-        self.UserProfile = (usrObj["UserProfile"] ?? "") as! String
         
+        if let fname = usrObj["FirstName"] as? String {
+            self.FirstName = fname
+        }
+        if let lname = usrObj["LastName"] as? String {
+            self.LastName = lname
+        }
+        if let id = usrObj["id"] as? String {
+            self.id = id
+        }
+        if let battingStyle = usrObj["BattingStyle"] as? String {
+            self.BattingStyle = battingStyle
+        }
+        if let bowlingStyle = usrObj["BowlingStyle"] as? String {
+            self.BowlingStyle = bowlingStyle
+        }
+        if let city = usrObj["City"] as? String {
+            self.City = city
+        }
+        if let country = usrObj["Country"] as? String {
+            self.Country = country
+        }
+        if let dob = usrObj["DateOfBirth"] as? String {
+            self.DateOfBirth = dob
+        }
+        if let email = usrObj["Email"] as? String {
+            self.Email = email
+        }
+        if let gender = usrObj["Gender"] as? String {
+            self.Gender = gender
+        }
+        if let mobile = usrObj["Mobile"] as? String {
+            self.Mobile = mobile
+        }
+        if let playingRole = usrObj["PlayingRole"] as? String {
+            self.PlayingRole = playingRole
+        }
+        if let profileImage = usrObj["ProfileImageURL"] as? String {
+            userImageMetaData = NSURL(string: profileImage)!
+        }
+        if let coverUrl = usrObj["CoverPhotoURL"] as? String {
+            self.CoverPhotoURL = ""
+        }
+        if let usrProfile = usrObj["UserProfile"] as? String {
+           self.UserProfile = usrProfile
+        }
+        if let coachingLevel = usrObj["CoachingLevel"] as? String {
+           
+            self.CoachingLevel = coachingLevel
+        }
+        if let experience = usrObj["Experience"] as? String {
+            
+            self.Experience = experience
+            
+        }
+        if let certifications = usrObj["Certifications"] as? [String] {
+            self.Certifications = certifications
+            
+        }
+        if let fname = self.FirstName as? String, let lName = self.LastName as? String {
+            self.fullName = "\(fname) \(lName)"
+            
+        }
         
-        self.CoachingLevel = (usrObj["CoachingLevel"] ?? "") as! String
-        self.Experience = (usrObj["Experience"] ?? "") as! String
-        self.Certifications = (usrObj["Certifications"] ?? []) as! [String]
+        if let favoritePlayers = usrObj["FavoritePlayers"] as? [String] {
+            self.FavoritePlayers = favoritePlayers
+            
+        }
+        if let playerCurrentTeams = usrObj["PlayerCurrentTeams"] as? [String] {
+            self.PlayerCurrentTeams = playerCurrentTeams
+        }
+        if let playerPastTeams = usrObj["PlayerPastTeams"] as? [String] {
+            self.PlayerPastTeams = playerPastTeams
+        }
         
+        if let coachCurrentTeams = usrObj["CoachCurrentTeams"] as? [String] {
+            self.CoachCurrentTeams = coachCurrentTeams
+        }
+        if let coachPastTeams = usrObj["CoachPastTeams"] as? [String] {
+            self.CoachPastTeams = coachPastTeams
+        }
         
-        self.fullName = "\(self.FirstName) \(self.LastName)"
+        if let supportingTeams = usrObj["SupportingTeams"] as? [String] {
+            self.SupportingTeams = supportingTeams
+        }
         
-        self.FavoritePlayers = (usrObj["FavoritePlayers"] ?? []) as! [String]
+        if let interestedSports = usrObj["InterestedSports"] as? [String] {
+            self.InterestedSports = interestedSports
+        }
         
-        self.PlayerCurrentTeams = (usrObj["PlayerCurrentTeams"] ?? []) as! [String]
-        self.PlayerPastTeams = (usrObj["PlayerPastTeams"] ?? []) as! [String]
-        self.CoachCurrentTeams = (usrObj["CoachCurrentTeams"] ?? []) as! [String]
-        self.CoachPastTeams = (usrObj["CoachPastTeams"] ?? []) as! [String]
-        self.SupportingTeams = (usrObj["SupportingTeams"] ?? []) as! [String]
-        self.InterestedSports = (usrObj["InterestedSports"] ?? []) as! [String]
-        self.Hobbies = (usrObj["Hobbies"] ?? []) as! [String]
-        
-        self.UserStatus = (usrObj["UserStatus"] ?? userStatus.Free.rawValue) as! String
-        
-        self.UserAddedDate =  ((usrObj["UserAddedDate"]) ?? String())
-        self.UserEditedDate = ((usrObj["UserEditedDate"]) ?? String())
-        self.UserLastLoggedin = ((usrObj["UserLastLoggedin"]) ?? String())
-        self.CoachPlayedFor = (usrObj["CoachPlayedFor"] ?? []) as! [String]
+        if let hobbies = usrObj["Hobbies"] as? [String] {
+            self.Hobbies = hobbies
+        }
+        if let userStatus = usrObj["UserStatus"] as? String {
+            self.UserStatus = userStatus
+        }
+        if let userAddedDate = usrObj["userAddedDate"] as AnyObject? {
+            self.UserAddedDate =  userAddedDate
+        }
+        if let userEditedDate = usrObj["UserEditedDate"] as AnyObject? {
+            self.UserEditedDate = userEditedDate
+        }
+        if let userLastLoggedin = usrObj["UserLastLoggedin"] as AnyObject? {
+            self.UserLastLoggedin = userLastLoggedin
+        }
+        if let coachPlayedFor = usrObj["CoachPlayedFor"] as? [String] {
+            self.CoachPlayedFor = coachPlayedFor
+        }
+            
         
     }
     

@@ -508,53 +508,53 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             
             DashboardDetails = DashboardData(dataObj: data)
             if DashboardDetails != nil {
-                self.winPerc.text = DashboardDetails.WinPercentage
-                self.BB.text = DashboardDetails.TopBowling1stMatchScore
-                self.totalRunsScored.text = DashboardDetails.TotalRuns
+                self.winPerc.text = String(DashboardDetails.WinPercentage)
+                self.BB.text = String(DashboardDetails.TopBowling1stMatchScore)
+                self.totalRunsScored.text = String(DashboardDetails.TotalRuns)
                 
-                self.battingMatches.text = DashboardDetails.TotalMatches
-                self.battingInnings.text = DashboardDetails.BattingInnings
+                self.battingMatches.text = String(DashboardDetails.TotalMatches)
+                self.battingInnings.text = String(DashboardDetails.BattingInnings)
                 //    self.notOuts = DashboardDetails
                 
-                self.highScore.text = DashboardDetails.TopBatting1stMatchScore
-                self.battingAverage.text = DashboardDetails.TotalBattingAverage
-                self.strikeRate.text = DashboardDetails.TotalStrikeRate
-                self.hundreds.text = DashboardDetails.Total100s
-                self.fifties.text = DashboardDetails.Total50s
+                self.highScore.text = String(DashboardDetails.TopBatting1stMatchScore)
+                self.battingAverage.text = String(DashboardDetails.TotalBattingAverage)
+                self.strikeRate.text = String(DashboardDetails.TotalStrikeRate)
+                self.hundreds.text = String(DashboardDetails.Total100s)
+                self.fifties.text = String(DashboardDetails.Total50s)
                 
-                self.sixes.text = DashboardDetails.Total6s
-                self.fours.text = DashboardDetails.Total4s
+                self.sixes.text = String(DashboardDetails.Total6s)
+                self.fours.text = String(DashboardDetails.Total4s)
                 
-                self.ballsFacedDuringBat.text = DashboardDetails.TotalBallsFaced
+                self.ballsFacedDuringBat.text = String(DashboardDetails.TotalBallsFaced)
                 
                 // bowling
                 
-                self.totalWickets.text = DashboardDetails.TotalWickets
-                self.bowlingAverage.text = DashboardDetails.TotalBowlingAverage
-                self.bowlingEconomy.text = DashboardDetails.TotalEconomy
+                self.totalWickets.text = String(DashboardDetails.TotalWickets)
+                self.bowlingAverage.text = String(DashboardDetails.TotalBowlingAverage)
+                self.bowlingEconomy.text = String(DashboardDetails.TotalEconomy)
                 
-                self.TotalThreeWicketsPerMatch.text = DashboardDetails.Total3Wkts
+                self.TotalThreeWicketsPerMatch.text = String(DashboardDetails.Total3Wkts)
                 
-                self.TotalMaidens.text = DashboardDetails.TotalMaidens
-                self.TotalFiveWicketsPerMatch.text = DashboardDetails.Total5Wkts
+                self.TotalMaidens.text = String(DashboardDetails.TotalMaidens)
+                self.TotalFiveWicketsPerMatch.text = String(DashboardDetails.Total5Wkts)
                 
-                self.PlayerOversBowld.text = DashboardDetails.TotalOvers
-                
-                
+                self.PlayerOversBowld.text = String(DashboardDetails.TotalOvers)
                 
                 
                 
-                self.FirstRecentMatchView.hidden = (DashboardDetails.TopBatting1stMatchScore == nil || DashboardDetails.TopBatting1stMatchScore == "0")
                 
                 
-                self.SecondRecentMatchView.hidden = (DashboardDetails.TopBatting2ndMatchScore == nil || DashboardDetails.TopBatting2ndMatchScore == "0")
+                self.FirstRecentMatchView.hidden = (DashboardDetails.TopBatting1stMatchScore == nil || String(DashboardDetails.TopBatting1stMatchScore) == "0")
+                
+                
+                self.SecondRecentMatchView.hidden = (DashboardDetails.TopBatting2ndMatchScore == nil || String(DashboardDetails.TopBatting2ndMatchScore) == "0")
                 
                 
                 
-                self.FirstRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling1stMatchScore == nil || DashboardDetails.TopBowling1stMatchScore == "0-0")
+                self.FirstRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling1stMatchScore == nil || DashboardDetails.TopBowling1stMatchScore as! String == "0-0")
                 
                 
-                self.SecondRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling2ndMatchScore == nil || DashboardDetails.TopBowling2ndMatchScore == "0-0")
+                self.SecondRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling2ndMatchScore == nil || DashboardDetails.TopBowling2ndMatchScore as! String == "0-0")
                 
                 
                 self.topBattingNotAvailable.hidden = !(self.FirstRecentMatchView.hidden && self.SecondRecentMatchView.hidden)
@@ -562,8 +562,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                                 
                 
                 if !self.FirstRecentMatchView.hidden {
-                    self.FirstRecentMatchScore.text = DashboardDetails.TopBatting1stMatchScore
-                    self.FirstRecentMatchOpponent.text = DashboardDetails.TopBatting1stMatchOpp
+                    self.FirstRecentMatchScore.text = String(DashboardDetails.TopBatting1stMatchScore)
+                    self.FirstRecentMatchOpponent.text = String(DashboardDetails.TopBatting1stMatchOpp)
                     
                     let formattedString = NSMutableAttributedString()
                     formattedString.bold("\(DashboardDetails.TopBatting1stMatchDate), at \(DashboardDetails.TopBatting1stMatchGround)",fontName: appFont_bold, fontSize: 12)
@@ -575,8 +575,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 
                 if !self.SecondRecentMatchView.hidden {
                     
-                    self.SecondRecentMatchScore.text = DashboardDetails.TopBatting2ndMatchScore
-                    self.SecondRecentMatchOpponent.text = DashboardDetails.TopBatting2ndMatchOpp
+                    self.SecondRecentMatchScore.text = String(DashboardDetails.TopBatting2ndMatchScore)
+                    self.SecondRecentMatchOpponent.text = String(DashboardDetails.TopBatting2ndMatchOpp)
                     
                     let formattedString_2 = NSMutableAttributedString()
                     formattedString_2.bold("\(DashboardDetails.TopBatting2ndMatchDate), at \(DashboardDetails.TopBatting2ndMatchGround)",fontName: appFont_bold, fontSize: 12)
@@ -586,8 +586,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 
                 
                 if !self.FirstRecentMatchBowlingView.hidden {
-                    self.FirstRecentMatchBowlingScore.text = DashboardDetails.TopBowling1stMatchScore
-                    self.FirstRecentMatchBowlingOpponent.text = DashboardDetails.TopBowling1stMatchOpp
+                    self.FirstRecentMatchBowlingScore.text = String(DashboardDetails.TopBowling1stMatchScore)
+                    self.FirstRecentMatchBowlingOpponent.text = String(DashboardDetails.TopBowling1stMatchOpp)
                     
                     let formattedString_Bowling = NSMutableAttributedString()
                     formattedString_Bowling.bold("\(DashboardDetails.TopBowling1stMatchDate), at \(DashboardDetails.TopBowling1stMatchGround)",fontName: appFont_bold, fontSize: 12)
@@ -598,8 +598,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 
                 if !self.SecondRecentMatchBowlingView.hidden {
                     
-                    self.SecondRecentMatchBowlingScore.text = DashboardDetails.TopBowling2ndMatchScore
-                    self.SecondRecentMatchBowlingOpponent.text = DashboardDetails.TopBowling2ndMatchOpp
+                    self.SecondRecentMatchBowlingScore.text = String(DashboardDetails.TopBowling2ndMatchScore)
+                    self.SecondRecentMatchBowlingOpponent.text = String(DashboardDetails.TopBowling2ndMatchOpp)
                     
                     let formattedString_Bowling_2 = NSMutableAttributedString()
                     formattedString_Bowling_2.bold("\(DashboardDetails.TopBowling2ndMatchDate), at \(DashboardDetails.TopBowling2ndMatchGround)",fontName: appFont_bold, fontSize: 12)
