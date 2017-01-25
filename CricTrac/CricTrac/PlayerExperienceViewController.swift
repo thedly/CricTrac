@@ -31,7 +31,8 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     var teamNames = [""]
     
     var scrollViewTop:CGFloat!
-
+  
+    var profileChanged: Bool! = false
     
     var pastTeamNames = [""]
     
@@ -63,15 +64,6 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         
         addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
 
-            
-            let userDefaults = NSUserDefaults.standardUserDefaults()
-            
-            if let _ = userDefaults.valueForKey("loginToken"){
-                
-                userDefaults.removeObjectForKey("loginToken")
-                
-            }
-            
             var currentwindow = UIWindow()
             
             if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let window = app.window {
@@ -79,10 +71,46 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
                 currentwindow = window
             }
             
+            if (self.profileChanged == true) {
+                let userDefaults = NSUserDefaults.standardUserDefaults()
+                
+                if let _ = userDefaults.valueForKey("loginToken"){
+                    
+                    userDefaults.removeObjectForKey("loginToken")
+                    
+                }
+                
+                
+                
+                
+                
+                
+                let loginBaseViewController = viewControllerFrom("Main", vcid: "LoginViewController")
+                
+                currentwindow.rootViewController = loginBaseViewController
+            }
+            else
+            {
+                            profileData = Profile(usrObj: data)
+                
+                            updateMetaData(userImageMetaData)
+                
+                
+                            if self.window.rootViewController == sliderMenu {
+                
+                
+                                self.window.rootViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+                            }
+                            else
+                            {
+                                let rootViewController: UIViewController = getRootViewController()
+                                self.window.rootViewController = rootViewController
+                
+                            }
+                
+                }
             
-            let loginBaseViewController = viewControllerFrom("Main", vcid: "LoginViewController")
             
-            currentwindow.rootViewController = loginBaseViewController
 //            self.presentViewController(loginBaseViewController, animated: true) {
 ////                SCLAlertView().showInfo("Logout",subTitle: "Data saved is cleared, Kill the app and relaunch for now")
 //            }
@@ -90,38 +118,7 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
 
             
             
-//            profileData = Profile(usrObj: data)
-//            
-//            updateMetaData(userImageMetaData)
-//            
-//            
-//            if self.window.rootViewController == sliderMenu {
-//                
-//                
-//                self.window.rootViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
-//            }
-//            else
-//            {
-//                let rootViewController: UIViewController = getRootViewController()
-//                self.window.rootViewController = rootViewController
-//                
-//            }
-            
-            
-            
-            
-            
-//            while ((vc.presentingViewController) != nil) {
-//                
-//                vc = vc.presentingViewController!;
-//                if ((vc.presentingViewController?.isEqual(viewControllerFrom("Main", vcid: "ProfileBaseViewController") as! ProfileBaseViewController)) != nil){
-//                    break;
-//                }
-//            }
-//            
-//            vc.presentingViewController!.dismissViewControllerAnimated(true, completion: { 
-//                
-//            })
+
             
             
             

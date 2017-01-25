@@ -33,6 +33,8 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     
     var selectedText: UITextField!
     
+    var profileChanged: Bool! = false
+    
     var data:[String:AnyObject]{
         
         return ["Certifications":CertificationsList,"Experience":Experience.textVal.trim(),"CoachingLevel":CoachingLevel.textVal.trim(),"CoachCurrentTeams":teamNames, "CoachPastTeams": pastTeamNames, "CoachPlayedFor": CoachPlayedFor]
@@ -48,6 +50,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     
     var pastTeamNames = [""]
     
+    var currentwindow = UIWindow()
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
@@ -131,52 +134,47 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         
         addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
             
-//            profileData = Profile(usrObj: data)
-//            
-//            updateMetaData(userImageMetaData)
-//            
-//            var window = UIWindow(frame: UIScreen.mainScreen().bounds)
-//            
-//            if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let currentwindow = app.window {
-//                
-//                window = currentwindow
-//            }
-//            
-//            
-//            if window.rootViewController == sliderMenu {
-//                window.rootViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
-//            }
-//            else
-//            {
-//                let rootViewController: UIViewController = getRootViewController()
-//                window.rootViewController = rootViewController
-//            }
-            
-            
-            let userDefaults = NSUserDefaults.standardUserDefaults()
-            
-            if let _ = userDefaults.valueForKey("loginToken"){
+            if (self.profileChanged == true) {
+                let userDefaults = NSUserDefaults.standardUserDefaults()
                 
-                userDefaults.removeObjectForKey("loginToken")
+                if let _ = userDefaults.valueForKey("loginToken"){
+                    
+                    userDefaults.removeObjectForKey("loginToken")
+                    
+                }
+                
+                
+                
+                if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let window = app.window {
+                    
+                    self.currentwindow = window
+                }
+                
+                
+                let loginBaseViewController = viewControllerFrom("Main", vcid: "LoginViewController")
+                
+                self.currentwindow.rootViewController = loginBaseViewController
+            }
+            else
+            {
+                profileData = Profile(usrObj: data)
+                
+                updateMetaData(userImageMetaData)
+                
+                
+                if self.currentwindow.rootViewController == sliderMenu {
+                    
+                    
+                    self.currentwindow.rootViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+                }
+                else
+                {
+                    let rootViewController: UIViewController = getRootViewController()
+                    self.currentwindow.rootViewController = rootViewController
+                    
+                }
                 
             }
-            
-            var currentwindow = UIWindow()
-            
-            if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let window = app.window {
-                
-                currentwindow = window
-            }
-            
-            
-            let loginBaseViewController = viewControllerFrom("Main", vcid: "LoginViewController")
-            
-            currentwindow.rootViewController = loginBaseViewController
-//            self.presentViewController(loginBaseViewController, animated: true) {
-//                //                SCLAlertView().showInfo("Logout",subTitle: "Data saved is cleared, Kill the app and relaunch for now")
-//            }
-
-            
         }
 
         

@@ -57,6 +57,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     
     var userProfile : String!
    
+    var profileChanged: Bool! = false
     
     @IBAction func goPreviousPage(sender: AnyObject) {
         
@@ -195,7 +196,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
             
             if profileData.userExists && profileData.UserProfile != userProfileInfo.textVal {
                 
-                
+                profileChanged = true
                 let appearance = SCLAlertView.SCLAppearance(
                     showCloseButton: false
                 )
@@ -206,11 +207,12 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
                 
                 alertView.addButton("Cancel", action: { })
                 
-                alertView.showNotice("Warning", subTitle: "All Data will be lost if you continue")
+                alertView.showNotice("Warning", subTitle: "Changing role will delete all existing data")
                 
             }
             else
             {
+                profileChanged = false
                 continueToDismiss()
             }
             
@@ -229,19 +231,44 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         profileData.State = self.data["State"]!
         profileData.City = self.data["City"]!
         
+        
+      
         if userProfileInfo != nil {
             switch userProfileInfo.text! {
             case userProfileType.Player.rawValue :
-                NextVC = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
+                
+                var vc = viewControllerFrom("Main", vcid: "PlayerExperienceViewController") as! PlayerExperienceViewController
+                
+                vc.profileChanged = self.profileChanged
+                
+                NextVC = vc
+                
             case userProfileType.Coach.rawValue :
-                NextVC = viewControllerFrom("Main", vcid: "CoachingExperienceViewController")
+                
+                var vc = viewControllerFrom("Main", vcid: "CoachingExperienceViewController") as! CoachingExperienceViewController
+                
+                vc.profileChanged = self.profileChanged
+                
+                NextVC = vc
             case userProfileType.Fan.rawValue :
-                NextVC = viewControllerFrom("Main", vcid: "CricketFanViewController")
+                
+                var vc = viewControllerFrom("Main", vcid: "CricketFanViewController") as! CricketFanViewController
+                
+                vc.profileChanged = self.profileChanged
+                
+                NextVC = vc
+                
             default:
-                NextVC = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
+                
+                var vc = viewControllerFrom("Main", vcid: "PlayerExperienceViewController") as! PlayerExperienceViewController
+                
+                vc.profileChanged = self.profileChanged
+
+                NextVC = vc
             }
             
         }
+        
         
         
         let toViewController = NextVC

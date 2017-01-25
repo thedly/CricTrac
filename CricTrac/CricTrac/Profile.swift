@@ -41,9 +41,9 @@ class Profile {
     
     var FavoritePlayers: [String] = []
     
-    var ProfileImageURL: String = ""
+    var ProfileImageURL: String = "-"
     
-    var CoverPhotoURL: String = ""
+    var CoverPhotoURL: String = "-"
     
     var fullName: String = ""
     var UserProfile: String = ""
