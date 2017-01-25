@@ -365,6 +365,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
             
             let rootViewController: UIViewController = getRootViewController()
             
+                
             
             let profileVC = viewControllerFrom("Main", vcid: "ProfileBaseViewController") as! ProfileBaseViewController
             

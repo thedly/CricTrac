@@ -21,6 +21,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     @IBOutlet weak var oversText:UITextField!
     @IBOutlet weak var tournamentText:UITextField!
     
+    @IBOutlet weak var venueText: UITextField!
     @IBOutlet weak var ageGroup: UITextField!
     @IBOutlet weak var playingLevel: UITextField!
     @IBOutlet weak var scrollView:UIScrollView!
@@ -37,7 +38,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     
     var data:[String:String]{
         
-        return ["MatchDate":dateText.textVal,"Team":teamText.textVal,"Opponent":opponentText.textVal,"Ground":groundText.textVal,"MatchOvers":oversText.textVal,"Tournament":tournamentText.textVal, "AgeGroup": ageGroup.textVal, "Level": playingLevel.textVal, "Stage": stage.textVal ]
+        return ["MatchDate":dateText.textVal,"Team":teamText.textVal,"Opponent":opponentText.textVal,"Ground":groundText.textVal,"MatchOvers":oversText.textVal,"Tournament":tournamentText.textVal, "AgeGroup": ageGroup.textVal, "Level": playingLevel.textVal, "Stage": stage.textVal, "Venue": venueText.textVal ]
     }
     
     func changeThemeSettigs() {
@@ -67,6 +68,9 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         teamText.textVal = parent!.selecetedData!["Team"]! as! String
         opponentText.textVal = parent!.selecetedData!["Opponent"]! as! String
         groundText.textVal = parent!.selecetedData!["Ground"]! as! String
+        
+        venueText.textVal = parent!.selecetedData!["Venue"]! as! String
+        
         oversText.textVal = parent!.selecetedData!["MatchOvers"]! as! String
         
         if let ag = parent!.selecetedData!["AgeGroup"] {
@@ -140,6 +144,9 @@ extension MatchViewController:UITextFieldDelegate{
         }
         else if textField == groundText{
             addSuggstionBox(textField,dataSource: groundNames)
+        }
+        else if textField == venueText{
+            addSuggstionBox(textField,dataSource: venueNames)
         }
         else if textField == opponentText{
             addSuggstionBox(textField,dataSource: opponentTeams)

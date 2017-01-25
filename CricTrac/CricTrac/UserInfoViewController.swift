@@ -9,6 +9,7 @@
 
 import UIKit
 import XLPagerTabStrip
+import SCLAlertView
 import SkyFloatingLabelTextField
 
 class UserInfoViewController: UIViewController,ThemeChangeable  {
@@ -190,43 +191,70 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     @IBAction func addUserBtnPressed(sender: AnyObject) {
         if validateProfileData() {
             
-            profileData.FirstName = self.data["FirstName"]!
-            profileData.LastName = self.data["LastName"]!
-            profileData.DateOfBirth = self.data["DateOfBirth"]!
-            profileData.Email = self.data["Email"]!
-            profileData.Mobile = self.data["Mobile"]!
-            profileData.Gender = self.data["Gender"]!
-            profileData.Country = self.data["Country"]!
-            profileData.State = self.data["State"]!
-            profileData.City = self.data["City"]!
             
-            if userProfileInfo != nil {
-                switch userProfileInfo.text! {
-                case userProfileType.Player.rawValue :
-                    NextVC = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
-                case userProfileType.Coach.rawValue :
-                    NextVC = viewControllerFrom("Main", vcid: "CoachingExperienceViewController")
-                case userProfileType.Fan.rawValue :
-                    NextVC = viewControllerFrom("Main", vcid: "CricketFanViewController")
-                default:
-                    NextVC = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
-                }
-
+            
+            if profileData.userExists && profileData.UserProfile != userProfileInfo.textVal {
+                
+                
+                let appearance = SCLAlertView.SCLAppearance(
+                    showCloseButton: false
+                )
+                
+                let alertView = SCLAlertView(appearance: appearance)
+                
+                alertView.addButton("OK", target:self, selector:#selector(UserInfoViewController.continueToDismiss))
+                
+                alertView.addButton("Cancel", action: { })
+                
+                alertView.showNotice("Warning", subTitle: "All Data will be lost if you continue")
+                
+            }
+            else
+            {
+                continueToDismiss()
             }
             
-            
-            let toViewController = NextVC
-            
-            
-            toViewController!.transitioningDelegate = self.transitionManager
-            presentViewController(toViewController!, animated: true, completion: nil)
-            
-            
-            
-            //dismissViewControllerAnimated(true, completion: nil)
         }
         
     }
+    
+    func continueToDismiss() {
+        profileData.FirstName = self.data["FirstName"]!
+        profileData.LastName = self.data["LastName"]!
+        profileData.DateOfBirth = self.data["DateOfBirth"]!
+        profileData.Email = self.data["Email"]!
+        profileData.Mobile = self.data["Mobile"]!
+        profileData.Gender = self.data["Gender"]!
+        profileData.Country = self.data["Country"]!
+        profileData.State = self.data["State"]!
+        profileData.City = self.data["City"]!
+        
+        if userProfileInfo != nil {
+            switch userProfileInfo.text! {
+            case userProfileType.Player.rawValue :
+                NextVC = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
+            case userProfileType.Coach.rawValue :
+                NextVC = viewControllerFrom("Main", vcid: "CoachingExperienceViewController")
+            case userProfileType.Fan.rawValue :
+                NextVC = viewControllerFrom("Main", vcid: "CricketFanViewController")
+            default:
+                NextVC = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
+            }
+            
+        }
+        
+        
+        let toViewController = NextVC
+        
+        
+        toViewController!.transitioningDelegate = self.transitionManager
+        presentViewController(toViewController!, animated: true, completion: nil)
+        
+        
+        
+        //dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     
     func validateProfileData() -> Bool {
         //var detailsValid = true

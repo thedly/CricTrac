@@ -47,7 +47,7 @@ class Profile {
     
     var fullName: String = ""
     var UserProfile: String = ""
-    var UserStatus: String = ""
+    var UserStatus: String = "Free"
     
     var UserAddedDate: AnyObject = ""
     var UserEditedDate: AnyObject = ""
@@ -83,6 +83,9 @@ class Profile {
         }
         if let country = usrObj["Country"] as? String {
             self.Country = country
+        }
+        if let state = usrObj["State"] as? String {
+            self.State = state
         }
         if let dob = usrObj["DateOfBirth"] as? String {
             self.DateOfBirth = dob
@@ -155,10 +158,10 @@ class Profile {
         if let hobbies = usrObj["Hobbies"] as? [String] {
             self.Hobbies = hobbies
         }
-        if let userStatus = usrObj["UserStatus"] as? String {
+        if let userStatus = usrObj["UserStatus"] as? String where userStatus != "" {
             self.UserStatus = userStatus
         }
-        if let userAddedDate = usrObj["userAddedDate"] as AnyObject? {
+        if let userAddedDate = usrObj["UserAddedDate"] as AnyObject? {
             self.UserAddedDate =  userAddedDate
         }
         if let userEditedDate = usrObj["UserEditedDate"] as AnyObject? {

@@ -62,23 +62,50 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         profileData.UserProfile = userProfileType.Player.rawValue
         
         addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
+
             
-            profileData = Profile(usrObj: data)
+            let userDefaults = NSUserDefaults.standardUserDefaults()
             
-            updateMetaData(userImageMetaData)
-            
-            
-            if self.window.rootViewController == sliderMenu {
+            if let _ = userDefaults.valueForKey("loginToken"){
                 
-                
-                self.window.rootViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
-            }
-            else
-            {
-                let rootViewController: UIViewController = getRootViewController()
-                self.window.rootViewController = rootViewController
+                userDefaults.removeObjectForKey("loginToken")
                 
             }
+            
+            var currentwindow = UIWindow()
+            
+            if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let window = app.window {
+                
+                currentwindow = window
+            }
+            
+            
+            let loginBaseViewController = viewControllerFrom("Main", vcid: "LoginViewController")
+            
+            currentwindow.rootViewController = loginBaseViewController
+//            self.presentViewController(loginBaseViewController, animated: true) {
+////                SCLAlertView().showInfo("Logout",subTitle: "Data saved is cleared, Kill the app and relaunch for now")
+//            }
+//            
+
+            
+            
+//            profileData = Profile(usrObj: data)
+//            
+//            updateMetaData(userImageMetaData)
+//            
+//            
+//            if self.window.rootViewController == sliderMenu {
+//                
+//                
+//                self.window.rootViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+//            }
+//            else
+//            {
+//                let rootViewController: UIViewController = getRootViewController()
+//                self.window.rootViewController = rootViewController
+//                
+//            }
             
             
             

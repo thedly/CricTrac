@@ -15,6 +15,7 @@ var sliderMenu = KYDrawerController()
 var currentUser:FIRUser?
 
 var groundNames = [String]()
+var venueNames = [String]()
 var teamNames = [String]()
 var opponentTeams = [String]()
 var dismissals = [String]()

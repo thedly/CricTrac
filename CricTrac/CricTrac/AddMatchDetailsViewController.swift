@@ -66,6 +66,10 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                 
             }
             
+            if let venue = userData["Venue"] as? [String: String]{
+                venueNames = venue.map({ (key, value) in value })
+            }
+            
             if let grounds = userData["Teams"] as? [String:String]{
                 
                 teamNames = grounds.map({ (key,value) in value })
@@ -149,7 +153,11 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                 groundName = ground
             }
             
+            var venueName = "-"
           
+            if let venue = data["Venue"] {
+                venueName = venue
+            }
             
             //OppositTeams
             if !dataHasChangedAfterLastSave {
@@ -183,6 +191,15 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                             groundNames.append(groundName)
                         }
                     }
+                    if venueName != "-"{
+                        
+                        if !venueNames.contains(venueName){
+                            addNewVenueName(venueName)
+                            venueNames.append(venueName)
+                        }
+                    }
+                    
+                    
                     
                     
                 }else{

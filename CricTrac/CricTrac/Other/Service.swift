@@ -93,6 +93,13 @@ func loadInitialValues(){
         }
     })
     
+    fireBaseRef.child("Venue").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let value = snapshot.value as? [String]{
+            venueNames = value
+        }
+    })
+    
     getAllProfiles({ resultObj in
         UserProfilesData.removeAll()
         for profile in resultObj {
@@ -221,6 +228,11 @@ func addNewGroundName(groundName:String){
     ref.setValue(groundName)
 }
 
+func addNewVenueName(venueName:String){
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Venue").childByAutoId()
+    ref.setValue(venueName)
+}
+
 func addNewTeamName(teamName:String){
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Teams").childByAutoId()
     ref.setValue(teamName)
@@ -291,7 +303,14 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
     {
         dataToBeModified["UserAddedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
         dataToBeModified["UserEditedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
-        createDashboardData(DashboardData(dataObj: [String:AnyObject]()).dashboardData)
+        
+        if let usrProfileType = dataToBeModified["UserProfile"] where usrProfileType as! String == userProfileType.Player.rawValue {
+            
+            createDashboardData(DashboardData(dataObj: [String:AnyObject]()).dashboardData)
+        
+        }
+        
+        
         
     }
     else
@@ -303,9 +322,62 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
     ref.setValue(dataToBeModified)
     
+    
+    if let usrProfileType = dataToBeModified["UserProfile"] where usrProfileType as! String != userProfileType.Player.rawValue {
+        
+        deleteAllPlayerData()
+        
+    }
+    
+    
     KRProgressHUD.dismiss()
     sucessBlock(dataToBeModified)
 }
+
+func deleteAllPlayerData(){
+    
+    fireBaseRef.child("Users").child(currentUser!.uid).observeEventType(.Value, withBlock: { (snapshot) in
+        
+        if snapshot.hasChild("Dashboard"){
+            snapshot.ref.child("Dashboard").removeValue()
+        }
+        
+        if snapshot.hasChild("Matches"){
+            snapshot.ref.child("Matches").removeValue()
+        }
+        
+        if snapshot.hasChild("Matches"){
+            snapshot.ref.child("Matches").removeValue()
+        }
+        
+        if snapshot.hasChild("Opponents"){
+            snapshot.ref.child("Opponents").removeValue()
+        }
+        
+        if snapshot.hasChild("Grounds"){
+            snapshot.ref.child("Grounds").removeValue()
+        }
+        
+        if snapshot.hasChild("Matches"){
+            snapshot.ref.child("Matches").removeValue()
+        }
+        
+        if snapshot.hasChild("Teams"){
+            snapshot.ref.child("Teams").removeValue()
+        }
+        
+        if snapshot.hasChild("Tournaments"){
+            snapshot.ref.child("Tournaments").removeValue()
+        }
+        
+        if snapshot.hasChild("Venue"){
+            snapshot.ref.child("Venue").removeValue()
+        }
+        
+        
+    })
+}
+
 
 func UpdateDashboardDetails(){
     

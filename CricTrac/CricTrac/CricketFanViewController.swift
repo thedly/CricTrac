@@ -126,29 +126,58 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
         
         addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
             
-            profileData = Profile(usrObj: data)
             
-            updateMetaData(userImageMetaData)
             
-            var window = UIWindow(frame: UIScreen.mainScreen().bounds)
+            let userDefaults = NSUserDefaults.standardUserDefaults()
             
-            if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let currentwindow = app.window {
+            if let _ = userDefaults.valueForKey("loginToken"){
                 
-                window = currentwindow
+                userDefaults.removeObjectForKey("loginToken")
+                
             }
+            
+            var currentwindow = UIWindow()
+            
+            if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let window = app.window {
+                
+                currentwindow = window
+            }
+            
+            
+            let loginBaseViewController = viewControllerFrom("Main", vcid: "LoginViewController")
+            
+            currentwindow.rootViewController = loginBaseViewController
+//            self.presentViewController(loginBaseViewController, animated: true) {
+//                //                SCLAlertView().showInfo("Logout",subTitle: "Data saved is cleared, Kill the app and relaunch for now")
+//            }
 
-            if window.rootViewController == sliderMenu {
-                window.rootViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: {
-                    KRProgressHUD.dismiss()
-                
-                })
-            }
-            else
-            {
-                let rootViewController: UIViewController = getRootViewController()
-                window.rootViewController = rootViewController
-                KRProgressHUD.dismiss()
-            }
+            
+            
+            
+            
+//            profileData = Profile(usrObj: data)
+//            
+//            updateMetaData(userImageMetaData)
+//            
+//            var window = UIWindow(frame: UIScreen.mainScreen().bounds)
+//            
+//            if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let currentwindow = app.window {
+//                
+//                window = currentwindow
+//            }
+//
+//            if window.rootViewController == sliderMenu {
+//                window.rootViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: {
+//                    KRProgressHUD.dismiss()
+//                
+//                })
+//            }
+//            else
+//            {
+//                let rootViewController: UIViewController = getRootViewController()
+//                window.rootViewController = rootViewController
+//                KRProgressHUD.dismiss()
+//            }
         }
         
     }
