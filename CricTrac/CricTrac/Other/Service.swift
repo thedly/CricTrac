@@ -706,14 +706,14 @@ func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
     let userName = loggedInUserName ?? "No Name"
     
     let addedTime = "\(NSDate().timeIntervalSince1970 * 1000)"
-    let timelineDict:[String:String] = ["AddedTime":addedTime,"CommentCount":"0","LikeCount":"0","OwnerID":currentUser!.uid,"OwnerName":userName,"isDeleted":"0","Post":postText]
+    let timelineDict:[String:String] = ["AddedTime":addedTime,"CommentCount":"0","LikeCount":"0","OwnerID":currentUser!.uid,"OwnerName":userName,"isDeleted":"0","Post":postText,"PostedBy":currentUser!.uid]
     
     let ref = fireBaseRef.child("TimelinePosts").childByAutoId()
     
     ref.setValue(timelineDict)
     
     let postKey = ref.key
-    let returnData = ["timeline":["Post":postText,"CommentCount":"0","LikeCount":"0","OwnerName":userName,"postId":postKey]]
+    let returnData = ["timeline":["Post":postText,"CommentCount":"0","LikeCount":"0","OwnerName":userName,"postId":postKey,"OwnerID":currentUser!.uid,"PostedBy":currentUser!.uid]]
     
     sucess(data: returnData)
     

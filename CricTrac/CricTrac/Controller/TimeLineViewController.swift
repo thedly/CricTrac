@@ -230,7 +230,15 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 let  postCell =  timeLineTable.dequeueReusableCellWithIdentifier("aPost", forIndexPath: indexPath) as! APostTableViewCell
                 
                 let friendId = data["OwnerID"].stringValue
+                if friendId == currentUser!.uid{
                     
+                    postCell.deleteButton.hidden = false
+                    
+                    print("Yes")
+                }else{
+                    
+                     postCell.deleteButton.hidden = true
+                }
                     fetchFriendDetail(friendId, sucess: { (data) in
                         
                         friendsCity[friendId] = data

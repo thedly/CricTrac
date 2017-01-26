@@ -90,16 +90,17 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         
         var vcName = menuData[indexPath.row]["vc"]
         
-        if menuData[indexPath.row]["title"] == "PROFILE" && profileData.fullName != " "{
-            vcName = "ProfileReadOnlyViewController"
+        if indexPath.row != 0{
+            if menuData[indexPath.row]["title"] == "PROFILE" && profileData.fullName != " "{
+                vcName = "ProfileReadOnlyViewController"
+            }
+            
+            let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc  = storyboard.instantiateViewControllerWithIdentifier(vcName!)
+            sliderMenu.mainViewController.presentViewController(vc, animated: true, completion: nil)
+            sliderMenu.setDrawerState(.Closed, animated: true)
         }
         
-        
-        
-        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc  = storyboard.instantiateViewControllerWithIdentifier(vcName!)
-        sliderMenu.mainViewController.presentViewController(vc, animated: true, completion: nil)
-        sliderMenu.setDrawerState(.Closed, animated: true)
     }
 
 }

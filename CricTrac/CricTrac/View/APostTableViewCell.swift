@@ -19,6 +19,7 @@ class APostTableViewCell: UITableViewCell {
     
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var commentCount: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
     
     
     var postId:String?
