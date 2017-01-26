@@ -86,13 +86,13 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             
             var timelineDta = timelineData!.arrayValue
             
-           // let pageKey = timelineData!.dictionaryValue["pageKey"]!.stringValue as AnyObject
+            // let pageKey = timelineData!.dictionaryValue["pageKey"]!.stringValue as AnyObject
             
             timelineDta.insert(JSON(data["timeline"]!), atIndex: 0)
             
             //let newResultDict:[String:AnyObject] = ["timeline":timelineDta,"pageKey":pageKey]
             
-           timelineData = JSON(timelineDta)
+            timelineData = JSON(timelineDta)
             
             dispatch_async(dispatch_get_main_queue(),{
                 
@@ -120,11 +120,11 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     if let timelineArrayObj = timelineData!.arrayObject, let dictionaryTimelineObj = data.dictionaryValue["timeline"], let dictionaryTimelineArrayObj = dictionaryTimelineObj.arrayObject {
                         
                         
-                         timelineData = JSON(timelineArrayObj + dictionaryTimelineArrayObj)
+                        timelineData = JSON(timelineArrayObj + dictionaryTimelineArrayObj)
                         
                     }
                     
-                   
+                    
                     
                     }, failure: { (error) in
                         
@@ -213,7 +213,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             
             let data = timelineData!.arrayValue[indexPath.section-1]
             
-          
+            
             
             if let imageurl = data.dictionaryValue["postImage"]?.string {
                 
@@ -230,25 +230,26 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 let  postCell =  timeLineTable.dequeueReusableCellWithIdentifier("aPost", forIndexPath: indexPath) as! APostTableViewCell
                 
                 let friendId = data["OwnerID"].stringValue
-                if friendId == currentUser!.uid{
+                
+                if let postedBy = data["PostedBy"].string  where postedBy == currentUser!.uid{
                     
                     postCell.deleteButton.hidden = false
                     
-                    print("Yes")
                 }else{
-                    
-                     postCell.deleteButton.hidden = true
+                    postCell.deleteButton.hidden = true
                 }
-                    fetchFriendDetail(friendId, sucess: { (data) in
+                
+                
+                fetchFriendDetail(friendId, sucess: { (data) in
+                    
+                    friendsCity[friendId] = data
+                    dispatch_async(dispatch_get_main_queue(),{
                         
-                        friendsCity[friendId] = data
-                        dispatch_async(dispatch_get_main_queue(),{
-                            
-                            postCell.postOwnerCity.text = data
-                            
-                        })
+                        postCell.postOwnerCity.text = data
                         
                     })
+                    
+                })
                 postCell.totalLikeCount = 0
                 postCell.post.text = data.dictionaryValue["Post"]?.stringValue
                 postCell.postOwnerName.text = data.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
@@ -257,10 +258,10 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 
                 if let value = data.dictionaryValue["TimelineComments"]?.count{
                     
-                   commentsCount = value
+                    commentsCount = value
                 }
                 
-                 postCell.commentCount.setTitle("\(commentsCount) COMMENTS", forState: .Normal)
+                postCell.commentCount.setTitle("\(commentsCount) COMMENTS", forState: .Normal)
                 
                 
                 postCell.postId = data.dictionaryValue["postId"]?.stringValue
@@ -334,24 +335,24 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
-                    if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height)
-                    {
-                        timeLineTable.reloadData()
-        
-                        if let key = pageKey{
-                            
-                            LoadTimeline(key, sucess: { (data) in
-                                
-                                pageKey = data.dictionaryValue["pageKey"]?.stringValue
-                                
-                                timelineData = JSON(timelineData!.arrayObject! + data.dictionaryValue["timeline"]!.arrayObject!)
-                                
-                                }, failure: { (error) in
-                                    
-                                    
-                            })
-                        }
-                        }
+        if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height)
+        {
+            timeLineTable.reloadData()
+            
+            if let key = pageKey{
+                
+                LoadTimeline(key, sucess: { (data) in
+                    
+                    pageKey = data.dictionaryValue["pageKey"]?.stringValue
+                    
+                    timelineData = JSON(timelineData!.arrayObject! + data.dictionaryValue["timeline"]!.arrayObject!)
+                    
+                    }, failure: { (error) in
+                        
+                        
+                })
+            }
+        }
     }
     
     
