@@ -82,17 +82,23 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         
         addNewPost(text) { data in
             
+            var timeLineData:[JSON]!
             
-            
-            var timelineDta = timelineData!.arrayValue
+            if let  value = timelineData?.arrayValue{
+                
+                timeLineData = value
+            }else{
+                
+                timeLineData = [JSON]()
+            }
             
             // let pageKey = timelineData!.dictionaryValue["pageKey"]!.stringValue as AnyObject
             
-            timelineDta.insert(JSON(data["timeline"]!), atIndex: 0)
+            timeLineData.insert(JSON(data["timeline"]!), atIndex: 0)
             
             //let newResultDict:[String:AnyObject] = ["timeline":timelineDta,"pageKey":pageKey]
             
-            timelineData = JSON(timelineDta)
+            timelineData = JSON(timeLineData)
             
             dispatch_async(dispatch_get_main_queue(),{
                 

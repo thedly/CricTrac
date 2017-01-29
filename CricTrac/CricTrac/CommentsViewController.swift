@@ -36,6 +36,20 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
         userName.text = postData!.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
         
+        if let likeCount = postData!.dictionaryValue["Likes"]?.count{
+            
+            likeButton.setTitle("\(likeCount) Likes", forState: .Normal)
+            
+        }else{
+            
+            likeButton.setTitle("0 Likes", forState: .Normal)
+        }
+        let commentCount =  postData!.dictionaryValue["TimelineComments"]?.count
+        
+        self.commnetButton.setTitle("\(commentCount) Comments", forState: .Normal)
+        
+        
+        
         let friendId = postData!["OwnerID"].stringValue
         
         if let city = friendsCity[friendId]{
@@ -58,6 +72,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         getAllComments(postId!) { (data) in
             
             self.dataSource = data
+            self.commnetButton.setTitle("\(data.count) Comments", forState: .Normal)
             self.tableView.reloadData()
             
         }
@@ -93,6 +108,13 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         return aCell
     }
     
+    func textViewDidBeginEditing(textView: UITextView){
+        textView.text = ""
+    }
+    func textViewDidEndEditing(textView: UITextView){
+        commentBox.text = "Add Comment"
+    }
+    
     @IBAction func postNewComment(sender: AnyObject) {
         
         
@@ -100,7 +122,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
         let postId = postData!.dictionaryValue["postId"]?.stringValue
         addNewComment(postId!, comment: commentBox.text)
-        
+        commentBox.text = ""
         tableView.reloadData()
     }
     
