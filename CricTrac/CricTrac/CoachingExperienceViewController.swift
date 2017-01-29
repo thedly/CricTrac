@@ -31,6 +31,17 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     
     @IBOutlet weak var Experience: UITextField!
     
+    
+    
+    @IBOutlet weak var currentTeamsTableHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var playedForTableHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var pastTeamsTableHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var certificationsTableHeightConstraint: NSLayoutConstraint!
+    
+    
     var selectedText: UITextField!
     
     var profileChanged: Bool! = false
@@ -57,6 +68,9 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         self.view.backgroundColor = currentTheme.boxColor
     }
     
+    func adjustTblHeight(constratintType: NSLayoutConstraint, collectionType: [String], cellHeight: CGFloat){
+        constratintType.constant = CGFloat(collectionType.count * Int(cellHeight))
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -214,6 +228,14 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
                 let indexPath = CoachPlayedForTbl.indexPathForCell(cell)
                 CoachPlayedFor.removeAtIndex((indexPath?.row)!)
                 CoachPlayedForTbl.reloadData()
+                
+            }
+                
+            else if tblView.isEqual(self.CertificationsTbl){
+                
+                let indexPath = CertificationsTbl.indexPathForCell(cell)
+                CertificationsList.removeAtIndex((indexPath?.row)!)
+                CertificationsTbl.reloadData()
                 
             }
             else {
@@ -381,16 +403,23 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        let cell = tableView.rectForRowAtIndexPath(indexPath)
+        
         if tableView.isEqual(currentTeams) {
+            adjustTblHeight(currentTeamsTableHeightConstraint, collectionType: teamNames, cellHeight: cell.size.height)
             return getCellForRow(indexPath)
         }
         else if tableView.isEqual(CoachPlayedForTbl) {
+            adjustTblHeight(playedForTableHeightConstraint, collectionType: CoachPlayedFor, cellHeight: cell.size.height)
             return getCellForPlayedTeamsRow(indexPath)
         }
         else if tableView.isEqual(CertificationsTbl) {
+            adjustTblHeight(certificationsTableHeightConstraint, collectionType: CertificationsList, cellHeight: cell.size.height)
             return getCellForCertifications(indexPath)
         }
-
+        
+        adjustTblHeight(pastTeamsTableHeightConstraint, collectionType: pastTeamNames, cellHeight: cell.size.height)
+        
         return getCellForPastTeamsRow(indexPath)
     }
 

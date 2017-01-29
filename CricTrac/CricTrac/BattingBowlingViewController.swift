@@ -402,6 +402,10 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
                     controlText.text = String(currentValue + 1)
                 }
             }
+            else
+            {
+                controlText.text = String(1)
+            }
         }
         else
         {
@@ -409,6 +413,10 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
                 if currentValue > 0 {
                     controlText.text = String(currentValue - 1)
                 }
+            }
+            else
+            {
+                controlText.text = String(0)
             }
         }
     }

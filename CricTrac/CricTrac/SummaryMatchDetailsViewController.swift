@@ -364,7 +364,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
             if let firstScore = matchDetailsData["FirstBattingScore"] {
                 if let firstWickets = matchDetailsData["FirstBattingWickets"] {
                     
-                    let firstTeamOvers = matchDetailsData["FirstBattingOvers"] ?? "-"
+                    let firstTeamOvers: String = (matchDetailsData["FirstBattingOvers"] ?? "-") as! String
                     homeTeam.text?.appendContentsOf("\n\(firstScore)/\(firstWickets)\n(\(firstTeamOvers))")
                 }
                 
@@ -374,7 +374,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
             if let secondScore = matchDetailsData["SecondBattingScore"] {
                 if let secondWickets = matchDetailsData["SecondBattingWickets"] {
                     
-                    let secondTeamOvers = matchDetailsData["SecondBattingOvers"] ?? "-"
+                    let secondTeamOvers: String = (matchDetailsData["SecondBattingOvers"] ?? "-") as! String
                     
                     awayTeam.text?.appendContentsOf("\n\(secondScore)/\(secondWickets)\n(\(secondTeamOvers))")
                 }

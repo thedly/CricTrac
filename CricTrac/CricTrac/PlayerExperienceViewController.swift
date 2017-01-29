@@ -22,6 +22,17 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     var selectedText: UITextField!
     
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    
+    
+    
+    @IBOutlet weak var teamNamesTableHeightConstraint: NSLayoutConstraint!
+    
+    
+    @IBOutlet weak var pastTeamNamesTableHeightConstraint: NSLayoutConstraint!
+    
+    
+    
+    
     @IBOutlet weak var currentTeams: UITableView!
     
     @IBOutlet weak var pastTeams: UITableView!
@@ -309,11 +320,23 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         return 1
     }
     
+    func adjustTblHeight(constratintType: NSLayoutConstraint, collectionType: [String], cellHeight: CGFloat){
+        constratintType.constant = CGFloat(collectionType.count * Int(cellHeight))
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        let cell = tableView.rectForRowAtIndexPath(indexPath)
+        
         if tableView.isEqual(currentTeams) {
+            
+            adjustTblHeight(teamNamesTableHeightConstraint, collectionType: teamNames, cellHeight: cell.size.height)
+            
             return getCellForRow(indexPath)
         }
+        
+        adjustTblHeight(pastTeamNamesTableHeightConstraint, collectionType: pastTeamNames, cellHeight: cell.size.height)
+        
         return getCellForPastTeamsRow(indexPath)
     }
     

@@ -43,8 +43,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        firstBatText = firstTeamTitle.text
-        secondBatText = secondTeamTitle.text
+        
         
         
         firstOversText.delegate = self
@@ -220,14 +219,14 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     
     func setTeamData(){
         
-        firstBatText = firstTeamTitle.text
-        secondBatText = secondTeamTitle.text
-        tossText = firstBatText
-        
         if !inEditMode, let matchVCInstance = parent?.matchVC {
             firstTeamTitle.text = matchVCInstance.teamText.text
             secondTeamTitle.text = matchVCInstance.opponentText.text
         }
+        
+        firstBatText = firstTeamTitle.text
+        secondBatText = secondTeamTitle.text
+        tossText = firstBatText
         
         
         

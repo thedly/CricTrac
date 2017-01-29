@@ -12,6 +12,12 @@ import KRProgressHUD
 
 class CricketFanViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,ThemeChangeable {
     
+    @IBOutlet weak var currentTeamsTblViewHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var interestedSportsTblViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var favouritePlayersTblViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var hobbiesTblViewHeightConstraint: NSLayoutConstraint!
+    
     
     @IBOutlet weak var scrollView: UIScrollView!
 //    var data:[String:String]{
@@ -182,6 +188,10 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
         // Dispose of any resources that can be recreated.
     }
     
+    func adjustTblHeight(constratintType: NSLayoutConstraint, collectionType: [String], cellHeight: CGFloat){
+        constratintType.constant = CGFloat(collectionType.count * Int(cellHeight))
+    }
+    
     func deleteTeamFromCurrentTeams(sender: UIButton) {
         let but = sender
         let view = but.superview!
@@ -197,6 +207,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
             else if tblView.isEqual(self.InterestedSports) {
                 let indexPath = InterestedSports.indexPathForCell(cell)
                 InterestedSportsNamesList.removeAtIndex((indexPath?.row)!)
+                
                 InterestedSports.reloadData()
             }
             else if tblView.isEqual(self.FavouritePlayerTbl) {
@@ -207,6 +218,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
             else {
                 let indexPath = Hobies.indexPathForCell(cell)
                 HobbiesList.removeAtIndex((indexPath?.row)!)
+                
                 Hobies.reloadData()
             }
         }
@@ -233,6 +245,10 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
         if InterestedSportsNames.text?.trimWhiteSpace != "" && InterestedSportsNames.text?.trimWhiteSpace != "-" {
             InterestedSportsNamesList.append(InterestedSportsNames.textVal.trim())
             InterestedSportsNames.text = ""
+            
+            
+            
+            
             InterestedSports.reloadData()
         }
     }
@@ -377,15 +393,21 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        let cell = tableView.rectForRowAtIndexPath(indexPath)
+        
         if tableView.isEqual(SupportingTeams) {
+            adjustTblHeight(currentTeamsTblViewHeightConstraint, collectionType: supportingTeamNamesList, cellHeight: cell.size.height)
             return getCellSupportingTeamsRow(indexPath)
         }
         else if tableView.isEqual(InterestedSports) {
+            adjustTblHeight(interestedSportsTblViewHeightConstraint, collectionType: InterestedSportsNamesList, cellHeight: cell.size.height)
             return getCellForInterestedTeams(indexPath)
         }
         else if tableView.isEqual(FavouritePlayerTbl) {
+            adjustTblHeight(favouritePlayersTblViewHeightConstraint, collectionType: favouritePlayerList, cellHeight: cell.size.height)
             return getCellForFavouritePlayersRow(indexPath)
         }
+        adjustTblHeight(hobbiesTblViewHeightConstraint, collectionType: HobbiesList, cellHeight: cell.size.height)
         return getCellForHobbiesRow(indexPath)
     }
 

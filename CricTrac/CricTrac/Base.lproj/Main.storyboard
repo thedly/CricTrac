@@ -6709,7 +6709,6 @@
                                                 <rect key="frame" x="8" y="197" width="584" height="60"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="Ycf-MO-wbe"/>
                                                     <constraint firstAttribute="height" constant="60" id="maG-tq-7Zq"/>
                                                 </constraints>
                                                 <prototypes>
@@ -6751,11 +6750,6 @@
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="Ycf-MO-wbe"/>
-                                                    </mask>
-                                                </variation>
                                             </tableView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="CURRENT TEAM(S)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RMH-bW-NdD">
                                                 <rect key="frame" x="8" y="8" width="112" height="19"/>
@@ -6935,9 +6929,11 @@
                         <outlet property="bowlingStyle" destination="Rin-5s-QZ5" id="Scg-0X-VEE"/>
                         <outlet property="currentTeams" destination="EyT-U3-Biw" id="7DR-gM-aI8"/>
                         <outlet property="pastTeamName" destination="7WE-AI-nrr" id="guD-QS-tpR"/>
+                        <outlet property="pastTeamNamesTableHeightConstraint" destination="maG-tq-7Zq" id="dlr-NN-ZhA"/>
                         <outlet property="pastTeams" destination="eId-3c-Xe4" id="ngs-nD-Lhb"/>
                         <outlet property="playingRole" destination="8Sa-7J-EuF" id="6Dx-FW-yNO"/>
                         <outlet property="teamName" destination="Q7A-6a-5L3" id="loq-bp-v7V"/>
+                        <outlet property="teamNamesTableHeightConstraint" destination="rEi-VS-Bdi" id="uJQ-nN-f8z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kgb-2J-uYQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -7096,12 +7092,6 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="584" height="34"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pif-eY-tbu">
-                                                                    <rect key="frame" x="23" y="9" width="28" height="16"/>
-                                                                    <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="12"/>
-                                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CEq-hR-UgE">
                                                                     <rect key="frame" x="541" y="7" width="20" height="20"/>
                                                                     <constraints>
@@ -7110,6 +7100,12 @@
                                                                     </constraints>
                                                                     <state key="normal" image="Delete Filled-100 (1)"/>
                                                                 </button>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pif-eY-tbu">
+                                                                    <rect key="frame" x="23" y="9" width="28" height="16"/>
+                                                                    <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="12"/>
+                                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="CEq-hR-UgE" firstAttribute="centerY" secondItem="KWC-wQ-Z8n" secondAttribute="centerY" id="HWA-bs-dGI"/>
@@ -7133,7 +7129,6 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="ACd-Td-qAs"/>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="aQK-2n-RFE"/>
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CurrentTeamsTableViewCell" rowHeight="35" id="KQg-Ce-FRS" customClass="CurrentTeamsTableViewCell" customModule="CricTrac" customModuleProvider="target">
@@ -7174,11 +7169,6 @@
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="aQK-2n-RFE"/>
-                                                    </mask>
-                                                </variation>
                                             </tableView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CURRENT TEAM(S)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJd-yv-dEw">
                                                 <rect key="frame" x="8" y="8" width="96" height="16"/>
@@ -7319,7 +7309,6 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="coa-F4-MUk"/>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="mNy-ij-9aD"/>
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CurrentTeamsTableViewCell" rowHeight="35" id="f3f-7S-IeY" customClass="CurrentTeamsTableViewCell" customModule="CricTrac" customModuleProvider="target">
@@ -7360,18 +7349,12 @@
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="mNy-ij-9aD"/>
-                                                    </mask>
-                                                </variation>
                                             </tableView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="35" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hJI-Qg-5RI">
                                                 <rect key="frame" x="8" y="599" width="584" height="60"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="Lcz-sc-0OO"/>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="gGJ-SQ-oli"/>
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CurrentTeamsTableViewCell" rowHeight="35" id="5RV-7Q-Zcf" customClass="CurrentTeamsTableViewCell" customModule="CricTrac" customModuleProvider="target">
@@ -7381,12 +7364,6 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="584" height="34"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W8n-Da-w2a">
-                                                                    <rect key="frame" x="23" y="9" width="28" height="16"/>
-                                                                    <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="12"/>
-                                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dV0-gN-ea1">
                                                                     <rect key="frame" x="541" y="7" width="20" height="20"/>
                                                                     <constraints>
@@ -7395,6 +7372,12 @@
                                                                     </constraints>
                                                                     <state key="normal" image="Delete Filled-100 (1)"/>
                                                                 </button>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W8n-Da-w2a">
+                                                                    <rect key="frame" x="23" y="9" width="28" height="16"/>
+                                                                    <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="12"/>
+                                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstAttribute="trailingMargin" secondItem="dV0-gN-ea1" secondAttribute="trailing" constant="15" id="DtC-ag-luW"/>
@@ -7412,11 +7395,6 @@
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="gGJ-SQ-oli"/>
-                                                    </mask>
-                                                </variation>
                                             </tableView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="CERTIFICATIONS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Jm-el-jkx">
                                                 <rect key="frame" x="8" y="406" width="72" height="16"/>
@@ -7659,9 +7637,13 @@
                         <outlet property="CoachPlayedForTbl" destination="lfn-q8-hZR" id="CxA-gP-JcW"/>
                         <outlet property="CoachingLevel" destination="7Pe-45-63C" id="C6M-86-fNb"/>
                         <outlet property="Experience" destination="uLa-Yn-rqJ" id="rcL-Tp-tj4"/>
+                        <outlet property="certificationsTableHeightConstraint" destination="Lcz-sc-0OO" id="NT3-c2-R7Q"/>
                         <outlet property="currentTeams" destination="BSL-ia-mNU" id="898-Gf-NW8"/>
+                        <outlet property="currentTeamsTableHeightConstraint" destination="rtc-4a-7kE" id="ETy-J3-Ssk"/>
                         <outlet property="pastTeamName" destination="SC9-mA-VpD" id="3Nx-IQ-fUa"/>
                         <outlet property="pastTeams" destination="6oc-7C-X0W" id="gVA-Vk-AVJ"/>
+                        <outlet property="pastTeamsTableHeightConstraint" destination="ACd-Td-qAs" id="Crx-7a-djI"/>
+                        <outlet property="playedForTableHeightConstraint" destination="coa-F4-MUk" id="UkY-Yh-BHG"/>
                         <outlet property="scrollView" destination="6DX-q4-3PO" id="Rhn-jh-1JY"/>
                         <outlet property="teamName" destination="9OG-io-w7P" id="lad-e7-9HB"/>
                         <outlet property="teamsPlayedForTxt" destination="kbo-Kz-8LZ" id="an9-Qb-hkX"/>
@@ -7856,7 +7838,6 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="EKs-l3-rTP"/>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="gPm-kJ-gEG"/>
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CurrentTeamsTableViewCell" rowHeight="35" id="dD9-So-shs" customClass="CurrentTeamsTableViewCell" customModule="CricTrac" customModuleProvider="target">
@@ -7897,11 +7878,6 @@
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="gPm-kJ-gEG"/>
-                                                    </mask>
-                                                </variation>
                                             </tableView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUW-9T-vDe">
                                                 <rect key="frame" x="560" y="619" width="32" height="32"/>
@@ -7928,7 +7904,6 @@
                                                 <rect key="frame" x="8" y="384" width="584" height="60"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="EVV-bS-5ed"/>
                                                     <constraint firstAttribute="height" constant="60" id="WA2-y2-o1A"/>
                                                 </constraints>
                                                 <prototypes>
@@ -7951,7 +7926,7 @@
                                                                         <constraint firstAttribute="height" constant="20" id="aaU-pc-E6U"/>
                                                                         <constraint firstAttribute="width" constant="20" id="mbH-f9-8IZ"/>
                                                                     </constraints>
-                                                                    <state key="normal" title="Button" image="Delete Filled-100 (1)"/>
+                                                                    <state key="normal" image="Delete Filled-100 (1)"/>
                                                                 </button>
                                                             </subviews>
                                                             <constraints>
@@ -7970,17 +7945,11 @@
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="EVV-bS-5ed"/>
-                                                    </mask>
-                                                </variation>
                                             </tableView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="35" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iVh-ph-WhV">
                                                 <rect key="frame" x="8" y="218" width="584" height="60"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="YTY-r2-7b8"/>
                                                     <constraint firstAttribute="height" constant="60" id="xLH-qT-2Ed"/>
                                                 </constraints>
                                                 <prototypes>
@@ -8022,11 +7991,6 @@
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="YTY-r2-7b8"/>
-                                                    </mask>
-                                                </variation>
                                             </tableView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SUPPORTING TEAM(S)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRa-SD-W5Q">
                                                 <rect key="frame" x="8" y="20" width="115" height="16"/>
@@ -8318,7 +8282,11 @@
                         <outlet property="InterestedSportsNames" destination="4mS-6O-cns" id="igE-MJ-2JR"/>
                         <outlet property="SupportingTeamNames" destination="9ag-3O-MJv" id="bNG-yC-l0C"/>
                         <outlet property="SupportingTeams" destination="3fq-MN-djM" id="e8a-ui-PCM"/>
+                        <outlet property="currentTeamsTblViewHeightConstraint" destination="Y7h-Bn-udt" id="5kA-rg-ZUQ"/>
                         <outlet property="favouritePlayer" destination="6n6-pB-0jW" id="ZVn-Bt-FRE"/>
+                        <outlet property="favouritePlayersTblViewHeightConstraint" destination="WA2-y2-o1A" id="LYc-m1-CZv"/>
+                        <outlet property="hobbiesTblViewHeightConstraint" destination="EKs-l3-rTP" id="OnM-RN-nyO"/>
+                        <outlet property="interestedSportsTblViewHeightConstraint" destination="xLH-qT-2Ed" id="4l7-PU-rNS"/>
                         <outlet property="scrollView" destination="g7s-pa-MK3" id="WvD-a9-8pl"/>
                     </connections>
                 </viewController>
