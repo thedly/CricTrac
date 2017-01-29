@@ -115,7 +115,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         return IndicatorInfo(title: "RESULTS")
     }
     
-    var tossText: String!
+    var tossText: String! = "-"
     
     @IBOutlet weak var isTeambattingSetBtn: UIImageView!
     @IBOutlet weak var secondBattingHeaderText: UILabel!
@@ -135,7 +135,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     
     var data:[String:String]{
         
-        return ["TossWonBy":tossText ?? "-","FirstBatting":firstBatText,"FirstBattingScore":firstScoreText.textVal,"FirstBattingWickets":firstWicketsText.textVal,"SecondBatting":secondBatText, "SecondBattingScore":secondScoreText.textVal,"SecondBattingWickets":secondWicketsText.textVal,"Result":resultText.textVal,"FirstBattingOvers":firstOversText.textVal,"SecondBattingOvers":secondOversText.textVal,"Achievements": AchievementsText.textVal]
+        return ["TossWonBy":tossText.trim() ?? "-","FirstBatting":firstBatText.trim(),"FirstBattingScore":firstScoreText.textVal.trim(),"FirstBattingWickets":firstWicketsText.textVal.trim(),"SecondBatting":secondBatText.trim(), "SecondBattingScore":secondScoreText.textVal.trim(),"SecondBattingWickets":secondWicketsText.textVal.trim(),"Result":resultText.textVal.trim(),"FirstBattingOvers":firstOversText.textVal.trim(),"SecondBattingOvers":secondOversText.textVal.trim(),"Achievements": AchievementsText.textVal.trim()]
     }
     
     
@@ -155,6 +155,9 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         incrementDecrementOperation(secondWicketsText, isIncrement: true)
     }
     @IBAction func tossBtnTapped(sender: UIButton) {
+        
+        parent?.dataChangedAfterLastSave()
+        
         firstTeamTossBtn.alpha = 0.2
         secondTeamTossBtn.alpha = 0.2
         sender.alpha = 1.0
@@ -191,14 +194,16 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         secondTeamTitle.text = secondBatText
         
         
+        firstOversText.text = parent!.selecetedData!["FirstBattingOvers"] as! String ?? "-"
+        
         firstTeamTossBtn.alpha = 0.2
         secondTeamTossBtn.alpha = 0.2
         isTeambattingSetBtn.alpha = 0.3
         
-        if tossText == firstBatText {
+        if tossText.trim() == firstBatText.trim() {
             firstTeamTossBtn.alpha = 1.0
         }
-        else if tossText == secondBatText
+        else if tossText.trim() == secondBatText.trim()
         {
             secondTeamTossBtn.alpha = 1.0
         }
@@ -207,9 +212,12 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             self.isTeambattingSetBtn.alpha = 1.0
         }
         
-        secondScoreText.textVal = parent!.selecetedData!["SecondBattingScore"]! as! String
-        secondWicketsText.textVal = parent!.selecetedData!["SecondBattingWickets"]! as! String
-        resultText.textVal = parent!.selecetedData!["Result"]! as! String
+        secondScoreText.textVal = parent!.selecetedData!["SecondBattingScore"]! as! String ?? "-"
+        
+        secondOversText.textVal = parent!.selecetedData!["SecondBattingOvers"] as! String ?? "-"
+        
+        secondWicketsText.textVal = parent!.selecetedData!["SecondBattingWickets"]! as! String ?? "-"
+        resultText.textVal = parent!.selecetedData!["Result"]! as! String ?? "-"
     }
     
     func allRequiredFieldsHaveFilledProperly()->Bool{
@@ -226,7 +234,10 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         
         firstBatText = firstTeamTitle.text
         secondBatText = secondTeamTitle.text
-        tossText = firstBatText
+        if tossText == "" || tossText == "-" {
+            tossText = firstBatText
+        }
+        
         
         
         
@@ -281,12 +292,28 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             secondBatText = secondTeamTitle.text
             
             let tempbattingtext = firstBatText
-            
             firstBatText = secondBatText
-            
             secondBatText = tempbattingtext
             
+            let tempOvers = firstOversText
+            firstOversText = secondOversText
+            secondOversText = tempOvers
+            
+            let tempScore = firstScoreText
+            firstScoreText = secondScoreText
+            secondScoreText = tempOvers
+            
+            let tempWickets = firstWicketsText
+            firstWicketsText = secondWicketsText
+            secondWicketsText = tempWickets
+            
+            
+            
+            
+            
             let tempPt = FirstBattingView.center
+            
+            parent?.dataChangedAfterLastSave()
             
             UIView.animateWithDuration(1.0,
                                        delay: 0.0,

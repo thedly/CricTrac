@@ -129,12 +129,14 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CoachCurrentTeamsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
                 
                 
-                aCell.TeamImage.image = UIImage()
+                //aCell.TeamImage.image = UIImage()
                 
                 
                 if teamNameToReturn != "" {
                     aCell.TeamName.text = teamNameToReturn
-                    aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+                    if aCell.TeamAbbr != nil {
+                        aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+                    }
                 }
                 
                 
@@ -157,7 +159,9 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
                 
                 if teamNameToReturn != "" {
                     aCell.TeamName.text = teamNameToReturn
-                    aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+                    if aCell.TeamAbbr != nil {
+                        aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+                    }
                 }
                 
                 
@@ -173,12 +177,15 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CoachPlayedForViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
                 
                 
-                aCell.TeamImage.image = UIImage()
+                //aCell.TeamImage.image = UIImage()
                 
                 
                 if teamNameToReturn != "" {
                     aCell.TeamName.text = teamNameToReturn
-                    aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+                    if aCell.TeamAbbr != nil {
+                        aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+                    }
+                    
                 }
                 
                 
@@ -194,12 +201,16 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CertificationsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
                 
                 
-                aCell.TeamImage.image = UIImage()
+                //aCell.TeamImage.image = UIImage()
                 
                 
                 if teamNameToReturn != "" {
                     aCell.TeamName.text = teamNameToReturn
-                    aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+                    
+                    if aCell.TeamAbbr != nil {
+                        aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+                    }
+                    
                 }
                 
                 

@@ -207,12 +207,15 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CertificationsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
                 
                 
-                aCell.TeamImage.image = UIImage()
+                //aCell.TeamImage.image = UIImage()
                 
                 
                 if teamNameToReturn != "" {
                     aCell.TeamName.text = teamNameToReturn
-                    aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+                    if aCell.TeamAbbr != nil {
+                        aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+                    }
+                    
                 }
                 
                 

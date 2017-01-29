@@ -26,6 +26,7 @@ class SplashScreenViewController: UIViewController,ThemeChangeable {
         if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let currentwindow = app.window {
             
             window = currentwindow
+            window?.makeKeyAndVisible()
         }
         
         if let usrTheme = NSUserDefaults.standardUserDefaults().valueForKey("userTheme") {

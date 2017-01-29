@@ -291,7 +291,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     var BattingData:[String:String]{
         
         
-        return ["RunsTaken":RunsTaken,"BallsFaced":BallsFaced,"Fours":Fours,"Sixes":Sixes,"Position":Position,"Dismissal":Dismissal]
+        return ["RunsTaken":RunsTaken.trim(),"BallsFaced":BallsFaced.trim(),"Fours":Fours.trim(),"Sixes":Sixes.trim(),"Position":Position.trim(),"Dismissal":Dismissal.trim()]
     }
     
     func loadEditData(){

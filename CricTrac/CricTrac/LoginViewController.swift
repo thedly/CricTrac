@@ -360,6 +360,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
             if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let currentwindow = app.window {
                 
                 window = currentwindow
+                window?.makeKeyAndVisible()
             }
             
             
