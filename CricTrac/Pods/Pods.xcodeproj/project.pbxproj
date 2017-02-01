@@ -551,6 +551,7 @@
 		14B062F9DBABC640C4AED869E7D19822 /* UITextField+fixCaretPosition.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UITextField+fixCaretPosition.swift"; path = "Sources/UITextField+fixCaretPosition.swift"; sourceTree = "<group>"; };
 		1560F02A29BFF2D9AD861B1ACADB82FB /* GTMOAuth2Authentication.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTMOAuth2Authentication.m; path = Source/GTMOAuth2Authentication.m; sourceTree = "<group>"; };
 		15A2FEF27D459D189D8BF12EF0ED0AEE /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		168754E7079EDD390D5D79DFA265CC29 /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = Frameworks/FirebaseCore.framework; sourceTree = "<group>"; };
 		16EF77DA80B968A253DF27A5EB66DE27 /* FBSDKLoginConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKLoginConstants.h; path = FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginConstants.h; sourceTree = "<group>"; };
 		16F61624CFCA703E847375E47F3BB28A /* SCLAlertView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SCLAlertView-prefix.pch"; sourceTree = "<group>"; };
 		189453ADDFC7A7F5975FAB04F7CF25C6 /* SwiftCountryPicker-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftCountryPicker-umbrella.h"; sourceTree = "<group>"; };
@@ -935,7 +936,6 @@
 		E78E6BE08A55CA848DC59C66C92C3E13 /* FBSDKGraphRequestDataAttachment.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKGraphRequestDataAttachment.m; path = FBSDKCoreKit/FBSDKCoreKit/FBSDKGraphRequestDataAttachment.m; sourceTree = "<group>"; };
 		E7EC7A607F60EF7B2DA538C63FB79FFA /* FBSDKTooltipView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKTooltipView.m; path = FBSDKLoginKit/FBSDKLoginKit/FBSDKTooltipView.m; sourceTree = "<group>"; };
 		E870CB7075E983AAB75A27E92EF47CA4 /* AnimatedTextInput.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AnimatedTextInput.xcconfig; sourceTree = "<group>"; };
-		E93B2CCAC1101A22982B479060E6D8CF /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = Frameworks/frameworks/FirebaseCore.framework; sourceTree = "<group>"; };
 		E9D73544F10C4DDE2639C456773B3686 /* GTMOAuth2ViewControllerTouch.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTMOAuth2ViewControllerTouch.m; path = Source/Touch/GTMOAuth2ViewControllerTouch.m; sourceTree = "<group>"; };
 		EA0CF5DF137BF87C1CF68D8341E5ECC9 /* cm_icon_input_eye_normal@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "cm_icon_input_eye_normal@2x.png"; path = "AnimatedTextInput/Assets/cm_icon_input_eye_normal@2x.png"; sourceTree = "<group>"; };
 		EB270BF069944C25C9EA41F4A4E8B7F2 /* SwiftyJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -1484,14 +1484,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6E1BB4FCA9C92DC30B53F1E94A7914DE /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				E93B2CCAC1101A22982B479060E6D8CF /* FirebaseCore.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		74292EFA760DB19250BE376428364BB8 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -1881,7 +1873,7 @@
 		AE531C2FD2313CC2E1C9977AEA149D47 /* FirebaseCore */ = {
 			isa = PBXGroup;
 			children = (
-				6E1BB4FCA9C92DC30B53F1E94A7914DE /* Frameworks */,
+				D0B9D1DE97CA83F6D9A027C81261FC42 /* Frameworks */,
 			);
 			path = FirebaseCore;
 			sourceTree = "<group>";
@@ -1991,6 +1983,14 @@
 			isa = PBXGroup;
 			children = (
 				E028CE08B71F378C58B970EA23D495DD /* FirebaseMessaging.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D0B9D1DE97CA83F6D9A027C81261FC42 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				168754E7079EDD390D5D79DFA265CC29 /* FirebaseCore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2842,17 +2842,6 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0700;
-				TargetAttributes = {
-					03E6E56F8533C2E42C696D7CCAC42910 = {
-						DevelopmentTeam = 2986MKJ83K;
-					};
-					6C93DE13A9E39F5C57B693BE90DBB2D0 = {
-						DevelopmentTeam = 2986MKJ83K;
-					};
-					9D0F2E5EA1B46A5D72FFD42B0B39DBBC = {
-						DevelopmentTeam = 2986MKJ83K;
-					};
-				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -3444,7 +3433,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 79240496B545A5ED9E881AA9EC0DC64B /* GTMSessionFetcher.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -3462,7 +3450,6 @@
 				MODULEMAP_FILE = "Target Support Files/GTMSessionFetcher/GTMSessionFetcher.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = GTMSessionFetcher;
-				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3673,11 +3660,12 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/AnimatedTextInput/AnimatedTextInput-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/AnimatedTextInput/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/AnimatedTextInput/AnimatedTextInput.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -3770,7 +3758,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 79240496B545A5ED9E881AA9EC0DC64B /* GTMSessionFetcher.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3788,7 +3775,6 @@
 				MODULEMAP_FILE = "Target Support Files/GTMSessionFetcher/GTMSessionFetcher.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = GTMSessionFetcher;
-				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4117,11 +4103,12 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/AnimatedTextInput/AnimatedTextInput-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/AnimatedTextInput/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/AnimatedTextInput/AnimatedTextInput.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -4168,7 +4155,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C22301CD9E611FD8C064E050DA533043 /* GoogleToolboxForMac.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -4186,7 +4172,6 @@
 				MODULEMAP_FILE = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = GoogleToolboxForMac;
-				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4228,7 +4213,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7B1D99C96A47B6E853F9D00CFF1FE1CB /* Bolts.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -4246,7 +4230,6 @@
 				MODULEMAP_FILE = "Target Support Files/Bolts/Bolts.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = Bolts;
-				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4259,7 +4242,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7B1D99C96A47B6E853F9D00CFF1FE1CB /* Bolts.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -4277,7 +4259,6 @@
 				MODULEMAP_FILE = "Target Support Files/Bolts/Bolts.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = Bolts;
-				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4436,7 +4417,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C22301CD9E611FD8C064E050DA533043 /* GoogleToolboxForMac.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -4454,7 +4434,6 @@
 				MODULEMAP_FILE = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = GoogleToolboxForMac;
-				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";

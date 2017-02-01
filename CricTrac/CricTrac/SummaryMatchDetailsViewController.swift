@@ -27,6 +27,11 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
     @IBOutlet weak var ballsFaced: UILabel!
     @IBOutlet weak var sixes: UILabel!
     
+    
+    
+    @IBOutlet weak var matchDateAndVenue: UILabel!
+    
+    
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var matchBetween: UILabel!
     @IBOutlet weak var ground: UILabel!
@@ -228,12 +233,45 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
             noBalls.text = Noballs as! String
         }
         
-        if let grnd = matchDetailsData["Ground"] {
-            self.ground.text = grnd as! String
-        }
+        
         
         if let dat = matchDetailsData["MatchDate"] {
-            self.date.text = dat as! String
+        
+            
+            
+            
+            let dateImageAttachment = NSTextAttachment()
+            dateImageAttachment.image = UIImage(named: "Calendar-100")
+            let dateAttachmentString = NSAttributedString(attachment: dateImageAttachment)
+            
+            
+            let groundImageAttachment = NSTextAttachment()
+            groundImageAttachment.image = UIImage(named: "Marker-100 (1)")
+            let groundAttachmentString = NSAttributedString(attachment: groundImageAttachment)
+            
+            
+            
+            
+            
+            
+            let formattedString = NSMutableAttributedString()
+            formattedString.appendAttributedString(dateAttachmentString)
+            
+            formattedString.bold("  \(dat)  ", fontName: appFont_bold, fontSize: 12)
+            
+            if let grnd = matchDetailsData["Ground"] {
+                
+                formattedString.appendAttributedString(groundAttachmentString)
+                formattedString.bold("  \(grnd)", fontName: appFont_bold, fontSize: 12)
+                
+            }
+            
+            
+            matchDateAndVenue.attributedText = formattedString
+            
+            
+            
+            //self.date.text = dat as! String
         }
         
         

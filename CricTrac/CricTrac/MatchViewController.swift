@@ -27,6 +27,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     @IBOutlet weak var scrollView:UIScrollView!
     
     var selectedText:UITextField!
+    var scrollViewTop:CGFloat!
     
     let ctDatePicker = CTDatePicker()
     let ctDataPicker = CTPicker()
@@ -55,11 +56,43 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         
         self.view.backgroundColor = UIColor.clearColor()
         
+        
+        
+        self.stage.delegate = self
+        self.dateText.delegate = self
+        self.teamText.delegate = self
+        self.opponentText.delegate = self
+        self.groundText.delegate = self
+        self.oversText.delegate = self
+        self.tournamentText.delegate = self
+        
+        self.venueText.delegate = self
+        self.ageGroup.delegate = self
+        self.playingLevel.delegate = self
+        
+        
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MatchViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        scrollView.setContentOffset(CGPointZero, animated: true)
+        scrollViewTop = scrollView.frame.origin.y
+        
         //setBackgroundColor()
         
         //setUIBackgroundTheme(self.view)
     }
     
+    func keyboardWillShow(sender: NSNotification){
+        
+        if let userInfo = sender.userInfo {
+            if  let  keyboardframe = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue{
+                let keyboardHeight = keyboardframe.CGRectValue().height
+                
+                var contentInset:UIEdgeInsets = self.scrollView.contentInset
+                contentInset.bottom = keyboardHeight + 10
+                self.scrollView.contentInset = contentInset
+            }
+        }
+    }
     
     func loadEditData(){
         

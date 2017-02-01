@@ -107,7 +107,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                                 
                             }
                             else{
-                                battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 53).bold("\nWICKETS", fontName: appFont_black, fontSize: 12)
+                                battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 30).bold("\nWICKETS", fontName: appFont_black, fontSize: 12)
                             }
                             
                             
@@ -136,8 +136,26 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                         
                         matchVenueAndDate.appendContentsOf(date as? String ?? "NA")
                     }
+                    
+                    if let group = value["AgeGroup"]{
+                        matchVenueAndDate.appendContentsOf(" | \(group)")
+                    }
+                    
                     if let venue = value["Ground"]{
                         matchVenueAndDate.appendContentsOf("\n@ \(venue)")
+                    }
+                    
+                    if let ballsFaced = value["BallsFaced"] as? String where ballsFaced != "-", let runsScored = value["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
+                        
+                        let strinkeRate = (Int(runsScored)!/Int(ballsFaced)!)*100
+                        matchVenueAndDate.appendContentsOf("\n Strike rate: \(strinkeRate)")
+                    }
+                    
+                    if let oversBowled = value["OversBowled"] as? String where oversBowled != "-", let runsGiven = value["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
+                        
+                        
+                        let economy = Float(runsGiven)!/Float(oversBowled)!
+                        matchVenueAndDate.appendContentsOf("\n Economy: \(economy)")
                     }
                     
                     if let opponent  = value["Opponent"]{

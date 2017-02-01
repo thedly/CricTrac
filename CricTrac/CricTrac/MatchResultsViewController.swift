@@ -135,7 +135,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     
     var data:[String:String]{
         
-        return ["TossWonBy":tossText.trim() ?? "-","FirstBatting":firstBatText.trim(),"FirstBattingScore":firstScoreText.textVal.trim(),"FirstBattingWickets":firstWicketsText.textVal.trim(),"SecondBatting":secondBatText.trim(), "SecondBattingScore":secondScoreText.textVal.trim(),"SecondBattingWickets":secondWicketsText.textVal.trim(),"Result":resultText.textVal.trim(),"FirstBattingOvers":firstOversText.textVal.trim(),"SecondBattingOvers":secondOversText.textVal.trim(),"Achievements": AchievementsText.textVal.trim()]
+        return ["TossWonBy":tossText.trim() ?? "-","FirstBatting":firstBatText.trim(),"FirstBattingScore":firstScoreText.textVal,"FirstBattingWickets":firstWicketsText.textVal,"SecondBatting":secondBatText.trim(), "SecondBattingScore":secondScoreText.textVal,"SecondBattingWickets":secondWicketsText.textVal,"Result":resultText.textVal,"FirstBattingOvers":firstOversText.textVal,"SecondBattingOvers":secondOversText.textVal,"Achievements": AchievementsText.textVal]
     }
     
     
@@ -301,7 +301,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             
             let tempScore = firstScoreText
             firstScoreText = secondScoreText
-            secondScoreText = tempOvers
+            secondScoreText = tempScore
             
             let tempWickets = firstWicketsText
             firstWicketsText = secondWicketsText

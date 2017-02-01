@@ -112,7 +112,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     
     func AddFriendBtnPressed(sender: UIButton) {
         
-        if let FriendUserId = sender.accessibilityIdentifier {
+        if let FriendUserId = sender.accessibilityIdentifier where FriendUserId != "" {
             
             if let FriendObject  = UserProfilesData.filter({ $0.id == FriendUserId }).first {
                 

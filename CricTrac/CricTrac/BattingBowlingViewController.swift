@@ -13,19 +13,7 @@ import SkyFloatingLabelTextField
 class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,ThemeChangeable {
     
     
-    var OversBowled: String! = "-"
-    var WicketsTaken: String! = "-"
-    var RunsGiven: String! = "-"
-    var NoBalls: String! = "-"
-    var Wides: String! = "-"
-    var Maidens: String! = "-"
     
-    var RunsTaken: String! = "-"
-    var BallsFaced: String! = "-"
-    var Fours: String! = "-"
-    var Sixes: String! = "-"
-    var Position: String! = "-"
-    var Dismissal: String! = "-"
     
     var selectedText:UITextField!
     
@@ -47,6 +35,22 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     @IBOutlet weak var maidensText: UITextField!
     @IBOutlet weak var runsGivenText: UITextField!
     weak var parent:MatchParent?
+    
+    
+    var OversBowled: String!
+    var WicketsTaken: String!
+    var RunsGiven: String!
+    var NoBalls: String!
+    var Wides: String!
+    var Maidens: String!
+    
+    var RunsTaken: String!
+    var BallsFaced: String!
+    var Fours: String!
+    var Sixes: String!
+    var Position: String!
+    var Dismissal: String!
+    
     
     var BowlingData:[String:String]{
         
@@ -291,7 +295,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     var BattingData:[String:String]{
         
         
-        return ["RunsTaken":RunsTaken.trim(),"BallsFaced":BallsFaced.trim(),"Fours":Fours.trim(),"Sixes":Sixes.trim(),"Position":Position.trim(),"Dismissal":Dismissal.trim()]
+        return ["RunsTaken":RunsTaken,"BallsFaced":BallsFaced,"Fours":Fours,"Sixes":Sixes,"Position":Position,"Dismissal":Dismissal]
     }
     
     func loadEditData(){
@@ -334,6 +338,24 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         self.view.backgroundColor = UIColor.clearColor()
         //setUIBackgroundTheme(self.view)
         // Do any additional setup after loading the view.
+        
+        
+        OversBowled = (parent?.selecetedData?["OversBowled"] ?? "-") as! String
+        WicketsTaken = (parent?.selecetedData?["WicketsTaken"] ?? "-") as! String
+        RunsGiven = (parent?.selecetedData?["RunsGiven"] ?? "-") as! String
+        NoBalls = (parent?.selecetedData?["NoBalls"] ?? "-") as! String
+        Wides = (parent?.selecetedData?["Wides"] ?? "-") as! String
+        Maidens = (parent?.selecetedData?["Maidens"] ?? "-") as! String
+        
+        RunsTaken = (parent?.selecetedData?["RunsTaken"] ?? "-") as! String
+        BallsFaced = (parent?.selecetedData?["BallsFaced"] ?? "-") as! String
+        Fours = (parent?.selecetedData?["Fours"] ?? "-") as! String
+        Sixes = (parent?.selecetedData?["Sixes"] ?? "-") as! String
+        Position = (parent?.selecetedData?["Position"] ?? "-") as! String
+        Dismissal = (parent?.selecetedData?["Dismissal"] ?? "-") as! String
+
+        
+        
         
         dismissalText.delegate = self
         runsText.delegate = self
