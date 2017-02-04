@@ -441,6 +441,8 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
                 controlText.text = String(0)
             }
         }
+        
+        textFieldDidEndEditing(controlText)
     }
 
 }

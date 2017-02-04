@@ -283,6 +283,8 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
                 }
             }
         }
+        
+        textFieldDidEndEditing(controlText)
     }
 
     @IBAction func swapBtnPressed(sender: AnyObject) {

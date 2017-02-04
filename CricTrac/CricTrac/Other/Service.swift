@@ -110,7 +110,7 @@ func loadInitialValues(){
             UserProfilesData.append(currentProfile)
             if let _imageUrl = profile["ProfileImageURL"] as? String where _imageUrl != ""  {
                 
-                let userId = profile["UserId"] as! String
+                let userId = profile["Id"] as! String
                 
                 getImageFromFirebase(_imageUrl) { (data) in
                     UserProfilesImages[userId] = data
@@ -443,9 +443,15 @@ func getAllProfiles(sucessBlock:([[String:AnyObject]])->Void){
         var users: [[String: AnyObject]] = []
         if let data: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
             
+            
+            
+            
+            
             for (key, value) in data {
                 if var profile = value["UserProfile"] as? [String : AnyObject] {
-                    profile["UserId"] = key
+                    profile["Id"] = key
+                    
+                
                     users.append(profile)
                 }
             }
@@ -708,8 +714,46 @@ func addThemeData(theme: String, sucessBlock:()->Void){
 // MARK: - Friends
 
 
+public func AcceptFriendRequest(data: [String:[String:AnyObject]], callback:(data:String)->Void){
+    
+    var dataToBeManipulated = data
+    
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Friends").childByAutoId()
+    ref.setValue(dataToBeManipulated["sentRequestData"], withCompletionBlock: { error, newlyCreateddata in
+        
+        var sentcreatedId = [String: AnyObject]()
+        sentcreatedId["FriendRecordId"] = newlyCreateddata.key
+        
+        
+        let receivedRequestRef = fireBaseRef.child("Users").child(dataToBeManipulated["sentRequestData"]!["SentTo"]! as! String).child("Friends").childByAutoId()
+        
+        dataToBeManipulated["ReceivedRequestData"]!["FriendRecordId"] = newlyCreateddata.key
+        receivedRequestRef.setValue(data["ReceivedRequestData"], withCompletionBlock: { error, newlyCreatedReceivedRequestData in
+            var createdId = [String: AnyObject]()
+            createdId["FriendRecordId"] = newlyCreatedReceivedRequestData.key
+            
+            createdId["FriendRecordId"] = newlyCreateddata.key
+            
+            
+            receivedRequestRef.updateChildValues(createdId)
+            
+            
+            sentcreatedId["FriendRecordIdOther"] = newlyCreatedReceivedRequestData.key
+            
+            ref.updateChildValues(sentcreatedId)
+            
+            
+            
+            callback(data: newlyCreatedReceivedRequestData.key)
+        })
+        
+    })
 
-public func AddSentRequestData(data: [String:[String:String]], callback:(data:String)->Void) {
+}
+
+
+
+public func AddSentRequestData(data: [String:[String:AnyObject]], callback:(data:String)->Void) {
     
     var dataToBeManipulated = data
     
@@ -720,7 +764,7 @@ public func AddSentRequestData(data: [String:[String:String]], callback:(data:St
         sentcreatedId["SentRequestId"] = newlyCreateddata.key
         
         
-        let receivedRequestRef = fireBaseRef.child("Users").child(dataToBeManipulated["sentRequestData"]!["SentTo"]!).child("ReceivedRequest").childByAutoId()
+        let receivedRequestRef = fireBaseRef.child("Users").child(dataToBeManipulated["sentRequestData"]!["SentTo"]! as! String).child("ReceivedRequest").childByAutoId()
         
         dataToBeManipulated["ReceivedRequestData"]!["SentRequestId"] = newlyCreateddata.key
         receivedRequestRef.setValue(data["ReceivedRequestData"], withCompletionBlock: { error, newlyCreatedReceivedRequestData in
@@ -764,7 +808,7 @@ func getAllFriendRequests(sucessBlock:([String: AnyObject])->Void){
 
 func getAllFriends(sucessBlock:([String: AnyObject])->Void){
     
-    fireBaseRef.child(currentUser!.uid).child("Friends").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Friends").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
         
         if let data = snapshot.value as? [String : AnyObject] {
             

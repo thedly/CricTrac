@@ -10,18 +10,18 @@ import Foundation
 
 class Friends {
     
-    var City: String?
-    var Club: String?
-    var FriendshipDateTime: String?
-    var Name: String?
-    var UserId: String?
+    var City: String!
+    var Club: String!
+    var FriendshipDateTime: String!
+    var Name: String!
+    var UserId: String!
     
     init(dataObj: [String: AnyObject]) {
-        self.City = String(dataObj["City"] ?? "-")
-        self.Club = String(dataObj["Club"] ?? "-")
-        self.Name = String(dataObj["Name"] ?? "-")
-        self.FriendshipDateTime =  String(dataObj["FriendshipDateTime"] ?? "-")
-        self.UserId = String(dataObj["UserId"] ?? "-")
+        self.City = dataObj["City"] as! String ?? "-"
+        self.Club = dataObj["Club"] as! String ?? "-"
+        self.Name = dataObj["Name"] as! String ?? "-"
+        self.FriendshipDateTime =  String(dataObj["FriendshipDateTime"]) ?? "-"
+        self.UserId = dataObj["UserId"] as! String ?? "-"
     }
     
     var FriendRequestObject : [String: String] {

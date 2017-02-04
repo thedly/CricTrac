@@ -60,7 +60,9 @@ class Profile {
         
         self.userExists = usrObj.count > 0
         
-        
+        if let userId = usrObj["Id"] as? String {
+            self.id = userId
+        }
         
         
         if let fname = usrObj["FirstName"] as? String {
@@ -69,9 +71,7 @@ class Profile {
         if let lname = usrObj["LastName"] as? String {
             self.LastName = lname
         }
-        if let id = usrObj["id"] as? String {
-            self.id = id
-        }
+        
         if let battingStyle = usrObj["BattingStyle"] as? String {
             self.BattingStyle = battingStyle
         }
