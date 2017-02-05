@@ -26,11 +26,11 @@ class FriendSuggestionsCell: UITableViewCell {
         
         self.baseView.layer.cornerRadius = 10
         self.baseView.clipsToBounds = true
-        self.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
-        self.baseView.alpha = 0.8
+       
         self.AddFriendBtn.userInteractionEnabled = true
         
-        
+        self.baseView.backgroundColor = UIColor.blackColor()
+        self.baseView.alpha = 0.3
         
         //self.AddFriendBtn.addTarget(self, action: #selector(FriendSuggestionsCell.AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         

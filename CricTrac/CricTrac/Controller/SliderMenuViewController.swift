@@ -9,20 +9,25 @@
 import UIKit
 import SCLAlertView
 
-class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable {
 
     
     @IBOutlet var baseView: UIView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setBackgroundColor()
         
         userName.text = profileData.fullName
-        baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
+        //baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
         
         self.profileImage.image = LoggedInUserImage
         
@@ -46,11 +51,17 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
             
         }
         
-        let window = UIWindow()
+        var currentwindow = UIWindow()
+        
+        if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let window = app.window {
+            
+            currentwindow = window
+        }
+        
         
         let loginBaseViewController = viewControllerFrom("Main", vcid: "LoginViewController")
         
-        window.rootViewController = loginBaseViewController
+        currentwindow.rootViewController = loginBaseViewController
         self.presentViewController(loginBaseViewController, animated: true) {
              SCLAlertView().showInfo("Logout",subTitle: "Data saved is cleared, Kill the app and relaunch for now")
         }
@@ -90,6 +101,7 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         
         var vcName = menuData[indexPath.row]["vc"]
         
+<<<<<<< HEAD
         if indexPath.row != 0{
             if menuData[indexPath.row]["title"] == "PROFILE" && profileData.fullName != " "{
                 vcName = "ProfileReadOnlyViewController"
@@ -99,6 +111,28 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
             let vc  = storyboard.instantiateViewControllerWithIdentifier(vcName!)
             sliderMenu.mainViewController.presentViewController(vc, animated: true, completion: nil)
             sliderMenu.setDrawerState(.Closed, animated: true)
+=======
+        if menuData[indexPath.row]["title"] == "PROFILE" && profileData.userExists {
+            vcName = "ProfileReadOnlyViewController"
+>>>>>>> Backup
+        }
+        else if menuData[indexPath.row]["title"] == "DASHBOARD" {
+            
+            switch profileData.UserProfile {
+            case userProfileType.Player.rawValue :
+                vcName = "UserDashboardViewController"
+                break
+            case userProfileType.Coach.rawValue :
+                vcName = "CoachDashboardViewController"
+                break
+            case userProfileType.Fan.rawValue :
+                vcName = "FanDashboardViewController"
+                break
+            default:
+                vcName = "UserDashboardViewController"
+                break
+                
+            }
         }
         
     }

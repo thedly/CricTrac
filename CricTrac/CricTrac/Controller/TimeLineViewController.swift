@@ -23,13 +23,11 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     var totalPosts = 5
     
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setNavigationBarProperties();
-        
+        currentTheme = cricTracTheme.currentTheme
         setBackgroundColor()
         
         //setUIBackgroundTheme(view)
@@ -61,13 +59,17 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     
-    func changeThemeSettigs(){
-        currentTheme = cricTracTheme.currentTheme
-        timeLineTable.backgroundView?.backgroundColor = UIColor.clearColor()
-        timeLineTable.backgroundColor = UIColor.clearColor()
-        timeLineTable.reloadData()
-    }
+//    func changeThemeSettigs(){
+//        currentTheme = cricTracTheme.currentTheme
+//        timeLineTable.backgroundView?.backgroundColor = UIColor.clearColor()
+//        timeLineTable.backgroundColor = UIColor.clearColor()
+//        timeLineTable.reloadData()
+//    }
     
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
     
     func refresh(sender:AnyObject) {
         loadTimeline()
@@ -166,6 +168,9 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     func setNavigationBarProperties(){
+        
+        currentTheme = cricTracTheme.currentTheme
+        
         let menuButton: UIButton = UIButton(type:.Custom)
         menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
         menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
@@ -184,7 +189,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         
         navigationItem.leftBarButtonItem = leftbarButton
         navigationItem.rightBarButtonItem = righttbarButton
-        navigationController!.navigationBar.barTintColor = UIColor(hex: topColor)
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "TIMELINE"
         let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         navigationController!.navigationBar.titleTextAttributes = titleDict

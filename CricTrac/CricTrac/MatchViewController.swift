@@ -10,7 +10,7 @@ import UIKit
 import XLPagerTabStrip
 import AnimatedTextInput
 
-class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTrackable {
+class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTrackable,ThemeChangeable {
     
     
     @IBOutlet weak var stage: UITextField!
@@ -21,11 +21,13 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     @IBOutlet weak var oversText:UITextField!
     @IBOutlet weak var tournamentText:UITextField!
     
+    @IBOutlet weak var venueText: UITextField!
     @IBOutlet weak var ageGroup: UITextField!
     @IBOutlet weak var playingLevel: UITextField!
     @IBOutlet weak var scrollView:UIScrollView!
     
     var selectedText:UITextField!
+    var scrollViewTop:CGFloat!
     
     let ctDatePicker = CTDatePicker()
     let ctDataPicker = CTPicker()
@@ -37,7 +39,12 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     
     var data:[String:String]{
         
-        return ["MatchDate":dateText.textVal,"Team":teamText.textVal,"Opponent":opponentText.textVal,"Ground":groundText.textVal,"MatchOvers":oversText.textVal,"Tournamnet":tournamentText.textVal, "AgeGroup": ageGroup.textVal, "Level": playingLevel.textVal, "Stage": stage.textVal ]
+        return ["MatchDate":dateText.textVal,"Team":teamText.textVal,"Opponent":opponentText.textVal,"Ground":groundText.textVal,"MatchOvers":oversText.textVal,"Tournament":tournamentText.textVal, "AgeGroup": ageGroup.textVal, "Level": playingLevel.textVal, "Stage": stage.textVal, "Venue": venueText.textVal ]
+    }
+    
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
     }
     
     override func viewDidLoad() {
@@ -47,28 +54,67 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         oversText.keyboardType = UIKeyboardType.DecimalPad
         DoneButtonClassInstance.AddDoneButtonTo(oversText)
         
-        setUIBackgroundTheme(self.view)
+        self.view.backgroundColor = UIColor.clearColor()
+        
+        
+        
+        self.stage.delegate = self
+        self.dateText.delegate = self
+        self.teamText.delegate = self
+        self.opponentText.delegate = self
+        self.groundText.delegate = self
+        self.oversText.delegate = self
+        self.tournamentText.delegate = self
+        
+        self.venueText.delegate = self
+        self.ageGroup.delegate = self
+        self.playingLevel.delegate = self
+        
+        
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MatchViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        scrollView.setContentOffset(CGPointZero, animated: true)
+        scrollViewTop = scrollView.frame.origin.y
+        
+        //setBackgroundColor()
+        
+        //setUIBackgroundTheme(self.view)
     }
     
+    func keyboardWillShow(sender: NSNotification){
+        
+        if let userInfo = sender.userInfo {
+            if  let  keyboardframe = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue{
+                let keyboardHeight = keyboardframe.CGRectValue().height
+                
+                var contentInset:UIEdgeInsets = self.scrollView.contentInset
+                contentInset.bottom = keyboardHeight + 10
+                self.scrollView.contentInset = contentInset
+            }
+        }
+    }
     
     func loadEditData(){
         
-        dateText.textVal = parent!.selecetedData!["MatchDate"]!
-        tournamentText.textVal = parent!.selecetedData!["Tournamnet"] ?? ""
-        teamText.textVal = parent!.selecetedData!["Team"]!
-        opponentText.textVal = parent!.selecetedData!["Opponent"]!
-        groundText.textVal = parent!.selecetedData!["Ground"]!
-        oversText.textVal = parent!.selecetedData!["MatchOvers"]!
+        dateText.textVal = parent!.selecetedData!["MatchDate"]! as! String
+        tournamentText.textVal = (parent!.selecetedData!["Tournament"] ?? "") as! String
+        teamText.textVal = parent!.selecetedData!["Team"]! as! String
+        opponentText.textVal = parent!.selecetedData!["Opponent"]! as! String
+        groundText.textVal = parent!.selecetedData!["Ground"]! as! String
+        
+        venueText.textVal = parent!.selecetedData!["Venue"]! as! String
+        
+        oversText.textVal = parent!.selecetedData!["MatchOvers"]! as! String
         
         if let ag = parent!.selecetedData!["AgeGroup"] {
-            ageGroup.textVal = ag
+            ageGroup.textVal = ag as! String
         }
 
         if let pl = parent!.selecetedData!["Level"] {
-            playingLevel.textVal = pl
+            playingLevel.textVal = pl as! String
         }
         if let pl = parent!.selecetedData!["Stage"] {
-            stage.textVal = pl
+            stage.textVal = pl as! String
         }
         
         
@@ -131,6 +177,9 @@ extension MatchViewController:UITextFieldDelegate{
         }
         else if textField == groundText{
             addSuggstionBox(textField,dataSource: groundNames)
+        }
+        else if textField == venueText{
+            addSuggstionBox(textField,dataSource: venueNames)
         }
         else if textField == opponentText{
             addSuggstionBox(textField,dataSource: opponentTeams)

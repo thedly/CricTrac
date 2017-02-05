@@ -11,7 +11,7 @@ import XLPagerTabStrip
 import SCLAlertView
 import KRProgressHUD
 
-class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchParent  {
+class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchParent,ThemeChangeable  {
     
     var matchVC:MatchViewController!
     
@@ -19,7 +19,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     
     var resVC: MatchResultsViewController!
     
-    var selecetedData:[String:String]?
+    var selecetedData:[String:AnyObject]?
     
     @IBOutlet weak var saveButton:UIButton!
     
@@ -27,6 +27,10 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     var dataAdded = false
     var data = [String:String]()
     
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +42,8 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         buttonBarView.selectedBar.backgroundColor = UIColor.whiteColor()
         settings.style.buttonBarItemFont = UIFont(name: appFont_bold, size: 15)!
         dataHasChangedAfterLastSave = false
-        setUIBackgroundTheme(self.view)
+        //setUIBackgroundTheme(self.view)
+        setBackgroundColor()
     }
     
     func dataChangedAfterLastSave(){
@@ -59,6 +64,10 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                 
                 groundNames = grounds.map({ (key,value) in value })
                 
+            }
+            
+            if let venue = userData["Venue"] as? [String: String]{
+                venueNames = venue.map({ (key, value) in value })
             }
             
             if let grounds = userData["Teams"] as? [String:String]{
@@ -144,7 +153,11 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                 groundName = ground
             }
             
+            var venueName = "-"
           
+            if let venue = data["Venue"] {
+                venueName = venue
+            }
             
             //OppositTeams
             if !dataHasChangedAfterLastSave {
@@ -163,11 +176,11 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                         opponentTeams.append(oppoTeamName)
                     }
                     
-                    let tournament = data["Tournamnet"]!
+                    let tournament = data["Tournament"]!
                     
                     if tournament != "-"{
                         if !tournaments.contains(tournament){
-                            addNewTournamnetName(tournament)
+                            addNewTournamentName(tournament)
                             tournaments.append(tournament)
                         }
                     }
@@ -178,10 +191,19 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                             groundNames.append(groundName)
                         }
                     }
+                    if venueName != "-"{
+                        
+                        if !venueNames.contains(venueName){
+                            addNewVenueName(venueName)
+                            venueNames.append(venueName)
+                        }
+                    }
+                    
+                    
                     
                     
                 }else{
-                    updateMatchData(selecetedData!["key"]!, data: data)
+                    updateMatchData(selecetedData!["key"]! as! String, data: data)
                     NSNotificationCenter.defaultCenter().postNotificationName("MatchDataChanged", object: self)
                 }
                 self.dismissViewControllerAnimated(true) {}

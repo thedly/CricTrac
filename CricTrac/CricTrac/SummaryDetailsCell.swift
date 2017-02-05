@@ -21,12 +21,18 @@ class SummaryDetailsCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.baseView.layer.cornerRadius = 10
-        self.baseView.clipsToBounds = true
-        self.baseView.backgroundColor = UIColor.blackColor()
-        self.baseView.alpha = 0.3
+        baseView.layer.cornerRadius = 10
+        baseView.clipsToBounds = true
+        
+        setColorForViewsWithSameTag(self)
+        
+        baseView.alpha = 0.7
+        
+        
+//        self.baseView.backgroundColor = UIColor.blackColor()
+//        self.baseView.alpha = 0.3
         self.selectionStyle = .None
-        self.vsView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: "#660000"))
+        //self.vsView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: "#660000"))
         
         // Initialization code
     }

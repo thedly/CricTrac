@@ -8,8 +8,9 @@
 
 import UIKit
 import KRProgressHUD
+import FirebaseAuth
 
-class UserDashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,ThemeChangeable {
+class UserDashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ThemeChangeable {
 
     //MARK: - Variable declaration
     
@@ -128,6 +129,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     @IBOutlet weak var FirstRecentMatchBowlingDateAndLocation: UILabel!
     
+    @IBOutlet weak var activityInd: UIActivityIndicatorView!
     
     
     @IBOutlet weak var SecondRecentMatchBowlingScore: UILabel!
@@ -136,15 +138,121 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     @IBOutlet weak var SecondRecentMatchBowlingDateAndLocation: UILabel!
     
     
+    @IBAction func editImageBtnPressed(sender: AnyObject) {
+        
+        let alertController = UIAlertController(title: nil, message: "Change your picture", preferredStyle: .ActionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+            // ...
+        }
+        alertController.addAction(cancelAction)
+        
+        let TakePictureAction = UIAlertAction(title: "Take Photo", style: .Default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
+                imagePicker.allowsEditing = false
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+            }
+        }
+        
+        alertController.addAction(TakePictureAction)
+        
+        let chooseExistingAction = UIAlertAction(title: "Choose Existing", style: .Default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+                imagePicker.allowsEditing = false
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+            }
+        }
+        
+        alertController.addAction(chooseExistingAction)
+        
+        
+        let chooseFromFacebookAction = UIAlertAction(title: "Choose Default", style: .Default) { (action) in
+            
+            var userProviderData = currentUser?.providerData
+            
+            for usr: FIRUserInfo in userProviderData! {
+                if (usr.providerID == "facebook.com" || usr.providerID == "google.com") {
+                    
+                    self.activityInd.startAnimating()
+                    
+                    let image:UIImage = getImageFromFacebook()
+                    
+                    self.userProfileImage.image = image
+                    
+                    addProfileImageData(self.resizeImage(image, newWidth: 200))
+                    self.activityInd.stopAnimating()
+
+                }
+            }
+            
+            
+            
+            
+         }
+        
+        alertController.addAction(chooseFromFacebookAction)
+        
+        
+        let removePhotoAction = UIAlertAction(title: "Remove Photo", style: .Default) { (action) in
+            
+            let image:UIImage = UIImage(named: "User")!
+            
+            self.userProfileImage.image = image
+            addProfileImageData(self.resizeImage(image, newWidth: 200))
+            
+        }
+        
+        alertController.addAction(removePhotoAction)
+        
+        
+        let viewPhotoAction = UIAlertAction(title: "View Photo", style: .Default) { (action) in
+            
+           self.viewImage()
+            
+        }
+        
+        alertController.addAction(viewPhotoAction)
+        
+        
+        
+        
+        
+        
+        self.presentViewController(alertController, animated: true) {
+            // ...
+        }
+        
+    }
     
     
+    func stopAnimation() {
+        if self.activityInd.isAnimating() {
+            self.activityInd.stopAnimating()
+        }
+    }
     
-    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        
+        self.userProfileImage.image = image
+        self.dismissViewControllerAnimated(true) { 
+            addProfileImageData(self.resizeImage(image, newWidth: 200))
+        }
+        
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUIBackgroundTheme(self.view)
+        setBackgroundColor()
+        
+        //setUIBackgroundTheme(self.view)
         
         userProfileImage.layer.cornerRadius = userProfileImage.bounds.size.width/2
         MatchesView.layer.cornerRadius = 10
@@ -176,9 +284,23 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         // Do any additional setup after loading the view.
     }
     
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+        
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+    
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
-        MatchesView.backgroundColor = currentTheme.boxColor
+        MatchesView.backgroundColor = UIColor.blackColor()
+        MatchesView.alpha = 0.3
+        //currentTheme.boxColor
         //baseView.backgroundColor = UIColor.clearColor()
     }
 
@@ -189,6 +311,48 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     
     // MARK: - Methods
+    
+    
+    
+    func viewImage(){
+        
+        let newImageView = UIImageView(image: userProfileImage.image)
+        newImageView.frame = self.view.frame
+        newImageView.backgroundColor = .blackColor()
+        newImageView.contentMode = .ScaleAspectFit
+        newImageView.userInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: "dismissFullscreenImage:")
+        newImageView.addGestureRecognizer(tap)
+        //        self.view.addSubview(navBarView)
+        self.view.addSubview(newImageView)
+        
+    }
+    
+    
+    
+    @IBAction func imageTapped(sender: UITapGestureRecognizer) {
+        let imageView = sender.view as! UIImageView
+        //        let navBarView = UIView(frame: CGRectMake(0, 0, (sender.view?.frame.size.width)!, 50))
+        //        navBarView.backgroundColor = UIColor(hex: "#D4D4D4")
+        //        let editBtn = UIButton(frame: CGRectMake((sender.view?.frame.size.width)! - 100, 10, 50, 20))
+        //        editBtn.setBackgroundImage(UIImage(named: "EditPencil-100"), forState: .Normal)
+        //        navBarView.addSubview(editBtn)
+        
+        let newImageView = UIImageView(image: imageView.image)
+        newImageView.frame = self.view.frame
+        newImageView.backgroundColor = .blackColor()
+        newImageView.contentMode = .ScaleAspectFit
+        newImageView.userInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: "dismissFullscreenImage:")
+        newImageView.addGestureRecognizer(tap)
+        //        self.view.addSubview(navBarView)
+        self.view.addSubview(newImageView)
+    }
+    
+    func dismissFullscreenImage(sender: UITapGestureRecognizer) {
+        sender.view?.removeFromSuperview()
+    }
+    
     
     
     func getMatchData(){
@@ -203,7 +367,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 //var dataDict = val as! [String:String]
                 //dataDict["key"] = key
                 
-                if  var value = val as? [String : String]{
+                if  var value = val as? [String : AnyObject]{
                     
                     value += ["key":key]
                     
@@ -214,11 +378,11 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                     let mData = MatchSummaryData()
                     if let runsTaken = value["RunsTaken"]{
                         
-                        mData.BattingSectionHidden = (runsTaken == "-")
+                        mData.BattingSectionHidden = (runsTaken as! String == "-")
                         
                         if mData.BattingSectionHidden == false {
                             
-                            battingBowlingScore.bold(runsTaken, fontName: appFont_black, fontSize: 30).bold("\nRUNS", fontName: appFont_black, fontSize: 12)
+                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 30).bold("\nRUNS", fontName: appFont_black, fontSize: 12)
                             
                         }
                     }
@@ -226,7 +390,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                     if let wicketsTaken = value["WicketsTaken"], let runsGiven = value["RunsGiven"] {
                         
                         
-                        mData.BowlingSectionHidden = (runsGiven == "-")
+                        mData.BowlingSectionHidden = (runsGiven as! String == "-")
                         
                         
                         if mData.BowlingSectionHidden == false {
@@ -258,7 +422,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                         var DateFormatter = NSDateFormatter()
                         DateFormatter.dateFormat = "dd-MM-yyyy"
                         DateFormatter.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
-                        var dateFromString = DateFormatter.dateFromString(date)
+                        var dateFromString = DateFormatter.dateFromString(date as! String)
                         
                         mData.matchDate = dateFromString
                         
@@ -285,6 +449,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             
             self.matches.sortInPlace({ $0.matchDate.compare($1.matchDate) == NSComparisonResult.OrderedDescending })
             
+            self.SecondRecentMatchSummary.hidden = true
+            self.FirstRecentMatchSummary.hidden = true
             
             if self.matches.count > 0 {
                 self.firstRecentMatchScoreCard.attributedText = self.matches[0].battingBowlingScore
@@ -342,62 +508,62 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             
             DashboardDetails = DashboardData(dataObj: data)
             if DashboardDetails != nil {
-                self.winPerc.text = DashboardDetails.WinPercentage
-                self.BB.text = DashboardDetails.TopBowling1stMatchScore
-                self.totalRunsScored.text = DashboardDetails.TotalRuns
+                self.winPerc.text = String(DashboardDetails.WinPercentage)
+                self.BB.text = String(DashboardDetails.TopBowling1stMatchScore)
+                self.totalRunsScored.text = String(DashboardDetails.TotalRuns)
                 
-                self.battingMatches.text = DashboardDetails.TotalMatches
-                self.battingInnings.text = DashboardDetails.BattingInnings
+                self.battingMatches.text = String(DashboardDetails.TotalMatches)
+                self.battingInnings.text = String(DashboardDetails.BattingInnings)
                 //    self.notOuts = DashboardDetails
                 
-                self.highScore.text = DashboardDetails.TopBatting1stMatchScore
-                self.battingAverage.text = DashboardDetails.TotalBattingAverage
-                self.strikeRate.text = DashboardDetails.TotalStrikeRate
-                self.hundreds.text = DashboardDetails.Total100s
-                self.fifties.text = DashboardDetails.Total50s
+                self.highScore.text = String(DashboardDetails.TopBatting1stMatchScore)
+                self.battingAverage.text = String(DashboardDetails.TotalBattingAverage)
+                self.strikeRate.text = String(DashboardDetails.TotalStrikeRate)
+                self.hundreds.text = String(DashboardDetails.Total100s)
+                self.fifties.text = String(DashboardDetails.Total50s)
                 
-                self.sixes.text = DashboardDetails.Total6s
-                self.fours.text = DashboardDetails.Total4s
+                self.sixes.text = String(DashboardDetails.Total6s)
+                self.fours.text = String(DashboardDetails.Total4s)
                 
-                self.ballsFacedDuringBat.text = DashboardDetails.TotalBallsFaced
+                self.ballsFacedDuringBat.text = String(DashboardDetails.TotalBallsFaced)
                 
                 // bowling
                 
-                self.totalWickets.text = DashboardDetails.TotalWickets
-                self.bowlingAverage.text = DashboardDetails.TotalBowlingAverage
-                self.bowlingEconomy.text = DashboardDetails.TotalEconomy
+                self.totalWickets.text = String(DashboardDetails.TotalWickets)
+                self.bowlingAverage.text = String(DashboardDetails.TotalBowlingAverage)
+                self.bowlingEconomy.text = String(DashboardDetails.TotalEconomy)
                 
-                self.TotalThreeWicketsPerMatch.text = DashboardDetails.Total3Wkts
+                self.TotalThreeWicketsPerMatch.text = String(DashboardDetails.Total3Wkts)
                 
-                self.TotalMaidens.text = DashboardDetails.TotalMaidens
-                self.TotalFiveWicketsPerMatch.text = DashboardDetails.Total5Wkts
+                self.TotalMaidens.text = String(DashboardDetails.TotalMaidens)
+                self.TotalFiveWicketsPerMatch.text = String(DashboardDetails.Total5Wkts)
                 
-                self.PlayerOversBowld.text = DashboardDetails.TotalOvers
-                
-                
+                self.PlayerOversBowld.text = String(DashboardDetails.TotalOvers)
                 
                 
                 
-                self.FirstRecentMatchView.hidden = (DashboardDetails.TopBatting1stMatchScore == nil || DashboardDetails.TopBatting1stMatchScore == "0")
                 
                 
-                self.SecondRecentMatchView.hidden = (DashboardDetails.TopBatting2ndMatchScore == nil || DashboardDetails.TopBatting1stMatchScore == "0")
+                self.FirstRecentMatchView.hidden = (DashboardDetails.TopBatting1stMatchScore == nil || String(DashboardDetails.TopBatting1stMatchScore) == "0")
+                
+                
+                self.SecondRecentMatchView.hidden = (DashboardDetails.TopBatting2ndMatchScore == nil || String(DashboardDetails.TopBatting2ndMatchScore) == "0")
                 
                 
                 
-                self.FirstRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling1stMatchScore == nil || DashboardDetails.TopBowling1stMatchScore == "0-0")
+                self.FirstRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling1stMatchScore == nil || DashboardDetails.TopBowling1stMatchScore as! String == "0-0")
                 
                 
-                self.SecondRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling2ndMatchScore == nil || DashboardDetails.TopBowling2ndMatchScore == "0-0")
+                self.SecondRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling2ndMatchScore == nil || DashboardDetails.TopBowling2ndMatchScore as! String == "0-0")
                 
                 
-                self.topBattingNotAvailable.hidden = (!self.FirstRecentMatchView.hidden && !self.SecondRecentMatchView.hidden)
-                self.topBowlingNotAvailable.hidden = (!self.FirstRecentMatchBowlingView.hidden && !self.SecondRecentMatchBowlingView.hidden)
+                self.topBattingNotAvailable.hidden = !(self.FirstRecentMatchView.hidden && self.SecondRecentMatchView.hidden)
+                self.topBowlingNotAvailable.hidden = !(self.FirstRecentMatchBowlingView.hidden && self.SecondRecentMatchBowlingView.hidden)
                                 
                 
                 if !self.FirstRecentMatchView.hidden {
-                    self.FirstRecentMatchScore.text = DashboardDetails.TopBatting1stMatchScore
-                    self.FirstRecentMatchOpponent.text = DashboardDetails.TopBatting1stMatchOpp
+                    self.FirstRecentMatchScore.text = String(DashboardDetails.TopBatting1stMatchScore)
+                    self.FirstRecentMatchOpponent.text = String(DashboardDetails.TopBatting1stMatchOpp)
                     
                     let formattedString = NSMutableAttributedString()
                     formattedString.bold("\(DashboardDetails.TopBatting1stMatchDate), at \(DashboardDetails.TopBatting1stMatchGround)",fontName: appFont_bold, fontSize: 12)
@@ -409,8 +575,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 
                 if !self.SecondRecentMatchView.hidden {
                     
-                    self.SecondRecentMatchScore.text = DashboardDetails.TopBatting2ndMatchScore
-                    self.SecondRecentMatchOpponent.text = DashboardDetails.TopBatting2ndMatchOpp
+                    self.SecondRecentMatchScore.text = String(DashboardDetails.TopBatting2ndMatchScore)
+                    self.SecondRecentMatchOpponent.text = String(DashboardDetails.TopBatting2ndMatchOpp)
                     
                     let formattedString_2 = NSMutableAttributedString()
                     formattedString_2.bold("\(DashboardDetails.TopBatting2ndMatchDate), at \(DashboardDetails.TopBatting2ndMatchGround)",fontName: appFont_bold, fontSize: 12)
@@ -420,8 +586,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 
                 
                 if !self.FirstRecentMatchBowlingView.hidden {
-                    self.FirstRecentMatchBowlingScore.text = DashboardDetails.TopBowling1stMatchScore
-                    self.FirstRecentMatchBowlingOpponent.text = DashboardDetails.TopBowling1stMatchOpp
+                    self.FirstRecentMatchBowlingScore.text = String(DashboardDetails.TopBowling1stMatchScore)
+                    self.FirstRecentMatchBowlingOpponent.text = String(DashboardDetails.TopBowling1stMatchOpp)
                     
                     let formattedString_Bowling = NSMutableAttributedString()
                     formattedString_Bowling.bold("\(DashboardDetails.TopBowling1stMatchDate), at \(DashboardDetails.TopBowling1stMatchGround)",fontName: appFont_bold, fontSize: 12)
@@ -432,8 +598,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 
                 if !self.SecondRecentMatchBowlingView.hidden {
                     
-                    self.SecondRecentMatchBowlingScore.text = DashboardDetails.TopBowling2ndMatchScore
-                    self.SecondRecentMatchBowlingOpponent.text = DashboardDetails.TopBowling2ndMatchOpp
+                    self.SecondRecentMatchBowlingScore.text = String(DashboardDetails.TopBowling2ndMatchScore)
+                    self.SecondRecentMatchBowlingOpponent.text = String(DashboardDetails.TopBowling2ndMatchOpp)
                     
                     let formattedString_Bowling_2 = NSMutableAttributedString()
                     formattedString_Bowling_2.bold("\(DashboardDetails.TopBowling2ndMatchDate), at \(DashboardDetails.TopBowling2ndMatchGround)",fontName: appFont_bold, fontSize: 12)
@@ -551,12 +717,12 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 break
             }
             
-            
-            
+            if teamNameToReturn != "" {
                 aCell.TeamName.text = teamNameToReturn
-            
-            
                 aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+            }
+            
+            
             
             
                 

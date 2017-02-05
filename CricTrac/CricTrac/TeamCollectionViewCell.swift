@@ -20,16 +20,21 @@ class TeamCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        if TeamImage.image != nil
-        {
-            TeamAbbr.hidden = true
-        }
-        else
-        {
-            TeamImage.hidden = true
+        if TeamImage != nil {
+            if TeamImage.image != nil
+            {
+                TeamAbbr.hidden = true
+            }
+            else
+            {
+                TeamImage.hidden = true
+            }
         }
         
         
-        baseView.layer.cornerRadius = baseView.frame.size.width/2
+        if baseView != nil {
+            baseView.layer.cornerRadius = baseView.frame.size.width/2
+        }
+        
     }
 }

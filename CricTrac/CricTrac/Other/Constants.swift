@@ -30,11 +30,11 @@ let menuData = [
     ["title":"MATCH SUMMARY","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
     ["title":"FRIENDS","vc":"FriendBaseViewController", "img": "Menu_Friends"],
     ["title":"PROFILE","vc":  "ProfileBaseViewController", "img": "Menu_Profile"],
-    ["title":"STATISTICS","vc":"AddMatchDetailsViewController", "img": "Menu_Statistics"],
-    ["title":"NOTIFICATION","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
+//    ["title":"STATISTICS","vc":"AddMatchDetailsViewController", "img": "Menu_Statistics"],
+//    ["title":"NOTIFICATION","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
     ["title":"SETTINGS","vc":"SettingsViewController", "img": "Menu_Settings"],
-    ["title":"FEEDBACK","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
-    ["title":"HELP & SUPPORT","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
+//    ["title":"FEEDBACK","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
+//    ["title":"HELP & SUPPORT","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
     ["title":"VERSION: \(versionAndBuildNumber)","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
     
 ]
@@ -46,11 +46,11 @@ let settingsMenuData = [
     //["title":"Offline Matches","vc":"AddMatchDetailsViewController", "img": "Menu_AddMatch", "desc": "Matches to be downloaded for offline view", "IsSwitchVisible": false],
     ["title":"App Theme","vc":"ThemeSettingsViewController", "img": "Menu_Summary", "desc": "Choose desired theme color for your app", "IsSwitchVisible": false],
     ["title":"Change Password","vc":"FriendBaseViewController", "img": "Menu_Friends", "desc": "", "IsSwitchVisible": false],
-    ["title":"FAQ","vc":  "ProfileBaseViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false],
+    ["title":"FAQ","vc":  "StaticPageViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/info/PrivacyPolicy.htm"],
     ["title":"Feedback","vc":  "ProfileBaseViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false],
-    ["title":"Rate this app","vc":  "ProfileBaseViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false],
-    ["title":"Terms & Conditions","vc":"AddMatchDetailsViewController", "img": "Menu_Statistics", "desc": "", "IsSwitchVisible": false],
-    ["title":"Privacy policy","vc":  "ProfileBaseViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false],
+    ["title":"Rate this app","vc":  "StaticPageViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false, "contentToDisplay": "itms://itunes.apple.com/de/app/x-gift/id839686104?mt=8&uo=4"],
+    ["title":"Terms & Conditions","vc":"StaticPageViewController", "img": "Menu_Statistics", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/info/TermsofUse.htm" ],
+    ["title":"Privacy policy","vc":  "StaticPageViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/info/PrivacyPolicy.htm" ],
     ["title":"About","vc":  "ProfileBaseViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false],
 ]
 

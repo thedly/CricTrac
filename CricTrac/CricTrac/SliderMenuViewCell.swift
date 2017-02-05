@@ -14,11 +14,11 @@ class SliderMenuViewCell: UITableViewCell {
     
     @IBOutlet weak var menuName: UILabel!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
+        
+        self.backgroundColor = UIColor.clearColor()
         
         // Initialization code
     }

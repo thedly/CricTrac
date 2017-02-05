@@ -8,20 +8,34 @@
 
 import UIKit
 import KRProgressHUD
+import FirebaseAuth
 
-class SplashScreenViewController: UIViewController {
+class SplashScreenViewController: UIViewController,ThemeChangeable {
 
     var window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
+    
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
+    
     var myGroup = dispatch_group_create()
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let currentwindow = app.window {
+            
+            window = currentwindow
+            window?.makeKeyAndVisible()
+        }
         
         if let usrTheme = NSUserDefaults.standardUserDefaults().valueForKey("userTheme") {
             CurrentTheme = usrTheme as! String
         }
         
-        setUIBackgroundTheme(self.view)
+        setBackgroundColor()
+        
+        //setUIBackgroundTheme(self.view)
         // Do any additional setup after loading the view.
     }
     
@@ -75,6 +89,23 @@ class SplashScreenViewController: UIViewController {
                 
                 
             }
+//            else if let emailCredentials = credential.valueForKey("emailToken") as? [String:String]{
+//                KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+//                
+//                
+//                FIRAuth.auth()?.signInWithCustomToken(emailCredentials["tokenString"]!, completion: { (user, error) in
+//                    
+//                    if error == nil {
+//                        currentUser = user
+//                        self.moveToNextScreen(true)
+//                    }
+//                    else
+//                    {
+//                        self.moveToNextScreen(false)
+//                    }
+//                    
+//                })
+//            }
             else
             {
                 self.moveToNextScreen(false)
@@ -103,7 +134,7 @@ class SplashScreenViewController: UIViewController {
                 profileData = Profile(usrObj: data)
                 dispatch_group_leave(self.myGroup)
                 
-                if profileData.ProfileImageUrl == "" {
+                if profileData.ProfileImageURL == "" {
                     let userDefaults = NSUserDefaults.standardUserDefaults()
                     if let token = userDefaults.valueForKey("loginToken") {
                         if token["Facebooktoken"] != nil || token["googletoken"] != nil{
@@ -115,7 +146,7 @@ class SplashScreenViewController: UIViewController {
                 }
                 else
                 {
-                    getImageFromFirebase(profileData.ProfileImageUrl) { (imgData) in
+                    getImageFromFirebase(profileData.ProfileImageURL) { (imgData) in
                         LoggedInUserImage = imgData
                     }
                 }
@@ -126,25 +157,20 @@ class SplashScreenViewController: UIViewController {
             
             dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
                 
-                let drawerViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController")
-                
-                let dashboardVC = viewControllerFrom("Main", vcid: "timeline") as! TimeLineViewController
-                
-                let navigationControl = UINavigationController(rootViewController: dashboardVC )
-                sliderMenu.mainViewController = navigationControl
-                sliderMenu.drawerViewController = drawerViewController
-                
-                self.window?.rootViewController = sliderMenu
+                var rootViewController: UIViewController = getRootViewController()
                 
                 let profileVC = viewControllerFrom("Main", vcid: "ProfileBaseViewController") as! ProfileBaseViewController
                 
                 
-                if profileData.fullName == " " {
+                if !profileData.userExists {
+                    KRProgressHUD.dismiss()
+                    self.window?.rootViewController = profileVC
                     self.presentViewController(profileVC, animated: true) { KRProgressHUD.dismiss() }
                 }
                 else
                 {
                     KRProgressHUD.dismiss()
+                    self.window?.rootViewController = rootViewController
                     self.presentViewController((self.window?.rootViewController)!, animated: true, completion: nil)
                 }
                 
@@ -159,7 +185,7 @@ class SplashScreenViewController: UIViewController {
         {
             let loginVC = viewControllerFrom("Main", vcid: "LoginViewController")
             window?.rootViewController = loginVC
-            
+            KRProgressHUD.dismiss()
             self.presentViewController((self.window?.rootViewController)!, animated: true, completion: nil)
             
         }

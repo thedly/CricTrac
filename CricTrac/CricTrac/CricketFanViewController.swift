@@ -7,10 +7,19 @@
 //
 
 import UIKit
+import KRProgressHUD
 
-class CricketFanViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+class CricketFanViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,ThemeChangeable {
+    
+    @IBOutlet weak var currentTeamsTblViewHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var interestedSportsTblViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var favouritePlayersTblViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var hobbiesTblViewHeightConstraint: NSLayoutConstraint!
     
     
+    @IBOutlet weak var scrollView: UIScrollView!
 //    var data:[String:String]{
 //        
 //        return ["PlayingRole":playingRole.textVal,"BattingStyle":battingStyle.textVal,"BowlingStyle":bowlingStyle.textVal,"TeamName":teamName.textVal]
@@ -32,10 +41,17 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet weak var Hobies: UITableView!
     
+    @IBOutlet weak var FavouritePlayerTbl: UITableView!
+    
+    var profileChanged: Bool! = false
+    
+    var selectedText: UITextField!
+    
+    var currentwindow = UIWindow()
     
     var data:[String:AnyObject]{
         
-        return ["FavouritePlayers":favouritePlayer.textVal,"Hobbies":HobbiesList, "InterestedSports":InterestedSportsNamesList,"SupportingTeams": supportingTeamNamesList]
+        return ["FavoritePlayers":favouritePlayerList,"Hobbies":HobbiesList, "InterestedSports":InterestedSportsNamesList,"SupportingTeams": supportingTeamNamesList]
     }
     
     var supportingTeamNamesList = [""]
@@ -44,9 +60,38 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var HobbiesList = [""]
     
+    var favouritePlayerList = [""]
+    
+    var scrollViewTop:CGFloat!
+
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        if profileData.FirstName.length > 0 {
+            
+            self.favouritePlayerList = profileData.FavoritePlayers
+            self.HobbiesList = profileData.Hobbies
+            self.InterestedSportsNamesList = profileData.InterestedSports
+            self.supportingTeamNamesList = profileData.SupportingTeams
+            
+            self.FavouritePlayerTbl.reloadData()
+            self.Hobies.reloadData()
+            self.InterestedSports.reloadData()
+            self.SupportingTeams.reloadData()
+        }
+    }
+
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUIBackgroundTheme(self.view)
+        setBackgroundColor()
+        //setUIBackgroundTheme(self.view)
         // Do any additional setup after loading the view.
         
         SupportingTeams.allowsSelection = false
@@ -63,38 +108,74 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
         Hobies.separatorStyle = .None
         Hobies.dataSource = self
         Hobies.delegate = self
+        
+        
+        FavouritePlayerTbl.allowsSelection = false
+        FavouritePlayerTbl.separatorStyle = .None
+        FavouritePlayerTbl.dataSource = self
+        FavouritePlayerTbl.delegate = self
+        
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserInfoViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        scrollView.setContentOffset(CGPointZero, animated: true)
+        scrollViewTop = scrollView.frame.origin.y
+
+        
     }
 
     @IBAction func CreateFanBtnPressed(sender: AnyObject) {
         
-        
-        profileData.FavouritePlayers =  self.data["FavouritePlayers"] as! String
+        KRProgressHUD.showText("Updating ...")
+        profileData.FavoritePlayers =  self.data["FavoritePlayers"] as! [String]
         profileData.SupportingTeams = self.data["SupportingTeams"] as! [String]
         profileData.InterestedSports = self.data["InterestedSports"] as! [String]
         profileData.Hobbies =  self.data["Hobbies"] as! [String]
+        profileData.UserProfile = userProfileType.Fan.rawValue
+        
         
         addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
             
-            profileData = Profile(usrObj: data)
-
-            var SplashScreenVC = viewControllerFrom("Main", vcid: "SplashScreenViewController") as! SplashScreenViewController
             
             
-            self.presentViewController(SplashScreenVC, animated: true, completion: nil)
-
+            if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let window = app.window {
+                
+                self.currentwindow = window
+            }
             
-//            var vc: UIViewController = self.presentingViewController!;
-//            while ((vc.presentingViewController) != nil) {
-//                
-//                vc = vc.presentingViewController!;
-//                if ((vc.presentingViewController?.isEqual(viewControllerFrom("Main", vcid: "ProfileBaseViewController") as! ProfileBaseViewController)) != nil){
-//                    break;
-//                }
-//            }
-//            
-//            vc.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
-
-           
+            if (self.profileChanged == true) {
+                let userDefaults = NSUserDefaults.standardUserDefaults()
+                
+                if let _ = userDefaults.valueForKey("loginToken"){
+                    
+                    userDefaults.removeObjectForKey("loginToken")
+                    
+                }
+                
+                let loginBaseViewController = viewControllerFrom("Main", vcid: "LoginViewController")
+                
+                self.currentwindow.rootViewController = loginBaseViewController
+            }
+            else
+            {
+                profileData = Profile(usrObj: data)
+                
+                updateMetaData(userImageMetaData)
+                
+                
+                if self.currentwindow.rootViewController == sliderMenu {
+                    
+                    
+                    self.currentwindow.rootViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+                }
+                else
+                {
+                    let rootViewController: UIViewController = getRootViewController()
+                    self.currentwindow.rootViewController = rootViewController
+                    
+                }
+                
+            }
+            
         }
         
     }
@@ -105,6 +186,10 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func adjustTblHeight(constratintType: NSLayoutConstraint, collectionType: [String], cellHeight: CGFloat){
+        constratintType.constant = CGFloat(collectionType.count * Int(cellHeight))
     }
     
     func deleteTeamFromCurrentTeams(sender: UIButton) {
@@ -122,11 +207,18 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
             else if tblView.isEqual(self.InterestedSports) {
                 let indexPath = InterestedSports.indexPathForCell(cell)
                 InterestedSportsNamesList.removeAtIndex((indexPath?.row)!)
+                
                 InterestedSports.reloadData()
+            }
+            else if tblView.isEqual(self.FavouritePlayerTbl) {
+                let indexPath = FavouritePlayerTbl.indexPathForCell(cell)
+                favouritePlayerList.removeAtIndex((indexPath?.row)!)
+                FavouritePlayerTbl.reloadData()
             }
             else {
                 let indexPath = Hobies.indexPathForCell(cell)
                 HobbiesList.removeAtIndex((indexPath?.row)!)
+                
                 Hobies.reloadData()
             }
         }
@@ -134,12 +226,29 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
+    func keyboardWillShow(sender: NSNotification){
+        
+        if let userInfo = sender.userInfo {
+            if  let  keyboardframe = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue{
+                let keyboardHeight = keyboardframe.CGRectValue().height
+                
+                var contentInset:UIEdgeInsets = self.scrollView.contentInset
+                contentInset.bottom = keyboardHeight + 10
+                self.scrollView.contentInset = contentInset
+            }
+        }
+    }
+
     
     @IBAction func addInterestedSportsPressed(sender: AnyObject) {
         
         if InterestedSportsNames.text?.trimWhiteSpace != "" && InterestedSportsNames.text?.trimWhiteSpace != "-" {
-            InterestedSportsNamesList.append(InterestedSportsNames.textVal)
+            InterestedSportsNamesList.append(InterestedSportsNames.textVal.trim())
             InterestedSportsNames.text = ""
+            
+            
+            
+            
             InterestedSports.reloadData()
         }
     }
@@ -148,7 +257,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBAction func addSupportingTeamsPressed(sender: AnyObject) {
         
         if SupportingTeamNames.text?.trimWhiteSpace != "" && SupportingTeamNames.text?.trimWhiteSpace != "-" {
-            supportingTeamNamesList.append(SupportingTeamNames.textVal)
+            supportingTeamNamesList.append(SupportingTeamNames.textVal.trim())
             SupportingTeamNames.text = ""
             
             SupportingTeams.reloadData()
@@ -161,10 +270,22 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBAction func addHobbiesPressed(sender: AnyObject) {
         
         if HobbiesNames.text?.trimWhiteSpace != "" && HobbiesNames.text?.trimWhiteSpace != "-" {
-            HobbiesList.append(HobbiesNames.textVal)
+            HobbiesList.append(HobbiesNames.textVal.trim())
             HobbiesNames.text = ""
             
             Hobies.reloadData()
+        }
+        
+        
+    }
+    
+    @IBAction func addFavouritePlayerPressed(sender: AnyObject) {
+        
+        if favouritePlayer.text?.trimWhiteSpace != "" && favouritePlayer.text?.trimWhiteSpace != "-" {
+            favouritePlayerList.append(favouritePlayer.textVal.trim())
+            favouritePlayer.text = ""
+            
+            FavouritePlayerTbl.reloadData()
         }
         
         
@@ -229,6 +350,24 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
+    func getCellForFavouritePlayersRow(indexPath:NSIndexPath)->UITableViewCell{
+        if let aCell =  FavouritePlayerTbl.dequeueReusableCellWithIdentifier("CurrentTeamsTableViewCell", forIndexPath: indexPath) as? CurrentTeamsTableViewCell {
+            
+            aCell.backgroundColor = UIColor.clearColor()
+            
+            aCell.teamName.text = favouritePlayerList[indexPath.row]
+            
+            aCell.deleteTeamBtn.addTarget(self, action: #selector(CricketFanViewController.deleteTeamFromCurrentTeams(_:)), forControlEvents: .TouchUpInside)
+            return aCell
+        }
+        else
+        {
+            return UITableViewCell()
+        }
+        
+        
+    }
+    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.isEqual(SupportingTeams) {
@@ -236,6 +375,9 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         else if tableView.isEqual(InterestedSports) {
             return InterestedSportsNamesList.count
+        }
+        else if tableView.isEqual(FavouritePlayerTbl) {
+            return favouritePlayerList.count
         }
         return HobbiesList.count
         
@@ -251,17 +393,54 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        let cell = tableView.rectForRowAtIndexPath(indexPath)
+        
         if tableView.isEqual(SupportingTeams) {
+            adjustTblHeight(currentTeamsTblViewHeightConstraint, collectionType: supportingTeamNamesList, cellHeight: cell.size.height)
             return getCellSupportingTeamsRow(indexPath)
         }
         else if tableView.isEqual(InterestedSports) {
+            adjustTblHeight(interestedSportsTblViewHeightConstraint, collectionType: InterestedSportsNamesList, cellHeight: cell.size.height)
             return getCellForInterestedTeams(indexPath)
         }
+        else if tableView.isEqual(FavouritePlayerTbl) {
+            adjustTblHeight(favouritePlayersTblViewHeightConstraint, collectionType: favouritePlayerList, cellHeight: cell.size.height)
+            return getCellForFavouritePlayersRow(indexPath)
+        }
+        adjustTblHeight(hobbiesTblViewHeightConstraint, collectionType: HobbiesList, cellHeight: cell.size.height)
         return getCellForHobbiesRow(indexPath)
     }
 
     
-
+    func textFieldDidBeginEditing(textField: UITextField) {
+        
+        self.selectedText = textField
+        AddDoneButtonTo(textField)
+    }
+    
+    func AddDoneButtonTo(inputText:UITextField) {
+        
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .Default
+        toolBar.translucent = true
+        toolBar.tintColor = UIColor(hex: "B12420")
+        toolBar.backgroundColor = UIColor.whiteColor()
+        toolBar.sizeToFit()
+        
+        // Adding Button ToolBar
+        let doneButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(CricketFanViewController.donePressed))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: #selector(CricketFanViewController.donePressed))
+        
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.userInteractionEnabled = true
+        inputText.inputAccessoryView = toolBar
+    }
+    
+    func donePressed() {
+        selectedText.resignFirstResponder()
+    }
+    
     /*
     // MARK: - Navigation
 

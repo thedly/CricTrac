@@ -9,9 +9,10 @@
 
 import UIKit
 import XLPagerTabStrip
+import SCLAlertView
 import SkyFloatingLabelTextField
 
-class UserInfoViewController: UIViewController  {
+class UserInfoViewController: UIViewController,ThemeChangeable  {
     
     
     lazy var ctDatePicker = CTDatePicker()
@@ -20,6 +21,7 @@ class UserInfoViewController: UIViewController  {
     lazy var ctDataPicker = DataPicker()
     var profileDetailsExists:Bool = false
     
+    var selectedText:UITextField!
     
     var userProfiles = [String]()
     
@@ -45,7 +47,6 @@ class UserInfoViewController: UIViewController  {
 //    @IBOutlet weak var playingRole: UITextField!
     
     
-    var selectedText:UITextField?
     
     let transitionManager = TransitionManager.sharedInstance
     
@@ -56,6 +57,7 @@ class UserInfoViewController: UIViewController  {
     
     var userProfile : String!
    
+    var profileChanged: Bool! = false
     
     @IBAction func goPreviousPage(sender: AnyObject) {
         
@@ -63,10 +65,15 @@ class UserInfoViewController: UIViewController  {
         
     }
     
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setUIBackgroundTheme(self.view)
+        setBackgroundColor()
+        //setUIBackgroundTheme(self.view)
         initializeView()
         // Do any additional setup after loading the view.
     }
@@ -74,7 +81,7 @@ class UserInfoViewController: UIViewController  {
     
     var data:[String:String]{
         
-        return ["FirstName":firstName.textVal,"LastName":lastName.textVal,"DateOfBirth":dateOfBirth.textVal,"Email":emailId.textVal,"Mobile":mobile.textVal,"Gender":gender.textVal,"Country":country.textVal,"State":state.textVal,"City":city.textVal]
+        return ["FirstName": firstName.textVal.trim(),"LastName":lastName.textVal.trim(),"DateOfBirth":dateOfBirth.textVal,"Email":emailId.textVal,"Mobile":mobile.textVal.trim(),"Gender":gender.textVal,"Country":country.textVal,"State":state.textVal,"City":city.textVal]
     }
     
     
@@ -137,7 +144,8 @@ class UserInfoViewController: UIViewController  {
         else
         {
             
-            if let displayName = currentUser?.displayName {
+
+            if let displayName = (currentUser?.displayName) where displayName.length > 0  {
                 
                 var fullNameArr = displayName.characters.split{$0 == " "}.map(String.init)
                 self.firstName.text = fullNameArr[0]
@@ -184,44 +192,96 @@ class UserInfoViewController: UIViewController  {
     @IBAction func addUserBtnPressed(sender: AnyObject) {
         if validateProfileData() {
             
-            profileData.FirstName = self.data["FirstName"]!
-            profileData.LastName = self.data["LastName"]!
-            profileData.DateOfBirth = self.data["DateOfBirth"]!
-            profileData.Email = self.data["Email"]!
-            profileData.Mobile = self.data["Mobile"]!
-            profileData.Gender = self.data["Gender"]!
-            profileData.Country = self.data["Country"]!
-            profileData.State = self.data["State"]!
-            profileData.City = self.data["City"]!
             
-            if userProfileInfo != nil {
-                switch userProfileInfo.text! {
-                case userProfileType.Player.rawValue :
-                    NextVC = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
-                case userProfileType.Coach.rawValue :
-                    NextVC = viewControllerFrom("Main", vcid: "CoachingExperienceViewController")
-                case userProfileType.Fan.rawValue :
-                    NextVC = viewControllerFrom("Main", vcid: "CricketFanViewController")
-                default:
-                    NextVC = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
-                }
-
+            
+            if profileData.userExists && profileData.UserProfile != userProfileInfo.textVal {
+                
+                profileChanged = true
+                let appearance = SCLAlertView.SCLAppearance(
+                    showCloseButton: false
+                )
+                
+                let alertView = SCLAlertView(appearance: appearance)
+                
+                alertView.addButton("OK", target:self, selector:#selector(UserInfoViewController.continueToDismiss))
+                
+                alertView.addButton("Cancel", action: { })
+                
+                alertView.showNotice("Warning", subTitle: "Changing role will delete all existing data")
+                
+            }
+            else
+            {
+                profileChanged = false
+                continueToDismiss()
             }
             
-            
-            let toViewController = NextVC
-            
-            
-            
-            toViewController!.transitioningDelegate = self.transitionManager
-            presentViewController(toViewController!, animated: true, completion: nil)
-            
-            
-            
-            //dismissViewControllerAnimated(true, completion: nil)
         }
         
     }
+    
+    func continueToDismiss() {
+        profileData.FirstName = self.data["FirstName"]!
+        profileData.LastName = self.data["LastName"]!
+        profileData.DateOfBirth = self.data["DateOfBirth"]!
+        profileData.Email = self.data["Email"]!
+        profileData.Mobile = self.data["Mobile"]!
+        profileData.Gender = self.data["Gender"]!
+        profileData.Country = self.data["Country"]!
+        profileData.State = self.data["State"]!
+        profileData.City = self.data["City"]!
+        
+        
+      
+        if userProfileInfo != nil {
+            switch userProfileInfo.text! {
+            case userProfileType.Player.rawValue :
+                
+                var vc = viewControllerFrom("Main", vcid: "PlayerExperienceViewController") as! PlayerExperienceViewController
+                
+                vc.profileChanged = self.profileChanged
+                
+                NextVC = vc
+                
+            case userProfileType.Coach.rawValue :
+                
+                var vc = viewControllerFrom("Main", vcid: "CoachingExperienceViewController") as! CoachingExperienceViewController
+                
+                vc.profileChanged = self.profileChanged
+                
+                NextVC = vc
+            case userProfileType.Fan.rawValue :
+                
+                var vc = viewControllerFrom("Main", vcid: "CricketFanViewController") as! CricketFanViewController
+                
+                vc.profileChanged = self.profileChanged
+                
+                NextVC = vc
+                
+            default:
+                
+                var vc = viewControllerFrom("Main", vcid: "PlayerExperienceViewController") as! PlayerExperienceViewController
+                
+                vc.profileChanged = self.profileChanged
+
+                NextVC = vc
+            }
+            
+        }
+        
+        
+        
+        let toViewController = NextVC
+        
+        
+        toViewController!.transitioningDelegate = self.transitionManager
+        presentViewController(toViewController!, animated: true, completion: nil)
+        
+        
+        
+        //dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     
     func validateProfileData() -> Bool {
         //var detailsValid = true
@@ -323,6 +383,7 @@ class UserInfoViewController: UIViewController  {
         return true
     }
     
+    
     func keyboardWillShow(sender: NSNotification){
         
         if let userInfo = sender.userInfo {
@@ -335,6 +396,32 @@ class UserInfoViewController: UIViewController  {
             }
         }
     }
+    
+    
+    func AddDoneButtonTo(inputText:UITextField) {
+        
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .Default
+        toolBar.translucent = true
+        toolBar.tintColor = UIColor(hex: "B12420")
+        toolBar.backgroundColor = UIColor.whiteColor()
+        toolBar.sizeToFit()
+        
+        // Adding Button ToolBar
+        let doneButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(UserInfoViewController.donePressed))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: #selector(UserInfoViewController.donePressed))
+        
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.userInteractionEnabled = true
+        inputText.inputAccessoryView = toolBar
+    }
+    
+    func donePressed() {
+        selectedText.resignFirstResponder()
+    }
+
+    
 }
 
 extension UserInfoViewController:UITextFieldDelegate{
@@ -342,6 +429,7 @@ extension UserInfoViewController:UITextFieldDelegate{
     func textFieldDidBeginEditing(textField: UITextField) {
         
         selectedText = textField
+        AddDoneButtonTo(textField)
         
         if textField == dateOfBirth{
             ctDatePicker.showPicker(self, inputText: textField)

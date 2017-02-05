@@ -64,14 +64,21 @@ struct AppTheme{
     let earthly = CTTheme(topColor: UIColor(hex: "#DBD5A4"), bottomColor: UIColor(hex: "#649173"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
     var currentTheme:CTTheme!
+    var currentThemeTxt : String! {
+        get {
+            return (NSUserDefaults.standardUserDefaults().objectForKey("selectedTheme") ?? "meanGreen") as? String
+        }
+    }
     
     init(){
 
         currentTheme = meanGreen
-       
     }
     
 }
+
+
+
 
 enum Themes:String{
     

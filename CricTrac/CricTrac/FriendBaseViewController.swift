@@ -9,11 +9,17 @@
 import UIKit
 import XLPagerTabStrip
 
-class FriendBaseViewController: ButtonBarPagerTabStripViewController {
+class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChangeable {
 
     @IBAction func didTapCancel(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         settings.style.buttonBarItemBackgroundColor = UIColor.clearColor()
@@ -23,7 +29,10 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController {
         
         
         settings.style.buttonBarItemFont = UIFont(name: appFont_bold, size: 15)!
-        setUIBackgroundTheme(self.view)
+        
+        setBackgroundColor()
+        
+        //setUIBackgroundTheme(self.view)
         // Do any additional setup after loading the view.
     }
 

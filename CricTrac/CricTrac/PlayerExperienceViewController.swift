@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import KRProgressHUD
 
-class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,ThemeChangeable {
 
+    @IBOutlet weak var ScrollView: UIScrollView!
     @IBOutlet weak var playingRole: UITextField!
     @IBOutlet weak var battingStyle: UITextField!
     @IBOutlet weak var bowlingStyle: UITextField!
@@ -17,8 +19,20 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     
     @IBOutlet weak var pastTeamName: UITextField!
     
+    var selectedText: UITextField!
     
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    
+    
+    
+    @IBOutlet weak var teamNamesTableHeightConstraint: NSLayoutConstraint!
+    
+    
+    @IBOutlet weak var pastTeamNamesTableHeightConstraint: NSLayoutConstraint!
+    
+    
+    
+    
     @IBOutlet weak var currentTeams: UITableView!
     
     @IBOutlet weak var pastTeams: UITableView!
@@ -27,8 +41,13 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     
     var teamNames = [""]
     
+    var scrollViewTop:CGFloat!
+  
+    var profileChanged: Bool! = false
+    
     var pastTeamNames = [""]
     
+    var window = UIWindow(frame: UIScreen.mainScreen().bounds)
     
     var nextVC: UIViewController!
     
@@ -47,7 +66,6 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     
     @IBAction func goNextPage(sender: AnyObject) {
         
-        
         profileData.PlayingRole = self.data["PlayingRole"] as! String
         profileData.BattingStyle = self.data["BattingStyle"] as! String
         profileData.BowlingStyle = self.data["BowlingStyle"] as! String
@@ -56,28 +74,62 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         profileData.UserProfile = userProfileType.Player.rawValue
         
         addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
+
+            var currentwindow = UIWindow()
             
-            profileData = Profile(usrObj: data)
+            if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let window = app.window {
+                
+                currentwindow = window
+            }
+            
+            if (self.profileChanged == true) {
+                let userDefaults = NSUserDefaults.standardUserDefaults()
+                
+                if let _ = userDefaults.valueForKey("loginToken"){
+                    
+                    userDefaults.removeObjectForKey("loginToken")
+                    
+                }
+                
+                
+                
+                
+                
+                
+                let loginBaseViewController = viewControllerFrom("Main", vcid: "LoginViewController")
+                
+                currentwindow.rootViewController = loginBaseViewController
+            }
+            else
+            {
+                            profileData = Profile(usrObj: data)
+                
+                            updateMetaData(userImageMetaData)
+                
+                
+                            if self.window.rootViewController == sliderMenu {
+                
+                
+                                self.window.rootViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+                            }
+                            else
+                            {
+                                let rootViewController: UIViewController = getRootViewController()
+                                self.window.rootViewController = rootViewController
+                
+                            }
+                
+                }
             
             
-//            var vc: UIViewController = self.presentingViewController!;
-//            
-            var SplashScreenVC = viewControllerFrom("Main", vcid: "SplashScreenViewController") as! SplashScreenViewController
-            
-            
-            self.presentViewController(SplashScreenVC, animated: true, completion: nil)
-            
-//            while ((vc.presentingViewController) != nil) {
-//                
-//                vc = vc.presentingViewController!;
-//                if ((vc.presentingViewController?.isEqual(viewControllerFrom("Main", vcid: "ProfileBaseViewController") as! ProfileBaseViewController)) != nil){
-//                    break;
-//                }
+//            self.presentViewController(loginBaseViewController, animated: true) {
+////                SCLAlertView().showInfo("Logout",subTitle: "Data saved is cleared, Kill the app and relaunch for now")
 //            }
 //            
-//            vc.presentingViewController!.dismissViewControllerAnimated(true, completion: { 
-//                
-//            })
+
+            
+            
+
             
             
             
@@ -104,6 +156,18 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         pastTeams.delegate = self
         
         
+        
+        if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let currentwindow = app.window {
+            
+            window = currentwindow
+        }
+        
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserInfoViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        ScrollView.setContentOffset(CGPointZero, animated: true)
+        scrollViewTop = ScrollView.frame.origin.y
+
+        
     }
     
     func deleteTeamFromCurrentTeams(sender: UIButton) {
@@ -128,11 +192,24 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         
     }
     
+    func keyboardWillShow(sender: NSNotification){
+        
+        if let userInfo = sender.userInfo {
+            if  let  keyboardframe = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue{
+                let keyboardHeight = keyboardframe.CGRectValue().height
+                
+                var contentInset:UIEdgeInsets = self.ScrollView.contentInset
+                contentInset.bottom = keyboardHeight + 10
+                self.ScrollView.contentInset = contentInset
+            }
+        }
+    }
+
     
     @IBAction func addPastTeamsPressed(sender: AnyObject) {
         
         if pastTeamName.text?.trimWhiteSpace != "" && pastTeamName.text?.trimWhiteSpace != "-" {
-            pastTeamNames.append(pastTeamName.textVal)
+            pastTeamNames.append(pastTeamName.textVal.trim())
             pastTeamName.text = ""
             pastTeams.reloadData()
         }
@@ -141,7 +218,7 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     
     @IBAction func addTeamsPressed(sender: AnyObject) {
         if teamName.text?.trimWhiteSpace != "" && teamName.text?.trimWhiteSpace != "-" {
-            teamNames.append(teamName.textVal)
+            teamNames.append(teamName.textVal.trim())
             teamName.text = ""
             
             currentTeams.reloadData()
@@ -193,7 +270,7 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         super.viewDidAppear(true)
         
         
-            if profileData.FirstName.length > 0 {
+            if profileData.FirstName.length > 0  {
                 self.playingRole.text = profileData.PlayingRole
                 self.battingStyle.text = profileData.BattingStyle
                 self.bowlingStyle.text = profileData.BowlingStyle
@@ -205,9 +282,18 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         
     }
     
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUIBackgroundTheme(self.view)
+        setBackgroundColor()
+        
+        
+        
+        //setUIBackgroundTheme(self.view)
         initializeView()
         // Do any additional setup after loading the view.
     }
@@ -234,18 +320,57 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         return 1
     }
     
+    func adjustTblHeight(constratintType: NSLayoutConstraint, collectionType: [String], cellHeight: CGFloat){
+        constratintType.constant = CGFloat(collectionType.count * Int(cellHeight))
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        let cell = tableView.rectForRowAtIndexPath(indexPath)
+        
         if tableView.isEqual(currentTeams) {
+            
+            adjustTblHeight(teamNamesTableHeightConstraint, collectionType: teamNames, cellHeight: cell.size.height)
+            
             return getCellForRow(indexPath)
         }
+        
+        adjustTblHeight(pastTeamNamesTableHeightConstraint, collectionType: pastTeamNames, cellHeight: cell.size.height)
+        
         return getCellForPastTeamsRow(indexPath)
+    }
+    
+    func AddDoneButtonTo(inputText:UITextField) {
+        
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .Default
+        toolBar.translucent = true
+        toolBar.tintColor = UIColor(hex: "B12420")
+        toolBar.backgroundColor = UIColor.whiteColor()
+        toolBar.sizeToFit()
+        
+        // Adding Button ToolBar
+        let doneButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(PlayerExperienceViewController.donePressed))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: #selector(PlayerExperienceViewController.donePressed))
+        
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.userInteractionEnabled = true
+        inputText.inputAccessoryView = toolBar
+    }
+
+    func donePressed() {
+        selectedText.resignFirstResponder()
     }
 }
 
 extension PlayerExperienceViewController:UITextFieldDelegate{
     
+    
     func textFieldDidBeginEditing(textField: UITextField) {
+    
+        self.selectedText = textField
+        AddDoneButtonTo(textField)
         
         if  textField == playingRole{
             ctDataPicker = DataPicker()

@@ -10,24 +10,12 @@ import UIKit
 import XLPagerTabStrip
 import SkyFloatingLabelTextField
 
-class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
+class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,ThemeChangeable {
     
     
-    var OversBowled: String! = "-"
-    var WicketsTaken: String! = "-"
-    var RunsGiven: String! = "-"
-    var NoBalls: String! = "-"
-    var Wides: String! = "-"
-    var Maidens: String! = "-"
-    
-    var RunsTaken: String! = "-"
-    var BallsFaced: String! = "-"
-    var Fours: String! = "-"
-    var Sixes: String! = "-"
-    var Position: String! = "-"
-    var Dismissal: String! = "-"
     
     
+    var selectedText:UITextField!
     
 
     @IBOutlet weak var runsText: SkyFloatingLabelTextField!
@@ -47,6 +35,22 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
     @IBOutlet weak var maidensText: UITextField!
     @IBOutlet weak var runsGivenText: UITextField!
     weak var parent:MatchParent?
+    
+    
+    var OversBowled: String!
+    var WicketsTaken: String!
+    var RunsGiven: String!
+    var NoBalls: String!
+    var Wides: String!
+    var Maidens: String!
+    
+    var RunsTaken: String!
+    var BallsFaced: String!
+    var Fours: String!
+    var Sixes: String!
+    var Position: String!
+    var Dismissal: String!
+    
     
     var BowlingData:[String:String]{
         
@@ -151,7 +155,6 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
                 
                 self.view.endEditing(true)
                 
-                OversBowled = overText
                 
                 Wides = "-"
                 NoBalls = "-"
@@ -287,7 +290,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
     }
    
     
-    var selectedText:UITextField!
+    
     
     var BattingData:[String:String]{
         
@@ -297,37 +300,62 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
     
     func loadEditData(){
         
-        runsText.textVal = parent!.selecetedData!["RunsTaken"]!
-        ballsPlayedText.textVal = parent!.selecetedData!["BallsFaced"]!
-        foursText.textVal = parent!.selecetedData!["Fours"]!
-        sixesText.textVal = parent!.selecetedData!["Sixes"]!
-        strikeRateText.textVal = parent!.selecetedData!["Ground"]!
-        positionText.textVal = parent!.selecetedData!["Position"]!
-        dismissalText.textVal = parent!.selecetedData!["Dismissal"]!
+        runsText.textVal = parent!.selecetedData!["RunsTaken"]! as! String
+        ballsPlayedText.textVal = parent!.selecetedData!["BallsFaced"]! as! String
+        foursText.textVal = parent!.selecetedData!["Fours"]! as! String
+        sixesText.textVal = parent!.selecetedData!["Sixes"]! as! String
+        strikeRateText.textVal = parent!.selecetedData!["Ground"]! as! String
+        positionText.textVal = parent!.selecetedData!["Position"]! as! String
+        dismissalText.textVal = parent!.selecetedData!["Dismissal"]! as! String
         setStrikeRate()
         
         
-        oversText.textVal = parent!.selecetedData!["OversBowled"]!
-        wicketsText.textVal = parent!.selecetedData!["WicketsTaken"]!
-        runsGivenText.textVal = parent!.selecetedData!["RunsGiven"]!
-        noballText.textVal = parent!.selecetedData!["NoBalls"]!
-        widesText.textVal = parent!.selecetedData!["Wides"]!
+        oversText.textVal = parent!.selecetedData!["OversBowled"]! as! String
+        wicketsText.textVal = parent!.selecetedData!["WicketsTaken"]! as! String
+        runsGivenText.textVal = parent!.selecetedData!["RunsGiven"]! as! String
+        noballText.textVal = parent!.selecetedData!["NoBalls"]! as! String
+        widesText.textVal = parent!.selecetedData!["Wides"]! as! String
         
         if let mt = parent!.selecetedData!["Wides"] {
-            maidensText.textVal = mt
+            maidensText.textVal = mt as! String
         }
         
 //        calculateEconomy()
 
     }
     
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         runsText.errorColor = UIColor.redColor()
         if ((parent?.selecetedData) != nil){ loadEditData() }
-        setUIBackgroundTheme(self.view)
+        
+        //setBackgroundColor()
+        self.view.backgroundColor = UIColor.clearColor()
+        //setUIBackgroundTheme(self.view)
         // Do any additional setup after loading the view.
+        
+        
+        OversBowled = (parent?.selecetedData?["OversBowled"] ?? "-") as! String
+        WicketsTaken = (parent?.selecetedData?["WicketsTaken"] ?? "-") as! String
+        RunsGiven = (parent?.selecetedData?["RunsGiven"] ?? "-") as! String
+        NoBalls = (parent?.selecetedData?["NoBalls"] ?? "-") as! String
+        Wides = (parent?.selecetedData?["Wides"] ?? "-") as! String
+        Maidens = (parent?.selecetedData?["Maidens"] ?? "-") as! String
+        
+        RunsTaken = (parent?.selecetedData?["RunsTaken"] ?? "-") as! String
+        BallsFaced = (parent?.selecetedData?["BallsFaced"] ?? "-") as! String
+        Fours = (parent?.selecetedData?["Fours"] ?? "-") as! String
+        Sixes = (parent?.selecetedData?["Sixes"] ?? "-") as! String
+        Position = (parent?.selecetedData?["Position"] ?? "-") as! String
+        Dismissal = (parent?.selecetedData?["Dismissal"] ?? "-") as! String
+
+        
+        
         
         dismissalText.delegate = self
         runsText.delegate = self
@@ -396,6 +424,10 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
                     controlText.text = String(currentValue + 1)
                 }
             }
+            else
+            {
+                controlText.text = String(1)
+            }
         }
         else
         {
@@ -404,7 +436,13 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider {
                     controlText.text = String(currentValue - 1)
                 }
             }
+            else
+            {
+                controlText.text = String(0)
+            }
         }
+        
+        textFieldDidEndEditing(controlText)
     }
 
 }

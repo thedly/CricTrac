@@ -93,28 +93,35 @@ func loadInitialValues(){
         }
     })
     
-    getAllProfiles({ resultObj in
-        UserProfilesData.removeAll()
-        for profile in resultObj {
-            
-            var currentProfile = Profile(usrObj: profile)
-            
-            
-            UserProfilesData.append(currentProfile)
-            if let _imageUrl = profile["ProfileImageUrl"] as? String where _imageUrl != ""  {
-                
-                let userId = profile["UserId"] as! String
-                
-                getImageFromFirebase(_imageUrl) { (data) in
-                    UserProfilesImages[userId] = data
-                }
-            }
+    fireBaseRef.child("Venue").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let value = snapshot.value as? [String]{
+            venueNames = value
         }
     })
     
+//    getAllProfiles({ resultObj in
+//        UserProfilesData.removeAll()
+//        for profile in resultObj {
+//            
+//            var currentProfile = Profile(usrObj: profile)
+//            
+//            
+//            UserProfilesData.append(currentProfile)
+//            if let _imageUrl = profile["ProfileImageURL"] as? String where _imageUrl != ""  {
+//                
+//                let userId = profile["Id"] as! String
+//                
+//                getImageFromFirebase(_imageUrl) { (data) in
+//                    UserProfilesImages[userId] = data
+//                }
+//            }
+//        }
+//    })
+    
 }
 
-func addMatchData(key:NSString,data:[String:String]){
+func addMatchData(key:NSString,data:[String:AnyObject]){
     
     var dataToBeModified = data
     
@@ -154,7 +161,10 @@ func addProfileImageData(profileDp:UIImage){
                 return
             }else{
                 
-                updateMetaData(metaData!.downloadURL()!)
+                userImageMetaData = (metaData?.downloadURL())!
+                
+                LoggedInUserImage = profileDp
+                
                 
             }
         }
@@ -167,12 +177,17 @@ func addProfileImageData(profileDp:UIImage){
 
 
 func updateMetaData(profileImgUrl: NSURL) {
-    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
-    let profileImageObject: [NSObject:AnyObject] = [ "ProfileImageUrl"    : profileImgUrl.absoluteString]
-    ref.updateChildValues(profileImageObject)
-    if profileData.ProfileImageUrl == "" {
-        profileData.ProfileImageUrl = profileImgUrl.absoluteString
+    
+    if profileData.userExists {
+        let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
+        let profileImageObject: [NSObject:AnyObject] = [ "ProfileImageURL"    : profileImgUrl.absoluteString]
+        ref.updateChildValues(profileImageObject)
+        if profileData.ProfileImageURL == "" {
+            profileData.ProfileImageURL = profileImgUrl.absoluteString
+        }
     }
+    
+    
     
     print("Image url updated successfully")
 }
@@ -213,6 +228,11 @@ func addNewGroundName(groundName:String){
     ref.setValue(groundName)
 }
 
+func addNewVenueName(venueName:String){
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Venue").childByAutoId()
+    ref.setValue(venueName)
+}
+
 func addNewTeamName(teamName:String){
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Teams").childByAutoId()
     ref.setValue(teamName)
@@ -223,7 +243,7 @@ func addNewOppoSitTeamName(oTeamName:String){
     ref.setValue(oTeamName)
 }
 
-func addNewTournamnetName(tournamnet:String){
+func addNewTournamentName(tournamnet:String){
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Tournaments").childByAutoId()
     ref.setValue(tournamnet)
 }
@@ -277,35 +297,97 @@ func enableSync(){
 
 func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject])->Void){
     
+    KRProgressHUD.showText("Updating ...")
+    
     var dataToBeModified = data
     
 //    let formatter = NSDateFormatter()
 //    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     
-    dataToBeModified["UserLastLoggedin"] = data["UserLastLoggedin"]
     
-    if profileData.fullName == " "
+    dataToBeModified["UserLastLoggedin"] = NSDate().getCurrentTimeStamp()
+    
+    
+    
+    if !profileData.userExists
     {
         dataToBeModified["UserAddedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
         dataToBeModified["UserEditedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
-        createDashboardData(DashboardData(dataObj: [String:AnyObject]()).dashboardData)
+        
+        if let usrProfileType = dataToBeModified["UserProfile"] where usrProfileType as! String == userProfileType.Player.rawValue {
+            
+            createDashboardData(DashboardData(dataObj: [String:AnyObject]()).dashboardData)
+        
+        }
+        
+        
         
     }
     else
     {
-        dataToBeModified["UserAddedDate"] = data["UserAddedDate"]
         dataToBeModified["UserEditedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
     }
     
     
-    
-    
-    
-    
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
     ref.setValue(dataToBeModified)
+    
+    
+    if let usrProfileType = dataToBeModified["UserProfile"] where usrProfileType as! String != userProfileType.Player.rawValue {
+        
+        deleteAllPlayerData()
+        
+    }
+    
+    
+    KRProgressHUD.dismiss()
     sucessBlock(dataToBeModified)
 }
+
+func deleteAllPlayerData(){
+    
+    fireBaseRef.child("Users").child(currentUser!.uid).observeEventType(.Value, withBlock: { (snapshot) in
+        
+        if snapshot.hasChild("Dashboard"){
+            snapshot.ref.child("Dashboard").removeValue()
+        }
+        
+        if snapshot.hasChild("Matches"){
+            snapshot.ref.child("Matches").removeValue()
+        }
+        
+        if snapshot.hasChild("Matches"){
+            snapshot.ref.child("Matches").removeValue()
+        }
+        
+        if snapshot.hasChild("Opponents"){
+            snapshot.ref.child("Opponents").removeValue()
+        }
+        
+        if snapshot.hasChild("Grounds"){
+            snapshot.ref.child("Grounds").removeValue()
+        }
+        
+        if snapshot.hasChild("Matches"){
+            snapshot.ref.child("Matches").removeValue()
+        }
+        
+        if snapshot.hasChild("Teams"){
+            snapshot.ref.child("Teams").removeValue()
+        }
+        
+        if snapshot.hasChild("Tournaments"){
+            snapshot.ref.child("Tournaments").removeValue()
+        }
+        
+        if snapshot.hasChild("Venue"){
+            snapshot.ref.child("Venue").removeValue()
+        }
+        
+        
+    })
+}
+
 
 func UpdateDashboardDetails(){
     
@@ -351,6 +433,8 @@ func updateLastLogin(){
 
 func getAllProfileData(sucessBlock:([String:AnyObject])->Void){
     
+    
+    
     fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
         
         if let data: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
@@ -369,9 +453,15 @@ func getAllProfiles(sucessBlock:([[String:AnyObject]])->Void){
         var users: [[String: AnyObject]] = []
         if let data: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
             
+            
+            
+            
+            
             for (key, value) in data {
                 if var profile = value["UserProfile"] as? [String : AnyObject] {
-                    profile["UserId"] = key
+                    profile["Id"] = key
+                    
+                
                     users.append(profile)
                 }
             }
@@ -423,7 +513,7 @@ func getImageFromFirebase(imagePath: String ,sucessBlock:(UIImage)->Void){
 
 //MARK:- Update  Match
 
-func updateMatchData(key:String,data:[String:String]){
+func updateMatchData(key:String,data:[String:AnyObject]){
     
     var dataToBeModified = data
     
@@ -470,6 +560,8 @@ func loginWithMailAndPassword(userName:String,password:String,callBack:(user:FIR
         
         pward = "test123"
     }
+    
+    
     
     
     FIRAuth.auth()?.signInWithEmail(uname, password: pward) { (user, error) in
@@ -586,7 +678,17 @@ func loadTimelineFromId(callback: (timeline:[String:AnyObject],postId:String)->V
     
 }
 
-
+func DoesUserExist() -> Bool {
+    
+    
+    fireBaseRef.child("Users").child(currentUser!.uid).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        return snapshot.hasChild("UserProfile")
+        
+    })
+    
+    return false
+}
 
 
 
@@ -622,8 +724,46 @@ func addThemeData(theme: String, sucessBlock:()->Void){
 // MARK: - Friends
 
 
+public func AcceptFriendRequest(data: [String:[String:AnyObject]], callback:(data:String)->Void){
+    
+    var dataToBeManipulated = data
+    
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Friends").childByAutoId()
+    ref.setValue(dataToBeManipulated["sentRequestData"], withCompletionBlock: { error, newlyCreateddata in
+        
+        var sentcreatedId = [String: AnyObject]()
+        sentcreatedId["FriendRecordId"] = newlyCreateddata.key
+        
+        
+        let receivedRequestRef = fireBaseRef.child("Users").child(dataToBeManipulated["sentRequestData"]!["SentTo"]! as! String).child("Friends").childByAutoId()
+        
+        dataToBeManipulated["ReceivedRequestData"]!["FriendRecordId"] = newlyCreateddata.key
+        receivedRequestRef.setValue(data["ReceivedRequestData"], withCompletionBlock: { error, newlyCreatedReceivedRequestData in
+            var createdId = [String: AnyObject]()
+            createdId["FriendRecordId"] = newlyCreatedReceivedRequestData.key
+            
+            createdId["FriendRecordId"] = newlyCreateddata.key
+            
+            
+            receivedRequestRef.updateChildValues(createdId)
+            
+            
+            sentcreatedId["FriendRecordIdOther"] = newlyCreatedReceivedRequestData.key
+            
+            ref.updateChildValues(sentcreatedId)
+            
+            
+            
+            callback(data: newlyCreatedReceivedRequestData.key)
+        })
+        
+    })
 
-public func AddSentRequestData(data: [String:[String:String]], callback:(data:String)->Void) {
+}
+
+
+
+public func AddSentRequestData(data: [String:[String:AnyObject]], callback:(data:String)->Void) {
     
     var dataToBeManipulated = data
     
@@ -634,7 +774,7 @@ public func AddSentRequestData(data: [String:[String:String]], callback:(data:St
         sentcreatedId["SentRequestId"] = newlyCreateddata.key
         
         
-        let receivedRequestRef = fireBaseRef.child("Users").child(dataToBeManipulated["sentRequestData"]!["SentTo"]!).child("ReceivedRequest").childByAutoId()
+        let receivedRequestRef = fireBaseRef.child("Users").child(dataToBeManipulated["sentRequestData"]!["SentTo"]! as! String).child("ReceivedRequest").childByAutoId()
         
         dataToBeManipulated["ReceivedRequestData"]!["SentRequestId"] = newlyCreateddata.key
         receivedRequestRef.setValue(data["ReceivedRequestData"], withCompletionBlock: { error, newlyCreatedReceivedRequestData in
@@ -678,7 +818,7 @@ func getAllFriendRequests(sucessBlock:([String: AnyObject])->Void){
 
 func getAllFriends(sucessBlock:([String: AnyObject])->Void){
     
-    fireBaseRef.child(currentUser!.uid).child("Friends").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Friends").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
         
         if let data = snapshot.value as? [String : AnyObject] {
             

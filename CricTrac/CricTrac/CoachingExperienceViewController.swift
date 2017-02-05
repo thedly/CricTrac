@@ -8,16 +8,18 @@
 
 import UIKit
 
-class CoachingExperienceViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CoachingExperienceViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, ThemeChangeable {
 
     @IBOutlet weak var teamName: UITextField!
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var teamsPlayedForTxt: UITextField!
     @IBOutlet weak var pastTeamName: UITextField!
     
     @IBOutlet weak var currentTeams: UITableView!
     
     
+    @IBOutlet weak var CertificationsTbl: UITableView!
     
     @IBOutlet weak var CoachPlayedForTbl: UITableView!
 
@@ -29,23 +31,53 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     
     @IBOutlet weak var Experience: UITextField!
     
+    
+    
+    @IBOutlet weak var currentTeamsTableHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var playedForTableHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var pastTeamsTableHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var certificationsTableHeightConstraint: NSLayoutConstraint!
+    
+    
+    var selectedText: UITextField!
+    
+    var profileChanged: Bool! = false
+    
     var data:[String:AnyObject]{
         
-        return ["Certifications":Certifications.textVal,"Experience":Experience.textVal,"CoachingLevel":CoachingLevel.textVal,"CoachCurrentTeams":teamNames, "CoachPastTeams": pastTeamNames, "CoachPlayedFor": CoachPlayedFor]
+        return ["Certifications":CertificationsList,"Experience":Experience.textVal.trim(),"CoachingLevel":CoachingLevel.textVal.trim(),"CoachCurrentTeams":teamNames, "CoachPastTeams": pastTeamNames, "CoachPlayedFor": CoachPlayedFor]
     }
-    
+    var scrollViewTop:CGFloat!
+
     
     var teamNames = [""]
     
+    var CertificationsList = [""]
     
     var CoachPlayedFor = [""]
     
     var pastTeamNames = [""]
     
+    var currentwindow = UIWindow()
+    
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
+    
+    func adjustTblHeight(constratintType: NSLayoutConstraint, collectionType: [String], cellHeight: CGFloat){
+        constratintType.constant = CGFloat(collectionType.count * Int(cellHeight))
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUIBackgroundTheme(self.view)
+        
+        setBackgroundColor()
+        
+        //setUIBackgroundTheme(self.view)
         // Do any additional setup after loading the view.
         
         currentTeams.allowsSelection = false
@@ -63,7 +95,18 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         CoachPlayedForTbl.dataSource = self
         CoachPlayedForTbl.delegate = self
         
+        CertificationsTbl.allowsSelection = false
+        CertificationsTbl.separatorStyle = .None
+        CertificationsTbl.dataSource = self
+        CertificationsTbl.delegate = self
+
+        Experience.delegate = self
         
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserInfoViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        scrollView.setContentOffset(CGPointZero, animated: true)
+        scrollViewTop = scrollView.frame.origin.y
+
         
     }
     
@@ -72,14 +115,16 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         
         if profileData.FirstName.length > 0 {
             self.CoachingLevel.text = profileData.CoachingLevel
-            self.Certifications.text = profileData.Certifications
+            self.CertificationsList = profileData.Certifications
             self.Experience.text = profileData.Experience
             self.teamNames = profileData.CoachCurrentTeams
             self.CoachPlayedFor = profileData.CoachPlayedFor
             self.pastTeamNames = profileData.CoachPastTeams
+            
             currentTeams.reloadData()
             pastTeams.reloadData()
             CoachPlayedForTbl.reloadData()
+            CertificationsTbl.reloadData()
         }
     }
     
@@ -93,7 +138,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     
     @IBAction func CreateCoachingProfileBtnPressed(sender: AnyObject) {
         
-        profileData.Certifications = self.data["Certifications"] as! String
+        profileData.Certifications = self.data["Certifications"] as! [String]
         profileData.Experience = self.data["Experience"] as! String
         profileData.CoachingLevel = self.data["CoachingLevel"] as! String
         profileData.CoachCurrentTeams = self.data["CoachCurrentTeams"] as! [String]
@@ -103,33 +148,67 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         
         addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
             
-            profileData = Profile(usrObj: data)
-            
-            var SplashScreenVC = viewControllerFrom("Main", vcid: "SplashScreenViewController") as! SplashScreenViewController
-            
-            
-            self.presentViewController(SplashScreenVC, animated: true, completion: nil)
-
-            
-//            var vc: UIViewController = self.presentingViewController!;
-//            while ((vc.presentingViewController) != nil) {
-//                
-//                vc = vc.presentingViewController!;
-//                if ((vc.presentingViewController?.isEqual(viewControllerFrom("Main", vcid: "ProfileBaseViewController") as! ProfileBaseViewController)) != nil){
-//                    break;
-//                }
-//            }
-//            
-//            vc.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
-
-            
-            
+            if (self.profileChanged == true) {
+                let userDefaults = NSUserDefaults.standardUserDefaults()
+                
+                if let _ = userDefaults.valueForKey("loginToken"){
+                    
+                    userDefaults.removeObjectForKey("loginToken")
+                    
+                }
+                
+                
+                
+                if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let window = app.window {
+                    
+                    self.currentwindow = window
+                }
+                
+                
+                let loginBaseViewController = viewControllerFrom("Main", vcid: "LoginViewController")
+                
+                self.currentwindow.rootViewController = loginBaseViewController
+            }
+            else
+            {
+                profileData = Profile(usrObj: data)
+                
+                updateMetaData(userImageMetaData)
+                
+                
+                if self.currentwindow.rootViewController == sliderMenu {
+                    
+                    
+                    self.currentwindow.rootViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+                }
+                else
+                {
+                    let rootViewController: UIViewController = getRootViewController()
+                    self.currentwindow.rootViewController = rootViewController
+                    
+                }
+                
+            }
         }
 
         
         
         
     }
+    
+    func keyboardWillShow(sender: NSNotification){
+        
+        if let userInfo = sender.userInfo {
+            if  let  keyboardframe = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue{
+                let keyboardHeight = keyboardframe.CGRectValue().height
+                
+                var contentInset:UIEdgeInsets = self.scrollView.contentInset
+                contentInset.bottom = keyboardHeight + 10
+                self.scrollView.contentInset = contentInset
+            }
+        }
+    }
+
     
     
     func deleteTeamFromCurrentTeams(sender: UIButton) {
@@ -151,6 +230,14 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
                 CoachPlayedForTbl.reloadData()
                 
             }
+                
+            else if tblView.isEqual(self.CertificationsTbl){
+                
+                let indexPath = CertificationsTbl.indexPathForCell(cell)
+                CertificationsList.removeAtIndex((indexPath?.row)!)
+                CertificationsTbl.reloadData()
+                
+            }
             else {
                 let indexPath = pastTeams.indexPathForCell(cell)
                 pastTeamNames.removeAtIndex((indexPath?.row)!)
@@ -165,7 +252,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     @IBAction func addPastTeamsPressed(sender: AnyObject) {
         
         if pastTeamName.text?.trimWhiteSpace != "" && pastTeamName.text?.trimWhiteSpace != "-" {
-            pastTeamNames.append(pastTeamName.textVal)
+            pastTeamNames.append(pastTeamName.textVal.trim())
             pastTeamName.text = ""
             pastTeams.reloadData()
         }
@@ -174,7 +261,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     
     @IBAction func addTeamsPressed(sender: AnyObject) {
         if teamName.text?.trimWhiteSpace != "" && teamName.text?.trimWhiteSpace != "-" {
-            teamNames.append(teamName.textVal)
+            teamNames.append(teamName.textVal.trim())
             teamName.text = ""
             
             currentTeams.reloadData()
@@ -185,7 +272,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     
     @IBAction func addTeamsPlayedForPressed(sender: AnyObject) {
         if teamsPlayedForTxt.text?.trimWhiteSpace != "" && teamsPlayedForTxt.text?.trimWhiteSpace != "-" {
-            CoachPlayedFor.append(teamsPlayedForTxt.textVal)
+            CoachPlayedFor.append(teamsPlayedForTxt.textVal.trim())
             teamsPlayedForTxt.text = ""
             
             CoachPlayedForTbl.reloadData()
@@ -193,8 +280,39 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         
         
     }
+
+    @IBAction func addCertificationsPressed(sender: AnyObject) {
+        if Certifications.text?.trimWhiteSpace != "" && Certifications.text?.trimWhiteSpace != "-" {
+            CertificationsList.append(Certifications.textVal.trim())
+            Certifications.text = ""
+            
+            CertificationsTbl.reloadData()
+        }
+        
+        
+    }
+
     
     
+    func getCellForCertifications(indexPath:NSIndexPath)->UITableViewCell{
+        if let aCell =  CertificationsTbl.dequeueReusableCellWithIdentifier("CurrentTeamsTableViewCell", forIndexPath: indexPath) as? CurrentTeamsTableViewCell {
+            
+            aCell.backgroundColor = UIColor.clearColor()
+            
+            
+            
+            aCell.teamName.text = CertificationsList[indexPath.row]
+            
+            aCell.deleteTeamBtn.addTarget(self, action: "deleteTeamFromCurrentTeams:", forControlEvents: .TouchUpInside)
+            return aCell
+        }
+        else
+        {
+            return UITableViewCell()
+        }
+        
+        
+    }
     
     
     
@@ -262,6 +380,9 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         else if tableView.isEqual(CoachPlayedForTbl) {
             return CoachPlayedFor.count
         }
+        else if tableView.isEqual(CertificationsTbl){
+            return CertificationsList.count
+        }
         return pastTeamNames.count
         
     }
@@ -274,19 +395,56 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         return 1
     }
     
+    func textFieldDidBeginEditing(textField: UITextField) {
+        
+        self.selectedText = textField
+        AddDoneButtonTo(textField)
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        let cell = tableView.rectForRowAtIndexPath(indexPath)
+        
         if tableView.isEqual(currentTeams) {
+            adjustTblHeight(currentTeamsTableHeightConstraint, collectionType: teamNames, cellHeight: cell.size.height)
             return getCellForRow(indexPath)
         }
         else if tableView.isEqual(CoachPlayedForTbl) {
+            adjustTblHeight(playedForTableHeightConstraint, collectionType: CoachPlayedFor, cellHeight: cell.size.height)
             return getCellForPlayedTeamsRow(indexPath)
         }
+        else if tableView.isEqual(CertificationsTbl) {
+            adjustTblHeight(certificationsTableHeightConstraint, collectionType: CertificationsList, cellHeight: cell.size.height)
+            return getCellForCertifications(indexPath)
+        }
+        
+        adjustTblHeight(pastTeamsTableHeightConstraint, collectionType: pastTeamNames, cellHeight: cell.size.height)
+        
         return getCellForPastTeamsRow(indexPath)
     }
 
-    
+    func AddDoneButtonTo(inputText:UITextField) {
+        
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .Default
+        toolBar.translucent = true
+        toolBar.tintColor = UIColor(hex: "B12420")
+        toolBar.backgroundColor = UIColor.whiteColor()
+        toolBar.sizeToFit()
+        
+        // Adding Button ToolBar
+        let doneButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(CoachingExperienceViewController.donePressed))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: #selector(CoachingExperienceViewController.donePressed))
+        
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.userInteractionEnabled = true
+        inputText.inputAccessoryView = toolBar
+    }
 
+    func donePressed() {
+        selectedText.resignFirstResponder()
+    }
     /*
     // MARK: - Navigation
 

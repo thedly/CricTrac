@@ -9,11 +9,15 @@
 import UIKit
 import XLPagerTabStrip
 
-class LoginBaseViewController: ButtonBarPagerTabStripViewController {
+class LoginBaseViewController: ButtonBarPagerTabStripViewController ,ThemeChangeable{
 
+    
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
@@ -21,7 +25,10 @@ class LoginBaseViewController: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarItemTitleColor = UIColor.whiteColor()
         buttonBarView.selectedBar.backgroundColor = UIColor.whiteColor()
         settings.style.buttonBarItemFont = UIFont(name: appFont_bold, size: 15)!
-        setUIBackgroundTheme(self.view)
+        
+        setBackgroundColor()
+        
+        //setUIBackgroundTheme(self.view)
                 // Do any additional setup after loading the view.
         
         

@@ -14,18 +14,18 @@ class SentFriendRequest {
     var Club: String?
     var Name: String?
     var ReceivedRequestIdOther: String?
-    var SentDateTime: String?
+    var SentDateTime: AnyObject?
     var SentRequestId: String?
     var SentTo: String?
     
         
-    func GetFriendRequestObject(datObj: SentFriendRequest) -> [String: String] {
+    func GetFriendRequestObject(datObj: SentFriendRequest) -> [String: AnyObject] {
         
         return [
             "City": datObj.City!,
             "Club": datObj.Club!,
             "Name": datObj.Name!,
-            "SentDateTime": datObj.SentDateTime!,
+            "SentDateTime": datObj.SentDateTime! as! AnyObject,
             "SentTo": datObj.SentTo!
         ]
     }

@@ -8,13 +8,19 @@
 
 import UIKit
 
-class ProfileReadOnlyViewController: UIViewController {
+class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,ThemeChangeable {
 
     @IBOutlet weak var PersonalInfoView: UIView!
     @IBOutlet weak var PlayerExperienceView: UIView!
     @IBOutlet weak var CoachingExperienceView: UIView!
     @IBOutlet weak var CricketFanView: UIView!
     
+    @IBOutlet weak var profileImage: UIImageView!
+    
+    @IBOutlet weak var activityInd: UIActivityIndicatorView!
+    
+    
+    @IBOutlet weak var PlayingRole: UILabel!
     
     
     @IBOutlet weak var NameText: UILabel!
@@ -42,12 +48,17 @@ class ProfileReadOnlyViewController: UIViewController {
     @IBOutlet weak var FanFavouritePlayer: UILabel!
     @IBOutlet weak var FanHobbies: UILabel!
     
+    @IBOutlet weak var editBtn: UIButton!
     let transitionManager = TransitionManager.sharedInstance
     
     @IBAction func CloseProfilePressed(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
     
     @IBAction func EditProfilePressed(sender: AnyObject) {
         
@@ -64,7 +75,9 @@ class ProfileReadOnlyViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         
-        if profileData.fullName != " " {
+//        self.profileImage.image = LoggedInUserImage
+        
+        if profileData.userExists {
             
             self.NameText.text = profileData.fullName.uppercaseString
             self.DOBText.text = profileData.DateOfBirth.uppercaseString
@@ -75,21 +88,24 @@ class ProfileReadOnlyViewController: UIViewController {
             self.StateText.text = profileData.State.uppercaseString
             self.CityText.text = profileData.City.uppercaseString
             
-            self.PlayerCurrentTeams.text = profileData.PlayerCurrentTeams.joinWithSeparator(",").uppercaseString
-            self.PlayerPastTeams.text = profileData.PlayerPastTeams.joinWithSeparator(",").uppercaseString
+            self.PlayerCurrentTeams.text = profileData.PlayerCurrentTeams.joinWithSeparator("\n").uppercaseString
+            self.PlayerPastTeams.text = profileData.PlayerPastTeams.joinWithSeparator("\n").uppercaseString
             self.PlayerBattingStyle.text = profileData.BattingStyle.uppercaseString
             self.PlayerBowlingStyle.text = profileData.BowlingStyle.uppercaseString
             
-            self.CoachCurrentTeams.text = profileData.CoachCurrentTeams.joinWithSeparator(",").uppercaseString
-            self.CoachPastTeams.text = profileData.CoachPastTeams.joinWithSeparator(",").uppercaseString
+            self.PlayingRole.text = profileData.PlayingRole.uppercaseString
+            
+            
+            self.CoachCurrentTeams.text = profileData.CoachCurrentTeams.joinWithSeparator("\n").uppercaseString
+            self.CoachPastTeams.text = profileData.CoachPastTeams.joinWithSeparator("\n").uppercaseString
             self.CoachCoachingLevel.text = profileData.CoachingLevel.uppercaseString
-            self.CoachCertifications.text = profileData.Certifications.uppercaseString
+            self.CoachCertifications.text = profileData.Certifications.joinWithSeparator("\n").uppercaseString
             self.CoachExperience.text = profileData.Experience.uppercaseString
             
-            self.FanSupportingTeams.text = profileData.SupportingTeams.joinWithSeparator(",").uppercaseString
-            self.FanInterestedSports.text = profileData.InterestedSports.joinWithSeparator(",").uppercaseString
-            self.FanFavouritePlayer.text = profileData.FavouritePlayers.uppercaseString
-            self.FanHobbies.text = profileData.Hobbies.joinWithSeparator(",").uppercaseString
+            self.FanSupportingTeams.text = profileData.SupportingTeams.joinWithSeparator("\n").uppercaseString
+            self.FanInterestedSports.text = profileData.InterestedSports.joinWithSeparator("\n").uppercaseString
+            self.FanFavouritePlayer.text = profileData.FavoritePlayers.joinWithSeparator("\n")
+            self.FanHobbies.text = profileData.Hobbies.joinWithSeparator("\n").uppercaseString
             
             
             self.CoachingExperienceView.hidden = profileData.UserProfile != userProfileType.Coach.rawValue
@@ -99,11 +115,23 @@ class ProfileReadOnlyViewController: UIViewController {
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUIBackgroundTheme(self.view)
+        //setUIBackgroundTheme(self.view)
+        setBackgroundColor()
+        
+//        profileImage.layer.cornerRadius = profileImage.frame.size.width/2
+//        profileImage.clipsToBounds = true
+//        
+//        activityInd.layer.cornerRadius = profileImage.frame.size.width/2
+//        activityInd.clipsToBounds = true
+//        
+//        editBtn.layer.cornerRadius = editBtn.frame.size.width/2
+//        editBtn.clipsToBounds = true
+        
+        
+        
         
         setColorForViewsWithSameTag(PersonalInfoView)
         setColorForViewsWithSameTag(PlayerExperienceView)
@@ -117,6 +145,10 @@ class ProfileReadOnlyViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    
+    
     
 
     /*

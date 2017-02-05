@@ -9,7 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 
-class NewMatchViewController: UIViewController,IndicatorInfoProvider {
+class NewMatchViewController: UIViewController,IndicatorInfoProvider,ThemeChangeable {
 
     lazy var ctDatePicker = CTDatePicker()
     
@@ -78,8 +78,18 @@ class NewMatchViewController: UIViewController,IndicatorInfoProvider {
     
     var scrollViewTop:CGFloat!
     
+    
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setBackgroundColor()
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(NewMatchViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         lastSelectedTab = matchSelector
  scrollView.setContentOffset(CGPointZero, animated: true)

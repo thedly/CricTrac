@@ -9,17 +9,25 @@
 import UIKit
 import KRProgressHUD
 
-class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable {
 
     @IBOutlet var matchSummaryTable:UITableView!
     
     var matchData:[String:AnyObject]!
-    var matchDataSource = [[String:String]]()
+    var matchDataSource = [[String:AnyObject]]()
     var matches = [MatchSummaryData]()
+    
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUIBackgroundTheme(self.view)
+        
+        setBackgroundColor()
+        
+        //setUIBackgroundTheme(self.view)
         getMatchData()
     matchSummaryTable.registerNib(UINib.init(nibName:"SummaryDetailsCell", bundle: nil), forCellReuseIdentifier: "SummaryDetailsCell")
         matchSummaryTable.allowsSelection = true
@@ -61,7 +69,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 //var dataDict = val as! [String:String]
                 //dataDict["key"] = key
                 
-                if  var value = val as? [String : String]{
+                if  var value = val as? [String : AnyObject]{
                     
                     value += ["key":key]
                     
@@ -77,11 +85,11 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                     
                     if let runsTaken = value["RunsTaken"]{
                         
-                        mData.BattingSectionHidden = (runsTaken == "-")
+                        mData.BattingSectionHidden = (runsTaken as! String == "-")
                         
                         if mData.BattingSectionHidden == false {
                             
-                            battingBowlingScore.bold(runsTaken, fontName: appFont_black, fontSize: 30).bold("\nRUNS", fontName: appFont_black, fontSize: 12)
+                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 30).bold("\nRUNS", fontName: appFont_black, fontSize: 12)
                             
                         }
                     }
@@ -89,7 +97,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                     if let wicketsTaken = value["WicketsTaken"], let runsGiven = value["RunsGiven"] {
                         
                         
-                        mData.BowlingSectionHidden = (runsGiven == "-")
+                        mData.BowlingSectionHidden = (runsGiven as! String == "-")
                         
                         
                         if mData.BowlingSectionHidden == false {
@@ -99,7 +107,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                                 
                             }
                             else{
-                                battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 53).bold("\nWICKETS", fontName: appFont_black, fontSize: 12)
+                                battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 30).bold("\nWICKETS", fontName: appFont_black, fontSize: 12)
                             }
                             
                             
@@ -121,15 +129,33 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                         var DateFormatter = NSDateFormatter()
                         DateFormatter.dateFormat = "dd-MM-yyyy"
                         DateFormatter.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
-                        var dateFromString = DateFormatter.dateFromString(date)
+                        var dateFromString = DateFormatter.dateFromString(date as! String)
                         
                         mData.matchDate = dateFromString
                         
                         
                         matchVenueAndDate.appendContentsOf(date as? String ?? "NA")
                     }
+                    
+                    if let group = value["AgeGroup"]{
+                        matchVenueAndDate.appendContentsOf(" | \(group)")
+                    }
+                    
                     if let venue = value["Ground"]{
                         matchVenueAndDate.appendContentsOf("\n@ \(venue)")
+                    }
+                    
+                    if let ballsFaced = value["BallsFaced"] as? String where ballsFaced != "-", let runsScored = value["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
+                        
+                        let strinkeRate = (Int(runsScored)!/Int(ballsFaced)!)*100
+                        matchVenueAndDate.appendContentsOf("\n Strike rate: \(strinkeRate)")
+                    }
+                    
+                    if let oversBowled = value["OversBowled"] as? String where oversBowled != "-", let runsGiven = value["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
+                        
+                        
+                        let economy = Float(runsGiven)!/Float(oversBowled)!
+                        matchVenueAndDate.appendContentsOf("\n Economy: \(economy)")
                     }
                     
                     if let opponent  = value["Opponent"]{
@@ -203,7 +229,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         
         var selectedDataSource = matchDataSource.filter { (dat) -> Bool in
-            return dat["MatchId"] == matches[indexPath.row].matchId
+            return dat["MatchId"] as! String == matches[indexPath.row].matchId
         }
         
        summaryDetailsVC.matchDetailsData = selectedDataSource.first
