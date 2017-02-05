@@ -122,52 +122,60 @@ func setColorForViewsWithSameTag(baseView: UIView) {
         
         
         // MARK: Setting all colors to black #000000
-        if view.accessibilityIdentifier == "greyMatter" || view.accessibilityIdentifier == "whiteMatter" {
-                        if let lbl: UILabel = view as? UILabel {
-                            lbl.textColor = UIColor(hex: "#000000")
-                            lbl.alpha = 0.5
-                            lbl.backgroundColor = UIColor.clearColor()
-                        }
-                        else if let btn: UIButton = view as? UIButton {
-                            btn.setTitleColor(UIColor(hex: "#000000"), forState: .Normal)
-                            btn.alpha = 0.3
-                        }
-                        else
-                        {
-                            view.backgroundColor = UIColor(hex: "#000000")
-                            view.alpha = 0.3
-                        }
-            
-        }
+//        if view.accessibilityIdentifier == "greyMatter" || view.accessibilityIdentifier == "whiteMatter" {
+//                        if let lbl: UILabel = view as? UILabel {
+//                            lbl.textColor = UIColor(hex: "#000000")
+//                            lbl.alpha = 0.5
+//                            lbl.backgroundColor = UIColor.clearColor()
+//                        }
+//                        else if let btn: UIButton = view as? UIButton {
+//                            btn.setTitleColor(UIColor(hex: "#000000"), forState: .Normal)
+//                            btn.alpha = 0.3
+//                        }
+//                        else
+//                        {
+//                            view.backgroundColor = UIColor(hex: "#000000")
+//                            view.alpha = 0.3
+//                        }
+//            
+//        }
         
         // MARK: Backup in case we go back theme colors
         
-//        if view.accessibilityIdentifier == "greyMatter" {
-//            if let lbl: UILabel = view as? UILabel {
-//                lbl.textColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
-//                lbl.backgroundColor = UIColor.clearColor()
-//            }
-//            else if let btn: UIButton = view as? UIButton {
-//                btn.setTitleColor(UIColor().darkerColorForColor(UIColor(hex: bottomColor)), forState: .Normal)
-//            }
-//            else
-//            {
-//                view.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
-//            }
-//        }
-//        else if view.accessibilityIdentifier == "whiteMatter" {
-//            if let lbl: UILabel = view as? UILabel {
-//                lbl.textColor = UIColor().lighterColorForColor(UIColor(hex: topColor))
-//                lbl.backgroundColor = UIColor.clearColor()
-//            }
-//            else if let btn: UIButton = view as? UIButton {
-//                btn.setTitleColor(UIColor().lighterColorForColor(UIColor(hex: topColor)), forState: .Normal)
-//            }
-//            else
-//            {
-//                view.backgroundColor = UIColor().lighterColorForColor(UIColor(hex: topColor))
-//            }
-//        }
+        if view.accessibilityIdentifier == "greyMatter" {
+            
+            let botColor = UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)
+            
+            
+            if let lbl: UILabel = view as? UILabel {
+                lbl.textColor = UIColor().darkerColorForColor(UIColor(hex: botColor))
+                lbl.backgroundColor = UIColor.clearColor()
+            }
+            else if let btn: UIButton = view as? UIButton {
+                btn.setTitleColor(UIColor().darkerColorForColor(UIColor(hex: botColor)), forState: .Normal)
+            }
+            else
+            {
+                view.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: botColor))
+            }
+        }
+        else if view.accessibilityIdentifier == "whiteMatter" {
+            
+            
+            let TopColor = UIColor().hexFromUIColor(cricTracTheme.currentTheme.topColor)
+            
+            if let lbl: UILabel = view as? UILabel {
+                lbl.textColor = UIColor().lighterColorForColor(UIColor(hex: TopColor))
+                lbl.backgroundColor = UIColor.clearColor()
+            }
+            else if let btn: UIButton = view as? UIButton {
+                btn.setTitleColor(UIColor().lighterColorForColor(UIColor(hex: TopColor)), forState: .Normal)
+            }
+            else
+            {
+                view.backgroundColor = UIColor().lighterColorForColor(UIColor(hex: TopColor))
+            }
+        }
     }
 }
 

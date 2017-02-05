@@ -100,24 +100,24 @@ func loadInitialValues(){
         }
     })
     
-    getAllProfiles({ resultObj in
-        UserProfilesData.removeAll()
-        for profile in resultObj {
-            
-            var currentProfile = Profile(usrObj: profile)
-            
-            
-            UserProfilesData.append(currentProfile)
-            if let _imageUrl = profile["ProfileImageURL"] as? String where _imageUrl != ""  {
-                
-                let userId = profile["Id"] as! String
-                
-                getImageFromFirebase(_imageUrl) { (data) in
-                    UserProfilesImages[userId] = data
-                }
-            }
-        }
-    })
+//    getAllProfiles({ resultObj in
+//        UserProfilesData.removeAll()
+//        for profile in resultObj {
+//            
+//            var currentProfile = Profile(usrObj: profile)
+//            
+//            
+//            UserProfilesData.append(currentProfile)
+//            if let _imageUrl = profile["ProfileImageURL"] as? String where _imageUrl != ""  {
+//                
+//                let userId = profile["Id"] as! String
+//                
+//                getImageFromFirebase(_imageUrl) { (data) in
+//                    UserProfilesImages[userId] = data
+//                }
+//            }
+//        }
+//    })
     
 }
 

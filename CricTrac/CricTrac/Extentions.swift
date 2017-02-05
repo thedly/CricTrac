@@ -69,6 +69,19 @@ extension UIColor {
     }
 }
 
+
+extension UIColor {
+    func hexFromUIColor(color: UIColor) -> String
+    {
+        let hexString = String(format: "%02X%02X%02X",
+                               Int(CGColorGetComponents(color.CGColor)[0] * 255.0),
+                               Int(CGColorGetComponents(color.CGColor)[1] * 255.0),
+                               Int(CGColorGetComponents(color.CGColor)[2] * 255.0))
+        return hexString
+    }
+}
+
+
 extension CAGradientLayer {
     func setGradientBackground(topColor:CGColor, bottomColor:CGColor) -> CAGradientLayer{
         let colorTop = topColor

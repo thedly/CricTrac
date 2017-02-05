@@ -15,12 +15,21 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
    
     
     @IBAction func nextBtnPressed(sender: AnyObject) {
+        
+        
+        var nav1 = UINavigationController()
+        var usrViewController = viewControllerFrom("Main", vcid: "UserInfoViewController") as! UserInfoViewController
+        nav1.viewControllers.append(usrViewController)
+        
+        
+        
         let nextViewController = viewControllerFrom("Main", vcid: "UserInfoViewController") as! UserInfoViewController
         var toViewController: UIViewController
         
         switch profileData.UserProfile {
         case userProfileType.Player.rawValue :
             toViewController = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
+            
         case userProfileType.Coach.rawValue :
             toViewController = viewControllerFrom("Main", vcid: "CoachingExperienceViewController")
         case userProfileType.Fan.rawValue :
@@ -29,10 +38,12 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
             toViewController = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
         }
         
-        NextVC = toViewController
-        nextViewController.NextVC = toViewController
-        nextViewController.transitioningDelegate = self.transitionManager
-        presentViewController(nextViewController, animated: true, completion: nil)
+        nav1.viewControllers.append(toViewController)
+        
+//        NextVC = toViewController
+//        nextViewController.NextVC = toViewController
+//        nextViewController.transitioningDelegate = self.transitionManager
+        presentViewController(nav1, animated: true, completion: nil)
     }
     
     @IBOutlet weak var playerTextView: radioSelectView!
