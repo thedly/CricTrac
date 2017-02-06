@@ -160,14 +160,13 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
         
         setColorForViewsWithSameTag(battingView)
         setColorForViewsWithSameTag(bowlingView)
-    
         
 //        for view in viewsWithSameTagId {
 //            view?.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
 //        }
         
-        //self.summarizedView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
-        
+        self.summarizedView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
+        self.summarizedView.alpha = 0.8
         initializeView()
         
         // Do any additional setup after loading the view.
@@ -335,15 +334,24 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
             var tournamentText = NSAttributedString()
             
             
-            var level = ""
             var group = ""
             
             if let dat = matchDetailsData["Level"] {
-                level.appendContentsOf("\(dat) level")
+                group.appendContentsOf("\(dat)")
+            }
+            
+            if let stage = matchDetailsData["Stage"] {
+                group.appendContentsOf("  |  \(stage)")
+                
             }
             
             if let dat = matchDetailsData["AgeGroup"] {
-                group.appendContentsOf("\(dat)")
+                group.appendContentsOf("  |  \(dat)")
+                
+            }
+            
+            if let ovrs = matchDetailsData["MatchOvers"] {
+                group.appendContentsOf("  |  \(ovrs) Overs")
                 
             }
             
@@ -352,18 +360,18 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
             if tournament as! String == "-"{
                 if let opponent = matchDetailsData["Opponent"] {
                     
-                    tournamentText = formattedString.bold("VS \(opponent)", fontName: appFont_black, fontSize: 17).bold("\n[\(group), \(level)]", fontName: appFont_bold, fontSize: 13)
+                    tournamentText = formattedString.bold("VS \(opponent)", fontName: appFont_black, fontSize: 17).bold("\n\(group)", fontName: appFont_bold, fontSize: 13)
                     
                 }
                 else
                 {
-                    tournamentText = formattedString.bold("Unknown Tournament", fontName: appFont_black, fontSize: 17).bold("\n[\(group), \(level)]", fontName: appFont_bold, fontSize: 13)
+                    tournamentText = formattedString.bold("Unknown Tournament", fontName: appFont_black, fontSize: 17).bold("\n\(group)", fontName: appFont_bold, fontSize: 13)
                     
                 }
             }
             else{
                 
-                tournamentText = formattedString.bold("\(tournament)", fontName: appFont_black, fontSize: 17).bold("\n[\(group), \(level)]", fontName: appFont_bold, fontSize: 13)
+                tournamentText = formattedString.bold("\(tournament)", fontName: appFont_black, fontSize: 17).bold("\n\(group)", fontName: appFont_bold, fontSize: 13)
                 
             }
             

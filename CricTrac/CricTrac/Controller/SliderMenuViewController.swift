@@ -101,20 +101,13 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         
         var vcName = menuData[indexPath.row]["vc"]
         
-<<<<<<< HEAD
-        if indexPath.row != 0{
-            if menuData[indexPath.row]["title"] == "PROFILE" && profileData.fullName != " "{
-                vcName = "ProfileReadOnlyViewController"
-            }
+
+        //if indexPath.row != 0{}
             
-            let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc  = storyboard.instantiateViewControllerWithIdentifier(vcName!)
-            sliderMenu.mainViewController.presentViewController(vc, animated: true, completion: nil)
-            sliderMenu.setDrawerState(.Closed, animated: true)
-=======
+            
         if menuData[indexPath.row]["title"] == "PROFILE" && profileData.userExists {
             vcName = "ProfileReadOnlyViewController"
->>>>>>> Backup
+
         }
         else if menuData[indexPath.row]["title"] == "DASHBOARD" {
             
@@ -134,6 +127,12 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
                 
             }
         }
+            
+            let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc  = storyboard.instantiateViewControllerWithIdentifier(vcName!)
+            sliderMenu.mainViewController.presentViewController(vc, animated: true, completion: nil)
+            sliderMenu.setDrawerState(.Closed, animated: true)
+
         
     }
 
