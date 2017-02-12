@@ -133,10 +133,10 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
         
         
         
-        setColorForViewsWithSameTag(PersonalInfoView)
-        setColorForViewsWithSameTag(PlayerExperienceView)
-        setColorForViewsWithSameTag(CoachingExperienceView)
-        setColorForViewsWithSameTag(CricketFanView)
+        //setColorForViewsWithSameTag(PersonalInfoView)
+        //setColorForViewsWithSameTag(PlayerExperienceView)
+        //setColorForViewsWithSameTag(CoachingExperienceView)
+        //setColorForViewsWithSameTag(CricketFanView)
         
         // Do any additional setup after loading the view.
     }

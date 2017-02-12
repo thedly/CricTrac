@@ -29,8 +29,9 @@ class FriendSuggestionsCell: UITableViewCell {
        
         self.AddFriendBtn.userInteractionEnabled = true
         
-        self.baseView.backgroundColor = UIColor.blackColor()
-        self.baseView.alpha = 0.3
+        self.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
+        
+        self.baseView.alpha = 0.8
         
         //self.AddFriendBtn.addTarget(self, action: #selector(FriendSuggestionsCell.AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         

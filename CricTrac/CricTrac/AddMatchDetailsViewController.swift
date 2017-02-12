@@ -162,51 +162,155 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             //OppositTeams
             if !dataHasChangedAfterLastSave {
                 if selecetedData == nil{
-                    addMatchData("date \(String(date))",data: data)
                     
-                    let teamName = data["Team"]!
-                    if !teamNames.contains(teamName){
-                        addNewTeamName(teamName)
-                        teamNames.append(teamName)
-                    }
-                    
-                    let oppoTeamName = data["Opponent"]!
-                    if !opponentTeams.contains(oppoTeamName){
-                        addNewOppoSitTeamName(oppoTeamName)
-                        opponentTeams.append(oppoTeamName)
-                    }
-                    
-                    let tournament = data["Tournament"]!
-                    
-                    if tournament != "-"{
-                        if !tournaments.contains(tournament){
-                            addNewTournamentName(tournament)
-                            tournaments.append(tournament)
-                        }
-                    }
-                    if groundName != "-"{
+                    addMatchData("date \(String(date))",data: data, callback: { dat in
                         
-                        if !groundNames.contains(groundName){
-                            addNewGroundName(groundName)
-                            groundNames.append(groundName)
+                        let teamName = self.data["Team"]!
+                        if !teamNames.contains(teamName){
+                            addNewTeamName(teamName)
+                            teamNames.append(teamName)
                         }
-                    }
-                    if venueName != "-"{
                         
-                        if !venueNames.contains(venueName){
-                            addNewVenueName(venueName)
-                            venueNames.append(venueName)
+                        let oppoTeamName = self.data["Opponent"]!
+                        if !opponentTeams.contains(oppoTeamName){
+                            addNewOppoSitTeamName(oppoTeamName)
+                            opponentTeams.append(oppoTeamName)
                         }
-                    }
+                        
+                        let tournament = self.data["Tournament"]!
+                        
+                        if tournament != "-"{
+                            if !tournaments.contains(tournament){
+                                addNewTournamentName(tournament)
+                                tournaments.append(tournament)
+                            }
+                        }
+                        if groundName != "-"{
+                            
+                            if !groundNames.contains(groundName){
+                                addNewGroundName(groundName)
+                                groundNames.append(groundName)
+                            }
+                        }
+                        if venueName != "-"{
+                            
+                            if !venueNames.contains(venueName){
+                                addNewVenueName(venueName)
+                                venueNames.append(venueName)
+                            }
+                        }
+                        
+                        
+                        let window = getCurrentWindow()
+                        
+                        let DetailsViewController = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
+                        
+                        
+                        DetailsViewController.battingViewHidden = (dat["RunsTaken"] as! String == "-")
+                        DetailsViewController.bowlingViewHidden = (dat["RunsGiven"] as! String == "-")
+                        
+                        DetailsViewController.matchDetailsData = dat
+                        window.rootViewController?.dismissViewControllerAnimated(false, completion: {
+                            window.rootViewController?.presentViewController(DetailsViewController, animated: true, completion: nil)
+                        })
+
+                        
+                    })
                     
                     
                     
                     
                 }else{
-                    updateMatchData(selecetedData!["key"]! as! String, data: data)
-                    NSNotificationCenter.defaultCenter().postNotificationName("MatchDataChanged", object: self)
+                    
+                    var key = ""
+                    
+                    if let keyValue = selecetedData!["key"] {
+                     
+                        key = keyValue as! String
+                        
+                    }
+                    
+                    if let keyValueAlt = selecetedData!["MatchId"] {
+                        if key == "" {
+                            key = keyValueAlt as! String
+                        }
+                        
+                    }
+                    
+                    if key != "" {
+                        updateMatchData(key, data: data, callback: { dat in
+                            
+                            var dataToBeModified = dat
+                            
+                            
+                            dataToBeModified["MatchId"] = key
+                            dataToBeModified["key"] = key
+                            
+                            
+                            if let previousVC = getPreviousViewController(self) as? SummaryMatchDetailsViewController {
+                                
+                                previousVC.matchDetailsData = dataToBeModified
+                                previousVC.viewDidLoad()
+                                
+                                
+                                if let previousPreviousVC = getPreviousViewController(previousVC) as? MatchSummaryViewController {
+                                    
+                                    if let index = previousPreviousVC.matchDataSource.indexOf({ $0["MatchId"] as? String == self.selecetedData!["key"] as? String }) {
+                                        
+                                        
+                                        let newSummaryData = previousPreviousVC.makeSummaryCell(dataToBeModified)
+                                        
+                                        
+                                        previousPreviousVC.matches.removeAtIndex(index)
+                                        previousPreviousVC.matches.insert(newSummaryData, atIndex: index)
+                                        
+                                        previousPreviousVC.matchSummaryTable.reloadData()
+                                        
+                                    }
+                                    
+                                    
+                                }
+                                
+                            }
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            //                        var dataToBeModeified = dat
+                            //
+                            //                        dataToBeModeified["MatchId"] = self.selecetedData!["key"]!
+                            //
+                            //                        let matchObjectIndex = matchDataSource.indexOfObject(self.selecetedData!)
+                            //
+                            //                        matchDataSource.replaceObjectAtIndex(matchObjectIndex, withObject: dataToBeModeified)
+                            //
+                            //  
+                            NSNotificationCenter.defaultCenter().postNotificationName("MatchDataChanged", object: self)
+                            self.dismissViewControllerAnimated(true) {}
+                            
+                        })
+                    }
+                    
+                    
+                    
+                    
+
+                    
+                    
+                    
                 }
-                self.dismissViewControllerAnimated(true) {}
+                
+                
+                
+                
+                
             }
             else{
                 

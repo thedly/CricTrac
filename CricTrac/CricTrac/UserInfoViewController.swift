@@ -293,8 +293,8 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         }
         else
         {
-            (firstName as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#D4D4D4")
-            (firstName as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#6D9447")
+            (firstName as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#FFFFFF")
+            (firstName as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#FFFFFF")
         }
         
         if !(dateOfBirth.text?.hasDataPresent)! || dateOfBirth.text?.length > 25 {
@@ -305,8 +305,8 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         }
         else
         {
-            (dateOfBirth as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#D4D4D4")
-            (dateOfBirth as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#6D9447")
+            (dateOfBirth as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#FFFFFF")
+            (dateOfBirth as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#FFFFFF")
         }
         
         if !(emailId.text?.hasDataPresent)! {
@@ -317,8 +317,8 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         }
         else
         {
-            (emailId as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#D4D4D4")
-            (emailId as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#6D9447")
+            (emailId as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#FFFFFF")
+            (emailId as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#FFFFFF")
         }
         
         if !(mobile.text?.hasDataPresent)! || mobile.text?.length != 10 {
@@ -329,8 +329,8 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         }
         else
         {
-            (mobile as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#D4D4D4")
-            (mobile as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#6D9447")
+            (mobile as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#FFFFFF")
+            (mobile as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#FFFFFF")
         }
         
         if !(country.text?.hasDataPresent)! || country.text?.length > 50 {
@@ -344,8 +344,8 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
             
         else
         {
-            (country as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#D4D4D4")
-            (country as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#6D9447")
+            (country as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#FFFFFF")
+            (country as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#FFFFFF")
         }
         
         if !(state.text?.hasDataPresent)! || state.text?.length > 50 {
@@ -356,7 +356,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         }
         else
         {
-            (state as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#D4D4D4")
+            (state as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#FFFFFF")
             (state as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#6D9447")
         }
         
@@ -368,8 +368,8 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         }
         else
         {
-            (city as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#D4D4D4")
-            (city as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#6D9447")
+            (city as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#FFFFFF")
+            (city as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#FFFFFF")
         }
         return true
     }

@@ -90,15 +90,15 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         
         //setUIBackgroundTheme(self.view)
         
-        FirstBattingView.backgroundColor = UIColor.blackColor() //UIColor().darkerColorForColor(UIColor(hex: bottomColor))
+        FirstBattingView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
         
-        FirstBattingView.alpha = 0.3
+        FirstBattingView.alpha = 0.8
         
-        SecondBattingView.backgroundColor = UIColor.blackColor()
+        SecondBattingView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
         
-        SecondBattingView.alpha = 0.3
+        SecondBattingView.alpha = 0.8
         
-        //UIColor().darkerColorForColor(UIColor(hex: bottomColor))
+        
 
        
     

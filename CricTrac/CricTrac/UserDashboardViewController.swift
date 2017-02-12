@@ -256,6 +256,30 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         userProfileImage.layer.cornerRadius = userProfileImage.bounds.size.width/2
         MatchesView.layer.cornerRadius = 10
+        
+        MatchesView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
+        
+        MatchesView.alpha = 0.8
+
+        
+        self.SecondRecentMatchSummary.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
+        self.SecondRecentMatchSummary.alpha = 0.8
+        
+        self.FirstRecentMatchSummary.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
+        self.FirstRecentMatchSummary.alpha = 0.8
+        
+        self.FirstRecentMatchView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
+        self.FirstRecentMatchView.alpha = 0.8
+        
+        self.SecondRecentMatchView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
+        self.SecondRecentMatchView.alpha = 0.8
+        
+        self.FirstRecentMatchBowlingView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
+        self.FirstRecentMatchBowlingView.alpha = 0.8
+        
+        self.SecondRecentMatchBowlingView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
+        self.SecondRecentMatchBowlingView.alpha = 0.8
+        
         userProfileImage.clipsToBounds = true
         
         TeamsTable.delegate = self
@@ -539,9 +563,6 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 self.TotalFiveWicketsPerMatch.text = String(DashboardDetails.Total5Wkts)
                 
                 self.PlayerOversBowld.text = String(DashboardDetails.TotalOvers)
-                
-                
-                
                 
                 
                 self.FirstRecentMatchView.hidden = (DashboardDetails.TopBatting1stMatchScore == nil || String(DashboardDetails.TopBatting1stMatchScore) == "0")

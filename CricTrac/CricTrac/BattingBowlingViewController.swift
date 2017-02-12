@@ -467,7 +467,12 @@ extension BattingBowlingViewController:UITextFieldDelegate{
             //addSuggstionBox(textField, dataSource: dismissals, showSuggestions: true)
             showPicker(self, inputText: textField, data: dismissals)
         }
+        
+        parent?.dataChangedAfterLastSave()
+        //textFieldDidEndEditing(textField)
     }
+    
+    
     
     func textFieldDidEndEditing(textField: UITextField){
         

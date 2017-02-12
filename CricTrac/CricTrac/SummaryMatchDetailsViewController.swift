@@ -210,7 +210,17 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
         
         
         if let Runs = matchDetailsData["RunsTaken"] {
-            batRuns.text = Runs as! String
+            
+            let formattedString = NSMutableAttributedString()
+            
+            formattedString.bold(Runs as! String, fontName: appFont_black, fontSize: 83)
+            
+            if let Balls = matchDetailsData["BallsFaced"] {
+                formattedString.bold("(\(Balls))", fontName: appFont_bold, fontSize: 30)
+            }
+                
+            batRuns.attributedText = formattedString
+            
         }
         if let Fours = matchDetailsData["Fours"] {
             fours.text = Fours as! String
@@ -222,8 +232,8 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
         if let eco = matchDetailsData["Economy"] {
             economy.text = eco as! String
         }
-        if let Balls = matchDetailsData["BallsFaced"] {
-            ballsFaced.text = Balls as! String
+        if let position = matchDetailsData["Position"] {
+            ballsFaced.text = position as! String
         }
         if let Wides = matchDetailsData["Wides"] {
             wides.text = Wides as! String
@@ -281,17 +291,19 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
         
         calculateStrikeRate()
         
-        if let Overs: String = matchDetailsData["OversBowled"] as! String { // in overs eg: 2, 3, 4
+        if let Overs: String = matchDetailsData["Maidens"] as! String { // in overs eg: 2, 3, 4
             
-            if let oversInt = Int(Overs) {
-                
-                let totalBalls = 6*oversInt
-                
-                let oversFromBallsInt = Int(totalBalls/6) // 12, 18
-                let oversFromBallsRealRemaining = totalBalls - (6*oversFromBallsInt)
-                
-                overs.text = String("\(oversFromBallsInt).\(oversFromBallsRealRemaining)")
-            }
+//            if let oversInt = Int(Overs) {
+//                
+//                let totalBalls = 6*oversInt
+//                
+//                let oversFromBallsInt = Int(totalBalls/6) // 12, 18
+//                let oversFromBallsRealRemaining = totalBalls - (6*oversFromBallsInt)
+//                
+//                overs.text = String("\(oversFromBallsInt).\(oversFromBallsRealRemaining)")
+//            }
+            
+            overs.text = Overs
             
         }
         
@@ -446,15 +458,42 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
         
         if let wicketstaken = matchDetailsData["WicketsTaken"] {
             
-            if let RunsGiven = matchDetailsData["RunsGiven"] {
-                
-                 totalWickets.text = "\(wicketstaken)-\(RunsGiven)"
-            }
-            else
+            let formattedString = NSMutableAttributedString()
             
-            {
-                totalWickets.text = "\(wicketstaken)-NA"
+            formattedString.bold(wicketstaken as! String, fontName: appFont_black, fontSize: 83)
+            
+            if let runsGiven = matchDetailsData["RunsGiven"] {
+                formattedString.bold("-\(runsGiven)", fontName: appFont_bold, fontSize: 83)
             }
+            
+            if let oversBowled = matchDetailsData["OversBowled"] as? String {
+                
+                if let oversInt = Int(oversBowled) {
+                    
+                    let totalBalls = 6*oversInt
+                    
+                    let oversFromBallsInt = Int(totalBalls/6) // 12, 18
+                    let oversFromBallsRealRemaining = totalBalls - (6*oversFromBallsInt)
+                    
+                   formattedString.bold("(\(oversFromBallsInt).\(oversFromBallsRealRemaining))", fontName: appFont_bold, fontSize: 30)
+                }
+                
+                
+                
+            }
+            
+            totalWickets.attributedText = formattedString
+            
+            
+//            if let RunsGiven = matchDetailsData["RunsGiven"] {
+//                
+//                 totalWickets.text = "\(wicketstaken)-\(RunsGiven)"
+//            }
+//            else
+//            
+//            {
+//                totalWickets.text = "\(wicketstaken)-NA"
+//            }
             
             
             

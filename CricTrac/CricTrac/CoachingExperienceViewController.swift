@@ -148,26 +148,10 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         
         addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
             
+            
+            
             if (self.profileChanged == true) {
-                let userDefaults = NSUserDefaults.standardUserDefaults()
-                
-                if let _ = userDefaults.valueForKey("loginToken"){
-                    
-                    userDefaults.removeObjectForKey("loginToken")
-                    
-                }
-                
-                
-                
-                if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let window = app.window {
-                    
-                    self.currentwindow = window
-                }
-                
-                
-                let loginBaseViewController = viewControllerFrom("Main", vcid: "LoginViewController")
-                
-                self.currentwindow.rootViewController = loginBaseViewController
+                logout(self)
             }
             else
             {

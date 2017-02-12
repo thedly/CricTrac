@@ -137,23 +137,10 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
             
             
             
-            if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let window = app.window {
-                
-                self.currentwindow = window
-            }
+            
             
             if (self.profileChanged == true) {
-                let userDefaults = NSUserDefaults.standardUserDefaults()
-                
-                if let _ = userDefaults.valueForKey("loginToken"){
-                    
-                    userDefaults.removeObjectForKey("loginToken")
-                    
-                }
-                
-                let loginBaseViewController = viewControllerFrom("Main", vcid: "LoginViewController")
-                
-                self.currentwindow.rootViewController = loginBaseViewController
+                logout(self)
             }
             else
             {

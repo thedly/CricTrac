@@ -31,7 +31,6 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     
     let ctDatePicker = CTDatePicker()
     let ctDataPicker = CTPicker()
-    let DoneButtonClassInstance = DoneButtonClass()
     
     weak var parent:MatchParent?
     
@@ -52,8 +51,6 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         if ((parent?.selecetedData) != nil){ loadEditData() }
         
         oversText.keyboardType = UIKeyboardType.DecimalPad
-        DoneButtonClassInstance.AddDoneButtonTo(oversText)
-        
         self.view.backgroundColor = UIColor.clearColor()
         
         
@@ -190,7 +187,33 @@ extension MatchViewController:UITextFieldDelegate{
         else if textField == stage {
             ctDataPicker.showPicker(self, inputText: textField, data: MatchStage )
         }
+        else if textField == oversText {
+            AddDoneButtonTo(textField)
+        }
         
+    }
+    
+    func AddDoneButtonTo(inputText:UITextField) {
+        
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .Default
+        toolBar.translucent = true
+        toolBar.tintColor = UIColor(hex: "B12420")
+        toolBar.backgroundColor = UIColor.whiteColor()
+        toolBar.sizeToFit()
+        
+        // Adding Button ToolBar
+        let doneButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(MatchViewController.donePressed))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: #selector(MatchViewController.donePressed))
+        
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.userInteractionEnabled = true
+        inputText.inputAccessoryView = toolBar
+    }
+
+    func donePressed() {
+        selectedText.resignFirstResponder()
     }
     
     func textFieldDidEndEditing(textField: UITextField) {

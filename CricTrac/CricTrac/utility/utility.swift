@@ -10,6 +10,7 @@ import Foundation
 import KYDrawerController
 import FirebaseAuth
 import SwiftyJSON
+import SCLAlertView
 
 var sliderMenu = KYDrawerController()
 var currentUser:FIRUser?
@@ -45,7 +46,7 @@ var DashboardDetails : DashboardData!
 var PlayingLevels = [String]()
 var genders = [String]()
 var MatchStage = [String]()
-var matchDataSource = [[String:String]]()
+var matchDataSource = [[String:AnyObject]]()
 var profileDataChanged: Bool = false
 var ThemeChanged: Bool = false
 var timelineData:JSON?
@@ -317,5 +318,64 @@ func saveToCachedImages(image:UIImage,imageName:String){
 }
 
 
+public func logout(currentController: UIViewController) {
+    let userDefaults = NSUserDefaults.standardUserDefaults()
+    
+    
+    try! FIRAuth.auth()!.signOut() 
+    
+    if let _ = userDefaults.valueForKey("loginToken"){
+        
+        userDefaults.removeObjectForKey("loginToken")
+        
+    }
+    
+    var currentwindow = UIWindow()
+    
+    if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let window = app.window {
+        
+        currentwindow = window
+    }
+    
+    currentwindow.rootViewController?.dismissViewControllerAnimated(true, completion: nil)
+    
+    let loginBaseViewController = viewControllerFrom("Main", vcid: "LoginViewController")
+    
+    currentwindow.rootViewController = loginBaseViewController
+    
+    currentwindow.makeKeyAndVisible()
+    
+    //currentController.presentViewController(loginBaseViewController, animated: true) {
+        //SCLAlertView().showInfo("Logout",subTitle: "Data saved is cleared, Kill the app and relaunch for now") 
+    //}
+    
+}
 
+public func backgroundThread(delay: Double = 0.0, background: (() -> Void)? = nil, completion: (() -> Void)? = nil) {
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+        if(background != nil){ background!(); }
+        
+        let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)))
+        dispatch_after(popTime, dispatch_get_main_queue()) {
+            if(completion != nil){ completion!(); }
+        }
+    }
+}
 
+public func getCurrentWindow() -> UIWindow {
+    var window = UIWindow(frame:UIScreen.mainScreen().bounds)
+    
+    if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let currentwindow = app.window {
+        
+        window = currentwindow
+    }
+    return window
+}
+
+func getPreviousViewController(currentController: UIViewController) -> UIViewController {
+    if let presentingVC = currentController.presentingViewController {
+        return presentingVC
+    }
+    return currentController
+}

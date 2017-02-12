@@ -13,10 +13,9 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
 
     @IBOutlet var matchSummaryTable:UITableView!
     
-    var matchData:[String:AnyObject]!
-    var matchDataSource = [[String:AnyObject]]()
+    var matchData = [String:AnyObject]()
     var matches = [MatchSummaryData]()
-    
+    var matchDataSource = [[String:AnyObject]]()
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.boxColor
@@ -62,124 +61,140 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
         getAllMatchData { (data) in
             
-            self.matchData = data
             self.matchDataSource.removeAll()
-            for (key,val) in data{
-                
-                //var dataDict = val as! [String:String]
-                //dataDict["key"] = key
-                
-                if  var value = val as? [String : AnyObject]{
-                    
-                    value += ["key":key]
-                    
-                    self.matchDataSource.append(value)
-                    var battingBowlingScore = NSMutableAttributedString()
-                    var matchVenueAndDate = ""
-                    var opponentName = ""
-                    
-                    let mData = MatchSummaryData()
-                    
-                    mData.matchId = key
-                    
-                    
-                    if let runsTaken = value["RunsTaken"]{
-                        
-                        mData.BattingSectionHidden = (runsTaken as! String == "-")
-                        
-                        if mData.BattingSectionHidden == false {
-                            
-                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 30).bold("\nRUNS", fontName: appFont_black, fontSize: 12)
-                            
-                        }
-                    }
-                    
-                    if let wicketsTaken = value["WicketsTaken"], let runsGiven = value["RunsGiven"] {
-                        
-                        
-                        mData.BowlingSectionHidden = (runsGiven as! String == "-")
-                        
-                        
-                        if mData.BowlingSectionHidden == false {
-                            if battingBowlingScore.length > 0 {
-                                
-                                battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 30).bold("\nWICKETS", fontName: appFont_black, fontSize: 12)
-                                
-                            }
-                            else{
-                                battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 30).bold("\nWICKETS", fontName: appFont_black, fontSize: 12)
-                            }
-                            
-                            
-                        }
-                        
-                    }
-                    
-                    
-                    if battingBowlingScore.length == 0 {
-                        battingBowlingScore.bold("DNP", fontName: appFont_black, fontSize: 30)
-                    }
-                    
-                    
-                    
-                    if let date = value["MatchDate"]{
-                        
-                        
-                        
-                        var DateFormatter = NSDateFormatter()
-                        DateFormatter.dateFormat = "dd-MM-yyyy"
-                        DateFormatter.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
-                        var dateFromString = DateFormatter.dateFromString(date as! String)
-                        
-                        mData.matchDate = dateFromString
-                        
-                        
-                        matchVenueAndDate.appendContentsOf(date as? String ?? "NA")
-                    }
-                    
-                    if let group = value["AgeGroup"]{
-                        matchVenueAndDate.appendContentsOf(" | \(group)")
-                    }
-                    
-                    if let venue = value["Ground"]{
-                        matchVenueAndDate.appendContentsOf("\n@ \(venue)")
-                    }
-                    
-                    if let ballsFaced = value["BallsFaced"] as? String where ballsFaced != "-", let runsScored = value["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
-                        
-                        let strinkeRate = (Int(runsScored)!/Int(ballsFaced)!)*100
-                        matchVenueAndDate.appendContentsOf("\n Strike rate: \(strinkeRate)")
-                    }
-                    
-                    if let oversBowled = value["OversBowled"] as? String where oversBowled != "-", let runsGiven = value["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
-                        
-                        
-                        let economy = Float(runsGiven)!/Float(oversBowled)!
-                        matchVenueAndDate.appendContentsOf("\n Economy: \(economy)")
-                    }
-                    
-                    if let opponent  = value["Opponent"]{
-                        opponentName = opponent.uppercaseString
-                    }
-                    
-                    
-                    mData.battingBowlingScore = battingBowlingScore
-                    mData.matchDateAndVenue = matchVenueAndDate
-                    mData.opponentName = opponentName
-                    
-                    self.matches.append(mData)
-                    
-                }
-            }
             
-            self.matches.sortInPlace({ $0.matchDate.compare($1.matchDate) == NSComparisonResult.OrderedDescending })
+            self.makeCells(data)
+            
             KRProgressHUD.dismiss()
-            self.matchSummaryTable.reloadData()
+            
             
         }
     }
+    
+    
+    func makeCells(data: [String: AnyObject]) {
+        
+        self.matchData = data
+        
+        for (key,val) in data{
+            
+            //var dataDict = val as! [String:String]
+            //dataDict["key"] = key
+            
+            if  var value = val as? [String : AnyObject]{
+                
+                value += ["key":key]
+                
+                self.matchDataSource.append(value)
+                self.matches.append(makeSummaryCell(value))
+                
+            }
+        }
+        
+        self.matches.sortInPlace({ $0.matchDate.compare($1.matchDate) == NSComparisonResult.OrderedDescending })
+        self.matchSummaryTable.reloadData()
+    }
 
     
+    
+    func makeSummaryCell(value: [String : AnyObject]) -> MatchSummaryData {
+        
+        let battingBowlingScore = NSMutableAttributedString()
+        var matchVenueAndDate = ""
+        var opponentName = ""
+        
+        let mData = MatchSummaryData()
+        
+        mData.matchId = value["key"] as! String
+        
+        
+        if let runsTaken = value["RunsTaken"]{
+            
+            mData.BattingSectionHidden = (runsTaken as! String == "-")
+            
+            if mData.BattingSectionHidden == false {
+                
+                battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 30).bold("\nRUNS", fontName: appFont_black, fontSize: 12)
+                
+            }
+        }
+        
+        if let wicketsTaken = value["WicketsTaken"], let runsGiven = value["RunsGiven"] {
+            
+            
+            mData.BowlingSectionHidden = (runsGiven as! String == "-")
+            
+            
+            if mData.BowlingSectionHidden == false {
+                if battingBowlingScore.length > 0 {
+                    
+                    battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 30).bold("\nWICKETS", fontName: appFont_black, fontSize: 12)
+                    
+                }
+                else{
+                    battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 30).bold("\nWICKETS", fontName: appFont_black, fontSize: 12)
+                }
+                
+                
+            }
+            
+        }
+        
+        
+        if battingBowlingScore.length == 0 {
+            battingBowlingScore.bold("DNP", fontName: appFont_black, fontSize: 30)
+        }
+        
+        
+        
+        if let date = value["MatchDate"]{
+            
+            
+            
+            var DateFormatter = NSDateFormatter()
+            DateFormatter.dateFormat = "dd-MM-yyyy"
+            DateFormatter.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
+            var dateFromString = DateFormatter.dateFromString(date as! String)
+            
+            mData.matchDate = dateFromString
+            
+            
+            matchVenueAndDate.appendContentsOf(date as? String ?? "NA")
+        }
+        
+        if let group = value["AgeGroup"]{
+            matchVenueAndDate.appendContentsOf(" | \(group)")
+        }
+        
+        if let venue = value["Ground"]{
+            matchVenueAndDate.appendContentsOf("\n@ \(venue)")
+        }
+        
+        if let ballsFaced = value["BallsFaced"] as? String where ballsFaced != "-", let runsScored = value["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
+            
+            let strinkeRate = (Int(runsScored)!/Int(ballsFaced)!)*100
+            matchVenueAndDate.appendContentsOf("\n Strike rate: \(strinkeRate)")
+        }
+        
+        if let oversBowled = value["OversBowled"] as? String where oversBowled != "-", let runsGiven = value["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
+            
+            
+            let economy = Float(runsGiven)!/Float(oversBowled)!
+            matchVenueAndDate.appendContentsOf("\n Economy: \(economy)")
+        }
+        
+        if let opponent  = value["Opponent"]{
+            opponentName = opponent.uppercaseString
+        }
+        
+        
+        mData.battingBowlingScore = battingBowlingScore
+        mData.matchDateAndVenue = matchVenueAndDate
+        mData.opponentName = opponentName
+        
+        
+        return mData
+    }
     
     
     func getCellForRow(indexPath:NSIndexPath)->SummaryDetailsCell{
@@ -187,7 +202,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             
             aCell.backgroundColor = UIColor.clearColor()
             
-            if let currentMatch = matches[indexPath.row] as? MatchSummaryData {
+            if let currentMatch = self.matches[indexPath.row] as? MatchSummaryData {
                 
                 aCell.BattingOrBowlingScore.attributedText = currentMatch.battingBowlingScore
                 aCell.matchDateAndVenue.text = currentMatch.matchDateAndVenue
@@ -228,11 +243,11 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         summaryDetailsVC.bowlingViewHidden = matches[indexPath.row].BowlingSectionHidden
         
         
-        var selectedDataSource = matchDataSource.filter { (dat) -> Bool in
-            return dat["MatchId"] as! String == matches[indexPath.row].matchId
+        var selectedDataSource = self.matchDataSource.filter { (dat) -> Bool in
+            return dat["MatchId"]! as! String == matches[indexPath.row].matchId
         }
         
-       summaryDetailsVC.matchDetailsData = selectedDataSource.first
+        summaryDetailsVC.matchDetailsData = selectedDataSource.first
             presentViewController(summaryDetailsVC, animated: true, completion: nil)
         CFRunLoopWakeUp(CFRunLoopGetCurrent())
     }

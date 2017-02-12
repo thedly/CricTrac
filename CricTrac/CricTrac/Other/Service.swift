@@ -100,28 +100,11 @@ func loadInitialValues(){
         }
     })
     
-//    getAllProfiles({ resultObj in
-//        UserProfilesData.removeAll()
-//        for profile in resultObj {
-//            
-//            var currentProfile = Profile(usrObj: profile)
-//            
-//            
-//            UserProfilesData.append(currentProfile)
-//            if let _imageUrl = profile["ProfileImageURL"] as? String where _imageUrl != ""  {
-//                
-//                let userId = profile["Id"] as! String
-//                
-//                getImageFromFirebase(_imageUrl) { (data) in
-//                    UserProfilesImages[userId] = data
-//                }
-//            }
-//        }
-//    })
+
     
 }
 
-func addMatchData(key:NSString,data:[String:AnyObject]){
+func addMatchData(key:NSString,data:[String:AnyObject], callback: [String:AnyObject] -> Void){
     
     var dataToBeModified = data
     
@@ -141,6 +124,9 @@ func addMatchData(key:NSString,data:[String:AnyObject]){
     
     
     UpdateDashboardDetails()
+    
+    
+    callback(dataToBeModified)
     
 }
 
@@ -314,13 +300,6 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
         dataToBeModified["UserAddedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
         dataToBeModified["UserEditedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
         
-        if let usrProfileType = dataToBeModified["UserProfile"] where usrProfileType as! String == userProfileType.Player.rawValue {
-            
-            createDashboardData(DashboardData(dataObj: [String:AnyObject]()).dashboardData)
-        
-        }
-        
-        
         
     }
     else
@@ -332,10 +311,18 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
     ref.setValue(dataToBeModified)
     
-    
-    if let usrProfileType = dataToBeModified["UserProfile"] where usrProfileType as! String != userProfileType.Player.rawValue {
+    if let usrProfileType = dataToBeModified["UserProfile"] {
         
-        deleteAllPlayerData()
+        if usrProfileType as! String != userProfileType.Player.rawValue {
+            deleteAllPlayerData()
+        }
+        else
+        {
+            let dataToBeCreated = DashboardData(dataObj: [String:AnyObject]())
+            let dataToBeSent = dataToBeCreated.dashboardData
+            createDashboardData(dataToBeSent)
+            
+        }
         
     }
     
@@ -513,7 +500,7 @@ func getImageFromFirebase(imagePath: String ,sucessBlock:(UIImage)->Void){
 
 //MARK:- Update  Match
 
-func updateMatchData(key:String,data:[String:AnyObject]){
+func updateMatchData(key:String,data:[String:AnyObject], callback:(data:[String:AnyObject])->Void ){
     
     var dataToBeModified = data
     
@@ -526,6 +513,8 @@ func updateMatchData(key:String,data:[String:AnyObject]){
     
     
     ref.updateChildValues(dataToBeModified)
+    callback(data: dataToBeModified)
+    
     UpdateDashboardDetails()
     
 }
@@ -722,6 +711,33 @@ func addThemeData(theme: String, sucessBlock:()->Void){
 
 
 // MARK: - Friends
+
+public func getAllFriendSuggestions(callback:()->Void) {
+    
+    getAllProfiles({ resultObj in
+            UserProfilesData.removeAll()
+            for profile in resultObj {
+    
+                var currentProfile = Profile(usrObj: profile)
+    
+    
+                UserProfilesData.append(currentProfile)
+                if let _imageUrl = profile["ProfileImageURL"] as? String where _imageUrl != ""  {
+    
+                    let userId = profile["Id"] as! String
+    
+                    getImageFromFirebase(_imageUrl) { (data) in
+                        UserProfilesImages[userId] = data
+                    }
+                }
+            }
+        
+            callback()
+        
+        })
+    
+    
+}
 
 
 public func AcceptFriendRequest(data: [String:[String:AnyObject]], callback:(data:String)->Void){

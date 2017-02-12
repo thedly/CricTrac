@@ -43,28 +43,9 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
     
     @IBAction func didTapLogout(sender: UIButton) {
         
-        let userDefaults = NSUserDefaults.standardUserDefaults()
         
-        if let _ = userDefaults.valueForKey("loginToken"){
-            
-            userDefaults.removeObjectForKey("loginToken")
-            
-        }
+        logout(self)
         
-        var currentwindow = UIWindow()
-        
-        if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let window = app.window {
-            
-            currentwindow = window
-        }
-        
-        
-        let loginBaseViewController = viewControllerFrom("Main", vcid: "LoginViewController")
-        
-        currentwindow.rootViewController = loginBaseViewController
-        self.presentViewController(loginBaseViewController, animated: true) {
-             SCLAlertView().showInfo("Logout",subTitle: "Data saved is cleared, Kill the app and relaunch for now")
-        }
     
         
        
@@ -102,7 +83,10 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         var vcName = menuData[indexPath.row]["vc"]
         
 
-        //if indexPath.row != 0{}
+        if indexPath.row == 0
+        {
+            return
+        }
             
             
         if menuData[indexPath.row]["title"] == "PROFILE" && profileData.userExists {

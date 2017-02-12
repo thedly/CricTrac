@@ -8,6 +8,7 @@
 
 import UIKit
 import XLPagerTabStrip
+import KRProgressHUD
 
 class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider,ThemeChangeable {
     
@@ -15,13 +16,35 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()
-        
+        getFriendSuggestions()
         // Do any additional setup after loading the view.
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getFriendSuggestions() {
+        
+        backgroundThread(background: {
+            
+            KRProgressHUD.showText("Loading ...")
+            getAllFriendSuggestions({
+                KRProgressHUD.dismiss()
+                self.SuggestsTblview.reloadData()
+            })
+            
+        })
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
     
     // MARK: - Methods

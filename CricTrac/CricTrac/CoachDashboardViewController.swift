@@ -48,6 +48,10 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         MatchesView.layer.cornerRadius = 10
         userProfileImage.clipsToBounds = true
         
+        MatchesView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
+        
+        MatchesView.alpha = 0.8
+        
         CurrentTeams.delegate = self
         CurrentTeams.dataSource = self
         

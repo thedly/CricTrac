@@ -355,14 +355,8 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         
         dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
             
-            var window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
             
-            if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let currentwindow = app.window {
-                
-                window = currentwindow
-                window?.makeKeyAndVisible()
-            }
-            
+            let window = getCurrentWindow()
             
             let rootViewController: UIViewController = getRootViewController()
             
@@ -379,13 +373,13 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
             if !profileData.userExists {
                 
                 KRProgressHUD.dismiss()
-                window?.rootViewController = profileVC
+                window.rootViewController = profileVC
                 self.presentViewController(profileVC, animated: true) { KRProgressHUD.dismiss() }
             }
             else
             {
                 KRProgressHUD.dismiss()
-                window?.rootViewController = rootViewController
+                window.rootViewController = rootViewController
                 self.presentViewController(rootViewController, animated: true) { KRProgressHUD.dismiss() }
             }
             
