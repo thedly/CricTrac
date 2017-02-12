@@ -7,7 +7,7 @@ target 'CricTrac' do
 
   # Pods for CricTrack
 
-pod 'Firebase'
+pod 'Firebase', '3.11.1'
 pod 'Firebase/Database'
 pod 'Firebase/Auth'
 pod 'Firebase/Storage'
