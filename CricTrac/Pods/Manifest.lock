@@ -99,7 +99,7 @@ DEPENDENCIES:
   - Fabric
   - FBSDKCoreKit
   - FBSDKLoginKit
-  - Firebase
+  - Firebase (= 3.11.1)
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
@@ -166,6 +166,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 96918c1bf505efa50c4f72957018dd3452090c9c
   XLPagerTabStrip: 9191deaa2336735b7c47beb21e42be537fa4242a
 
-PODFILE CHECKSUM: 67bdee034a823f8bfffd0bd378a7e0afea25a50c
+PODFILE CHECKSUM: 9225d0a86eb69a420637a9ab2742f3730d9d7d03
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.1
