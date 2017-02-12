@@ -42,8 +42,14 @@ class CTCountryPicker: NSObject {
             var indexPos = 0
             
             if newValue != "" && newValue != "-" {
-                //indexPos = countryPicker.countryData.indexOf({$0.name == newValue})!
-                //countryPicker.pickedCountry = countryPicker.countryData.filter({$0.name == newValue}).first
+                indexPos = CountriesList.indexOf({$0.name == newValue})!
+                
+                
+                if let pickedCountry = CountriesList.filter({$0.name == newValue}).first as? Country {
+                    countryPicker.pickedCountry = pickedCountry
+                }
+                
+                
             }
             
             countryPicker.selectRow(indexPos, inComponent: 0, animated: true)

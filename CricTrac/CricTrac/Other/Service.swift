@@ -100,7 +100,7 @@ func loadInitialValues(){
         }
     })
     
-
+    loadCountriesData()
     
 }
 

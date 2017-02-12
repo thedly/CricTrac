@@ -12,6 +12,8 @@ import FirebaseAuth
 import SwiftyJSON
 import SCLAlertView
 
+import SwiftCountryPicker
+
 var sliderMenu = KYDrawerController()
 var currentUser:FIRUser?
 
@@ -23,7 +25,7 @@ var dismissals = [String]()
 var tournaments = [String]()
 var results = [String]()
 
-
+var CountriesList = [CustomCountry]()
 
 var profileData = Profile(usrObj: [String:String]())
 var LoggedInUserImage = UIImage(named: defaultProfileImage)
@@ -378,4 +380,65 @@ func getPreviousViewController(currentController: UIViewController) -> UIViewCon
         return presentingVC
     }
     return currentController
+}
+
+public struct CustomCountry {
+    
+    /// Name of the country
+    public let name : String!
+    
+    /// ISO country code of the country
+    public let iso : String!
+    
+    /// Emoji flag of the country
+    public let emoji: String!
+    
+}
+
+
+public func loadCountriesData() {
+    let bundlePath = NSBundle(forClass: CountryPicker.self).pathForResource("SwiftCountryPicker", ofType: "bundle")
+    
+    if let path = NSBundle(path: bundlePath!)!.pathForResource("EmojiCountryCodes", ofType: "json")
+    {
+        
+        do {
+            let jsonData = try NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe)
+            let json = try NSJSONSerialization.JSONObjectWithData(jsonData, options: .AllowFragments)
+            
+            var countryCode: String?
+            
+            if let local = NSLocale.currentLocale().objectForKey(NSLocaleCountryCode) as? String {
+                countryCode = local
+            }
+            
+            
+            guard let countries = json as? NSArray else {
+                print("countries is not an array")
+                return
+            }
+            
+            for subJson in countries{
+                
+                guard let name = subJson["name"] as? String, iso = subJson["code"] as? String, emoji = subJson["emoji"] as? String else {
+                    
+                    print("couldn't parse json")
+                    
+                    break
+                }
+                
+                let country = CustomCountry(name: name, iso: iso, emoji: emoji)
+                                
+                // append country
+                CountriesList.append(country)
+            }
+            
+            CountriesList.sortInPlace { $1.name > $0.name }
+            
+        } catch {
+            print("error reading file")
+            
+        }
+    }
+    
 }
