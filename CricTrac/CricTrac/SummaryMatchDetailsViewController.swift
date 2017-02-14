@@ -209,11 +209,11 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
     func initializeView() {
         
         
-        if let Runs = matchDetailsData["RunsTaken"] {
+        if let runs = matchDetailsData["RunsTaken"] as? String{
             
             let formattedString = NSMutableAttributedString()
             
-            formattedString.bold(Runs as! String, fontName: appFont_black, fontSize: 83)
+            formattedString.bold(runs , fontName: appFont_black, fontSize: 83)
             
             if let Balls = matchDetailsData["BallsFaced"] {
                 formattedString.bold("(\(Balls))", fontName: appFont_bold, fontSize: 30)
@@ -222,24 +222,24 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
             batRuns.attributedText = formattedString
             
         }
-        if let Fours = matchDetailsData["Fours"] {
-            fours.text = Fours as! String
+        if let Fours = matchDetailsData["Fours"] as? String{
+            fours.text = Fours
         }
-        if let Sixes = matchDetailsData["Sixes"] {
-            sixes.text = Sixes as! String
+        if let Sixes = matchDetailsData["Sixes"] as? String{
+            sixes.text = Sixes
         }
         
-        if let eco = matchDetailsData["Economy"] {
-            economy.text = eco as! String
+        if let eco = matchDetailsData["Economy"] as? String {
+            economy.text = eco
         }
-        if let position = matchDetailsData["Position"] {
-            ballsFaced.text = position as! String
+        if let position = matchDetailsData["Position"] as? String {
+            ballsFaced.text = position
         }
-        if let Wides = matchDetailsData["Wides"] {
-            wides.text = Wides as! String
+        if let Wides = matchDetailsData["Wides"] as? String{
+            wides.text = Wides
         }
-        if let Noballs = matchDetailsData["NoBalls"] {
-            noBalls.text = Noballs as! String
+        if let Noballs = matchDetailsData["NoBalls"] as? String{
+            noBalls.text = Noballs
         }
         
         
@@ -284,14 +284,14 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
         }
         
         
-        if let dat = matchDetailsData["Achievements"] {
-            self.achievements.text = dat as! String
+        if let dat = matchDetailsData["Achievements"] as? String {
+            self.achievements.text = dat
         }
         
         
         calculateStrikeRate()
         
-        if let Overs: String = matchDetailsData["Maidens"] as! String { // in overs eg: 2, 3, 4
+        if let Overs: String = matchDetailsData["Maidens"] as? String { // in overs eg: 2, 3, 4
             
 //            if let oversInt = Int(Overs) {
 //                
@@ -397,18 +397,18 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
         var firstTeamScore = "-"
         var secondTeamScore = "-"
         
-        if let hTeam: String = matchDetailsData["Team"] as! String {
+        if let hTeam: String = matchDetailsData["Team"] as? String {
             if hTeam != "-" {
-                homeTeam.text = hTeam as! String
+                homeTeam.text = hTeam
             }
             else
             {
                 homeTeam.text = "Unknown"
             }
             
-            if let opponent: String = matchDetailsData["Opponent"] as! String {
+            if let opponent: String = matchDetailsData["Opponent"] as? String {
                 if opponent != "-" {
-                    awayTeam.text = opponent as! String
+                    awayTeam.text = opponent
                 }
                 else
                 {
