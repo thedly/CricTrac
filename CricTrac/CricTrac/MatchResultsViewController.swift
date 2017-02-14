@@ -135,7 +135,84 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     
     var data:[String:String]{
         
-        return ["TossWonBy":tossText.trim() ?? "-","FirstBatting":firstBatText.trim(),"FirstBattingScore":firstScoreText.textVal,"FirstBattingWickets":firstWicketsText.textVal,"SecondBatting":secondBatText.trim(), "SecondBattingScore":secondScoreText.textVal,"SecondBattingWickets":secondWicketsText.textVal,"Result":resultText.textVal,"FirstBattingOvers":firstOversText.textVal,"SecondBattingOvers":secondOversText.textVal,"Achievements": AchievementsText.textVal]
+        
+        var tossVal = ""
+        
+        if let val = tossText{
+            
+            tossVal = val.trim()
+        }
+        
+        var firstBatVal = ""
+        
+        if let val = firstBatText{
+            
+            firstBatVal = val.trim()
+        }
+        
+        var firstScoreVal = ""
+        
+        if let val = firstScoreText{
+            
+            firstScoreVal = val.textVal
+        }
+        
+        var firstWicketsVal = ""
+        
+        if let val = firstWicketsText{
+            
+            firstWicketsVal = val.textVal
+        }
+        var secondBatVal = ""
+        
+        if let val = secondBatText{
+            
+            secondBatVal = val.trim()
+        }
+        
+        var secondScoreVal = ""
+        
+        if let val = secondScoreText{
+            
+            secondScoreVal = val.textVal
+        }
+        
+        var secondWicketsVal = ""
+        
+        if let val = secondWicketsText{
+            
+            secondWicketsVal = val.textVal
+        }
+        
+        var resultVal = ""
+        
+        if let val = resultText{
+            
+            resultVal = val.textVal
+        }
+        
+        var firstOversVal = ""
+        
+        if let val = firstOversText{
+            
+            firstOversVal = val.textVal
+        }
+        
+        var secondOversVal = ""
+        
+        if let val = secondOversText{
+            
+            secondOversVal = val.textVal
+        }
+        
+        var AchievementsVal = ""
+        
+        if let val = AchievementsText{
+            
+            AchievementsVal = val.textVal
+        }
+        
+        return ["TossWonBy":tossVal,"FirstBatting":firstBatVal,"FirstBattingScore":firstScoreVal,"FirstBattingWickets":firstWicketsVal,"SecondBatting":secondBatVal, "SecondBattingScore":secondScoreVal,"SecondBattingWickets":secondBatVal,"Result":resultVal,"FirstBattingOvers":firstOversVal,"SecondBattingOvers":secondOversVal,"Achievements":AchievementsVal]
     }
     
     

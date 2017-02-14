@@ -133,16 +133,16 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             
             if dataHasChangedAfterLastSave{
             
-            if  matchVC?.view != nil{
+            if let _ =  matchVC?.view{
                 
                 data += matchVC.data
             }
-            if battingBowlingViewController?.view != nil{
+            if let _ = battingBowlingViewController?.view{
                 
                 data += battingBowlingViewController.BattingData
                 data += battingBowlingViewController.BowlingData
             }
-            if resVC?.view != nil{
+            if let _ = resVC?.view{
                data += resVC.data
             }
         }
