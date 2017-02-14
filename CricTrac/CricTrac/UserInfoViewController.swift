@@ -75,6 +75,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         setBackgroundColor()
         //setUIBackgroundTheme(self.view)
         initializeView()
+        self.navigationController?.navigationBarHidden = true
         // Do any additional setup after loading the view.
     }
     
@@ -118,7 +119,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         
         
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserInfoViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+       // NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserInfoViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         scrollView.setContentOffset(CGPointZero, animated: true)
         scrollViewTop = scrollView.frame.origin.y
         
@@ -233,8 +234,8 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         
         
       
-        if userProfileInfo != nil {
-            switch userProfileInfo.text! {
+        if userProfile != nil {
+            switch userProfile {
             case userProfileType.Player.rawValue :
                 
                 var vc = viewControllerFrom("Main", vcid: "PlayerExperienceViewController") as! PlayerExperienceViewController
@@ -272,8 +273,6 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         
         
         let toViewController = NextVC
-        
-        
         toViewController!.transitioningDelegate = self.transitionManager
         presentViewController(toViewController!, animated: true, completion: nil)
         
@@ -469,6 +468,14 @@ extension UserInfoViewController:UITextFieldDelegate{
 //            let indexPos = BowlingStyles.indexOf(bowlingStyle.text!) ?? 0
 //            ctDataPicker.showPicker(self, inputText: textField, data: BowlingStyles,selectedValueIndex: indexPos)
 //        }
+    }
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        let newLength = textField.text!.characters.count + string.characters.count - range.length
+        if textField == firstName || textField == lastName {
+            return newLength <= nameCharacterLimit // Bool
+        } else {
+            return true // Bool
+        }
     }
 }
 

@@ -138,7 +138,7 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         pastTeams.separatorStyle = .None
         pastTeams.dataSource = self
         pastTeams.delegate = self
-        
+        pastTeamName.delegate = self
         
         
         if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let currentwindow = app.window {
@@ -217,10 +217,10 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
             aCell.backgroundColor = UIColor.clearColor()
             
             
-            
+            aCell.teamName.font = UIFont(name: "SourceSansPro-Bold", size: 15)
             aCell.teamName.text = teamNames[indexPath.row]
             
-            aCell.deleteTeamBtn.addTarget(self, action: "deleteTeamFromCurrentTeams:", forControlEvents: .TouchUpInside)
+            aCell.deleteTeamBtn.addTarget(self, action: #selector(PlayerExperienceViewController.deleteTeamFromCurrentTeams(_:)), forControlEvents: .TouchUpInside)
             return aCell
         }
         else
@@ -238,7 +238,7 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
             
             aCell.teamName.text = pastTeamNames[indexPath.row]
             
-            aCell.deleteTeamBtn.addTarget(self, action: "deleteTeamFromCurrentTeams:", forControlEvents: .TouchUpInside)
+            aCell.deleteTeamBtn.addTarget(self, action: #selector(PlayerExperienceViewController.deleteTeamFromCurrentTeams(_:)), forControlEvents: .TouchUpInside)
             return aCell
         }
         else
@@ -297,7 +297,7 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 20
+        return 40
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -372,4 +372,22 @@ extension PlayerExperienceViewController:UITextFieldDelegate{
             ctDataPicker.showPicker(self, inputText: textField, data: BowlingStyles, selectedValueIndex: indexPos)
         }
     }
+    func textFieldDidEndEditing(textField: UITextField) {
+        if textField == pastTeamName {
+            addPastTeamsPressed(textField)
+        }else if textField == teamName {
+            addTeamsPressed(textField)
+        }else {
+            
+        }
+        //[textField resignFirstResponder];
+       
+    }
+//    func textFieldShouldEndEditing(textField: UITextField) -> Bool {
+//        if textField == pastTeamName {
+//            addPastTeamsPressed(textField)
+//        }
+//        return true
+//    }
+    
 }

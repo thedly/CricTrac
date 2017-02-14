@@ -10,7 +10,7 @@ import UIKit
 import KRProgressHUD
 
 
-class CricketFanViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,ThemeChangeable {
+class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFieldDelegate, UITableViewDataSource,ThemeChangeable {
     
     @IBOutlet weak var currentTeamsTblViewHeightConstraint: NSLayoutConstraint!
     
@@ -115,6 +115,10 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
         FavouritePlayerTbl.dataSource = self
         FavouritePlayerTbl.delegate = self
         
+        favouritePlayer.delegate = self
+        SupportingTeamNames.delegate = self
+        InterestedSportsNames.delegate = self
+        HobbiesNames.delegate = self
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserInfoViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         scrollView.setContentOffset(CGPointZero, animated: true)
@@ -371,7 +375,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 20
+        return 40
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -428,6 +432,20 @@ class CricketFanViewController: UIViewController, UITableViewDelegate, UITableVi
         selectedText.resignFirstResponder()
     }
     
+    func textFieldDidEndEditing(textField: UITextField) {
+        
+        if textField == favouritePlayer {
+            addFavouritePlayerPressed(textField)
+        }else if textField == SupportingTeamNames {
+            addSupportingTeamsPressed(textField)
+        }else if  textField == InterestedSportsNames {
+            addInterestedSportsPressed(textField)
+        }else {
+            addHobbiesPressed(textField)
+        }
+        //[textField resignFirstResponder];
+        
+    }
     /*
     // MARK: - Navigation
 

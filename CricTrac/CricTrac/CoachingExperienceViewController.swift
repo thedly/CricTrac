@@ -101,7 +101,9 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         CertificationsTbl.delegate = self
 
         Experience.delegate = self
-        
+        teamName.delegate = self
+        teamsPlayedForTxt.delegate = self
+        pastTeamName.delegate = self
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserInfoViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         scrollView.setContentOffset(CGPointZero, animated: true)
@@ -372,7 +374,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 20
+        return 40
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -428,6 +430,19 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
 
     func donePressed() {
         selectedText.resignFirstResponder()
+    }
+    func textFieldDidEndEditing(textField: UITextField) {
+        if textField == pastTeamName {
+            addPastTeamsPressed(textField)
+        }else if textField == teamName {
+            addTeamsPressed(textField)
+        }else if textField == teamsPlayedForTxt {
+            addTeamsPlayedForPressed(textField)
+        }else {
+            addCertificationsPressed(textField)
+        }
+        //[textField resignFirstResponder];
+        
     }
     /*
     // MARK: - Navigation

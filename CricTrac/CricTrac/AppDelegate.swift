@@ -18,7 +18,7 @@ import FirebaseDatabase
 import FirebaseAuth
 import GoogleSignIn
 import KRProgressHUD
-
+import IQKeyboardManagerSwift
 import SCLAlertView
 
 @UIApplicationMain
@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         setDefaultAppThems()
-        
+       IQKeyboardManager.sharedManager().enable = true
         return true
     }
     

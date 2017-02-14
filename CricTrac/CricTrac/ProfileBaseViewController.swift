@@ -13,13 +13,16 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
     var ProfileBaseDetails: [String:AnyObject]!
     var NextVC: UIViewController!
    
-    
+    @IBOutlet weak var imgPlayer: UIImageView!
+    @IBOutlet weak var imgCoach: UIImageView!
+    @IBOutlet weak var imgFan: UIImageView!
+
     @IBAction func nextBtnPressed(sender: AnyObject) {
         
         
         var nav1 = UINavigationController()
         var usrViewController = viewControllerFrom("Main", vcid: "UserInfoViewController") as! UserInfoViewController
-        nav1.viewControllers.append(usrViewController)
+        usrViewController.userProfile = profileData.UserProfile
         
         
         
@@ -29,7 +32,7 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
         switch profileData.UserProfile {
         case userProfileType.Player.rawValue :
             toViewController = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
-            
+            //(toViewController as! PlayerExperienceViewController).userProfile = ""
         case userProfileType.Coach.rawValue :
             toViewController = viewControllerFrom("Main", vcid: "CoachingExperienceViewController")
         case userProfileType.Fan.rawValue :
@@ -39,11 +42,22 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
         }
         
         nav1.viewControllers.append(toViewController)
-        
+        nav1.viewControllers.append(usrViewController)
+
 //        NextVC = toViewController
 //        nextViewController.NextVC = toViewController
 //        nextViewController.transitioningDelegate = self.transitionManager
-        presentViewController(nav1, animated: true, completion: nil)
+       // presentViewController(nav1, animated: true, completion: nil)
+       // self.presentViewController(toViewController, animated: true, completion: nil)
+        //presentViewController(nav1, animated: true, completion: nil)
+        /*
+         UIWindow *windows = [[UIApplication sharedApplication].delegate window];
+         UIViewController *vc = windows.rootViewController;
+         [vc presentViewController:alertController animated: YES completion:nil];
+ */
+        let window = UIApplication.sharedApplication().delegate?.window
+        let vc = window!!.rootViewController
+        vc?.presentViewController(nav1, animated: true, completion: nil)
     }
     
     @IBOutlet weak var playerTextView: radioSelectView!
@@ -58,18 +72,30 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
         deselectAll(self.view)
         playerTextView.isSelected = true
         profileData.UserProfile = userProfileType.Player.rawValue
+        
+        self.imgPlayer.image = UIImage(named: "BallIcon")
+        self.imgCoach.image = UIImage(named: "OkFilled")
+        self.imgFan.image = UIImage(named: "OkFilled")
     }
     
     func handleCoachTap(sender: UITapGestureRecognizer? = nil) {
         deselectAll(self.view)
         coachTextView.isSelected = true
         profileData.UserProfile = userProfileType.Coach.rawValue
+        
+        self.imgPlayer.image = UIImage(named: "OkFilled")
+        self.imgCoach.image = UIImage(named: "BallIcon")
+        self.imgFan.image = UIImage(named: "OkFilled")
     }
     
     func handleFanTap(sender: UITapGestureRecognizer? = nil) {
         deselectAll(self.view)
         cricketFanTextView.isSelected = true
         profileData.UserProfile = userProfileType.Fan.rawValue
+        
+        self.imgPlayer.image = UIImage(named: "OkFilled")
+        self.imgCoach.image = UIImage(named: "OkFilled")
+        self.imgFan.image = UIImage(named: "BallIcon")
     }
     
     
@@ -78,6 +104,8 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
     
     @IBAction func disPressCancel(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
+       // self.dismissViewControllerAnimated(true, completion: nil)
+       // self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
     
@@ -92,18 +120,32 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
                     self.coachTextView.isSelected = true
                     self.playerTextView.isSelected = false
                     self.cricketFanTextView.isSelected = false
+                    self.imgPlayer.image = UIImage(named: "OkFilled")
+                    self.imgCoach.image = UIImage(named: "BallIcon")
+                    self.imgFan.image = UIImage(named: "OkFilled")
+
+                //BallIcon
                 case userProfileType.Player.rawValue:
                     self.playerTextView.isSelected = true
                     self.coachTextView.isSelected = false
                     self.cricketFanTextView.isSelected = false
+                    self.imgPlayer.image = UIImage(named: "BallIcon")
+                    self.imgCoach.image = UIImage(named: "OkFilled")
+                    self.imgFan.image = UIImage(named: "OkFilled")
                 case userProfileType.Fan.rawValue:
                     self.cricketFanTextView.isSelected = true
                     self.playerTextView.isSelected = false
                     self.coachTextView.isSelected = false
+                    self.imgPlayer.image = UIImage(named: "OkFilled")
+                    self.imgCoach.image = UIImage(named: "OkFilled")
+                    self.imgFan.image = UIImage(named: "BallIcon")
                 default:
                     self.playerTextView.isSelected = true
                     self.coachTextView.isSelected = false
                     self.cricketFanTextView.isSelected = false
+                    self.imgPlayer.image = UIImage(named: "BallIcon")
+                    self.imgCoach.image = UIImage(named: "OkFilled")
+                    self.imgFan.image = UIImage(named: "OkFilled")
                 }
                 
             }
@@ -129,7 +171,11 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
         
         cricketFanTextView.userInteractionEnabled = true
         cricketFanTextView.addGestureRecognizer(fantap)
-        
+        profileData.UserProfile = userProfileType.Player.rawValue
+        self.imgPlayer.image = UIImage(named: "BallIcon")
+        self.imgCoach.image = UIImage(named: "OkFilled")
+        self.imgFan.image = UIImage(named: "OkFilled")
+
         
     }
     

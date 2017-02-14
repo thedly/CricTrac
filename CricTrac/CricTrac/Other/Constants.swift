@@ -238,3 +238,7 @@ let states = ["Alabama",
               "Wisconsin",
               "Wyoming"]
 
+
+//Marks -- profileSettings
+let nameCharacterLimit = 30
+
