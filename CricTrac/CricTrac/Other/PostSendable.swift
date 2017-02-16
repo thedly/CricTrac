@@ -13,3 +13,8 @@ protocol PostSendable:class {
     func sendNewPost(text:String)
     
 }
+
+protocol previousRefershable{
+    
+    func refresh(data:AnyObject)
+}

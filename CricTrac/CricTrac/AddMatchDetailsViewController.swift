@@ -20,6 +20,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     var resVC: MatchResultsViewController!
     
     var selecetedData:[String:AnyObject]?
+    var previous:previousRefershable?
     
     @IBOutlet weak var saveButton:UIButton!
     
@@ -35,6 +36,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     override func viewDidLoad() {
         super.viewDidLoad()
         getUserData()
+        
         // Do any additional setup after loading the view.
         settings.style.buttonBarItemBackgroundColor = UIColor.clearColor()
         settings.style.buttonBarItemTitleColor = UIColor.whiteColor()
@@ -52,7 +54,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         saveButton.setTitle("Save", forState: .Normal)
     }
     
-    
+ 
     
     
     func getUserData(){
@@ -239,78 +241,12 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                     
                     if key != "" {
                         updateMatchData(key, data: data, callback: { dat in
-                            
-                            var dataToBeModified = dat
-                            
-                            
-                            dataToBeModified["MatchId"] = key
-                            dataToBeModified["key"] = key
-                            
-                            
-                            if let previousVC = getPreviousViewController(self) as? SummaryMatchDetailsViewController {
-                                
-                                previousVC.matchDetailsData = dataToBeModified
-                                previousVC.viewDidLoad()
-                                
-                                
-                                if let previousPreviousVC = getPreviousViewController(previousVC) as? MatchSummaryViewController {
-                                    
-                                    if let index = previousPreviousVC.matchDataSource.indexOf({ $0["MatchId"] as? String == self.selecetedData!["key"] as? String }) {
-                                        
-                                        
-                                        let newSummaryData = previousPreviousVC.makeSummaryCell(dataToBeModified)
-                                        
-                                        
-                                        previousPreviousVC.matches.removeAtIndex(index)
-                                        previousPreviousVC.matches.insert(newSummaryData, atIndex: index)
-                                        
-                                        previousPreviousVC.matchSummaryTable.reloadData()
-                                        
-                                    }
-                                    
-                                    
-                                }
-                                
-                            }
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            //                        var dataToBeModeified = dat
-                            //
-                            //                        dataToBeModeified["MatchId"] = self.selecetedData!["key"]!
-                            //
-                            //                        let matchObjectIndex = matchDataSource.indexOfObject(self.selecetedData!)
-                            //
-                            //                        matchDataSource.replaceObjectAtIndex(matchObjectIndex, withObject: dataToBeModeified)
-                            //
-                            //  
-                            NSNotificationCenter.defaultCenter().postNotificationName("MatchDataChanged", object: self)
+                            self.previous?.refresh(dat)
                             self.dismissViewControllerAnimated(true) {}
                             
                         })
                     }
-                    
-                    
-                    
-                    
-
-                    
-                    
-                    
                 }
-                
-                
-                
-                
-                
             }
             else{
                 
