@@ -120,6 +120,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
         
         editMatch.selecetedData = matchDetailsData
         editMatch.previous = self
+        editMatch.matchBeingEdited = true
         presentViewController(editMatch, animated: true) {}
     }
     
