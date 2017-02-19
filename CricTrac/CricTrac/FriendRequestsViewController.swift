@@ -52,13 +52,10 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
             for (_, req) in data {
                 var reqData = ReceivedFriendRequest(dataObj: req as! [String : AnyObject])
                 friendsRequestsData.append(reqData)
-                self.RequestsTblview.reloadData()
+                
             }
             
-            
-            
-
-            
+            self.RequestsTblview.reloadData()
             
             // do something here
         }
@@ -78,9 +75,16 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         aCell.FriendCity.text = friendsRequestsData[indexPath.row].City
         aCell.FriendProfileImage.image = extractImages(friendsRequestsData[indexPath.row].ReceivedFrom)
         
-        aCell.confirmBtn.accessibilityIdentifier = UserProfilesData[indexPath.row].id
+        aCell.confirmBtn.accessibilityIdentifier = friendsRequestsData[indexPath.row].ReceivedFrom
         
-        aCell.confirmBtn.addTarget(self, action: #selector(ConfirmFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        aCell.confirmBtn.restorationIdentifier = friendsRequestsData[indexPath.row].RequestId
+        
+        aCell.rejectBtn.restorationIdentifier = friendsRequestsData[indexPath.row].RequestId
+        
+        
+        aCell.confirmBtn.addTarget(self, action: #selector(FriendRequestsViewController.ConfirmFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        aCell.rejectBtn.addTarget(self, action: #selector(FriendRequestsViewController.RejectFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         aCell.backgroundColor = UIColor.clearColor()
         return aCell
@@ -108,48 +112,97 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         
     }
 
-    func ConfirmFriendBtnPressed(sender: UIButton) {
+    func RejectFriendBtnPressed(sender: UIButton){
+        
+        let RequestObjectid = sender.restorationIdentifier
+        
+        DeleteSentAndReceivedFriendRequestData(RequestObjectid!, successBlock: { data in
+            
+            if data == true {
+                if let index = friendsRequestsData.indexOf( {$0.RequestId == RequestObjectid }) {
+                    friendsRequestsData.removeAtIndex(index)
+                }
+                
+                
+                self.RequestsTblview.reloadData()
+            }
+            
+            
+            
+        })
+
+        
+    }
+    
+    public func ConfirmFriendBtnPressed(sender:UIButton!) {
         
         if let FriendUserId = sender.accessibilityIdentifier where FriendUserId != "" {
             
-            if let FriendObject  = UserProfilesData.filter({ $0.id == FriendUserId }).first {
+            var FriendObject = Profile(usrObj: [:])
+            var loggedInUserObject = Profile(usrObj: [:])
+            
+            getProfileInfoById(FriendUserId, sucessBlock: { FriendData in
+                FriendObject = Profile(usrObj: FriendData)
                 
-                if let loggedInUserObject = UserProfilesData.filter({ $0.id == currentUser?.uid }).first {
+                getProfileInfoById((currentUser?.uid)!, sucessBlock: { loggedInUserObjectData in
+                    loggedInUserObject = Profile(usrObj: loggedInUserObjectData)
                     
                     
-                    var AcceptedFriendRequestData = Friends(dataObj: [:])
+                    let RequestObjectid = sender.restorationIdentifier
                     
-                    AcceptedFriendRequestData.City = FriendObject.City
-                    AcceptedFriendRequestData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
-                    AcceptedFriendRequestData.Name = FriendObject.fullName
-                    AcceptedFriendRequestData.FriendRecordIdOther = FriendObject.id
-                    AcceptedFriendRequestData.FriendRecordId = loggedInUserObject.id
-                    AcceptedFriendRequestData.FriendshipDateTime = NSDate().getCurrentTimeStamp() as! String
                     
-                    var AcceptFriendRequestData = Friends(dataObj: [:])
+                    var FriendData = Friends(dataObj: [:])
                     
-                    AcceptFriendRequestData.City = loggedInUserObject.City
-                    AcceptFriendRequestData.Club = loggedInUserObject.PlayerCurrentTeams.joinWithSeparator(",")
-                    AcceptFriendRequestData.Name = loggedInUserObject.fullName
-                    AcceptFriendRequestData.FriendRecordIdOther = loggedInUserObject.id
-                    AcceptFriendRequestData.FriendRecordId = FriendObject.id
-                    AcceptFriendRequestData.FriendshipDateTime = NSDate().getCurrentTimeStamp() as! String
-
-                    AcceptFriendRequest(["AcceptedFriendRequestData": AcceptedFriendRequestData.FriendRequestObject(AcceptedFriendRequestData), "AcceptFriendRequestData": AcceptFriendRequestData.FriendRequestObject(AcceptFriendRequestData)], callback: { data in
+                    FriendData.City = FriendObject.City
+                    FriendData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
+                    FriendData.Name = FriendObject.fullName
+                    FriendData.FriendRecordIdOther = FriendObject.id
+                    FriendData.FriendRecordId = loggedInUserObject.id
+                    FriendData.FriendshipDateTime = NSDate().getCurrentTimeStamp()
+                    
+                    var UserData = Friends(dataObj: [:])
+                    
+                    UserData.City = loggedInUserObject.City
+                    UserData.Club = loggedInUserObject.PlayerCurrentTeams.joinWithSeparator(",")
+                    UserData.Name = loggedInUserObject.fullName
+                    UserData.FriendRecordIdOther = loggedInUserObject.id
+                    UserData.FriendRecordId = FriendObject.id
+                    UserData.FriendshipDateTime = NSDate().getCurrentTimeStamp()
+                    
+                    AcceptFriendRequest(["UserData": UserData.FriendRequestObject(UserData), "FriendData": FriendData.FriendRequestObject(FriendData)], callback: { data in
                         
                         
-                        if let index = UserProfilesData.indexOf( {$0.id == FriendObject.id}) {
-                            UserProfilesData.removeAtIndex(index)
-                        }
+                        DeleteSentAndReceivedFriendRequestData(RequestObjectid!, successBlock: { data in
+                            
+                            if data == true {
+                                if let index = friendsRequestsData.indexOf( {$0.ReceivedFrom == FriendObject.id}) {
+                                    friendsRequestsData.removeAtIndex(index)
+                                }
+                                
+                                
+                                self.RequestsTblview.reloadData()
+                            }
+                            
+                            
+                            
+                        })
                         
                         
-                        self.RequestsTblview.reloadData()
+                        
                         
                     })
-                }
-            }
+                    
+                    
+                    
+                })
+                
+                
+            })
             
-        }
+            
+            
+            
+         }
     }
    
 

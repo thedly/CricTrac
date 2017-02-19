@@ -16,7 +16,7 @@ import Crashlytics
 import FBSDKCoreKit
 import FirebaseDatabase
 import FirebaseAuth
-import GoogleSignIn
+//import GoogleSignIn
 import KRProgressHUD
 
 import SCLAlertView
@@ -112,8 +112,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         let checkFB = FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
-        let checkGoogle = GIDSignIn.sharedInstance().handleURL(url, sourceApplication: sourceApplication,annotation: annotation)
-        return checkGoogle || checkFB
+//        let checkGoogle = GIDSignIn.sharedInstance().handleURL(url, sourceApplication: sourceApplication,annotation: annotation)
+        return /*checkGoogle ||*/ checkFB
         
         //return FBSDKApplicationDelegate.sharedInstance().application( application,  openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }

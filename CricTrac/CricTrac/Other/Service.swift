@@ -135,6 +135,7 @@ func addProfileImageData(profileDp:UIImage){
     let imageData:NSData = UIImageJPEGRepresentation(profileDp, 0.8)!
     
     let metaData = FIRStorageMetadata()
+    
     metaData.contentType = "image/jpg"
     
     
@@ -237,9 +238,12 @@ func addNewTournamentName(tournamnet:String){
 func getAllUserData(sucessBlock:(AnyObject)->Void){
     
     fireBaseRef.child("Users").child(currentUser!.uid).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-        if let data = snapshot.value{
+        if let data = snapshot.value as? [String : AnyObject]{
             
-            sucessBlock(data)
+            var datToBeManipulated = data
+            datToBeManipulated["Id"] = currentUser!.uid
+            
+            sucessBlock(datToBeManipulated)
         }
         else{
             sucessBlock([:])
@@ -259,7 +263,22 @@ func getAllUserProfileInfo(){
         }
     })
 }
-//Users/1Gx1xGkrLchZY9ZRZXZu52Bf8Z43/UserProfile/City
+
+
+func getProfileInfoById(usrId: String, sucessBlock: ([String:AnyObject]) -> Void) {
+    
+    fireBaseRef.child("Users").child(usrId).child("UserProfile").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        if let data = snapshot.value as? [String : AnyObject]{
+            var dataToBeManipulated = data
+            dataToBeManipulated["Id"] = usrId
+            sucessBlock(dataToBeManipulated)
+        }
+        else{
+            sucessBlock([:])
+        }
+    })
+}
+
 
 func fetchFriendDetail(id:String,sucess:(city:String)->Void){
     
@@ -437,6 +456,8 @@ func getAllProfileData(sucessBlock:([String:AnyObject])->Void){
 func getAllProfiles(sucessBlock:([[String:AnyObject]])->Void){
     
     fireBaseRef.child("Users").observeEventType(.Value, withBlock: { (snapshot) in
+        
+        
         var users: [[String: AnyObject]] = []
         if let data: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
             
@@ -446,10 +467,16 @@ func getAllProfiles(sucessBlock:([[String:AnyObject]])->Void){
             
             for (key, value) in data {
                 if var profile = value["UserProfile"] as? [String : AnyObject] {
-                    profile["Id"] = key
                     
-                
-                    users.append(profile)
+                    if let usrProfile = profile["City"] as? String where usrProfile == profileData.City {
+                        
+                        profile["Id"] = key
+                        users.append(profile)
+                        
+                    }
+                    
+                    
+                    
                 }
             }
             
@@ -728,33 +755,46 @@ public func AcceptFriendRequest(data: [String:[String:AnyObject]], callback:(dat
     
     var dataToBeManipulated = data
     
+    // Add friend to user friends list
+    
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Friends").childByAutoId()
-    ref.setValue(dataToBeManipulated["sentRequestData"], withCompletionBlock: { error, newlyCreateddata in
+    ref.setValue(dataToBeManipulated["FriendData"], withCompletionBlock: { error, newlyCreatedUserFriendData in
         
-        var sentcreatedId = [String: AnyObject]()
-        sentcreatedId["FriendRecordId"] = newlyCreateddata.key
+        var UserFriendData = [String: AnyObject]()
+        UserFriendData["FriendRecordId"] = newlyCreatedUserFriendData.key
         
         
-        let receivedRequestRef = fireBaseRef.child("Users").child(dataToBeManipulated["sentRequestData"]!["SentTo"]! as! String).child("Friends").childByAutoId()
         
-        dataToBeManipulated["ReceivedRequestData"]!["FriendRecordId"] = newlyCreateddata.key
-        receivedRequestRef.setValue(data["ReceivedRequestData"], withCompletionBlock: { error, newlyCreatedReceivedRequestData in
+        
+        
+       // Add user reference to Friend's friends list
+        
+        
+        
+        let receivedRequestRef = fireBaseRef.child("Users").child(dataToBeManipulated["FriendData"]!["FriendRecordIdOther"]! as! String).child("Friends").childByAutoId()
+        
+        
+        
+        dataToBeManipulated["UserData"]!["FriendRecordId"] = newlyCreatedUserFriendData.key
+        
+        receivedRequestRef.setValue(data["UserData"], withCompletionBlock: { error, newlyCreatedUserReferenceData in
             var createdId = [String: AnyObject]()
-            createdId["FriendRecordId"] = newlyCreatedReceivedRequestData.key
             
-            createdId["FriendRecordId"] = newlyCreateddata.key
+            createdId["FriendRecordId"] = newlyCreatedUserReferenceData.key
+            
+            createdId["FriendRecordId"] = newlyCreatedUserFriendData.key
             
             
             receivedRequestRef.updateChildValues(createdId)
             
             
-            sentcreatedId["FriendRecordIdOther"] = newlyCreatedReceivedRequestData.key
+            UserFriendData["FriendRecordIdOther"] = newlyCreatedUserReferenceData.key
             
-            ref.updateChildValues(sentcreatedId)
+            ref.updateChildValues(UserFriendData)
             
             
             
-            callback(data: newlyCreatedReceivedRequestData.key)
+            callback(data: newlyCreatedUserReferenceData.key)
         })
         
     })
@@ -815,6 +855,33 @@ func getAllFriendRequests(sucessBlock:([String: AnyObject])->Void){
     })
 }
 
+
+func DeleteSentAndReceivedFriendRequestData(ReceivedRequestId: String, successBlock: Bool -> Void) {
+    
+    
+    fireBaseRef.child("Users").child(currentUser!.uid).child("ReceivedRequest").child(ReceivedRequestId).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let data = snapshot.value as? [String : AnyObject] {
+        
+            let FriendRequestId = data["SentRequestId"] as! String
+            let FriendId = data["ReceivedFrom"] as! String
+            
+            snapshot.ref.removeValue()
+            
+            
+            fireBaseRef.child("Users").child(FriendId).child("SentRequest").child(FriendRequestId).observeSingleEventOfType(.Value, withBlock: { (friendsnapshot) in
+                friendsnapshot.ref.removeValue()
+                successBlock(true)
+            })
+            
+            successBlock(false)
+
+        }
+        successBlock(false)
+        
+    })
+    
+}
 
 func getAllFriends(sucessBlock:([String: AnyObject])->Void){
     

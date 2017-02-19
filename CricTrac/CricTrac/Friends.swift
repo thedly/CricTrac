@@ -12,21 +12,22 @@ class Friends {
     
     var City: String!
     var Club: String!
-    var FriendshipDateTime: String!
+    var FriendshipDateTime: AnyObject!
     var Name: String!
     var UserId: String!
     var FriendRecordIdOther: String!
     var FriendRecordId: String!
     
     init(dataObj: [String: AnyObject]) {
-        self.City = dataObj["City"] as! String ?? "-"
-        self.Club = dataObj["Club"] as! String ?? "-"
-        self.Name = dataObj["Name"] as! String ?? "-"
-        self.FriendshipDateTime =  String(dataObj["FriendshipDateTime"]) ?? "-"
-        self.UserId = dataObj["UserId"] as! String ?? "-"
+        self.City = String(dataObj["City"] ?? "-")
         
-        self.FriendRecordIdOther = dataObj["FriendRecordIdOther"] as! String ?? "-"
-        self.FriendRecordId = dataObj["FriendRecordId"] as! String ?? "-"
+        self.Club = (dataObj["Club"] ?? "-") as! String
+        self.Name = (dataObj["Name"] ?? "-") as! String
+        self.FriendshipDateTime = dataObj["FriendshipDateTime"] ?? "-"
+        self.UserId = String(dataObj["UserId"] ?? "-")
+        
+        self.FriendRecordIdOther = String(dataObj["FriendRecordIdOther"] ?? "-")
+        self.FriendRecordId = String(dataObj["FriendRecordId"] ?? "-")
     }
     
     func FriendRequestObject(datObject: Friends) -> [String: AnyObject] {

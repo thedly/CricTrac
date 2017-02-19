@@ -27,9 +27,6 @@ PODS:
   - Firebase/Messaging (3.11.1):
     - Firebase/Core
     - FirebaseMessaging (= 1.2.1)
-  - Firebase/Storage (3.11.1):
-    - Firebase/Core
-    - FirebaseStorage (= 1.0.5)
   - FirebaseAnalytics (3.6.0):
     - FirebaseCore (~> 3.4)
     - FirebaseInstanceID (~> 1.0)
@@ -103,7 +100,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Messaging
-  - Firebase/Storage
+  - FirebaseStorage
   - GoogleSignIn
   - KeychainSwift (from `https://github.com/marketplacer/keychain-swift.git`, branch `swift_2_3`)
   - KRProgressHUD (from `https://github.com/krimpedance/KRProgressHUD.git`, branch `swift2.3`)
@@ -172,6 +169,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 96918c1bf505efa50c4f72957018dd3452090c9c
   XLPagerTabStrip: 9191deaa2336735b7c47beb21e42be537fa4242a
 
-PODFILE CHECKSUM: b47e95e7eae3b5626eb4b6041973bb11e958f8c4
+PODFILE CHECKSUM: fd172c06f147352996806d319435a300b812e8a0
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.0.1
