@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import SCLAlertView
 
 class APostTableViewCell: UITableViewCell {
 
@@ -22,10 +23,13 @@ class APostTableViewCell: UITableViewCell {
     @IBOutlet weak var deleteButton: UIButton!
     
     
+    
+    
     var postId:String?
     var totalLikeCount = 0
     var index:Int?
     var currentUserHasLikedThePost = false
+    var parent:Deletable?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -83,6 +87,35 @@ class APostTableViewCell: UITableViewCell {
     func addLikeToDataArray(likeArray:[String:[String:String]]){
         
         timelineData![index!]["Likes"] = JSON(likeArray)
+    }
+    
+    
+    @IBAction func deletePost(sender: UIButton){
+        
+        
+        
+                let appearance = SCLAlertView.SCLAppearance(
+                    showCloseButton: false
+                )
+                
+                let alertView = SCLAlertView(appearance: appearance)
+                
+                alertView.addButton("OK", target:self, selector:#selector(APostTableViewCell.deletePostFromFB))
+                
+                alertView.addButton("Cancel", target:self, selector:#selector(APostTableViewCell.cancel))
+                
+                alertView.showNotice("Warning", subTitle: "All Data will be lost if you continue")
+    }
+    
+    func deletePostFromFB(){
+        if let value = postId{
+            setIsDeletedToOne(value)
+        }
+        parent?.deletePost(index!)
+    }
+    
+    func cancel(){
+        
     }
     
     override func setSelected(selected: Bool, animated: Bool) {

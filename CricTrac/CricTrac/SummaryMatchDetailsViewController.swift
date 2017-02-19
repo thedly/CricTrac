@@ -96,21 +96,22 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
     func deleteMatch(){
         
         KRProgressHUD.show(progressHUDStyle: .White, message: "Deleting...")
-        let matchKey = matchDetailsData["key"]! as! String
-        
-        deleteMatchData(matchKey) { (error) in
+        if let matchKey = matchDetailsData["MatchId"] as? String{
             
-            KRProgressHUD.dismiss()
+            deleteMatchData(matchKey) { (error) in
+                
+                KRProgressHUD.dismiss()
+                
+                if error != nil{
+                    SCLAlertView().showError("Error",subTitle:error!.localizedDescription)
+                }
+                else{
+                    NSNotificationCenter.defaultCenter().postNotificationName("MatchDataChanged", object: self)
+                    self.dismissViewControllerAnimated(true, completion: { })
+                }
+            }
             
-            if error != nil{
-                SCLAlertView().showError("Error",subTitle:error!.localizedDescription)
-            }
-            else{
-                NSNotificationCenter.defaultCenter().postNotificationName("MatchDataChanged", object: self)
-                self.dismissViewControllerAnimated(true, completion: { })
-            }
         }
-        
     }
     
     

@@ -18,3 +18,8 @@ protocol previousRefershable{
     
     func refresh(data:AnyObject)
 }
+
+protocol Deletable {
+    
+    func deletePost(index:Int)
+}

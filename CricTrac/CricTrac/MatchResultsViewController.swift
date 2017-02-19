@@ -152,9 +152,12 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         
         var firstScoreVal = ""
         
-        if let val = firstScoreText{
+        if let val = firstScoreText?.text where val != ""{
             
-            firstScoreVal = val.textVal
+            firstScoreVal = val
+        }else{
+            
+            firstScoreVal = "0"
         }
         
         var firstWicketsVal = ""
@@ -172,16 +175,22 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         
         var secondScoreVal = ""
         
-        if let val = secondScoreText{
+        if let val = secondScoreText?.text where val != ""{
             
-            secondScoreVal = val.textVal
+            secondScoreVal = val
+        }else{
+            
+            secondScoreVal = "0"
         }
         
-        var secondWicketsVal = ""
+        var secondWicketsVal = "0"
         
-        if let val = secondWicketsText{
+        if let val = secondWicketsText?.text where val != ""{
             
-            secondWicketsVal = val.textVal
+            secondWicketsVal = val
+        }else{
+            
+            secondWicketsVal = "0"
         }
         
         var resultVal = ""
@@ -191,18 +200,23 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             resultVal = val.textVal
         }
         
-        var firstOversVal = ""
+        var firstOversVal = "0"
         
-        if let val = firstOversText{
+        if let val = firstOversText?.text where val != ""{
             
-            firstOversVal = val.textVal
+            firstOversVal = val
+        }else{
+            
+            firstOversVal = "0"
         }
         
-        var secondOversVal = ""
+        var secondOversVal = "0"
         
-        if let val = secondOversText{
+        if let val = secondOversText?.text where val != ""{
             
-            secondOversVal = val.textVal
+            secondOversVal = val
+        }else{
+            secondOversVal = "0"
         }
         
         var AchievementsVal = ""
@@ -212,7 +226,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             AchievementsVal = val.textVal
         }
         
-        return ["TossWonBy":tossVal,"FirstBatting":firstBatVal,"FirstBattingScore":firstScoreVal,"FirstBattingWickets":firstWicketsVal,"SecondBatting":secondBatVal, "SecondBattingScore":secondScoreVal,"SecondBattingWickets":secondBatVal,"Result":resultVal,"FirstBattingOvers":firstOversVal,"SecondBattingOvers":secondOversVal,"Achievements":AchievementsVal]
+        return ["TossWonBy":tossVal,"FirstBatting":firstBatVal,"FirstBattingScore":firstScoreVal,"FirstBattingWickets":firstWicketsVal,"SecondBatting":secondBatVal, "SecondBattingScore":secondScoreVal,"SecondBattingWickets":secondWicketsVal,"Result":resultVal,"FirstBattingOvers":firstOversVal,"SecondBattingOvers":secondOversVal,"Achievements":AchievementsVal]
     }
     
     
