@@ -54,7 +54,41 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     
     var BowlingData:[String:String]{
         
-        return ["OversBowled":OversBowled,"WicketsTaken":WicketsTaken,"RunsGiven":RunsGiven,"NoBalls":NoBalls,"Wides":Wides, "Maidens": Maidens]
+        
+        var bowledOvers = ""
+        var takenWickets = ""
+        var givenRuns = ""
+        var noBalls = ""
+        var wides = ""
+        var maidens = ""
+        
+        if let val = OversBowled{
+            
+            bowledOvers = val
+        }
+        
+        if let val = WicketsTaken{
+            takenWickets = val
+        }
+        
+        if let val = RunsGiven{
+            givenRuns = val
+        }
+        
+        if let val = NoBalls{
+            noBalls = val
+        }
+        
+        if let val = Wides{
+            wides = val
+        }
+        
+        if let val = Maidens{
+            maidens = val
+        }
+        
+        
+        return ["OversBowled":bowledOvers,"WicketsTaken":takenWickets,"RunsGiven":givenRuns,"NoBalls":noBalls,"Wides":wides, "Maidens": maidens]
     }
     
     var allRequiredFieldsHaveFilledProperly: Bool {
@@ -294,8 +328,39 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     
     var BattingData:[String:String]{
         
+        var takenRuns = ""
+        var facedBalls = ""
+        var fours = ""
+        var sixes = ""
+        var position = ""
+        var dismissal = ""
         
-        return ["RunsTaken":RunsTaken,"BallsFaced":BallsFaced,"Fours":Fours,"Sixes":Sixes,"Position":Position,"Dismissal":Dismissal]
+        if let val = RunsTaken{
+            
+            takenRuns = val
+        }
+        
+        if let val = BallsFaced{
+            facedBalls = val
+        }
+        
+        if let val = Fours{
+            fours = val
+        }
+        
+        if let val = Sixes{
+            sixes = val
+        }
+        
+        if let val = Position{
+            position = val
+        }
+        
+        if let val = Dismissal{
+            dismissal = val
+        }
+        
+        return ["RunsTaken":takenRuns,"BallsFaced":facedBalls,"Fours":fours,"Sixes":sixes,"Position":position,"Dismissal":dismissal]
     }
     
     func loadEditData(){

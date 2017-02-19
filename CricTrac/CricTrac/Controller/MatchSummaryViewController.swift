@@ -21,13 +21,15 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         self.view.backgroundColor = currentTheme.boxColor
     }
     
+    override func viewWillAppear(animated: Bool) {
+        getMatchData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setBackgroundColor()
-        
-        //setUIBackgroundTheme(self.view)
-        getMatchData()
+       // getMatchData()
     matchSummaryTable.registerNib(UINib.init(nibName:"SummaryDetailsCell", bundle: nil), forCellReuseIdentifier: "SummaryDetailsCell")
         matchSummaryTable.allowsSelection = true
         matchSummaryTable.separatorStyle = .None
@@ -75,11 +77,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     func makeCells(data: [String: AnyObject]) {
         
         self.matchData = data
-        
+        self.matches.removeAll()
         for (key,val) in data{
-            
-            //var dataDict = val as! [String:String]
-            //dataDict["key"] = key
             
             if  var value = val as? [String : AnyObject]{
                 

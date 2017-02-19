@@ -1,4 +1,4 @@
-//
+    //
 //  SummaryMatchDetailsViewController.swift
 //  CricTrac
 //
@@ -10,7 +10,7 @@ import UIKit
 import SCLAlertView
 import KRProgressHUD
 
-class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeChangeable {
+class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeChangeable,previousRefershable {
 
     @IBOutlet weak var matchDetailsTbl: UITableView!
     
@@ -119,7 +119,8 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
         let editMatch = viewController("AddMatchDetailsViewController") as! AddMatchDetailsViewController
         
         editMatch.selecetedData = matchDetailsData
-        
+        editMatch.previous = self
+        editMatch.matchBeingEdited = true
         presentViewController(editMatch, animated: true) {}
     }
     
@@ -160,11 +161,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
         
         setColorForViewsWithSameTag(battingView)
         setColorForViewsWithSameTag(bowlingView)
-        
-//        for view in viewsWithSameTagId {
-//            view?.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: bottomColor))
-//        }
-        
+
         self.summarizedView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
         self.summarizedView.alpha = 0.8
         initializeView()
@@ -209,11 +206,11 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
     func initializeView() {
         
         
-        if let Runs = matchDetailsData["RunsTaken"] {
+        if let runs = matchDetailsData["RunsTaken"] as? String{
             
             let formattedString = NSMutableAttributedString()
             
-            formattedString.bold(Runs as! String, fontName: appFont_black, fontSize: 83)
+            formattedString.bold(runs , fontName: appFont_black, fontSize: 83)
             
             if let Balls = matchDetailsData["BallsFaced"] {
                 formattedString.bold("(\(Balls))", fontName: appFont_bold, fontSize: 30)
@@ -222,33 +219,30 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
             batRuns.attributedText = formattedString
             
         }
-        if let Fours = matchDetailsData["Fours"] {
-            fours.text = Fours as! String
+        if let Fours = matchDetailsData["Fours"] as? String{
+            fours.text = Fours
         }
-        if let Sixes = matchDetailsData["Sixes"] {
-            sixes.text = Sixes as! String
+        if let Sixes = matchDetailsData["Sixes"] as? String{
+            sixes.text = Sixes
         }
         
-        if let eco = matchDetailsData["Economy"] {
-            economy.text = eco as! String
+        if let eco = matchDetailsData["Economy"] as? String {
+            economy.text = eco
         }
-        if let position = matchDetailsData["Position"] {
-            ballsFaced.text = position as! String
+        if let position = matchDetailsData["Position"] as? String {
+            ballsFaced.text = position
         }
-        if let Wides = matchDetailsData["Wides"] {
-            wides.text = Wides as! String
+        if let Wides = matchDetailsData["Wides"] as? String{
+            wides.text = Wides
         }
-        if let Noballs = matchDetailsData["NoBalls"] {
-            noBalls.text = Noballs as! String
+        if let Noballs = matchDetailsData["NoBalls"] as? String{
+            noBalls.text = Noballs
         }
         
         
         
         if let dat = matchDetailsData["MatchDate"] {
         
-            
-            
-            
             let dateImageAttachment = NSTextAttachment()
             dateImageAttachment.image = UIImage(named: "Calendar-100")
             let dateAttachmentString = NSAttributedString(attachment: dateImageAttachment)
@@ -257,11 +251,6 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
             let groundImageAttachment = NSTextAttachment()
             groundImageAttachment.image = UIImage(named: "Marker-100 (1)")
             let groundAttachmentString = NSAttributedString(attachment: groundImageAttachment)
-            
-            
-            
-            
-            
             
             let formattedString = NSMutableAttributedString()
             formattedString.appendAttributedString(dateAttachmentString)
@@ -277,38 +266,20 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
             
             
             matchDateAndVenue.attributedText = formattedString
-            
-            
-            
-            //self.date.text = dat as! String
         }
         
         
-        if let dat = matchDetailsData["Achievements"] {
-            self.achievements.text = dat as! String
+        if let dat = matchDetailsData["Achievements"] as? String {
+            self.achievements.text = dat
         }
         
         
         calculateStrikeRate()
         
-        if let Overs: String = matchDetailsData["Maidens"] as! String { // in overs eg: 2, 3, 4
-            
-//            if let oversInt = Int(Overs) {
-//                
-//                let totalBalls = 6*oversInt
-//                
-//                let oversFromBallsInt = Int(totalBalls/6) // 12, 18
-//                let oversFromBallsRealRemaining = totalBalls - (6*oversFromBallsInt)
-//                
-//                overs.text = String("\(oversFromBallsInt).\(oversFromBallsRealRemaining)")
-//            }
-            
+        if let Overs: String = matchDetailsData["Maidens"] as? String { // in overs eg: 2, 3, 4
             overs.text = Overs
             
         }
-        
-        
-        
         
         if (bowlingViewHidden == true) {
             self.bowlingView.hidden = true
@@ -322,22 +293,6 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
             self.screenShotHeightConstraint.constant -= 240
         }
 
-//        if let Ground = matchDetailsData["Ground"] {
-//            ground.text = "@ \(Ground)"
-//        }
-        
-        
-        
-//        if let toss = matchDetailsData["Toss"]{
-//            
-//            if toss != "-" {
-//                self.toss.text = "Toss won by \(toss)"
-//            }
-//            else
-//            {
-//                self.toss.text = "Toss details NA"
-//            }
-//        }
         
         if let tournament = matchDetailsData["Tournament"]{
             
@@ -386,29 +341,24 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
                 tournamentText = formattedString.bold("\(tournament)", fontName: appFont_black, fontSize: 17).bold("\n\(group)", fontName: appFont_bold, fontSize: 13)
                 
             }
-            
-            
             tournamentName.attributedText = tournamentText
-            
-            
-            
         }
         
         var firstTeamScore = "-"
         var secondTeamScore = "-"
         
-        if let hTeam: String = matchDetailsData["Team"] as! String {
+        if let hTeam: String = matchDetailsData["Team"] as? String {
             if hTeam != "-" {
-                homeTeam.text = hTeam as! String
+                homeTeam.text = hTeam
             }
             else
             {
                 homeTeam.text = "Unknown"
             }
             
-            if let opponent: String = matchDetailsData["Opponent"] as! String {
+            if let opponent: String = matchDetailsData["Opponent"] as? String {
                 if opponent != "-" {
-                    awayTeam.text = opponent as! String
+                    awayTeam.text = opponent
                 }
                 else
                 {
@@ -477,67 +427,19 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
                     
                    formattedString.bold("(\(oversFromBallsInt).\(oversFromBallsRealRemaining))", fontName: appFont_bold, fontSize: 30)
                 }
-                
-                
-                
             }
             
             totalWickets.attributedText = formattedString
-            
-            
-//            if let RunsGiven = matchDetailsData["RunsGiven"] {
-//                
-//                 totalWickets.text = "\(wicketstaken)-\(RunsGiven)"
-//            }
-//            else
-//            
-//            {
-//                totalWickets.text = "\(wicketstaken)-NA"
-//            }
-            
-            
-            
-            
-            
-           
+        }
+    
+    }
+    
+    func refresh(data:AnyObject){
+        if let value = data as? [String : AnyObject]{
+            matchDetailsData = value
+            initializeView()
         }
         
         
-//        if let Position = matchDetailsData["Position"] {
-//            batPos.text = Position
-//        }
-//        if let Dismissal = matchDetailsData["Dismissal"] {
-//            dismissal.text = Dismissal.lowercaseString
-//        }
-//        if let OversBalled = matchDetailsData["OversBalled"] {
-//            oversBowled.text = OversBalled
-//        }
-        
-        
-//        if let date = matchDetailsData["Date"]{
-//            let dateArray = date.characters.split{$0 == "/"}.map(String.init)
-//            self.date.text = "\(dateArray[0]) \(dateArray[1].monthName) \(dateArray[2])"
-//        }
-    
     }
-    
-    // MARK: - Table Delegate methods
-    
-    
-    
-    //MARK: - Service Calls 
-    
-    
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

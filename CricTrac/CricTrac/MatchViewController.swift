@@ -38,7 +38,75 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     
     var data:[String:String]{
         
-        return ["MatchDate":dateText.textVal,"Team":teamText.textVal,"Opponent":opponentText.textVal,"Ground":groundText.textVal,"MatchOvers":oversText.textVal,"Tournament":tournamentText.textVal, "AgeGroup": ageGroup.textVal, "Level": playingLevel.textVal, "Stage": stage.textVal, "Venue": venueText.textVal ]
+        var matchDateVal = ""
+        
+        if let val = dateText{
+            
+            matchDateVal = val.textVal
+        }
+        
+        var teamVal = ""
+        
+        if let val = teamText{
+            
+            teamVal = val.textVal
+        }
+        
+        var opponentVal = ""
+        
+        if let val = opponentText{
+            
+            opponentVal = val.textVal
+        }
+        
+        var groundVal = ""
+        
+        if let val = groundText{
+            
+            groundVal = val.textVal
+        }
+        var oversVal = ""
+        
+        if let val = oversText{
+            
+            oversVal = val.textVal
+        }
+        
+        var tournamentVal = ""
+        
+        if let val = tournamentText{
+            
+            tournamentVal = val.textVal
+        }
+        
+        var ageGroupVal = ""
+        
+        if let val = ageGroup{
+            
+            ageGroupVal = val.textVal
+        }
+        
+        var playingLevelVal = ""
+        
+        if let val = playingLevel{
+            
+            playingLevelVal = val.textVal
+        }
+        
+        var stageVal = ""
+        
+        if let val = stage{
+            
+            stageVal = val.textVal
+        }
+        
+        var venueVal = ""
+        
+        if let val = venueText{
+            
+            venueVal = val.textVal
+        }
+        return ["MatchDate":matchDateVal,"Team":teamVal,"Opponent":opponentVal,"Ground":groundVal,"MatchOvers":oversVal,"Tournament":tournamentVal, "AgeGroup":ageGroupVal, "Level": playingLevelVal, "Stage":stageVal, "Venue": venueVal]
     }
     
     func changeThemeSettigs() {
@@ -55,17 +123,17 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         
         
         
-        self.stage.delegate = self
-        self.dateText.delegate = self
-        self.teamText.delegate = self
-        self.opponentText.delegate = self
-        self.groundText.delegate = self
-        self.oversText.delegate = self
-        self.tournamentText.delegate = self
-        
-        self.venueText.delegate = self
-        self.ageGroup.delegate = self
-        self.playingLevel.delegate = self
+//        self.stage.delegate = self
+//        self.dateText.delegate = self
+//        self.teamText.delegate = self
+//        self.opponentText.delegate = self
+//        self.groundText.delegate = self
+//        self.oversText.delegate = self
+//        self.tournamentText.delegate = self
+//        
+//        self.venueText.delegate = self
+//        self.ageGroup.delegate = self
+//        self.playingLevel.delegate = self
         
         
         
@@ -93,27 +161,57 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     
     func loadEditData(){
         
-        dateText.textVal = parent!.selecetedData!["MatchDate"]! as! String
-        tournamentText.textVal = (parent!.selecetedData!["Tournament"] ?? "") as! String
-        teamText.textVal = parent!.selecetedData!["Team"]! as! String
-        opponentText.textVal = parent!.selecetedData!["Opponent"]! as! String
-        groundText.textVal = parent!.selecetedData!["Ground"]! as! String
+        if  let selectedData = parent?.selecetedData{
         
-        venueText.textVal = parent!.selecetedData!["Venue"]! as! String
         
-        oversText.textVal = parent!.selecetedData!["MatchOvers"]! as! String
+        if let val = selectedData["MatchDate"] as? String{
+            
+            dateText.textVal = val
+        }
         
-        if let ag = parent!.selecetedData!["AgeGroup"] {
-            ageGroup.textVal = ag as! String
+        if let val = selectedData["Tournament"] as? String{
+            
+            tournamentText.textVal = val
+        }
+        
+        if let val = selectedData["Team"] as? String{
+            
+            teamText.textVal = val
+        }
+        
+        if let val = selectedData["Opponent"] as? String{
+            
+            opponentText.textVal = val
+        }
+        
+        if let val = selectedData["Ground"] as? String{
+            
+            groundText.textVal = val
+        }
+        
+        if let val = selectedData["Venue"] as? String{
+            
+            venueText.textVal = val
+        }
+        
+        if let val = selectedData["MatchOvers"] as? String{
+            
+            oversText.textVal = val
+        }
+        
+        
+        
+        if let ag = selectedData["AgeGroup"] as? String{
+            ageGroup.textVal = ag
         }
 
-        if let pl = parent!.selecetedData!["Level"] {
-            playingLevel.textVal = pl as! String
+        if let pl = selectedData["Level"] as? String {
+            playingLevel.textVal = pl
         }
-        if let pl = parent!.selecetedData!["Stage"] {
-            stage.textVal = pl as! String
+        if let pl = selectedData["Stage"] as? String {
+            stage.textVal = pl
         }
-        
+        }
         
     }
     

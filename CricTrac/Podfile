@@ -31,4 +31,6 @@ pod 'XLPagerTabStrip', '~> 5.0'
 pod 'AnimatedTextInput', '~> 0.3.0'
 pod 'SwiftCountryPicker'
 
+pod 'KeychainSwift', git: "https://github.com/marketplacer/keychain-swift.git", branch: "swift_2_3"
+
 end
