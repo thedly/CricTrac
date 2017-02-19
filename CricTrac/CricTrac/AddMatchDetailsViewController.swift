@@ -153,11 +153,35 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             if let _ = resVC?.view{
                data += resVC.data
             }
+                
+                
         }
            
-           
+           if let val =  data["FirstBatting"] where val == ""{
             
-            //OppositTeams
+            data["FirstBatting"] =  data["Team"]
+            
+            }
+            
+            if let val =  data["SecondBatting"] where val == ""{
+                
+                data["SecondBatting"] =  data["Opponent"]
+                
+            }
+            
+            if let val =  data["TossWonBy"] where val == "-"{
+                
+                data["TossWonBy"] =  data["Team"]
+                
+            }
+            
+            if let val =  data["Result"] where val == "-"{
+                
+                data["Result"] =  "Won"
+                
+            }
+            
+            
             if !dataHasChangedAfterLastSave {
                 if !matchBeingEdited{
                     

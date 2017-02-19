@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class TimeLineViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable,PostSendable{
+class TimeLineViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable,PostSendable,Deletable{
     
     @IBOutlet weak var timeLineTable: UITableView!
     
@@ -59,13 +59,6 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     
-//    func changeThemeSettigs(){
-//        currentTheme = cricTracTheme.currentTheme
-//        timeLineTable.backgroundView?.backgroundColor = UIColor.clearColor()
-//        timeLineTable.backgroundColor = UIColor.clearColor()
-//        timeLineTable.reloadData()
-//    }
-    
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.boxColor
@@ -94,11 +87,9 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 timeLineData = [JSON]()
             }
             
-            // let pageKey = timelineData!.dictionaryValue["pageKey"]!.stringValue as AnyObject
             
             timeLineData.insert(JSON(data["timeline"]!), atIndex: 0)
             
-            //let newResultDict:[String:AnyObject] = ["timeline":timelineDta,"pageKey":pageKey]
             
             timelineData = JSON(timeLineData)
             
@@ -214,8 +205,6 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         
         if indexPath.section == 0{
             let cell = timeLineTable.dequeueReusableCellWithIdentifier("addpost", forIndexPath: indexPath) as! AddPostTableViewCell
-            // cell.newPostButton.addTarget(self, action: #selector(addPost) , forControlEvents: .TouchUpInside)
-            //newPostText = cell.newPostText
             acell =  cell
         }
         else{
@@ -240,16 +229,25 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 
                 let  postCell =  timeLineTable.dequeueReusableCellWithIdentifier("aPost", forIndexPath: indexPath) as! APostTableViewCell
                 
+                postCell.parent = self
+                
                 let friendId = data["OwnerID"].stringValue
                 
-                if let postedBy = data["PostedBy"].string  where postedBy == currentUser!.uid{
-                    
-                    postCell.deleteButton.hidden = false
-                    
-                }else{
-                    postCell.deleteButton.hidden = true
-                }
                 
+                 let postedBy = data["PostedBy"].stringValue
+                if postedBy == "CricTrac"{
+                    postCell.postOwnerName.text = "CricTrac"
+                    postCell.deleteButton.hidden = true
+                }else{
+                    postCell.postOwnerName.text = data.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
+                    if let postedBy = data["PostedBy"].string  where postedBy == currentUser!.uid{
+                        
+                        postCell.deleteButton.hidden = false
+                        
+                    }else{
+                        postCell.deleteButton.hidden = true
+                    }
+                }
                 
                 fetchFriendDetail(friendId, sucess: { (data) in
                     
@@ -263,7 +261,6 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 })
                 postCell.totalLikeCount = 0
                 postCell.post.text = data.dictionaryValue["Post"]?.stringValue
-                postCell.postOwnerName.text = data.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
                 postCell.index = indexPath.section-1
                 var commentsCount = 0
                 
@@ -387,6 +384,11 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         aView.backgroundColor = UIColor.clearColor()
         
         return aView
+    }
+    
+    func deletePost(index:Int){
+        timelineData!.arrayObject?.removeAtIndex(index)
+        timeLineTable.reloadData()
     }
     
     @IBAction func exit(sender: UIButton) {

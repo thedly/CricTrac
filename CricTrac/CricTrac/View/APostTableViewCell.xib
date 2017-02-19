@@ -101,6 +101,9 @@
                         <state key="normal" title="DELETE">
                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="deletePost:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Aoi-Jr-mrD"/>
+                        </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aLx-nn-Rhs">
                         <rect key="frame" x="13" y="212" width="526" height="1"/>
@@ -152,7 +155,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="commentCount" destination="HT5-zA-qQ7" id="Had-c4-nAz"/>
-                <outlet property="deleteButton" destination="eyX-jy-j45" id="pGS-YC-reC"/>
+                <outlet property="deleteButton" destination="eyX-jy-j45" id="tFJ-zd-5tk"/>
                 <outlet property="likeButton" destination="sao-ME-HsA" id="Pbc-eS-yt8"/>
                 <outlet property="likeCount" destination="LYJ-aE-uqd" id="31I-ad-R46"/>
                 <outlet property="post" destination="asJ-kQ-Jqv" id="YEO-VY-ALn"/>
