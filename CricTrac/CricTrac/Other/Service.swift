@@ -849,6 +849,13 @@ func getAllFriends(sucessBlock:([String: AnyObject])->Void){
     
         }
 
+
+func getFriendRequestById(id: String) -> [String: String]{
+    if let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("ReceivedRequest").child(id) as? [String: String] {
+        return ref
+    }
+    return [:]
+}
    
 
 

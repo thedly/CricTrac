@@ -5518,11 +5518,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CricTrac/FriendRequestsViewController.swift"
-            timestampString = "507825492.735582"
+            timestampString = "509169100.589224"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
             landmarkName = "tableView(_:numberOfRowsInSection:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -5925,6 +5925,102 @@
                   offsetFromSymbolStart = "217">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CricTrac/Other/Service.swift"
+            timestampString = "508862215.390811"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "745"
+            endingLineNumber = "745"
+            landmarkName = "AcceptFriendRequest(_:callback:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CricTrac.AcceptFriendRequest (Swift.Dictionary&lt;Swift.String, Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;&gt;, callback : (data : Swift.String) -&gt; ()) -&gt; ()"
+                  moduleName = "CricTrac"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tejashedly/Documents/CricTrac/crictrac_ios/CricTrac/CricTrac/Other/Service.swift"
+                  timestampString = "508870210.225473"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "745"
+                  endingLineNumber = "745"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CricTrac.(AcceptFriendRequest (Swift.Dictionary&lt;Swift.String, Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;&gt;, callback : (data : Swift.String) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "CricTrac"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tejashedly/Documents/CricTrac/crictrac_ios/CricTrac/CricTrac/Other/Service.swift"
+                  timestampString = "508870210.225571"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "745"
+                  endingLineNumber = "745"
+                  offsetFromSymbolStart = "30">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CricTrac/FriendRequestsViewController.swift"
+            timestampString = "509169100.589224"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "ConfirmFriendBtnPressed(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CricTrac/FriendRequestsViewController.swift"
+            timestampString = "509169100.589224"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "ConfirmFriendBtnPressed(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CricTrac/FriendRequestsViewController.swift"
+            timestampString = "509169100.589224"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "getCellForRow(_:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

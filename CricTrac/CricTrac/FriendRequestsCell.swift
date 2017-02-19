@@ -11,6 +11,7 @@ import UIKit
 class FriendRequestsCell: UITableViewCell {
     @IBOutlet weak var rejectBtn: UIButton!
     
+    @IBOutlet weak var confirmBtn: UIButton!
     @IBOutlet weak var FriendProfileImage: UIImageView!
     @IBOutlet weak var FriendName: UILabel!
     @IBOutlet weak var FriendCity: UILabel!
@@ -29,7 +30,6 @@ class FriendRequestsCell: UITableViewCell {
         self.rejectBtn.layer.borderWidth = 2.0
         
         self.rejectBtn.layer.borderColor = UIColor.whiteColor().CGColor
-        
         
         
     }

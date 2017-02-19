@@ -24,57 +24,28 @@
                 <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="We3-Yk-pYO">
                     <rect key="frame" x="10" y="10" width="518" height="90"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="DELHI PUBLIC SCHOOL" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGY-xF-mWO">
-                            <rect key="frame" x="77" y="32" width="97" height="13"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DELHI PUBLIC SCHOOL" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGY-xF-mWO">
+                            <rect key="frame" x="77" y="35" width="126" height="17"/>
                             <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="13"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="E8R-yd-gKu">
-                            <rect key="frame" x="423" y="17" width="65" height="66"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8uw-ie-Jm4">
-                                    <rect key="frame" x="0.0" y="0.0" width="65" height="28"/>
-                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="28" id="7AU-tW-mzP"/>
-                                        <constraint firstAttribute="width" constant="65" id="vTG-FP-a0y"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="12"/>
-                                    <state key="normal" title="CONFIRM">
-                                        <color key="titleColor" red="0.40784313729999999" green="0.73333333329999995" blue="0.0078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
-                                    </state>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                            <integer key="value" value="10"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
-                                    </userDefinedRuntimeAttributes>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1NE-7K-Jr1">
-                                    <rect key="frame" x="0.0" y="38" width="65" height="28"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="28" id="dto-2E-XhD"/>
-                                        <constraint firstAttribute="width" constant="65" id="och-bC-0MM"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="12"/>
-                                    <state key="normal" title="REJECT">
-                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    </state>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                            <integer key="value" value="10"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
-                                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                </button>
-                            </subviews>
-                        </stackView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="SAJITH KUMAR" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0n2-7X-gh7">
-                            <rect key="frame" x="77" y="13" width="79" height="16"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8uw-ie-Jm4">
+                            <rect key="frame" x="458" y="11" width="50" height="28"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="12"/>
+                            <state key="normal" title="CONFIRM">
+                                <color key="titleColor" red="0.40784313729999999" green="0.73333333329999995" blue="0.0078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="10"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAJITH KUMAR" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0n2-7X-gh7">
+                            <rect key="frame" x="77" y="13" width="99" height="19"/>
                             <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="15"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -92,23 +63,42 @@
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1NE-7K-Jr1">
+                            <rect key="frame" x="458" y="39" width="50" height="28"/>
+                            <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="12"/>
+                            <state key="normal" title="REJECT">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="10"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                    <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
                     </subviews>
                     <constraints>
                         <constraint firstItem="map-2l-fvr" firstAttribute="centerY" secondItem="We3-Yk-pYO" secondAttribute="centerY" id="3BE-1X-o4S"/>
+                        <constraint firstItem="8uw-ie-Jm4" firstAttribute="leading" secondItem="1NE-7K-Jr1" secondAttribute="leading" id="4NP-sl-dOC"/>
                         <constraint firstItem="FGY-xF-mWO" firstAttribute="trailing" secondItem="0n2-7X-gh7" secondAttribute="trailing" id="4fS-Ga-8Iv"/>
                         <constraint firstItem="FGY-xF-mWO" firstAttribute="trailing" secondItem="0n2-7X-gh7" secondAttribute="trailing" id="B99-cL-udJ"/>
+                        <constraint firstItem="8uw-ie-Jm4" firstAttribute="centerY" secondItem="We3-Yk-pYO" secondAttribute="centerY" constant="-20" id="DgR-mE-0Wm"/>
                         <constraint firstItem="FGY-xF-mWO" firstAttribute="top" secondItem="0n2-7X-gh7" secondAttribute="bottom" id="DqJ-rY-GMG"/>
                         <constraint firstItem="map-2l-fvr" firstAttribute="leading" secondItem="We3-Yk-pYO" secondAttribute="leading" constant="5" id="JL2-fq-IGQ"/>
                         <constraint firstItem="0n2-7X-gh7" firstAttribute="top" secondItem="map-2l-fvr" secondAttribute="top" constant="18" id="JQe-wz-1yl"/>
+                        <constraint firstAttribute="trailing" secondItem="8uw-ie-Jm4" secondAttribute="trailing" constant="10" id="OfX-K0-Agr"/>
                         <constraint firstItem="FGY-xF-mWO" firstAttribute="leading" secondItem="0n2-7X-gh7" secondAttribute="leading" id="Zb2-8T-900"/>
+                        <constraint firstItem="1NE-7K-Jr1" firstAttribute="top" secondItem="8uw-ie-Jm4" secondAttribute="bottom" id="etB-Lg-Kuk"/>
                         <constraint firstItem="0n2-7X-gh7" firstAttribute="leading" secondItem="map-2l-fvr" secondAttribute="trailing" constant="8" id="iBr-qT-idq"/>
                         <constraint firstItem="FGY-xF-mWO" firstAttribute="leading" secondItem="0n2-7X-gh7" secondAttribute="leading" id="ify-wU-qW3"/>
-                        <constraint firstItem="E8R-yd-gKu" firstAttribute="centerY" secondItem="map-2l-fvr" secondAttribute="centerY" id="jqi-Mz-Kc4"/>
                         <constraint firstItem="0n2-7X-gh7" firstAttribute="top" secondItem="map-2l-fvr" secondAttribute="top" id="lmS-fs-Yko"/>
                         <constraint firstItem="0n2-7X-gh7" firstAttribute="leading" secondItem="map-2l-fvr" secondAttribute="trailing" constant="8" id="mQY-FU-i5L"/>
-                        <constraint firstAttribute="trailing" secondItem="E8R-yd-gKu" secondAttribute="trailing" constant="30" id="uBO-83-Upg"/>
                         <constraint firstItem="0n2-7X-gh7" firstAttribute="leading" secondItem="map-2l-fvr" secondAttribute="trailing" constant="8" id="wKo-6L-RzQ"/>
                         <constraint firstItem="FGY-xF-mWO" firstAttribute="top" secondItem="0n2-7X-gh7" secondAttribute="bottom" constant="3" id="yBP-I0-9lQ"/>
+                        <constraint firstItem="8uw-ie-Jm4" firstAttribute="trailing" secondItem="1NE-7K-Jr1" secondAttribute="trailing" id="yf0-Oq-by8"/>
                         <constraint firstItem="FGY-xF-mWO" firstAttribute="centerX" secondItem="0n2-7X-gh7" secondAttribute="centerX" id="zw5-ca-Twh"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
@@ -144,6 +134,7 @@
                 <outlet property="FriendName" destination="0n2-7X-gh7" id="oAM-Ne-JyT"/>
                 <outlet property="FriendProfileImage" destination="map-2l-fvr" id="0cW-Nm-HCt"/>
                 <outlet property="baseView" destination="We3-Yk-pYO" id="klb-w1-YNE"/>
+                <outlet property="confirmBtn" destination="8uw-ie-Jm4" id="2UC-Xm-hH8"/>
                 <outlet property="rejectBtn" destination="1NE-7K-Jr1" id="oF6-h7-DuQ"/>
             </connections>
             <point key="canvasLocation" x="326" y="270"/>
