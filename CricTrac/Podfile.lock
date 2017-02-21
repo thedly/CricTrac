@@ -53,6 +53,11 @@ PODS:
   - FirebaseStorage (1.0.5):
     - FirebaseAnalytics (~> 3.5)
     - GTMSessionFetcher/Core (~> 1.1)
+  - Google/Core (3.0.3):
+    - FirebaseAnalytics (~> 3.2)
+  - Google/SignIn (3.0.3):
+    - Google/Core
+    - GoogleSignIn (~> 4.0)
   - GoogleInterchangeUtilities (1.2.2):
     - GoogleSymbolUtilities (~> 1.1)
   - GoogleSignIn (4.0.2):
@@ -101,7 +106,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Messaging
   - FirebaseStorage
-  - GoogleSignIn
+  - Google/SignIn
   - KeychainSwift (from `https://github.com/marketplacer/keychain-swift.git`, branch `swift_2_3`)
   - KRProgressHUD (from `https://github.com/krimpedance/KRProgressHUD.git`, branch `swift2.3`)
   - KYDrawerController (from `https://github.com/ykyouhei/KYDrawerController.git`, branch `develop`)
@@ -154,6 +159,7 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
   FirebaseMessaging: acf66347e43c5637c697060c3001d25c809a4131
   FirebaseStorage: 5738284835edb57f0e81d4ae5832bb17c1e4b5fa
+  Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
   GoogleSignIn: d7ad83f13480e1f30453471d00d19b5293ac46af
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
@@ -169,6 +175,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 96918c1bf505efa50c4f72957018dd3452090c9c
   XLPagerTabStrip: 9191deaa2336735b7c47beb21e42be537fa4242a
 
-PODFILE CHECKSUM: fd172c06f147352996806d319435a300b812e8a0
+PODFILE CHECKSUM: a9b43a27a3cb2646d6f793be5c097af0285d46c5
 
 COCOAPODS: 1.0.1

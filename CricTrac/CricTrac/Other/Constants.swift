@@ -180,6 +180,7 @@ let themeColors = [
 let defaultTheme = "MeanGreen"
 let defaultProfileImage = "sachin"
 let DashboardDataUpdateUrl = "http://crictracserver.azurewebsites.net/Users/"
+let FriendSuggstionUrl = "http://crictracserver.azurewebsites.net/suggestions/"
 let topColorDefault = themeColors[CurrentTheme]!["topColor"]!
 let bottomColorDefault = themeColors[CurrentTheme]!["bottomColor"]!
 let appFont_black = "SourceSansPro-Black"
