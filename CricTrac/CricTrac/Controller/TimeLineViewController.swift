@@ -118,9 +118,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     
                     if let timelineArrayObj = timelineData?.arrayObject, let dictionaryTimelineObj = data.dictionaryValue["timeline"], let dictionaryTimelineArrayObj = dictionaryTimelineObj.arrayObject {
                         
-                        
                         timelineData = JSON(timelineArrayObj + dictionaryTimelineArrayObj)
-                        
                     }
                     
                     
@@ -234,6 +232,12 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 if postedBy == "CricTrac"{
                     postCell.postOwnerName.text = "CricTrac"
                     postCell.deleteButton.hidden = true
+                    
+                    if let val = data["PostType"].stringValue{
+                        
+                        postCell.postOwnerCity.text = val
+                    }
+                    
                 }else{
                     postCell.postOwnerName.text = data.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
                     if let postedBy = data["OwnerID"].string  where postedBy == currentUser!.uid{
@@ -243,18 +247,20 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     }else{
                         postCell.deleteButton.hidden = true
                     }
-                }
-                
-                fetchFriendDetail(friendId, sucess: { (data) in
                     
-                    friendsCity[friendId] = data
-                    dispatch_async(dispatch_get_main_queue(),{
+                    fetchFriendDetail(friendId, sucess: { (data) in
                         
-                        postCell.postOwnerCity.text = data
+                        friendsCity[friendId] = data
+                        dispatch_async(dispatch_get_main_queue(),{
+                            
+                            postCell.postOwnerCity.text = data
+                            
+                        })
                         
                     })
-                    
-                })
+                }
+                
+               
                 postCell.totalLikeCount = 0
                 postCell.post.text = data.dictionaryValue["Post"]?.stringValue
                 postCell.index = indexPath.section-1
