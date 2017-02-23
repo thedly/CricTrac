@@ -116,7 +116,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     pageKey = data.dictionaryValue["pageKey"]?.stringValue
                     
                     
-                    if let timelineArrayObj = timelineData!.arrayObject, let dictionaryTimelineObj = data.dictionaryValue["timeline"], let dictionaryTimelineArrayObj = dictionaryTimelineObj.arrayObject {
+                    if let timelineArrayObj = timelineData?.arrayObject, let dictionaryTimelineObj = data.dictionaryValue["timeline"], let dictionaryTimelineArrayObj = dictionaryTimelineObj.arrayObject {
                         
                         
                         timelineData = JSON(timelineArrayObj + dictionaryTimelineArrayObj)
@@ -209,11 +209,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         }
         else{
             
-            
-            
             let data = timelineData!.arrayValue[indexPath.section-1]
-            
-            
             
             if let imageurl = data.dictionaryValue["postImage"]?.string {
                 
@@ -240,7 +236,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     postCell.deleteButton.hidden = true
                 }else{
                     postCell.postOwnerName.text = data.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
-                    if let postedBy = data["PostedBy"].string  where postedBy == currentUser!.uid{
+                    if let postedBy = data["OwnerID"].string  where postedBy == currentUser!.uid{
                         
                         postCell.deleteButton.hidden = false
                         
