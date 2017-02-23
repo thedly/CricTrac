@@ -47,6 +47,9 @@ class CTCountryPicker: NSObject {
                 
                 if let pickedCountry = CountriesList.filter({$0.name == newValue}).first as? Country {
                     countryPicker.pickedCountry = pickedCountry
+                    
+                   
+                    
                 }
                 
                 

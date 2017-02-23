@@ -20,8 +20,8 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
     @IBAction func nextBtnPressed(sender: AnyObject) {
         
         
-        var nav1 = UINavigationController()
-        var usrViewController = viewControllerFrom("Main", vcid: "UserInfoViewController") as! UserInfoViewController
+        let nav1 = UINavigationController()
+        let usrViewController = viewControllerFrom("Main", vcid: "UserInfoViewController") as! UserInfoViewController
         usrViewController.userProfile = profileData.UserProfile
         
         
@@ -41,8 +41,8 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
             toViewController = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
         }
         
-        nav1.viewControllers.append(toViewController)
-        nav1.viewControllers.append(usrViewController)
+       // nav1.viewControllers.append(toViewController)
+        //nav1.viewControllers.append(usrViewController)
 
 //        NextVC = toViewController
 //        nextViewController.NextVC = toViewController
@@ -57,7 +57,8 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
  */
         let window = UIApplication.sharedApplication().delegate?.window
         let vc = window!!.rootViewController
-        vc?.presentViewController(nav1, animated: true, completion: nil)
+       // vc?.presentViewController(nav1, animated: true, completion: nil)
+        self.navigationController?.pushViewController(usrViewController, animated: true)
     }
     
     @IBOutlet weak var playerTextView: radioSelectView!
@@ -99,11 +100,40 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
     }
     
     
+    func setNavigationBarProperties(){
+        var currentTheme:CTTheme!
+        currentTheme = cricTracTheme.currentTheme
+        let menuButton: UIButton = UIButton(type:.Custom)
+        menuButton.setTitle("Logout", forState:.Normal)
+        menuButton.titleLabel?.font = UIFont(name: appFont_black, size: 16)
+        menuButton.addTarget(self, action: #selector(popAndLogout), forControlEvents: UIControlEvents.TouchUpInside)
+        menuButton.frame = CGRectMake(0, 0, 80, 40)
+        let leftbarButton = UIBarButtonItem(customView: menuButton)
+        let addNewMatchButton: UIButton = UIButton(type:.Custom)
+        addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
+        addNewMatchButton.setTitle("NEXT", forState:.Normal)
+        addNewMatchButton.titleLabel?.font = UIFont(name: appFont_black, size: 16)
+        addNewMatchButton.addTarget(self, action: #selector(nextBtnPressed), forControlEvents: UIControlEvents.TouchUpInside)
+        let righttbarButton = UIBarButtonItem(customView: addNewMatchButton)
+        
+        //assign button to navigationbar
+        
+        navigationItem.leftBarButtonItem = leftbarButton
+        navigationItem.rightBarButtonItem = righttbarButton
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        title = "CREATE PROFILE"
+        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        navigationController!.navigationBar.titleTextAttributes = titleDict
+    }
     
+    func popAndLogout() {
+        logout(self)
+    }
     
     
     @IBAction func disPressCancel(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
+          logout(self)
+       // dismissViewControllerAnimated(true, completion: nil)
        // self.dismissViewControllerAnimated(true, completion: nil)
        // self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -193,7 +223,7 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
         //setUIBackgroundTheme(self.view)
         setupControls();
         
-        
+        setNavigationBarProperties()
         // Do any additional setup after loading the view.
     }
     

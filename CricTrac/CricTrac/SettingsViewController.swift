@@ -29,10 +29,27 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         
         initializeView()
-        
+        setNavigationBarProperties()
         // Do any additional setup after loading the view.
     }
     
+    func setNavigationBarProperties(){
+        var currentTheme:CTTheme!
+        currentTheme = cricTracTheme.currentTheme
+        let menuButton: UIButton = UIButton(type:.Custom)
+        menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
+        menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+        menuButton.frame = CGRectMake(0, 0, 40, 40)
+        let leftbarButton = UIBarButtonItem(customView: menuButton)
+        navigationItem.leftBarButtonItem = leftbarButton
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        title = "SETTINGS"
+        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        navigationController!.navigationBar.titleTextAttributes = titleDict
+    }
+    @IBAction func didMenuButtonTapp(sender: UIButton){
+        sliderMenu.setDrawerState(.Opened, animated: true)
+    }
     
     func initializeView() {
         
@@ -102,10 +119,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             viewCtrl.pageHeaderText = (settingsMenuData[indexPath.row]["title"] as! String).uppercaseString
             
             presentViewController(viewCtrl, animated: true, completion: nil)
+        }else if vcName == "" {
+            logout(self)
         }
         else
         {
-            var vc  = storyboard.instantiateViewControllerWithIdentifier(vcName! as! String)
+            let vc  = storyboard.instantiateViewControllerWithIdentifier(vcName! as! String)
             presentViewController(vc, animated: true, completion: nil)
         }
     }

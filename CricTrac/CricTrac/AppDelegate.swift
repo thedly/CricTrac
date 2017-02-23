@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         setDefaultAppThems()
+        UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: UIFont(name: appFont_black, size: 20)!]
        IQKeyboardManager.sharedManager().enable = true
         return true
     }

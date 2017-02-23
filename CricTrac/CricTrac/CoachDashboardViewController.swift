@@ -78,7 +78,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         self.PlayerLocation.attributedText = locationText
         self.userProfileImage.image = LoggedInUserImage
         
-        
+        setNavigationBarProperties()
         // Do any additional setup after loading the view.
     }
 
@@ -96,6 +96,25 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         //baseView.backgroundColor = UIColor.clearColor()
     }
 
+    @IBAction func didMenuButtonTapp(sender: UIButton){
+        sliderMenu.setDrawerState(.Opened, animated: true)
+    }
+    
+    func setNavigationBarProperties(){
+        var currentTheme:CTTheme!
+        currentTheme = cricTracTheme.currentTheme
+        let menuButton: UIButton = UIButton(type:.Custom)
+        menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
+        menuButton.titleLabel?.font = UIFont(name: appFont_black, size: 16)
+        menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+        menuButton.frame = CGRectMake(0, 0, 40, 40)
+        let leftbarButton = UIBarButtonItem(customView: menuButton)
+        navigationItem.leftBarButtonItem = leftbarButton
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        title = "DASHBOARD"
+        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        navigationController!.navigationBar.titleTextAttributes = titleDict
+    }
     
     // MARK: - Collection view delegates
     

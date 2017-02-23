@@ -52,6 +52,7 @@ let settingsMenuData = [
     ["title":"Terms & Conditions","vc":"StaticPageViewController", "img": "Menu_Statistics", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/info/TermsofUse.htm" ],
     ["title":"Privacy policy","vc":  "StaticPageViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/info/PrivacyPolicy.htm" ],
     ["title":"About","vc":  "ProfileBaseViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false],
+     ["title":"Logout","vc":  "", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false]
 ]
 
 

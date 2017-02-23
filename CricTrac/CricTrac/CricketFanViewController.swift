@@ -47,7 +47,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
     
     var selectedText: UITextField!
     
-    var currentwindow = UIWindow()
+    var window = UIWindow(frame: UIScreen.mainScreen().bounds)
     
     var data:[String:AnyObject]{
         
@@ -64,10 +64,8 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
     
     var scrollViewTop:CGFloat!
 
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
-        
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         if profileData.FirstName.length > 0 {
             
             self.favouritePlayerList = profileData.FavoritePlayers
@@ -80,6 +78,12 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
             self.InterestedSports.reloadData()
             self.SupportingTeams.reloadData()
         }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        
     }
 
     func changeThemeSettigs() {
@@ -124,7 +128,36 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
         scrollView.setContentOffset(CGPointZero, animated: true)
         scrollViewTop = scrollView.frame.origin.y
 
+        if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let currentwindow = app.window {
+            
+            window = currentwindow
+        }
+        setNavigationBarProperties()
+    }
+    
+    func setNavigationBarProperties(){
+        var currentTheme:CTTheme!
+        currentTheme = cricTracTheme.currentTheme
+        let menuButton: UIButton = UIButton(type:.Custom)
+        menuButton.setImage(UIImage(named: "Back-100"), forState: UIControlState.Normal)
+        menuButton.addTarget(self, action: #selector(backBtnPressed), forControlEvents: UIControlEvents.TouchUpInside)
+        menuButton.frame = CGRectMake(0, 0, 40, 40)
+        let leftbarButton = UIBarButtonItem(customView: menuButton)
+        let addNewMatchButton: UIButton = UIButton(type:.Custom)
+        addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
+        addNewMatchButton.setTitle("SAVE", forState:.Normal)
+        addNewMatchButton.titleLabel?.font = UIFont(name: appFont_bold, size: 15)
+        addNewMatchButton.addTarget(self, action: #selector(CreateFanBtnPressed), forControlEvents: UIControlEvents.TouchUpInside)
+        let righttbarButton = UIBarButtonItem(customView: addNewMatchButton)
         
+        //assign button to navigationbar
+        
+        navigationItem.leftBarButtonItem = leftbarButton
+        navigationItem.rightBarButtonItem = righttbarButton
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        title = "PERSONAL INTERESTS"
+        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        navigationController!.navigationBar.titleTextAttributes = titleDict
     }
 
     @IBAction func CreateFanBtnPressed(sender: AnyObject) {
@@ -153,16 +186,18 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
                 updateMetaData(userImageMetaData)
                 
                 
-                if self.currentwindow.rootViewController == sliderMenu {
+                if self.window.rootViewController == sliderMenu {
                     
                     
-                    self.currentwindow.rootViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+                    let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+                    self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
                 }
                 else
                 {
                     let rootViewController: UIViewController = getRootViewController()
-                    self.currentwindow.rootViewController = rootViewController
-                    
+                    self.window.rootViewController = rootViewController
+                   // sliderMenu.mainViewController = rootViewController
+
                 }
                 
             }
@@ -172,7 +207,8 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
     }
     
     @IBAction func backBtnPressed(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
+        //dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

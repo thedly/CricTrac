@@ -43,8 +43,11 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         super.viewDidLoad()
         
         setBackgroundColor()
-        username.text = "bharathi92m@gmail.com"
-        password.text = "qwerty"
+//        username.text = "crictracvirat@gmail.com"
+//        password.text = "crictrac"\
+     //   username.text = "bharathi92m@gmail.com"
+       // password.text = "qwerty"
+
         //setUIBackgroundTheme(self.view)
         
         
@@ -375,8 +378,9 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
             if !profileData.userExists {
                 
                 KRProgressHUD.dismiss()
-                window.rootViewController = profileVC
-                self.presentViewController(profileVC, animated: true) { KRProgressHUD.dismiss() }
+               // window.rootViewController = profileVC
+                let nav = UINavigationController(rootViewController: profileVC)
+                self.presentViewController(nav, animated: true) { KRProgressHUD.dismiss() }
             }
             else
             {

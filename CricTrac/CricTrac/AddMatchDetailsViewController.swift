@@ -44,15 +44,45 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         dataHasChangedAfterLastSave = false
         //setUIBackgroundTheme(self.view)
         setBackgroundColor()
+        setNavigationBarProperties()
     }
     
     func dataChangedAfterLastSave(){
         
         dataHasChangedAfterLastSave = true
-        saveButton.setTitle("Save", forState: .Normal)
+        let button = navigationItem.rightBarButtonItem
+        let myBtn : UIButton?
+        if((button!.customView?.isKindOfClass(UIButton)) != nil)
+        {
+            myBtn = button!.customView as? UIButton
+            myBtn!.setTitle("SAVE", forState: .Normal)
+        }
     }
     
-    
+    func setNavigationBarProperties(){
+        var currentTheme:CTTheme!
+        currentTheme = cricTracTheme.currentTheme
+        let menuButton: UIButton = UIButton(type:.Custom)
+        menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
+        menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+        menuButton.frame = CGRectMake(0, 0, 40, 40)
+        let leftbarButton = UIBarButtonItem(customView: menuButton)
+        let addNewMatchButton: UIButton = UIButton(type:.Custom)
+        addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
+        addNewMatchButton.setTitle("SAVE", forState:.Normal)
+        addNewMatchButton.titleLabel?.font = UIFont(name: appFont_bold, size: 15)
+        addNewMatchButton.addTarget(self, action: #selector(didTapSave), forControlEvents: UIControlEvents.TouchUpInside)
+        let righttbarButton = UIBarButtonItem(customView: addNewMatchButton)
+        
+        //assign button to navigationbar
+        
+        navigationItem.leftBarButtonItem = leftbarButton
+        navigationItem.rightBarButtonItem = righttbarButton
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        title = "ADD MATCH"
+        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        navigationController!.navigationBar.titleTextAttributes = titleDict
+    }
     
     
     func getUserData(){
@@ -314,7 +344,15 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             }
             else{
                 
-                saveButton.setTitle("Done", forState: .Normal)
+                let button = navigationItem.rightBarButtonItem
+                //(navigationItem.rightBarButtonItem.customView.subviews.lastObject)
+                let myBtn : UIButton?
+                if((button!.customView?.isKindOfClass(UIButton)) != nil)
+                {
+                    myBtn = button!.customView as? UIButton
+                    myBtn!.setTitle("DONE", forState: .Normal)
+                    
+                }
                 dataHasChangedAfterLastSave = false
             }
             
@@ -368,7 +406,9 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         return false
     }
     
-    
+    @IBAction func didMenuButtonTapp(sender: UIButton){
+        sliderMenu.setDrawerState(.Opened, animated: true)
+    }
     
     /*
      // MARK: - Navigation

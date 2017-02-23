@@ -67,19 +67,50 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
+        
         self.view.backgroundColor = currentTheme.boxColor
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setBackgroundColor()
+        setNavigationBarProperties()
+        self.navigationController?.interactivePopGestureRecognizer?.enabled = false
+      //  sliderMenu.screenEdgePanGestreEnabled = false
         //setUIBackgroundTheme(self.view)
-        initializeView()
-        self.navigationController?.navigationBarHidden = true
+       // self.navigationController?.navigationBarHidden = true
         // Do any additional setup after loading the view.
     }
-    
-    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        initializeView()
+        setBackgroundColor()
+
+
+    }
+    func setNavigationBarProperties(){
+        var currentTheme:CTTheme!
+        currentTheme = cricTracTheme.currentTheme
+        let menuButton: UIButton = UIButton(type:.Custom)
+        menuButton.setImage(UIImage(named: "Back-100"), forState: UIControlState.Normal)
+        menuButton.addTarget(self, action: #selector(didTapCancel), forControlEvents: UIControlEvents.TouchUpInside)
+        menuButton.frame = CGRectMake(0, 0, 40, 40)
+        let leftbarButton = UIBarButtonItem(customView: menuButton)
+        let addNewMatchButton: UIButton = UIButton(type:.Custom)
+        addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
+        addNewMatchButton.setTitle("NEXT", forState:.Normal)
+        addNewMatchButton.titleLabel?.font = UIFont(name: appFont_bold, size: 15)
+        addNewMatchButton.addTarget(self, action: #selector(addUserBtnPressed), forControlEvents: UIControlEvents.TouchUpInside)
+        let righttbarButton = UIBarButtonItem(customView: addNewMatchButton)
+        
+        //assign button to navigationbar
+        
+        navigationItem.leftBarButtonItem = leftbarButton
+        navigationItem.rightBarButtonItem = righttbarButton
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        title = "PERSONAL INFO"
+        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        navigationController!.navigationBar.titleTextAttributes = titleDict
+    }
     var data:[String:String]{
         
         return ["FirstName": firstName.textVal.trim(),"LastName":lastName.textVal.trim(),"DateOfBirth":dateOfBirth.textVal,"Email":emailId.textVal,"Mobile":mobile.textVal.trim(),"Gender":gender.textVal,"Country":country.textVal,"State":state.textVal,"City":city.textVal]
@@ -102,12 +133,10 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         
         
         if userProfileInfo != nil {
-            
+            userProfiles.removeAll()
             for profile in userProfileType.allValues {
                 userProfiles.append(profile.rawValue)
             }
-            
-            
             userProfileInfo.delegate = self
         }
         
@@ -187,35 +216,62 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     }
     
     @IBAction func didTapCancel(sender: UIButton) {
-        dismissViewControllerAnimated(true) {}
+        //dismissViewControllerAnimated(true) {}
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     @IBAction func addUserBtnPressed(sender: AnyObject) {
         if validateProfileData() {
             
-            
-            
-            if profileData.userExists && profileData.UserProfile != userProfileInfo.textVal {
+//            if profileData.PlayingRole {
+//
+//            }
+            if userProfileInfo != nil {
+                if profileData.UserProfile != userProfileInfo.text {
+                    //profileData.UserProfile
+                    profileData.UserProfile = userProfileInfo.text!
+                    profileChanged = true
+                    let appearance = SCLAlertView.SCLAppearance(
+                        showCloseButton: false
+                    )
+                    
+                    let alertView = SCLAlertView(appearance: appearance)
+                    
+                    alertView.addButton("OK", target:self, selector:#selector(UserInfoViewController.continueToDismiss))
+                    
+                    alertView.addButton("Cancel", action: { })
+                    
+                    alertView.showNotice("Warning", subTitle: "Changing role will delete all existing data")
+                }else {
+                    profileChanged = false
+                    continueToDismiss()
+                }
+            }else {
                 
-                profileChanged = true
-                let appearance = SCLAlertView.SCLAppearance(
-                    showCloseButton: false
-                )
-                
-                let alertView = SCLAlertView(appearance: appearance)
-                
-                alertView.addButton("OK", target:self, selector:#selector(UserInfoViewController.continueToDismiss))
-                
-                alertView.addButton("Cancel", action: { })
-                
-                alertView.showNotice("Warning", subTitle: "Changing role will delete all existing data")
+                if profileData.userExists {
+                    
+                    profileChanged = true
+                    let appearance = SCLAlertView.SCLAppearance(
+                        showCloseButton: false
+                    )
+                    
+                    let alertView = SCLAlertView(appearance: appearance)
+                    
+                    alertView.addButton("OK", target:self, selector:#selector(UserInfoViewController.continueToDismiss))
+                    
+                    alertView.addButton("Cancel", action: { })
+                    
+                    alertView.showNotice("Warning", subTitle: "Changing role will delete all existing data")
+                    
+                }
+                else
+                {
+                    profileChanged = false
+                    continueToDismiss()
+                }
                 
             }
-            else
-            {
-                profileChanged = false
-                continueToDismiss()
-            }
+            
             
         }
         
@@ -234,8 +290,8 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         
         
       
-        if userProfile != nil {
-            switch userProfile {
+     //   if profileData != nil {
+            switch profileData.UserProfile {
             case userProfileType.Player.rawValue :
                 
                 var vc = viewControllerFrom("Main", vcid: "PlayerExperienceViewController") as! PlayerExperienceViewController
@@ -268,14 +324,14 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
                 NextVC = vc
             }
             
-        }
+     //   }
         
         
         
         let toViewController = NextVC
-        toViewController!.transitioningDelegate = self.transitionManager
-        presentViewController(toViewController!, animated: true, completion: nil)
-        
+      //  toViewController!.transitioningDelegate = self.transitionManager
+        //presentViewController(toViewController!, animated: true, completion: nil)
+        self.navigationController?.pushViewController(toViewController, animated: true)
         
         
         //dismissViewControllerAnimated(true, completion: nil)
@@ -284,7 +340,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     
     func validateProfileData() -> Bool {
         //var detailsValid = true
-        if !(firstName.text?.hasDataPresent)! || firstName.text?.length > 25 {
+        if !(firstName.text?.hasDataPresent)! {
             (firstName as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
             (firstName as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
             firstName.becomeFirstResponder()
@@ -379,7 +435,12 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        return true
+        if textField == state || textField == country {
+            return false
+        }else {
+              return true
+        }
+      
     }
     
     
@@ -434,6 +495,7 @@ extension UserInfoViewController:UITextFieldDelegate{
             ctDatePicker.showPicker(self, inputText: textField)
         }
         else if textField == country {
+            state.text = ""
             ctCountryPicker.showPicker(self, inputText: textField)
             //state.text = String()
         }
@@ -446,7 +508,14 @@ extension UserInfoViewController:UITextFieldDelegate{
             
             
         else if textField == state {
-            ctStatePicker.showPicker(self, inputText: textField, iso: ctCountryPicker.SelectedISO)
+            if country.text?.length >= 0 {
+                state.userInteractionEnabled = true
+                city.text = ""
+                ctStatePicker.showPicker(self, inputText: textField, iso: ctCountryPicker.SelectedISO)
+            }else {
+               state.userInteractionEnabled = false
+            }
+            
         }
         else if  textField == gender{
             ctDataPicker = DataPicker()
@@ -473,10 +542,13 @@ extension UserInfoViewController:UITextFieldDelegate{
         let newLength = textField.text!.characters.count + string.characters.count - range.length
         if textField == firstName || textField == lastName {
             return newLength <= nameCharacterLimit // Bool
-        } else {
+        }else if textField == state || textField == country {
+            return false
+        }else {
             return true // Bool
         }
     }
+    
 }
 
 

@@ -230,6 +230,35 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
     }
     
+
+    func setNavigationBarProperties(){
+        
+            var currentTheme:CTTheme!
+
+            currentTheme = cricTracTheme.currentTheme
+            
+            let menuButton: UIButton = UIButton(type:.Custom)
+            menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
+            menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+            menuButton.frame = CGRectMake(0, 0, 40, 40)
+            let leftbarButton = UIBarButtonItem(customView: menuButton)
+            
+            
+        
+            //assign button to navigationbar
+            
+            navigationItem.leftBarButtonItem = leftbarButton
+            navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+            title = "TIMELINE"
+            let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+            navigationController!.navigationBar.titleTextAttributes = titleDict
+    
+    }
+    
+    
+    @IBAction func didMenuButtonTapp(sender: UIButton){
+        sliderMenu.setDrawerState(.Opened, animated: true)
+    }
     
     func stopAnimation() {
         if self.activityInd.isAnimating() {
@@ -306,6 +335,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         //setBackgroundColor()
         
         // Do any additional setup after loading the view.
+        setNavigationBarProperties()
     }
     
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
