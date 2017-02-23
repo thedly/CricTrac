@@ -233,10 +233,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     postCell.postOwnerName.text = "CricTrac"
                     postCell.deleteButton.hidden = true
                     
-                    if let val = data["PostType"].stringValue{
-                        
-                        postCell.postOwnerCity.text = val
-                    }
+                    postCell.postOwnerCity.text = data["PostType"].stringValue
                     
                 }else{
                     postCell.postOwnerName.text = data.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
