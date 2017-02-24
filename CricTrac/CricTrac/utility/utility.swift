@@ -11,7 +11,7 @@ import KYDrawerController
 import FirebaseAuth
 import SwiftyJSON
 import SCLAlertView
-
+import KRProgressHUD
 import SwiftCountryPicker
 import KeychainSwift
 
@@ -344,6 +344,8 @@ public func logout(currentController: UIViewController) {
         currentwindow = window
     }
     
+    
+    
     currentwindow.rootViewController?.dismissViewControllerAnimated(true, completion: nil)
     
     let loginBaseViewController = viewControllerFrom("Main", vcid: "LoginViewController")
@@ -351,6 +353,8 @@ public func logout(currentController: UIViewController) {
     currentwindow.rootViewController = loginBaseViewController
     
     currentwindow.makeKeyAndVisible()
+    
+    
     
     //currentController.presentViewController(loginBaseViewController, animated: true) {
         //SCLAlertView().showInfo("Logout",subTitle: "Data saved is cleared, Kill the app and relaunch for now") 

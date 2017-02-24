@@ -753,7 +753,7 @@ public func getAllFriendSuggestions(callback:()->Void) {
             let json = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments)
                 
                 
-                getAllProfiles( json["timeline"] as! [String] ,sucessBlock: { resultObj in
+                getAllProfiles( json["suggestions"] as! [String] ,sucessBlock: { resultObj in
                     UserProfilesData.removeAll()
                     for profile in resultObj {
                         
@@ -816,10 +816,10 @@ public func AcceptFriendRequest(data: [String:[String:AnyObject]], callback:(dat
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Friends").childByAutoId()
     ref.setValue(dataToBeManipulated["FriendData"], withCompletionBlock: { error, newlyCreatedUserFriendData in
         
-        var UserFriendData = [String: AnyObject]()
-        UserFriendData["FriendRecordId"] = newlyCreatedUserFriendData.key
         
+        dataToBeManipulated["FriendData"]!["FriendRecordId"] = newlyCreatedUserFriendData.key  // user's friend recored id
         
+        dataToBeManipulated["UserData"]!["FriendRecordIdOther"] = newlyCreatedUserFriendData.key
         
         
         
@@ -827,26 +827,26 @@ public func AcceptFriendRequest(data: [String:[String:AnyObject]], callback:(dat
         
         
         
-        let receivedRequestRef = fireBaseRef.child("Users").child(dataToBeManipulated["FriendData"]!["FriendRecordIdOther"]! as! String).child("Friends").childByAutoId()
+        let receivedRequestRef = fireBaseRef.child("Users").child(dataToBeManipulated["FriendData"]!["UserId"]! as! String).child("Friends").childByAutoId()
         
         
-        
-        dataToBeManipulated["UserData"]!["FriendRecordId"] = newlyCreatedUserFriendData.key
-        
-        receivedRequestRef.setValue(data["UserData"], withCompletionBlock: { error, newlyCreatedUserReferenceData in
-            var createdId = [String: AnyObject]()
-            
-            createdId["FriendRecordId"] = newlyCreatedUserReferenceData.key
-            
-            createdId["FriendRecordId"] = newlyCreatedUserFriendData.key
+        receivedRequestRef.setValue(dataToBeManipulated["UserData"], withCompletionBlock: { error, newlyCreatedUserReferenceData in
+           
             
             
-            receivedRequestRef.updateChildValues(createdId)
+            
+            dataToBeManipulated["FriendData"]!["FriendRecordIdOther"] = newlyCreatedUserReferenceData.key
+            
+            dataToBeManipulated["UserData"]!["FriendRecordId"] = newlyCreatedUserReferenceData.key // user's recored id other
+
             
             
-            UserFriendData["FriendRecordIdOther"] = newlyCreatedUserReferenceData.key
             
-            ref.updateChildValues(UserFriendData)
+            
+            // Friend's recored id
+            
+            receivedRequestRef.updateChildValues(dataToBeManipulated["UserData"]!)
+            ref.updateChildValues(dataToBeManipulated["FriendData"]!)
             
             
             
@@ -938,6 +938,39 @@ func DeleteSentAndReceivedFriendRequestData(ReceivedRequestId: String, successBl
     })
     
 }
+
+func DeleteFriendRequestData(FriendReqId: String, successBlock: Bool -> Void) {
+    
+    
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Friends").child(FriendReqId).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let data = snapshot.value as? [String : AnyObject] {
+            
+            let FriendId = data["UserId"] as! String
+            let FriendRequestId = data["FriendRecordIdOther"] as! String
+            
+            snapshot.ref.removeValue()
+            
+            
+            fireBaseRef.child("Users").child(FriendId).child("Friends").child(FriendRequestId).observeSingleEventOfType(.Value, withBlock: { (friendsnapshot) in
+                friendsnapshot.ref.removeValue()
+                successBlock(true)
+            })
+            
+            //successBlock(false)
+            
+        }
+        //successBlock(false)
+
+        
+    })
+
+    
+    
+}
+
+
+
 
 func getAllFriends(sucessBlock:([String: AnyObject])->Void){
     

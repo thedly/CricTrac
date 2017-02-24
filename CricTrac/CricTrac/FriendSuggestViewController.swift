@@ -139,13 +139,33 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
             
             if let FriendObject  = UserProfilesData.filter({ $0.id == FriendUserId }).first {
                 
-                if let loggedInUserObject = UserProfilesData.filter({ $0.id == currentUser?.uid }).first {
+                getProfileInfoById((currentUser?.uid)!, sucessBlock: { data in
+                
+                    var loggedInUserObject = Profile(usrObj: data)
                     
                     
                     var sendFriendRequestData = SentFriendRequest()
                     
                     sendFriendRequestData.City = FriendObject.City
-                    sendFriendRequestData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
+                    
+                    
+                    switch FriendObject.UserProfile {
+                    case userProfileType.Player.rawValue :
+                        sendFriendRequestData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
+                            break;
+                    case userProfileType.Coach.rawValue :
+                        sendFriendRequestData.Club = FriendObject.CoachCurrentTeams.joinWithSeparator(",")
+                        break;
+                    case userProfileType.Fan.rawValue :
+                        sendFriendRequestData.Club = FriendObject.SupportingTeams.joinWithSeparator(",")
+                        break;
+                    default:
+                        sendFriendRequestData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
+                        break;
+
+                    }
+                    
+                    
                     sendFriendRequestData.Name = FriendObject.fullName
                     sendFriendRequestData.SentTo = FriendObject.id
                     sendFriendRequestData.SentDateTime = NSDate().getCurrentTimeStamp()
@@ -156,7 +176,23 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                     
                     
                     receiveFriendRequestData.City = loggedInUserObject.City
-                    receiveFriendRequestData.Club = loggedInUserObject.PlayerCurrentTeams.joinWithSeparator(",")
+                    
+                    switch loggedInUserObject.UserProfile {
+                    case userProfileType.Player.rawValue :
+                        receiveFriendRequestData.Club = loggedInUserObject.PlayerCurrentTeams.joinWithSeparator(",")
+                        break;
+                    case userProfileType.Coach.rawValue :
+                        receiveFriendRequestData.Club = loggedInUserObject.CoachCurrentTeams.joinWithSeparator(",")
+                        break;
+                    case userProfileType.Fan.rawValue :
+                        receiveFriendRequestData.Club = loggedInUserObject.SupportingTeams.joinWithSeparator(",")
+                        break;
+                    default:
+                        receiveFriendRequestData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
+                        break;
+                        
+                    }
+
                     receiveFriendRequestData.Name = loggedInUserObject.fullName
                     receiveFriendRequestData.ReceivedFrom = loggedInUserObject.id
                     receiveFriendRequestData.ReceivedDateTime = NSDate().getCurrentTimeStamp()
@@ -175,11 +211,9 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                         
                         
                     })
-                    
-                    
-                    
-                    
-                }
+
+                
+                }) //UserProfilesData.filter({ $0.id == currentUser?.uid }).first {
                 
                 
             }

@@ -19,15 +19,15 @@ class Friends {
     var FriendRecordId: String!
     
     init(dataObj: [String: AnyObject]) {
-        self.City = String(dataObj["City"] ?? "-")
+        self.City = (dataObj["City"] ?? "-") as! String
         
         self.Club = (dataObj["Club"] ?? "-") as! String
         self.Name = (dataObj["Name"] ?? "-") as! String
         self.FriendshipDateTime = dataObj["FriendshipDateTime"] ?? "-"
-        self.UserId = String(dataObj["UserId"] ?? "-")
+        self.UserId = (dataObj["UserId"] ?? "-") as! String
         
-        self.FriendRecordIdOther = String(dataObj["FriendRecordIdOther"] ?? "-")
-        self.FriendRecordId = String(dataObj["FriendRecordId"] ?? "-")
+        self.FriendRecordIdOther = (dataObj["FriendRecordIdOther"] ?? "-") as! String
+        self.FriendRecordId = (dataObj["FriendRecordId"] ?? "-") as! String
     }
     
     func FriendRequestObject(datObject: Friends) -> [String: AnyObject] {

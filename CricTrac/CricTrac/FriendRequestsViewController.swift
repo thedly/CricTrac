@@ -153,20 +153,52 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                     
                     var FriendData = Friends(dataObj: [:])
                     
+                    FriendData.UserId = FriendObject.id
                     FriendData.City = FriendObject.City
-                    FriendData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
+                    switch FriendObject.UserProfile {
+                    case userProfileType.Player.rawValue :
+                        FriendData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
+                        break;
+                    case userProfileType.Coach.rawValue :
+                        FriendData.Club = FriendObject.CoachCurrentTeams.joinWithSeparator(",")
+                        break;
+                    case userProfileType.Fan.rawValue :
+                        FriendData.Club = FriendObject.SupportingTeams.joinWithSeparator(",")
+                        break;
+                    default:
+                        FriendData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
+                        break;
+                        
+                    }
+
                     FriendData.Name = FriendObject.fullName
-                    FriendData.FriendRecordIdOther = FriendObject.id
-                    FriendData.FriendRecordId = loggedInUserObject.id
                     FriendData.FriendshipDateTime = NSDate().getCurrentTimeStamp()
                     
                     var UserData = Friends(dataObj: [:])
                     
+                    UserData.UserId = loggedInUserObject.id
                     UserData.City = loggedInUserObject.City
-                    UserData.Club = loggedInUserObject.PlayerCurrentTeams.joinWithSeparator(",")
+                    
+                    switch FriendObject.UserProfile {
+                    case userProfileType.Player.rawValue :
+                        UserData.Club = loggedInUserObject.PlayerCurrentTeams.joinWithSeparator(",")
+                        break;
+                    case userProfileType.Coach.rawValue :
+                        UserData.Club = loggedInUserObject.CoachCurrentTeams.joinWithSeparator(",")
+                        break;
+                    case userProfileType.Fan.rawValue :
+                        UserData.Club = loggedInUserObject.SupportingTeams.joinWithSeparator(",")
+                        break;
+                    default:
+                        UserData.Club = loggedInUserObject.PlayerCurrentTeams.joinWithSeparator(",")
+                        break;
+                        
+                    }
+
+                    
+                    
+                    
                     UserData.Name = loggedInUserObject.fullName
-                    UserData.FriendRecordIdOther = loggedInUserObject.id
-                    UserData.FriendRecordId = FriendObject.id
                     UserData.FriendshipDateTime = NSDate().getCurrentTimeStamp()
                     
                     AcceptFriendRequest(["UserData": UserData.FriendRequestObject(UserData), "FriendData": FriendData.FriendRequestObject(FriendData)], callback: { data in
