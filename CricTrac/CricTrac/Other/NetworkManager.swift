@@ -74,7 +74,7 @@ func getLatestTimelines(sucess:(JSON)->Void,failure:(NSError?)->Void){
 
 func LoadTimeline(key:String,sucess:(JSON)->Void,failure:(NSError?)->Void){
     
-    let timelineURL = NSURL(string:serverBaseURL+"/timelineAutoPostFor/Users/\(currentUser!.uid)/page/\(key)")!
+    let timelineURL = NSURL(string:serverBaseURL+"/timeline/\(currentUser!.uid)/page/\(key)")!
     
     dataTask = defaultSession.dataTaskWithURL(timelineURL, completionHandler: { (data, response, error) in
         
@@ -90,11 +90,11 @@ func LoadTimeline(key:String,sucess:(JSON)->Void,failure:(NSError?)->Void){
 }
 
 
-func writeAutomaticMessage(matchId:String){
+func writeAutomaticMessage(matchId:String){1
     
    // guard let firstName = loggedInUserInfo["FirstName"] as? String else { return}
     
-    let timelineURL = NSURL(string:serverBaseURL+"/timelineAutoPost/Users/\(currentUser!.uid)/MatchId/\(matchId)/FullName/Sachin")!
+    let timelineURL = NSURL(string:serverBaseURL+"/timelineAutoPost/\(currentUser!.uid)/MatchId/\(matchId)")!
     
     dataTask = defaultSession.dataTaskWithURL(timelineURL, completionHandler: { (data, response, error) in })
     dataTask?.resume()

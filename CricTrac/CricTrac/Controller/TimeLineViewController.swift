@@ -116,11 +116,9 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     pageKey = data.dictionaryValue["pageKey"]?.stringValue
                     
                     
-                    if let timelineArrayObj = timelineData!.arrayObject, let dictionaryTimelineObj = data.dictionaryValue["timeline"], let dictionaryTimelineArrayObj = dictionaryTimelineObj.arrayObject {
-                        
+                    if let timelineArrayObj = timelineData?.arrayObject, let dictionaryTimelineObj = data.dictionaryValue["timeline"], let dictionaryTimelineArrayObj = dictionaryTimelineObj.arrayObject {
                         
                         timelineData = JSON(timelineArrayObj + dictionaryTimelineArrayObj)
-                        
                     }
                     
                     
@@ -209,11 +207,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         }
         else{
             
-            
-            
             let data = timelineData!.arrayValue[indexPath.section-1]
-            
-            
             
             if let imageurl = data.dictionaryValue["postImage"]?.string {
                 
@@ -238,27 +232,32 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 if postedBy == "CricTrac"{
                     postCell.postOwnerName.text = "CricTrac"
                     postCell.deleteButton.hidden = true
+                    
+                    postCell.postOwnerCity.text = data["PostType"].stringValue
+                    
                 }else{
                     postCell.postOwnerName.text = data.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
-                    if let postedBy = data["PostedBy"].string  where postedBy == currentUser!.uid{
+                    if let postedBy = data["OwnerID"].string  where postedBy == currentUser!.uid{
                         
                         postCell.deleteButton.hidden = false
                         
                     }else{
                         postCell.deleteButton.hidden = true
                     }
-                }
-                
-                fetchFriendDetail(friendId, sucess: { (data) in
                     
-                    friendsCity[friendId] = data
-                    dispatch_async(dispatch_get_main_queue(),{
+                    fetchFriendDetail(friendId, sucess: { (data) in
                         
-                        postCell.postOwnerCity.text = data
+                        friendsCity[friendId] = data
+                        dispatch_async(dispatch_get_main_queue(),{
+                            
+                            postCell.postOwnerCity.text = data
+                            
+                        })
                         
                     })
-                    
-                })
+                }
+                
+               
                 postCell.totalLikeCount = 0
                 postCell.post.text = data.dictionaryValue["Post"]?.stringValue
                 postCell.index = indexPath.section-1
