@@ -54,6 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("InstanceID token: \(refreshedToken)")
         }
         
+    
         // Connect to FCM since connection may have failed when attempted before having a token.
        //connectToFcm()
         
