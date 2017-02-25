@@ -124,17 +124,17 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         
         
         
-        self.stage.delegate = self
-        self.dateText.delegate = self
-        self.teamText.delegate = self
-        self.opponentText.delegate = self
-        self.groundText.delegate = self
-        self.oversText.delegate = self
-        self.tournamentText.delegate = self
-        
-        self.venueText.delegate = self
-        self.ageGroup.delegate = self
-        self.playingLevel.delegate = self
+//        self.stage.delegate = self
+//        self.dateText.delegate = self
+//        self.teamText.delegate = self
+//        self.opponentText.delegate = self
+//        self.groundText.delegate = self
+//        self.oversText.delegate = self
+//        self.tournamentText.delegate = self
+//        
+//        self.venueText.delegate = self
+//        self.ageGroup.delegate = self
+//        self.playingLevel.delegate = self
         
         
         
@@ -238,6 +238,9 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
             return true
         }
         else if !(opponentText.text?.hasDataPresent)!{
+            
+            return true
+        }else if !(groundText.text?.hasDataPresent)!{
             
             return true
         }

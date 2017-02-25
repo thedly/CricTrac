@@ -14,12 +14,13 @@ import KRProgressHUD
 class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchParent,ThemeChangeable  {
     
     var matchVC:MatchViewController!
-    
+    var matchBeingEdited = false
     var battingBowlingViewController: BattingBowlingViewController!
     
     var resVC: MatchResultsViewController!
-    
+    var matchId:String?
     var selecetedData:[String:AnyObject]?
+    var previous:previousRefershable?
     
     @IBOutlet weak var saveButton:UIButton!
     
@@ -36,6 +37,12 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     override func viewDidLoad() {
         super.viewDidLoad()
         getUserData()
+        if matchBeingEdited{
+            if let val = selecetedData!["MatchId"] as? String{
+               
+                matchId = val
+            }
+        }
         // Do any additional setup after loading the view.
         settings.style.buttonBarItemBackgroundColor = UIColor.clearColor()
         settings.style.buttonBarItemTitleColor = UIColor.whiteColor()
@@ -62,6 +69,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         }
     }
     
+
     func setNavigationBarProperties(){
         var currentTheme:CTTheme!
         currentTheme = cricTracTheme.currentTheme
@@ -174,9 +182,10 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         
         if validateMatchDetails() {
             
+            if dataHasChangedAfterLastSave || matchBeingEdited == true {
             
-            if dataHasChangedAfterLastSave{
-            
+            data.removeAll()
+                
             if let _ =  matchVC?.view{
                 
                 data += matchVC.data
@@ -189,172 +198,56 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             if let _ = resVC?.view{
                data += resVC.data
             }
+                
+                
         }
            
-            var groundName = "-"
+           if let val =  data["FirstBatting"] where val == ""{
             
-            if let ground = data["Ground"] {
-                groundName = ground
+            data["FirstBatting"] =  data["Team"]
+            
             }
             
-            var venueName = "-"
-          
-            if let venue = data["Venue"] {
-                venueName = venue
+            if let val =  data["SecondBatting"] where val == ""{
+                
+                data["SecondBatting"] =  data["Opponent"]
+                
             }
             
-            //OppositTeams
+            if let val =  data["TossWonBy"] where val == "-"{
+                
+                data["TossWonBy"] =  data["Team"]
+                
+            }
+            
+            if let val =  data["Result"] where val == "-"{
+                
+                data["Result"] =  "Won"
+                
+            }
+            
+            
             if !dataHasChangedAfterLastSave {
-                if selecetedData == nil{
+                if !matchBeingEdited{
                     
                     addMatchData("date \(String(date))",data: data, callback: { dat in
-                        
-                        let teamName = self.data["Team"]!
-                        if !teamNames.contains(teamName){
-                            addNewTeamName(teamName)
-                            teamNames.append(teamName)
-                        }
-                        
-                        let oppoTeamName = self.data["Opponent"]!
-                        if !opponentTeams.contains(oppoTeamName){
-                            addNewOppoSitTeamName(oppoTeamName)
-                            opponentTeams.append(oppoTeamName)
-                        }
-                        
-                        let tournament = self.data["Tournament"]!
-                        
-                        if tournament != "-"{
-                            if !tournaments.contains(tournament){
-                                addNewTournamentName(tournament)
-                                tournaments.append(tournament)
-                            }
-                        }
-                        if groundName != "-"{
-                            
-                            if !groundNames.contains(groundName){
-                                addNewGroundName(groundName)
-                                groundNames.append(groundName)
-                            }
-                        }
-                        if venueName != "-"{
-                            
-                            if !venueNames.contains(venueName){
-                                addNewVenueName(venueName)
-                                venueNames.append(venueName)
-                            }
-                        }
-                        
-                        
-                        let window = getCurrentWindow()
-                        
-                        let DetailsViewController = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
-                        
-                        
-                        DetailsViewController.battingViewHidden = (dat["RunsTaken"] as! String == "-")
-                        DetailsViewController.bowlingViewHidden = (dat["RunsGiven"] as! String == "-")
-                        
-                        DetailsViewController.matchDetailsData = dat
-                        window.rootViewController?.dismissViewControllerAnimated(false, completion: {
-                            window.rootViewController?.presentViewController(DetailsViewController, animated: true, completion: nil)
-                        })
+                    self.updateGlobalValues()
+                    self.dismissViewControllerAnimated(true) {}
 
-                        
                     })
-                    
-                    
-                    
-                    
                 }else{
                     
-                    var key = ""
-                    
-                    if let keyValue = selecetedData!["key"] {
-                     
-                        key = keyValue as! String
-                        
-                    }
-                    
-                    if let keyValueAlt = selecetedData!["MatchId"] {
-                        if key == "" {
-                            key = keyValueAlt as! String
-                        }
-                        
-                    }
-                    
-                    if key != "" {
-                        updateMatchData(key, data: data, callback: { dat in
-                            
-                            var dataToBeModified = dat
-                            
-                            
-                            dataToBeModified["MatchId"] = key
-                            dataToBeModified["key"] = key
-                            
-                            
-                            if let previousVC = getPreviousViewController(self) as? SummaryMatchDetailsViewController {
-                                
-                                previousVC.matchDetailsData = dataToBeModified
-                                previousVC.viewDidLoad()
-                                
-                                
-                                if let previousPreviousVC = getPreviousViewController(previousVC) as? MatchSummaryViewController {
-                                    
-                                    if let index = previousPreviousVC.matchDataSource.indexOf({ $0["MatchId"] as? String == self.selecetedData!["key"] as? String }) {
-                                        
-                                        
-                                        let newSummaryData = previousPreviousVC.makeSummaryCell(dataToBeModified)
-                                        
-                                        
-                                        previousPreviousVC.matches.removeAtIndex(index)
-                                        previousPreviousVC.matches.insert(newSummaryData, atIndex: index)
-                                        
-                                        previousPreviousVC.matchSummaryTable.reloadData()
-                                        
-                                    }
-                                    
-                                    
-                                }
-                                
-                            }
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            //                        var dataToBeModeified = dat
-                            //
-                            //                        dataToBeModeified["MatchId"] = self.selecetedData!["key"]!
-                            //
-                            //                        let matchObjectIndex = matchDataSource.indexOfObject(self.selecetedData!)
-                            //
-                            //                        matchDataSource.replaceObjectAtIndex(matchObjectIndex, withObject: dataToBeModeified)
-                            //
-                            //  
-                            NSNotificationCenter.defaultCenter().postNotificationName("MatchDataChanged", object: self)
+                    if let matchKey = matchId{
+                        updateMatchData(matchKey, data: data, callback: { dat in
+                            self.updateGlobalValues()
+                            var data = dat
+                            data["MatchId"] =  matchKey
+                            self.previous?.refresh(data)
                             self.dismissViewControllerAnimated(true) {}
-                            
                         })
                     }
                     
-                    
-                    
-                    
-
-                    
-                    
-                    
                 }
-                
-                
-                
-                
-                
             }
             else{
                 
@@ -376,13 +269,66 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     }
     
     
+    func updateGlobalValues(){
+        
+        let teamName = self.data["Team"]!
+        if !teamNames.contains(teamName){
+            addNewTeamName(teamName)
+            teamNames.append(teamName)
+        }
+        
+        let oppoTeamName = self.data["Opponent"]!
+        if !opponentTeams.contains(oppoTeamName){
+            addNewOppoSitTeamName(oppoTeamName)
+            opponentTeams.append(oppoTeamName)
+        }
+        
+        let tournament = self.data["Tournament"]!
+        
+        if tournament != "-"{
+            if !tournaments.contains(tournament){
+                addNewTournamentName(tournament)
+                tournaments.append(tournament)
+            }
+        }
+        
+        var groundName = "-"
+        
+        if let ground = data["Ground"] {
+            groundName = ground
+        }
+        
+        var venueName = "-"
+        
+        if let venue = data["Venue"] {
+            venueName = venue
+        }
+        
+        
+        if groundName != "-"{
+            
+            if !groundNames.contains(groundName){
+                addNewGroundName(groundName)
+                groundNames.append(groundName)
+            }
+        }
+        if venueName != "-"{
+            
+            if !venueNames.contains(venueName){
+                addNewVenueName(venueName)
+                venueNames.append(venueName)
+            }
+        }
+        
+    }
+    
     
     override  func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
         matchVC = viewControllerFrom("Main", vcid: "MatchViewController") as! MatchViewController
         
 //        battingVC = viewControllerFrom("Main", vcid: "BattingViewController") as! BattingViewController
-//        
+//
 //        bowlingVC = viewControllerFrom("Main", vcid: "BowlingViewController") as! BowlingViewController
         
         battingBowlingViewController = viewControllerFrom("Main", vcid: "BattingBowlingViewController") as! BattingBowlingViewController

@@ -13,6 +13,7 @@ import SwiftyJSON
 import SCLAlertView
 
 import SwiftCountryPicker
+import KeychainSwift
 
 var sliderMenu = KYDrawerController()
 var currentUser:FIRUser?
@@ -325,6 +326,10 @@ public func logout(currentController: UIViewController) {
     
     
     try! FIRAuth.auth()!.signOut() 
+    
+    let keychain = KeychainSwift()
+    keychain.delete("ct_userName")
+    keychain.delete("ct_password")
     
     if let _ = userDefaults.valueForKey("loginToken"){
         

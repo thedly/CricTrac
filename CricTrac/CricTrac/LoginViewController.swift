@@ -17,6 +17,7 @@ import FBSDKLoginKit
 import KRProgressHUD
 import SCLAlertView
 import XLPagerTabStrip
+import KeychainSwift
 
 class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDelegate, GIDSignInUIDelegate,ThemeChangeable {
     
@@ -40,6 +41,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
        // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,8 +53,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
 
         //setUIBackgroundTheme(self.view)
         
-        
-        
+        loginWithSavedCredentials()
             }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -318,18 +319,45 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         userDefaults.synchronize()
     }
     
+    func loginWithSavedCredentials(){
+        
+        KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+        let keychain = KeychainSwift()
+        guard let userName = keychain.get("ct_userName") else {return}
+        guard let password = keychain.get("ct_password") else {return}
+        
+        loginWithMailAndPassword(userName, password:password) { (user, error) in
+            KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+            if error != nil{
+                KRProgressHUD.dismiss()
+            }
+            else {
+                if user!.emailVerified{
+                    currentUser = user
+                    enableSync()
+                    self.navigateToNextScreen()
+                }
+            }
+        }
+    }
+    
     func navigateToNextScreen(){
         
-        
+        if let userName = username.text?.trimWhiteSpace where userName != ""{
+            
+            if let password = password.text?.trimWhiteSpace where password != "" {
+                
+                let keychain = KeychainSwift()
+                keychain.set(userName, forKey: "ct_userName")
+                keychain.set(password, forKey: "ct_password")
+                
+            }
+        }
         
         
         if currentUser != nil && profileData.userExists {
             updateLastLogin()
         }
-        
-        
-        
-        
         
         dispatch_group_enter(myGroup)
         getAllProfileData({ data in
@@ -352,10 +380,6 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
                     LoggedInUserImage = imgData
                 }
             }
-            
-            
-            
-            
         })
         
         
@@ -366,11 +390,8 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
             
             let rootViewController: UIViewController = getRootViewController()
             
-                
-            
             let profileVC = viewControllerFrom("Main", vcid: "ProfileBaseViewController") as! ProfileBaseViewController
-            
-            
+
             self.facebookBtn.enabled = true
             self.googleBtn.enabled = true
             
@@ -378,7 +399,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
             print(profileData.Email.length)
             print(profileData.userExists)
             if !profileData.userExists || profileData.Email.length == 0 {
-                
+
                 KRProgressHUD.dismiss()
                // window.rootViewController = profileVC
                 let nav = UINavigationController(rootViewController: profileVC)
@@ -399,17 +420,9 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
                     window.rootViewController = rootViewController
                     self.presentViewController(rootViewController, animated: true) { KRProgressHUD.dismiss() }
                     }, completion: nil)
-                
-            }
-            
-            
-            
-            
-        })
-        
-        
-        
-        
-    }
 
+            }
+            KRProgressHUD.dismiss()
+        })
+    }
 }
