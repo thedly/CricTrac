@@ -22,7 +22,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
-        self.view.backgroundColor = currentTheme.boxColor
+        self.view.backgroundColor = currentTheme.topColor
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     override func viewDidLoad() {
@@ -44,8 +45,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         navigationItem.leftBarButtonItem = leftbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "SETTINGS"
-        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        navigationController!.navigationBar.titleTextAttributes = titleDict
+       // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+       // navigationController!.navigationBar.titleTextAttributes = titleDict
     }
     @IBAction func didMenuButtonTapp(sender: UIButton){
         sliderMenu.setDrawerState(.Opened, animated: true)
@@ -111,8 +112,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let vcName = settingsMenuData[indexPath.row]["vc"]
         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
+        if vcName == "ThemeSettingsViewController" {
+            let vc  = storyboard.instantiateViewControllerWithIdentifier(vcName! as! String)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         
-        if vcName == "StaticPageViewController" {
+        else if vcName == "StaticPageViewController" {
             let viewCtrl = storyboard.instantiateViewControllerWithIdentifier(vcName! as! String) as! StaticPageViewController
             
             viewCtrl.pageToLoad = settingsMenuData[indexPath.row]["contentToDisplay"] as! String

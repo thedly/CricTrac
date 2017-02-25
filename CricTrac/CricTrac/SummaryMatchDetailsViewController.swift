@@ -81,7 +81,11 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
         showCTAlert("Match Data will be Permanantly Deleted from the Database")
        
     }
-    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavigationBarProperties()
+        
+    }
     
     func cancelClicked() {
         
@@ -107,24 +111,49 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
             }
             else{
                 NSNotificationCenter.defaultCenter().postNotificationName("MatchDataChanged", object: self)
-                self.dismissViewControllerAnimated(true, completion: { })
+                self.navigationController?.popViewControllerAnimated(true)
             }
         }
         
     }
     
+    func setNavigationBarProperties(){
+        var currentTheme:CTTheme!
+        currentTheme = cricTracTheme.currentTheme
+        let menuButton: UIButton = UIButton(type:.Custom)
+        menuButton.setImage(UIImage(named: "Back-100"), forState: UIControlState.Normal)
+        menuButton.addTarget(self, action: #selector(didTapCancel), forControlEvents: UIControlEvents.TouchUpInside)
+        menuButton.frame = CGRectMake(0, 0, 40, 40)
+        let leftbarButton = UIBarButtonItem(customView: menuButton)
+        let addNewMatchButton: UIButton = UIButton(type:.Custom)
+        addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
+        addNewMatchButton.setImage(UIImage(named: "Edit-100"), forState: UIControlState.Normal)
+        addNewMatchButton.titleLabel?.font = UIFont(name: appFont_bold, size: 15)
+        addNewMatchButton.addTarget(self, action: #selector(didTapEditButton), forControlEvents: UIControlEvents.TouchUpInside)
+        let righttbarButton = UIBarButtonItem(customView: addNewMatchButton)
+        
+        //assign button to navigationbar
+        
+        navigationItem.leftBarButtonItem = leftbarButton
+        navigationItem.rightBarButtonItem = righttbarButton
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        title = "MATCH DETAILS"
+        //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        // navigationController!.navigationBar.titleTextAttributes = titleDict
+    }
     
     @IBAction func didTapEditButton(sender: AnyObject) {
         
         let editMatch = viewController("AddMatchDetailsViewController") as! AddMatchDetailsViewController
         
         editMatch.selecetedData = matchDetailsData
-        
-        presentViewController(editMatch, animated: true) {}
+        self.navigationController?.pushViewController(editMatch, animated: true)
+      //  presentViewController(editMatch, animated: true) {}
     }
     
     @IBAction func didTapCancel(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
+       // dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     @IBAction func ShareActionPressed(sender: UIButton) {
@@ -149,6 +178,7 @@ class SummaryMatchDetailsViewController: UIViewController,CTAlertDelegate,ThemeC
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.boxColor
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     override func viewDidLoad() {

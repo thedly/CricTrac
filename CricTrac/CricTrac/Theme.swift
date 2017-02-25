@@ -64,6 +64,7 @@ struct AppTheme{
     let earthly = CTTheme(topColor: UIColor(hex: "#DBD5A4"), bottomColor: UIColor(hex: "#649173"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
     var currentTheme:CTTheme!
+    var testTheme:CTTheme!
     var currentThemeTxt : String! {
         get {
             return (NSUserDefaults.standardUserDefaults().objectForKey("selectedTheme") ?? "meanGreen") as? String
@@ -102,9 +103,29 @@ func setCurrentTheme(theme:Themes){
     
 }
 
+
 func getPersistedTheme()->CTTheme{
     
     if let savedTheme = NSUserDefaults.standardUserDefaults().objectForKey("selectedTheme") as? String{
+        
+        return themeFor(Themes(rawValue: savedTheme)!)
+        
+    }
+    else{
+        return cricTracTheme.meanGreen
+    }
+    
+}
+func testCurrentTheme(theme:Themes){
+    
+    NSUserDefaults.standardUserDefaults().setValue(theme.rawValue, forKey: "testTheme")
+    cricTracTheme.testTheme = getPersistedTheme()
+    NSNotificationCenter.defaultCenter().postNotificationName("TestTheme", object: nil)
+    
+}
+func getTestPersistedTheme()->CTTheme{
+    
+    if let savedTheme = NSUserDefaults.standardUserDefaults().objectForKey("testTheme") as? String{
         
         return themeFor(Themes(rawValue: savedTheme)!)
         

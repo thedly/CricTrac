@@ -17,6 +17,7 @@ class SplashScreenViewController: UIViewController,ThemeChangeable {
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.boxColor
+       // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     var myGroup = dispatch_group_create()

@@ -18,7 +18,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     var matchDataSource = [[String:AnyObject]]()
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
-        self.view.backgroundColor = currentTheme.boxColor
+        self.view.backgroundColor = currentTheme.topColor
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     override func viewDidLoad() {
@@ -60,8 +61,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         navigationItem.leftBarButtonItem = leftbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "MATCH SUMMARY"
-        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        navigationController!.navigationBar.titleTextAttributes = titleDict
+       // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+       // navigationController!.navigationBar.titleTextAttributes = titleDict
     }
     @IBAction func didTapCancel(sender: UIButton) {
         
@@ -264,7 +265,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         }
         
         summaryDetailsVC.matchDetailsData = selectedDataSource.first
-            presentViewController(summaryDetailsVC, animated: true, completion: nil)
+          //  presentViewController(summaryDetailsVC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
         CFRunLoopWakeUp(CFRunLoopGetCurrent())
     }
 

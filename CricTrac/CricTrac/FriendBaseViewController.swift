@@ -17,7 +17,8 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
-        self.view.backgroundColor = currentTheme.boxColor
+        self.view.backgroundColor = currentTheme.topColor
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     override func viewDidLoad() {
@@ -25,7 +26,8 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         settings.style.buttonBarItemBackgroundColor = UIColor.clearColor()
         settings.style.buttonBarItemTitleColor = UIColor.whiteColor()
         buttonBarView.selectedBar.backgroundColor = UIColor.whiteColor()
-        
+        self.buttonBarView.collectionViewLayout = UICollectionViewFlowLayout()
+        self.buttonBarView.frame.size.height = 40
         
         
         settings.style.buttonBarItemFont = UIFont(name: appFont_bold, size: 15)!
@@ -56,8 +58,8 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         navigationItem.rightBarButtonItem = righttbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "FRIENDS"
-        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        navigationController!.navigationBar.titleTextAttributes = titleDict
+        //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+       // navigationController!.navigationBar.titleTextAttributes = titleDict
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -66,12 +68,12 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
     
     override  func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
+    
         let friends = viewControllerFrom("Main", vcid: "FriendsViewController")
         
         let friendReq = viewControllerFrom("Main", vcid: "FriendRequestsViewController")
         
         let friendSug = viewControllerFrom("Main", vcid: "FriendSuggestViewController")
-        
         
         return [friends, friendReq, friendSug]
     }

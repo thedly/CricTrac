@@ -31,7 +31,8 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
-        self.view.backgroundColor = currentTheme.boxColor
+        self.view.backgroundColor = currentTheme.topColor
+       // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     override func viewDidLoad() {
@@ -212,7 +213,7 @@ extension SliderMenuViewController {
             return navProfile!
         case "ProfileReadOnlyViewController":
             if navProfile == nil {
-                let dashboardVC = viewControllerFrom("Main", vcid: "ProfileBaseViewController") as! ProfileBaseViewController
+                let dashboardVC = viewControllerFrom("Main", vcid: "ProfileReadOnlyViewController") as! ProfileReadOnlyViewController
                 
                 navProfile = UINavigationController(rootViewController: dashboardVC)
             }

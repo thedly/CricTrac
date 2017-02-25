@@ -480,7 +480,9 @@ func getImageFromFirebase(imagePath: String ,sucessBlock:(UIImage)->Void){
     
     if let url = NSURL(string: imagePath) {
         if let data = NSData(contentsOfURL: url) {
-            sucessBlock(UIImage(data: data)!)
+            if data.length > 0 {
+                sucessBlock(UIImage(data: data)!)
+            }
         }
     }
     

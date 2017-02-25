@@ -51,7 +51,8 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
-        self.view.backgroundColor = currentTheme.boxColor
+        self.view.backgroundColor = currentTheme.topColor
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     func initializeView() {

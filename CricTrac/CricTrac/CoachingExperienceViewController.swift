@@ -66,7 +66,8 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
-        self.view.backgroundColor = currentTheme.boxColor
+        self.view.backgroundColor = currentTheme.topColor
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     func adjustTblHeight(constratintType: NSLayoutConstraint, collectionType: [String], cellHeight: CGFloat){
@@ -160,8 +161,8 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         navigationItem.rightBarButtonItem = righttbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "COACHING EXPERIENCE"
-        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        navigationController!.navigationBar.titleTextAttributes = titleDict
+       // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+       // navigationController!.navigationBar.titleTextAttributes = titleDict
     }
     @IBAction func backBtnPressed(sender: AnyObject) {
        // dismissViewControllerAnimated(true, completion: nil)

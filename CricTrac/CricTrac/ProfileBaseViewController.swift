@@ -74,9 +74,9 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
         playerTextView.isSelected = true
         profileData.UserProfile = userProfileType.Player.rawValue
         
-        self.imgPlayer.image = UIImage(named: "BallIcon")
-        self.imgCoach.image = UIImage(named: "OkFilled")
-        self.imgFan.image = UIImage(named: "OkFilled")
+        self.imgPlayer.image = UIImage(named: "OkFilled")
+        self.imgCoach.image = UIImage(named: "OkUnfilled")
+        self.imgFan.image = UIImage(named: "OkUnfilled")
     }
     
     func handleCoachTap(sender: UITapGestureRecognizer? = nil) {
@@ -84,9 +84,9 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
         coachTextView.isSelected = true
         profileData.UserProfile = userProfileType.Coach.rawValue
         
-        self.imgPlayer.image = UIImage(named: "OkFilled")
-        self.imgCoach.image = UIImage(named: "BallIcon")
-        self.imgFan.image = UIImage(named: "OkFilled")
+        self.imgPlayer.image = UIImage(named: "OkUnfilled")
+        self.imgCoach.image = UIImage(named: "OkFilled")
+        self.imgFan.image = UIImage(named: "OkUnfilled")
     }
     
     func handleFanTap(sender: UITapGestureRecognizer? = nil) {
@@ -94,9 +94,9 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
         cricketFanTextView.isSelected = true
         profileData.UserProfile = userProfileType.Fan.rawValue
         
-        self.imgPlayer.image = UIImage(named: "OkFilled")
-        self.imgCoach.image = UIImage(named: "OkFilled")
-        self.imgFan.image = UIImage(named: "BallIcon")
+        self.imgPlayer.image = UIImage(named: "OkUnfilled")
+        self.imgCoach.image = UIImage(named: "OkUnfilled")
+        self.imgFan.image = UIImage(named: "OkFilled")
     }
     
     
@@ -122,8 +122,8 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
         navigationItem.rightBarButtonItem = righttbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "CREATE PROFILE"
-        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        navigationController!.navigationBar.titleTextAttributes = titleDict
+       // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+       // navigationController!.navigationBar.titleTextAttributes = titleDict
     }
     
     func popAndLogout() {
@@ -150,32 +150,32 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
                     self.coachTextView.isSelected = true
                     self.playerTextView.isSelected = false
                     self.cricketFanTextView.isSelected = false
-                    self.imgPlayer.image = UIImage(named: "OkFilled")
-                    self.imgCoach.image = UIImage(named: "BallIcon")
-                    self.imgFan.image = UIImage(named: "OkFilled")
+                    self.imgPlayer.image = UIImage(named: "OkUnfilled")
+                    self.imgCoach.image = UIImage(named: "OkFilled")
+                    self.imgFan.image = UIImage(named: "OkUnfilled")
 
-                //BallIcon
+                //OkFilled
                 case userProfileType.Player.rawValue:
                     self.playerTextView.isSelected = true
                     self.coachTextView.isSelected = false
                     self.cricketFanTextView.isSelected = false
-                    self.imgPlayer.image = UIImage(named: "BallIcon")
-                    self.imgCoach.image = UIImage(named: "OkFilled")
-                    self.imgFan.image = UIImage(named: "OkFilled")
+                    self.imgPlayer.image = UIImage(named: "OkFilled")
+                    self.imgCoach.image = UIImage(named: "OkUnfilled")
+                    self.imgFan.image = UIImage(named: "OkUnfilled")
                 case userProfileType.Fan.rawValue:
                     self.cricketFanTextView.isSelected = true
                     self.playerTextView.isSelected = false
                     self.coachTextView.isSelected = false
-                    self.imgPlayer.image = UIImage(named: "OkFilled")
-                    self.imgCoach.image = UIImage(named: "OkFilled")
-                    self.imgFan.image = UIImage(named: "BallIcon")
+                    self.imgPlayer.image = UIImage(named: "OkUnfilled")
+                    self.imgCoach.image = UIImage(named: "OkUnfilled")
+                    self.imgFan.image = UIImage(named: "OkFilled")
                 default:
                     self.playerTextView.isSelected = true
                     self.coachTextView.isSelected = false
                     self.cricketFanTextView.isSelected = false
-                    self.imgPlayer.image = UIImage(named: "BallIcon")
-                    self.imgCoach.image = UIImage(named: "OkFilled")
-                    self.imgFan.image = UIImage(named: "OkFilled")
+                    self.imgPlayer.image = UIImage(named: "OkFilled")
+                    self.imgCoach.image = UIImage(named: "OkUnfilled")
+                    self.imgFan.image = UIImage(named: "OkUnfilled")
                 }
                 
             }
@@ -202,9 +202,9 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
         cricketFanTextView.userInteractionEnabled = true
         cricketFanTextView.addGestureRecognizer(fantap)
         profileData.UserProfile = userProfileType.Player.rawValue
-        self.imgPlayer.image = UIImage(named: "BallIcon")
-        self.imgCoach.image = UIImage(named: "OkFilled")
-        self.imgFan.image = UIImage(named: "OkFilled")
+        self.imgPlayer.image = UIImage(named: "OkFilled")
+        self.imgCoach.image = UIImage(named: "OkUnfilled")
+        self.imgFan.image = UIImage(named: "OkUnfilled")
 
         
     }
@@ -212,13 +212,13 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
    
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
-        self.view.backgroundColor = currentTheme.boxColor
+        self.view.backgroundColor = currentTheme.topColor
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setBackgroundColor()
         
         //setUIBackgroundTheme(self.view)
         setupControls();
@@ -226,7 +226,12 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
         setNavigationBarProperties()
         // Do any additional setup after loading the view.
     }
-    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setBackgroundColor()
+
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

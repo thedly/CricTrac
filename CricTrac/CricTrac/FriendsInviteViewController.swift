@@ -15,7 +15,8 @@ class FriendsInviteViewController: UIViewController,IndicatorInfoProvider,ThemeC
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
-        self.view.backgroundColor = currentTheme.boxColor
+        self.view.backgroundColor = currentTheme.topColor
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     

@@ -29,7 +29,8 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
-        self.view.backgroundColor = currentTheme.boxColor
+        self.view.backgroundColor = currentTheme.topColor
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     override func viewDidLoad() {
@@ -40,6 +41,8 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         settings.style.buttonBarItemTitleColor = UIColor.whiteColor()
         
         buttonBarView.selectedBar.backgroundColor = UIColor.whiteColor()
+        self.buttonBarView.collectionViewLayout = UICollectionViewFlowLayout()
+        self.buttonBarView.frame.size.height = 40
         settings.style.buttonBarItemFont = UIFont(name: appFont_bold, size: 15)!
         dataHasChangedAfterLastSave = false
         //setUIBackgroundTheme(self.view)
@@ -63,8 +66,18 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         var currentTheme:CTTheme!
         currentTheme = cricTracTheme.currentTheme
         let menuButton: UIButton = UIButton(type:.Custom)
-        menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
-        menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+          if selecetedData == nil{
+            menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
+            menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+            title = "ADD MATCH"
+
+          }else {
+            menuButton.setImage(UIImage(named: "Back"), forState: UIControlState.Normal)
+            menuButton.addTarget(self, action: #selector(popBack), forControlEvents: UIControlEvents.TouchUpInside)
+            title = "EDIT MATCH"
+
+        }
+       
         menuButton.frame = CGRectMake(0, 0, 40, 40)
         let leftbarButton = UIBarButtonItem(customView: menuButton)
         let addNewMatchButton: UIButton = UIButton(type:.Custom)
@@ -79,11 +92,12 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         navigationItem.leftBarButtonItem = leftbarButton
         navigationItem.rightBarButtonItem = righttbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-        title = "ADD MATCH"
-        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        navigationController!.navigationBar.titleTextAttributes = titleDict
+        //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+       // navigationController!.navigationBar.titleTextAttributes = titleDict
     }
-    
+    func popBack()  {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
     
     func getUserData(){
         

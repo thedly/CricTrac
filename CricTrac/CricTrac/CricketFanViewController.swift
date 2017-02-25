@@ -88,7 +88,8 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
 
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
-        self.view.backgroundColor = currentTheme.boxColor
+        self.view.backgroundColor = currentTheme.topColor
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     
@@ -152,12 +153,12 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
         
         //assign button to navigationbar
         
-        navigationItem.leftBarButtonItem = leftbarButton
-        navigationItem.rightBarButtonItem = righttbarButton
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-        title = "PERSONAL INTERESTS"
-        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        navigationController!.navigationBar.titleTextAttributes = titleDict
+        self.navigationItem.leftBarButtonItem = leftbarButton
+        self.navigationItem.rightBarButtonItem = righttbarButton
+        self.navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        self.title = "PERSONAL INTERESTS"
+        //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+       // self.navigationController!.navigationBar.titleTextAttributes = titleDict
     }
 
     @IBAction func CreateFanBtnPressed(sender: AnyObject) {

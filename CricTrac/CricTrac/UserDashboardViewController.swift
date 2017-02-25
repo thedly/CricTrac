@@ -250,8 +250,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             navigationItem.leftBarButtonItem = leftbarButton
             navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
             title = "TIMELINE"
-            let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-            navigationController!.navigationBar.titleTextAttributes = titleDict
+            //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+            //navigationController!.navigationBar.titleTextAttributes = titleDict
     
     }
     
@@ -279,7 +279,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setBackgroundColor()
+     //   setBackgroundColor()
         
         //setUIBackgroundTheme(self.view)
         
@@ -337,7 +337,12 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         // Do any additional setup after loading the view.
         setNavigationBarProperties()
     }
-    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setBackgroundColor()
+
+    }
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
         
         let scale = newWidth / image.size.width
@@ -354,6 +359,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         let currentTheme = cricTracTheme.currentTheme
         MatchesView.backgroundColor = UIColor.blackColor()
         MatchesView.alpha = 0.3
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor
         //currentTheme.boxColor
         //baseView.backgroundColor = UIColor.clearColor()
     }

@@ -59,7 +59,8 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
-        self.view.backgroundColor = currentTheme.boxColor
+        self.view.backgroundColor = currentTheme.topColor
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
     }
     
     @IBAction func EditProfilePressed(sender: AnyObject) {
@@ -124,7 +125,6 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
         super.viewDidLoad()
         
         //setUIBackgroundTheme(self.view)
-        setBackgroundColor()
         setNavigationBarProperties()
 //        profileImage.layer.cornerRadius = profileImage.frame.size.width/2
 //        profileImage.clipsToBounds = true
@@ -150,7 +150,12 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setBackgroundColor()
+
+    }
     func setNavigationBarProperties(){
         var currentTheme:CTTheme!
         currentTheme = cricTracTheme.currentTheme
@@ -171,8 +176,8 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
         navigationItem.rightBarButtonItem = righttbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "PERSONAL INFO"
-        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        navigationController!.navigationBar.titleTextAttributes = titleDict
+       // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+       // navigationController!.navigationBar.titleTextAttributes = titleDict
     }
     
     

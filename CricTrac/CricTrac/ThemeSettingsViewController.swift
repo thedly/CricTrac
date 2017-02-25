@@ -48,7 +48,8 @@ class ThemeSettingsViewController: UIViewController, UIGestureRecognizerDelegate
     @IBAction func changeColorPressed(sender: AnyObject) {
         CurrentTheme = _currentTheme
         userDefaults.setValue(CurrentTheme, forKeyPath: "userTheme")
-        dismissViewControllerAnimated(true, completion: nil)
+        //dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     override func viewDidLoad() {
@@ -59,23 +60,52 @@ class ThemeSettingsViewController: UIViewController, UIGestureRecognizerDelegate
         
         // Do any additional setup after loading the view.
     }
-    
+    func setNavigationBarProperties(){
+        var currentTheme:CTTheme!
+        currentTheme = cricTracTheme.currentTheme
+        let menuButton: UIButton = UIButton(type:.Custom)
+        menuButton.setImage(UIImage(named: "Back-100"), forState: UIControlState.Normal)
+        menuButton.addTarget(self, action: #selector(CloseBtnPressed), forControlEvents: UIControlEvents.TouchUpInside)
+        menuButton.frame = CGRectMake(0, 0, 40, 40)
+        menuButton.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5)
+        let leftbarButton = UIBarButtonItem(customView: menuButton)
+        navigationItem.leftBarButtonItem = leftbarButton
+        
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor
+        self.title = "THEMES"
+    }
     func changeThemeSettigs(){
         
+        var currentTheme:CTTheme!
+        currentTheme = cricTracTheme.currentTheme
+       // navigationController!.navigationBar.barTintColor = currentTheme.topColor
+        self.title = "THEMES"
         
     }
     
     
     @IBAction func CloseBtnPressed(sender: AnyObject) {
         
-        dismissViewControllerAnimated(true, completion: nil)
+//        dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     func initializeView() {
         
         ThemeColorSet.delegate = self
         ThemeColorSet.dataSource = self
+      
+        var currentTheme:CTTheme!
+        currentTheme = cricTracTheme.currentTheme
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor
+        self.title = "THEMES"
         
+    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setNavigationBarProperties()
+       
     }
 
 
@@ -143,5 +173,6 @@ class ThemeSettingsViewController: UIViewController, UIGestureRecognizerDelegate
         // Pass the selected object to the new view controller.
     }
     */
+   
 
 }

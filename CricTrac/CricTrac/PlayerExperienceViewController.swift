@@ -86,8 +86,8 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         navigationItem.rightBarButtonItem = righttbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "PLAYER EXPERIENCE"
-        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        navigationController!.navigationBar.titleTextAttributes = titleDict
+        //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        //navigationController!.navigationBar.titleTextAttributes = titleDict
     }
     @IBAction func goNextPage(sender: AnyObject) {
         
@@ -310,7 +310,8 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     }
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
-        self.view.backgroundColor = currentTheme.boxColor
+        self.view.backgroundColor = currentTheme.topColor
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     override func viewDidLoad() {

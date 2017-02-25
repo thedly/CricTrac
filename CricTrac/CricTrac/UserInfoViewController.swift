@@ -68,13 +68,14 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         
-        self.view.backgroundColor = currentTheme.boxColor
+        self.view.backgroundColor = currentTheme.topColor
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBarProperties()
-        self.navigationController?.interactivePopGestureRecognizer?.enabled = false
+       // self.navigationController?.interactivePopGestureRecognizer?.enabled = false
       //  sliderMenu.screenEdgePanGestreEnabled = false
         //setUIBackgroundTheme(self.view)
        // self.navigationController?.navigationBarHidden = true
@@ -94,6 +95,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         menuButton.setImage(UIImage(named: "Back-100"), forState: UIControlState.Normal)
         menuButton.addTarget(self, action: #selector(didTapCancel), forControlEvents: UIControlEvents.TouchUpInside)
         menuButton.frame = CGRectMake(0, 0, 40, 40)
+        menuButton.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5)
         let leftbarButton = UIBarButtonItem(customView: menuButton)
         let addNewMatchButton: UIButton = UIButton(type:.Custom)
         addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
@@ -108,8 +110,8 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         navigationItem.rightBarButtonItem = righttbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "PERSONAL INFO"
-        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        navigationController!.navigationBar.titleTextAttributes = titleDict
+       // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        //navigationController!.navigationBar.titleTextAttributes = titleDict
     }
     var data:[String:String]{
         

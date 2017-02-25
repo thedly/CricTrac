@@ -92,6 +92,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         let currentTheme = cricTracTheme.currentTheme
         MatchesView.backgroundColor = UIColor.blackColor()
         MatchesView.alpha = 0.3
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor
         //currentTheme.boxColor
         //baseView.backgroundColor = UIColor.clearColor()
     }
@@ -112,8 +113,8 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         navigationItem.leftBarButtonItem = leftbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "DASHBOARD"
-        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        navigationController!.navigationBar.titleTextAttributes = titleDict
+        //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+       //// navigationController!.navigationBar.titleTextAttributes = titleDict
     }
     
     // MARK: - Collection view delegates

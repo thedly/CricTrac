@@ -83,12 +83,12 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         navigationItem.leftBarButtonItem = leftbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "DASHBOARD"
-        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        navigationController!.navigationBar.titleTextAttributes = titleDict
+        //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        //navigationController!.navigationBar.titleTextAttributes = titleDict
     }
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
-        
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor
         //currentTheme.boxColor
         //baseView.backgroundColor = UIColor.clearColor()
     }

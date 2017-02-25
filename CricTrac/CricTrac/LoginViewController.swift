@@ -36,15 +36,16 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
-        self.view.backgroundColor = currentTheme.boxColor
+        self.view.backgroundColor = currentTheme.topColor
+       // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setBackgroundColor()
-//        username.text = "crictracvirat@gmail.com"
-//        password.text = "crictrac"\
+     //  username.text = "bharathi92m@gmail.com"
+       // password.text = "qwerty"
      //   username.text = "bharathi92m@gmail.com"
        // password.text = "qwerty"
 
@@ -374,8 +375,9 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
             self.googleBtn.enabled = true
             
             
-            
-            if !profileData.userExists {
+            print(profileData.Email.length)
+            print(profileData.userExists)
+            if !profileData.userExists || profileData.Email.length == 0 {
                 
                 KRProgressHUD.dismiss()
                // window.rootViewController = profileVC
@@ -385,8 +387,19 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
             else
             {
                 KRProgressHUD.dismiss()
-                window.rootViewController = rootViewController
-                self.presentViewController(rootViewController, animated: true) { KRProgressHUD.dismiss() }
+                /*
+                 [UIView transitionWithView:self.window
+                 duration:0.5
+                 options:UIViewAnimationOptionTransitionFlipFromLeft
+                 animations:^{ self.window.rootViewController = newViewController; }
+                 completion:nil];
+ */
+                UIView.transitionWithView(window, duration: 0.5, options: .TransitionFlipFromLeft, animations: {
+                    
+                    window.rootViewController = rootViewController
+                    self.presentViewController(rootViewController, animated: true) { KRProgressHUD.dismiss() }
+                    }, completion: nil)
+                
             }
             
             

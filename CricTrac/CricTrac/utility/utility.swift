@@ -338,7 +338,7 @@ public func logout(currentController: UIViewController) {
         
         currentwindow = window
     }
-    
+
     currentwindow.rootViewController?.dismissViewControllerAnimated(true, completion: nil)
     
     let loginBaseViewController = viewControllerFrom("Main", vcid: "LoginViewController")
