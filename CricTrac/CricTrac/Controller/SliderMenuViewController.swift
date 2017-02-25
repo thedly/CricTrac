@@ -12,6 +12,19 @@ import SCLAlertView
 class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable {
 
     
+    // NavigationControllers
+    
+    var navTimeLine : UINavigationController?
+    var navUserDashBoard : UINavigationController?
+    var navCoachDashBoard : UINavigationController?
+    var navFanDashBoard : UINavigationController?
+    var navAddMatch : UINavigationController?
+    var navMatchSummary : UINavigationController?
+    var navFriends : UINavigationController?
+    var navProfile : UINavigationController?
+    var navSettings : UINavigationController?
+    var navVersion: UINavigationController?
+    
     @IBOutlet var baseView: UIView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
@@ -83,11 +96,11 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         var vcName = menuData[indexPath.row]["vc"]
         
 
-        if indexPath.row == 0
-        {
-            return
-        }
-            
+//        if indexPath.row == 0
+//        {
+//            return
+//        }
+        
             
         if menuData[indexPath.row]["title"] == "PROFILE" && profileData.userExists {
             vcName = "ProfileReadOnlyViewController"
@@ -111,13 +124,118 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
                 
             }
         }
-            
-            let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc  = storyboard.instantiateViewControllerWithIdentifier(vcName!)
-            sliderMenu.mainViewController.presentViewController(vc, animated: true, completion: nil)
+            let navigationControl = getNavigationControllerFor(vcName!)
+            sliderMenu.mainViewController = navigationControl
             sliderMenu.setDrawerState(.Closed, animated: true)
-
-        
     }
+}
 
+
+
+
+
+/*
+ ["title":"TIMELINE","vc":"timeline", "img": "Menu_TimeLine"],
+ ["title":"DASHBOARD","vc":"UserDashboardViewController", "img": "Menu_Dashboard"],
+ ["title":"NEW MATCH","vc":"AddMatchDetailsViewController", "img": "Menu_AddMatch"],
+ ["title":"MATCH SUMMARY","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
+ ["title":"FRIENDS","vc":"FriendBaseViewController", "img": "Menu_Friends"],
+ ["title":"PROFILE","vc":  "ProfileBaseViewController", "img": "Menu_Profile"],
+ //    ["title":"STATISTICS","vc":"AddMatchDetailsViewController", "img": "Menu_Statistics"],
+ //    ["title":"NOTIFICATION","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
+ ["title":"SETTINGS","vc":"SettingsViewController", "img": "Menu_Settings"],
+ //    ["title":"FEEDBACK","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
+ //    ["title":"HELP & SUPPORT","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
+ ["title":"VERSION: \(versionAndBuildNumber)","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
+ */
+extension SliderMenuViewController {
+    
+    func getNavigationControllerFor(vcName:String) -> UINavigationController {
+        
+        //let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        //let vc  = storyboard.instantiateViewControllerWithIdentifier(vcName)
+        switch vcName {
+        case "timeline":
+            if navTimeLine == nil {
+                let dashboardVC = viewControllerFrom("Main", vcid: "timeline") as! TimeLineViewController
+                navTimeLine = UINavigationController(rootViewController: dashboardVC)
+            }
+            return navTimeLine!
+        case "UserDashboardViewController":
+            if navUserDashBoard == nil {
+                let dashboardVC = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
+
+                navUserDashBoard = UINavigationController(rootViewController: dashboardVC)
+            }
+            return navUserDashBoard!
+        case "CoachDashboardViewController":
+            if navCoachDashBoard == nil {
+                let dashboardVC = viewControllerFrom("Main", vcid: "CoachDashboardViewController") as! CoachDashboardViewController
+
+                navCoachDashBoard = UINavigationController(rootViewController: dashboardVC)
+            }
+            return navCoachDashBoard!
+        case "FanDashboardViewController":
+            if navFanDashBoard == nil {
+                let dashboardVC = viewControllerFrom("Main", vcid: "FanDashboardViewController") as! FanDashboardViewController
+
+                navFanDashBoard = UINavigationController(rootViewController: dashboardVC)
+            }
+            return navFanDashBoard!
+        case "AddMatchDetailsViewController":
+            if navAddMatch == nil {
+                let dashboardVC = viewControllerFrom("Main", vcid: "AddMatchDetailsViewController") as! AddMatchDetailsViewController
+
+                navAddMatch = UINavigationController(rootViewController: dashboardVC)
+            }
+            return navAddMatch!
+        case "MatchSummaryViewController":
+            if navMatchSummary == nil {
+                let dashboardVC = viewControllerFrom("Main", vcid: "MatchSummaryViewController") as! MatchSummaryViewController
+
+                navMatchSummary = UINavigationController(rootViewController: dashboardVC)
+            }
+            return navMatchSummary!
+        case "FriendBaseViewController":
+            if navFriends == nil {
+                let dashboardVC = viewControllerFrom("Main", vcid: "FriendBaseViewController") as! FriendBaseViewController
+
+                navFriends = UINavigationController(rootViewController: dashboardVC)
+            }
+            return navFriends!
+        case "ProfileBaseViewController":
+            if navProfile == nil {
+                let dashboardVC = viewControllerFrom("Main", vcid: "ProfileBaseViewController") as! ProfileBaseViewController
+
+                navProfile = UINavigationController(rootViewController: dashboardVC)
+            }
+            return navProfile!
+        case "ProfileReadOnlyViewController":
+            if navProfile == nil {
+                let dashboardVC = viewControllerFrom("Main", vcid: "ProfileBaseViewController") as! ProfileBaseViewController
+                
+                navProfile = UINavigationController(rootViewController: dashboardVC)
+            }
+            return navProfile!
+        case "SettingsViewController":
+            if navSettings == nil {
+                let dashboardVC = viewControllerFrom("Main", vcid: "SettingsViewController") as! SettingsViewController
+
+                navSettings = UINavigationController(rootViewController: dashboardVC)
+            }
+            return navSettings!
+        
+            
+        default:
+            
+            if navTimeLine == nil {
+                let dashboardVC = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! TimeLineViewController
+
+                navTimeLine = UINavigationController(rootViewController: dashboardVC)
+            }
+            return navTimeLine!
+            
+            
+        }
+    }
 }

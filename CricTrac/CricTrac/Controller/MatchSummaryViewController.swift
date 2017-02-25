@@ -33,7 +33,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     matchSummaryTable.registerNib(UINib.init(nibName:"SummaryDetailsCell", bundle: nil), forCellReuseIdentifier: "SummaryDetailsCell")
         matchSummaryTable.allowsSelection = true
         matchSummaryTable.separatorStyle = .None
-        
+        setNavigationBarProperties()
 //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MatchSummaryViewController.newDataAdded), name: "MatchDataChanged" , object: nil)
         // Do any additional setup after loading the view.
     }
@@ -51,12 +51,28 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         getMatchData()
     }
 
+    func setNavigationBarProperties(){
+        var currentTheme:CTTheme!
+        currentTheme = cricTracTheme.currentTheme
+        let menuButton: UIButton = UIButton(type:.Custom)
+        menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
+        menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+        menuButton.frame = CGRectMake(0, 0, 40, 40)
+        let leftbarButton = UIBarButtonItem(customView: menuButton)
+        navigationItem.leftBarButtonItem = leftbarButton
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        title = "MATCH SUMMARY"
+        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        navigationController!.navigationBar.titleTextAttributes = titleDict
+    }
     @IBAction func didTapCancel(sender: UIButton) {
         
         self.dismissViewControllerAnimated(true) {}
     }
     
-    
+    @IBAction func didMenuButtonTapp(sender: UIButton){
+        sliderMenu.setDrawerState(.Opened, animated: true)
+    }
     
     func getMatchData(){
         

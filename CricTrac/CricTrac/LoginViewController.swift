@@ -45,6 +45,11 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         super.viewDidLoad()
         
         setBackgroundColor()
+//        username.text = "crictracvirat@gmail.com"
+//        password.text = "crictrac"\
+     //   username.text = "bharathi92m@gmail.com"
+       // password.text = "qwerty"
+
         //setUIBackgroundTheme(self.view)
         
         loginWithSavedCredentials()
@@ -389,8 +394,10 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
             self.facebookBtn.enabled = true
             self.googleBtn.enabled = true
             if !profileData.userExists {
-                window.rootViewController = profileVC
-                self.presentViewController(profileVC, animated: true) { KRProgressHUD.dismiss() }
+                KRProgressHUD.dismiss()
+               // window.rootViewController = profileVC
+                let nav = UINavigationController(rootViewController: profileVC)
+                self.presentViewController(nav, animated: true) { KRProgressHUD.dismiss() }
             }
             else
             {

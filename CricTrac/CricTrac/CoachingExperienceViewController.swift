@@ -51,6 +51,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         return ["Certifications":CertificationsList,"Experience":Experience.textVal.trim(),"CoachingLevel":CoachingLevel.textVal.trim(),"CoachCurrentTeams":teamNames, "CoachPastTeams": pastTeamNames, "CoachPlayedFor": CoachPlayedFor]
     }
     var scrollViewTop:CGFloat!
+    var window = UIWindow(frame: UIScreen.mainScreen().bounds)
 
     
     var teamNames = [""]
@@ -101,18 +102,24 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         CertificationsTbl.delegate = self
 
         Experience.delegate = self
-        
+        teamName.delegate = self
+        teamsPlayedForTxt.delegate = self
+        pastTeamName.delegate = self
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserInfoViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         scrollView.setContentOffset(CGPointZero, animated: true)
         scrollViewTop = scrollView.frame.origin.y
-
         
+        if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let currentwindow = app.window {
+            
+            window = currentwindow
+        }
+        setNavigationBarProperties()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
-        
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    
         if profileData.FirstName.length > 0 {
             self.CoachingLevel.text = profileData.CoachingLevel
             self.CertificationsList = profileData.Certifications
@@ -127,9 +134,38 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
             CertificationsTbl.reloadData()
         }
     }
-    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        
+    }
+    func setNavigationBarProperties(){
+        var currentTheme:CTTheme!
+        currentTheme = cricTracTheme.currentTheme
+        let menuButton: UIButton = UIButton(type:.Custom)
+        menuButton.setImage(UIImage(named: "Back-100"), forState: UIControlState.Normal)
+        menuButton.addTarget(self, action: #selector(backBtnPressed), forControlEvents: UIControlEvents.TouchUpInside)
+        menuButton.frame = CGRectMake(0, 0, 40, 40)
+        let leftbarButton = UIBarButtonItem(customView: menuButton)
+        let addNewMatchButton: UIButton = UIButton(type:.Custom)
+        addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
+        addNewMatchButton.setTitle("SAVE", forState:.Normal)
+        addNewMatchButton.titleLabel?.font = UIFont(name: appFont_bold, size: 15)
+        addNewMatchButton.addTarget(self, action: #selector(CreateCoachingProfileBtnPressed), forControlEvents: UIControlEvents.TouchUpInside)
+        let righttbarButton = UIBarButtonItem(customView: addNewMatchButton)
+        
+        //assign button to navigationbar
+        
+        navigationItem.leftBarButtonItem = leftbarButton
+        navigationItem.rightBarButtonItem = righttbarButton
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        title = "COACHING EXPERIENCE"
+        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        navigationController!.navigationBar.titleTextAttributes = titleDict
+    }
     @IBAction func backBtnPressed(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
+       // dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -160,15 +196,18 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
                 updateMetaData(userImageMetaData)
                 
                 
-                if self.currentwindow.rootViewController == sliderMenu {
+                if self.window.rootViewController == sliderMenu {
                     
                     
-                    self.currentwindow.rootViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+                    let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+                    self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
                 }
                 else
                 {
                     let rootViewController: UIViewController = getRootViewController()
-                    self.currentwindow.rootViewController = rootViewController
+                    self.window.rootViewController = rootViewController
+                   // sliderMenu.mainViewController = rootViewController
+
                     
                 }
                 
@@ -372,7 +411,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 20
+        return 40
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -428,6 +467,19 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
 
     func donePressed() {
         selectedText.resignFirstResponder()
+    }
+    func textFieldDidEndEditing(textField: UITextField) {
+        if textField == pastTeamName {
+            addPastTeamsPressed(textField)
+        }else if textField == teamName {
+            addTeamsPressed(textField)
+        }else if textField == teamsPlayedForTxt {
+            addTeamsPlayedForPressed(textField)
+        }else {
+            addCertificationsPressed(textField)
+        }
+        //[textField resignFirstResponder];
+        
     }
     /*
     // MARK: - Navigation

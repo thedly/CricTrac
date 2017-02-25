@@ -37,6 +37,8 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
     @IBOutlet weak var PlayerBattingStyle: UILabel!
     @IBOutlet weak var PlayerBowlingStyle: UILabel!
     
+    @IBOutlet weak var lblCoachPastPlayedFor: UILabel!
+
     @IBOutlet weak var CoachCurrentTeams: UILabel!
     @IBOutlet weak var CoachPastTeams: UILabel!
     @IBOutlet weak var CoachCoachingLevel: UILabel!
@@ -51,8 +53,8 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
     @IBOutlet weak var editBtn: UIButton!
     let transitionManager = TransitionManager.sharedInstance
     
-    @IBAction func CloseProfilePressed(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func didMenuButtonTapp(sender: UIButton){
+        sliderMenu.setDrawerState(.Opened, animated: true)
     }
     
     func changeThemeSettigs() {
@@ -65,11 +67,12 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
         let vc = viewControllerFrom("Main", vcid: "UserInfoEditViewController") as! UserInfoViewController
         
         
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+      //  vc.transitioningDelegate = self.transitionManager
         
         
-        vc.transitioningDelegate = self.transitionManager
-        
-        presentViewController(vc, animated: true, completion: nil)        
+       // presentViewController(vc, animated: true, completion: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -97,11 +100,13 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
             
             
             self.CoachCurrentTeams.text = profileData.CoachCurrentTeams.joinWithSeparator("\n").uppercaseString
+            //lblCoachPastPlayedFor
             self.CoachPastTeams.text = profileData.CoachPastTeams.joinWithSeparator("\n").uppercaseString
             self.CoachCoachingLevel.text = profileData.CoachingLevel.uppercaseString
             self.CoachCertifications.text = profileData.Certifications.joinWithSeparator("\n").uppercaseString
             self.CoachExperience.text = profileData.Experience.uppercaseString
-            
+            //lblCoachPastPlayedFor
+             self.lblCoachPastPlayedFor.text = profileData.CoachPlayedFor.joinWithSeparator("\n").uppercaseString
             self.FanSupportingTeams.text = profileData.SupportingTeams.joinWithSeparator("\n").uppercaseString
             self.FanInterestedSports.text = profileData.InterestedSports.joinWithSeparator("\n").uppercaseString
             self.FanFavouritePlayer.text = profileData.FavoritePlayers.joinWithSeparator("\n")
@@ -120,7 +125,7 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
         
         //setUIBackgroundTheme(self.view)
         setBackgroundColor()
-        
+        setNavigationBarProperties()
 //        profileImage.layer.cornerRadius = profileImage.frame.size.width/2
 //        profileImage.clipsToBounds = true
 //        
@@ -146,7 +151,29 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
         // Dispose of any resources that can be recreated.
     }
     
-    
+    func setNavigationBarProperties(){
+        var currentTheme:CTTheme!
+        currentTheme = cricTracTheme.currentTheme
+        let menuButton: UIButton = UIButton(type:.Custom)
+        menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
+        menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+        menuButton.frame = CGRectMake(0, 0, 40, 40)
+        let leftbarButton = UIBarButtonItem(customView: menuButton)
+        let editButton: UIButton = UIButton(type:.Custom)
+        editButton.frame = CGRectMake(0, 0, 40, 40)
+        editButton.setImage(UIImage(named: "Edit-100"), forState: UIControlState.Normal)
+        editButton.addTarget(self, action: #selector(EditProfilePressed), forControlEvents: UIControlEvents.TouchUpInside)
+        let righttbarButton = UIBarButtonItem(customView: editButton)
+        
+        //assign button to navigationbar
+        
+        navigationItem.leftBarButtonItem = leftbarButton
+        navigationItem.rightBarButtonItem = righttbarButton
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        title = "PERSONAL INFO"
+        let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        navigationController!.navigationBar.titleTextAttributes = titleDict
+    }
     
     
     
