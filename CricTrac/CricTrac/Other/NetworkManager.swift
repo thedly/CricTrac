@@ -96,7 +96,12 @@ func writeAutomaticMessage(matchId:String){1
     
     let timelineURL = NSURL(string:serverBaseURL+"/timelineAutoPost/\(currentUser!.uid)/MatchId/\(matchId)")!
     
-    dataTask = defaultSession.dataTaskWithURL(timelineURL, completionHandler: { (data, response, error) in })
+    dataTask = defaultSession.dataTaskWithURL(timelineURL, completionHandler: { (data, response, error) in
+    
+        print(response)
+        
+        print(error)
+    })
     dataTask?.resume()
 }
 //
