@@ -256,4 +256,7 @@ extension NewMatchViewController:UITextFieldDelegate{
         return IndicatorInfo(title: "BATTING")
     }
     
+    @IBAction func didMenuButtonTapp(sender: UIButton){
+        sliderMenu.setDrawerState(.Opened, animated: true)
+    }
 }

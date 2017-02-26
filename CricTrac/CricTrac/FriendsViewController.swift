@@ -81,6 +81,10 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         aCell.FriendCity.text = friendsDataArray[indexPath.row].City
         aCell.FriendProfileImage.image = extractImages(friendsDataArray[indexPath.row].Name!)
         
+        aCell.UnfriendBtn.addTarget(self, action: #selector(FriendsViewController.UnfriendBtnBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        
+        aCell.UnfriendBtn.restorationIdentifier = friendsDataArray[indexPath.row].FriendRecordId
         
         aCell.backgroundColor = UIColor.clearColor()
         return aCell
@@ -113,7 +117,26 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         
     }
     
-    
+    func UnfriendBtnBtnPressed(sender: UIButton) {
+        
+        var friendReqId = sender.restorationIdentifier!
+        
+        DeleteFriendRequestData(friendReqId, successBlock: { data in
+            
+            if data == true {
+                
+                if let index = friendsDataArray.indexOf( {$0.FriendRecordId == friendReqId}) {
+                    friendsDataArray.removeAtIndex(index)
+                }
+                
+                
+                self.SuggestsTblview.reloadData()
+                
+            }
+            
+        })
+        
+    }
     
     /*
      // MARK: - Navigation

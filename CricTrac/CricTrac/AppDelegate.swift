@@ -16,9 +16,9 @@ import Crashlytics
 import FBSDKCoreKit
 import FirebaseDatabase
 import FirebaseAuth
-import GoogleSignIn
+//import GoogleSignIn
 import KRProgressHUD
-
+import IQKeyboardManagerSwift
 import SCLAlertView
 
 @UIApplicationMain
@@ -40,7 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         setDefaultAppThems()
-        
+        UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: UIFont(name: appFont_black, size: 20)!]
+       IQKeyboardManager.sharedManager().enable = true
         return true
     }
     
@@ -112,8 +113,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         let checkFB = FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
-        let checkGoogle = GIDSignIn.sharedInstance().handleURL(url, sourceApplication: sourceApplication,annotation: annotation)
-        return checkGoogle || checkFB
+//        let checkGoogle = GIDSignIn.sharedInstance().handleURL(url, sourceApplication: sourceApplication,annotation: annotation)
+        return /*checkGoogle ||*/ checkFB
         
         //return FBSDKApplicationDelegate.sharedInstance().application( application,  openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }

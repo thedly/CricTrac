@@ -37,6 +37,20 @@
 			<array>
 				<string>com.googleusercontent.apps.891578110522-0djhgtiq09vr90m1psk9osojd8u970me</string>
 			</array>
+            <key>LSApplicationQueriesSchemes</key>
+            <array>
+                <string>com-google-gidconsent-google</string>
+                <string>com-google-gidconsent-youtube</string>
+                <string>com-google-gidconsent</string>
+                <string>com.google.gppconsent.2.4.1</string>
+                <string>com.google.gppconsent.2.4.0</string>
+                <string>googlechrome</string>
+                <string>googlechrome-x-callback</string>
+                <string>hasgplus4</string>
+                <string>com.google.gppconsent.2.3.0</string>
+                <string>com.google.gppconsent.2.2.0</string>
+                <string>com.google.gppconsent</string>
+            </array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
@@ -53,10 +67,19 @@
 			</dict>
 		</array>
 	</dict>
-	<key>FacebookAppID</key>
-	<string>1765140540407741</string>
-	<key>FacebookDisplayName</key>
-	<string>CricTrack</string>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>fb1171088259676886</string>
+            </array>
+        </dict>
+    </array>
+    <key>FacebookAppID</key>
+    <string>1171088259676886</string>
+    <key>FacebookDisplayName</key>
+    <string>CricTrac</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbauth2</string>

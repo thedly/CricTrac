@@ -183,18 +183,21 @@ class Profile {
         
         if self.UserProfile == String(userProfileType.Fan.rawValue) {
             return [
-                "FirstName" : self.FirstName,
-                "LastName" : self.LastName,
-                "City": self.City,
+                "FirstName" : self.FirstName.whiteSpacesTrimmedString(),
+                "LastName" : self.LastName.whiteSpacesTrimmedString(),
+                "City": self.City.whiteSpacesTrimmedString(),
                 "Country": self.Country,
                 "State": self.State,
                 "DateOfBirth": self.DateOfBirth,
-                "Email": self.Email,
+                "Email": self.Email.whiteSpacesTrimmedString(),
                 "Gender": self.Gender,
-                "Mobile": self.Mobile,
+                "Mobile": self.Mobile.whiteSpacesTrimmedString(),
                 "ProfileImageURL": self.ProfileImageURL ,
                 "UserProfile": self.UserProfile,
                 "CoverPhotoURL" : self.CoverPhotoURL,
+                "SearchFirstName" : self.FirstName.lowercaseString.whiteSpacesTrimmedString(),
+                "SearchLastName" : self.LastName.lowercaseString.whiteSpacesTrimmedString(),
+
                 "FavoritePlayers": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.FavoritePlayers : [],
                 "SupportingTeams": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.SupportingTeams: [],
                 "InterestedSports": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.InterestedSports: [],
@@ -208,20 +211,23 @@ class Profile {
         else if self.UserProfile == String(userProfileType.Player.rawValue) {
             
             return [
-                "FirstName" : self.FirstName,
-                "LastName" : self.LastName,
+                "FirstName" : self.FirstName.whiteSpacesTrimmedString(),
+                "LastName" : self.LastName.whiteSpacesTrimmedString(),
                 "BattingStyle": self.BattingStyle,
                 "BowlingStyle": self.BowlingStyle,
                 "City": self.City,
                 "Country": self.Country,
                 "State": self.State,
                 "DateOfBirth": self.DateOfBirth,
-                "Email": self.Email,
+                "Email": self.Email.whiteSpacesTrimmedString(),
                 "Gender": self.Gender,
-                "Mobile": self.Mobile,
+                "Mobile": self.Mobile.whiteSpacesTrimmedString(),
                 "PlayingRole":self.PlayingRole,
                 //"Level":self.PlayingLevel,
                 "ProfileImageURL": self.ProfileImageURL ,
+                "SearchFirstName" : self.FirstName.lowercaseString.whiteSpacesTrimmedString(),
+                "SearchLastName" : self.LastName.lowercaseString.whiteSpacesTrimmedString(),
+
                 "CoverPhotoURL" : self.CoverPhotoURL,
                 "UserProfile": self.UserProfile,
                 
@@ -237,19 +243,21 @@ class Profile {
         else {
             
             return [
-                "FirstName" : self.FirstName,
-                "LastName" : self.LastName,
+                "FirstName" : self.FirstName.whiteSpacesTrimmedString(),
+                "LastName" : self.LastName.whiteSpacesTrimmedString(),
                 "City": self.City,
                 "Country": self.Country,
                 "State": self.State,
                 "DateOfBirth": self.DateOfBirth,
-                "Email": self.Email,
+                "Email": self.Email.whiteSpacesTrimmedString(),
                 "Gender": self.Gender,
-                "Mobile": self.Mobile,
+                "Mobile": self.Mobile.whiteSpacesTrimmedString(),
                 "ProfileImageURL": self.ProfileImageURL ,
                 "CoverPhotoURL" : self.CoverPhotoURL,
                 "UserProfile": self.UserProfile,
-                
+                "SearchFirstName" : self.FirstName.lowercaseString.whiteSpacesTrimmedString(),
+                "SearchLastName" : self.LastName.lowercaseString.whiteSpacesTrimmedString(),
+
                 "CoachCurrentTeams": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.CoachCurrentTeams: [],
                 "CoachPastTeams": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.CoachPastTeams: [],
                 "CoachPlayedFor": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.CoachPlayedFor : [],
@@ -266,4 +274,9 @@ class Profile {
     }
     
     
+}
+extension String {
+    func whiteSpacesTrimmedString() -> String {
+        return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+    }
 }

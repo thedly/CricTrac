@@ -153,7 +153,9 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
     func didNewMatchButtonTapp(){
         let newMatchVc = viewControllerFrom("Main", vcid: "AddMatchDetailsViewController")
-        self.presentViewController(newMatchVc, animated: true) {}
+        let nav = UINavigationController(rootViewController: newMatchVc)
+        sliderMenu.mainViewController = nav
+       // self.presentViewController(nav, animated: true) {}
     }
     
     func setNavigationBarProperties(){

@@ -52,6 +52,7 @@ let settingsMenuData = [
     ["title":"Terms & Conditions","vc":"StaticPageViewController", "img": "Menu_Statistics", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/info/TermsofUse.htm" ],
     ["title":"Privacy policy","vc":  "StaticPageViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/info/PrivacyPolicy.htm" ],
     ["title":"About","vc":  "ProfileBaseViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false],
+     ["title":"Logout","vc":  "", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false]
 ]
 
 
@@ -180,6 +181,7 @@ let themeColors = [
 let defaultTheme = "MeanGreen"
 let defaultProfileImage = "sachin"
 let DashboardDataUpdateUrl = "http://crictracserver.azurewebsites.net/Users/"
+let FriendSuggstionUrl = "http://crictracserver.azurewebsites.net/suggestions/"
 let topColorDefault = themeColors[CurrentTheme]!["topColor"]!
 let bottomColorDefault = themeColors[CurrentTheme]!["bottomColor"]!
 let appFont_black = "SourceSansPro-Black"
@@ -237,4 +239,8 @@ let states = ["Alabama",
               "West Virginia",
               "Wisconsin",
               "Wyoming"]
+
+
+//Marks -- profileSettings
+let nameCharacterLimit = 30
 
