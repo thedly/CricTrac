@@ -103,11 +103,11 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
                 
                 let userDefaults = NSUserDefaults.standardUserDefaults()
                 
-//                currentUser?..getTokenForcingRefresh(true) {idToken, error in
-//                    if error == nil {
-//                        self.saveEmailToken(idToken!)
-//                    }
-//                }
+                currentUser?.getTokenForcingRefresh(true) {idToken, error in
+                    if error == nil {
+                        self.saveEmailToken(idToken!)
+                    }
+                }
                 
                 enableSync()
                 self.navigateToNextScreen()
