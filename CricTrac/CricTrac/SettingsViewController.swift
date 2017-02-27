@@ -130,7 +130,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         else
         {
             let vc  = storyboard.instantiateViewControllerWithIdentifier(vcName! as! String)
-            presentViewController(vc, animated: true, completion: nil)
+             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     

@@ -109,7 +109,12 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         navigationItem.leftBarButtonItem = leftbarButton
         navigationItem.rightBarButtonItem = righttbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-        title = "PERSONAL INFO"
+        if userProfileInfo != nil {
+            title = "EDIT PROFILE"
+        }else {
+            title = "CREATE PROFILE"
+        }
+        
        // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         //navigationController!.navigationBar.titleTextAttributes = titleDict
     }

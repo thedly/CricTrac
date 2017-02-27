@@ -48,7 +48,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     @IBOutlet weak var secondRecentMatchScoreCard: UILabel!
     @IBOutlet weak var firstRecentMatchOpponentName: UILabel!
     @IBOutlet weak var secondRecentMatchOpponentName: UILabel!
-    
+    @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var winPerc: UILabel!
     @IBOutlet weak var BB: UILabel!
@@ -230,6 +230,24 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        /*
+
+         CGRect contentRect = CGRectZero;
+         for (UIView *view in self.scrollView.subviews) {
+         contentRect = CGRectUnion(contentRect, view.frame);
+         }
+         self.scrollView.contentSize = contentRect.size;
+ */
+        
+        var contentRect = CGRectZero
+        for view in scrollView.subviews {
+            contentRect = CGRectUnion(contentRect, view.frame)
+        }
+        //scrollView.contentSize = contentRect.size
+        
+    }
 
     func setNavigationBarProperties(){
         

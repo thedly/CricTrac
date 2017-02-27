@@ -26,7 +26,7 @@ class StaticPageViewController: UIViewController,ThemeChangeable {
         let currentTheme = cricTracTheme.currentTheme
         self.pageHeader.text = pageHeaderText
         self.view.backgroundColor = currentTheme.topColor
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor
+      //  navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     override func viewDidLoad() {

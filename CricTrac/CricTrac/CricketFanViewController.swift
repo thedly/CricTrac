@@ -156,7 +156,15 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
         self.navigationItem.leftBarButtonItem = leftbarButton
         self.navigationItem.rightBarButtonItem = righttbarButton
         self.navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-        self.title = "PERSONAL INTERESTS"
+        if self.window.rootViewController == sliderMenu {
+            title = "EDIT PROFILE"
+            
+        }
+        else
+        {
+            title = "CREATE PROFILE"
+        }
+        //self.title = "PERSONAL INTERESTS"
         //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
        // self.navigationController!.navigationBar.titleTextAttributes = titleDict
     }

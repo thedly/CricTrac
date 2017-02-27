@@ -43,6 +43,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                 matchId = val
             }
         }
+        self.automaticallyAdjustsScrollViewInsets = false
         // Do any additional setup after loading the view.
         settings.style.buttonBarItemBackgroundColor = UIColor.clearColor()
         settings.style.buttonBarItemTitleColor = UIColor.whiteColor()
@@ -55,6 +56,10 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         //setUIBackgroundTheme(self.view)
         setBackgroundColor()
         setNavigationBarProperties()
+       // containerView.setContentOffset(CGPointMake(pageOffsetForChildIndex(index: 0), -64), animated: true)
+       // containerView.setContentOffset(CGPointMake(pageOffsetForChildIndex(index: 1), -64), animated: true)
+       // containerView.setContentOffset(CGPointMake(pageOffsetForChildIndex(index: 2), -64), animated: true)
+
     }
     
     func dataChangedAfterLastSave(){
@@ -154,7 +159,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             )
             
             let alertView = SCLAlertView(appearance: appearance)
-            
+           
             alertView.addButton("OK", target:self, selector:#selector(AddMatchDetailsViewController.continueToDismiss))
             
             alertView.addButton("Cancel", action: { })
@@ -165,7 +170,8 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         }
         else{
             
-            self.dismissViewControllerAnimated(true) {}
+           // self.dismissViewControllerAnimated(true) {}
+            moveToMatchSummary()
         }
         
     }
@@ -173,7 +179,8 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     
     func continueToDismiss(){
         
-        self.dismissViewControllerAnimated(true) {}
+       // self.dismissViewControllerAnimated(true) {}
+        moveToMatchSummary()
     }
     
     
@@ -232,8 +239,8 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                     
                     addMatchData("date \(String(date))",data: data, callback: { dat in
                     self.updateGlobalValues()
-                    self.dismissViewControllerAnimated(true) {}
-
+                   // self.dismissViewControllerAnimated(true) {}
+                        self.moveToMatchSummary()
                     })
                 }else{
                     
@@ -243,7 +250,8 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                             var data = dat
                             data["MatchId"] =  matchKey
                             self.previous?.refresh(data)
-                            self.dismissViewControllerAnimated(true) {}
+                           self.moveToMatchSummary()
+                            // self.dismissViewControllerAnimated(true) {}
                         })
                     }
                     
@@ -379,5 +387,10 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
      // Pass the selected object to the new view controller.
      }
      */
-    
+    func moveToMatchSummary()  {
+        
+         let dashboardVC = viewControllerFrom("Main", vcid: "MatchSummaryViewController") as! MatchSummaryViewController
+        let navigationControl = UINavigationController(rootViewController: dashboardVC)
+        sliderMenu.mainViewController = navigationControl
+    }
 }

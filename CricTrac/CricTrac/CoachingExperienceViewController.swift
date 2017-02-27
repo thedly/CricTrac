@@ -160,7 +160,15 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         navigationItem.leftBarButtonItem = leftbarButton
         navigationItem.rightBarButtonItem = righttbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-        title = "COACHING EXPERIENCE"
+        if self.window.rootViewController == sliderMenu {
+            title = "EDIT PROFILE"
+            
+        }
+        else
+        {
+            title = "CREATE PROFILE"
+        }
+        //title = "COACHING EXPERIENCE"
        // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
        // navigationController!.navigationBar.titleTextAttributes = titleDict
     }
