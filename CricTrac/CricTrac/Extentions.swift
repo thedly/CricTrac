@@ -325,4 +325,5 @@ extension String
     {
         return self.stringByReplacingOccurrencesOfString(target, withString: withString, options: NSStringCompareOptions.LiteralSearch, range: nil)
     }
+
 }

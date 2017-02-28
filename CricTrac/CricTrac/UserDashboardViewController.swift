@@ -505,10 +505,10 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                         mData.matchDate = dateFromString
                         
                         
-                        matchVenueAndDate.appendContentsOf(date as? String ?? "NA")
+                        //matchVenueAndDate.appendContentsOf(date as? String ?? "NA")
                     }
                     if let venue = value["Ground"]{
-                        matchVenueAndDate.appendContentsOf("\n@ \(venue)")
+                        matchVenueAndDate.appendContentsOf("\(venue)")
                     }
                     
                     if let opponent  = value["Opponent"]{

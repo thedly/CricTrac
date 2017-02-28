@@ -103,7 +103,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     func ValidateScore() -> Void {
         
         if let runText = runsText.text {
-            if runText.trimWhiteSpace.length > 0 && Int(runText)! > 0  {
+            if runText.trimWhiteSpace.length > 0 && Int(runText)! >= 0  {
                 
                 RunsTaken = runText
                 
@@ -381,7 +381,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         noballText.textVal = parent!.selecetedData!["NoBalls"]! as! String
         widesText.textVal = parent!.selecetedData!["Wides"]! as! String
         
-        if let mt = parent!.selecetedData!["Wides"] {
+        if let mt = parent!.selecetedData!["Maidens"] {
             maidensText.textVal = mt as! String
         }
         

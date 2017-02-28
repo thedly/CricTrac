@@ -16,6 +16,10 @@ class SummaryDetailsCell: UITableViewCell {
     @IBOutlet weak var BattingOrBowlingScore: UILabel!
     @IBOutlet weak var vsView: UIView!
     
+    @IBOutlet weak var stadiumLabel: UILabel!
+    @IBOutlet weak var strikeRateLabel: UILabel!
+    @IBOutlet weak var economyLabel: UILabel!
+    
     @IBOutlet weak var matchDateAndVenue: UILabel!
     
     override func awakeFromNib() {

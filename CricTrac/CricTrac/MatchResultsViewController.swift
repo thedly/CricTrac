@@ -319,7 +319,12 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     
     func setTeamData(){
         
-        if !inEditMode, let matchVCInstance = parent?.matchVC {
+        if !inEditMode , let matchVCInstance = parent?.matchVC {
+            firstTeamTitle.text = matchVCInstance.teamText.text
+            secondTeamTitle.text = matchVCInstance.opponentText.text
+        }
+        
+        if inEditMode && parent!.matchVC.teamOROpponentFieldChanged , let matchVCInstance = parent?.matchVC {
             firstTeamTitle.text = matchVCInstance.teamText.text
             secondTeamTitle.text = matchVCInstance.opponentText.text
         }

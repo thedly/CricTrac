@@ -14,6 +14,9 @@ class MatchSummaryData {
     var opponentName: String!
     var battingBowlingScore: NSMutableAttributedString!
     var matchDateAndVenue: String!
+    var ground: String!
+    var strikerate: Float!
+    var economy: Float!
     var BattingSectionHidden: Bool!
     var BowlingSectionHidden: Bool!
     var matchDate: NSDate!
