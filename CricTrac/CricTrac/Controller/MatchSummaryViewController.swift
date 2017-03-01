@@ -160,7 +160,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         
         if battingBowlingScore.length == 0 {
-            battingBowlingScore.bold("DNP", fontName: appFont_black, fontSize: 30)
+            battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize: 30)
         }
         
         
@@ -184,21 +184,26 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             matchVenueAndDate.appendContentsOf(" | \(group)")
         }
         
-        if let venue = value["Ground"]{
-            matchVenueAndDate.appendContentsOf("\n@ \(venue)")
+        if let ground = value["Ground"]{
+            mData.ground = ground as! String
+            
+            if let venue = value["Venue"]{
+                mData.ground = "\(ground) \(venue)"
+            }
         }
         
         if let ballsFaced = value["BallsFaced"] as? String where ballsFaced != "-", let runsScored = value["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
             
-            let strinkeRate = (Int(runsScored)!/Int(ballsFaced)!)*100
-            matchVenueAndDate.appendContentsOf("\n Strike rate: \(strinkeRate)")
+            let strinkeRate = String(format: "%.2f",(Float(runsScored)!)*100/Float(ballsFaced)!)
+            mData.strikerate = Float(strinkeRate)
+            //matchVenueAndDate.appendContentsOf("\n Strike rate: \(strinkeRate)")
         }
         
         if let oversBowled = value["OversBowled"] as? String where oversBowled != "-", let runsGiven = value["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
             
-            
-            let economy = Float(runsGiven)!/Float(oversBowled)!
-            matchVenueAndDate.appendContentsOf("\n Economy: \(economy)")
+            let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
+            mData.economy = Float(economy)
+            //matchVenueAndDate.appendContentsOf("\n Economy: \(economy)")
         }
         
         if let opponent  = value["Opponent"]{
@@ -225,6 +230,16 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 aCell.BattingOrBowlingScore.attributedText = currentMatch.battingBowlingScore
                 aCell.matchDateAndVenue.text = currentMatch.matchDateAndVenue
                 aCell.oponentName.text = currentMatch.opponentName
+                aCell.stadiumLabel.text = currentMatch.ground
+                if let sRate = currentMatch.strikerate {
+                    aCell.strikeRateLabel.text = "Strike Rate : \(sRate)"
+                }
+                if let economy = currentMatch.economy {
+                    
+                    aCell.economyLabel.text = "Economy : \(economy)"
+                }
+    
+                //aCell.stadiumLabel.text = currentMatch.
             }
             return aCell
         }

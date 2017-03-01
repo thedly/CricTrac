@@ -60,6 +60,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
        // containerView.setContentOffset(CGPointMake(pageOffsetForChildIndex(index: 1), -64), animated: true)
        // containerView.setContentOffset(CGPointMake(pageOffsetForChildIndex(index: 2), -64), animated: true)
 
+
     }
     
     func dataChangedAfterLastSave(){
@@ -186,6 +187,9 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     
     @IBAction func didTapSave(sender: UIButton) {
         
+        if matchBeingEdited {
+            dataHasChangedAfterLastSave = false
+        }
         
         if validateMatchDetails() {
             

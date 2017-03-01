@@ -854,8 +854,8 @@ func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
     
     let userName = loggedInUserName ?? "No Name"
     
-    let addedTime = "\(NSDate().timeIntervalSince1970 * 1000)"
-    let timelineDict:[String:String] = ["AddedTime":addedTime,"OwnerID":currentUser!.uid,"OwnerName":userName,"isDeleted":"0","Post":postText,"PostedBy":currentUser!.uid,"PostType":"Self"]
+    let addedTime =  Int(NSDate().timeIntervalSince1970 * 1000)
+    let timelineDict:[String:AnyObject] = ["AddedTime":addedTime,"OwnerID":currentUser!.uid,"OwnerName":userName,"isDeleted":"0","Post":postText,"PostedBy":currentUser!.uid,"PostType":"Self"]
     
     let ref = fireBaseRef.child("TimelinePosts").childByAutoId()
     
@@ -877,7 +877,9 @@ func addNewComment(postId:String,comment:String){
     
     let ref = fireBaseRef.child("TimelinePosts").child(postId).child("TimelineComments").childByAutoId()
     
-    let commentDict:[String:String] = ["Comment":comment,"OwnerID":currentUser!.uid,"OwnerName":loggedInUserName ?? "","isDeleted":"0"]
+    let addedTime =  Int(NSDate().timeIntervalSince1970 * 1000)
+    
+    let commentDict:[String:AnyObject] = ["Comment":comment,"OwnerID":currentUser!.uid,"OwnerName":loggedInUserName ?? "","isDeleted":"0","AddedTime":addedTime]
     
     ref.setValue(commentDict)
     
