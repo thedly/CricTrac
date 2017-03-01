@@ -50,6 +50,12 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         // Do any additional setup after loading the view.
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.profileImage.image = LoggedInUserImage
+
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -184,11 +190,11 @@ extension SliderMenuViewController {
             }
             return navFanDashBoard!
         case "AddMatchDetailsViewController":
-            if navAddMatch == nil {
+            //if navAddMatch == nil {
                 let dashboardVC = viewControllerFrom("Main", vcid: "AddMatchDetailsViewController") as! AddMatchDetailsViewController
 
                 navAddMatch = UINavigationController(rootViewController: dashboardVC)
-            }
+          //  }
             return navAddMatch!
         case "MatchSummaryViewController":
             if navMatchSummary == nil {

@@ -74,7 +74,10 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initialization()
         setNavigationBarProperties()
+        initializeView()
+
        // self.navigationController?.interactivePopGestureRecognizer?.enabled = false
       //  sliderMenu.screenEdgePanGestreEnabled = false
         //setUIBackgroundTheme(self.view)
@@ -83,7 +86,6 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        initializeView()
         setBackgroundColor()
 
 
@@ -167,8 +169,17 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
             
                     
                 
+        
+        
+//                    self.teamName.text = profileData.TeamName
+//                    self.battingStyle.text = profileData.BattingStyle
+//                    self.bowlingStyle.text = profileData.BowlingStyle
+//                    self.playingRole.text = profileData.PlayingRole
                 
-                    self.profileDetailsExists = true
+        }
+    func initialization()  {
+        
+        self.profileDetailsExists = true
         
         if let fName = profileData.FirstName as? String where fName.length > 0, let lName = profileData.LastName as? String where lName.length > 0 {
             
@@ -181,7 +192,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         else
         {
             
-
+            
             if let displayName = (currentUser?.displayName) where displayName.length > 0  {
                 
                 var fullNameArr = displayName.characters.split{$0 == " "}.map(String.init)
@@ -196,26 +207,19 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         
         
         
-                    self.dateOfBirth.text = profileData.DateOfBirth
-                    self.emailId.text = currentUser?.email  //profileData.Email
-                    self.mobile.text = profileData.Mobile
-                    self.gender.text = profileData.Gender
-                    self.country.text = profileData.Country
-                    self.state.text = profileData.State
-                    self.city.text = profileData.City
-                    self.ctCountryPicker.SelectedCountry = profileData.Country
+        self.dateOfBirth.text = profileData.DateOfBirth
+        self.emailId.text = currentUser?.email  //profileData.Email
+        self.mobile.text = profileData.Mobile
+        self.gender.text = profileData.Gender
+        self.country.text = profileData.Country
+        self.state.text = profileData.State
+        self.city.text = profileData.City
+        self.ctCountryPicker.SelectedCountry = profileData.Country
         
         if self.userProfileInfo != nil {
             self.userProfileInfo.text = profileData.UserProfile
         }
-        
-//                    self.teamName.text = profileData.TeamName
-//                    self.battingStyle.text = profileData.BattingStyle
-//                    self.bowlingStyle.text = profileData.BowlingStyle
-//                    self.playingRole.text = profileData.PlayingRole
-                
-        }
-   
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
