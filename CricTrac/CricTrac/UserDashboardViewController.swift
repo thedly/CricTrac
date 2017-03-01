@@ -14,6 +14,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
 
     //MARK: - Variable declaration
     
+    @IBOutlet weak var imgCoverPhoto: UIImageView!
     var battingDetails: [String:String]!
     var bowlingDetails: [String:String]!
     var recentMatches: [String:String]!
@@ -354,6 +355,9 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         // Do any additional setup after loading the view.
         setNavigationBarProperties()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(changeThemeSettigs))
+        tapGesture.numberOfTapsRequired = 1
+        imgCoverPhoto.addGestureRecognizer(tapGesture)
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

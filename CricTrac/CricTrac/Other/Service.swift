@@ -15,7 +15,7 @@ import SwiftyJSON
 
 func loadInitialValues(){
     
-    
+   
     fireBaseRef.child("Dismissals").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
         
         if let value = snapshot.value as? [String]{
@@ -151,7 +151,33 @@ func addProfileImageData(profileDp:UIImage){
                 userImageMetaData = (metaData?.downloadURL())!
                 
                 LoggedInUserImage = profileDp
-                
+            
+                let qualityOfServiceClass = QOS_CLASS_BACKGROUND
+                let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+                dispatch_async(backgroundQueue, {
+                    updateMetaData(userImageMetaData)
+                    do {
+                    let data = try? NSData(contentsOfURL: userImageMetaData)
+                        LoggedInUserImage = UIImage(data: data!!)!
+
+                        
+                    }catch {
+                        LoggedInUserImage = placeHolderImage!
+
+                    }
+                    print("This is run on the background queue")
+                    
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        if let data = try? NSData(contentsOfURL: userImageMetaData) {
+                            
+                            LoggedInUserImage = UIImage(data: data!)!
+                        }else {
+                            LoggedInUserImage = placeHolderImage!
+                        }
+                        print("This is run on the main queue, after the previous code in outer block")
+                    })
+                })
+               
                 
             }
         }
@@ -169,8 +195,9 @@ func updateMetaData(profileImgUrl: NSURL) {
         let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
         let profileImageObject: [NSObject:AnyObject] = [ "ProfileImageURL"    : profileImgUrl.absoluteString]
         ref.updateChildValues(profileImageObject)
-        if profileData.ProfileImageURL == "" {
+        if profileData.ProfileImageURL == "-" {
             profileData.ProfileImageURL = profileImgUrl.absoluteString
+             NSNotificationCenter.defaultCenter().postNotificationName(ProfilePictureUpdated, object: nil)
         }
     }
     

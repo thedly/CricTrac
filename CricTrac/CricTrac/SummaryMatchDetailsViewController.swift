@@ -196,7 +196,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.boxColor
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor
+       // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     override func viewDidLoad() {

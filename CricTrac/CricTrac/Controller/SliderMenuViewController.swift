@@ -8,8 +8,8 @@
 
 import UIKit
 import SCLAlertView
-
-class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable {
+import KYDrawerController
+class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable,KYDrawerControllerDelegate {
 
     
     // NavigationControllers
@@ -43,15 +43,30 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         userName.text = profileData.fullName
         //baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
         
-        self.profileImage.image = LoggedInUserImage
+      
         
         loadInitialValues();
-        
+        NSNotificationCenter.defaultCenter().addObserverForName(ProfilePictureUpdated, object: nil, queue: nil) { (notification) in
+            self.profileImage.image = LoggedInUserImage
+
+        }
         // Do any additional setup after loading the view.
     }
 
+    func drawerController(drawerController: KYDrawerController, stateChanged state: KYDrawerController.DrawerState) {
+        self.profileImage.image = LoggedInUserImage
+
+        
+    }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        
+        self.profileImage.image = LoggedInUserImage
+
+    }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
         self.profileImage.image = LoggedInUserImage
 
