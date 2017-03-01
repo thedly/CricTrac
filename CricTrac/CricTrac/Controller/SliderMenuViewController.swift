@@ -129,6 +129,14 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
             sliderMenu.mainViewController = navigationControl
             sliderMenu.setDrawerState(.Closed, animated: true)
     }
+    
+    
+    func moveTo(vc:String){
+        let navigationControl = getNavigationControllerFor(vc)
+        sliderMenu.mainViewController = navigationControl
+        sliderMenu.setDrawerState(.Closed, animated: true)
+    }
+    
 }
 
 

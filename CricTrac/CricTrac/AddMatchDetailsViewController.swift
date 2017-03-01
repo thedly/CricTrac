@@ -55,6 +55,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         //setUIBackgroundTheme(self.view)
         setBackgroundColor()
         setNavigationBarProperties()
+
     }
     
     func dataChangedAfterLastSave(){
