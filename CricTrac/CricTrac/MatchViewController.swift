@@ -26,6 +26,8 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     @IBOutlet weak var playingLevel: UITextField!
     @IBOutlet weak var scrollView:UIScrollView!
     
+    var teamOROpponentFieldChanged : Bool = false
+    
     var selectedText:UITextField!
     var scrollViewTop:CGFloat!
     
@@ -273,6 +275,7 @@ extension MatchViewController:UITextFieldDelegate{
         }
         else if textField == teamText{
             addSuggstionBox(textField,dataSource: teamNames)
+            self.teamOROpponentFieldChanged = true
         }
         else if textField == groundText{
             addSuggstionBox(textField,dataSource: groundNames)
@@ -282,6 +285,7 @@ extension MatchViewController:UITextFieldDelegate{
         }
         else if textField == opponentText{
             addSuggstionBox(textField,dataSource: opponentTeams)
+            self.teamOROpponentFieldChanged = true
         }
         else if textField == tournamentText{
             addSuggstionBox(textField,dataSource: tournaments)

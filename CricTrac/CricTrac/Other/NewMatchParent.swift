@@ -12,6 +12,7 @@ protocol MatchParent:class {
     
     var selecetedData:[String:AnyObject]?{get set}
     var matchVC:MatchViewController! {get set}
+    //var teamOROpponentFieldChanged : Bool!{get set}
     func dataChangedAfterLastSave()
 }
 

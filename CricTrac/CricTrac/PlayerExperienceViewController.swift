@@ -85,8 +85,14 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         navigationItem.leftBarButtonItem = leftbarButton
         navigationItem.rightBarButtonItem = righttbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-        title = "PLAYER EXPERIENCE"
-        //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        if self.window.rootViewController == sliderMenu {
+            title = "EDIT PROFILE"
+        }
+        else
+        {
+            title = "CREATE PROFILE"
+            
+        }        //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         //navigationController!.navigationBar.titleTextAttributes = titleDict
     }
     @IBAction func goNextPage(sender: AnyObject) {

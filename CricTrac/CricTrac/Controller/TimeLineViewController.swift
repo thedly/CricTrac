@@ -29,7 +29,8 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         setNavigationBarProperties();
         currentTheme = cricTracTheme.currentTheme
         setBackgroundColor()
-        
+        self.automaticallyAdjustsScrollViewInsets = false
+
         //setUIBackgroundTheme(view)
         
         loadTimeline()

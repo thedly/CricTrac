@@ -131,7 +131,7 @@ Copyright 2016 Google
 
 ## FirebaseInstanceID
 
-Copyright 2017 Google
+Copyright 2016 Google
 
 ## FirebaseMessaging
 
@@ -553,13 +553,17 @@ Copyright 2016 Google
    limitations under the License.
 
 
+## GoogleAppUtilities
+
+Copyright 2016 Google
+
 ## GoogleInterchangeUtilities
 
 Copyright 2016 Google
 
 ## GoogleSignIn
 
-Copyright 2017 Google
+Copyright 2016 Google
 
 ## GoogleSymbolUtilities
 
