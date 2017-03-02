@@ -53,13 +53,10 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
             for (_, req) in data {
                 var reqData = ReceivedFriendRequest(dataObj: req as! [String : AnyObject])
                 friendsRequestsData.append(reqData)
-                self.RequestsTblview.reloadData()
+                
             }
             
-            
-            
-
-            
+            self.RequestsTblview.reloadData()
             
             // do something here
         }
@@ -78,6 +75,17 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         aCell.FriendName.text = friendsRequestsData[indexPath.row].Name
         aCell.FriendCity.text = friendsRequestsData[indexPath.row].City
         aCell.FriendProfileImage.image = extractImages(friendsRequestsData[indexPath.row].ReceivedFrom)
+        
+        aCell.confirmBtn.accessibilityIdentifier = friendsRequestsData[indexPath.row].ReceivedFrom
+        
+        aCell.confirmBtn.restorationIdentifier = friendsRequestsData[indexPath.row].RequestId
+        
+        aCell.rejectBtn.restorationIdentifier = friendsRequestsData[indexPath.row].RequestId
+        
+        
+        aCell.confirmBtn.addTarget(self, action: #selector(FriendRequestsViewController.ConfirmFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        aCell.rejectBtn.addTarget(self, action: #selector(FriendRequestsViewController.RejectFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         aCell.backgroundColor = UIColor.clearColor()
         return aCell
@@ -105,7 +113,130 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         
     }
 
+    func RejectFriendBtnPressed(sender: UIButton){
+        
+        let RequestObjectid = sender.restorationIdentifier
+        
+        DeleteSentAndReceivedFriendRequestData(RequestObjectid!, successBlock: { data in
+            
+            if data == true {
+                if let index = friendsRequestsData.indexOf( {$0.RequestId == RequestObjectid }) {
+                    friendsRequestsData.removeAtIndex(index)
+                }
+                
+                
+                self.RequestsTblview.reloadData()
+            }
+            
+            
+            
+        })
+
+        
+    }
     
+    public func ConfirmFriendBtnPressed(sender:UIButton!) {
+        
+        if let FriendUserId = sender.accessibilityIdentifier where FriendUserId != "" {
+            
+            var FriendObject = Profile(usrObj: [:])
+            var loggedInUserObject = Profile(usrObj: [:])
+            
+            getProfileInfoById(FriendUserId, sucessBlock: { FriendData in
+                FriendObject = Profile(usrObj: FriendData)
+                
+                getProfileInfoById((currentUser?.uid)!, sucessBlock: { loggedInUserObjectData in
+                    loggedInUserObject = Profile(usrObj: loggedInUserObjectData)
+                    
+                    
+                    let RequestObjectid = sender.restorationIdentifier
+                    
+                    
+                    var FriendData = Friends(dataObj: [:])
+                    
+                    FriendData.UserId = FriendObject.id
+                    FriendData.City = FriendObject.City
+                    switch FriendObject.UserProfile {
+                    case userProfileType.Player.rawValue :
+                        FriendData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
+                        break;
+                    case userProfileType.Coach.rawValue :
+                        FriendData.Club = FriendObject.CoachCurrentTeams.joinWithSeparator(",")
+                        break;
+                    case userProfileType.Fan.rawValue :
+                        FriendData.Club = FriendObject.SupportingTeams.joinWithSeparator(",")
+                        break;
+                    default:
+                        FriendData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
+                        break;
+                        
+                    }
+
+                    FriendData.Name = FriendObject.fullName
+                    FriendData.FriendshipDateTime = NSDate().getCurrentTimeStamp()
+                    
+                    var UserData = Friends(dataObj: [:])
+                    
+                    UserData.UserId = loggedInUserObject.id
+                    UserData.City = loggedInUserObject.City
+                    
+                    switch FriendObject.UserProfile {
+                    case userProfileType.Player.rawValue :
+                        UserData.Club = loggedInUserObject.PlayerCurrentTeams.joinWithSeparator(",")
+                        break;
+                    case userProfileType.Coach.rawValue :
+                        UserData.Club = loggedInUserObject.CoachCurrentTeams.joinWithSeparator(",")
+                        break;
+                    case userProfileType.Fan.rawValue :
+                        UserData.Club = loggedInUserObject.SupportingTeams.joinWithSeparator(",")
+                        break;
+                    default:
+                        UserData.Club = loggedInUserObject.PlayerCurrentTeams.joinWithSeparator(",")
+                        break;
+                        
+                    }
+
+                    
+                    
+                    
+                    UserData.Name = loggedInUserObject.fullName
+                    UserData.FriendshipDateTime = NSDate().getCurrentTimeStamp()
+                    
+                    AcceptFriendRequest(["UserData": UserData.FriendRequestObject(UserData), "FriendData": FriendData.FriendRequestObject(FriendData)], callback: { data in
+                        
+                        
+                        DeleteSentAndReceivedFriendRequestData(RequestObjectid!, successBlock: { data in
+                            
+                            if data == true {
+                                if let index = friendsRequestsData.indexOf( {$0.ReceivedFrom == FriendObject.id}) {
+                                    friendsRequestsData.removeAtIndex(index)
+                                }
+                                
+                                
+                                self.RequestsTblview.reloadData()
+                            }
+                            
+                            
+                            
+                        })
+                        
+                        
+                        
+                        
+                    })
+                    
+                    
+                    
+                })
+                
+                
+            })
+            
+            
+            
+            
+         }
+    }
    
 
     /*
