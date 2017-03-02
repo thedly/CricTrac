@@ -76,14 +76,16 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     
     @IBOutlet weak var summarizedView: UIView!
     
-    let actionSheetController = UIAlertController(title: "", message: "Are you sure to delete ?", preferredStyle: .ActionSheet)
+    
     
     @IBAction func deleteActionPressed(sender: UIButton) {
+        
+        let actionSheetController = UIAlertController(title: "", message: "Are you sure to delete ?", preferredStyle: .ActionSheet)
         
         // Create and add the Cancel action
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
             // Just dismiss the action sheet
-            self.actionSheetController.dismissViewControllerAnimated(true, completion: nil)
+            actionSheetController.dismissViewControllerAnimated(true, completion: nil)
         }
         actionSheetController.addAction(cancelAction)
         
@@ -294,7 +296,16 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             
             let formattedString = NSMutableAttributedString()
             
-            formattedString.bold(runs , fontName: appFont_black, fontSize: 83)
+            
+            
+            if let dismissal = matchDetailsData["Dismissal"] as? String where dismissal == "Not out"{
+                
+                formattedString.bold(runs+"*" , fontName: appFont_black, fontSize: 83)
+            }else{
+                
+                 formattedString.bold(runs , fontName: appFont_black, fontSize: 83)
+            }
+            
             let fullRange = NSRange(location: 0,length: formattedString.length)
             let batLength = formattedString.length
             
@@ -423,30 +434,17 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             
             
             
-            if tournament as! String == "-"{
-                if let opponent = matchDetailsData["Opponent"] {
-                    
-                    tournamentText = formattedString.bold("vs \(opponent)", fontName: appFont_black, fontSize: 19).bold("\n\(group)", fontName: appFont_bold, fontSize: 15)
-                    
-                }
-                else
-                {
-                    tournamentText = formattedString.bold("Unknown Tournament", fontName: appFont_black, fontSize: 19).bold("\n\(group)", fontName: appFont_bold, fontSize: 15)
-                    
-                }
+            if let val =  tournament as? String where val != "-"{
+               tournamentText = formattedString.bold("\(val)", fontName: appFont_black, fontSize: 19).bold("\n\(group)", fontName: appFont_bold, fontSize: 15)
             }
-            else{
-                
-                tournamentText = formattedString.bold("\(tournament)", fontName: appFont_black, fontSize: 19).bold("\n\(group)", fontName: appFont_bold, fontSize: 15)
-                
-            }
+   
             tournamentName.attributedText = tournamentText
         }
         
         var firstTeamScore = "-"
         var secondTeamScore = "-"
         
-        if let hTeam: String = matchDetailsData["Team"] as? String {
+        if let hTeam: String = matchDetailsData["FirstBatting"] as? String {
             if hTeam != "-" {
                 if hTeam.length > 15 {
                     var subString =  hTeam[hTeam.startIndex.advancedBy(0)...hTeam.startIndex.advancedBy(15)]
@@ -463,7 +461,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                 homeTeam.text = "Unknown"
             }
             
-            if let opponent: String = matchDetailsData["Opponent"] as? String {
+            if let opponent: String = matchDetailsData["SecondBatting"] as? String {
                 if opponent != "-" {
                     if opponent.length > 15 {
                         var subString =  opponent[opponent.startIndex.advancedBy(0)...opponent.startIndex.advancedBy(15)]
