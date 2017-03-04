@@ -38,7 +38,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func initializeView() {
         
-         SuggestsTblview.registerNib(UINib.init(nibName:"FriendsCell", bundle: nil), forCellReuseIdentifier: "FriendsCell")
+        SuggestsTblview.registerNib(UINib.init(nibName:"FriendsCell", bundle: nil), forCellReuseIdentifier: "FriendsCell")
         
         SuggestsTblview.allowsSelection = false
         SuggestsTblview.separatorStyle = .None
@@ -51,24 +51,26 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
-        friendsDataArray.removeAll()
+        
         getAllFriends { (data) in
             
+            friendsDataArray.removeAll()
             
             for (_, req) in data {
                 var reqData = Friends(dataObj: req as! [String : AnyObject])
                 friendsDataArray.append(reqData)
-                self.SuggestsTblview.reloadData()
+                
             }
             
             
             
-            
+            self.SuggestsTblview.reloadData()
             
             
             // do something here
         }
+        
+        
     }
 
     

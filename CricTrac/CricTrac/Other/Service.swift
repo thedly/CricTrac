@@ -439,25 +439,20 @@ func getAllProfileData(sucessBlock:([String:AnyObject])->Void){
     })
 }
 
-func getAllProfiles(sucessBlock:([[String:AnyObject]])->Void){
+func getAllProfiles(params:[String], sucessBlock:([[String:AnyObject]])->Void){
     
     fireBaseRef.child("Users").observeEventType(.Value, withBlock: { (snapshot) in
         var users: [[String: AnyObject]] = []
         if let data: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
             
-            
-            
-            
-            
             for (key, value) in data {
-                if var profile = value["UserProfile"] as? [String : AnyObject] {
-                    profile["Id"] = key
-                    
-                
-                    users.append(profile)
+                if params.contains(key) {
+                    if var profile = value["UserProfile"] as? [String : AnyObject] {
+                        profile["Id"] = key
+                        users.append(profile)
+                    }
                 }
             }
-            
             sucessBlock(users)
         }
         else{
@@ -707,27 +702,61 @@ func addThemeData(theme: String, sucessBlock:()->Void){
 
 public func getAllFriendSuggestions(callback:()->Void) {
     
-    getAllProfiles({ resultObj in
-            UserProfilesData.removeAll()
-            for profile in resultObj {
-    
-                var currentProfile = Profile(usrObj: profile)
-    
-    
-                UserProfilesData.append(currentProfile)
-                if let _imageUrl = profile["ProfileImageURL"] as? String where _imageUrl != ""  {
-    
-                    let userId = profile["Id"] as! String
-    
-                    getImageFromFirebase(_imageUrl) { (data) in
-                        UserProfilesImages[userId] = data
-                    }
-                }
+    if let usrId = currentUser?.uid {
+        let requestUrl = "\(FriendSuggstionUrl)\(usrId)"
+        let request = NSMutableURLRequest(URL: NSURL(string: requestUrl)!)
+        request.HTTPMethod = "GET"
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+            guard error == nil && data != nil else {                                                          // check for fundamental networking error
+                print("error=\(error)")
+                return
             }
-        
-            callback()
-        
-        })
+            
+            if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+            }
+            
+            do{
+                
+                let json = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments)
+                
+                
+                getAllProfiles( json["suggestions"] as! [String] ,sucessBlock: { resultObj in
+                    UserProfilesData.removeAll()
+                    for profile in resultObj {
+                        
+                        var currentProfile = Profile(usrObj: profile)
+                        
+                        
+                        UserProfilesData.append(currentProfile)
+                        if let _imageUrl = profile["ProfileImageURL"] as? String where _imageUrl != ""  {
+                            
+                            let userId = profile["Id"] as! String
+                            
+                            getImageFromFirebase(_imageUrl) { (data) in
+                                UserProfilesImages[userId] = data
+                            }
+                        }
+                    }
+                    
+                    callback()
+                    
+                })
+                
+                
+                
+            }
+            catch
+            {
+                print("Error with Json: \(error)")
+            }
+            
+            let responseString = String(data: data!, encoding: NSUTF8StringEncoding)
+            print("responseString = \(responseString)")
+        }
+        task.resume()
+    }
     
     
 }
