@@ -120,23 +120,37 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func UnfriendBtnBtnPressed(sender: UIButton) {
         
-        var friendReqId = sender.restorationIdentifier!
         
-        DeleteFriendRequestData(friendReqId, successBlock: { data in
+        let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to remove this friend  ?", preferredStyle: .ActionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
+            // Just dismiss the action sheet
+            actionSheetController.dismissViewControllerAnimated(true, completion: nil)
+        }
+        actionSheetController.addAction(cancelAction)
+        
+        // Create and add first option action
+        let unfriendAction = UIAlertAction(title: "Unfriend", style: .Default) { action -> Void in
+            var friendReqId = sender.restorationIdentifier!
             
-            if data == true {
+            DeleteFriendRequestData(friendReqId, successBlock: { data in
                 
-                if let index = friendsDataArray.indexOf( {$0.FriendRecordId == friendReqId}) {
-                    friendsDataArray.removeAtIndex(index)
+                if data == true {
+                    
+                    if let index = friendsDataArray.indexOf( {$0.FriendRecordId == friendReqId}) {
+                        friendsDataArray.removeAtIndex(index)
+                    }
+                    self.SuggestsTblview.reloadData()
                 }
-                
-                
-                self.SuggestsTblview.reloadData()
-                
-            }
-            
-        })
+            })
+        }
+        actionSheetController.addAction(unfriendAction)
         
+        // We need to provide a popover sourceView when using it on iPad
+        actionSheetController.popoverPresentationController?.sourceView = sender as UIView
+        
+        // Present the AlertController
+        self.presentViewController(actionSheetController, animated: true, completion: nil)
     }
     
     /*
