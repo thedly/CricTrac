@@ -16,6 +16,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     
     @IBOutlet weak var suggestionsTblView: UITableView!
     
+    @IBOutlet weak var noRequestsLbl: UILabel!
     
     @IBOutlet weak var RequestsTblview: UITableView!
     override func viewDidLoad() {
@@ -59,6 +60,8 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         //setBackgroundColor()
         //setUIBackgroundTheme(self.view)
         self.view.backgroundColor = UIColor.clearColor()
+        
+        getFriendSuggestions()
     }
     
     
@@ -67,7 +70,6 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         friendsRequestsData.removeAll()
         getAllFriendRequests { (data) in
             
-            
             for (_, req) in data {
                 var reqData = ReceivedFriendRequest(dataObj: req as! [String : AnyObject])
                 friendsRequestsData.append(reqData)
@@ -75,17 +77,19 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
             }
             
             
+                
+            self.noRequestsLbl.hidden = !(friendsRequestsData.count == 0)
+            
+            
+            
             self.RequestsTblViewHeight.constant = CGFloat(friendsRequestsData.count * 100)
-            
-            
-            
             self.RequestsTblview.reloadData()
             
             
             // do something here
         }
         
-        getFriendSuggestions()
+        
     }
     
     
@@ -110,14 +114,20 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     func getCellForRow(indexPath:NSIndexPath)->FriendRequestsCell{
         
         
-        let aCell =  RequestsTblview.dequeueReusableCellWithIdentifier("FriendRequestsCell", forIndexPath: indexPath) as! FriendRequestsCell
+        if let aCell =  RequestsTblview.dequeueReusableCellWithIdentifier("FriendRequestsCell", forIndexPath: indexPath) as? FriendRequestsCell {
+            aCell.FriendName.text = friendsRequestsData[indexPath.row].Name
+            aCell.FriendCity.text = friendsRequestsData[indexPath.row].City
+            aCell.FriendProfileImage.image = extractImages(friendsRequestsData[indexPath.row].ReceivedFrom)
+            
+            aCell.backgroundColor = UIColor.clearColor()
+            return aCell
+        }
+        else
+        {
+            return FriendRequestsCell()
+        }
         
-        aCell.FriendName.text = friendsRequestsData[indexPath.row].Name
-        aCell.FriendCity.text = friendsRequestsData[indexPath.row].City
-        aCell.FriendProfileImage.image = extractImages(friendsRequestsData[indexPath.row].ReceivedFrom)
         
-        aCell.backgroundColor = UIColor.clearColor()
-        return aCell
     }
     
     // MARK: - Table delegate functions
@@ -176,7 +186,6 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         else {
             return FriendSuggestionsCell()
         }
-
         
     }
    
@@ -186,13 +195,33 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
             
             if let FriendObject  = UserProfilesData.filter({ $0.id == FriendUserId }).first {
                 
-                if let loggedInUserObject = UserProfilesData.filter({ $0.id == currentUser?.uid }).first {
+                getProfileInfoById((currentUser?.uid)!, sucessBlock: { data in
+                    
+                    var loggedInUserObject = Profile(usrObj: data)
                     
                     
                     var sendFriendRequestData = SentFriendRequest()
                     
                     sendFriendRequestData.City = FriendObject.City
-                    sendFriendRequestData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
+                    
+                    
+                    switch FriendObject.UserProfile {
+                    case userProfileType.Player.rawValue :
+                        sendFriendRequestData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
+                        break;
+                    case userProfileType.Coach.rawValue :
+                        sendFriendRequestData.Club = FriendObject.CoachCurrentTeams.joinWithSeparator(",")
+                        break;
+                    case userProfileType.Fan.rawValue :
+                        sendFriendRequestData.Club = FriendObject.SupportingTeams.joinWithSeparator(",")
+                        break;
+                    default:
+                        sendFriendRequestData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
+                        break;
+                        
+                    }
+                    
+                    
                     sendFriendRequestData.Name = FriendObject.fullName
                     sendFriendRequestData.SentTo = FriendObject.id
                     sendFriendRequestData.SentDateTime = NSDate().getCurrentTimeStamp()
@@ -203,7 +232,23 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                     
                     
                     receiveFriendRequestData.City = loggedInUserObject.City
-                    receiveFriendRequestData.Club = loggedInUserObject.PlayerCurrentTeams.joinWithSeparator(",")
+                    
+                    switch loggedInUserObject.UserProfile {
+                    case userProfileType.Player.rawValue :
+                        receiveFriendRequestData.Club = loggedInUserObject.PlayerCurrentTeams.joinWithSeparator(",")
+                        break;
+                    case userProfileType.Coach.rawValue :
+                        receiveFriendRequestData.Club = loggedInUserObject.CoachCurrentTeams.joinWithSeparator(",")
+                        break;
+                    case userProfileType.Fan.rawValue :
+                        receiveFriendRequestData.Club = loggedInUserObject.SupportingTeams.joinWithSeparator(",")
+                        break;
+                    default:
+                        receiveFriendRequestData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
+                        break;
+                        
+                    }
+                    
                     receiveFriendRequestData.Name = loggedInUserObject.fullName
                     receiveFriendRequestData.ReceivedFrom = loggedInUserObject.id
                     receiveFriendRequestData.ReceivedDateTime = NSDate().getCurrentTimeStamp()
@@ -224,9 +269,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                     })
                     
                     
-                    
-                    
-                }
+                }) //UserProfilesData.filter({ $0.id == currentUser?.uid }).first {
                 
                 
             }
@@ -250,7 +293,6 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         
         
         //Send Friend Request
-        
         
         
     }

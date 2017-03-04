@@ -9,7 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 
-class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChangeable, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate {
+class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChangeable, UISearchResultsUpdating, UISearchBarDelegate {
 
     @IBAction func didMenuButtonTapp(sender: UIButton){
         sliderMenu.setDrawerState(.Opened, animated: true)
@@ -19,7 +19,7 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         
         UIView.animateWithDuration(0.3) {
             self.searchBar.alpha = 1
-            self.searchResultsTblView.alpha = 1
+            //self.searchResultsTblView.alpha = 1
             self.searchBar.becomeFirstResponder()
         }
         
@@ -27,7 +27,7 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         
     }
     
-    
+    var searchedProfiles = [Profile]()
     
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -42,6 +42,10 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        searchResultsTblView.registerNib(UINib.init(nibName:"FriendSuggestionsCell", bundle: nil), forCellReuseIdentifier: "FriendSuggestionsCell")
+        
+        
         settings.style.buttonBarItemBackgroundColor = UIColor.clearColor()
         settings.style.buttonBarItemTitleColor = UIColor.whiteColor()
         buttonBarView.selectedBar.backgroundColor = UIColor.whiteColor()
@@ -63,9 +67,9 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         
         
         
-        searchResultsTblView.dataSource = self
-        searchResultsTblView.delegate = self
-        
+//        searchResultsTblView.dataSource = self
+//        searchResultsTblView.delegate = self
+//        
         definesPresentationContext = true
         
         
@@ -116,26 +120,96 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         return [friends, friendReq, friendSug]
     }
     
+    func getCellForSearchedParametersRow(indexPath:NSIndexPath)->FriendSuggestionsCell{
+        
+        
+        if let aCell =  searchResultsTblView.dequeueReusableCellWithIdentifier("FriendSuggestionsCell") as? FriendSuggestionsCell {
+            
+            
+            if searchedProfiles.count > 0 && indexPath.row < searchedProfiles.count {
+                aCell.configureCell(searchedProfiles[indexPath.row])
+                
+                aCell.AddFriendBtn.accessibilityIdentifier = searchedProfiles[indexPath.row].id
+                
+                
+                //            aCell.AddFriendBtn.addTarget(self, action: #selector(AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                
+                
+                
+                aCell.backgroundColor = UIColor.clearColor()
+            }
+            
+            
+            return aCell
+        }
+        else {
+            return FriendSuggestionsCell()
+        }
+        
+    }
+
     
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return searchedProfiles.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        return UITableViewCell()
         
+        
+        if searchedProfiles.count > 0 {
+            return getCellForSearchedParametersRow(indexPath)
+        }
+        
+        return UITableViewCell()
         //
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 100
+        
     }
+    
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 100
+        
+    }
+  
+    
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
     {
-        if searchText.characters.count > 0 {
+        if searchText.characters.count > 1 {
             
+            backgroundThread(background: {
+                
+                searchProfiles(searchText, sucessBlock: { data in
+                    
+                    if let searchedData = data as? [Profile] {
+                        
+                        self.searchedProfiles.removeAll()
+                        
+                        for profile in searchedData {
+                            
+                            self.searchedProfiles.append(profile)
+                        }
+                        
+//                        self.searchResultsTblView.reloadData()
+                    }
+                    
+                })
+                
+            })
+            
+        }
+        else if searchText.characters.count == 0 {
+            
+            self.searchedProfiles.removeAll()
+            self.searchResultsTblView.reloadData()
         }
     }
     func updateSearchResultsForSearchController(searchController: UISearchController) {
@@ -165,25 +239,31 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         
     }
     
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        
-    }
+//    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+//        
+//        
+//        
+//        
+//    }
     
     
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         
-        searchBar.text = nil
+        searchBar.text = ""
         
         // Remove focus from the search bar.
         searchBar.endEditing(true)
+        self.searchedProfiles.removeAll()
+        self.searchResultsTblView.reloadData()
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
         
-        UIView.animateWithDuration(0.8) {
+        UIView.animateWithDuration(0.5) {
             self.searchBar.alpha = 0
             self.searchResultsTblView.alpha = 0
+            
         }
         
         
