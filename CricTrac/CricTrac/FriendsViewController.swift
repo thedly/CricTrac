@@ -17,8 +17,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
-        self.view.backgroundColor = currentTheme.topColor
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor
+        self.view.backgroundColor = currentTheme.boxColor
     }
     
     @IBOutlet weak var SuggestsTblview: UITableView!
@@ -51,6 +50,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
         
         getAllFriends { (data) in
             
@@ -63,16 +63,14 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
             }
             
             
-            
             self.SuggestsTblview.reloadData()
+            
             
             
             // do something here
         }
-        
-        
     }
-
+    
     
     func getCellForRow(indexPath:NSIndexPath)->FriendsCell{
         
@@ -84,6 +82,10 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         aCell.FriendCity.text = friendsDataArray[indexPath.row].City
         aCell.FriendProfileImage.image = extractImages(friendsDataArray[indexPath.row].Name!)
         
+        aCell.UnfriendBtn.addTarget(self, action: #selector(FriendsViewController.UnfriendBtnBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        
+        aCell.UnfriendBtn.restorationIdentifier = friendsDataArray[indexPath.row].FriendRecordId
         
         aCell.backgroundColor = UIColor.clearColor()
         return aCell
@@ -116,7 +118,26 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         
     }
     
-    
+    func UnfriendBtnBtnPressed(sender: UIButton) {
+        
+        var friendReqId = sender.restorationIdentifier!
+        
+        DeleteFriendRequestData(friendReqId, successBlock: { data in
+            
+            if data == true {
+                
+                if let index = friendsDataArray.indexOf( {$0.FriendRecordId == friendReqId}) {
+                    friendsDataArray.removeAtIndex(index)
+                }
+                
+                
+                self.SuggestsTblview.reloadData()
+                
+            }
+            
+        })
+        
+    }
     
     /*
      // MARK: - Navigation

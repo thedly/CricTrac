@@ -9,9 +9,10 @@
 import UIKit
 
 class FriendsCell: UITableViewCell {
-
+    
     @IBOutlet weak var baseView: UIView!
     
+    @IBOutlet weak var UnfriendBtn: UIButton!
     @IBOutlet weak var FriendProfileImage: UIImageView!
     @IBOutlet weak var FriendName: UILabel!
     @IBOutlet weak var FriendCity: UILabel!
@@ -26,11 +27,11 @@ class FriendsCell: UITableViewCell {
         
         self.baseView.alpha = 0.8
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
-
+    
 }
