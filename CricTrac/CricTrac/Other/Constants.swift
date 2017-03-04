@@ -23,7 +23,7 @@ public var loggedInUserName:String?{
     return firstName + " " + lastName
 }
 
-let menuData = [
+var menuData = [
 
     ["title":"TIMELINE","vc":"timeline", "img": "Menu_TimeLine"],
     ["title":"DASHBOARD","vc":"UserDashboardViewController", "img": "Menu_Dashboard"],

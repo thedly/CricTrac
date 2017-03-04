@@ -34,7 +34,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         //setUIBackgroundTheme(view)
         
         loadTimeline()
-        getAllUserProfileInfo()
+        getAllUserProfileInfo(){}
         refreshControl.attributedTitle = NSAttributedString(string: "Loading New Posts")
         refreshControl.addTarget(self, action: #selector(TimeLineViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         timeLineTable.addSubview(refreshControl)

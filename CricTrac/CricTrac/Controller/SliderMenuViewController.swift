@@ -29,6 +29,8 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     
+    var menuDataArray = menuData
+    
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
@@ -44,8 +46,32 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         //baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
         
       
+        getAllUserProfileInfo {
+        
+           if let userType = loggedInUserInfo["UserProfile"] as? String where userType != "Player"{
+            
+            if let newMatchIndex =  self.menuDataArray.indexOf({ $0["title"] == "NEW MATCH"}){
+                
+                self.menuDataArray.removeAtIndex(newMatchIndex)
+            }
+           
+            if let matchSummaryIndexIndex =  self.menuDataArray.indexOf({ $0["title"] == "MATCH SUMMARY"}){
+                
+                self.menuDataArray.removeAtIndex(matchSummaryIndexIndex)
+            }
+           
+            print(self.menuDataArray)
+        
+            }
+        
+        }
         
         loadInitialValues();
+        
+        
+        
+        
+        
         NSNotificationCenter.defaultCenter().addObserverForName(ProfilePictureUpdated, object: nil, queue: nil) { (notification) in
             self.profileImage.image = LoggedInUserImage
 
@@ -94,7 +120,7 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
     
      func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return menuData.count
+        return menuDataArray.count
     }
     
     
@@ -103,9 +129,9 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         
         
         let cell = tableView.dequeueReusableCellWithIdentifier("SliderMenuViewCell", forIndexPath: indexPath) as! SliderMenuViewCell
-        let itemTitle = menuData[indexPath.row]["title"]
+        let itemTitle = menuDataArray[indexPath.row]["title"]
         
-        let menuIcon = UIImage(named: menuData[indexPath.row]["img"]!)
+        let menuIcon = UIImage(named: menuDataArray[indexPath.row]["img"]!)
         
         cell.menuName.text = itemTitle
         cell.menuIcon.image = menuIcon
@@ -115,7 +141,7 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        var vcName = menuData[indexPath.row]["vc"]
+        var vcName = menuDataArray[indexPath.row]["vc"]
         
 
 //        if indexPath.row == 0
@@ -124,11 +150,11 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
 //        }
         
             
-        if menuData[indexPath.row]["title"] == "PROFILE" && profileData.userExists {
+        if menuDataArray[indexPath.row]["title"] == "PROFILE" && profileData.userExists {
             vcName = "ProfileReadOnlyViewController"
 
         }
-        else if menuData[indexPath.row]["title"] == "DASHBOARD" {
+        else if menuDataArray[indexPath.row]["title"] == "DASHBOARD" {
             
             switch profileData.UserProfile {
             case userProfileType.Player.rawValue :

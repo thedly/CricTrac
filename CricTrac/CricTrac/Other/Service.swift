@@ -16,35 +16,35 @@ import SwiftyJSON
 func loadInitialValues(){
     
    
-    fireBaseRef.child("Dismissals").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+    fireBaseRef.child("Dismissals").observeEventType(.Value, withBlock: { snapshot in
         
         if let value = snapshot.value as? [String]{
         dismissals = value
         }
     })
     
-    fireBaseRef.child("AgeGroup").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+    fireBaseRef.child("AgeGroup").observeEventType(.Value, withBlock: { snapshot in
         
         if let value = snapshot.value as? [String]{
             AgeGroupData = value
         }
     })
 
-    fireBaseRef.child("PlayingLevel").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+    fireBaseRef.child("PlayingLevel").observeEventType(.Value, withBlock: { snapshot in
         
         if let value = snapshot.value as? [String]{
             PlayingLevels = value
         }
     })
     
-    fireBaseRef.child("Results").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+    fireBaseRef.child("Results").observeEventType(.Value, withBlock: { snapshot in
         
         if let value = snapshot.value as? [String]{
             results = value
         }
     })
     
-    fireBaseRef.child("Achievements").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+    fireBaseRef.child("Achievements").observeEventType(.Value, withBlock: { snapshot in
         
         if let value = snapshot.value as? [String]{
             Achievements = value
@@ -221,10 +221,10 @@ func getAllMatchData(sucessBlock:([String:AnyObject])->Void){
     }
     })
 }
-
+//njith
 func getAllDashboardData(sucessBlock:([String:AnyObject])->Void){
     
-    fireBaseRef.child("Users").child(currentUser!.uid).child("Dashboard").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Dashboard").observeEventType(.Value, withBlock: { snapshot in
         
         if let data = snapshot.value! as? [String:AnyObject]{
             
@@ -233,7 +233,9 @@ func getAllDashboardData(sucessBlock:([String:AnyObject])->Void){
         else{
             sucessBlock([:])
         }
+        
     })
+    
 }
 
 //MARK:- Ground
@@ -279,18 +281,22 @@ func getAllUserData(sucessBlock:(AnyObject)->Void){
     })
 }
 
-func getAllUserProfileInfo(){
-    
-    fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+func getAllUserProfileInfo(sucess:(Void)->Void){
+
+    fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").observeEventType(.Value, withBlock: { snapshot in
+        
         if let data = snapshot.value as? [String : AnyObject]{
             
             loggedInUserInfo = data
-        }
-        else{
+            sucess()
             
         }
+        
     })
+
 }
+
+
 
 
 func getProfileInfoById(usrId: String, sucessBlock: ([String:AnyObject]) -> Void) {
@@ -319,8 +325,9 @@ func fetchFriendDetail(id:String,sucess:(city:String)->Void){
 }
 
 func enableSync(){
+    //fireBaseRef.database.persistenceEnabled = true
+    fireBaseRef.keepSynced(true)
     
-    fireBaseRef.child(currentUser!.uid).keepSynced(true)
 }
 
 
