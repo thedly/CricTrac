@@ -76,7 +76,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                 
             }
             
-<<<<<<< HEAD
+
             
                 
             self.noRequestsLbl.hidden = !(friendsRequestsData.count == 0)
@@ -86,9 +86,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
             
             self.RequestsTblview.reloadData()
             
-=======
-            self.RequestsTblview.reloadData()
->>>>>>> development
+
             
             // do something here
         }
@@ -174,7 +172,6 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         
     }
 
-<<<<<<< HEAD
     func getCellForSuggestionsRow(indexPath:NSIndexPath)->FriendSuggestionsCell{
         
         if let aCell =  suggestionsTblView.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as? FriendSuggestionsCell {
@@ -233,31 +230,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         self.presentViewController(actionSheetController, animated: true, completion: nil)
         
     }
-    
-=======
-    func RejectFriendBtnPressed(sender: UIButton){
-        
-        let RequestObjectid = sender.restorationIdentifier
-        
-        DeleteSentAndReceivedFriendRequestData(RequestObjectid!, successBlock: { data in
-            
-            if data == true {
-                if let index = friendsRequestsData.indexOf( {$0.RequestId == RequestObjectid }) {
-                    friendsRequestsData.removeAtIndex(index)
-                }
-                
-                
-                self.RequestsTblview.reloadData()
-            }
-            
-            
-            
-        })
 
-        
-    }
-    
->>>>>>> development
     public func ConfirmFriendBtnPressed(sender:UIButton!) {
         
         if let FriendUserId = sender.accessibilityIdentifier where FriendUserId != "" {
@@ -271,10 +244,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                 getProfileInfoById((currentUser?.uid)!, sucessBlock: { loggedInUserObjectData in
                     loggedInUserObject = Profile(usrObj: loggedInUserObjectData)
                     
-                    
                     let RequestObjectid = sender.restorationIdentifier
-                    
-                    
                     var FriendData = Friends(dataObj: [:])
                     
                     FriendData.UserId = FriendObject.id
@@ -294,11 +264,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                         break;
                         
                     }
-<<<<<<< HEAD
-                    
-=======
 
->>>>>>> development
                     FriendData.Name = FriendObject.fullName
                     FriendData.FriendshipDateTime = NSDate().getCurrentTimeStamp()
                     
@@ -322,18 +288,10 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                         break;
                         
                     }
-<<<<<<< HEAD
-                    
-=======
-
->>>>>>> development
-                    
-                    
-                    
+                
                     UserData.Name = loggedInUserObject.fullName
                     UserData.FriendshipDateTime = NSDate().getCurrentTimeStamp()
                     
-<<<<<<< HEAD
                     if let index = friendsRequestsData.indexOf( {$0.ReceivedFrom == FriendObject.id}) {
                         friendsRequestsData.removeAtIndex(index)
                     }
@@ -349,53 +307,16 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                                 }
                             })
                         })
-=======
-                    AcceptFriendRequest(["UserData": UserData.FriendRequestObject(UserData), "FriendData": FriendData.FriendRequestObject(FriendData)], callback: { data in
-                        
-                        
-                        DeleteSentAndReceivedFriendRequestData(RequestObjectid!, successBlock: { data in
-                            
-                            if data == true {
-                                if let index = friendsRequestsData.indexOf( {$0.ReceivedFrom == FriendObject.id}) {
-                                    friendsRequestsData.removeAtIndex(index)
-                                }
-                                
-                                
-                                self.RequestsTblview.reloadData()
-                            }
-                            
-                            
-                            
-                        })
-                        
-                        
-                        
-                        
->>>>>>> development
+
                     })
                     
                     
-                    
-<<<<<<< HEAD
-                    
-                    
-=======
->>>>>>> development
                 })
-                
-                
             })
-            
-            
-            
-            
-<<<<<<< HEAD
-        }
-=======
+
          }
->>>>>>> development
     }
-   
+    
     func AddFriendBtnPressed(sender: UIButton) {
         
         if let FriendUserId = sender.accessibilityIdentifier where FriendUserId != "" {

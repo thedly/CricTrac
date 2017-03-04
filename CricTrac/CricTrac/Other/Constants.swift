@@ -81,7 +81,6 @@ let storageRef = FIRStorage.storage().referenceForURL("gs://arjun-innovations.ap
 
 let serverBaseURL = "http://crictracserver.azurewebsites.net"
 
-let FriendSuggstionUrl = "http://crictracserver.azurewebsites.net/suggestions/"
 
 /*
  

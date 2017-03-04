@@ -124,8 +124,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func UnfriendBtnBtnPressed(sender: UIButton) {
-        
-<<<<<<< HEAD
+
         
         let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to remove this friend  ?", preferredStyle: .ActionSheet)
         
@@ -157,25 +156,8 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // Present the AlertController
         self.presentViewController(actionSheetController, animated: true, completion: nil)
-=======
-        var friendReqId = sender.restorationIdentifier!
-        
-        DeleteFriendRequestData(friendReqId, successBlock: { data in
-            
-            if data == true {
-                
-                if let index = friendsDataArray.indexOf( {$0.FriendRecordId == friendReqId}) {
-                    friendsDataArray.removeAtIndex(index)
-                }
-                
-                
-                self.SuggestsTblview.reloadData()
-                
-            }
-            
-        })
-        
->>>>>>> development
+
+
     }
     
     /*
