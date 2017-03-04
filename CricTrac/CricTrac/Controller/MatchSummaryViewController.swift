@@ -132,7 +132,14 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             
             if mData.BattingSectionHidden == false {
                 
-                battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 30).bold("\nRUNS", fontName: appFont_black, fontSize: 12)
+                if let dismissal = value["Dismissal"] as? String where dismissal == "Not out"{
+                    
+                   battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("*", fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
+                    
+                }else{
+                    
+                    battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
+                }
                 
             }
         }
@@ -146,11 +153,11 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             if mData.BowlingSectionHidden == false {
                 if battingBowlingScore.length > 0 {
                     
-                    battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 30).bold("\nWICKETS", fontName: appFont_black, fontSize: 12)
+                    battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 25).bold("\nWICKETS", fontName: appFont_black, fontSize: 10)
                     
                 }
                 else{
-                    battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 30).bold("\nWICKETS", fontName: appFont_black, fontSize: 12)
+                    battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 25).bold("\nWICKETS", fontName: appFont_black, fontSize: 10)
                 }
                 
                 
@@ -169,10 +176,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             
             
             
-            var DateFormatter = NSDateFormatter()
+            let DateFormatter = NSDateFormatter()
             DateFormatter.dateFormat = "dd-MM-yyyy"
             DateFormatter.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
-            var dateFromString = DateFormatter.dateFromString(date as! String)
+            let dateFromString = DateFormatter.dateFromString(date as! String)
             
             mData.matchDate = dateFromString
             
@@ -225,22 +232,57 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             
             aCell.backgroundColor = UIColor.clearColor()
             
-            if let currentMatch = self.matches[indexPath.row] as? MatchSummaryData {
+             let currentMatch = self.matches[indexPath.row]
                 
                 aCell.BattingOrBowlingScore.attributedText = currentMatch.battingBowlingScore
                 aCell.matchDateAndVenue.text = currentMatch.matchDateAndVenue
                 aCell.oponentName.text = currentMatch.opponentName
                 aCell.stadiumLabel.text = currentMatch.ground
+            
+            
+            if let isHidden = currentMatch.BattingSectionHidden where isHidden == true{
+                
+                if let isHidden = currentMatch.BowlingSectionHidden where isHidden == false{
+                    
+                    aCell.strikeRateLabel.text = "Economy : \(currentMatch.economy!)"
+                    aCell.strikeRateLabel.hidden = false
+                }else{
+                    aCell.strikeRateLabel.hidden = true
+                }
+                aCell.economyLabel.hidden = true
+                
+            }else{
+                
                 if let sRate = currentMatch.strikerate {
-                    aCell.strikeRateLabel.text = "Strike Rate : \(sRate)"
+                aCell.strikeRateLabel.hidden = false
+                aCell.strikeRateLabel.text = "Strike Rate : \(sRate)"
+                }
+                
+                if let economy = currentMatch.economy {
+                    
+                    aCell.economyLabel.hidden = false
+                    aCell.economyLabel.text = "Economy : \(economy)"
+                }
+                
+
+                
+            }
+            
+            
+                if let sRate = currentMatch.strikerate {
+                    //aCell.strikeRateLabel.text = "Strike Rate : \(sRate)"
                 }
                 if let economy = currentMatch.economy {
                     
-                    aCell.economyLabel.text = "Economy : \(economy)"
+                    //aCell.economyLabel.text = "Economy : \(economy)"
                 }
+            
+//            if currentMatch.BattingSectionHidden!{
+//                
+//                aCell.strikeRateLabel.hidden = true
+//            }
     
                 //aCell.stadiumLabel.text = currentMatch.
-            }
             return aCell
         }
         else

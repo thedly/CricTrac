@@ -10,6 +10,7 @@ import Foundation
 import AnimatedTextInput
 import Firebase
 
+let ProfilePictureUpdated = "ProfilePictureUpdated"
 public var date = 0
 
 public var loggedInUserInfo = [String:AnyObject]()
@@ -22,7 +23,7 @@ public var loggedInUserName:String?{
     return firstName + " " + lastName
 }
 
-let menuData = [
+var menuData = [
 
     ["title":"TIMELINE","vc":"timeline", "img": "Menu_TimeLine"],
     ["title":"DASHBOARD","vc":"UserDashboardViewController", "img": "Menu_Dashboard"],
@@ -183,6 +184,7 @@ let themeColors = [
 let defaultTheme = "MeanGreen"
 let defaultProfileImage = "sachin"
 let DashboardDataUpdateUrl = "http://crictracserver.azurewebsites.net/Users/"
+let FriendSuggstionUrl = "http://crictracserver.azurewebsites.net/suggestions/"
 let topColorDefault = themeColors[CurrentTheme]!["topColor"]!
 let bottomColorDefault = themeColors[CurrentTheme]!["bottomColor"]!
 let appFont_black = "SourceSansPro-Black"

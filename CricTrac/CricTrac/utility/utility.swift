@@ -11,7 +11,7 @@ import KYDrawerController
 import FirebaseAuth
 import SwiftyJSON
 import SCLAlertView
-
+import KRProgressHUD
 import SwiftCountryPicker
 import KeychainSwift
 
@@ -29,7 +29,9 @@ var results = [String]()
 var CountriesList = [CustomCountry]()
 
 var profileData = Profile(usrObj: [String:String]())
-var LoggedInUserImage = UIImage(named: defaultProfileImage)
+//var LoggedInUserImage = UIImage(named: defaultProfileImage)
+var placeHolderImage = UIImage(named: defaultProfileImage)
+
 var UserProfilesData = [Profile]()
 var UserProfilesImages = [String: UIImage]()
 var userImageMetaData = NSURL()
@@ -69,6 +71,47 @@ var CurrentTheme: String {
         bottomColor = themeColors[_currentTheme]!["bottomColor"]!
     }
     get { return _currentTheme }
+}
+//var LoggedInUserImage = UIImage(named: defaultProfileImage)
+
+var LoggedInUserImage: UIImage {
+set
+{
+    
+        let userdefaults = NSUserDefaults.standardUserDefaults()
+        let data = UIImageJPEGRepresentation(newValue, 1.0)
+        userdefaults.setValue(data, forKey: "ProfileImage")
+  
+   
+}
+get {
+    if (profileData.ProfileImageURL != "-")  {
+        
+        if let data = NSData(contentsOfURL: NSURL(string: profileData.ProfileImageURL)!) {
+            let userdefaults = NSUserDefaults.standardUserDefaults()
+            userdefaults.setValue(data, forKey: "ProfileImage")
+            return UIImage(data: data)!
+
+        }else {
+            let userdefaults = NSUserDefaults.standardUserDefaults()
+            if let data =  userdefaults.valueForKey("ProfileImage") as? NSData {
+                let image = UIImage(data: data)
+                return image!
+            }else {
+                return placeHolderImage!
+            }
+        }
+    }else {
+        let userdefaults = NSUserDefaults.standardUserDefaults()
+        if let data =  userdefaults.valueForKey("ProfileImage") as? NSData {
+            let image = UIImage(data: data)
+            return image!
+        }else {
+            return placeHolderImage!
+        }
+    }
+    
+}
 }
 
 public func viewControllerFrom(storyBoard:String,vcid:String)->UIViewController{
@@ -351,6 +394,8 @@ public func logout(currentController: UIViewController) {
     currentwindow.rootViewController = loginBaseViewController
     
     currentwindow.makeKeyAndVisible()
+    
+    
     
     //currentController.presentViewController(loginBaseViewController, animated: true) {
         //SCLAlertView().showInfo("Logout",subTitle: "Data saved is cleared, Kill the app and relaunch for now") 

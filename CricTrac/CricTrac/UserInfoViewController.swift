@@ -210,6 +210,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         self.dateOfBirth.text = profileData.DateOfBirth
         self.emailId.text = currentUser?.email  //profileData.Email
         self.mobile.text = profileData.Mobile
+        
         self.gender.text = profileData.Gender
         self.country.text = profileData.Country
         self.state.text = profileData.State
