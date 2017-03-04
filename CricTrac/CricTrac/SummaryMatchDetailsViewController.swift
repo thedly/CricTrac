@@ -552,6 +552,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             totalWickets.attributedText = formattedString
         }
         
+        
         setEconomy()
     
     }

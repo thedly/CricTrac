@@ -221,7 +221,7 @@ func getAllMatchData(sucessBlock:([String:AnyObject])->Void){
     }
     })
 }
-//njith
+
 func getAllDashboardData(sucessBlock:([String:AnyObject])->Void){
     
     fireBaseRef.child("Users").child(currentUser!.uid).child("Dashboard").observeEventType(.Value, withBlock: { snapshot in
