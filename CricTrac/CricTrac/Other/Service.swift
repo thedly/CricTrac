@@ -768,28 +768,31 @@ public func getAllFriendSuggestions(callback:()->Void) {
                 
                 let json = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments)
                 
-                
-                getAllProfiles( json["suggestions"] as! [String] ,sucessBlock: { resultObj in
-                    UserProfilesData.removeAll()
-                    for profile in resultObj {
-                        
-                        var currentProfile = Profile(usrObj: profile)
-                        
-                        
-                        UserProfilesData.append(currentProfile)
-                        if let _imageUrl = profile["ProfileImageURL"] as? String where _imageUrl != ""  {
+                if let jsonStrArr = json["suggestions"] as? [String] {
+                    
+                    getAllProfiles( jsonStrArr ,sucessBlock: { resultObj in
+                        UserProfilesData.removeAll()
+                        for profile in resultObj {
                             
-                            let userId = profile["Id"] as! String
+                            var currentProfile = Profile(usrObj: profile)
                             
-                            getImageFromFirebase(_imageUrl) { (data) in
-                                UserProfilesImages[userId] = data
+                            
+                            UserProfilesData.append(currentProfile)
+                            if let _imageUrl = profile["ProfileImageURL"] as? String where _imageUrl != ""  {
+                                
+                                let userId = profile["Id"] as! String
+                                
+                                getImageFromFirebase(_imageUrl) { (data) in
+                                    UserProfilesImages[userId] = data
+                                }
                             }
                         }
-                    }
-                    
-                    callback()
-                    
-                })
+                        
+                        callback()
+                        
+                    })
+                }
+                
                 
                 
                 
@@ -815,8 +818,13 @@ public func AcceptFriendRequest(data: [String:[String:AnyObject]], callback:(dat
     
     // Add friend to user friends list
     
-    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Friends").childByAutoId()
-    ref.setValue(dataToBeManipulated["FriendData"], withCompletionBlock: { error, newlyCreatedUserFriendData in
+    
+    
+    
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Friends")
+    
+        
+    ref.childByAutoId().setValue(dataToBeManipulated["FriendData"], withCompletionBlock: { error, newlyCreatedUserFriendData in
         
         
         dataToBeManipulated["FriendData"]!["FriendRecordId"] = newlyCreatedUserFriendData.key  // user's friend recored id

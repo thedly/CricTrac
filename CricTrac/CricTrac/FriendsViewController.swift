@@ -57,8 +57,13 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
             friendsDataArray.removeAll()
             
             for (_, req) in data {
-                var reqData = Friends(dataObj: req as! [String : AnyObject])
-                friendsDataArray.append(reqData)
+                
+                if let dat = req as? [String : AnyObject] {
+                    let reqData = Friends(dataObj: dat)
+                    friendsDataArray.append(reqData)
+                }
+                
+                
                 
             }
             
