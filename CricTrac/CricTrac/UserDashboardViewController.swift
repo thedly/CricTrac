@@ -21,10 +21,17 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     var recentMatchesBowling: [String:String]!
     private var _currentTheme:String = CurrentTheme
     
+    var isFriendDashboard = false
     
     var clearColor = UIColor.clearColor()
     var darkerThemeColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
     var matches = [MatchSummaryData]()
+    var friendId:String? = nil
+    
+    var friendProfile:[String:AnyObject]?
+    
+    var userProfileData:Profile!
+    
     // MARK: - Plumbing
     
    
@@ -175,7 +182,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         let chooseFromFacebookAction = UIAlertAction(title: "Choose Default", style: .Default) { (action) in
             
-            var userProviderData = currentUser?.providerData
+            let userProviderData = currentUser?.providerData
             
             for usr: FIRUserInfo in userProviderData! {
                 if (usr.providerID == "facebook.com" || usr.providerID == "google.com") {
@@ -267,8 +274,12 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             //assign button to navigationbar
             
             navigationItem.leftBarButtonItem = leftbarButton
-            navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        if let navigation = navigationController{
+            
+            navigation.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
             title = "TIMELINE"
+        }
+    
             //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
             //navigationController!.navigationBar.titleTextAttributes = titleDict
     
@@ -297,6 +308,12 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let value = friendProfile{
+            userProfileData = Profile(usrObj: value)
+        }else{
+            userProfileData = profileData
+        }
         
      //   setBackgroundColor()
         
@@ -339,9 +356,9 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         let df = NSDateFormatter()
         df.dateFormat = "dd/MM/yyyy"
-        self.PlayerName.text = profileData.fullName.uppercaseString
+        self.PlayerName.text = userProfileData.fullName.uppercaseString
         let formattedString = NSMutableAttributedString()
-        let locationText = formattedString.bold("\(profileData.City.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(profileData.State.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(profileData.Country.uppercaseString) ", fontName: appFont_black, fontSize: 15)
+        let locationText = formattedString.bold("\(userProfileData.City.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.Country.uppercaseString) ", fontName: appFont_black, fontSize: 15)
         self.PlayerLocation.attributedText = locationText
         self.userProfileImage.image = LoggedInUserImage
         
@@ -381,7 +398,10 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         let currentTheme = cricTracTheme.currentTheme
         MatchesView.backgroundColor = UIColor.blackColor()
         MatchesView.alpha = 0.3
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor
+        if let _ = navigationController{
+            navigationController!.navigationBar.barTintColor = currentTheme.topColor
+        }
+        
         //currentTheme.boxColor
         //baseView.backgroundColor = UIColor.clearColor()
     }
@@ -441,7 +461,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         recentMatchesNotAvailable.hidden = true
         KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
-        getAllMatchData { (data) in
+        getAllMatchData(friendId) { (data) in
             
             
             for (key,val) in data{
@@ -453,7 +473,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                     
                     value += ["key":key]
                     
-                    var battingBowlingScore = NSMutableAttributedString()
+                    let battingBowlingScore = NSMutableAttributedString()
                     var matchVenueAndDate = ""
                     var opponentName = ""
                     
@@ -501,10 +521,10 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                         
                         
                         
-                        var DateFormatter = NSDateFormatter()
+                        let DateFormatter = NSDateFormatter()
                         DateFormatter.dateFormat = "dd-MM-yyyy"
                         DateFormatter.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
-                        var dateFromString = DateFormatter.dateFromString(date as! String)
+                        let dateFromString = DateFormatter.dateFromString(date as! String)
                         
                         mData.matchDate = dateFromString
                         
@@ -561,17 +581,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 self.recentMatchesNotAvailable.hidden = false
             }
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
             KRProgressHUD.dismiss()
-            
             
         }
     }
@@ -580,115 +590,125 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     func setDashboardData(){
         
-        KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+        //KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
         
         topBattingNotAvailable.hidden = true
         topBowlingNotAvailable.hidden = true
         
-        
-        getAllDashboardData { (data) in
+       
+        getAllDashboardData(friendId) { (data) in
             
             DashboardDetails = DashboardData(dataObj: data)
             if DashboardDetails != nil {
-                self.winPerc.text = String(DashboardDetails.WinPercentage)
-                self.BB.text = String(DashboardDetails.TopBowling1stMatchScore)
-                self.totalRunsScored.text = String(DashboardDetails.TotalRuns)
-                
-                self.battingMatches.text = String(DashboardDetails.TotalMatches)
-                self.battingInnings.text = String(DashboardDetails.BattingInnings)
-                //    self.notOuts = DashboardDetails
-                
-                self.highScore.text = String(DashboardDetails.TopBatting1stMatchScore)
-                self.battingAverage.text = String(DashboardDetails.TotalBattingAverage)
-                self.strikeRate.text = String(DashboardDetails.TotalStrikeRate)
-                self.hundreds.text = String(DashboardDetails.Total100s)
-                self.fifties.text = String(DashboardDetails.Total50s)
-                
-                self.sixes.text = String(DashboardDetails.Total6s)
-                self.fours.text = String(DashboardDetails.Total4s)
-                
-                self.ballsFacedDuringBat.text = String(DashboardDetails.TotalBallsFaced)
-                
-                // bowling
-                
-                self.totalWickets.text = String(DashboardDetails.TotalWickets)
-                self.bowlingAverage.text = String(DashboardDetails.TotalBowlingAverage)
-                self.bowlingEconomy.text = String(DashboardDetails.TotalEconomy)
-                
-                self.TotalThreeWicketsPerMatch.text = String(DashboardDetails.Total3Wkts)
-                
-                self.TotalMaidens.text = String(DashboardDetails.TotalMaidens)
-                self.TotalFiveWicketsPerMatch.text = String(DashboardDetails.Total5Wkts)
-                
-                self.PlayerOversBowld.text = String(DashboardDetails.TotalOvers)
-                
-                
-                self.FirstRecentMatchView.hidden = (DashboardDetails.TopBatting1stMatchScore == nil || String(DashboardDetails.TopBatting1stMatchScore) == "0")
-                
-                
-                self.SecondRecentMatchView.hidden = (DashboardDetails.TopBatting2ndMatchScore == nil || String(DashboardDetails.TopBatting2ndMatchScore) == "0")
                 
                 
                 
-                self.FirstRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling1stMatchScore == nil || DashboardDetails.TopBowling1stMatchScore as! String == "0-0")
-                
-                
-                self.SecondRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling2ndMatchScore == nil || DashboardDetails.TopBowling2ndMatchScore as! String == "0-0")
-                
-                
-                self.topBattingNotAvailable.hidden = !(self.FirstRecentMatchView.hidden && self.SecondRecentMatchView.hidden)
-                self.topBowlingNotAvailable.hidden = !(self.FirstRecentMatchBowlingView.hidden && self.SecondRecentMatchBowlingView.hidden)
-                                
-                
-                if !self.FirstRecentMatchView.hidden {
-                    self.FirstRecentMatchScore.text = String(DashboardDetails.TopBatting1stMatchScore)
-                    self.FirstRecentMatchOpponent.text = String(DashboardDetails.TopBatting1stMatchOpp)
+                UIView.animateWithDuration(3.0, animations: {
                     
-                    let formattedString = NSMutableAttributedString()
-                    formattedString.bold("\(DashboardDetails.TopBatting1stMatchDate), at \(DashboardDetails.TopBatting1stMatchGround)",fontName: appFont_bold, fontSize: 12)
-                    self.FirstRecentMatchDateAndLocation.attributedText = formattedString
-                }
-                
-                
-                
-                
-                if !self.SecondRecentMatchView.hidden {
+                    self.winPerc.text = String(DashboardDetails.WinPercentage)
+                    self.BB.text = String(DashboardDetails.TopBowling1stMatchScore)
+                    self.totalRunsScored.text = String(DashboardDetails.TotalRuns)
                     
-                    self.SecondRecentMatchScore.text = String(DashboardDetails.TopBatting2ndMatchScore)
-                    self.SecondRecentMatchOpponent.text = String(DashboardDetails.TopBatting2ndMatchOpp)
+                    self.battingMatches.text = String(DashboardDetails.TotalMatches)
+                    self.battingInnings.text = String(DashboardDetails.BattingInnings)
+                    //    self.notOuts = DashboardDetails
                     
-                    let formattedString_2 = NSMutableAttributedString()
-                    formattedString_2.bold("\(DashboardDetails.TopBatting2ndMatchDate), at \(DashboardDetails.TopBatting2ndMatchGround)",fontName: appFont_bold, fontSize: 12)
-                    self.SecondRecentMatchDateAndLocation.attributedText = formattedString_2
+                    self.highScore.text = String(DashboardDetails.TopBatting1stMatchScore)
+                    self.battingAverage.text = String(DashboardDetails.TotalBattingAverage)
+                    self.strikeRate.text = String(DashboardDetails.TotalStrikeRate)
+                    self.hundreds.text = String(DashboardDetails.Total100s)
+                    self.fifties.text = String(DashboardDetails.Total50s)
                     
-                }
-                
-                
-                if !self.FirstRecentMatchBowlingView.hidden {
-                    self.FirstRecentMatchBowlingScore.text = String(DashboardDetails.TopBowling1stMatchScore)
-                    self.FirstRecentMatchBowlingOpponent.text = String(DashboardDetails.TopBowling1stMatchOpp)
+                    self.sixes.text = String(DashboardDetails.Total6s)
+                    self.fours.text = String(DashboardDetails.Total4s)
                     
-                    let formattedString_Bowling = NSMutableAttributedString()
-                    formattedString_Bowling.bold("\(DashboardDetails.TopBowling1stMatchDate), at \(DashboardDetails.TopBowling1stMatchGround)",fontName: appFont_bold, fontSize: 12)
-                    self.FirstRecentMatchBowlingDateAndLocation.attributedText = formattedString_Bowling
-                }
-                
-                
-                
-                if !self.SecondRecentMatchBowlingView.hidden {
+                    self.ballsFacedDuringBat.text = String(DashboardDetails.TotalBallsFaced)
                     
-                    self.SecondRecentMatchBowlingScore.text = String(DashboardDetails.TopBowling2ndMatchScore)
-                    self.SecondRecentMatchBowlingOpponent.text = String(DashboardDetails.TopBowling2ndMatchOpp)
+                    // bowling
                     
-                    let formattedString_Bowling_2 = NSMutableAttributedString()
-                    formattedString_Bowling_2.bold("\(DashboardDetails.TopBowling2ndMatchDate), at \(DashboardDetails.TopBowling2ndMatchGround)",fontName: appFont_bold, fontSize: 12)
-                    self.SecondRecentMatchBowlingDateAndLocation.attributedText = formattedString_Bowling_2
-                }
+                    self.totalWickets.text = String(DashboardDetails.TotalWickets)
+                    self.bowlingAverage.text = String(DashboardDetails.TotalBowlingAverage)
+                    self.bowlingEconomy.text = String(DashboardDetails.TotalEconomy)
+                    
+                    self.TotalThreeWicketsPerMatch.text = String(DashboardDetails.Total3Wkts)
+                    
+                    self.TotalMaidens.text = String(DashboardDetails.TotalMaidens)
+                    self.TotalFiveWicketsPerMatch.text = String(DashboardDetails.Total5Wkts)
+                    
+                    self.PlayerOversBowld.text = String(DashboardDetails.TotalOvers)
+                    
+                    
+                    self.FirstRecentMatchView.hidden = (DashboardDetails.TopBatting1stMatchScore == nil || String(DashboardDetails.TopBatting1stMatchScore) == "0")
+                    
+                    
+                    self.SecondRecentMatchView.hidden = (DashboardDetails.TopBatting2ndMatchScore == nil || String(DashboardDetails.TopBatting2ndMatchScore) == "0")
+                    
+                    
+                    
+                    self.FirstRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling1stMatchScore == nil || DashboardDetails.TopBowling1stMatchScore as! String == "0-0")
+                    
+                    
+                    self.SecondRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling2ndMatchScore == nil || DashboardDetails.TopBowling2ndMatchScore as! String == "0-0")
+                    
+                    
+                    self.topBattingNotAvailable.hidden = !(self.FirstRecentMatchView.hidden && self.SecondRecentMatchView.hidden)
+                    self.topBowlingNotAvailable.hidden = !(self.FirstRecentMatchBowlingView.hidden && self.SecondRecentMatchBowlingView.hidden)
+                    
+                    
+                    if !self.FirstRecentMatchView.hidden {
+                        self.FirstRecentMatchScore.text = String(DashboardDetails.TopBatting1stMatchScore)
+                        self.FirstRecentMatchOpponent.text = String(DashboardDetails.TopBatting1stMatchOpp)
+                        
+                        let formattedString = NSMutableAttributedString()
+                        formattedString.bold("\(DashboardDetails.TopBatting1stMatchDate), at \(DashboardDetails.TopBatting1stMatchGround)",fontName: appFont_bold, fontSize: 12)
+                        self.FirstRecentMatchDateAndLocation.attributedText = formattedString
+                    }
+                    
+                    
+                    
+                    
+                    if !self.SecondRecentMatchView.hidden {
+                        
+                        self.SecondRecentMatchScore.text = String(DashboardDetails.TopBatting2ndMatchScore)
+                        self.SecondRecentMatchOpponent.text = String(DashboardDetails.TopBatting2ndMatchOpp)
+                        
+                        let formattedString_2 = NSMutableAttributedString()
+                        formattedString_2.bold("\(DashboardDetails.TopBatting2ndMatchDate), at \(DashboardDetails.TopBatting2ndMatchGround)",fontName: appFont_bold, fontSize: 12)
+                        self.SecondRecentMatchDateAndLocation.attributedText = formattedString_2
+                        
+                    }
+                    
+                    
+                    if !self.FirstRecentMatchBowlingView.hidden {
+                        self.FirstRecentMatchBowlingScore.text = String(DashboardDetails.TopBowling1stMatchScore)
+                        self.FirstRecentMatchBowlingOpponent.text = String(DashboardDetails.TopBowling1stMatchOpp)
+                        
+                        let formattedString_Bowling = NSMutableAttributedString()
+                        formattedString_Bowling.bold("\(DashboardDetails.TopBowling1stMatchDate), at \(DashboardDetails.TopBowling1stMatchGround)",fontName: appFont_bold, fontSize: 12)
+                        self.FirstRecentMatchBowlingDateAndLocation.attributedText = formattedString_Bowling
+                    }
+                    
+                    
+                    
+                    if !self.SecondRecentMatchBowlingView.hidden {
+                        
+                        self.SecondRecentMatchBowlingScore.text = String(DashboardDetails.TopBowling2ndMatchScore)
+                        self.SecondRecentMatchBowlingOpponent.text = String(DashboardDetails.TopBowling2ndMatchOpp)
+                        
+                        let formattedString_Bowling_2 = NSMutableAttributedString()
+                        formattedString_Bowling_2.bold("\(DashboardDetails.TopBowling2ndMatchDate), at \(DashboardDetails.TopBowling2ndMatchGround)",fontName: appFont_bold, fontSize: 12)
+                        self.SecondRecentMatchBowlingDateAndLocation.attributedText = formattedString_Bowling_2
+                    }
+                    
+                    }, completion: { (val) in
+                        
+                       // KRProgressHUD.dismiss()
+                })
             }
             
             //self.setUIElements()
             //self.setBowlingUIElements()
-            KRProgressHUD.dismiss()
+            
             
             
             
@@ -699,15 +719,12 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        
-        getMatchData()
-        
-        setDashboardData()
-        
-        
+     
+            getMatchData()
+            setDashboardData()
     }
     
-    
+
     func scrollViewDidScrollToTop(scrollView: UIScrollView) {
         if (scrollView.contentOffset.y > 300) {
             if TopMenu.backgroundColor != darkerThemeColor {
@@ -731,15 +748,15 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         var valueToReturn = 0
         
-        switch profileData.UserProfile {
+        switch userProfileData.UserProfile {
         case userProfileType.Player.rawValue:
-            valueToReturn = profileData.PlayerCurrentTeams.count
+            valueToReturn = userProfileData.PlayerCurrentTeams.count
             break
         case userProfileType.Coach.rawValue:
-            valueToReturn = profileData.CoachCurrentTeams.count
+            valueToReturn = userProfileData.CoachCurrentTeams.count
             break
         case userProfileType.Fan.rawValue:
-            valueToReturn = profileData.SupportingTeams.count
+            valueToReturn = userProfileData.SupportingTeams.count
             break
         default:
             valueToReturn = 0
@@ -781,15 +798,15 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             
             var teamNameToReturn = ""
             
-            switch profileData.UserProfile {
+            switch userProfileData.UserProfile {
             case userProfileType.Player.rawValue:
-                teamNameToReturn = profileData.PlayerCurrentTeams[indexPath.row]
+                teamNameToReturn = userProfileData.PlayerCurrentTeams[indexPath.row]
                 break
             case userProfileType.Coach.rawValue:
-                teamNameToReturn = profileData.CoachCurrentTeams[indexPath.row]
+                teamNameToReturn = userProfileData.CoachCurrentTeams[indexPath.row]
                 break
             case userProfileType.Fan.rawValue:
-                teamNameToReturn = profileData.SupportingTeams[indexPath.row]
+                teamNameToReturn = userProfileData.SupportingTeams[indexPath.row]
                 break
             default:
                 teamNameToReturn = ""

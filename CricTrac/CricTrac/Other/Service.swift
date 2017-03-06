@@ -207,9 +207,12 @@ func updateMetaData(profileImgUrl: NSURL) {
     print("Image url updated successfully")
 }
 
-func getAllMatchData(sucessBlock:([String:AnyObject])->Void){
+func getAllMatchData(friendId:String? = nil,sucessBlock:([String:AnyObject])->Void){
     
-   fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").observeEventType(.Value, withBlock: { snapshot in
+    let userId:String = friendId ?? currentUser!.uid
+    
+    
+   fireBaseRef.child("Users").child(userId).child("Matches").observeEventType(.Value, withBlock: { snapshot in
     
     if let data = snapshot.value! as? [String:AnyObject]{
         
@@ -222,9 +225,11 @@ func getAllMatchData(sucessBlock:([String:AnyObject])->Void){
     })
 }
 
-func getAllDashboardData(sucessBlock:([String:AnyObject])->Void){
+func getAllDashboardData(friendId:String?=nil,sucessBlock:([String:AnyObject])->Void){
     
-    fireBaseRef.child("Users").child(currentUser!.uid).child("Dashboard").observeEventType(.Value, withBlock: { snapshot in
+   let userId:String = friendId ?? currentUser!.uid
+    
+    fireBaseRef.child("Users").child(userId).child("Dashboard").observeEventType(.Value, withBlock: { snapshot in
         
         if let data = snapshot.value! as? [String:AnyObject]{
             
@@ -237,6 +242,7 @@ func getAllDashboardData(sucessBlock:([String:AnyObject])->Void){
     })
     
 }
+
 
 //MARK:- Ground
 
@@ -281,8 +287,8 @@ func getAllUserData(sucessBlock:(AnyObject)->Void){
     })
 }
 
-func getAllUserProfileInfo(sucess:(Void)->Void){
-
+    func getAllUserProfileInfo(friendId:String? = nil , sucess:(Void)->Void){
+        
     fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").observeEventType(.Value, withBlock: { snapshot in
         
         if let data = snapshot.value as? [String : AnyObject]{
@@ -294,6 +300,21 @@ func getAllUserProfileInfo(sucess:(Void)->Void){
         
     })
 
+}
+
+
+func getFriendProfileInfo(friendId:String? = nil , sucess:([String : AnyObject])->Void){
+    
+    let userId:String = friendId ?? currentUser!.uid
+    
+    fireBaseRef.child("Users").child(userId).child("UserProfile").observeEventType(.Value, withBlock: { snapshot in
+        
+        if let data = snapshot.value as? [String : AnyObject]{
+            sucess(data)
+        }
+        
+    })
+    
 }
 
 

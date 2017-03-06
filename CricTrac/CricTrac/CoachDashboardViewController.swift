@@ -38,9 +38,19 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         
     }
     
+    var friendProfile:[String:AnyObject]?
+    
+    var userProfileData:Profile!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if let value = friendProfile{
+            userProfileData = Profile(usrObj: value)
+        }else{
+            userProfileData = profileData
+        }
+        
         
         setBackgroundColor()
         
@@ -65,16 +75,16 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         Certifications.dataSource = self
         
         
-        CoachExperience.text = profileData.Experience
+        CoachExperience.text = userProfileData.Experience
         
-        CoachLevel.text = profileData.CoachingLevel
+        CoachLevel.text = userProfileData.CoachingLevel
         
         
         let df = NSDateFormatter()
         df.dateFormat = "dd/MM/yyyy"
-        self.PlayerName.text = profileData.fullName.uppercaseString
+        self.PlayerName.text = userProfileData.fullName.uppercaseString
         let formattedString = NSMutableAttributedString()
-        let locationText = formattedString.bold("\(profileData.City.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(profileData.State.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(profileData.Country.uppercaseString) ", fontName: appFont_black, fontSize: 15)
+        let locationText = formattedString.bold("\(userProfileData.City.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.Country.uppercaseString) ", fontName: appFont_black, fontSize: 15)
         self.PlayerLocation.attributedText = locationText
         self.userProfileImage.image = LoggedInUserImage
         
@@ -92,7 +102,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         let currentTheme = cricTracTheme.currentTheme
         MatchesView.backgroundColor = UIColor.blackColor()
         MatchesView.alpha = 0.3
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor
+        navigationController?.navigationBar.barTintColor = currentTheme.topColor
         //currentTheme.boxColor
         //baseView.backgroundColor = UIColor.clearColor()
     }
@@ -111,7 +121,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         menuButton.frame = CGRectMake(0, 0, 40, 40)
         let leftbarButton = UIBarButtonItem(customView: menuButton)
         navigationItem.leftBarButtonItem = leftbarButton
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        navigationController?.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "DASHBOARD"
         //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
        //// navigationController!.navigationBar.titleTextAttributes = titleDict
@@ -126,19 +136,19 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         switch collectionView {
             
         case CurrentTeams:
-            valueToReturn = profileData.CoachCurrentTeams.count
+            valueToReturn = userProfileData.CoachCurrentTeams.count
             break
         case PastTeams:
-            valueToReturn = profileData.CoachPastTeams.count
+            valueToReturn = userProfileData.CoachPastTeams.count
             break;
         case PlayedFor:
-            valueToReturn = profileData.CoachPlayedFor.count
+            valueToReturn = userProfileData.CoachPlayedFor.count
             break
         case Certifications:
-            valueToReturn = profileData.Certifications.count
+            valueToReturn = userProfileData.Certifications.count
             break
         default:
-            valueToReturn = profileData.CoachCurrentTeams.count
+            valueToReturn = userProfileData.CoachCurrentTeams.count
             break
             
         }
@@ -160,7 +170,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         switch collectionView {
             
         case CurrentTeams:
-            teamNameToReturn = profileData.CoachCurrentTeams[indexPath.row]
+            teamNameToReturn = userProfileData.CoachCurrentTeams[indexPath.row]
             
             
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CoachCurrentTeamsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
@@ -183,7 +193,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             
             break
         case PastTeams:
-            teamNameToReturn = profileData.CoachPastTeams[indexPath.row]
+            teamNameToReturn = userProfileData.CoachPastTeams[indexPath.row]
             
             
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CoachPastTeamsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
@@ -205,7 +215,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             
             break;
         case PlayedFor:
-            teamNameToReturn = profileData.CoachPlayedFor[indexPath.row]
+            teamNameToReturn = userProfileData.CoachPlayedFor[indexPath.row]
             
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CoachPlayedForViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
                 
@@ -226,7 +236,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             
             break
         case Certifications:
-            teamNameToReturn = profileData.Certifications[indexPath.row]
+            teamNameToReturn = userProfileData.Certifications[indexPath.row]
             
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CertificationsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
                 
@@ -250,7 +260,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             
             break
         default:
-            teamNameToReturn = profileData.CoachCurrentTeams[indexPath.row]
+            teamNameToReturn = userProfileData.CoachCurrentTeams[indexPath.row]
             
             
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("TeamCollectionViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {

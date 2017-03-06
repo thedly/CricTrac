@@ -231,6 +231,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 
                 let friendId = data["OwnerID"].stringValue
                 
+                postCell.postOwnerId = friendId
                 
                  let postedBy = data["PostedBy"].stringValue
                 if postedBy == "CricTrac"{

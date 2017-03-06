@@ -24,6 +24,10 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var PlayerLocation: UILabel!
     
     
+    var friendProfile:[String:AnyObject]?
+    
+    var userProfileData:Profile!
+    
     @IBAction func CloseDashboardPressed(sender: AnyObject) {
         
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -33,6 +37,11 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let value = friendProfile{
+            userProfileData = Profile(usrObj: value)
+        }else{
+            userProfileData = profileData
+        }
         
         setBackgroundColor()
         
@@ -56,9 +65,9 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         
         let df = NSDateFormatter()
         df.dateFormat = "dd/MM/yyyy"
-        self.PlayerName.text = profileData.fullName.uppercaseString
+        self.PlayerName.text = userProfileData.fullName.uppercaseString
         let formattedString = NSMutableAttributedString()
-        let locationText = formattedString.bold("\(profileData.City.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(profileData.State.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(profileData.Country.uppercaseString) ", fontName: appFont_black, fontSize: 15)
+        let locationText = formattedString.bold("\(userProfileData.City.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.Country.uppercaseString) ", fontName: appFont_black, fontSize: 15)
         self.PlayerLocation.attributedText = locationText
         self.userProfileImage.image = LoggedInUserImage
         
@@ -81,14 +90,14 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         menuButton.frame = CGRectMake(0, 0, 40, 40)
         let leftbarButton = UIBarButtonItem(customView: menuButton)
         navigationItem.leftBarButtonItem = leftbarButton
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        navigationController?.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "DASHBOARD"
         //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         //navigationController!.navigationBar.titleTextAttributes = titleDict
     }
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor
+        navigationController?.navigationBar.barTintColor = currentTheme.topColor
         //currentTheme.boxColor
         //baseView.backgroundColor = UIColor.clearColor()
     }
@@ -105,19 +114,19 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         switch collectionView {
             
         case SupportingTeams:
-            valueToReturn = profileData.SupportingTeams.count
+            valueToReturn = userProfileData.SupportingTeams.count
             break
         case FavoritePlayers:
-            valueToReturn = profileData.FavoritePlayers.count
+            valueToReturn = userProfileData.FavoritePlayers.count
             break;
         case Hobbies:
-            valueToReturn = profileData.Hobbies.count
+            valueToReturn = userProfileData.Hobbies.count
             break
         case InterestedSports:
-            valueToReturn = profileData.InterestedSports.count
+            valueToReturn = userProfileData.InterestedSports.count
             break
         default:
-            valueToReturn = profileData.SupportingTeams.count
+            valueToReturn = userProfileData.SupportingTeams.count
             break
             
         }
@@ -139,7 +148,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         switch collectionView {
             
         case FavoritePlayers:
-            teamNameToReturn = profileData.FavoritePlayers[indexPath.row]
+            teamNameToReturn = userProfileData.FavoritePlayers[indexPath.row]
             
             
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CoachCurrentTeamsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
@@ -164,7 +173,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
             
             break
         case SupportingTeams:
-            teamNameToReturn = profileData.SupportingTeams[indexPath.row]
+            teamNameToReturn = userProfileData.SupportingTeams[indexPath.row]
             
             
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CoachPastTeamsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
@@ -188,7 +197,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
             
             break;
         case InterestedSports:
-            teamNameToReturn = profileData.InterestedSports[indexPath.row]
+            teamNameToReturn = userProfileData.InterestedSports[indexPath.row]
             
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CoachPlayedForViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
                 
@@ -212,7 +221,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
             
             break
         case Hobbies:
-            teamNameToReturn = profileData.Hobbies[indexPath.row]
+            teamNameToReturn = userProfileData.Hobbies[indexPath.row]
             
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CertificationsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
                 
@@ -237,7 +246,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
             
             break
         default:
-            teamNameToReturn = profileData.SupportingTeams[indexPath.row]
+            teamNameToReturn = userProfileData.SupportingTeams[indexPath.row]
             
             
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("TeamCollectionViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
