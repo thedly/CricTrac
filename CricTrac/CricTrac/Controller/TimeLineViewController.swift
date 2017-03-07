@@ -34,7 +34,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         //setUIBackgroundTheme(view)
         
         loadTimeline()
-        getAllUserProfileInfo()
+        getAllUserProfileInfo(){}
         refreshControl.attributedTitle = NSAttributedString(string: "Loading New Posts")
         refreshControl.addTarget(self, action: #selector(TimeLineViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         timeLineTable.addSubview(refreshControl)
@@ -231,6 +231,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 
                 let friendId = data["OwnerID"].stringValue
                 
+                postCell.postOwnerId = friendId
                 
                  let postedBy = data["PostedBy"].stringValue
                 if postedBy == "CricTrac"{
@@ -361,7 +362,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     }, failure: { (error) in
                         
                         
-                })
+                })  
             }
         }
     }

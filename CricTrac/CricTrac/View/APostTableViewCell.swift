@@ -30,12 +30,80 @@ class APostTableViewCell: UITableViewCell {
     var index:Int?
     var currentUserHasLikedThePost = false
     var parent:Deletable?
+    var postOwnerId:String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        addTapGestureToUserName()
+    }
+    
+    
+    func addTapGestureToUserName(){
+        
+        if let _ = postOwnerName{
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(APostTableViewCell.didTapLabelName))
+            postOwnerName.userInteractionEnabled = true
+            postOwnerName.addGestureRecognizer(gesture)
+        }
+        
+    }
+    
+    func didTapLabelName(){
+        print("Working")
+        
+        if  postOwnerId != nil{
+            
+                getFriendProfileInfo(postOwnerId, sucess: { (friendInfo) in
+                    
+                    if let friendType = friendInfo["UserProfile"] as? String{
+                        
+                        
+                        switch friendType{
+                            
+                            case "Player": self.moveToPlayer(friendInfo)
+                            
+                            case "Coach": self.moveToCoach(friendInfo)
+                            
+                            case "Cricket Fan": self.moveToFan(friendInfo)
+                            
+                            default: break
+                        }
+                    }
+                    
+                })
+            }
+    }
+    
+    func moveToPlayer(userInfo:[String : AnyObject]){
+         if let parentVC = parent as? UIViewController{
+        let dashBoard = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
+        dashBoard.friendId = postOwnerId
+        dashBoard.friendProfile = userInfo
+        parentVC.presentViewController(dashBoard, animated: true) {}
+        }
     }
 
+    func moveToCoach(userInfo:[String : AnyObject]){
+        
+        if let parentVC = parent as? UIViewController{
+            let dashBoard = viewControllerFrom("Main", vcid: "CoachDashboardViewController") as! CoachDashboardViewController
+            dashBoard.friendProfile = userInfo
+            parentVC.presentViewController(dashBoard, animated: true) {}
+        }
+        
+    }
+    
+    func moveToFan(userInfo:[String : AnyObject]){
+        
+        if let parentVC = parent as? UIViewController{
+            let dashBoard = viewControllerFrom("Main", vcid: "FanDashboardViewController") as! FanDashboardViewController
+            dashBoard.friendProfile = userInfo
+            parentVC.presentViewController(dashBoard, animated: true) {}
+        }
+    }
+    
+    
     @IBAction func DidTapLikeButton(sender: UIButton) {
         
         if let value = postId{
@@ -58,6 +126,7 @@ class APostTableViewCell: UITableViewCell {
         }
         }
     }
+    
     
     
 

@@ -92,7 +92,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     }
     
     var allRequiredFieldsHaveFilledProperly: Bool {
-        if let runText = runsText, let overText = oversText {
+        if let _ = runsText, let _ = oversText {
             ValidateScore()
             validateOvers()
             return true
@@ -195,7 +195,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
                 WicketsTaken = "-"
                 Maidens = "-"
                 RunsGiven = "-"
-                
+                OversBowled = "-"
                 
                 
                 widesText.userInteractionEnabled = false

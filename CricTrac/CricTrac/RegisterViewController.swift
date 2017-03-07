@@ -12,16 +12,17 @@ import Firebase
 import FirebaseDatabase
 import FirebaseAuth
 
-//import GoogleSignIn
+import GoogleSignIn
 import FBSDKCoreKit
 import FBSDKLoginKit
 import KRProgressHUD
 import SCLAlertView
 
-class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChangeable /*,GIDSignInDelegate, GIDSignInUIDelegate*/ {
+class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChangeable ,GIDSignInDelegate, GIDSignInUIDelegate {
    
     @IBOutlet weak var username:UITextField!
     @IBOutlet weak var password:UITextField!
+
     @IBOutlet weak var facebookBtn: UIButton!
     let loginManager = FBSDKLoginManager()
     @IBOutlet weak var googleBtn: UIButton!
@@ -63,75 +64,75 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
     
     func loginWithGoogle(){
         
-        //        GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
-        //        GIDSignIn.sharedInstance().uiDelegate = self
-        //        GIDSignIn.sharedInstance().delegate = self
-        //        GIDSignIn.sharedInstance().signIn()
+                GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
+                GIDSignIn.sharedInstance().uiDelegate = self
+                GIDSignIn.sharedInstance().delegate = self
+                GIDSignIn.sharedInstance().signIn()
         
     }
     
     
-    //    func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError?) {
-    //
-    //        if error != nil{
-    //            self.googleBtn.enabled = true
-    //            SCLAlertView().showError("Login Error", subTitle: "Error Occoured")
-    //            return
-    //        }
-    //
-    //        let authentication = user.authentication
-    //        let credential = FIRGoogleAuthProvider.credentialWithIDToken(authentication.idToken,
-    //                                                                     accessToken: authentication.accessToken)
-    //        firebaseLogin(credential, sucess: { (user) in
-    //            self.saveGoogleTocken(authentication.idToken, accessToken: authentication.accessToken)
-    //            currentUser = user
-    //            enableSync()
-    //            self.navigateToNextScreen()
-    //            }, failure: { (error) in
-    //
-    //                KRProgressHUD.dismiss()
-    //
-    //                let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
-    //                dispatch_after(delay, dispatch_get_main_queue()) {
-    //                    self.googleBtn.enabled = true
-    //                    SCLAlertView().showError("Login Error", subTitle: error.localizedDescription)
-    //                }
-    //
-    //        })
-    //
-    //    }
+        func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError?) {
+    
+            if error != nil{
+                self.googleBtn.enabled = true
+                SCLAlertView().showError("Login Error", subTitle: "Error Occoured")
+                return
+            }
+    
+            let authentication = user.authentication
+            let credential = FIRGoogleAuthProvider.credentialWithIDToken(authentication.idToken,
+                                                                         accessToken: authentication.accessToken)
+            firebaseLogin(credential, sucess: { (user) in
+                self.saveGoogleTocken(authentication.idToken, accessToken: authentication.accessToken)
+                currentUser = user
+                enableSync()
+                self.navigateToNextScreen()
+                }, failure: { (error) in
+    
+                    KRProgressHUD.dismiss()
+    
+                    let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
+                    dispatch_after(delay, dispatch_get_main_queue()) {
+                        self.googleBtn.enabled = true
+                        SCLAlertView().showError("Login Error", subTitle: error.localizedDescription)
+                    }
+    
+            })
+    
+        }
     
     
-    //    func saveGoogleTocken(idToken:String,accessToken:String ){
-    //
-    //        let userDefaults = NSUserDefaults.standardUserDefaults()
-    //        let googleTokens = ["idToken":idToken,"accessToken":accessToken]
-    //
-    //        var facebookToken:[String:String]!
-    //
-    //
-    //        if let loginToken = userDefaults.valueForKey("loginToken") as? [String:AnyObject]{
-    //
-    //            if let fbtoken = loginToken["Facebooktoken"]{
-    //
-    //                facebookToken = fbtoken as! [String : String]
-    //            }
-    //
-    //        }
-    //
-    //        var token = [String:AnyObject]()
-    //        if facebookToken != nil{
-    //            token["Facebooktoken"] = facebookToken
-    //        }
-    //        token["googletoken"] = googleTokens
-    //
-    //        userDefaults.setValue(token, forKey: "loginToken")
-    //
-    //        userDefaults.synchronize()
-    //
-    //
-    //
-    //    }
+        func saveGoogleTocken(idToken:String,accessToken:String ){
+    
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            let googleTokens = ["idToken":idToken,"accessToken":accessToken]
+    
+            var facebookToken:[String:String]!
+    
+    
+            if let loginToken = userDefaults.valueForKey("loginToken") as? [String:AnyObject]{
+    
+                if let fbtoken = loginToken["Facebooktoken"]{
+    
+                    facebookToken = fbtoken as! [String : String]
+                }
+    
+            }
+    
+            var token = [String:AnyObject]()
+            if facebookToken != nil{
+                token["Facebooktoken"] = facebookToken
+            }
+            token["googletoken"] = googleTokens
+    
+            userDefaults.setValue(token, forKey: "loginToken")
+    
+            userDefaults.synchronize()
+    
+    
+    
+        }
     
     
     // MARK:- FBSignIn
