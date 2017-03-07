@@ -246,10 +246,16 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         if let runs = matchDetailsData["RunsTaken"] as? String {
             if let balls = matchDetailsData["BallsFaced"] as? String {
                 
-                guard let ball = Float(balls) where ball > 0 else {
-                    return
+                //guard let ball = Float(balls) where ball > 0 else {
+                //    return
+                //}
+                
+                if balls == "0" {
+                    strikeRateText.text = "0.0"
                 }
-                strikeRateText.text = String(format: "%.2f",(Float(runs)!)*100/Float(balls)!)
+                else {
+                    strikeRateText.text = String(format: "%.2f",(Float(runs)!)*100/Float(balls)!)
+                }
             }
         }
         
@@ -280,6 +286,9 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         }
         else if matchDetailsData["Result"]! as! String == "No Result" {
             result.text = "No Result"
+        }
+        else if matchDetailsData["Result"]! as! String == "Tied" {
+           result.text = "Match Tied"
         }
         else {
             
@@ -365,7 +374,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                 
             }
             
-            if let venue = matchDetailsData["Venue"] {
+            if let venue = matchDetailsData["Venue"] as? String where venue != "-"  {
                 
                 formattedString.bold(", \(venue)", fontName: appFont_bold, fontSize: 15)
                 
@@ -404,42 +413,47 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         }
 
         
-        if let tournament = matchDetailsData["Tournament"]{
+        var group = ""
+        
+        //if let tournament = matchDetailsData["Tournament"]{
             
             let formattedString = NSMutableAttributedString()
             
             var tournamentText = NSAttributedString()
-            
-            
-            var group = ""
-            
-            if let dat = matchDetailsData["Level"] {
-                group.appendContentsOf("\(dat)")
+        
+        
+            if let tournament = matchDetailsData["Tournament"] as? String where tournament != "-" {
+                group.appendContentsOf("\(tournament)\n")
             }
             
-            if let stage = matchDetailsData["Stage"] {
+            
+            if let agegroup = matchDetailsData["AgeGroup"] as? String where agegroup != "-"  {
+                group.appendContentsOf("\(agegroup)")
+            }
+        
+            if let level = matchDetailsData["Level"] as? String where level != "-"  {
+                group.appendContentsOf("  |  \(level)")
+            }
+            
+            if let stage = matchDetailsData["Stage"] as? String where stage != "-"  {
                 group.appendContentsOf("  |  \(stage)")
-                
+            }
+        
+            
+            if let overs = matchDetailsData["MatchOvers"] as? String where overs != "-"  {
+                group.appendContentsOf("  |  \(overs) Overs")
             }
             
-            if let dat = matchDetailsData["AgeGroup"] {
-                group.appendContentsOf("  |  \(dat)")
-                
-            }
-            
-            if let ovrs = matchDetailsData["MatchOvers"] {
-                group.appendContentsOf("  |  \(ovrs) Overs")
-                
-            }
-            
-            
-            
-            if let val =  tournament as? String where val != "-"{
-               tournamentText = formattedString.bold("\(val)", fontName: appFont_black, fontSize: 19).bold("\n\(group)", fontName: appFont_bold, fontSize: 15)
-            }
+            //if let val =  tournament as? String where val != "-"{
+               //tournamentText = formattedString.bold("\(tournament)", fontName: appFont_black, fontSize: 19).bold("\n\(group)", fontName: appFont_bold, fontSize: 15)
+            //}
+            tournamentText = formattedString.bold("\(group)", fontName: appFont_bold, fontSize: 15)
    
             tournamentName.attributedText = tournamentText
-        }
+        //}
+        
+        
+
         
         var firstTeamScore = "-"
         var secondTeamScore = "-"
