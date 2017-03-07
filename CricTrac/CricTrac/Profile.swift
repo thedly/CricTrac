@@ -215,7 +215,7 @@ class Profile {
                 "LastName" : self.LastName.whiteSpacesTrimmedString(),
                 "BattingStyle": self.BattingStyle,
                 "BowlingStyle": self.BowlingStyle,
-                "City": self.City,
+                "City": self.City.whiteSpacesTrimmedString(),
                 "Country": self.Country,
                 "State": self.State,
                 "DateOfBirth": self.DateOfBirth,
@@ -245,7 +245,7 @@ class Profile {
             return [
                 "FirstName" : self.FirstName.whiteSpacesTrimmedString(),
                 "LastName" : self.LastName.whiteSpacesTrimmedString(),
-                "City": self.City,
+                "City": self.City.whiteSpacesTrimmedString(),
                 "Country": self.Country,
                 "State": self.State,
                 "DateOfBirth": self.DateOfBirth,

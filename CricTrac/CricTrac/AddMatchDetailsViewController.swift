@@ -165,7 +165,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             
             alertView.addButton("Cancel", action: { })
             
-            alertView.showNotice("Warning", subTitle: "All Data will be lost if you continue")
+            alertView.showNotice("Warning", subTitle: "All data will be lost if you continue")
             
             
         }

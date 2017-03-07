@@ -228,7 +228,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         // Dispose of any resources that can be recreated.
     }
     
-    func calculateStrikeRate(){
+    /*func calculateStrikeRate(){
         
         if batRuns.text?.trimWhiteSpace.length == 0{
            strikeRateText.text = ""
@@ -239,11 +239,11 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         else{
             setStrikeRate()
         }
-    }
+    }*/
     
     func setStrikeRate(){
         
-        if let runs = matchDetailsData["RunsTaken"] as? String {
+        if let runs = matchDetailsData["RunsTaken"] as? String where runs != "-" {
             if let balls = matchDetailsData["BallsFaced"] as? String {
                 
                 //guard let ball = Float(balls) where ball > 0 else {
@@ -263,9 +263,8 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     
     func setEconomy(){
         
-        if let runs = matchDetailsData["RunsGiven"] as? String {
-            
-            if let balls = matchDetailsData["OversBowled"] as? String {
+        if let balls = matchDetailsData["OversBowled"] as? String where balls != "-" {
+            if let runs = matchDetailsData["RunsGiven"] as? String {
                 
                 guard let ball = Float(balls) where ball > 0 else {
                     return
@@ -392,8 +391,8 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             
         }
         
-        
-        calculateStrikeRate()
+        setStrikeRate()
+        //calculateStrikeRate()
         
         if let Overs: String = matchDetailsData["Maidens"] as? String { // in overs eg: 2, 3, 4
             overs.text = Overs
