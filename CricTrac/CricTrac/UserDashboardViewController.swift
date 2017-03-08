@@ -279,7 +279,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         if let navigation = navigationController{
             
             navigation.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-            title = "TIMELINE"
+            title = "DASHBOARD"
         }
     
             //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
@@ -360,9 +360,9 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         let df = NSDateFormatter()
         df.dateFormat = "dd/MM/yyyy"
-        self.PlayerName.text = userProfileData.fullName.uppercaseString
+        self.PlayerName.text = userProfileData.fullName
         let formattedString = NSMutableAttributedString()
-        let locationText = formattedString.bold("\(userProfileData.City.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.Country.uppercaseString) ", fontName: appFont_black, fontSize: 15)
+        let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.Country)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.DateOfBirth)\n", fontName: appFont_black, fontSize: 15)
         self.PlayerLocation.attributedText = locationText
         self.userProfileImage.image = LoggedInUserImage
         
