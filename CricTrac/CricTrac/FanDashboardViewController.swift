@@ -22,7 +22,8 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var userProfileImage: UIImageView!
     @IBOutlet weak var PlayerName: UILabel!
     @IBOutlet weak var PlayerLocation: UILabel!
-    
+    @IBOutlet weak var closeButton: UIButton!
+
     
     var friendProfile:[String:AnyObject]?
     
@@ -39,8 +40,10 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         
         if let value = friendProfile{
             userProfileData = Profile(usrObj: value)
+            closeButton.hidden = false
         }else{
             userProfileData = profileData
+            closeButton.hidden = true
         }
         
         setBackgroundColor()

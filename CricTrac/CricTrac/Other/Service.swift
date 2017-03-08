@@ -118,6 +118,8 @@ func addMatchData(key:String,data:[String:AnyObject], callback: [String:AnyObjec
     dataToBeModified["MatchId"] = ref.key
     ref.setValue(dataToBeModified)
     
+    callback(dataToBeModified)
+    
     if let matchId = dataToBeModified["MatchId"] as? String{
         
         writeAutomaticMessage(matchId)
@@ -127,7 +129,7 @@ func addMatchData(key:String,data:[String:AnyObject], callback: [String:AnyObjec
     UpdateDashboardDetails()
     
     
-    callback(dataToBeModified)
+    //callback(dataToBeModified)
     
 }
 
