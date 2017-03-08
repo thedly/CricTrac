@@ -124,6 +124,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     @IBOutlet weak var SecondRecentMatchDateAndLocation: UILabel!
  
 
+    @IBOutlet weak var closeButton: UIButton!
+    
     
     
     @IBAction func CloseDashboardPressed(sender: UIButton) {
@@ -311,8 +313,10 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         if let value = friendProfile{
             userProfileData = Profile(usrObj: value)
+            closeButton.hidden = false
         }else{
             userProfileData = profileData
+            closeButton.hidden = true
         }
         
      //   setBackgroundColor()
