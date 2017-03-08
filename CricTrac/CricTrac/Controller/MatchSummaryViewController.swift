@@ -194,16 +194,21 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         if let ground = value["Ground"]{
             mData.ground = ground as! String
             
-            if let venue = value["Venue"]{
-                mData.ground = "\(ground) \(venue)"
+            if let venue = value["Venue"] as? String where venue != "-" {
+                mData.ground = "\(ground), \(venue)"
             }
         }
         
         if let ballsFaced = value["BallsFaced"] as? String where ballsFaced != "-", let runsScored = value["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
             
-            let strinkeRate = String(format: "%.2f",(Float(runsScored)!)*100/Float(ballsFaced)!)
-            mData.strikerate = Float(strinkeRate)
-            //matchVenueAndDate.appendContentsOf("\n Strike rate: \(strinkeRate)")
+            if ballsFaced == "0" {
+                mData.strikerate = Float("0.00")
+            }
+            else {
+                let strinkeRate = String(format: "%.2f",(Float(runsScored)!)*100/Float(ballsFaced)!)
+                mData.strikerate = Float(strinkeRate)
+                //matchVenueAndDate.appendContentsOf("\n Strike rate: \(strinkeRate)")
+            }
         }
         
         if let oversBowled = value["OversBowled"] as? String where oversBowled != "-", let runsGiven = value["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
@@ -214,7 +219,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         }
         
         if let opponent  = value["Opponent"]{
-            opponentName = opponent.uppercaseString
+            //opponentName = opponent.uppercaseString
+            opponentName = opponent as! String
         }
         
         
@@ -243,7 +249,6 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             if let isHidden = currentMatch.BattingSectionHidden where isHidden == true{
                 
                 if let isHidden = currentMatch.BowlingSectionHidden where isHidden == false{
-                    
                     aCell.strikeRateLabel.text = "Economy : \(currentMatch.economy!)"
                     aCell.strikeRateLabel.hidden = false
                 }else{
@@ -251,21 +256,19 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 }
                 aCell.economyLabel.hidden = true
                 
-            }else{
-                
+            }
+            else
+            {
                 if let sRate = currentMatch.strikerate {
-                aCell.strikeRateLabel.hidden = false
-                aCell.strikeRateLabel.text = "Strike Rate : \(sRate)"
+                    aCell.strikeRateLabel.hidden = false
+                    aCell.economyLabel.hidden = true
+                    aCell.strikeRateLabel.text = "Strike Rate : \(sRate)"
                 }
                 
                 if let economy = currentMatch.economy {
-                    
                     aCell.economyLabel.hidden = false
                     aCell.economyLabel.text = "Economy : \(economy)"
                 }
-                
-
-                
             }
             
             
