@@ -175,7 +175,7 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
         navigationItem.leftBarButtonItem = leftbarButton
         navigationItem.rightBarButtonItem = righttbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-        title = "PERSONAL INFO"
+        title = "PROFILE"
        // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
        // navigationController!.navigationBar.titleTextAttributes = titleDict
     }

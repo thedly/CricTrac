@@ -379,6 +379,9 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
                 getImageFromFirebase(profileData.ProfileImageURL) { (imgData) in
                     LoggedInUserImage = imgData
                 }
+                getImageFromFirebase(profileData.CoverPhotoURL) { (imgData) in
+                    LoggedInUserCoverImage = imgData
+                }
             }
         })
         

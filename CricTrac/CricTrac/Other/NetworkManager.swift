@@ -89,19 +89,63 @@ func LoadTimeline(key:String,sucess:(JSON)->Void,failure:(NSError?)->Void){
     
 }
 
+/*
+if let usrId = currentUser?.uid {
+    let requestUrl = "\(DashboardDataUpdateUrl)\(usrId)"
+    let request = NSMutableURLRequest(URL: NSURL(string: requestUrl)!)
+    request.HTTPMethod = "POST"
+    let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+        guard error == nil && data != nil else {                                                          // check for fundamental networking error
+            print("error=\(error)")
+            return
+        }
+        
+        if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
+            print("statusCode should be 200, but is \(httpStatus.statusCode)")
+            print("response = \(response)")
+        }
+        
+        let responseString = String(data: data!, encoding: NSUTF8StringEncoding)
+        print("responseString = \(responseString)")
+    }
+    task.resume()
+}
+*/
 
-func writeAutomaticMessage(matchId:String){1
+func writeAutomaticMessage(matchId:String){
+    
+    let timelineURL = serverBaseURL+"/timelineAutoPost/\(currentUser!.uid)/MatchId/\(matchId)"
+    let request = NSMutableURLRequest(URL: NSURL(string: timelineURL)!)
+    request.HTTPMethod = "POST"
+    let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+        guard error == nil && data != nil else {
+            // check for fundamental networking error
+            print("error=\(error)")
+            return
+        }
+        
+        if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {
+            // check for http errors
+            print("statusCode should be 200, but is \(httpStatus.statusCode)")
+            print("response = \(response)")
+        }
+        
+        let responseString = String(data: data!, encoding: NSUTF8StringEncoding)
+        print("responseString = \(responseString)")
+    }
+    task.resume()
     
    // guard let firstName = loggedInUserInfo["FirstName"] as? String else { return}
     
-    let timelineURL = NSURL(string:serverBaseURL+"/timelineAutoPost/\(currentUser!.uid)/MatchId/\(matchId)")!
+    //let timelineURL = NSURL(string:serverBaseURL+"/timelineAutoPost/\(currentUser!.uid)/MatchId/\(matchId)")!
+
+    //dataTask = defaultSession.dataTaskWithURL(timelineURL, completionHandler: { (data, response, error) in
     
-    dataTask = defaultSession.dataTaskWithURL(timelineURL, completionHandler: { (data, response, error) in
-    
-        print(response)
+      //  print(response)
         
-        print(error)
-    })
-    dataTask?.resume()
+      //  print(error)
+    //})
+    //dataTask?.resume()
+    
 }
 //

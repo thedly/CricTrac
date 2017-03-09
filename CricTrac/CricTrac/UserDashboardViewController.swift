@@ -21,6 +21,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     var recentMatchesBowling: [String:String]!
     private var _currentTheme:String = CurrentTheme
     
+    var coverOrProfile = ""
+    
     var isFriendDashboard = false
     
     var clearColor = UIColor.clearColor()
@@ -150,6 +152,13 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     @IBAction func editImageBtnPressed(sender: AnyObject) {
         
+        self.photoOptions("ProfilePhoto")
+        coverOrProfile = "Profile"
+        
+    }
+    
+    func photoOptions(option:String)  {
+        
         let alertController = UIAlertController(title: nil, message: "Change your picture", preferredStyle: .ActionSheet)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
@@ -197,14 +206,14 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                     
                     addProfileImageData(self.resizeImage(image, newWidth: 200))
                     self.activityInd.stopAnimating()
-
+                    
                 }
             }
             
             
             
             
-         }
+        }
         
         alertController.addAction(chooseFromFacebookAction)
         
@@ -223,7 +232,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         let viewPhotoAction = UIAlertAction(title: "View Photo", style: .Default) { (action) in
             
-           self.viewImage()
+            self.viewImage(option)
             
         }
         
@@ -237,9 +246,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         self.presentViewController(alertController, animated: true) {
             // ...
         }
-        
     }
-    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         /*
@@ -279,7 +286,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         if let navigation = navigationController{
             
             navigation.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-            title = "TIMELINE"
+            title = "DASHBOARD"
         }
     
             //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
@@ -299,11 +306,19 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        
-        self.userProfileImage.image = image
-        self.dismissViewControllerAnimated(true) { 
-            addProfileImageData(self.resizeImage(image, newWidth: 200))
+        if coverOrProfile == "Profile" {
+           
+            self.userProfileImage.image = image
+            self.dismissViewControllerAnimated(true) {
+                addProfileImageData(self.resizeImage(image, newWidth: 200))
+            }
+        }else {
+            self.imgCoverPhoto.image = image
+            self.dismissViewControllerAnimated(true) {
+                addCoverImageData(self.resizeImage(image, newWidth: 200))
+            }
         }
+        
         
         
     }
@@ -360,12 +375,13 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         let df = NSDateFormatter()
         df.dateFormat = "dd/MM/yyyy"
-        self.PlayerName.text = userProfileData.fullName.uppercaseString
+        self.PlayerName.text = userProfileData.fullName
         let formattedString = NSMutableAttributedString()
-        let locationText = formattedString.bold("\(userProfileData.City.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.Country.uppercaseString) ", fontName: appFont_black, fontSize: 15)
+        let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.Country)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.DateOfBirth)\n", fontName: appFont_black, fontSize: 15)
         self.PlayerLocation.attributedText = locationText
         self.userProfileImage.image = LoggedInUserImage
-        
+        self.imgCoverPhoto.image = LoggedInUserCoverImage
+
         
         //getMatchData()
         
@@ -376,10 +392,16 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         // Do any additional setup after loading the view.
         setNavigationBarProperties()
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(changeThemeSettigs))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapCoverPhoto))
         tapGesture.numberOfTapsRequired = 1
         imgCoverPhoto.addGestureRecognizer(tapGesture)
     }
+    func tapCoverPhoto()  {
+        self.photoOptions("CoverPhoto")
+        coverOrProfile = "Cover"
+
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -420,14 +442,19 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     
     
-    func viewImage(){
+    func viewImage(option:String){
         
-        let newImageView = UIImageView(image: userProfileImage.image)
+        let newImageView = UIImageView()
+        if option == "CoverPhoto" {
+            newImageView.image = imgCoverPhoto.image
+        }else {
+            newImageView.image = userProfileImage.image
+        }
         newImageView.frame = self.view.frame
         newImageView.backgroundColor = .blackColor()
         newImageView.contentMode = .ScaleAspectFit
         newImageView.userInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: "dismissFullscreenImage:")
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UserDashboardViewController.dismissFullscreenImage(_:)))
         newImageView.addGestureRecognizer(tap)
         //        self.view.addSubview(navBarView)
         self.view.addSubview(newImageView)

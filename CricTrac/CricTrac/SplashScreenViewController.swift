@@ -150,6 +150,9 @@ class SplashScreenViewController: UIViewController,ThemeChangeable {
                     getImageFromFirebase(profileData.ProfileImageURL) { (imgData) in
                         LoggedInUserImage = imgData
                     }
+                    getImageFromFirebase(profileData.CoverPhotoURL) { (imgData) in
+                        LoggedInUserCoverImage = imgData
+                    }
                 }
                 
                 
