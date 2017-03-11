@@ -32,7 +32,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     @IBOutlet weak var loginBtn: UIButton!
     let loginManager = FBSDKLoginManager()
 
-    var myGroup = dispatch_group_create()
+    
     var profileImage: UIImage?
     
     func changeThemeSettigs() {
@@ -342,7 +342,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     }
     
     func navigateToNextScreen(){
-        
+        var myGroup = dispatch_group_create()
         if let userName = username.text?.trimWhiteSpace where userName != ""{
             
             if let password = password.text?.trimWhiteSpace where password != "" {
@@ -362,7 +362,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         dispatch_group_enter(myGroup)
         getAllProfileData({ data in
             profileData = Profile(usrObj: data)
-            dispatch_group_leave(self.myGroup)
+            dispatch_group_leave(myGroup)
             
             if profileData.ProfileImageURL == "" {
                 let userDefaults = NSUserDefaults.standardUserDefaults()

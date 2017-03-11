@@ -493,10 +493,22 @@ func getAllProfileData(sucessBlock:([String:AnyObject])->Void){
 }
 
 
+func FriendExists(FriendId: String) -> [AnyObject]? {
+    let ref = fireBaseRef.child("Friends")
+    ref.queryOrderedByChild("UserId").queryStartingAtValue(FriendId).queryEndingAtValue(FriendId+"\u{f8ff}").observeEventType(.Value, withBlock: { snapshot in
+        
+        return snapshot.value
+    })
+    return nil
+    
+}
+
+
 func searchProfiles(searchParameter: String, sucessBlock:([Profile])->Void) {
     let ref = fireBaseRef.child("Users")
     ref.queryOrderedByChild("UserProfile/FirstName").queryStartingAtValue(searchParameter).queryEndingAtValue(searchParameter+"\u{f8ff}").observeEventType(.Value, withBlock: { snapshot in
         
+       
         var users: [Profile] = []
         if let data: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
             
@@ -515,8 +527,7 @@ func searchProfiles(searchParameter: String, sucessBlock:([Profile])->Void) {
     })
     
     return
-    
-    
+ 
 }
 
 func getAllProfiles(params:[String], sucessBlock:([[String:AnyObject]])->Void){
@@ -988,16 +999,28 @@ func getAllFriendRequests(sucessBlock:([String: AnyObject])->Void){
     fireBaseRef.child("Users").child(currentUser!.uid).child("ReceivedRequest").observeEventType(.Value, withBlock: { snapshot in
         
         if let data = snapshot.value as? [String : AnyObject] {
-            
             sucessBlock(data)
         }
         else{
             sucessBlock([:])
         }
     })
+    
 }
 
+func getAllSentFriendRequests(sucessBlock:([String: AnyObject])->Void){
+    
+    fireBaseRef.child("Users").child(currentUser!.uid).child("SentRequest").observeEventType(.Value, withBlock: {   snapshot in
+    
+        if let data = snapshot.value as? [String : AnyObject] {
+            sucessBlock(data)
+        }
+        else{
+            sucessBlock([:])
+        }
+    })
 
+}
 
 func getAllFriends(sucessBlock:([String: AnyObject])->Void){
     

@@ -16,6 +16,9 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     @IBOutlet weak var postText: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     
+    @IBOutlet weak var postDetailView: UIView!
+    @IBOutlet var baseView: UIView!
+    @IBOutlet weak var CommentLblHeight: NSLayoutConstraint!
     @IBOutlet weak var commnetButton: UIButton!
 
     @IBOutlet weak var postComment: UIButton!
@@ -31,6 +34,13 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         super.viewDidLoad()
 
         postText.text = postData!.dictionaryValue["Post"]?.stringValue
+        
+        let font = UIFont(name: "Source Sans Pro", size: 17)
+        let detailHeight = heightForLabel(postText.text! , font: font!, width: postDetailView.bounds.size.width)
+        
+        CommentLblHeight.constant = detailHeight + 300
+        
+        
         
         let postId = postData!.dictionaryValue["postId"]?.stringValue
         
@@ -131,6 +141,20 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         dismissViewControllerAnimated(true) { }
     }
     
+    
+    
+    func heightForLabel(text:String, font:UIFont, width:CGFloat) -> CGFloat
+    {
+        let label:UILabel = UILabel(frame: CGRectMake(0, 0, width, CGFloat.max))
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        label.font = font
+        label.text = text
+        
+        label.sizeToFit()
+        return label.frame.height
+        
+    }
     
 
     /*

@@ -324,7 +324,10 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0{return 125}
         return 225
+        
     }
+    
+    
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         

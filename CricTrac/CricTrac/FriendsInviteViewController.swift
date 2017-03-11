@@ -10,8 +10,10 @@
 import UIKit
 import XLPagerTabStrip
 
-class FriendsInviteViewController: UIViewController,IndicatorInfoProvider,ThemeChangeable {
+class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,IndicatorInfoProvider,ThemeChangeable {
     
+    
+    var friendInviteDataArray = friendInviteData
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
@@ -20,10 +22,15 @@ class FriendsInviteViewController: UIViewController,IndicatorInfoProvider,ThemeC
     }
     
     
-    @IBOutlet weak var friendSearchTbl: UITableView!
-    override func viewDidLoad() {
+  
+        override func viewDidLoad() {
         super.viewDidLoad()
-        setBackgroundColor()
+        
+            
+            
+         
+            
+        //setBackgroundColor()
         // Do any additional setup after loading the view.
     }
     
@@ -35,6 +42,44 @@ class FriendsInviteViewController: UIViewController,IndicatorInfoProvider,ThemeC
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "INVITE")
     }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return friendInviteDataArray.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        
+        
+        if let cell = tableView.dequeueReusableCellWithIdentifier("SliderMenuViewCell", forIndexPath: indexPath) as? SliderMenuViewCell {
+            let itemTitle = friendInviteDataArray[indexPath.row]["title"]
+            
+            let menuIcon = UIImage(named: friendInviteDataArray[indexPath.row]["img"]!)
+            
+            cell.menuName.text = itemTitle
+            
+            cell.menuIcon.frame.size.width = 20
+            cell.menuIcon.frame.size.height = 20
+            
+            cell.menuIcon.contentMode = UIViewContentMode.ScaleAspectFit;
+            
+            cell.menuIcon.image = menuIcon
+            
+            return cell
+
+        }
+        
+        
+        return SliderMenuViewCell()
+     }
+
+    
     
     /*
      // MARK: - Navigation

@@ -136,7 +136,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // Create and add first option action
         let unfriendAction = UIAlertAction(title: "Unfriend", style: .Default) { action -> Void in
-            var friendReqId = sender.restorationIdentifier!
+            let friendReqId = sender.restorationIdentifier!
             
             DeleteFriendRequestData(friendReqId, successBlock: { data in
                 

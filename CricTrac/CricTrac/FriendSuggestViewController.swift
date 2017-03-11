@@ -25,27 +25,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         // Dispose of any resources that can be recreated.
     }
     
-    func getFriendSuggestions() {
-        
-        backgroundThread(background: {
-            
-            KRProgressHUD.showText("Loading ...")
-            getAllFriendSuggestions({
-                KRProgressHUD.dismiss()
-                self.SuggestsTblview.reloadData()
-            })
-            
-        })
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    }
+    
     
     // MARK: - Methods
     

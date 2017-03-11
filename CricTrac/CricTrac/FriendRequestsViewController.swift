@@ -65,33 +65,73 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
-        friendsRequestsData.removeAll()
+    
+    func setAllReceivedRequests() {
+        
         getAllFriendRequests { (data) in
             
             for (_, req) in data {
-                var reqData = ReceivedFriendRequest(dataObj: req as! [String : AnyObject])
+                
+                var modReq = req as! [String : AnyObject]
+                
+                modReq["IsSentRequest"] = false
+                
+                var reqData = ReceivedFriendRequest(dataObj: modReq)
                 friendsRequestsData.append(reqData)
+                
+                self.ReloadTbl()
                 
             }
             
-
-            
-                
-            self.noRequestsLbl.hidden = !(friendsRequestsData.count == 0)
-            
-            
+        }
+    }
+    
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        friendsRequestsData.removeAll()
+        
+        setAllReceivedRequests()
+        
+        setAllSentRequestsData()
+        
+        
+        
+        
+    }
+    
+    
+    func ReloadTbl() {
+        
+        self.noRequestsLbl.hidden = !(friendsRequestsData.count == 0)
+        
+        if friendsRequestsData.count < 3 {
             self.RequestsTblViewHeight.constant = CGFloat(friendsRequestsData.count * 100)
-            
-            self.RequestsTblview.reloadData()
-            
-
-            
-            // do something here
         }
         
         
+        self.RequestsTblview.reloadData()
+    }
+    
+    
+    func setAllSentRequestsData() {
+        
+        getAllSentFriendRequests { (data) in
+            for (_, req) in data {
+                
+                var modReq = req as! [String : AnyObject]
+            
+                modReq["IsSentRequest"] = true
+            
+                var reqData = ReceivedFriendRequest(dataObj: modReq)
+                friendsRequestsData.append(reqData)
+                
+                
+                self.ReloadTbl()
+                
+            }
+        }
     }
     
     
@@ -101,6 +141,19 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
             
             KRProgressHUD.showText("Loading ...")
             getAllFriendSuggestions({
+                
+                var modFriendReqData = [Profile]()
+                
+                for (index, dat) in UserProfilesData.enumerate() {
+                    
+                    if friendsRequestsData.filter({$0.Name == dat.fullName }).count == 0 {
+                        modFriendReqData.append(dat)
+                    }
+                    
+                }
+                
+                UserProfilesData = modFriendReqData
+                
                 KRProgressHUD.dismiss()
                 self.suggestionsTblView.reloadData()
             })
@@ -128,6 +181,15 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         aCell.confirmBtn.restorationIdentifier = friendsRequestsData[indexPath.row].RequestId
         
         aCell.rejectBtn.restorationIdentifier = friendsRequestsData[indexPath.row].RequestId
+        
+        
+        
+        if friendsRequestsData[indexPath.row].isSentRequest == true {
+            aCell.confirmBtn.hidden = true
+            aCell.rejectBtn.setTitle("Delete", forState: UIControlState.Normal)
+            
+        }
+        
         
         
         aCell.confirmBtn.addTarget(self, action: #selector(FriendRequestsViewController.ConfirmFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
@@ -163,6 +225,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         if tableView.isEqual(suggestionsTblView){
             
             return getCellForSuggestionsRow(indexPath)
+            
         }
         else
         {
@@ -174,24 +237,32 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
 
     func getCellForSuggestionsRow(indexPath:NSIndexPath)->FriendSuggestionsCell{
         
-        if let aCell =  suggestionsTblView.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as? FriendSuggestionsCell {
+        
+        if friendsRequestsData.filter({$0.Name == UserProfilesData[indexPath.row].fullName}).first == nil {
             
-            
-            aCell.configureCell(UserProfilesData[indexPath.row])
-            
-            aCell.AddFriendBtn.accessibilityIdentifier = UserProfilesData[indexPath.row].id
-            
-            
-            aCell.AddFriendBtn.addTarget(self, action: #selector(AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-            
-            
-            
-            aCell.backgroundColor = UIColor.clearColor()
-            return aCell
+            if let aCell =  suggestionsTblView.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as? FriendSuggestionsCell {
+                
+                
+                aCell.configureCell(UserProfilesData[indexPath.row])
+                
+                aCell.AddFriendBtn.accessibilityIdentifier = UserProfilesData[indexPath.row].id
+                
+                
+                aCell.AddFriendBtn.addTarget(self, action: #selector(AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                
+                
+                
+                aCell.backgroundColor = UIColor.clearColor()
+                return aCell
+            }
+            else {
+                return FriendSuggestionsCell()
+            }
         }
         else {
             return FriendSuggestionsCell()
         }
+        
         
     }
     
@@ -211,7 +282,10 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         if let index = friendsRequestsData.indexOf( {$0.RequestId == RequestObjectid }) {
             friendsRequestsData.removeAtIndex(index)
         }
-        self.RequestsTblViewHeight.constant = CGFloat(friendsRequestsData.count * 100)
+            if friendsRequestsData.count < 3 {
+                self.RequestsTblViewHeight.constant = CGFloat(friendsRequestsData.count * 100)
+            }
+
         self.RequestsTblview.reloadData()
         backgroundThread(background: {
             DeleteSentAndReceivedFriendRequestData(RequestObjectid!, successBlock: { data in
@@ -234,6 +308,10 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     public func ConfirmFriendBtnPressed(sender:UIButton!) {
         
         if let FriendUserId = sender.accessibilityIdentifier where FriendUserId != "" {
+          
+            if FriendExists(FriendUserId) == nil {
+                
+            
             
             var FriendObject = Profile(usrObj: [:])
             var loggedInUserObject = Profile(usrObj: [:])
@@ -285,7 +363,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                         break;
                     default:
                         UserData.Club = loggedInUserObject.PlayerCurrentTeams.joinWithSeparator(",")
-                        break;
+                        break
                         
                     }
                 
@@ -295,7 +373,10 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                     if let index = friendsRequestsData.indexOf( {$0.ReceivedFrom == FriendObject.id}) {
                         friendsRequestsData.removeAtIndex(index)
                     }
-                    self.RequestsTblViewHeight.constant = CGFloat(friendsRequestsData.count * 100)
+                    if friendsRequestsData.count < 3 {
+                        self.RequestsTblViewHeight.constant = CGFloat(friendsRequestsData.count * 100)
+                    }
+
                     self.RequestsTblview.reloadData()
                     
                     
@@ -313,7 +394,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                     
                 })
             })
-
+            }
          }
     }
     
@@ -321,14 +402,16 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         
         if let FriendUserId = sender.accessibilityIdentifier where FriendUserId != "" {
             
-            if let FriendObject  = UserProfilesData.filter({ $0.id == FriendUserId }).first {
+            getProfileInfoById(FriendUserId, sucessBlock: { FriendData in
+                
+                let FriendObject = Profile(usrObj: FriendData)
                 
                 getProfileInfoById((currentUser?.uid)!, sucessBlock: { data in
                     
-                    var loggedInUserObject = Profile(usrObj: data)
+                    let loggedInUserObject = Profile(usrObj: data)
                     
                     
-                    var sendFriendRequestData = SentFriendRequest()
+                    let sendFriendRequestData = SentFriendRequest()
                     
                     sendFriendRequestData.City = FriendObject.City
                     
@@ -356,7 +439,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                     
                     
                     
-                    var receiveFriendRequestData = ReceivedFriendRequest()
+                    let receiveFriendRequestData = ReceivedFriendRequest()
                     
                     
                     receiveFriendRequestData.City = loggedInUserObject.City
@@ -380,45 +463,22 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                     receiveFriendRequestData.Name = loggedInUserObject.fullName
                     receiveFriendRequestData.ReceivedFrom = loggedInUserObject.id
                     receiveFriendRequestData.ReceivedDateTime = NSDate().getCurrentTimeStamp()
-                    
+
                     if let index = UserProfilesData.indexOf( {$0.id == FriendObject.id}) {
                         UserProfilesData.removeAtIndex(index)
                     }
-                    self.suggestionsTblView.reloadData()
                     
+                    self.suggestionsTblView.reloadData()
                     
                     
                     backgroundThread(background: {
                         AddSentRequestData(["sentRequestData": sendFriendRequestData.GetFriendRequestObject(sendFriendRequestData), "ReceivedRequestData": receiveFriendRequestData.getFriendRequestObject(receiveFriendRequestData)], callback: { data in
-                        
                         })
                     })
-                    
-                    
-                }) //UserProfilesData.filter({ $0.id == currentUser?.uid }).first {
-                
-                
-            }
-            
+                })
+        })
         }
         
-        
-        
-        
-        //            let friendRequestData  = ["sentRequestData":
-        //
-        //            ["City": _userObj.City, "Club": _userObj.TeamName, "Name": _userObj.fullName, "SentTo": _userObj.id, "SentDateTime": "\(currentTimeMillis())"],
-        //
-        //            "ReceivedRequestData" : ["City": loggedInUser.City, "Club": loggedInUser.TeamName, "Name": loggedInUser.fullName, "ReceivedFrom": loggedInUser.id, "ReceievedDateTime": "\(currentTimeMillis())"]
-        //            ]
-        //
-        //            AddSentRequestData(friendRequestData, callback: { sentRequestId in
-        //            print(sentRequestId)
-        //            })
-        
-        
-        
-        //Send Friend Request
         
         
     }

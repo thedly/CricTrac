@@ -15,10 +15,20 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         sliderMenu.setDrawerState(.Opened, animated: true)
     }
     
+    
+    
+    @IBOutlet var SearchDisplayCtrlr: UISearchDisplayController!
+    
+    
+    
+    
+    
     func didSearchTapp(sender: UIButton){
         
         UIView.animateWithDuration(0.3) {
+            self.searchBar.hidden = false
             self.searchBar.alpha = 1
+            
             //self.searchResultsTblView.alpha = 1
             self.searchBar.becomeFirstResponder()
         }
@@ -57,6 +67,7 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         
         
         searchBar.alpha = 0
+        self.searchBar.hidden = true
         searchResultsTblView.alpha = 0
         
         settings.style.buttonBarItemFont = UIFont(name: appFont_bold, size: 15)!
@@ -64,7 +75,7 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         setBackgroundColor()
         setNavigationBarProperties()
         
-        
+        self.searchBar.returnKeyType = UIReturnKeyType.Done
         
         
 //        searchResultsTblView.dataSource = self
@@ -108,6 +119,8 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
     override  func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
     
@@ -115,9 +128,9 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         
         let friendReq = viewControllerFrom("Main", vcid: "FriendRequestsViewController")
         
-        let friendSug = viewControllerFrom("Main", vcid: "FriendSuggestViewController")
+        let friendInv = viewControllerFrom("Main", vcid: "FriendsInviteViewController")
         
-        return [friends, friendReq, friendSug]
+        return [friends, friendReq, friendInv]
     }
     
     func getCellForSearchedParametersRow(indexPath:NSIndexPath)->FriendSuggestionsCell{
@@ -212,6 +225,11 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
             self.searchResultsTblView.reloadData()
         }
     }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBarCancelButtonClicked(searchBar)
+    }
+    
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         if searchController.searchBar.text?.characters.count > 0 {
 //
@@ -247,22 +265,26 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
 //    }
     
     
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        
+    func searchrefresh(searchBar: UISearchBar){
         searchBar.text = ""
-        
-        // Remove focus from the search bar.
         searchBar.endEditing(true)
         self.searchedProfiles.removeAll()
         self.searchResultsTblView.reloadData()
+        SearchDisplayCtrlr.active = false
+        
+    }
+    
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchrefresh(searchBar)
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
         
         UIView.animateWithDuration(0.5) {
             self.searchBar.alpha = 0
-            self.searchResultsTblView.alpha = 0
+            self.searchBar.hidden = true
+            
             
         }
         
