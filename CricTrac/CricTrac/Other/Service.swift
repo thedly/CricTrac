@@ -389,7 +389,6 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
     ref.setValue(dataToBeModified)
     
     if let usrProfileType = dataToBeModified["UserProfile"] {
-        
         if usrProfileType as! String != userProfileType.Player.rawValue {
             deleteAllPlayerData()
         }
@@ -398,9 +397,9 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
             let dataToBeCreated = DashboardData(dataObj: [String:AnyObject]())
             let dataToBeSent = dataToBeCreated.dashboardData
             createDashboardData(dataToBeSent)
-            
+            UpdateDashboardDetails()
         }
-        
+ 
     }
     
     
