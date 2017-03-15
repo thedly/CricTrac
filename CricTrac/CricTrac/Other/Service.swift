@@ -419,20 +419,12 @@ func deleteAllPlayerData(){
             snapshot.ref.child("Matches").removeValue()
         }
         
-        if snapshot.hasChild("Matches"){
-            snapshot.ref.child("Matches").removeValue()
-        }
-        
         if snapshot.hasChild("Opponents"){
             snapshot.ref.child("Opponents").removeValue()
         }
         
         if snapshot.hasChild("Grounds"){
             snapshot.ref.child("Grounds").removeValue()
-        }
-        
-        if snapshot.hasChild("Matches"){
-            snapshot.ref.child("Matches").removeValue()
         }
         
         if snapshot.hasChild("Teams"){
@@ -446,8 +438,7 @@ func deleteAllPlayerData(){
         if snapshot.hasChild("Venue"){
             snapshot.ref.child("Venue").removeValue()
         }
-        
-        
+
     })
 }
 
@@ -1168,6 +1159,24 @@ func likeOrUnlike(postId:String,like:(likeDict:[String:[String:String]])->Void,u
 func setIsDeletedToOne(postId:String){
     let ref = fireBaseRef.child("TimelinePosts").child(postId).child("isDeleted")
     ref.setValue("1")
+    deleteTimelineNodes(postId)
+}
+
+// sajith
+func deleteTimelineNodes(postId:String){
+    let timelineURL = serverBaseURL+"/deleteTimeline/"+postId
+    
+    let request = NSMutableURLRequest(URL: NSURL(string:timelineURL)!)
+    request.HTTPMethod = "POST"
+    
+    dataTask = defaultSession.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+        guard error == nil && data != nil else {
+            // check for fundamental networking error
+            print("error=\(error)")
+            return
+        }
+    })
+    dataTask?.resume()
 }
 
 
