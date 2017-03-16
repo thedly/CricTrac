@@ -463,6 +463,15 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
 
 func deleteAllPlayerData(){
     
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Dashboard").removeValue()
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").removeValue()
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Opponents").removeValue()
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Teams").removeValue()
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Grounds").removeValue()
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Tournaments").removeValue()
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Venue").removeValue()
+    
+    /*
     fireBaseRef.child("Users").child(currentUser!.uid).observeEventType(.Value, withBlock: { (snapshot) in
         
         if snapshot.hasChild("Dashboard"){
@@ -493,7 +502,7 @@ func deleteAllPlayerData(){
             snapshot.ref.child("Venue").removeValue()
         }
 
-    })
+    })*/
 }
 
 
