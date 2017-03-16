@@ -1216,7 +1216,7 @@ func setIsDeletedToOne(postId:String){
     deleteTimelineNodes(postId)
 }
 
-// sajith
+// call the API to delete all reference timeline nodes
 func deleteTimelineNodes(postId:String){
     let timelineURL = serverBaseURL+"/deleteTimeline/"+postId
     
