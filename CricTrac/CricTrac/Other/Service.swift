@@ -144,8 +144,8 @@ func addProfileImageData(profileDp:UIImage){
     
 //    if let usrId = FIRAuth.auth()?.currentUser?.uid {
     
-        let filePath = "\(FIRAuth.auth()?.currentUser?.uid)/UserProfile/profileImage"
-        storageRef.child(filePath).putData(imageData, metadata: metaData){(metaData,error) in
+        let filePath = "\(FIRAuth.auth()?.currentUser?.uid)/UserProfile/profilePhoto"
+        storageRef.child((FIRAuth.auth()?.currentUser?.uid)!).child("UserProfile").child("profileImage").putData(imageData, metadata: metaData){(metaData,error) in
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -188,7 +188,61 @@ func addProfileImageData(profileDp:UIImage){
     
     
 }
-
+func addCoverImageData(profileDp:UIImage){
+    
+    let imageData:NSData = UIImageJPEGRepresentation(profileDp, 0.8)!
+    
+    let metaData = FIRStorageMetadata()
+    
+    metaData.contentType = "image/jpg"
+    
+    
+    //    if let usrId = FIRAuth.auth()?.currentUser?.uid {
+    
+    let filePath = "\(FIRAuth.auth()?.currentUser?.uid)/UserProfile/coverImage"
+    storageRef.child((FIRAuth.auth()?.currentUser?.uid)!).child("UserProfile").child("coverPhoto").putData(imageData, metadata: metaData){(metaData,error) in
+        if let error = error {
+            print(error.localizedDescription)
+            return
+        }else{
+            
+            userImageMetaData = (metaData?.downloadURL())!
+            
+            LoggedInUserCoverImage = profileDp
+            
+            let qualityOfServiceClass = QOS_CLASS_BACKGROUND
+            let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+            dispatch_async(backgroundQueue, {
+                updateMetaData(userImageMetaData)
+                do {
+                    let data = try? NSData(contentsOfURL: userImageMetaData)
+                    LoggedInUserCoverImage = UIImage(data: data!!)!
+                    
+                    
+                }catch {
+                    LoggedInUserCoverImage = placeHolderImage!
+                    
+                }
+                print("This is run on the background queue")
+                
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    if let data = try? NSData(contentsOfURL: userImageMetaData) {
+                        
+                        LoggedInUserCoverImage = UIImage(data: data!)!
+                    }else {
+                        LoggedInUserCoverImage = placeHolderImage!
+                    }
+                    print("This is run on the main queue, after the previous code in outer block")
+                })
+            })
+            
+            
+        }
+    }
+    //    }
+    
+    
+}
 
 
 
@@ -1126,7 +1180,7 @@ func likeOrUnlike(postId:String,like:(likeDict:[String:[String:String]])->Void,u
     
     let ref = fireBaseRef.child("TimelinePosts").child(postId).child("Likes")
     
-    ref.observeEventType(.Value, withBlock: { snapshot in
+    ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
         
         if let data = snapshot.value as? [String:[String:String]] {
             

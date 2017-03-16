@@ -113,6 +113,45 @@ get {
     
 }
 }
+var LoggedInUserCoverImage: UIImage {
+set
+{
+    
+    let userdefaults = NSUserDefaults.standardUserDefaults()
+    let data = UIImageJPEGRepresentation(newValue, 1.0)
+    userdefaults.setValue(data, forKey: "CoverImage")
+    
+    
+}
+get {
+    if (profileData.ProfileImageURL != "-")  {
+        
+        if let data = NSData(contentsOfURL: NSURL(string: profileData.ProfileImageURL)!) {
+            let userdefaults = NSUserDefaults.standardUserDefaults()
+            userdefaults.setValue(data, forKey: "CoverImage")
+            return UIImage(data: data)!
+            
+        }else {
+            let userdefaults = NSUserDefaults.standardUserDefaults()
+            if let data =  userdefaults.valueForKey("CoverImage") as? NSData {
+                let image = UIImage(data: data)
+                return image!
+            }else {
+                return placeHolderImage!
+            }
+        }
+    }else {
+        let userdefaults = NSUserDefaults.standardUserDefaults()
+        if let data =  userdefaults.valueForKey("CoverImage") as? NSData {
+            let image = UIImage(data: data)
+            return image!
+        }else {
+            return placeHolderImage!
+        }
+    }
+    
+}
+}
 
 public func viewControllerFrom(storyBoard:String,vcid:String)->UIViewController{
     
