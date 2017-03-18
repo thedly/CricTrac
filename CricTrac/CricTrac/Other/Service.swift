@@ -874,17 +874,15 @@ public func AcceptFriendRequest(data: [String:[String:AnyObject]], callback:(dat
         
         dataToBeManipulated["FriendData"]!["FriendRecordId"] = newlyCreatedUserFriendData.key  // user's friend recored id
         
-        dataToBeManipulated["FriendData"]!["FriendRecordId"] = newlyCreatedUserFriendData.key  // user's friend recored id
-        
         dataToBeManipulated["UserData"]!["FriendRecordIdOther"] = newlyCreatedUserFriendData.key
         
         
         
         // Add user reference to Friend's friends list
-        let receivedRequestRef = fireBaseRef.child("Users").child(dataToBeManipulated["FriendData"]!["UserId"]! as! String).child("Friends").childByAutoId()
+        let receivedRequestRef = fireBaseRef.child("Users").child(dataToBeManipulated["FriendData"]!["UserId"]! as! String).child("Friends")
         
         
-        receivedRequestRef.setValue(dataToBeManipulated["UserData"], withCompletionBlock: { error, newlyCreatedUserReferenceData in
+        receivedRequestRef.childByAutoId().setValue(dataToBeManipulated["UserData"], withCompletionBlock: { error, newlyCreatedUserReferenceData in
 
             dataToBeManipulated["FriendData"]!["FriendRecordIdOther"] = newlyCreatedUserReferenceData.key
             
@@ -892,8 +890,8 @@ public func AcceptFriendRequest(data: [String:[String:AnyObject]], callback:(dat
 
             // Friend's recored id
             
-            receivedRequestRef.updateChildValues(dataToBeManipulated["UserData"]!)
-            ref.updateChildValues(dataToBeManipulated["FriendData"]!)
+            receivedRequestRef.child(newlyCreatedUserReferenceData.key).updateChildValues(dataToBeManipulated["UserData"]!)
+            ref.child(newlyCreatedUserFriendData.key).updateChildValues(dataToBeManipulated["FriendData"]!)
 
             callback(data: newlyCreatedUserReferenceData.key)
         })
