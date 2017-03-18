@@ -108,7 +108,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
             
             venueVal = val.textVal
         }
-        return ["MatchDate":matchDateVal,"Team":teamVal,"Opponent":opponentVal,"Ground":groundVal,"MatchOvers":oversVal,"Tournament":tournamentVal, "AgeGroup":ageGroupVal, "Level": playingLevelVal, "Stage":stageVal, "Venue": venueVal]
+        return ["MatchDate":matchDateVal,"Team":teamVal,"Opponent":opponentVal,"Ground":groundVal,"MatchOvers":oversVal,"Tournament":tournamentVal, "AgeGroup":ageGroupVal, "Level": playingLevelVal, "MatchStage":stageVal, "Venue": venueVal]
     }
     
     func changeThemeSettigs() {
@@ -211,7 +211,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         if let pl = selectedData["Level"] as? String {
             playingLevel.textVal = pl
         }
-        if let pl = selectedData["Stage"] as? String {
+        if let pl = selectedData["MatchStage"] as? String {
             stage.textVal = pl
         }
         }
@@ -227,7 +227,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "MATCH")
+        return IndicatorInfo(title: "DETAILS")
     }
     
     var allRequiredFieldsHaveNotFilledProperly:Bool{

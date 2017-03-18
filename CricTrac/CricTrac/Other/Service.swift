@@ -267,8 +267,9 @@ func getAllMatchData(friendId:String? = nil,sucessBlock:([String:AnyObject])->Vo
     
     let userId:String = friendId ?? currentUser!.uid
     
-    
    fireBaseRef.child("Users").child(userId).child("Matches").observeEventType(.Value, withBlock: { snapshot in
+   //fireBaseRef.child("Users").child(userId).child("Matches").queryLimitedToFirst(2).observeEventType(.Value, withBlock: { snapshot in
+    
     
     if let data = snapshot.value! as? [String:AnyObject]{
         
@@ -463,6 +464,15 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
 
 func deleteAllPlayerData(){
     
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Dashboard").removeValue()
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").removeValue()
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Opponents").removeValue()
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Teams").removeValue()
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Grounds").removeValue()
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Tournaments").removeValue()
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Venue").removeValue()
+    
+    /*
     fireBaseRef.child("Users").child(currentUser!.uid).observeEventType(.Value, withBlock: { (snapshot) in
         
         if snapshot.hasChild("Dashboard"){
@@ -493,7 +503,7 @@ func deleteAllPlayerData(){
             snapshot.ref.child("Venue").removeValue()
         }
 
-    })
+    })*/
 }
 
 
@@ -649,7 +659,6 @@ func updateMatchData(key:String,data:[String:AnyObject], callback:(data:[String:
     
     ref.updateChildValues(dataToBeModified)
     callback(data: dataToBeModified)
-    
     UpdateDashboardDetails()
     
 }

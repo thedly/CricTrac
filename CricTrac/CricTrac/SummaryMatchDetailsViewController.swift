@@ -434,7 +434,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                 group.appendContentsOf("  |  \(level)")
             }
             
-            if let stage = matchDetailsData["Stage"] as? String where stage != "-"  {
+            if let stage = matchDetailsData["MatchStage"] as? String where stage != "-"  {
                 group.appendContentsOf("  |  \(stage)")
             }
         
