@@ -443,7 +443,6 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
     ref.setValue(dataToBeModified)
     
     if let usrProfileType = dataToBeModified["UserProfile"] {
-        
         if usrProfileType as! String != userProfileType.Player.rawValue {
             deleteAllPlayerData()
         }
@@ -452,9 +451,9 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
             let dataToBeCreated = DashboardData(dataObj: [String:AnyObject]())
             let dataToBeSent = dataToBeCreated.dashboardData
             createDashboardData(dataToBeSent)
-            
+            UpdateDashboardDetails()
         }
-        
+ 
     }
     
     
@@ -474,20 +473,12 @@ func deleteAllPlayerData(){
             snapshot.ref.child("Matches").removeValue()
         }
         
-        if snapshot.hasChild("Matches"){
-            snapshot.ref.child("Matches").removeValue()
-        }
-        
         if snapshot.hasChild("Opponents"){
             snapshot.ref.child("Opponents").removeValue()
         }
         
         if snapshot.hasChild("Grounds"){
             snapshot.ref.child("Grounds").removeValue()
-        }
-        
-        if snapshot.hasChild("Matches"){
-            snapshot.ref.child("Matches").removeValue()
         }
         
         if snapshot.hasChild("Teams"){
@@ -501,8 +492,7 @@ func deleteAllPlayerData(){
         if snapshot.hasChild("Venue"){
             snapshot.ref.child("Venue").removeValue()
         }
-        
-        
+
     })
 }
 
@@ -1190,7 +1180,7 @@ func likeOrUnlike(postId:String,like:(likeDict:[String:[String:String]])->Void,u
     
     let ref = fireBaseRef.child("TimelinePosts").child(postId).child("Likes")
     
-    ref.observeEventType(.Value, withBlock: { snapshot in
+    ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
         
         if let data = snapshot.value as? [String:[String:String]] {
             
@@ -1223,6 +1213,24 @@ func likeOrUnlike(postId:String,like:(likeDict:[String:[String:String]])->Void,u
 func setIsDeletedToOne(postId:String){
     let ref = fireBaseRef.child("TimelinePosts").child(postId).child("isDeleted")
     ref.setValue("1")
+    deleteTimelineNodes(postId)
+}
+
+// call the API to delete all reference timeline nodes
+func deleteTimelineNodes(postId:String){
+    let timelineURL = serverBaseURL+"/deleteTimeline/"+postId
+    
+    let request = NSMutableURLRequest(URL: NSURL(string:timelineURL)!)
+    request.HTTPMethod = "POST"
+    
+    dataTask = defaultSession.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+        guard error == nil && data != nil else {
+            // check for fundamental networking error
+            print("error=\(error)")
+            return
+        }
+    })
+    dataTask?.resume()
 }
 
 
