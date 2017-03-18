@@ -956,6 +956,17 @@ func DeleteSentAndReceivedFriendRequestData(ReceivedRequestId: String, successBl
     
 }
 
+func CancelSentFriendRequestData(ReceivedRequestId: String, successBlock: Bool -> Void) {
+    
+    fireBaseRef.child("Users").child(currentUser!.uid).child("SentRequest").child(ReceivedRequestId).observeSingleEventOfType(.Value, withBlock: { (friendsnapshot) in
+        
+        friendsnapshot.ref.removeValue()
+        successBlock(true)
+    })
+    
+}
+
+
 public func AddSentRequestData(data: [String:[String:AnyObject]], callback:(data:String)->Void) {
     
     var dataToBeManipulated = data

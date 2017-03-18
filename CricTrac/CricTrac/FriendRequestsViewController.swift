@@ -76,42 +76,53 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                 
                 modReq["IsSentRequest"] = false
                 
-                var reqData = ReceivedFriendRequest(dataObj: modReq)
-                friendsRequestsData.append(reqData)
-                
-                self.ReloadTbl()
+                var reqData = RequestsData(dataObj: modReq)
+                FriendRequestsData.append(reqData)
                 
             }
             
+            self.RequestsTblview.reloadData()
+            self.AdjustHeight()
         }
     }
     
     
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
-        friendsRequestsData.removeAll()
+    func setRequests(){
+        FriendRequestsData.removeAll()
         
         setAllReceivedRequests()
         
         setAllSentRequestsData()
         
         
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        
+        setRequests();
         
         
     }
     
+    func AdjustHeight(){
+        self.noRequestsLbl.hidden = !(FriendRequestsData.count == 0)
+        
+        if FriendRequestsData.count < 3 {
+            self.RequestsTblViewHeight.constant = CGFloat(FriendRequestsData.count * 100)
+        }
+        else{
+            self.RequestsTblViewHeight.constant = CGFloat(2.5 * 100)
+        }
+
+    }
     
     func ReloadTbl() {
         
-        self.noRequestsLbl.hidden = !(friendsRequestsData.count == 0)
-        
-        if friendsRequestsData.count < 3 {
-            self.RequestsTblViewHeight.constant = CGFloat(friendsRequestsData.count * 100)
-        }
+        setRequests()
         
         
-        self.RequestsTblview.reloadData()
     }
     
     
@@ -124,13 +135,12 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
             
                 modReq["IsSentRequest"] = true
             
-                var reqData = ReceivedFriendRequest(dataObj: modReq)
-                friendsRequestsData.append(reqData)
-                
-                
-                self.ReloadTbl()
-                
+                var reqData = RequestsData(dataObj: modReq)
+                FriendRequestsData.append(reqData)
             }
+            
+            self.RequestsTblview.reloadData()
+            self.AdjustHeight()
         }
     }
     
@@ -146,7 +156,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                 
                 for (index, dat) in UserProfilesData.enumerate() {
                     
-                    if friendsRequestsData.filter({$0.Name == dat.fullName }).count == 0 {
+                    if FriendRequestsData.filter({$0.Name == dat.fullName }).count == 0 {
                         modFriendReqData.append(dat)
                     }
                     
@@ -172,21 +182,43 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         
         let aCell =  RequestsTblview.dequeueReusableCellWithIdentifier("FriendRequestsCell", forIndexPath: indexPath) as! FriendRequestsCell
         
-        aCell.FriendName.text = friendsRequestsData[indexPath.row].Name
-        aCell.FriendCity.text = friendsRequestsData[indexPath.row].City
-        aCell.FriendProfileImage.image = extractImages(friendsRequestsData[indexPath.row].ReceivedFrom)
-        
-        aCell.confirmBtn.accessibilityIdentifier = friendsRequestsData[indexPath.row].ReceivedFrom
-        
-        aCell.confirmBtn.restorationIdentifier = friendsRequestsData[indexPath.row].RequestId
-        
-        aCell.rejectBtn.restorationIdentifier = friendsRequestsData[indexPath.row].RequestId
         
         
         
-        if friendsRequestsData[indexPath.row].isSentRequest == true {
+        
+        if FriendRequestsData[indexPath.row].isSentRequest == true {
             aCell.confirmBtn.hidden = true
             aCell.rejectBtn.setTitle("Delete", forState: UIControlState.Normal)
+            
+            aCell.FriendName.text = FriendRequestsData[indexPath.row].Name
+            aCell.FriendCity.text = FriendRequestsData[indexPath.row].City
+            aCell.FriendProfileImage.image = extractImages(FriendRequestsData[indexPath.row].SentTo)
+            
+            aCell.confirmBtn.accessibilityIdentifier = FriendRequestsData[indexPath.row].SentTo
+            
+            aCell.confirmBtn.restorationIdentifier = FriendRequestsData[indexPath.row].SentRequestId
+            
+            aCell.rejectBtn.restorationIdentifier = FriendRequestsData[indexPath.row].SentRequestId
+            
+            aCell.rejectBtn.addTarget(self, action: #selector(FriendRequestsViewController.CancelRequest(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            
+        }
+        else
+        {
+            aCell.FriendName.text = FriendRequestsData[indexPath.row].Name
+            aCell.FriendCity.text = FriendRequestsData[indexPath.row].City
+            aCell.FriendProfileImage.image = extractImages(FriendRequestsData[indexPath.row].ReceivedFrom)
+            
+            aCell.confirmBtn.accessibilityIdentifier = FriendRequestsData[indexPath.row].ReceivedFrom
+            
+            aCell.confirmBtn.restorationIdentifier = FriendRequestsData[indexPath.row].RequestId
+            
+            aCell.rejectBtn.restorationIdentifier = FriendRequestsData[indexPath.row].RequestId
+            
+            aCell.rejectBtn.addTarget(self, action: #selector(FriendRequestsViewController.RejectFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            
+            
+            
             
         }
         
@@ -194,7 +226,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         
         aCell.confirmBtn.addTarget(self, action: #selector(FriendRequestsViewController.ConfirmFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
-        aCell.rejectBtn.addTarget(self, action: #selector(FriendRequestsViewController.RejectFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
         
         aCell.backgroundColor = UIColor.clearColor()
         return aCell
@@ -217,7 +249,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
             return UserProfilesData.count
         }
         
-        return friendsRequestsData.count
+        return FriendRequestsData.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -238,7 +270,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     func getCellForSuggestionsRow(indexPath:NSIndexPath)->FriendSuggestionsCell{
         
         
-        if friendsRequestsData.filter({$0.Name == UserProfilesData[indexPath.row].fullName}).first == nil {
+        if FriendRequestsData.filter({$0.Name == UserProfilesData[indexPath.row].fullName}).first == nil {
             
             if let aCell =  suggestionsTblView.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as? FriendSuggestionsCell {
                 
@@ -266,6 +298,29 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         
     }
     
+    
+    func CancelRequest(sender: UIButton){
+        let RequestObjectid = sender.restorationIdentifier
+        
+        
+        if let index = FriendRequestsData.indexOf( {$0.SentRequestId == RequestObjectid }) {
+            FriendRequestsData.removeAtIndex(index)
+        }
+        
+        
+        self.ReloadTbl()
+        backgroundThread(background: {
+            CancelSentFriendRequestData(RequestObjectid!, successBlock: { (data) in
+                
+            })
+        })
+
+        
+
+    }
+    
+    
+    
     func RejectFriendBtnPressed(sender: UIButton){
         
          let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to reject this request  ?", preferredStyle: .ActionSheet)
@@ -279,14 +334,13 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         let unfriendAction = UIAlertAction(title: "Reject", style: .Default) { action -> Void in
         
         let RequestObjectid = sender.restorationIdentifier
-        if let index = friendsRequestsData.indexOf( {$0.RequestId == RequestObjectid }) {
-            friendsRequestsData.removeAtIndex(index)
-        }
-            if friendsRequestsData.count < 3 {
-                self.RequestsTblViewHeight.constant = CGFloat(friendsRequestsData.count * 100)
+         
+                
+            if let index = FriendRequestsData.indexOf( {$0.RequestId == RequestObjectid }) {
+                FriendRequestsData.removeAtIndex(index)
             }
-
-        self.RequestsTblview.reloadData()
+        
+            self.ReloadTbl()
         backgroundThread(background: {
             DeleteSentAndReceivedFriendRequestData(RequestObjectid!, successBlock: { data in
                 
@@ -370,14 +424,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                     UserData.Name = loggedInUserObject.fullName
                     UserData.FriendshipDateTime = NSDate().getCurrentTimeStamp()
                     
-                    if let index = friendsRequestsData.indexOf( {$0.ReceivedFrom == FriendObject.id}) {
-                        friendsRequestsData.removeAtIndex(index)
-                    }
-                    if friendsRequestsData.count < 3 {
-                        self.RequestsTblViewHeight.constant = CGFloat(friendsRequestsData.count * 100)
-                    }
-
-                    self.RequestsTblview.reloadData()
+                    self.ReloadTbl()
                     
                     
                     backgroundThread(background: { 
