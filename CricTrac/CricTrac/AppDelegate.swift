@@ -16,10 +16,12 @@ import Crashlytics
 import FBSDKCoreKit
 import FirebaseDatabase
 import FirebaseAuth
+import FirebaseInstanceID
 //import GoogleSignIn
 import KRProgressHUD
 import IQKeyboardManagerSwift
 import SCLAlertView
+    import SwiftyStoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -45,6 +47,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSForegroundColorAttributeName:UIColor.whiteColor()
         ]
        IQKeyboardManager.sharedManager().enable = true
+        
+        
+        SwiftyStoreKit.completeTransactions() { completedTransactions in
+            
+            for completedTransaction in completedTransactions {
+                
+                if completedTransaction.transactionState == .Purchased || completedTransaction.transactionState == .Restored {
+                    
+                    print("purchased: \(completedTransaction.productId)")
+                }
+            }
+        }
+        
+        //MARK: In App purchase
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+            //self.fetchProductInfo()
+            //self.didTapPurchaseButton()
+        }
+        
         return true
     }
     
@@ -162,5 +184,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let splashScreenVC = viewControllerFrom("Main", vcid: "SplashScreenViewController")
         window?.rootViewController = splashScreenVC
     }
+    
+
 }
 
