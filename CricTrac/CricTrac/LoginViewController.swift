@@ -357,10 +357,10 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
             updateLastLogin()
         }
         
-        dispatch_group_enter(myGroup)
+       // dispatch_group_enter(myGroup)
         getAllProfileData({ data in
             profileData = Profile(usrObj: data)
-            dispatch_group_leave(self.myGroup)
+           // dispatch_group_leave(self.myGroup)
             
             if profileData.ProfileImageURL == "" {
                 let userDefaults = NSUserDefaults.standardUserDefaults()

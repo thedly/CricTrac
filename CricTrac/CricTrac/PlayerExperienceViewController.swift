@@ -56,7 +56,7 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         
         return ["PlayingRole":playingRole.textVal,"BattingStyle":battingStyle.textVal,"BowlingStyle":bowlingStyle.textVal,"PlayerCurrentTeams":teamNames, "PlayerPastTeams": pastTeamNames]
     }
-    
+    var basicProfileInfo : [String:String]!
     let transitionManager = TransitionManager.sharedInstance
     
     
@@ -97,6 +97,16 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     }
     @IBAction func goNextPage(sender: AnyObject) {
         
+        //basicProfileInfo
+               profileData.FirstName = self.basicProfileInfo["FirstName"]!
+        profileData.LastName = self.basicProfileInfo["LastName"]!
+        profileData.DateOfBirth = self.basicProfileInfo["DateOfBirth"]!
+        profileData.Email = self.basicProfileInfo["Email"]!
+        profileData.Mobile = self.basicProfileInfo["Mobile"]!
+        profileData.Gender = self.basicProfileInfo["Gender"]!
+        profileData.Country = self.basicProfileInfo["Country"]!
+        profileData.State = self.basicProfileInfo["State"]!
+        profileData.City = self.basicProfileInfo["City"]!
         profileData.PlayingRole = self.data["PlayingRole"] as! String
         profileData.BattingStyle = self.data["BattingStyle"] as! String
         profileData.BowlingStyle = self.data["BowlingStyle"] as! String
@@ -104,8 +114,15 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         profileData.PlayerPastTeams = self.data["PlayerPastTeams"] as! [String]
         profileData.UserProfile = userProfileType.Player.rawValue
         
+        if profileData.UserProfile == self.basicProfileInfo!["Role"]!  {
+            self.profileChanged = false
+        }else{
+           self.profileChanged = true
+        }
+        
         addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
 
+            
             
             
             if (self.profileChanged == true) {
