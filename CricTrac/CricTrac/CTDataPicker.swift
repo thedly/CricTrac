@@ -9,7 +9,9 @@
 import Foundation
 
 import SwiftCountryPicker
-
+protocol pickerProtocol {
+    func selectedValue(textfield:UITextField , selectedString:String)
+}
 class DataPicker: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
     
     var dataPicker: UIPickerView!
@@ -18,7 +20,8 @@ class DataPicker: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
     var pickerData: [String]!
     var feetStr = String()
     var inchStr = String()
-    
+    var delegate : pickerProtocol!
+
     private var _selectedValue: String!
     
     var selectedvalue: String {
@@ -59,7 +62,15 @@ class DataPicker: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
         
     }
     
+
     func doneClick() {
+    
+        delegate.selectedValue(self.inputText, selectedString: _selectedValue)
+            inputText.text = _selectedValue
+            inputText.resignFirstResponder()
+        
+    }
+    func changeRole()  {
         inputText.text = _selectedValue
         inputText.resignFirstResponder()
     }

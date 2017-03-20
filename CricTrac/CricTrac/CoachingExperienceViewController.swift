@@ -41,7 +41,8 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     
     @IBOutlet weak var certificationsTableHeightConstraint: NSLayoutConstraint!
     
-    
+    var basicProfileInfo : [String:String]!
+
     var selectedText: UITextField!
     
     var profileChanged: Bool! = false
@@ -183,6 +184,15 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     
     @IBAction func CreateCoachingProfileBtnPressed(sender: AnyObject) {
         
+        profileData.FirstName = self.basicProfileInfo["FirstName"]!
+        profileData.LastName = self.basicProfileInfo["LastName"]!
+        profileData.DateOfBirth = self.basicProfileInfo["DateOfBirth"]!
+        profileData.Email = self.basicProfileInfo["Email"]!
+        profileData.Mobile = self.basicProfileInfo["Mobile"]!
+        profileData.Gender = self.basicProfileInfo["Gender"]!
+        profileData.Country = self.basicProfileInfo["Country"]!
+        profileData.State = self.basicProfileInfo["State"]!
+        profileData.City = self.basicProfileInfo["City"]!
         profileData.Certifications = self.data["Certifications"] as! [String]
         profileData.Experience = self.data["Experience"] as! String
         profileData.CoachingLevel = self.data["CoachingLevel"] as! String
@@ -191,6 +201,11 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         profileData.CoachPlayedFor = self.data["CoachPlayedFor"] as! [String]
         profileData.UserProfile = userProfileType.Coach.rawValue
         
+        if profileData.UserProfile == self.basicProfileInfo!["Role"]!  {
+            self.profileChanged = false
+        }else{
+            self.profileChanged = true
+        }
         addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
             
             
@@ -499,5 +514,10 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         // Pass the selected object to the new view controller.
     }
     */
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        let newLength = textField.text!.characters.count + string.characters.count - range.length
+        return newLength <= nameCharacterLimit // Bool
+        
+    }
 
 }

@@ -249,10 +249,11 @@ extension SliderMenuViewController {
             return navFanDashBoard!
         case "AddMatchDetailsViewController":
             //if navAddMatch == nil {
+            
                 let dashboardVC = viewControllerFrom("Main", vcid: "AddMatchDetailsViewController") as! AddMatchDetailsViewController
 
                 navAddMatch = UINavigationController(rootViewController: dashboardVC)
-          //  }
+            //  }
             return navAddMatch!
         case "MatchSummaryViewController":
             if navMatchSummary == nil {
