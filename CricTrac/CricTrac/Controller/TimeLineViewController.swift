@@ -30,7 +30,10 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         currentTheme = cricTracTheme.currentTheme
         setBackgroundColor()
         self.automaticallyAdjustsScrollViewInsets = false
-
+        
+        timeLineTable.rowHeight = UITableViewAutomaticDimension;
+        timeLineTable.estimatedRowHeight = 12500.0;
+        
         //setUIBackgroundTheme(view)
         
         loadTimeline()
@@ -208,6 +211,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         if indexPath.section == 0{
             let cell = timeLineTable.dequeueReusableCellWithIdentifier("addpost", forIndexPath: indexPath) as! AddPostTableViewCell
             acell =  cell
+            acell.contentView.frame = CGRectMake(acell.contentView.frame.minX, acell.contentView.frame.minY, acell.contentView.frame.width, 200)
         }
         else{
             
@@ -322,10 +326,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         return 5
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 0{return 125}
-        return 225
-    }
+   
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
