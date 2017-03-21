@@ -750,7 +750,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-     
+
             getMatchData()
             setDashboardData()
     }

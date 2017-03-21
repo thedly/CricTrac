@@ -113,7 +113,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "RESULTS")
+        return IndicatorInfo(title: "RESULT")
     }
     
     var tossText: String! = "-"
@@ -387,24 +387,24 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     @IBAction func swapBtnPressed(sender: AnyObject) {
         
         if (self.firstBatText != "-" && self.firstBatText != "") {
-//            firstBatText = firstTeamTitle.text
-//            secondBatText = secondTeamTitle.text
-//            
-//            let tempbattingtext = firstBatText
-//            firstBatText = secondBatText
-//            secondBatText = tempbattingtext
-//            
-//            let tempOvers = firstOversText
-//            firstOversText = secondOversText
-//            secondOversText = tempOvers
-//            
-//            let tempScore = firstScoreText
-//            firstScoreText = secondScoreText
-//            secondScoreText = tempScore
-//            
-//            let tempWickets = firstWicketsText
-//            firstWicketsText = secondWicketsText
-//            secondWicketsText = tempWickets
+            firstBatText = firstTeamTitle.text
+            secondBatText = secondTeamTitle.text
+            
+            let tempbattingtext = firstBatText
+            firstBatText = secondBatText
+            secondBatText = tempbattingtext
+            
+            let tempOvers = firstOversText
+            firstOversText = secondOversText
+            secondOversText = tempOvers
+            
+            let tempScore = firstScoreText
+            firstScoreText = secondScoreText
+            secondScoreText = tempScore
+            
+            let tempWickets = firstWicketsText
+            firstWicketsText = secondWicketsText
+            secondWicketsText = tempWickets
             
             
             

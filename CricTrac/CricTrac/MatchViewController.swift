@@ -227,7 +227,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "MATCH")
+        return IndicatorInfo(title: "DETAILS")
     }
     
     var allRequiredFieldsHaveNotFilledProperly:Bool{

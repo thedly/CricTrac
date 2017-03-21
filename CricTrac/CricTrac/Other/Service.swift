@@ -267,8 +267,9 @@ func getAllMatchData(friendId:String? = nil,sucessBlock:([String:AnyObject])->Vo
     
     let userId:String = friendId ?? currentUser!.uid
     
-    
    fireBaseRef.child("Users").child(userId).child("Matches").observeEventType(.Value, withBlock: { snapshot in
+   //fireBaseRef.child("Users").child(userId).child("Matches").queryLimitedToFirst(2).observeEventType(.Value, withBlock: { snapshot in
+    
     
     if let data = snapshot.value! as? [String:AnyObject]{
         
@@ -658,7 +659,6 @@ func updateMatchData(key:String,data:[String:AnyObject], callback:(data:[String:
     
     ref.updateChildValues(dataToBeModified)
     callback(data: dataToBeModified)
-    
     UpdateDashboardDetails()
     
 }

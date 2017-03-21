@@ -508,8 +508,8 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UdQ-zQ-maD">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="1000"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d0g-iY-REP" userLabel="MatchView">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="680"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d0g-iY-REP" userLabel="MatchView">
+                                        <rect key="frame" x="0.0" y="74" width="600" height="680"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="MATCH DATE" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kg1-hI-0WI" userLabel="Date" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="60" y="0.0" width="480" height="45"/>
@@ -869,6 +869,39 @@
                                                     <constraint firstAttribute="width" constant="16" id="SZj-Qp-R1R"/>
                                                 </constraints>
                                             </imageView>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="MATCH OVERS" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UqC-G6-aVZ" userLabel="Overs" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <rect key="frame" x="60" y="409" width="480" height="45"/>
+                                                <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="15"/>
+                                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="titleTextColour">
+                                                        <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="titleActiveTextColour">
+                                                        <color key="value" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                                        <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
+                                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outlet property="delegate" destination="qDe-nu-i1g" id="PcP-LQ-vr6"/>
+                                                </connections>
+                                            </textField>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="FDf-wj-GYb" firstAttribute="trailing" secondItem="OoZ-vw-tId" secondAttribute="trailing" id="0lU-Hm-r8i"/>
@@ -4034,7 +4067,7 @@
                                                                     <rect key="frame" x="0.0" y="166" width="145" height="38.5"/>
                                                                 </variation>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="ECONOMY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfz-Zd-5XE">
+                                                            <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="ECON" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfz-Zd-5XE">
                                                                 <rect key="frame" x="472" y="211" width="72" height="21"/>
                                                                 <accessibility key="accessibilityConfiguration" identifier="greyMatter"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="16"/>
@@ -4348,7 +4381,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="amq-jJ-Zwt">
                                                 <rect key="frame" x="10" y="505" width="580" height="230"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="T20 1 of 2 Hong Kong series 1-0" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rgq-p0-Per">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="Tournament" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rgq-p0-Per">
                                                         <rect key="frame" x="8" y="17" width="564" height="22"/>
                                                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
                                                         <color key="textColor" red="0.78431844955755314" green="0.86987179487179489" blue="0.44177886330627464" alpha="1" colorSpace="calibratedRGB"/>
@@ -4357,7 +4390,7 @@
                                                             <rect key="frame" x="8" y="15" width="564" height="20"/>
                                                         </variation>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="748" text="Bangalore Cricketers won by 21 runs" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P2l-LN-FOH">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="748" text="RESULT" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P2l-LN-FOH">
                                                         <rect key="frame" x="8" y="198" width="564" height="22"/>
                                                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -5033,7 +5066,7 @@
                                                     <action selector="incrementPosition:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="unW-jw-BgJ"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="WICKETS TAKEN" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="esn-g4-4VA" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="WICKETS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="esn-g4-4VA" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="400" y="358" width="120" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
@@ -5311,7 +5344,7 @@
                                                     <constraint firstAttribute="width" constant="16" id="Y2K-AT-j0L"/>
                                                 </constraints>
                                             </imageView>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="RUNS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x2V-5v-hev" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="RUNS TAKEN" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x2V-5v-hev" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="20" y="72" width="240" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -6129,7 +6162,7 @@
                                                     <constraint firstAttribute="width" constant="10" id="qT3-ny-3D3"/>
                                                 </constraints>
                                             </imageView>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ACHIEVEMENT" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JnP-UA-THP" userLabel="FirstScore" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ACHIEVEMENTS" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JnP-UA-THP" userLabel="FirstScore" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="10" y="594" width="580" height="42"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -9733,14 +9766,14 @@
                                             </mask>
                                         </variation>
                                     </view>
-                                    <imageView opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cover" translatesAutoresizingMaskIntoConstraints="NO" id="1KX-yW-equ">
+                                    <imageView opaque="NO" alpha="0.59999999999999998" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cover" translatesAutoresizingMaskIntoConstraints="NO" id="1KX-yW-equ">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="250"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="250" id="hHH-12-juU"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RAVICHANDRAN ASHWIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMX-U7-mFh">
-                                        <rect key="frame" x="110" y="154" width="187" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="RAVICHANDRAN ASHWIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMX-U7-mFh">
+                                        <rect key="frame" x="110" y="145" width="187" height="22"/>
                                         <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -9781,8 +9814,8 @@
                                             <action selector="CloseDashboardPressed:" destination="rqA-Yp-b4n" eventType="touchUpInside" id="JeA-FF-dYh"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BANGALORE" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tjy-6g-d2t">
-                                        <rect key="frame" x="110" y="181" width="82" height="19"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="BANGALORE" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tjy-6g-d2t">
+                                        <rect key="frame" x="110" y="165" width="82" height="19"/>
                                         <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -9804,11 +9837,10 @@
                                     <constraint firstAttribute="trailing" secondItem="46Q-dn-IoZ" secondAttribute="trailing" id="AfB-Pv-IKZ"/>
                                     <constraint firstItem="Sko-tp-bww" firstAttribute="width" secondItem="S9Z-Re-S27" secondAttribute="width" id="AlY-gY-Abz"/>
                                     <constraint firstItem="Sko-tp-bww" firstAttribute="centerX" secondItem="S9Z-Re-S27" secondAttribute="centerX" id="AyV-x4-Wj5"/>
-                                    <constraint firstItem="Tjy-6g-d2t" firstAttribute="top" secondItem="gMX-U7-mFh" secondAttribute="bottom" constant="5" id="ByN-4c-m9l"/>
+                                    <constraint firstItem="Tjy-6g-d2t" firstAttribute="top" secondItem="gMX-U7-mFh" secondAttribute="bottom" constant="10" id="ByN-4c-m9l"/>
                                     <constraint firstItem="Tjy-6g-d2t" firstAttribute="centerX" secondItem="gMX-U7-mFh" secondAttribute="centerX" id="Ddu-gx-Yr8"/>
                                     <constraint firstItem="Sko-tp-bww" firstAttribute="centerY" secondItem="S9Z-Re-S27" secondAttribute="centerY" id="GHv-xS-FLP"/>
                                     <constraint firstItem="46Q-dn-IoZ" firstAttribute="leading" secondItem="iCo-7Y-Ifm" secondAttribute="leading" id="GzQ-RP-TNB"/>
-                                    <constraint firstItem="Tjy-6g-d2t" firstAttribute="leading" secondItem="gMX-U7-mFh" secondAttribute="leading" id="N20-px-KF7"/>
                                     <constraint firstItem="gMX-U7-mFh" firstAttribute="leading" secondItem="S9Z-Re-S27" secondAttribute="trailing" constant="20" id="OU1-cE-O2z"/>
                                     <constraint firstItem="sUc-4o-RLf" firstAttribute="leading" secondItem="iCo-7Y-Ifm" secondAttribute="leading" constant="10" id="QOg-My-BCK"/>
                                     <constraint firstItem="hxC-2b-V9g" firstAttribute="width" secondItem="Sko-tp-bww" secondAttribute="width" id="RgJ-rU-mny"/>
@@ -13764,6 +13796,7 @@ gACCAIcAkgCUAJYAmACdAKAAogCkAKYAqACtAMQAxgDID3oPfw+KD5MPpg+qD7UPvg/DD8sPzg/TD+IP
 ABBHA
 </mutableData>
         </image>
+
         <image name="Back-100" width="33" height="33"/>
         <image name="BallIcon" width="19" height="26"/>
         <image name="BatIcon" width="22" height="22"/>

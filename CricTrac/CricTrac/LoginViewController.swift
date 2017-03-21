@@ -46,8 +46,8 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         super.viewDidLoad()
         
         setBackgroundColor()
-        //username.text = "crictracvirat@gmail.com"
-        //password.text = "crictrac"
+        username.text = "crictracvirat@gmail.com"
+        password.text = "crictrac"
 
         //setUIBackgroundTheme(self.view)
         
@@ -357,10 +357,10 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
             updateLastLogin()
         }
         
-       // dispatch_group_enter(myGroup)
+        dispatch_group_enter(myGroup)
         getAllProfileData({ data in
             profileData = Profile(usrObj: data)
-           // dispatch_group_leave(self.myGroup)
+            dispatch_group_leave(self.myGroup)
             
             if profileData.ProfileImageURL == "" {
                 let userDefaults = NSUserDefaults.standardUserDefaults()
