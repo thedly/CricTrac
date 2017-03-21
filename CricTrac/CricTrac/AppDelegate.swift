@@ -21,7 +21,8 @@ import FirebaseInstanceID
 import KRProgressHUD
 import IQKeyboardManagerSwift
 import SCLAlertView
-    import SwiftyStoreKit
+import SwiftyStoreKit
+import GoogleMobileAds
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -40,6 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let refreshedToken = FIRInstanceID.instanceID().token()
         
+        GADMobileAds.configureWithApplicationID("ca-app-pub-3940256099942544~1458002511")
         
         setDefaultAppThems()
         UINavigationBar.appearance().titleTextAttributes = [
