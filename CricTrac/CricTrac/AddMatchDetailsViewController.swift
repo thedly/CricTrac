@@ -402,6 +402,6 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         //let dashboardVC = viewControllerFrom("Main", vcid: "MatchSummaryViewController") as! MatchSummaryViewController
         //let navigationControl = UINavigationController(rootViewController: dashboardVC)
         //sliderMenu.mainViewController = navigationControl
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        self.navigationController?.popViewControllerAnimated(true)
     }
 }
