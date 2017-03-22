@@ -69,7 +69,7 @@ class MenuTransitionOperator: NSObject, UIViewControllerAnimatedTransitioning, U
     
     func dismissNavigation(transitionContext: UIViewControllerContextTransitioning) {
         
-        let container = transitionContext.containerView()
+       let container = transitionContext.containerView()
         let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
         let fromView = fromViewController!.view
         let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
