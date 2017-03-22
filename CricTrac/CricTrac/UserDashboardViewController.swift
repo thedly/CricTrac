@@ -329,7 +329,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //loadBannerAds()
+        loadBannerAds()
         if let value = friendProfile{
             userProfileData = Profile(usrObj: value)
             closeButton.hidden = false
