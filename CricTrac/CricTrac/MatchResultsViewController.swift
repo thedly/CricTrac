@@ -276,6 +276,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         }
         
         firstBatText = parent!.selecetedData!["FirstBatting"]! as! String ?? "-"
+        
         firstScoreText.textVal = parent!.selecetedData!["FirstBattingScore"]! as! String ?? "-"
         firstWicketsText.textVal = parent!.selecetedData!["FirstBattingWickets"]! as! String ?? "-"
         secondBatText = parent!.selecetedData!["SecondBatting"]! as! String ?? "-"

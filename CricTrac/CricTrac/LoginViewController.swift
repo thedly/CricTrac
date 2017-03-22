@@ -356,7 +356,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         if currentUser != nil && profileData.userExists {
             updateLastLogin()
         }
-        
+        /*
         dispatch_group_enter(myGroup)
         getAllProfileData({ data in
             profileData = Profile(usrObj: data)
@@ -424,6 +424,82 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
 
             }
             KRProgressHUD.dismiss()
+        })*/
+        
+        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
+        var backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+        dispatch_async(backgroundQueue, {
+            
+            getAllProfileData({ data in
+                profileData = Profile(usrObj: data)
+                
+                if profileData.ProfileImageURL == "" {
+                    let userDefaults = NSUserDefaults.standardUserDefaults()
+                    if let token = userDefaults.valueForKey("loginToken") {
+                        if token["Facebooktoken"] != nil || token["googletoken"] != nil{
+                            let profileimage = getImageFromFacebook()
+                            addProfileImageData(profileimage)
+                            
+                        }
+                    }
+                }
+                else
+                {
+                    getImageFromFirebase(profileData.ProfileImageURL) { (imgData) in
+                        LoggedInUserImage = imgData
+                    }
+                    getImageFromFirebase(profileData.CoverPhotoURL) { (imgData) in
+                        LoggedInUserCoverImage = imgData
+                    }
+                }
+                
+                
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    
+                    let window = getCurrentWindow()
+                    
+                    let rootViewController: UIViewController = getRootViewController()
+                    
+                    let profileVC = viewControllerFrom("Main", vcid: "ProfileBaseViewController") as! ProfileBaseViewController
+                    
+                    self.facebookBtn.enabled = true
+                    self.googleBtn.enabled = true
+                    
+                    
+                    print(profileData.Email.length)
+                    print(profileData.userExists)
+                    if !profileData.userExists || profileData.Email.length == 0 {
+                        
+                        KRProgressHUD.dismiss()
+                        // window.rootViewController = profileVC
+                        let nav = UINavigationController(rootViewController: profileVC)
+                        self.presentViewController(nav, animated: true) { KRProgressHUD.dismiss() }
+                    }
+                    else
+                    {
+                        KRProgressHUD.dismiss()
+                        /*
+                         [UIView transitionWithView:self.window
+                         duration:0.5
+                         options:UIViewAnimationOptionTransitionFlipFromLeft
+                         animations:^{ self.window.rootViewController = newViewController; }
+                         completion:nil];
+                         */
+                        UIView.transitionWithView(window, duration: 0.5, options: .TransitionFlipFromLeft, animations: {
+                            
+                            window.rootViewController = rootViewController
+                            self.presentViewController(rootViewController, animated: true) { KRProgressHUD.dismiss() }
+                            }, completion: nil)
+                        
+                    }
+                    KRProgressHUD.dismiss()
+                    
+                    
+                })
+                
+            })
+            
+            
         })
     }
 }
