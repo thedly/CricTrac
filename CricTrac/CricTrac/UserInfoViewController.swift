@@ -121,12 +121,8 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         //navigationController!.navigationBar.titleTextAttributes = titleDict
     }
     var data:[String:String]{
-        if userProfileInfo != nil {
-            return ["FirstName": firstName.textVal.trim(),"LastName":lastName.textVal.trim(),"DateOfBirth":dateOfBirth.textVal,"Email":emailId.textVal,"Mobile":mobile.textVal.trim(),"Gender":gender.textVal,"Country":country.textVal,"State":state.textVal,"City":city.textVal,"Role":userProfileInfo.text!]
-        }else {
-           return ["FirstName": firstName.textVal.trim(),"LastName":lastName.textVal.trim(),"DateOfBirth":dateOfBirth.textVal,"Email":emailId.textVal,"Mobile":mobile.textVal.trim(),"Gender":gender.textVal,"Country":country.textVal,"State":state.textVal,"City":city.textVal]
-        }
         
+        return ["FirstName": firstName.textVal.trim(),"LastName":lastName.textVal.trim(),"DateOfBirth":dateOfBirth.textVal,"Email":emailId.textVal,"Mobile":mobile.textVal.trim(),"Gender":gender.textVal,"Country":country.textVal,"State":state.textVal,"City":city.textVal]
     }
     
     
@@ -243,27 +239,41 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
 //
 //            }
             if userProfileInfo != nil {
+                if profileData.UserProfile != userProfileInfo.text {
+                    //profileData.UserProfile
+                    profileData.UserProfile = userProfileInfo.text!
+                    profileChanged = true
+                    let appearance = SCLAlertView.SCLAppearance(
+                        showCloseButton: false
+                    )
+                    
+                    let alertView = SCLAlertView(appearance: appearance)
+                    
+                    alertView.addButton("OK", target:self, selector:#selector(UserInfoViewController.continueToDismiss))
+                    
+                    alertView.addButton("Cancel", action: { })
+                    
+                    alertView.showNotice("Warning", subTitle: "Changing role will delete all existing data")
+                }else {
                     profileChanged = false
                     continueToDismiss()
-                
+                }
             }else {
                 
                 if profileData.userExists {
                     
                     profileChanged = true
-                    continueToDismiss()
-
-//                    let appearance = SCLAlertView.SCLAppearance(
-//                        showCloseButton: false
-//                    )
-//                    
-//                    let alertView = SCLAlertView(appearance: appearance)
-//                    
-//                    alertView.addButton("OK", target:self, selector:#selector(UserInfoViewController.continueToDismiss))
-//                    
-//                    alertView.addButton("Cancel", action: { })
-//                    
-//                    alertView.showNotice("Warning", subTitle: "Changing role will delete all existing data")
+                    let appearance = SCLAlertView.SCLAppearance(
+                        showCloseButton: false
+                    )
+                    
+                    let alertView = SCLAlertView(appearance: appearance)
+                    
+                    alertView.addButton("OK", target:self, selector:#selector(UserInfoViewController.continueToDismiss))
+                    
+                    alertView.addButton("Cancel", action: { })
+                    
+                    alertView.showNotice("Warning", subTitle: "Changing role will delete all existing data")
                     
                 }
                 else
@@ -280,58 +290,48 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     }
     
     func continueToDismiss() {
-//        profileData.FirstName = self.data["FirstName"]!
-//        profileData.LastName = self.data["LastName"]!
-//        profileData.DateOfBirth = self.data["DateOfBirth"]!
-//        profileData.Email = self.data["Email"]!
-//        profileData.Mobile = self.data["Mobile"]!
-//        profileData.Gender = self.data["Gender"]!
-//        profileData.Country = self.data["Country"]!
-//        profileData.State = self.data["State"]!
-//        profileData.City = self.data["City"]!
-        
+        profileData.FirstName = self.data["FirstName"]!
+        profileData.LastName = self.data["LastName"]!
+        profileData.DateOfBirth = self.data["DateOfBirth"]!
+        profileData.Email = self.data["Email"]!
+        profileData.Mobile = self.data["Mobile"]!
+        profileData.Gender = self.data["Gender"]!
+        profileData.Country = self.data["Country"]!
+        profileData.State = self.data["State"]!
+        profileData.City = self.data["City"]!
         
         
       
      //   if profileData != nil {
-        var roleString = ""
-        if let role = self.data["Role"] {
-            roleString = role
-        }else {
-            roleString = profileData.UserProfile
-        }
-            switch roleString {
+            switch profileData.UserProfile {
             case userProfileType.Player.rawValue :
                 
                 var vc = viewControllerFrom("Main", vcid: "PlayerExperienceViewController") as! PlayerExperienceViewController
-                vc.basicProfileInfo = self.data
-                //vc.profileChanged = self.profileChanged
+                
+                vc.profileChanged = self.profileChanged
                 
                 NextVC = vc
                 
             case userProfileType.Coach.rawValue :
                 
                 var vc = viewControllerFrom("Main", vcid: "CoachingExperienceViewController") as! CoachingExperienceViewController
-                vc.basicProfileInfo = self.data
-
-                //vc.profileChanged = self.profileChanged
+                
+                vc.profileChanged = self.profileChanged
                 
                 NextVC = vc
             case userProfileType.Fan.rawValue :
                 
                 var vc = viewControllerFrom("Main", vcid: "CricketFanViewController") as! CricketFanViewController
-                vc.basicProfileInfo = self.data
-
-                //vc.profileChanged = self.profileChanged
+                
+                vc.profileChanged = self.profileChanged
                 
                 NextVC = vc
                 
             default:
                 
                 var vc = viewControllerFrom("Main", vcid: "PlayerExperienceViewController") as! PlayerExperienceViewController
-                vc.basicProfileInfo = self.data
-
-                //vc.profileChanged = self.profileChanged
+                
+                vc.profileChanged = self.profileChanged
 
                 NextVC = vc
             }
@@ -511,16 +511,13 @@ extension UserInfoViewController:UITextFieldDelegate{
             
         else if userProfileInfo != nil && textField == userProfileInfo {
             ctDataPicker = DataPicker()
-            ctDataPicker.delegate = self
-
-            textField.tag == 100
             let indexPos = userProfiles.indexOf(profileData.UserProfile) ?? 0
             ctDataPicker.showPicker(self, inputText: textField, data: userProfiles,selectedValueIndex: indexPos)
         }
             
             
         else if textField == state {
-            if country.text!.length >= 0 {
+            if country.text?.length >= 0 {
                 state.userInteractionEnabled = true
                 city.text = ""
                 ctStatePicker.showPicker(self, inputText: textField, iso: ctCountryPicker.SelectedISO)
@@ -552,38 +549,16 @@ extension UserInfoViewController:UITextFieldDelegate{
     }
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         let newLength = textField.text!.characters.count + string.characters.count - range.length
-//        if textField == firstName || textField == lastName || textField == mobile || textField == city {
-//            return newLength <= nameCharacterLimit // Bool
-//        }else if textField == state || textField == country {
-//            return false
-//        }else {
-//            return true // Bool
-//        }
-        return newLength <= nameCharacterLimit // Bool
-
+        if textField == firstName || textField == lastName || textField == mobile || textField == city {
+            return newLength <= nameCharacterLimit // Bool
+        }else if textField == state || textField == country {
+            return false
+        }else {
+            return true // Bool
+        }
     }
     
 }
-extension UserInfoViewController : pickerProtocol {
-    func selectedValue(textfield:UITextField , selectedString:String) {
-        if textfield == userProfileInfo {
-            if selectedString != profileData.UserProfile {
-                
-                let appearance = SCLAlertView.SCLAppearance(
-                    showCloseButton: false
-                )
-                
-                let alertView = SCLAlertView(appearance: appearance)
-                
-                alertView.addButton("OK", action: { })
-                
-                alertView.addButton("Cancel", action: { })
-                
-                alertView.showNotice("Warning", subTitle: "Changing role will delete all existing data")
-                
-            }
-        }
-    }
-}
+
 
 

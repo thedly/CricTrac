@@ -53,8 +53,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
         
         return ["FavoritePlayers":favouritePlayerList,"Hobbies":HobbiesList, "InterestedSports":InterestedSportsNamesList,"SupportingTeams": supportingTeamNamesList]
     }
-    var basicProfileInfo : [String:String]!
-
+    
     var supportingTeamNamesList = [""]
     
     var InterestedSportsNamesList = [""]
@@ -173,26 +172,13 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
     @IBAction func CreateFanBtnPressed(sender: AnyObject) {
         
         KRProgressHUD.showText("Updating ...")
-        profileData.FirstName = self.basicProfileInfo["FirstName"]!
-        profileData.LastName = self.basicProfileInfo["LastName"]!
-        profileData.DateOfBirth = self.basicProfileInfo["DateOfBirth"]!
-        profileData.Email = self.basicProfileInfo["Email"]!
-        profileData.Mobile = self.basicProfileInfo["Mobile"]!
-        profileData.Gender = self.basicProfileInfo["Gender"]!
-        profileData.Country = self.basicProfileInfo["Country"]!
-        profileData.State = self.basicProfileInfo["State"]!
-        profileData.City = self.basicProfileInfo["City"]!
         profileData.FavoritePlayers =  self.data["FavoritePlayers"] as! [String]
         profileData.SupportingTeams = self.data["SupportingTeams"] as! [String]
         profileData.InterestedSports = self.data["InterestedSports"] as! [String]
         profileData.Hobbies =  self.data["Hobbies"] as! [String]
         profileData.UserProfile = userProfileType.Fan.rawValue
         
-        if profileData.UserProfile == self.basicProfileInfo["Role"]!   {
-            self.profileChanged = false
-        }else{
-            self.profileChanged = true
-        }
+        
         addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
             
             
@@ -371,7 +357,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
             
             aCell.teamName.text = InterestedSportsNamesList[indexPath.row]
             
-            aCell.deleteTeamBtn.addTarget(self, action: #selector(CricketFanViewController.deleteTeamFromCurrentTeams(_:)), forControlEvents: .TouchUpInside)
+            aCell.deleteTeamBtn.addTarget(self, action: "deleteTeamFromCurrentTeams:", forControlEvents: .TouchUpInside)
             return aCell
         }
         else
@@ -514,10 +500,5 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
         // Pass the selected object to the new view controller.
     }
     */
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        let newLength = textField.text!.characters.count + string.characters.count - range.length
-        return newLength <= nameCharacterLimit // Bool
-        
-    }
 
 }

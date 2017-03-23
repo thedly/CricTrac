@@ -8,13 +8,12 @@
 
 import UIKit
 
-
 class CTDatePicker: NSObject {
     
     var datePicker:UIDatePicker!
     var inputText:UITextField!
     var parent:UIViewController!
-
+    
     func showPicker(parent:UIViewController,inputText:UITextField){
         
         self.inputText = inputText
