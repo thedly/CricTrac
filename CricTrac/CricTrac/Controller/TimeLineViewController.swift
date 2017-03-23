@@ -64,7 +64,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         
         // Do any additional setup after loading the view.
         
-        //loadBannerAds()
+        loadBannerAds()
     }
     
     //MARK: Ads related

@@ -144,7 +144,7 @@ func addProfileImageData(profileDp:UIImage){
     
 //    if let usrId = FIRAuth.auth()?.currentUser?.uid {
     
-      //  let filePath = "\(FIRAuth.auth()?.currentUser?.uid)/UserProfile/profilePhoto"
+        let filePath = "\(FIRAuth.auth()?.currentUser?.uid)/UserProfile/profilePhoto"
         storageRef.child((FIRAuth.auth()?.currentUser?.uid)!).child("UserProfile").child("profileImage").putData(imageData, metadata: metaData){(metaData,error) in
             if let error = error {
                 print(error.localizedDescription)
@@ -199,7 +199,7 @@ func addCoverImageData(profileDp:UIImage){
     
     //    if let usrId = FIRAuth.auth()?.currentUser?.uid {
     
-   // let filePath = "\(FIRAuth.auth()?.currentUser?.uid)/UserProfile/coverImage"
+    let filePath = "\(FIRAuth.auth()?.currentUser?.uid)/UserProfile/coverImage"
     storageRef.child((FIRAuth.auth()?.currentUser?.uid)!).child("UserProfile").child("coverPhoto").putData(imageData, metadata: metaData){(metaData,error) in
         if let error = error {
             print(error.localizedDescription)
@@ -860,7 +860,7 @@ public func getAllFriendSuggestions(callback:()->Void) {
                     UserProfilesData.removeAll()
                     for profile in resultObj {
                         
-                        let currentProfile = Profile(usrObj: profile)
+                        var currentProfile = Profile(usrObj: profile)
                         
                         
                         UserProfilesData.append(currentProfile)

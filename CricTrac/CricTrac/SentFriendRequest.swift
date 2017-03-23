@@ -25,7 +25,7 @@ class SentFriendRequest {
             "City": datObj.City!,
             "Club": datObj.Club!,
             "Name": datObj.Name!,
-            "SentDateTime": datObj.SentDateTime!,
+            "SentDateTime": datObj.SentDateTime! as! AnyObject,
             "SentTo": datObj.SentTo!
         ]
     }

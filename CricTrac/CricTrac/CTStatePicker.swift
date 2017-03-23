@@ -95,7 +95,6 @@ class CTStatePicker: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
             if let path = NSBundle.mainBundle().pathForResource("country-states", ofType: "plist") {
                 let statelist = NSArray(contentsOfFile: path) as! [[String:String]]
                 
-                
                 for item in statelist {
                     if item["ISO"] == inputISO {
                         filteredStates.append(item["State"]!)

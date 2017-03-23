@@ -51,7 +51,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
             
             
             for (_, req) in data {
-                let reqData = ReceivedFriendRequest(dataObj: req as! [String : AnyObject])
+                var reqData = ReceivedFriendRequest(dataObj: req as! [String : AnyObject])
                 friendsRequestsData.append(reqData)
                 
             }
@@ -135,7 +135,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         
     }
     
-    internal func ConfirmFriendBtnPressed(sender:UIButton!) {
+    public func ConfirmFriendBtnPressed(sender:UIButton!) {
         
         if let FriendUserId = sender.accessibilityIdentifier where FriendUserId != "" {
             
@@ -152,7 +152,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                     let RequestObjectid = sender.restorationIdentifier
                     
                     
-                    let FriendData = Friends(dataObj: [:])
+                    var FriendData = Friends(dataObj: [:])
                     
                     FriendData.UserId = FriendObject.id
                     FriendData.City = FriendObject.City
@@ -175,7 +175,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                     FriendData.Name = FriendObject.fullName
                     FriendData.FriendshipDateTime = NSDate().getCurrentTimeStamp()
                     
-                    let UserData = Friends(dataObj: [:])
+                    var UserData = Friends(dataObj: [:])
                     
                     UserData.UserId = loggedInUserObject.id
                     UserData.City = loggedInUserObject.City

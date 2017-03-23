@@ -329,7 +329,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //loadBannerAds()
+        loadBannerAds()
         if let value = friendProfile{
             userProfileData = Profile(usrObj: value)
             closeButton.hidden = false
@@ -491,7 +491,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         newImageView.backgroundColor = .blackColor()
         newImageView.contentMode = .ScaleAspectFit
         newImageView.userInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(UserDashboardViewController.dismissFullscreenImage(_:)))
+        let tap = UITapGestureRecognizer(target: self, action: "dismissFullscreenImage:")
         newImageView.addGestureRecognizer(tap)
         //        self.view.addSubview(navBarView)
         self.view.addSubview(newImageView)

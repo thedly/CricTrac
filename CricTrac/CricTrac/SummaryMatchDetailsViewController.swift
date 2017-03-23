@@ -502,7 +502,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                 }
                 
                 firstTeamScore = firstScore as! String
-                print(firstTeamScore)
             }
             
             if let secondScore = matchDetailsData["SecondBattingScore"] {
@@ -514,7 +513,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                 }
                 
                 secondTeamScore = secondScore as! String
-                print(secondTeamScore)
             }
 
         }
@@ -582,22 +580,22 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     }
     
     //MARK: Actionsheet delegate
-//    
-//    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int)
-//    {
-//        switch (buttonIndex){
-//            
-//        case 0:
-//            print("Cancel")
-//        case 1:
-//            print("Save")
-//        case 2:
-//            print("Delete")
-//        default:
-//            print("Default")
-//            //Some code here..
-//            
-//        }
-//    }
+    
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int)
+    {
+        switch (buttonIndex){
+            
+        case 0:
+            print("Cancel")
+        case 1:
+            print("Save")
+        case 2:
+            print("Delete")
+        default:
+            print("Default")
+            //Some code here..
+            
+        }
+    }
     
 }

@@ -78,7 +78,6 @@ class ThemeSettingsViewController: UIViewController, UIGestureRecognizerDelegate
         
         var currentTheme:CTTheme!
         currentTheme = cricTracTheme.currentTheme
-        print(currentTheme)
        // navigationController!.navigationBar.barTintColor = currentTheme.topColor
         self.title = "THEMES"
         

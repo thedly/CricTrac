@@ -20,13 +20,13 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
     @IBAction func nextBtnPressed(sender: AnyObject) {
         
         
-       // let nav1 = UINavigationController()
+        let nav1 = UINavigationController()
         let usrViewController = viewControllerFrom("Main", vcid: "UserInfoViewController") as! UserInfoViewController
         usrViewController.userProfile = profileData.UserProfile
         
         
         
-     //   let nextViewController = viewControllerFrom("Main", vcid: "UserInfoViewController") as! UserInfoViewController
+        let nextViewController = viewControllerFrom("Main", vcid: "UserInfoViewController") as! UserInfoViewController
         var toViewController: UIViewController
         
         switch profileData.UserProfile {
@@ -39,7 +39,6 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
             toViewController = viewControllerFrom("Main", vcid: "CricketFanViewController")
         default:
             toViewController = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
-            print(toViewController)
         }
         
        // nav1.viewControllers.append(toViewController)
@@ -56,8 +55,8 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
          UIViewController *vc = windows.rootViewController;
          [vc presentViewController:alertController animated: YES completion:nil];
  */
-       // let window = UIApplication.sharedApplication().delegate?.window
-       // let vc = window!!.rootViewController
+        let window = UIApplication.sharedApplication().delegate?.window
+        let vc = window!!.rootViewController
        // vc?.presentViewController(nav1, animated: true, completion: nil)
         self.navigationController?.pushViewController(usrViewController, animated: true)
     }

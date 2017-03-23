@@ -194,7 +194,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             
             
             
-           // break
+            break
         case PastTeams:
             teamNameToReturn = userProfileData.CoachPastTeams[indexPath.row]
             
@@ -216,7 +216,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             return ThemeColorsCollectionViewCell()
             
             
-           // break;
+            break;
         case PlayedFor:
             teamNameToReturn = userProfileData.CoachPlayedFor[indexPath.row]
             
@@ -237,7 +237,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             return ThemeColorsCollectionViewCell()
             
             
-           // break
+            break
         case Certifications:
             teamNameToReturn = userProfileData.Certifications[indexPath.row]
             
@@ -261,7 +261,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             return ThemeColorsCollectionViewCell()
             
             
-           // break
+            break
         default:
             teamNameToReturn = userProfileData.CoachCurrentTeams[indexPath.row]
             
@@ -282,7 +282,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             }
             return ThemeColorsCollectionViewCell()
             
-           // break
+            break
             
         }
 

@@ -279,10 +279,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             }
             
             
-                if currentMatch.strikerate != nil {
+                if let sRate = currentMatch.strikerate {
                     //aCell.strikeRateLabel.text = "Strike Rate : \(sRate)"
                 }
-                if currentMatch.economy != nil {
+                if let economy = currentMatch.economy {
                     
                     //aCell.economyLabel.text = "Economy : \(economy)"
                 }
@@ -321,15 +321,14 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-      //  let cell = tableView.cellForRowAtIndexPath(indexPath) as! SummaryDetailsCell
-        
-        let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! SummaryDetailsCell
+                let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
         
         summaryDetailsVC.battingViewHidden = matches[indexPath.row].BattingSectionHidden
         summaryDetailsVC.bowlingViewHidden = matches[indexPath.row].BowlingSectionHidden
         
         
-        let selectedDataSource = self.matchDataSource.filter { (dat) -> Bool in
+        var selectedDataSource = self.matchDataSource.filter { (dat) -> Bool in
             return dat["MatchId"]! as! String == matches[indexPath.row].matchId
         }
         
