@@ -161,7 +161,7 @@ class SplashScreenViewController: UIViewController,ThemeChangeable {
             
             dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
                 
-                var rootViewController: UIViewController = getRootViewController()
+                let rootViewController: UIViewController = getRootViewController()
                 
                 let profileVC = viewControllerFrom("Main", vcid: "ProfileBaseViewController") as! ProfileBaseViewController
                 

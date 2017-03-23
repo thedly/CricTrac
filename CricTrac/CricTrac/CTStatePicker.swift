@@ -92,8 +92,8 @@ class CTStatePicker: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
     func getStatesByISO(_iso : String) -> [String] {
         do {
             var filteredStates = [String]()
-            if let path = NSBundle.mainBundle().pathForResource("country-states", ofType: "plist") {
-                let statelist = NSArray(contentsOfFile: path) as! [[String:String]]
+            if let path =  NSBundle.mainBundle().pathForResource("country-states", ofType: "plist") {
+                let statelist =  NSArray(contentsOfFile: path) as! [[String:String]]
                 
                 for item in statelist {
                     if item["ISO"] == inputISO {
