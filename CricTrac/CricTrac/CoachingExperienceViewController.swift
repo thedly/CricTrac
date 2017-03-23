@@ -350,7 +350,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
             
             aCell.teamName.text = CertificationsList[indexPath.row]
             
-            aCell.deleteTeamBtn.addTarget(self, action: "deleteTeamFromCurrentTeams:", forControlEvents: .TouchUpInside)
+            aCell.deleteTeamBtn.addTarget(self, action: #selector(CoachingExperienceViewController.deleteTeamFromCurrentTeams(_:)), forControlEvents: .TouchUpInside)
             return aCell
         }
         else
@@ -372,7 +372,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
             
             aCell.teamName.text = teamNames[indexPath.row]
             
-            aCell.deleteTeamBtn.addTarget(self, action: "deleteTeamFromCurrentTeams:", forControlEvents: .TouchUpInside)
+            aCell.deleteTeamBtn.addTarget(self, action: #selector(CoachingExperienceViewController.deleteTeamFromCurrentTeams(_:)), forControlEvents: .TouchUpInside)
             return aCell
         }
         else
@@ -390,7 +390,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
             
             aCell.teamName.text = pastTeamNames[indexPath.row]
             
-            aCell.deleteTeamBtn.addTarget(self, action: "deleteTeamFromCurrentTeams:", forControlEvents: .TouchUpInside)
+            aCell.deleteTeamBtn.addTarget(self, action: #selector(CoachingExperienceViewController.deleteTeamFromCurrentTeams(_:)), forControlEvents: .TouchUpInside)
             return aCell
         }
         else
@@ -408,7 +408,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
             
             aCell.teamName.text = CoachPlayedFor[indexPath.row]
             
-            aCell.deleteTeamBtn.addTarget(self, action: "deleteTeamFromCurrentTeams:", forControlEvents: .TouchUpInside)
+            aCell.deleteTeamBtn.addTarget(self, action: #selector(CoachingExperienceViewController.deleteTeamFromCurrentTeams(_:)), forControlEvents: .TouchUpInside)
             return aCell
         }
         else

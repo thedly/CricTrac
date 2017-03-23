@@ -581,21 +581,21 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     
     //MARK: Actionsheet delegate
     
-    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int)
-    {
-        switch (buttonIndex){
-            
-        case 0:
-            print("Cancel")
-        case 1:
-            print("Save")
-        case 2:
-            print("Delete")
-        default:
-            print("Default")
-            //Some code here..
-            
-        }
-    }
+//    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int)
+//    {
+//        switch (buttonIndex){
+//            
+//        case 0:
+//            print("Cancel")
+//        case 1:
+//            print("Save")
+//        case 2:
+//            print("Delete")
+//        default:
+//            print("Default")
+//            //Some code here..
+//            
+//        }
+//    }
     
 }

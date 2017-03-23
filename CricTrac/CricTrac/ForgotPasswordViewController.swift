@@ -48,7 +48,7 @@ class ForgotPasswordViewController: UIViewController,ThemeChangeable {
             
             KRProgressHUD.dismiss()
             
-            if let error = error {
+            if error != nil {
                 SCLAlertView().showError("Error", subTitle: "Email was not sent")
             } else {
                 

@@ -73,11 +73,14 @@ class ThemeSettingsViewController: UIViewController, UIGestureRecognizerDelegate
         
         navigationController!.navigationBar.barTintColor = currentTheme.topColor
         self.title = "THEMES"
+    
     }
+    
+    // variable 'currentTheme was written but never read'
     func changeThemeSettigs(){
         
-        var currentTheme:CTTheme!
-        currentTheme = cricTracTheme.currentTheme
+//        var currentTheme:CTTheme!
+//        currentTheme = cricTracTheme.currentTheme
        // navigationController!.navigationBar.barTintColor = currentTheme.topColor
         self.title = "THEMES"
         

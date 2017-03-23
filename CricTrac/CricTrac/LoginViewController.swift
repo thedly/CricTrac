@@ -46,10 +46,10 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         super.viewDidLoad()
         
         setBackgroundColor()
-     //  username.text = "bharathi92m@gmail.com"
-       // password.text = "qwerty"
-        username.text = "crictracvirat@gmail.com"
-        password.text = "crictrac"
+       username.text = "sravani.mdr@gmail.com"
+        password.text = "123456"
+        //username.text = "crictracvirat@gmail.com"
+        //password.text = "crictrac"
 
         //setUIBackgroundTheme(self.view)
         
@@ -102,7 +102,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
             if user!.emailVerified{
                 currentUser = user
                 
-                let userDefaults = NSUserDefaults.standardUserDefaults()
+              //  let userDefaults = NSUserDefaults.standardUserDefaults()
                 
                 currentUser?.getTokenForcingRefresh(true) {idToken, error in
                     if error == nil {
@@ -132,7 +132,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         
         var facebookToken:[String:String]!
         
-        var emailToken = ["tokenString":idToken]
+        let emailToken = ["tokenString":idToken]
         
         if let loginToken = userDefaults.valueForKey("loginToken") as? [String:AnyObject]{
             

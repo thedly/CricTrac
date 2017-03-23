@@ -71,7 +71,7 @@ class CTCountryPicker: NSObject {
     }
     
     var States: [String] {
-        if let _states = states as? [String] {
+        if let _states = states  {
             return _states
         }
         else

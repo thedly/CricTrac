@@ -20,13 +20,13 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
     @IBAction func nextBtnPressed(sender: AnyObject) {
         
         
-        let nav1 = UINavigationController()
+       // let nav1 = UINavigationController()
         let usrViewController = viewControllerFrom("Main", vcid: "UserInfoViewController") as! UserInfoViewController
         usrViewController.userProfile = profileData.UserProfile
         
         
         
-        let nextViewController = viewControllerFrom("Main", vcid: "UserInfoViewController") as! UserInfoViewController
+      //  let nextViewController = viewControllerFrom("Main", vcid: "UserInfoViewController") as! UserInfoViewController
         var toViewController: UIViewController
         
         switch profileData.UserProfile {
