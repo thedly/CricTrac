@@ -35,12 +35,13 @@ class ReceivedFriendRequest {
     
     
     func getFriendRequestObject(datObject: ReceivedFriendRequest) -> [String: AnyObject] {
+        
         return [
         
         "City": datObject.City!,
         "Club": datObject.Club!,
         "Name": datObject.Name!,
-        "ReceivedDateTime": datObject.ReceivedDateTime! as! AnyObject,
+        "ReceivedDateTime": datObject.ReceivedDateTime!,
         "ReceivedFrom": datObject.ReceivedFrom!,
         
         ]

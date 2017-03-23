@@ -102,7 +102,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
             if user!.emailVerified{
                 currentUser = user
                 
-                let userDefaults = NSUserDefaults.standardUserDefaults()
+              //  let userDefaults = NSUserDefaults.standardUserDefaults()
                 
                 currentUser?.getTokenForcingRefresh(true) {idToken, error in
                     if error == nil {
@@ -132,7 +132,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         
         var facebookToken:[String:String]!
         
-        var emailToken = ["tokenString":idToken]
+        let emailToken = ["tokenString":idToken]
         
         if let loginToken = userDefaults.valueForKey("loginToken") as? [String:AnyObject]{
             

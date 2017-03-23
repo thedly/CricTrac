@@ -105,7 +105,7 @@ class Profile {
         if let profileImage = usrObj["ProfileImageURL"] as? String {
             userImageMetaData = NSURL(string: profileImage)!
         }
-        if let coverUrl = usrObj["CoverPhotoURL"] as? String {
+        if (usrObj["CoverPhotoURL"] as? String) != nil {
             self.CoverPhotoURL = ""
         }
         if let usrProfile = usrObj["UserProfile"] as? String {
@@ -124,6 +124,8 @@ class Profile {
             self.Certifications = certifications
             
         }
+       
+       
         if let fname = self.FirstName as? String, let lName = self.LastName as? String {
             self.fullName = "\(fname) \(lName)"
             

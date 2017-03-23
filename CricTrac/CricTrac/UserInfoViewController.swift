@@ -303,7 +303,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
             switch roleString {
             case userProfileType.Player.rawValue :
                 
-                var vc = viewControllerFrom("Main", vcid: "PlayerExperienceViewController") as! PlayerExperienceViewController
+                let vc = viewControllerFrom("Main", vcid: "PlayerExperienceViewController") as! PlayerExperienceViewController
                 vc.basicProfileInfo = self.data
                 //vc.profileChanged = self.profileChanged
                 
@@ -311,7 +311,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
                 
             case userProfileType.Coach.rawValue :
                 
-                var vc = viewControllerFrom("Main", vcid: "CoachingExperienceViewController") as! CoachingExperienceViewController
+                let vc = viewControllerFrom("Main", vcid: "CoachingExperienceViewController") as! CoachingExperienceViewController
                 vc.basicProfileInfo = self.data
 
                 //vc.profileChanged = self.profileChanged
@@ -319,7 +319,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
                 NextVC = vc
             case userProfileType.Fan.rawValue :
                 
-                var vc = viewControllerFrom("Main", vcid: "CricketFanViewController") as! CricketFanViewController
+                let vc = viewControllerFrom("Main", vcid: "CricketFanViewController") as! CricketFanViewController
                 vc.basicProfileInfo = self.data
 
                 //vc.profileChanged = self.profileChanged
@@ -328,7 +328,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
                 
             default:
                 
-                var vc = viewControllerFrom("Main", vcid: "PlayerExperienceViewController") as! PlayerExperienceViewController
+                let vc = viewControllerFrom("Main", vcid: "PlayerExperienceViewController") as! PlayerExperienceViewController
                 vc.basicProfileInfo = self.data
 
                 //vc.profileChanged = self.profileChanged

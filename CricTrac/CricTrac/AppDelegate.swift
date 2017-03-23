@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics.self])
         setSliderMenu()
         
-        let refreshedToken = FIRInstanceID.instanceID().token()
+       // let refreshedToken = FIRInstanceID.instanceID().token()
         
         GADMobileAds.configureWithApplicationID("ca-app-pub-3940256099942544~1458002511")
         

@@ -499,6 +499,7 @@ public func loadCountriesData() {
             
             if let local = NSLocale.currentLocale().objectForKey(NSLocaleCountryCode) as? String {
                 countryCode = local
+                print(countryCode)
             }
             
             
