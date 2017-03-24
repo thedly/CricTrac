@@ -96,14 +96,13 @@
                             <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.5" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eyX-jy-j45">
-                        <rect key="frame" x="497" y="5" width="50" height="15"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eyX-jy-j45">
+                        <rect key="frame" x="515" y="5" width="32" height="32"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="15" id="OkA-rU-aFu"/>
-                            <constraint firstAttribute="width" constant="50" id="heM-dl-adp"/>
+                            <constraint firstAttribute="height" constant="32" id="OkA-rU-aFu"/>
+                            <constraint firstAttribute="width" constant="32" id="heM-dl-adp"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <state key="normal" title="DELETE">
+                        <state key="normal" image="down_arrow">
                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
@@ -165,8 +164,9 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="down_arrow" width="26" height="16"/>
         <image name="heart" width="14" height="13"/>
         <image name="sachin" width="160" height="206"/>
-        <image name="speech_bubble" width="19" height="16"/>
+        <image name="speech_bubble" width="29" height="25"/>
     </resources>
 </document>

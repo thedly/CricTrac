@@ -161,20 +161,68 @@ class APostTableViewCell: UITableViewCell {
     
     @IBAction func deletePost(sender: UIButton){
         
-        
-        
-                let appearance = SCLAlertView.SCLAppearance(
-                    showCloseButton: false
-                )
-                
-                let alertView = SCLAlertView(appearance: appearance)
-                
-                alertView.addButton("OK", target:self, selector:#selector(APostTableViewCell.deletePostFromFB))
-                
-                alertView.addButton("Cancel", target:self, selector:#selector(APostTableViewCell.cancel))
-                
-                alertView.showNotice("Warning", subTitle: "All Data will be lost if you continue")
+        showPostOptions()
+//        
+//                let appearance = SCLAlertView.SCLAppearance(
+//                    showCloseButton: false
+//                )
+//                
+//                let alertView = SCLAlertView(appearance: appearance)
+//                
+//                alertView.addButton("OK", target:self, selector:#selector(APostTableViewCell.deletePostFromFB))
+//                
+//                alertView.addButton("Cancel", target:self, selector:#selector(APostTableViewCell.cancel))
+//                
+//                alertView.showNotice("Warning", subTitle: "All Data will be lost if you continue")
     }
+    
+    func showPostOptions(){
+        
+        let optionMenu = UIAlertController(title: nil, message: "SELECT ACTION", preferredStyle: .ActionSheet)
+        
+        // 2
+        let deleteAction = UIAlertAction(title: "Delete", style: .Default, handler: {
+            (alert: UIAlertAction!) -> Void in
+           
+            let appearance = SCLAlertView.SCLAppearance(
+                showCloseButton: false
+            )
+            
+            let alertView = SCLAlertView(appearance: appearance)
+            
+            alertView.addButton("OK", target:self, selector:#selector(APostTableViewCell.deletePostFromFB))
+            
+            alertView.addButton("Cancel", target:self, selector:#selector(APostTableViewCell.cancel))
+            
+            alertView.showNotice("Warning", subTitle: "All Data will be lost if you continue")
+        })
+        let saveAction = UIAlertAction(title: "Save", style: .Default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+            
+        })
+        
+        //
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+            print("Cancelled")
+        })
+        
+        
+        // 4
+        optionMenu.addAction(deleteAction)
+        optionMenu.addAction(saveAction)
+        optionMenu.addAction(cancelAction)
+        
+        // 5
+        if let parentVc = parent as? UIViewController{
+            
+            parentVc.presentViewController(optionMenu, animated: true, completion: nil)
+        }
+        
+        
+    }
+    
     
     func deletePostFromFB(){
         if let value = postId{
