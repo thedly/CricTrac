@@ -1,3 +1,4 @@
+
 //
 //  TimeLineViewController.swift
 //  CricTrac
@@ -8,6 +9,7 @@
 
 import UIKit
 import SwiftyJSON
+import GoogleMobileAds
 
 class TimeLineViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable,PostSendable,Deletable{
     
@@ -18,6 +20,8 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     var newPostText:UITextField?
     
     var timelineDS = [[String:String]]()
+    
+    @IBOutlet weak var bannerView: GADBannerView!
     
     let  refreshControl = UIRefreshControl()
     var totalPosts = 5
@@ -60,6 +64,17 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         //loadAllNewPosts()
         
         // Do any additional setup after loading the view.
+        
+        //loadBannerAds()
+    }
+    
+    //MARK: Ads related
+    
+    func loadBannerAds() {
+        
+        bannerView.adUnitID = adUnitId
+        bannerView.rootViewController = self
+        bannerView.loadRequest(GADRequest())
     }
     
     

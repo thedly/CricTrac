@@ -142,10 +142,10 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                 
                 getProfileInfoById((currentUser?.uid)!, sucessBlock: { data in
                 
-                    var loggedInUserObject = Profile(usrObj: data)
+                    let loggedInUserObject = Profile(usrObj: data)
                     
                     
-                    var sendFriendRequestData = SentFriendRequest()
+                    let sendFriendRequestData = SentFriendRequest()
                     
                     sendFriendRequestData.City = FriendObject.City
                     
@@ -173,7 +173,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                     
                     
                     
-                    var receiveFriendRequestData = ReceivedFriendRequest()
+                    let receiveFriendRequestData = ReceivedFriendRequest()
                     
                     
                     receiveFriendRequestData.City = loggedInUserObject.City

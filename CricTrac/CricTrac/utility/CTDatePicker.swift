@@ -8,13 +8,12 @@
 
 import UIKit
 
-
 class CTDatePicker: NSObject {
     
     var datePicker:UIDatePicker!
     var inputText:UITextField!
     var parent:UIViewController!
-
+    
     func showPicker(parent:UIViewController,inputText:UITextField){
         
         self.inputText = inputText
@@ -54,7 +53,7 @@ class CTDatePicker: NSObject {
         dateFormatter.timeStyle = .NoStyle
         dateFormatter.dateFormat = gbDateFormat
         
-        var selectedDate = dateFormatter.stringFromDate(datePicker.date)
+        let selectedDate = dateFormatter.stringFromDate(datePicker.date)
         
         inputText.text = selectedDate.replaceStr(" ", withString: "-")
         inputText.resignFirstResponder()

@@ -9,6 +9,7 @@
 import UIKit
 import KRProgressHUD
 import FirebaseAuth
+import GoogleMobileAds
 
 class UserDashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ThemeChangeable {
 
@@ -20,6 +21,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     var recentMatches: [String:String]!
     var recentMatchesBowling: [String:String]!
     private var _currentTheme:String = CurrentTheme
+    
+    @IBOutlet weak var bannerView: GADBannerView!
     
     var coverOrProfile = ""
     
@@ -326,6 +329,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //loadBannerAds()
         if let value = friendProfile{
             userProfileData = Profile(usrObj: value)
             closeButton.hidden = false
@@ -396,6 +400,17 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         tapGesture.numberOfTapsRequired = 1
         imgCoverPhoto.addGestureRecognizer(tapGesture)
     }
+    
+    //MARK: Ads related
+    
+    func loadBannerAds() {
+        
+        bannerView.adUnitID = adUnitId
+        bannerView.rootViewController = self
+        bannerView.loadRequest(GADRequest())
+    }
+    
+    
     func tapCoverPhoto()  {
         self.photoOptions("CoverPhoto")
         coverOrProfile = "Cover"
@@ -476,7 +491,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         newImageView.backgroundColor = .blackColor()
         newImageView.contentMode = .ScaleAspectFit
         newImageView.userInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: "dismissFullscreenImage:")
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UserDashboardViewController.dismissFullscreenImage(_:)))
         newImageView.addGestureRecognizer(tap)
         //        self.view.addSubview(navBarView)
         self.view.addSubview(newImageView)
@@ -750,7 +765,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-     
+
             getMatchData()
             setDashboardData()
     }

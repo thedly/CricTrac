@@ -144,7 +144,7 @@ func addProfileImageData(profileDp:UIImage){
     
 //    if let usrId = FIRAuth.auth()?.currentUser?.uid {
     
-        let filePath = "\(FIRAuth.auth()?.currentUser?.uid)/UserProfile/profilePhoto"
+      //  let filePath = "\(FIRAuth.auth()?.currentUser?.uid)/UserProfile/profilePhoto"
         storageRef.child((FIRAuth.auth()?.currentUser?.uid)!).child("UserProfile").child("profileImage").putData(imageData, metadata: metaData){(metaData,error) in
             if let error = error {
                 print(error.localizedDescription)
@@ -160,8 +160,9 @@ func addProfileImageData(profileDp:UIImage){
                 dispatch_async(backgroundQueue, {
                     updateMetaData(userImageMetaData)
                     do {
-                    let data = try? NSData(contentsOfURL: userImageMetaData)
-                        LoggedInUserImage = UIImage(data: data!!)!
+                        let data = try? NSData(contentsOfURL: userImageMetaData, options: NSDataReadingOptions())
+                   // let data = try? NSData(contentsOfURL: userImageMetaData)
+                        LoggedInUserImage = UIImage(data: data!)!
 
                         
                     }catch {
@@ -171,9 +172,9 @@ func addProfileImageData(profileDp:UIImage){
                     print("This is run on the background queue")
                     
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        if let data = try? NSData(contentsOfURL: userImageMetaData) {
+                        if let data = try? NSData(contentsOfURL: userImageMetaData, options: NSDataReadingOptions()){
                             
-                            LoggedInUserImage = UIImage(data: data!)!
+                            LoggedInUserImage = UIImage(data: data)!
                         }else {
                             LoggedInUserImage = placeHolderImage!
                         }
@@ -199,7 +200,7 @@ func addCoverImageData(profileDp:UIImage){
     
     //    if let usrId = FIRAuth.auth()?.currentUser?.uid {
     
-    let filePath = "\(FIRAuth.auth()?.currentUser?.uid)/UserProfile/coverImage"
+   // let filePath = "\(FIRAuth.auth()?.currentUser?.uid)/UserProfile/coverImage"
     storageRef.child((FIRAuth.auth()?.currentUser?.uid)!).child("UserProfile").child("coverPhoto").putData(imageData, metadata: metaData){(metaData,error) in
         if let error = error {
             print(error.localizedDescription)
@@ -215,8 +216,9 @@ func addCoverImageData(profileDp:UIImage){
             dispatch_async(backgroundQueue, {
                 updateMetaData(userImageMetaData)
                 do {
-                    let data = try? NSData(contentsOfURL: userImageMetaData)
-                    LoggedInUserCoverImage = UIImage(data: data!!)!
+                    
+                    let data = try? NSData(contentsOfURL: userImageMetaData, options: NSDataReadingOptions())
+                    LoggedInUserCoverImage = UIImage(data: data!)!
                     
                     
                 }catch {
@@ -226,9 +228,9 @@ func addCoverImageData(profileDp:UIImage){
                 print("This is run on the background queue")
                 
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    if let data = try? NSData(contentsOfURL: userImageMetaData) {
-                        
-                        LoggedInUserCoverImage = UIImage(data: data!)!
+                    if let data = try? NSData(contentsOfURL: userImageMetaData, options: NSDataReadingOptions()) {
+                    
+                        LoggedInUserCoverImage = UIImage(data: data)!
                     }else {
                         LoggedInUserCoverImage = placeHolderImage!
                     }
@@ -267,8 +269,9 @@ func getAllMatchData(friendId:String? = nil,sucessBlock:([String:AnyObject])->Vo
     
     let userId:String = friendId ?? currentUser!.uid
     
-    
    fireBaseRef.child("Users").child(userId).child("Matches").observeEventType(.Value, withBlock: { snapshot in
+   //fireBaseRef.child("Users").child(userId).child("Matches").queryLimitedToFirst(2).observeEventType(.Value, withBlock: { snapshot in
+    
     
     if let data = snapshot.value! as? [String:AnyObject]{
         
@@ -463,6 +466,15 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
 
 func deleteAllPlayerData(){
     
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Dashboard").removeValue()
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").removeValue()
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Opponents").removeValue()
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Teams").removeValue()
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Grounds").removeValue()
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Tournaments").removeValue()
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Venue").removeValue()
+    
+    /*
     fireBaseRef.child("Users").child(currentUser!.uid).observeEventType(.Value, withBlock: { (snapshot) in
         
         if snapshot.hasChild("Dashboard"){
@@ -493,7 +505,7 @@ func deleteAllPlayerData(){
             snapshot.ref.child("Venue").removeValue()
         }
 
-    })
+    })*/
 }
 
 
@@ -649,7 +661,6 @@ func updateMatchData(key:String,data:[String:AnyObject], callback:(data:[String:
     
     ref.updateChildValues(dataToBeModified)
     callback(data: dataToBeModified)
-    
     UpdateDashboardDetails()
     
 }
@@ -860,7 +871,7 @@ public func getAllFriendSuggestions(callback:()->Void) {
                     UserProfilesData.removeAll()
                     for profile in resultObj {
                         
-                        var currentProfile = Profile(usrObj: profile)
+                        let currentProfile = Profile(usrObj: profile)
                         
                         
                         UserProfilesData.append(currentProfile)

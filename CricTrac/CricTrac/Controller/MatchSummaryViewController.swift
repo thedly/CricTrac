@@ -212,9 +212,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 mData.strikerate = Float("0.00")
             }
             else {
-                let strinkeRate = String(format: "%.2f",(Float(runsScored)!)*100/Float(ballsFaced)!)
-                mData.strikerate = Float(strinkeRate)
-                //matchVenueAndDate.appendContentsOf("\n Strike rate: \(strinkeRate)")
+                let strikeRate = String(format: "%.2f",(Float(runsScored)!)*100/Float(ballsFaced)!)
+                mData.strikerate = Float(strikeRate)
             }
         }
         
@@ -279,14 +278,15 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             }
             
             
-                if let sRate = currentMatch.strikerate {
-                    //aCell.strikeRateLabel.text = "Strike Rate : \(sRate)"
-                }
-                if let economy = currentMatch.economy {
-                    
-                    //aCell.economyLabel.text = "Economy : \(economy)"
-                }
-            
+
+//                if let sRate = currentMatch.strikerate {
+//                    //aCell.strikeRateLabel.text = "Strike Rate : \(sRate)"
+//                }
+//                if let economy = currentMatch.economy {
+//                    
+//                    //aCell.economyLabel.text = "Economy : \(economy)"
+//                }
+//            
 //            if currentMatch.BattingSectionHidden!{
 //                
 //                aCell.strikeRateLabel.hidden = true
@@ -321,14 +321,14 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! SummaryDetailsCell
+//        let cell = tableView.cellForRowAtIndexPath(indexPath) as! SummaryDetailsCell
                 let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
         
         summaryDetailsVC.battingViewHidden = matches[indexPath.row].BattingSectionHidden
         summaryDetailsVC.bowlingViewHidden = matches[indexPath.row].BowlingSectionHidden
         
         
-        var selectedDataSource = self.matchDataSource.filter { (dat) -> Bool in
+        let selectedDataSource = self.matchDataSource.filter { (dat) -> Bool in
             return dat["MatchId"]! as! String == matches[indexPath.row].matchId
         }
         

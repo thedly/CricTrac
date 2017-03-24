@@ -495,11 +495,11 @@ public func loadCountriesData() {
             let jsonData = try NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe)
             let json = try NSJSONSerialization.JSONObjectWithData(jsonData, options: .AllowFragments)
             
-            var countryCode: String?
-            
-            if let local = NSLocale.currentLocale().objectForKey(NSLocaleCountryCode) as? String {
-                countryCode = local
-            }
+//            var countryCode: String?
+//            
+//            if let local = NSLocale.currentLocale().objectForKey(NSLocaleCountryCode) as? String {
+//                countryCode = local
+//            }
             
             
             guard let countries = json as? NSArray else {

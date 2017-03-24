@@ -15,6 +15,9 @@ PODS:
     - FBSDKCoreKit
   - Firebase (3.11.1):
     - Firebase/Core (= 3.11.1)
+  - Firebase/AdMob (3.11.1):
+    - Firebase/Core
+    - Google-Mobile-Ads-SDK (= 7.16.0)
   - Firebase/Auth (3.11.1):
     - Firebase/Core
     - FirebaseAuth (= 3.1.0)
@@ -56,6 +59,7 @@ PODS:
   - FirebaseStorage (1.0.5):
     - FirebaseAnalytics (~> 3.5)
     - GTMSessionFetcher/Core (~> 1.1)
+  - Google-Mobile-Ads-SDK (7.16.0)
   - GoogleInterchangeUtilities (1.2.2):
     - GoogleSymbolUtilities (~> 1.1)
   - GoogleSignIn (4.0.2):
@@ -101,6 +105,7 @@ DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - Firebase (= 3.11.1)
+  - Firebase/AdMob
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
@@ -161,6 +166,7 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
   FirebaseMessaging: acf66347e43c5637c697060c3001d25c809a4131
   FirebaseStorage: 5738284835edb57f0e81d4ae5832bb17c1e4b5fa
+  Google-Mobile-Ads-SDK: 92dff0e9ce1cfdfe640d9d80ab86d5e4371e478f
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
   GoogleSignIn: d7ad83f13480e1f30453471d00d19b5293ac46af
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
@@ -178,6 +184,6 @@ SPEC CHECKSUMS:
   SwiftyStoreKit: 2e081b797f75ff14adae6c799473a7124f9ac539
   XLPagerTabStrip: 9191deaa2336735b7c47beb21e42be537fa4242a
 
-PODFILE CHECKSUM: 6c83394893d797ded0d436a59f2913170fe81d23
+PODFILE CHECKSUM: f8b7ef28ec929820faed6c905ece007fff98a29e
 
 COCOAPODS: 1.1.1

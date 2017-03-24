@@ -434,7 +434,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                 group.appendContentsOf("  |  \(level)")
             }
             
-            if let stage = matchDetailsData["Stage"] as? String where stage != "-"  {
+            if let stage = matchDetailsData["MatchStage"] as? String where stage != "-"  {
                 group.appendContentsOf("  |  \(stage)")
             }
         
@@ -581,21 +581,21 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     
     //MARK: Actionsheet delegate
     
-    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int)
-    {
-        switch (buttonIndex){
-            
-        case 0:
-            print("Cancel")
-        case 1:
-            print("Save")
-        case 2:
-            print("Delete")
-        default:
-            print("Default")
-            //Some code here..
-            
-        }
-    }
+//    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int)
+//    {
+//        switch (buttonIndex){
+//            
+//        case 0:
+//            print("Cancel")
+//        case 1:
+//            print("Save")
+//        case 2:
+//            print("Delete")
+//        default:
+//            print("Default")
+//            //Some code here..
+//            
+//        }
+//    }
     
 }

@@ -11,6 +11,7 @@ import AnimatedTextInput
 import Firebase
 
 let ProfilePictureUpdated = "ProfilePictureUpdated"
+
 public var date = 0
 
 public var loggedInUserInfo = [String:AnyObject]()
@@ -68,6 +69,7 @@ var versionAndBuildNumber:String{
 }
 
 
+let adUnitId = "ca-app-pub-3940256099942544/2934735716"
 
 
 //MARK:-URLS

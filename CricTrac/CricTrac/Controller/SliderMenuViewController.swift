@@ -57,7 +57,9 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
             }
             
         }
-      
+        
+        //sajith - added the call to remove the menu items
+        //removeUnwantedMenu()
         loadInitialValues();
         
         

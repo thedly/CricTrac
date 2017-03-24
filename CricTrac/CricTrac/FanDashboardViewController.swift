@@ -174,7 +174,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
             
             
             
-            break
+           //break
         case SupportingTeams:
             teamNameToReturn = userProfileData.SupportingTeams[indexPath.row]
             
@@ -198,7 +198,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
             return ThemeColorsCollectionViewCell()
             
             
-            break;
+          //  break;
         case InterestedSports:
             teamNameToReturn = userProfileData.InterestedSports[indexPath.row]
             
@@ -222,7 +222,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
             return ThemeColorsCollectionViewCell()
             
             
-            break
+          //  break
         case Hobbies:
             teamNameToReturn = userProfileData.Hobbies[indexPath.row]
             
@@ -247,7 +247,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
             return ThemeColorsCollectionViewCell()
             
             
-            break
+           // break
         default:
             teamNameToReturn = userProfileData.SupportingTeams[indexPath.row]
             
@@ -268,7 +268,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
             }
             return ThemeColorsCollectionViewCell()
             
-            break
+          //  break
             
         }
         
