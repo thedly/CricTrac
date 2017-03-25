@@ -36,7 +36,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         self.automaticallyAdjustsScrollViewInsets = false
         
         timeLineTable.rowHeight = UITableViewAutomaticDimension;
-        timeLineTable.estimatedRowHeight = 12500.0;
+        timeLineTable.estimatedRowHeight = 50.0;
         
         //setUIBackgroundTheme(view)
         
@@ -250,6 +250,16 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 
                 let friendId = data["OwnerID"].stringValue
                 
+                if let dateTimeStamp = data["AddedTime"].double{
+    
+                    let date = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
+                    let dateFormatter = NSDateFormatter()
+                    dateFormatter.timeZone = NSTimeZone.localTimeZone()
+                    dateFormatter.timeStyle = .ShortStyle
+                    dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+                    postCell.postedDate.text = dateFormatter.stringFromDate(date)
+                }
+                
                 postCell.postOwnerId = friendId
                 
                  let postedBy = data["PostedBy"].stringValue
@@ -292,7 +302,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     commentsCount = value
                 }
                 
-                postCell.commentCount.setTitle("\(commentsCount) COMMENTS", forState: .Normal)
+                postCell.commentCount.setTitle("\(commentsCount) Comments", forState: .Normal)
                 
                 
                 postCell.postId = data.dictionaryValue["postId"]?.stringValue
@@ -313,7 +323,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     
                 }
                 
-                postCell.likeCount.setTitle("\(likesCount) LIKES", forState: .Normal)
+                postCell.likeCount.setTitle("\(likesCount) Likes", forState: .Normal)
                 postCell.likeButton.titleLabel?.textColor = likeColor
                 acell = postCell
                 

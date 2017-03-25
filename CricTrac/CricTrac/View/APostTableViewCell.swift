@@ -22,7 +22,7 @@ class APostTableViewCell: UITableViewCell {
     @IBOutlet weak var commentCount: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     
-    
+     @IBOutlet weak var postedDate: UILabel!
     
     
     var postId:String?
