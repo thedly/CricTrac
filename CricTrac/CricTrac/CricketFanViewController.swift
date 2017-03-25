@@ -337,7 +337,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
             
             aCell.teamName.text = supportingTeamNamesList[indexPath.row]
             
-            aCell.deleteTeamBtn.addTarget(self, action: "deleteTeamFromCurrentTeams:", forControlEvents: .TouchUpInside)
+            aCell.deleteTeamBtn.addTarget(self, action: #selector(CricketFanViewController.deleteTeamFromCurrentTeams(_:)), forControlEvents: .TouchUpInside)
             return aCell
         }
         else

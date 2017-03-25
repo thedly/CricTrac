@@ -309,6 +309,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
                 var vc = viewControllerFrom("Main", vcid: "PlayerExperienceViewController") as! PlayerExperienceViewController
                 
                 vc.profileChanged = self.profileChanged
+
                 
                 NextVC = vc
                 
@@ -317,6 +318,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
                 var vc = viewControllerFrom("Main", vcid: "CoachingExperienceViewController") as! CoachingExperienceViewController
                 
                 vc.profileChanged = self.profileChanged
+
                 
                 NextVC = vc
             case userProfileType.Fan.rawValue :
@@ -324,6 +326,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
                 var vc = viewControllerFrom("Main", vcid: "CricketFanViewController") as! CricketFanViewController
                 
                 vc.profileChanged = self.profileChanged
+
                 
                 NextVC = vc
                 
@@ -332,6 +335,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
                 var vc = viewControllerFrom("Main", vcid: "PlayerExperienceViewController") as! PlayerExperienceViewController
                 
                 vc.profileChanged = self.profileChanged
+
 
                 NextVC = vc
             }

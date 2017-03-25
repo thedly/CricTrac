@@ -57,7 +57,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
             
             
             for (_, req) in data {
-                var reqData = Friends(dataObj: req as! [String : AnyObject])
+                let reqData = Friends(dataObj: req as! [String : AnyObject])
                 friendsDataArray.append(reqData)
                 self.SuggestsTblview.reloadData()
             }
@@ -120,7 +120,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func UnfriendBtnBtnPressed(sender: UIButton) {
         
-        var friendReqId = sender.restorationIdentifier!
+        let friendReqId = sender.restorationIdentifier!
         
         DeleteFriendRequestData(friendReqId, successBlock: { data in
             
