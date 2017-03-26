@@ -23,13 +23,27 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     @IBOutlet weak var likeButton: UIButton!
     
     @IBOutlet weak var tableView: UITableView!
-    var dataSource = [[String:String]]()
+    
+    @IBOutlet weak var inerView: UIView!
+    
+    
+    var dataSource = [[String:AnyObject]]()
     
     var postData:JSON?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        inerView.layer.masksToBounds = true
+        inerView.layer.cornerRadius = inerView.frame.width/56
+        
+        tableView.tableFooterView = UIView()
+        tableView.backgroundColor = inerView.backgroundColor
+        tableView.backgroundView?.backgroundColor = inerView.backgroundColor
+        
+        tableView.rowHeight = UITableViewAutomaticDimension;
+        tableView.estimatedRowHeight = 50.0;
+        
         postText.text = postData!.dictionaryValue["Post"]?.stringValue
         
         let postId = postData!.dictionaryValue["postId"]?.stringValue
@@ -38,15 +52,15 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
         if let likeCount = postData!.dictionaryValue["Likes"]?.count{
             
-            likeButton.setTitle("\(likeCount) Likes", forState: .Normal)
+            //likeButton.setTitle("\(likeCount) Likes", forState: .Normal)
             
         }else{
             
-            likeButton.setTitle("0 Likes", forState: .Normal)
+            //likeButton.setTitle("0 Likes", forState: .Normal)
         }
         let commentCount =  postData!.dictionaryValue["TimelineComments"]?.count
         
-        self.commnetButton.setTitle("\(commentCount) Comments", forState: .Normal)
+        //self.commnetButton.setTitle("\(commentCount) Comments", forState: .Normal)
         
         
         
@@ -61,7 +75,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
             fetchFriendDetail(friendId, sucess: { (city) in
                 friendsCity[friendId] = city
                 dispatch_async(dispatch_get_main_queue(),{
-                    self.userCity.text = city
+                    //self.userCity.text = city
                     
                 })
                 
@@ -95,15 +109,23 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         let data = dataSource[indexPath.row]
          let aCell =  tableView.dequeueReusableCellWithIdentifier("commentcell", forIndexPath: indexPath) as! CommentTableViewCell
         
-        aCell.commentText.text = data["Comment"]
-        
-        var value = data["OwnerName"]
-        if value == ""{
+        if let val = data["Comment"] as? String{
             
-            value = "No Name Added"
+             aCell.commentText.text = val
         }
         
-        aCell.userName.text =   value
+       
+        
+        if var value = data["OwnerName"] as? String{
+            
+            if value == ""{
+                
+                value = "No Name Added"
+            }
+            
+            aCell.userName.text =   value
+        }
+       
         
         return aCell
     }
@@ -132,6 +154,40 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     
     
+    @IBAction func addCommnet(sender: UIButton) {
+        
+        
+        let alert = UIAlertController(title: "Alert Title",
+                                      message: "Alert message",
+                                      preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let ok = UIAlertAction(title: "OK",
+                               style: UIAlertActionStyle.Default) { (action: UIAlertAction) in
+                                
+                                if let alertTextField = alert.textFields?.first where alertTextField.text != nil {
+                                    
+                                    print("And the text is... \(alertTextField.text!)!")
+                                    
+                                }
+                                
+                                
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel",
+                                   style: UIAlertActionStyle.Cancel,
+                                   handler: nil)
+        
+        alert.addTextFieldWithConfigurationHandler { (textField: UITextField) in
+            
+            textField.placeholder = "Text here"
+            
+        }
+        
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
 
     /*
     // MARK: - Navigation
