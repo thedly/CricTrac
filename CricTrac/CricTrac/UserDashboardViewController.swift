@@ -73,19 +73,19 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     @IBOutlet weak var MatchesView: UIView!
     @IBOutlet weak var userProfileImage: UIImageView!
     @IBOutlet weak var battingMatches: UILabel!
-    @IBOutlet weak var battingInnings: UILabel!
+    @IBOutlet weak var bowlingInnings: UILabel!
 //    @IBOutlet weak var notOuts: UILabel!
     @IBOutlet weak var highScore: UILabel!
     @IBOutlet weak var battingAverage: UILabel!
     @IBOutlet weak var strikeRate: UILabel!
     @IBOutlet weak var hundreds: UILabel!
-    @IBOutlet weak var fifties: UILabel!
-    
-    @IBOutlet weak var sixes: UILabel!
     @IBOutlet weak var fours: UILabel!
     
+    @IBOutlet weak var sixes: UILabel!
+    @IBOutlet weak var fifties: UILabel!
+    
     @IBOutlet weak var recentBest: UILabel!
-    @IBOutlet weak var ballsFacedDuringBat: UILabel!
+    @IBOutlet weak var battingInnings: UILabel!
     
     // bowling
     
@@ -268,6 +268,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         //scrollView.contentSize = contentRect.size
         
     }
+    
 
     func setNavigationBarProperties(){
         
@@ -657,6 +658,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                     
                     self.battingMatches.text = String(DashboardDetails.TotalMatches)
                     self.battingInnings.text = String(DashboardDetails.BattingInnings)
+                    self.bowlingInnings.text = String(DashboardDetails.BowlingInnings)
                     //    self.notOuts = DashboardDetails
                     
                     self.highScore.text = String(DashboardDetails.TopBatting1stMatchScore)
@@ -668,7 +670,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                     self.sixes.text = String(DashboardDetails.Total6s)
                     self.fours.text = String(DashboardDetails.Total4s)
                     
-                    self.ballsFacedDuringBat.text = String(DashboardDetails.TotalBallsFaced)
+                  //
+                   // self.ballsFacedDuringBat.text = String(DashboardDetails.TotalBallsFaced)
                     
                     // bowling
                     
@@ -796,7 +799,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         switch userProfileData.UserProfile {
         case userProfileType.Player.rawValue:
-            valueToReturn = userProfileData.PlayerCurrentTeams.count
+            
+            valueToReturn = (userProfileData.PlayerCurrentTeams.count) + (userProfileData.PlayerPastTeams.count)
             break
         case userProfileType.Coach.rawValue:
             valueToReturn = userProfileData.CoachCurrentTeams.count
@@ -831,7 +835,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("TeamCollectionViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
             
-            
+        
 //            let intIndex = indexPath.row // where intIndex < myDictionary.count
 //            let index = themeColors.startIndex.advancedBy(intIndex) // index 1
             
@@ -844,9 +848,19 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             
             var teamNameToReturn = ""
             
+            
             switch userProfileData.UserProfile {
             case userProfileType.Player.rawValue:
-                teamNameToReturn = userProfileData.PlayerCurrentTeams[indexPath.row]
+                if indexPath.row < (userProfileData.PlayerCurrentTeams.count) {
+                   
+                    teamNameToReturn = userProfileData.PlayerCurrentTeams[indexPath.row]
+
+                }
+                else if (indexPath.row - (userProfileData.PlayerCurrentTeams.count)) < (userProfileData.PlayerPastTeams.count) {
+                 teamNameToReturn = userProfileData.PlayerPastTeams[(indexPath.row - userProfileData.PlayerCurrentTeams.count)]
+                    
+                }
+                
                 break
             case userProfileType.Coach.rawValue:
                 teamNameToReturn = userProfileData.CoachCurrentTeams[indexPath.row]
