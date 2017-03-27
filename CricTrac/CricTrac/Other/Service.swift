@@ -1146,19 +1146,19 @@ func addNewComment(postId:String,comment:String){
     
 }
 
-func getAllComments(postId:String,sucess:(data:[[String:String]])->Void){
+func getAllComments(postId:String,sucess:(data:[[String:AnyObject]])->Void){
     
     let ref = fireBaseRef.child("TimelinePosts").child(postId).child("TimelineComments")
     
     ref.observeEventType(.Value, withBlock: { snapshot in
         
-        if let data = snapshot.value as? [String:[String:String]] {
+        if let data = snapshot.value as? [String:[String:AnyObject]] {
             
-            var result = [[String:String]]()
+            var result = [[String:AnyObject]]()
             for (key,value) in data{
                 var dataval = value
-                dataval["postId"] = key
-                result.append(dataval)
+                    dataval["postId"] = key
+                    result.append(dataval)
             }
             
             sucess(data: result)

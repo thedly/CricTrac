@@ -4,11 +4,18 @@
         <deployment identifier="iOS"/>
         <development version="7000" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="HelveticaNeue.ttc">
-            <string>HelveticaNeue-Bold</string>
-            <string>HelveticaNeue-Bold</string>
+        <mutableArray key="SourceSansPro-Bold.otf">
+            <string>SourceSansPro-Bold</string>
+        </mutableArray>
+        <mutableArray key="SourceSansPro-Regular.otf">
+            <string>SourceSansPro-Regular</string>
+            <string>SourceSansPro-Regular</string>
+            <string>SourceSansPro-Regular</string>
+            <string>SourceSansPro-Regular</string>
+            <string>SourceSansPro-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -22,7 +29,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sachin" translatesAutoresizingMaskIntoConstraints="NO" id="F5q-Ml-KiJ">
-                        <rect key="frame" x="5" y="5" width="46" height="46"/>
+                        <rect key="frame" x="12" y="12" width="46" height="46"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="46" id="9Kb-IG-FQG"/>
                             <constraint firstAttribute="height" constant="46" id="lmI-HV-eaz"/>
@@ -35,34 +42,34 @@
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arjun S" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UIx-fb-WlC">
-                        <rect key="frame" x="56" y="5" width="52" height="18"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                        <rect key="frame" x="63" y="12" width="48" height="19"/>
+                        <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="15"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="asJ-kQ-Jqv">
-                        <rect key="frame" x="5" y="56" width="542" height="136"/>
+                        <rect key="frame" x="12" y="73" width="528" height="105"/>
                         <string key="text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</string>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DPS Bangalore" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Glb-Ym-hQ7">
-                        <rect key="frame" x="56" y="28" width="96" height="16"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                        <rect key="frame" x="63" y="36" width="91" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.39966823630136988" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sao-ME-HsA">
-                        <rect key="frame" x="5" y="236" width="66" height="18"/>
+                        <rect key="frame" x="12" y="223" width="66" height="18"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="66" id="iMh-je-mwa"/>
                             <constraint firstAttribute="height" constant="18" id="rex-0N-WSW"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="14"/>
                         <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="2" maxY="0.0"/>
                         <inset key="imageEdgeInsets" minX="-11" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <state key="normal" title="LIKE" image="like">
+                        <state key="normal" title="LIKE" image="heart">
                             <color key="titleColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="0.5" colorSpace="calibratedRGB"/>
                         </state>
                         <connections>
@@ -70,12 +77,12 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FYt-Kg-9A5">
-                        <rect key="frame" x="436" y="236" width="111" height="18"/>
+                        <rect key="frame" x="429" y="223" width="111" height="18"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="111" id="Hfl-aN-ZIs"/>
                             <constraint firstAttribute="height" constant="18" id="Pfv-AS-FP8"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="14"/>
                         <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="2" maxY="0.0"/>
                         <inset key="imageEdgeInsets" minX="-11" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <state key="normal" title="COMMENT" image="speech_bubble">
@@ -83,27 +90,26 @@
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HT5-zA-qQ7">
-                        <rect key="frame" x="441" y="197" width="106" height="28"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                        <state key="normal" title="123 COMMENTS">
+                        <rect key="frame" x="458" y="183" width="82" height="29"/>
+                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="13"/>
+                        <state key="normal" title="123 Comments">
                             <color key="titleColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="0.5" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LYJ-aE-uqd">
-                        <rect key="frame" x="5" y="197" width="65" height="28"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                        <state key="normal" title="123 LIKES">
+                        <rect key="frame" x="12" y="183" width="50" height="29"/>
+                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="13"/>
+                        <state key="normal" title="123 Likes">
                             <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.5" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eyX-jy-j45">
-                        <rect key="frame" x="497" y="5" width="50" height="15"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eyX-jy-j45">
+                        <rect key="frame" x="515" y="12" width="32" height="32"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="15" id="OkA-rU-aFu"/>
-                            <constraint firstAttribute="width" constant="50" id="heM-dl-adp"/>
+                            <constraint firstAttribute="height" constant="32" id="OkA-rU-aFu"/>
+                            <constraint firstAttribute="width" constant="32" id="heM-dl-adp"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <state key="normal" title="DELETE">
+                        <state key="normal" image="down_arrow">
                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
@@ -111,39 +117,48 @@
                         </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aLx-nn-Rhs">
-                        <rect key="frame" x="5" y="230" width="542" height="1"/>
+                        <rect key="frame" x="5" y="217" width="542" height="1"/>
                         <color key="backgroundColor" red="0.64647446065989844" green="0.64647446065989844" blue="0.64647446065989844" alpha="0.44970034246575341" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="6KH-Pe-lCt"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jn2-2i-CGw">
+                        <rect key="frame" x="63" y="57" width="27" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.39942744006849318" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" red="0.3529411764705882" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
+                    <constraint firstItem="Jn2-2i-CGw" firstAttribute="top" secondItem="Glb-Ym-hQ7" secondAttribute="bottom" constant="5" id="0Ya-AL-xBA"/>
                     <constraint firstItem="Glb-Ym-hQ7" firstAttribute="top" secondItem="UIx-fb-WlC" secondAttribute="bottom" constant="5" id="2DC-zN-tCn"/>
                     <constraint firstItem="aLx-nn-Rhs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="40K-bO-gVF"/>
                     <constraint firstItem="UIx-fb-WlC" firstAttribute="leading" secondItem="F5q-Ml-KiJ" secondAttribute="trailing" constant="5" id="8hr-ct-q94"/>
-                    <constraint firstAttribute="trailing" secondItem="HT5-zA-qQ7" secondAttribute="trailing" constant="5" id="CDA-e4-OJR"/>
+                    <constraint firstAttribute="trailing" secondItem="HT5-zA-qQ7" secondAttribute="trailing" constant="12" id="CDA-e4-OJR"/>
                     <constraint firstItem="LYJ-aE-uqd" firstAttribute="top" secondItem="asJ-kQ-Jqv" secondAttribute="bottom" constant="5" id="GuR-R0-Y2Z"/>
-                    <constraint firstAttribute="trailing" secondItem="asJ-kQ-Jqv" secondAttribute="trailing" constant="5" id="JRI-T5-jCK"/>
+                    <constraint firstAttribute="trailing" secondItem="asJ-kQ-Jqv" secondAttribute="trailing" constant="12" id="JRI-T5-jCK"/>
                     <constraint firstItem="Glb-Ym-hQ7" firstAttribute="leading" secondItem="F5q-Ml-KiJ" secondAttribute="trailing" constant="5" id="PEh-XD-0uY"/>
                     <constraint firstItem="HT5-zA-qQ7" firstAttribute="top" secondItem="asJ-kQ-Jqv" secondAttribute="bottom" constant="5" id="PVS-B7-lvn"/>
-                    <constraint firstItem="sao-ME-HsA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="RFt-fW-xpQ"/>
-                    <constraint firstItem="eyX-jy-j45" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="WXy-a5-gPc"/>
+                    <constraint firstItem="sao-ME-HsA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="RFt-fW-xpQ"/>
+                    <constraint firstItem="eyX-jy-j45" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="WXy-a5-gPc"/>
                     <constraint firstAttribute="trailing" secondItem="eyX-jy-j45" secondAttribute="trailing" constant="5" id="Wg4-jI-y4i"/>
                     <constraint firstAttribute="bottom" secondItem="FYt-Kg-9A5" secondAttribute="bottom" constant="5" id="Wsi-Xj-zgd"/>
                     <constraint firstItem="aLx-nn-Rhs" firstAttribute="top" secondItem="LYJ-aE-uqd" secondAttribute="bottom" constant="5" id="ZMJ-f7-hvf"/>
                     <constraint firstItem="FYt-Kg-9A5" firstAttribute="top" secondItem="aLx-nn-Rhs" secondAttribute="bottom" constant="5" id="cbe-LO-sz1"/>
-                    <constraint firstItem="asJ-kQ-Jqv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="d3F-X2-FND"/>
+                    <constraint firstItem="asJ-kQ-Jqv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="d3F-X2-FND"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="sao-ME-HsA" secondAttribute="bottom" constant="10" id="e2M-g7-bHa"/>
                     <constraint firstItem="LYJ-aE-uqd" firstAttribute="top" secondItem="asJ-kQ-Jqv" secondAttribute="bottom" constant="5" id="eLh-WQ-fL0"/>
-                    <constraint firstItem="F5q-Ml-KiJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="f8S-E7-Qry"/>
+                    <constraint firstItem="F5q-Ml-KiJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="f8S-E7-Qry"/>
                     <constraint firstItem="sao-ME-HsA" firstAttribute="top" secondItem="aLx-nn-Rhs" secondAttribute="bottom" constant="5" id="gdd-be-bzq"/>
+                    <constraint firstItem="Jn2-2i-CGw" firstAttribute="leading" secondItem="Glb-Ym-hQ7" secondAttribute="leading" id="iSd-zA-gJQ"/>
                     <constraint firstAttribute="trailing" secondItem="aLx-nn-Rhs" secondAttribute="trailing" constant="5" id="jif-kL-FmG"/>
-                    <constraint firstAttribute="trailing" secondItem="FYt-Kg-9A5" secondAttribute="trailing" constant="5" id="kBy-C9-czb"/>
-                    <constraint firstItem="UIx-fb-WlC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="kWe-zw-pXc"/>
-                    <constraint firstItem="asJ-kQ-Jqv" firstAttribute="top" secondItem="F5q-Ml-KiJ" secondAttribute="bottom" constant="5" id="pTL-0F-pzU"/>
-                    <constraint firstItem="F5q-Ml-KiJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="tGV-Jm-kfa"/>
-                    <constraint firstItem="LYJ-aE-uqd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="wSY-fh-f8w"/>
+                    <constraint firstAttribute="trailing" secondItem="FYt-Kg-9A5" secondAttribute="trailing" constant="12" id="kBy-C9-czb"/>
+                    <constraint firstItem="UIx-fb-WlC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="kWe-zw-pXc"/>
+                    <constraint firstItem="asJ-kQ-Jqv" firstAttribute="top" secondItem="F5q-Ml-KiJ" secondAttribute="bottom" constant="15" id="pTL-0F-pzU"/>
+                    <constraint firstItem="F5q-Ml-KiJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="tGV-Jm-kfa"/>
+                    <constraint firstItem="LYJ-aE-uqd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="wSY-fh-f8w"/>
                 </constraints>
                 <userDefinedRuntimeAttributes>
                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
@@ -151,6 +166,11 @@
                         <integer key="value" value="15"/>
                     </userDefinedRuntimeAttribute>
                 </userDefinedRuntimeAttributes>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="Wsi-Xj-zgd"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="commentCount" destination="HT5-zA-qQ7" id="Had-c4-nAz"/>
@@ -160,13 +180,15 @@
                 <outlet property="post" destination="asJ-kQ-Jqv" id="YEO-VY-ALn"/>
                 <outlet property="postOwnerCity" destination="Glb-Ym-hQ7" id="c6a-xG-fAf"/>
                 <outlet property="postOwnerName" destination="UIx-fb-WlC" id="iUJ-as-4hm"/>
+                <outlet property="postedDate" destination="Jn2-2i-CGw" id="Gae-hP-qnY"/>
             </connections>
             <point key="canvasLocation" x="355" y="317"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="like" width="19" height="18"/>
+        <image name="down_arrow" width="26" height="16"/>
+        <image name="heart" width="14" height="13"/>
         <image name="sachin" width="160" height="206"/>
-        <image name="speech_bubble" width="24" height="20"/>
+        <image name="speech_bubble" width="29" height="25"/>
     </resources>
 </document>

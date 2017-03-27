@@ -327,3 +327,21 @@ extension String
     }
 
 }
+
+extension UITextView{
+    
+    func setPlaceHolder(){
+        self.text = "Enter your comment"
+        self.textColor = UIColor.grayColor()
+    }
+    
+    func clearPlaceHolder(){
+        if self.text == "Enter your comment"{
+            
+            self.text = ""
+        }
+        self.textColor = UIColor.blackColor()
+    }
+    
+}
+
