@@ -27,19 +27,19 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
         
         
       //  let nextViewController = viewControllerFrom("Main", vcid: "UserInfoViewController") as! UserInfoViewController
-        var toViewController: UIViewController
-        
-        switch profileData.UserProfile {
-        case userProfileType.Player.rawValue :
-            toViewController = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
-            //(toViewController as! PlayerExperienceViewController).userProfile = ""
-        case userProfileType.Coach.rawValue :
-            toViewController = viewControllerFrom("Main", vcid: "CoachingExperienceViewController")
-        case userProfileType.Fan.rawValue :
-            toViewController = viewControllerFrom("Main", vcid: "CricketFanViewController")
-        default:
-            toViewController = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
-        }
+//        var toViewController: UIViewController
+//        
+//        switch profileData.UserProfile {
+//        case userProfileType.Player.rawValue :
+//            toViewController = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
+//            //(toViewController as! PlayerExperienceViewController).userProfile = ""
+//        case userProfileType.Coach.rawValue :
+//            toViewController = viewControllerFrom("Main", vcid: "CoachingExperienceViewController")
+//        case userProfileType.Fan.rawValue :
+//            toViewController = viewControllerFrom("Main", vcid: "CricketFanViewController")
+//        default:
+//            toViewController = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
+//        }
         
        // nav1.viewControllers.append(toViewController)
         //nav1.viewControllers.append(usrViewController)
@@ -55,8 +55,8 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
          UIViewController *vc = windows.rootViewController;
          [vc presentViewController:alertController animated: YES completion:nil];
  */
-        let window = UIApplication.sharedApplication().delegate?.window
-        let vc = window!!.rootViewController
+       // let window = UIApplication.sharedApplication().delegate?.window
+       // let vc = window!!.rootViewController
        // vc?.presentViewController(nav1, animated: true, completion: nil)
         self.navigationController?.pushViewController(usrViewController, animated: true)
     }

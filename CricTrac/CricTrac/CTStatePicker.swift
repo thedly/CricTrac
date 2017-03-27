@@ -103,10 +103,10 @@ class CTStatePicker: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
             }
             return filteredStates
         }
-        catch let error as NSError {
-            print(error.debugDescription)
-            return [String]()
-        }
+//        catch let error as NSError {
+//            print(error.debugDescription)
+//            return [String]()
+//        }
     }
 }
 

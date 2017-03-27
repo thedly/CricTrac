@@ -165,10 +165,11 @@ func addProfileImageData(profileDp:UIImage){
                         LoggedInUserImage = UIImage(data: data!)!
 
                         
-                    }catch {
-                        LoggedInUserImage = placeHolderImage!
-
                     }
+//                    catch {
+//                        LoggedInUserImage = placeHolderImage!
+//
+//                    }
                     print("This is run on the background queue")
                     
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -221,10 +222,11 @@ func addCoverImageData(profileDp:UIImage){
                     LoggedInUserCoverImage = UIImage(data: data!)!
                     
                     
-                }catch {
-                    LoggedInUserCoverImage = placeHolderImage!
-                    
                 }
+//                catch {
+//                    LoggedInUserCoverImage = placeHolderImage!
+//                    
+//                }
                 print("This is run on the background queue")
                 
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
