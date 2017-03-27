@@ -8,7 +8,7 @@
 
 import UIKit
 import SwiftyJSON
-class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var clubName: UILabel!
     @IBOutlet weak var userCity: UILabel!
@@ -26,8 +26,11 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     @IBOutlet weak var inerView: UIView!
     
+    @IBOutlet weak var commentTextView: UITextView!
     
     var dataSource = [[String:AnyObject]]()
+    
+    @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
     
     var postData:JSON?
     
@@ -43,6 +46,10 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
         tableView.rowHeight = UITableViewAutomaticDimension;
         tableView.estimatedRowHeight = 50.0;
+        
+        commentTextView.layer.borderWidth = 1
+        commentTextView.layer.borderColor = UIColor.darkGrayColor().CGColor
+        commentTextView.setPlaceHolder()
         
         postText.text = postData!.dictionaryValue["Post"]?.stringValue
         
@@ -134,18 +141,29 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         textView.text = ""
     }
     func textViewDidEndEditing(textView: UITextView){
-        commentBox.text = "Add Comment"
+        
+        if textView == commentTextView{
+        commentTextView.setPlaceHolder()
+        textViewHeightConstraint.constant = 30
+        }
+        
     }
     
     @IBAction func postNewComment(sender: AnyObject) {
         
         
-        dataSource.append(["OwnerName":loggedInUserName ?? "Another Friend","Comment":commentBox.text])
+        let text = commentTextView.text.trimWhiteSpace
         
-        let postId = postData!.dictionaryValue["postId"]?.stringValue
-        addNewComment(postId!, comment: commentBox.text)
-        commentBox.text = ""
-        tableView.reloadData()
+        if text.characters.count > 0{
+            
+            commentTextView.resignFirstResponder()
+            commentTextView.setPlaceHolder()
+            textViewHeightConstraint.constant = 30
+            dataSource.append(["OwnerName":loggedInUserName ?? "Another Friend","Comment":text])
+            let postId = postData!.dictionaryValue["postId"]?.stringValue
+            addNewComment(postId!, comment:text)
+            tableView.reloadData()
+        }
     }
     
     @IBAction func didTapClose(sender: AnyObject) {
@@ -154,41 +172,60 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     
     
-    @IBAction func addCommnet(sender: UIButton) {
+   
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool{
         
+        let textViewContent = textView.text
+        /*
+         
+         if textViewContent != ""{
+         
+         let lastChar = textViewContent[textViewContent.endIndex.predecessor()]
+         if lastChar == "\n" && text ==  ""{
+         if self.TextViewHeight.constant > 30{
+         self.TextViewHeight.constant = self.TextViewHeight.constant-18
+         }
+         }
+         }
+         if text ==  "\n"{
+         
+         UIView.animateWithDuration(0.1, animations: { () -> Void in
+         if self.TextViewHeight.constant < 102{
+         self.TextViewHeight.constant = self.TextViewHeight.constant+18
+         }
+         
+         })
+         }
+         */
         
-        let alert = UIAlertController(title: "Alert Title",
-                                      message: "Alert message",
-                                      preferredStyle: UIAlertControllerStyle.Alert)
+        if text ==  "\n"{ return false}
         
-        let ok = UIAlertAction(title: "OK",
-                               style: UIAlertActionStyle.Default) { (action: UIAlertAction) in
-                                
-                                if let alertTextField = alert.textFields?.first where alertTextField.text != nil {
-                                    
-                                    print("And the text is... \(alertTextField.text!)!")
-                                    
-                                }
-                                
-                                
+        let lines  =  textViewContent.characters.count/40
+        
+        let heightConstant = Int((self.textViewHeightConstraint.constant - 30)/18)
+        
+        if lines > heightConstant{
+            
+            if self.textViewHeightConstraint.constant < 102{
+                UIView.animateWithDuration(0.1, animations: { () -> Void in
+                    
+                    self.textViewHeightConstraint.constant = self.textViewHeightConstraint.constant+18
+                })}
+        }else if heightConstant > lines{
+            
+            self.textViewHeightConstraint.constant = self.textViewHeightConstraint.constant - 18
         }
         
-        let cancel = UIAlertAction(title: "Cancel",
-                                   style: UIAlertActionStyle.Cancel,
-                                   handler: nil)
-        
-        alert.addTextFieldWithConfigurationHandler { (textField: UITextField) in
-            
-            textField.placeholder = "Text here"
-            
-        }
-        
-        alert.addAction(ok)
-        alert.addAction(cancel)
-        
-        self.presentViewController(alert, animated: true, completion: nil)
+        return true
     }
-
+    
+    func textViewShouldBeginEditing(textView: UITextView) -> Bool{
+        
+        textView.clearPlaceHolder()
+        return true
+    }
+    
     /*
     // MARK: - Navigation
 
