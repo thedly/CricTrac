@@ -632,7 +632,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             
         }
     }
-
+   
     
     
     func setDashboardData(){
@@ -854,10 +854,17 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 if indexPath.row < (userProfileData.PlayerCurrentTeams.count) {
                    
                     teamNameToReturn = userProfileData.PlayerCurrentTeams[indexPath.row]
+                   
+                    aCell.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.boxColor)))
+                    aCell.TeamAbbr.textColor = UIColor.whiteColor()
+                   
 
                 }
                 else if (indexPath.row - (userProfileData.PlayerCurrentTeams.count)) < (userProfileData.PlayerPastTeams.count) {
-                 teamNameToReturn = userProfileData.PlayerPastTeams[(indexPath.row - userProfileData.PlayerCurrentTeams.count)]
+                 
+                    teamNameToReturn = userProfileData.PlayerPastTeams[(indexPath.row - userProfileData.PlayerCurrentTeams.count)]
+                     aCell.baseView.backgroundColor = UIColor.grayColor()
+                    aCell.TeamAbbr.textColor = UIColor.blackColor()
                     
                 }
                 
@@ -874,11 +881,22 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             }
             
             if teamNameToReturn != "" {
+                
                 aCell.TeamName.text = teamNameToReturn
-                aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+                
+                let teamName = teamNameToReturn.componentsSeparatedByString(" ")
+                
+                if teamName.count == 1 {
+                  aCell.TeamAbbr.text = "\(teamName[0].characters.first!)"
+                }
+                else if teamName.count == 2 {
+                    aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)"
+                }
+                else {
+                    aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
+                }
             }
-            
-            
+
             
             
                 
