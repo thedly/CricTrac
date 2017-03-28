@@ -422,7 +422,9 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         super.viewWillAppear(animated)
         
         setBackgroundColor()
-
+        
+        
+       
     }
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
         
