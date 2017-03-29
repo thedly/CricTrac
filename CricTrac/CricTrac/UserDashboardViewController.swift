@@ -505,11 +505,12 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     
-    
-    func getMatchData(){
+    //commmented by sajith
+    /*func getMatchData(){
         
         recentMatchesNotAvailable.hidden = true
         KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+        
         getAllMatchData(friendId) { (data) in
             
             
@@ -602,6 +603,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             
             self.SecondRecentMatchSummary.hidden = true
             self.FirstRecentMatchSummary.hidden = true
+ 
             
             if self.matches.count > 0 {
                 self.firstRecentMatchScoreCard.attributedText = self.matches[0].battingBowlingScore
@@ -633,147 +635,207 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             KRProgressHUD.dismiss()
             
         }
-    }
+    }*/
    
     
     
-    func setDashboardData(){
-        
-        //KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
-        
-        topBattingNotAvailable.hidden = true
-        topBowlingNotAvailable.hidden = true
-        
+func setDashboardData(){
+    //KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+    topBattingNotAvailable.hidden = true
+    topBowlingNotAvailable.hidden = true
        
-        getAllDashboardData(friendId) { (data) in
-            
-            DashboardDetails = DashboardData(dataObj: data)
-            if DashboardDetails != nil {
+    getAllDashboardData(friendId) { (data) in
+        DashboardDetails = DashboardData(dataObj: data)
+        if DashboardDetails != nil {
+            UIView.animateWithDuration(3.0, animations: {
+                //data for Top box on dashboard
+                self.battingMatches.text = String(DashboardDetails.TotalMatches)
+                self.highScore.text = String(DashboardDetails.TopBatting1stMatchScore)
+                self.BB.text = String(DashboardDetails.TopBowling1stMatchScore)
+                self.winPerc.text = String(DashboardDetails.WinPercentage)
                 
+                //data for Batting Card
+                self.totalRunsScored.text = String(DashboardDetails.TotalRuns)
+                self.battingInnings.text = String(DashboardDetails.BattingInnings)
+                self.battingAverage.text = String(DashboardDetails.TotalBattingAverage)
+                self.strikeRate.text = String(DashboardDetails.TotalStrikeRate)
+                self.hundreds.text = String(DashboardDetails.Total100s)
+                self.fifties.text = String(DashboardDetails.Total50s)
+                self.sixes.text = String(DashboardDetails.Total6s)
+                self.fours.text = String(DashboardDetails.Total4s)
                 
+                //data for Bowling Card
+                self.bowlingInnings.text = String(DashboardDetails.BowlingInnings)
+                self.totalWickets.text = String(DashboardDetails.TotalWickets)
+                self.bowlingAverage.text = String(DashboardDetails.TotalBowlingAverage)
+                self.bowlingEconomy.text = String(DashboardDetails.TotalEconomy)
+                self.TotalThreeWicketsPerMatch.text = String(DashboardDetails.Total3Wkts)
+                self.TotalMaidens.text = String(DashboardDetails.TotalMaidens)
+                self.TotalFiveWicketsPerMatch.text = String(DashboardDetails.Total5Wkts)
+                self.PlayerOversBowld.text = String(DashboardDetails.TotalOvers)
                 
-                UIView.animateWithDuration(3.0, animations: {
+                //sajith - new code for Recent Matches
+                //Data for Recent Matches
+                self.FirstRecentMatchSummary.hidden = true
+                self.SecondRecentMatchSummary.hidden = true
+                if String(DashboardDetails.Recent1stMatchID) != "-" {
+                    /*getSelectedMatchData(String(DashboardDetails.Recent1stMatchID), friendId: self.friendId) { (data) in
+                    }*/
                     
-                    self.winPerc.text = String(DashboardDetails.WinPercentage)
-                    self.BB.text = String(DashboardDetails.TopBowling1stMatchScore)
-                    self.totalRunsScored.text = String(DashboardDetails.TotalRuns)
-                    
-                    self.battingMatches.text = String(DashboardDetails.TotalMatches)
-                    self.battingInnings.text = String(DashboardDetails.BattingInnings)
-                    self.bowlingInnings.text = String(DashboardDetails.BowlingInnings)
-                    //    self.notOuts = DashboardDetails
-                    
-                    self.highScore.text = String(DashboardDetails.TopBatting1stMatchScore)
-                    self.battingAverage.text = String(DashboardDetails.TotalBattingAverage)
-                    self.strikeRate.text = String(DashboardDetails.TotalStrikeRate)
-                    self.hundreds.text = String(DashboardDetails.Total100s)
-                    self.fifties.text = String(DashboardDetails.Total50s)
-                    
-                    self.sixes.text = String(DashboardDetails.Total6s)
-                    self.fours.text = String(DashboardDetails.Total4s)
-                    
-                  //
-                   // self.ballsFacedDuringBat.text = String(DashboardDetails.TotalBallsFaced)
-                    
-                    // bowling
-                    
-                    self.totalWickets.text = String(DashboardDetails.TotalWickets)
-                    self.bowlingAverage.text = String(DashboardDetails.TotalBowlingAverage)
-                    self.bowlingEconomy.text = String(DashboardDetails.TotalEconomy)
-                    
-                    self.TotalThreeWicketsPerMatch.text = String(DashboardDetails.Total3Wkts)
-                    
-                    self.TotalMaidens.text = String(DashboardDetails.TotalMaidens)
-                    self.TotalFiveWicketsPerMatch.text = String(DashboardDetails.Total5Wkts)
-                    
-                    self.PlayerOversBowld.text = String(DashboardDetails.TotalOvers)
-                    
-                    
-                    self.FirstRecentMatchView.hidden = (DashboardDetails.TopBatting1stMatchScore == nil || String(DashboardDetails.TopBatting1stMatchScore) == "0")
-                    
-                    
-                    self.SecondRecentMatchView.hidden = (DashboardDetails.TopBatting2ndMatchScore == nil || String(DashboardDetails.TopBatting2ndMatchScore) == "0")
-                    
-                    
-                    
-                    self.FirstRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling1stMatchScore == nil || DashboardDetails.TopBowling1stMatchScore as! String == "0-0")
-                    
-                    
-                    self.SecondRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling2ndMatchScore == nil || DashboardDetails.TopBowling2ndMatchScore as! String == "0-0")
-                    
-                    
-                    self.topBattingNotAvailable.hidden = !(self.FirstRecentMatchView.hidden && self.SecondRecentMatchView.hidden)
-                    self.topBowlingNotAvailable.hidden = !(self.FirstRecentMatchBowlingView.hidden && self.SecondRecentMatchBowlingView.hidden)
-                    
-                    
-                    if !self.FirstRecentMatchView.hidden {
-                        self.FirstRecentMatchScore.text = String(DashboardDetails.TopBatting1stMatchScore)
-                        self.FirstRecentMatchOpponent.text = String(DashboardDetails.TopBatting1stMatchOpp)
+                    let matchId:String = (String(DashboardDetails.Recent1stMatchID) ?? nil)!
+                    let userId:String = self.friendId ?? currentUser!.uid
+                    fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
                         
-                        let formattedString = NSMutableAttributedString()
-                        formattedString.bold("\(DashboardDetails.TopBatting1stMatchDate), at \(DashboardDetails.TopBatting1stMatchGround)",fontName: appFont_bold, fontSize: 12)
-                        self.FirstRecentMatchDateAndLocation.attributedText = formattedString
-                    }
-                    
-                    
-                    
-                    
-                    if !self.SecondRecentMatchView.hidden {
-                        
-                        self.SecondRecentMatchScore.text = String(DashboardDetails.TopBatting2ndMatchScore)
-                        self.SecondRecentMatchOpponent.text = String(DashboardDetails.TopBatting2ndMatchOpp)
-                        
-                        let formattedString_2 = NSMutableAttributedString()
-                        formattedString_2.bold("\(DashboardDetails.TopBatting2ndMatchDate), at \(DashboardDetails.TopBatting2ndMatchGround)",fontName: appFont_bold, fontSize: 12)
-                        self.SecondRecentMatchDateAndLocation.attributedText = formattedString_2
-                        
-                    }
-                    
-                    
-                    if !self.FirstRecentMatchBowlingView.hidden {
-                        self.FirstRecentMatchBowlingScore.text = String(DashboardDetails.TopBowling1stMatchScore)
-                        self.FirstRecentMatchBowlingOpponent.text = String(DashboardDetails.TopBowling1stMatchOpp)
-                        
-                        let formattedString_Bowling = NSMutableAttributedString()
-                        formattedString_Bowling.bold("\(DashboardDetails.TopBowling1stMatchDate), at \(DashboardDetails.TopBowling1stMatchGround)",fontName: appFont_bold, fontSize: 12)
-                        self.FirstRecentMatchBowlingDateAndLocation.attributedText = formattedString_Bowling
-                    }
-                    
-                    
-                    
-                    if !self.SecondRecentMatchBowlingView.hidden {
-                        
-                        self.SecondRecentMatchBowlingScore.text = String(DashboardDetails.TopBowling2ndMatchScore)
-                        self.SecondRecentMatchBowlingOpponent.text = String(DashboardDetails.TopBowling2ndMatchOpp)
-                        
-                        let formattedString_Bowling_2 = NSMutableAttributedString()
-                        formattedString_Bowling_2.bold("\(DashboardDetails.TopBowling2ndMatchDate), at \(DashboardDetails.TopBowling2ndMatchGround)",fontName: appFont_bold, fontSize: 12)
-                        self.SecondRecentMatchBowlingDateAndLocation.attributedText = formattedString_Bowling_2
-                    }
-                    
-                    }, completion: { (val) in
-                        
-                       // KRProgressHUD.dismiss()
-                })
-            }
-            
-            //self.setUIElements()
-            //self.setBowlingUIElements()
-            
-            
-            
-            
+                        if let data = snapshot.value! as? [String:AnyObject]{
+                            
+                            let battingBowlingScore = NSMutableAttributedString()
+                            var matchVenueAndDate = ""
+                            var opponentName = ""
+                            let mData = MatchSummaryData()
+                            
+                            if let runsTaken = data["RunsTaken"]{
+                                mData.BattingSectionHidden = (runsTaken as! String == "-")
+                                if mData.BattingSectionHidden == false {
+                                    if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
+                                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("*", fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
+                                    }
+                                    else{
+                                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
+                                    }
+                                }
+                            }
+                            if let wicketsTaken = data["WicketsTaken"], let runsGiven = data["RunsGiven"] {
+                                mData.BowlingSectionHidden = (runsGiven as! String == "-")
+                                if mData.BowlingSectionHidden == false {
+                                    if battingBowlingScore.length > 0 {
+                                        battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 30).bold("\nWICKETS", fontName: appFont_black, fontSize: 12)
+                                    }
+                                    else{
+                                        battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 53).bold("\nWICKETS", fontName: appFont_black, fontSize: 12)
+                                    }
+                                }
+                            }
+                            
+                            if battingBowlingScore.length == 0 {
+                                battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize: 30)
+                            }
+                            
+                            
+                            if let date = data["MatchDate"]{
+                                let DateFormatter = NSDateFormatter()
+                                DateFormatter.dateFormat = "dd-MM-yyyy"
+                                DateFormatter.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
+                                let dateFromString = DateFormatter.dateFromString(date as! String)
+                                mData.matchDate = dateFromString
+                                matchVenueAndDate.appendContentsOf(date as? String ?? "NA")
+                            }
+                            
+                            if let group = data["AgeGroup"]{
+                                matchVenueAndDate.appendContentsOf(" | \(group)")
+                            }
+                            
+                            if let ground = data["Ground"]{
+                                mData.ground = ground as! String
+                                
+                                if let venue = data["Venue"] as? String where venue != "-" {
+                                    mData.ground = "\(ground), \(venue)"
+                                }
+                                matchVenueAndDate.appendContentsOf("\n \(mData.ground)")
+                            }
+                            
+                            if let ballsFaced = data["BallsFaced"] as? String where ballsFaced != "-", let runsScored = data["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
+                                
+                                if ballsFaced == "0" {
+                                    mData.strikerate = Float("0.00")
+                                }
+                                else {
+                                    let strikeRate = String(format: "%.2f",(Float(runsScored)!)*100/Float(ballsFaced)!)
+                                    mData.strikerate = Float(strikeRate)
+                                    matchVenueAndDate.appendContentsOf("\n Strike Rate: \(strikeRate)")
+                                }
+                            }
+                            
+                            if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
+                                
+                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
+                                mData.economy = Float(economy)
+                                matchVenueAndDate.appendContentsOf("\n Economy: \(economy)")
+                            }
+                            
+                            if let opponent  = data["Opponent"]{
+                                opponentName = opponent as! String
+                            }
+                            
+                            self.firstRecentMatchScoreCard.attributedText = battingBowlingScore
+                            self.firstRecentMatchOpponentName.text = opponentName
+                            self.firstRecentMatchDateAndVenue.text = matchVenueAndDate
+                            
+                        }
+                    })
+                    self.FirstRecentMatchSummary.hidden = false
+                    self.recentMatchesNotAvailable.hidden = true
+                }
+                
+                //Data for Top Batting section
+                self.FirstRecentMatchView.hidden = (DashboardDetails.TopBatting1stMatchScore == nil || String(DashboardDetails.TopBatting1stMatchScore) == "0")
+                self.SecondRecentMatchView.hidden = (DashboardDetails.TopBatting2ndMatchScore == nil || String(DashboardDetails.TopBatting2ndMatchScore) == "0")
+                
+                //Data for Top Bowling section
+                self.FirstRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling1stMatchScore == nil || DashboardDetails.TopBowling1stMatchScore as! String == "0-0")
+                self.SecondRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling2ndMatchScore == nil || DashboardDetails.TopBowling2ndMatchScore as! String == "0-0")
+                
+                self.topBattingNotAvailable.hidden = !(self.FirstRecentMatchView.hidden && self.SecondRecentMatchView.hidden)
+                self.topBowlingNotAvailable.hidden = !(self.FirstRecentMatchBowlingView.hidden && self.SecondRecentMatchBowlingView.hidden)
+                
+                //Display Top Batting First Match card
+                if !self.FirstRecentMatchView.hidden {
+                    self.FirstRecentMatchScore.text = String(DashboardDetails.TopBatting1stMatchScore)
+                    self.FirstRecentMatchOpponent.text = String(DashboardDetails.TopBatting1stMatchOpp)
+                    let formattedString = NSMutableAttributedString()
+                    formattedString.bold("\(DashboardDetails.TopBatting1stMatchDate), at \(DashboardDetails.TopBatting1stMatchGround)",fontName: appFont_bold, fontSize: 12)
+                    self.FirstRecentMatchDateAndLocation.attributedText = formattedString
+                }
+                
+                //Display Top Batting Second Match card
+                if !self.SecondRecentMatchView.hidden {
+                    self.SecondRecentMatchScore.text = String(DashboardDetails.TopBatting2ndMatchScore)
+                    self.SecondRecentMatchOpponent.text = String(DashboardDetails.TopBatting2ndMatchOpp)
+                    let formattedString_2 = NSMutableAttributedString()
+                    formattedString_2.bold("\(DashboardDetails.TopBatting2ndMatchDate), at \(DashboardDetails.TopBatting2ndMatchGround)",fontName: appFont_bold, fontSize: 12)
+                    self.SecondRecentMatchDateAndLocation.attributedText = formattedString_2
+                }
+                
+                //Display Top Bowling First Match card
+                if !self.FirstRecentMatchBowlingView.hidden {
+                    self.FirstRecentMatchBowlingScore.text = String(DashboardDetails.TopBowling1stMatchScore)
+                    self.FirstRecentMatchBowlingOpponent.text = String(DashboardDetails.TopBowling1stMatchOpp)
+                    let formattedString_Bowling = NSMutableAttributedString()
+                    formattedString_Bowling.bold("\(DashboardDetails.TopBowling1stMatchDate), at \(DashboardDetails.TopBowling1stMatchGround)",fontName: appFont_bold, fontSize: 12)
+                    self.FirstRecentMatchBowlingDateAndLocation.attributedText = formattedString_Bowling
+                }
+                
+                //Display Top Bowling Second Match card
+                if !self.SecondRecentMatchBowlingView.hidden {
+                    self.SecondRecentMatchBowlingScore.text = String(DashboardDetails.TopBowling2ndMatchScore)
+                    self.SecondRecentMatchBowlingOpponent.text = String(DashboardDetails.TopBowling2ndMatchOpp)
+                    let formattedString_Bowling_2 = NSMutableAttributedString()
+                    formattedString_Bowling_2.bold("\(DashboardDetails.TopBowling2ndMatchDate), at \(DashboardDetails.TopBowling2ndMatchGround)",fontName: appFont_bold, fontSize: 12)
+                    self.SecondRecentMatchBowlingDateAndLocation.attributedText = formattedString_Bowling_2
+                }
+            },
+            completion: { (val) in
+                // KRProgressHUD.dismiss()
+            })
         }
-        
     }
+}
     
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
-
-            getMatchData()
-            setDashboardData()
-    }
+override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(true)
+    //getMatchData()
+    setDashboardData()
+}
     
 
     func scrollViewDidScrollToTop(scrollView: UIScrollView) {
