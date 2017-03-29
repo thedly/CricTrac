@@ -641,8 +641,9 @@ func setDashboardData(){
                 let bowlingAverageDouble = Double(String(DashboardDetails.TotalBowlingAverage))
                 self.bowlingAverage.text = String(format:"%.2f",bowlingAverageDouble!)
                 //self.bowlingAverage.text = String(DashboardDetails.TotalBowlingAverage)
-                
-                self.bowlingEconomy.text = String(DashboardDetails.TotalEconomy)
+                let economy = Double(String(DashboardDetails.TotalEconomy))
+                self.bowlingEconomy.text = String(format:"%.2f",economy!)
+                //self.bowlingEconomy.text = String(DashboardDetails.TotalEconomy)
                 self.TotalThreeWicketsPerMatch.text = String(DashboardDetails.Total3Wkts)
                 self.TotalMaidens.text = String(DashboardDetails.TotalMaidens)
                 self.TotalFiveWicketsPerMatch.text = String(DashboardDetails.Total5Wkts)
