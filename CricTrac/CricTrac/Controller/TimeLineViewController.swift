@@ -10,6 +10,7 @@
 import UIKit
 import SwiftyJSON
 import GoogleMobileAds
+import KRProgressHUD
 
 class TimeLineViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable,PostSendable,Deletable{
     
@@ -117,6 +118,35 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 
                 self.timeLineTable.reloadData()
             })
+        }
+    }
+    
+    func modifyPost(text: String, postId: String,index:Int) {
+
+        editPost(text,postId: postId) { (data) in
+            
+            var timeLineData:[JSON]!
+            
+            if let  value = timelineData?.arrayValue{
+                
+                timeLineData = value
+            }else{
+                
+                timeLineData = [JSON]()
+            }
+            
+            
+            timeLineData[index] = JSON(data["timeline"]!)
+            
+            
+            timelineData = JSON(timeLineData)
+            
+            dispatch_async(dispatch_get_main_queue(),{
+                
+                self.timeLineTable.reloadData()
+                KRProgressHUD.dismiss()
+            })
+            
         }
     }
     
@@ -247,6 +277,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 let  postCell =  timeLineTable.dequeueReusableCellWithIdentifier("aPost", forIndexPath: indexPath) as! APostTableViewCell
                 
                 postCell.parent = self
+                postCell.postIndex = indexPath.section-1
                 
                 let friendId = data["OwnerID"].stringValue
                 

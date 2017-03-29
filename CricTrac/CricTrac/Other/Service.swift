@@ -1141,6 +1141,30 @@ func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
     
 }
 
+
+
+func editPost(post:String, postId:String,sucess:([String:AnyObject])->Void){
+    
+    KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+    
+    let userName = loggedInUserName ?? "No Name"
+    
+    let edittedTime =  Int(NSDate().timeIntervalSince1970 * 1000)
+//    let timelineDict:[String:AnyObject] = ["AddedTime":addedTime,"OwnerID":currentUser!.uid,"OwnerName":userName,"isDeleted":"0","Post":post,"PostedBy":currentUser!.uid,"PostType":"Self"]
+    
+    let ref = fireBaseRef.child("TimelinePosts").child(postId).child("Post")
+    
+    ref.setValue(post)
+    
+    let editedTimeRef = fireBaseRef.child("TimelinePosts").child(postId).child("EditedTime")
+    
+    editedTimeRef.setValue(edittedTime)
+    
+    let returnData = ["timeline":["Post":post,"CommentCount":"0","LikeCount":"0","OwnerName":userName,"postId":postId,"OwnerID":currentUser!.uid,"PostedBy":currentUser!.uid,"PostType":"Self"]]
+    sucess(returnData)
+}
+
+
 func addNewComment(postId:String,comment:String){
     
     let ref = fireBaseRef.child("TimelinePosts").child(postId).child("TimelineComments").childByAutoId()
