@@ -302,22 +302,6 @@ func getAllDashboardData(friendId:String?=nil,sucessBlock:([String:AnyObject])->
     
 }
 
-//Sajith - new function for fetching match data
-func getSelectedMatchData (matchId:String?=nil, friendId:String?=nil,sucessBlock:([String:AnyObject])->Void){
-    let matchId:String = (matchId ?? nil)!
-    let userId:String = friendId ?? currentUser!.uid
-    fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
-        
-        if let data = snapshot.value! as? [String:AnyObject]{
-            
-            sucessBlock(data)
-        }
-        else{
-            sucessBlock([:])
-        }
-    })
-}
-
 //MARK:- Ground
 
 func addNewGroundName(groundName:String){
