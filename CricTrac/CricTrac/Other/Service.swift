@@ -302,7 +302,6 @@ func getAllDashboardData(friendId:String?=nil,sucessBlock:([String:AnyObject])->
     
 }
 
-
 //MARK:- Ground
 
 func addNewGroundName(groundName:String){
