@@ -11,6 +11,7 @@ import Foundation
 protocol PostSendable:class {
     
     func sendNewPost(text:String)
+    func modifyPost(text:String,postId:String,index:Int)
     
 }
 

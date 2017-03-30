@@ -31,6 +31,7 @@ class APostTableViewCell: UITableViewCell {
     var currentUserHasLikedThePost = false
     var parent:Deletable?
     var postOwnerId:String?
+    var postIndex = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -181,7 +182,7 @@ class APostTableViewCell: UITableViewCell {
         let optionMenu = UIAlertController(title: nil, message: "SELECT ACTION", preferredStyle: .ActionSheet)
         
         // 2
-        let deleteAction = UIAlertAction(title: "Delete", style: .Default, handler: {
+        let deleteAction = UIAlertAction(title: "DELETE", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
            
             let appearance = SCLAlertView.SCLAppearance(
@@ -196,14 +197,15 @@ class APostTableViewCell: UITableViewCell {
             
             alertView.showNotice("Warning", subTitle: "All Data will be lost if you continue")
         })
-        let saveAction = UIAlertAction(title: "Save", style: .Default, handler: {
+        let saveAction = UIAlertAction(title: "EDIT", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
             
+            self.presentEditablePost()
             
         })
         
         //
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+        let cancelAction = UIAlertAction(title: "CANCEL", style: .Cancel, handler: {
             (alert: UIAlertAction!) -> Void in
             print("Cancelled")
         })
@@ -223,6 +225,20 @@ class APostTableViewCell: UITableViewCell {
         
     }
     
+    func presentEditablePost(){
+     
+        let newPost = viewControllerFrom("Main", vcid: "NewPostViewController") as! NewPostViewController
+        newPost.sendPostDelegate = (self.parent as! PostSendable)
+        newPost.modalPresentationStyle = .OverCurrentContext
+        newPost.editingPost = self.post.text
+        newPost.postIndex = postIndex
+        if let val = postId{
+           newPost.postId = val
+        }
+        if let parentVC = self.parent as? UIViewController{
+            parentVC.presentViewController(newPost, animated: true, completion: nil)
+        }
+    }
     
     func deletePostFromFB(){
         if let value = postId{
