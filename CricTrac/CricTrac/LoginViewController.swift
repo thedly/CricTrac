@@ -46,14 +46,17 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         super.viewDidLoad()
         
         setBackgroundColor()
+<<<<<<< HEAD
        username.text = "sravani.mdr@gmail.com"
         password.text = "123456"
+=======
+>>>>>>> abc6cfcca66839421b9a79004dc4bbbe380c2529
         //username.text = "crictracvirat@gmail.com"
         //password.text = "crictrac"
 
         //setUIBackgroundTheme(self.view)
         
-        //loginWithSavedCredentials()
+        loginWithSavedCredentials()
             }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
