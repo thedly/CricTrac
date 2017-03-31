@@ -608,6 +608,76 @@ func setDashboardData(){
     //KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
     topBattingNotAvailable.hidden = true
     topBowlingNotAvailable.hidden = true
+    self.firstRecentMatchScoreCard.attributedText = nil
+    
+    self.firstRecentMatchOpponentName.text = nil
+    
+    self.firstRecentMatchDateAndVenue.text = nil
+    
+    self.FirstRecentMatchGroundVenue.text = nil
+    
+    self.FirstRecentMatchStrikeRate.text = nil
+    
+    
+    
+    self.secondRecentMatchScoreCard.attributedText = nil
+    
+    self.secondRecentMatchOpponentName.text = nil
+    
+    self.secondRecentMatchDateAndVenue.text = nil
+    
+    self.SecondRecentMatchGroundVenue.text = nil
+    
+    self.SecondRecentMatchStrikeRate.text = nil
+    
+    
+    
+    self.FirstRecentMatchScore.attributedText = nil
+    
+    self.FirstRecentMatchOpponent.text = nil
+    
+    self.FirstRecentMatchDateAndLocation.text = nil
+    
+    self.FirstRecentMatchBattingGroundVenue.text = nil
+    
+    self.FirstRecentMatchBattingStrikeRate.text = nil
+    
+    
+    
+    self.SecondRecentMatchScore.attributedText = nil
+    
+    self.SecondRecentMatchOpponent.text = nil
+    
+    self.SecondRecentMatchDateAndLocation.text = nil
+    
+    self.SecondRecentMatchBattingGroundVenue.text = nil
+    
+    self.SecondRecentMatchBattingStrikeRate.text = nil
+    
+    
+    
+    self.FirstRecentMatchBowlingScore.attributedText = nil
+    
+    self.FirstRecentMatchBowlingOpponent.text = nil
+    
+    self.FirstRecentMatchBowlingDateAndLocation.text = nil
+    
+    self.FirstRecentMatchBowlingGroundVenue.text = nil
+    
+    self.FirstRecentMatchBowlingEconomy.text = nil
+    
+    
+    
+    self.SecondRecentMatchBowlingScore.attributedText = nil
+    
+    self.SecondRecentMatchBowlingOpponent.text = nil
+    
+    self.SecondRecentMatchBowlingDateAndLocation.text = nil
+    
+    self.SecondRecentMatchBowlingGroundVenue.text = nil
+    
+    self.SecondRecentMatchBowlingEconomy.text = nil
+
        
     getAllDashboardData(friendId) { (data) in
         DashboardDetails = DashboardData(dataObj: data)
