@@ -39,7 +39,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     // MARK: - Plumbing
     
-   
+   @IBOutlet weak var vsView: UIView!
     
     @IBOutlet weak var FirstRecentMatchSummary: UIView!
     @IBOutlet weak var SecondRecentMatchSummary: UIView!
