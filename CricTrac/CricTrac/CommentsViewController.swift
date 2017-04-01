@@ -10,8 +10,11 @@ import UIKit
 import SwiftyJSON
 class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate {
     @IBOutlet weak var userName: UILabel!
-    @IBOutlet weak var clubName: UILabel!
+    @IBOutlet weak var date: UILabel!
     @IBOutlet weak var userCity: UILabel!
+    
+    @IBOutlet weak var comments: UILabel!
+    @IBOutlet weak var likes: UILabel!
     
     @IBOutlet weak var postText: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
@@ -28,6 +31,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     @IBOutlet weak var commentTextView: UITextView!
     
     var dataSource = [[String:AnyObject]]()
+    var  postId:String = ""
     
     @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
     
@@ -52,20 +56,27 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
         postText.text = postData!.dictionaryValue["Post"]?.stringValue
         
-        let postId = postData!.dictionaryValue["postId"]?.stringValue
+        postId = (postData!.dictionaryValue["postId"]?.stringValue)!
         
         userName.text = postData!.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
         
         if let likeCount = postData!.dictionaryValue["Likes"]?.count{
             
-            //likeButton.setTitle("\(likeCount) Likes", forState: .Normal)
+            likes.text = "\(likeCount) Likes"
             
         }else{
             
-            //likeButton.setTitle("0 Likes", forState: .Normal)
+            likes.text = "0 Likes"
         }
         
-        
+        if let commentCount = postData!.dictionaryValue["TimelineComments"]?.count{
+            
+            comments.text = "\(commentCount) Comments"
+            
+        }else{
+            
+            comments.text = "0 Comments"
+        }
         
         
         let friendId = postData!["OwnerID"].stringValue
@@ -87,7 +98,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         }
         
        
-        getAllComments(postId!) { (data) in
+        getAllComments(postId) { (data) in
             
             self.dataSource = data
             self.tableView.reloadData()
@@ -221,6 +232,54 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         textView.clearPlaceHolder()
         return true
     }
+    
+    
+    
+    
+    @IBAction func didTapLikeButton(sender: UIButton) {
+        
+            
+            likeOrUnlike(postId, like: { (likeDict) in
+                
+                self.addLikeToDataArray(likeDict)
+                self.likeButton.titleLabel?.textColor = UIColor.yellowColor()
+                //self.likeButton.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
+                
+            }) {
+                self.removeLikeFromArray()
+                self.likeButton.titleLabel?.textColor = UIColor.grayColor()
+                //self.likeButton.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
+                
+            }
+        }
+    
+    func addLikeToDataArray(likeArray:[String:[String:String]]){
+        
+        //timelineData![index]["Likes"] = JSON(likeArray)
+    }
+    
+    func removeLikeFromArray(){
+        /*
+        var likes = timelineData!.arrayObject![index]["Likes"] as! [String:[String:String]]
+        let keys =  likes.filter{key,val in
+            
+            return val["OwnerID"]! == currentUser!.uid
+            
+            }.map{
+                
+                return $0.0
+        }
+        
+        if keys.count > 0 {
+            
+            likes.removeValueForKey(keys[0])
+            
+            timelineData![index!]["Likes"] = JSON(likes)
+        }
+        */
+        
+    }
+    
     
     /*
     // MARK: - Navigation
