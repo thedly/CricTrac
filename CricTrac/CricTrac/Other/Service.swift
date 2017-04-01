@@ -1129,7 +1129,7 @@ func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
     ref.setValue(timelineDict)
     
     let postKey = ref.key
-    let returnData = ["timeline":["Post":postText,"CommentCount":"0","LikeCount":"0","OwnerName":userName,"postId":postKey,"OwnerID":currentUser!.uid,"PostedBy":currentUser!.uid,"PostType":"Self"]]
+    let returnData = ["timeline":["AddedTime":addedTime,"Post":postText,"CommentCount":"0","LikeCount":"0","OwnerName":userName,"postId":postKey,"OwnerID":currentUser!.uid,"PostedBy":currentUser!.uid,"PostType":"Self"]]
     
     sucess(data: returnData)
     

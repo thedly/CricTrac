@@ -24,3 +24,8 @@ protocol Deletable {
     
     func deletePost(index:Int)
 }
+
+protocol Refreshable{
+    
+    func refresh()
+}

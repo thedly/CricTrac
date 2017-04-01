@@ -12,7 +12,7 @@ import SwiftyJSON
 import GoogleMobileAds
 import KRProgressHUD
 
-class TimeLineViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable,PostSendable,Deletable{
+class TimeLineViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable,PostSendable,Deletable,Refreshable{
     
     @IBOutlet weak var timeLineTable: UITableView!
     
@@ -396,6 +396,8 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             
             let newPost = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
             newPost.postData =  timelineData!.arrayValue[indexPath.section-1]
+            newPost.postIndex = indexPath.section-1
+            newPost.refreshableParent = self
             presentViewController(newPost, animated: true, completion: nil)
             
         }
@@ -460,7 +462,9 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     
-  
+    func refresh(){
+        timeLineTable.reloadData()
+    }
     
     
     /*
