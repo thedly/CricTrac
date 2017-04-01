@@ -150,6 +150,9 @@ class SplashScreenViewController: UIViewController,ThemeChangeable {
                     getImageFromFirebase(profileData.ProfileImageURL) { (imgData) in
                         LoggedInUserImage = imgData
                     }
+                    getImageFromFirebase(profileData.CoverPhotoURL) { (imgData) in
+                        LoggedInUserCoverImage = imgData
+                    }
                 }
                 
                 
@@ -158,7 +161,7 @@ class SplashScreenViewController: UIViewController,ThemeChangeable {
             
             dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
                 
-                var rootViewController: UIViewController = getRootViewController()
+                let rootViewController: UIViewController = getRootViewController()
                 
                 let profileVC = viewControllerFrom("Main", vcid: "ProfileBaseViewController") as! ProfileBaseViewController
                 

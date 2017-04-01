@@ -9,6 +9,7 @@
 import UIKit
 import KRProgressHUD
 import FirebaseAuth
+import GoogleMobileAds
 
 class UserDashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ThemeChangeable {
 
@@ -21,36 +22,37 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     var recentMatchesBowling: [String:String]!
     private var _currentTheme:String = CurrentTheme
     
+    @IBOutlet weak var bannerView: GADBannerView!
+    
+    var coverOrProfile = ""
+    
+    var isFriendDashboard = false
     
     var clearColor = UIColor.clearColor()
     var darkerThemeColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
     var matches = [MatchSummaryData]()
+    var friendId:String? = nil
+    
+    var friendProfile:[String:AnyObject]?
+    
+    var userProfileData:Profile!
+    
     // MARK: - Plumbing
     
-   
+   @IBOutlet weak var vsView: UIView!
     
     @IBOutlet weak var FirstRecentMatchSummary: UIView!
-    
-    
     @IBOutlet weak var SecondRecentMatchSummary: UIView!
-    
-    
     @IBOutlet weak var recentMatchesNotAvailable: UILabel!
-    
     @IBOutlet weak var topBattingNotAvailable: UILabel!
-    
     @IBOutlet weak var topBowlingNotAvailable: UILabel!
-    
     @IBOutlet weak var firstRecentMatchDateAndVenue: UILabel!
-
     @IBOutlet weak var secondRecentMatchDateAndVenue: UILabel!
-    
     @IBOutlet weak var firstRecentMatchScoreCard: UILabel!
     @IBOutlet weak var secondRecentMatchScoreCard: UILabel!
     @IBOutlet weak var firstRecentMatchOpponentName: UILabel!
     @IBOutlet weak var secondRecentMatchOpponentName: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
-    
     @IBOutlet weak var winPerc: UILabel!
     @IBOutlet weak var BB: UILabel!
     @IBOutlet weak var PlayerLocation: UILabel!
@@ -61,85 +63,80 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     @IBOutlet weak var MatchesView: UIView!
     @IBOutlet weak var userProfileImage: UIImageView!
     @IBOutlet weak var battingMatches: UILabel!
-    @IBOutlet weak var battingInnings: UILabel!
-//    @IBOutlet weak var notOuts: UILabel!
+    @IBOutlet weak var bowlingInnings: UILabel!
+    //@IBOutlet weak var notOuts: UILabel!
     @IBOutlet weak var highScore: UILabel!
     @IBOutlet weak var battingAverage: UILabel!
     @IBOutlet weak var strikeRate: UILabel!
     @IBOutlet weak var hundreds: UILabel!
-    @IBOutlet weak var fifties: UILabel!
-    
-    @IBOutlet weak var sixes: UILabel!
     @IBOutlet weak var fours: UILabel!
-    
+    @IBOutlet weak var sixes: UILabel!
+    @IBOutlet weak var fifties: UILabel!
     @IBOutlet weak var recentBest: UILabel!
-    @IBOutlet weak var ballsFacedDuringBat: UILabel!
-    
+    @IBOutlet weak var battingInnings: UILabel!
     // bowling
-    
     @IBOutlet weak var totalWickets: UILabel!
     @IBOutlet weak var bowlingAverage: UILabel!
     @IBOutlet weak var bowlingEconomy: UILabel!
-    
     @IBOutlet weak var TotalThreeWicketsPerMatch: UILabel!
     @IBOutlet weak var recentBestBowling: UILabel!
-    
     @IBOutlet weak var TotalMaidens: UILabel!
     @IBOutlet weak var TotalFiveWicketsPerMatch: UILabel!
-
     @IBOutlet weak var PlayerOversBowld: UILabel!
-    
-    
-    
     @IBOutlet weak var FirstRecentMatchView: UIView!
-    
-    
     @IBOutlet weak var SecondRecentMatchView: UIView!
-    
-    
     @IBOutlet weak var FirstRecentMatchBowlingView: UIView!
-    
     @IBOutlet weak var SecondRecentMatchBowlingView: UIView!
-    
-    
-    
-    
     @IBOutlet weak var FirstRecentMatchScore: UILabel!
     @IBOutlet weak var FirstRecentMatchOpponent: UILabel!
-    
     @IBOutlet weak var FirstRecentMatchDateAndLocation: UILabel!
-    
-    
-    
     @IBOutlet weak var SecondRecentMatchScore: UILabel!
     @IBOutlet weak var SecondRecentMatchOpponent: UILabel!
-    
     @IBOutlet weak var SecondRecentMatchDateAndLocation: UILabel!
- 
-
-    
-    
+    @IBOutlet weak var closeButton: UIButton!
     @IBAction func CloseDashboardPressed(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    
     @IBOutlet weak var TopMenu: UIView!
     @IBOutlet weak var FirstRecentMatchBowlingScore: UILabel!
     @IBOutlet weak var FirstRecentMatchBowlingOpponent: UILabel!
-    
     @IBOutlet weak var FirstRecentMatchBowlingDateAndLocation: UILabel!
-    
     @IBOutlet weak var activityInd: UIActivityIndicatorView!
-    
-    
     @IBOutlet weak var SecondRecentMatchBowlingScore: UILabel!
     @IBOutlet weak var SecondRecentMatchBowlingOpponent: UILabel!
-    
     @IBOutlet weak var SecondRecentMatchBowlingDateAndLocation: UILabel!
+    
+    @IBOutlet weak var FirstRecentMatchGroundVenue: UILabel!
+    @IBOutlet weak var FirstRecentMatchStrikeRate: UILabel!
+    @IBOutlet weak var SecondRecentMatchGroundVenue: UILabel!
+    @IBOutlet weak var SecondRecentMatchStrikeRate: UILabel!
+    @IBOutlet weak var FirstRecentMatchBattingGroundVenue: UILabel!
+    @IBOutlet weak var FirstRecentMatchBattingStrikeRate: UILabel!
+    @IBOutlet weak var SecondRecentMatchBattingGroundVenue: UILabel!
+    @IBOutlet weak var SecondRecentMatchBattingStrikeRate: UILabel!
+    @IBOutlet weak var FirstRecentMatchBowlingGroundVenue: UILabel!
+    @IBOutlet weak var FirstRecentMatchBowlingEconomy: UILabel!
+    @IBOutlet weak var SecondRecentMatchBowlingGroundVenue: UILabel!
+    @IBOutlet weak var SecondRecentMatchBowlingEconomy: UILabel!
+    
+    @IBOutlet weak var summaryViewHeightConstraint1 : NSLayoutConstraint!
+    @IBOutlet weak var summaryViewHeightConstraint2 : NSLayoutConstraint!
+    @IBOutlet weak var summaryStackViewHeightConstraint : NSLayoutConstraint!
+    @IBOutlet weak var topBattingStackViewHeightConstraint : NSLayoutConstraint!
+    @IBOutlet weak var topBallingStackViewHeightConstraint : NSLayoutConstraint!
+    @IBOutlet weak var battingSummaryViewHeightConstraint : NSLayoutConstraint!
+    @IBOutlet weak var teamsViewHeightConstraint : NSLayoutConstraint!
+    
+    @IBOutlet weak var scrollViewBottomElementConstraint : NSLayoutConstraint!
+    
     
     
     @IBAction func editImageBtnPressed(sender: AnyObject) {
+        self.photoOptions("ProfilePhoto")
+        coverOrProfile = "Profile"
+    }
+    
+    func photoOptions(option:String)  {
         
         let alertController = UIAlertController(title: nil, message: "Change your picture", preferredStyle: .ActionSheet)
         
@@ -175,7 +172,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         let chooseFromFacebookAction = UIAlertAction(title: "Choose Default", style: .Default) { (action) in
             
-            var userProviderData = currentUser?.providerData
+            let userProviderData = currentUser?.providerData
             
             for usr: FIRUserInfo in userProviderData! {
                 if (usr.providerID == "facebook.com" || usr.providerID == "google.com") {
@@ -188,14 +185,14 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                     
                     addProfileImageData(self.resizeImage(image, newWidth: 200))
                     self.activityInd.stopAnimating()
-
+                    
                 }
             }
             
             
             
             
-         }
+        }
         
         alertController.addAction(chooseFromFacebookAction)
         
@@ -214,7 +211,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         let viewPhotoAction = UIAlertAction(title: "View Photo", style: .Default) { (action) in
             
-           self.viewImage()
+            self.viewImage(option)
             
         }
         
@@ -228,9 +225,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         self.presentViewController(alertController, animated: true) {
             // ...
         }
-        
     }
-    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         /*
@@ -249,6 +244,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         //scrollView.contentSize = contentRect.size
         
     }
+    
 
     func setNavigationBarProperties(){
         
@@ -267,8 +263,12 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             //assign button to navigationbar
             
             navigationItem.leftBarButtonItem = leftbarButton
-            navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-            title = "TIMELINE"
+        if let navigation = navigationController{
+            
+            navigation.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+            title = "DASHBOARD"
+        }
+    
             //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
             //navigationController!.navigationBar.titleTextAttributes = titleDict
     
@@ -286,11 +286,19 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        
-        self.userProfileImage.image = image
-        self.dismissViewControllerAnimated(true) { 
-            addProfileImageData(self.resizeImage(image, newWidth: 200))
+        if coverOrProfile == "Profile" {
+           
+            self.userProfileImage.image = image
+            self.dismissViewControllerAnimated(true) {
+                addProfileImageData(self.resizeImage(image, newWidth: 200))
+            }
+        }else {
+            self.imgCoverPhoto.image = image
+            self.dismissViewControllerAnimated(true) {
+                addCoverImageData(self.resizeImage(image, newWidth: 200))
+            }
         }
+        
         
         
     }
@@ -298,7 +306,21 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
-     //   setBackgroundColor()
+        //loadBannerAds()
+
+    }
+    
+    func initView() {
+        
+        if let value = friendProfile{
+            userProfileData = Profile(usrObj: value)
+            closeButton.hidden = false
+        }else{
+            userProfileData = profileData
+            closeButton.hidden = true
+        }
+        
+        //   setBackgroundColor()
         
         //setUIBackgroundTheme(self.view)
         
@@ -308,7 +330,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         MatchesView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
         
         MatchesView.alpha = 0.8
-
+        
         
         self.SecondRecentMatchSummary.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
         self.SecondRecentMatchSummary.alpha = 0.8
@@ -339,11 +361,12 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         let df = NSDateFormatter()
         df.dateFormat = "dd/MM/yyyy"
-        self.PlayerName.text = profileData.fullName.uppercaseString
+        self.PlayerName.text = userProfileData.fullName
         let formattedString = NSMutableAttributedString()
-        let locationText = formattedString.bold("\(profileData.City.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(profileData.State.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(profileData.Country.uppercaseString) ", fontName: appFont_black, fontSize: 15)
+        let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.Country)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.DateOfBirth)\n", fontName: appFont_black, fontSize: 15)
         self.PlayerLocation.attributedText = locationText
         self.userProfileImage.image = LoggedInUserImage
+        self.imgCoverPhoto.image = LoggedInUserCoverImage
         
         
         //getMatchData()
@@ -355,15 +378,37 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         // Do any additional setup after loading the view.
         setNavigationBarProperties()
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(changeThemeSettigs))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapCoverPhoto))
         tapGesture.numberOfTapsRequired = 1
         imgCoverPhoto.addGestureRecognizer(tapGesture)
     }
+    
+    //MARK: Ads related
+    
+    func loadBannerAds() {
+        
+        bannerView.adUnitID = adUnitId
+        bannerView.rootViewController = self
+        bannerView.loadRequest(GADRequest())
+    }
+    
+    
+    func tapCoverPhoto()  {
+        self.photoOptions("CoverPhoto")
+        coverOrProfile = "Cover"
+
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         setBackgroundColor()
-
+        
+       // viewDidLoad()
+        initView()
+        setDashboardData()
+        
+       
     }
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
         
@@ -381,7 +426,10 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         let currentTheme = cricTracTheme.currentTheme
         MatchesView.backgroundColor = UIColor.blackColor()
         MatchesView.alpha = 0.3
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor
+        if let _ = navigationController{
+            navigationController!.navigationBar.barTintColor = currentTheme.topColor
+        }
+        
         //currentTheme.boxColor
         //baseView.backgroundColor = UIColor.clearColor()
     }
@@ -396,14 +444,19 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     
     
-    func viewImage(){
+    func viewImage(option:String){
         
-        let newImageView = UIImageView(image: userProfileImage.image)
+        let newImageView = UIImageView()
+        if option == "CoverPhoto" {
+            newImageView.image = imgCoverPhoto.image
+        }else {
+            newImageView.image = userProfileImage.image
+        }
         newImageView.frame = self.view.frame
         newImageView.backgroundColor = .blackColor()
         newImageView.contentMode = .ScaleAspectFit
         newImageView.userInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: "dismissFullscreenImage:")
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UserDashboardViewController.dismissFullscreenImage(_:)))
         newImageView.addGestureRecognizer(tap)
         //        self.view.addSubview(navBarView)
         self.view.addSubview(newImageView)
@@ -425,7 +478,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         newImageView.backgroundColor = .blackColor()
         newImageView.contentMode = .ScaleAspectFit
         newImageView.userInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: "dismissFullscreenImage:")
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UserDashboardViewController.dismissFullscreenImage(_:)))
         newImageView.addGestureRecognizer(tap)
         //        self.view.addSubview(navBarView)
         self.view.addSubview(newImageView)
@@ -436,12 +489,13 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     
-    
-    func getMatchData(){
+    //commmented by sajith
+    /*func getMatchData(){
         
         recentMatchesNotAvailable.hidden = true
         KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
-        getAllMatchData { (data) in
+        
+        getAllMatchData(friendId) { (data) in
             
             
             for (key,val) in data{
@@ -453,7 +507,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                     
                     value += ["key":key]
                     
-                    var battingBowlingScore = NSMutableAttributedString()
+                    let battingBowlingScore = NSMutableAttributedString()
                     var matchVenueAndDate = ""
                     var opponentName = ""
                     
@@ -501,10 +555,10 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                         
                         
                         
-                        var DateFormatter = NSDateFormatter()
+                        let DateFormatter = NSDateFormatter()
                         DateFormatter.dateFormat = "dd-MM-yyyy"
                         DateFormatter.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
-                        var dateFromString = DateFormatter.dateFromString(date as! String)
+                        let dateFromString = DateFormatter.dateFromString(date as! String)
                         
                         mData.matchDate = dateFromString
                         
@@ -533,6 +587,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             
             self.SecondRecentMatchSummary.hidden = true
             self.FirstRecentMatchSummary.hidden = true
+ 
             
             if self.matches.count > 0 {
                 self.firstRecentMatchScoreCard.attributedText = self.matches[0].battingBowlingScore
@@ -561,153 +616,851 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 self.recentMatchesNotAvailable.hidden = false
             }
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
             KRProgressHUD.dismiss()
             
-            
         }
-    }
+    }*/
+   
+    
+    
+func setDashboardData(){
+    //KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+    topBattingNotAvailable.hidden = true
+    topBowlingNotAvailable.hidden = true
+    self.firstRecentMatchScoreCard.attributedText = nil
+    
+    self.firstRecentMatchOpponentName.text = nil
+    
+    self.firstRecentMatchDateAndVenue.text = nil
+    
+    self.FirstRecentMatchGroundVenue.text = nil
+    
+    self.FirstRecentMatchStrikeRate.text = nil
+    
+    
+    
+    self.secondRecentMatchScoreCard.attributedText = nil
+    
+    self.secondRecentMatchOpponentName.text = nil
+    
+    self.secondRecentMatchDateAndVenue.text = nil
+    
+    self.SecondRecentMatchGroundVenue.text = nil
+    
+    self.SecondRecentMatchStrikeRate.text = nil
+    
+    
+    
+    self.FirstRecentMatchScore.attributedText = nil
+    
+    self.FirstRecentMatchOpponent.text = nil
+    
+    self.FirstRecentMatchDateAndLocation.text = nil
+    
+    self.FirstRecentMatchBattingGroundVenue.text = nil
+    
+    self.FirstRecentMatchBattingStrikeRate.text = nil
+    
+    
+    
+    self.SecondRecentMatchScore.attributedText = nil
+    
+    self.SecondRecentMatchOpponent.text = nil
+    
+    self.SecondRecentMatchDateAndLocation.text = nil
+    
+    self.SecondRecentMatchBattingGroundVenue.text = nil
+    
+    self.SecondRecentMatchBattingStrikeRate.text = nil
+    
+    
+    
+    self.FirstRecentMatchBowlingScore.attributedText = nil
+    
+    self.FirstRecentMatchBowlingOpponent.text = nil
+    
+    self.FirstRecentMatchBowlingDateAndLocation.text = nil
+    
+    self.FirstRecentMatchBowlingGroundVenue.text = nil
+    
+    self.FirstRecentMatchBowlingEconomy.text = nil
+    
+    
+    
+    self.SecondRecentMatchBowlingScore.attributedText = nil
+    
+    self.SecondRecentMatchBowlingOpponent.text = nil
+    
+    self.SecondRecentMatchBowlingDateAndLocation.text = nil
+    
+    self.SecondRecentMatchBowlingGroundVenue.text = nil
+    
+    self.SecondRecentMatchBowlingEconomy.text = nil
+
+    //reset values
+    self.FirstRecentMatchView.hidden = false
+    self.SecondRecentMatchView.hidden = false
+    self.FirstRecentMatchBowlingView.hidden = false
+    self.SecondRecentMatchSummary.hidden = false
+    self.topBattingNotAvailable.hidden = false
+    self.topBowlingNotAvailable.hidden = false
+    
 
     
-    
-    func setDashboardData(){
-        
-        KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
-        
-        topBattingNotAvailable.hidden = true
-        topBowlingNotAvailable.hidden = true
-        
-        
-        getAllDashboardData { (data) in
-            
-            DashboardDetails = DashboardData(dataObj: data)
-            if DashboardDetails != nil {
-                self.winPerc.text = String(DashboardDetails.WinPercentage)
-                self.BB.text = String(DashboardDetails.TopBowling1stMatchScore)
-                self.totalRunsScored.text = String(DashboardDetails.TotalRuns)
-                
+    getAllDashboardData(friendId) { (data) in
+        DashboardDetails = DashboardData(dataObj: data)
+        if DashboardDetails != nil {
+            UIView.animateWithDuration(0.0, animations: {
+                //data for Top box on dashboard
                 self.battingMatches.text = String(DashboardDetails.TotalMatches)
-                self.battingInnings.text = String(DashboardDetails.BattingInnings)
-                //    self.notOuts = DashboardDetails
-                
                 self.highScore.text = String(DashboardDetails.TopBatting1stMatchScore)
-                self.battingAverage.text = String(DashboardDetails.TotalBattingAverage)
-                self.strikeRate.text = String(DashboardDetails.TotalStrikeRate)
+                self.BB.text = String(DashboardDetails.TopBowling1stMatchScore)
+                let winPercent = Double(String(DashboardDetails.WinPercentage))
+                self.winPerc.text = String(format:"%.2f",winPercent!)
+                //self.winPerc.text = String(DashboardDetails.WinPercentage)
+                
+                //data for Batting Card
+                self.totalRunsScored.text = String(DashboardDetails.TotalRuns)
+                self.battingInnings.text = String(DashboardDetails.BattingInnings)
+                let battingAverage = Double(String(DashboardDetails.TotalBattingAverage))
+                self.battingAverage.text = String(format:"%.2f",battingAverage!)
+                //self.battingAverage.text = String(DashboardDetails.TotalBattingAverage)
+                let strikeRate = Double(String(DashboardDetails.TotalStrikeRate))
+                self.strikeRate.text = String(format:"%.2f",strikeRate!)
+                //self.strikeRate.text = String(DashboardDetails.TotalStrikeRate)
                 self.hundreds.text = String(DashboardDetails.Total100s)
                 self.fifties.text = String(DashboardDetails.Total50s)
-                
                 self.sixes.text = String(DashboardDetails.Total6s)
                 self.fours.text = String(DashboardDetails.Total4s)
                 
-                self.ballsFacedDuringBat.text = String(DashboardDetails.TotalBallsFaced)
-                
-                // bowling
-                
+                //data for Bowling Card
+                self.bowlingInnings.text = String(DashboardDetails.BowlingInnings)
                 self.totalWickets.text = String(DashboardDetails.TotalWickets)
-                self.bowlingAverage.text = String(DashboardDetails.TotalBowlingAverage)
+                let bowlingAverageDouble = Double(String(DashboardDetails.TotalBowlingAverage))
+                self.bowlingAverage.text = String(format:"%.2f",bowlingAverageDouble!)
+                //self.bowlingAverage.text = String(DashboardDetails.TotalBowlingAverage)
+                
                 self.bowlingEconomy.text = String(DashboardDetails.TotalEconomy)
-                
                 self.TotalThreeWicketsPerMatch.text = String(DashboardDetails.Total3Wkts)
-                
                 self.TotalMaidens.text = String(DashboardDetails.TotalMaidens)
                 self.TotalFiveWicketsPerMatch.text = String(DashboardDetails.Total5Wkts)
-                
                 self.PlayerOversBowld.text = String(DashboardDetails.TotalOvers)
                 
+                dispatch_async(dispatch_get_main_queue(),{
+                    
+                    //sajith - new code for Recent First Match
+                    self.FirstRecentMatchSummary.hidden = true
+                    self.SecondRecentMatchSummary.hidden = true
+                    
+                    self.updateDashBoardMatches()
+                    
+                })
                 
-                self.FirstRecentMatchView.hidden = (DashboardDetails.TopBatting1stMatchScore == nil || String(DashboardDetails.TopBatting1stMatchScore) == "0")
-                
-                
-                self.SecondRecentMatchView.hidden = (DashboardDetails.TopBatting2ndMatchScore == nil || String(DashboardDetails.TopBatting2ndMatchScore) == "0")
-                
-                
-                
-                self.FirstRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling1stMatchScore == nil || DashboardDetails.TopBowling1stMatchScore as! String == "0-0")
-                
-                
-                self.SecondRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling2ndMatchScore == nil || DashboardDetails.TopBowling2ndMatchScore as! String == "0-0")
-                
-                
-                self.topBattingNotAvailable.hidden = !(self.FirstRecentMatchView.hidden && self.SecondRecentMatchView.hidden)
-                self.topBowlingNotAvailable.hidden = !(self.FirstRecentMatchBowlingView.hidden && self.SecondRecentMatchBowlingView.hidden)
+
+                if String(DashboardDetails.Recent1stMatchID) != "-" {
+                    /*getSelectedMatchData(String(DashboardDetails.Recent1stMatchID), friendId: self.friendId) { (data) in
+                    }*/
+                    
+                    let matchId:String = (String(DashboardDetails.Recent1stMatchID) ?? nil)!
+                    let userId:String = self.friendId ?? currentUser!.uid
+                    fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+                        
+                        if let data = snapshot.value! as? [String:AnyObject]{
+                            
+                            let battingBowlingScore = NSMutableAttributedString()
+                            var matchVenueAndDate = ""
+                            var opponentName = ""
+                            var groundVenue = ""
+                            var srEconomy = ""
+                            let mData = MatchSummaryData()
+                            
+                            if let runsTaken = data["RunsTaken"]{
+                                mData.BattingSectionHidden = (runsTaken as! String == "-")
+                                if mData.BattingSectionHidden == false {
+                                    if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
+                                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("*", fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
+                                    }
+                                    else{
+                                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
+                                    }
+                                }
+                            }
+                            if let wicketsTaken = data["WicketsTaken"], let runsGiven = data["RunsGiven"] {
+                                mData.BowlingSectionHidden = (runsGiven as! String == "-")
+                                if mData.BowlingSectionHidden == false {
+                                    if battingBowlingScore.length > 0 {
+                                        battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 25).bold("\nWICKETS", fontName: appFont_black, fontSize: 10)
+                                    }
+                                    else{
+                                        battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 25).bold("\nWICKETS", fontName: appFont_black, fontSize: 10)
+                                    }
+                                }
+                            }
+                            
+                            if battingBowlingScore.length == 0 {
+                                battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize: 30)
+                            }
+                            
+                            
+                            if let date = data["MatchDate"]{
+                                let DateFormatter = NSDateFormatter()
+                                DateFormatter.dateFormat = "dd-MM-yyyy"
+                                DateFormatter.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
+                                let dateFromString = DateFormatter.dateFromString(date as! String)
+                                mData.matchDate = dateFromString
+                                matchVenueAndDate.appendContentsOf(date as? String ?? "NA")
+                            }
+                            
+                            if let group = data["AgeGroup"]{
+                                matchVenueAndDate.appendContentsOf(" | \(group)")
+                            }
+                            
+                            if let ground = data["Ground"]{
+                                mData.ground = ground as! String
                                 
+                                if let venue = data["Venue"] as? String where venue != "-" {
+                                    mData.ground = "\(ground), \(venue)"
+                                }
+                                groundVenue = ("\(mData.ground)")
+                            }
+                            
+                            if let ballsFaced = data["BallsFaced"] as? String where ballsFaced != "-", let runsScored = data["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
+                                
+                                if ballsFaced == "0" {
+                                    mData.strikerate = Float("0.00")
+                                }
+                                else {
+                                    let strikeRate = String(format: "%.2f",(Float(runsScored)!)*100/Float(ballsFaced)!)
+                                    mData.strikerate = Float(strikeRate)
+                                    srEconomy = ("Strike Rate: \(strikeRate)")
+                                }
+                            }
+                            
+                            if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
+                                
+                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
+                                mData.economy = Float(economy)
+                                if srEconomy.length > 0 {
+                                    srEconomy.appendContentsOf("\nEconomy: \(economy)")
+                                }
+                                else {
+                                    srEconomy = ("Economy: \(economy)")
+                                }
+                            }
+                            
+                            if let opponent  = data["Opponent"]{
+                                opponentName = opponent as! String
+                            }
+                            
+                            self.firstRecentMatchScoreCard.attributedText = battingBowlingScore
+                            self.firstRecentMatchOpponentName.text = opponentName
+                            self.firstRecentMatchDateAndVenue.text = matchVenueAndDate
+                            self.FirstRecentMatchGroundVenue.text = groundVenue
+                            self.FirstRecentMatchStrikeRate.text = srEconomy
+                        }
+                    })
+                    dispatch_async(dispatch_get_main_queue(),{
+                        
+                        self.FirstRecentMatchSummary.hidden = false
+                        self.recentMatchesNotAvailable.hidden = true
+                        
+                        self.updateDashBoardMatches()
+                        
+                    })
+                    
+                }
                 
-                if !self.FirstRecentMatchView.hidden {
+                //sajith - new code for Recent Second Match
+                if String(DashboardDetails.Recent2ndMatchID) != "-" {
+                    let matchId:String = (String(DashboardDetails.Recent2ndMatchID) ?? nil)!
+                    let userId:String = self.friendId ?? currentUser!.uid
+                    fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+                        
+                        if let data = snapshot.value! as? [String:AnyObject]{
+                            
+                            let battingBowlingScore = NSMutableAttributedString()
+                            var matchVenueAndDate = ""
+                            var opponentName = ""
+                            var groundVenue = ""
+                            var srEconomy = ""
+                            let mData = MatchSummaryData()
+                            
+                            if let runsTaken = data["RunsTaken"]{
+                                mData.BattingSectionHidden = (runsTaken as! String == "-")
+                                if mData.BattingSectionHidden == false {
+                                    if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
+                                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("*", fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
+                                    }
+                                    else{
+                                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
+                                    }
+                                }
+                            }
+                            if let wicketsTaken = data["WicketsTaken"], let runsGiven = data["RunsGiven"] {
+                                mData.BowlingSectionHidden = (runsGiven as! String == "-")
+                                if mData.BowlingSectionHidden == false {
+                                    if battingBowlingScore.length > 0 {
+                                        battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 25).bold("\nWICKETS", fontName: appFont_black, fontSize: 10)
+                                    }
+                                    else{
+                                        battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 25).bold("\nWICKETS", fontName: appFont_black, fontSize: 10)
+                                    }
+                                }
+                            }
+                            
+                            if battingBowlingScore.length == 0 {
+                                battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize: 30)
+                            }
+                            
+                            
+                            if let date = data["MatchDate"]{
+                                let DateFormatter = NSDateFormatter()
+                                DateFormatter.dateFormat = "dd-MM-yyyy"
+                                DateFormatter.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
+                                let dateFromString = DateFormatter.dateFromString(date as! String)
+                                mData.matchDate = dateFromString
+                                matchVenueAndDate.appendContentsOf(date as? String ?? "NA")
+                            }
+                            
+                            if let group = data["AgeGroup"]{
+                                matchVenueAndDate.appendContentsOf(" | \(group)")
+                            }
+                            
+                            if let ground = data["Ground"]{
+                                mData.ground = ground as! String
+                                
+                                if let venue = data["Venue"] as? String where venue != "-" {
+                                    mData.ground = "\(ground), \(venue)"
+                                }
+                                groundVenue = ("\(mData.ground)")
+                            }
+                            
+                            if let ballsFaced = data["BallsFaced"] as? String where ballsFaced != "-", let runsScored = data["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
+                                
+                                if ballsFaced == "0" {
+                                    mData.strikerate = Float("0.00")
+                                }
+                                else {
+                                    let strikeRate = String(format: "%.2f",(Float(runsScored)!)*100/Float(ballsFaced)!)
+                                    mData.strikerate = Float(strikeRate)
+                                    srEconomy = ("Strike Rate: \(strikeRate)")
+                                }
+                            }
+                            
+                            if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
+                                
+                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
+                                mData.economy = Float(economy)
+                                if srEconomy.length > 0 {
+                                    srEconomy.appendContentsOf("\nEconomy: \(economy)")
+                                }
+                                else {
+                                    srEconomy = ("Economy: \(economy)")
+                                }
+
+                            }
+                            
+                            if let opponent  = data["Opponent"]{
+                                opponentName = opponent as! String
+                            }
+                            
+                            self.secondRecentMatchScoreCard.attributedText = battingBowlingScore
+                            self.secondRecentMatchOpponentName.text = opponentName
+                            self.secondRecentMatchDateAndVenue.text = matchVenueAndDate
+                            self.SecondRecentMatchGroundVenue.text = groundVenue
+                            self.SecondRecentMatchStrikeRate.text = srEconomy
+                        }
+                    })
+    
+                    
+                    dispatch_async(dispatch_get_main_queue(),{
+                        
+                        self.SecondRecentMatchSummary.hidden = false
+                        self.recentMatchesNotAvailable.hidden = true
+                        
+                        self.updateDashBoardMatches()
+                        
+                    })
+                }
+
+                
+                
+                //Display Top Batting First Match card
+                /*if !self.FirstRecentMatchView.hidden {
                     self.FirstRecentMatchScore.text = String(DashboardDetails.TopBatting1stMatchScore)
                     self.FirstRecentMatchOpponent.text = String(DashboardDetails.TopBatting1stMatchOpp)
-                    
                     let formattedString = NSMutableAttributedString()
                     formattedString.bold("\(DashboardDetails.TopBatting1stMatchDate), at \(DashboardDetails.TopBatting1stMatchGround)",fontName: appFont_bold, fontSize: 12)
                     self.FirstRecentMatchDateAndLocation.attributedText = formattedString
-                }
+                }*/
                 
-                
-                
-                
-                if !self.SecondRecentMatchView.hidden {
+                //sajith - new code for Top Batting First Match
+                if String(DashboardDetails.TopBatting1stMatchID) != "-" {
+                    let matchId:String = (String(DashboardDetails.TopBatting1stMatchID) ?? nil)!
+                    let userId:String = self.friendId ?? currentUser!.uid
+                    fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+                        
+                        if let data = snapshot.value! as? [String:AnyObject]{
+            
+                            let battingBowlingScore = NSMutableAttributedString()
+                            var matchVenueAndDate = ""
+                            var opponentName = ""
+                            var groundVenue = ""
+                            var srEconomy = ""
+                            let mData = MatchSummaryData()
+                            
+                            if let runsTaken = data["RunsTaken"]{
+                                mData.BattingSectionHidden = (runsTaken as! String == "-")
+                                if mData.BattingSectionHidden == false {
+                                    if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
+                                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("*", fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
+                                    }
+                                    else{
+                                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
+                                    }
+                                }
+                            }
+                            
+                            if battingBowlingScore.length == 0 {
+                                battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize: 30)
+                            }
+                            
+                            if let date = data["MatchDate"]{
+                                let DateFormatter = NSDateFormatter()
+                                DateFormatter.dateFormat = "dd-MM-yyyy"
+                                DateFormatter.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
+                                let dateFromString = DateFormatter.dateFromString(date as! String)
+                                mData.matchDate = dateFromString
+                                matchVenueAndDate.appendContentsOf(date as? String ?? "NA")
+                            }
+                            
+                            if let group = data["AgeGroup"]{
+                                matchVenueAndDate.appendContentsOf(" | \(group)")
+                            }
+                            
+                            if let ground = data["Ground"]{
+                                mData.ground = ground as! String
+                                
+                                if let venue = data["Venue"] as? String where venue != "-" {
+                                    mData.ground = "\(ground), \(venue)"
+                                }
+                                groundVenue = ("\(mData.ground)")
+                            }
+                            
+                            if let ballsFaced = data["BallsFaced"] as? String where ballsFaced != "-", let runsScored = data["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
+                                
+                                if ballsFaced == "0" {
+                                    mData.strikerate = Float("0.00")
+                                }
+                                else {
+                                    let strikeRate = String(format: "%.2f",(Float(runsScored)!)*100/Float(ballsFaced)!)
+                                    mData.strikerate = Float(strikeRate)
+                                    srEconomy = ("Strike Rate: \(strikeRate)")
+                                }
+                            }
+                            
+                            if let opponent  = data["Opponent"]{
+                                opponentName = opponent as! String
+                            }
+                            
+                            self.FirstRecentMatchScore.attributedText = battingBowlingScore
+                            self.FirstRecentMatchOpponent.text = opponentName
+                            self.FirstRecentMatchDateAndLocation.text = matchVenueAndDate
+                            self.FirstRecentMatchBattingGroundVenue.text = groundVenue
+                            self.FirstRecentMatchBattingStrikeRate.text = srEconomy
+
+                        }
+                    })
                     
+                    
+                    dispatch_async(dispatch_get_main_queue(),{
+                        
+                        self.FirstRecentMatchView.hidden = false
+                        
+                        self.updateDashBoardMatches()
+                        
+                    })
+                }
+
+                //Display Top Batting Second Match card
+                /*if !self.SecondRecentMatchView.hidden {
                     self.SecondRecentMatchScore.text = String(DashboardDetails.TopBatting2ndMatchScore)
                     self.SecondRecentMatchOpponent.text = String(DashboardDetails.TopBatting2ndMatchOpp)
-                    
                     let formattedString_2 = NSMutableAttributedString()
                     formattedString_2.bold("\(DashboardDetails.TopBatting2ndMatchDate), at \(DashboardDetails.TopBatting2ndMatchGround)",fontName: appFont_bold, fontSize: 12)
                     self.SecondRecentMatchDateAndLocation.attributedText = formattedString_2
+                }*/
+                
+                //sajith - new code for Top Batting Second Match
+                if String(DashboardDetails.TopBatting2ndMatchID) != "-" {
+                    let matchId:String = (String(DashboardDetails.TopBatting2ndMatchID) ?? nil)!
+                    let userId:String = self.friendId ?? currentUser!.uid
+                    fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+                        
+                        if let data = snapshot.value! as? [String:AnyObject]{
+                            
+                            let battingBowlingScore = NSMutableAttributedString()
+                            var matchVenueAndDate = ""
+                            var opponentName = ""
+                            var groundVenue = ""
+                            var srEconomy = ""
+                            let mData = MatchSummaryData()
+                            
+                            if let runsTaken = data["RunsTaken"]{
+                                mData.BattingSectionHidden = (runsTaken as! String == "-")
+                                if mData.BattingSectionHidden == false {
+                                    if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
+                                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("*", fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
+                                    }
+                                    else{
+                                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
+                                    }
+                                }
+                            }
+                            
+                            if battingBowlingScore.length == 0 {
+                                battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize: 30)
+                            }
+                            
+                            if let date = data["MatchDate"]{
+                                let DateFormatter = NSDateFormatter()
+                                DateFormatter.dateFormat = "dd-MM-yyyy"
+                                DateFormatter.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
+                                let dateFromString = DateFormatter.dateFromString(date as! String)
+                                mData.matchDate = dateFromString
+                                matchVenueAndDate.appendContentsOf(date as? String ?? "NA")
+                            }
+                            
+                            if let group = data["AgeGroup"]{
+                                matchVenueAndDate.appendContentsOf(" | \(group)")
+                            }
+                            
+                            if let ground = data["Ground"]{
+                                mData.ground = ground as! String
+                                
+                                if let venue = data["Venue"] as? String where venue != "-" {
+                                    mData.ground = "\(ground), \(venue)"
+                                }
+                                groundVenue = ("\(mData.ground)")
+                            }
+                            
+                            if let ballsFaced = data["BallsFaced"] as? String where ballsFaced != "-", let runsScored = data["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
+                                
+                                if ballsFaced == "0" {
+                                    mData.strikerate = Float("0.00")
+                                }
+                                else {
+                                    let strikeRate = String(format: "%.2f",(Float(runsScored)!)*100/Float(ballsFaced)!)
+                                    mData.strikerate = Float(strikeRate)
+                                    srEconomy = ("Strike Rate: \(strikeRate)")
+                                }
+                            }
+                            
+                            if let opponent  = data["Opponent"]{
+                                opponentName = opponent as! String
+                            }
+                            
+                            self.SecondRecentMatchScore.attributedText = battingBowlingScore
+                            self.SecondRecentMatchOpponent.text = opponentName
+                            self.SecondRecentMatchDateAndLocation.text = matchVenueAndDate
+                            self.SecondRecentMatchBattingGroundVenue.text = groundVenue
+                            self.SecondRecentMatchBattingStrikeRate.text = srEconomy
+                        }
+                    })
                     
+                    
+                    dispatch_async(dispatch_get_main_queue(),{
+                        
+                        self.SecondRecentMatchView.hidden = false
+                        
+                        self.updateDashBoardMatches()
+                        
+                    })
                 }
+
                 
-                
-                if !self.FirstRecentMatchBowlingView.hidden {
+                //Display Top Bowling First Match card
+                /*if !self.FirstRecentMatchBowlingView.hidden {
                     self.FirstRecentMatchBowlingScore.text = String(DashboardDetails.TopBowling1stMatchScore)
                     self.FirstRecentMatchBowlingOpponent.text = String(DashboardDetails.TopBowling1stMatchOpp)
-                    
                     let formattedString_Bowling = NSMutableAttributedString()
                     formattedString_Bowling.bold("\(DashboardDetails.TopBowling1stMatchDate), at \(DashboardDetails.TopBowling1stMatchGround)",fontName: appFont_bold, fontSize: 12)
                     self.FirstRecentMatchBowlingDateAndLocation.attributedText = formattedString_Bowling
-                }
+                }*/
                 
-                
-                
-                if !self.SecondRecentMatchBowlingView.hidden {
+                //sajith - new code for Top Bowling 1st Match
+                if String(DashboardDetails.TopBowling1stMatchID) != "-" {
+                    let matchId:String = (String(DashboardDetails.TopBowling1stMatchID) ?? nil)!
+                    let userId:String = self.friendId ?? currentUser!.uid
+                    fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+                        
+                        if let data = snapshot.value! as? [String:AnyObject]{
+                            
+                            let battingBowlingScore = NSMutableAttributedString()
+                            var matchVenueAndDate = ""
+                            var opponentName = ""
+                            var groundVenue = ""
+                            var srEconomy = ""
+                            let mData = MatchSummaryData()
+                            
+                            if let wicketsTaken = data["WicketsTaken"], let runsGiven = data["RunsGiven"] {
+                                mData.BowlingSectionHidden = (runsGiven as! String == "-")
+                                if mData.BowlingSectionHidden == false {
+                                    battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 25).bold("\nWICKETS", fontName: appFont_black, fontSize: 10)
+                                }
+                            }
+                            
+                            if battingBowlingScore.length == 0 {
+                                battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize: 30)
+                            }
+                            
+                            
+                            if let date = data["MatchDate"]{
+                                let DateFormatter = NSDateFormatter()
+                                DateFormatter.dateFormat = "dd-MM-yyyy"
+                                DateFormatter.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
+                                let dateFromString = DateFormatter.dateFromString(date as! String)
+                                mData.matchDate = dateFromString
+                                matchVenueAndDate.appendContentsOf(date as? String ?? "NA")
+                            }
+                            
+                            if let group = data["AgeGroup"]{
+                                matchVenueAndDate.appendContentsOf(" | \(group)")
+                            }
+                            
+                            if let ground = data["Ground"]{
+                                mData.ground = ground as! String
+                                
+                                if let venue = data["Venue"] as? String where venue != "-" {
+                                    mData.ground = "\(ground), \(venue)"
+                                }
+                                groundVenue = ("\(mData.ground)")
+                            }
+                            
+                            if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
+                                
+                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
+                                mData.economy = Float(economy)
+                                srEconomy = ("Economy: \(economy)")
+                            }
+                            
+                            if let opponent  = data["Opponent"]{
+                                opponentName = opponent as! String
+                            }
+                            
+                            self.FirstRecentMatchBowlingScore.attributedText = battingBowlingScore
+                            self.FirstRecentMatchBowlingOpponent.text = opponentName
+                            self.FirstRecentMatchBowlingDateAndLocation.text = matchVenueAndDate
+                            self.FirstRecentMatchBowlingGroundVenue.text = groundVenue
+                            self.FirstRecentMatchBowlingEconomy.text = srEconomy
+                        }
+                    })
                     
+                    
+                    dispatch_async(dispatch_get_main_queue(),{
+                        
+                        self.FirstRecentMatchBowlingView.hidden = false
+                        
+                        self.updateDashBoardMatches()
+                        
+                    })
+                }
+
+                
+                //Display Top Bowling Second Match card
+                /*if !self.SecondRecentMatchBowlingView.hidden {
                     self.SecondRecentMatchBowlingScore.text = String(DashboardDetails.TopBowling2ndMatchScore)
                     self.SecondRecentMatchBowlingOpponent.text = String(DashboardDetails.TopBowling2ndMatchOpp)
-                    
                     let formattedString_Bowling_2 = NSMutableAttributedString()
                     formattedString_Bowling_2.bold("\(DashboardDetails.TopBowling2ndMatchDate), at \(DashboardDetails.TopBowling2ndMatchGround)",fontName: appFont_bold, fontSize: 12)
                     self.SecondRecentMatchBowlingDateAndLocation.attributedText = formattedString_Bowling_2
+                }*/
+                
+                //sajith - new code for Top Bowling 2nd Match
+                if String(DashboardDetails.TopBowling2ndMatchID) != "-" {
+                    let matchId:String = (String(DashboardDetails.TopBowling2ndMatchID) ?? nil)!
+                    let userId:String = self.friendId ?? currentUser!.uid
+                    fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+                        
+                        if let data = snapshot.value! as? [String:AnyObject]{
+                            
+                            let battingBowlingScore = NSMutableAttributedString()
+                            var matchVenueAndDate = ""
+                            var opponentName = ""
+                            var groundVenue = ""
+                            var srEconomy = ""
+                            let mData = MatchSummaryData()
+                            
+                            if let wicketsTaken = data["WicketsTaken"], let runsGiven = data["RunsGiven"] {
+                                mData.BowlingSectionHidden = (runsGiven as! String == "-")
+                                if mData.BowlingSectionHidden == false {
+                                    battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 25).bold("\nWICKETS", fontName: appFont_black, fontSize: 10)
+                                }
+                            }
+                            
+                            if battingBowlingScore.length == 0 {
+                                battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize: 30)
+                            }
+                            
+                            
+                            if let date = data["MatchDate"]{
+                                let DateFormatter = NSDateFormatter()
+                                DateFormatter.dateFormat = "dd-MM-yyyy"
+                                DateFormatter.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
+                                let dateFromString = DateFormatter.dateFromString(date as! String)
+                                mData.matchDate = dateFromString
+                                matchVenueAndDate.appendContentsOf(date as? String ?? "NA")
+                            }
+                            
+                            if let group = data["AgeGroup"]{
+                                matchVenueAndDate.appendContentsOf(" | \(group)")
+                            }
+                            
+                            if let ground = data["Ground"]{
+                                mData.ground = ground as! String
+                                
+                                if let venue = data["Venue"] as? String where venue != "-" {
+                                    mData.ground = "\(ground), \(venue)"
+                                }
+                                groundVenue = ("\(mData.ground)")
+                            }
+                            
+                            if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
+                                
+                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
+                                mData.economy = Float(economy)
+                                srEconomy = ("Economy: \(economy)")
+                            }
+                            
+                            if let opponent  = data["Opponent"]{
+                                opponentName = opponent as! String
+                            }
+                            
+                            self.SecondRecentMatchBowlingScore.attributedText = battingBowlingScore
+                            self.SecondRecentMatchBowlingOpponent.text = opponentName
+                            self.SecondRecentMatchBowlingDateAndLocation.text = matchVenueAndDate
+                            self.SecondRecentMatchBowlingGroundVenue.text = groundVenue
+                            self.SecondRecentMatchBowlingEconomy.text = srEconomy
+                            
+                        }
+                    })
+                    
+                    
+                    dispatch_async(dispatch_get_main_queue(),{
+                        
+                        self.SecondRecentMatchBowlingView.hidden = false
+                        self.updateDashBoardMatches()
+                        
+                    })
                 }
+
+ 
+            },
+            completion: { (val) in
+                // KRProgressHUD.dismiss()
+            })
+        }
+    }
+}
+    
+
+    func updateDashBoardMatches() {
+        
+        //Data for Top Batting section
+        self.FirstRecentMatchView.hidden = (DashboardDetails.TopBatting1stMatchScore == nil || String(DashboardDetails.TopBatting1stMatchScore) == "0")
+        self.SecondRecentMatchView.hidden = (DashboardDetails.TopBatting2ndMatchScore == nil || String(DashboardDetails.TopBatting2ndMatchScore) == "0")
+        
+        //Data for Top Bowling section
+        self.FirstRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling1stMatchScore == nil || DashboardDetails.TopBowling1stMatchScore as! String == "0-0")
+        self.SecondRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling2ndMatchScore == nil || DashboardDetails.TopBowling2ndMatchScore as! String == "0-0")
+        
+        self.topBattingNotAvailable.hidden = !(self.FirstRecentMatchView.hidden && self.SecondRecentMatchView.hidden)
+        self.topBowlingNotAvailable.hidden = !(self.FirstRecentMatchBowlingView.hidden && self.SecondRecentMatchBowlingView.hidden)
+        
+        self.recentMatchesNotAvailable.hidden = !(self.FirstRecentMatchSummary.hidden && self.SecondRecentMatchSummary.hidden)
+        
+        //*****Reduce view height if not available******
+        
+        //Summary view
+        if !self.recentMatchesNotAvailable.hidden {
+            
+            self.summaryViewHeightConstraint1.constant = 0
+            self.summaryViewHeightConstraint2.constant = 0
+            self.summaryStackViewHeightConstraint.constant = 0
+        }
+        else {
+            
+            if String(DashboardDetails.Recent1stMatchID) != "-" {
+                
+                self.summaryViewHeightConstraint1.constant = 90
+                self.summaryViewHeightConstraint2.constant = 0
+                self.summaryStackViewHeightConstraint.constant = 110
             }
-            
-            //self.setUIElements()
-            //self.setBowlingUIElements()
-            KRProgressHUD.dismiss()
-            
-            
+            if String(DashboardDetails.Recent2ndMatchID) != "-" {
+                self.summaryViewHeightConstraint1.constant = 100
+                self.summaryViewHeightConstraint2.constant = 100
+                self.summaryStackViewHeightConstraint.constant = 210
+            }
             
         }
         
+        //Top batting view
+        if !self.topBattingNotAvailable.hidden {
+            
+            self.topBattingStackViewHeightConstraint.constant = 0
+        }
+        else {
+            
+            if String(DashboardDetails.TopBatting1stMatchID) != "-" {
+                
+                self.topBattingStackViewHeightConstraint.constant = 85
+            }
+            if String(DashboardDetails.TopBatting2ndMatchID) != "-" {
+                
+                self.topBattingStackViewHeightConstraint.constant = 170
+            }
+        }
+        
+        //Top Balling view
+        if !self.topBowlingNotAvailable.hidden {
+            
+            self.topBallingStackViewHeightConstraint.constant = 0
+        }
+        else {
+            
+            
+            if String(DashboardDetails.TopBowling1stMatchID) != "-" {
+                
+                self.topBallingStackViewHeightConstraint.constant = 85
+            }
+            if String(DashboardDetails.TopBowling2ndMatchID) != "-" {
+                
+                self.topBallingStackViewHeightConstraint.constant = 170
+            }
+        }
+        
+        //Check for team count.If team count = 0, make view height to 0
+        
+        if ((self.userProfileData.PlayerCurrentTeams.count) + (self.userProfileData.PlayerPastTeams.count)) == 0 {
+            self.teamsViewHeightConstraint.constant = 0
+        }
+        
+        
+        //self.scrollViewBottomElementConstraint.constant = 10
+        self.view.layoutIfNeeded()
+
+        
     }
     
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
-        
-        getMatchData()
-        
-        setDashboardData()
-        
-        
-    }
+override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(true)
+    //getMatchData()
+    //setDashboardData()
+
+}
     
-    
+
     func scrollViewDidScrollToTop(scrollView: UIScrollView) {
         if (scrollView.contentOffset.y > 300) {
             if TopMenu.backgroundColor != darkerThemeColor {
@@ -731,15 +1484,16 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         var valueToReturn = 0
         
-        switch profileData.UserProfile {
+        switch userProfileData.UserProfile {
         case userProfileType.Player.rawValue:
-            valueToReturn = profileData.PlayerCurrentTeams.count
+            
+            valueToReturn = (userProfileData.PlayerCurrentTeams.count) + (userProfileData.PlayerPastTeams.count)
             break
         case userProfileType.Coach.rawValue:
-            valueToReturn = profileData.CoachCurrentTeams.count
+            valueToReturn = userProfileData.CoachCurrentTeams.count
             break
         case userProfileType.Fan.rawValue:
-            valueToReturn = profileData.SupportingTeams.count
+            valueToReturn = userProfileData.SupportingTeams.count
             break
         default:
             valueToReturn = 0
@@ -768,7 +1522,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("TeamCollectionViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
             
-            
+        
 //            let intIndex = indexPath.row // where intIndex < myDictionary.count
 //            let index = themeColors.startIndex.advancedBy(intIndex) // index 1
             
@@ -781,15 +1535,32 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             
             var teamNameToReturn = ""
             
-            switch profileData.UserProfile {
+            
+            switch userProfileData.UserProfile {
             case userProfileType.Player.rawValue:
-                teamNameToReturn = profileData.PlayerCurrentTeams[indexPath.row]
+                if indexPath.row < (userProfileData.PlayerCurrentTeams.count) {
+                   
+                    teamNameToReturn = userProfileData.PlayerCurrentTeams[indexPath.row]
+                   
+                    aCell.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.boxColor)))
+                    aCell.TeamAbbr.textColor = UIColor.whiteColor()
+                   
+
+                }
+                else if (indexPath.row - (userProfileData.PlayerCurrentTeams.count)) < (userProfileData.PlayerPastTeams.count) {
+                 
+                    teamNameToReturn = userProfileData.PlayerPastTeams[(indexPath.row - userProfileData.PlayerCurrentTeams.count)]
+                     aCell.baseView.backgroundColor = UIColor.grayColor()
+                    aCell.TeamAbbr.textColor = UIColor.blackColor()
+                    
+                }
+                
                 break
             case userProfileType.Coach.rawValue:
-                teamNameToReturn = profileData.CoachCurrentTeams[indexPath.row]
+                teamNameToReturn = userProfileData.CoachCurrentTeams[indexPath.row]
                 break
             case userProfileType.Fan.rawValue:
-                teamNameToReturn = profileData.SupportingTeams[indexPath.row]
+                teamNameToReturn = userProfileData.SupportingTeams[indexPath.row]
                 break
             default:
                 teamNameToReturn = ""
@@ -797,11 +1568,22 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             }
             
             if teamNameToReturn != "" {
+                
                 aCell.TeamName.text = teamNameToReturn
-                aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+                
+                let teamName = teamNameToReturn.componentsSeparatedByString(" ")
+                
+                if teamName.count == 1 {
+                  aCell.TeamAbbr.text = "\(teamName[0].characters.first!)"
+                }
+                else if teamName.count == 2 {
+                    aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)"
+                }
+                else {
+                    aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
+                }
             }
-            
-            
+
             
             
                 

@@ -1,3 +1,4 @@
+
 //
 //  TimeLineViewController.swift
 //  CricTrac
@@ -8,8 +9,10 @@
 
 import UIKit
 import SwiftyJSON
+import GoogleMobileAds
+import KRProgressHUD
 
-class TimeLineViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable,PostSendable,Deletable{
+class TimeLineViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable,PostSendable,Deletable,Refreshable{
     
     @IBOutlet weak var timeLineTable: UITableView!
     
@@ -18,6 +21,8 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     var newPostText:UITextField?
     
     var timelineDS = [[String:String]]()
+    
+    @IBOutlet weak var bannerView: GADBannerView!
     
     let  refreshControl = UIRefreshControl()
     var totalPosts = 5
@@ -30,7 +35,10 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         currentTheme = cricTracTheme.currentTheme
         setBackgroundColor()
         self.automaticallyAdjustsScrollViewInsets = false
-
+        
+        timeLineTable.rowHeight = UITableViewAutomaticDimension;
+        timeLineTable.estimatedRowHeight = 50.0;
+        
         //setUIBackgroundTheme(view)
         
         loadTimeline()
@@ -57,6 +65,17 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         //loadAllNewPosts()
         
         // Do any additional setup after loading the view.
+        
+        //loadBannerAds()
+    }
+    
+    //MARK: Ads related
+    
+    func loadBannerAds() {
+        
+        bannerView.adUnitID = adUnitId
+        bannerView.rootViewController = self
+        bannerView.loadRequest(GADRequest())
     }
     
     
@@ -99,6 +118,35 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 
                 self.timeLineTable.reloadData()
             })
+        }
+    }
+    
+    func modifyPost(text: String, postId: String,index:Int) {
+
+        editPost(text,postId: postId) { (data) in
+            
+            var timeLineData:[JSON]!
+            
+            if let  value = timelineData?.arrayValue{
+                
+                timeLineData = value
+            }else{
+                
+                timeLineData = [JSON]()
+            }
+            
+            
+            timeLineData[index] = JSON(data["timeline"]!)
+            
+            
+            timelineData = JSON(timeLineData)
+            
+            dispatch_async(dispatch_get_main_queue(),{
+                
+                self.timeLineTable.reloadData()
+                KRProgressHUD.dismiss()
+            })
+            
         }
     }
     
@@ -208,6 +256,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         if indexPath.section == 0{
             let cell = timeLineTable.dequeueReusableCellWithIdentifier("addpost", forIndexPath: indexPath) as! AddPostTableViewCell
             acell =  cell
+            acell.contentView.frame = CGRectMake(acell.contentView.frame.minX, acell.contentView.frame.minY, acell.contentView.frame.width, 200)
         }
         else{
             
@@ -228,9 +277,21 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 let  postCell =  timeLineTable.dequeueReusableCellWithIdentifier("aPost", forIndexPath: indexPath) as! APostTableViewCell
                 
                 postCell.parent = self
+                postCell.postIndex = indexPath.section-1
                 
                 let friendId = data["OwnerID"].stringValue
                 
+                if let dateTimeStamp = data["AddedTime"].double{
+    
+                    let date = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
+                    let dateFormatter = NSDateFormatter()
+                    dateFormatter.timeZone = NSTimeZone.localTimeZone()
+                    dateFormatter.timeStyle = .ShortStyle
+                    dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+                    postCell.postedDate.text = dateFormatter.stringFromDate(date)
+                }
+                
+                postCell.postOwnerId = friendId
                 
                  let postedBy = data["PostedBy"].stringValue
                 if postedBy == "CricTrac"{
@@ -272,7 +333,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     commentsCount = value
                 }
                 
-                postCell.commentCount.setTitle("\(commentsCount) COMMENTS", forState: .Normal)
+                postCell.commentCount.setTitle("\(commentsCount) Comments", forState: .Normal)
                 
                 
                 postCell.postId = data.dictionaryValue["postId"]?.stringValue
@@ -293,7 +354,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     
                 }
                 
-                postCell.likeCount.setTitle("\(likesCount) LIKES", forState: .Normal)
+                postCell.likeCount.setTitle("\(likesCount) Likes", forState: .Normal)
                 postCell.likeButton.titleLabel?.textColor = likeColor
                 acell = postCell
                 
@@ -321,13 +382,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         return 5
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 0{return 125}
-        return 225
-        
-    }
-    
-    
+   
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
@@ -341,6 +396,8 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             
             let newPost = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
             newPost.postData =  timelineData!.arrayValue[indexPath.section-1]
+            newPost.postIndex = indexPath.section-1
+            newPost.refreshableParent = self
             presentViewController(newPost, animated: true, completion: nil)
             
         }
@@ -404,6 +461,10 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         }
     }
     
+    
+    func refresh(){
+        timeLineTable.reloadData()
+    }
     
     
     /*

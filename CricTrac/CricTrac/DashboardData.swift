@@ -70,6 +70,16 @@ class DashboardData {
     var TotalWins: AnyObject!
     var WinPercentage: AnyObject!
     
+    var TopBatting1stMatchID: AnyObject!
+    var TopBatting2ndMatchID: AnyObject!
+    var TopBatting3rdMatchID: AnyObject!
+    var Recent1stMatchID: AnyObject!
+    var Recent1stMatchDate: AnyObject!
+    var Recent2ndMatchID: AnyObject!
+    var Recent2ndMatchDate: AnyObject!
+    var Recent3rdMatchID: AnyObject!
+    var Recent3rdMatchDate: AnyObject!
+    
     
     init(dataObj: [String: AnyObject!]){
         self.BattingInnings = dataObj["BattingInnings"] ?? 0
@@ -132,6 +142,16 @@ class DashboardData {
         self.TotalWides = dataObj["TotalWides"] ?? 0
         self.TotalWins = dataObj["TotalWins"] ?? 0
         self.WinPercentage = dataObj["WinPercentage"] ?? 0
+        
+        self.TopBatting1stMatchID = String(dataObj["TopBatting1stMatchID"] ??  "-")
+        self.TopBatting2ndMatchID = String(dataObj["TopBatting2ndMatchID"] ??  "-")
+        self.TopBatting3rdMatchID = String(dataObj["TopBatting3rdMatchID"] ??  "-")
+        self.Recent1stMatchID = String(dataObj["Recent1stMatchID"] ??  "-")
+        self.Recent1stMatchDate = String(dataObj["Recent1stMatchDate"] ?? "-")
+        self.Recent2ndMatchID = String(dataObj["Recent2ndMatchID"] ??  "-")
+        self.Recent2ndMatchDate = String(dataObj["Recent2ndMatchDate"] ?? "-")
+        self.Recent3rdMatchID = String(dataObj["Recent3rdMatchID"] ??  "-")
+        self.Recent3rdMatchDate = String(dataObj["Recent3rdMatchDate"] ?? "-")
     }
     
     var dashboardData: [String: AnyObject] {
@@ -195,7 +215,17 @@ class DashboardData {
         "TotalWickets" : self.TotalWickets,
         "TotalWides" : self.TotalWides,
         "TotalWins" : self.TotalWins,
-        "WinPercentage" : self.WinPercentage!
+        "WinPercentage" : self.WinPercentage!,
+            
+        "TopBatting1stMatchID" : self.TopBatting1stMatchID,
+        "TopBatting2ndMatchID" : self.TopBatting2ndMatchID,
+        "TopBatting3rdMatchID" : self.TopBatting3rdMatchID,
+        "Recent1stMatchID" : self.Recent1stMatchID,
+        "Recent1stMatchDate" : self.Recent1stMatchDate,
+        "Recent2ndMatchID" : self.Recent2ndMatchID,
+        "Recent2ndMatchDate" : self.Recent2ndMatchDate,
+        "Recent3rdMatchID" : self.Recent3rdMatchID,
+        "Recent3rdMatchDate" : self.Recent3rdMatchDate
         ]
     }
     

@@ -222,7 +222,41 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "330"
-            endingLineNumber = "330">
+            endingLineNumber = "330"
+            landmarkName = "fileExists(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CricTrac.(firebaseLoginWithGoogle (Swift.String, accessToken : Swift.String, sucess : (__ObjC.FIRUser) -&gt; (), failure : (__ObjC.NSError) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "CricTrac"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/renjith/Projects/Latest/crictrac_ios/CricTrac/CricTrac/utility/utility.swift"
+                  timestampString = "512734551.968709"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "331"
+                  endingLineNumber = "331"
+                  offsetFromSymbolStart = "67">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CricTrac.(firebaseLoginWithGoogle (Swift.String, accessToken : Swift.String, sucess : (__ObjC.FIRUser) -&gt; (), failure : (__ObjC.NSError) -&gt; ()) -&gt; ()).(closure #2)"
+                  moduleName = "CricTrac"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/renjith/Projects/Latest/crictrac_ios/CricTrac/CricTrac/utility/utility.swift"
+                  timestampString = "512734551.968898"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "333"
+                  endingLineNumber = "333"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -236,7 +270,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "328"
-            endingLineNumber = "328">
+            endingLineNumber = "328"
+            landmarkName = "fileExists(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -278,12 +314,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CricTrac/Other/Service.swift"
-            timestampString = "510300216.951164"
+            timestampString = "510459961.891687"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "519"
-            endingLineNumber = "519"
-            landmarkName = "getAllProfiles(_:sucessBlock:)"
+            startingLineNumber = "540"
+            endingLineNumber = "540"
+            landmarkName = "UpdateDashboardDetails()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -454,12 +490,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CricTrac/Other/Service.swift"
-            timestampString = "510300216.951164"
+            timestampString = "510459961.891687"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "520"
-            endingLineNumber = "520"
-            landmarkName = "getAllProfiles(_:sucessBlock:)"
+            startingLineNumber = "541"
+            endingLineNumber = "541"
+            landmarkName = "UpdateDashboardDetails()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -614,12 +650,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CricTrac/Other/Service.swift"
-            timestampString = "510300216.951164"
+            timestampString = "510459961.891687"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "539"
-            endingLineNumber = "539"
-            landmarkName = "getImageFromFacebook()"
+            startingLineNumber = "560"
+            endingLineNumber = "560"
+            landmarkName = "getAllProfileData(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -630,29 +666,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CricTrac/Controller/TimeLineViewController.swift"
-            timestampString = "509514357.133825"
+            timestampString = "512480770.278288"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "212"
-            endingLineNumber = "212"
-            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CricTrac/View/APostTableViewCell.swift"
-            timestampString = "509189249.602393"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "deletePost(_:)"
-            landmarkType = "5">
+            startingLineNumber = "246"
+            endingLineNumber = "246"
+            landmarkName = "TimeLineViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -662,125 +682,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CricTrac/Other/Service.swift"
-            timestampString = "510300216.951164"
+            timestampString = "510459961.891687"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "963"
-            endingLineNumber = "963"
-            landmarkName = "DeleteSentAndReceivedFriendRequestData(_:successBlock:)"
+            startingLineNumber = "984"
+            endingLineNumber = "984"
+            landmarkName = "AddSentRequestData(_:callback:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CricTrac.(DeleteSentAndReceivedFriendRequestData (Swift.String, successBlock : (Swift.Bool) -&gt; ()) -&gt; ()).(closure #1)"
-                  moduleName = "CricTrac"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/renjith/Projects/Latest/crictrac_ios/CricTrac/CricTrac/Other/Service.swift"
-                  timestampString = "510301642.776831"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "964"
-                  endingLineNumber = "964"
-                  offsetFromSymbolStart = "1100">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CricTrac.(DeleteSentAndReceivedFriendRequestData (Swift.String, successBlock : (Swift.Bool) -&gt; ()) -&gt; ()).(closure #1).(closure #1)"
-                  moduleName = "CricTrac"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/renjith/Projects/Latest/crictrac_ios/CricTrac/CricTrac/Other/Service.swift"
-                  timestampString = "510301642.777048"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "965"
-                  endingLineNumber = "965"
-                  offsetFromSymbolStart = "20">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CricTrac/View/APostTableViewCell.swift"
-            timestampString = "509189328.437364"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
-            landmarkName = "cancel()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CricTrac/View/APostTableViewCell.swift"
-            timestampString = "509189331.277763"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "delete()"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CricTrac.APostTableViewCell.deletePostFromFB () -&gt; ()"
-                  moduleName = "CricTrac"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/renjith/Projects/Latest/crictrac_ios/CricTrac/CricTrac/View/APostTableViewCell.swift"
-                  timestampString = "510301642.779863"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "111"
-                  endingLineNumber = "111"
-                  offsetFromSymbolStart = "26">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CricTrac.APostTableViewCell.deletePostFromFB () -&gt; ()"
-                  moduleName = "CricTrac"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/renjith/Projects/Latest/crictrac_ios/CricTrac/CricTrac/View/APostTableViewCell.swift"
-                  timestampString = "510301642.780014"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "111"
-                  endingLineNumber = "111"
-                  offsetFromSymbolStart = "145">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CricTrac/Controller/TimeLineViewController.swift"
-            timestampString = "509514357.133825"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "349"
-            endingLineNumber = "349"
-            landmarkName = "scrollViewDidEndDragging(_:willDecelerate:)"
-            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -790,11 +698,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CricTrac/Controller/TimeLineViewController.swift"
-            timestampString = "509514357.133825"
+            timestampString = "512480770.278288"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "224"
-            endingLineNumber = "224"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -842,9 +750,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "101"
-            endingLineNumber = "101"
-            landmarkName = "writeAutomaticMessage(_:)"
-            landmarkType = "7">
+            endingLineNumber = "101">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -858,41 +764,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "99"
-            endingLineNumber = "99"
-            landmarkName = "writeAutomaticMessage(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CricTrac.writeAutomaticMessage (Swift.String) -&gt; ()"
-                  moduleName = "CricTrac"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/renjith/Projects/Latest/crictrac_ios/CricTrac/CricTrac/Other/NetworkManager.swift"
-                  timestampString = "510301642.783529"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "99"
-                  endingLineNumber = "99"
-                  offsetFromSymbolStart = "765">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CricTrac.(writeAutomaticMessage (Swift.String) -&gt; ()).(closure #1)"
-                  moduleName = "CricTrac"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/renjith/Projects/Latest/crictrac_ios/CricTrac/CricTrac/Other/NetworkManager.swift"
-                  timestampString = "510301642.783767"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "101"
-                  endingLineNumber = "101"
-                  offsetFromSymbolStart = "30">
-               </Location>
-            </Locations>
+            endingLineNumber = "99">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -918,12 +790,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CricTrac/Other/Service.swift"
-            timestampString = "510300216.951164"
+            timestampString = "510459961.891687"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "865"
-            endingLineNumber = "865"
-            landmarkName = "AcceptFriendRequest(_:callback:)"
+            startingLineNumber = "886"
+            endingLineNumber = "886"
+            landmarkName = "getAllFriendSuggestions(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -966,12 +838,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CricTrac/Other/Service.swift"
-            timestampString = "510300216.951164"
+            timestampString = "510459961.891687"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "871"
-            endingLineNumber = "871"
-            landmarkName = "AcceptFriendRequest(_:callback:)"
+            startingLineNumber = "892"
+            endingLineNumber = "892"
+            landmarkName = "getAllFriendSuggestions(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -982,45 +854,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CricTrac/Other/Service.swift"
-            timestampString = "510300216.951164"
+            timestampString = "510459961.891687"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "891"
-            endingLineNumber = "891"
-            landmarkName = "AcceptFriendRequest(_:callback:)"
+            startingLineNumber = "912"
+            endingLineNumber = "912"
+            landmarkName = "getAllFriendSuggestions(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CricTrac.AcceptFriendRequest (Swift.Dictionary&lt;Swift.String, Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;&gt;, callback : (data : Swift.String) -&gt; ()) -&gt; ()"
-                  moduleName = "CricTrac"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/renjith/Projects/Latest/crictrac_ios/CricTrac/CricTrac/Other/Service.swift"
-                  timestampString = "510301642.78934"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "892"
-                  endingLineNumber = "892"
-                  offsetFromSymbolStart = "1399">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CricTrac.(AcceptFriendRequest (Swift.Dictionary&lt;Swift.String, Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;&gt;, callback : (data : Swift.String) -&gt; ()) -&gt; ()).(closure #1)"
-                  moduleName = "CricTrac"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/renjith/Projects/Latest/crictrac_ios/CricTrac/CricTrac/Other/Service.swift"
-                  timestampString = "510301642.789543"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "892"
-                  endingLineNumber = "892"
-                  offsetFromSymbolStart = "3719">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1285,61 +1125,109 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CricTrac/Controller/SliderMenuViewController.swift"
-            timestampString = "510299061.41194"
+            filePath = "CricTrac/View/APostTableViewCell.swift"
+            timestampString = "512479953.492104"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "didTapLabelName()"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CricTrac.APostTableViewCell.didTapLabelName () -&gt; ()"
+                  moduleName = "CricTrac"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/renjith/Projects/Latest/crictrac_ios/CricTrac/CricTrac/View/APostTableViewCell.swift"
+                  timestampString = "510385883.81299"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "558">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CricTrac.APostTableViewCell.didTapLabelName () -&gt; ()"
+                  moduleName = "CricTrac"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/renjith/Projects/Latest/crictrac_ios/CricTrac/CricTrac/View/APostTableViewCell.swift"
+                  timestampString = "510385883.813163"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "782">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CricTrac/Other/Service.swift"
+            timestampString = "510459961.891687"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "232"
+            endingLineNumber = "232"
+            landmarkName = "addCoverImageData(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CricTrac/UserDashboardViewController.swift"
+            timestampString = "510639322.466015"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "726"
+            endingLineNumber = "726"
+            landmarkName = "setDashboardData()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CricTrac/Controller/SliderMenuViewController.swift"
-            timestampString = "510299062.875809"
+            filePath = "CricTrac/Other/Service.swift"
+            timestampString = "510459961.891687"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "5">
+            startingLineNumber = "220"
+            endingLineNumber = "220"
+            landmarkName = "addCoverImageData(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CricTrac/Controller/SliderMenuViewController.swift"
-            timestampString = "510299063.907461"
+            filePath = "CricTrac/UserDashboardViewController.swift"
+            timestampString = "510639322.466015"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CricTrac/Controller/SliderMenuViewController.swift"
-            timestampString = "510299080.575465"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "316"
+            endingLineNumber = "316"
+            landmarkName = "imagePickerController(_:didFinishPickingImage:editingInfo:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1350,12 +1238,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CricTrac/UserDashboardViewController.swift"
-            timestampString = "510299863.881231"
+            timestampString = "510639322.466015"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "305"
-            endingLineNumber = "305"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "318"
+            endingLineNumber = "318"
+            landmarkName = "imagePickerController(_:didFinishPickingImage:editingInfo:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1365,14 +1253,222 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CricTrac/Controller/SliderMenuViewController.swift"
-            timestampString = "510301642.690265"
+            filePath = "CricTrac/Other/Service.swift"
+            timestampString = "512132387.224835"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
-            landmarkName = "tableView(_:didSelectRowAtIndexPath:)"
+            startingLineNumber = "1125"
+            endingLineNumber = "1125"
+            landmarkName = "addNewPost(_:sucess:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CricTrac/Controller/TimeLineViewController.swift"
+            timestampString = "512480770.278288"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "modifyPost(_:postId:index:)"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CricTrac.TimeLineViewController.modifyPost (Swift.String, postId : Swift.String, index : Swift.Int) -&gt; ()"
+                  moduleName = "CricTrac"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/renjith/Projects/Latest/crictrac_ios/CricTrac/CricTrac/Controller/TimeLineViewController.swift"
+                  timestampString = "512734551.982832"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "126"
+                  endingLineNumber = "126"
+                  offsetFromSymbolStart = "51">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CricTrac.TimeLineViewController.(modifyPost (Swift.String, postId : Swift.String, index : Swift.Int) -&gt; ()).(closure #1)"
+                  moduleName = "CricTrac"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/renjith/Projects/Latest/crictrac_ios/CricTrac/CricTrac/Controller/TimeLineViewController.swift"
+                  timestampString = "512734551.98297"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "130"
+                  endingLineNumber = "130"
+                  offsetFromSymbolStart = "71">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CricTrac/View/APostTableViewCell.swift"
+            timestampString = "512481059.346736"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
+            landmarkName = "showPostOptions()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CricTrac/View/APostTableViewCell.swift"
+            timestampString = "512481068.854511"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
+            landmarkName = "showPostOptions()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CricTrac/View/APostTableViewCell.swift"
+            timestampString = "512481152.038014"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
+            landmarkName = "showPostOptions()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CricTrac/View/APostTableViewCell.swift"
+            timestampString = "512481159.513994"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "showPostOptions()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CricTrac/CommentsViewController.swift"
+            timestampString = "512734829.110932"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "306"
+            endingLineNumber = "306"
+            landmarkName = "didTapLikeButton(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CricTrac/CommentsViewController.swift"
+            timestampString = "512734829.110932"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
+            landmarkName = "didTapLikeButton(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CricTrac/CommentsViewController.swift"
+            timestampString = "512734829.110932"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
+            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CricTrac/CommentsViewController.swift"
+            timestampString = "512734595.681325"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
+            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CricTrac.CommentsViewController.tableView (__ObjC.UITableView, cellForRowAtIndexPath : __ObjC.NSIndexPath) -&gt; __ObjC.UITableViewCell"
+                  moduleName = "CricTrac"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/renjith/Projects/Latest/crictrac_ios/CricTrac/CricTrac/CommentsViewController.swift"
+                  timestampString = "512734595.685863"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "141"
+                  endingLineNumber = "141"
+                  offsetFromSymbolStart = "341">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CricTrac.CommentsViewController.tableView (__ObjC.UITableView, cellForRowAtIndexPath : __ObjC.NSIndexPath) -&gt; __ObjC.UITableViewCell"
+                  moduleName = "CricTrac"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/renjith/Projects/Latest/crictrac_ios/CricTrac/CricTrac/CommentsViewController.swift"
+                  timestampString = "512734595.686068"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "141"
+                  endingLineNumber = "141"
+                  offsetFromSymbolStart = "768">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

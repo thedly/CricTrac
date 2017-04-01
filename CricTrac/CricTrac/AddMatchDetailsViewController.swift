@@ -165,7 +165,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             
             alertView.addButton("Cancel", action: { })
             
-            alertView.showNotice("Warning", subTitle: "All Data will be lost if you continue")
+            alertView.showNotice("Warning", subTitle: "All data will be lost if you continue")
             
             
         }
@@ -187,9 +187,9 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     
     @IBAction func didTapSave(sender: UIButton) {
         
-        if matchBeingEdited {
+        /*if matchBeingEdited {
             dataHasChangedAfterLastSave = false
-        }
+        }*/
         
         if validateMatchDetails() {
             
@@ -237,6 +237,11 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                 
             }
             
+            //sajith - if condition moved from top
+            if matchBeingEdited {
+                dataHasChangedAfterLastSave = false
+            }
+
             
             if !dataHasChangedAfterLastSave {
                 if !matchBeingEdited{
@@ -246,7 +251,8 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                    // self.dismissViewControllerAnimated(true) {}
                         self.moveToMatchSummary()
                     })
-                }else{
+                }
+                else{
                     
                     if let matchKey = matchId{
                         updateMatchData(matchKey, data: data, callback: { dat in
@@ -257,8 +263,8 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                            self.moveToMatchSummary()
                             // self.dismissViewControllerAnimated(true) {}
                         })
+
                     }
-                    
                 }
             }
             else{
@@ -393,8 +399,10 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
      */
     func moveToMatchSummary()  {
         
-         let dashboardVC = viewControllerFrom("Main", vcid: "MatchSummaryViewController") as! MatchSummaryViewController
+        let dashboardVC = viewControllerFrom("Main", vcid: "MatchSummaryViewController") as! MatchSummaryViewController
         let navigationControl = UINavigationController(rootViewController: dashboardVC)
         sliderMenu.mainViewController = navigationControl
+        //self.navigationController?.popToRootViewControllerAnimated(true)
+        //self.navigationController?.popViewControllerAnimated(true)
     }
 }

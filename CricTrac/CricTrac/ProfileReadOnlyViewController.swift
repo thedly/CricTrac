@@ -83,35 +83,35 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
         
         if profileData.userExists {
             
-            self.NameText.text = profileData.fullName.uppercaseString
-            self.DOBText.text = profileData.DateOfBirth.uppercaseString
-            self.EmailText.text = profileData.Email.uppercaseString
-            self.MobileText.text = profileData.Mobile.uppercaseString
-            self.GenderText.text = profileData.Gender.uppercaseString
-            self.CountryText.text = profileData.Country.uppercaseString
-            self.StateText.text = profileData.State.uppercaseString
-            self.CityText.text = profileData.City.uppercaseString
+            self.NameText.text = profileData.fullName
+            self.DOBText.text = profileData.DateOfBirth
+            self.EmailText.text = profileData.Email
+            self.MobileText.text = profileData.Mobile
+            self.GenderText.text = profileData.Gender
+            self.CountryText.text = profileData.Country
+            self.StateText.text = profileData.State
+            self.CityText.text = profileData.City
             
-            self.PlayerCurrentTeams.text = profileData.PlayerCurrentTeams.joinWithSeparator("\n").uppercaseString
-            self.PlayerPastTeams.text = profileData.PlayerPastTeams.joinWithSeparator("\n").uppercaseString
-            self.PlayerBattingStyle.text = profileData.BattingStyle.uppercaseString
-            self.PlayerBowlingStyle.text = profileData.BowlingStyle.uppercaseString
+            self.PlayerCurrentTeams.text = profileData.PlayerCurrentTeams.joinWithSeparator("\n")
+            self.PlayerPastTeams.text = profileData.PlayerPastTeams.joinWithSeparator("\n")
+            self.PlayerBattingStyle.text = profileData.BattingStyle
+            self.PlayerBowlingStyle.text = profileData.BowlingStyle
             
-            self.PlayingRole.text = profileData.PlayingRole.uppercaseString
+            self.PlayingRole.text = profileData.PlayingRole
             
             
-            self.CoachCurrentTeams.text = profileData.CoachCurrentTeams.joinWithSeparator("\n").uppercaseString
+            self.CoachCurrentTeams.text = profileData.CoachCurrentTeams.joinWithSeparator("\n")
             //lblCoachPastPlayedFor
-            self.CoachPastTeams.text = profileData.CoachPastTeams.joinWithSeparator("\n").uppercaseString
-            self.CoachCoachingLevel.text = profileData.CoachingLevel.uppercaseString
-            self.CoachCertifications.text = profileData.Certifications.joinWithSeparator("\n").uppercaseString
+            self.CoachPastTeams.text = profileData.CoachPastTeams.joinWithSeparator("\n")
+            self.CoachCoachingLevel.text = profileData.CoachingLevel
+            self.CoachCertifications.text = profileData.Certifications.joinWithSeparator("\n")
             self.CoachExperience.text = profileData.Experience.uppercaseString
             //lblCoachPastPlayedFor
-             self.lblCoachPastPlayedFor.text = profileData.CoachPlayedFor.joinWithSeparator("\n").uppercaseString
-            self.FanSupportingTeams.text = profileData.SupportingTeams.joinWithSeparator("\n").uppercaseString
-            self.FanInterestedSports.text = profileData.InterestedSports.joinWithSeparator("\n").uppercaseString
+            self.lblCoachPastPlayedFor.text = profileData.CoachPlayedFor.joinWithSeparator("\n")
+            self.FanSupportingTeams.text = profileData.SupportingTeams.joinWithSeparator("\n")
+            self.FanInterestedSports.text = profileData.InterestedSports.joinWithSeparator("\n")
             self.FanFavouritePlayer.text = profileData.FavoritePlayers.joinWithSeparator("\n")
-            self.FanHobbies.text = profileData.Hobbies.joinWithSeparator("\n").uppercaseString
+            self.FanHobbies.text = profileData.Hobbies.joinWithSeparator("\n")
             
             
             self.CoachingExperienceView.hidden = profileData.UserProfile != userProfileType.Coach.rawValue
@@ -175,7 +175,7 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
         navigationItem.leftBarButtonItem = leftbarButton
         navigationItem.rightBarButtonItem = righttbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-        title = "PERSONAL INFO"
+        title = "PROFILE"
        // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
        // navigationController!.navigationBar.titleTextAttributes = titleDict
     }

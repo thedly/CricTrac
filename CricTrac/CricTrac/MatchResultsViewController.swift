@@ -113,7 +113,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "RESULTS")
+        return IndicatorInfo(title: "RESULT")
     }
     
     var tossText: String! = "-"
@@ -275,18 +275,19 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             tossText = toss as! String
         }
         
-        firstBatText = parent!.selecetedData!["FirstBatting"]! as! String ?? "-"
-        firstScoreText.textVal = parent!.selecetedData!["FirstBattingScore"]! as! String ?? "-"
-        firstWicketsText.textVal = parent!.selecetedData!["FirstBattingWickets"]! as! String ?? "-"
-        secondBatText = parent!.selecetedData!["SecondBatting"]! as! String ?? "-"
+
+        firstBatText = parent!.selecetedData!["FirstBatting"]! as? String ?? "-"
+        firstScoreText.textVal = parent!.selecetedData!["FirstBattingScore"]! as? String ?? "-"
+        firstWicketsText.textVal = parent!.selecetedData!["FirstBattingWickets"]! as? String ?? "-"
+        secondBatText = parent!.selecetedData!["SecondBatting"]! as? String ?? "-"
         
-        AchievementsText.text = parent?.selecetedData!["Achievements"] as! String ?? "-"
+        AchievementsText.text = parent?.selecetedData!["Achievements"] as? String ?? "-"
         
         firstTeamTitle.text = firstBatText
         secondTeamTitle.text = secondBatText
         
         
-        firstOversText.text = parent!.selecetedData!["FirstBattingOvers"] as! String ?? "-"
+        firstOversText.text = parent!.selecetedData!["FirstBattingOvers"] as? String ?? "-"
         
         firstTeamTossBtn.alpha = 0.2
         secondTeamTossBtn.alpha = 0.2
@@ -304,12 +305,12 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             self.isTeambattingSetBtn.alpha = 1.0
         }
         
-        secondScoreText.textVal = parent!.selecetedData!["SecondBattingScore"]! as! String ?? "-"
+        secondScoreText.textVal = parent!.selecetedData!["SecondBattingScore"]! as? String ?? "-"
         
-        secondOversText.textVal = parent!.selecetedData!["SecondBattingOvers"] as! String ?? "-"
+        secondOversText.textVal = parent!.selecetedData!["SecondBattingOvers"] as? String ?? "-"
         
-        secondWicketsText.textVal = parent!.selecetedData!["SecondBattingWickets"]! as! String ?? "-"
-        resultText.textVal = parent!.selecetedData!["Result"]! as! String ?? "-"
+        secondWicketsText.textVal = parent!.selecetedData!["SecondBattingWickets"]! as? String ?? "-"
+        resultText.textVal = parent!.selecetedData!["Result"]! as? String ?? "-"
     }
     
     func allRequiredFieldsHaveFilledProperly()->Bool{
@@ -387,24 +388,24 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     @IBAction func swapBtnPressed(sender: AnyObject) {
         
         if (self.firstBatText != "-" && self.firstBatText != "") {
-//            firstBatText = firstTeamTitle.text
-//            secondBatText = secondTeamTitle.text
-//            
-//            let tempbattingtext = firstBatText
-//            firstBatText = secondBatText
-//            secondBatText = tempbattingtext
-//            
-//            let tempOvers = firstOversText
-//            firstOversText = secondOversText
-//            secondOversText = tempOvers
-//            
-//            let tempScore = firstScoreText
-//            firstScoreText = secondScoreText
-//            secondScoreText = tempScore
-//            
-//            let tempWickets = firstWicketsText
-//            firstWicketsText = secondWicketsText
-//            secondWicketsText = tempWickets
+            firstBatText = firstTeamTitle.text
+            secondBatText = secondTeamTitle.text
+            
+            let tempbattingtext = firstBatText
+            firstBatText = secondBatText
+            secondBatText = tempbattingtext
+            
+            let tempOvers = firstOversText
+            firstOversText = secondOversText
+            secondOversText = tempOvers
+            
+            let tempScore = firstScoreText
+            firstScoreText = secondScoreText
+            secondScoreText = tempScore
+            
+            let tempWickets = firstWicketsText
+            firstWicketsText = secondWicketsText
+            secondWicketsText = tempWickets
             
             
             

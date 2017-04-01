@@ -8,6 +8,7 @@
 
 import UIKit
 import KRProgressHUD
+import SwiftyStoreKit
 
 class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable {
 
@@ -22,12 +23,18 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
+    var inAppProductPrice : String?
+    @IBOutlet var upgradeButton : UIButton!
+    
     override func viewWillAppear(animated: Bool) {
         getMatchData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //In App Purchase
+        fetchProductInfo()
         
         self.automaticallyAdjustsScrollViewInsets = false
 
@@ -194,16 +201,20 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         if let ground = value["Ground"]{
             mData.ground = ground as! String
             
-            if let venue = value["Venue"]{
-                mData.ground = "\(ground) \(venue)"
+            if let venue = value["Venue"] as? String where venue != "-" {
+                mData.ground = "\(ground), \(venue)"
             }
         }
         
         if let ballsFaced = value["BallsFaced"] as? String where ballsFaced != "-", let runsScored = value["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
             
-            let strinkeRate = String(format: "%.2f",(Float(runsScored)!)*100/Float(ballsFaced)!)
-            mData.strikerate = Float(strinkeRate)
-            //matchVenueAndDate.appendContentsOf("\n Strike rate: \(strinkeRate)")
+            if ballsFaced == "0" {
+                mData.strikerate = Float("0.00")
+            }
+            else {
+                let strikeRate = String(format: "%.2f",(Float(runsScored)!)*100/Float(ballsFaced)!)
+                mData.strikerate = Float(strikeRate)
+            }
         }
         
         if let oversBowled = value["OversBowled"] as? String where oversBowled != "-", let runsGiven = value["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
@@ -214,7 +225,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         }
         
         if let opponent  = value["Opponent"]{
-            opponentName = opponent.uppercaseString
+            //opponentName = opponent.uppercaseString
+            opponentName = opponent as! String
         }
         
         
@@ -243,7 +255,6 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             if let isHidden = currentMatch.BattingSectionHidden where isHidden == true{
                 
                 if let isHidden = currentMatch.BowlingSectionHidden where isHidden == false{
-                    
                     aCell.strikeRateLabel.text = "Economy : \(currentMatch.economy!)"
                     aCell.strikeRateLabel.hidden = false
                 }else{
@@ -251,32 +262,31 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 }
                 aCell.economyLabel.hidden = true
                 
-            }else{
-                
+            }
+            else
+            {
                 if let sRate = currentMatch.strikerate {
-                aCell.strikeRateLabel.hidden = false
-                aCell.strikeRateLabel.text = "Strike Rate : \(sRate)"
+                    aCell.strikeRateLabel.hidden = false
+                    aCell.economyLabel.hidden = true
+                    aCell.strikeRateLabel.text = "Strike Rate : \(sRate)"
                 }
                 
                 if let economy = currentMatch.economy {
-                    
                     aCell.economyLabel.hidden = false
                     aCell.economyLabel.text = "Economy : \(economy)"
                 }
-                
-
-                
             }
             
             
-                if let sRate = currentMatch.strikerate {
-                    //aCell.strikeRateLabel.text = "Strike Rate : \(sRate)"
-                }
-                if let economy = currentMatch.economy {
-                    
-                    //aCell.economyLabel.text = "Economy : \(economy)"
-                }
-            
+
+//                if let sRate = currentMatch.strikerate {
+//                    //aCell.strikeRateLabel.text = "Strike Rate : \(sRate)"
+//                }
+//                if let economy = currentMatch.economy {
+//                    
+//                    //aCell.economyLabel.text = "Economy : \(economy)"
+//                }
+//            
 //            if currentMatch.BattingSectionHidden!{
 //                
 //                aCell.strikeRateLabel.hidden = true
@@ -311,14 +321,14 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! SummaryDetailsCell
+//        let cell = tableView.cellForRowAtIndexPath(indexPath) as! SummaryDetailsCell
                 let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
         
         summaryDetailsVC.battingViewHidden = matches[indexPath.row].BattingSectionHidden
         summaryDetailsVC.bowlingViewHidden = matches[indexPath.row].BowlingSectionHidden
         
         
-        var selectedDataSource = self.matchDataSource.filter { (dat) -> Bool in
+        let selectedDataSource = self.matchDataSource.filter { (dat) -> Bool in
             return dat["MatchId"]! as! String == matches[indexPath.row].matchId
         }
         
@@ -326,6 +336,81 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
           //  presentViewController(summaryDetailsVC, animated: true, completion: nil)
         self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
         CFRunLoopWakeUp(CFRunLoopGetCurrent())
+    }
+    
+    //MARK: In App purchase
+    
+    // Optional: Use this methode to fetch product info.
+    private func fetchProductInfo(){
+        
+        SwiftyStoreKit.retrieveProductsInfo(["CricTrac_Premium_Player"]) { result in
+            if let product = result.retrievedProducts.first {
+                let numberFormatter = NSNumberFormatter()
+                numberFormatter.locale = product.priceLocale
+                numberFormatter.numberStyle = .CurrencyStyle
+                let priceString = numberFormatter.stringFromNumber(product.price ?? 0) ?? ""
+                print("Product: \(product.localizedDescription), price: \(priceString)")
+                self.inAppProductPrice = priceString
+            }
+            else if let invalidProductId = result.invalidProductIDs.first {
+                //return alertWithTitle("Could not retrieve product info", message: "Invalid product identifier: \(invalidProductId)")
+                print("Invalid product identifier: \(invalidProductId)")
+            }
+            else {
+                print("Error: \(result.error)")
+            }
+        }
+    }
+    
+    @IBAction func didTapPurchaseButton(){
+        
+        
+        if let msg = inAppProductPrice {
+            
+            let message = "Upgrade to Premium by paying : Rs. \(msg)"
+            
+            let refreshAlert = UIAlertController(title: "Upgrade", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            
+            refreshAlert.addAction(UIAlertAction(title: "Buy", style: .Default, handler: { (action: UIAlertAction!) in
+                self.doPurchase()
+            }))
+            
+            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+                print("Handle Cancel Logic here")
+            }))
+            
+            presentViewController(refreshAlert, animated: true, completion: nil)
+        }
+        else {
+            
+            self.fetchProductInfo()
+            
+            let refreshAlert = UIAlertController(title: "Sorry", message: "Please try again", preferredStyle: UIAlertControllerStyle.Alert)
+            refreshAlert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: { (action: UIAlertAction!) in
+            }))
+            self.presentViewController(refreshAlert, animated: true, completion: nil)
+        }
+        
+
+
+    }
+    
+    func doPurchase(){
+        
+        SwiftyStoreKit.purchaseProduct("CricTrac_Premium_Player") { result in
+            switch result {
+            case .Success(let productId):
+                print("Purchase Success: \(productId)")
+                self.upgradeButton.setTitle("", forState: UIControlState.Normal)
+                let refreshAlert = UIAlertController(title: "Success", message: "Purchase successfull", preferredStyle: UIAlertControllerStyle.Alert)
+                refreshAlert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: { (action: UIAlertAction!) in
+                }))
+                self.presentViewController(refreshAlert, animated: true, completion: nil)
+                
+            case .Error(let error):
+                print("Purchase Failed: \(error)")
+            }
+        }
     }
 
 }

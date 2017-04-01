@@ -309,6 +309,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
                 var vc = viewControllerFrom("Main", vcid: "PlayerExperienceViewController") as! PlayerExperienceViewController
                 
                 vc.profileChanged = self.profileChanged
+
                 
                 NextVC = vc
                 
@@ -317,6 +318,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
                 var vc = viewControllerFrom("Main", vcid: "CoachingExperienceViewController") as! CoachingExperienceViewController
                 
                 vc.profileChanged = self.profileChanged
+
                 
                 NextVC = vc
             case userProfileType.Fan.rawValue :
@@ -324,6 +326,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
                 var vc = viewControllerFrom("Main", vcid: "CricketFanViewController") as! CricketFanViewController
                 
                 vc.profileChanged = self.profileChanged
+
                 
                 NextVC = vc
                 
@@ -332,6 +335,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
                 var vc = viewControllerFrom("Main", vcid: "PlayerExperienceViewController") as! PlayerExperienceViewController
                 
                 vc.profileChanged = self.profileChanged
+
 
                 NextVC = vc
             }
@@ -364,7 +368,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
             (firstName as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#FFFFFF")
         }
         
-        if !(dateOfBirth.text?.hasDataPresent)! || dateOfBirth.text?.length > 25 {
+        if !(dateOfBirth.text?.hasDataPresent)! {
             (dateOfBirth as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
             (dateOfBirth as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
             dateOfBirth.becomeFirstResponder()
@@ -388,7 +392,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
             (emailId as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#FFFFFF")
         }
         
-        if !(mobile.text?.hasDataPresent)! || mobile.text?.length != 10 {
+        if !(mobile.text?.hasDataPresent)! {
             (mobile as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
             (mobile as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
             mobile.becomeFirstResponder()
@@ -406,9 +410,6 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
             country.becomeFirstResponder()
             return false
         }
-        
-        
-            
         else
         {
             (country as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#FFFFFF")
@@ -427,7 +428,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
             (state as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#6D9447")
         }
         
-        if !(city.text?.hasDataPresent)! || city.text?.length > 25 {
+        if !(city.text?.hasDataPresent)! {
             (city as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
             (city as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
             city.becomeFirstResponder()
@@ -552,7 +553,7 @@ extension UserInfoViewController:UITextFieldDelegate{
     }
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         let newLength = textField.text!.characters.count + string.characters.count - range.length
-        if textField == firstName || textField == lastName {
+        if textField == firstName || textField == lastName || textField == mobile || textField == city {
             return newLength <= nameCharacterLimit // Bool
         }else if textField == state || textField == country {
             return false

@@ -36,11 +36,11 @@ class SentFriendRequest {
         
     func GetFriendRequestObject(datObj: SentFriendRequest) -> [String: AnyObject] {
         
-        return [
+            return [
             "City": datObj.City!,
             "Club": datObj.Club!,
             "Name": datObj.Name!,
-            "SentDateTime": datObj.SentDateTime! as! AnyObject,
+            "SentDateTime": datObj.SentDateTime!,
             "SentTo": datObj.SentTo!
         ]
     }

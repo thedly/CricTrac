@@ -45,31 +45,22 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         userName.text = profileData.fullName
         //baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
         
-      
-        getAllUserProfileInfo {
-        
-           if let userType = loggedInUserInfo["UserProfile"] as? String where userType != "Player"{
+        if let _ = loggedInUserInfo["UserProfile"] as? String{
             
-            if let newMatchIndex =  self.menuDataArray.indexOf({ $0["title"] == "NEW MATCH"}){
+            removeUnwantedMenu()
+        }else{
+            
+            getAllUserProfileInfo {
                 
-                self.menuDataArray.removeAtIndex(newMatchIndex)
-            }
-           
-            if let matchSummaryIndexIndex =  self.menuDataArray.indexOf({ $0["title"] == "MATCH SUMMARY"}){
+             self.removeUnwantedMenu()
                 
-                self.menuDataArray.removeAtIndex(matchSummaryIndexIndex)
             }
-           
-            print(self.menuDataArray)
-        
-            }
-        
+            
         }
         
+        //sajith - added the call to remove the menu items
+        //removeUnwantedMenu()
         loadInitialValues();
-        
-        
-        
         
         
         NSNotificationCenter.defaultCenter().addObserverForName(ProfilePictureUpdated, object: nil, queue: nil) { (notification) in
@@ -78,6 +69,26 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         }
         // Do any additional setup after loading the view.
     }
+    
+    
+    func removeUnwantedMenu(){
+        
+        if let userType = loggedInUserInfo["UserProfile"] as? String where userType != "Player"{
+            
+            if let newMatchIndex =  self.menuDataArray.indexOf({ $0["title"] == "NEW MATCH"}){
+                
+                self.menuDataArray.removeAtIndex(newMatchIndex)
+            }
+            
+            if let matchSummaryIndexIndex =  self.menuDataArray.indexOf({ $0["title"] == "MATCH SUMMARY"}){
+                
+                self.menuDataArray.removeAtIndex(matchSummaryIndexIndex)
+            }
+            
+        }
+        
+    }
+    
 
     func drawerController(drawerController: KYDrawerController, stateChanged state: KYDrawerController.DrawerState) {
         self.profileImage.image = LoggedInUserImage
@@ -240,10 +251,11 @@ extension SliderMenuViewController {
             return navFanDashBoard!
         case "AddMatchDetailsViewController":
             //if navAddMatch == nil {
+            
                 let dashboardVC = viewControllerFrom("Main", vcid: "AddMatchDetailsViewController") as! AddMatchDetailsViewController
 
                 navAddMatch = UINavigationController(rootViewController: dashboardVC)
-          //  }
+            //  }
             return navAddMatch!
         case "MatchSummaryViewController":
             if navMatchSummary == nil {
