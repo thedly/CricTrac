@@ -55,16 +55,12 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         suggestionsTblView.dataSource = self
         suggestionsTblView.delegate = self
         
-        
-        
         //setBackgroundColor()
         //setUIBackgroundTheme(self.view)
         self.view.backgroundColor = UIColor.clearColor()
         
         getFriendSuggestions()
     }
-    
-    
     
     func setAllReceivedRequests() {
         
@@ -178,17 +174,11 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     
     func getCellForRow(indexPath:NSIndexPath)->FriendRequestsCell{
         
-        
-        
         let aCell =  RequestsTblview.dequeueReusableCellWithIdentifier("FriendRequestsCell", forIndexPath: indexPath) as! FriendRequestsCell
-        
-        
-        
-        
         
         if FriendRequestsData[indexPath.row].isSentRequest == true {
             aCell.confirmBtn.hidden = true
-            aCell.rejectBtn.setTitle("Delete", forState: UIControlState.Normal)
+            aCell.rejectBtn.setTitle("Cancel Request", forState: UIControlState.Normal)
             
             aCell.FriendName.text = FriendRequestsData[indexPath.row].Name
             aCell.FriendCity.text = FriendRequestsData[indexPath.row].City
@@ -268,22 +258,11 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     }
 
     func getCellForSuggestionsRow(indexPath:NSIndexPath)->FriendSuggestionsCell{
-        
-        
         if FriendRequestsData.filter({$0.Name == UserProfilesData[indexPath.row].fullName}).first == nil {
-            
             if let aCell =  suggestionsTblView.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as? FriendSuggestionsCell {
-                
-                
                 aCell.configureCell(UserProfilesData[indexPath.row])
-                
                 aCell.AddFriendBtn.accessibilityIdentifier = UserProfilesData[indexPath.row].id
-                
-                
                 aCell.AddFriendBtn.addTarget(self, action: #selector(AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-                
-                
-                
                 aCell.backgroundColor = UIColor.clearColor()
                 return aCell
             }
@@ -294,8 +273,6 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         else {
             return FriendSuggestionsCell()
         }
-        
-        
     }
     
     
@@ -315,15 +292,12 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
             })
         })
 
-        
-
     }
     
     
     
     func RejectFriendBtnPressed(sender: UIButton){
-        
-         let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to reject this request  ?", preferredStyle: .ActionSheet)
+         let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to reject this request?", preferredStyle: .ActionSheet)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
             // Just dismiss the action sheet
@@ -334,14 +308,13 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         let unfriendAction = UIAlertAction(title: "Reject", style: .Default) { action -> Void in
         
         let RequestObjectid = sender.restorationIdentifier
-         
                 
             if let index = FriendRequestsData.indexOf( {$0.RequestId == RequestObjectid }) {
                 FriendRequestsData.removeAtIndex(index)
             }
         
             self.ReloadTbl()
-        backgroundThread(background: {
+            backgroundThread(background: {
             DeleteSentAndReceivedFriendRequestData(RequestObjectid!, successBlock: { data in
                 
             })
@@ -362,11 +335,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     public func ConfirmFriendBtnPressed(sender:UIButton!) {
         
         if let FriendUserId = sender.accessibilityIdentifier where FriendUserId != "" {
-          
             if FriendExists(FriendUserId) == nil {
-                
-            
-            
             var FriendObject = Profile(usrObj: [:])
             var loggedInUserObject = Profile(usrObj: [:])
             
@@ -380,8 +349,8 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                     var FriendData = Friends(dataObj: [:])
                     
                     FriendData.UserId = FriendObject.id
-                    FriendData.City = FriendObject.City
-                    switch FriendObject.UserProfile {
+                    //FriendData.City = FriendObject.City
+                    /*switch FriendObject.UserProfile {
                     case userProfileType.Player.rawValue :
                         FriendData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
                         break;
@@ -395,7 +364,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                         FriendData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
                         break;
                         
-                    }
+                    }*/
 
                     FriendData.Name = FriendObject.fullName
                     FriendData.FriendshipDateTime = NSDate().getCurrentTimeStamp()
@@ -403,9 +372,9 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                     var UserData = Friends(dataObj: [:])
                     
                     UserData.UserId = loggedInUserObject.id
-                    UserData.City = loggedInUserObject.City
+                    //UserData.City = loggedInUserObject.City
                     
-                    switch FriendObject.UserProfile {
+                    /*switch FriendObject.UserProfile {
                     case userProfileType.Player.rawValue :
                         UserData.Club = loggedInUserObject.PlayerCurrentTeams.joinWithSeparator(",")
                         break;
@@ -419,7 +388,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                         UserData.Club = loggedInUserObject.PlayerCurrentTeams.joinWithSeparator(",")
                         break
                         
-                    }
+                    }*/
                 
                     UserData.Name = loggedInUserObject.fullName
                     UserData.FriendshipDateTime = NSDate().getCurrentTimeStamp()

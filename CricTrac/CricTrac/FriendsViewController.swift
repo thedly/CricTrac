@@ -26,6 +26,18 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         initializeView()
         
         // Do any additional setup after loading the view.
+        
+        //sajith moved the code form viewDidAppear section
+        getAllFriends { (data) in
+            friendsDataArray.removeAll()
+            for (_, req) in data {
+                if let dat = req as? [String : AnyObject] {
+                    let reqData = Friends(dataObj: dat)
+                    friendsDataArray.append(reqData)
+                }
+            }
+            self.SuggestsTblview.reloadData()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -52,7 +64,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         
-        getAllFriends { (data) in
+        /*getAllFriends { (data) in
             
             friendsDataArray.removeAll()
             
@@ -73,7 +85,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
             
             
             // do something here
-        }
+        }*/
     }
     
     
@@ -124,10 +136,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func UnfriendBtnBtnPressed(sender: UIButton) {
-
-        
-        let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to remove this friend  ?", preferredStyle: .ActionSheet)
-        
+        let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to remove this friend?", preferredStyle: .ActionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
             // Just dismiss the action sheet
             actionSheetController.dismissViewControllerAnimated(true, completion: nil)
@@ -139,9 +148,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
             let friendReqId = sender.restorationIdentifier!
             
             DeleteFriendRequestData(friendReqId, successBlock: { data in
-                
                 if data == true {
-                    
                     if let index = friendsDataArray.indexOf( {$0.FriendRecordId == friendReqId}) {
                         friendsDataArray.removeAtIndex(index)
                     }
@@ -156,8 +163,6 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // Present the AlertController
         self.presentViewController(actionSheetController, animated: true, completion: nil)
-
-
     }
     
     /*
