@@ -16,7 +16,6 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     @IBOutlet weak var postText: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     
-    @IBOutlet weak var commnetButton: UIButton!
 
     @IBOutlet weak var postComment: UIButton!
     @IBOutlet weak var commentBox: UITextView!
@@ -65,9 +64,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
             
             //likeButton.setTitle("0 Likes", forState: .Normal)
         }
-        let commentCount =  postData!.dictionaryValue["TimelineComments"]?.count
         
-        //self.commnetButton.setTitle("\(commentCount) Comments", forState: .Normal)
         
         
         
@@ -93,7 +90,6 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         getAllComments(postId!) { (data) in
             
             self.dataSource = data
-            self.commnetButton.setTitle("\(data.count) Comments", forState: .Normal)
             self.tableView.reloadData()
             
         }
