@@ -11,6 +11,7 @@ import Foundation
 protocol PostSendable:class {
     
     func sendNewPost(text:String)
+    func modifyPost(text:String,postId:String,index:Int)
     
 }
 
@@ -22,4 +23,9 @@ protocol previousRefershable{
 protocol Deletable {
     
     func deletePost(index:Int)
+}
+
+protocol Refreshable{
+    
+    func refresh()
 }

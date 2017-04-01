@@ -302,7 +302,6 @@ func getAllDashboardData(friendId:String?=nil,sucessBlock:([String:AnyObject])->
     
 }
 
-
 //MARK:- Ground
 
 func addNewGroundName(groundName:String){
@@ -1130,7 +1129,7 @@ func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
     ref.setValue(timelineDict)
     
     let postKey = ref.key
-    let returnData = ["timeline":["Post":postText,"CommentCount":"0","LikeCount":"0","OwnerName":userName,"postId":postKey,"OwnerID":currentUser!.uid,"PostedBy":currentUser!.uid,"PostType":"Self"]]
+    let returnData = ["timeline":["AddedTime":addedTime,"Post":postText,"CommentCount":"0","LikeCount":"0","OwnerName":userName,"postId":postKey,"OwnerID":currentUser!.uid,"PostedBy":currentUser!.uid,"PostType":"Self"]]
     
     sucess(data: returnData)
     
@@ -1140,6 +1139,30 @@ func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
     }
     
 }
+
+
+
+func editPost(post:String, postId:String,sucess:([String:AnyObject])->Void){
+    
+    KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+    
+    let userName = loggedInUserName ?? "No Name"
+    
+    let edittedTime =  Int(NSDate().timeIntervalSince1970 * 1000)
+//    let timelineDict:[String:AnyObject] = ["AddedTime":addedTime,"OwnerID":currentUser!.uid,"OwnerName":userName,"isDeleted":"0","Post":post,"PostedBy":currentUser!.uid,"PostType":"Self"]
+    
+    let ref = fireBaseRef.child("TimelinePosts").child(postId).child("Post")
+    
+    ref.setValue(post)
+    
+    let editedTimeRef = fireBaseRef.child("TimelinePosts").child(postId).child("EditedTime")
+    
+    editedTimeRef.setValue(edittedTime)
+    
+    let returnData = ["timeline":["Post":post,"CommentCount":"0","LikeCount":"0","OwnerName":userName,"postId":postId,"OwnerID":currentUser!.uid,"PostedBy":currentUser!.uid,"PostType":"Self"]]
+    sucess(returnData)
+}
+
 
 func addNewComment(postId:String,comment:String){
     
@@ -1153,19 +1176,19 @@ func addNewComment(postId:String,comment:String){
     
 }
 
-func getAllComments(postId:String,sucess:(data:[[String:String]])->Void){
+func getAllComments(postId:String,sucess:(data:[[String:AnyObject]])->Void){
     
     let ref = fireBaseRef.child("TimelinePosts").child(postId).child("TimelineComments")
     
     ref.observeEventType(.Value, withBlock: { snapshot in
         
-        if let data = snapshot.value as? [String:[String:String]] {
+        if let data = snapshot.value as? [String:[String:AnyObject]] {
             
-            var result = [[String:String]]()
+            var result = [[String:AnyObject]]()
             for (key,value) in data{
                 var dataval = value
-                dataval["postId"] = key
-                result.append(dataval)
+                    dataval["postId"] = key
+                    result.append(dataval)
             }
             
             sucess(data: result)
