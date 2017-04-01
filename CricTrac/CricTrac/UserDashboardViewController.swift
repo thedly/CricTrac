@@ -119,6 +119,17 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     @IBOutlet weak var SecondRecentMatchBowlingGroundVenue: UILabel!
     @IBOutlet weak var SecondRecentMatchBowlingEconomy: UILabel!
     
+    @IBOutlet weak var summaryViewHeightConstraint1 : NSLayoutConstraint!
+    @IBOutlet weak var summaryViewHeightConstraint2 : NSLayoutConstraint!
+    @IBOutlet weak var summaryStackViewHeightConstraint : NSLayoutConstraint!
+    @IBOutlet weak var topBattingStackViewHeightConstraint : NSLayoutConstraint!
+    @IBOutlet weak var topBallingStackViewHeightConstraint : NSLayoutConstraint!
+    @IBOutlet weak var battingSummaryViewHeightConstraint : NSLayoutConstraint!
+    @IBOutlet weak var teamsViewHeightConstraint : NSLayoutConstraint!
+    
+    @IBOutlet weak var scrollViewBottomElementConstraint : NSLayoutConstraint!
+    
+    
     
     @IBAction func editImageBtnPressed(sender: AnyObject) {
         self.photoOptions("ProfilePhoto")
@@ -296,6 +307,11 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         super.viewDidLoad()
         
         //loadBannerAds()
+
+    }
+    
+    func initView() {
+        
         if let value = friendProfile{
             userProfileData = Profile(usrObj: value)
             closeButton.hidden = false
@@ -304,7 +320,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             closeButton.hidden = true
         }
         
-     //   setBackgroundColor()
+        //   setBackgroundColor()
         
         //setUIBackgroundTheme(self.view)
         
@@ -314,7 +330,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         MatchesView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
         
         MatchesView.alpha = 0.8
-
+        
         
         self.SecondRecentMatchSummary.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
         self.SecondRecentMatchSummary.alpha = 0.8
@@ -351,7 +367,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         self.PlayerLocation.attributedText = locationText
         self.userProfileImage.image = LoggedInUserImage
         self.imgCoverPhoto.image = LoggedInUserCoverImage
-
+        
         
         //getMatchData()
         
@@ -388,6 +404,9 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         setBackgroundColor()
         
+       // viewDidLoad()
+        initView()
+        setDashboardData()
         
        
     }
@@ -678,11 +697,20 @@ func setDashboardData(){
     
     self.SecondRecentMatchBowlingEconomy.text = nil
 
-       
+    //reset values
+    self.FirstRecentMatchView.hidden = false
+    self.SecondRecentMatchView.hidden = false
+    self.FirstRecentMatchBowlingView.hidden = false
+    self.SecondRecentMatchSummary.hidden = false
+    self.topBattingNotAvailable.hidden = false
+    self.topBowlingNotAvailable.hidden = false
+    
+
+    
     getAllDashboardData(friendId) { (data) in
         DashboardDetails = DashboardData(dataObj: data)
         if DashboardDetails != nil {
-            UIView.animateWithDuration(3.0, animations: {
+            UIView.animateWithDuration(0.0, animations: {
                 //data for Top box on dashboard
                 self.battingMatches.text = String(DashboardDetails.TotalMatches)
                 self.highScore.text = String(DashboardDetails.TopBatting1stMatchScore)
@@ -718,9 +746,17 @@ func setDashboardData(){
                 self.TotalFiveWicketsPerMatch.text = String(DashboardDetails.Total5Wkts)
                 self.PlayerOversBowld.text = String(DashboardDetails.TotalOvers)
                 
-                //sajith - new code for Recent First Match
-                self.FirstRecentMatchSummary.hidden = true
-                self.SecondRecentMatchSummary.hidden = true
+                dispatch_async(dispatch_get_main_queue(),{
+                    
+                    //sajith - new code for Recent First Match
+                    self.FirstRecentMatchSummary.hidden = true
+                    self.SecondRecentMatchSummary.hidden = true
+                    
+                    self.updateDashBoardMatches()
+                    
+                })
+                
+
                 if String(DashboardDetails.Recent1stMatchID) != "-" {
                     /*getSelectedMatchData(String(DashboardDetails.Recent1stMatchID), friendId: self.friendId) { (data) in
                     }*/
@@ -823,8 +859,15 @@ func setDashboardData(){
                             self.FirstRecentMatchStrikeRate.text = srEconomy
                         }
                     })
-                    self.FirstRecentMatchSummary.hidden = false
-                    self.recentMatchesNotAvailable.hidden = true
+                    dispatch_async(dispatch_get_main_queue(),{
+                        
+                        self.FirstRecentMatchSummary.hidden = false
+                        self.recentMatchesNotAvailable.hidden = true
+                        
+                        self.updateDashBoardMatches()
+                        
+                    })
+                    
                 }
                 
                 //sajith - new code for Recent Second Match
@@ -928,21 +971,19 @@ func setDashboardData(){
                             self.SecondRecentMatchStrikeRate.text = srEconomy
                         }
                     })
-                    self.SecondRecentMatchSummary.hidden = false
-                    self.recentMatchesNotAvailable.hidden = true
+    
+                    
+                    dispatch_async(dispatch_get_main_queue(),{
+                        
+                        self.SecondRecentMatchSummary.hidden = false
+                        self.recentMatchesNotAvailable.hidden = true
+                        
+                        self.updateDashBoardMatches()
+                        
+                    })
                 }
 
                 
-                //Data for Top Batting section
-                self.FirstRecentMatchView.hidden = (DashboardDetails.TopBatting1stMatchScore == nil || String(DashboardDetails.TopBatting1stMatchScore) == "0")
-                self.SecondRecentMatchView.hidden = (DashboardDetails.TopBatting2ndMatchScore == nil || String(DashboardDetails.TopBatting2ndMatchScore) == "0")
-                
-                //Data for Top Bowling section
-                self.FirstRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling1stMatchScore == nil || DashboardDetails.TopBowling1stMatchScore as! String == "0-0")
-                self.SecondRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling2ndMatchScore == nil || DashboardDetails.TopBowling2ndMatchScore as! String == "0-0")
-                
-                self.topBattingNotAvailable.hidden = !(self.FirstRecentMatchView.hidden && self.SecondRecentMatchView.hidden)
-                self.topBowlingNotAvailable.hidden = !(self.FirstRecentMatchBowlingView.hidden && self.SecondRecentMatchBowlingView.hidden)
                 
                 //Display Top Batting First Match card
                 /*if !self.FirstRecentMatchView.hidden {
@@ -1030,7 +1071,15 @@ func setDashboardData(){
 
                         }
                     })
-                    self.FirstRecentMatchView.hidden = false
+                    
+                    
+                    dispatch_async(dispatch_get_main_queue(),{
+                        
+                        self.FirstRecentMatchView.hidden = false
+                        
+                        self.updateDashBoardMatches()
+                        
+                    })
                 }
 
                 //Display Top Batting Second Match card
@@ -1118,7 +1167,15 @@ func setDashboardData(){
                             self.SecondRecentMatchBattingStrikeRate.text = srEconomy
                         }
                     })
-                    self.SecondRecentMatchView.hidden = false
+                    
+                    
+                    dispatch_async(dispatch_get_main_queue(),{
+                        
+                        self.SecondRecentMatchView.hidden = false
+                        
+                        self.updateDashBoardMatches()
+                        
+                    })
                 }
 
                 
@@ -1198,7 +1255,15 @@ func setDashboardData(){
                             self.FirstRecentMatchBowlingEconomy.text = srEconomy
                         }
                     })
-                    self.FirstRecentMatchBowlingView.hidden = false
+                    
+                    
+                    dispatch_async(dispatch_get_main_queue(),{
+                        
+                        self.FirstRecentMatchBowlingView.hidden = false
+                        
+                        self.updateDashBoardMatches()
+                        
+                    })
                 }
 
                 
@@ -1279,7 +1344,14 @@ func setDashboardData(){
                             
                         }
                     })
-                    self.SecondRecentMatchBowlingView.hidden = false
+                    
+                    
+                    dispatch_async(dispatch_get_main_queue(),{
+                        
+                        self.SecondRecentMatchBowlingView.hidden = false
+                        self.updateDashBoardMatches()
+                        
+                    })
                 }
 
  
@@ -1291,11 +1363,101 @@ func setDashboardData(){
     }
 }
     
+
+    func updateDashBoardMatches() {
+        
+        //Data for Top Batting section
+        self.FirstRecentMatchView.hidden = (DashboardDetails.TopBatting1stMatchScore == nil || String(DashboardDetails.TopBatting1stMatchScore) == "0")
+        self.SecondRecentMatchView.hidden = (DashboardDetails.TopBatting2ndMatchScore == nil || String(DashboardDetails.TopBatting2ndMatchScore) == "0")
+        
+        //Data for Top Bowling section
+        self.FirstRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling1stMatchScore == nil || DashboardDetails.TopBowling1stMatchScore as! String == "0-0")
+        self.SecondRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling2ndMatchScore == nil || DashboardDetails.TopBowling2ndMatchScore as! String == "0-0")
+        
+        self.topBattingNotAvailable.hidden = !(self.FirstRecentMatchView.hidden && self.SecondRecentMatchView.hidden)
+        self.topBowlingNotAvailable.hidden = !(self.FirstRecentMatchBowlingView.hidden && self.SecondRecentMatchBowlingView.hidden)
+        
+        self.recentMatchesNotAvailable.hidden = !(self.FirstRecentMatchSummary.hidden && self.SecondRecentMatchSummary.hidden)
+        
+        //*****Reduce view height if not available******
+        
+        //Summary view
+        if !self.recentMatchesNotAvailable.hidden {
+            
+            self.summaryViewHeightConstraint1.constant = 0
+            self.summaryViewHeightConstraint2.constant = 0
+            self.summaryStackViewHeightConstraint.constant = 0
+        }
+        else {
+            
+            if String(DashboardDetails.Recent1stMatchID) != "-" {
+                
+                self.summaryViewHeightConstraint1.constant = 90
+                self.summaryViewHeightConstraint2.constant = 0
+                self.summaryStackViewHeightConstraint.constant = 110
+            }
+            if String(DashboardDetails.Recent2ndMatchID) != "-" {
+                self.summaryViewHeightConstraint1.constant = 100
+                self.summaryViewHeightConstraint2.constant = 100
+                self.summaryStackViewHeightConstraint.constant = 210
+            }
+            
+        }
+        
+        //Top batting view
+        if !self.topBattingNotAvailable.hidden {
+            
+            self.topBattingStackViewHeightConstraint.constant = 0
+        }
+        else {
+            
+            if String(DashboardDetails.TopBatting1stMatchID) != "-" {
+                
+                self.topBattingStackViewHeightConstraint.constant = 85
+            }
+            if String(DashboardDetails.TopBatting2ndMatchID) != "-" {
+                
+                self.topBattingStackViewHeightConstraint.constant = 170
+            }
+        }
+        
+        //Top Balling view
+        if !self.topBowlingNotAvailable.hidden {
+            
+            self.topBallingStackViewHeightConstraint.constant = 0
+        }
+        else {
+            
+            
+            if String(DashboardDetails.TopBowling1stMatchID) != "-" {
+                
+                self.topBallingStackViewHeightConstraint.constant = 85
+            }
+            if String(DashboardDetails.TopBowling2ndMatchID) != "-" {
+                
+                self.topBallingStackViewHeightConstraint.constant = 170
+            }
+        }
+        
+        //Check for team count.If team count = 0, make view height to 0
+        
+        if ((self.userProfileData.PlayerCurrentTeams.count) + (self.userProfileData.PlayerPastTeams.count)) == 0 {
+            self.teamsViewHeightConstraint.constant = 0
+        }
+        
+        
+        //self.scrollViewBottomElementConstraint.constant = 10
+        self.view.layoutIfNeeded()
+
+        
+    }
+    
     
 override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(true)
     //getMatchData()
-    setDashboardData()
+    //setDashboardData()
+
 }
     
 
