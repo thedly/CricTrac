@@ -897,15 +897,11 @@ public func getAllFriendSuggestions(callback:()->Void) {
                 
                 let json = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments)
                 
-                getAllProfiles( json["suggestions"] as! [String] ,sucessBlock: { resultObj in
-                    UserProfilesData.removeAll()
-                    for profile in resultObj {
-                        
-                        let currentProfile = Profile(usrObj: profile)
-                        
-                        
-                        UserProfilesData.append(currentProfile)
-                        if let _imageUrl = profile["ProfileImageURL"] as? String where _imageUrl != ""  {
+                if let jsonStrArr = json["suggestions"] as? [String] {
+                    
+                    getAllProfiles( jsonStrArr ,sucessBlock: { resultObj in
+                        UserProfilesData.removeAll()
+                        for profile in resultObj {
                             
                             var currentProfile = Profile(usrObj: profile)
                             

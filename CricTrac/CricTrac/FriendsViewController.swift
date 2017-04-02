@@ -57,9 +57,14 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
             friendsDataArray.removeAll()
             
             for (_, req) in data {
-                let reqData = Friends(dataObj: req as! [String : AnyObject])
-                friendsDataArray.append(reqData)
-                self.SuggestsTblview.reloadData()
+                
+                if let dat = req as? [String : AnyObject] {
+                    let reqData = Friends(dataObj: dat)
+                    friendsDataArray.append(reqData)
+                }
+                
+                
+                
             }
             
             
@@ -121,7 +126,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     func UnfriendBtnBtnPressed(sender: UIButton) {
 
         
-        let friendReqId = sender.restorationIdentifier!
+        let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to remove this friend  ?", preferredStyle: .ActionSheet)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
             // Just dismiss the action sheet

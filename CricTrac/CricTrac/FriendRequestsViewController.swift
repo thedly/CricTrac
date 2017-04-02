@@ -71,8 +71,13 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         getAllFriendRequests { (data) in
             
             for (_, req) in data {
-                let reqData = ReceivedFriendRequest(dataObj: req as! [String : AnyObject])
-                friendsRequestsData.append(reqData)
+                
+                var modReq = req as! [String : AnyObject]
+                
+                modReq["IsSentRequest"] = false
+                
+                var reqData = RequestsData(dataObj: modReq)
+                FriendRequestsData.append(reqData)
                 
             }
             
@@ -125,13 +130,16 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         
         getAllSentFriendRequests { (data) in
             for (_, req) in data {
+                let reqData = ReceivedFriendRequest(dataObj: req as! [String : AnyObject])
+                //sajith commented
+                //friendsRequestsData.append(reqData)
                 
                 var modReq = req as! [String : AnyObject]
             
                 modReq["IsSentRequest"] = true
             
-                var reqData = RequestsData(dataObj: modReq)
-                FriendRequestsData.append(reqData)
+                //var reqData = RequestsData(dataObj: modReq)
+                //FriendRequestsData.append(reqData)
             }
             
             self.RequestsTblview.reloadData()
@@ -314,7 +322,47 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
 
     }
     
-    internal func ConfirmFriendBtnPressed(sender:UIButton!) {
+    
+    
+    func RejectFriendBtnPressed(sender: UIButton){
+        
+         let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to reject this request  ?", preferredStyle: .ActionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
+            // Just dismiss the action sheet
+            actionSheetController.dismissViewControllerAnimated(true, completion: nil)
+        }
+        actionSheetController.addAction(cancelAction)
+        
+        let unfriendAction = UIAlertAction(title: "Reject", style: .Default) { action -> Void in
+        
+        let RequestObjectid = sender.restorationIdentifier
+         
+                
+            if let index = FriendRequestsData.indexOf( {$0.RequestId == RequestObjectid }) {
+                FriendRequestsData.removeAtIndex(index)
+            }
+        
+            self.ReloadTbl()
+        backgroundThread(background: {
+            DeleteSentAndReceivedFriendRequestData(RequestObjectid!, successBlock: { data in
+                
+            })
+        })
+        
+        }
+        
+        actionSheetController.addAction(unfriendAction)
+        
+        // We need to provide a popover sourceView when using it on iPad
+        actionSheetController.popoverPresentationController?.sourceView = sender as UIView
+        
+        // Present the AlertController
+        self.presentViewController(actionSheetController, animated: true, completion: nil)
+        
+    }
+
+    public func ConfirmFriendBtnPressed(sender:UIButton!) {
         
         if let FriendUserId = sender.accessibilityIdentifier where FriendUserId != "" {
           
@@ -332,9 +380,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                     loggedInUserObject = Profile(usrObj: loggedInUserObjectData)
                     
                     let RequestObjectid = sender.restorationIdentifier
-                    
-                    
-                    let FriendData = Friends(dataObj: [:])
+                    var FriendData = Friends(dataObj: [:])
                     
                     FriendData.UserId = FriendObject.id
                     FriendData.City = FriendObject.City
