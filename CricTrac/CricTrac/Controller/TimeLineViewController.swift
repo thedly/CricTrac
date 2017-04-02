@@ -11,6 +11,7 @@ import UIKit
 import SwiftyJSON
 import GoogleMobileAds
 import KRProgressHUD
+import Kingfisher
 
 class TimeLineViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable,PostSendable,Deletable,Refreshable{
     
@@ -310,7 +311,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                         postCell.deleteButton.hidden = true
                     }
                     
-                    fetchFriendDetail(friendId, sucess: { (data) in
+                    fetchFriendCity(friendId, sucess: { (data) in
                         
                         friendsCity[friendId] = data
                         dispatch_async(dispatch_get_main_queue(),{
@@ -320,6 +321,23 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                         })
                         
                     })
+                    postCell.postOwnerPic.image = nil
+                    fetchFriendDetail(friendId, sucess: { (result) in
+                        let proPic = result["proPic"]
+                        let city =   result["city"]
+                        postCell.postOwnerCity.text = city
+                        if let imageURL = NSURL(string:proPic!){
+                            postCell.postOwnerPic.kf_setImageWithURL(imageURL)
+                        }else{
+                            
+                            let imageName = "propic.png"
+                            let image = UIImage(named: imageName)
+                            postCell.postOwnerPic.image = image
+                        }
+                        
+                        //sucess(result: ["proPic":proPic,"city":city])
+                    })
+                    
                 }
                 
                

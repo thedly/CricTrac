@@ -95,7 +95,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
             
         }else{
             
-            fetchFriendDetail(friendId, sucess: { (city) in
+            fetchFriendCity(friendId, sucess: { (city) in
                 friendsCity[friendId] = city
                 dispatch_async(dispatch_get_main_queue(),{
                     //self.userCity.text = city
