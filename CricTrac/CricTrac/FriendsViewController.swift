@@ -6,14 +6,10 @@
 //  Copyright © 2016 CricTrac. All rights reserved.
 //
 
-
-
-
 import UIKit
 import XLPagerTabStrip
 
 class FriendsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider,ThemeChangeable {
-    
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
@@ -24,8 +20,18 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()
-        
         // Do any additional setup after loading the view.
+        //sajith moved the code form viewDidAppear section
+        /*getAllFriends { (data) in
+            friendsDataArray.removeAll()
+            for (_, req) in data {
+                if let dat = req as? [String : AnyObject] {
+                    let reqData = Friends(dataObj: dat)
+                    friendsDataArray.append(reqData)
+                }
+            }
+            self.SuggestsTblview.reloadData()
+        }*/
     }
     
     override func didReceiveMemoryWarning() {
@@ -36,9 +42,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     // MARK: - Methods
     
     func initializeView() {
-        
         SuggestsTblview.registerNib(UINib.init(nibName:"FriendsCell", bundle: nil), forCellReuseIdentifier: "FriendsCell")
-        
         SuggestsTblview.allowsSelection = false
         SuggestsTblview.separatorStyle = .None
         SuggestsTblview.dataSource = self
@@ -51,51 +55,30 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        
         getAllFriends { (data) in
-            
             friendsDataArray.removeAll()
-            
             for (_, req) in data {
-                
                 if let dat = req as? [String : AnyObject] {
                     let reqData = Friends(dataObj: dat)
                     friendsDataArray.append(reqData)
                 }
-                
-                
-                
             }
-            
-            
             self.SuggestsTblview.reloadData()
-            
-            
-            
             // do something here
         }
     }
     
     
     func getCellForRow(indexPath:NSIndexPath)->FriendsCell{
-        
-        
         let aCell =  SuggestsTblview.dequeueReusableCellWithIdentifier("FriendsCell", forIndexPath: indexPath) as! FriendsCell
-        
-        
         aCell.FriendName.text = friendsDataArray[indexPath.row].Name
         aCell.FriendCity.text = friendsDataArray[indexPath.row].City
         aCell.FriendProfileImage.image = extractImages(friendsDataArray[indexPath.row].Name!)
-        
         aCell.UnfriendBtn.addTarget(self, action: #selector(FriendsViewController.UnfriendBtnBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        
-        
         aCell.UnfriendBtn.restorationIdentifier = friendsDataArray[indexPath.row].FriendRecordId
-        
         aCell.backgroundColor = UIColor.clearColor()
         return aCell
     }
-    
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "FRIENDS")
@@ -117,17 +100,11 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        
         return getCellForRow(indexPath)
-        
     }
     
     func UnfriendBtnBtnPressed(sender: UIButton) {
-
-        
         let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to remove this friend  ?", preferredStyle: .ActionSheet)
-        
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
             // Just dismiss the action sheet
             actionSheetController.dismissViewControllerAnimated(true, completion: nil)
@@ -139,9 +116,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
             let friendReqId = sender.restorationIdentifier!
             
             DeleteFriendRequestData(friendReqId, successBlock: { data in
-                
                 if data == true {
-                    
                     if let index = friendsDataArray.indexOf( {$0.FriendRecordId == friendReqId}) {
                         friendsDataArray.removeAtIndex(index)
                     }
@@ -156,8 +131,6 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // Present the AlertController
         self.presentViewController(actionSheetController, animated: true, completion: nil)
-
-
     }
     
     /*

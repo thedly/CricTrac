@@ -11,7 +11,7 @@ import Foundation
 class SentFriendRequest {
     
     var City: String?
-    var Club: String?
+    //var Club: String?
     var Name: String?
     var ReceivedRequestIdOther: String?
     var SentDateTime: AnyObject?
@@ -24,7 +24,7 @@ class SentFriendRequest {
     
     init(dataObj: [String: AnyObject!]) {
         self.City = String(dataObj["City"] ?? "-")
-        self.Club = String(dataObj["Club"] ?? "-")
+        //self.Club = String(dataObj["Club"] ?? "-")
         self.Name = String(dataObj["Name"] ?? "-")
         self.SentDateTime = String(dataObj["SentDateTime"] ?? "-")
         self.SentTo = String(dataObj["SentTo"] ?? "-")
@@ -38,7 +38,7 @@ class SentFriendRequest {
         
             return [
             "City": datObj.City!,
-            "Club": datObj.Club!,
+            //"Club": datObj.Club!,
             "Name": datObj.Name!,
             "SentDateTime": datObj.SentDateTime!,
             "SentTo": datObj.SentTo!

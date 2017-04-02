@@ -11,12 +11,10 @@ import XLPagerTabStrip
 import KRProgressHUD
 
 class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider,ThemeChangeable {
-    
     @IBOutlet weak var SuggestsTblview: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()
-        
         // Do any additional setup after loading the view.
     }
     
@@ -24,8 +22,6 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
     
     // MARK: - Methods
     
@@ -37,18 +33,15 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     
     func initializeView() {
         SuggestsTblview.registerNib(UINib.init(nibName:"FriendSuggestionsCell", bundle: nil), forCellReuseIdentifier: "FriendSuggestionsCell")
-        
         SuggestsTblview.allowsSelection = false
         SuggestsTblview.separatorStyle = .None
         SuggestsTblview.dataSource = self
         SuggestsTblview.delegate = self
-        
         self.view.backgroundColor = UIColor.clearColor()
         
         //setBackgroundColor()
         //setUIBackgroundTheme(self.view)
     }
-    
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "INVITE")
@@ -56,10 +49,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     
     // MARK: - Table delegate functions
     
-    
-        
     @IBAction func getAllProfilesBtnPressed(sender: AnyObject) {
-        
         
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -75,12 +65,8 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        
         return UITableViewCell()
-        
     }
-    
     
     func AddFriendBtnPressed(sender: UIButton) {
         
@@ -95,9 +81,9 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                     
                     let sendFriendRequestData = SentFriendRequest()
                     
-                    sendFriendRequestData.City = FriendObject.City
+                    //sendFriendRequestData.City = FriendObject.City
                     
-                    
+                    /*
                     switch FriendObject.UserProfile {
                     case userProfileType.Player.rawValue :
                         sendFriendRequestData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
@@ -112,7 +98,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                         sendFriendRequestData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
                         break;
 
-                    }
+                    }*/
                     
                     
                     sendFriendRequestData.Name = FriendObject.fullName
@@ -124,8 +110,8 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                     let receiveFriendRequestData = ReceivedFriendRequest()
                     
                     
-                    receiveFriendRequestData.City = loggedInUserObject.City
-                    
+                    //receiveFriendRequestData.City = loggedInUserObject.City
+                    /*
                     switch loggedInUserObject.UserProfile {
                     case userProfileType.Player.rawValue :
                         receiveFriendRequestData.Club = loggedInUserObject.PlayerCurrentTeams.joinWithSeparator(",")
@@ -140,7 +126,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                         receiveFriendRequestData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
                         break;
                         
-                    }
+                    }*/
 
                     receiveFriendRequestData.Name = loggedInUserObject.fullName
                     receiveFriendRequestData.ReceivedFrom = loggedInUserObject.id

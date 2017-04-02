@@ -12,7 +12,7 @@ class FriendSuggestionsCell: UITableViewCell {
     @IBOutlet weak var baseView: UIView!
     
     @IBOutlet weak var userName: UILabel!
-    @IBOutlet weak var userTeam: UILabel!
+    @IBOutlet weak var userCity: UILabel!
     
     @IBOutlet weak var userProfileView: UIImageView!
     
@@ -49,7 +49,8 @@ class FriendSuggestionsCell: UITableViewCell {
         self._userObj = userProfileObject
         
         self.userName.text = userProfileObject.fullName
-//        self.userTeam.text = userProfileObject.TeamName
+        self.userCity.text = userProfileObject.City
+        //self.userTeam.text = userProfileObject.TeamName
         self.userProfileView.image = extractImages(userProfileObject.id)
         
         
