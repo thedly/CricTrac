@@ -95,7 +95,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
             
         }else{
             
-            fetchFriendDetail(friendId, sucess: { (city) in
+            fetchFriendCity(friendId, sucess: { (city) in
                 friendsCity[friendId] = city
                 dispatch_async(dispatch_get_main_queue(),{
                     //self.userCity.text = city
@@ -104,6 +104,29 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
                 
             })
         }
+        
+        
+        fetchFriendDetail(friendId, sucess: { (result) in
+            let proPic = result["proPic"]
+            
+            if proPic! == "-"{
+                
+                let imageName = "propic.png"
+                let image = UIImage(named: imageName)
+                self.profileImage.image = image
+                
+            }else{
+                if let imageURL = NSURL(string:proPic!){
+                    self.profileImage.kf_setImageWithURL(imageURL)
+                }
+            }
+            
+            //sucess(result: ["proPic":proPic,"city":city])
+        })
+        
+        
+        
+        
         
         if let dateTimeStamp = postData!["AddedTime"].double{
             

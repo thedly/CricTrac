@@ -13,6 +13,7 @@ import SCLAlertView
 class APostTableViewCell: UITableViewCell {
 
     @IBOutlet weak var postOwnerName: UILabel!
+    @IBOutlet weak var postOwnerPic: UIImageView!
     @IBOutlet weak var post: UILabel!
     @IBOutlet weak var postOwnerCity: UILabel!
 

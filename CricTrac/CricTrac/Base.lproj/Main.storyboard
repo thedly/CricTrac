@@ -1576,6 +1576,22 @@
                                                     <constraint firstAttribute="height" constant="1" id="4TR-nO-GdR"/>
                                                 </constraints>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Roo-gA-72q">
+                                                <rect key="frame" x="15" y="168" width="66" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="66" id="9qR-Gi-zOW"/>
+                                                    <constraint firstAttribute="height" constant="18" id="NEa-PJ-a14"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="14"/>
+                                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="2" maxY="0.0"/>
+                                                <inset key="imageEdgeInsets" minX="-11" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="LIKE" image="heart">
+                                                    <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.5" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="didTapLikeButton:" destination="SWL-XX-99S" eventType="touchUpInside" id="HBp-wA-qTq"/>
+                                                </connections>
+                                            </button>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UYA-bQ-Pp9">
                                                 <rect key="frame" x="0.0" y="236" width="560" height="500"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1645,22 +1661,6 @@
                                                     <outlet property="delegate" destination="SWL-XX-99S" id="8eR-Ve-srL"/>
                                                 </connections>
                                             </tableView>
-                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Roo-gA-72q">
-                                                <rect key="frame" x="15" y="168" width="66" height="18"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="66" id="9qR-Gi-zOW"/>
-                                                    <constraint firstAttribute="height" constant="18" id="NEa-PJ-a14"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="14"/>
-                                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="2" maxY="0.0"/>
-                                                <inset key="imageEdgeInsets" minX="-11" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="LIKE" image="heart">
-                                                    <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.5" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="didTapLikeButton:" destination="SWL-XX-99S" eventType="touchUpInside" id="HBp-wA-qTq"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.30196078430000001" green="0.61568627450000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -1799,6 +1799,7 @@
                         <outlet property="likeButton" destination="Roo-gA-72q" id="g2w-Fy-cNB"/>
                         <outlet property="likes" destination="LTq-ow-lYR" id="OSJ-FG-tCj"/>
                         <outlet property="postText" destination="LuA-aJ-Qru" id="o1O-F6-Kdg"/>
+                        <outlet property="profileImage" destination="Qdm-be-5P7" id="2sJ-7I-WjJ"/>
                         <outlet property="tableView" destination="UYA-bQ-Pp9" id="3oP-Y7-6Y8"/>
                         <outlet property="textViewHeightConstraint" destination="7go-VM-qvY" id="KJN-Pv-8mC"/>
                         <outlet property="userCity" destination="Bbg-gI-vel" id="G5u-lN-C9d"/>

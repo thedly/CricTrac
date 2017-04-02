@@ -393,11 +393,25 @@ func getProfileInfoById(usrId: String, sucessBlock: ([String:AnyObject]) -> Void
 }
 
 
-func fetchFriendDetail(id:String,sucess:(city:String)->Void){
+func fetchFriendCity(id:String,sucess:(city:String)->Void){
     
     fireBaseRef.child("Users").child(id).child("UserProfile").child("City").observeEventType(.Value, withBlock: { snapshot in
         if let data = snapshot.value as? String{
             sucess(city: data)
+        }
+    })
+    
+}
+
+func fetchFriendDetail(id:String,sucess:(result:[String:String])->Void){
+    
+    fireBaseRef.child("Users").child(id).child("UserProfile").observeEventType(.Value, withBlock: { snapshot in
+        if let data = snapshot.value {
+            
+            let proPic = data["ProfileImageURL"]! as! String
+            let city = data["City"]! as! String
+            
+            sucess(result: ["proPic":proPic,"city":city])
         }
     })
     
