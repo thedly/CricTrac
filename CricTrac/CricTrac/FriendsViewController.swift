@@ -17,8 +17,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
-        self.view.backgroundColor = currentTheme.topColor
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor
+        self.view.backgroundColor = currentTheme.boxColor
     }
     
     @IBOutlet weak var SuggestsTblview: UITableView!
@@ -38,7 +37,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func initializeView() {
         
-         SuggestsTblview.registerNib(UINib.init(nibName:"FriendsCell", bundle: nil), forCellReuseIdentifier: "FriendsCell")
+        SuggestsTblview.registerNib(UINib.init(nibName:"FriendsCell", bundle: nil), forCellReuseIdentifier: "FriendsCell")
         
         SuggestsTblview.allowsSelection = false
         SuggestsTblview.separatorStyle = .None
@@ -52,9 +51,10 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        friendsDataArray.removeAll()
+        
         getAllFriends { (data) in
             
+            friendsDataArray.removeAll()
             
             for (_, req) in data {
                 let reqData = Friends(dataObj: req as! [String : AnyObject])
@@ -63,14 +63,14 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
             }
             
             
-            
+            self.SuggestsTblview.reloadData()
             
             
             
             // do something here
         }
     }
-
+    
     
     func getCellForRow(indexPath:NSIndexPath)->FriendsCell{
         
@@ -119,24 +119,40 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func UnfriendBtnBtnPressed(sender: UIButton) {
+
         
         let friendReqId = sender.restorationIdentifier!
         
-        DeleteFriendRequestData(friendReqId, successBlock: { data in
-            
-            if data == true {
-                
-                if let index = friendsDataArray.indexOf( {$0.FriendRecordId == friendReqId}) {
-                    friendsDataArray.removeAtIndex(index)
-                }
-                
-                
-                self.SuggestsTblview.reloadData()
-                
-            }
-            
-        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
+            // Just dismiss the action sheet
+            actionSheetController.dismissViewControllerAnimated(true, completion: nil)
+        }
+        actionSheetController.addAction(cancelAction)
         
+        // Create and add first option action
+        let unfriendAction = UIAlertAction(title: "Unfriend", style: .Default) { action -> Void in
+            let friendReqId = sender.restorationIdentifier!
+            
+            DeleteFriendRequestData(friendReqId, successBlock: { data in
+                
+                if data == true {
+                    
+                    if let index = friendsDataArray.indexOf( {$0.FriendRecordId == friendReqId}) {
+                        friendsDataArray.removeAtIndex(index)
+                    }
+                    self.SuggestsTblview.reloadData()
+                }
+            })
+        }
+        actionSheetController.addAction(unfriendAction)
+        
+        // We need to provide a popover sourceView when using it on iPad
+        actionSheetController.popoverPresentationController?.sourceView = sender as UIView
+        
+        // Present the AlertController
+        self.presentViewController(actionSheetController, animated: true, completion: nil)
+
+
     }
     
     /*

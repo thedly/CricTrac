@@ -42,7 +42,8 @@ var PlayingRoles = [String]()
 var AgeGroupData = [String]()
 
 var friendsDataArray = [Friends]()
-var friendsRequestsData = [ReceivedFriendRequest]()
+
+var FriendRequestsData = [RequestsData]()
 
 var Achievements = [String]()
 

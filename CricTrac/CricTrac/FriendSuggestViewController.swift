@@ -16,7 +16,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()
-        getFriendSuggestions()
+        
         // Do any additional setup after loading the view.
     }
     
@@ -25,27 +25,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         // Dispose of any resources that can be recreated.
     }
     
-    func getFriendSuggestions() {
-        
-        backgroundThread(background: {
-            
-            KRProgressHUD.showText("Loading ...")
-            getAllFriendSuggestions({
-                KRProgressHUD.dismiss()
-                self.SuggestsTblview.reloadData()
-            })
-            
-        })
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    }
+    
     
     // MARK: - Methods
     
@@ -71,7 +51,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "SUGGESTIONS")
+        return IndicatorInfo(title: "INVITE")
     }
     
     // MARK: - Table delegate functions
@@ -91,45 +71,13 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return UserProfilesData.count
+        return 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         
-        return getCellForRow(indexPath)
-        
-    }
-    
-    func getCellForRow(indexPath:NSIndexPath)->FriendSuggestionsCell{
-        
-        
-        if let aCell =  SuggestsTblview.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as? FriendSuggestionsCell {
-             
-            
-            aCell.configureCell(UserProfilesData[indexPath.row])
-            
-            aCell.AddFriendBtn.accessibilityIdentifier = UserProfilesData[indexPath.row].id
-            
-            
-            aCell.AddFriendBtn.addTarget(self, action: #selector(AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-            
-            
-            
-            aCell.backgroundColor = UIColor.clearColor()
-            return aCell
-        }
-        else {
-            return FriendSuggestionsCell()
-        }
-        
-        
-        
-        
-        
-        
-        
-        
+        return UITableViewCell()
         
     }
     

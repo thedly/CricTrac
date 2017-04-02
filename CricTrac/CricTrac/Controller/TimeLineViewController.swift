@@ -384,6 +384,8 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
    
     
+    
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         if indexPath.section  == 0{

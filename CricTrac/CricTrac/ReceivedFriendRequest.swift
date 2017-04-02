@@ -16,6 +16,7 @@ class ReceivedFriendRequest {
     var ReceivedFrom: String!
     var RequestId: String!
     var SentRequestId: String!
+    var isSentRequest: Bool!
     
     
     init(){
@@ -23,6 +24,7 @@ class ReceivedFriendRequest {
     }
     
     init(dataObj: [String: AnyObject!]) {
+        self.isSentRequest = (dataObj["IsSentRequest"] ?? false) as! Bool
         self.City = String(dataObj["City"] ?? "-")
         self.Club = String(dataObj["Club"] ?? "-")
         self.Name = String(dataObj["Name"] ?? "-")

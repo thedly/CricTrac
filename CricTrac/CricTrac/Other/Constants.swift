@@ -41,6 +41,14 @@ var menuData = [
     
 ]
 
+var friendInviteData = [
+    
+    ["title":"MAIL","vc":"UserDashboardViewController", "img": "mail_icon"],
+    ["title":"MESSAGE","vc":"AddMatchDetailsViewController", "img": "message_icon"],
+    ["title":"FACEBOOK","vc":"MatchSummaryViewController", "img": "facebook_icon"],
+    ["title":"TWITTER","vc":"FriendBaseViewController", "img": "twitter_icon"]
+]
+
 let settingsMenuData = [
     
     //["title":"Show profile picture","vc":"ProfileBaseViewController", "img": "Menu_TimeLine", "desc": "Show profile picture to other users", "IsSwitchVisible": true],
@@ -82,6 +90,7 @@ let fireBaseRef =  FIRDatabase.database().reference()
 let storageRef = FIRStorage.storage().referenceForURL("gs://arjun-innovations.appspot.com")
 
 let serverBaseURL = "http://crictracserver.azurewebsites.net"
+
 
 /*
  
