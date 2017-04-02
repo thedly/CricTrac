@@ -105,6 +105,29 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
             })
         }
         
+        
+        fetchFriendDetail(friendId, sucess: { (result) in
+            let proPic = result["proPic"]
+            
+            if proPic! == "-"{
+                
+                let imageName = "propic.png"
+                let image = UIImage(named: imageName)
+                self.profileImage.image = image
+                
+            }else{
+                if let imageURL = NSURL(string:proPic!){
+                    self.profileImage.kf_setImageWithURL(imageURL)
+                }
+            }
+            
+            //sucess(result: ["proPic":proPic,"city":city])
+        })
+        
+        
+        
+        
+        
         if let dateTimeStamp = postData!["AddedTime"].double{
             
             let date = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)

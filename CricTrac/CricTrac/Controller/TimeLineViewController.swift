@@ -321,21 +321,20 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                         })
                         
                     })
-                    postCell.postOwnerPic.image = nil
                     fetchFriendDetail(friendId, sucess: { (result) in
                         let proPic = result["proPic"]
                         let city =   result["city"]
                         postCell.postOwnerCity.text = city
-                        if let imageURL = NSURL(string:proPic!){
-                            postCell.postOwnerPic.kf_setImageWithURL(imageURL)
-                        }else{
-                            
+                        if proPic! == "-"{
                             let imageName = "propic.png"
                             let image = UIImage(named: imageName)
                             postCell.postOwnerPic.image = image
+                        }else{
+                            if let imageURL = NSURL(string:proPic!){
+                                postCell.postOwnerPic.kf_setImageWithURL(imageURL)
+                            }
                         }
                         
-                        //sucess(result: ["proPic":proPic,"city":city])
                     })
                     
                 }
