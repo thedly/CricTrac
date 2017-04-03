@@ -11,76 +11,48 @@ import SCLAlertView
 import KRProgressHUD
 
 class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previousRefershable,UIActionSheetDelegate {
-
     @IBOutlet weak var matchDetailsTbl: UITableView!
-    
-    
     @IBOutlet weak var screenShotHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var ScreenShot: UIView!
     @IBAction func backBtnPressed(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     // MARK: - Variables and constants
-    
     @IBOutlet weak var batRuns: UILabel!
     @IBOutlet weak var ballsFaced: UILabel!
     @IBOutlet weak var sixes: UILabel!
-    
-    
-    
     @IBOutlet weak var matchDateAndVenue: UILabel!
-    
-    
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var matchBetween: UILabel!
     @IBOutlet weak var ground: UILabel!
     @IBOutlet weak var tournamentName: UILabel!
     @IBOutlet weak var overs: UILabel!
     @IBOutlet weak var totalWickets: UILabel!
-
     @IBOutlet weak var wides: UILabel!
     @IBOutlet weak var batPos: UILabel!
     @IBOutlet weak var fours: UILabel!
     @IBOutlet weak var result: UILabel!
-   
     @IBOutlet weak var toss: UILabel!
     @IBOutlet weak var economy: UILabel!
     @IBOutlet weak var noBalls: UILabel!
     @IBOutlet weak var dismissal: UILabel!
-    
     @IBOutlet weak var awayTeam: UILabel!
     @IBOutlet weak var homeTeam: UILabel!
-    
     @IBOutlet weak var strikeRateText: UILabel!
-    
     @IBOutlet weak var runsGiven: UILabel!
     @IBOutlet weak var oversBowled: UILabel!
-    
-    
     @IBOutlet weak var achievements: UILabel!
     @IBOutlet weak var level: UILabel!
-    
     @IBOutlet weak var ageGroup: UILabel!
-    
     var matchDetailsData : [String:AnyObject]!
-    
     var battingViewHidden : Bool! = false
     var bowlingViewHidden : Bool!  = false
-
-    
-    
     @IBOutlet weak var battingView: UIView!
-    
     @IBOutlet weak var bowlingView: UIView!
-    
     @IBOutlet weak var summarizedView: UIView!
-    
-    
-    
     @IBAction func deleteActionPressed(sender: UIButton) {
         
-        let actionSheetController = UIAlertController(title: "", message: "Are you sure to delete ?", preferredStyle: .ActionSheet)
+        let actionSheetController = UIAlertController(title: "", message: "Are you sure to delete the match?", preferredStyle: .ActionSheet)
         
         // Create and add the Cancel action
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
@@ -103,10 +75,10 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         
        
     }
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationBarProperties()
-        
     }
     
     func deleteMatch(){
@@ -159,9 +131,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     }
     
     @IBAction func didTapEditButton(sender: AnyObject) {
-        
         let editMatch = viewController("AddMatchDetailsViewController") as! AddMatchDetailsViewController
-        
         editMatch.selecetedData = matchDetailsData
         editMatch.previous = self
         editMatch.matchBeingEdited = true
@@ -177,7 +147,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     }
     
     @IBAction func ShareActionPressed(sender: UIButton) {
-        
         print(self.ScreenShot.bounds.size)
         UIGraphicsBeginImageContext(self.ScreenShot.bounds.size);
         self.ScreenShot.layer.renderInContext(UIGraphicsGetCurrentContext()!)
@@ -185,13 +154,8 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         UIGraphicsEndImageContext();
     
         let itemsToShare = screenShot
-        
-        
         let actCtrl = UIActivityViewController(activityItems: [itemsToShare!], applicationActivities: nil)
-        
-        
         actCtrl.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeMessage, UIActivityTypeMail]
-        
         presentViewController(actCtrl, animated: true, completion: nil)
     }
     
@@ -203,18 +167,13 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setBackgroundColor()
-        
         //setUIBackgroundTheme(self.view)
-        
         setColorForViewsWithSameTag(battingView)
         setColorForViewsWithSameTag(bowlingView)
-
         self.summarizedView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
         self.summarizedView.alpha = 0.8
         initializeView()
-        
         // Do any additional setup after loading the view.
     }
     
@@ -262,24 +221,17 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     }
     
     func setEconomy(){
-        
         if let balls = matchDetailsData["OversBowled"] as? String where balls != "-" {
             if let runs = matchDetailsData["RunsGiven"] as? String {
-                
                 guard let ball = Float(balls) where ball > 0 else {
                     return
                 }
                 economy.text = String(format: "%.2f",(Float(runs)!)/Float(balls)!)
             }
-            
         }
-        
-        
-        
     }
     
     func setResult(){
-        
         if matchDetailsData["Result"]! as! String == "Abandoned" {
             result.text = "Match Abandoned"
         }
@@ -290,33 +242,22 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
            result.text = "Match Tied"
         }
         else {
-            
             result.text = "\(matchDetailsData["Team"]!) \(matchDetailsData["Result"]!)"
         }
-
-        
     }
     
     func initializeView() {
-        
-        
         if let runs = matchDetailsData["RunsTaken"] as? String{
-            
             let formattedString = NSMutableAttributedString()
-            
-            
-            
             if let dismissal = matchDetailsData["Dismissal"] as? String where dismissal == "Not out"{
-                
                 formattedString.bold(runs+"*" , fontName: appFont_black, fontSize: 83)
-            }else{
-                
+            }
+            else{
                  formattedString.bold(runs , fontName: appFont_black, fontSize: 83)
             }
             
             let fullRange = NSRange(location: 0,length: formattedString.length)
             let batLength = formattedString.length
-            
             
             if let Balls = matchDetailsData["BallsFaced"] {
                 formattedString.bold("(\(Balls))", fontName: appFont_bold, fontSize: 30)
@@ -326,7 +267,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             }
                 
             batRuns.attributedText = formattedString
-            
         }
         if let Fours = matchDetailsData["Fours"] as? String{
             fours.text = Fours
@@ -348,14 +288,10 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             noBalls.text = Noballs
         }
         
-        
-        
         if let dat = matchDetailsData["MatchDate"] {
-        
             let dateImageAttachment = NSTextAttachment()
             dateImageAttachment.image = UIImage(named: "Calendar-100")
             let dateAttachmentString = NSAttributedString(attachment: dateImageAttachment)
-            
             
             let groundImageAttachment = NSTextAttachment()
             groundImageAttachment.image = UIImage(named: "Marker-100 (1)")
@@ -363,32 +299,24 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             
             let formattedString = NSMutableAttributedString()
             formattedString.appendAttributedString(dateAttachmentString)
-            
             formattedString.bold("  \(dat)  ", fontName: appFont_bold, fontSize: 15)
             
             if let grnd = matchDetailsData["Ground"] {
-                
                 formattedString.appendAttributedString(groundAttachmentString)
                 formattedString.bold("  \(grnd)", fontName: appFont_bold, fontSize: 15)
-                
             }
             
             if let venue = matchDetailsData["Venue"] as? String where venue != "-"  {
-                
                 formattedString.bold(", \(venue)", fontName: appFont_bold, fontSize: 15)
-                
             }
-            
             
             matchDateAndVenue.attributedText = formattedString
         }
-        
         
         if let dat = matchDetailsData["Achievements"] as? String {
             if dat != "-" {
                 self.achievements.text = dat
             }
-            
         }
         
         setStrikeRate()
@@ -396,36 +324,28 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         
         if let Overs: String = matchDetailsData["Maidens"] as? String { // in overs eg: 2, 3, 4
             overs.text = Overs
-            
         }
         
         if (bowlingViewHidden == true) {
             self.bowlingView.hidden = true
-            
             self.screenShotHeightConstraint.constant -= 240
-            
         }
         
         if (battingViewHidden == true) {
             self.battingView.hidden = true
             self.screenShotHeightConstraint.constant -= 240
         }
-
         
         var group = ""
         
         //if let tournament = matchDetailsData["Tournament"]{
-            
             let formattedString = NSMutableAttributedString()
-            
             var tournamentText = NSAttributedString()
-        
         
             if let tournament = matchDetailsData["Tournament"] as? String where tournament != "-" {
                 group.appendContentsOf("\(tournament)\n")
             }
-            
-            
+        
             if let agegroup = matchDetailsData["AgeGroup"] as? String where agegroup != "-"  {
                 group.appendContentsOf("\(agegroup)")
             }
@@ -438,7 +358,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                 group.appendContentsOf("  |  \(stage)")
             }
         
-            
             if let overs = matchDetailsData["MatchOvers"] as? String where overs != "-"  {
                 group.appendContentsOf("  |  \(overs) Overs")
             }
@@ -447,12 +366,8 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                //tournamentText = formattedString.bold("\(tournament)", fontName: appFont_black, fontSize: 19).bold("\n\(group)", fontName: appFont_bold, fontSize: 15)
             //}
             tournamentText = formattedString.bold("\(group)", fontName: appFont_bold, fontSize: 15)
-   
-            tournamentName.attributedText = tournamentText
+               tournamentName.attributedText = tournamentText
         //}
-        
-        
-
         
         var firstTeamScore = "-"
         var secondTeamScore = "-"
@@ -467,7 +382,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                 else {
                     homeTeam.text = hTeam
                 }
-            
             }
             else
             {
@@ -491,30 +405,22 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                 }
             }
             
-            
-            
-            
             if let firstScore = matchDetailsData["FirstBattingScore"] {
                 if let firstWickets = matchDetailsData["FirstBattingWickets"] {
-                    
                     let firstTeamOvers: String = (matchDetailsData["FirstBattingOvers"] ?? "-") as! String
                     homeTeam.text?.appendContentsOf("\n\(firstScore)/\(firstWickets)\n\(firstTeamOvers) Overs")
                 }
-                
                 firstTeamScore = firstScore as! String
             }
             
             if let secondScore = matchDetailsData["SecondBattingScore"] {
                 if let secondWickets = matchDetailsData["SecondBattingWickets"] {
-                    
                     let secondTeamOvers: String = (matchDetailsData["SecondBattingOvers"] ?? "-") as! String
-                    
                     awayTeam.text?.appendContentsOf("\n\(secondScore)/\(secondWickets)\n\(secondTeamOvers) Overs")
                 }
                 
                 secondTeamScore = secondScore as! String
             }
-
         }
         
         
@@ -533,10 +439,9 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         
         setResult()
         
+        //sajith check what is this logic for
         if let wicketstaken = matchDetailsData["WicketsTaken"] {
-            
             let formattedString = NSMutableAttributedString()
-            
             formattedString.bold(wicketstaken as! String, fontName: appFont_black, fontSize: 83)
             
             if let runsGiven = matchDetailsData["RunsGiven"] {
@@ -561,13 +466,10 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                     formattedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(hex: "1a6a00") , range: ballRange)
                 }
             }
-            
             totalWickets.attributedText = formattedString
         }
         
-        
         setEconomy()
-    
     }
     
     func refresh(data:AnyObject){
@@ -575,8 +477,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             matchDetailsData = value
             initializeView()
         }
-        
-        
     }
     
     //MARK: Actionsheet delegate

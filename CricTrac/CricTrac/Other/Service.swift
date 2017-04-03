@@ -694,36 +694,26 @@ func getImageFromFirebase(imagePath: String ,sucessBlock:(UIImage)->Void){
 //MARK:- Update  Match
 
 func updateMatchData(key:String,data:[String:AnyObject], callback:(data:[String:AnyObject])->Void ){
-    
     var dataToBeModified = data
-    
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").child(key)
     
     //let formatter = NSDateFormatter()
     //formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     
     dataToBeModified["MatchEditedDate"] = NSDate().getCurrentTimeStamp() //formatter.stringFromDate(NSDate())
-    
-    
     ref.updateChildValues(dataToBeModified)
     callback(data: dataToBeModified)
     UpdateDashboardDetails()
-    
 }
-
 
 //MARK:- Delete Match
 
 func deleteMatchData(matchId:String, callback:(error:NSError?)->Void ){
-    
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").child(matchId)
-    
     ref.removeValueWithCompletionBlock { (error, dataRef) in
-        
         UpdateDashboardDetails()
         callback(error: error)
     }
-    
 }
 
 //MARK:- Login

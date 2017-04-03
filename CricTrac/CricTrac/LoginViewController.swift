@@ -46,8 +46,8 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         super.viewDidLoad()
         
         setBackgroundColor()
-        username.text = "sravani.mdr@gmail.com"
-        password.text = "123456"
+        username.text = "crictracrahul@gmail.com"
+        password.text = "crictrac"
 
         //setUIBackgroundTheme(self.view)
         

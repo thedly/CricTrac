@@ -17,21 +17,11 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     @IBOutlet weak var SuggestsTblview: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()
         // Do any additional setup after loading the view.
-        //sajith moved the code form viewDidAppear section
-        /*getAllFriends { (data) in
-            friendsDataArray.removeAll()
-            for (_, req) in data {
-                if let dat = req as? [String : AnyObject] {
-                    let reqData = Friends(dataObj: dat)
-                    friendsDataArray.append(reqData)
-                }
-            }
-            self.SuggestsTblview.reloadData()
-        }*/
     }
     
     override func didReceiveMemoryWarning() {
