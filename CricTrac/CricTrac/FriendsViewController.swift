@@ -17,6 +17,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     @IBOutlet weak var SuggestsTblview: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()
@@ -67,22 +68,6 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         aCell.UnfriendBtn.restorationIdentifier = friendsDataArray[indexPath.row].FriendRecordId
         aCell.backgroundColor = UIColor.clearColor()
         return aCell
-        
-        
-        /* sajith added for testing
-         var FriendObject = Profile(usrObj: [:])
-         getProfileInfoById(userprofileId, sucessBlock: { FriendData in
-         var currentProfile = Profile(usrObj: FriendData)
-         UserProfilesData.append(currentProfile)
-         if let _imageUrl = FriendData["ProfileImageURL"] as? String where _imageUrl != ""  {
-         let userId = userprofileId as! String
-         getImageFromFirebase(_imageUrl) { (data) in
-         UserProfilesImages[userId] = data
-         }
-         }
-         callback()
-
-        */
     }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
