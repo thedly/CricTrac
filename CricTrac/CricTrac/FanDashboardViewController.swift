@@ -23,6 +23,14 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var PlayerName: UILabel!
     @IBOutlet weak var PlayerLocation: UILabel!
     @IBOutlet weak var closeButton: UIButton!
+    
+    @IBOutlet weak var favouritePlayerHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var interstedSportsheightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var supportingTeamHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var hobbiesHeightConstraint: NSLayoutConstraint!
 
     
     var friendProfile:[String:AnyObject]?
@@ -154,10 +162,10 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
             teamNameToReturn = userProfileData.FavoritePlayers[indexPath.row]
             
             
-            if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CoachCurrentTeamsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
+            if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("FanFavouriteViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
                 
                 
-                //aCell.TeamImage.image = UIImage()
+                aCell.TeamImage.image = UIImage()
                 
                 
                 if teamNameToReturn != "" {
@@ -202,10 +210,10 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         case InterestedSports:
             teamNameToReturn = userProfileData.InterestedSports[indexPath.row]
             
-            if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CoachPlayedForViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
+            if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("FanInterestedSportsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
                 
                 
-                //aCell.TeamImage.image = UIImage()
+                aCell.TeamImage.image = UIImage()
                 
                 
                 if teamNameToReturn != "" {
@@ -226,10 +234,10 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         case Hobbies:
             teamNameToReturn = userProfileData.Hobbies[indexPath.row]
             
-            if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CertificationsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
+            if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("FanHobbiesViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
                 
                 
-                //aCell.TeamImage.image = UIImage()
+                aCell.TeamImage.image = UIImage()
                 
                 
                 if teamNameToReturn != "" {
