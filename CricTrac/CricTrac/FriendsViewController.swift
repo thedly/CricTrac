@@ -21,17 +21,6 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
         initializeView()
         // Do any additional setup after loading the view.
-        //sajith moved the code form viewDidAppear section
-        /*getAllFriends { (data) in
-            friendsDataArray.removeAll()
-            for (_, req) in data {
-                if let dat = req as? [String : AnyObject] {
-                    let reqData = Friends(dataObj: dat)
-                    friendsDataArray.append(reqData)
-                }
-            }
-            self.SuggestsTblview.reloadData()
-        }*/
     }
     
     override func didReceiveMemoryWarning() {
@@ -78,6 +67,22 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         aCell.UnfriendBtn.restorationIdentifier = friendsDataArray[indexPath.row].FriendRecordId
         aCell.backgroundColor = UIColor.clearColor()
         return aCell
+        
+        
+        /* sajith added for testing
+         var FriendObject = Profile(usrObj: [:])
+         getProfileInfoById(userprofileId, sucessBlock: { FriendData in
+         var currentProfile = Profile(usrObj: FriendData)
+         UserProfilesData.append(currentProfile)
+         if let _imageUrl = FriendData["ProfileImageURL"] as? String where _imageUrl != ""  {
+         let userId = userprofileId as! String
+         getImageFromFirebase(_imageUrl) { (data) in
+         UserProfilesImages[userId] = data
+         }
+         }
+         callback()
+
+        */
     }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {

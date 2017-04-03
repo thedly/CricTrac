@@ -81,7 +81,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                     
                     let sendFriendRequestData = SentFriendRequest()
                     
-                    //sendFriendRequestData.City = FriendObject.City
+                    sendFriendRequestData.City = FriendObject.City
                     
                     /*
                     switch FriendObject.UserProfile {
@@ -110,7 +110,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                     let receiveFriendRequestData = ReceivedFriendRequest()
                     
                     
-                    //receiveFriendRequestData.City = loggedInUserObject.City
+                    receiveFriendRequestData.City = loggedInUserObject.City
                     /*
                     switch loggedInUserObject.UserProfile {
                     case userProfileType.Player.rawValue :
