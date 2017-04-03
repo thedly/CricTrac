@@ -15,7 +15,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     
     @IBOutlet weak var CurrentTeams: UICollectionView!
    
-    @IBOutlet weak var PastTeams: UICollectionView!
+   // @IBOutlet weak var PastTeams: UICollectionView!
     
     @IBOutlet weak var PlayedFor: UICollectionView!
     
@@ -32,6 +32,11 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var CoachLevel: UILabel!
     @IBOutlet weak var closeButton: UIButton!
 
+    @IBOutlet weak var coachCurrentTeamsHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var coachPastTeamsHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var coachPlayedHeightConstraint: NSLayoutConstraint!
+    
+   
     
     @IBAction func CloseDashboardPressed(sender: AnyObject) {
         
@@ -67,9 +72,9 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         
         CurrentTeams.delegate = self
         CurrentTeams.dataSource = self
-        
-        PastTeams.delegate = self
-        PastTeams.dataSource = self
+//        
+//        PastTeams.delegate = self
+//        PastTeams.dataSource = self
         
         PlayedFor.delegate = self
         PlayedFor.dataSource = self
@@ -78,8 +83,8 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         Certifications.dataSource = self
         
         
+       
         CoachExperience.text = userProfileData.Experience
-        
         CoachLevel.text = userProfileData.CoachingLevel
         
         
@@ -139,11 +144,11 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         switch collectionView {
             
         case CurrentTeams:
-            valueToReturn = userProfileData.CoachCurrentTeams.count
+            valueToReturn = (userProfileData.CoachCurrentTeams.count) + userProfileData.CoachPastTeams.count
             break
-        case PastTeams:
-            valueToReturn = userProfileData.CoachPastTeams.count
-            break;
+       // case PastTeams:
+          //  valueToReturn = userProfileData.CoachPastTeams.count
+          //  break;
         case PlayedFor:
             valueToReturn = userProfileData.CoachPlayedFor.count
             break
@@ -167,27 +172,51 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         
         
         var teamNameToReturn = ""
-        
-        
-        
+       
         switch collectionView {
             
         case CurrentTeams:
-            teamNameToReturn = userProfileData.CoachCurrentTeams[indexPath.row]
-            
+           // teamNameToReturn = userProfileData.CoachCurrentTeams[indexPath.row]
             
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CoachCurrentTeamsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
                 
                 
                 aCell.TeamImage.image = UIImage()
                 
-                
-                if teamNameToReturn != "" {
-                    aCell.TeamName.text = teamNameToReturn
-                    aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+                if indexPath.row < (userProfileData.CoachCurrentTeams.count) {
+                    
+                    teamNameToReturn = userProfileData.CoachCurrentTeams[indexPath.row]
+                    
+                    aCell.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.boxColor)))
+                    
+                    aCell.TeamAbbr.textColor = UIColor.whiteColor()
+
+                }
+                else if (indexPath.row - (userProfileData.CoachCurrentTeams.count)) < (userProfileData.CoachPastTeams.count) {
+                    
+                    teamNameToReturn = userProfileData.CoachPastTeams[(indexPath.row - userProfileData.CoachCurrentTeams.count)]
+                    
+                    aCell.baseView.backgroundColor = UIColor.grayColor()
+                    aCell.TeamAbbr.textColor = UIColor.blackColor()
                 }
                 
                 
+                if teamNameToReturn != "" {
+                    aCell.TeamName.text = teamNameToReturn
+                    
+                    let teamName = teamNameToReturn.componentsSeparatedByString(" ")
+                    
+                    if teamName.count == 1 {
+                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)"
+                    }
+                    else if teamName.count == 2 {
+                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)"
+                    }
+                    else {
+                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
+                }
+                
+                }
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
@@ -195,26 +224,26 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             
             
          //   break
-        case PastTeams:
-            teamNameToReturn = userProfileData.CoachPastTeams[indexPath.row]
-            
-            
-            if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CoachPastTeamsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
-                
-                
-                aCell.TeamImage.image = UIImage()
-                
-                
-                if teamNameToReturn != "" {
-                    aCell.TeamName.text = teamNameToReturn
-                    aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
-                }
-                
-                
-                return aCell
-            }
-            return ThemeColorsCollectionViewCell()
-            
+//        case PastTeams:
+//            teamNameToReturn = userProfileData.CoachPastTeams[indexPath.row]
+//            
+//            
+//            if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CoachPastTeamsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
+//                
+//                
+//                aCell.TeamImage.image = UIImage()
+//                
+//                
+//                if teamNameToReturn != "" {
+//                    aCell.TeamName.text = teamNameToReturn
+//                    aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+//                }
+//                
+//                
+//                return aCell
+//            }
+//            return ThemeColorsCollectionViewCell()
+//            
             
            // break;
         case PlayedFor:
@@ -228,9 +257,20 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
                 
                 if teamNameToReturn != "" {
                     aCell.TeamName.text = teamNameToReturn
-                    aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+                    
+                    let teamName = teamNameToReturn.componentsSeparatedByString(" ")
+                    
+                    if teamName.count == 1 {
+                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)"
+                    }
+                    else if teamName.count == 2 {
+                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)"
+                    }
+                    else {
+                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
+                    }
+                    
                 }
-                
                 
                 return aCell
             }
@@ -244,13 +284,22 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CertificationsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
                 
                 
-                //aCell.TeamImage.image = UIImage()
+                aCell.TeamImage.image = UIImage()
                 
                 
                 if teamNameToReturn != "" {
                     aCell.TeamName.text = teamNameToReturn
-                    if aCell.TeamAbbr != nil {
-                        aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+                    
+                    let teamName = teamNameToReturn.componentsSeparatedByString(" ")
+                    
+                    if teamName.count == 1 {
+                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)"
+                    }
+                    else if teamName.count == 2 {
+                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)"
+                    }
+                    else {
+                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
                     }
                     
                 }
@@ -274,7 +323,19 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
                 
                 if teamNameToReturn != "" {
                     aCell.TeamName.text = teamNameToReturn
-                    aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+                    
+                    let teamName = teamNameToReturn.componentsSeparatedByString(" ")
+                    
+                    if teamName.count == 1 {
+                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)"
+                    }
+                    else if teamName.count == 2 {
+                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)"
+                    }
+                    else {
+                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
+                    }
+                    
                 }
                 
                 
