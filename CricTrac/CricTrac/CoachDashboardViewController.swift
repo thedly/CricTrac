@@ -32,6 +32,11 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var CoachLevel: UILabel!
     @IBOutlet weak var closeButton: UIButton!
 
+    @IBOutlet weak var coachCurrentTeamsHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var coachPastTeamsHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var coachPlayedHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var coachCertificationHeightConstraint: NSLayoutConstraint!
     
     @IBAction func CloseDashboardPressed(sender: AnyObject) {
         

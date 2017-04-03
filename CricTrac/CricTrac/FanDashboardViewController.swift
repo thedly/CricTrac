@@ -44,7 +44,9 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
         
         if let value = friendProfile{
             userProfileData = Profile(usrObj: value)
@@ -118,6 +120,38 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     }
     // MARK: - Collection view delegates
     
+    func updateFanDashBoard() {
+        
+        if userProfileData.SupportingTeams.count == 0 {
+            self.supportingTeamHeightConstraint.constant = 0
+            
+        }else {
+            self.supportingTeamHeightConstraint.constant = 160
+        }
+        
+        if userProfileData.FavoritePlayers.count == 0 {
+            self.favouritePlayerHeightConstraint.constant = 0
+        }
+        else{
+            self.favouritePlayerHeightConstraint.constant = 160
+        }
+        
+        if userProfileData.Hobbies.count == 0 {
+            self.hobbiesHeightConstraint.constant = 0
+        }
+        else {
+            self.hobbiesHeightConstraint.constant = 160
+        }
+        
+        if userProfileData.InterestedSports.count == 0 {
+            self.interstedSportsheightConstraint.constant = 0
+        }
+        else {
+            self.interstedSportsheightConstraint.constant = 160
+        }
+        
+    }
+
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         var valueToReturn = 0
@@ -175,7 +209,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
                     }
                 }
                 
-                
+               self.updateFanDashBoard()
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
@@ -200,7 +234,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
                     }
                 }
                 
-                
+                self.updateFanDashBoard()
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
@@ -224,7 +258,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
                     
                 }
                 
-                
+                self.updateFanDashBoard()
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
@@ -249,7 +283,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
                     
                 }
                 
-                
+                self.updateFanDashBoard()
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
@@ -279,7 +313,6 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
           //  break
             
         }
-        
         
         
         
