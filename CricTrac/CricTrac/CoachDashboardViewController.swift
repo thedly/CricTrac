@@ -33,9 +33,10 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var closeButton: UIButton!
     
     @IBOutlet weak var coachCurrentTeamsHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var coachPastTeamsHeightConstraint: NSLayoutConstraint!
+   
     @IBOutlet weak var coachPlayedHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var coachCertificationHeightConstraint: NSLayoutConstraint!
     
     
     @IBAction func CloseDashboardPressed(sender: AnyObject) {
@@ -135,6 +136,30 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         //// navigationController!.navigationBar.titleTextAttributes = titleDict
     }
     
+    func updateCoachDashboard(){
+        if (userProfileData.CoachCurrentTeams.count) + (userProfileData.CoachPastTeams.count) == 0 {
+            self.coachCurrentTeamsHeightConstraint.constant = 0
+        }
+        else {
+            self.coachCurrentTeamsHeightConstraint.constant = 180
+        }
+        
+        if userProfileData.CoachPlayedFor.count == 0{
+            self.coachPlayedHeightConstraint.constant = 0
+        }
+        else {
+            self.coachPlayedHeightConstraint.constant = 180
+        }
+        
+        if userProfileData.Certifications.count == 0 {
+            self.coachCertificationHeightConstraint.constant = 0
+        }
+        else {
+            self.coachCertificationHeightConstraint.constant = 180
+        }
+ 
+    }
+    
     // MARK: - Collection view delegates
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -217,6 +242,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
                     }
                     
                 }
+                self.updateCoachDashboard()
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
@@ -271,7 +297,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
                     }
                     
                 }
-                
+                self.updateCoachDashboard()
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
@@ -304,7 +330,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
                     
                 }
                 
-                
+                self.updateCoachDashboard()
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
@@ -338,7 +364,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
                     
                 }
                 
-                
+                self.updateCoachDashboard()
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
