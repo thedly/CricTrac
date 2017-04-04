@@ -9,13 +9,13 @@
 import UIKit
 
 class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ThemeChangeable {
-
+    
     @IBOutlet weak var MatchesView: UIView!
     
     
     @IBOutlet weak var CurrentTeams: UICollectionView!
-   
-    @IBOutlet weak var PastTeams: UICollectionView!
+    
+    // @IBOutlet weak var PastTeams: UICollectionView!
     
     @IBOutlet weak var PlayedFor: UICollectionView!
     
@@ -31,7 +31,12 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     
     @IBOutlet weak var CoachLevel: UILabel!
     @IBOutlet weak var closeButton: UIButton!
-
+    
+    @IBOutlet weak var coachCurrentTeamsHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var coachPastTeamsHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var coachPlayedHeightConstraint: NSLayoutConstraint!
+    
+    
     
     @IBAction func CloseDashboardPressed(sender: AnyObject) {
         
@@ -45,7 +50,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if let value = friendProfile{
             userProfileData = Profile(usrObj: value)
             closeButton.hidden = false
@@ -67,9 +72,9 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         
         CurrentTeams.delegate = self
         CurrentTeams.dataSource = self
-        
-        PastTeams.delegate = self
-        PastTeams.dataSource = self
+        //
+        //        PastTeams.delegate = self
+        //        PastTeams.dataSource = self
         
         PlayedFor.delegate = self
         PlayedFor.dataSource = self
@@ -78,8 +83,8 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         Certifications.dataSource = self
         
         
-        CoachExperience.text = userProfileData.Experience
         
+        CoachExperience.text = userProfileData.Experience
         CoachLevel.text = userProfileData.CoachingLevel
         
         
@@ -94,13 +99,13 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         setNavigationBarProperties()
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         MatchesView.backgroundColor = UIColor.blackColor()
@@ -109,7 +114,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         //currentTheme.boxColor
         //baseView.backgroundColor = UIColor.clearColor()
     }
-
+    
     @IBAction func didMenuButtonTapp(sender: UIButton){
         sliderMenu.setDrawerState(.Opened, animated: true)
     }
@@ -127,7 +132,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         navigationController?.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "DASHBOARD"
         //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-       //// navigationController!.navigationBar.titleTextAttributes = titleDict
+        //// navigationController!.navigationBar.titleTextAttributes = titleDict
     }
     
     // MARK: - Collection view delegates
@@ -139,11 +144,11 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         switch collectionView {
             
         case CurrentTeams:
-            valueToReturn = userProfileData.CoachCurrentTeams.count
+            valueToReturn = (userProfileData.CoachCurrentTeams.count) + userProfileData.CoachPastTeams.count
             break
-        case PastTeams:
-            valueToReturn = userProfileData.CoachPastTeams.count
-            break;
+            // case PastTeams:
+            //  valueToReturn = userProfileData.CoachPastTeams.count
+        //  break;
         case PlayedFor:
             valueToReturn = userProfileData.CoachPlayedFor.count
             break
@@ -168,55 +173,79 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         
         var teamNameToReturn = ""
         
-        
-        
         switch collectionView {
             
         case CurrentTeams:
-            teamNameToReturn = userProfileData.CoachCurrentTeams[indexPath.row]
-            
+            // teamNameToReturn = userProfileData.CoachCurrentTeams[indexPath.row]
             
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CoachCurrentTeamsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
                 
                 
                 aCell.TeamImage.image = UIImage()
                 
-                
-                if teamNameToReturn != "" {
-                    aCell.TeamName.text = teamNameToReturn
-                    aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+                if indexPath.row < (userProfileData.CoachCurrentTeams.count) {
+                    
+                    teamNameToReturn = userProfileData.CoachCurrentTeams[indexPath.row]
+                    
+                    aCell.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.boxColor)))
+                    
+                    aCell.TeamAbbr.textColor = UIColor.whiteColor()
+                    
+                }
+                else if (indexPath.row - (userProfileData.CoachCurrentTeams.count)) < (userProfileData.CoachPastTeams.count) {
+                    
+                    teamNameToReturn = userProfileData.CoachPastTeams[(indexPath.row - userProfileData.CoachCurrentTeams.count)]
+                    
+                    aCell.baseView.backgroundColor = UIColor.grayColor()
+                    aCell.TeamAbbr.textColor = UIColor.blackColor()
                 }
                 
                 
+                if teamNameToReturn != "" {
+                    aCell.TeamName.text = teamNameToReturn
+                    
+                    let teamName = teamNameToReturn.componentsSeparatedByString(" ")
+                    
+                    if teamName.count == 1 {
+                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)"
+                    }
+                    else if teamName.count == 2 {
+                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)"
+                    }
+                    else {
+                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
+                    }
+                    
+                }
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
             
             
             
-         //   break
-        case PastTeams:
-            teamNameToReturn = userProfileData.CoachPastTeams[indexPath.row]
+            //   break
+            //        case PastTeams:
+            //            teamNameToReturn = userProfileData.CoachPastTeams[indexPath.row]
+            //
+            //
+            //            if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CoachPastTeamsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
+            //
+            //
+            //                aCell.TeamImage.image = UIImage()
+            //
+            //
+            //                if teamNameToReturn != "" {
+            //                    aCell.TeamName.text = teamNameToReturn
+            //                    aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+            //                }
+            //
+            //
+            //                return aCell
+            //            }
+            //            return ThemeColorsCollectionViewCell()
+            //
             
-            
-            if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CoachPastTeamsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
-                
-                
-                aCell.TeamImage.image = UIImage()
-                
-                
-                if teamNameToReturn != "" {
-                    aCell.TeamName.text = teamNameToReturn
-                    aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
-                }
-                
-                
-                return aCell
-            }
-            return ThemeColorsCollectionViewCell()
-            
-            
-           // break;
+        // break;
         case PlayedFor:
             teamNameToReturn = userProfileData.CoachPlayedFor[indexPath.row]
             
@@ -228,29 +257,49 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
                 
                 if teamNameToReturn != "" {
                     aCell.TeamName.text = teamNameToReturn
-                    aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+                    
+                    let teamName = teamNameToReturn.componentsSeparatedByString(" ")
+                    
+                    if teamName.count == 1 {
+                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)"
+                    }
+                    else if teamName.count == 2 {
+                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)"
+                    }
+                    else {
+                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
+                    }
+                    
                 }
-                
                 
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
             
             
-           // break
+        // break
         case Certifications:
             teamNameToReturn = userProfileData.Certifications[indexPath.row]
             
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CertificationsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
                 
                 
-                //aCell.TeamImage.image = UIImage()
+                aCell.TeamImage.image = UIImage()
                 
                 
                 if teamNameToReturn != "" {
                     aCell.TeamName.text = teamNameToReturn
-                    if aCell.TeamAbbr != nil {
-                        aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+                    
+                    let teamName = teamNameToReturn.componentsSeparatedByString(" ")
+                    
+                    if teamName.count == 1 {
+                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)"
+                    }
+                    else if teamName.count == 2 {
+                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)"
+                    }
+                    else {
+                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
                     }
                     
                 }
@@ -261,7 +310,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             return ThemeColorsCollectionViewCell()
             
             
-          //  break
+        //  break
         default:
             teamNameToReturn = userProfileData.CoachCurrentTeams[indexPath.row]
             
@@ -274,7 +323,19 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
                 
                 if teamNameToReturn != "" {
                     aCell.TeamName.text = teamNameToReturn
-                    aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
+                    
+                    let teamName = teamNameToReturn.componentsSeparatedByString(" ")
+                    
+                    if teamName.count == 1 {
+                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)"
+                    }
+                    else if teamName.count == 2 {
+                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)"
+                    }
+                    else {
+                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
+                    }
+                    
                 }
                 
                 
@@ -282,10 +343,10 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             }
             return ThemeColorsCollectionViewCell()
             
-          //  break
+            //  break
             
         }
-
+        
         
         
         
@@ -299,13 +360,13 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
