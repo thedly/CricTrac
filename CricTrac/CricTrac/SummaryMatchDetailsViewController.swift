@@ -326,14 +326,49 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             overs.text = Overs
         }
         
-        if (bowlingViewHidden == true) {
+        if let oversBowled = matchDetailsData["OversBowled"] as? String where oversBowled == "-" {
+            
+            bowlingViewHidden = true
+            
             self.bowlingView.hidden = true
+            
+        }
+        else {
+            
+            bowlingViewHidden = false
+            
+            self.bowlingView.hidden = false
+            
+        }
+        
+        if (bowlingViewHidden == true) {
+            
+            //self.bowlingView.hidden = true
+            
             self.screenShotHeightConstraint.constant -= 240
+            
+        }
+        
+        if let runs = matchDetailsData["RunsTaken"] as? String where runs == "-" {
+            
+            battingViewHidden = true
+            
+            self.battingView.hidden = true
+            
+        }else {
+            
+            battingViewHidden = false
+            
+            self.battingView.hidden = false
+            
         }
         
         if (battingViewHidden == true) {
-            self.battingView.hidden = true
+            
+            //self.battingView.hidden = true
+            
             self.screenShotHeightConstraint.constant -= 240
+            
         }
         
         var group = ""

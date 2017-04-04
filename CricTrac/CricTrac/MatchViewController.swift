@@ -25,7 +25,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     @IBOutlet weak var ageGroup: UITextField!
     @IBOutlet weak var playingLevel: UITextField!
     @IBOutlet weak var scrollView:UIScrollView!
-    
+    @IBInspectable var placeholderColor: UIColor = UIColor.blackColor()
     var teamOROpponentFieldChanged : Bool = false
     
     var selectedText:UITextField!
