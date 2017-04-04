@@ -214,7 +214,7 @@ func addCoverImageData(profileDp:UIImage){
             let qualityOfServiceClass = QOS_CLASS_BACKGROUND
             let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
             dispatch_async(backgroundQueue, {
-                updateMetaData(userImageMetaData)
+                updateCoverMetaData(userImageMetaData)
                 do {
                     
                     let data = try? NSData(contentsOfURL: userImageMetaData, options: NSDataReadingOptions())
@@ -264,6 +264,25 @@ func updateMetaData(profileImgUrl: NSURL) {
     
     print("Image url updated successfully")
 }
+
+// cover pic
+func updateCoverMetaData(coverImgUrl: NSURL) {
+    
+    if profileData.userExists {
+        let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
+        let coverImageObject: [NSObject:AnyObject] = [ "CoverPhotoURL"    : coverImgUrl.absoluteString]
+        ref.updateChildValues(coverImageObject)
+        if profileData.CoverPhotoURL == "-" {
+            profileData.CoverPhotoURL = coverImgUrl.absoluteString
+            NSNotificationCenter.defaultCenter().postNotificationName(CoverPictureUpdated, object: nil)
+        }
+    }
+    
+    
+    
+    print("Cover Image url updated successfully")
+}
+
 
 func getAllMatchData(friendId:String? = nil,sucessBlock:([String:AnyObject])->Void){
     

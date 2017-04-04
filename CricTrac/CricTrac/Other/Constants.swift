@@ -11,7 +11,7 @@ import AnimatedTextInput
 import Firebase
 
 let ProfilePictureUpdated = "ProfilePictureUpdated"
-
+let CoverPictureUpdated = "CoverPictureUpdated"
 public var date = 0
 
 public var loggedInUserInfo = [String:AnyObject]()
