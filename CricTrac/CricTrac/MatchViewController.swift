@@ -51,21 +51,21 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         
         if let val = teamText{
             
-            teamVal = val.textVal
+            teamVal = val.textVal.trim()
         }
         
         var opponentVal = ""
         
         if let val = opponentText{
             
-            opponentVal = val.textVal
+            opponentVal = val.textVal.trim()
         }
         
         var groundVal = ""
         
         if let val = groundText{
             
-            groundVal = val.textVal
+            groundVal = val.textVal.trim()
         }
         var oversVal = ""
         
@@ -78,7 +78,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         
         if let val = tournamentText{
             
-            tournamentVal = val.textVal
+            tournamentVal = val.textVal.trim()
         }
         
         var ageGroupVal = ""
@@ -106,10 +106,11 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         
         if let val = venueText{
             
-            venueVal = val.textVal
+            venueVal = val.textVal.trim()
         }
         return ["MatchDate":matchDateVal,"Team":teamVal,"Opponent":opponentVal,"Ground":groundVal,"MatchOvers":oversVal,"Tournament":tournamentVal, "AgeGroup":ageGroupVal, "Level": playingLevelVal, "MatchStage":stageVal, "Venue": venueVal]
     }
+    
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
@@ -126,17 +127,17 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         
         
         
-//        self.stage.delegate = self
-//        self.dateText.delegate = self
-//        self.teamText.delegate = self
-//        self.opponentText.delegate = self
-//        self.groundText.delegate = self
-//        self.oversText.delegate = self
-//        self.tournamentText.delegate = self
-//        
-//        self.venueText.delegate = self
-//        self.ageGroup.delegate = self
-//        self.playingLevel.delegate = self
+        self.stage.delegate = self
+        self.dateText.delegate = self
+        self.teamText.delegate = self
+        self.opponentText.delegate = self
+        self.groundText.delegate = self
+        self.oversText.delegate = self
+        self.tournamentText.delegate = self
+        
+        self.venueText.delegate = self
+        self.ageGroup.delegate = self
+        self.playingLevel.delegate = self
         
         
         
@@ -250,11 +251,12 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         return false
     }
     
+    
 }
 
 
-extension MatchViewController:UITextFieldDelegate{
-    
+extension MatchViewController:UITextFieldDelegate
+{
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -273,29 +275,29 @@ extension MatchViewController:UITextFieldDelegate{
         else if textField == playingLevel {
             ctDataPicker.showPicker(self, inputText: textField, data: PlayingLevels )
         }
-        else if textField == teamText{
-            addSuggstionBox(textField,dataSource: teamNames)
-            self.teamOROpponentFieldChanged = true
-        }
-        else if textField == groundText{
-            addSuggstionBox(textField,dataSource: groundNames)
-        }
-        else if textField == venueText{
-            addSuggstionBox(textField,dataSource: venueNames)
-        }
-        else if textField == opponentText{
-            addSuggstionBox(textField,dataSource: opponentTeams)
-            self.teamOROpponentFieldChanged = true
-        }
-        else if textField == tournamentText{
-            addSuggstionBox(textField,dataSource: tournaments)
-        }
+//        else if textField == teamText{
+//            addSuggstionBox(textField,dataSource: teamNames)
+//            self.teamOROpponentFieldChanged = true
+//        }
+//        else if textField == groundText{
+//            addSuggstionBox(textField,dataSource: groundNames)
+//        }
+//        else if textField == venueText{
+//            addSuggstionBox(textField,dataSource: venueNames)
+//        }
+//        else if textField == opponentText{
+//            addSuggstionBox(textField,dataSource: opponentTeams)
+//            self.teamOROpponentFieldChanged = true
+//        }
+//        else if textField == tournamentText{
+//            addSuggstionBox(textField,dataSource: tournaments)
+//        }
         else if textField == stage {
             ctDataPicker.showPicker(self, inputText: textField, data: MatchStage )
         }
-        else if textField == oversText {
-            AddDoneButtonTo(textField)
-        }
+//        else if textField == oversText {
+//            AddDoneButtonTo(textField)
+//        }
         
     }
     
@@ -329,6 +331,23 @@ extension MatchViewController:UITextFieldDelegate{
             parent?.dataChangedAfterLastSave()
         }
     }
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+       
+        let newLength = textField.text!.characters.count + string.characters.count - range.length
+        if textField == teamText || textField == opponentText || textField == groundText || textField == venueText || textField == tournamentText {
+            return newLength <= nameCharacterLimit // bool
+        }
+        else if textField == oversText {
+            return newLength <= 3
+        }
+        else if textField == dateText {
+            return false
+        }
+        else{
+            return true // Bool
+        }
+    }
+    
     
 }
 

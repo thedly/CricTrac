@@ -620,6 +620,19 @@ extension BattingBowlingViewController:UITextFieldDelegate{
     func donePressed() {
         selectedText.resignFirstResponder()
     }
-
+    
+//    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+//        let newlength = (textField.text!.characters.count) + string.characters.count - range.length
+//        
+//        if textField == runsText || textField == ballsPlayedText {
+//            return newlength <= 4
+//        }
+//        else if textField == foursText || textField == sixesText {
+//            return newlength <= 3
+//        }
+//        else {
+//            return true
+//        }
+//    }
     
 }
