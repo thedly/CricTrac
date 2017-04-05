@@ -368,7 +368,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     func incrementDecrementOperation(controlText: UITextField, isIncrement: Bool) {
         if isIncrement {
             if let currentValue = Int(controlText.text!) {
-                if currentValue >= 0 {
+                if currentValue <= 99 {
                     controlText.text = String(currentValue + 1)
                 }
             }
@@ -521,6 +521,22 @@ extension MatchResultsViewController:UITextFieldDelegate{
         if textField.text?.trimWhiteSpace.length > 0{
             
             parent?.dataChangedAfterLastSave()
+        }
+    }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        let newlength = textField.text!.characters.count + string.characters.count - range.length
+        if textField == firstScoreText || textField == secondScoreText {
+           return newlength <= 4
+        }
+        else if textField == firstOversText || textField == secondOversText {
+            return newlength <= 3
+        }
+        else if textField == firstWicketsText || textField == secondWicketsText {
+            return newlength <= 2
+        }
+        else {
+            return true
         }
     }
 }
