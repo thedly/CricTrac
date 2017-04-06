@@ -24,12 +24,14 @@ class CTDatePicker: NSObject {
         datePicker = UIDatePicker(frame:CGRectMake(0, 0, parent.view.frame.size.width, 216))
         datePicker.backgroundColor = UIColor.whiteColor()
         datePicker.datePickerMode = UIDatePickerMode.Date
+        datePicker.maximumDate = NSDate()
         }
         inputText.inputView = datePicker
         
         // ToolBar
         let toolBar = UIToolbar()
         toolBar.barStyle = .Default
+        
         toolBar.translucent = true
         toolBar.tintColor = UIColor(hex: "B12420")
         toolBar.backgroundColor = UIColor.whiteColor()

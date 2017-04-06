@@ -32,6 +32,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     var scrollViewTop:CGFloat!
     
     let ctDatePicker = CTDatePicker()
+    
     let ctDataPicker = CTPicker()
     
     weak var parent:MatchParent?
@@ -120,7 +121,12 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if ((parent?.selecetedData) != nil){ loadEditData() }
+        if ((parent?.selecetedData) != nil){
+            loadEditData()
+        }
+        else {
+            loadDefaultData()
+        }
         
         oversText.keyboardType = UIKeyboardType.DecimalPad
         self.view.backgroundColor = UIColor.clearColor()
@@ -148,6 +154,8 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         //setBackgroundColor()
         
         //setUIBackgroundTheme(self.view)
+        
+        
     }
     
     func keyboardWillShow(sender: NSNotification){
@@ -162,6 +170,12 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
             }
         }
     }
+    
+    func loadDefaultData(){
+        let plLevel = "Club"
+        playingLevel.textVal = plLevel
+    }
+    
     
     func loadEditData(){
         

@@ -442,6 +442,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         noballText.delegate = self
         widesText.delegate = self
         maidensText.delegate = self
+        runsGivenText.delegate = self
         
         
     }
@@ -485,10 +486,20 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     
     func incrementDecrementOperation(controlText: UITextField, isIncrement: Bool) {
         if isIncrement {
+            if controlText == foursText || controlText == sixesText || controlText == maidensText || controlText == maidensText || controlText == widesText || controlText == noballText {
             if let currentValue = Int(controlText.text!) {
-                if currentValue >= 0 {
+                if currentValue < 999 {
                     controlText.text = String(currentValue + 1)
                 }
+            }
+            }else if controlText == positionText || controlText == wicketsText {
+                if let currentValue = Int(controlText.text!) {
+                    if currentValue < 99 {
+                        controlText.text = String(currentValue + 1)
+                    }
+                }
+ 
+                
             }
             else
             {
@@ -624,11 +635,22 @@ extension BattingBowlingViewController:UITextFieldDelegate{
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         let newlength = (textField.text!.characters.count) + string.characters.count - range.length
         
+        //batting details
         if textField == runsText || textField == ballsPlayedText {
             return newlength <= 4
         }
         else if textField == foursText || textField == sixesText {
             return newlength <= 3
+        }
+        else if textField == positionText {
+            return newlength <= 2
+        }
+         // bowling details
+        else if textField == oversText || textField == runsGivenText || textField == maidensText || textField == noballText || textField == widesText {
+            return newlength <= 3
+        }
+        else if textField == wicketsText {
+            return newlength <= 2
         }
         else {
             return true

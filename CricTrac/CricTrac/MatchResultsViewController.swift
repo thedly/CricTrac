@@ -27,6 +27,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     
     var firstBatText: String!
     var secondBatText: String!
+    var swapBtnVal = 0
     
     private var inEditMode: Bool = false
     
@@ -232,19 +233,41 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     
     
     @IBAction func FirstTeamWicketsIncrement(sender: AnyObject) {
-        incrementDecrementOperation(firstWicketsText, isIncrement: true)
+        if swapBtnVal == 0 {
+            incrementDecrementOperation(firstWicketsText, isIncrement: true)
+        } else {
+           incrementDecrementOperation(secondWicketsText, isIncrement: true)
+        }
+        
     }
     
     
     @IBAction func FirstTeamWicketsDecrement(sender: AnyObject) {
-        incrementDecrementOperation(firstWicketsText, isIncrement: false)
+        if swapBtnVal == 0 {
+            incrementDecrementOperation(firstWicketsText, isIncrement: false)
+        }
+        else {
+            incrementDecrementOperation(secondWicketsText, isIncrement: false)
+        }
     }
     
-    @IBAction func SecondTeamWicketsDecrement(sender: AnyObject) {
-        incrementDecrementOperation(secondWicketsText, isIncrement: false)
-    }
+  
     @IBAction func SecondTeamWicketsIncrement(sender: AnyObject) {
-        incrementDecrementOperation(secondWicketsText, isIncrement: true)
+        if swapBtnVal == 0 {
+            incrementDecrementOperation(secondWicketsText, isIncrement: true)
+        }
+        else{
+           incrementDecrementOperation(firstWicketsText, isIncrement: true)
+        }
+    }
+    @IBAction func SecondTeamWicketsDecrement(sender: AnyObject) {
+        if swapBtnVal == 0 {
+           incrementDecrementOperation(secondWicketsText, isIncrement: false)
+        }
+        else {
+            incrementDecrementOperation(firstWicketsText, isIncrement: false)
+        }
+        
     }
     @IBAction func tossBtnTapped(sender: UIButton) {
         
@@ -368,7 +391,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     func incrementDecrementOperation(controlText: UITextField, isIncrement: Bool) {
         if isIncrement {
             if let currentValue = Int(controlText.text!) {
-                if currentValue <= 99 {
+                if currentValue < 99 {
                     controlText.text = String(currentValue + 1)
                 }
             }
@@ -386,6 +409,12 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     }
 
     @IBAction func swapBtnPressed(sender: AnyObject) {
+        
+        if swapBtnVal == 0 {
+            swapBtnVal = 1
+        } else {
+            swapBtnVal = 0
+        }
         
         if (self.firstBatText != "-" && self.firstBatText != "") {
             firstBatText = firstTeamTitle.text
@@ -407,7 +436,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             firstWicketsText = secondWicketsText
             secondWicketsText = tempWickets
             
-            
+           
             
             
             

@@ -128,15 +128,15 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                 venueNames = venue.map({ (key, value) in value })
             }
             
-            if let grounds = userData["Teams"] as? [String:String]{
+            if let teams = userData["Teams"] as? [String:String]{
                 
-                teamNames = grounds.map({ (key,value) in value })
+                teamNames = teams.map({ (key,value) in value })
                 
             }
             
-            if let grounds = userData["Opponents"] as? [String:String]{
+            if let opponents = userData["Opponents"] as? [String:String]{
                 
-                opponentTeams = grounds.map({ (key,value) in value })
+                opponentTeams = opponents.map({ (key,value) in value })
                 
             }
             
@@ -292,17 +292,20 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     func updateGlobalValues(){
         
         let teamName = self.data["Team"]!
-        if !teamNames.contains(teamName){
+        if teamName != "-" {
+            if !teamNames.contains(teamName){
             addNewTeamName(teamName)
             teamNames.append(teamName)
+            }
         }
         
         let oppoTeamName = self.data["Opponent"]!
-        if !opponentTeams.contains(oppoTeamName){
+        if oppoTeamName != "-" {
+            if !opponentTeams.contains(oppoTeamName){
             addNewOppoSitTeamName(oppoTeamName)
             opponentTeams.append(oppoTeamName)
+            }
         }
-        
         let tournament = self.data["Tournament"]!
         
         if tournament != "-"{
