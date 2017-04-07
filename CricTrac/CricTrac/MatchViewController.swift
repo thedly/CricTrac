@@ -170,8 +170,32 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
             }
         }
     }
-    
+
     func loadDefaultData(){
+        let date = NSDate()
+        let calendar: NSCalendar! = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        
+        let dob = profileData.DateOfBirth
+        
+        let dateFormater = NSDateFormatter()
+        dateFormater.dateFormat = "dd-MM-yyyy"
+        let birthdayDate = dateFormater.dateFromString(dob)
+       
+        let calcAge = calendar.components(.Year, fromDate: birthdayDate!, toDate: date, options: [])
+        let age = calcAge.year + 1
+        
+        var ageGroup1 = " "
+        if age < 10 {
+             ageGroup1 = "Under 10"
+        }
+        else if age > 23 {
+             ageGroup1 = "Seniors"
+        }
+        else {
+             ageGroup1 = "Under \(age)"
+        }
+        ageGroup.textVal = ageGroup1
+        
         let plLevel = "Club"
         playingLevel.textVal = plLevel
     }
