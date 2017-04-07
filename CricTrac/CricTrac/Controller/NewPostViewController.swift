@@ -27,7 +27,7 @@ class NewPostViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = cricTracTheme.currentTheme.topColor
-        contentView.backgroundColor = cricTracTheme.currentTheme.boxColor
+        contentView.backgroundColor = UIColor.clearColor()
         postContent.backgroundColor = UIColor.clearColor()
         profilePic.layer.cornerRadius = profilePic.frame.width/2
         postOwnerName.text = loggedInUserName ?? "Say Something Loud"

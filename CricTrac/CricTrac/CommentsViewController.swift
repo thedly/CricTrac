@@ -16,6 +16,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     @IBOutlet weak var comments: UILabel!
     @IBOutlet weak var likes: UILabel!
     
+  
     @IBOutlet weak var postText: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     var postIndex = 0
@@ -48,10 +49,10 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
         inerView.layer.masksToBounds = true
         inerView.layer.cornerRadius = inerView.frame.width/56
-        
+        inerView.backgroundColor = UIColor.clearColor()
         tableView.tableFooterView = UIView()
-        tableView.backgroundColor = inerView.backgroundColor
-        tableView.backgroundView?.backgroundColor = inerView.backgroundColor
+        tableView.backgroundColor = UIColor.clearColor()
+        tableView.backgroundView?.backgroundColor = UIColor.clearColor()
         
         tableView.rowHeight = UITableViewAutomaticDimension;
         tableView.estimatedRowHeight = 50.0;
@@ -167,6 +168,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         if let val = data["Comment"] as? String{
             
             aCell.commentText.text = val
+            aCell.backgroundColor = UIColor.clearColor()
         }
         
 

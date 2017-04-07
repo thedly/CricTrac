@@ -175,6 +175,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         self.summarizedView.alpha = 0.8
         initializeView()
         // Do any additional setup after loading the view.
+        self.automaticallyAdjustsScrollViewInsets = true
     }
     
     
@@ -347,6 +348,8 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             
             self.screenShotHeightConstraint.constant -= 240
             
+        }else{
+            self.screenShotHeightConstraint.constant += 240
         }
         
         if let runs = matchDetailsData["RunsTaken"] as? String where runs == "-" {
@@ -369,6 +372,8 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             
             self.screenShotHeightConstraint.constant -= 240
             
+        }else {
+            self.screenShotHeightConstraint.constant += 240
         }
         
         var group = ""

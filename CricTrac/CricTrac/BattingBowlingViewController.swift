@@ -487,24 +487,28 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     func incrementDecrementOperation(controlText: UITextField, isIncrement: Bool) {
         if isIncrement {
             if controlText == foursText || controlText == sixesText || controlText == maidensText || controlText == maidensText || controlText == widesText || controlText == noballText {
-            if let currentValue = Int(controlText.text!) {
-                if currentValue < 999 {
-                    controlText.text = String(currentValue + 1)
+                if let currentValue = Int(controlText.text!) {
+                    if currentValue < 999 {
+                        controlText.text = String(currentValue + 1)
+                    }
+                }
+                else
+                {
+                    controlText.text = String(1)
                 }
             }
-            }else if controlText == positionText || controlText == wicketsText {
+            else if controlText == positionText || controlText == wicketsText {
                 if let currentValue = Int(controlText.text!) {
                     if currentValue < 99 {
                         controlText.text = String(currentValue + 1)
                     }
                 }
- 
-                
+                else
+                {
+                    controlText.text = String(1)
+                }
             }
-            else
-            {
-                controlText.text = String(1)
-            }
+
         }
         else
         {
