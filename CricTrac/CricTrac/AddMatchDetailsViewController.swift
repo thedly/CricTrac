@@ -256,6 +256,52 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                 }
                 else{
                     
+                    if !matchVC.teamOROpponentFieldChanged {
+                        if resVC.swapBtnVal == 0 {
+                            if data["Team"] == resVC.existFB {
+                                data["FirstBatting"]  = data["Team"]
+                                data["SecondBatting"] = data["Opponent"]
+                            }
+                            else {
+                                data["FirstBatting"]  = data["Opponent"]
+                                data["SecondBatting"] = data["Team"]
+                            }
+                        }
+                        else {
+                            if data["Team"] == resVC.existFB {
+                                data["FirstBatting"]  = data["Opponent"]
+                                data["SecondBatting"] = data["Team"]
+                                
+                            }
+                            else {
+                                data["FirstBatting"]  = data["Team"]
+                                data["SecondBatting"] = data["Opponent"]
+                            }
+                        }
+                    }
+                    else {
+                        if resVC.swapBtnVal == 0 {
+                            if matchVC.existTeamName == resVC.existFB {
+                                data["FirstBatting"]  = data["Team"]
+                                data["SecondBatting"] = data["Opponent"]
+                            }
+                            else {
+                                data["FirstBatting"]  = data["Opponent"]
+                                data["SecondBatting"] = data["Team"]
+                            }
+                        }
+                        else {
+                            if matchVC.existTeamName == resVC.existFB {
+                                data["FirstBatting"]  = data["Opponent"]
+                                data["SecondBatting"] = data["Team"]
+                            }
+                            else {
+                                data["FirstBatting"]  = data["Team"]
+                                data["SecondBatting"] = data["Opponent"]
+                            }
+                        }
+                    }
+                    
                     if let matchKey = matchId{
                         updateMatchData(matchKey, data: data, callback: { dat in
                             self.updateGlobalValues()

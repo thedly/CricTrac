@@ -31,6 +31,9 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     var selectedText:UITextField!
     var scrollViewTop:CGFloat!
     
+    var existTeamName = ""
+    var existOppName = ""
+    
     let ctDatePicker = CTDatePicker()
     
     let ctDataPicker = CTPicker()
@@ -217,12 +220,12 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         }
         
         if let val = selectedData["Team"] as? String{
-            
+            existTeamName = val
             teamText.textVal = val
         }
         
         if let val = selectedData["Opponent"] as? String{
-            
+            existOppName = val
             opponentText.textVal = val
         }
         
@@ -313,20 +316,20 @@ extension MatchViewController:UITextFieldDelegate
         else if textField == playingLevel {
             ctDataPicker.showPicker(self, inputText: textField, data: PlayingLevels )
         }
-//        else if textField == teamText{
+        else if textField == teamText{
 //            addSuggstionBox(textField,dataSource: teamNames)
-//            self.teamOROpponentFieldChanged = true
-//        }
+            self.teamOROpponentFieldChanged = true
+        }
 //        else if textField == groundText{
 //            addSuggstionBox(textField,dataSource: groundNames)
 //        }
 //        else if textField == venueText{
 //            addSuggstionBox(textField,dataSource: venueNames)
 //        }
-//        else if textField == opponentText{
+        else if textField == opponentText{
 //            addSuggstionBox(textField,dataSource: opponentTeams)
-//            self.teamOROpponentFieldChanged = true
-//        }
+            self.teamOROpponentFieldChanged = true
+        }
 //        else if textField == tournamentText{
 //            addSuggstionBox(textField,dataSource: tournaments)
 //        }

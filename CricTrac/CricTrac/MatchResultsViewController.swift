@@ -28,6 +28,9 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     var firstBatText: String!
     var secondBatText: String!
     var swapBtnVal = 0
+    var resultsTab = 0
+    var existFB = ""
+    var existSB = ""
     
     private var inEditMode: Bool = false
     
@@ -289,6 +292,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
 
     override func viewDidAppear(animated: Bool) {
         setTeamData()
+        resultsTab = 1
     }
     
     func loadEditData(){
@@ -303,6 +307,9 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         firstScoreText.textVal = parent!.selecetedData!["FirstBattingScore"]! as? String ?? "-"
         firstWicketsText.textVal = parent!.selecetedData!["FirstBattingWickets"]! as? String ?? "-"
         secondBatText = parent!.selecetedData!["SecondBatting"]! as? String ?? "-"
+        
+        existFB = firstBatText
+        existSB = secondBatText
         
         AchievementsText.text = parent?.selecetedData!["Achievements"] as? String ?? "-"
         
@@ -343,18 +350,48 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     
     func setTeamData(){
         
-        if !inEditMode , let matchVCInstance = parent?.matchVC {
-            firstTeamTitle.text = matchVCInstance.teamText.text
-            secondTeamTitle.text = matchVCInstance.opponentText.text
+        //if !inEditMode , let matchVCInstance = parent?.matchVC {
+        if firstTeamTitle.text == "-" {
+            if let matchVCInstance = parent?.matchVC {
+                firstTeamTitle.text = matchVCInstance.teamText.text
+                secondTeamTitle.text = matchVCInstance.opponentText.text
+            }
         }
         
         if inEditMode && parent!.matchVC.teamOROpponentFieldChanged , let matchVCInstance = parent?.matchVC {
-            firstTeamTitle.text = matchVCInstance.teamText.text
-            secondTeamTitle.text = matchVCInstance.opponentText.text
+            if swapBtnVal == 0 {
+                if matchVCInstance.existTeamName == data["FirstBatting"] {
+                    firstTeamTitle.text = matchVCInstance.teamText.text
+                    secondTeamTitle.text = matchVCInstance.opponentText.text
+                }
+                else {
+                    firstTeamTitle.text = matchVCInstance.opponentText.text
+                    secondTeamTitle.text = matchVCInstance.teamText.text
+                }
+            }
+            else {
+                if matchVCInstance.existTeamName == data["FirstBatting"] {
+                    firstTeamTitle.text = matchVCInstance.opponentText.text
+                    secondTeamTitle.text = matchVCInstance.teamText.text
+                }
+                else {
+                    firstTeamTitle.text = matchVCInstance.teamText.text
+                    secondTeamTitle.text = matchVCInstance.opponentText.text
+                }
+            }
         }
         
-        firstBatText = firstTeamTitle.text
-        secondBatText = secondTeamTitle.text
+//commented by sajith
+//        if inEditMode && parent!.matchVC.teamOROpponentFieldChanged , let matchVCInstance = parent?.matchVC {
+//            firstTeamTitle.text = matchVCInstance.teamText.text
+//            secondTeamTitle.text = matchVCInstance.opponentText.text
+//        }
+        
+        if resultsTab == 1 {
+            firstBatText = firstTeamTitle.text
+            secondBatText = secondTeamTitle.text
+        }
+        
         if tossText == "" || tossText == "-" {
             tossText = firstBatText
         }
