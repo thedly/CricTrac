@@ -52,9 +52,11 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         
         
         firstOversText.delegate = self
+        firstOversText.keyboardType = UIKeyboardType.DecimalPad
         firstScoreText.delegate = self
         firstWicketsText.delegate = self
         secondOversText.delegate = self
+        secondOversText.keyboardType = UIKeyboardType.DecimalPad
         secondScoreText.delegate = self
         secondWicketsText.delegate = self
         resultText.delegate = self
@@ -291,8 +293,8 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     
 
     override func viewDidAppear(animated: Bool) {
-        setTeamData()
         resultsTab = 1
+        setTeamData()
     }
     
     func loadEditData(){
@@ -596,7 +598,7 @@ extension MatchResultsViewController:UITextFieldDelegate{
            return newlength <= 4
         }
         else if textField == firstOversText || textField == secondOversText {
-            return newlength <= 3
+            return newlength <= 5
         }
         else if textField == firstWicketsText || textField == secondWicketsText {
             return newlength <= 2

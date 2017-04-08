@@ -276,7 +276,6 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     }
     @IBAction func incrementPosition(sender: AnyObject) {
         self.incrementDecrementOperation(positionText, isIncrement: true)
-        
     }
     
     @IBAction func decrementPosition(sender: UIButton) {
@@ -301,7 +300,6 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     @IBAction func incrementWides(sender: AnyObject) {
         self.incrementDecrementOperation(widesText, isIncrement: true)
     }
-    
    
     @IBAction func decrementWides(sender: AnyObject) {
         self.incrementDecrementOperation(widesText, isIncrement: false)
@@ -427,18 +425,12 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         runsText.delegate = self
         oversText.delegate = self
         oversText.keyboardType = UIKeyboardType.DecimalPad
-        
-        runsText.delegate = self
         ballsPlayedText.delegate = self
         foursText.delegate = self
         sixesText.delegate = self
         strikeRateText.delegate = self
         positionText.delegate = self
-        dismissalText.delegate = self
-        
-        oversText.delegate = self
         wicketsText.delegate = self
-        runsText.delegate = self
         noballText.delegate = self
         widesText.delegate = self
         maidensText.delegate = self
@@ -650,7 +642,44 @@ extension BattingBowlingViewController:UITextFieldDelegate{
             return newlength <= 2
         }
          // bowling details
-        else if textField == oversText || textField == runsGivenText || textField == maidensText || textField == noballText || textField == widesText {
+            //sajith
+        else if textField == oversText {
+            return newlength <= 5
+        }
+//            switch string {
+//            case "0","1","2","3","4","5","6","7","8","9":
+//                return newlength <= 3
+//            case ".":
+//                let array = textField.text?.characters.map { String($0) }
+//                var decimalCount = 0
+//                var charCount = 0
+//                for character in array! {
+//                    if character == "." {
+//                        decimalCount += 1
+//                    }
+//                    charCount += 1
+//                }
+//                
+//                
+//                if decimalCount == 1 {
+//                    //var charCount = charCount+1
+//                    return newlength <= 5
+//                } else {
+//                    var charCount = charCount + 2
+//                    return newlength <= 5
+//                }
+//            default:
+//                let array = string.characters.map { String($0) }
+//                if array.count == 0 {
+//                    return true
+//                }
+//                return newlength <= 5
+//            }
+//            
+//            
+//            //return newlength <= 3
+//        }
+        else if textField == runsGivenText || textField == maidensText || textField == noballText || textField == widesText {
             return newlength <= 3
         }
         else if textField == wicketsText {

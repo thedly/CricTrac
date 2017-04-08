@@ -114,6 +114,10 @@ func addMatchData(key:String,data:[String:AnyObject], callback: [String:AnyObjec
     dataToBeModified["MatchAddedDate"] = NSDate().getCurrentTimeStamp() // formatter.stringFromDate(NSDate())
     dataToBeModified["MatchEditedDate"] = NSDate().getCurrentTimeStamp()// formatter.stringFromDate(NSDate())
     
+    dataToBeModified["MatchDateTS"] = NSDate().getCurrentTimeStamp()// MatchDate in timestamp format
+    dataToBeModified["UserId"] = currentUser!.uid //Current user ID
+    dataToBeModified["DeviceInfo"] = "iOS || " + versionAndBuildNumber //Device info and App info
+    
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").childByAutoId()
     dataToBeModified["MatchId"] = ref.key
     ref.setValue(dataToBeModified)
@@ -591,7 +595,7 @@ func getAllProfileData(sucessBlock:([String:AnyObject])->Void){
     
     
     
-    fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").observeEventType(.Value, withBlock: { snapshot in
+    fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").observeSingleEventOfType(.Value, withBlock: { snapshot in
         
         if let data: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
             
