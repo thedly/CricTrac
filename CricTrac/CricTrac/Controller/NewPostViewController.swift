@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import SCLAlertView
 
 class NewPostViewController: UIViewController {
 
@@ -56,6 +57,20 @@ class NewPostViewController: UIViewController {
     
     
     @IBAction func sendNewPostToTimline(sender:UIButton){
+        
+        // network reachability test
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        if !appDelegate.reachability.isReachable()  {
+            
+            let alert = UIAlertController(title: "", message: "Please check your internet connection", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        
+            return
+        }
+        
         
         if let postText = postContent.text{
             if editingPost == nil{

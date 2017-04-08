@@ -77,14 +77,17 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         
         self.searchBar.returnKeyType = UIReturnKeyType.Done
         
+        SearchDisplayCtrlr.searchResultsTableView.backgroundColor = cricTracTheme.currentTheme.topColor
+        
+        searchBar.barTintColor = cricTracTheme.currentTheme.bottomColor
         
 //        searchResultsTblView.dataSource = self
 //        searchResultsTblView.delegate = self
 //        
         definesPresentationContext = true
         
-        
-        //setUIBackgroundTheme(self.view)
+        //self.view.backgroundColor = UIColor.redColor()
+
         // Do any additional setup after loading the view.
     }
 
@@ -145,11 +148,13 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
                 aCell.AddFriendBtn.accessibilityIdentifier = searchedProfiles[indexPath.row].id
                 
                 
-                //            aCell.AddFriendBtn.addTarget(self, action: #selector(AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                aCell.AddFriendBtn.addTarget(self, action: #selector(AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                 
                 
                 
                 aCell.backgroundColor = UIColor.clearColor()
+                
+                aCell.selectionStyle = .None
             }
             
             
@@ -189,6 +194,12 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 100
+        
+    }
+    
+    func AddFriendBtnPressed(sender:UIButton) {
+        
+        
         
     }
   

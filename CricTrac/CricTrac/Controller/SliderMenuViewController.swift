@@ -28,6 +28,7 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
     @IBOutlet var baseView: UIView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var tableView : UITableView!
     
     var menuDataArray = menuData
     
@@ -78,11 +79,15 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
             if let newMatchIndex =  self.menuDataArray.indexOf({ $0["title"] == "NEW MATCH"}){
                 
                 self.menuDataArray.removeAtIndex(newMatchIndex)
+                
+               tableView.reloadData()
             }
             
             if let matchSummaryIndexIndex =  self.menuDataArray.indexOf({ $0["title"] == "MATCH SUMMARY"}){
                 
                 self.menuDataArray.removeAtIndex(matchSummaryIndexIndex)
+                
+                tableView.reloadData()
             }
             
         }
