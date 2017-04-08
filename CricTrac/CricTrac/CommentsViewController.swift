@@ -21,6 +21,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     @IBOutlet weak var profileImage: UIImageView!
     var postIndex = 0
     
+    @IBOutlet weak var contentViewForCommentCell: UIView!
     
     
     @IBOutlet weak var postComment: UIButton!
@@ -42,6 +43,8 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var contentViewHeightConstraint: NSLayoutConstraint!
+    var comntsHeightConstraint = false
     var postData:JSON?
     
     override func viewDidLoad() {
@@ -66,6 +69,8 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         postId = (postData!.dictionaryValue["postId"]?.stringValue)!
         
         userName.text = postData!.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
+        
+        
         
         if let likeCount = postData!.dictionaryValue["Likes"]?.count{
             
@@ -165,11 +170,14 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         let data = dataSource[indexPath.row]
         let aCell =  tableView.dequeueReusableCellWithIdentifier("commentcell", forIndexPath: indexPath) as! CommentTableViewCell
         
+       
+
         if let val = data["Comment"] as? String{
-            
+           
             aCell.commentText.text = val
             aCell.backgroundColor = UIColor.clearColor()
         }
+      
         
 
         

@@ -29,6 +29,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     var totalPosts = 5
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
