@@ -152,7 +152,7 @@ func themeFor(key:Themes)->CTTheme{
     }
 }
 
-func setDefaultAppThems(){
+func setDefaultAppTheme(){
     cricTracTheme.currentTheme = getPersistedTheme()
 }
 

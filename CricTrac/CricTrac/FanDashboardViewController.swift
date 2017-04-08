@@ -56,6 +56,8 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
             closeButton.hidden = true
         }
         
+        self.updateFanDashBoard()
+        
         setBackgroundColor()
         
         userProfileImage.layer.cornerRadius = userProfileImage.bounds.size.width/2
@@ -88,6 +90,9 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -149,6 +154,8 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         else {
             self.interstedSportsheightConstraint.constant = 160
         }
+        
+        self.view.layoutIfNeeded()
         
     }
     
@@ -218,10 +225,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
                         aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
                     }
                 }
-                
-
-                
-                self.updateFanDashBoard()
+            
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
@@ -258,7 +262,6 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
                 
 
                 
-                self.updateFanDashBoard()
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
@@ -291,8 +294,6 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
                 }
                 
 
-                
-                self.updateFanDashBoard()
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
@@ -325,8 +326,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
                 }
                 
 
-                
-                self.updateFanDashBoard()
+
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
