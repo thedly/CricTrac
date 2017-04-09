@@ -317,28 +317,28 @@ extension MatchViewController:UITextFieldDelegate
             ctDataPicker.showPicker(self, inputText: textField, data: PlayingLevels )
         }
         else if textField == teamText{
-//            addSuggstionBox(textField,dataSource: teamNames)
+            addSuggstionBox(textField,dataSource: teamNames)
             self.teamOROpponentFieldChanged = true
         }
-//        else if textField == groundText{
-//            addSuggstionBox(textField,dataSource: groundNames)
-//        }
-//        else if textField == venueText{
-//            addSuggstionBox(textField,dataSource: venueNames)
-//        }
+        else if textField == groundText{
+            addSuggstionBox(textField,dataSource: groundNames)
+        }
+        else if textField == venueText{
+            addSuggstionBox(textField,dataSource: venueNames)
+        }
         else if textField == opponentText{
-//            addSuggstionBox(textField,dataSource: opponentTeams)
+            addSuggstionBox(textField,dataSource: opponentTeams)
             self.teamOROpponentFieldChanged = true
         }
-//        else if textField == tournamentText{
-//            addSuggstionBox(textField,dataSource: tournaments)
-//        }
+        else if textField == tournamentText{
+            addSuggstionBox(textField,dataSource: tournaments)
+        }
         else if textField == stage {
             ctDataPicker.showPicker(self, inputText: textField, data: MatchStage )
         }
-//        else if textField == oversText {
-//            AddDoneButtonTo(textField)
-//        }
+        else if textField == oversText {
+            AddDoneButtonTo(textField)
+        }
         
     }
     

@@ -12,11 +12,7 @@ import SkyFloatingLabelTextField
 
 class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,ThemeChangeable {
     
-    
-    
-    
     var selectedText:UITextField!
-    
 
     @IBOutlet weak var runsText: SkyFloatingLabelTextField!
     @IBOutlet weak var ballsPlayedText:UITextField!
@@ -36,7 +32,6 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     @IBOutlet weak var runsGivenText: UITextField!
     weak var parent:MatchParent?
     
-    
     var OversBowled: String!
     var WicketsTaken: String!
     var RunsGiven: String!
@@ -51,10 +46,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     var Position: String!
     var Dismissal: String!
     
-    
     var BowlingData:[String:String]{
-        
-        
         var bowledOvers = ""
         var takenWickets = ""
         var givenRuns = ""
@@ -62,8 +54,16 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         var wides = ""
         var maidens = ""
         
+//        var newOvers = ""
+//        var intOvers = ""
+//        var decOvers = ""
+        
         if let val = OversBowled{
-            
+//            var newOvers = val.componentsSeparatedByString(".")
+//            if newOvers.count > 0 {
+//                intOvers = newOvers[0]
+//                decOvers = newOvers[1]
+//            }
             bowledOvers = val
         }
         
@@ -87,7 +87,6 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
             maidens = val
         }
         
-        
         return ["OversBowled":bowledOvers,"WicketsTaken":takenWickets,"RunsGiven":givenRuns,"NoBalls":noBalls,"Wides":wides, "Maidens": maidens]
     }
     
@@ -101,12 +100,9 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     }
     
     func ValidateScore() -> Void {
-        
         if let runText = runsText.text {
             if runText.trimWhiteSpace.length > 0 && Int(runText)! >= 0  {
-                
                 RunsTaken = runText
-                
                 if let foursScored = foursText.text {
                     Fours = foursScored != "-" && foursScored.length > 0 ? foursScored : "0"
                 }
@@ -127,43 +123,15 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
                     BallsFaced = ballsPlayed != "-" && ballsPlayed.length > 0 ? ballsPlayed : runText
                 }
                 
-                
-                
-//                if let foursScored = foursText.text, let sixesScored = sixesText.text
-//                {
-//                    var sum = 0
-//                    if foursScored.trimWhiteSpace.length > 0, let foursInt = Int(foursScored) {
-//                        sum += (4*foursInt)
-//                    }
-//                    if sixesScored.trimWhiteSpace.length > 0, let sixesInt = Int(sixesScored) {
-//                        sum += (6*sixesInt)
-//                    }
-//                    
-//                    if sum > Int(runText)! {
-//                        runsText.errorMessage = "Invalid Runs"
-//                    }
-//                    else
-//                    {
-//                        runsText.errorMessage = ""
-//                    }
-//                }
-                
-                
-                
-                
                 foursText.userInteractionEnabled = true
                 sixesText.userInteractionEnabled = true
                 positionText.userInteractionEnabled = true
                 dismissalText.userInteractionEnabled = true
                 ballsPlayedText.userInteractionEnabled = true
-                
-                
             }
             else
             {
-                
                 self.view.endEditing(true)
-                
                 RunsTaken = "-"
                 Fours = "-"
                 Sixes = "-"
@@ -176,20 +144,14 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
                 dismissalText.userInteractionEnabled = false
                 positionText.userInteractionEnabled = false
                 ballsPlayedText.userInteractionEnabled = false
-                
-                
             }
         }
     }
     
     func validateOvers() -> Void {
-        
         if let overText = oversText.text {
             if overText.length == 0 || Int(overText) <= 0 {
-                
                 self.view.endEditing(true)
-                
-                
                 Wides = "-"
                 NoBalls = "-"
                 WicketsTaken = "-"
@@ -197,45 +159,15 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
                 RunsGiven = "-"
                 OversBowled = "-"
                 
-                
                 widesText.userInteractionEnabled = false
                 noballText.userInteractionEnabled = false
                 wicketsText.userInteractionEnabled = false
                 maidensText.userInteractionEnabled = false
                 runsGivenText.userInteractionEnabled = false
-                
-//                if let widesBowled = widesText.text, let noBallsBowled = noballText.text
-//                {
-//                    var sum = 0
-//                    if widesBowled.trimWhiteSpace.length > 0, let widesInt = Int(widesBowled) {
-//                        sum += widesInt
-//                    }
-//                    
-//                    if noBallsBowled.trimWhiteSpace.length > 0, let noBallsInt = Int(noBallsBowled) {
-//                        sum += noBallsInt
-//                    }
-//                    
-//                    if sum > Int(Float(oversText.text!)!) {
-//                        oversText.errorMessage = "Invalid Overs"
-//                    }
-//                    else
-//                    {
-//                        oversText.errorMessage = ""
-//                    }
-//                }
             }
             else
             {
-//                if Int(widesText.textVal) > 0 || Int(noballText.textVal) > 0 {
-//                    oversText.errorMessage = "Overs Empty"
-//                }
-//                else
-//                {
-//                    oversText.errorMessage = ""
-//                }
-//                
                 OversBowled = oversText.text
-                
                 if let wides = widesText.text {
                     Wides = wides != "-" && wides.length > 0  ? wides : "0"
                 }
@@ -256,16 +188,13 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
                     RunsGiven = runsgiven != "-" && runsgiven.length > 0 ? runsgiven : "0"
                 }
 
-                
                 widesText.userInteractionEnabled = true
                 noballText.userInteractionEnabled = true
                 wicketsText.userInteractionEnabled = true
                 maidensText.userInteractionEnabled = true
                 runsGivenText.userInteractionEnabled = true
-                
             }
         }
-        
     }
     
     @IBAction func decrementMaidens(sender: UIButton) {
@@ -320,12 +249,8 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     @IBAction func decrementFours(sender: AnyObject) {
         self.incrementDecrementOperation(foursText, isIncrement: false)
     }
-   
-    
-    
     
     var BattingData:[String:String]{
-        
         var takenRuns = ""
         var facedBalls = ""
         var fours = ""
@@ -334,7 +259,6 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         var dismissal = ""
         
         if let val = RunsTaken{
-            
             takenRuns = val
         }
         
@@ -362,7 +286,6 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     }
     
     func loadEditData(){
-        
         runsText.textVal = parent!.selecetedData!["RunsTaken"]! as! String
         ballsPlayedText.textVal = parent!.selecetedData!["BallsFaced"]! as! String
         foursText.textVal = parent!.selecetedData!["Fours"]! as! String
@@ -370,20 +293,15 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         strikeRateText.textVal = parent!.selecetedData!["Ground"]! as! String
         positionText.textVal = parent!.selecetedData!["Position"]! as! String
         dismissalText.textVal = parent!.selecetedData!["Dismissal"]! as! String
-        setStrikeRate()
-        
+        //setStrikeRate()
         
         oversText.textVal = parent!.selecetedData!["OversBowled"]! as! String
         wicketsText.textVal = parent!.selecetedData!["WicketsTaken"]! as! String
         runsGivenText.textVal = parent!.selecetedData!["RunsGiven"]! as! String
         noballText.textVal = parent!.selecetedData!["NoBalls"]! as! String
         widesText.textVal = parent!.selecetedData!["Wides"]! as! String
-        
-        if let mt = parent!.selecetedData!["Maidens"] {
-            maidensText.textVal = mt as! String
-        }
-        
-//        calculateEconomy()
+        maidensText.textVal = parent!.selecetedData!["Maidens"] as! String
+        //calculateEconomy()
 
     }
     
@@ -403,7 +321,6 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         //setUIBackgroundTheme(self.view)
         // Do any additional setup after loading the view.
         
-        
         OversBowled = (parent?.selecetedData?["OversBowled"] ?? "-") as! String
         WicketsTaken = (parent?.selecetedData?["WicketsTaken"] ?? "-") as! String
         RunsGiven = (parent?.selecetedData?["RunsGiven"] ?? "-") as! String
@@ -417,9 +334,6 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         Sixes = (parent?.selecetedData?["Sixes"] ?? "-") as! String
         Position = (parent?.selecetedData?["Position"] ?? "-") as! String
         Dismissal = (parent?.selecetedData?["Dismissal"] ?? "-") as! String
-
-        
-        
         
         dismissalText.delegate = self
         runsText.delegate = self
@@ -435,8 +349,6 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         widesText.delegate = self
         maidensText.delegate = self
         runsGivenText.delegate = self
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -447,34 +359,6 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "BATTING & BOWLING")
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-//    func calculateEconomy(){
-//        
-//        if runsText.text?.trimWhiteSpace.length == 0{
-//            economyText.text = ""
-//        }
-//        else if oversText.text?.trimWhiteSpace.length == 0{
-//            economyText.text = ""
-//        }
-//        else{
-//            
-//            if let runs = Double((runsText.text?.trimWhiteSpace)!){
-//                if let overs = Double((oversText.text?.trimWhiteSpace)!){
-//                    economyText.text = "\(runs / overs)"
-//                }
-//                
-//            }
-//        }
-//    }
     
     func incrementDecrementOperation(controlText: UITextField, isIncrement: Bool) {
         if isIncrement {
@@ -500,7 +384,6 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
                     controlText.text = String(1)
                 }
             }
-
         }
         else
         {
@@ -520,14 +403,11 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
 
 }
 
-
 extension BattingBowlingViewController:UITextFieldDelegate{
-    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
-    
     
     func textFieldDidBeginEditing(textField: UITextField) {
         self.selectedText = textField
@@ -545,68 +425,55 @@ extension BattingBowlingViewController:UITextFieldDelegate{
         //textFieldDidEndEditing(textField)
     }
     
-    
-    
     func textFieldDidEndEditing(textField: UITextField){
-        
         if textField.tag == 1 {
             ValidateScore()
-            
-            if textField == runsText || textField == ballsPlayedText{
-                
-                calculateStrikeRate()
-            }
+//            if textField == runsText || textField == ballsPlayedText{
+//                //calculateStrikeRate()
+//            }
             
             if textField.text?.trimWhiteSpace.length > 0{
-                
                 parent?.dataChangedAfterLastSave()
             }
         }
         else if textField.tag == 2 {
             validateOvers()
 //            if textField == oversText || textField == runsText{
-//                
 //                calculateEconomy()
 //            }
             
             if textField.text?.trimWhiteSpace.length > 0{
-                
                 parent?.dataChangedAfterLastSave()
             }
-
-        }
-        
-        
-    }
-    
-    func calculateStrikeRate(){
-        
-        if runsText.text?.trimWhiteSpace.length == 0{
-            strikeRateText.text = ""
-        }
-        else if ballsPlayedText.text?.trimWhiteSpace.length == 0{
-            strikeRateText.text = ""
-        }
-        else{
-            setStrikeRate()
         }
     }
     
-    
-    func setStrikeRate(){
-        
-        if let runs = Double((runsText.text?.trimWhiteSpace)!){
-            if let balls = Double((ballsPlayedText.text?.trimWhiteSpace)!){
-                
-                strikeRateText.text = String(format: "%.0f",(runs*100 / balls))
-            }
-            
-        }
-    }
-    
+//    func calculateStrikeRate(){
+//        
+//        if runsText.text?.trimWhiteSpace.length == 0{
+//            strikeRateText.text = ""
+//        }
+//        else if ballsPlayedText.text?.trimWhiteSpace.length == 0{
+//            strikeRateText.text = ""
+//        }
+//        else{
+//            setStrikeRate()
+//        }
+//    }
+//    
+//    
+//    func setStrikeRate(){
+//        
+//        if let runs = Double((runsText.text?.trimWhiteSpace)!){
+//            if let balls = Double((ballsPlayedText.text?.trimWhiteSpace)!){
+//                
+//                strikeRateText.text = String(format: "%.0f",(runs*100 / balls))
+//            }
+//            
+//        }
+//    }
     
     func AddDoneButtonTo(inputText:UITextField) {
-        
         let toolBar = UIToolbar()
         toolBar.barStyle = .Default
         toolBar.translucent = true
@@ -642,43 +509,9 @@ extension BattingBowlingViewController:UITextFieldDelegate{
             return newlength <= 2
         }
          // bowling details
-            //sajith
         else if textField == oversText {
             return newlength <= 5
         }
-//            switch string {
-//            case "0","1","2","3","4","5","6","7","8","9":
-//                return newlength <= 3
-//            case ".":
-//                let array = textField.text?.characters.map { String($0) }
-//                var decimalCount = 0
-//                var charCount = 0
-//                for character in array! {
-//                    if character == "." {
-//                        decimalCount += 1
-//                    }
-//                    charCount += 1
-//                }
-//                
-//                
-//                if decimalCount == 1 {
-//                    //var charCount = charCount+1
-//                    return newlength <= 5
-//                } else {
-//                    var charCount = charCount + 2
-//                    return newlength <= 5
-//                }
-//            default:
-//                let array = string.characters.map { String($0) }
-//                if array.count == 0 {
-//                    return true
-//                }
-//                return newlength <= 5
-//            }
-//            
-//            
-//            //return newlength <= 3
-//        }
         else if textField == runsGivenText || textField == maidensText || textField == noballText || textField == widesText {
             return newlength <= 3
         }
