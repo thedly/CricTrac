@@ -170,52 +170,52 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         alertController.addAction(chooseExistingAction)
         
         
-        let chooseFromFacebookAction = UIAlertAction(title: "Choose Default", style: .Default) { (action) in
-            
-            let userProviderData = currentUser?.providerData
-            
-            for usr: FIRUserInfo in userProviderData! {
-                if (usr.providerID == "facebook.com" || usr.providerID == "google.com") {
-                    
-                    self.activityInd.startAnimating()
-                    
-                    let image:UIImage = getImageFromFacebook()
-                    
-                    self.userProfileImage.image = image
-                    
-                    addProfileImageData(self.resizeImage(image, newWidth: 200))
-                    self.activityInd.stopAnimating()
-                    
-                }
-            }
-            
-            
-            
-            
-        }
+//        let chooseFromFacebookAction = UIAlertAction(title: "Choose Default", style: .Default) { (action) in
+//            
+//            let userProviderData = currentUser?.providerData
+//            
+//            for usr: FIRUserInfo in userProviderData! {
+//                if (usr.providerID == "facebook.com" || usr.providerID == "google.com") {
+//                    
+//                    self.activityInd.startAnimating()
+//                    
+//                    let image:UIImage = getImageFromFacebook()
+//                    
+//                    self.userProfileImage.image = image
+//                    
+//                    addProfileImageData(self.resizeImage(image, newWidth: 200))
+//                    self.activityInd.stopAnimating()
+//                    
+//                }
+//            }
+//            
+//            
+//            
+//            
+//        }
         
-        alertController.addAction(chooseFromFacebookAction)
-        
-        
-        let removePhotoAction = UIAlertAction(title: "Remove Photo", style: .Default) { (action) in
-            
-            let image:UIImage = UIImage(named: "User")!
-            
-            self.userProfileImage.image = image
-            addProfileImageData(self.resizeImage(image, newWidth: 200))
-            
-        }
-        
-        alertController.addAction(removePhotoAction)
-        
-        
-        let viewPhotoAction = UIAlertAction(title: "View Photo", style: .Default) { (action) in
-            
-            self.viewImage(option)
-            
-        }
-        
-        alertController.addAction(viewPhotoAction)
+//        alertController.addAction(chooseFromFacebookAction)
+//        
+//        
+//        let removePhotoAction = UIAlertAction(title: "Remove Photo", style: .Default) { (action) in
+//            
+//            let image:UIImage = UIImage(named: "User")!
+//            
+//            self.userProfileImage.image = image
+//            addProfileImageData(self.resizeImage(image, newWidth: 200))
+//            
+//        }
+//        
+//        alertController.addAction(removePhotoAction)
+//        
+//        
+//        let viewPhotoAction = UIAlertAction(title: "View Photo", style: .Default) { (action) in
+//            
+//            self.viewImage(option)
+//            
+//        }
+//        
+//        alertController.addAction(viewPhotoAction)
         
         
         
@@ -266,7 +266,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         if let navigation = navigationController{
             
             navigation.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-            title = "DASHBOARD"
+            title = "SIGHTSCREEN"
         }
     
             //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
@@ -625,77 +625,77 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
 func setDashboardData(){
     //KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
-    topBattingNotAvailable.hidden = true
-    topBowlingNotAvailable.hidden = true
-    self.firstRecentMatchScoreCard.attributedText = nil
-    
-    self.firstRecentMatchOpponentName.text = nil
-    
-    self.firstRecentMatchDateAndVenue.text = nil
-    
-    self.FirstRecentMatchGroundVenue.text = nil
-    
-    self.FirstRecentMatchStrikeRate.text = nil
-    
-    
-    
-    self.secondRecentMatchScoreCard.attributedText = nil
-    
-    self.secondRecentMatchOpponentName.text = nil
-    
-    self.secondRecentMatchDateAndVenue.text = nil
-    
-    self.SecondRecentMatchGroundVenue.text = nil
-    
-    self.SecondRecentMatchStrikeRate.text = nil
-    
-    
-    
-    self.FirstRecentMatchScore.attributedText = nil
-    
-    self.FirstRecentMatchOpponent.text = nil
-    
-    self.FirstRecentMatchDateAndLocation.text = nil
-    
-    self.FirstRecentMatchBattingGroundVenue.text = nil
-    
-    self.FirstRecentMatchBattingStrikeRate.text = nil
-    
-    
-    
-    self.SecondRecentMatchScore.attributedText = nil
-    
-    self.SecondRecentMatchOpponent.text = nil
-    
-    self.SecondRecentMatchDateAndLocation.text = nil
-    
-    self.SecondRecentMatchBattingGroundVenue.text = nil
-    
-    self.SecondRecentMatchBattingStrikeRate.text = nil
-    
-    
-    
-    self.FirstRecentMatchBowlingScore.attributedText = nil
-    
-    self.FirstRecentMatchBowlingOpponent.text = nil
-    
-    self.FirstRecentMatchBowlingDateAndLocation.text = nil
-    
-    self.FirstRecentMatchBowlingGroundVenue.text = nil
-    
-    self.FirstRecentMatchBowlingEconomy.text = nil
-    
-    
-    
-    self.SecondRecentMatchBowlingScore.attributedText = nil
-    
-    self.SecondRecentMatchBowlingOpponent.text = nil
-    
-    self.SecondRecentMatchBowlingDateAndLocation.text = nil
-    
-    self.SecondRecentMatchBowlingGroundVenue.text = nil
-    
-    self.SecondRecentMatchBowlingEconomy.text = nil
+//    topBattingNotAvailable.hidden = true
+//    topBowlingNotAvailable.hidden = true
+//    self.firstRecentMatchScoreCard.attributedText = nil
+//    
+//    self.firstRecentMatchOpponentName.text = nil
+//    
+//    self.firstRecentMatchDateAndVenue.text = nil
+//    
+//    self.FirstRecentMatchGroundVenue.text = nil
+//    
+//    self.FirstRecentMatchStrikeRate.text = nil
+//    
+//    
+//    
+//    self.secondRecentMatchScoreCard.attributedText = nil
+//    
+//    self.secondRecentMatchOpponentName.text = nil
+//    
+//    self.secondRecentMatchDateAndVenue.text = nil
+//    
+//    self.SecondRecentMatchGroundVenue.text = nil
+//    
+//    self.SecondRecentMatchStrikeRate.text = nil
+//    
+//    
+//    
+//    self.FirstRecentMatchScore.attributedText = nil
+//    
+//    self.FirstRecentMatchOpponent.text = nil
+//    
+//    self.FirstRecentMatchDateAndLocation.text = nil
+//    
+//    self.FirstRecentMatchBattingGroundVenue.text = nil
+//    
+//    self.FirstRecentMatchBattingStrikeRate.text = nil
+//    
+//    
+//    
+//    self.SecondRecentMatchScore.attributedText = nil
+//    
+//    self.SecondRecentMatchOpponent.text = nil
+//    
+//    self.SecondRecentMatchDateAndLocation.text = nil
+//    
+//    self.SecondRecentMatchBattingGroundVenue.text = nil
+//    
+//    self.SecondRecentMatchBattingStrikeRate.text = nil
+//    
+//    
+//    
+//    self.FirstRecentMatchBowlingScore.attributedText = nil
+//    
+//    self.FirstRecentMatchBowlingOpponent.text = nil
+//    
+//    self.FirstRecentMatchBowlingDateAndLocation.text = nil
+//    
+//    self.FirstRecentMatchBowlingGroundVenue.text = nil
+//    
+//    self.FirstRecentMatchBowlingEconomy.text = nil
+//    
+//    
+//    
+//    self.SecondRecentMatchBowlingScore.attributedText = nil
+//    
+//    self.SecondRecentMatchBowlingOpponent.text = nil
+//    
+//    self.SecondRecentMatchBowlingDateAndLocation.text = nil
+//    
+//    self.SecondRecentMatchBowlingGroundVenue.text = nil
+//    
+//    self.SecondRecentMatchBowlingEconomy.text = nil
 
     //reset values
     self.FirstRecentMatchView.hidden = false

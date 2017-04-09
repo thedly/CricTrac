@@ -196,7 +196,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
             
             if value == ""{
                 
-                value = "No Name Added"
+                value = "No Name"
             }
             
             aCell.userName.text =   value

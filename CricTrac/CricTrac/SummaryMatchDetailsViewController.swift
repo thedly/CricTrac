@@ -125,7 +125,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         navigationItem.leftBarButtonItem = leftbarButton
         navigationItem.rightBarButtonItem = righttbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-        title = "MATCH DETAILS"
+        title = "SCORECARD"
         //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         // navigationController!.navigationBar.titleTextAttributes = titleDict
     }

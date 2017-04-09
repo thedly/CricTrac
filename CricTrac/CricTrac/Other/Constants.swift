@@ -26,18 +26,26 @@ public var loggedInUserName:String?{
 
 var menuData = [
 
-    ["title":"TIMELINE","vc":"timeline", "img": "Menu_TimeLine"],
-    ["title":"DASHBOARD","vc":"UserDashboardViewController", "img": "Menu_Dashboard"],
-    ["title":"NEW MATCH","vc":"AddMatchDetailsViewController", "img": "Menu_AddMatch"],
-    ["title":"MATCH SUMMARY","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
-    ["title":"FRIENDS","vc":"FriendBaseViewController", "img": "Menu_Friends"],
+    ["title":"PAVILION","vc":"timeline", "img": "Menu_TimeLine"],
+    ["title":"SIGHTSCREEN","vc":"UserDashboardViewController", "img": "Menu_Dashboard"],
+    ["title":"ADD MATCH","vc":"AddMatchDetailsViewController", "img": "Menu_AddMatch"],
+    ["title":"SCOREBOARD","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
+    ["title":"DUGOUT","vc":"FriendBaseViewController", "img": "Menu_Friends"],
     ["title":"PROFILE","vc":  "ProfileBaseViewController", "img": "Menu_Profile"],
+    ["title":"THIRD UMPIRE","vc":"SettingsViewController", "img": "Menu_Settings"],
+//    ["title":"TIMELINE","vc":"timeline", "img": "Menu_TimeLine"],
+//    ["title":"DASHBOARD","vc":"UserDashboardViewController", "img": "Menu_Dashboard"],
+//    ["title":"NEW MATCH","vc":"AddMatchDetailsViewController", "img": "Menu_AddMatch"],
+//    ["title":"MATCH SUMMARY","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
+//    ["title":"FRIENDS","vc":"FriendBaseViewController", "img": "Menu_Friends"],
+//    ["title":"PROFILE","vc":  "ProfileBaseViewController", "img": "Menu_Profile"],
 //    ["title":"STATISTICS","vc":"AddMatchDetailsViewController", "img": "Menu_Statistics"],
 //    ["title":"NOTIFICATION","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
-    ["title":"SETTINGS","vc":"SettingsViewController", "img": "Menu_Settings"],
+
+//    ["title":"SETTINGS","vc":"SettingsViewController", "img": "Menu_Settings"],
 //    ["title":"FEEDBACK","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
 //    ["title":"HELP & SUPPORT","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
-    ["title":"VERSION: \(versionAndBuildNumber)","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
+//    ["title":"VERSION: \(versionAndBuildNumber)","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
     
 ]
 

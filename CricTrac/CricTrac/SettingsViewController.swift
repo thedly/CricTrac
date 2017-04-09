@@ -44,7 +44,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let leftbarButton = UIBarButtonItem(customView: menuButton)
         navigationItem.leftBarButtonItem = leftbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-        title = "SETTINGS"
+        title = "THIRD UMPIRE"
        // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
        // navigationController!.navigationBar.titleTextAttributes = titleDict
     }

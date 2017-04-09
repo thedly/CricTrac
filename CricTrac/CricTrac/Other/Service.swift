@@ -266,7 +266,7 @@ func updateMetaData(profileImgUrl: NSURL) {
     
     
     
-    print("Image url updated successfully")
+    //print("Image url updated successfully")
 }
 
 // cover pic
@@ -284,7 +284,7 @@ func updateCoverMetaData(coverImgUrl: NSURL) {
     
     
     
-    print("Cover Image url updated successfully")
+    //print("Cover Image url updated successfully")
 }
 
 
