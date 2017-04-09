@@ -135,9 +135,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                 }
                 UserProfilesData.removeAll()
                 UserProfilesData = modFriendReqData
-                
-                print(UserProfilesData)
-                
+                                
                 dispatch_async(dispatch_get_main_queue(),{
                     
                     KRProgressHUD.dismiss()
@@ -358,7 +356,6 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     func AddFriendBtnPressed(sender: UIButton) {
-        print(FriendRequestsData.count)
         if let FriendUserId = sender.accessibilityIdentifier where FriendUserId != "" {
             getProfileInfoById(FriendUserId, sucessBlock: { FriendData in
                 let FriendObject = Profile(usrObj: FriendData)
@@ -413,28 +410,18 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                         UserProfilesData.removeAtIndex(index)
                     }
                     
-                    self.suggestionsTblView.reloadData()
-                    
-                    print(FriendRequestsData.count)
+                    //self.suggestionsTblView.reloadData()
                     
                     backgroundThread(background: {
                         AddSentRequestData(["sentRequestData": sendFriendRequestData.GetFriendRequestObject(sendFriendRequestData), "ReceivedRequestData": receiveFriendRequestData.getFriendRequestObject(receiveFriendRequestData)], callback: { data in
-                            
-                            
-                            
+                           
                             dispatch_async(dispatch_get_main_queue(),{
-                                
                                 self.setRequests()
                                 self.RequestsTblview.reloadData()
                                 self.suggestionsTblView.reloadData()
-                                
                             })
-                            
-                            
-                            })
+                        })
                     })
-                    
-
                 })
             })
         }
