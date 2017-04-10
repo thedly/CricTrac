@@ -91,12 +91,22 @@ class Profile {
         if let playingRole = usrObj["PlayingRole"] as? String {
             self.PlayingRole = playingRole
         }
+        
         if let profileImage = usrObj["ProfileImageURL"] as? String {
-            userImageMetaData = NSURL(string: profileImage)!
+            self.ProfileImageURL = profileImage
         }
+        
         if let coverUrl = usrObj["CoverPhotoURL"] as? String {
-            self.CoverPhotoURL = ""
+            self.CoverPhotoURL = coverUrl
         }
+        
+        
+//        if let profileImage = usrObj["ProfileImageURL"] as? String {
+//            userImageMetaData = NSURL(string: profileImage)!
+//        }
+//        if let coverUrl = usrObj["CoverPhotoURL"] as? String {
+//            self.CoverPhotoURL = ""
+//        }
         if let usrProfile = usrObj["UserProfile"] as? String {
            self.UserProfile = usrProfile
         }
