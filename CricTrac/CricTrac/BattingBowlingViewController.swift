@@ -23,7 +23,8 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     @IBOutlet weak var dismissalText:UITextField!
     @IBOutlet weak var scrollView:UIScrollView!
     
-    @IBOutlet weak var oversText:SkyFloatingLabelTextField!
+     @IBOutlet weak var oversText:UITextField!
+    //@IBOutlet weak var oversText:SkyFloatingLabelTextField!
     @IBOutlet weak var wicketsText:UITextField!
     @IBOutlet weak var noballText:UITextField!
     @IBOutlet weak var widesText:UITextField!
@@ -32,7 +33,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     @IBOutlet weak var runsGivenText: UITextField!
     weak var parent:MatchParent?
     
-    var OversBowled: String!
+    var bowledOvers: String!
     var WicketsTaken: String!
     var RunsGiven: String!
     var NoBalls: String!
@@ -58,13 +59,13 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
 //        var intOvers = ""
 //        var decOvers = ""
         
-        if let val = OversBowled{
+        if let val = oversText {
 //            var newOvers = val.componentsSeparatedByString(".")
 //            if newOvers.count > 0 {
 //                intOvers = newOvers[0]
 //                decOvers = newOvers[1]
 //            }
-            bowledOvers = val
+            bowledOvers = val.textVal
         }
         
         if let val = WicketsTaken{
@@ -150,14 +151,14 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     
     func validateOvers() -> Void {
         if let overText = oversText.text {
-            if overText.length == 0 || Int(overText) <= 0 {
+            if overText.length == 0 || Float(overText) <= 0 {
                 self.view.endEditing(true)
                 Wides = "-"
                 NoBalls = "-"
                 WicketsTaken = "-"
                 Maidens = "-"
                 RunsGiven = "-"
-                OversBowled = "-"
+                bowledOvers = "-"
                 
                 widesText.userInteractionEnabled = false
                 noballText.userInteractionEnabled = false
@@ -167,7 +168,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
             }
             else
             {
-                OversBowled = oversText.text
+                bowledOvers = oversText.text
                 if let wides = widesText.text {
                     Wides = wides != "-" && wides.length > 0  ? wides : "0"
                 }
@@ -321,7 +322,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         //setUIBackgroundTheme(self.view)
         // Do any additional setup after loading the view.
         
-        OversBowled = (parent?.selecetedData?["OversBowled"] ?? "-") as! String
+        bowledOvers = (parent?.selecetedData?["OversBowled"] ?? "-") as! String
         WicketsTaken = (parent?.selecetedData?["WicketsTaken"] ?? "-") as! String
         RunsGiven = (parent?.selecetedData?["RunsGiven"] ?? "-") as! String
         NoBalls = (parent?.selecetedData?["NoBalls"] ?? "-") as! String

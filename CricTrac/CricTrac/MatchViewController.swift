@@ -131,7 +131,8 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
             loadDefaultData()
         }
         
-        oversText.keyboardType = UIKeyboardType.DecimalPad
+        //oversText.keyboardType = UIKeyboardType.DecimalPad
+        oversText.keyboardType = UIKeyboardType.NumberPad
         self.view.backgroundColor = UIColor.clearColor()
         
         

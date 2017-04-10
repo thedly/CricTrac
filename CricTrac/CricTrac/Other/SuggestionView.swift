@@ -16,12 +16,12 @@ class SuggestionView: UIView,UITableViewDelegate,UITableViewDataSource,UITextFie
     var oldDelegate:UITextFieldDelegate? = nil
     private var filturedData:[String]? = nil
     
-    
-    @IBAction func didCancel(sender: AnyObject) {
-        
-        self.removeFromSuperview()
-        textField!.delegate = oldDelegate
-    }
+//action for CLOSE button in suggestion box is disabled - to enable provide a name and enable this code
+//    @IBAction func didCancel(sender: AnyObject) {
+//        
+//        self.removeFromSuperview()
+//        textField!.delegate = oldDelegate
+//    }
     
     func setDataSource(data:[String]){
         
@@ -70,15 +70,12 @@ class SuggestionView: UIView,UITableViewDelegate,UITableViewDataSource,UITextFie
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool{
         self.hidden = false
         var newString = ""
-      
-        
+       
         if string == ""{
             
             let textFieldVal = textField.text! as NSString
             
             newString = textFieldVal.stringByReplacingCharactersInRange(range, withString: string) as String
-           
-            
         }
         else {
             
@@ -100,11 +97,13 @@ class SuggestionView: UIView,UITableViewDelegate,UITableViewDataSource,UITextFie
            self.hidden = true
         }
         suggestionTable.reloadData()
-        return true
+        
+        //code added for checking the character limit for the text fields where autosuggestion is present
+        let newLength = textField.text!.characters.count + string.characters.count - range.length
+        return newLength <= nameCharacterLimit // bool
+        
+        //return true
     }
-
-    
-    
 }
 
 var  suggestionView:SuggestionView{
@@ -133,8 +132,6 @@ func removeSuggestion(){
     sBox.textField?.delegate = sBox.oldDelegate
 }
 
-
-
 func addSuggstionBox(textField:UITextField,dataSource:[String],showSuggestions:Bool = false){
     
     let suggBox = sBox
@@ -151,8 +148,6 @@ func addSuggstionBox(textField:UITextField,dataSource:[String],showSuggestions:B
     }
     
     textField.superview?.addSubview(suggBox)
-    
-    
     
    let heightConstraint =   NSLayoutConstraint(item: suggBox, attribute:
         .Height, relatedBy: .Equal, toItem: nil,

@@ -248,7 +248,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     }
     
     func initializeView() {
-        if let runs = matchDetailsData["RunsTaken"] as? String{
+        if let runs = matchDetailsData["RunsTaken"] as? String  where runs == "-" {
             let formattedString = NSMutableAttributedString()
             if let dismissal = matchDetailsData["Dismissal"] as? String where dismissal == "Not out"{
                 formattedString.bold(runs+"*" , fontName: appFont_black, fontSize: 83)
@@ -479,10 +479,10 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         
         setResult()
         
-        //sajith check what is this logic for
-        if let wicketstaken = matchDetailsData["WicketsTaken"] {
+        //sajith modified the bowling section
+        if let oversBowled = matchDetailsData["OversBowled"] as? String  where oversBowled != "-" {
             let formattedString = NSMutableAttributedString()
-            formattedString.bold(wicketstaken as! String, fontName: appFont_black, fontSize: 83)
+            formattedString.bold(matchDetailsData["WicketsTaken"] as! String, fontName: appFont_black, fontSize: 83)
             
             if let runsGiven = matchDetailsData["RunsGiven"] {
                 formattedString.bold("-\(runsGiven)", fontName: appFont_bold, fontSize: 83)
@@ -491,25 +491,54 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             let fullRange = NSRange(location: 0,length: formattedString.length)
             let wicketLength = formattedString.length
             
-            if let oversBowled = matchDetailsData["OversBowled"] as? String {
+            //if let oversBowled = matchDetailsData["OversBowled"] as? String {
                 
-                if let oversInt = Int(oversBowled) {
+                //if let oversInt = Float(oversBowled) {
                     
-                    let totalBalls = 6*oversInt
+                    //let totalBalls = 6*oversInt
                     
-                    let oversFromBallsInt = Int(totalBalls/6) // 12, 18
-                    let oversFromBallsRealRemaining = totalBalls - (6*oversFromBallsInt)
+                    //let oversFromBallsInt = Int(totalBalls/6) // 12, 18
+                    //let oversFromBallsRealRemaining = totalBalls - (6*oversFromBallsInt)
                     
-                   formattedString.bold("(\(oversFromBallsInt).\(oversFromBallsRealRemaining))", fontName: appFont_bold, fontSize: 30)
+                    formattedString.bold("(\(String(format: "%.1f",(Float(oversBowled)!))))", fontName: appFont_bold, fontSize: 30)
                     let ballRange = NSRange(location: wicketLength,length: formattedString.length-wicketLength)
                     formattedString.addAttribute(NSBaselineOffsetAttributeName, value: NSNumber(float:-14), range: fullRange)
                     formattedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(hex: "1a6a00") , range: ballRange)
-                }
-            }
+                //}
+            //}
             totalWickets.attributedText = formattedString
         }
-        
         setEconomy()
+
+//        if let wicketstaken = matchDetailsData["WicketsTaken"] {
+//            let formattedString = NSMutableAttributedString()
+//            formattedString.bold(wicketstaken as! String, fontName: appFont_black, fontSize: 83)
+//            
+//            if let runsGiven = matchDetailsData["RunsGiven"] {
+//                formattedString.bold("-\(runsGiven)", fontName: appFont_bold, fontSize: 83)
+//            }
+//            
+//            let fullRange = NSRange(location: 0,length: formattedString.length)
+//            let wicketLength = formattedString.length
+//            
+//            if let oversBowled = matchDetailsData["OversBowled"] as? String {
+//                
+//                if let oversInt = Int(oversBowled) {
+//                    
+//                    let totalBalls = 6*oversInt
+//                    
+//                    let oversFromBallsInt = Int(totalBalls/6) // 12, 18
+//                    let oversFromBallsRealRemaining = totalBalls - (6*oversFromBallsInt)
+//                    
+//                   formattedString.bold("(\(oversFromBallsInt).\(oversFromBallsRealRemaining))", fontName: appFont_bold, fontSize: 30)
+//                    let ballRange = NSRange(location: wicketLength,length: formattedString.length-wicketLength)
+//                    formattedString.addAttribute(NSBaselineOffsetAttributeName, value: NSNumber(float:-14), range: fullRange)
+//                    formattedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(hex: "1a6a00") , range: ballRange)
+//                }
+//            }
+//            totalWickets.attributedText = formattedString
+//        }
+        
     }
     
     func refresh(data:AnyObject){
