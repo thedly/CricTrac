@@ -70,12 +70,15 @@ class SuggestionView: UIView,UITableViewDelegate,UITableViewDataSource,UITextFie
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool{
         self.hidden = false
         var newString = ""
+      
         
         if string == ""{
             
             let textFieldVal = textField.text! as NSString
             
             newString = textFieldVal.stringByReplacingCharactersInRange(range, withString: string) as String
+           
+            
         }
         else {
             
