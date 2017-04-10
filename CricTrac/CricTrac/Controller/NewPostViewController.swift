@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 import SCLAlertView
 
-class NewPostViewController: UIViewController {
+class NewPostViewController: UIViewController,ThemeChangeable {
 
     @IBOutlet weak var contentView: UIView!
     
@@ -26,8 +26,8 @@ class NewPostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = cricTracTheme.currentTheme.topColor
+        setBackgroundColor()
+       //self.view.backgroundColor = UIColor.clearColor()
         contentView.backgroundColor = UIColor.clearColor()
         postContent.backgroundColor = UIColor.clearColor()
         profilePic.layer.cornerRadius = profilePic.frame.width/2
@@ -36,6 +36,18 @@ class NewPostViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.topColor
+      //  navigationController!.navigationBar.barTintColor = currentTheme.topColor
+    }
+    func setNavigationBarProperties(){
+        var currentTheme:CTTheme!
+        currentTheme = cricTracTheme.currentTheme
+      //  navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

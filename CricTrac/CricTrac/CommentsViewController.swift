@@ -8,7 +8,7 @@
 
 import UIKit
 import SwiftyJSON
-class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate {
+class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var userCity: UILabel!
@@ -46,10 +46,16 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     @IBOutlet weak var contentViewHeightConstraint: NSLayoutConstraint!
     var comntsHeightConstraint = false
     var postData:JSON?
+    var currentTheme:CTTheme!
     
+   
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
+        setNavigationBarProperties();
+        currentTheme = cricTracTheme.currentTheme
+        setBackgroundColor()
         inerView.layer.masksToBounds = true
         inerView.layer.cornerRadius = inerView.frame.width/56
         inerView.backgroundColor = UIColor.clearColor()
@@ -153,6 +159,18 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         }
         
         // Do any additional setup after loading the view.
+    }
+    
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.topColor
+      //  navigationController!.navigationBar.barTintColor = currentTheme.topColor
+    }
+    func setNavigationBarProperties(){
+        var currentTheme:CTTheme!
+        currentTheme = cricTracTheme.currentTheme
+//        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        
     }
     
     override func didReceiveMemoryWarning() {
