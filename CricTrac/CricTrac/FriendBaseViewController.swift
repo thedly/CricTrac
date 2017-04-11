@@ -163,7 +163,7 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
                     
                     //KRProgressHUD.show(progressHUDStyle: .White, message: "Friend Request Sent")
                     //KRProgressHUD.dismiss()
-                    self.searchBar.text = ""
+                    self.searchrefresh(self.searchBar)
                     
                     backgroundThread(background: {
                         AddSentRequestData(["sentRequestData": sendFriendRequestData.GetFriendRequestObject(sendFriendRequestData), "ReceivedRequestData": receiveFriendRequestData.getFriendRequestObject(receiveFriendRequestData)], callback: { data in

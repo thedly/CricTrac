@@ -267,6 +267,12 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
             self.ReloadTbl()
             backgroundThread(background: {
                 DeleteSentAndReceivedFriendRequestData(RequestObjectid!, successBlock: { data in
+                
+                    dispatch_async(dispatch_get_main_queue(),{
+                        self.setRequests()
+                        self.RequestsTblview.reloadData()
+                        //self.suggestionsTblView.reloadData()
+                    })
                 })
             })
         }
@@ -279,7 +285,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         self.presentViewController(actionSheetController, animated: true, completion: nil)
     }
 
-    func ConfirmFriendBtnPressed(sender:UIButton!) {
+     func ConfirmFriendBtnPressed(sender:UIButton!) {
         if let FriendUserId = sender.accessibilityIdentifier where FriendUserId != "" {
             if FriendExists(FriendUserId) == nil {
                 var FriendObject = Profile(usrObj: [:])
@@ -344,8 +350,12 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                         backgroundThread(background: {
                             AcceptFriendRequest(["UserData": UserData.FriendRequestObject(UserData), "FriendData": FriendData.FriendRequestObject(FriendData)], callback: { data in
                                 DeleteSentAndReceivedFriendRequestData(RequestObjectid!, successBlock: { data in
-                                    //if data == true {
-                                    //}
+                                    
+                                    dispatch_async(dispatch_get_main_queue(),{
+                                        self.setRequests()
+                                        self.RequestsTblview.reloadData()
+                                        //self.suggestionsTblView.reloadData()
+                                    })
                                 })
                             })
                         })
