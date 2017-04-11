@@ -480,20 +480,6 @@ func FriendExists(FriendId: String) -> [AnyObject]? {
     return nil
 }
 
-func idExists(FriendId: String) -> Int? {
-    var retVal = 0
-    fireBaseRef.child("Users").child(currentUser!.uid).child("Friends").observeSingleEventOfType(.Value, withBlock: { snapshot in
-        if let data: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
-            for (key, value) in data {
-                if FriendId == value["UserId"] as? String {
-                    retVal = 1
-                }
-            }
-        }
-    })
-    return retVal
-}
-
 func searchProfiles(searchParameter: String, sucessBlock:([Profile])->Void) {
     let ref = fireBaseRef.child("Users")
     ref.queryOrderedByChild("UserProfile/FirstName").queryStartingAtValue(searchParameter).queryEndingAtValue(searchParameter+"\u{f8ff}").observeSingleEventOfType(.Value, withBlock: { snapshot in
@@ -501,13 +487,51 @@ func searchProfiles(searchParameter: String, sucessBlock:([Profile])->Void) {
         var users: [Profile] = []
         if let data: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
             for (key, value) in data {
-                if var profile = value["UserProfile"] as? [String : AnyObject] {
-                    profile["Id"] = key
-                    let profileObject = Profile(usrObj: profile)
-                    users.append(profileObject)
-                }
+                var retVal = 0
+                
+                //exclude the users from Friends node
+                fireBaseRef.child("Users").child(currentUser!.uid).child("Friends").observeSingleEventOfType(.Value, withBlock: { snapshot in
+                    if let data2: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
+                        for (key2, value2) in data2 {
+                            if key == value2["UserId"] as? String {
+                                retVal = 1
+                            }
+                        }
+                    }
+                    
+                    //exclude the users from Recieved Request node
+                    fireBaseRef.child("Users").child(currentUser!.uid).child("ReceivedRequest").observeSingleEventOfType(.Value, withBlock: { snapshot in
+                        if let data3: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
+                            for (key3, value3) in data3 {
+                                if key == value3["ReceivedFrom"] as? String {
+                                    retVal = 1
+                                }
+                            }
+                        }
+                        
+                        //exclude the users from Sent Request node
+                        fireBaseRef.child("Users").child(currentUser!.uid).child("SentRequest").observeSingleEventOfType(.Value, withBlock: { snapshot in
+                            if let data4: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
+                                for (key4, value4) in data4 {
+                                    if key == value4["SentTo"] as? String {
+                                        retVal = 1
+                                    }
+                                }
+                            }
+                    
+                            if retVal == 0 {
+                                if var profile = value["UserProfile"] as? [String : AnyObject] {
+                                    profile["Id"] = key
+                                    let profileObject = Profile(usrObj: profile)
+                                    users.append(profileObject)
+                                }
+                            }
+                            sucessBlock(users)
+                        })
+                    })
+                })
             }
-            sucessBlock(users)
+            //sucessBlock(users)
         }
     })
     return

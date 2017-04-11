@@ -8,6 +8,7 @@
 
 import UIKit
 import XLPagerTabStrip
+import KRProgressHUD
 
 class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChangeable, UISearchResultsUpdating, UISearchBarDelegate {
 
@@ -140,7 +141,6 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
     
     func AddFriendBtnPressed(sender:UIButton) {
         if let FriendUserId = sender.accessibilityIdentifier where FriendUserId != "" {
-            //if idExists(FriendUserId) == 0 {
             getProfileInfoById(FriendUserId, sucessBlock: { FriendData in
                 let FriendObject = Profile(usrObj: FriendData)
                 getProfileInfoById((currentUser?.uid)!, sucessBlock: { data in
@@ -161,26 +161,29 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
                         self.searchedProfiles.removeAtIndex(index)
                     }
                     
-                    self.searchResultsTblView.reloadData()
+                    //KRProgressHUD.show(progressHUDStyle: .White, message: "Friend Request Sent")
+                    //KRProgressHUD.dismiss()
+                    self.searchBar.text = ""
                     
                     backgroundThread(background: {
                         AddSentRequestData(["sentRequestData": sendFriendRequestData.GetFriendRequestObject(sendFriendRequestData), "ReceivedRequestData": receiveFriendRequestData.getFriendRequestObject(receiveFriendRequestData)], callback: { data in
                             
                             dispatch_async(dispatch_get_main_queue(),{
-                                //self.setRequests()
+                                self.searchedProfiles.removeAll()
                                 self.searchResultsTblView.reloadData()
+                                //self.setRequests()
+                                //self.searchResultsTblView.reloadData()
                                 //self.suggestionsTblView.reloadData()
                             })
                         })
                     })
                 })
             })
-            //}
         }
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.characters.count > 2 {
+        if searchText.characters.count > 1 {
             backgroundThread(background: {
                 searchProfiles(searchText, sucessBlock: { data in
                     if let searchedData = data as? [Profile] {

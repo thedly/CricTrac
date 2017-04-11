@@ -29,7 +29,7 @@ class SentFriendRequest {
         self.SentDateTime = String(dataObj["SentDateTime"] ?? "-")
         self.SentTo = String(dataObj["SentTo"] ?? "-")
         self.SentRequestId = String(dataObj["SentRequestId"] ?? "-")
-        self.SentRequestId = String(dataObj["SentRequestId"] ?? "-")
+        //self.SentRequestId = String(dataObj["SentRequestId"] ?? "-")
     }
 
     

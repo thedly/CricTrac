@@ -279,7 +279,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         self.presentViewController(actionSheetController, animated: true, completion: nil)
     }
 
-    public func ConfirmFriendBtnPressed(sender:UIButton!) {
+    func ConfirmFriendBtnPressed(sender:UIButton!) {
         if let FriendUserId = sender.accessibilityIdentifier where FriendUserId != "" {
             if FriendExists(FriendUserId) == nil {
                 var FriendObject = Profile(usrObj: [:])

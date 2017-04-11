@@ -248,7 +248,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     }
     
     func initializeView() {
-        if let runs = matchDetailsData["RunsTaken"] as? String  where runs == "-" {
+        if let runs = matchDetailsData["RunsTaken"] as? String  where runs != "-" {
             let formattedString = NSMutableAttributedString()
             if let dismissal = matchDetailsData["Dismissal"] as? String where dismissal == "Not out"{
                 formattedString.bold(runs+"*" , fontName: appFont_black, fontSize: 83)
