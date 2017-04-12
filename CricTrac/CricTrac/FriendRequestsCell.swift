@@ -10,7 +10,7 @@ import UIKit
 
 class FriendRequestsCell: UITableViewCell {
     @IBOutlet weak var rejectBtn: UIButton!
-    
+    @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var confirmBtn: UIButton!
     @IBOutlet weak var FriendProfileImage: UIImageView!
     @IBOutlet weak var FriendName: UILabel!
@@ -31,7 +31,13 @@ class FriendRequestsCell: UITableViewCell {
         
         self.rejectBtn.userInteractionEnabled = true
         
+        self.cancelBtn.userInteractionEnabled = true
+        
         self.rejectBtn.layer.borderWidth = 2.0
+        
+        self.cancelBtn.layer.cornerRadius = 10
+        self.rejectBtn.layer.cornerRadius = 10
+        self.confirmBtn.layer.cornerRadius = 10
         
         self.rejectBtn.layer.borderColor = UIColor.whiteColor().CGColor
         

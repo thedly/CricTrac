@@ -81,6 +81,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
+        
         setRequests();
 //        if UserProfilesData.count < 10 {
 //            getFriendSuggestions()
@@ -150,21 +151,28 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         return IndicatorInfo(title: "REQUESTS")
     }
     
+        
     func getCellForRow(indexPath:NSIndexPath)->FriendRequestsCell{
         let aCell =  RequestsTblview.dequeueReusableCellWithIdentifier("FriendRequestsCell", forIndexPath: indexPath) as! FriendRequestsCell
         if FriendRequestsData[indexPath.row].isSentRequest == true {
             aCell.confirmBtn.hidden = true
-            aCell.rejectBtn.setTitle("Cancel Request", forState: UIControlState.Normal)
+            aCell.rejectBtn.hidden = true
+            aCell.cancelBtn.hidden = false
+            //aCell.rejectBtn.setTitle("CANCEL", forState: UIControlState.Normal)
             aCell.FriendName.text = FriendRequestsData[indexPath.row].Name
             aCell.FriendCity.text = FriendRequestsData[indexPath.row].City
             aCell.FriendProfileImage.image = extractImages(FriendRequestsData[indexPath.row].SentTo)
-            aCell.confirmBtn.accessibilityIdentifier = FriendRequestsData[indexPath.row].SentTo
-            aCell.confirmBtn.restorationIdentifier = FriendRequestsData[indexPath.row].SentRequestId
-            aCell.rejectBtn.restorationIdentifier = FriendRequestsData[indexPath.row].SentRequestId
-            aCell.rejectBtn.addTarget(self, action: #selector(FriendRequestsViewController.CancelRequest(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            //aCell.confirmBtn.accessibilityIdentifier = FriendRequestsData[indexPath.row].SentTo
+            //aCell.confirmBtn.restorationIdentifier = FriendRequestsData[indexPath.row].SentRequestId
+            aCell.cancelBtn.restorationIdentifier = FriendRequestsData[indexPath.row].SentRequestId
+            aCell.cancelBtn.addTarget(self, action: #selector(FriendRequestsViewController.CancelRequest(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         }
         else
         {
+            aCell.confirmBtn.hidden = false
+            aCell.rejectBtn.hidden = false
+            aCell.cancelBtn.hidden = true
+            //aCell.rejectBtn.setTitle("REJECT", forState: UIControlState.Normal)
             aCell.FriendName.text = FriendRequestsData[indexPath.row].Name
             aCell.FriendCity.text = FriendRequestsData[indexPath.row].City
             aCell.FriendProfileImage.image = extractImages(FriendRequestsData[indexPath.row].ReceivedFrom)
@@ -172,9 +180,8 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
             aCell.confirmBtn.restorationIdentifier = FriendRequestsData[indexPath.row].RequestId
             aCell.rejectBtn.restorationIdentifier = FriendRequestsData[indexPath.row].RequestId
             aCell.rejectBtn.addTarget(self, action: #selector(FriendRequestsViewController.RejectFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            aCell.confirmBtn.addTarget(self, action: #selector(FriendRequestsViewController.ConfirmFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         }
-        
-        aCell.confirmBtn.addTarget(self, action: #selector(FriendRequestsViewController.ConfirmFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         aCell.backgroundColor = UIColor.clearColor()
         return aCell
@@ -226,31 +233,43 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     
     
     func CancelRequest(sender: UIButton){
-        let RequestObjectid = sender.restorationIdentifier
-        if let index = FriendRequestsData.indexOf( {$0.SentRequestId == RequestObjectid }) {
-            FriendRequestsData.removeAtIndex(index)
+        let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to Cancel this request?", preferredStyle: .ActionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Ignore", style: .Cancel) { action -> Void in
+            // Just dismiss the action sheet
+            actionSheetController.dismissViewControllerAnimated(true, completion: nil)
         }
-        //self.ReloadTbl()
-        backgroundThread(background: {
-            CancelSentFriendRequestData(RequestObjectid!, successBlock: { (data) in
+        actionSheetController.addAction(cancelAction)
+        let unfriendAction = UIAlertAction(title: "Cancel Request", style: .Default) { action -> Void in
+            let RequestObjectid = sender.restorationIdentifier
+        
+            if let index = FriendRequestsData.indexOf( {$0.SentRequestId == RequestObjectid }) {
+                FriendRequestsData.removeAtIndex(index)
+            }
+            self.ReloadTbl()
+            backgroundThread(background: {
+                CancelSentFriendRequestData(RequestObjectid!, successBlock: { (data) in
                 
-                dispatch_async(dispatch_get_main_queue(),{
-                    
-                    self.setRequests()
-                    self.RequestsTblview.reloadData()
-                    
+                    dispatch_async(dispatch_get_main_queue(),{
+                        self.setRequests()
+                        self.RequestsTblview.reloadData()
+                        self.suggestionsTblView.reloadData()
+                    })
                 })
-                
             })
-        })
+        }
+        actionSheetController.addAction(unfriendAction)
         
+        // We need to provide a popover sourceView when using it on iPad
+        actionSheetController.popoverPresentationController?.sourceView = sender as UIView
         
+        // Present the AlertController
+        self.presentViewController(actionSheetController, animated: true, completion: nil)
     }
     
     
-    
     func RejectFriendBtnPressed(sender: UIButton){
-         let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to reject this request?", preferredStyle: .ActionSheet)
+         let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to Reject this request?", preferredStyle: .ActionSheet)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
             // Just dismiss the action sheet
@@ -271,7 +290,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                     dispatch_async(dispatch_get_main_queue(),{
                         self.setRequests()
                         self.RequestsTblview.reloadData()
-                        //self.suggestionsTblView.reloadData()
+                        self.suggestionsTblView.reloadData()
                     })
                 })
             })
@@ -373,44 +392,12 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                     let loggedInUserObject = Profile(usrObj: data)
                     let sendFriendRequestData = SentFriendRequest()
                     sendFriendRequestData.City = FriendObject.City
-                    /*
-                    switch FriendObject.UserProfile {
-                    case userProfileType.Player.rawValue :
-                        sendFriendRequestData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
-                        break;
-                    case userProfileType.Coach.rawValue :
-                        sendFriendRequestData.Club = FriendObject.CoachCurrentTeams.joinWithSeparator(",")
-                        break;
-                    case userProfileType.Fan.rawValue :
-                        sendFriendRequestData.Club = FriendObject.SupportingTeams.joinWithSeparator(",")
-                        break;
-                    default:
-                        sendFriendRequestData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
-                        break;
-                        
-                    }*/
                     sendFriendRequestData.Name = FriendObject.fullName
                     sendFriendRequestData.SentTo = FriendObject.id
                     sendFriendRequestData.SentDateTime = NSDate().getCurrentTimeStamp()
                     
                     let receiveFriendRequestData = ReceivedFriendRequest()
                     receiveFriendRequestData.City = loggedInUserObject.City
-                    /*
-                    switch loggedInUserObject.UserProfile {
-                    case userProfileType.Player.rawValue :
-                        receiveFriendRequestData.Club = loggedInUserObject.PlayerCurrentTeams.joinWithSeparator(",")
-                        break;
-                    case userProfileType.Coach.rawValue :
-                        receiveFriendRequestData.Club = loggedInUserObject.CoachCurrentTeams.joinWithSeparator(",")
-                        break;
-                    case userProfileType.Fan.rawValue :
-                        receiveFriendRequestData.Club = loggedInUserObject.SupportingTeams.joinWithSeparator(",")
-                        break;
-                    default:
-                        receiveFriendRequestData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
-                        break;
-                        
-                    }*/
                     
                     receiveFriendRequestData.Name = loggedInUserObject.fullName
                     receiveFriendRequestData.ReceivedFrom = loggedInUserObject.id
