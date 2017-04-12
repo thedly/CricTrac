@@ -21,4 +21,7 @@ class FriendRequestCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var RejectBtn: UIButton!
     
     @IBOutlet weak var RemoveBtn: UIButton!
+    
+    @IBOutlet weak var CancelBtn: UIButton!
+    
 }

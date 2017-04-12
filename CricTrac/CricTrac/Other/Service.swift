@@ -522,10 +522,14 @@ func searchProfiles(searchParameter: String, sucessBlock:([Profile])->Void) {
                             if retVal == 0 {
                                 if var profile = value["UserProfile"] as? [String : AnyObject] {
                                     profile["Id"] = key
-                                    let profileObject = Profile(usrObj: profile)
-                                    users.append(profileObject)
+                                    if key != currentUser?.uid {
+                                        let profileObject = Profile(usrObj: profile)
+                                        users.append(profileObject)
+                                    }
                                 }
                             }
+                            
+                            
                             sucessBlock(users)
                         })
                     })

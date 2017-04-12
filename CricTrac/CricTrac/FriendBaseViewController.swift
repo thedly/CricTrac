@@ -183,7 +183,7 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.characters.count > 1 {
+        if searchText.characters.count > 2 {
             backgroundThread(background: {
                 searchProfiles(searchText, sucessBlock: { data in
                     if let searchedData = data as? [Profile] {
@@ -191,7 +191,7 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
                         for profile in searchedData {
                             self.searchedProfiles.append(profile)
                         }
-//                        self.searchResultsTblView.reloadData()
+                        //self.searchResultsTblView.reloadData()
                     }
                 })
             })

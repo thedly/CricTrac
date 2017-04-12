@@ -218,10 +218,6 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
 //        alertController.addAction(viewPhotoAction)
         
         
-        
-        
-        
-        
         self.presentViewController(alertController, animated: true) {
             // ...
         }
@@ -300,7 +296,6 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         }
         
         
-        
     }
     
     override func viewDidLoad() {
@@ -354,9 +349,6 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         TeamsTable.delegate = self
         TeamsTable.dataSource = self
-        
-        
-        
         
         
         let df = NSDateFormatter()
