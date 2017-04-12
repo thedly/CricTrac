@@ -8,7 +8,9 @@
 
 import UIKit
 import SwiftyJSON
-class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate {
+
+class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UIActionSheetDelegate,DeleteComment{
+    
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var userCity: UILabel!
@@ -47,7 +49,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     var comntsHeightConstraint = false
     var postData:JSON?
     var currentTheme:CTTheme!
-    
+   // var commentId = [Int]()
    
 
     override func viewDidLoad() {
@@ -170,7 +172,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         var currentTheme:CTTheme!
         currentTheme = cricTracTheme.currentTheme
 //        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-        
+        self.contentViewForCommentCell.backgroundColor =  currentTheme.topColor
     }
     
     override func didReceiveMemoryWarning() {
@@ -187,11 +189,12 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     {
         let data = dataSource[indexPath.row]
         let aCell =  tableView.dequeueReusableCellWithIdentifier("commentcell", forIndexPath: indexPath) as! CommentTableViewCell
+        aCell.parent = self
         
        
 
         if let val = data["Comment"] as? String{
-           
+           //let  commentId = data["commentId"]
             aCell.commentText.text = val
             aCell.backgroundColor = UIColor.clearColor()
         }
@@ -220,7 +223,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
             aCell.userName.text =   value
         }
         
-        
+        aCell.selectionStyle = UITableViewCellSelectionStyle.None
         return aCell
     }
     
@@ -284,8 +287,73 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
             
         }
     }
+    func deletebuttonTapped(index: Int) {
+//        timelineData!.arrayObject?.removeAtIndex(index)
+//        timeLineTable.reloadData()
+    }
+ 
     
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//       
+//            
+//            let actionSheetController = UIAlertController(title: "", message: "Are you sure to delete the comment?", preferredStyle: .ActionSheet)
+//            
+//            // Create and add the Cancel action
+//            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
+//                // Just dismiss the action sheet
+//                actionSheetController.dismissViewControllerAnimated(true, completion: nil)
+//            }
+//            actionSheetController.addAction(cancelAction)
+//            
+//            // Create and add first option action
+//            let takePictureAction = UIAlertAction(title: "Delete", style: .Default) { action -> Void in
+//               
+//                let refreshAlert = UIAlertController(title: "Delete Comment", message: "Are you sure you want to delete this comment?", preferredStyle: UIAlertControllerStyle.Alert)
+//                
+//                refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
+//                    print("Handle Ok logic here")
+//                   // self.deleteComment()
+//                    
+//                }))
+//                
+//                refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+//                    print("Handle Cancel Logic here")
+//                }))
+//                
+//                self.presentViewController(refreshAlert, animated: true, completion: nil)
+//            }
+//        
+//            actionSheetController.addAction(takePictureAction)
+//            
+//            // We need to provide a popover sourceView when using it on iPad
+//         //   actionSheetController.popoverPresentationController?.sourceView = sender as UIView
+//            
+//            // Present the AlertController
+//            self.presentViewController(actionSheetController, animated: true, completion: nil)
+//            
+//            
+//        
+//    }
     
+//    func deleteTapp() {
+//        let refreshAlert = UIAlertController(title: "Delete Comment", message: "Are you sure you want to delete this comment?", preferredStyle: UIAlertControllerStyle.Alert)
+//        
+//        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
+//            print("Handle Ok logic here")
+//            // self.deleteComment()
+//            
+//        }))
+//        
+//        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+//            print("Handle Cancel Logic here")
+//        }))
+//        
+//        self.presentViewController(refreshAlert, animated: true, completion: nil)
+//    }
+    
+  
+    
+
     
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool{
