@@ -14,44 +14,38 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var userCity: UILabel!
-    
     @IBOutlet weak var comments: UILabel!
     @IBOutlet weak var likes: UILabel!
-    
-  
     @IBOutlet weak var postText: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
-    var postIndex = 0
-    
     @IBOutlet weak var contentViewForCommentCell: UIView!
-    
-    
     @IBOutlet weak var postComment: UIButton!
     @IBOutlet weak var commentBox: UITextView!
     @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var inerView: UIView!
+    @IBOutlet weak var commentTextView: UITextView!
+    @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var contentViewHeightConstraint: NSLayoutConstraint!
+    
+    var postIndex = 0
     var postLikeCount = 0
     var initialLikes = 0
     var refreshableParent:Refreshable?
-    
-    
-    @IBOutlet weak var tableView: UITableView!
-    
-    @IBOutlet weak var inerView: UIView!
-    
-    @IBOutlet weak var commentTextView: UITextView!
-    
     var dataSource = [[String:AnyObject]]()
-    var  postId:String = ""
-    
-    @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var contentViewHeightConstraint: NSLayoutConstraint!
+    var postId:String = ""
     var comntsHeightConstraint = false
     var postData:JSON?
     var currentTheme:CTTheme!
-   // var commentId = [Int]()
+    var commentId:String = ""
    
-
+//    override func viewWillAppear(animated: Bool) {
+//        getAllComments(postId) { (data) in
+//            self.dataSource = data
+//            self.tableView.reloadData()
+//        }
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        
@@ -64,86 +58,60 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = UIColor.clearColor()
         tableView.backgroundView?.backgroundColor = UIColor.clearColor()
-        
         tableView.rowHeight = UITableViewAutomaticDimension;
         tableView.estimatedRowHeight = 50.0;
-        
         commentTextView.layer.borderWidth = 1
         commentTextView.layer.borderColor = UIColor.darkGrayColor().CGColor
         commentTextView.setPlaceHolder()
-        
         postText.text = postData!.dictionaryValue["Post"]?.stringValue
-        
         postId = (postData!.dictionaryValue["postId"]?.stringValue)!
-        
         userName.text = postData!.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
         
-        
-        
         if let likeCount = postData!.dictionaryValue["Likes"]?.count{
-            
             likes.text = "\(likeCount) Likes"
             postLikeCount = likeCount
             initialLikes = postLikeCount
-            
-        }else{
-            
+        }else
+        {
             likes.text = "0 Likes"
         }
         
         if let commentCount = postData!.dictionaryValue["TimelineComments"]?.count{
-            
             comments.text = "\(commentCount) Comments"
-            
-        }else{
-            
+        }else
+        {
             comments.text = "0 Comments"
         }
         
-        
         let friendId = postData!["OwnerID"].stringValue
-        
         if let city = friendsCity[friendId]{
-            
             self.userCity.text = city
-            
-        }else{
-            
+        }else
+        {
             fetchFriendCity(friendId, sucess: { (city) in
                 friendsCity[friendId] = city
                 dispatch_async(dispatch_get_main_queue(),{
                     //self.userCity.text = city
-                    
                 })
-                
             })
         }
         
-        
         fetchFriendDetail(friendId, sucess: { (result) in
             let proPic = result["proPic"]
-            
             if proPic! == "-"{
-                
                 let imageName = "propic.png"
                 let image = UIImage(named: imageName)
                 self.profileImage.image = image
-                
-            }else{
+            }else
+            {
                 if let imageURL = NSURL(string:proPic!){
                     self.profileImage.kf_setImageWithURL(imageURL)
                 }
             }
-            
             //sucess(result: ["proPic":proPic,"city":city])
         })
         
-        
-        
-        
-        
         if let dateTimeStamp = postData!["AddedTime"].double{
-            
             let date = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
             let dateFormatter = NSDateFormatter()
             dateFormatter.timeZone = NSTimeZone.localTimeZone()
@@ -152,12 +120,9 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
             self.date.text = dateFormatter.stringFromDate(date)
         }
         
-        
         getAllComments(postId) { (data) in
-            
             self.dataSource = data
             self.tableView.reloadData()
-            
         }
         
         // Do any additional setup after loading the view.
@@ -171,7 +136,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     func setNavigationBarProperties(){
         var currentTheme:CTTheme!
         currentTheme = cricTracTheme.currentTheme
-//        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        //        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         self.contentViewForCommentCell.backgroundColor =  currentTheme.topColor
     }
     
@@ -181,7 +146,6 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return dataSource.count
     }
     
@@ -190,20 +154,37 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         let data = dataSource[indexPath.row]
         let aCell =  tableView.dequeueReusableCellWithIdentifier("commentcell", forIndexPath: indexPath) as! CommentTableViewCell
         aCell.parent = self
-        
-       
 
         if let val = data["Comment"] as? String{
-           //let  commentId = data["commentId"]
+            
+            //display comment owners image
+            fetchFriendDetail((data["OwnerID"]  as? String)!, sucess: { (result) in
+                let proPic = result["proPic"]
+                
+                aCell.userImage.layer.borderWidth = 1
+                aCell.userImage.layer.masksToBounds = false
+                aCell.userImage.layer.borderColor = UIColor.clearColor().CGColor
+                aCell.userImage.layer.cornerRadius = aCell.userImage.frame.width/2
+                aCell.userImage.clipsToBounds = true
+                
+                if proPic! == "-"{
+                    let imageName = "propic.png"
+                    let image = UIImage(named: imageName)
+                    aCell.userImage.image = image
+                }else{
+                    if let imageURL = NSURL(string:proPic!){
+                        aCell.userImage.kf_setImageWithURL(imageURL)
+                    }
+                }
+            })
+            
+            aCell.commentID = data["commentId"] as? String
+            aCell.postID = postId as? String
             aCell.commentText.text = val
             aCell.backgroundColor = UIColor.clearColor()
         }
-      
-        
-
         
         if let dateTimeStamp = data["AddedTime"] as? Double{
-            
             let date = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
             let dateFormatter = NSDateFormatter()
             dateFormatter.timeZone = NSTimeZone.localTimeZone()
@@ -212,16 +193,19 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
             aCell.commentDate.text = dateFormatter.stringFromDate(date)
         }
         
-        
         if var value = data["OwnerName"] as? String{
-            
             if value == ""{
-                
                 value = "No Name"
             }
-            
             aCell.userName.text =   value
         }
+        
+        if currentUser?.uid == data["OwnerID"]  as? String {
+            aCell.delCommentBtn.hidden = false
+        } else {
+            aCell.delCommentBtn.hidden = true
+        }
+        
         
         aCell.selectionStyle = UITableViewCellSelectionStyle.None
         return aCell
@@ -230,68 +214,53 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     func textViewDidBeginEditing(textView: UITextView){
         textView.text = ""
     }
+    
     func textViewDidEndEditing(textView: UITextView){
-        
         if textView == commentTextView{
             commentTextView.setPlaceHolder()
             textViewHeightConstraint.constant = 30
         }
-        
     }
     
     @IBAction func postNewComment(sender: AnyObject) {
-        
-        
         let text = commentTextView.text.trimWhiteSpace
-        
         if text.characters.count > 0{
-            
             commentTextView.resignFirstResponder()
             commentTextView.setPlaceHolder()
             textViewHeightConstraint.constant = 30
             dataSource.append(["OwnerName":loggedInUserName ?? "Another Friend","Comment":text])
             let postId = postData!.dictionaryValue["postId"]?.stringValue
             addNewComment(postId!, comment:text)
+        
             tableView.reloadData()
         }
     }
     
     @IBAction func didTapClose(sender: AnyObject) {
-        
         dismissViewControllerAnimated(true) {
-            
             if self.postLikeCount < self.initialLikes{
-                
                 var likes = timelineData!.arrayObject![self.postIndex]["Likes"] as! [String:[String:String]]
                 let keys =  likes.filter{key,val in
-                    
                     return val["OwnerID"]! == currentUser!.uid
-                    
-                    }.map{
-                        
-                        return $0.0
+                }.map{
+                    return $0.0
                 }
                 
                 if keys.count > 0 {
-                    
                     likes.removeValueForKey(keys[0])
-                    
                     timelineData![self.postIndex]["Likes"] = JSON(likes)
                 }
-                
             }
             if self.postLikeCount != self.initialLikes{
-                
                 self.refreshableParent?.refresh()
             }
-            
         }
     }
+    
     func deletebuttonTapped(index: Int) {
-//        timelineData!.arrayObject?.removeAtIndex(index)
-//        timeLineTable.reloadData()
+        //        timelineData!.arrayObject?.removeAtIndex(index)
+        //        timeLineTable.reloadData()
     }
- 
     
 //    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 //       
@@ -351,13 +320,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
 //        self.presentViewController(refreshAlert, animated: true, completion: nil)
 //    }
     
-  
-    
-
-    
-    
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool{
-        
         let textViewContent = textView.text
         /*
          
@@ -382,51 +345,38 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
          */
         
         if text ==  "\n"{ return false}
-        
+
         let lines  =  textViewContent.characters.count/40
-        
         let heightConstant = Int((self.textViewHeightConstraint.constant - 30)/18)
         
         if lines > heightConstant{
-            
             if self.textViewHeightConstraint.constant < 102{
                 UIView.animateWithDuration(0.1, animations: { () -> Void in
-                    
                     self.textViewHeightConstraint.constant = self.textViewHeightConstraint.constant+18
                 })}
-        }else if heightConstant > lines{
-            
+        }else if heightConstant > lines
+        {
             self.textViewHeightConstraint.constant = self.textViewHeightConstraint.constant - 18
         }
-        
         return true
     }
     
     func textViewShouldBeginEditing(textView: UITextView) -> Bool{
-        
         textView.clearPlaceHolder()
         return true
     }
     
-    
-    
-    
     @IBAction func didTapLikeButton(sender: UIButton) {
-        
-        
         likeOrUnlike(postId, like: { (likeDict) in
-            
-            self.likeButton.titleLabel?.textColor = UIColor.yellowColor()
+            self.likeButton.titleLabel?.textColor = UIColor.whiteColor()
             self.postLikeCount += 1
             self.likes.text = "\(self.postLikeCount) Likes"
              timelineData![self.postIndex]["Likes"] = JSON(likeDict)
-            
         }) {
             self.removeLikeFromArray()
             self.likeButton.titleLabel?.textColor = UIColor.grayColor()
             self.postLikeCount -= 1
             self.likes.text = "\(self.postLikeCount) Likes"
-            
         }
     }
     

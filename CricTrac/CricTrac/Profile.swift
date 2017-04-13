@@ -94,6 +94,7 @@ class Profile {
         
         if let profileImage = usrObj["ProfileImageURL"] as? String {
             self.ProfileImageURL = profileImage
+            userImageMetaData = NSURL(string: profileImage)!
         }
         
         if let coverUrl = usrObj["CoverPhotoURL"] as? String {

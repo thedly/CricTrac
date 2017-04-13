@@ -964,13 +964,13 @@ func addNewComment(postId:String,comment:String){
 }
 
 func getAllComments(postId:String,sucess:(data:[[String:AnyObject]])->Void){
-    let ref = fireBaseRef.child("TimelinePosts").child(postId).child("TimelineComments")
+    let ref = fireBaseRef.child("TimelinePosts").child(postId).child("TimelineComments").queryOrderedByChild("AddedTime")
     ref.observeEventType(.Value, withBlock: { snapshot in
         if let data = snapshot.value as? [String:[String:AnyObject]] {
             var result = [[String:AnyObject]]()
             for (key,value) in data{
                 var dataval = value
-                    dataval["postId"] = key
+                    dataval["commentId"] = key
                     result.append(dataval)
             }
             sucess(data: result)
@@ -1024,6 +1024,10 @@ func setIsDeletedToOne(postId:String){
     let ref = fireBaseRef.child("TimelinePosts").child(postId).child("isDeleted")
     ref.setValue("1")
     deleteTimelineNodes(postId)
+}
+
+func delComment(postId:String, commentId:String){
+    let ref = fireBaseRef.child("TimelinePosts").child(postId).child("TimelineComments").child(commentId).removeValue()
 }
 
 // call the API to delete all reference timeline nodes

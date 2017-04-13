@@ -55,7 +55,6 @@ class APostTableViewCell: UITableViewCell {
     }
     
     func didTapLabelName(){
-        print("Working")
         
         if  postOwnerId != nil{
             
@@ -132,34 +131,23 @@ class APostTableViewCell: UITableViewCell {
         }
     }
     
-    
-    
-
-    
     func removeLikeFromArray(){
-        
         var likes = timelineData!.arrayObject![index!]["Likes"] as! [String:[String:String]]
         let keys =  likes.filter{key,val in
             
             return val["OwnerID"]! == currentUser!.uid
-            
             }.map{
                 
                 return $0.0
         }
         
         if keys.count > 0 {
-            
             likes.removeValueForKey(keys[0])
-            
             timelineData![index!]["Likes"] = JSON(likes)
         }
-        
-        
     }
     
     func addLikeToDataArray(likeArray:[String:[String:String]]){
-        
         timelineData![index!]["Likes"] = JSON(likeArray)
     }
     
@@ -182,10 +170,8 @@ class APostTableViewCell: UITableViewCell {
     }
     
     func showPostOptions(){
-        
         let optionMenu = UIAlertController(title: nil, message: "SELECT ACTION", preferredStyle: .ActionSheet)
         
-        // 2
         let deleteAction = UIAlertAction(title: "DELETE", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
            
@@ -208,25 +194,17 @@ class APostTableViewCell: UITableViewCell {
             
         })
         
-        //
         let cancelAction = UIAlertAction(title: "CANCEL", style: .Cancel, handler: {
             (alert: UIAlertAction!) -> Void in
-            print("Cancelled")
         })
         
-        
-        // 4
         optionMenu.addAction(deleteAction)
         optionMenu.addAction(saveAction)
         optionMenu.addAction(cancelAction)
         
-        // 5
         if let parentVc = parent as? UIViewController{
-            
             parentVc.presentViewController(optionMenu, animated: true, completion: nil)
         }
-        
-        
     }
     
     func presentEditablePost(){
