@@ -329,7 +329,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         })*/
         
         let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        var backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
         dispatch_async(backgroundQueue, {
             getAllProfileData({ data in
                 profileData = Profile(usrObj: data)
