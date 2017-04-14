@@ -19,8 +19,10 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     
     @IBOutlet weak var pastTeamName: UITextField!
     
+    @IBOutlet weak var addTeamBtn: UIButton!
     var selectedText: UITextField!
     
+    @IBOutlet weak var addPastTeamBtn: UIButton!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
     
@@ -225,14 +227,15 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
 
     
     @IBAction func addPastTeamsPressed(sender: AnyObject) {
-        
+       
         if pastTeamName.text?.trimWhiteSpace != "" && pastTeamName.text?.trimWhiteSpace != "-" {
+           
             pastTeamNames.append(pastTeamName.textVal.trim())
             pastTeamName.text = ""
             pastTeams.reloadData()
         }
     }
-    
+   
     
     @IBAction func addTeamsPressed(sender: AnyObject) {
         if teamName.text?.trimWhiteSpace != "" && teamName.text?.trimWhiteSpace != "-" {
@@ -431,6 +434,31 @@ extension PlayerExperienceViewController:UITextFieldDelegate{
         }
         //[textField resignFirstResponder];
        
+    }
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        let newLength = textField.text!.characters.count + string.characters.count - range.length
+        
+        if textField == teamName  {
+            if teamNames.count >= 5 {
+            addTeamBtn.enabled = false
+            return newLength <= 0
+            }
+            else{
+             return newLength <= 30
+            }
+        
+        }
+        else if  textField == pastTeamName {
+            if pastTeamNames.count >= 20 {
+                addPastTeamBtn.enabled = false
+                return newLength <= 0
+            }
+            else {
+                return newLength <= 30
+            }
+        }
+        
+        return true
     }
 //    func textFieldShouldEndEditing(textField: UITextField) -> Bool {
 //        if textField == pastTeamName {
