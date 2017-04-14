@@ -491,6 +491,41 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
         //[textField resignFirstResponder];
         
     }
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        let newLength = textField.text!.characters.count + string.characters.count - range.length
+        if textField == SupportingTeamNames {
+          if supportingTeamNamesList.count >= 10 {
+                return newLength <= 0
+            }else {
+                return newLength <= 30
+            }
+        }
+        else if textField == InterestedSportsNames {
+            if InterestedSportsNamesList.count >= 10 {
+                return newLength <= 0
+            }
+            else {
+            return newLength <= 30
+            }
+        }
+        else if textField == favouritePlayer {
+            if favouritePlayerList.count >= 10 {
+                return newLength <= 0
+            }
+            else {
+                return newLength <= 30
+            }
+        }
+        else if textField == HobbiesNames {
+            if HobbiesList.count >= 10 {
+                return newLength <= 0
+            }
+            else {
+                return newLength <= 30
+            }
+        }
+        return true
+    }
     /*
     // MARK: - Navigation
 
