@@ -63,25 +63,55 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         commentTextView.layer.borderWidth = 1
         commentTextView.layer.borderColor = UIColor.darkGrayColor().CGColor
         commentTextView.setPlaceHolder()
-        postText.text = postData!.dictionaryValue["Post"]?.stringValue
         postId = (postData!.dictionaryValue["postId"]?.stringValue)!
-        userName.text = postData!.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
+        //postText.text = postData!.dictionaryValue["Post"]?.stringValue
+        //userName.text = postData!.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
         
-        if let likeCount = postData!.dictionaryValue["Likes"]?.count{
-            likes.text = "\(likeCount) Likes"
-            postLikeCount = likeCount
-            initialLikes = postLikeCount
-        }else
-        {
-            likes.text = "0 Likes"
+        //sajith-  fetch the fresh post data
+        getPost(postId) { (data) in
+            self.postText.text = data["Post"] as? String
+            self.userName.text = data ["OwnerName"] as? String
+            
+//            if let postDateTS = data["AddedTime"]{
+//                //let date = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
+//                let dateFormatter = NSDateFormatter()
+//                dateFormatter.timeZone = NSTimeZone.localTimeZone()
+//                dateFormatter.timeStyle = .ShortStyle
+//                dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+//                self.date.text = dateFormatter.stringFromDate(postDateTS as! NSDate)
+//            }
+            
+            if (data["LikeCount"] != nil) {
+                let likeCount = data["LikeCount"] as? Int
+                self.likes.text = "\(likeCount!) Likes"
+            }
+            else {
+                self.likes.text = "0 Likes"
+            }
+            if (data["CommentCount"] != nil) {
+                let cmtCount = data["CommentCount"] as? Int
+                self.comments.text = "\(cmtCount!) Comments"
+            }
+            else {
+                self.comments.text = "0 Comments"
+            }
         }
         
-        if let commentCount = postData!.dictionaryValue["TimelineComments"]?.count{
-            comments.text = "\(commentCount) Comments"
-        }else
-        {
-            comments.text = "0 Comments"
-        }
+//        if let likeCount = postData!.dictionaryValue["Likes"]?.count{
+//            likes.text = "\(likeCount) Likes"
+//            postLikeCount = likeCount
+//            initialLikes = postLikeCount
+//        }else
+//        {
+//            likes.text = "0 Likes"
+//        }
+        
+//        if let commentCount = postData!.dictionaryValue["TimelineComments"]?.count{
+//            comments.text = "\(commentCount) Comments"
+//        }else
+//        {
+//            comments.text = "0 Comments"
+//        }
         
         let friendId = postData!["OwnerID"].stringValue
         if let city = friendsCity[friendId]{
@@ -157,27 +187,6 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
 
         if let val = data["Comment"] as? String{
             
-            //display comment owners image
-            fetchFriendDetail((data["OwnerID"]  as? String)!, sucess: { (result) in
-                let proPic = result["proPic"]
-                
-                aCell.userImage.layer.borderWidth = 1
-                aCell.userImage.layer.masksToBounds = false
-                aCell.userImage.layer.borderColor = UIColor.clearColor().CGColor
-                aCell.userImage.layer.cornerRadius = aCell.userImage.frame.width/2
-                aCell.userImage.clipsToBounds = true
-                
-                if proPic! == "-"{
-                    let imageName = "propic.png"
-                    let image = UIImage(named: imageName)
-                    aCell.userImage.image = image
-                }else{
-                    if let imageURL = NSURL(string:proPic!){
-                        aCell.userImage.kf_setImageWithURL(imageURL)
-                    }
-                }
-            })
-            
             aCell.commentID = data["commentId"] as? String
             aCell.postID = postId as? String
             aCell.commentText.text = val
@@ -205,6 +214,30 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         } else {
             aCell.delCommentBtn.hidden = true
         }
+        
+        //display comment owners image
+        if ((data["OwnerID"]) != nil) {
+        fetchFriendDetail((data["OwnerID"]  as? String)!, sucess: { (result) in
+            let proPic = result["proPic"]
+            
+            aCell.userImage.layer.borderWidth = 1
+            aCell.userImage.layer.masksToBounds = false
+            aCell.userImage.layer.borderColor = UIColor.clearColor().CGColor
+            aCell.userImage.layer.cornerRadius = aCell.userImage.frame.width/2
+            aCell.userImage.clipsToBounds = true
+            
+            if proPic! == "-"{
+                let imageName = "propic.png"
+                let image = UIImage(named: imageName)
+                aCell.userImage.image = image
+            }else{
+                if let imageURL = NSURL(string:proPic!){
+                    aCell.userImage.kf_setImageWithURL(imageURL)
+                }
+            }
+        })
+        }
+
         
         
         aCell.selectionStyle = UITableViewCellSelectionStyle.None
@@ -370,13 +403,13 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         likeOrUnlike(postId, like: { (likeDict) in
             self.likeButton.titleLabel?.textColor = UIColor.whiteColor()
             self.postLikeCount += 1
-            self.likes.text = "\(self.postLikeCount) Likes"
+            //self.likes.text = "\(self.postLikeCount) Likes"
              timelineData![self.postIndex]["Likes"] = JSON(likeDict)
         }) {
             self.removeLikeFromArray()
             self.likeButton.titleLabel?.textColor = UIColor.grayColor()
             self.postLikeCount -= 1
-            self.likes.text = "\(self.postLikeCount) Likes"
+            //self.likes.text = "\(self.postLikeCount) Likes"
         }
     }
     

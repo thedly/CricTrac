@@ -224,7 +224,7 @@ class APostTableViewCell: UITableViewCell {
     
     func deletePostFromFB(){
         if let value = postId{
-            setIsDeletedToOne(value)
+            deleteSelectedPost(value)
         }
         parent?.deletePost(index!)
     }

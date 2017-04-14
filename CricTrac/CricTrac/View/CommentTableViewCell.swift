@@ -28,6 +28,7 @@ class CommentTableViewCell: UITableViewCell {
             if let value = self.commentID {
                 delComment(self.postID!,commentId: self.commentID!)
             }
+            
             //parent?.deletePost(index!)
         }))
         
