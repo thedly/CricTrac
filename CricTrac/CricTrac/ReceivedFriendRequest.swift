@@ -10,12 +10,13 @@ import Foundation
 
 class ReceivedFriendRequest {
     var City: String!
-    var Club: String!
+    //var Club: String!
     var Name: String!
     var ReceivedDateTime: AnyObject!
     var ReceivedFrom: String!
     var RequestId: String!
     var SentRequestId: String!
+    var isSentRequest: Bool!
     
     
     init(){
@@ -23,8 +24,9 @@ class ReceivedFriendRequest {
     }
     
     init(dataObj: [String: AnyObject!]) {
+        self.isSentRequest = (dataObj["IsSentRequest"] ?? false) as! Bool
         self.City = String(dataObj["City"] ?? "-")
-        self.Club = String(dataObj["Club"] ?? "-")
+        //self.Club = String(dataObj["Club"] ?? "-")
         self.Name = String(dataObj["Name"] ?? "-")
         self.ReceivedDateTime = String(dataObj["ReceivedDateTime"] ?? "-")
         self.ReceivedFrom = String(dataObj["ReceivedFrom"] ?? "-")
@@ -38,7 +40,7 @@ class ReceivedFriendRequest {
         return [
         
         "City": datObject.City!,
-        "Club": datObject.Club!,
+        //"Club": datObject.Club!,
         "Name": datObject.Name!,
         "ReceivedDateTime": datObject.ReceivedDateTime! ,
         "ReceivedFrom": datObject.ReceivedFrom!,

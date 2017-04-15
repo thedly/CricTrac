@@ -9,31 +9,28 @@
 import UIKit
 import XLPagerTabStrip
 
-
 class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeChangeable {
 
-    
     @IBOutlet weak var firstTeamTitle: UILabel!
     @IBOutlet weak var secondTeamTitle: UILabel!
-    
     @IBOutlet weak var firstTeamTossBtn: UIButton!
-    
     @IBOutlet weak var secondTeamTossBtn: UIButton!
-    
     @IBOutlet weak var AchievementsText: UITextField!
     @IBOutlet weak var FirstBattingView: UIView!
-    
     @IBOutlet weak var SecondBattingView: UIView!
     
     var firstBatText: String!
     var secondBatText: String!
+    var swapBtnVal = 0
+    var resultsTab = 0
+    var existFB = ""
+    var existSB = ""
     
     private var inEditMode: Bool = false
     
     let fullRotation = CGFloat(M_PI * 2)
     
     @IBOutlet weak var refreshBtn: UIButton!
-
 
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
@@ -44,13 +41,12 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
-        
         firstOversText.delegate = self
+        firstOversText.keyboardType = UIKeyboardType.DecimalPad
         firstScoreText.delegate = self
         firstWicketsText.delegate = self
         secondOversText.delegate = self
+        secondOversText.keyboardType = UIKeyboardType.DecimalPad
         secondScoreText.delegate = self
         secondWicketsText.delegate = self
         resultText.delegate = self
@@ -65,7 +61,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         let battingText = NSMutableAttributedString()
         var firstBattingformattedStringCollection = [NSMutableAttributedString]()
         var secondBattingformattedStringCollection = [NSMutableAttributedString]()
-        
         
         battingText.normal("BATTING", fontName: appFont_bold, fontSize: 17)
         
@@ -82,7 +77,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         firstBattingHeaderText.attributedText = firstBattingformattedStringCollection.joinWithSeparator("\n")
         secondBattingHeaderText.attributedText = secondBattingformattedStringCollection.joinWithSeparator("\n")
         
-        
         if ((parent?.selecetedData) != nil){ inEditMode = true; loadEditData() }
         
         //setBackgroundColor()
@@ -98,11 +92,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         SecondBattingView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
         
         SecondBattingView.alpha = 0.8
-        
-        
-
-       
-    
         
         // Do any additional setup after loading the view.
     }
@@ -135,7 +124,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     weak var parent:MatchParent?
     
     var data:[String:String]{
-        
         
         var tossVal = ""
         
@@ -230,21 +218,40 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         return ["TossWonBy":tossVal,"FirstBatting":firstBatVal,"FirstBattingScore":firstScoreVal,"FirstBattingWickets":firstWicketsVal,"SecondBatting":secondBatVal, "SecondBattingScore":secondScoreVal,"SecondBattingWickets":secondWicketsVal,"Result":resultVal,"FirstBattingOvers":firstOversVal,"SecondBattingOvers":secondOversVal,"Achievements":AchievementsVal]
     }
     
-    
     @IBAction func FirstTeamWicketsIncrement(sender: AnyObject) {
-        incrementDecrementOperation(firstWicketsText, isIncrement: true)
+        if swapBtnVal == 0 {
+            incrementDecrementOperation(firstWicketsText, isIncrement: true)
+        } else {
+           incrementDecrementOperation(secondWicketsText, isIncrement: true)
+        }
+        
     }
-    
     
     @IBAction func FirstTeamWicketsDecrement(sender: AnyObject) {
-        incrementDecrementOperation(firstWicketsText, isIncrement: false)
+        if swapBtnVal == 0 {
+            incrementDecrementOperation(firstWicketsText, isIncrement: false)
+        }
+        else {
+            incrementDecrementOperation(secondWicketsText, isIncrement: false)
+        }
     }
     
-    @IBAction func SecondTeamWicketsDecrement(sender: AnyObject) {
-        incrementDecrementOperation(secondWicketsText, isIncrement: false)
-    }
     @IBAction func SecondTeamWicketsIncrement(sender: AnyObject) {
-        incrementDecrementOperation(secondWicketsText, isIncrement: true)
+        if swapBtnVal == 0 {
+            incrementDecrementOperation(secondWicketsText, isIncrement: true)
+        }
+        else{
+           incrementDecrementOperation(firstWicketsText, isIncrement: true)
+        }
+    }
+    @IBAction func SecondTeamWicketsDecrement(sender: AnyObject) {
+        if swapBtnVal == 0 {
+           incrementDecrementOperation(secondWicketsText, isIncrement: false)
+        }
+        else {
+            incrementDecrementOperation(firstWicketsText, isIncrement: false)
+        }
+        
     }
     @IBAction func tossBtnTapped(sender: UIButton) {
         
@@ -260,11 +267,10 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         {
             tossText = secondTeamTitle.text
         }
-
     }
-    
 
     override func viewDidAppear(animated: Bool) {
+        resultsTab = 1
         setTeamData()
     }
     
@@ -275,17 +281,18 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             tossText = toss as! String
         }
         
-
         firstBatText = parent!.selecetedData!["FirstBatting"]! as? String ?? "-"
         firstScoreText.textVal = parent!.selecetedData!["FirstBattingScore"]! as? String ?? "-"
         firstWicketsText.textVal = parent!.selecetedData!["FirstBattingWickets"]! as? String ?? "-"
         secondBatText = parent!.selecetedData!["SecondBatting"]! as? String ?? "-"
         
+        existFB = firstBatText
+        existSB = secondBatText
+        
         AchievementsText.text = parent?.selecetedData!["Achievements"] as? String ?? "-"
         
         firstTeamTitle.text = firstBatText
         secondTeamTitle.text = secondBatText
-        
         
         firstOversText.text = parent!.selecetedData!["FirstBattingOvers"] as? String ?? "-"
         
@@ -306,38 +313,58 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         }
         
         secondScoreText.textVal = parent!.selecetedData!["SecondBattingScore"]! as? String ?? "-"
-        
         secondOversText.textVal = parent!.selecetedData!["SecondBattingOvers"] as? String ?? "-"
-        
         secondWicketsText.textVal = parent!.selecetedData!["SecondBattingWickets"]! as? String ?? "-"
         resultText.textVal = parent!.selecetedData!["Result"]! as? String ?? "-"
     }
     
     func allRequiredFieldsHaveFilledProperly()->Bool{
-        
         return false
     }
     
     func setTeamData(){
-        
-        if !inEditMode , let matchVCInstance = parent?.matchVC {
+        if let matchVCInstance = parent?.matchVC {
             firstTeamTitle.text = matchVCInstance.teamText.text
             secondTeamTitle.text = matchVCInstance.opponentText.text
         }
-        
+
         if inEditMode && parent!.matchVC.teamOROpponentFieldChanged , let matchVCInstance = parent?.matchVC {
-            firstTeamTitle.text = matchVCInstance.teamText.text
-            secondTeamTitle.text = matchVCInstance.opponentText.text
+            if swapBtnVal == 0 {
+                if matchVCInstance.existTeamName == data["FirstBatting"] {
+                    firstTeamTitle.text = matchVCInstance.teamText.text
+                    secondTeamTitle.text = matchVCInstance.opponentText.text
+                }
+                else {
+                    firstTeamTitle.text = matchVCInstance.opponentText.text
+                    secondTeamTitle.text = matchVCInstance.teamText.text
+                }
+            }
+            else {
+                if matchVCInstance.existTeamName == data["FirstBatting"] {
+                    firstTeamTitle.text = matchVCInstance.opponentText.text
+                    secondTeamTitle.text = matchVCInstance.teamText.text
+                }
+                else {
+                    firstTeamTitle.text = matchVCInstance.teamText.text
+                    secondTeamTitle.text = matchVCInstance.opponentText.text
+                }
+            }
         }
         
-        firstBatText = firstTeamTitle.text
-        secondBatText = secondTeamTitle.text
+        //commented by sajith
+        //        if inEditMode && parent!.matchVC.teamOROpponentFieldChanged , let matchVCInstance = parent?.matchVC {
+        //            firstTeamTitle.text = matchVCInstance.teamText.text
+        //            secondTeamTitle.text = matchVCInstance.opponentText.text
+        //        }
+        
+        if resultsTab == 1 {
+            firstBatText = firstTeamTitle.text
+            secondBatText = secondTeamTitle.text
+        }
+        
         if tossText == "" || tossText == "-" {
             tossText = firstBatText
         }
-        
-        
-        
         
         if tossText == firstBatText {
             firstTeamTossBtn.alpha = 1.0
@@ -349,10 +376,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             secondTeamTossBtn.alpha = 1.0
         }
         
-        
-        
         self.isTeambattingSetBtn.alpha = (firstBatText == "-" || firstBatText == "") ? 0.3 : 1.0
-        
         
         teams.removeAll()
         if matchDetails?.opponentText.text?.trimWhiteSpace.length > 0{
@@ -368,7 +392,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     func incrementDecrementOperation(controlText: UITextField, isIncrement: Bool) {
         if isIncrement {
             if let currentValue = Int(controlText.text!) {
-                if currentValue >= 0 {
+                if currentValue < 99 {
                     controlText.text = String(currentValue + 1)
                 }
             }
@@ -386,6 +410,12 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     }
 
     @IBAction func swapBtnPressed(sender: AnyObject) {
+        
+        if swapBtnVal == 0 {
+            swapBtnVal = 1
+        } else {
+            swapBtnVal = 0
+        }
         
         if (self.firstBatText != "-" && self.firstBatText != "") {
             firstBatText = firstTeamTitle.text
@@ -407,10 +437,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             firstWicketsText = secondWicketsText
             secondWicketsText = tempWickets
             
-            
-            
-            
-            
             let tempPt = FirstBattingView.center
             
             parent?.dataChangedAfterLastSave()
@@ -422,7 +448,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
                                         self.FirstBattingView.center = self.SecondBattingView.center
                 },
                                        completion: { finished in
-                                        
             })
             
             UIView.animateWithDuration(1.0,
@@ -432,13 +457,10 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
                                         self.SecondBattingView.center = tempPt
                 },
                                        completion: { finished in
-                                        
             })
             
             animateBtn();
         }
-        
-        
         
         
 //        FirstBattingView.layer.addAnimation(animateSwap(SecondBattingView.center), forKey: "animate position along path")
@@ -494,14 +516,10 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         anim.duration = 2.0
         return anim
     }
-
-
 }
 
 extension MatchResultsViewController:UITextFieldDelegate{
-    
     func textFieldDidBeginEditing(textField: UITextField) {
-        
         if textField == resultText{
             showPicker(self, inputText: textField, data: results)
         }
@@ -509,8 +527,6 @@ extension MatchResultsViewController:UITextFieldDelegate{
             showPicker(self, inputText: textField, data: Achievements)
         }
     }
-    
-    
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -521,6 +537,22 @@ extension MatchResultsViewController:UITextFieldDelegate{
         if textField.text?.trimWhiteSpace.length > 0{
             
             parent?.dataChangedAfterLastSave()
+        }
+    }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        let newlength = textField.text!.characters.count + string.characters.count - range.length
+        if textField == firstScoreText || textField == secondScoreText {
+           return newlength <= 4
+        }
+        else if textField == firstOversText || textField == secondOversText {
+            return newlength <= 5
+        }
+        else if textField == firstWicketsText || textField == secondWicketsText {
+            return newlength <= 2
+        }
+        else {
+            return true
         }
     }
 }

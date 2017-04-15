@@ -23,27 +23,36 @@ import IQKeyboardManagerSwift
 import SCLAlertView
 import SwiftyStoreKit
 import GoogleMobileAds
+import ReachabilitySwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
 
-    
+    var reachability : Reachability!
     
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        self.listenForReachability()
         FIRApp.configure()
         registerForPushNotifications(application)
         FIRDatabase.database().persistenceEnabled = true
         Fabric.with([Crashlytics.self])
         setSliderMenu()
         
+//        // network reachability test
+//        if Reachability.isConnectedToNetwork() == true {
+//            print("Internet connection OK")
+//        } else {
+//            print("Internet connection FAILED")
+//        }
+        
        // let refreshedToken = FIRInstanceID.instanceID().token()
         
         GADMobileAds.configureWithApplicationID("ca-app-pub-3940256099942544~1458002511")
         
-        setDefaultAppThems()
+        setDefaultAppTheme()
         UINavigationBar.appearance().titleTextAttributes = [
             NSFontAttributeName: UIFont(name: appFont_black, size: 18)!,
             NSForegroundColorAttributeName:UIColor.whiteColor()
@@ -69,8 +78,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //self.didTapPurchaseButton()
         }
         
+        
         return true
     }
+    
+    func listenForReachability() {
+        
+        do {
+            self.reachability = try Reachability.init(hostname: "www.apple.com")
+        } catch {
+            print("ERROR: Unable to create Reachability")
+        }
+        //declare this inside of viewWillAppear
+        
+        self.reachability!.whenReachable = { reachability in
+            print("whenReachable")
+            
+
+        }
+        
+        self.reachability!.whenUnreachable = { reachability in
+            print("whenUnreachable")
+
+        }
+        
+        do { try self.reachability!.startNotifier() } catch {
+            print("ERROR: Unable to start Reachability notifier")
+            
+            
+        }
+        
+    }
+    
+
     
     func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
         

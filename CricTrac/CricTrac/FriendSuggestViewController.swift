@@ -11,40 +11,16 @@ import XLPagerTabStrip
 import KRProgressHUD
 
 class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider,ThemeChangeable {
-    
     @IBOutlet weak var SuggestsTblview: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()
-        getFriendSuggestions()
         // Do any additional setup after loading the view.
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func getFriendSuggestions() {
-        
-        backgroundThread(background: {
-            
-            KRProgressHUD.showText("Loading ...")
-            getAllFriendSuggestions({
-                KRProgressHUD.dismiss()
-                self.SuggestsTblview.reloadData()
-            })
-            
-        })
-        
-        
-        
-        
-        
-        
-        
-        
-        
     }
     
     // MARK: - Methods
@@ -57,29 +33,23 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     
     func initializeView() {
         SuggestsTblview.registerNib(UINib.init(nibName:"FriendSuggestionsCell", bundle: nil), forCellReuseIdentifier: "FriendSuggestionsCell")
-        
         SuggestsTblview.allowsSelection = false
         SuggestsTblview.separatorStyle = .None
         SuggestsTblview.dataSource = self
         SuggestsTblview.delegate = self
-        
         self.view.backgroundColor = UIColor.clearColor()
         
         //setBackgroundColor()
         //setUIBackgroundTheme(self.view)
     }
     
-    
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "SUGGESTIONS")
+        return IndicatorInfo(title: "INVITE")
     }
     
     // MARK: - Table delegate functions
     
-    
-        
     @IBAction func getAllProfilesBtnPressed(sender: AnyObject) {
-        
         
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -91,48 +61,12 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return UserProfilesData.count
+        return 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        
-        return getCellForRow(indexPath)
-        
+        return UITableViewCell()
     }
-    
-    func getCellForRow(indexPath:NSIndexPath)->FriendSuggestionsCell{
-        
-        
-        if let aCell =  SuggestsTblview.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as? FriendSuggestionsCell {
-             
-            
-            aCell.configureCell(UserProfilesData[indexPath.row])
-            
-            aCell.AddFriendBtn.accessibilityIdentifier = UserProfilesData[indexPath.row].id
-            
-            
-            aCell.AddFriendBtn.addTarget(self, action: #selector(AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-            
-            
-            
-            aCell.backgroundColor = UIColor.clearColor()
-            return aCell
-        }
-        else {
-            return FriendSuggestionsCell()
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    }
-    
     
     func AddFriendBtnPressed(sender: UIButton) {
         
@@ -149,7 +83,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                     
                     sendFriendRequestData.City = FriendObject.City
                     
-                    
+                    /*
                     switch FriendObject.UserProfile {
                     case userProfileType.Player.rawValue :
                         sendFriendRequestData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
@@ -164,7 +98,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                         sendFriendRequestData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
                         break;
 
-                    }
+                    }*/
                     
                     
                     sendFriendRequestData.Name = FriendObject.fullName
@@ -177,7 +111,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                     
                     
                     receiveFriendRequestData.City = loggedInUserObject.City
-                    
+                    /*
                     switch loggedInUserObject.UserProfile {
                     case userProfileType.Player.rawValue :
                         receiveFriendRequestData.Club = loggedInUserObject.PlayerCurrentTeams.joinWithSeparator(",")
@@ -192,7 +126,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                         receiveFriendRequestData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
                         break;
                         
-                    }
+                    }*/
 
                     receiveFriendRequestData.Name = loggedInUserObject.fullName
                     receiveFriendRequestData.ReceivedFrom = loggedInUserObject.id

@@ -11,7 +11,7 @@ import Foundation
 class Friends {
     
     var City: String!
-    var Club: String!
+    //var Club: String!
     var FriendshipDateTime: AnyObject!
     var Name: String!
     var UserId: String!
@@ -21,7 +21,7 @@ class Friends {
     init(dataObj: [String: AnyObject]) {
         self.City = (dataObj["City"] ?? "-") as! String
         
-        self.Club = (dataObj["Club"] ?? "-") as! String
+        //self.Club = (dataObj["Club"] ?? "-") as! String
         self.Name = (dataObj["Name"] ?? "-") as! String
         self.FriendshipDateTime = dataObj["FriendshipDateTime"] ?? "-"
         self.UserId = (dataObj["UserId"] ?? "-") as! String
@@ -34,7 +34,7 @@ class Friends {
         return [
             
             "City": self.City!,
-            "Club": self.Club!,
+            //"Club": self.Club!,
             "Name": self.Name!,
             "FriendshipDateTime": self.FriendshipDateTime!,
             "UserId": self.UserId!,
@@ -42,6 +42,6 @@ class Friends {
             "FriendRecordId": self.FriendRecordId!
         ]
     }
-
+    
     
 }

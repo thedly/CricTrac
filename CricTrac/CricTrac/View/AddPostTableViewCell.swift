@@ -12,6 +12,7 @@ class AddPostTableViewCell: UITableViewCell {
 
     @IBOutlet weak var newPostButton: UIButton!
     @IBOutlet weak var newPostText: UITextField!
+    @IBOutlet weak var timelineOwnerPic: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

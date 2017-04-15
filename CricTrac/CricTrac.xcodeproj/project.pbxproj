@@ -55,6 +55,8 @@
 		89129C4A1D904F89009488FE /* LoginBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89129C491D904F89009488FE /* LoginBaseViewController.swift */; };
 		89129C4C1D90501B009488FE /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89129C4B1D90501B009488FE /* RegisterViewController.swift */; };
 		8917AE241D94466900E6BC1A /* ThemeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8917AE231D94466900E6BC1A /* ThemeSettingsViewController.swift */; };
+		891B2AA51E7CDA6200F6B5BA /* FriendRequestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891B2AA41E7CDA6200F6B5BA /* FriendRequestCollectionViewCell.swift */; };
+		891B2AA71E7CE09800F6B5BA /* RequestsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891B2AA61E7CE09800F6B5BA /* RequestsData.swift */; };
 		8922042D1D97A3A6005F555B /* FriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8922042C1D97A3A6005F555B /* FriendsCell.xib */; };
 		8922042F1D97A7EC005F555B /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8922042E1D97A7EC005F555B /* FriendsCell.swift */; };
 		892520B21E336044006946C0 /* CoachDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892520B11E336044006946C0 /* CoachDashboardViewController.swift */; };
@@ -199,6 +201,8 @@
 		89129C491D904F89009488FE /* LoginBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginBaseViewController.swift; sourceTree = "<group>"; };
 		89129C4B1D90501B009488FE /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8917AE231D94466900E6BC1A /* ThemeSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeSettingsViewController.swift; sourceTree = "<group>"; };
+		891B2AA41E7CDA6200F6B5BA /* FriendRequestCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestCollectionViewCell.swift; sourceTree = "<group>"; };
+		891B2AA61E7CE09800F6B5BA /* RequestsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestsData.swift; sourceTree = "<group>"; };
 		8922042C1D97A3A6005F555B /* FriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsCell.xib; sourceTree = "<group>"; };
 		8922042E1D97A7EC005F555B /* FriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
 		892520B11E336044006946C0 /* CoachDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachDashboardViewController.swift; sourceTree = "<group>"; };
@@ -440,6 +444,7 @@
 				897C414B1E21FD4B005F1231 /* ReceivedFriendRequest.swift */,
 				897C414D1E21FF16005F1231 /* SentFriendRequest.swift */,
 				897C414F1E21FFA4005F1231 /* Friends.swift */,
+				891B2AA61E7CE09800F6B5BA /* RequestsData.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -499,6 +504,7 @@
 				894624FF1E1580E700FE79C2 /* TeamCollectionViewCell.swift */,
 				89358AF91E19773E00A1A6F0 /* SettingsViewCell.swift */,
 				89358AFA1E19773E00A1A6F0 /* SettingsViewCell.xib */,
+				891B2AA41E7CDA6200F6B5BA /* FriendRequestCollectionViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -773,6 +779,7 @@
 				8930F0341D5B5D4E00C7540B /* ProfileBaseViewController.swift in Sources */,
 				899206241D61BA0700F99A97 /* FriendsViewController.swift in Sources */,
 				895E04051D5CE24B002E322E /* FriendSearchViewController.swift in Sources */,
+				891B2AA51E7CDA6200F6B5BA /* FriendRequestCollectionViewCell.swift in Sources */,
 				892CE2D41D9EC126001E098E /* MatchResultsViewController.swift in Sources */,
 				899206261D61BA6700F99A97 /* FriendsInviteViewController.swift in Sources */,
 				896407CE1DA7FE51002212EB /* SplashScreenViewController.swift in Sources */,
@@ -838,6 +845,7 @@
 				893823B41E113ACE00BCD0CD /* SliderMenuViewCell.swift in Sources */,
 				89358AFE1E197B4800A1A6F0 /* SettingsViewController.swift in Sources */,
 				46DE32C51D900C9F0024CD82 /* AddPostTableViewCell.swift in Sources */,
+				891B2AA71E7CE09800F6B5BA /* RequestsData.swift in Sources */,
 				89358AFB1E19773E00A1A6F0 /* SettingsViewCell.swift in Sources */,
 				46ACE0C71E0FF625004118A4 /* CommentTableViewCell.swift in Sources */,
 				89E6084D1D6D4ADC00F6BD11 /* CTDataPicker.swift in Sources */,

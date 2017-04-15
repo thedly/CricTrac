@@ -25,13 +25,17 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     @IBOutlet weak var ageGroup: UITextField!
     @IBOutlet weak var playingLevel: UITextField!
     @IBOutlet weak var scrollView:UIScrollView!
-    
+    @IBInspectable var placeholderColor: UIColor = UIColor.blackColor()
     var teamOROpponentFieldChanged : Bool = false
     
     var selectedText:UITextField!
     var scrollViewTop:CGFloat!
     
+    var existTeamName = ""
+    var existOppName = ""
+    
     let ctDatePicker = CTDatePicker()
+    
     let ctDataPicker = CTPicker()
     
     weak var parent:MatchParent?
@@ -51,21 +55,21 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         
         if let val = teamText{
             
-            teamVal = val.textVal
+            teamVal = val.textVal.trim()
         }
         
         var opponentVal = ""
         
         if let val = opponentText{
             
-            opponentVal = val.textVal
+            opponentVal = val.textVal.trim()
         }
         
         var groundVal = ""
         
         if let val = groundText{
             
-            groundVal = val.textVal
+            groundVal = val.textVal.trim()
         }
         var oversVal = ""
         
@@ -78,7 +82,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         
         if let val = tournamentText{
             
-            tournamentVal = val.textVal
+            tournamentVal = val.textVal.trim()
         }
         
         var ageGroupVal = ""
@@ -106,10 +110,11 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         
         if let val = venueText{
             
-            venueVal = val.textVal
+            venueVal = val.textVal.trim()
         }
         return ["MatchDate":matchDateVal,"Team":teamVal,"Opponent":opponentVal,"Ground":groundVal,"MatchOvers":oversVal,"Tournament":tournamentVal, "AgeGroup":ageGroupVal, "Level": playingLevelVal, "MatchStage":stageVal, "Venue": venueVal]
     }
+    
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
@@ -119,24 +124,30 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if ((parent?.selecetedData) != nil){ loadEditData() }
+        if ((parent?.selecetedData) != nil){
+            loadEditData()
+        }
+        else {
+            loadDefaultData()
+        }
         
-        oversText.keyboardType = UIKeyboardType.DecimalPad
+        //oversText.keyboardType = UIKeyboardType.DecimalPad
+        oversText.keyboardType = UIKeyboardType.NumberPad
         self.view.backgroundColor = UIColor.clearColor()
         
         
         
-//        self.stage.delegate = self
-//        self.dateText.delegate = self
-//        self.teamText.delegate = self
-//        self.opponentText.delegate = self
-//        self.groundText.delegate = self
-//        self.oversText.delegate = self
-//        self.tournamentText.delegate = self
-//        
-//        self.venueText.delegate = self
-//        self.ageGroup.delegate = self
-//        self.playingLevel.delegate = self
+        self.stage.delegate = self
+        self.dateText.delegate = self
+        self.teamText.delegate = self
+        self.opponentText.delegate = self
+        self.groundText.delegate = self
+        self.oversText.delegate = self
+        self.tournamentText.delegate = self
+        
+        self.venueText.delegate = self
+        self.ageGroup.delegate = self
+        self.playingLevel.delegate = self
         
         
         
@@ -147,6 +158,8 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         //setBackgroundColor()
         
         //setUIBackgroundTheme(self.view)
+        
+        
     }
     
     func keyboardWillShow(sender: NSNotification){
@@ -161,6 +174,36 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
             }
         }
     }
+
+    func loadDefaultData(){
+        let date = NSDate()
+        let calendar: NSCalendar! = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        
+        let dob = profileData.DateOfBirth
+        
+        let dateFormater = NSDateFormatter()
+        dateFormater.dateFormat = "dd-MM-yyyy"
+        let birthdayDate = dateFormater.dateFromString(dob)
+       
+        let calcAge = calendar.components(.Year, fromDate: birthdayDate!, toDate: date, options: [])
+        let age = calcAge.year + 1
+        
+        var ageGroup1 = " "
+        if age < 10 {
+             ageGroup1 = "Under 10"
+        }
+        else if age > 23 {
+             ageGroup1 = "Seniors"
+        }
+        else {
+             ageGroup1 = "Under \(age)"
+        }
+        ageGroup.textVal = ageGroup1
+        
+        let plLevel = "Club"
+        playingLevel.textVal = plLevel
+    }
+    
     
     func loadEditData(){
         
@@ -178,12 +221,12 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         }
         
         if let val = selectedData["Team"] as? String{
-            
+            existTeamName = val
             teamText.textVal = val
         }
         
         if let val = selectedData["Opponent"] as? String{
-            
+            existOppName = val
             opponentText.textVal = val
         }
         
@@ -250,11 +293,12 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         return false
     }
     
+    
 }
 
 
-extension MatchViewController:UITextFieldDelegate{
-    
+extension MatchViewController:UITextFieldDelegate
+{
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -329,6 +373,23 @@ extension MatchViewController:UITextFieldDelegate{
             parent?.dataChangedAfterLastSave()
         }
     }
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+       
+        let newLength = textField.text!.characters.count + string.characters.count - range.length
+        if textField == teamText || textField == opponentText || textField == groundText || textField == venueText || textField == tournamentText {
+            return newLength <= nameCharacterLimit // bool
+        }
+        else if textField == oversText {
+            return newLength <= 3
+        }
+        else if textField == dateText {
+            return false
+        }
+        else{
+            return true // Bool
+        }
+    }
+    
     
 }
 

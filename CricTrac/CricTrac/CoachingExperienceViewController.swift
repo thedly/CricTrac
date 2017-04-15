@@ -40,7 +40,12 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     @IBOutlet weak var pastTeamsTableHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var certificationsTableHeightConstraint: NSLayoutConstraint!
-    
+   
+    @IBOutlet weak var addCurrentTeamBtn: UIButton!
+    @IBOutlet weak var addPastTeamBtn: UIButton!
+    @IBOutlet weak var addCoachPlayedForBtn: UIButton!
+    @IBOutlet weak var addCertificationsBtn: UIButton!
+   
     
     var selectedText: UITextField!
     
@@ -106,6 +111,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         teamName.delegate = self
         teamsPlayedForTxt.delegate = self
         pastTeamName.delegate = self
+        Certifications.delegate = self
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserInfoViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         scrollView.setContentOffset(CGPointZero, animated: true)
@@ -134,6 +140,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
             CoachPlayedForTbl.reloadData()
             CertificationsTbl.reloadData()
         }
+        
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
@@ -336,13 +343,15 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
             aCell.teamName.text = CertificationsList[indexPath.row]
             
             aCell.deleteTeamBtn.addTarget(self, action: #selector(CoachingExperienceViewController.deleteTeamFromCurrentTeams(_:)), forControlEvents: .TouchUpInside)
+           
+            
             return aCell
         }
         else
         {
             return UITableViewCell()
         }
-        
+       
         
     }
     
@@ -446,6 +455,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
             return getCellForPlayedTeamsRow(indexPath)
         }
         else if tableView.isEqual(CertificationsTbl) {
+            
             adjustTblHeight(certificationsTableHeightConstraint, collectionType: CertificationsList, cellHeight: cell.size.height)
             return getCellForCertifications(indexPath)
         }
@@ -490,6 +500,54 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         //[textField resignFirstResponder];
         
     }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        let newlength = (textField.text!.characters.count + string.characters.count) - range.length
+        if textField == teamName {
+            if teamNames.count >= 5 {
+                addCurrentTeamBtn.enabled = false
+                return newlength <= 0
+            }
+            else {
+                return newlength <= 30
+            }
+        }
+        else if textField == pastTeamName {
+            if pastTeamNames.count >= 20 {
+                addPastTeamBtn.enabled = false
+                return newlength <= 0
+            }
+            else{
+                return newlength <= 30
+            }
+        }
+        else if textField == teamsPlayedForTxt {
+            if CoachPlayedFor.count >= 20 {
+                addCoachPlayedForBtn.enabled = false
+               return newlength <= 0
+            }
+            else {
+                return newlength <= 30
+            }
+        }
+        else if textField == Certifications {
+            if CertificationsList.count >= 5 {
+                addCertificationsBtn.enabled = false
+                return newlength <= 0
+                    
+                }
+            else {
+                return newlength <= 30
+            }
+        }
+       
+        else if textField == Experience {
+            return newlength <= 2
+        }
+        
+        return true
+    }
+        
     /*
     // MARK: - Navigation
 

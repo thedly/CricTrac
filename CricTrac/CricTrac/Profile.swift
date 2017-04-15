@@ -24,12 +24,9 @@ class Profile {
     //var PlayingLevel: String
     var PlayingRole: String = ""
     var State: String = ""
-    
     var Experience: String = ""
     var Certifications: [String] = []
     var CoachingLevel: String = ""
-    
-    
     var PlayerCurrentTeams: [String] = []
     var PlayerPastTeams: [String] = []
     var CoachPastTeams: [String] = []
@@ -38,22 +35,15 @@ class Profile {
     var SupportingTeams: [String] = []
     var InterestedSports: [String] = []
     var Hobbies: [String] = []
-    
     var FavoritePlayers: [String] = []
-    
     var ProfileImageURL: String = "-"
-    
     var CoverPhotoURL: String = "-"
-    
     var fullName: String = ""
     var UserProfile: String = ""
     var UserStatus: String = "Free"
-    
     var UserAddedDate: AnyObject = ""
     var UserEditedDate: AnyObject = ""
     var UserLastLoggedin: AnyObject = ""
-    
-    
     var userExists: Bool = false
     
     init(usrObj : [String: AnyObject]) {
@@ -63,7 +53,6 @@ class Profile {
         if let userId = usrObj["Id"] as? String {
             self.id = userId
         }
-        
         
         if let fname = usrObj["FirstName"] as? String {
             self.FirstName = fname
@@ -102,9 +91,20 @@ class Profile {
         if let playingRole = usrObj["PlayingRole"] as? String {
             self.PlayingRole = playingRole
         }
+        
         if let profileImage = usrObj["ProfileImageURL"] as? String {
+            self.ProfileImageURL = profileImage
             userImageMetaData = NSURL(string: profileImage)!
         }
+        
+        if let coverUrl = usrObj["CoverPhotoURL"] as? String {
+            self.CoverPhotoURL = coverUrl
+        }
+        
+        
+//        if let profileImage = usrObj["ProfileImageURL"] as? String {
+//            userImageMetaData = NSURL(string: profileImage)!
+//        }
 //        if let coverUrl = usrObj["CoverPhotoURL"] as? String {
 //            self.CoverPhotoURL = ""
 //        }
@@ -124,12 +124,10 @@ class Profile {
             self.Certifications = certifications
             
         }
-        
        
         
         if let fname = self.FirstName as? String, let lName = self.LastName as? String {
             self.fullName = "\(fname) \(lName)"
-            
         }
         
         if let favoritePlayers = usrObj["FavoritePlayers"] as? [String] {
@@ -176,14 +174,9 @@ class Profile {
         if let coachPlayedFor = usrObj["CoachPlayedFor"] as? [String] {
             self.CoachPlayedFor = coachPlayedFor
         }
-            
-        
     }
     
-    
     var ProfileObject: [String:AnyObject] {
-        
-        
         if self.UserProfile == String(userProfileType.Fan.rawValue) {
             return [
                 "FirstName" : self.FirstName.whiteSpacesTrimmedString(),
@@ -200,7 +193,6 @@ class Profile {
                 "CoverPhotoURL" : self.CoverPhotoURL,
                 "SearchFirstName" : self.FirstName.lowercaseString.whiteSpacesTrimmedString(),
                 "SearchLastName" : self.LastName.lowercaseString.whiteSpacesTrimmedString(),
-
                 "FavoritePlayers": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.FavoritePlayers : [],
                 "SupportingTeams": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.SupportingTeams: [],
                 "InterestedSports": self.UserProfile == String(userProfileType.Fan.rawValue) ? self.InterestedSports: [],
@@ -212,7 +204,6 @@ class Profile {
             ]
         }
         else if self.UserProfile == String(userProfileType.Player.rawValue) {
-            
             return [
                 "FirstName" : self.FirstName.whiteSpacesTrimmedString(),
                 "LastName" : self.LastName.whiteSpacesTrimmedString(),
@@ -230,10 +221,8 @@ class Profile {
                 "ProfileImageURL": self.ProfileImageURL ,
                 "SearchFirstName" : self.FirstName.lowercaseString.whiteSpacesTrimmedString(),
                 "SearchLastName" : self.LastName.lowercaseString.whiteSpacesTrimmedString(),
-
                 "CoverPhotoURL" : self.CoverPhotoURL,
                 "UserProfile": self.UserProfile,
-                
                 "PlayerCurrentTeams": self.UserProfile == String(userProfileType.Player.rawValue) ? self.PlayerCurrentTeams : [],
                 "PlayerPastTeams": self.UserProfile == String(userProfileType.Player.rawValue) ? self.PlayerPastTeams: [],
                 "UserStatus": self.UserStatus,
@@ -241,10 +230,8 @@ class Profile {
                 "UserEditedDate" : self.UserEditedDate,
                 "UserLastLoggedin": self.UserLastLoggedin
             ]
-        
         }
         else {
-            
             return [
                 "FirstName" : self.FirstName.whiteSpacesTrimmedString(),
                 "LastName" : self.LastName.whiteSpacesTrimmedString(),
@@ -260,7 +247,6 @@ class Profile {
                 "UserProfile": self.UserProfile,
                 "SearchFirstName" : self.FirstName.lowercaseString.whiteSpacesTrimmedString(),
                 "SearchLastName" : self.LastName.lowercaseString.whiteSpacesTrimmedString(),
-
                 "CoachCurrentTeams": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.CoachCurrentTeams: [],
                 "CoachPastTeams": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.CoachPastTeams: [],
                 "CoachPlayedFor": self.UserProfile == String(userProfileType.Coach.rawValue) ? self.CoachPlayedFor : [],
@@ -273,13 +259,12 @@ class Profile {
                 "UserLastLoggedin": self.UserLastLoggedin
             ]
         }
-        
     }
-    
-    
 }
+
 extension String {
     func whiteSpacesTrimmedString() -> String {
         return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
     }
 }
+

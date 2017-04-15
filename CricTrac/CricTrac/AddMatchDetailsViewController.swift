@@ -128,15 +128,15 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                 venueNames = venue.map({ (key, value) in value })
             }
             
-            if let grounds = userData["Teams"] as? [String:String]{
+            if let teams = userData["Teams"] as? [String:String]{
                 
-                teamNames = grounds.map({ (key,value) in value })
+                teamNames = teams.map({ (key,value) in value })
                 
             }
             
-            if let grounds = userData["Opponents"] as? [String:String]{
+            if let opponents = userData["Opponents"] as? [String:String]{
                 
-                opponentTeams = grounds.map({ (key,value) in value })
+                opponentTeams = opponents.map({ (key,value) in value })
                 
             }
             
@@ -186,6 +186,8 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     
     
     @IBAction func didTapSave(sender: UIButton) {
+        
+        
         
         /*if matchBeingEdited {
             dataHasChangedAfterLastSave = false
@@ -254,6 +256,52 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                 }
                 else{
                     
+                    if !matchVC.teamOROpponentFieldChanged {
+                        if resVC.swapBtnVal == 0 {
+                            if data["Team"] == resVC.existFB {
+                                data["FirstBatting"]  = data["Team"]
+                                data["SecondBatting"] = data["Opponent"]
+                            }
+                            else {
+                                data["FirstBatting"]  = data["Opponent"]
+                                data["SecondBatting"] = data["Team"]
+                            }
+                        }
+                        else {
+                            if data["Team"] == resVC.existFB {
+                                data["FirstBatting"]  = data["Opponent"]
+                                data["SecondBatting"] = data["Team"]
+                                
+                            }
+                            else {
+                                data["FirstBatting"]  = data["Team"]
+                                data["SecondBatting"] = data["Opponent"]
+                            }
+                        }
+                    }
+                    else {
+                        if resVC.swapBtnVal == 0 {
+                            if matchVC.existTeamName == resVC.existFB {
+                                data["FirstBatting"]  = data["Team"]
+                                data["SecondBatting"] = data["Opponent"]
+                            }
+                            else {
+                                data["FirstBatting"]  = data["Opponent"]
+                                data["SecondBatting"] = data["Team"]
+                            }
+                        }
+                        else {
+                            if matchVC.existTeamName == resVC.existFB {
+                                data["FirstBatting"]  = data["Opponent"]
+                                data["SecondBatting"] = data["Team"]
+                            }
+                            else {
+                                data["FirstBatting"]  = data["Team"]
+                                data["SecondBatting"] = data["Opponent"]
+                            }
+                        }
+                    }
+                    
                     if let matchKey = matchId{
                         updateMatchData(matchKey, data: data, callback: { dat in
                             self.updateGlobalValues()
@@ -290,17 +338,20 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     func updateGlobalValues(){
         
         let teamName = self.data["Team"]!
-        if !teamNames.contains(teamName){
+        if teamName != "-" {
+            if !teamNames.contains(teamName){
             addNewTeamName(teamName)
             teamNames.append(teamName)
+            }
         }
         
         let oppoTeamName = self.data["Opponent"]!
-        if !opponentTeams.contains(oppoTeamName){
+        if oppoTeamName != "-" {
+            if !opponentTeams.contains(oppoTeamName){
             addNewOppoSitTeamName(oppoTeamName)
             opponentTeams.append(oppoTeamName)
+            }
         }
-        
         let tournament = self.data["Tournament"]!
         
         if tournament != "-"{
@@ -400,9 +451,13 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     func moveToMatchSummary()  {
         
         let dashboardVC = viewControllerFrom("Main", vcid: "MatchSummaryViewController") as! MatchSummaryViewController
-        let navigationControl = UINavigationController(rootViewController: dashboardVC)
-        sliderMenu.mainViewController = navigationControl
-        //self.navigationController?.popToRootViewControllerAnimated(true)
-        //self.navigationController?.popViewControllerAnimated(true)
+        if !matchBeingEdited {
+            let navigationControl = UINavigationController(rootViewController: dashboardVC)
+            sliderMenu.mainViewController = navigationControl
+        }
+        else {
+            //self.navigationController?.popToRootViewControllerAnimated(true)
+            self.navigationController?.popViewControllerAnimated(true)
+        }
     }
 }

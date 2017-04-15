@@ -42,7 +42,8 @@ var PlayingRoles = [String]()
 var AgeGroupData = [String]()
 
 var friendsDataArray = [Friends]()
-var friendsRequestsData = [ReceivedFriendRequest]()
+
+var FriendRequestsData = [RequestsData]()
 
 var Achievements = [String]()
 
@@ -124,9 +125,9 @@ set
     
 }
 get {
-    if (profileData.ProfileImageURL != "-")  {
+    if (profileData.CoverPhotoURL != "-")  {
         
-        if let data = NSData(contentsOfURL: NSURL(string: profileData.ProfileImageURL)!) {
+        if let data = NSData(contentsOfURL: NSURL(string: profileData.CoverPhotoURL)!) {
             let userdefaults = NSUserDefaults.standardUserDefaults()
             userdefaults.setValue(data, forKey: "CoverImage")
             return UIImage(data: data)!

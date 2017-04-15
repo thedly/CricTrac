@@ -497,7 +497,8 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     
 }
 
-extension UserInfoViewController:UITextFieldDelegate{
+extension UserInfoViewController:UITextFieldDelegate
+{
     
     func textFieldDidBeginEditing(textField: UITextField) {
         

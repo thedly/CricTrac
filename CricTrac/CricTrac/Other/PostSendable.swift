@@ -23,4 +23,15 @@ protocol previousRefershable{
 protocol Deletable {
     
     func deletePost(index:Int)
+   
+    
+}
+protocol DeleteComment {
+    
+    func deletebuttonTapped(index: Int)
+}
+
+protocol Refreshable{
+    
+    func refresh()
 }

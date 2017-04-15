@@ -28,6 +28,7 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
     @IBOutlet var baseView: UIView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var tableView : UITableView!
     
     var menuDataArray = menuData
     
@@ -45,7 +46,7 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         userName.text = profileData.fullName
         //baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
         
-        if let _ = loggedInUserInfo["UserProfile"] as? String{
+        if let _ = profileData.UserProfile as? String{
             
             removeUnwantedMenu()
         }else{
@@ -73,16 +74,22 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
     
     func removeUnwantedMenu(){
         
-        if let userType = loggedInUserInfo["UserProfile"] as? String where userType != "Player"{
+        //if let userType = loggedInUserInfo["UserProfile"] as? String where userType != "Player"{
+        if let userType = profileData.UserProfile as? String where userType != "Player"{
             
-            if let newMatchIndex =  self.menuDataArray.indexOf({ $0["title"] == "NEW MATCH"}){
+            if let newMatchIndex =  self.menuDataArray.indexOf({ $0["title"] == "ADD MATCH"}){
                 
                 self.menuDataArray.removeAtIndex(newMatchIndex)
+                
+               //tableView.reloadData()
             }
             
-            if let matchSummaryIndexIndex =  self.menuDataArray.indexOf({ $0["title"] == "MATCH SUMMARY"}){
+            //if let matchSummaryIndexIndex =  self.menuDataArray.indexOf({ $0["title"] == "MATCH SUMMARY"}){
+            if let matchSummaryIndexIndex =  self.menuDataArray.indexOf({ $0["title"] == "SCOREBOARD"}){
                 
                 self.menuDataArray.removeAtIndex(matchSummaryIndexIndex)
+                
+                //tableView.reloadData()
             }
             
         }
@@ -165,7 +172,7 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
             vcName = "ProfileReadOnlyViewController"
 
         }
-        else if menuDataArray[indexPath.row]["title"] == "DASHBOARD" {
+        else if menuDataArray[indexPath.row]["title"] == "SIGHTSCREEN" {
             
             switch profileData.UserProfile {
             case userProfileType.Player.rawValue :
