@@ -16,15 +16,11 @@ class APostTableViewCell: UITableViewCell {
     @IBOutlet weak var postOwnerPic: UIImageView!
     @IBOutlet weak var post: UILabel!
     @IBOutlet weak var postOwnerCity: UILabel!
-
     @IBOutlet weak var likeCount: UIButton!
-    
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var commentCount: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
-    
-     @IBOutlet weak var postedDate: UILabel!
-    
+    @IBOutlet weak var postedDate: UILabel!
     
     var postId:String?
     var totalLikeCount = 0
@@ -36,51 +32,35 @@ class APostTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        
-        
         // Initialization code
         addTapGestureToUserName()
     }
     
-    
     func addTapGestureToUserName(){
-        
         if let _ = postOwnerName{
             let gesture = UITapGestureRecognizer(target: self, action: #selector(APostTableViewCell.didTapLabelName))
             postOwnerName.userInteractionEnabled = true
             postOwnerName.addGestureRecognizer(gesture)
         }
-        
     }
     
     func didTapLabelName(){
-        
         if  postOwnerId != nil{
-            
                 getFriendProfileInfo(postOwnerId, sucess: { (friendInfo) in
-                    
                     if let friendType = friendInfo["UserProfile"] as? String{
-                        
-                        
                         switch friendType{
-                            
                             case "Player": self.moveToPlayer(friendInfo)
-                            
                             case "Coach": self.moveToCoach(friendInfo)
-                            
                             case "Cricket Fan": self.moveToFan(friendInfo)
-                            
                             default: break
                         }
                     }
-                    
                 })
             }
     }
     
     func moveToPlayer(userInfo:[String : AnyObject]){
-         if let parentVC = parent as? UIViewController{
+        if let parentVC = parent as? UIViewController{
         let dashBoard = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
         dashBoard.friendId = postOwnerId
         dashBoard.friendProfile = userInfo
@@ -89,17 +69,14 @@ class APostTableViewCell: UITableViewCell {
     }
 
     func moveToCoach(userInfo:[String : AnyObject]){
-        
         if let parentVC = parent as? UIViewController{
             let dashBoard = viewControllerFrom("Main", vcid: "CoachDashboardViewController") as! CoachDashboardViewController
             dashBoard.friendProfile = userInfo
             parentVC.presentViewController(dashBoard, animated: true) {}
         }
-        
     }
     
     func moveToFan(userInfo:[String : AnyObject]){
-        
         if let parentVC = parent as? UIViewController{
             let dashBoard = viewControllerFrom("Main", vcid: "FanDashboardViewController") as! FanDashboardViewController
             dashBoard.friendProfile = userInfo
@@ -109,35 +86,28 @@ class APostTableViewCell: UITableViewCell {
     
     
     @IBAction func DidTapLikeButton(sender: UIButton) {
-        
         if let value = postId{
-        
-       likeOrUnlike(value, like: { (likeDict) in
-        
-        self.addLikeToDataArray(likeDict)
-        self.likeButton.titleLabel?.textColor = UIColor.yellowColor()
-        self.totalLikeCount += 1
-        self.likeCount.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
-        self.currentUserHasLikedThePost = true
-        
-        }) {
-            self.removeLikeFromArray()
-            self.likeButton.titleLabel?.textColor = UIColor.grayColor()
-            self.totalLikeCount -= 1
-            self.likeCount.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
-            self.currentUserHasLikedThePost = false
-
-        }
+            likeOrUnlike(value, like: { (likeDict) in
+                self.addLikeToDataArray(likeDict)
+                self.likeButton.titleLabel?.textColor = UIColor.yellowColor()
+                self.totalLikeCount += 1
+                self.likeCount.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
+                self.currentUserHasLikedThePost = true
+            }) {
+                self.removeLikeFromArray()
+                self.likeButton.titleLabel?.textColor = UIColor.grayColor()
+                self.totalLikeCount -= 1
+                self.likeCount.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
+                self.currentUserHasLikedThePost = false
+            }
         }
     }
     
     func removeLikeFromArray(){
         var likes = timelineData!.arrayObject![index!]["Likes"] as! [String:[String:String]]
         let keys =  likes.filter{key,val in
-            
             return val["OwnerID"]! == currentUser!.uid
             }.map{
-                
                 return $0.0
         }
         
@@ -153,7 +123,6 @@ class APostTableViewCell: UITableViewCell {
     
     
     @IBAction func deletePost(sender: UIButton){
-        
         showPostOptions()
 //        
 //                let appearance = SCLAlertView.SCLAppearance(
@@ -170,36 +139,31 @@ class APostTableViewCell: UITableViewCell {
     }
     
     func showPostOptions(){
-        let optionMenu = UIAlertController(title: nil, message: "SELECT ACTION", preferredStyle: .ActionSheet)
+        let optionMenu = UIAlertController(title: nil, message: "Select Action", preferredStyle: .ActionSheet)
         
-        let deleteAction = UIAlertAction(title: "DELETE", style: .Default, handler: {
+        let saveAction = UIAlertAction(title: "Edit", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
-           
+            self.presentEditablePost()
+        })
+        
+        let deleteAction = UIAlertAction(title: "Delete", style: .Default, handler: {
+            (alert: UIAlertAction!) -> Void in
             let appearance = SCLAlertView.SCLAppearance(
                 showCloseButton: false
             )
             
             let alertView = SCLAlertView(appearance: appearance)
-            
             alertView.addButton("OK", target:self, selector:#selector(APostTableViewCell.deletePostFromFB))
-            
             alertView.addButton("Cancel", target:self, selector:#selector(APostTableViewCell.cancel))
-            
             alertView.showNotice("Warning", subTitle: "All Data will be lost if you continue")
-        })
-        let saveAction = UIAlertAction(title: "EDIT", style: .Default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            
-            self.presentEditablePost()
-            
         })
         
         let cancelAction = UIAlertAction(title: "CANCEL", style: .Cancel, handler: {
             (alert: UIAlertAction!) -> Void in
         })
         
-        optionMenu.addAction(deleteAction)
         optionMenu.addAction(saveAction)
+        optionMenu.addAction(deleteAction)
         optionMenu.addAction(cancelAction)
         
         if let parentVc = parent as? UIViewController{
@@ -208,7 +172,6 @@ class APostTableViewCell: UITableViewCell {
     }
     
     func presentEditablePost(){
-     
         let newPost = viewControllerFrom("Main", vcid: "NewPostViewController") as! NewPostViewController
         newPost.sendPostDelegate = (self.parent as! PostSendable)
         newPost.modalPresentationStyle = .OverCurrentContext
