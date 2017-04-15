@@ -43,6 +43,17 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
     
     @IBOutlet weak var FavouritePlayerTbl: UITableView!
     
+    @IBOutlet weak var supportingTeamsBtn: UIButton!
+    
+    @IBOutlet weak var interestedSportsteamBtn: UIButton!
+    
+    @IBOutlet weak var favouritePlayerBtn: UIButton!
+    
+    @IBOutlet weak var hobbiesBtn: UIButton!
+    
+    
+    
+    
     var profileChanged: Bool! = false
     
     var selectedText: UITextField!
@@ -180,36 +191,52 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
         
         
         addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
+        
+        profileData = Profile(usrObj: data)
+        updateMetaData(userImageMetaData)
+            
+        if self.window.rootViewController == sliderMenu {
+            let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+            self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+        }
+        else
+        {
+            let rootViewController: UIViewController = getRootViewController()
+            self.window.rootViewController = rootViewController
+            // sliderMenu.mainViewController = rootViewController
+        }
+        
+        if (self.profileChanged == true) {
+            logout(self)
+        }
             
             
-            
-            
-            
-            if (self.profileChanged == true) {
-                logout(self)
-            }
-            else
-            {
-                profileData = Profile(usrObj: data)
-                
-                updateMetaData(userImageMetaData)
-                
-                
-                if self.window.rootViewController == sliderMenu {
-                    
-                    
-                    let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
-                    self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
-                }
-                else
-                {
-                    let rootViewController: UIViewController = getRootViewController()
-                    self.window.rootViewController = rootViewController
-                   // sliderMenu.mainViewController = rootViewController
-
-                }
-                
-            }
+//            
+//            if (self.profileChanged == true) {
+//                logout(self)
+//            }
+//            else
+//            {
+//                profileData = Profile(usrObj: data)
+//                
+//                updateMetaData(userImageMetaData)
+//                
+//                
+//                if self.window.rootViewController == sliderMenu {
+//                    
+//                    
+//                    let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+//                    self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+//                }
+//                else
+//                {
+//                    let rootViewController: UIViewController = getRootViewController()
+//                    self.window.rootViewController = rootViewController
+//                   // sliderMenu.mainViewController = rootViewController
+//
+//                }
+//                
+//            }
             
         }
         
@@ -495,6 +522,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
         let newLength = textField.text!.characters.count + string.characters.count - range.length
         if textField == SupportingTeamNames {
           if supportingTeamNamesList.count >= 10 {
+                supportingTeamsBtn.enabled = false
                 return newLength <= 0
             }else {
                 return newLength <= 30
@@ -502,6 +530,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
         }
         else if textField == InterestedSportsNames {
             if InterestedSportsNamesList.count >= 10 {
+                interestedSportsteamBtn.enabled = false
                 return newLength <= 0
             }
             else {
@@ -510,6 +539,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
         }
         else if textField == favouritePlayer {
             if favouritePlayerList.count >= 10 {
+                favouritePlayerBtn.enabled = false
                 return newLength <= 0
             }
             else {
@@ -518,6 +548,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
         }
         else if textField == HobbiesNames {
             if HobbiesList.count >= 10 {
+                hobbiesBtn.enabled = false
                 return newLength <= 0
             }
             else {

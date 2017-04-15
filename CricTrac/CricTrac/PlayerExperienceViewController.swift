@@ -107,56 +107,81 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         profileData.UserProfile = userProfileType.Player.rawValue
         
         addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
-
             
+            profileData = Profile(usrObj: data)
+            updateMetaData(userImageMetaData)
             
-            if (self.profileChanged == true) {
-                
-                
-                logout(self)
-                
-                
+            if self.window.rootViewController == sliderMenu {
+                let viewControllers: [UIViewController] = self.navigationController!.viewControllers as     [UIViewController]
+                self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
             }
             else
             {
-                            profileData = Profile(usrObj: data)
-                
-                            updateMetaData(userImageMetaData)
-                
-                
-                            if self.window.rootViewController == sliderMenu {
-                
-                                let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
-                                self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
-                                
-//                                self.window.rootViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
-                            }
-                            else
-                            {
-                                let rootViewController: UIViewController = getRootViewController()
-                                self.window.rootViewController = rootViewController
-                               // sliderMenu.mainViewController = rootViewController
-                
-                            }
-                
-                }
-            
-            
-//            self.presentViewController(loginBaseViewController, animated: true) {
-////                SCLAlertView().showInfo("Logout",subTitle: "Data saved is cleared, Kill the app and relaunch for now")
-//            }
-//            
-
-            
-            
-
-            
-            
-            
-
-        }
-        
+                let rootViewController: UIViewController = getRootViewController()
+                self.window.rootViewController = rootViewController
+                // sliderMenu.mainViewController = rootViewController
             }
+            
+            if (self.profileChanged == true) {
+                logout(self)
+            }
+        }
+    }
+    
+                        
+            //            self.presentViewController(loginBaseViewController, animated: true) {
+            ////                SCLAlertView().showInfo("Logout",subTitle: "Data saved is cleared, Kill the app and relaunch for now")
+            //            }
+
+            
+            
+//            if (self.profileChanged == true) {
+//                
+//                
+//                logout(self)
+//                
+//                
+//            }
+//            else
+//            {
+//                            profileData = Profile(usrObj: data)
+//                
+//                            updateMetaData(userImageMetaData)
+//                
+//                
+//                            if self.window.rootViewController == sliderMenu {
+//                
+//                                let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+//                                self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+//                                
+////                                self.window.rootViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+//                            }
+//                            else
+//                            {
+//                                let rootViewController: UIViewController = getRootViewController()
+//                                self.window.rootViewController = rootViewController
+//                               // sliderMenu.mainViewController = rootViewController
+//                
+//                            }
+//                
+//                }
+//            
+//            
+////            self.presentViewController(loginBaseViewController, animated: true) {
+//////                SCLAlertView().showInfo("Logout",subTitle: "Data saved is cleared, Kill the app and relaunch for now")
+////            }
+////            
+//
+//            
+//            
+//
+//            
+//            
+//            
+//
+//        }
+//        
+//            }
     
     func initializeView() {
         playingRole.delegate = self
