@@ -189,7 +189,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         let age = calcAge.year + 1
         
         var ageGroup1 = " "
-        if age < 10 {
+        if age <= 10 {
              ageGroup1 = "Under 10"
         }
         else if age > 23 {

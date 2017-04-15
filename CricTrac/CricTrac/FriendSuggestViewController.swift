@@ -12,6 +12,9 @@ import KRProgressHUD
 
 class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider,ThemeChangeable {
     @IBOutlet weak var SuggestsTblview: UITableView!
+    @IBOutlet weak var suggestionsTblView: UITableView!
+    @IBOutlet weak var noRequestsLbl: UILabel!
+    @IBOutlet weak var RequestsTblview: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()
@@ -33,18 +36,35 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     
     func initializeView() {
         SuggestsTblview.registerNib(UINib.init(nibName:"FriendSuggestionsCell", bundle: nil), forCellReuseIdentifier: "FriendSuggestionsCell")
-        SuggestsTblview.allowsSelection = false
-        SuggestsTblview.separatorStyle = .None
-        SuggestsTblview.dataSource = self
-        SuggestsTblview.delegate = self
-        self.view.backgroundColor = UIColor.clearColor()
+        
+        RequestsTblview.allowsSelection = false
+        RequestsTblview.separatorStyle = .None
+        RequestsTblview.dataSource = self
+        RequestsTblview.delegate = self
+        
+        suggestionsTblView.allowsSelection = false
+        suggestionsTblView.separatorStyle = .None
+        suggestionsTblView.dataSource = self
+        suggestionsTblView.delegate = self
         
         //setBackgroundColor()
         //setUIBackgroundTheme(self.view)
+        self.view.backgroundColor = UIColor.clearColor()
+        getFriendSuggestions()
+
+//        SuggestsTblview.registerNib(UINib.init(nibName:"FriendSuggestionsCell", bundle: nil), forCellReuseIdentifier: "FriendSuggestionsCell")
+//        SuggestsTblview.allowsSelection = false
+//        SuggestsTblview.separatorStyle = .None
+//        SuggestsTblview.dataSource = self
+//        SuggestsTblview.delegate = self
+//        self.view.backgroundColor = UIColor.clearColor()
+//        
+//        //setBackgroundColor()
+//        //setUIBackgroundTheme(self.view)
     }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "INVITE")
+        return IndicatorInfo(title: "SUGGESTIONS")
     }
     
     // MARK: - Table delegate functions
