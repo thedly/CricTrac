@@ -180,36 +180,52 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
         
         
         addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
+        
+        profileData = Profile(usrObj: data)
+        updateMetaData(userImageMetaData)
+            
+        if self.window.rootViewController == sliderMenu {
+            let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+            self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+        }
+        else
+        {
+            let rootViewController: UIViewController = getRootViewController()
+            self.window.rootViewController = rootViewController
+            // sliderMenu.mainViewController = rootViewController
+        }
+        
+        if (self.profileChanged == true) {
+            logout(self)
+        }
             
             
-            
-            
-            
-            if (self.profileChanged == true) {
-                logout(self)
-            }
-            else
-            {
-                profileData = Profile(usrObj: data)
-                
-                updateMetaData(userImageMetaData)
-                
-                
-                if self.window.rootViewController == sliderMenu {
-                    
-                    
-                    let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
-                    self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
-                }
-                else
-                {
-                    let rootViewController: UIViewController = getRootViewController()
-                    self.window.rootViewController = rootViewController
-                   // sliderMenu.mainViewController = rootViewController
-
-                }
-                
-            }
+//            
+//            if (self.profileChanged == true) {
+//                logout(self)
+//            }
+//            else
+//            {
+//                profileData = Profile(usrObj: data)
+//                
+//                updateMetaData(userImageMetaData)
+//                
+//                
+//                if self.window.rootViewController == sliderMenu {
+//                    
+//                    
+//                    let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+//                    self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+//                }
+//                else
+//                {
+//                    let rootViewController: UIViewController = getRootViewController()
+//                    self.window.rootViewController = rootViewController
+//                   // sliderMenu.mainViewController = rootViewController
+//
+//                }
+//                
+//            }
             
         }
         
