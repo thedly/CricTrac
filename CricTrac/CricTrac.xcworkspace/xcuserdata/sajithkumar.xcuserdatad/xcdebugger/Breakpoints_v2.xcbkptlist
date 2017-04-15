@@ -278,7 +278,7 @@
                   moduleName = "AnimatedTextInput"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sajithkumar/Desktop/crictrac_ios/CricTrac/Pods/AnimatedTextInput/AnimatedTextInput/Classes/AnimatedTextInput.swift"
-                  timestampString = "513849963.348883"
+                  timestampString = "513925611.416804"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "28"
@@ -293,7 +293,7 @@
                   moduleName = "AnimatedTextInput"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sajithkumar/Desktop/crictrac_ios/CricTrac/Pods/AnimatedTextInput/AnimatedTextInput/Classes/AnimatedTextInput.swift"
-                  timestampString = "513849963.349161"
+                  timestampString = "513925611.417952"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "28"
@@ -347,7 +347,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "428"
             endingLineNumber = "428"
-            landmarkName = "incrementDecrementOperation(_:isIncrement:)"
+            landmarkName = "swapBtnPressed(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -459,40 +459,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "290"
             endingLineNumber = "290"
-            landmarkName = "deletebuttonTapped(_:)"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CricTrac.CommentsViewController.deletebuttonTapped (Swift.Int) -&gt; ()"
-                  moduleName = "CricTrac"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sajithkumar/Desktop/crictrac_ios/CricTrac/CricTrac/CommentsViewController.swift"
-                  timestampString = "513849963.360344"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "293"
-                  endingLineNumber = "293"
-                  offsetFromSymbolStart = "12">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "protocol witness for CricTrac.DeleteComment.deletebuttonTapped (Swift.Int) -&gt; () in conformance CricTrac.CommentsViewController : CricTrac.DeleteComment in CricTrac"
-                  moduleName = "CricTrac"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sajithkumar/Desktop/crictrac_ios/CricTrac/CricTrac/CommentsViewController.swift"
-                  timestampString = "513849963.360535"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "290"
-                  endingLineNumber = "290"
-                  offsetFromSymbolStart = "4">
-               </Location>
-            </Locations>
+            landmarkName = "CommentsViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -518,12 +486,12 @@
                   moduleName = "CricTrac"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sajithkumar/Desktop/crictrac_ios/CricTrac/CricTrac/View/APostTableViewCell.swift"
-                  timestampString = "513849963.361719"
+                  timestampString = "513925611.52735"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "189"
                   endingLineNumber = "189"
-                  offsetFromSymbolStart = "227">
+                  offsetFromSymbolStart = "434">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -533,12 +501,12 @@
                   moduleName = "CricTrac"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sajithkumar/Desktop/crictrac_ios/CricTrac/CricTrac/View/APostTableViewCell.swift"
-                  timestampString = "513849963.361883"
+                  timestampString = "513925611.527627"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "192"
-                  endingLineNumber = "192"
-                  offsetFromSymbolStart = "28">
+                  startingLineNumber = "189"
+                  endingLineNumber = "189"
+                  offsetFromSymbolStart = "2896">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -557,6 +525,38 @@
             endingLineNumber = "28"
             landmarkName = "deletebuttonTapped(_:)"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CricTrac.CommentTableViewCell.(deletebuttonTapped (Swift.AnyObject) -&gt; ()).(closure #1)"
+                  moduleName = "CricTrac"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sajithkumar/Desktop/crictrac_ios/CricTrac/CricTrac/View/CommentTableViewCell.swift"
+                  timestampString = "513925611.560127"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "30">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CricTrac.CommentTableViewCell.(deletebuttonTapped (Swift.AnyObject) -&gt; ()).(closure #1)"
+                  moduleName = "CricTrac"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sajithkumar/Desktop/crictrac_ios/CricTrac/CricTrac/View/CommentTableViewCell.swift"
+                  timestampString = "513925611.56055"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "149">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -573,6 +573,54 @@
             endingLineNumber = "504"
             landmarkName = "textField(_:shouldChangeCharactersInRange:replacementString:)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CricTrac/CommentsViewController.swift"
+            timestampString = "513925572.25323"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
+            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CricTrac.CommentsViewController.tableView (__ObjC.UITableView, cellForRowAtIndexPath : __ObjC.NSIndexPath) -&gt; __ObjC.UITableViewCell"
+                  moduleName = "CricTrac"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sajithkumar/Desktop/crictrac_ios/CricTrac/CricTrac/CommentsViewController.swift"
+                  timestampString = "513925611.564145"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "187"
+                  endingLineNumber = "187"
+                  offsetFromSymbolStart = "2446">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CricTrac.CommentsViewController.tableView (__ObjC.UITableView, cellForRowAtIndexPath : __ObjC.NSIndexPath) -&gt; __ObjC.UITableViewCell"
+                  moduleName = "CricTrac"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sajithkumar/Desktop/crictrac_ios/CricTrac/CricTrac/CommentsViewController.swift"
+                  timestampString = "513925611.564407"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "187"
+                  endingLineNumber = "187"
+                  offsetFromSymbolStart = "2763">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
