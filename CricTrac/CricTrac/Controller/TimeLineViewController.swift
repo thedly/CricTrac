@@ -304,7 +304,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 }
                 
                 
-                //sajith-  fetch the fresh post data
+                //sajith-  fetch the fresh post data for Like and Comment counts
                 let postid = data.dictionaryValue["postId"]?.stringValue
                 getPost(postid!) { (data) in
                     if (data["LikeCount"] != nil) {

@@ -29,7 +29,7 @@ class CommentTableViewCell: UITableViewCell {
                 delComment(self.postID!,commentId: self.commentID!)
             }
             
-            //parent?.deletePost(index!)
+            self.parent?.deletebuttonTapped()
         }))
         
         refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in

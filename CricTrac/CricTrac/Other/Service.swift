@@ -919,6 +919,13 @@ func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
     let userName = loggedInUserName ?? "No Name"
     let addedTime =  NSDate().getCurrentTimeStamp()
     
+//    let date = NSDate()
+//    let dateFormatter = NSDateFormatter()
+//    dateFormatter.timeZone = NSTimeZone.localTimeZone()
+//    dateFormatter.timeStyle = .ShortStyle
+//    dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+//    let dispTime = dateFormatter.stringFromDate((date as? NSDate)!)
+    
     let timelineDict:[String:AnyObject] = ["AddedTime":addedTime,"OwnerID":currentUser!.uid,"OwnerName":userName,"isDeleted":"0","Post":postText,"PostedBy":currentUser!.uid,"PostType":"Self","CommentCount":0,"LikeCount":0]
     
     let ref = fireBaseRef.child("TimelinePosts").childByAutoId()

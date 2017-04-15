@@ -72,14 +72,14 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
             self.postText.text = data["Post"] as? String
             self.userName.text = data ["OwnerName"] as? String
             
-//            if let postDateTS = data["AddedTime"]{
-//                //let date = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
-//                let dateFormatter = NSDateFormatter()
-//                dateFormatter.timeZone = NSTimeZone.localTimeZone()
-//                dateFormatter.timeStyle = .ShortStyle
-//                dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-//                self.date.text = dateFormatter.stringFromDate(postDateTS as! NSDate)
-//            }
+            if let postDateTS = data["AddedTime"] as? Double{
+                let date = NSDate(timeIntervalSince1970:postDateTS/1000.0)
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.timeZone = NSTimeZone.localTimeZone()
+                dateFormatter.timeStyle = .ShortStyle
+                dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+                self.date.text = dateFormatter.stringFromDate(date)
+            }
             
             if (data["LikeCount"] != nil) {
                 let likeCount = data["LikeCount"] as? Int
@@ -141,14 +141,14 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
             //sucess(result: ["proPic":proPic,"city":city])
         })
         
-        if let dateTimeStamp = postData!["AddedTime"].double{
-            let date = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.timeZone = NSTimeZone.localTimeZone()
-            dateFormatter.timeStyle = .ShortStyle
-            dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-            self.date.text = dateFormatter.stringFromDate(date)
-        }
+//        if let dateTimeStamp = postData!["AddedTime"].double{
+//            let date = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
+//            let dateFormatter = NSDateFormatter()
+//            dateFormatter.timeZone = NSTimeZone.localTimeZone()
+//            dateFormatter.timeStyle = .ShortStyle
+//            dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+//            self.date.text = dateFormatter.stringFromDate(date)
+//        }
         
         getAllComments(postId) { (data) in
             self.dataSource = data
@@ -290,9 +290,10 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         }
     }
     
-    func deletebuttonTapped(index: Int) {
+    func deletebuttonTapped() {
         //        timelineData!.arrayObject?.removeAtIndex(index)
         //        timeLineTable.reloadData()
+         tableView.reloadData()
     }
     
 //    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

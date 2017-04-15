@@ -28,7 +28,7 @@ protocol Deletable {
 }
 protocol DeleteComment {
     
-    func deletebuttonTapped(index: Int)
+    func deletebuttonTapped()
 }
 
 protocol Refreshable{
