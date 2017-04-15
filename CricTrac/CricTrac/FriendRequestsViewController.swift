@@ -35,22 +35,50 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     
     func initializeView() {
         RequestsTblview.registerNib(UINib.init(nibName:"FriendRequestsCell", bundle: nil), forCellReuseIdentifier: "FriendRequestsCell")
-        suggestionsTblView.registerNib(UINib.init(nibName:"FriendSuggestionsCell", bundle: nil), forCellReuseIdentifier: "FriendSuggestionsCell")
+        //suggestionsTblView.registerNib(UINib.init(nibName:"FriendSuggestionsCell", bundle: nil), forCellReuseIdentifier: "FriendSuggestionsCell")
         
         RequestsTblview.allowsSelection = false
         RequestsTblview.separatorStyle = .None
         RequestsTblview.dataSource = self
         RequestsTblview.delegate = self
         
-        suggestionsTblView.allowsSelection = false
-        suggestionsTblView.separatorStyle = .None
-        suggestionsTblView.dataSource = self
-        suggestionsTblView.delegate = self
+//        suggestionsTblView.allowsSelection = false
+//        suggestionsTblView.separatorStyle = .None
+//        suggestionsTblView.dataSource = self
+//        suggestionsTblView.delegate = self
         
         //setBackgroundColor()
         //setUIBackgroundTheme(self.view)
         self.view.backgroundColor = UIColor.clearColor()
-        getFriendSuggestions()
+        //getFriendSuggestions()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        self.noRequestsLbl.hidden = true
+        setRequests();
+        //self.RequestsTblview.reloadData()
+    }
+    
+    func setRequests(){
+        FriendRequestsData.removeAll()
+        self.setAllReceivedRequests()
+        self.setAllSentRequestsData()
+    }
+    
+    func AdjustHeight(){
+//        self.noRequestsLbl.hidden = !(FriendRequestsData.count == 0)
+//        if FriendRequestsData.count < 3 {
+//            self.RequestsTblViewHeight.constant = CGFloat(FriendRequestsData.count * 100)
+//        }
+//        else{
+//            self.RequestsTblViewHeight.constant = CGFloat(2.5 * 100)
+//        }
+        self.RequestsTblViewHeight.constant = self.RequestsTblview.contentSize.height
+    }
+    
+    func ReloadTbl() {
+        setRequests()
     }
     
     func setAllReceivedRequests() {
@@ -65,42 +93,8 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                 
                 self.RequestsTblview.reloadData()
                 self.AdjustHeight()
-                
             })
-            
-            
         }
-    }
-    
-    func setRequests(){
-        FriendRequestsData.removeAll()
-        self.setAllReceivedRequests()
-        self.setAllSentRequestsData()
-        
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
-        
-        setRequests();
-//        if UserProfilesData.count < 10 {
-//            getFriendSuggestions()
-//        }
-        
-    }
-    
-    func AdjustHeight(){
-        self.noRequestsLbl.hidden = !(FriendRequestsData.count == 0)
-        if FriendRequestsData.count < 3 {
-            self.RequestsTblViewHeight.constant = CGFloat(FriendRequestsData.count * 100)
-        }
-        else{
-            self.RequestsTblViewHeight.constant = CGFloat(2.5 * 100)
-        }
-    }
-    
-    func ReloadTbl() {
-        setRequests()
     }
     
     func setAllSentRequestsData() {
@@ -120,32 +114,31 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                 self.AdjustHeight()
                 
             })
-
         }
     }
     
-    func getFriendSuggestions() {
-        backgroundThread(background: {
-            KRProgressHUD.showText("Loading ...")
-            getAllFriendSuggestions({
-                var modFriendReqData = [Profile]()
-                for (index, dat) in UserProfilesData.enumerate() {
-                    if FriendRequestsData.filter({$0.Name == dat.fullName }).count == 0 {
-                        modFriendReqData.append(dat)
-                    }
-                }
-                UserProfilesData.removeAll()
-                UserProfilesData = modFriendReqData
-                                
-                dispatch_async(dispatch_get_main_queue(),{
-                    
-                    KRProgressHUD.dismiss()
-                    self.suggestionsTblView.reloadData()
-                    
-                })
-            })
-        })
-    }
+//    func getFriendSuggestions() {
+//        backgroundThread(background: {
+//            KRProgressHUD.showText("Loading ...")
+//            getAllFriendSuggestions({
+//                var modFriendReqData = [Profile]()
+//                for (index, dat) in UserProfilesData.enumerate() {
+//                    if FriendRequestsData.filter({$0.Name == dat.fullName }).count == 0 {
+//                        modFriendReqData.append(dat)
+//                    }
+//                }
+//                UserProfilesData.removeAll()
+//                UserProfilesData = modFriendReqData
+//                                
+//                dispatch_async(dispatch_get_main_queue(),{
+//                    
+//                    KRProgressHUD.dismiss()
+//                    self.suggestionsTblView.reloadData()
+//                    
+//                })
+//            })
+//        })
+//    }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "REQUESTS")
@@ -197,39 +190,39 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView.isEqual(suggestionsTblView){
-            return UserProfilesData.count
-        }
+//        if tableView.isEqual(suggestionsTblView){
+//            return UserProfilesData.count
+//        }
         return FriendRequestsData.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if tableView.isEqual(suggestionsTblView){
-            return getCellForSuggestionsRow(indexPath)
-        }
-        else
-        {
+//        if tableView.isEqual(suggestionsTblView){
+//            return getCellForSuggestionsRow(indexPath)
+//        }
+//        else
+//        {
             return getCellForRow(indexPath)
-        }
+        //}
     }
 
-    func getCellForSuggestionsRow(indexPath:NSIndexPath)->FriendSuggestionsCell{
-        if FriendRequestsData.filter({$0.Name == UserProfilesData[indexPath.row].fullName}).first == nil {
-            if let aCell =  suggestionsTblView.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as? FriendSuggestionsCell {
-                aCell.configureCell(UserProfilesData[indexPath.row])
-                aCell.AddFriendBtn.accessibilityIdentifier = UserProfilesData[indexPath.row].id
-                aCell.AddFriendBtn.addTarget(self, action: #selector(AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-                aCell.backgroundColor = UIColor.clearColor()
-                return aCell
-            }
-            else {
-                return FriendSuggestionsCell()
-            }
-        }
-        else {
-            return FriendSuggestionsCell()
-        }
-    }
+//    func getCellForSuggestionsRow(indexPath:NSIndexPath)->FriendSuggestionsCell{
+//        if FriendRequestsData.filter({$0.Name == UserProfilesData[indexPath.row].fullName}).first == nil {
+//            if let aCell =  suggestionsTblView.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as? FriendSuggestionsCell {
+//                aCell.configureCell(UserProfilesData[indexPath.row])
+//                aCell.AddFriendBtn.accessibilityIdentifier = UserProfilesData[indexPath.row].id
+//                aCell.AddFriendBtn.addTarget(self, action: #selector(AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+//                aCell.backgroundColor = UIColor.clearColor()
+//                return aCell
+//            }
+//            else {
+//                return FriendSuggestionsCell()
+//            }
+//        }
+//        else {
+//            return FriendSuggestionsCell()
+//        }
+//    }
     
     
     func CancelRequest(sender: UIButton){
@@ -246,14 +239,16 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
             if let index = FriendRequestsData.indexOf( {$0.SentRequestId == RequestObjectid }) {
                 FriendRequestsData.removeAtIndex(index)
             }
-            self.ReloadTbl()
+            
+            //self.ReloadTbl()
+            
             backgroundThread(background: {
                 CancelSentFriendRequestData(RequestObjectid!, successBlock: { (data) in
                 
                     dispatch_async(dispatch_get_main_queue(),{
                         self.setRequests()
                         self.RequestsTblview.reloadData()
-                        self.suggestionsTblView.reloadData()
+                        //self.suggestionsTblView.reloadData()
                     })
                 })
             })
@@ -290,7 +285,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                     dispatch_async(dispatch_get_main_queue(),{
                         self.setRequests()
                         self.RequestsTblview.reloadData()
-                        self.suggestionsTblView.reloadData()
+                        //self.suggestionsTblView.reloadData()
                     })
                 })
             })
@@ -384,45 +379,45 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         }
     }
     
-    func AddFriendBtnPressed(sender: UIButton) {
-        if let FriendUserId = sender.accessibilityIdentifier where FriendUserId != "" {
-            getProfileInfoById(FriendUserId, sucessBlock: { FriendData in
-                let FriendObject = Profile(usrObj: FriendData)
-                getProfileInfoById((currentUser?.uid)!, sucessBlock: { data in
-                    let loggedInUserObject = Profile(usrObj: data)
-                    let sendFriendRequestData = SentFriendRequest()
-                    sendFriendRequestData.City = FriendObject.City
-                    sendFriendRequestData.Name = FriendObject.fullName
-                    sendFriendRequestData.SentTo = FriendObject.id
-                    sendFriendRequestData.SentDateTime = NSDate().getCurrentTimeStamp()
-                    
-                    let receiveFriendRequestData = ReceivedFriendRequest()
-                    receiveFriendRequestData.City = loggedInUserObject.City
-                    
-                    receiveFriendRequestData.Name = loggedInUserObject.fullName
-                    receiveFriendRequestData.ReceivedFrom = loggedInUserObject.id
-                    receiveFriendRequestData.ReceivedDateTime = NSDate().getCurrentTimeStamp()
-
-                    if let index = UserProfilesData.indexOf( {$0.id == FriendObject.id}) {
-                        UserProfilesData.removeAtIndex(index)
-                    }
-                    
-                    //self.suggestionsTblView.reloadData()
-                    
-                    backgroundThread(background: {
-                        AddSentRequestData(["sentRequestData": sendFriendRequestData.GetFriendRequestObject(sendFriendRequestData), "ReceivedRequestData": receiveFriendRequestData.getFriendRequestObject(receiveFriendRequestData)], callback: { data in
-                           
-                            dispatch_async(dispatch_get_main_queue(),{
-                                self.setRequests()
-                                self.RequestsTblview.reloadData()
-                                self.suggestionsTblView.reloadData()
-                            })
-                        })
-                    })
-                })
-            })
-        }
-    }
+//    func AddFriendBtnPressed(sender: UIButton) {
+//        if let FriendUserId = sender.accessibilityIdentifier where FriendUserId != "" {
+//            getProfileInfoById(FriendUserId, sucessBlock: { FriendData in
+//                let FriendObject = Profile(usrObj: FriendData)
+//                getProfileInfoById((currentUser?.uid)!, sucessBlock: { data in
+//                    let loggedInUserObject = Profile(usrObj: data)
+//                    let sendFriendRequestData = SentFriendRequest()
+//                    sendFriendRequestData.City = FriendObject.City
+//                    sendFriendRequestData.Name = FriendObject.fullName
+//                    sendFriendRequestData.SentTo = FriendObject.id
+//                    sendFriendRequestData.SentDateTime = NSDate().getCurrentTimeStamp()
+//                    
+//                    let receiveFriendRequestData = ReceivedFriendRequest()
+//                    receiveFriendRequestData.City = loggedInUserObject.City
+//                    
+//                    receiveFriendRequestData.Name = loggedInUserObject.fullName
+//                    receiveFriendRequestData.ReceivedFrom = loggedInUserObject.id
+//                    receiveFriendRequestData.ReceivedDateTime = NSDate().getCurrentTimeStamp()
+//
+//                    if let index = UserProfilesData.indexOf( {$0.id == FriendObject.id}) {
+//                        UserProfilesData.removeAtIndex(index)
+//                    }
+//                    
+//                    //self.suggestionsTblView.reloadData()
+//                    
+//                    backgroundThread(background: {
+//                        AddSentRequestData(["sentRequestData": sendFriendRequestData.GetFriendRequestObject(sendFriendRequestData), "ReceivedRequestData": receiveFriendRequestData.getFriendRequestObject(receiveFriendRequestData)], callback: { data in
+//                           
+//                            dispatch_async(dispatch_get_main_queue(),{
+//                                self.setRequests()
+//                                self.RequestsTblview.reloadData()
+//                                self.suggestionsTblView.reloadData()
+//                            })
+//                        })
+//                    })
+//                })
+//            })
+//        }
+//    }
     /*
     // MARK: - Navigation
 
