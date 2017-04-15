@@ -915,13 +915,11 @@ func getFriendRequestById(id: String) -> [String: String]{
 
 
 func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
-    
     KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
-    
     let userName = loggedInUserName ?? "No Name"
+    let addedTime =  NSDate().getCurrentTimeStamp()
     
-    let addedTime =  Int(NSDate().timeIntervalSince1970 * 1000)
-    let timelineDict:[String:AnyObject] = ["AddedTime":addedTime,"OwnerID":currentUser!.uid,"OwnerName":userName,"isDeleted":"0","Post":postText,"PostedBy":currentUser!.uid,"PostType":"Self"]
+    let timelineDict:[String:AnyObject] = ["AddedTime":addedTime,"OwnerID":currentUser!.uid,"OwnerName":userName,"isDeleted":"0","Post":postText,"PostedBy":currentUser!.uid,"PostType":"Self","CommentCount":0,"LikeCount":0]
     
     let ref = fireBaseRef.child("TimelinePosts").childByAutoId()
     
@@ -930,13 +928,11 @@ func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
     let postKey = ref.key
     let returnData = ["timeline":["AddedTime":addedTime,"Post":postText,"CommentCount":"0","LikeCount":"0","OwnerName":userName,"postId":postKey,"OwnerID":currentUser!.uid,"PostedBy":currentUser!.uid,"PostType":"Self"]]
     
-    sucess(data: returnData)
-    
-    updateTimelineWithNewPost(postKey) { (resultError) in
+        sucess(data: returnData)
+        updateTimelineWithNewPost(postKey) { (resultError) in
         
         KRProgressHUD.dismiss()
     }
-    
 }
 
 
@@ -958,10 +954,43 @@ func editPost(post:String, postId:String,sucess:([String:AnyObject])->Void){
 
 func addNewComment(postId:String,comment:String){
     let ref = fireBaseRef.child("TimelinePosts").child(postId).child("TimelineComments").childByAutoId()
-    let addedTime =  Int(NSDate().timeIntervalSince1970 * 1000)
+    //let addedTime =  Int(NSDate().timeIntervalSince1970 * 1000)
+    let addedTime = NSDate().getCurrentTimeStamp()
     let commentDict:[String:AnyObject] = ["Comment":comment,"OwnerID":currentUser!.uid,"OwnerName":loggedInUserName ?? "","isDeleted":"0","AddedTime":addedTime]
     ref.setValue(commentDict)
+   
+    calCmtCnt(postId)
 }
+
+func calCmtCnt(postId:String) {
+    //calculate the Comment Count
+    fireBaseRef.child("TimelinePosts").child(postId).child("TimelineComments").observeSingleEventOfType(.Value, withBlock: {   snapshot in
+        let CommentCount = snapshot.childrenCount
+        let ref = fireBaseRef.child("TimelinePosts").child(postId).child("CommentCount")
+        ref.setValue(CommentCount)
+    })
+}
+
+func calLikeCnt(postId:String) {
+    //calculate the Like Count
+    fireBaseRef.child("TimelinePosts").child(postId).child("Likes").observeSingleEventOfType(.Value, withBlock: {   snapshot in
+        let LikeCount = snapshot.childrenCount
+        let ref = fireBaseRef.child("TimelinePosts").child(postId).child("LikeCount")
+        ref.setValue(LikeCount)
+    })
+}
+
+//func decrementCmtCnt(postId:String) {
+//    //fetch the Comment Count and increase by 1
+//    fireBaseRef.child("TimelinePosts").child(postId).child("CommentCount").observeSingleEventOfType(.Value, withBlock: {   snapshot in
+//        if let cmtCntdata = snapshot.value {
+//            var CommentCount = (cmtCntdata as? Int)!
+//            CommentCount -= 1
+//            let ref = fireBaseRef.child("TimelinePosts").child(postId).child("CommentCount")
+//            ref.setValue(CommentCount)
+//        }
+//    })
+//}
 
 func getAllComments(postId:String,sucess:(data:[[String:AnyObject]])->Void){
     let ref = fireBaseRef.child("TimelinePosts").child(postId).child("TimelineComments").queryOrderedByChild("AddedTime")
@@ -973,6 +1002,7 @@ func getAllComments(postId:String,sucess:(data:[[String:AnyObject]])->Void){
                     dataval["commentId"] = key
                     result.append(dataval)
             }
+            //result.sortInPlace({$0.AddedTime > $1.AddedTime})
             sucess(data: result)
         }
     })
@@ -983,51 +1013,55 @@ func likePost(postId:String)->[String:[String:String]]{
     let ref = fireBaseRef.child("TimelinePosts").child(postId).child("Likes").childByAutoId()
     let likeDict:[String:String] = ["OwnerID":currentUser!.uid,"OwnerName":loggedInUserName ?? ""]
     ref.setValue(likeDict)
+    
+    calLikeCnt(postId)
+    
     return [ref.key:likeDict]
 }
 
 func likeOrUnlike(postId:String,like:(likeDict:[String:[String:String]])->Void,unlike:(Void)->Void){
-    
     let ref = fireBaseRef.child("TimelinePosts").child(postId).child("Likes")
-    
     ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
-        
         if let data = snapshot.value as? [String:[String:String]] {
-            
             let result = data.filter { return  $0.1["OwnerID"] == currentUser!.uid }
-            
             if result.count > 0 {
-                
                 let ref = fireBaseRef.child("TimelinePosts").child(postId).child("Likes").child(result[0].0)
                 ref.removeValueWithCompletionBlock({ (error, ref) in
                     if error == nil{
+                        calLikeCnt(postId)
                         unlike()
                     }
                 })
-                
-                
             }else{
-                
                 like(likeDict: likePost(postId))
             }
-            
         }else{
-            
             like(likeDict: likePost(postId))
         }
     })
-    
 }
 
+func getPost(postId:String,sucessBlock:([String:AnyObject])->Void){
+    fireBaseRef.child("TimelinePosts").child(postId).observeEventType(.Value, withBlock: { snapshot in
+        if let data: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
+            sucessBlock(data)
+        }
+    })
+}
 
-func setIsDeletedToOne(postId:String){
+func deleteSelectedPost(postId:String){
+    //soft delete the post by setting the isDeleted value to 1
     let ref = fireBaseRef.child("TimelinePosts").child(postId).child("isDeleted")
     ref.setValue("1")
+    
+    //API call for deleting the deleted timeline node from all Users nodes
     deleteTimelineNodes(postId)
 }
 
 func delComment(postId:String, commentId:String){
     let ref = fireBaseRef.child("TimelinePosts").child(postId).child("TimelineComments").child(commentId).removeValue()
+   
+    calCmtCnt(postId)
 }
 
 // call the API to delete all reference timeline nodes
