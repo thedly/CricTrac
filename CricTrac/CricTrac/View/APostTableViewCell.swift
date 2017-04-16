@@ -45,7 +45,8 @@ class APostTableViewCell: UITableViewCell {
     }
     
     func didTapLabelName(){
-        if  postOwnerId != nil{
+        if postOwnerName.text != "CricTrac" {
+            if  postOwnerId != nil{
                 getFriendProfileInfo(postOwnerId, sucess: { (friendInfo) in
                     if let friendType = friendInfo["UserProfile"] as? String{
                         switch friendType{
@@ -57,6 +58,7 @@ class APostTableViewCell: UITableViewCell {
                     }
                 })
             }
+        }
     }
     
     func moveToPlayer(userInfo:[String : AnyObject]){
@@ -140,11 +142,14 @@ class APostTableViewCell: UITableViewCell {
     
     func showPostOptions(){
         let optionMenu = UIAlertController(title: nil, message: "Select Action", preferredStyle: .ActionSheet)
-        
-        let saveAction = UIAlertAction(title: "Edit", style: .Default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            self.presentEditablePost()
-        })
+    
+        if postOwnerName.text != "CricTrac" {
+            let saveAction = UIAlertAction(title: "Edit", style: .Default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                self.presentEditablePost()
+            })
+            optionMenu.addAction(saveAction)
+        }
         
         let deleteAction = UIAlertAction(title: "Delete", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
@@ -158,11 +163,11 @@ class APostTableViewCell: UITableViewCell {
             alertView.showNotice("Warning", subTitle: "All Data will be lost if you continue")
         })
         
-        let cancelAction = UIAlertAction(title: "CANCEL", style: .Cancel, handler: {
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
             (alert: UIAlertAction!) -> Void in
         })
         
-        optionMenu.addAction(saveAction)
+        
         optionMenu.addAction(deleteAction)
         optionMenu.addAction(cancelAction)
         

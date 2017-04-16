@@ -21,7 +21,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     var currentTheme:CTTheme!
     var newPostText:UITextField?
     var timelineDS = [[String:String]]()
-    let  refreshControl = UIRefreshControl()
+    let refreshControl = UIRefreshControl()
     var totalPosts = 5
     
     override func viewDidLoad() {
@@ -42,7 +42,6 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         refreshControl.attributedTitle = NSAttributedString(string: "Loading New Posts")
         refreshControl.addTarget(self, action: #selector(TimeLineViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         timeLineTable.addSubview(refreshControl)
-        
         
         timeLineTable.registerNib(UINib.init(nibName:"AddPostTableViewCell", bundle: nil), forCellReuseIdentifier: "addpost")
         
@@ -236,23 +235,30 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 postCell.parent = self
                 postCell.postIndex = indexPath.section-1
                 
-                let friendId = data["OwnerID"].stringValue
+                var friendId = data["OwnerID"].stringValue
                 
-                if let dateTimeStamp = data["AddedTime"].double{
-                    let date = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
-                    let dateFormatter = NSDateFormatter()
-                    dateFormatter.timeZone = NSTimeZone.localTimeZone()
-                    dateFormatter.timeStyle = .ShortStyle
-                    dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-                    postCell.postedDate.text = dateFormatter.stringFromDate(date)
-                }
+//                if let dateTimeStamp = data["AddedTime"].double{
+//                    let date = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
+//                    let dateFormatter = NSDateFormatter()
+//                    dateFormatter.timeZone = NSTimeZone.localTimeZone()
+//                    dateFormatter.timeStyle = .ShortStyle
+//                    dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+//                    postCell.postedDate.text = dateFormatter.stringFromDate(date)
+//                }
                 
                 postCell.postOwnerId = friendId
                 
                 let postedBy = data["PostedBy"].stringValue
                 if postedBy == "CricTrac"{
                     postCell.postOwnerName.text = "CricTrac"
-                    postCell.deleteButton.hidden = true
+                    
+                    if friendId == currentUser!.uid {
+                        postCell.deleteButton.hidden = false
+                    }
+                    else {
+                        postCell.deleteButton.hidden = true
+                    }
+                    
                     postCell.postOwnerCity.text = data["PostType"].stringValue
                     
                     fetchFriendDetail(friendId, sucess: { (result) in
@@ -306,6 +312,16 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 //sajith-  fetch the fresh post data for Like and Comment counts
                 let postid = data.dictionaryValue["postId"]?.stringValue
                 getPost(postid!) { (data) in
+                    
+                    if let dateTimeStamp = data["AddedTime"] as? Double{
+                        let date = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
+                        let dateFormatter = NSDateFormatter()
+                        dateFormatter.timeZone = NSTimeZone.localTimeZone()
+                        dateFormatter.timeStyle = .ShortStyle
+                        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+                        postCell.postedDate.text = dateFormatter.stringFromDate(date)
+                    }
+                    
                     if (data["LikeCount"] != nil) {
                         let likeCount = data["LikeCount"] as? Int
                         postCell.likeCount.setTitle("\(likeCount!) Likes", forState: .Normal)

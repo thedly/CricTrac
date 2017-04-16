@@ -60,6 +60,10 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         definesPresentationContext = true
         //self.view.backgroundColor = UIColor.redColor()
         // Do any additional setup after loading the view.
+
+        //navigationController!.navigationBar.translucent = true
+        
+        //self.SearchDisplayCtrlr.active = true
     }
 
     func setNavigationBarProperties(){
