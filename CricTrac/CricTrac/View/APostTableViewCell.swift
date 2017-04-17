@@ -42,6 +42,12 @@ class APostTableViewCell: UITableViewCell {
             postOwnerName.userInteractionEnabled = true
             postOwnerName.addGestureRecognizer(gesture)
         }
+        
+        if let _ = post{
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(APostTableViewCell.didTapLabelName))
+            post.userInteractionEnabled = true
+            post.addGestureRecognizer(gesture)
+        }
     }
     
     func didTapLabelName(){
@@ -57,6 +63,22 @@ class APostTableViewCell: UITableViewCell {
                         }
                     }
                 })
+            }
+        }
+        
+        if  post != nil{
+            if let parentVC = parent as? UIViewController{
+                let commentPage = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
+                commentPage.postId = postId!
+                parentVC.presentViewController(commentPage, animated: true) {}
+            }
+        }
+        
+        if  post != nil{
+            if let parentVC = parent as? UIViewController{
+                let commentPage = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
+                commentPage.postId = postId!
+                parentVC.presentViewController(commentPage, animated: true) {}
             }
         }
     }
@@ -88,21 +110,23 @@ class APostTableViewCell: UITableViewCell {
     
     
     @IBAction func DidTapLikeButton(sender: UIButton) {
-        if let value = postId{
-            likeOrUnlike(value, like: { (likeDict) in
-                self.addLikeToDataArray(likeDict)
-                self.likeButton.titleLabel?.textColor = UIColor.yellowColor()
-                self.totalLikeCount += 1
-                self.likeCount.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
-                self.currentUserHasLikedThePost = true
-            }) {
-                self.removeLikeFromArray()
-                self.likeButton.titleLabel?.textColor = UIColor.grayColor()
-                self.totalLikeCount -= 1
-                self.likeCount.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
-                self.currentUserHasLikedThePost = false
-            }
-        }
+        likeOrUnlike(postId!)
+        
+        //if let value = postId{
+            //likeOrUnlike(value, like: { (likeDict) in
+                //self.addLikeToDataArray(likeDict)
+                //self.likeButton.titleLabel?.textColor = UIColor.yellowColor()
+                //self.totalLikeCount += 1
+                //self.likeCount.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
+                //self.currentUserHasLikedThePost = true
+            //}) {
+                //self.removeLikeFromArray()
+                //self.likeButton.titleLabel?.textColor = UIColor.grayColor()
+                //self.totalLikeCount -= 1
+                //self.likeCount.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
+                //self.currentUserHasLikedThePost = false
+            //}
+        //}
     }
     
     func removeLikeFromArray(){
