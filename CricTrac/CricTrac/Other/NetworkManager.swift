@@ -34,20 +34,47 @@ func getDataFromNJS(){
 }
 
 func updateTimelineWithNewPost(postId:String,result:(resultError:NSError?)->Void){
-    
     let timelineURL = serverBaseURL+"/user/\(currentUser!.uid)/newPost/\(postId)"
-    
     let request = NSMutableURLRequest(URL: NSURL(string:timelineURL)!)
     request.HTTPMethod = "POST"
     
     dataTask = defaultSession.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
-        
         result(resultError: error)
-     
     })
-    
     dataTask?.resume()
+}
+
+func newPostNotification(postId:String,result:(resultError:NSError?)->Void){
+    let notificationURL = serverBaseURL+"/notifications/NPA/\((currentUser!.uid))/\(postId)"
+    let request = NSMutableURLRequest(URL: NSURL(string:notificationURL)!)
+    request.HTTPMethod = "POST"
     
+    dataTask = defaultSession.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+        result(resultError: error)
+    })
+    dataTask?.resume()
+}
+
+func newCommentNotification(postId:String,result:(resultError:NSError?)->Void){
+    let notificationURL = serverBaseURL+"/notifications/NCA/\((currentUser!.uid))/\(postId)"
+    let request = NSMutableURLRequest(URL: NSURL(string:notificationURL)!)
+    request.HTTPMethod = "POST"
+    
+    dataTask = defaultSession.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+        result(resultError: error)
+    })
+    dataTask?.resume()
+}
+
+func newLikeNotification(postId:String,result:(resultError:NSError?)->Void){
+    let notificationURL = serverBaseURL+"/notifications/NLA/\((currentUser!.uid))/\(postId)"
+    let request = NSMutableURLRequest(URL: NSURL(string:notificationURL)!)
+    request.HTTPMethod = "POST"
+    
+    dataTask = defaultSession.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+        result(resultError: error)
+    })
+    dataTask?.resume()
 }
 
 var pageKey:String?
