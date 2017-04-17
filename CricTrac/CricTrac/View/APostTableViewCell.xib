@@ -88,6 +88,9 @@
                         <state key="normal" title="COMMENT" image="speech_bubble">
                             <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.5" colorSpace="calibratedRGB"/>
                         </state>
+                        <connections>
+                            <action selector="didTapCommentBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Sne-zB-Obf"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HT5-zA-qQ7">
                         <rect key="frame" x="458" y="183" width="82" height="29"/>
