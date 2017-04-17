@@ -936,9 +936,13 @@ func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
     let returnData = ["timeline":["AddedTime":addedTime,"Post":postText,"CommentCount":"0","LikeCount":"0","OwnerName":userName,"postId":postKey,"OwnerID":currentUser!.uid,"PostedBy":currentUser!.uid,"PostType":"Self"]]
     
         sucess(data: returnData)
+    
         updateTimelineWithNewPost(postKey) { (resultError) in
-        
-        KRProgressHUD.dismiss()
+            KRProgressHUD.dismiss()
+        }
+    
+    newPostNotification(postKey) { (resultError) in
+        //KRProgressHUD.dismiss()
     }
 }
 
@@ -967,6 +971,10 @@ func addNewComment(postId:String,comment:String){
     ref.setValue(commentDict)
    
     calCmtCnt(postId)
+    
+    newCommentNotification(postId) { (resultError) in
+        //KRProgressHUD.dismiss()
+    }
 }
 
 func calCmtCnt(postId:String) {
@@ -1022,6 +1030,9 @@ func likePost(postId:String)->[String:[String:String]]{
     ref.setValue(likeDict)
     
     calLikeCnt(postId)
+    newLikeNotification(postId) { (resultError) in
+        //KRProgressHUD.dismiss()
+    }
     
     return [ref.key:likeDict]
 }

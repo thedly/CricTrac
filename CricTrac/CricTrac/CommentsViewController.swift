@@ -293,7 +293,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     func deletebuttonTapped() {
         //        timelineData!.arrayObject?.removeAtIndex(index)
         //        timeLineTable.reloadData()
-         tableView.reloadData()
+         //tableView.reloadData()
     }
     
 //    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
