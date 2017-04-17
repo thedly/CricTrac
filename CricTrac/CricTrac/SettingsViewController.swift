@@ -32,7 +32,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         initializeView()
         setNavigationBarProperties()
         // Do any additional setup after loading the view.
+       
     }
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView(frame: .zero)
+    }
+
     
     func setNavigationBarProperties(){
         var currentTheme:CTTheme!
@@ -69,6 +74,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return settingsMenuData.count
+    }
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 60
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
