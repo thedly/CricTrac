@@ -35,7 +35,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     var dataSource = [[String:AnyObject]]()
     var postId:String = ""
     var comntsHeightConstraint = false
-    var postData:JSON?
+    //var postData:JSON?
     var currentTheme:CTTheme!
     var commentId:String = ""
    
@@ -63,7 +63,8 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         commentTextView.layer.borderWidth = 1
         commentTextView.layer.borderColor = UIColor.darkGrayColor().CGColor
         commentTextView.setPlaceHolder()
-        postId = (postData!.dictionaryValue["postId"]?.stringValue)!
+
+        //postId = (postData!.dictionaryValue["postId"]?.stringValue)!
         //postText.text = postData!.dictionaryValue["Post"]?.stringValue
         //userName.text = postData!.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
         
@@ -95,7 +96,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
             else {
                 self.comments.text = "0 Comments"
             }
-        }
+        //}
         
 //        if let likeCount = postData!.dictionaryValue["Likes"]?.count{
 //            likes.text = "\(likeCount) Likes"
@@ -113,20 +114,20 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
 //            comments.text = "0 Comments"
 //        }
         
-        let friendId = postData!["OwnerID"].stringValue
-        if let city = friendsCity[friendId]{
+        let friendId = data["OwnerID"]!
+        if let city = friendsCity[friendId as! String]{
             self.userCity.text = city
         }else
         {
-            fetchFriendCity(friendId, sucess: { (city) in
-                friendsCity[friendId] = city
+            fetchFriendCity(friendId as! String, sucess: { (city) in
+                friendsCity[friendId as! String] = city
                 dispatch_async(dispatch_get_main_queue(),{
                     //self.userCity.text = city
                 })
             })
         }
         
-        fetchFriendDetail(friendId, sucess: { (result) in
+        fetchFriendDetail(friendId as! String, sucess: { (result) in
             let proPic = result["proPic"]
             if proPic! == "-"{
                 let imageName = "propic.png"
@@ -140,7 +141,8 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
             }
             //sucess(result: ["proPic":proPic,"city":city])
         })
-        
+    }
+    
 //        if let dateTimeStamp = postData!["AddedTime"].double{
 //            let date = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
 //            let dateFormatter = NSDateFormatter()
@@ -262,8 +264,8 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
             commentTextView.setPlaceHolder()
             textViewHeightConstraint.constant = 30
             dataSource.append(["OwnerName":loggedInUserName ?? "Another Friend","Comment":text])
-            let postId = postData!.dictionaryValue["postId"]?.stringValue
-            addNewComment(postId!, comment:text)
+            //let postId = postData!.dictionaryValue["postId"]?.stringValue
+            addNewComment(postId, comment:text)
         
             tableView.reloadData()
         }
@@ -401,18 +403,22 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     }
     
     @IBAction func didTapLikeButton(sender: UIButton) {
-        likeOrUnlike(postId, like: { (likeDict) in
-            self.likeButton.titleLabel?.textColor = UIColor.whiteColor()
-            self.postLikeCount += 1
-            //self.likes.text = "\(self.postLikeCount) Likes"
-             timelineData![self.postIndex]["Likes"] = JSON(likeDict)
-        }) {
-            self.removeLikeFromArray()
-            self.likeButton.titleLabel?.textColor = UIColor.grayColor()
-            self.postLikeCount -= 1
-            //self.likes.text = "\(self.postLikeCount) Likes"
-        }
+        likeOrUnlike(postId)
     }
+    
+//    @IBAction func didTapLikeButton(sender: UIButton) {
+//        likeOrUnlike(postId, like: { (likeDict) in
+//            self.likeButton.titleLabel?.textColor = UIColor.whiteColor()
+//            self.postLikeCount += 1
+//            //self.likes.text = "\(self.postLikeCount) Likes"
+//             timelineData![self.postIndex]["Likes"] = JSON(likeDict)
+//        }) {
+//            self.removeLikeFromArray()
+//            self.likeButton.titleLabel?.textColor = UIColor.grayColor()
+//            self.postLikeCount -= 1
+//            //self.likes.text = "\(self.postLikeCount) Likes"
+//        }
+//    }
     
     func addLikeToDataArray(likeArray:[String:[String:String]]){
         
