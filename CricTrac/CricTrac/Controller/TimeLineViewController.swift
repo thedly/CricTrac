@@ -388,13 +388,13 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         return 5
     }
     
-//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        if indexPath.section  == 0{
-//            let newPost = viewControllerFrom("Main", vcid: "NewPostViewController") as! NewPostViewController
-//            newPost.sendPostDelegate = self
-//            newPost.modalPresentationStyle = .OverCurrentContext
-//            presentViewController(newPost, animated: true, completion: nil)
-//        }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section  == 0{
+            let newPost = viewControllerFrom("Main", vcid: "NewPostViewController") as! NewPostViewController
+            newPost.sendPostDelegate = self
+            newPost.modalPresentationStyle = .OverCurrentContext
+            presentViewController(newPost, animated: true, completion: nil)
+        }
 //        else
 //        {
 //            let newPost = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
@@ -403,7 +403,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
 //            newPost.refreshableParent = self
 //            presentViewController(newPost, animated: true, completion: nil)
 //        }
-//    }
+    }
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height)

@@ -22,6 +22,7 @@ class APostTableViewCell: UITableViewCell {
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var postedDate: UILabel!
     
+    @IBOutlet weak var commentButton: UIButton!
     var postId:String?
     var totalLikeCount = 0
     var index:Int?
@@ -48,6 +49,7 @@ class APostTableViewCell: UITableViewCell {
             post.userInteractionEnabled = true
             post.addGestureRecognizer(gesture)
         }
+       
     }
     
     func didTapLabelName(){
@@ -73,14 +75,16 @@ class APostTableViewCell: UITableViewCell {
                 parentVC.presentViewController(commentPage, animated: true) {}
             }
         }
+       
+//        if  commentButton != nil{
+//            if let parentVC = parent as? UIViewController{
+//                let commentPage = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
+//                commentPage.postId = postId!
+//                parentVC.presentViewController(commentPage, animated: true) {}
+//            }
+//        }
         
-        if  post != nil{
-            if let parentVC = parent as? UIViewController{
-                let commentPage = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
-                commentPage.postId = postId!
-                parentVC.presentViewController(commentPage, animated: true) {}
-            }
-        }
+        
     }
     
     func moveToPlayer(userInfo:[String : AnyObject]){
@@ -129,6 +133,17 @@ class APostTableViewCell: UITableViewCell {
         //}
     }
     
+  
+    @IBAction func didTapCommentButton(sender: UIButton) {
+       
+        if let parentVC = parent as? UIViewController{
+            let commentPage = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
+            commentPage.postId = postId!
+            parentVC.presentViewController(commentPage, animated: true) {}
+        }
+        
+        
+    }
     func removeLikeFromArray(){
         var likes = timelineData!.arrayObject![index!]["Likes"] as! [String:[String:String]]
         let keys =  likes.filter{key,val in

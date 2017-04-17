@@ -89,7 +89,7 @@
                             <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.5" colorSpace="calibratedRGB"/>
                         </state>
                         <connections>
-                            <action selector="didTapCommentBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Sne-zB-Obf"/>
+                            <action selector="didTapCommentButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="UWb-yK-R8K"/>
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HT5-zA-qQ7">
@@ -176,6 +176,7 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="commentButton" destination="FYt-Kg-9A5" id="G4i-rL-Fas"/>
                 <outlet property="commentCount" destination="HT5-zA-qQ7" id="Had-c4-nAz"/>
                 <outlet property="deleteButton" destination="eyX-jy-j45" id="tFJ-zd-5tk"/>
                 <outlet property="likeButton" destination="sao-ME-HsA" id="Pbc-eS-yt8"/>

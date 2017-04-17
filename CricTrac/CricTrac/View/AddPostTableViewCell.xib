@@ -66,6 +66,7 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="freeHitLabel" destination="bhW-du-ny1" id="aqS-jr-CmH"/>
                 <outlet property="timelineOwnerPic" destination="8Ce-D1-WU7" id="UaB-WL-i9i"/>
             </connections>
             <point key="canvasLocation" x="358" y="276"/>
