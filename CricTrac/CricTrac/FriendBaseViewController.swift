@@ -95,7 +95,8 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
     override  func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         let friends = viewControllerFrom("Main", vcid: "FriendsViewController")
         let friendReq = viewControllerFrom("Main", vcid: "FriendRequestsViewController")
-        let friendInv = viewControllerFrom("Main", vcid: "FriendsInviteViewController")
+        let friendInv = viewControllerFrom("Main", vcid: "FriendSuggestViewController")
+        //let friendInv = viewControllerFrom("Main", vcid: "FriendsInviteViewController")
         return [friends, friendReq, friendInv]
     }
     

@@ -270,7 +270,6 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                             }
                         }
                     })
-                    
                 }else{
                     postCell.postOwnerName.text = data.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
                     if let postedBy = data["OwnerID"].string  where postedBy == currentUser!.uid{
@@ -304,7 +303,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 }
                 
                 
-                //sajith-  fetch the fresh post data
+                //sajith-  fetch the fresh post data for Like and Comment counts
                 let postid = data.dictionaryValue["postId"]?.stringValue
                 getPost(postid!) { (data) in
                     if (data["LikeCount"] != nil) {
@@ -342,7 +341,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 if let likes = data.dictionaryValue["Likes"]?.dictionaryObject as? [String:[String:String]]{
                     let result = likes.filter{ return  $0.1["OwnerID"] == currentUser!.uid }
                     if result.count > 0 {
-                        likeColor = UIColor.yellowColor()
+                        likeColor = UIColor.whiteColor()
                     }
 //                    likesCount = likes.count
 //                    postCell.totalLikeCount = likesCount

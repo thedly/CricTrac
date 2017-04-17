@@ -12,6 +12,7 @@ import KRProgressHUD
 
 class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider,ThemeChangeable {
     @IBOutlet weak var SuggestsTblview: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()
@@ -33,19 +34,55 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     
     func initializeView() {
         SuggestsTblview.registerNib(UINib.init(nibName:"FriendSuggestionsCell", bundle: nil), forCellReuseIdentifier: "FriendSuggestionsCell")
+        
         SuggestsTblview.allowsSelection = false
         SuggestsTblview.separatorStyle = .None
         SuggestsTblview.dataSource = self
         SuggestsTblview.delegate = self
-        self.view.backgroundColor = UIColor.clearColor()
         
         //setBackgroundColor()
         //setUIBackgroundTheme(self.view)
+        self.view.backgroundColor = UIColor.clearColor()
+        getFriendSuggestions()
+
+//        SuggestsTblview.registerNib(UINib.init(nibName:"FriendSuggestionsCell", bundle: nil), forCellReuseIdentifier: "FriendSuggestionsCell")
+//        SuggestsTblview.allowsSelection = false
+//        SuggestsTblview.separatorStyle = .None
+//        SuggestsTblview.dataSource = self
+//        SuggestsTblview.delegate = self
+//        self.view.backgroundColor = UIColor.clearColor()
+//        
+//        //setBackgroundColor()
+//        //setUIBackgroundTheme(self.view)
     }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "INVITE")
+        return IndicatorInfo(title: "SUGGESTIONS")
     }
+    
+    func getFriendSuggestions() {
+        backgroundThread(background: {
+            KRProgressHUD.showText("Loading ...")
+            getAllFriendSuggestions({
+                var modFriendReqData = [Profile]()
+                for (index, dat) in UserProfilesData.enumerate() {
+                    if FriendRequestsData.filter({$0.Name == dat.fullName }).count == 0 {
+                        modFriendReqData.append(dat)
+                    }
+                }
+                UserProfilesData.removeAll()
+                UserProfilesData = modFriendReqData
+                
+                dispatch_async(dispatch_get_main_queue(),{
+                    
+                    KRProgressHUD.dismiss()
+                    self.SuggestsTblview.reloadData()
+                    
+                })
+            })
+        })
+    }
+
     
     // MARK: - Table delegate functions
     
@@ -61,120 +98,65 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return UserProfilesData.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        return getCellForSuggestionsRow(indexPath)
+    }
+    
+    func getCellForSuggestionsRow(indexPath:NSIndexPath)->FriendSuggestionsCell{
+        if FriendRequestsData.filter({$0.Name == UserProfilesData[indexPath.row].fullName}).first == nil {
+            if let aCell =  SuggestsTblview.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as? FriendSuggestionsCell {
+                aCell.configureCell(UserProfilesData[indexPath.row])
+                aCell.AddFriendBtn.accessibilityIdentifier = UserProfilesData[indexPath.row].id
+                aCell.AddFriendBtn.addTarget(self, action: #selector(AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                aCell.backgroundColor = UIColor.clearColor()
+                return aCell
+            }
+            else {
+                return FriendSuggestionsCell()
+            }
+        }
+        else {
+            return FriendSuggestionsCell()
+        }
     }
     
     func AddFriendBtnPressed(sender: UIButton) {
-        
         if let FriendUserId = sender.accessibilityIdentifier where FriendUserId != "" {
-            
-            if let FriendObject  = UserProfilesData.filter({ $0.id == FriendUserId }).first {
-                
+            getProfileInfoById(FriendUserId, sucessBlock: { FriendData in
+                let FriendObject = Profile(usrObj: FriendData)
                 getProfileInfoById((currentUser?.uid)!, sucessBlock: { data in
-                
                     let loggedInUserObject = Profile(usrObj: data)
-                    
-                    
                     let sendFriendRequestData = SentFriendRequest()
-                    
                     sendFriendRequestData.City = FriendObject.City
-                    
-                    /*
-                    switch FriendObject.UserProfile {
-                    case userProfileType.Player.rawValue :
-                        sendFriendRequestData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
-                            break;
-                    case userProfileType.Coach.rawValue :
-                        sendFriendRequestData.Club = FriendObject.CoachCurrentTeams.joinWithSeparator(",")
-                        break;
-                    case userProfileType.Fan.rawValue :
-                        sendFriendRequestData.Club = FriendObject.SupportingTeams.joinWithSeparator(",")
-                        break;
-                    default:
-                        sendFriendRequestData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
-                        break;
-
-                    }*/
-                    
-                    
                     sendFriendRequestData.Name = FriendObject.fullName
                     sendFriendRequestData.SentTo = FriendObject.id
                     sendFriendRequestData.SentDateTime = NSDate().getCurrentTimeStamp()
                     
-                    
-                    
                     let receiveFriendRequestData = ReceivedFriendRequest()
-                    
-                    
                     receiveFriendRequestData.City = loggedInUserObject.City
-                    /*
-                    switch loggedInUserObject.UserProfile {
-                    case userProfileType.Player.rawValue :
-                        receiveFriendRequestData.Club = loggedInUserObject.PlayerCurrentTeams.joinWithSeparator(",")
-                        break;
-                    case userProfileType.Coach.rawValue :
-                        receiveFriendRequestData.Club = loggedInUserObject.CoachCurrentTeams.joinWithSeparator(",")
-                        break;
-                    case userProfileType.Fan.rawValue :
-                        receiveFriendRequestData.Club = loggedInUserObject.SupportingTeams.joinWithSeparator(",")
-                        break;
-                    default:
-                        receiveFriendRequestData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
-                        break;
-                        
-                    }*/
-
+                    
                     receiveFriendRequestData.Name = loggedInUserObject.fullName
                     receiveFriendRequestData.ReceivedFrom = loggedInUserObject.id
                     receiveFriendRequestData.ReceivedDateTime = NSDate().getCurrentTimeStamp()
                     
+                    if let index = UserProfilesData.indexOf( {$0.id == FriendObject.id}) {
+                        UserProfilesData.removeAtIndex(index)
+                    }
                     
-                    
-                    AddSentRequestData(["sentRequestData": sendFriendRequestData.GetFriendRequestObject(sendFriendRequestData), "ReceivedRequestData": receiveFriendRequestData.getFriendRequestObject(receiveFriendRequestData)], callback: { data in
-                        
-                        
-                        if let index = UserProfilesData.indexOf( {$0.id == FriendObject.id}) {
-                            UserProfilesData.removeAtIndex(index)
-                        }
-                        
-                        
-                        self.SuggestsTblview.reloadData()
-                        
-                        
+                    backgroundThread(background: {
+                        AddSentRequestData(["sentRequestData": sendFriendRequestData.GetFriendRequestObject(sendFriendRequestData), "ReceivedRequestData": receiveFriendRequestData.getFriendRequestObject(receiveFriendRequestData)], callback: { data in
+                            
+                            dispatch_async(dispatch_get_main_queue(),{
+                                self.SuggestsTblview.reloadData()
+                            })
+                        })
                     })
-
-                
-                }) //UserProfilesData.filter({ $0.id == currentUser?.uid }).first {
-                
-                
-            }
-            
+                })
+            })
         }
-        
-        
-        
-        
-        //            let friendRequestData  = ["sentRequestData":
-        //
-        //            ["City": _userObj.City, "Club": _userObj.TeamName, "Name": _userObj.fullName, "SentTo": _userObj.id, "SentDateTime": "\(currentTimeMillis())"],
-        //
-        //            "ReceivedRequestData" : ["City": loggedInUser.City, "Club": loggedInUser.TeamName, "Name": loggedInUser.fullName, "ReceivedFrom": loggedInUser.id, "ReceievedDateTime": "\(currentTimeMillis())"]
-        //            ]
-        //
-        //            AddSentRequestData(friendRequestData, callback: { sentRequestId in
-        //            print(sentRequestId)
-        //            })
-        
-        
-        
-        //Send Friend Request
-        
-        
-        
     }
 
     

@@ -23,13 +23,13 @@ class CommentTableViewCell: UITableViewCell {
     @IBAction func deletebuttonTapped(sender: AnyObject) {
         let refreshAlert = UIAlertController(title: "Delete Comment", message: "Are you sure you want to delete this comment?", preferredStyle: UIAlertControllerStyle.Alert)
         
-        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
+        refreshAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
             //delete comment
             if let value = self.commentID {
                 delComment(self.postID!,commentId: self.commentID!)
             }
             
-            //parent?.deletePost(index!)
+            self.parent?.deletebuttonTapped()
         }))
         
         refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
