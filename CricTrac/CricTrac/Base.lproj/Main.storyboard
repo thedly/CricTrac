@@ -362,6 +362,7 @@
             <string>SourceSansPro-Bold</string>
             <string>SourceSansPro-Bold</string>
             <string>SourceSansPro-Bold</string>
+            <string>SourceSansPro-Bold</string>
         </mutableArray>
         <mutableArray key="SourceSansPro-Regular.otf">
             <string>SourceSansPro-Regular</string>
@@ -2172,7 +2173,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EBA449DE-DE7B-43EF-92A7-E57E70972EAB" translatesAutoresizingMaskIntoConstraints="NO" id="oF2-e2-1Wz">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="D2BF9629-0D0B-484A-87C9-8BD3F2EBA1A1" translatesAutoresizingMaskIntoConstraints="NO" id="oF2-e2-1Wz">
                                                 <rect key="frame" x="529" y="546" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="16" id="3f0-C6-z59"/>
@@ -2269,7 +2270,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EBA449DE-DE7B-43EF-92A7-E57E70972EAB" translatesAutoresizingMaskIntoConstraints="NO" id="fsn-M8-eca">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="D2BF9629-0D0B-484A-87C9-8BD3F2EBA1A1" translatesAutoresizingMaskIntoConstraints="NO" id="fsn-M8-eca">
                                                 <rect key="frame" x="529" y="186" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="16" id="Db4-OQ-KbR"/>
@@ -2336,7 +2337,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EBA449DE-DE7B-43EF-92A7-E57E70972EAB" translatesAutoresizingMaskIntoConstraints="NO" id="bhw-c3-xiz">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="D2BF9629-0D0B-484A-87C9-8BD3F2EBA1A1" translatesAutoresizingMaskIntoConstraints="NO" id="bhw-c3-xiz">
                                                 <rect key="frame" x="529" y="402" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="16" id="65C-T8-6qD"/>
@@ -2373,7 +2374,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EBA449DE-DE7B-43EF-92A7-E57E70972EAB" translatesAutoresizingMaskIntoConstraints="NO" id="38U-SC-Isu">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="D2BF9629-0D0B-484A-87C9-8BD3F2EBA1A1" translatesAutoresizingMaskIntoConstraints="NO" id="38U-SC-Isu">
                                                 <rect key="frame" x="529" y="474" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="16" id="Fyv-ih-I0W"/>
@@ -11987,24 +11988,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="125" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sqG-Ut-y81">
-                                <rect key="frame" x="0.0" y="40" width="600" height="300"/>
+                                <rect key="frame" x="0.0" y="40" width="600" height="560"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="300" id="9uw-2s-T2l"/>
-                                </constraints>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PEOPLE YOU MAY KNOW" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i4t-he-geO">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PEOPLE YOU MAY KNOW" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i4t-he-geO">
                                 <rect key="frame" x="238" y="360" width="125" height="16"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Semibold" family="Source Sans Pro" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ubk-iQ-GX6">
-                                <rect key="frame" x="0.0" y="381" width="600" height="219"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="( NO MORE REQUESTS )" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewh-m9-wtB">
-                                <rect key="frame" x="238" y="10" width="125" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="( NO MORE REQUESTS )" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewh-m9-wtB">
+                                <rect key="frame" x="241" y="10" width="119" height="16"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Semibold" family="Source Sans Pro" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -12015,35 +12009,29 @@
                             <constraint firstItem="sqG-Ut-y81" firstAttribute="top" secondItem="dwr-iO-DtR" secondAttribute="bottom" constant="50" id="8ny-Xh-FkM"/>
                             <constraint firstItem="ewh-m9-wtB" firstAttribute="centerX" secondItem="EMt-V5-QuV" secondAttribute="centerX" id="Aoh-ly-ow0"/>
                             <constraint firstAttribute="trailing" secondItem="sqG-Ut-y81" secondAttribute="trailing" id="JCO-EP-TVB"/>
-                            <constraint firstItem="ubk-iQ-GX6" firstAttribute="top" secondItem="i4t-he-geO" secondAttribute="bottom" constant="10" id="JzM-GQ-crM"/>
-                            <constraint firstItem="ubk-iQ-GX6" firstAttribute="top" secondItem="i4t-he-geO" secondAttribute="bottom" constant="8" symbolic="YES" id="OnW-49-Vha"/>
-                            <constraint firstItem="KhU-WW-cPE" firstAttribute="top" secondItem="ubk-iQ-GX6" secondAttribute="bottom" id="Si6-mV-WR4"/>
                             <constraint firstItem="ewh-m9-wtB" firstAttribute="top" secondItem="EMt-V5-QuV" secondAttribute="topMargin" constant="10" id="a1c-wl-XDd"/>
-                            <constraint firstItem="ubk-iQ-GX6" firstAttribute="top" secondItem="sqG-Ut-y81" secondAttribute="bottom" id="ard-zw-bQ0"/>
                             <constraint firstItem="KhU-WW-cPE" firstAttribute="top" secondItem="sqG-Ut-y81" secondAttribute="bottom" id="hVp-In-Fzh"/>
                             <constraint firstItem="sqG-Ut-y81" firstAttribute="leading" secondItem="EMt-V5-QuV" secondAttribute="leading" id="kSJ-E9-Rya"/>
+                            <constraint firstItem="KhU-WW-cPE" firstAttribute="top" secondItem="sqG-Ut-y81" secondAttribute="bottom" id="kTW-yT-OgN"/>
                             <constraint firstItem="sqG-Ut-y81" firstAttribute="top" secondItem="dwr-iO-DtR" secondAttribute="bottom" constant="20" id="nBK-3X-X9S"/>
                             <constraint firstItem="i4t-he-geO" firstAttribute="centerX" secondItem="EMt-V5-QuV" secondAttribute="centerX" id="nHa-ki-g6B"/>
                             <constraint firstItem="i4t-he-geO" firstAttribute="leading" secondItem="EMt-V5-QuV" secondAttribute="leadingMargin" constant="10" id="sqL-Ni-TPd"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ubk-iQ-GX6" secondAttribute="trailing" constant="-20" id="vpv-67-wWm"/>
-                            <constraint firstItem="ubk-iQ-GX6" firstAttribute="leading" secondItem="EMt-V5-QuV" secondAttribute="leadingMargin" constant="-20" id="yOG-um-yMG"/>
                             <constraint firstItem="i4t-he-geO" firstAttribute="top" secondItem="sqG-Ut-y81" secondAttribute="bottom" constant="20" id="ze0-cQ-pWS"/>
                         </constraints>
                         <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="i4t-he-geO"/>
+                            </mask>
                             <mask key="constraints">
                                 <exclude reference="8ny-Xh-FkM"/>
-                                <exclude reference="OnW-49-Vha"/>
-                                <exclude reference="ard-zw-bQ0"/>
-                                <exclude reference="sqL-Ni-TPd"/>
                                 <exclude reference="hVp-In-Fzh"/>
+                                <exclude reference="sqL-Ni-TPd"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="RequestsTblViewHeight" destination="9uw-2s-T2l" id="i56-fs-vjr"/>
                         <outlet property="RequestsTblview" destination="sqG-Ut-y81" id="O3K-av-4zT"/>
                         <outlet property="noRequestsLbl" destination="ewh-m9-wtB" id="qaY-KI-WQz"/>
-                        <outlet property="suggestionsTblView" destination="ubk-iQ-GX6" id="XY1-jl-1Vd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nI5-Op-DQ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -12063,7 +12051,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="52" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FPY-0n-kNr">
-                                <rect key="frame" x="0.0" y="40" width="600" height="560"/>
+                                <rect key="frame" x="0.0" y="70" width="600" height="530"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="52" id="gGg-QF-WhF">
@@ -12076,14 +12064,26 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PEOPLE YOU MAY KNOW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eqk-gp-cQ7">
+                                <rect key="frame" x="20" y="36" width="560" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="0eF-5X-Hyy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="Eqk-gp-cQ7" firstAttribute="top" secondItem="wrX-Ej-lLz" secondAttribute="bottom" constant="16" id="4O2-vM-fK0"/>
                             <constraint firstItem="FPY-0n-kNr" firstAttribute="top" secondItem="wrX-Ej-lLz" secondAttribute="bottom" constant="50" id="8C4-Di-dJC"/>
+                            <constraint firstItem="Eqk-gp-cQ7" firstAttribute="leading" secondItem="u20-90-Jwk" secondAttribute="leading" constant="20" id="9aj-HK-p24"/>
+                            <constraint firstAttribute="trailing" secondItem="Eqk-gp-cQ7" secondAttribute="trailing" constant="20" id="AnV-TV-qLN"/>
                             <constraint firstItem="5dA-3m-frj" firstAttribute="top" secondItem="FPY-0n-kNr" secondAttribute="bottom" id="Ekn-Tb-1lE"/>
+                            <constraint firstItem="FPY-0n-kNr" firstAttribute="top" secondItem="Eqk-gp-cQ7" secondAttribute="bottom" constant="18" id="FVs-oz-klS"/>
                             <constraint firstItem="FPY-0n-kNr" firstAttribute="top" secondItem="wrX-Ej-lLz" secondAttribute="bottom" constant="20" id="QQe-UN-ZOP"/>
                             <constraint firstItem="FPY-0n-kNr" firstAttribute="leading" secondItem="u20-90-Jwk" secondAttribute="leading" id="bDB-1D-g10"/>
-                            <constraint firstItem="FPY-0n-kNr" firstAttribute="top" secondItem="wrX-Ej-lLz" secondAttribute="bottom" constant="20" id="tAF-ZK-wfA"/>
                             <constraint firstAttribute="trailing" secondItem="FPY-0n-kNr" secondAttribute="trailing" id="wfe-05-nHs"/>
                         </constraints>
                         <variation key="default">
@@ -13703,11 +13703,7 @@
         <image name="Calendar-100" width="19" height="17"/>
         <image name="CricTrac_Img" width="210" height="36"/>
         <image name="Cricket Filled-100" width="171" height="171"/>
-        <image name="Delete Filled-100 (1)" width="17" height="17"/>
-        <image name="Delete-100" width="100" height="100"/>
-        <image name="Delete-icon" width="27" height="29"/>
-        <image name="DropdownIcon" width="13" height="8"/>
-        <image name="EBA449DE-DE7B-43EF-92A7-E57E70972EAB" width="13" height="8">
+        <image name="D2BF9629-0D0B-484A-87C9-8BD3F2EBA1A1" width="13" height="8">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -13784,6 +13780,10 @@ gACCAIcAkgCUAJYAmACdAKAAogCkAKYAqACtAMQAxgDID3oPfw+KD5MPpg+qD7UPvg/DD8sPzg/TD+IP
 ABBHA
 </mutableData>
         </image>
+        <image name="Delete Filled-100 (1)" width="17" height="17"/>
+        <image name="Delete-100" width="100" height="100"/>
+        <image name="Delete-icon" width="27" height="29"/>
+        <image name="DropdownIcon" width="13" height="8"/>
         <image name="Edit-100" width="20" height="20"/>
         <image name="Facebook-96" width="52" height="52"/>
         <image name="Google Plus-96" width="52" height="52"/>

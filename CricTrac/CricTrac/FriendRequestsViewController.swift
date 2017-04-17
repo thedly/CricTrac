@@ -74,7 +74,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
 //        else{
 //            self.RequestsTblViewHeight.constant = CGFloat(2.5 * 100)
 //        }
-        self.RequestsTblViewHeight.constant = self.RequestsTblview.contentSize.height
+       // self.RequestsTblViewHeight.constant = self.RequestsTblview.contentSize.height
     }
     
     func ReloadTbl() {
@@ -104,7 +104,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                 //friendsRequestsData.append(reqData)
                 var modReq = req as! [String : AnyObject]
                 modReq["IsSentRequest"] = true
-                var reqData = RequestsData(dataObj: modReq)
+                let reqData = RequestsData(dataObj: modReq)
                 FriendRequestsData.append(reqData)
             }
             
