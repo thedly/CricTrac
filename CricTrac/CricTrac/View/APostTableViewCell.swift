@@ -39,20 +39,20 @@ class APostTableViewCell: UITableViewCell {
     
     func addTapGestureToUserName(){
         if let _ = postOwnerName{
-            let gesture = UITapGestureRecognizer(target: self, action: #selector(APostTableViewCell.didTapLabelName))
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(APostTableViewCell.didTapOwnerName))
             postOwnerName.userInteractionEnabled = true
             postOwnerName.addGestureRecognizer(gesture)
         }
         
         if let _ = post{
-            let gesture = UITapGestureRecognizer(target: self, action: #selector(APostTableViewCell.didTapLabelName))
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(APostTableViewCell.didTapPost))
             post.userInteractionEnabled = true
             post.addGestureRecognizer(gesture)
         }
        
     }
     
-    func didTapLabelName(){
+    func didTapOwnerName(){
         if postOwnerName.text != "CricTrac" {
             if  postOwnerId != nil{
                 getFriendProfileInfo(postOwnerId, sucess: { (friendInfo) in
@@ -67,7 +67,9 @@ class APostTableViewCell: UITableViewCell {
                 })
             }
         }
-        
+    }
+    
+    func didTapPost(){
         if  post != nil{
             if let parentVC = parent as? UIViewController{
                 let commentPage = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
@@ -75,16 +77,6 @@ class APostTableViewCell: UITableViewCell {
                 parentVC.presentViewController(commentPage, animated: true) {}
             }
         }
-       
-//        if  commentButton != nil{
-//            if let parentVC = parent as? UIViewController{
-//                let commentPage = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
-//                commentPage.postId = postId!
-//                parentVC.presentViewController(commentPage, animated: true) {}
-//            }
-//        }
-        
-        
     }
     
     func moveToPlayer(userInfo:[String : AnyObject]){

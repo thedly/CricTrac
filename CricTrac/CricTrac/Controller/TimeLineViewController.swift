@@ -152,12 +152,12 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         sliderMenu.setDrawerState(.Opened, animated: true)
     }
     
-    func didNewMatchButtonTapp(){
-        let newMatchVc = viewControllerFrom("Main", vcid: "AddMatchDetailsViewController")
-        let nav = UINavigationController(rootViewController: newMatchVc)
-        sliderMenu.mainViewController = nav
-       // self.presentViewController(nav, animated: true) {}
-    }
+//    func didNewMatchButtonTapp(){
+//        let newMatchVc = viewControllerFrom("Main", vcid: "AddMatchDetailsViewController")
+//        let nav = UINavigationController(rootViewController: newMatchVc)
+//        sliderMenu.mainViewController = nav
+//       // self.presentViewController(nav, animated: true) {}
+//    }
     
     func setNavigationBarProperties(){
         currentTheme = cricTracTheme.currentTheme
@@ -167,17 +167,17 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         menuButton.frame = CGRectMake(0, 0, 40, 40)
         let leftbarButton = UIBarButtonItem(customView: menuButton)
         
-        let addNewMatchButton: UIButton = UIButton(type:.Custom)
-        addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
-        addNewMatchButton.setTitle("+", forState:.Normal)
-        addNewMatchButton.titleLabel?.font = UIFont(name: appFont_bold, size: 30)
-        addNewMatchButton.addTarget(self, action: #selector(didNewMatchButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
-        let righttbarButton = UIBarButtonItem(customView: addNewMatchButton)
+        //let addNewMatchButton: UIButton = UIButton(type:.Custom)
+        //addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
+        //addNewMatchButton.setTitle("+", forState:.Normal)
+        //addNewMatchButton.titleLabel?.font = UIFont(name: appFont_bold, size: 30)
+        //addNewMatchButton.addTarget(self, action: #selector(didNewMatchButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+        //let righttbarButton = UIBarButtonItem(customView: addNewMatchButton)
         
         //assign button to navigationbar
         
         navigationItem.leftBarButtonItem = leftbarButton
-        navigationItem.rightBarButtonItem = righttbarButton
+        //navigationItem.rightBarButtonItem = righttbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "PAVILION"
        // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
@@ -311,9 +311,9 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 
                 //sajith-  fetch the fresh post data for Like and Comment counts
                 let postid = data.dictionaryValue["postId"]?.stringValue
-                getPost(postid!) { (data) in
+                getPost(postid!) { (postData) in
                     
-                    if let dateTimeStamp = data["AddedTime"] as? Double{
+                    if let dateTimeStamp = postData["AddedTime"] as? Double{
                         let date = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
                         let dateFormatter = NSDateFormatter()
                         dateFormatter.timeZone = NSTimeZone.localTimeZone()
@@ -322,15 +322,15 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                         postCell.postedDate.text = dateFormatter.stringFromDate(date)
                     }
                     
-                    if (data["LikeCount"] != nil) {
-                        let likeCount = data["LikeCount"] as? Int
+                    if (postData["LikeCount"] != nil) {
+                        let likeCount = postData["LikeCount"] as? Int
                         postCell.likeCount.setTitle("\(likeCount!) Likes", forState: .Normal)
                     }
                     else {
                         postCell.likeCount.setTitle("0 Likes", forState: .Normal)
                     }
-                    if (data["CommentCount"] != nil) {
-                        let cmtCount = data["CommentCount"] as? Int
+                    if (postData["CommentCount"] != nil) {
+                        let cmtCount = postData["CommentCount"] as? Int
                         postCell.commentCount.setTitle("\(cmtCount!) Comments", forState: .Normal)
                     }
                     else {

@@ -37,6 +37,9 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     var userProfileData:Profile!
     
+    var currentUserProfileImage = UIImage()
+    var currentUserCoverImage = UIImage()
+    
     // MARK: - Plumbing
     
    @IBOutlet weak var vsView: UIView!
@@ -357,15 +360,36 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         let formattedString = NSMutableAttributedString()
         let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.Country)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.DateOfBirth)\n", fontName: appFont_black, fontSize: 15)
         self.PlayerLocation.attributedText = locationText
-        self.userProfileImage.image = LoggedInUserImage
-        self.imgCoverPhoto.image = LoggedInUserCoverImage
+//        self.userProfileImage.image = LoggedInUserImage
+//        self.imgCoverPhoto.image = LoggedInUserCoverImage
         
+        if userProfileData.ProfileImageURL != "-" {
+                getImageFromFirebase(userProfileData.ProfileImageURL) { (imgData) in
+                    self.currentUserProfileImage = imgData
+            }
+        }
+        else {
+            let imageName = "propic.png"
+            let image = UIImage(named: imageName)
+            self.currentUserProfileImage = image!
+        }
+        
+        if userProfileData.ProfileImageURL != "-" {
+            getImageFromFirebase(userProfileData.CoverPhotoURL) { (imgData) in
+                self.currentUserCoverImage = imgData
+            }
+        }
+        else {
+            let imageName = "propic.png"
+            let image = UIImage(named: imageName)
+            self.currentUserCoverImage = image!
+        }
+        
+        self.userProfileImage.image = currentUserProfileImage
+        self.imgCoverPhoto.image = currentUserCoverImage
         
         //getMatchData()
-        
-        
-        
-        
+                
         //setBackgroundColor()
         
         // Do any additional setup after loading the view.
