@@ -43,6 +43,7 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         settings.style.buttonBarItemBackgroundColor = UIColor.clearColor()
         settings.style.buttonBarItemTitleColor = UIColor.whiteColor()
         buttonBarView.selectedBar.backgroundColor = UIColor.whiteColor()
+        
         self.buttonBarView.collectionViewLayout = UICollectionViewFlowLayout()
         self.buttonBarView.frame.size.height = 40
         searchBar.delegate = self
