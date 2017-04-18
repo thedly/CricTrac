@@ -20,14 +20,19 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
     
     func didSearchTapp(sender: UIButton){
         UIView.animateWithDuration(0.3) {
-            self.searchBar.hidden = false
-            self.searchBar.alpha = 1
-            //self.searchResultsTblView.alpha = 1
-            self.searchBar.becomeFirstResponder()
+//            self.searchBar.hidden = false
+//            self.searchBar.alpha = 1
+//            //self.searchResultsTblView.alpha = 1
+         //   self.searchBar.becomeFirstResponder()
+            let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+             let vc  = storyboard.instantiateViewControllerWithIdentifier("FriendSearchViewController") as! FriendSearchViewController
+             self.navigationController?.pushViewController(vc, animated: true)
+           // self.presentViewController(vc, animated: true, completion: nil)
+         
         }
     }
-    
-    var searchedProfiles = [Profile]()
+//
+//    var searchedProfiles = [Profile]()
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchResultsTblView: UITableView!
     
@@ -105,112 +110,112 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         return [friends, friendReq, friendSug, friendInv]
     }
     
-    func getCellForSearchedParametersRow(indexPath:NSIndexPath)->FriendSuggestionsCell{
-        if let aCell =  searchResultsTblView.dequeueReusableCellWithIdentifier("FriendSuggestionsCell") as? FriendSuggestionsCell {
-            if searchedProfiles.count > 0 && indexPath.row < searchedProfiles.count {
-                aCell.configureCell(searchedProfiles[indexPath.row])
-                aCell.AddFriendBtn.accessibilityIdentifier = searchedProfiles[indexPath.row].id
-                aCell.AddFriendBtn.addTarget(self, action: #selector(AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-                aCell.backgroundColor = UIColor.clearColor()
-                aCell.selectionStyle = .None
-            }
-            return aCell
-        }
-        else {
-            return FriendSuggestionsCell()
-        }
-    }
+//    func getCellForSearchedParametersRow(indexPath:NSIndexPath)->FriendSuggestionsCell{
+//        if let aCell =  searchResultsTblView.dequeueReusableCellWithIdentifier("FriendSuggestionsCell") as? FriendSuggestionsCell {
+//            if searchedProfiles.count > 0 && indexPath.row < searchedProfiles.count {
+//                aCell.configureCell(searchedProfiles[indexPath.row])
+//                aCell.AddFriendBtn.accessibilityIdentifier = searchedProfiles[indexPath.row].id
+//                aCell.AddFriendBtn.addTarget(self, action: #selector(AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+//                aCell.backgroundColor = UIColor.clearColor()
+//                aCell.selectionStyle = .None
+//            }
+//            return aCell
+//        }
+//        else {
+//            return FriendSuggestionsCell()
+//        }
+//    }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchedProfiles.count
-    }
+//    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return searchedProfiles.count
+//    }
+//    
+//    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+//        if searchedProfiles.count > 0 {
+//            return getCellForSearchedParametersRow(indexPath)
+//        }
+//        return UITableViewCell()
+//    }
+//    
+//    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        return 100
+//    }
+//    
+//    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        return 100
+//        
+//    }
+//
+//    func AddFriendBtnPressed(sender:UIButton) {
+//        if let FriendUserId = sender.accessibilityIdentifier where FriendUserId != "" {
+//            getProfileInfoById(FriendUserId, sucessBlock: { FriendData in
+//                let FriendObject = Profile(usrObj: FriendData)
+//                getProfileInfoById((currentUser?.uid)!, sucessBlock: { data in
+//                    let loggedInUserObject = Profile(usrObj: data)
+//                    let sendFriendRequestData = SentFriendRequest()
+//                    sendFriendRequestData.City = FriendObject.City
+//                    sendFriendRequestData.Name = FriendObject.fullName
+//                    sendFriendRequestData.SentTo = FriendObject.id
+//                    sendFriendRequestData.SentDateTime = NSDate().getCurrentTimeStamp()
+//                    
+//                    let receiveFriendRequestData = ReceivedFriendRequest()
+//                    receiveFriendRequestData.City = loggedInUserObject.City
+//                    receiveFriendRequestData.Name = loggedInUserObject.fullName
+//                    receiveFriendRequestData.ReceivedFrom = loggedInUserObject.id
+//                    receiveFriendRequestData.ReceivedDateTime = NSDate().getCurrentTimeStamp()
+//                    
+//                    if let index = self.searchedProfiles.indexOf( {$0.id == FriendObject.id}) {
+//                        self.searchedProfiles.removeAtIndex(index)
+//                    }
+//                    
+//                    //KRProgressHUD.show(progressHUDStyle: .White, message: "Friend Request Sent")
+//                    //KRProgressHUD.dismiss()
+//                    self.searchrefresh(self.searchBar)
+//                    
+//                    backgroundThread(background: {
+//                        AddSentRequestData(["sentRequestData": sendFriendRequestData.GetFriendRequestObject(sendFriendRequestData), "ReceivedRequestData": receiveFriendRequestData.getFriendRequestObject(receiveFriendRequestData)], callback: { data in
+//                            
+//                            dispatch_async(dispatch_get_main_queue(),{
+//                                self.searchedProfiles.removeAll()
+//                                self.searchResultsTblView.reloadData()
+//                                //self.setRequests()
+//                                //self.searchResultsTblView.reloadData()
+//                                //self.suggestionsTblView.reloadData()
+//                            })
+//                        })
+//                    })
+//                })
+//            })
+//        }
+//    }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if searchedProfiles.count > 0 {
-            return getCellForSearchedParametersRow(indexPath)
-        }
-        return UITableViewCell()
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100
-    }
-    
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100
-        
-    }
-    
-    func AddFriendBtnPressed(sender:UIButton) {
-        if let FriendUserId = sender.accessibilityIdentifier where FriendUserId != "" {
-            getProfileInfoById(FriendUserId, sucessBlock: { FriendData in
-                let FriendObject = Profile(usrObj: FriendData)
-                getProfileInfoById((currentUser?.uid)!, sucessBlock: { data in
-                    let loggedInUserObject = Profile(usrObj: data)
-                    let sendFriendRequestData = SentFriendRequest()
-                    sendFriendRequestData.City = FriendObject.City
-                    sendFriendRequestData.Name = FriendObject.fullName
-                    sendFriendRequestData.SentTo = FriendObject.id
-                    sendFriendRequestData.SentDateTime = NSDate().getCurrentTimeStamp()
-                    
-                    let receiveFriendRequestData = ReceivedFriendRequest()
-                    receiveFriendRequestData.City = loggedInUserObject.City
-                    receiveFriendRequestData.Name = loggedInUserObject.fullName
-                    receiveFriendRequestData.ReceivedFrom = loggedInUserObject.id
-                    receiveFriendRequestData.ReceivedDateTime = NSDate().getCurrentTimeStamp()
-                    
-                    if let index = self.searchedProfiles.indexOf( {$0.id == FriendObject.id}) {
-                        self.searchedProfiles.removeAtIndex(index)
-                    }
-                    
-                    //KRProgressHUD.show(progressHUDStyle: .White, message: "Friend Request Sent")
-                    //KRProgressHUD.dismiss()
-                    self.searchrefresh(self.searchBar)
-                    
-                    backgroundThread(background: {
-                        AddSentRequestData(["sentRequestData": sendFriendRequestData.GetFriendRequestObject(sendFriendRequestData), "ReceivedRequestData": receiveFriendRequestData.getFriendRequestObject(receiveFriendRequestData)], callback: { data in
-                            
-                            dispatch_async(dispatch_get_main_queue(),{
-                                self.searchedProfiles.removeAll()
-                                self.searchResultsTblView.reloadData()
-                                //self.setRequests()
-                                //self.searchResultsTblView.reloadData()
-                                //self.suggestionsTblView.reloadData()
-                            })
-                        })
-                    })
-                })
-            })
-        }
-    }
-    
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.characters.count > 2 {
-            backgroundThread(background: {
-                searchProfiles(searchText, sucessBlock: { data in
-                    if let searchedData = data as? [Profile] {
-                        self.searchedProfiles.removeAll()
-                        for profile in searchedData {
-                            self.searchedProfiles.append(profile)
-                        }
-                        //self.searchResultsTblView.reloadData()
-                    }
-                })
-            })
-        }
-        else if searchText.characters.count == 0 {
-            self.searchedProfiles.removeAll()
-            self.searchResultsTblView.reloadData()
-        }
-    }
-    
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        searchBarCancelButtonClicked(searchBar)
-    }
+//    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+//        if searchText.characters.count > 2 {
+//            backgroundThread(background: {
+//                searchProfiles(searchText, sucessBlock: { data in
+//                    if let searchedData = data as? [Profile] {
+//                        self.searchedProfiles.removeAll()
+//                        for profile in searchedData {
+//                            self.searchedProfiles.append(profile)
+//                        }
+//                        //self.searchResultsTblView.reloadData()
+//                    }
+//                })
+//            })
+//        }
+//        else if searchText.characters.count == 0 {
+//            self.searchedProfiles.removeAll()
+//            self.searchResultsTblView.reloadData()
+//        }
+//    }
+//    
+//    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+//        searchBarCancelButtonClicked(searchBar)
+//    }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         if searchController.searchBar.text?.characters.count > 0 {
@@ -245,23 +250,23 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
 //        
 //    }
     
-    func searchrefresh(searchBar: UISearchBar){
-        searchBar.text = ""
-        searchBar.endEditing(true)
-        self.searchedProfiles.removeAll()
-        self.searchResultsTblView.reloadData()
-        SearchDisplayCtrlr.active = false
-    }
-    
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        searchrefresh(searchBar)
-    }
-    
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        UIView.animateWithDuration(0.5) {
-            self.searchBar.alpha = 0
-            self.searchBar.hidden = true
-        }
-    }
+//    func searchrefresh(searchBar: UISearchBar){
+//        searchBar.text = ""
+//        searchBar.endEditing(true)
+//        self.searchedProfiles.removeAll()
+//        self.searchResultsTblView.reloadData()
+//        SearchDisplayCtrlr.active = false
+//    }
+//    
+//    
+//    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+//        searchrefresh(searchBar)
+//    }
+//    
+//    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+//        UIView.animateWithDuration(0.5) {
+//            self.searchBar.alpha = 0
+//            self.searchBar.hidden = true
+//        }
+//    }
 }
