@@ -91,13 +91,28 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         self.PlayerLocation.attributedText = locationText
         //self.userProfileImage.image = LoggedInUserImage
         
-        getImageFromFirebase(userProfileData.ProfileImageURL) { (imgData) in
-            self.currentUserProfileImage = imgData
+        if userProfileData.ProfileImageURL != "-" {
+            getImageFromFirebase(userProfileData.ProfileImageURL) { (imgData) in
+                self.currentUserProfileImage = imgData
+            }
+        }
+        else {
+            let imageName = "propic.png"
+            let image = UIImage(named: imageName)
+            self.currentUserProfileImage = image!
         }
         
-        getImageFromFirebase(userProfileData.CoverPhotoURL) { (imgData) in
-            self.currentUserCoverImage = imgData
+        if userProfileData.ProfileImageURL != "-" {
+            getImageFromFirebase(userProfileData.CoverPhotoURL) { (imgData) in
+                self.currentUserCoverImage = imgData
+            }
         }
+        else {
+            let imageName = "propic.png"
+            let image = UIImage(named: imageName)
+            self.currentUserCoverImage = image!
+        }
+
         self.userProfileImage.image = currentUserProfileImage
         self.imgCoverPhoto.image = currentUserCoverImage
         
