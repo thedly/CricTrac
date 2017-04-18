@@ -11,42 +11,28 @@ import UIKit
 class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ThemeChangeable {
     
     @IBOutlet weak var MatchesView: UIView!
-    
-    
     @IBOutlet weak var CurrentTeams: UICollectionView!
-    
     // @IBOutlet weak var PastTeams: UICollectionView!
-    
     @IBOutlet weak var PlayedFor: UICollectionView!
-    
-    
     @IBOutlet weak var Certifications: UICollectionView!
-    
     @IBOutlet weak var userProfileImage: UIImageView!
+    @IBOutlet weak var imgCoverPhoto: UIImageView!
     @IBOutlet weak var PlayerName: UILabel!
     @IBOutlet weak var PlayerLocation: UILabel!
-    
     @IBOutlet weak var CoachExperience: UILabel!
-    
-    
     @IBOutlet weak var CoachLevel: UILabel!
     @IBOutlet weak var closeButton: UIButton!
-    
     @IBOutlet weak var coachCurrentTeamsHeightConstraint: NSLayoutConstraint!
-   
     @IBOutlet weak var coachPlayedHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var coachCertificationHeightConstraint: NSLayoutConstraint!
     
-    
     @IBAction func CloseDashboardPressed(sender: AnyObject) {
-        
         self.dismissViewControllerAnimated(true, completion: nil)
-        
     }
     
+    var currentUserProfileImage = UIImage()
+    var currentUserCoverImage = UIImage()
     var friendProfile:[String:AnyObject]?
-    
     var userProfileData:Profile!
     
     override func viewDidLoad() {
@@ -59,7 +45,6 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             userProfileData = profileData
             closeButton.hidden = true
         }
-        
         
         setBackgroundColor()
         
@@ -79,15 +64,10 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         
         PlayedFor.delegate = self
         PlayedFor.dataSource = self
-        
         Certifications.delegate = self
         Certifications.dataSource = self
-        
-        
-        
         CoachExperience.text = userProfileData.Experience
         CoachLevel.text = userProfileData.CoachingLevel
-        
         
         let df = NSDateFormatter()
         df.dateFormat = "dd/MM/yyyy"
@@ -95,7 +75,17 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         let formattedString = NSMutableAttributedString()
         let locationText = formattedString.bold("\(userProfileData.City.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.Country.uppercaseString) ", fontName: appFont_black, fontSize: 15)
         self.PlayerLocation.attributedText = locationText
-        self.userProfileImage.image = LoggedInUserImage
+        //self.userProfileImage.image = LoggedInUserImage
+        
+        getImageFromFirebase(userProfileData.ProfileImageURL) { (imgData) in
+            self.currentUserProfileImage = imgData
+        }
+       
+        getImageFromFirebase(userProfileData.CoverPhotoURL) { (imgData) in
+            self.currentUserCoverImage = imgData
+        }
+        self.userProfileImage.image = currentUserProfileImage
+        self.imgCoverPhoto.image = currentUserCoverImage
         
         setNavigationBarProperties()
         // Do any additional setup after loading the view.
@@ -105,7 +95,6 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme

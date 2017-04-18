@@ -20,6 +20,8 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var FavoritePlayers: UICollectionView!
     
     @IBOutlet weak var userProfileImage: UIImageView!
+    @IBOutlet weak var imgCoverPhoto: UIImageView!
+
     @IBOutlet weak var PlayerName: UILabel!
     @IBOutlet weak var PlayerLocation: UILabel!
     @IBOutlet weak var closeButton: UIButton!
@@ -36,6 +38,9 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     var friendProfile:[String:AnyObject]?
     
     var userProfileData:Profile!
+    
+    var currentUserProfileImage = UIImage()
+    var currentUserCoverImage = UIImage()
     
     @IBAction func CloseDashboardPressed(sender: AnyObject) {
         
@@ -84,7 +89,17 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         let formattedString = NSMutableAttributedString()
         let locationText = formattedString.bold("\(userProfileData.City.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.Country.uppercaseString) ", fontName: appFont_black, fontSize: 15)
         self.PlayerLocation.attributedText = locationText
-        self.userProfileImage.image = LoggedInUserImage
+        //self.userProfileImage.image = LoggedInUserImage
+        
+        getImageFromFirebase(userProfileData.ProfileImageURL) { (imgData) in
+            self.currentUserProfileImage = imgData
+        }
+        
+        getImageFromFirebase(userProfileData.CoverPhotoURL) { (imgData) in
+            self.currentUserCoverImage = imgData
+        }
+        self.userProfileImage.image = currentUserProfileImage
+        self.imgCoverPhoto.image = currentUserCoverImage
         
         setNavigationBarProperties()
         // Do any additional setup after loading the view.
