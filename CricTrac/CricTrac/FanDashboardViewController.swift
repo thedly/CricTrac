@@ -39,6 +39,8 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     
     var userProfileData:Profile!
     
+     var coverOrProfile = ""
+    
     var currentUserProfileImage = UIImage()
     var currentUserCoverImage = UIImage()
     
@@ -48,79 +50,63 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         
     }
     
+    @IBAction func editImageBtnPressed(sender: AnyObject) {
+        self.photoOptions("ProfilePhoto")
+        coverOrProfile = "Profile"
+    }
+    
+    func photoOptions(option:String)  {
+        
+        let alertController = UIAlertController(title: nil, message: "Change your picture", preferredStyle: .ActionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+            // ...
+        }
+        alertController.addAction(cancelAction)
+        
+        let TakePictureAction = UIAlertAction(title: "Take Photo", style: .Default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
+                imagePicker.allowsEditing = false
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+            }
+        }
+        
+        alertController.addAction(TakePictureAction)
+        
+        let chooseExistingAction = UIAlertAction(title: "Choose Existing", style: .Default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+                imagePicker.allowsEditing = false
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+            }
+        }
+        
+        alertController.addAction(chooseExistingAction)
+        
+        self.presentViewController(alertController, animated: true) {
+            // ...
+        }
+    }
+
+
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         
-        if let value = friendProfile{
-            userProfileData = Profile(usrObj: value)
-            closeButton.hidden = false
-        }else{
-            userProfileData = profileData
-            closeButton.hidden = true
-        }
-        
-        self.updateFanDashBoard()
-        
-        setBackgroundColor()
-        
-        userProfileImage.layer.cornerRadius = userProfileImage.bounds.size.width/2
-        userProfileImage.clipsToBounds = true
-        
-        SupportingTeams.delegate = self
-        SupportingTeams.dataSource = self
-        
-        InterestedSports.delegate = self
-        InterestedSports.dataSource = self
-        
-        Hobbies.delegate = self
-        Hobbies.dataSource = self
-        
-        FavoritePlayers.delegate = self
-        FavoritePlayers.dataSource = self
-        
-        
-        
-        
-        let df = NSDateFormatter()
-        df.dateFormat = "dd/MM/yyyy"
-        self.PlayerName.text = userProfileData.fullName.uppercaseString
-        let formattedString = NSMutableAttributedString()
-        let locationText = formattedString.bold("\(userProfileData.City.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.Country.uppercaseString) ", fontName: appFont_black, fontSize: 15)
-        self.PlayerLocation.attributedText = locationText
-        //self.userProfileImage.image = LoggedInUserImage
-        
-        if userProfileData.ProfileImageURL != "-" {
-            getImageFromFirebase(userProfileData.ProfileImageURL) { (imgData) in
-                self.currentUserProfileImage = imgData
-            }
-        }
-        else {
-            let imageName = "propic.png"
-            let image = UIImage(named: imageName)
-            self.currentUserProfileImage = image!
-        }
-        
-        if userProfileData.ProfileImageURL != "-" {
-            getImageFromFirebase(userProfileData.CoverPhotoURL) { (imgData) in
-                self.currentUserCoverImage = imgData
-            }
-        }
-        else {
-            let imageName = "propic.png"
-            let image = UIImage(named: imageName)
-            self.currentUserCoverImage = image!
-        }
-
-        self.userProfileImage.image = currentUserProfileImage
-        self.imgCoverPhoto.image = currentUserCoverImage
-        
-        setNavigationBarProperties()
-        // Do any additional setup after loading the view.
+     // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(animated: Bool) {
+       
+       setBackgroundColor()
+       initView()
+       self.updateFanDashBoard()
         
     }
     override func didReceiveMemoryWarning() {
@@ -155,6 +141,131 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     }
     // MARK: - Collection view delegates
     
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        if coverOrProfile == "Profile" {
+            
+            self.userProfileImage.image = image
+            self.dismissViewControllerAnimated(true) {
+                addProfileImageData(self.resizeImage(image, newWidth: 200))
+            }
+        }else {
+            self.imgCoverPhoto.image = image
+            self.dismissViewControllerAnimated(true) {
+                addCoverImageData(self.resizeImage(image, newWidth: 200))
+            }
+        }
+        
+        
+    }
+    
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+        
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+    
+    func initView() {
+        
+        
+        if let value = friendProfile{
+            userProfileData = Profile(usrObj: value)
+            closeButton.hidden = false
+        }else{
+            userProfileData = profileData
+            closeButton.hidden = true
+        }
+        
+        userProfileImage.layer.cornerRadius = userProfileImage.bounds.size.width/2
+        userProfileImage.clipsToBounds = true
+        
+        SupportingTeams.delegate = self
+        SupportingTeams.dataSource = self
+        
+        InterestedSports.delegate = self
+        InterestedSports.dataSource = self
+        
+        Hobbies.delegate = self
+        Hobbies.dataSource = self
+        
+        FavoritePlayers.delegate = self
+        FavoritePlayers.dataSource = self
+        
+        let df = NSDateFormatter()
+        df.dateFormat = "dd/MM/yyyy"
+        self.PlayerName.text = userProfileData.fullName.uppercaseString
+        let formattedString = NSMutableAttributedString()
+        let locationText = formattedString.bold("\(userProfileData.City.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.Country.uppercaseString) ", fontName: appFont_black, fontSize: 15)
+        self.PlayerLocation.attributedText = locationText
+        //self.userProfileImage.image = LoggedInUserImage
+        
+        if userProfileData.ProfileImageURL != "-" {
+            getImageFromFirebase(userProfileData.ProfileImageURL) { (imgData) in
+                self.currentUserProfileImage = imgData
+            }
+        }
+        else {
+            let imageName = "propic.png"
+            let image = UIImage(named: imageName)
+            self.currentUserProfileImage = image!
+        }
+        
+        if userProfileData.CoverPhotoURL != "-" {
+            getImageFromFirebase(userProfileData.CoverPhotoURL) { (imgData) in
+                self.currentUserCoverImage = imgData
+            }
+        }
+        else {
+            let imageName = "propic.png"
+            let image = UIImage(named: imageName)
+            self.currentUserCoverImage = image!
+        }
+        
+        self.userProfileImage.image = currentUserProfileImage
+        self.imgCoverPhoto.image = currentUserCoverImage
+        
+        setNavigationBarProperties()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapCoverPhoto))
+        tapGesture.numberOfTapsRequired = 1
+        imgCoverPhoto.addGestureRecognizer(tapGesture)
+        
+    }
+    
+    func tapCoverPhoto()  {
+        self.photoOptions("CoverPhoto")
+        coverOrProfile = "Cover"
+        
+    }
+    
+    @IBAction func imageTapped(sender: UITapGestureRecognizer) {
+        let imageView = sender.view as! UIImageView
+        //        let navBarView = UIView(frame: CGRectMake(0, 0, (sender.view?.frame.size.width)!, 50))
+        //        navBarView.backgroundColor = UIColor(hex: "#D4D4D4")
+        //        let editBtn = UIButton(frame: CGRectMake((sender.view?.frame.size.width)! - 100, 10, 50, 20))
+        //        editBtn.setBackgroundImage(UIImage(named: "EditPencil-100"), forState: .Normal)
+        //        navBarView.addSubview(editBtn)
+        
+        let newImageView = UIImageView(image: imageView.image)
+        newImageView.frame = self.view.frame
+        newImageView.backgroundColor = .blackColor()
+        newImageView.contentMode = .ScaleAspectFit
+        newImageView.userInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(FanDashboardViewController.dismissFullscreenImage(_:)))
+        newImageView.addGestureRecognizer(tap)
+        //        self.view.addSubview(navBarView)
+        self.view.addSubview(newImageView)
+    }
+    
+    func dismissFullscreenImage(sender: UITapGestureRecognizer) {
+        sender.view?.removeFromSuperview()
+    }
+
+
     func updateFanDashBoard() {
         
         if userProfileData.SupportingTeams.count == 0 {
