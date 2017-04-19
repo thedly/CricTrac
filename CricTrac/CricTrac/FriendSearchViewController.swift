@@ -134,7 +134,7 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
                         AddSentRequestData(["sentRequestData": sendFriendRequestData.GetFriendRequestObject(sendFriendRequestData), "ReceivedRequestData": receiveFriendRequestData.getFriendRequestObject(receiveFriendRequestData)], callback: { data in
                             
                             dispatch_async(dispatch_get_main_queue(),{
-                                self.searchedProfiles.removeAll()
+                                //self.searchedProfiles.removeAll()
                                 self.friendSearchTbl.reloadData()
                                 
                             })

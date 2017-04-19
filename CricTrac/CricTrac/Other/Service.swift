@@ -483,9 +483,11 @@ func FriendExists(FriendId: String) -> [AnyObject]? {
 func searchProfiles(searchParameter: String, sucessBlock:([Profile])->Void) {
     let ref = fireBaseRef.child("Users")
     ref.queryOrderedByChild("UserProfile/FirstName").queryStartingAtValue(searchParameter).queryEndingAtValue(searchParameter+"\u{f8ff}").observeSingleEventOfType(.Value, withBlock: { snapshot in
-        
+
         var users: [Profile] = []
+        
         if let data: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
+
             for (key, value) in data {
                 var retVal = 0
                 
@@ -537,6 +539,7 @@ func searchProfiles(searchParameter: String, sucessBlock:([Profile])->Void) {
             }
             //sucessBlock(users)
         }
+ 
     })
     return
 }
