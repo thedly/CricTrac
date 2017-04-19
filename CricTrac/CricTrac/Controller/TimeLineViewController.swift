@@ -409,6 +409,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     
                     //postCell.postOwnerName.text = postid
                 }
+            }
                 
 //               
 //                postCell.totalLikeCount = 0
@@ -433,7 +434,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
 //                    }
 //                    likesCount = likes.count
 //                    postCell.totalLikeCount = likesCount
-                }
+                //}
 //                
 //                postCell.likeCount.setTitle("\(likesCount) Likes", forState: .Normal)
                 //postCell.likeButton.titleLabel?.textColor = likeColor
