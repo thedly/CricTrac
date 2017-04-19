@@ -617,16 +617,16 @@ func loginWithMailAndPassword(userName:String,password:String,callBack:(user:FIR
     }
 }
 
-func loadTimeline(callback: (timeline:[String:AnyObject])->Void){
-    fireBaseRef.child(currentUser!.uid).child("TimelineDetailed").observeEventType(.Value, withBlock: { snapshot in
-        if let data: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
-            callback(timeline: data)
-        }
-        else{
-            callback(timeline: [:])
-        }
-    })
-}
+//func loadTimeline(callback: (timeline:[String:AnyObject])->Void){
+//    fireBaseRef.child(currentUser!.uid).child("TimelineDetailed").observeEventType(.Value, withBlock: { snapshot in
+//        if let data: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
+//            callback(timeline: data)
+//        }
+//        else{
+//            callback(timeline: [:])
+//        }
+//    })
+//}
 
 public func loadTimeLineFromIDS(callback: (timeline:[[String:String]])->Void){
     loadAllPostIds {
@@ -916,8 +916,8 @@ func getFriendRequestById(id: String) -> [String: String]{
 
  //MARK: - Add Post
 
-
-func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
+func addNewPost(postText:String, sucess:()->Void){
+//func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
     KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
     let userName = loggedInUserName ?? "No Name"
     let addedTime =  NSDate().getCurrentTimeStamp()
@@ -936,9 +936,10 @@ func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
     ref.setValue(timelineDict)
     
     let postKey = ref.key
-    let returnData = ["timeline":["AddedTime":addedTime,"Post":postText,"CommentCount":"0","LikeCount":"0","OwnerName":userName,"postId":postKey,"OwnerID":currentUser!.uid,"PostedBy":currentUser!.uid,"PostType":"Self"]]
-    
-        sucess(data: returnData)
+//    let returnData = ["timeline":["AddedTime":addedTime,"Post":postText,"CommentCount":"0","LikeCount":"0","OwnerName":userName,"postId":postKey,"OwnerID":currentUser!.uid,"PostedBy":currentUser!.uid,"PostType":"Self"]]
+//    
+//        sucess(data: returnData)
+     sucess()
     
         updateTimelineWithNewPost(postKey) { (resultError) in
             KRProgressHUD.dismiss()

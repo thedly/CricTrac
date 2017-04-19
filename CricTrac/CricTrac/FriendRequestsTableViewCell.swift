@@ -35,5 +35,6 @@ class FriendRequestsTableViewCell: UITableViewCell {
         self.friendProfileName.text = friendName
         self.friendProfileTeamName.text = friendTeamName
     }
+    
 
 }
