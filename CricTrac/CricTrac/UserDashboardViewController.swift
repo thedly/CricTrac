@@ -132,16 +132,17 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     @IBOutlet weak var scrollViewBottomElementConstraint : NSLayoutConstraint!
     
-    
+    var alertMessage = "Change picture"
     
     @IBAction func editImageBtnPressed(sender: AnyObject) {
+        alertMessage = "Change your profile photo"
         self.photoOptions("ProfilePhoto")
         coverOrProfile = "Profile"
     }
     
     func photoOptions(option:String)  {
         
-        let alertController = UIAlertController(title: nil, message: "Change your picture", preferredStyle: .ActionSheet)
+        let alertController = UIAlertController(title: nil, message: alertMessage, preferredStyle: .ActionSheet)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
             // ...
@@ -286,19 +287,20 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         if coverOrProfile == "Profile" {
-           
+            //dispatch_async(dispatch_get_main_queue(),{
             self.userProfileImage.image = image
             self.dismissViewControllerAnimated(true) {
-                addProfileImageData(self.resizeImage(image, newWidth: 200))
-            }
+                    addProfileImageData(self.resizeImage(image, newWidth: 200))
+                //self.initView()
+                }
+            //})
+            
         }else {
             self.imgCoverPhoto.image = image
             self.dismissViewControllerAnimated(true) {
                 addCoverImageData(self.resizeImage(image, newWidth: 200))
             }
         }
-        
-        
     }
     
     override func viewDidLoad() {
@@ -313,8 +315,9 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         if let value = friendProfile{
             userProfileData = Profile(usrObj: value)
             closeButton.hidden = false
-        }else{
-            userProfileData = profileData
+        }
+        else{
+           userProfileData = profileData
             closeButton.hidden = true
         }
         
@@ -410,9 +413,9 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     
     func tapCoverPhoto()  {
+        alertMessage = "Change your cover photo"
         self.photoOptions("CoverPhoto")
         coverOrProfile = "Cover"
-
     }
     
     override func viewWillAppear(animated: Bool) {

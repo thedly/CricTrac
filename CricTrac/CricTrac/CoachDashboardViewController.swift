@@ -130,11 +130,16 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         imgCoverPhoto.addGestureRecognizer(tapGesture)
     }
     
+    var alertMessage = "Change picture"
+    
     func tapCoverPhoto()  {
+        alertMessage = "Change your cover photo"
         self.photoOptions("CoverPhoto")
         coverOrProfile = "Cover"
     }
+    
     @IBAction func editImageBtnPressed(sender: AnyObject) {
+        alertMessage = "Change your profile photo"
         self.photoOptions("ProfilePhoto")
         coverOrProfile = "Profile"
     }
@@ -142,7 +147,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     
     func photoOptions(option:String)  {
         
-        let alertController = UIAlertController(title: nil, message: "Change your picture", preferredStyle: .ActionSheet)
+        let alertController = UIAlertController(title: nil, message: alertMessage, preferredStyle: .ActionSheet)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
             // ...

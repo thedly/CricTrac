@@ -194,6 +194,7 @@ func addCoverImageData(profileDp:UIImage){
         }
     }
     //    }
+    
 }
 
 func updateMetaData(profileImgUrl: NSURL) {
@@ -201,10 +202,10 @@ func updateMetaData(profileImgUrl: NSURL) {
         let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
         let profileImageObject: [NSObject:AnyObject] = [ "ProfileImageURL"    : profileImgUrl.absoluteString]
         ref.updateChildValues(profileImageObject)
-        if profileData.ProfileImageURL == "-" {
+        //if profileData.ProfileImageURL == "-" {
             profileData.ProfileImageURL = profileImgUrl.absoluteString
              NSNotificationCenter.defaultCenter().postNotificationName(ProfilePictureUpdated, object: nil)
-        }
+        //}
     }
     //print("Image url updated successfully")
 }
@@ -215,10 +216,10 @@ func updateCoverMetaData(coverImgUrl: NSURL) {
         let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
         let coverImageObject: [NSObject:AnyObject] = [ "CoverPhotoURL"    : coverImgUrl.absoluteString]
         ref.updateChildValues(coverImageObject)
-        if profileData.CoverPhotoURL == "-" {
+        //if profileData.CoverPhotoURL == "-" {
             profileData.CoverPhotoURL = coverImgUrl.absoluteString
             NSNotificationCenter.defaultCenter().postNotificationName(CoverPictureUpdated, object: nil)
-        }
+        //}
     }
     //print("Cover Image url updated successfully")
 }
