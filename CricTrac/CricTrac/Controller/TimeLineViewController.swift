@@ -448,6 +448,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         return acell
     }
     
+       
     func numberOfSectionsInTableView(tableView: UITableView) -> Int{
         
         if timelineData == nil{
@@ -462,7 +463,17 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
         if indexPath.section  == 0{
+            // network reachability test
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            if !appDelegate.reachability.isReachable()  {
+                let alert = UIAlertController(title: "", message: networkErrorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+                return
+            }
+            
             let newPost = viewControllerFrom("Main", vcid: "NewPostViewController") as! NewPostViewController
             newPost.sendPostDelegate = self
             newPost.modalPresentationStyle = .OverCurrentContext

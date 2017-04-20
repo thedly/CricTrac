@@ -87,7 +87,7 @@ class NewPostViewController: UIViewController,ThemeChangeable {
         // network reachability test
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         if !appDelegate.reachability.isReachable()  {
-            let alert = UIAlertController(title: "", message: "Please check your internet connection", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "", message: networkErrorMessage, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
             return

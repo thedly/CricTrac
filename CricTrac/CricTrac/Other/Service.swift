@@ -941,9 +941,9 @@ func addNewPost(postText:String, sucess:()->Void){
 //        sucess(data: returnData)
      sucess()
     
-        updateTimelineWithNewPost(postKey) { (resultError) in
-            KRProgressHUD.dismiss()
-        }
+    updateTimelineWithNewPost(postKey) { (resultError) in
+        KRProgressHUD.dismiss()
+    }
     
     newPostNotification(postKey) { (resultError) in
         //KRProgressHUD.dismiss()
