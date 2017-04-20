@@ -916,8 +916,8 @@ func getFriendRequestById(id: String) -> [String: String]{
 
  //MARK: - Add Post
 
-func addNewPost(postText:String, sucess:()->Void){
-//func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
+//func addNewPost(postText:String, sucess:()->Void){
+func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
     KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
     let userName = loggedInUserName ?? "No Name"
     let addedTime =  NSDate().getCurrentTimeStamp()
@@ -936,10 +936,9 @@ func addNewPost(postText:String, sucess:()->Void){
     ref.setValue(timelineDict)
     
     let postKey = ref.key
-//    let returnData = ["timeline":["AddedTime":addedTime,"Post":postText,"CommentCount":"0","LikeCount":"0","OwnerName":userName,"postId":postKey,"OwnerID":currentUser!.uid,"PostedBy":currentUser!.uid,"PostType":"Self"]]
-//    
-//        sucess(data: returnData)
-     sucess()
+    let returnData = ["timeline":["AddedTime":addedTime,"Post":postText,"CommentCount":"0","LikeCount":"0","OwnerName":userName,"postId":postKey,"OwnerID":currentUser!.uid,"PostedBy":currentUser!.uid,"PostType":"Self"]]
+    
+        sucess(data: returnData)
     
     updateTimelineWithNewPost(postKey) { (resultError) in
         KRProgressHUD.dismiss()
@@ -1041,30 +1040,7 @@ func likePost(postId:String)->[String:[String:String]]{
     return [ref.key:likeDict]
 }
 
-func likeOrUnlike(postId:String){
-    let ref = fireBaseRef.child("TimelinePosts").child(postId).child("Likes")
-    ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
-        if let data = snapshot.value as? [String:[String:String]] {
-            let result = data.filter { return  $0.1["OwnerID"] == currentUser!.uid }
-            if result.count > 0 {
-                let ref = fireBaseRef.child("TimelinePosts").child(postId).child("Likes").child(result[0].0)
-                ref.removeValueWithCompletionBlock({ (error, ref) in
-                    if error == nil{
-                        calLikeCnt(postId)
-                        //unlike()
-                    }
-                })
-            }else{
-                likePost(postId)
-            }
-        }
-        else{
-            likePost(postId)
-        }
-    })
-}
-
-//func likeOrUnlike(postId:String,like:(likeDict:[String:[String:String]])->Void,unlike:(Void)->Void){
+//func likeOrUnlike(postId:String){
 //    let ref = fireBaseRef.child("TimelinePosts").child(postId).child("Likes")
 //    ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
 //        if let data = snapshot.value as? [String:[String:String]] {
@@ -1074,17 +1050,40 @@ func likeOrUnlike(postId:String){
 //                ref.removeValueWithCompletionBlock({ (error, ref) in
 //                    if error == nil{
 //                        calLikeCnt(postId)
-//                        unlike()
+//                        //unlike()
 //                    }
 //                })
 //            }else{
-//                like(likeDict: likePost(postId))
+//                likePost(postId)
 //            }
-//        }else{
-//            like(likeDict: likePost(postId))
+//        }
+//        else{
+//            likePost(postId)
 //        }
 //    })
 //}
+
+func likeOrUnlike(postId:String,like:(likeDict:[String:[String:String]])->Void,unlike:(Void)->Void){
+    let ref = fireBaseRef.child("TimelinePosts").child(postId).child("Likes")
+    ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
+        if let data = snapshot.value as? [String:[String:String]] {
+            let result = data.filter { return  $0.1["OwnerID"] == currentUser!.uid }
+            if result.count > 0 {
+                let ref = fireBaseRef.child("TimelinePosts").child(postId).child("Likes").child(result[0].0)
+                ref.removeValueWithCompletionBlock({ (error, ref) in
+                    if error == nil{
+                        calLikeCnt(postId)
+                        unlike()
+                    }
+                })
+            }else{
+                like(likeDict: likePost(postId))
+            }
+        }else{
+            like(likeDict: likePost(postId))
+        }
+    })
+}
 
 func getPost(postId:String,sucessBlock:([String:AnyObject])->Void){
     fireBaseRef.child("TimelinePosts").child(postId).observeEventType(.Value, withBlock: { snapshot in
