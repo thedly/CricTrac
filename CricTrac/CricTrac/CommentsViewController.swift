@@ -63,7 +63,9 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         commentTextView.layer.borderWidth = 1
         commentTextView.layer.borderColor = UIColor.darkGrayColor().CGColor
         commentTextView.setPlaceHolder()
-
+     //   postComment.enabled = false
+    //  postComment.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
+      
         //postId = (postData!.dictionaryValue["postId"]?.stringValue)!
         //postText.text = postData!.dictionaryValue["Post"]?.stringValue
         //userName.text = postData!.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
@@ -71,7 +73,14 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         //sajith-  fetch the fresh post data
         getPost(postId) { (data) in
             self.postText.text = data["Post"] as? String
-            self.userName.text = data ["OwnerName"] as? String
+            
+            let postedBy = data["PostedBy"] as? String
+            if postedBy == "CricTrac" {
+                self.userName.text = "CricTrac"
+            }
+            else{
+                self.userName.text = data ["OwnerName"] as? String
+            }
             
             if let postDateTS = data["AddedTime"] as? Double{
                 let date = NSDate(timeIntervalSince1970:postDateTS/1000.0)
@@ -248,6 +257,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     
     func textViewDidBeginEditing(textView: UITextView){
         textView.text = ""
+        
     }
     
     func textViewDidEndEditing(textView: UITextView){
@@ -258,8 +268,18 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     }
     
     @IBAction func postNewComment(sender: AnyObject) {
+        // network reachability test
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        if !appDelegate.reachability.isReachable()  {
+            let alert = UIAlertController(title: "", message: networkErrorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            return
+        }
+        
         let text = commentTextView.text.trimWhiteSpace
-        if text.characters.count > 0{
+        if text.characters.count > 0 && text != "Enter your comment" {
             commentTextView.resignFirstResponder()
             commentTextView.setPlaceHolder()
             textViewHeightConstraint.constant = 30
@@ -382,7 +402,20 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
          */
         
         if text ==  "\n"{ return false}
-
+       
+        
+//        if textViewContent.characters.count < 0 {
+//            postComment.enabled = false
+//            postComment.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
+//
+//        }
+//        else {
+//            postComment.enabled = true
+//            postComment.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+//        
+//        }
+       
+   
         let lines  =  textViewContent.characters.count/40
         let heightConstant = Int((self.textViewHeightConstraint.constant - 30)/18)
         
@@ -408,6 +441,16 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
 //    }
     
     @IBAction func didTapLikeButton(sender: UIButton) {
+        // network reachability test
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        if !appDelegate.reachability.isReachable()  {
+            let alert = UIAlertController(title: "", message: networkErrorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            return
+        }
+        
         likeOrUnlike(postId, like: { (likeDict) in
             self.likeButton.titleLabel?.textColor = UIColor.whiteColor()
             self.postLikeCount += 1

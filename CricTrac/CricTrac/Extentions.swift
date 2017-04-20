@@ -334,13 +334,24 @@ extension UITextView{
         self.text = "Enter your comment"
         self.textColor = UIColor.grayColor()
     }
-    
+    func placeHolderForTextView(){
+        self.text = "Free hit"
+        self.textColor = UIColor.grayColor()
+    }
     func clearPlaceHolder(){
-        if self.text == "Enter your comment"{
+        if self.text == "Enter your comment"  {
             
             self.text = ""
         }
         self.textColor = UIColor.blackColor()
+    }
+    
+    func clearPlaceHolderForTextView(){
+        if self.text == "Free hit" {
+            
+            self.text = ""
+        }
+        self.textColor = UIColor.whiteColor()
     }
     
 }

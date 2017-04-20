@@ -108,6 +108,16 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
     }
 
     func AddFriendBtnPressed(sender:UIButton) {
+        // network reachability test
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        if !appDelegate.reachability.isReachable()  {
+            let alert = UIAlertController(title: "", message: networkErrorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            return
+        }
+        
         if let FriendUserId = sender.accessibilityIdentifier where FriendUserId != "" {
             getProfileInfoById(FriendUserId, sucessBlock: { FriendData in
                 let FriendObject = Profile(usrObj: FriendData)

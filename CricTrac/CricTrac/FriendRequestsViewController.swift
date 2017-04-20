@@ -300,6 +300,16 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     }
 
      func ConfirmFriendBtnPressed(sender:UIButton!) {
+        // network reachability test
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        if !appDelegate.reachability.isReachable()  {
+            let alert = UIAlertController(title: "", message: networkErrorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            return
+        }
+        
         if let FriendUserId = sender.accessibilityIdentifier where FriendUserId != "" {
             if FriendExists(FriendUserId) == nil {
                 var FriendObject = Profile(usrObj: [:])
