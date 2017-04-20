@@ -263,4 +263,5 @@ let states = ["Alabama",
 
 //Marks -- profileSettings
 let nameCharacterLimit = 30
+let networkErrorMessage = "Please check your internet connection"
 

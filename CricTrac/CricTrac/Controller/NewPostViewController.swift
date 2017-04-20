@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 import SCLAlertView
 
-class NewPostViewController: UIViewController,ThemeChangeable {
+class NewPostViewController: UIViewController,ThemeChangeable,UITextViewDelegate {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var postContent: UITextView!
@@ -29,7 +29,8 @@ class NewPostViewController: UIViewController,ThemeChangeable {
         contentView.backgroundColor = UIColor.clearColor()
         postContent.backgroundColor = UIColor.clearColor()
         profilePic.layer.cornerRadius = profilePic.frame.width/2
-        
+         postContent.placeHolderForTextView()
+        postContent.delegate = self
         let postOwnerId = currentUser?.uid
         fetchFriendDetail(postOwnerId!, sucess: { (result) in
             let proPic = result["proPic"]
@@ -87,20 +88,46 @@ class NewPostViewController: UIViewController,ThemeChangeable {
         // network reachability test
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         if !appDelegate.reachability.isReachable()  {
-            let alert = UIAlertController(title: "", message: "Please check your internet connection", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "", message: networkErrorMessage, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
             return
         }
         
-        if let postText = postContent.text{
-            if editingPost == nil{
+        if let postText = postContent.text {
+            if postText.characters.count > 0 && postText != "Free hit"{
+                if editingPost == nil{
                 sendPostDelegate?.sendNewPost(postText)
             }else{
                 sendPostDelegate?.modifyPost(postText, postId: postId,index: postIndex)
             }
+            }
+            else{
+                let alert = UIAlertController(title: "", message: "Please enter a post", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+                return
+
+            }
         }
         dismissViewControllerAnimated(true) {}
+    }
+    func textViewDidBeginEditing(textView: UITextView){
+        if editingPost == nil{
+            textView.text = ""
+        }
+    }
+    
+    func textViewDidEndEditing(textView: UITextView){
+        if textView == postContent{
+            postContent.placeHolderForTextView()
+           
+        }
+    }
+
+    func textViewShouldBeginEditing(textView: UITextView) -> Bool{
+        textView.clearPlaceHolderForTextView()
+        return true
     }
     
     /*

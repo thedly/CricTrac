@@ -106,6 +106,17 @@ class APostTableViewCell: UITableViewCell {
     
     
     @IBAction func DidTapLikeButton(sender: UIButton) {
+        // network reachability test
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        if !appDelegate.reachability.isReachable()  {
+            let alert = UIAlertController(title: "", message: networkErrorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            let parentVC = parent as? TimeLineViewController
+            parentVC!.presentViewController(alert, animated: true, completion: nil)
+            return
+        }
+
         //likeOrUnlike(postId!)
         
         if let value = postId{
@@ -157,22 +168,13 @@ class APostTableViewCell: UITableViewCell {
     
     @IBAction func deletePost(sender: UIButton){
         showPostOptions()
-//        
-//                let appearance = SCLAlertView.SCLAppearance(
-//                    showCloseButton: false
-//                )
-//                
-//                let alertView = SCLAlertView(appearance: appearance)
-//                
-//                alertView.addButton("OK", target:self, selector:#selector(APostTableViewCell.deletePostFromFB))
-//                
-//                alertView.addButton("Cancel", target:self, selector:#selector(APostTableViewCell.cancel))
-//                
-//                alertView.showNotice("Warning", subTitle: "All Data will be lost if you continue")
     }
     
     func showPostOptions(){
         let optionMenu = UIAlertController(title: nil, message: "Select Action", preferredStyle: .ActionSheet)
+       
+        let deleteAlert = UIAlertController(title: "Delete Comment", message: "Are you sure you want to delete this comment?", preferredStyle: UIAlertControllerStyle.Alert)
+
     
         if postOwnerName.text != "CricTrac" {
             let saveAction = UIAlertAction(title: "Edit", style: .Default, handler: {
@@ -184,14 +186,21 @@ class APostTableViewCell: UITableViewCell {
         
         let deleteAction = UIAlertAction(title: "Delete", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
-            let appearance = SCLAlertView.SCLAppearance(
-                showCloseButton: false
-            )
             
-            let alertView = SCLAlertView(appearance: appearance)
-            alertView.addButton("OK", target:self, selector:#selector(APostTableViewCell.deletePostFromFB))
-            alertView.addButton("Cancel", target:self, selector:#selector(APostTableViewCell.cancel))
-            alertView.showNotice("Warning", subTitle: "All Data will be lost if you continue")
+              deleteAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!)-> Void in
+                self.deletePostFromFB()
+                print("Handle Cancel Logic here")
+               }))
+            
+              deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction!)-> Void in
+                
+                         self.cancel()
+                          print("Handle Cancel Logic here")
+              }))
+            
+              let parentVc = self.parent as? UIViewController
+               parentVc!.presentViewController(deleteAlert, animated: true, completion: nil)
+            
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
