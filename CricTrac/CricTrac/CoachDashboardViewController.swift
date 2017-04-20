@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import KRProgressHUD
+import FirebaseAuth
+import GoogleMobileAds
 
 class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ThemeChangeable {
     
@@ -35,8 +38,27 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     var friendProfile:[String:AnyObject]?
     var userProfileData:Profile!
     
+    var coverOrProfile = ""
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setBackgroundColor()
+        initView()
+         self.updateCoachDashboard()
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //loadBannerAds()
+        
+    }
+    
+    func initView() {
+
+        //super.viewDidLoad()
         
         if let value = friendProfile{
             userProfileData = Profile(usrObj: value)
@@ -46,7 +68,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             closeButton.hidden = true
         }
         
-        setBackgroundColor()
+        //setBackgroundColor()
         
         userProfileImage.layer.cornerRadius = userProfileImage.bounds.size.width/2
         MatchesView.layer.cornerRadius = 10
@@ -88,7 +110,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             self.currentUserProfileImage = image!
         }
         
-        if userProfileData.ProfileImageURL != "-" {
+        if userProfileData.CoverPhotoURL != "-" {
             getImageFromFirebase(userProfileData.CoverPhotoURL) { (imgData) in
                 self.currentUserCoverImage = imgData
             }
@@ -103,7 +125,57 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         self.imgCoverPhoto.image = currentUserCoverImage
         
         setNavigationBarProperties()
-        // Do any additional setup after loading the view.
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapCoverPhoto))
+        tapGesture.numberOfTapsRequired = 1
+        imgCoverPhoto.addGestureRecognizer(tapGesture)
+    }
+    
+    func tapCoverPhoto()  {
+        self.photoOptions("CoverPhoto")
+        coverOrProfile = "Cover"
+    }
+    @IBAction func editImageBtnPressed(sender: AnyObject) {
+        self.photoOptions("ProfilePhoto")
+        coverOrProfile = "Profile"
+    }
+
+    
+    func photoOptions(option:String)  {
+        
+        let alertController = UIAlertController(title: nil, message: "Change your picture", preferredStyle: .ActionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+            // ...
+        }
+        alertController.addAction(cancelAction)
+        
+        let TakePictureAction = UIAlertAction(title: "Take Photo", style: .Default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
+                imagePicker.allowsEditing = false
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+            }
+        }
+        
+        alertController.addAction(TakePictureAction)
+        
+        let chooseExistingAction = UIAlertAction(title: "Choose Existing", style: .Default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+                imagePicker.allowsEditing = false
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+            }
+        }
+        
+        alertController.addAction(chooseExistingAction)
+        
+        self.presentViewController(alertController, animated: true) {
+            // ...
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -124,6 +196,76 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         sliderMenu.setDrawerState(.Opened, animated: true)
     }
     
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        if coverOrProfile == "Profile" {
+            
+            self.userProfileImage.image = image
+            self.dismissViewControllerAnimated(true) {
+                addProfileImageData(self.resizeImage(image, newWidth: 200))
+            }
+        }else {
+            self.imgCoverPhoto.image = image
+            self.dismissViewControllerAnimated(true) {
+                addCoverImageData(self.resizeImage(image, newWidth: 200))
+            }
+        }
+    }
+    
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+        
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+    
+    func viewImage(option:String){
+        
+        let newImageView = UIImageView()
+        if option == "CoverPhoto" {
+            newImageView.image = imgCoverPhoto.image
+        }else {
+            newImageView.image = userProfileImage.image
+        }
+        newImageView.frame = self.view.frame
+        newImageView.backgroundColor = .blackColor()
+        newImageView.contentMode = .ScaleAspectFit
+        newImageView.userInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(CoachDashboardViewController.dismissFullscreenImage(_:)))
+        newImageView.addGestureRecognizer(tap)
+        //        self.view.addSubview(navBarView)
+        self.view.addSubview(newImageView)
+        
+    }
+    
+    @IBAction func imageTapped(sender: UITapGestureRecognizer) {
+        let imageView = sender.view as! UIImageView
+        //        let navBarView = UIView(frame: CGRectMake(0, 0, (sender.view?.frame.size.width)!, 50))
+        //        navBarView.backgroundColor = UIColor(hex: "#D4D4D4")
+        //        let editBtn = UIButton(frame: CGRectMake((sender.view?.frame.size.width)! - 100, 10, 50, 20))
+        //        editBtn.setBackgroundImage(UIImage(named: "EditPencil-100"), forState: .Normal)
+        //        navBarView.addSubview(editBtn)
+        
+        let newImageView = UIImageView(image: imageView.image)
+        newImageView.frame = self.view.frame
+        newImageView.backgroundColor = .blackColor()
+        newImageView.contentMode = .ScaleAspectFit
+        newImageView.userInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(CoachDashboardViewController.dismissFullscreenImage(_:)))
+        newImageView.addGestureRecognizer(tap)
+        //        self.view.addSubview(navBarView)
+        self.view.addSubview(newImageView)
+    }
+    
+    func dismissFullscreenImage(sender: UITapGestureRecognizer) {
+        sender.view?.removeFromSuperview()
+    }
+
+    
     func setNavigationBarProperties(){
         var currentTheme:CTTheme!
         currentTheme = cricTracTheme.currentTheme
@@ -134,12 +276,16 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         menuButton.frame = CGRectMake(0, 0, 40, 40)
         let leftbarButton = UIBarButtonItem(customView: menuButton)
         navigationItem.leftBarButtonItem = leftbarButton
-        navigationController?.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-        title = "SIGHTSCREEN"
+        
+        if let navigation = navigationController{
+            
+            navigation.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+            title = "SIGHTSCREEN"
+
         //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         //// navigationController!.navigationBar.titleTextAttributes = titleDict
     }
-    
+}
     func updateCoachDashboard(){
         if (userProfileData.CoachCurrentTeams.count) + (userProfileData.CoachPastTeams.count) == 0 {
             self.coachCurrentTeamsHeightConstraint.constant = 0
@@ -246,7 +392,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
                     }
                     
                 }
-                self.updateCoachDashboard()
+                
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
@@ -301,7 +447,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
                     }
                     
                 }
-                self.updateCoachDashboard()
+               
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
@@ -334,7 +480,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
                     
                 }
                 
-                self.updateCoachDashboard()
+                
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
@@ -368,7 +514,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
                     
                 }
                 
-                self.updateCoachDashboard()
+               
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
