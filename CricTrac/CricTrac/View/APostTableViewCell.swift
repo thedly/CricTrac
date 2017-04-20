@@ -106,23 +106,23 @@ class APostTableViewCell: UITableViewCell {
     
     
     @IBAction func DidTapLikeButton(sender: UIButton) {
-        likeOrUnlike(postId!)
+        //likeOrUnlike(postId!)
         
-        //if let value = postId{
-            //likeOrUnlike(value, like: { (likeDict) in
-                //self.addLikeToDataArray(likeDict)
-                //self.likeButton.titleLabel?.textColor = UIColor.yellowColor()
-                //self.totalLikeCount += 1
-                //self.likeCount.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
-                //self.currentUserHasLikedThePost = true
-            //}) {
-                //self.removeLikeFromArray()
-                //self.likeButton.titleLabel?.textColor = UIColor.grayColor()
-                //self.totalLikeCount -= 1
-                //self.likeCount.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
-                //self.currentUserHasLikedThePost = false
-            //}
-        //}
+        if let value = postId{
+            likeOrUnlike(value, like: { (likeDict) in
+                self.addLikeToDataArray(likeDict)
+                self.likeButton.titleLabel?.textColor = UIColor.yellowColor()
+                self.totalLikeCount += 1
+                self.likeCount.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
+                self.currentUserHasLikedThePost = true
+            }) {
+                self.removeLikeFromArray()
+                self.likeButton.titleLabel?.textColor = UIColor.grayColor()
+                self.totalLikeCount -= 1
+                self.likeCount.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
+                self.currentUserHasLikedThePost = false
+            }
+        }
     }
     
   

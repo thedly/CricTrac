@@ -290,6 +290,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                 self.refreshableParent?.refresh()
             }
         }
+        
     }
     
     func deletebuttonTapped() {
@@ -402,23 +403,23 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         return true
     }
     
-    @IBAction func didTapLikeButton(sender: UIButton) {
-        likeOrUnlike(postId)
-    }
-    
 //    @IBAction func didTapLikeButton(sender: UIButton) {
-//        likeOrUnlike(postId, like: { (likeDict) in
-//            self.likeButton.titleLabel?.textColor = UIColor.whiteColor()
-//            self.postLikeCount += 1
-//            //self.likes.text = "\(self.postLikeCount) Likes"
-//             timelineData![self.postIndex]["Likes"] = JSON(likeDict)
-//        }) {
-//            self.removeLikeFromArray()
-//            self.likeButton.titleLabel?.textColor = UIColor.grayColor()
-//            self.postLikeCount -= 1
-//            //self.likes.text = "\(self.postLikeCount) Likes"
-//        }
+//        likeOrUnlike(postId)
 //    }
+    
+    @IBAction func didTapLikeButton(sender: UIButton) {
+        likeOrUnlike(postId, like: { (likeDict) in
+            self.likeButton.titleLabel?.textColor = UIColor.whiteColor()
+            self.postLikeCount += 1
+            //self.likes.text = "\(self.postLikeCount) Likes"
+             timelineData![self.postIndex]["Likes"] = JSON(likeDict)
+        }) {
+            self.removeLikeFromArray()
+            self.likeButton.titleLabel?.textColor = UIColor.grayColor()
+            self.postLikeCount -= 1
+            //self.likes.text = "\(self.postLikeCount) Likes"
+        }
+    }
     
     func addLikeToDataArray(likeArray:[String:[String:String]]){
         
