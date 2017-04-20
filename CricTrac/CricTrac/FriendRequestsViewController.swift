@@ -186,7 +186,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100
+        return 90
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

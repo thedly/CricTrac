@@ -94,7 +94,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100
+        return 85
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

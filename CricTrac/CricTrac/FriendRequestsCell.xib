@@ -43,7 +43,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAJITH KUMAR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBq-Ub-tKL">
-                                <rect key="frame" x="80" y="23" width="287" height="19"/>
+                                <rect key="frame" x="80" y="24" width="287" height="18"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -67,7 +67,7 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DELHI PUBLIC SCHOOL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ua-TL-Kyc">
-                                <rect key="frame" x="80" y="52" width="287" height="17"/>
+                                <rect key="frame" x="80" y="46" width="287" height="16"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -118,7 +118,7 @@
                             <constraint firstItem="WBq-Ub-tKL" firstAttribute="centerY" secondItem="qJF-gX-S8I" secondAttribute="centerY" constant="-10" id="WVY-Jl-V1s"/>
                             <constraint firstItem="qJF-gX-S8I" firstAttribute="centerY" secondItem="eAd-Sj-Pzi" secondAttribute="centerY" id="cBt-Ua-5dp"/>
                             <constraint firstItem="5ua-TL-Kyc" firstAttribute="trailing" secondItem="WBq-Ub-tKL" secondAttribute="trailing" id="d2Z-Va-Hlk"/>
-                            <constraint firstItem="5ua-TL-Kyc" firstAttribute="top" secondItem="WBq-Ub-tKL" secondAttribute="bottom" constant="10" id="kKz-Rw-8Sa"/>
+                            <constraint firstItem="5ua-TL-Kyc" firstAttribute="top" secondItem="WBq-Ub-tKL" secondAttribute="bottom" constant="4" id="kKz-Rw-8Sa"/>
                             <constraint firstAttribute="trailing" secondItem="Gvq-qS-C2a" secondAttribute="trailing" constant="8" id="r1y-tl-LI5"/>
                         </constraints>
                     </view>
