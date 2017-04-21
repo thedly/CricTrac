@@ -148,13 +148,31 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     func getCellForRow(indexPath:NSIndexPath)->FriendRequestsCell{
         let aCell =  RequestsTblview.dequeueReusableCellWithIdentifier("FriendRequestsCell", forIndexPath: indexPath) as! FriendRequestsCell
         if FriendRequestsData[indexPath.row].isSentRequest == true {
+            
+            let friendUserId = FriendRequestsData[indexPath.row].SentTo
+            fetchFriendDetail(friendUserId, sucess: { (result) in
+                let proPic = result["proPic"]
+                let city =   result["city"]
+                aCell.FriendCity.text = city
+                
+                if proPic! == "-"{
+                    let imageName = defaultProfileImage
+                    let image = UIImage(named: imageName)
+                    aCell.FriendProfileImage.image = image
+                }else{
+                    if let imageURL = NSURL(string:proPic!){
+                        aCell.FriendProfileImage.kf_setImageWithURL(imageURL)
+                    }
+                }
+            })
+            
             aCell.confirmBtn.hidden = true
             aCell.rejectBtn.hidden = true
             aCell.cancelBtn.hidden = false
             //aCell.rejectBtn.setTitle("CANCEL", forState: UIControlState.Normal)
             aCell.FriendName.text = FriendRequestsData[indexPath.row].Name
-            aCell.FriendCity.text = FriendRequestsData[indexPath.row].City
-            aCell.FriendProfileImage.image = extractImages(FriendRequestsData[indexPath.row].SentTo)
+            //aCell.FriendCity.text = FriendRequestsData[indexPath.row].City
+            //aCell.FriendProfileImage.image = extractImages(FriendRequestsData[indexPath.row].SentTo)
             //aCell.confirmBtn.accessibilityIdentifier = FriendRequestsData[indexPath.row].SentTo
             //aCell.confirmBtn.restorationIdentifier = FriendRequestsData[indexPath.row].SentRequestId
             aCell.cancelBtn.restorationIdentifier = FriendRequestsData[indexPath.row].SentRequestId
@@ -162,13 +180,30 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         }
         else
         {
+            let friendUserId = FriendRequestsData[indexPath.row].ReceivedFrom
+            fetchFriendDetail(friendUserId, sucess: { (result) in
+                let proPic = result["proPic"]
+                let city =   result["city"]
+                aCell.FriendCity.text = city
+                
+                if proPic! == "-"{
+                    let imageName = defaultProfileImage
+                    let image = UIImage(named: imageName)
+                    aCell.FriendProfileImage.image = image
+                }else{
+                    if let imageURL = NSURL(string:proPic!){
+                        aCell.FriendProfileImage.kf_setImageWithURL(imageURL)
+                    }
+                }
+            })
+            
             aCell.confirmBtn.hidden = false
             aCell.rejectBtn.hidden = false
             aCell.cancelBtn.hidden = true
             //aCell.rejectBtn.setTitle("REJECT", forState: UIControlState.Normal)
             aCell.FriendName.text = FriendRequestsData[indexPath.row].Name
-            aCell.FriendCity.text = FriendRequestsData[indexPath.row].City
-            aCell.FriendProfileImage.image = extractImages(FriendRequestsData[indexPath.row].ReceivedFrom)
+            //aCell.FriendCity.text = FriendRequestsData[indexPath.row].City
+            //aCell.FriendProfileImage.image = extractImages(FriendRequestsData[indexPath.row].ReceivedFrom)
             aCell.confirmBtn.accessibilityIdentifier = FriendRequestsData[indexPath.row].ReceivedFrom
             aCell.confirmBtn.restorationIdentifier = FriendRequestsData[indexPath.row].RequestId
             aCell.rejectBtn.restorationIdentifier = FriendRequestsData[indexPath.row].RequestId

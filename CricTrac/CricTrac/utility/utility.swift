@@ -163,9 +163,9 @@ public func viewControllerFrom(storyBoard:String,vcid:String)->UIViewController{
 
 public func extractImages(userId:String) -> UIImage {
     if userId != "" {
-        return UserProfilesImages[userId] ?? UIImage(named: "User")!
+        return UserProfilesImages[userId] ?? UIImage(named: defaultProfileImage)!
     }
-    return UIImage(named: "User")!
+    return UIImage(named: defaultProfileImage)!
 }
 
 

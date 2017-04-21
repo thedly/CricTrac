@@ -94,7 +94,25 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
     func getCellForSearchedParametersRow(indexPath:NSIndexPath)->FriendSuggestionsCell{
         if let aCell =  friendSearchTbl.dequeueReusableCellWithIdentifier("FriendSuggestionsCell") as? FriendSuggestionsCell {
             if searchedProfiles.count > 0 && indexPath.row < searchedProfiles.count {
-                aCell.configureCell(searchedProfiles[indexPath.row])
+                
+                let friendUserId = searchedProfiles[indexPath.row].id
+                fetchFriendDetail(friendUserId, sucess: { (result) in
+                    let proPic = result["proPic"]
+                    let city =   result["city"]
+                    aCell.userCity.text = city
+                    
+                    if proPic! == "-"{
+                        let imageName = defaultProfileImage
+                        let image = UIImage(named: imageName)
+                        aCell.userProfileView.image = image
+                    }else{
+                        if let imageURL = NSURL(string:proPic!){
+                            aCell.userProfileView.kf_setImageWithURL(imageURL)
+                        }
+                    }
+                })
+                //aCell.configureCell(searchedProfiles[indexPath.row])
+                aCell.userName.text = searchedProfiles[indexPath.row].fullName
                 aCell.AddFriendBtn.accessibilityIdentifier = searchedProfiles[indexPath.row].id
                 aCell.AddFriendBtn.addTarget(self, action: #selector(AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                 aCell.backgroundColor = UIColor.clearColor()

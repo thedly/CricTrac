@@ -15,6 +15,8 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UserProfilesData.removeAll()
+        
         initializeView()
         // Do any additional setup after loading the view.
     }
@@ -73,12 +75,13 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         
         backgroundThread(background: {
             KRProgressHUD.showText("Loading ...")
+             
             getAllFriendSuggestions({
                 var modFriendReqData = [Profile]()
                 for (index, dat) in UserProfilesData.enumerate() {
-                    if FriendRequestsData.filter({$0.Name == dat.fullName }).count == 0 {
+                    //if FriendRequestsData.filter({$0.Name == dat.fullName }).count == 0 {
                         modFriendReqData.append(dat)
-                    }
+                    //}
                 }
                 UserProfilesData.removeAll()
                 UserProfilesData = modFriendReqData
@@ -118,7 +121,26 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     func getCellForSuggestionsRow(indexPath:NSIndexPath)->FriendSuggestionsCell{
         if FriendRequestsData.filter({$0.Name == UserProfilesData[indexPath.row].fullName}).first == nil {
             if let aCell =  SuggestsTblview.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as? FriendSuggestionsCell {
-                aCell.configureCell(UserProfilesData[indexPath.row])
+                
+                let friendUserId = UserProfilesData[indexPath.row].id
+                fetchFriendDetail(friendUserId, sucess: { (result) in
+                    let proPic = result["proPic"]
+                    let city =   result["city"]
+                    aCell.userCity.text = city
+                    
+                    if proPic! == "-"{
+                        let imageName = defaultProfileImage
+                        let image = UIImage(named: imageName)
+                        aCell.userProfileView.image = image
+                    }else{
+                        if let imageURL = NSURL(string:proPic!){
+                            aCell.userProfileView.kf_setImageWithURL(imageURL)
+                        }
+                    }
+                })
+                
+                //aCell.configureCell(UserProfilesData[indexPath.row])
+                aCell.userName.text = UserProfilesData[indexPath.row].fullName
                 aCell.AddFriendBtn.accessibilityIdentifier = UserProfilesData[indexPath.row].id
                 aCell.AddFriendBtn.addTarget(self, action: #selector(AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                 aCell.backgroundColor = UIColor.clearColor()

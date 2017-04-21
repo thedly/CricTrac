@@ -603,11 +603,11 @@ func updateMatchData(key:String,data:[String:AnyObject], callback:(data:[String:
 //MARK:- Delete Match
 
 func deleteMatchData(matchId:String, callback:(error:NSError?)->Void ){
-    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").child(matchId)
-    ref.removeValueWithCompletionBlock { (error, dataRef) in
-        UpdateDashboardDetails()
-        callback(error: error)
-    }
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").child(matchId).removeValue()
+//    ref.removeValueWithCompletionBlock { (error, dataRef) in
+//        callback(error: error)
+//    }
+    UpdateDashboardDetails()
 }
 
 //MARK:- Login
@@ -733,12 +733,12 @@ public func getAllFriendSuggestions(callback:()->Void) {
                         getProfileInfoById(userprofileId, sucessBlock: { FriendData in
                             var currentProfile = Profile(usrObj: FriendData)
                             UserProfilesData.append(currentProfile)
-                            if let _imageUrl = FriendData["ProfileImageURL"] as? String where _imageUrl != ""  {
-                                let userId = userprofileId as! String
-                                getImageFromFirebase(_imageUrl) { (data) in
-                                    UserProfilesImages[userId] = data
-                                }
-                            }
+//                            if let _imageUrl = FriendData["ProfileImageURL"] as? String where _imageUrl != ""  {
+//                                let userId = userprofileId as! String
+//                                getImageFromFirebase(_imageUrl) { (data) in
+//                                    UserProfilesImages[userId] = data
+//                                }
+//                            }
                             callback()
                         })
                     }
@@ -897,6 +897,27 @@ func getAllSentFriendRequests(sucessBlock:([String: AnyObject])->Void){
 func getAllFriends(sucessBlock:([String: AnyObject])->Void){
     fireBaseRef.child("Users").child(currentUser!.uid).child("Friends").observeEventType(.Value, withBlock: { snapshot in
         if let data = snapshot.value as? [String : AnyObject] {
+            
+            //sajith code for fetching individual user data
+//            UserProfilesData.removeAll()
+//            for (key, value) in data {
+//                //var FriendObject = Profile(usrObj: [:])
+//                var friendUserId = value["UserId"] as? String
+//                getProfileInfoById(friendUserId!, sucessBlock: { FriendData in
+//                    var currentProfile = Profile(usrObj: FriendData)
+//                    UserProfilesData.append(currentProfile)
+//                    if let _imageUrl = FriendData["ProfileImageURL"] as? String where _imageUrl != ""  {
+//                        //let userId = friendUserId as! String
+//                        getImageFromFirebase(_imageUrl) { (data) in
+//                            UserProfilesImages[friendUserId!] = data
+//                        }
+//                    }
+//                    //callback()
+//                })
+//            }
+
+            
+            
             sucessBlock(data)
         }
         else{

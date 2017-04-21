@@ -8,6 +8,7 @@
 
 import UIKit
 import XLPagerTabStrip
+import Kingfisher
 
 class FriendsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider,ThemeChangeable {
     
@@ -60,10 +61,30 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     
     func getCellForRow(indexPath:NSIndexPath)->FriendsCell{
+        
         let aCell =  SuggestsTblview.dequeueReusableCellWithIdentifier("FriendsCell", forIndexPath: indexPath) as! FriendsCell
+        
+        let friendUserId = friendsDataArray[indexPath.row].UserId
+        fetchFriendDetail(friendUserId, sucess: { (result) in
+            let proPic = result["proPic"]
+            let city =   result["city"]
+            aCell.FriendCity.text = city
+
+            if proPic! == "-"{
+                let imageName = defaultProfileImage
+                let image = UIImage(named: imageName)
+                aCell.FriendProfileImage.image = image
+            }else{
+                if let imageURL = NSURL(string:proPic!){
+                    aCell.FriendProfileImage.kf_setImageWithURL(imageURL)
+                }
+            }
+        })
+        
+        
         aCell.FriendName.text = friendsDataArray[indexPath.row].Name
-        aCell.FriendCity.text = friendsDataArray[indexPath.row].City
-        aCell.FriendProfileImage.image = extractImages(friendsDataArray[indexPath.row].Name!)
+        //aCell.FriendCity.text = friendsDataArray[indexPath.row].City
+        //aCell.FriendProfileImage.image = extractImages(friendsDataArray[indexPath.row].UserId!)
         aCell.UnfriendBtn.addTarget(self, action: #selector(FriendsViewController.UnfriendBtnBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         aCell.UnfriendBtn.restorationIdentifier = friendsDataArray[indexPath.row].FriendRecordId
         aCell.backgroundColor = UIColor.clearColor()
