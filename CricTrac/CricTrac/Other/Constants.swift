@@ -256,7 +256,7 @@ let themeColors = [
 
 
 let defaultTheme = "Grass"
-let defaultProfileImage = "sachin"
+let defaultProfileImage = "propic"
 let DashboardDataUpdateUrl = "http://crictracserver.azurewebsites.net/Users/"
 let FriendSuggstionUrl = "http://crictracserver.azurewebsites.net/suggestions/"
 let topColorDefault = themeColors[CurrentTheme]!["topColor"]!

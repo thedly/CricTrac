@@ -897,28 +897,7 @@ func getAllSentFriendRequests(sucessBlock:([String: AnyObject])->Void){
 func getAllFriends(sucessBlock:([String: AnyObject])->Void){
     fireBaseRef.child("Users").child(currentUser!.uid).child("Friends").observeEventType(.Value, withBlock: { snapshot in
         if let data = snapshot.value as? [String : AnyObject] {
-            
-            //sajith code for fetching individual user data
-//            UserProfilesData.removeAll()
-//            for (key, value) in data {
-//                //var FriendObject = Profile(usrObj: [:])
-//                var friendUserId = value["UserId"] as? String
-//                getProfileInfoById(friendUserId!, sucessBlock: { FriendData in
-//                    var currentProfile = Profile(usrObj: FriendData)
-//                    UserProfilesData.append(currentProfile)
-//                    if let _imageUrl = FriendData["ProfileImageURL"] as? String where _imageUrl != ""  {
-//                        //let userId = friendUserId as! String
-//                        getImageFromFirebase(_imageUrl) { (data) in
-//                            UserProfilesImages[friendUserId!] = data
-//                        }
-//                    }
-//                    //callback()
-//                })
-//            }
-
-            
-            
-            sucessBlock(data)
+          sucessBlock(data)
         }
         else{
             sucessBlock([:])
