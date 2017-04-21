@@ -28,6 +28,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var contentViewHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var barView: UIView!
     var postIndex = 0
     var postLikeCount = 0
     var initialLikes = 0
@@ -172,12 +173,13 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
-      //  navigationController!.navigationBar.barTintColor = currentTheme.topColor
+      // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     func setNavigationBarProperties(){
         var currentTheme:CTTheme!
         currentTheme = cricTracTheme.currentTheme
-        //        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        self.barView.backgroundColor = currentTheme.topColor
+      //  navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         self.contentViewForCommentCell.backgroundColor =  currentTheme.topColor
     }
     

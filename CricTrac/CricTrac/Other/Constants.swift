@@ -139,67 +139,124 @@ let serverBaseURL = "http://crictracserver.azurewebsites.net"
     var yHintPositionOffset: CGFloat = 7
     var yPlaceholderPositionOffset: CGFloat = 0
 }
-
-
+//Grass - green theme (b4ed50 - 429321)
+//Flash - yellow theme (fdef0f - b49b09)
+//Feather - blue theme (c96dd8 - 3023ae)
+//Peach - orange theme (fbda61 - f76b1c)
+//Cherry - maroon theme (f5515f - 9f031b)
+//Daisy - purple theme (eb56c1 - 961b74 )
+//Ashes - grey theme (C8CBC3 - 5C635A)
+//Beehive - brown theme (B8896B - 6F401B)
+//Ferret - black theme (8B8484 - 2D2C2A)
 
 
 let themeColors = [
-    "Dawn" : [
-        "topColor" : "#4DA0B0",
-        "bottomColor" : "#D39D38",
-        "theme":"dawn"
+    "Grass" : [
+        "topColor" : "#b4ed50",
+        "bottomColor" : "#429321",
+        "theme":"grass"
     ],
-    "MeanGreen" : [
-        "topColor" : "#84CC00",
-        "bottomColor" : "#4D9D00",
-        "theme":"meanGreen"
+    "Flash" : [
+        "topColor" : "#fdef0f",
+        "bottomColor" : "#b49b09",
+        "theme":"flash"
     ],
-    "Dusk" : [
-        "topColor" : "#434343",
-        "bottomColor": "#000000",
-        "theme":"dusk"
+    "Feather" : [
+        "topColor" : "#c96dd8",
+        "bottomColor": "#3023ae",
+        "theme":"feather"
     ],
-    "Sunset": [
-        "topColor": "#FF9500",
-        "bottomColor": "#FF5E3A",
-        "theme":"sunSet"
+    "Peach": [
+        "topColor": "#fbda61",
+        "bottomColor": "#f76b1c",
+        "theme":"peach"
     ],
-    "Turquoise": [
-        "topColor": "#136a8a",
-        "bottomColor": "#267871",
-        "theme":"turquoise"
+    "Cherry": [
+        "topColor": "#f5515f",
+        "bottomColor": "#9f031b",
+        "theme":"cherry"
     ],
-    "Instagram": [
-        "topColor": "#517fa4",
-        "bottomColor": "#243949",
-        "theme":"instagram"
+    "Daisy": [
+        "topColor": "#eb56c1",
+        "bottomColor": "#961b74",
+        "theme":"daisy"
     ],
-    "Mango": [
-        "topColor": "#ffcc33",
-        "bottomColor": "#ffb347",
-        "theme":"mango"
+    "Ashes": [
+        "topColor": "#C8CBC3",
+        "bottomColor": "#5C635A",
+        "theme":"ashes"
     ],
-    "Hersheys": [
-        "topColor": "#9a8478",
-        "bottomColor": "#1e130c",
-        "theme":"hersheys"
+    "Beehive": [
+        "topColor": "#B8896B",
+        "bottomColor": "#6F401B",
+        "theme":"beehive"
     ],
-    "Cocktail": [
-        "topColor": "#D38312",
-        "bottomColor": "#A83279",
-        "theme":"cocktail"
-    ],
-    "Earthly": [
-        "topColor": "#DBD5A4",
-        "bottomColor": "#649173",
-        "theme":"earthly"
+    "Ferret": [
+        "topColor": "#8B8484",
+        "bottomColor": "#2D2C2A",
+        "theme":"ferret"
     ]
 ]
 
 
 
-let defaultTheme = "MeanGreen"
-let defaultProfileImage = "propic"
+//let themeColors = [
+//    "Dawn" : [
+//        "topColor" : "#4DA0B0",
+//        "bottomColor" : "#D39D38",
+//        "theme":"dawn"
+//    ],
+//    "MeanGreen" : [                                      
+//        "topColor" : "#84CC00",
+//        "bottomColor" : "#4D9D00",
+//        "theme":"meanGreen"
+//    ],
+//    "Dusk" : [
+//        "topColor" : "#434343",
+//        "bottomColor": "#000000",
+//        "theme":"dusk"
+//    ],
+//    "Sunset456": [
+//        "topColor": "#FF9500",
+//        "bottomColor": "#FF5E3A",
+//        "theme":"sunSet678"
+//    ],
+//    "Turquoise": [
+//        "topColor": "#136a8a",
+//        "bottomColor": "#267871",
+//        "theme":"turquoise"
+//    ],
+//    "Instagram": [
+//        "topColor": "#517fa4",
+//        "bottomColor": "#243949",
+//        "theme":"instagram"
+//    ],
+//    "Mango": [
+//        "topColor": "#ffcc33",
+//        "bottomColor": "#ffb347",
+//        "theme":"mango"
+//    ],
+//    "Hersheys": [
+//        "topColor": "#9a8478",
+//        "bottomColor": "#1e130c",
+//        "theme":"hersheys"
+//    ],
+//    "Cocktail": [
+//        "topColor": "#D38312",
+//        "bottomColor": "#A83279",
+//        "theme":"cocktail"
+//    ],
+//    "Earthly": [
+//        "topColor": "#DBD5A4",
+//        "bottomColor": "#649173",
+//        "theme":"earthly"
+//    ]
+//]
+//
+
+
+let defaultTheme = "Grass"
+let defaultProfileImage = "sachin"
 let DashboardDataUpdateUrl = "http://crictracserver.azurewebsites.net/Users/"
 let FriendSuggstionUrl = "http://crictracserver.azurewebsites.net/suggestions/"
 let topColorDefault = themeColors[CurrentTheme]!["topColor"]!
