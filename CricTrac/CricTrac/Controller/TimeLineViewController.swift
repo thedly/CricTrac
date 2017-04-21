@@ -27,13 +27,14 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     override func viewWillAppear(animated: Bool) {
         //loadTimeline()
         //timeLineTable.reloadData()
+        setNavigationBarProperties();
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setNavigationBarProperties();
-        currentTheme = cricTracTheme.currentTheme
+        
+        //currentTheme = cricTracTheme.currentTheme
         setBackgroundColor()
         self.automaticallyAdjustsScrollViewInsets = false
         
@@ -75,8 +76,10 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
-        self.view.backgroundColor = currentTheme.topColor
-       // navigationController!.navigationBar.barTintColor = currentTheme.topColor
+        
+        
+       
+       navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     func refresh(sender:AnyObject) {
@@ -167,6 +170,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
 //    }
     
     func setNavigationBarProperties(){
+       
         currentTheme = cricTracTheme.currentTheme
         let menuButton: UIButton = UIButton(type:.Custom)
         menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
@@ -185,6 +189,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         
         navigationItem.leftBarButtonItem = leftbarButton
         //navigationItem.rightBarButtonItem = righttbarButton
+        self.view.backgroundColor =  currentTheme.topColor
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "PAVILION"
        // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
@@ -345,8 +350,9 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             }
         }
         
-        acell.contentView.backgroundColor = currentTheme.boxColor
-        acell.backgroundColor = UIColor.clearColor()
+       // acell.contentView.backgroundColor = currentTheme.boxColor
+        acell.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.boxColor)))
+        //acell.alpha = 0.3
         acell.selectionStyle = .None
         return acell
     }

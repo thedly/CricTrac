@@ -15,6 +15,7 @@ class NewPostViewController: UIViewController,ThemeChangeable,UITextViewDelegate
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var postContent: UITextView!
     @IBOutlet weak var postOwnerName:UILabel!
+    @IBOutlet weak var barView: UIView!
     
     weak var sendPostDelegate:PostSendable?
     var editingPost:String?
@@ -25,11 +26,14 @@ class NewPostViewController: UIViewController,ThemeChangeable,UITextViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackgroundColor()
+        setNavigationBarProperties()
        //self.view.backgroundColor = UIColor.clearColor()
         contentView.backgroundColor = UIColor.clearColor()
         postContent.backgroundColor = UIColor.clearColor()
         profilePic.layer.cornerRadius = profilePic.frame.width/2
-         postContent.placeHolderForTextView()
+        postContent.placeHolderForTextView()
+        //postContent.keyboardAppearance
+        
         postContent.delegate = self
         let postOwnerId = currentUser?.uid
         fetchFriendDetail(postOwnerId!, sucess: { (result) in
@@ -61,12 +65,13 @@ class NewPostViewController: UIViewController,ThemeChangeable,UITextViewDelegate
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
-      //  navigationController!.navigationBar.barTintColor = currentTheme.topColor
+       // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     func setNavigationBarProperties(){
         var currentTheme:CTTheme!
         currentTheme = cricTracTheme.currentTheme
+        self.barView.backgroundColor = currentTheme.topColor
       //  navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
     }
 
@@ -113,17 +118,17 @@ class NewPostViewController: UIViewController,ThemeChangeable,UITextViewDelegate
         dismissViewControllerAnimated(true) {}
     }
     func textViewDidBeginEditing(textView: UITextView){
-        if editingPost == nil{
+        if editingPost == nil && textView.text == "Free hit" {
             textView.text = ""
         }
     }
     
-    func textViewDidEndEditing(textView: UITextView){
-        if textView == postContent{
-            postContent.placeHolderForTextView()
-           
-        }
-    }
+//    func textViewDidEndEditing(textView: UITextView){
+//        if textView == postContent{
+//            postContent.placeHolderForTextView()
+//           
+//        }
+//    }
 
     func textViewShouldBeginEditing(textView: UITextView) -> Bool{
         textView.clearPlaceHolderForTextView()

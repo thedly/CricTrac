@@ -50,6 +50,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         navigationItem.leftBarButtonItem = leftbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "THIRD UMPIRE"
+        self.view.backgroundColor = currentTheme.topColor
        // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
        // navigationController!.navigationBar.titleTextAttributes = titleDict
     }
