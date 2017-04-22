@@ -28,6 +28,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         //loadTimeline()
         self.timeLineTable.reloadData()
         setNavigationBarProperties();
+        setBackgroundColor()
     }
     
     override func viewDidLoad() {
@@ -35,7 +36,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         
         
         //currentTheme = cricTracTheme.currentTheme
-        setBackgroundColor()
+        
         self.automaticallyAdjustsScrollViewInsets = false
         
         timeLineTable.rowHeight = UITableViewAutomaticDimension;

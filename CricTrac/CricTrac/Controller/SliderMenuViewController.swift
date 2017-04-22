@@ -41,7 +41,7 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setBackgroundColor()
+    
         
         userName.text = profileData.fullName
         //baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
@@ -105,7 +105,8 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        
+         setBackgroundColor()
+
         self.profileImage.image = LoggedInUserImage
 
     }

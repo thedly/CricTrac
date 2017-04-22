@@ -23,7 +23,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor
+       // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     override func viewDidLoad() {
@@ -50,7 +50,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         navigationItem.leftBarButtonItem = leftbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "THIRD UMPIRE"
-        self.view.backgroundColor = currentTheme.topColor
+       // self.view.backgroundColor = currentTheme.topColor
        // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
        // navigationController!.navigationBar.titleTextAttributes = titleDict
     }
