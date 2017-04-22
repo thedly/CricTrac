@@ -31,7 +31,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor
+       
     }
     
     override func viewDidLoad() {
@@ -86,8 +86,9 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             title = "ADD MATCH"
 
           }else {
-            menuButton.setImage(UIImage(named: "Back"), forState: UIControlState.Normal)
+            menuButton.setImage(UIImage(named: "Back-100"), forState: UIControlState.Normal)
             menuButton.addTarget(self, action: #selector(popBack), forControlEvents: UIControlEvents.TouchUpInside)
+            
             title = "EDIT MATCH"
 
         }

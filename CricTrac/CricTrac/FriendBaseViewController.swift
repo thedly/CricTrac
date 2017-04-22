@@ -68,6 +68,7 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "DUGOUT"
     }
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -15,6 +15,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     @IBOutlet weak var suggestionsTblView: UITableView!
     @IBOutlet weak var noRequestsLbl: UILabel!
     @IBOutlet weak var RequestsTblview: UITableView!
+    var currentTheme:CTTheme!
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()
@@ -52,7 +53,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         self.view.backgroundColor = UIColor.clearColor()
         //getFriendSuggestions()
     }
-    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         self.noRequestsLbl.hidden = true
@@ -210,7 +211,9 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
             aCell.rejectBtn.addTarget(self, action: #selector(FriendRequestsViewController.RejectFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             aCell.confirmBtn.addTarget(self, action: #selector(FriendRequestsViewController.ConfirmFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         }
+        aCell.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
         
+        aCell.baseView.alpha = 0.8
         aCell.backgroundColor = UIColor.clearColor()
         return aCell
     }

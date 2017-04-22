@@ -139,15 +139,7 @@ let serverBaseURL = "http://crictracserver.azurewebsites.net"
     var yHintPositionOffset: CGFloat = 7
     var yPlaceholderPositionOffset: CGFloat = 0
 }
-//Grass - green theme (b4ed50 - 429321)
-//Flash - yellow theme (fdef0f - b49b09)
-//Feather - blue theme (c96dd8 - 3023ae)
-//Peach - orange theme (fbda61 - f76b1c)
-//Cherry - maroon theme (f5515f - 9f031b)
-//Daisy - purple theme (eb56c1 - 961b74 )
-//Ashes - grey theme (C8CBC3 - 5C635A)
-//Beehive - brown theme (B8896B - 6F401B)
-//Ferret - black theme (8B8484 - 2D2C2A)
+
 
 
 let themeColors = [
@@ -173,12 +165,12 @@ let themeColors = [
     ],
     "Cherry": [
         "topColor": "#f5515f",
-        "bottomColor": "#9f031b",
+        "bottomColor": "9f031b",
         "theme":"cherry"
     ],
     "Daisy": [
-        "topColor": "#eb56c1",
-        "bottomColor": "#961b74",
+        "topColor": "eb56c1",
+        "bottomColor": "961b74",
         "theme":"daisy"
     ],
     "Ashes": [

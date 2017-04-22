@@ -67,7 +67,9 @@ var background: CAGradientLayer!
 var CurrentTheme: String {
     set
     {
+       
         _currentTheme = newValue
+      
         topColor = themeColors[_currentTheme]!["topColor"]!
         bottomColor = themeColors[_currentTheme]!["bottomColor"]!
     }
