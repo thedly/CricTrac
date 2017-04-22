@@ -12,6 +12,7 @@ import KRProgressHUD
 
 class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider,ThemeChangeable {
     @IBOutlet weak var SuggestsTblview: UITableView!
+    var currentTheme:CTTheme!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,12 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         initializeView()
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(animated: Bool) {
+         self.SuggestsTblview.reloadData()
+    }
+    
+   
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -93,6 +100,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                     
                 })
             })
+           
         })
     }
 
@@ -143,6 +151,10 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                 aCell.userName.text = UserProfilesData[indexPath.row].fullName
                 aCell.AddFriendBtn.accessibilityIdentifier = UserProfilesData[indexPath.row].id
                 aCell.AddFriendBtn.addTarget(self, action: #selector(AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                aCell.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
+                
+                aCell.baseView.alpha = 0.8
+
                 aCell.backgroundColor = UIColor.clearColor()
                 return aCell
             }

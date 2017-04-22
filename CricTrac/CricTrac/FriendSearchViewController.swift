@@ -19,7 +19,7 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor
+      
         
     }
     func setNavigationBarProperties(){
@@ -31,6 +31,7 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
         backButton.frame = CGRectMake(0, 0, 40, 40)
         let leftbarButton = UIBarButtonItem(customView: backButton)
         navigationItem.leftBarButtonItem = leftbarButton
+          navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     func didBackButtonTapp() {
        self.navigationController?.popViewControllerAnimated(true)

@@ -22,9 +22,9 @@ class FriendRequestsCell: UITableViewCell {
         super.awakeFromNib()
         self.baseView.layer.cornerRadius = 10
         self.baseView.clipsToBounds = true
-        self.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
-        
-        self.baseView.alpha = 0.8
+//        self.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
+//        
+//        self.baseView.alpha = 0.8
         
         
         self.confirmBtn.userInteractionEnabled = true

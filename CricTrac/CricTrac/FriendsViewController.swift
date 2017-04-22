@@ -15,16 +15,22 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.boxColor
+       
     }
     
     @IBOutlet weak var SuggestsTblview: UITableView!
+    var currentTheme:CTTheme!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()
         // Do any additional setup after loading the view.
+        
     }
     
+    override func viewWillAppear(animated: Bool) {
+         self.SuggestsTblview.reloadData()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -38,6 +44,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         SuggestsTblview.separatorStyle = .None
         SuggestsTblview.dataSource = self
         SuggestsTblview.delegate = self
+    
         
         //setUIBackgroundTheme(self.view)
         //setBackgroundColor()
@@ -87,6 +94,8 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         //aCell.FriendProfileImage.image = extractImages(friendsDataArray[indexPath.row].UserId!)
         aCell.UnfriendBtn.addTarget(self, action: #selector(FriendsViewController.UnfriendBtnBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         aCell.UnfriendBtn.restorationIdentifier = friendsDataArray[indexPath.row].FriendRecordId
+        aCell.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
+         aCell.baseView.alpha = 0.8
         aCell.backgroundColor = UIColor.clearColor()
         return aCell
     }
