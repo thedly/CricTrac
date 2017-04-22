@@ -46,7 +46,7 @@ class NewPostViewController: UIViewController,ThemeChangeable,UITextViewDelegate
 //            aCell.userImage.clipsToBounds = true
             
             if proPic! == "-"{
-                let imageName = "propic.png"
+                let imageName = defaultProfileImage
                 let image = UIImage(named: imageName)
                 self.profilePic.image = image
             }else{
@@ -56,7 +56,7 @@ class NewPostViewController: UIViewController,ThemeChangeable,UITextViewDelegate
             }
         })
         
-        postOwnerName.text = loggedInUserName ?? "Say Something Loud"
+        postOwnerName.text = loggedInUserName ?? "CricTrac"
         loadPostIfEditMode()
         
         // Do any additional setup after loading the view.
@@ -102,21 +102,21 @@ class NewPostViewController: UIViewController,ThemeChangeable,UITextViewDelegate
         if let postText = postContent.text {
             if postText.characters.count > 0 && postText != "Free hit"{
                 if editingPost == nil{
-                sendPostDelegate?.sendNewPost(postText)
-            }else{
-                sendPostDelegate?.modifyPost(postText, postId: postId,index: postIndex)
-            }
+                    sendPostDelegate?.sendNewPost(postText)
+                }else{
+                    sendPostDelegate?.modifyPost(postText, postId: postId,index: postIndex)
+                }
             }
             else{
                 let alert = UIAlertController(title: "", message: "Please enter a post", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
                 return
-
             }
         }
         dismissViewControllerAnimated(true) {}
     }
+    
     func textViewDidBeginEditing(textView: UITextView){
         if editingPost == nil && textView.text == "Free hit" {
             textView.text = ""

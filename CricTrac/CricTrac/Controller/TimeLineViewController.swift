@@ -217,7 +217,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 //postCell.postOwnerCity.text = city
                 
                 if proPic! == "-"{
-                    let imageName = "propic.png"
+                    let imageName = defaultProfileImage
                     let image = UIImage(named: imageName)
                     cell.timelineOwnerPic.image = image
                 }else{
@@ -249,7 +249,10 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 
                 let friendId = data["OwnerID"].stringValue
 
-                if let dateTimeStamp = data["AddedTime"].double{
+                if data["DisplayTime"] != nil {
+                    postCell.postedDate.text = data["DisplayTime"].stringValue
+                }
+                else if let dateTimeStamp = data["AddedTime"].double{
                     let date = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
                     let dateFormatter = NSDateFormatter()
                     dateFormatter.timeZone = NSTimeZone.localTimeZone()
@@ -257,6 +260,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
                     postCell.postedDate.text = dateFormatter.stringFromDate(date)
                 }
+                
                 
                 postCell.postOwnerId = friendId
                 
@@ -279,7 +283,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                         postCell.postOwnerCity.text = city
                         
                         if proPic! == "-"{
-                            let imageName = "propic.png"
+                            let imageName = defaultProfileImage
                             let image = UIImage(named: imageName)
                             postCell.postOwnerPic.image = image
                         }else{
@@ -309,7 +313,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                         postCell.postOwnerCity.text = city
                         
                         if proPic! == "-"{
-                            let imageName = "propic.png"
+                            let imageName = defaultProfileImage
                             let image = UIImage(named: imageName)
                             postCell.postOwnerPic.image = image
                         }else{

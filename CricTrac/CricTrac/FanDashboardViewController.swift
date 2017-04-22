@@ -11,43 +11,31 @@ import UIKit
 class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ThemeChangeable {
     
     @IBOutlet weak var SupportingTeams: UICollectionView!
-    
     @IBOutlet weak var InterestedSports: UICollectionView!
-    
     @IBOutlet weak var Hobbies: UICollectionView!
-    
-    
     @IBOutlet weak var FavoritePlayers: UICollectionView!
-    
     @IBOutlet weak var userProfileImage: UIImageView!
     @IBOutlet weak var imgCoverPhoto: UIImageView!
-
     @IBOutlet weak var PlayerName: UILabel!
     @IBOutlet weak var PlayerLocation: UILabel!
     @IBOutlet weak var closeButton: UIButton!
-    
     @IBOutlet weak var favouritePlayerHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var interstedSportsheightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var supportingTeamHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var hobbiesHeightConstraint: NSLayoutConstraint!
-    
     
     var friendProfile:[String:AnyObject]?
     
     var userProfileData:Profile!
     
-     var coverOrProfile = ""
+    var coverOrProfile = ""
+    var friendId:String? = nil
     
     var currentUserProfileImage = UIImage()
     var currentUserCoverImage = UIImage()
     
     @IBAction func CloseDashboardPressed(sender: AnyObject) {
-        
         self.dismissViewControllerAnimated(true, completion: nil)
-        
     }
     
     var alertMessage = "Change picture"
@@ -213,7 +201,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
             }
         }
         else {
-            let imageName = "propic.png"
+            let imageName = defaultProfileImage
             let image = UIImage(named: imageName)
             self.currentUserProfileImage = image!
         }
@@ -224,7 +212,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
             }
         }
         else {
-            let imageName = "propic.png"
+            let imageName = defaultProfileImage
             let image = UIImage(named: imageName)
             self.currentUserCoverImage = image!
         }

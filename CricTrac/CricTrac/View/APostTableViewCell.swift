@@ -91,6 +91,7 @@ class APostTableViewCell: UITableViewCell {
     func moveToCoach(userInfo:[String : AnyObject]){
         if let parentVC = parent as? UIViewController{
             let dashBoard = viewControllerFrom("Main", vcid: "CoachDashboardViewController") as! CoachDashboardViewController
+            dashBoard.friendId = postOwnerId
             dashBoard.friendProfile = userInfo
             parentVC.presentViewController(dashBoard, animated: true) {}
         }
@@ -99,6 +100,7 @@ class APostTableViewCell: UITableViewCell {
     func moveToFan(userInfo:[String : AnyObject]){
         if let parentVC = parent as? UIViewController{
             let dashBoard = viewControllerFrom("Main", vcid: "FanDashboardViewController") as! FanDashboardViewController
+            dashBoard.friendId = postOwnerId
             dashBoard.friendProfile = userInfo
             parentVC.presentViewController(dashBoard, animated: true) {}
         }
@@ -173,7 +175,7 @@ class APostTableViewCell: UITableViewCell {
     func showPostOptions(){
         let optionMenu = UIAlertController(title: nil, message: "Select Action", preferredStyle: .ActionSheet)
        
-        let deleteAlert = UIAlertController(title: "Delete Comment", message: "Are you sure you want to delete this comment?", preferredStyle: UIAlertControllerStyle.Alert)
+        let deleteAlert = UIAlertController(title: "Delete Comment", message: "Are you sure you want to delete this post?", preferredStyle: UIAlertControllerStyle.Alert)
 
     
         if postOwnerName.text != "CricTrac" {

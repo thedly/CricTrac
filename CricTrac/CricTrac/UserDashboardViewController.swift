@@ -25,13 +25,13 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     @IBOutlet weak var bannerView: GADBannerView!
     
     var coverOrProfile = ""
+    var friendId:String? = nil
     
     var isFriendDashboard = false
     
     var clearColor = UIColor.clearColor()
     var darkerThemeColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
     var matches = [MatchSummaryData]()
-    var friendId:String? = nil
     
     var friendProfile:[String:AnyObject]?
     
@@ -135,9 +135,11 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     var alertMessage = "Change picture"
     
     @IBAction func editImageBtnPressed(sender: AnyObject) {
-        alertMessage = "Change your profile photo"
-        self.photoOptions("ProfilePhoto")
-        coverOrProfile = "Profile"
+        if friendId == nil {
+            alertMessage = "Change your profile photo"
+            self.photoOptions("ProfilePhoto")
+            coverOrProfile = "Profile"
+        }
     }
     
     func photoOptions(option:String)  {
@@ -372,7 +374,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             }
         }
         else {
-            let imageName = "propic.png"
+            let imageName = defaultProfileImage
             let image = UIImage(named: imageName)
             self.currentUserProfileImage = image!
         }
@@ -383,7 +385,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             }
         }
         else {
-            let imageName = "propic.png"
+            let imageName = defaultProfileImage
             let image = UIImage(named: imageName)
             self.currentUserCoverImage = image!
         }
@@ -413,9 +415,11 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     
     func tapCoverPhoto()  {
-        alertMessage = "Change your cover photo"
-        self.photoOptions("CoverPhoto")
-        coverOrProfile = "Cover"
+        if friendId == nil {
+            alertMessage = "Change your cover photo"
+            self.photoOptions("CoverPhoto")
+            coverOrProfile = "Cover"
+        }
     }
     
     override func viewWillAppear(animated: Bool) {

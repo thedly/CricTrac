@@ -39,6 +39,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     var userProfileData:Profile!
     
     var coverOrProfile = ""
+    var friendId:String? = nil
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -105,7 +106,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             }
         }
         else {
-            let imageName = "propic.png"
+            let imageName = defaultProfileImage
             let image = UIImage(named: imageName)
             self.currentUserProfileImage = image!
         }
@@ -116,7 +117,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             }
         }
         else {
-            let imageName = "propic.png"
+            let imageName = defaultProfileImage
             let image = UIImage(named: imageName)
             self.currentUserCoverImage = image!
         }
@@ -133,15 +134,19 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     var alertMessage = "Change picture"
     
     func tapCoverPhoto()  {
-        alertMessage = "Change your cover photo"
-        self.photoOptions("CoverPhoto")
-        coverOrProfile = "Cover"
+        if friendId == nil {
+            alertMessage = "Change your cover photo"
+            self.photoOptions("CoverPhoto")
+            coverOrProfile = "Cover"
+        }
     }
     
     @IBAction func editImageBtnPressed(sender: AnyObject) {
-        alertMessage = "Change your profile photo"
-        self.photoOptions("ProfilePhoto")
-        coverOrProfile = "Profile"
+        if friendId == nil {
+            alertMessage = "Change your profile photo"
+            self.photoOptions("ProfilePhoto")
+            coverOrProfile = "Profile"
+        }
     }
 
     

@@ -923,12 +923,12 @@ func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
     let userName = loggedInUserName ?? "No Name"
     let addedTime =  NSDate().getCurrentTimeStamp()
     
-//    let date = NSDate()
-//    let dateFormatter = NSDateFormatter()
-//    dateFormatter.timeZone = NSTimeZone.localTimeZone()
-//    dateFormatter.timeStyle = .ShortStyle
-//    dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-//    let dispTime = dateFormatter.stringFromDate((date as? NSDate)!)
+    let date = NSDate()
+    let dateFormatter = NSDateFormatter()
+    dateFormatter.timeZone = NSTimeZone.localTimeZone()
+    dateFormatter.timeStyle = .ShortStyle
+    dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+    let dispTime = dateFormatter.stringFromDate((date as? NSDate)!)
     
     let timelineDict:[String:AnyObject] = ["AddedTime":addedTime,"OwnerID":currentUser!.uid,"OwnerName":userName,"isDeleted":"0","Post":postText,"PostedBy":currentUser!.uid,"PostType":"Self","CommentCount":0,"LikeCount":0]
     
@@ -937,7 +937,7 @@ func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
     ref.setValue(timelineDict)
     
     let postKey = ref.key
-    let returnData = ["timeline":["AddedTime":addedTime,"Post":postText,"CommentCount":"0","LikeCount":"0","OwnerName":userName,"postId":postKey,"OwnerID":currentUser!.uid,"PostedBy":currentUser!.uid,"PostType":"Self"]]
+    let returnData = ["timeline":["DisplayTime":dispTime,"Post":postText,"CommentCount":"0","LikeCount":"0","OwnerName":userName,"postId":postKey,"OwnerID":currentUser!.uid,"PostedBy":currentUser!.uid,"PostType":"Self"]]
     
         sucess(data: returnData)
     
