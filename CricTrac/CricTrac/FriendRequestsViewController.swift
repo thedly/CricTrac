@@ -151,6 +151,8 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         if FriendRequestsData[indexPath.row].isSentRequest == true {
             
             let friendUserId = FriendRequestsData[indexPath.row].SentTo
+            aCell.friendId = friendUserId
+
             fetchFriendDetail(friendUserId, sucess: { (result) in
                 let proPic = result["proPic"]
                 let city =   result["city"]
@@ -182,6 +184,8 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         else
         {
             let friendUserId = FriendRequestsData[indexPath.row].ReceivedFrom
+            aCell.friendId = friendUserId
+
             fetchFriendDetail(friendUserId, sucess: { (result) in
                 let proPic = result["proPic"]
                 let city =   result["city"]

@@ -131,6 +131,8 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
             if let aCell =  SuggestsTblview.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as? FriendSuggestionsCell {
                 
                 let friendUserId = UserProfilesData[indexPath.row].id
+                aCell.friendId = friendUserId
+
                 fetchFriendDetail(friendUserId, sucess: { (result) in
                     let proPic = result["proPic"]
                     let city =   result["city"]

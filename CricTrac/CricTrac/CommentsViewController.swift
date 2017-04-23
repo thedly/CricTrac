@@ -42,10 +42,11 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     var postOwnerId:String?
     var parent:Deletable?
     
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        addTapGestureToUserName()
     }
     
     func addTapGestureToUserName(){
@@ -75,34 +76,30 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     }
     
     func moveToPlayer(userInfo:[String : AnyObject]){
-        if let parentVC = parent as? UIViewController{
-            let dashBoard = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
-            dashBoard.friendId = postOwnerId
-            dashBoard.friendProfile = userInfo
-            parentVC.presentViewController(dashBoard, animated: true) {}
-        }
+        let dashBoard = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
+        dashBoard.friendId = postOwnerId
+        dashBoard.friendProfile = userInfo
+        self.presentViewController(dashBoard, animated: true) {}
     }
     
-    func moveToCoach(userInfo:[String : AnyObject]){
-        if let parentVC = parent as? UIViewController{
-            let dashBoard = viewControllerFrom("Main", vcid: "CoachDashboardViewController") as! CoachDashboardViewController
-            dashBoard.friendId = postOwnerId
-            dashBoard.friendProfile = userInfo
-            parentVC.presentViewController(dashBoard, animated: true) {}
-        }
+    func moveToCoach(userInfo:[String : AnyObject]){            let dashBoard = viewControllerFrom("Main", vcid: "CoachDashboardViewController") as! CoachDashboardViewController
+        dashBoard.friendId = postOwnerId
+        dashBoard.friendProfile = userInfo
+        self.presentViewController(dashBoard, animated: true) {}
     }
     
     func moveToFan(userInfo:[String : AnyObject]){
-        if let parentVC = parent as? UIViewController{
-            let dashBoard = viewControllerFrom("Main", vcid: "FanDashboardViewController") as! FanDashboardViewController
-            dashBoard.friendId = postOwnerId
-            dashBoard.friendProfile = userInfo
-            parentVC.presentViewController(dashBoard, animated: true) {}
-        }
+        let dashBoard = viewControllerFrom("Main", vcid: "FanDashboardViewController") as! FanDashboardViewController
+        dashBoard.friendId = postOwnerId
+        dashBoard.friendProfile = userInfo
+        self.presentViewController(dashBoard, animated: true) {}
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        postOwnerName.text = "Arjun"
+        addTapGestureToUserName()
        
         setNavigationBarProperties();
         currentTheme = cricTracTheme.currentTheme
@@ -128,7 +125,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         //sajith-  fetch the fresh post data
         getPost(postId) { (data) in
             
-            self.postOwnerId = data["PostOwnerID"]?.stringValue
+            self.postOwnerId = data["OwnerID"] as? String
             self.postText.text = data["Post"] as? String
             
             let postedBy = data["PostedBy"] as? String
@@ -253,6 +250,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         let data = dataSource[indexPath.row]
         let aCell =  tableView.dequeueReusableCellWithIdentifier("commentcell", forIndexPath: indexPath) as! CommentTableViewCell
         aCell.parent = self
+        aCell.ownerId = data["OwnerID"] as? String
 
         if let val = data["Comment"] as? String{
             
@@ -286,6 +284,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         
         //display comment owners image
         if ((data["OwnerID"]) != nil) {
+            
         fetchFriendDetail((data["OwnerID"]  as? String)!, sucess: { (result) in
             let proPic = result["proPic"]
             

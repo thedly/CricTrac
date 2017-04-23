@@ -11,21 +11,67 @@ import UIKit
 class FriendsCell: UITableViewCell {
     
     @IBOutlet weak var baseView: UIView!
-    
     @IBOutlet weak var UnfriendBtn: UIButton!
     @IBOutlet weak var FriendProfileImage: UIImageView!
     @IBOutlet weak var FriendName: UILabel!
     @IBOutlet weak var FriendCity: UILabel!
     
+    var friendId:String?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        addTapGestureToUserName()
         
         self.baseView.layer.cornerRadius = 10
         self.baseView.clipsToBounds = true
 //        self.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
 //        
 //        self.baseView.alpha = 0.8
+    }
+    
+    func addTapGestureToUserName(){
+        if let _ = FriendName{
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(FriendsCell.didTapFriendName))
+            FriendName.userInteractionEnabled = true
+            FriendName.addGestureRecognizer(gesture)
+        }
+    }
+    
+    func didTapFriendName(){
+        if friendId != nil{
+            getFriendProfileInfo(friendId, sucess: { (friendInfo) in
+                if let friendType = friendInfo["UserProfile"] as? String{
+                    switch friendType{
+                    case "Player": self.moveToPlayer(friendInfo)
+                    case "Coach": self.moveToCoach(friendInfo)
+                    case "Cricket Fan": self.moveToFan(friendInfo)
+                    default: break
+                    }
+                }
+            })
+        }
+    }
+
+    func moveToPlayer(userInfo:[String : AnyObject]){
+        let dashBoard = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
+        dashBoard.friendId = friendId
+        dashBoard.friendProfile = userInfo
+        self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
+    }
+    
+    func moveToCoach(userInfo:[String : AnyObject]){
+        let dashBoard = viewControllerFrom("Main", vcid: "CoachDashboardViewController") as! CoachDashboardViewController
+        dashBoard.friendId = friendId
+        dashBoard.friendProfile = userInfo
+        self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
+    }
+    
+    func moveToFan(userInfo:[String : AnyObject]){
+        let dashBoard = viewControllerFrom("Main", vcid: "FanDashboardViewController") as! FanDashboardViewController
+        dashBoard.friendId = friendId
+        dashBoard.friendProfile = userInfo
+        self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
     }
     
     override func setSelected(selected: Bool, animated: Bool) {

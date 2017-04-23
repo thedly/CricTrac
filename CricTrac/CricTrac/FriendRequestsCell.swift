@@ -16,32 +16,71 @@ class FriendRequestsCell: UITableViewCell {
     @IBOutlet weak var FriendName: UILabel!
     @IBOutlet weak var FriendCity: UILabel!
     
+    var friendId:String?
     
     @IBOutlet weak var baseView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
+        addTapGestureToUserName()
+
         self.baseView.layer.cornerRadius = 10
         self.baseView.clipsToBounds = true
 //        self.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
 //        
 //        self.baseView.alpha = 0.8
         
-        
         self.confirmBtn.userInteractionEnabled = true
-        
         self.rejectBtn.userInteractionEnabled = true
-        
         self.cancelBtn.userInteractionEnabled = true
-        
         self.rejectBtn.layer.borderWidth = 2.0
-        
         self.cancelBtn.layer.cornerRadius = 10
         self.rejectBtn.layer.cornerRadius = 10
         self.confirmBtn.layer.cornerRadius = 10
-        
         self.rejectBtn.layer.borderColor = UIColor.whiteColor().CGColor
-        
-        
+    }
+    
+    func addTapGestureToUserName(){
+        if let _ = FriendName{
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(FriendRequestsCell.didTapFriendName))
+            FriendName.userInteractionEnabled = true
+            FriendName.addGestureRecognizer(gesture)
+        }
+    }
+    
+    func didTapFriendName(){
+        if friendId != nil{
+            getFriendProfileInfo(friendId, sucess: { (friendInfo) in
+                if let friendType = friendInfo["UserProfile"] as? String{
+                    switch friendType{
+                    case "Player": self.moveToPlayer(friendInfo)
+                    case "Coach": self.moveToCoach(friendInfo)
+                    case "Cricket Fan": self.moveToFan(friendInfo)
+                    default: break
+                    }
+                }
+            })
+        }
+    }
+    
+    func moveToPlayer(userInfo:[String : AnyObject]){
+        let dashBoard = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
+        dashBoard.friendId = friendId
+        dashBoard.friendProfile = userInfo
+        self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
+    }
+    
+    func moveToCoach(userInfo:[String : AnyObject]){
+        let dashBoard = viewControllerFrom("Main", vcid: "CoachDashboardViewController") as! CoachDashboardViewController
+        dashBoard.friendId = friendId
+        dashBoard.friendProfile = userInfo
+        self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
+    }
+    
+    func moveToFan(userInfo:[String : AnyObject]){
+        let dashBoard = viewControllerFrom("Main", vcid: "FanDashboardViewController") as! FanDashboardViewController
+        dashBoard.friendId = friendId
+        dashBoard.friendProfile = userInfo
+        self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
