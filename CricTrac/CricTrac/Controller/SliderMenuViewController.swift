@@ -40,6 +40,7 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
        // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackgroundColor()
@@ -105,6 +106,8 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        setBackgroundColor()
+        
         if profilePic == "-" {
             let imageName = defaultProfileImage
             let image = UIImage(named: imageName)
