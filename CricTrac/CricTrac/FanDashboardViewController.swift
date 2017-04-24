@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ThemeChangeable {
     
@@ -31,8 +32,8 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     var coverOrProfile = ""
     var friendId:String? = nil
     
-    var currentUserProfileImage = UIImage()
-    var currentUserCoverImage = UIImage()
+//    var currentUserProfileImage = UIImage()
+//    var currentUserCoverImage = UIImage()
     
     @IBAction func CloseDashboardPressed(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -195,30 +196,52 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         self.PlayerLocation.attributedText = locationText
         //self.userProfileImage.image = LoggedInUserImage
         
-        if userProfileData.ProfileImageURL != "-" {
-            getImageFromFirebase(userProfileData.ProfileImageURL) { (imgData) in
-                self.currentUserProfileImage = imgData
-            }
-        }
-        else {
+        let proPic = userProfileData.ProfileImageURL
+        if proPic == "-"{
             let imageName = defaultProfileImage
             let image = UIImage(named: imageName)
-            self.currentUserProfileImage = image!
-        }
-        
-        if userProfileData.CoverPhotoURL != "-" {
-            getImageFromFirebase(userProfileData.CoverPhotoURL) { (imgData) in
-                self.currentUserCoverImage = imgData
+            userProfileImage.image = image!
+        }else{
+            if let imageURL = NSURL(string:proPic){
+                userProfileImage.kf_setImageWithURL(imageURL)
             }
         }
-        else {
+        
+        let coverPic = userProfileData.CoverPhotoURL
+        if coverPic == "-"{
             let imageName = defaultProfileImage
             let image = UIImage(named: imageName)
-            self.currentUserCoverImage = image!
+            imgCoverPhoto.image = image!
+        }else{
+            if let imageURL = NSURL(string:coverPic){
+                imgCoverPhoto.kf_setImageWithURL(imageURL)
+            }
         }
         
-        self.userProfileImage.image = currentUserProfileImage
-        self.imgCoverPhoto.image = currentUserCoverImage
+//        if userProfileData.ProfileImageURL != "-" {
+//            getImageFromFirebase(userProfileData.ProfileImageURL) { (imgData) in
+//                self.currentUserProfileImage = imgData
+//            }
+//        }
+//        else {
+//            let imageName = defaultProfileImage
+//            let image = UIImage(named: imageName)
+//            self.currentUserProfileImage = image!
+//        }
+//        
+//        if userProfileData.CoverPhotoURL != "-" {
+//            getImageFromFirebase(userProfileData.CoverPhotoURL) { (imgData) in
+//                self.currentUserCoverImage = imgData
+//            }
+//        }
+//        else {
+//            let imageName = defaultProfileImage
+//            let image = UIImage(named: imageName)
+//            self.currentUserCoverImage = image!
+//        }
+//        
+//        self.userProfileImage.image = currentUserProfileImage
+//        self.imgCoverPhoto.image = currentUserCoverImage
         
         setNavigationBarProperties()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapCoverPhoto))

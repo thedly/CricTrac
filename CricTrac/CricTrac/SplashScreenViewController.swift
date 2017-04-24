@@ -145,15 +145,16 @@ class SplashScreenViewController: UIViewController,ThemeChangeable {
                         }
                     }
                 }
-                else
-                {
-                    getImageFromFirebase(profileData.ProfileImageURL) { (imgData) in
-                        LoggedInUserImage = imgData
-                    }
-                    getImageFromFirebase(profileData.CoverPhotoURL) { (imgData) in
-                        LoggedInUserCoverImage = imgData
-                    }
-                }
+//                else
+//                {
+//                    let profilePic = profileData.ProfileImageURL
+//                    getImageFromFirebase(profileData.ProfileImageURL) { (imgData) in
+//                        LoggedInUserImage = imgData
+//                    }
+//                    getImageFromFirebase(profileData.CoverPhotoURL) { (imgData) in
+//                        LoggedInUserCoverImage = imgData
+//                    }
+                //}
                 
                 
                 

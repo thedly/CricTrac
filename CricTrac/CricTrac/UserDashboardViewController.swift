@@ -10,6 +10,7 @@ import UIKit
 import KRProgressHUD
 import FirebaseAuth
 import GoogleMobileAds
+import Kingfisher
 
 class UserDashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ThemeChangeable {
 
@@ -37,8 +38,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     var userProfileData:Profile!
     
-    var currentUserProfileImage = UIImage()
-    var currentUserCoverImage = UIImage()
+//    var currentUserProfileImage = UIImage()
+//    var currentUserCoverImage = UIImage()
     
     // MARK: - Plumbing
     
@@ -368,30 +369,52 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
 //        self.userProfileImage.image = LoggedInUserImage
 //        self.imgCoverPhoto.image = LoggedInUserCoverImage
         
-        if userProfileData.ProfileImageURL != "-" {
-                getImageFromFirebase(userProfileData.ProfileImageURL) { (imgData) in
-                    self.currentUserProfileImage = imgData
-            }
-        }
-        else {
+        let proPic = userProfileData.ProfileImageURL
+        if proPic == "-"{
             let imageName = defaultProfileImage
             let image = UIImage(named: imageName)
-            self.currentUserProfileImage = image!
-        }
-        
-        if userProfileData.CoverPhotoURL != "-" {
-            getImageFromFirebase(userProfileData.CoverPhotoURL) { (imgData) in
-                self.currentUserCoverImage = imgData
+            userProfileImage.image = image!
+        }else{
+            if let imageURL = NSURL(string:proPic){
+                userProfileImage.kf_setImageWithURL(imageURL)
             }
         }
-        else {
+        
+        let coverPic = userProfileData.CoverPhotoURL
+        if coverPic == "-"{
             let imageName = defaultProfileImage
             let image = UIImage(named: imageName)
-            self.currentUserCoverImage = image!
+            imgCoverPhoto.image = image!
+        }else{
+            if let imageURL = NSURL(string:coverPic){
+                imgCoverPhoto.kf_setImageWithURL(imageURL)
+            }
         }
         
-        self.userProfileImage.image = currentUserProfileImage
-        self.imgCoverPhoto.image = currentUserCoverImage
+//        if userProfileData.ProfileImageURL != "-" {
+//                getImageFromFirebase(userProfileData.ProfileImageURL) { (imgData) in
+//                    self.currentUserProfileImage = imgData
+//            }
+//        }
+//        else {
+//            let imageName = defaultProfileImage
+//            let image = UIImage(named: imageName)
+//            self.currentUserProfileImage = image!
+//        }
+//        
+//        if userProfileData.CoverPhotoURL != "-" {
+//            getImageFromFirebase(userProfileData.CoverPhotoURL) { (imgData) in
+//                self.currentUserCoverImage = imgData
+//            }
+//        }
+//        else {
+//            let imageName = defaultProfileImage
+//            let image = UIImage(named: imageName)
+//            self.currentUserCoverImage = image!
+//        }
+//        
+//        self.userProfileImage.image = currentUserProfileImage
+//        self.imgCoverPhoto.image = currentUserCoverImage
         
         //getMatchData()
                 

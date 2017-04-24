@@ -101,6 +101,8 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
             if searchedProfiles.count > 0 && indexPath.row < searchedProfiles.count {
                 
                 let friendUserId = searchedProfiles[indexPath.row].id
+                aCell.friendId = friendUserId
+                
                 fetchFriendDetail(friendUserId, sucess: { (result) in
                     let proPic = result["proPic"]
                     let city =   result["city"]
