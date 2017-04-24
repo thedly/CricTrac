@@ -36,7 +36,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     var dataSource = [[String:AnyObject]]()
     var postId:String = ""
     var comntsHeightConstraint = false
-    //var postData:JSON?
+    var postData:JSON?
     var currentTheme:CTTheme!
     var commentId:String = ""
     var postOwnerId:String?
@@ -145,6 +145,19 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                 self.date.text = dateFormatter.stringFromDate(date)
             }
             
+            var likeColor = UIColor.redColor()
+            let childLikes = data["Likes"] as? [String : AnyObject]
+            if childLikes != nil {
+            for (key, value) in childLikes! {
+                if currentUser!.uid == value["OwnerID"] as? String {
+                    likeColor = UIColor.greenColor()
+                }
+            }
+            }
+            self.likeButton.titleLabel?.textColor = likeColor
+
+            
+    
             if (data["LikeCount"] != nil) {
                 let likeCount = data["LikeCount"] as? Int
                 self.likes.text = "\(likeCount!) Likes"
@@ -152,6 +165,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
             else {
                 self.likes.text = "0 Likes"
             }
+            
             if (data["CommentCount"] != nil) {
                 let cmtCount = data["CommentCount"] as? Int
                 self.comments.text = "\(cmtCount!) Comments"
@@ -205,6 +219,22 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
             //sucess(result: ["proPic":proPic,"city":city])
         })
     }
+        
+        
+//        var likeColor = UIColor.grayColor()
+//        
+//        if let likes = postData!.dictionaryValue["Likes"]?.dictionaryObject as? [String:[String:String]]{
+//            let result = likes.filter{ return  $0.1["OwnerID"] == currentUser!.uid }
+//            if result.count > 0 {
+//                likeColor = UIColor.whiteColor()
+//            }
+//            //likesCount = likes.count
+//            //postCell.totalLikeCount = likesCount
+//        }
+//        
+//        //postCell.likeCount.setTitle("\(likesCount) Likes", forState: .Normal)
+//        likeButton.titleLabel?.textColor = likeColor
+        
     
 //        if let dateTimeStamp = postData!["AddedTime"].double{
 //            let date = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
@@ -368,67 +398,15 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     }
     
     func deletebuttonTapped() {
-        //        timelineData!.arrayObject?.removeAtIndex(index)
-        //        timeLineTable.reloadData()
-         //tableView.reloadData()
+
     }
     
 //    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//       
-//            
-//            let actionSheetController = UIAlertController(title: "", message: "Are you sure to delete the comment?", preferredStyle: .ActionSheet)
-//            
-//            // Create and add the Cancel action
-//            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
-//                // Just dismiss the action sheet
-//                actionSheetController.dismissViewControllerAnimated(true, completion: nil)
-//            }
-//            actionSheetController.addAction(cancelAction)
-//            
-//            // Create and add first option action
-//            let takePictureAction = UIAlertAction(title: "Delete", style: .Default) { action -> Void in
-//               
-//                let refreshAlert = UIAlertController(title: "Delete Comment", message: "Are you sure you want to delete this comment?", preferredStyle: UIAlertControllerStyle.Alert)
-//                
-//                refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
-//                    print("Handle Ok logic here")
-//                   // self.deleteComment()
-//                    
-//                }))
-//                
-//                refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
-//                    print("Handle Cancel Logic here")
-//                }))
-//                
-//                self.presentViewController(refreshAlert, animated: true, completion: nil)
-//            }
-//        
-//            actionSheetController.addAction(takePictureAction)
-//            
-//            // We need to provide a popover sourceView when using it on iPad
-//         //   actionSheetController.popoverPresentationController?.sourceView = sender as UIView
-//            
-//            // Present the AlertController
-//            self.presentViewController(actionSheetController, animated: true, completion: nil)
-//            
-//            
-//        
+    
 //    }
     
 //    func deleteTapp() {
-//        let refreshAlert = UIAlertController(title: "Delete Comment", message: "Are you sure you want to delete this comment?", preferredStyle: UIAlertControllerStyle.Alert)
-//        
-//        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
-//            print("Handle Ok logic here")
-//            // self.deleteComment()
-//            
-//        }))
-//        
-//        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
-//            print("Handle Cancel Logic here")
-//        }))
-//        
-//        self.presentViewController(refreshAlert, animated: true, completion: nil)
+//
 //    }
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool{

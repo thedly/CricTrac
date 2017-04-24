@@ -40,6 +40,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     
     var coverOrProfile = ""
     var friendId:String? = nil
+    var test:String? = nil
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
