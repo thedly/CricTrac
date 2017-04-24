@@ -30,6 +30,9 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewWillAppear(animated: Bool) {
          self.SuggestsTblview.reloadData()
+        setBackgroundColor()
+        
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -44,11 +47,10 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         SuggestsTblview.separatorStyle = .None
         SuggestsTblview.dataSource = self
         SuggestsTblview.delegate = self
-    
+        setBackgroundColor()
         
         //setUIBackgroundTheme(self.view)
-        //setBackgroundColor()
-        self.view.backgroundColor = UIColor.clearColor()
+               self.view.backgroundColor = UIColor.clearColor()
     }
     
     override func viewDidAppear(animated: Bool) {

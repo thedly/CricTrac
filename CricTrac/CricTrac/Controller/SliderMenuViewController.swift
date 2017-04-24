@@ -42,9 +42,10 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         super.viewDidLoad()
         
         setBackgroundColor()
+        self.baseView.backgroundColor = cricTracTheme.currentTheme.topColor
         
         userName.text = profileData.fullName
-        //baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
+       // baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
         
         if let _ = profileData.UserProfile as? String{
             
@@ -104,6 +105,7 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+         setBackgroundColor()
         
         
         self.profileImage.image = LoggedInUserImage

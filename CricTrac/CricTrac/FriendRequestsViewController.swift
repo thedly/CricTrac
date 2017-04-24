@@ -16,6 +16,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     @IBOutlet weak var noRequestsLbl: UILabel!
     @IBOutlet weak var RequestsTblview: UITableView!
     var currentTheme:CTTheme!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()
@@ -31,7 +32,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor
+       // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     func initializeView() {
@@ -48,10 +49,14 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
 //        suggestionsTblView.dataSource = self
 //        suggestionsTblView.delegate = self
         
-        //setBackgroundColor()
         //setUIBackgroundTheme(self.view)
         self.view.backgroundColor = UIColor.clearColor()
         //getFriendSuggestions()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        setBackgroundColor()
+
     }
 
     override func viewDidAppear(animated: Bool) {

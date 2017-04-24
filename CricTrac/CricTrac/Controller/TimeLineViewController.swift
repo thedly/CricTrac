@@ -23,11 +23,13 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     var timelineDS = [[String:String]]()
     let refreshControl = UIRefreshControl()
     var totalPosts = 5
-    
+   
     override func viewWillAppear(animated: Bool) {
         //loadTimeline()
         self.timeLineTable.reloadData()
         setNavigationBarProperties();
+       
+        setBackgroundColor()
     }
     
     override func viewDidLoad() {

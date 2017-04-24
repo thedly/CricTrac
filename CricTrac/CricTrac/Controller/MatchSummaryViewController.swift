@@ -28,6 +28,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     
     override func viewWillAppear(animated: Bool) {
         getMatchData()
+        setBackgroundColor()
+        self.matchSummaryTable.reloadData()
     }
     
     override func viewDidLoad() {
@@ -243,6 +245,9 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         if let aCell =  matchSummaryTable.dequeueReusableCellWithIdentifier("SummaryDetailsCell", forIndexPath: indexPath) as? SummaryDetailsCell {
             
             aCell.backgroundColor = UIColor.clearColor()
+            aCell.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
+            
+            aCell.baseView.alpha = 0.8
             
              let currentMatch = self.matches[indexPath.row]
                 

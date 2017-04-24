@@ -25,6 +25,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         self.view.backgroundColor = currentTheme.topColor
         navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
+    override func viewWillAppear(animated: Bool) {
+        setBackgroundColor()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

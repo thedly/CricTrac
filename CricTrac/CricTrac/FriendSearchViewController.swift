@@ -31,7 +31,7 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
         backButton.frame = CGRectMake(0, 0, 40, 40)
         let leftbarButton = UIBarButtonItem(customView: backButton)
         navigationItem.leftBarButtonItem = leftbarButton
-          navigationController!.navigationBar.barTintColor = currentTheme.topColor
+         // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     func didBackButtonTapp() {
        self.navigationController?.popViewControllerAnimated(true)
@@ -44,12 +44,16 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
             self.searchBar.becomeFirstResponder()
         }
     }
-    
+    override func viewWillAppear(animated: Bool) {
+        setBackgroundColor()
+        
+    }
+
     
     override func viewDidLoad() {
          friendSearchTbl.registerNib(UINib.init(nibName:"FriendSuggestionsCell", bundle: nil), forCellReuseIdentifier: "FriendSuggestionsCell")
         super.viewDidLoad()
-        setBackgroundColor()
+       // setBackgroundColor()
         setNavigationBarProperties()
         self.title = "SEARCH"
         self.searchBar.hidden = false
@@ -58,7 +62,7 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
          self.searchBar.becomeFirstResponder()
         
         searchBar.delegate = self
-        setBackgroundColor()
+//        setBackgroundColor()
         friendSearchTbl.delegate = self
         friendSearchTbl.dataSource = self
         definesPresentationContext = true
@@ -116,6 +120,8 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
                 aCell.userName.text = searchedProfiles[indexPath.row].fullName
                 aCell.AddFriendBtn.accessibilityIdentifier = searchedProfiles[indexPath.row].id
                 aCell.AddFriendBtn.addTarget(self, action: #selector(AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+               
+
                 aCell.backgroundColor = UIColor.clearColor()
                 aCell.selectionStyle = .None
             }

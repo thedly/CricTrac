@@ -24,6 +24,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     
     override func viewWillAppear(animated: Bool) {
          self.SuggestsTblview.reloadData()
+        setBackgroundColor()
     }
     
    
@@ -38,7 +39,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor
+       // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     func initializeView() {
@@ -49,7 +50,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         SuggestsTblview.dataSource = self
         SuggestsTblview.delegate = self
         
-        //setBackgroundColor()
+        
         //setUIBackgroundTheme(self.view)
         self.view.backgroundColor = UIColor.clearColor()
         getFriendSuggestions()

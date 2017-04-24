@@ -29,7 +29,11 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         self.view.backgroundColor = currentTheme.topColor
         navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
-    
+    override func viewWillAppear(animated: Bool) {
+        setBackgroundColor()
+        
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
        
@@ -40,7 +44,7 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         self.buttonBarView.collectionViewLayout = UICollectionViewFlowLayout()
         self.buttonBarView.frame.size.height = 40
         settings.style.buttonBarItemFont = UIFont(name: appFont_bold, size: 15)!
-        setBackgroundColor()
+       // setBackgroundColor()
         setNavigationBarProperties()
        definesPresentationContext = true
        

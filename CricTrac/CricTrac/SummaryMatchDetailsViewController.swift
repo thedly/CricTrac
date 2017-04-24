@@ -79,6 +79,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationBarProperties()
+        setBackgroundColor()
     }
     
     func deleteMatch(){
@@ -262,9 +263,9 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             
             if let Balls = matchDetailsData["BallsFaced"] {
                 formattedString.bold("(\(Balls))", fontName: appFont_bold, fontSize: 30)
-                let ballRange = NSRange(location: batLength,length: formattedString.length-batLength)
+//                let ballRange = NSRange(location: batLength,length: formattedString.length-batLength)
                 formattedString.addAttribute(NSBaselineOffsetAttributeName, value: NSNumber(float:-14), range: fullRange)
-                formattedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(hex: "1a6a00") , range: ballRange)
+//                formattedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(hex: "1a6a00") , range: ballRange)
             }
                 
             batRuns.attributedText = formattedString
@@ -489,7 +490,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             }
             
             let fullRange = NSRange(location: 0,length: formattedString.length)
-            let wicketLength = formattedString.length
+           // let wicketLength = formattedString.length
             
             //if let oversBowled = matchDetailsData["OversBowled"] as? String {
                 
@@ -501,9 +502,9 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                     //let oversFromBallsRealRemaining = totalBalls - (6*oversFromBallsInt)
                     
                     formattedString.bold("(\(String(format: "%.1f",(Float(oversBowled)!))))", fontName: appFont_bold, fontSize: 30)
-                    let ballRange = NSRange(location: wicketLength,length: formattedString.length-wicketLength)
+//                    let ballRange = NSRange(location: wicketLength,length: formattedString.length-wicketLength)
                     formattedString.addAttribute(NSBaselineOffsetAttributeName, value: NSNumber(float:-14), range: fullRange)
-                    formattedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(hex: "1a6a00") , range: ballRange)
+                 //   formattedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(hex: "1a6a00") , range: ballRange)
                 //}
             //}
             totalWickets.attributedText = formattedString
