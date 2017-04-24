@@ -39,15 +39,6 @@ struct CTTheme {
         self.backGroundGradientLayer.locations = [0.0, 1.0]
     }
 }
-//Grass - green theme (b4ed50 - 429321)
-//Flash - yellow theme (fdef0f - b49b09)
-//Feather - blue theme (c96dd8 - 3023ae)
-//Peach - orange theme (fbda61 - f76b1c)
-//Cherry - maroon theme (f5515f - 9f031b)
-//Daisy - purple theme (eb56c1 - 961b74 )
-//Ashes - grey theme (C8CBC3 - 5C635A)
-//Beehive - brown theme (B8896B - 6F401B)
-//Ferret - black theme (8B8484 - 2D2C2A)
 
 struct AppTheme{
     
