@@ -10,6 +10,7 @@ import UIKit
 import KRProgressHUD
 import FirebaseAuth
 import GoogleMobileAds
+import Kingfisher
 
 class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ThemeChangeable {
     
@@ -33,33 +34,27 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    var currentUserProfileImage = UIImage()
-    var currentUserCoverImage = UIImage()
+//    var currentUserProfileImage = UIImage()
+//    var currentUserCoverImage = UIImage()
     var friendProfile:[String:AnyObject]?
     var userProfileData:Profile!
     
     var coverOrProfile = ""
     var friendId:String? = nil
-    var test:String? = nil
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
         setBackgroundColor()
         initView()
-         self.updateCoachDashboard()
-        
+        self.updateCoachDashboard()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //loadBannerAds()
-        
     }
     
     func initView() {
-
         //super.viewDidLoad()
         
         if let value = friendProfile{
@@ -82,7 +77,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         
         CurrentTeams.delegate = self
         CurrentTeams.dataSource = self
-        //
+        
         //        PastTeams.delegate = self
         //        PastTeams.dataSource = self
         
@@ -101,30 +96,52 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         self.PlayerLocation.attributedText = locationText
         //self.userProfileImage.image = LoggedInUserImage
         
-        if userProfileData.ProfileImageURL != "-" {
-            getImageFromFirebase(userProfileData.ProfileImageURL) { (imgData) in
-                self.currentUserProfileImage = imgData
-            }
-        }
-        else {
+        let proPic = userProfileData.ProfileImageURL
+        if proPic == "-"{
             let imageName = defaultProfileImage
             let image = UIImage(named: imageName)
-            self.currentUserProfileImage = image!
+            userProfileImage.image = image!
+        }else{
+            if let imageURL = NSURL(string:proPic){
+                userProfileImage.kf_setImageWithURL(imageURL)
+            }
         }
         
-        if userProfileData.CoverPhotoURL != "-" {
-            getImageFromFirebase(userProfileData.CoverPhotoURL) { (imgData) in
-                self.currentUserCoverImage = imgData
-            }
-        }
-        else {
+        let coverPic = userProfileData.CoverPhotoURL
+        if coverPic == "-"{
             let imageName = defaultProfileImage
             let image = UIImage(named: imageName)
-            self.currentUserCoverImage = image!
+            imgCoverPhoto.image = image!
+        }else{
+            if let imageURL = NSURL(string:coverPic){
+                imgCoverPhoto.kf_setImageWithURL(imageURL)
+            }
         }
+        
+//        if userProfileData.ProfileImageURL != "-" {
+//            getImageFromFirebase(userProfileData.ProfileImageURL) { (imgData) in
+//                self.currentUserProfileImage = imgData
+//            }
+//        }
+//        else {
+//            let imageName = defaultProfileImage
+//            let image = UIImage(named: imageName)
+//            self.currentUserProfileImage = image!
+//        }
+        
+//        if userProfileData.CoverPhotoURL != "-" {
+//            getImageFromFirebase(userProfileData.CoverPhotoURL) { (imgData) in
+//                self.currentUserCoverImage = imgData
+//            }
+//        }
+//        else {
+//            let imageName = defaultProfileImage
+//            let image = UIImage(named: imageName)
+//            self.currentUserCoverImage = image!
+//        }
 
-        self.userProfileImage.image = currentUserProfileImage
-        self.imgCoverPhoto.image = currentUserCoverImage
+        //self.userProfileImage.image = currentUserProfileImage
+        //self.imgCoverPhoto.image = currentUserCoverImage
         
         setNavigationBarProperties()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapCoverPhoto))
@@ -149,12 +166,9 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             coverOrProfile = "Profile"
         }
     }
-
     
     func photoOptions(option:String)  {
-        
         let alertController = UIAlertController(title: nil, message: alertMessage, preferredStyle: .ActionSheet)
-        
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
             // ...
         }
@@ -183,7 +197,6 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         }
         
         alertController.addAction(chooseExistingAction)
-        
         self.presentViewController(alertController, animated: true) {
             // ...
         }
@@ -223,7 +236,6 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     }
     
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
-        
         let scale = newWidth / image.size.width
         let newHeight = image.size.height * scale
         UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
@@ -235,7 +247,6 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     }
     
     func viewImage(option:String){
-        
         let newImageView = UIImageView()
         if option == "CoverPhoto" {
             newImageView.image = imgCoverPhoto.image
@@ -250,7 +261,6 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         newImageView.addGestureRecognizer(tap)
         //        self.view.addSubview(navBarView)
         self.view.addSubview(newImageView)
-        
     }
     
     @IBAction func imageTapped(sender: UITapGestureRecognizer) {
@@ -276,7 +286,6 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         sender.view?.removeFromSuperview()
     }
 
-    
     func setNavigationBarProperties(){
         var currentTheme:CTTheme!
         currentTheme = cricTracTheme.currentTheme
@@ -289,14 +298,12 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         navigationItem.leftBarButtonItem = leftbarButton
         
         if let navigation = navigationController{
-            
             navigation.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
             title = "SIGHTSCREEN"
-
         //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         //// navigationController!.navigationBar.titleTextAttributes = titleDict
+        }
     }
-}
     func updateCoachDashboard(){
         if (userProfileData.CoachCurrentTeams.count) + (userProfileData.CoachPastTeams.count) == 0 {
             self.coachCurrentTeamsHeightConstraint.constant = 0
@@ -318,17 +325,13 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         else {
             self.coachCertificationHeightConstraint.constant = 180
         }
- 
     }
     
     // MARK: - Collection view delegates
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         var valueToReturn = 0
-        
         switch collectionView {
-            
         case CurrentTeams:
             valueToReturn = (userProfileData.CoachCurrentTeams.count) + userProfileData.CoachPastTeams.count
             break
@@ -351,47 +354,30 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
-        
         var teamNameToReturn = ""
-        
         switch collectionView {
-            
         case CurrentTeams:
             // teamNameToReturn = userProfileData.CoachCurrentTeams[indexPath.row]
-            
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CoachCurrentTeamsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
-                
-                
-                aCell.TeamImage.image = UIImage()
+                //aCell.TeamImage.image = UIImage()
                 
                 if indexPath.row < (userProfileData.CoachCurrentTeams.count) {
-                    
                     teamNameToReturn = userProfileData.CoachCurrentTeams[indexPath.row]
-                    
                     aCell.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.boxColor)))
-                    
                     aCell.TeamAbbr.textColor = UIColor.whiteColor()
-                    
                 }
                 else if (indexPath.row - (userProfileData.CoachCurrentTeams.count)) < (userProfileData.CoachPastTeams.count) {
-                    
                     teamNameToReturn = userProfileData.CoachPastTeams[(indexPath.row - userProfileData.CoachCurrentTeams.count)]
-                    
                     aCell.baseView.backgroundColor = UIColor.grayColor()
                     aCell.TeamAbbr.textColor = UIColor.blackColor()
                 }
                 
-                
                 if teamNameToReturn != "" {
                     aCell.TeamName.text = teamNameToReturn
-                    
                     let teamName = teamNameToReturn.componentsSeparatedByString(" ")
-                    
                     if teamName.count == 1 {
                         aCell.TeamAbbr.text = "\(teamName[0].characters.first!)"
                     }
@@ -401,52 +387,19 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
                     else {
                         aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
                     }
-                    
                 }
-                
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
             
-            
-            
-            //   break
-            //        case PastTeams:
-            //            teamNameToReturn = userProfileData.CoachPastTeams[indexPath.row]
-            //
-            //
-            //            if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CoachPastTeamsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
-            //
-            //
-            //                aCell.TeamImage.image = UIImage()
-            //
-            //
-            //                if teamNameToReturn != "" {
-            //                    aCell.TeamName.text = teamNameToReturn
-            //                    aCell.TeamAbbr.text = "\(teamNameToReturn[0])\(teamNameToReturn[1])"
-            //                }
-            //
-            //
-            //                return aCell
-            //            }
-            //            return ThemeColorsCollectionViewCell()
-            //
-            
-        // break;
-        case PlayedFor:
+            case PlayedFor:
             teamNameToReturn = userProfileData.CoachPlayedFor[indexPath.row]
             
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CoachPlayedForViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
-                
-                
-                aCell.TeamImage.image = UIImage()
-                
-                
+                //aCell.TeamImage.image = UIImage()
                 if teamNameToReturn != "" {
                     aCell.TeamName.text = teamNameToReturn
-                    
                     let teamName = teamNameToReturn.componentsSeparatedByString(" ")
-                    
                     if teamName.count == 1 {
                         aCell.TeamAbbr.text = "\(teamName[0].characters.first!)"
                     }
@@ -456,27 +409,17 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
                     else {
                         aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
                     }
-                    
                 }
-               
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
-            
-            
         // break
         case Certifications:
             teamNameToReturn = userProfileData.Certifications[indexPath.row]
-            
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CertificationsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
-                
-                
-                aCell.TeamImage.image = UIImage()
-                
-                
+                //aCell.TeamImage.image = UIImage()
                 if teamNameToReturn != "" {
                     aCell.TeamName.text = teamNameToReturn
-                    
                     let teamName = teamNameToReturn.componentsSeparatedByString(" ")
                     
                     if teamName.count == 1 {
@@ -488,29 +431,17 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
                     else {
                         aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
                     }
-                    
                 }
-                
-                
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
-            
-            
         //  break
         default:
             teamNameToReturn = userProfileData.CoachCurrentTeams[indexPath.row]
-            
-            
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("TeamCollectionViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
-                
-                
-                aCell.TeamImage.image = UIImage()
-                
-                
+                //aCell.TeamImage.image = UIImage()
                 if teamNameToReturn != "" {
                     aCell.TeamName.text = teamNameToReturn
-                    
                     let teamName = teamNameToReturn.componentsSeparatedByString(" ")
                     
                     if teamName.count == 1 {
@@ -522,29 +453,13 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
                     else {
                         aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
                     }
-                    
                 }
-                
-               
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
-            
             //  break
-            
         }
-        
-        
-        
-        
     }
-    
-    
-    
-    
-    
-    
-    
     
     /*
      // MARK: - Navigation

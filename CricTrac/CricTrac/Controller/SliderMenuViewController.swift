@@ -9,8 +9,9 @@
 import UIKit
 import SCLAlertView
 import KYDrawerController
-class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable,KYDrawerControllerDelegate {
+import Kingfisher
 
+class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable,KYDrawerControllerDelegate {
     
     // NavigationControllers
     
@@ -31,6 +32,7 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
     @IBOutlet weak var tableView : UITableView!
     
     var menuDataArray = menuData
+    var profilePic:String?
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
@@ -40,95 +42,102 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setBackgroundColor()
-        
         userName.text = profileData.fullName
+        profilePic = profileData.ProfileImageURL
+        
         //baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
         
         if let _ = profileData.UserProfile as? String{
-            
             removeUnwantedMenu()
         }else{
-            
             getAllUserProfileInfo {
-                
-             self.removeUnwantedMenu()
-                
+            self.removeUnwantedMenu()
             }
-            
         }
         
-        //sajith - added the call to remove the menu items
-        //removeUnwantedMenu()
         loadInitialValues();
         
-        
         NSNotificationCenter.defaultCenter().addObserverForName(ProfilePictureUpdated, object: nil, queue: nil) { (notification) in
-            self.profileImage.image = LoggedInUserImage
-
+            if self.profilePic == "-" {
+                let imageName = defaultProfileImage
+                let image = UIImage(named: imageName)
+                self.profileImage.image = image!
+            }else{
+                if let imageURL = NSURL(string:self.profilePic!){
+                    self.profileImage.kf_setImageWithURL(imageURL)
+                }
+            }
+            //self.profileImage.image = LoggedInUserImage
         }
         // Do any additional setup after loading the view.
     }
     
-    
     func removeUnwantedMenu(){
-        
         //if let userType = loggedInUserInfo["UserProfile"] as? String where userType != "Player"{
         if let userType = profileData.UserProfile as? String where userType != "Player"{
-            
             if let newMatchIndex =  self.menuDataArray.indexOf({ $0["title"] == "ADD MATCH"}){
-                
                 self.menuDataArray.removeAtIndex(newMatchIndex)
-                
                //tableView.reloadData()
             }
             
             //if let matchSummaryIndexIndex =  self.menuDataArray.indexOf({ $0["title"] == "MATCH SUMMARY"}){
             if let matchSummaryIndexIndex =  self.menuDataArray.indexOf({ $0["title"] == "SCOREBOARD"}){
-                
                 self.menuDataArray.removeAtIndex(matchSummaryIndexIndex)
-                
                 //tableView.reloadData()
             }
-            
         }
-        
     }
-    
 
     func drawerController(drawerController: KYDrawerController, stateChanged state: KYDrawerController.DrawerState) {
-        self.profileImage.image = LoggedInUserImage
-
         
+        if profilePic == "-" {
+            let imageName = defaultProfileImage
+            let image = UIImage(named: imageName)
+            profileImage.image = image!
+        }else{
+            if let imageURL = NSURL(string:profilePic!){
+                profileImage.kf_setImageWithURL(imageURL)
+            }
+        }
+        //self.profileImage.image = LoggedInUserImage
     }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        
-        self.profileImage.image = LoggedInUserImage
-
+        if profilePic == "-" {
+            let imageName = defaultProfileImage
+            let image = UIImage(named: imageName)
+            profileImage.image = image!
+        }else{
+            if let imageURL = NSURL(string:profilePic!){
+                profileImage.kf_setImageWithURL(imageURL)
+            }
+        }
+        //self.profileImage.image = LoggedInUserImage
     }
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.profileImage.image = LoggedInUserImage
-
-    }
+    
+//    override func viewDidAppear(animated: Bool) {
+//        super.viewDidAppear(animated)
+//        if profilePic == "-" {
+//            let imageName = defaultProfileImage
+//            let image = UIImage(named: imageName)
+//            profileImage.image = image!
+//        }else{
+//            if let imageURL = NSURL(string:profilePic!){
+//                profileImage.kf_setImageWithURL(imageURL)
+//            }
+//        }
+//        //self.profileImage.image = LoggedInUserImage
+//    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     @IBAction func didTapLogout(sender: UIButton) {
-        
-        
         logout(self)
-        
-    
-        
-       
-        
     }
 
      func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -141,39 +150,27 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         return menuDataArray.count
     }
     
-    
-     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        
-        
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("SliderMenuViewCell", forIndexPath: indexPath) as! SliderMenuViewCell
         let itemTitle = menuDataArray[indexPath.row]["title"]
-        
         let menuIcon = UIImage(named: menuDataArray[indexPath.row]["img"]!)
-        
         cell.menuName.text = itemTitle
         cell.menuIcon.image = menuIcon
-        
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
         var vcName = menuDataArray[indexPath.row]["vc"]
-        
 
 //        if indexPath.row == 0
 //        {
 //            return
 //        }
         
-            
         if menuDataArray[indexPath.row]["title"] == "PROFILE" && profileData.userExists {
             vcName = "ProfileReadOnlyViewController"
-
         }
         else if menuDataArray[indexPath.row]["title"] == "SIGHTSCREEN" {
-            
             switch profileData.UserProfile {
             case userProfileType.Player.rawValue :
                 vcName = "UserDashboardViewController"
@@ -187,7 +184,6 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
             default:
                 vcName = "UserDashboardViewController"
                 break
-                
             }
         }
             let navigationControl = getNavigationControllerFor(vcName!)
@@ -195,18 +191,12 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
             sliderMenu.setDrawerState(.Closed, animated: true)
     }
     
-    
     func moveTo(vc:String){
         let navigationControl = getNavigationControllerFor(vc)
         sliderMenu.mainViewController = navigationControl
         sliderMenu.setDrawerState(.Closed, animated: true)
     }
-    
 }
-
-
-
-
 
 /*
  ["title":"TIMELINE","vc":"timeline", "img": "Menu_TimeLine"],
@@ -222,10 +212,9 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
  //    ["title":"HELP & SUPPORT","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
  ["title":"VERSION: \(versionAndBuildNumber)","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
  */
+
 extension SliderMenuViewController {
-    
     func getNavigationControllerFor(vcName:String) -> UINavigationController {
-        
         //let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         //let vc  = storyboard.instantiateViewControllerWithIdentifier(vcName)
         switch vcName {
@@ -258,7 +247,6 @@ extension SliderMenuViewController {
             return navFanDashBoard!
         case "AddMatchDetailsViewController":
             //if navAddMatch == nil {
-            
                 let dashboardVC = viewControllerFrom("Main", vcid: "AddMatchDetailsViewController") as! AddMatchDetailsViewController
 
                 navAddMatch = UINavigationController(rootViewController: dashboardVC)
@@ -299,18 +287,14 @@ extension SliderMenuViewController {
                 navSettings = UINavigationController(rootViewController: dashboardVC)
             }
             return navSettings!
-        
             
         default:
-            
             if navTimeLine == nil {
                 let dashboardVC = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! TimeLineViewController
 
                 navTimeLine = UINavigationController(rootViewController: dashboardVC)
             }
             return navTimeLine!
-            
-            
         }
     }
 }

@@ -603,10 +603,10 @@ func updateMatchData(key:String,data:[String:AnyObject], callback:(data:[String:
 //MARK:- Delete Match
 
 func deleteMatchData(matchId:String, callback:(error:NSError?)->Void ){
-    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").child(matchId).removeValue()
-//    ref.removeValueWithCompletionBlock { (error, dataRef) in
-//        callback(error: error)
-//    }
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").child(matchId)
+    ref.removeValueWithCompletionBlock { (error, dataRef) in
+        callback(error: error)
+    }
     UpdateDashboardDetails()
 }
 
