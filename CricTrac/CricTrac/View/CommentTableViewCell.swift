@@ -18,7 +18,7 @@ class CommentTableViewCell: UITableViewCell {
     var commentID:String?
     var postID:String?
     var parent:DeleteComment?
-    
+    var ownerId:String?
     
     @IBAction func deletebuttonTapped(sender: AnyObject) {
         let deleteAlert = UIAlertController(title: "Delete Comment", message: "Are you sure you want to delete this comment?", preferredStyle: UIAlertControllerStyle.Alert)
@@ -43,8 +43,56 @@ class CommentTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        addTapGestureToUserName()
         // Initialization code
     }
+    
+    func addTapGestureToUserName(){
+        if let _ = userName{
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(CommentTableViewCell.didTapOwnerName))
+            userName.userInteractionEnabled = true
+            userName.addGestureRecognizer(gesture)
+        }
+    }
+    
+    func didTapOwnerName(){
+        if ownerId != nil{
+            getFriendProfileInfo(ownerId, sucess: { (friendInfo) in
+                if let friendType = friendInfo["UserProfile"] as? String{
+                    switch friendType{
+                    case "Player": self.moveToPlayer(friendInfo)
+                    case "Coach": self.moveToCoach(friendInfo)
+                    case "Cricket Fan": self.moveToFan(friendInfo)
+                    default: break
+                    }
+                }
+            })
+        }
+    }
+    
+    func moveToPlayer(userInfo:[String : AnyObject]){
+        if let parentVC = parent as? UIViewController{
+            let dashBoard = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
+            dashBoard.friendId = ownerId
+            dashBoard.friendProfile = userInfo
+            parentVC.presentViewController(dashBoard, animated: true) {}
+        }
+    }
+    
+    func moveToCoach(userInfo:[String : AnyObject]){
+        let dashBoard = viewControllerFrom("Main", vcid: "CoachDashboardViewController") as! CoachDashboardViewController
+        dashBoard.friendId = ownerId
+        dashBoard.friendProfile = userInfo
+        self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
+    }
+    
+    func moveToFan(userInfo:[String : AnyObject]){
+        let dashBoard = viewControllerFrom("Main", vcid: "FanDashboardViewController") as! FanDashboardViewController
+        dashBoard.friendId = ownerId
+        dashBoard.friendProfile = userInfo
+        self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
+    }
+
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

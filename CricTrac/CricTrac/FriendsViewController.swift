@@ -72,6 +72,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         let aCell =  SuggestsTblview.dequeueReusableCellWithIdentifier("FriendsCell", forIndexPath: indexPath) as! FriendsCell
         
         let friendUserId = friendsDataArray[indexPath.row].UserId
+        aCell.friendId = friendUserId
         fetchFriendDetail(friendUserId, sucess: { (result) in
             let proPic = result["proPic"]
             let city =   result["city"]

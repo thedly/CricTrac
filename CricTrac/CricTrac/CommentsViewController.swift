@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UIActionSheetDelegate,DeleteComment{
     
-    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var postOwnerName: UILabel!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var userCity: UILabel!
     @IBOutlet weak var comments: UILabel!
@@ -39,16 +39,67 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     //var postData:JSON?
     var currentTheme:CTTheme!
     var commentId:String = ""
-   
-//    override func viewWillAppear(animated: Bool) {
-//        getAllComments(postId) { (data) in
-//            self.dataSource = data
-//            self.tableView.reloadData()
-//        }
-//    }
+    var postOwnerId:String?
+    var parent:Deletable?
+    
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+    
+    func addTapGestureToUserName(){
+        if let _ = postOwnerName{
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(CommentsViewController.didTapOwnerName))
+            postOwnerName.userInteractionEnabled = true
+            postOwnerName.addGestureRecognizer(gesture)
+        }
+    }
+    
+    
+    func didTapOwnerName(){
+        if postOwnerName.text != "CricTrac" {
+            if  postOwnerId != nil{
+                getFriendProfileInfo(postOwnerId, sucess: { (friendInfo) in
+                    if let friendType = friendInfo["UserProfile"] as? String{
+                        switch friendType{
+                        case "Player": self.moveToPlayer(friendInfo)
+                        case "Coach": self.moveToCoach(friendInfo)
+                        case "Cricket Fan": self.moveToFan(friendInfo)
+                        default: break
+                        }
+                    }
+                })
+            }
+        }
+    }
+    
+    func moveToPlayer(userInfo:[String : AnyObject]){
+        let dashBoard = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
+        dashBoard.friendId = postOwnerId
+        dashBoard.friendProfile = userInfo
+        self.presentViewController(dashBoard, animated: true) {}
+    }
+    
+    func moveToCoach(userInfo:[String : AnyObject]){            let dashBoard = viewControllerFrom("Main", vcid: "CoachDashboardViewController") as! CoachDashboardViewController
+        dashBoard.friendId = postOwnerId
+        dashBoard.friendProfile = userInfo
+        self.presentViewController(dashBoard, animated: true) {}
+    }
+    
+    func moveToFan(userInfo:[String : AnyObject]){
+        let dashBoard = viewControllerFrom("Main", vcid: "FanDashboardViewController") as! FanDashboardViewController
+        dashBoard.friendId = postOwnerId
+        dashBoard.friendProfile = userInfo
+        self.presentViewController(dashBoard, animated: true) {}
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        postOwnerName.text = "Arjun"
+        addTapGestureToUserName()
        
         setNavigationBarProperties();
         currentTheme = cricTracTheme.currentTheme
@@ -73,14 +124,16 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         
         //sajith-  fetch the fresh post data
         getPost(postId) { (data) in
+            
+            self.postOwnerId = data["OwnerID"] as? String
             self.postText.text = data["Post"] as? String
             
             let postedBy = data["PostedBy"] as? String
             if postedBy == "CricTrac" {
-                self.userName.text = "CricTrac"
+                self.postOwnerName.text = "CricTrac"
             }
             else{
-                self.userName.text = data ["OwnerName"] as? String
+                self.postOwnerName.text = data ["OwnerName"] as? String
             }
             
             if let postDateTS = data["AddedTime"] as? Double{
@@ -140,7 +193,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         fetchFriendDetail(friendId as! String, sucess: { (result) in
             let proPic = result["proPic"]
             if proPic! == "-"{
-                let imageName = "propic.png"
+                let imageName = defaultProfileImage
                 let image = UIImage(named: imageName)
                 self.profileImage.image = image
             }else
@@ -197,6 +250,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         let data = dataSource[indexPath.row]
         let aCell =  tableView.dequeueReusableCellWithIdentifier("commentcell", forIndexPath: indexPath) as! CommentTableViewCell
         aCell.parent = self
+        aCell.ownerId = data["OwnerID"] as? String
 
         if let val = data["Comment"] as? String{
             
@@ -230,6 +284,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         
         //display comment owners image
         if ((data["OwnerID"]) != nil) {
+            
         fetchFriendDetail((data["OwnerID"]  as? String)!, sucess: { (result) in
             let proPic = result["proPic"]
             
@@ -240,7 +295,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
             aCell.userImage.clipsToBounds = true
             
             if proPic! == "-"{
-                let imageName = "propic.png"
+                let imageName = defaultProfileImage
                 let image = UIImage(named: imageName)
                 aCell.userImage.image = image
             }else{
@@ -250,8 +305,6 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
             }
         })
         }
-
-        
         
         aCell.selectionStyle = UITableViewCellSelectionStyle.None
         return aCell
@@ -259,7 +312,6 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     
     func textViewDidBeginEditing(textView: UITextView){
         textView.text = ""
-        
     }
     
     func textViewDidEndEditing(textView: UITextView){
