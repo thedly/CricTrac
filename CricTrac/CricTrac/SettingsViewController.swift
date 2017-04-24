@@ -110,7 +110,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         cell.menuItemSelectedValue.text = selectedValue
         
         
-        cell.menuItemToggleSwitch.hidden = !toggleConfig
+      //  cell.menuItemToggleSwitch.hidden = !toggleConfig
         cell.menuItemSelectedValue.hidden = toggleConfig
         
         
