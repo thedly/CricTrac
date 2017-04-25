@@ -308,6 +308,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addTapGestureToUserName() 
         
         //loadBannerAds()
 
@@ -690,17 +691,17 @@ func setDashboardData(){
                 self.highScore.text = String(DashboardDetails.TopBatting1stMatchScore)
                 self.BB.text = String(DashboardDetails.TopBowling1stMatchScore)
                 let winPercent = Double(String(DashboardDetails.WinPercentage))
-                self.winPerc.text = String(format:"%.2f",winPercent!)
+                self.winPerc.text = String(format:"%.1f",winPercent!)
                 //self.winPerc.text = String(DashboardDetails.WinPercentage)
                 
                 //data for Batting Card
                 self.totalRunsScored.text = String(DashboardDetails.TotalRuns)
                 self.battingInnings.text = String(DashboardDetails.BattingInnings)
                 let battingAverage = Double(String(DashboardDetails.TotalBattingAverage))
-                self.battingAverage.text = String(format:"%.2f",battingAverage!)
+                self.battingAverage.text = String(format:"%.1f",battingAverage!)
                 //self.battingAverage.text = String(DashboardDetails.TotalBattingAverage)
                 let strikeRate = Double(String(DashboardDetails.TotalStrikeRate))
-                self.strikeRate.text = String(format:"%.2f",strikeRate!)
+                self.strikeRate.text = String(format:"%.1f",strikeRate!)
                 //self.strikeRate.text = String(DashboardDetails.TotalStrikeRate)
                 self.hundreds.text = String(DashboardDetails.Total100s)
                 self.fifties.text = String(DashboardDetails.Total50s)
@@ -711,7 +712,7 @@ func setDashboardData(){
                 self.bowlingInnings.text = String(DashboardDetails.BowlingInnings)
                 self.totalWickets.text = String(DashboardDetails.TotalWickets)
                 let bowlingAverageDouble = Double(String(DashboardDetails.TotalBowlingAverage))
-                self.bowlingAverage.text = String(format:"%.2f",bowlingAverageDouble!)
+                self.bowlingAverage.text = String(format:"%.1f",bowlingAverageDouble!)
                 //self.bowlingAverage.text = String(DashboardDetails.TotalBowlingAverage)
                 
                 self.bowlingEconomy.text = String(DashboardDetails.TotalEconomy)
@@ -740,8 +741,7 @@ func setDashboardData(){
                     fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
                         
                         if let data = snapshot.value! as? [String:AnyObject]{
-                            
-                            let battingBowlingScore = NSMutableAttributedString()
+                           let battingBowlingScore = NSMutableAttributedString()
                             var matchVenueAndDate = ""
                             var opponentName = ""
                             var groundVenue = ""
@@ -804,7 +804,7 @@ func setDashboardData(){
                                     mData.strikerate = Float("0.00")
                                 }
                                 else {
-                                    let strikeRate = String(format: "%.2f",(Float(runsScored)!)*100/Float(ballsFaced)!)
+                                    let strikeRate = String(format: "%.1f",(Float(runsScored)!)*100/Float(ballsFaced)!)
                                     mData.strikerate = Float(strikeRate)
                                     srEconomy = ("Strike Rate: \(strikeRate)")
                                 }
@@ -812,7 +812,7 @@ func setDashboardData(){
                             
                             if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
                                 
-                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
+                                let economy = String(format: "%.1f",(Float(runsGiven)!)/Float(oversBowled)!)
                                 mData.economy = Float(economy)
                                 if srEconomy.length > 0 {
                                     srEconomy.appendContentsOf("\nEconomy: \(economy)")
@@ -915,7 +915,7 @@ func setDashboardData(){
                                     mData.strikerate = Float("0.00")
                                 }
                                 else {
-                                    let strikeRate = String(format: "%.2f",(Float(runsScored)!)*100/Float(ballsFaced)!)
+                                    let strikeRate = String(format: "%.1f",(Float(runsScored)!)*100/Float(ballsFaced)!)
                                     mData.strikerate = Float(strikeRate)
                                     srEconomy = ("Strike Rate: \(strikeRate)")
                                 }
@@ -923,7 +923,7 @@ func setDashboardData(){
                             
                             if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
                                 
-                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
+                                let economy = String(format: "%.1f",(Float(runsGiven)!)/Float(oversBowled)!)
                                 mData.economy = Float(economy)
                                 if srEconomy.length > 0 {
                                     srEconomy.appendContentsOf("\nEconomy: \(economy)")
@@ -1027,7 +1027,7 @@ func setDashboardData(){
                                     mData.strikerate = Float("0.00")
                                 }
                                 else {
-                                    let strikeRate = String(format: "%.2f",(Float(runsScored)!)*100/Float(ballsFaced)!)
+                                    let strikeRate = String(format: "%.1f",(Float(runsScored)!)*100/Float(ballsFaced)!)
                                     mData.strikerate = Float(strikeRate)
                                     srEconomy = ("Strike Rate: \(strikeRate)")
                                 }
@@ -1124,7 +1124,7 @@ func setDashboardData(){
                                     mData.strikerate = Float("0.00")
                                 }
                                 else {
-                                    let strikeRate = String(format: "%.2f",(Float(runsScored)!)*100/Float(ballsFaced)!)
+                                    let strikeRate = String(format: "%.1f",(Float(runsScored)!)*100/Float(ballsFaced)!)
                                     mData.strikerate = Float(strikeRate)
                                     srEconomy = ("Strike Rate: \(strikeRate)")
                                 }
@@ -1213,7 +1213,7 @@ func setDashboardData(){
                             
                             if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
                                 
-                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
+                                let economy = String(format: "%.1f",(Float(runsGiven)!)/Float(oversBowled)!)
                                 mData.economy = Float(economy)
                                 srEconomy = ("Economy: \(economy)")
                             }
@@ -1301,7 +1301,7 @@ func setDashboardData(){
                             
                             if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
                                 
-                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
+                                let economy = String(format: "%.1f",(Float(runsGiven)!)/Float(oversBowled)!)
                                 mData.economy = Float(economy)
                                 srEconomy = ("Economy: \(economy)")
                             }
@@ -1559,9 +1559,6 @@ override func viewDidAppear(animated: Bool) {
             }
 
             
-            
-                
-            
                 return aCell
 //            }
 //            else
@@ -1580,7 +1577,136 @@ override func viewDidAppear(animated: Bool) {
         // Pass the selected object to the new view controller.
     }
     */
+   
+ 
+    func addTapGestureToUserName() {
+        let gesture1 = UITapGestureRecognizer(target: self,action: #selector(UserDashboardViewController.didTapRecent1stMatchID))
+        FirstRecentMatchSummary.userInteractionEnabled = true
+        FirstRecentMatchSummary.addGestureRecognizer(gesture1)
+        
+         let gesture2 = UITapGestureRecognizer(target: self,action: #selector(UserDashboardViewController.didTapRecent2ndMatchID))
+        SecondRecentMatchSummary.userInteractionEnabled = true
+        SecondRecentMatchSummary.addGestureRecognizer(gesture2)
+        
+        let gesture3 = UITapGestureRecognizer(target: self,action: #selector(UserDashboardViewController.didTapTopBatting1stMatchID))
+        FirstRecentMatchView.userInteractionEnabled = true
+        FirstRecentMatchView.addGestureRecognizer(gesture3)
+        
+        let gesture4 = UITapGestureRecognizer(target: self,action: #selector(UserDashboardViewController.didTapTopBatting2ndMatchID))
+        SecondRecentMatchView.userInteractionEnabled = true
+        SecondRecentMatchView.addGestureRecognizer(gesture4)
+        
+        let gesture5 = UITapGestureRecognizer(target: self,action: #selector(UserDashboardViewController.didTapTopBowling1stMatchID))
+        FirstRecentMatchBowlingView.userInteractionEnabled = true
+        FirstRecentMatchBowlingView.addGestureRecognizer(gesture5)
+        
+        let gesture6 = UITapGestureRecognizer(target: self,action: #selector(UserDashboardViewController.didTapTopBowling2ndMatchID))
+        SecondRecentMatchBowlingView.userInteractionEnabled = true
+        SecondRecentMatchBowlingView.addGestureRecognizer(gesture6)
     
+    }
+  
+    func didTapRecent1stMatchID() {
     
+    if String(DashboardDetails.Recent1stMatchID) != "-" {
 
+        let matchId:String = (String(DashboardDetails.Recent1stMatchID) ?? nil)!
+        let userId:String = self.friendId ?? currentUser!.uid
+        fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+            
+            if let data = snapshot.value! as? [String:AnyObject]{
+                
+            let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
+                summaryDetailsVC.matchDetailsData = data
+                self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+            }
+        })
+    }
 }
+func didTapRecent2ndMatchID() {
+        if String(DashboardDetails.Recent2ndMatchID) != "-" {
+            let matchId:String = (String(DashboardDetails.Recent2ndMatchID) ?? nil)!
+            let userId:String = self.friendId ?? currentUser!.uid
+            fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+                
+                if let data = snapshot.value! as? [String:AnyObject]{
+                let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
+                   
+                    summaryDetailsVC.matchDetailsData = data
+                    self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                }
+            })
+        }
+    }
+func didTapTopBatting1stMatchID() {
+        if String(DashboardDetails.TopBatting1stMatchID) != "-" {
+            let matchId:String = (String(DashboardDetails.TopBatting1stMatchID) ?? nil)!
+            let userId:String = self.friendId ?? currentUser!.uid
+            fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+                
+                if let data = snapshot.value! as? [String:AnyObject]{
+
+                    let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
+                    
+                    summaryDetailsVC.matchDetailsData = data
+                    self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                }
+            })
+        }
+    }
+    
+    func didTapTopBatting2ndMatchID() {
+        if String(DashboardDetails.TopBatting2ndMatchID) != "-" {
+            let matchId:String = (String(DashboardDetails.TopBatting2ndMatchID) ?? nil)!
+            let userId:String = self.friendId ?? currentUser!.uid
+            fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+                
+                if let data = snapshot.value! as? [String:AnyObject]{
+                    let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
+                    summaryDetailsVC.matchDetailsData = data
+                    self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                }
+            })
+        }
+        
+    }
+
+  func didTapTopBowling1stMatchID() {
+        if String(DashboardDetails.TopBowling1stMatchID) != "-" {
+            let matchId:String = (String(DashboardDetails.TopBowling1stMatchID) ?? nil)!
+            let userId:String = self.friendId ?? currentUser!.uid
+            fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+                
+                if let data = snapshot.value! as? [String:AnyObject]{
+                    
+                    let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
+                    
+                    summaryDetailsVC.matchDetailsData = data
+                    self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                }
+            })
+        }
+    }
+    func didTapTopBowling2ndMatchID() {
+        
+            if String(DashboardDetails.TopBowling2ndMatchID) != "-" {
+                let matchId:String = (String(DashboardDetails.TopBowling2ndMatchID) ?? nil)!
+                let userId:String = self.friendId ?? currentUser!.uid
+                fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+                    
+                    if let data = snapshot.value! as? [String:AnyObject]{
+                    
+                    let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
+                    
+                    summaryDetailsVC.matchDetailsData = data
+                    self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                }
+            })
+        }
+    }
+
+  
+}
+
+
+

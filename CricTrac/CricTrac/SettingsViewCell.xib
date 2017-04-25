@@ -48,9 +48,6 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qE0-aQ-HPJ">
-                        <rect key="frame" x="383" y="19" width="51" height="31"/>
-                    </switch>
                 </subviews>
                 <constraints>
                     <constraint firstItem="ZZf-hM-Bt7" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-10" id="1Sg-2v-0Tq"/>
@@ -63,13 +60,11 @@
                     <constraint firstItem="ZHY-5Q-UhT" firstAttribute="bottom" secondItem="KYy-8T-LUJ" secondAttribute="bottom" id="GR1-qD-Dnb"/>
                     <constraint firstItem="KYy-8T-LUJ" firstAttribute="centerY" secondItem="ZZf-hM-Bt7" secondAttribute="centerY" id="GhA-nu-Emz"/>
                     <constraint firstItem="Psb-7o-q1e" firstAttribute="trailing" secondItem="KYy-8T-LUJ" secondAttribute="trailing" id="UOI-sN-nF4"/>
-                    <constraint firstItem="ZHY-5Q-UhT" firstAttribute="centerX" secondItem="qE0-aQ-HPJ" secondAttribute="centerX" id="X79-dr-UzF"/>
                     <constraint firstItem="Psb-7o-q1e" firstAttribute="top" secondItem="KYy-8T-LUJ" secondAttribute="bottom" constant="5" id="hiF-zg-dwT"/>
                     <constraint firstItem="Psb-7o-q1e" firstAttribute="width" secondItem="KYy-8T-LUJ" secondAttribute="width" constant="135" id="jD8-UT-ANz"/>
                     <constraint firstItem="ZZf-hM-Bt7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="oMC-Yd-0S8"/>
                     <constraint firstItem="Psb-7o-q1e" firstAttribute="leading" secondItem="KYy-8T-LUJ" secondAttribute="leading" id="p7j-rC-MxI"/>
                     <constraint firstItem="ZZf-hM-Bt7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="25" id="v57-gw-UyZ"/>
-                    <constraint firstItem="ZHY-5Q-UhT" firstAttribute="centerY" secondItem="qE0-aQ-HPJ" secondAttribute="centerY" id="wCQ-Bk-M0W"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
@@ -86,7 +81,6 @@
                 <outlet property="menuItemIcon" destination="ZZf-hM-Bt7" id="Uvc-CK-e40"/>
                 <outlet property="menuItemName" destination="KYy-8T-LUJ" id="TFw-TG-qML"/>
                 <outlet property="menuItemSelectedValue" destination="ZHY-5Q-UhT" id="467-8a-TNz"/>
-                <outlet property="menuItemToggleSwitch" destination="qE0-aQ-HPJ" id="EqL-8b-Tev"/>
             </connections>
             <point key="canvasLocation" x="374.5" y="161"/>
         </tableViewCell>

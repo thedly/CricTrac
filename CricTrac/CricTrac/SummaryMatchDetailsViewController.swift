@@ -50,6 +50,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     @IBOutlet weak var battingView: UIView!
     @IBOutlet weak var bowlingView: UIView!
     @IBOutlet weak var summarizedView: UIView!
+    
     @IBAction func deleteActionPressed(sender: UIButton) {
         
         let actionSheetController = UIAlertController(title: "", message: "Are you sure to delete the match?", preferredStyle: .ActionSheet)
@@ -83,27 +84,20 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     }
     
     func deleteMatch(){
-        
         KRProgressHUD.show(progressHUDStyle: .White, message: "Deleting...")
         if let matchKey = matchDetailsData["MatchId"] as? String{
-            
             deleteMatchData(matchKey) { (error) in
-                
                 KRProgressHUD.dismiss()
-                
                 if error != nil{
                     SCLAlertView().showError("Error",subTitle:error!.localizedDescription)
                 }
                 else{
                     NSNotificationCenter.defaultCenter().postNotificationName("MatchDataChanged", object: self)
                     self.dismissViewControllerAnimated(true, completion: { })
-                    
                     self.navigationController?.popViewControllerAnimated(true)
                 }
             }
-            
         }
-        
     }
     
     func setNavigationBarProperties(){
@@ -114,17 +108,20 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         menuButton.addTarget(self, action: #selector(didTapCancel), forControlEvents: UIControlEvents.TouchUpInside)
         menuButton.frame = CGRectMake(0, 0, 40, 40)
         let leftbarButton = UIBarButtonItem(customView: menuButton)
-        let addNewMatchButton: UIButton = UIButton(type:.Custom)
-        addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
-        addNewMatchButton.setImage(UIImage(named: "Edit-100"), forState: UIControlState.Normal)
-        addNewMatchButton.titleLabel?.font = UIFont(name: appFont_bold, size: 15)
-        addNewMatchButton.addTarget(self, action: #selector(didTapEditButton), forControlEvents: UIControlEvents.TouchUpInside)
-        let righttbarButton = UIBarButtonItem(customView: addNewMatchButton)
+        
+        if matchDetailsData["UserId"] as? String == currentUser?.uid {
+            let addNewMatchButton: UIButton = UIButton(type:.Custom)
+            addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
+            addNewMatchButton.setImage(UIImage(named: "Edit-100"), forState: UIControlState.Normal)
+            addNewMatchButton.titleLabel?.font = UIFont(name: appFont_bold, size: 15)
+            addNewMatchButton.addTarget(self, action: #selector(didTapEditButton), forControlEvents: UIControlEvents.TouchUpInside)
+            let righttbarButton = UIBarButtonItem(customView: addNewMatchButton)
+            navigationItem.rightBarButtonItem = righttbarButton
+        }
         
         //assign button to navigationbar
         
         navigationItem.leftBarButtonItem = leftbarButton
-        navigationItem.rightBarButtonItem = righttbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "SCORECARD"
         //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
@@ -189,37 +186,17 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         // Dispose of any resources that can be recreated.
     }
     
-    /*func calculateStrikeRate(){
-        
-        if batRuns.text?.trimWhiteSpace.length == 0{
-           strikeRateText.text = ""
-        }
-        else if ballsFaced.text?.trimWhiteSpace.length == 0{
-            strikeRateText.text = ""
-        }
-        else{
-            setStrikeRate()
-        }
-    }*/
-    
     func setStrikeRate(){
-        
         if let runs = matchDetailsData["RunsTaken"] as? String where runs != "-" {
             if let balls = matchDetailsData["BallsFaced"] as? String {
-                
-                //guard let ball = Float(balls) where ball > 0 else {
-                //    return
-                //}
-                
                 if balls == "0" {
                     strikeRateText.text = "0.0"
                 }
                 else {
-                    strikeRateText.text = String(format: "%.2f",(Float(runs)!)*100/Float(balls)!)
+                    strikeRateText.text = String(format: "%.1f",(Float(runs)!)*100/Float(balls)!)
                 }
             }
         }
-        
     }
     
     func setEconomy(){
@@ -228,7 +205,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                 guard let ball = Float(balls) where ball > 0 else {
                     return
                 }
-                economy.text = String(format: "%.2f",(Float(runs)!)/Float(balls)!)
+                economy.text = String(format: "%.1f",(Float(runs)!)/Float(balls)!)
             }
         }
     }
@@ -329,57 +306,41 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         }
         
         if let oversBowled = matchDetailsData["OversBowled"] as? String where oversBowled == "-" {
-            
             bowlingViewHidden = true
-            
             self.bowlingView.hidden = true
-            
         }
         else {
-            
             bowlingViewHidden = false
-            
             self.bowlingView.hidden = false
-            
         }
         
         if (bowlingViewHidden == true) {
-            
             //self.bowlingView.hidden = true
-            
             self.screenShotHeightConstraint.constant -= 240
-            
-        }else{
+        }
+        else{
             self.screenShotHeightConstraint.constant += 240
         }
         
         if let runs = matchDetailsData["RunsTaken"] as? String where runs == "-" {
-            
             battingViewHidden = true
-            
             self.battingView.hidden = true
-            
-        }else {
-            
+        }
+        else {
             battingViewHidden = false
-            
             self.battingView.hidden = false
-            
         }
         
         if (battingViewHidden == true) {
-            
             //self.battingView.hidden = true
-            
             self.screenShotHeightConstraint.constant -= 240
-            
-        }else {
+        }
+        else {
             self.screenShotHeightConstraint.constant += 240
         }
         
         var group = ""
         
-        //if let tournament = matchDetailsData["Tournament"]{
             let formattedString = NSMutableAttributedString()
             var tournamentText = NSAttributedString()
         
@@ -408,7 +369,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             //}
             tournamentText = formattedString.bold("\(group)", fontName: appFont_bold, fontSize: 15)
                tournamentName.attributedText = tournamentText
-        //}
         
         var firstTeamScore = "-"
         var secondTeamScore = "-"
@@ -459,25 +419,9 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                     let secondTeamOvers: String = (matchDetailsData["SecondBattingOvers"] ?? "-") as! String
                     awayTeam.text?.appendContentsOf("\n\(secondScore)/\(secondWickets)\n\(secondTeamOvers) Overs")
                 }
-                
                 secondTeamScore = secondScore as! String
             }
         }
-        
-        
-//        if let firstScore = Int(firstTeamScore), let secondScore = Int(secondTeamScore) {
-//            if firstScore > secondScore {
-//                result.text = "\(matchDetailsData["Team"]!) Won"
-//            }
-//            else if firstScore < secondScore
-//            {
-//                result.text = "\(matchDetailsData["Opponent"]!) Won"
-//            }
-//            else if firstScore == secondScore {
-//                result.text = "Match tied"
-//            }
-//        }
-        
         setResult()
         
         //sajith modified the bowling section
@@ -490,56 +434,11 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             }
             
             let fullRange = NSRange(location: 0,length: formattedString.length)
-           // let wicketLength = formattedString.length
-            
-            //if let oversBowled = matchDetailsData["OversBowled"] as? String {
-                
-                //if let oversInt = Float(oversBowled) {
-                    
-                    //let totalBalls = 6*oversInt
-                    
-                    //let oversFromBallsInt = Int(totalBalls/6) // 12, 18
-                    //let oversFromBallsRealRemaining = totalBalls - (6*oversFromBallsInt)
-                    
-                    formattedString.bold("(\(String(format: "%.1f",(Float(oversBowled)!))))", fontName: appFont_bold, fontSize: 30)
-//                    let ballRange = NSRange(location: wicketLength,length: formattedString.length-wicketLength)
-                    formattedString.addAttribute(NSBaselineOffsetAttributeName, value: NSNumber(float:-14), range: fullRange)
-                 //   formattedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(hex: "1a6a00") , range: ballRange)
-                //}
-            //}
+                formattedString.bold("(\(String(format: "%.1f",(Float(oversBowled)!))))", fontName: appFont_bold, fontSize: 30)
+                formattedString.addAttribute(NSBaselineOffsetAttributeName, value: NSNumber(float:-14), range: fullRange)
             totalWickets.attributedText = formattedString
         }
         setEconomy()
-
-//        if let wicketstaken = matchDetailsData["WicketsTaken"] {
-//            let formattedString = NSMutableAttributedString()
-//            formattedString.bold(wicketstaken as! String, fontName: appFont_black, fontSize: 83)
-//            
-//            if let runsGiven = matchDetailsData["RunsGiven"] {
-//                formattedString.bold("-\(runsGiven)", fontName: appFont_bold, fontSize: 83)
-//            }
-//            
-//            let fullRange = NSRange(location: 0,length: formattedString.length)
-//            let wicketLength = formattedString.length
-//            
-//            if let oversBowled = matchDetailsData["OversBowled"] as? String {
-//                
-//                if let oversInt = Int(oversBowled) {
-//                    
-//                    let totalBalls = 6*oversInt
-//                    
-//                    let oversFromBallsInt = Int(totalBalls/6) // 12, 18
-//                    let oversFromBallsRealRemaining = totalBalls - (6*oversFromBallsInt)
-//                    
-//                   formattedString.bold("(\(oversFromBallsInt).\(oversFromBallsRealRemaining))", fontName: appFont_bold, fontSize: 30)
-//                    let ballRange = NSRange(location: wicketLength,length: formattedString.length-wicketLength)
-//                    formattedString.addAttribute(NSBaselineOffsetAttributeName, value: NSNumber(float:-14), range: fullRange)
-//                    formattedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(hex: "1a6a00") , range: ballRange)
-//                }
-//            }
-//            totalWickets.attributedText = formattedString
-//        }
-        
     }
     
     func refresh(data:AnyObject){
@@ -548,24 +447,4 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             initializeView()
         }
     }
-    
-    //MARK: Actionsheet delegate
-    
-//    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int)
-//    {
-//        switch (buttonIndex){
-//            
-//        case 0:
-//            print("Cancel")
-//        case 1:
-//            print("Save")
-//        case 2:
-//            print("Delete")
-//        default:
-//            print("Default")
-//            //Some code here..
-//            
-//        }
-//    }
-    
 }
