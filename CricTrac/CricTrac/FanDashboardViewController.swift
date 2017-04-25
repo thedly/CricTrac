@@ -42,9 +42,11 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     var alertMessage = "Change picture"
     
     @IBAction func editImageBtnPressed(sender: AnyObject) {
-        alertMessage = "Change your profile photo"
-        self.photoOptions("ProfilePhoto")
-        coverOrProfile = "Profile"
+        if friendId == nil {
+            alertMessage = "Change your profile photo"
+            self.photoOptions("ProfilePhoto")
+            coverOrProfile = "Profile"
+        }
     }
     
     func photoOptions(option:String)  {

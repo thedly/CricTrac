@@ -691,17 +691,17 @@ func setDashboardData(){
                 self.highScore.text = String(DashboardDetails.TopBatting1stMatchScore)
                 self.BB.text = String(DashboardDetails.TopBowling1stMatchScore)
                 let winPercent = Double(String(DashboardDetails.WinPercentage))
-                self.winPerc.text = String(format:"%.2f",winPercent!)
+                self.winPerc.text = String(format:"%.1f",winPercent!)
                 //self.winPerc.text = String(DashboardDetails.WinPercentage)
                 
                 //data for Batting Card
                 self.totalRunsScored.text = String(DashboardDetails.TotalRuns)
                 self.battingInnings.text = String(DashboardDetails.BattingInnings)
                 let battingAverage = Double(String(DashboardDetails.TotalBattingAverage))
-                self.battingAverage.text = String(format:"%.2f",battingAverage!)
+                self.battingAverage.text = String(format:"%.1f",battingAverage!)
                 //self.battingAverage.text = String(DashboardDetails.TotalBattingAverage)
                 let strikeRate = Double(String(DashboardDetails.TotalStrikeRate))
-                self.strikeRate.text = String(format:"%.2f",strikeRate!)
+                self.strikeRate.text = String(format:"%.1f",strikeRate!)
                 //self.strikeRate.text = String(DashboardDetails.TotalStrikeRate)
                 self.hundreds.text = String(DashboardDetails.Total100s)
                 self.fifties.text = String(DashboardDetails.Total50s)
@@ -712,7 +712,7 @@ func setDashboardData(){
                 self.bowlingInnings.text = String(DashboardDetails.BowlingInnings)
                 self.totalWickets.text = String(DashboardDetails.TotalWickets)
                 let bowlingAverageDouble = Double(String(DashboardDetails.TotalBowlingAverage))
-                self.bowlingAverage.text = String(format:"%.2f",bowlingAverageDouble!)
+                self.bowlingAverage.text = String(format:"%.1f",bowlingAverageDouble!)
                 //self.bowlingAverage.text = String(DashboardDetails.TotalBowlingAverage)
                 
                 self.bowlingEconomy.text = String(DashboardDetails.TotalEconomy)
@@ -804,7 +804,7 @@ func setDashboardData(){
                                     mData.strikerate = Float("0.00")
                                 }
                                 else {
-                                    let strikeRate = String(format: "%.2f",(Float(runsScored)!)*100/Float(ballsFaced)!)
+                                    let strikeRate = String(format: "%.1f",(Float(runsScored)!)*100/Float(ballsFaced)!)
                                     mData.strikerate = Float(strikeRate)
                                     srEconomy = ("Strike Rate: \(strikeRate)")
                                 }
@@ -812,7 +812,7 @@ func setDashboardData(){
                             
                             if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
                                 
-                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
+                                let economy = String(format: "%.1f",(Float(runsGiven)!)/Float(oversBowled)!)
                                 mData.economy = Float(economy)
                                 if srEconomy.length > 0 {
                                     srEconomy.appendContentsOf("\nEconomy: \(economy)")
@@ -915,7 +915,7 @@ func setDashboardData(){
                                     mData.strikerate = Float("0.00")
                                 }
                                 else {
-                                    let strikeRate = String(format: "%.2f",(Float(runsScored)!)*100/Float(ballsFaced)!)
+                                    let strikeRate = String(format: "%.1f",(Float(runsScored)!)*100/Float(ballsFaced)!)
                                     mData.strikerate = Float(strikeRate)
                                     srEconomy = ("Strike Rate: \(strikeRate)")
                                 }
@@ -923,7 +923,7 @@ func setDashboardData(){
                             
                             if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
                                 
-                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
+                                let economy = String(format: "%.1f",(Float(runsGiven)!)/Float(oversBowled)!)
                                 mData.economy = Float(economy)
                                 if srEconomy.length > 0 {
                                     srEconomy.appendContentsOf("\nEconomy: \(economy)")
@@ -1027,7 +1027,7 @@ func setDashboardData(){
                                     mData.strikerate = Float("0.00")
                                 }
                                 else {
-                                    let strikeRate = String(format: "%.2f",(Float(runsScored)!)*100/Float(ballsFaced)!)
+                                    let strikeRate = String(format: "%.1f",(Float(runsScored)!)*100/Float(ballsFaced)!)
                                     mData.strikerate = Float(strikeRate)
                                     srEconomy = ("Strike Rate: \(strikeRate)")
                                 }
@@ -1124,7 +1124,7 @@ func setDashboardData(){
                                     mData.strikerate = Float("0.00")
                                 }
                                 else {
-                                    let strikeRate = String(format: "%.2f",(Float(runsScored)!)*100/Float(ballsFaced)!)
+                                    let strikeRate = String(format: "%.1f",(Float(runsScored)!)*100/Float(ballsFaced)!)
                                     mData.strikerate = Float(strikeRate)
                                     srEconomy = ("Strike Rate: \(strikeRate)")
                                 }
@@ -1213,7 +1213,7 @@ func setDashboardData(){
                             
                             if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
                                 
-                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
+                                let economy = String(format: "%.1f",(Float(runsGiven)!)/Float(oversBowled)!)
                                 mData.economy = Float(economy)
                                 srEconomy = ("Economy: \(economy)")
                             }
@@ -1301,7 +1301,7 @@ func setDashboardData(){
                             
                             if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
                                 
-                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
+                                let economy = String(format: "%.1f",(Float(runsGiven)!)/Float(oversBowled)!)
                                 mData.economy = Float(economy)
                                 srEconomy = ("Economy: \(economy)")
                             }
@@ -1638,7 +1638,7 @@ func didTapRecent2ndMatchID() {
             })
         }
     }
-   func didTapTopBatting1stMatchID() {
+func didTapTopBatting1stMatchID() {
         if String(DashboardDetails.TopBatting1stMatchID) != "-" {
             let matchId:String = (String(DashboardDetails.TopBatting1stMatchID) ?? nil)!
             let userId:String = self.friendId ?? currentUser!.uid

@@ -80,17 +80,21 @@ class CommentTableViewCell: UITableViewCell {
     }
     
     func moveToCoach(userInfo:[String : AnyObject]){
-        let dashBoard = viewControllerFrom("Main", vcid: "CoachDashboardViewController") as! CoachDashboardViewController
-        dashBoard.friendId = ownerId
-        dashBoard.friendProfile = userInfo
-        self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
+        if let parentVC = parent as? UIViewController{
+            let dashBoard = viewControllerFrom("Main", vcid: "CoachDashboardViewController") as! CoachDashboardViewController
+            dashBoard.friendId = ownerId
+            dashBoard.friendProfile = userInfo
+            parentVC.presentViewController(dashBoard, animated: true) {}
+        }
     }
     
     func moveToFan(userInfo:[String : AnyObject]){
-        let dashBoard = viewControllerFrom("Main", vcid: "FanDashboardViewController") as! FanDashboardViewController
-        dashBoard.friendId = ownerId
-        dashBoard.friendProfile = userInfo
-        self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
+        if let parentVC = parent as? UIViewController{
+            let dashBoard = viewControllerFrom("Main", vcid: "FanDashboardViewController") as! FanDashboardViewController
+            dashBoard.friendId = ownerId
+            dashBoard.friendProfile = userInfo
+            parentVC.presentViewController(dashBoard, animated: true) {}
+        }
     }
 
     

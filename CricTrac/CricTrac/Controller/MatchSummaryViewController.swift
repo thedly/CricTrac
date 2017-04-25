@@ -87,34 +87,22 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     }
     
     func getMatchData(){
-        
         KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
         getAllMatchData { (data) in
-            
             self.matchDataSource.removeAll()
-            
             self.makeCells(data)
-            
             KRProgressHUD.dismiss()
-            
-            
         }
     }
     
-    
     func makeCells(data: [String: AnyObject]) {
-        
         self.matchData = data
         self.matches.removeAll()
         for (key,val) in data{
-            
             if  var value = val as? [String : AnyObject]{
-                
                 value += ["key":key]
-                
                 self.matchDataSource.append(value)
                 self.matches.append(makeSummaryCell(value))
-                
             }
         }
         
@@ -122,77 +110,48 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         self.matchSummaryTable.reloadData()
     }
 
-    
-    
     func makeSummaryCell(value: [String : AnyObject]) -> MatchSummaryData {
-        
         let battingBowlingScore = NSMutableAttributedString()
         var matchVenueAndDate = ""
         var opponentName = ""
         
         let mData = MatchSummaryData()
-        
         mData.matchId = value["key"] as! String
         
-        
         if let runsTaken = value["RunsTaken"]{
-            
             mData.BattingSectionHidden = (runsTaken as! String == "-")
-            
             if mData.BattingSectionHidden == false {
-                
                 if let dismissal = value["Dismissal"] as? String where dismissal == "Not out"{
-                    
                    battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("*", fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
-                    
-                }else{
-                    
+                }
+                else{
                     battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
                 }
-                
             }
         }
         
         if let wicketsTaken = value["WicketsTaken"], let runsGiven = value["RunsGiven"] {
-            
-            
             mData.BowlingSectionHidden = (runsGiven as! String == "-")
-            
-            
             if mData.BowlingSectionHidden == false {
                 if battingBowlingScore.length > 0 {
-                    
                     battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 25).bold("\nWICKETS", fontName: appFont_black, fontSize: 10)
-                    
                 }
                 else{
                     battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 25).bold("\nWICKETS", fontName: appFont_black, fontSize: 10)
                 }
-                
-                
             }
-            
         }
-        
         
         if battingBowlingScore.length == 0 {
             battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize: 30)
         }
         
-        
-        
         if let date = value["MatchDate"]{
-            
-            
-            
             let DateFormatter = NSDateFormatter()
             DateFormatter.dateFormat = "dd-MM-yyyy"
             DateFormatter.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
             let dateFromString = DateFormatter.dateFromString(date as! String)
-            
             mData.matchDate = dateFromString
-            
-            
             matchVenueAndDate.appendContentsOf(date as? String ?? "NA")
         }
         
@@ -214,14 +173,14 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 mData.strikerate = Float("0.00")
             }
             else {
-                let strikeRate = String(format: "%.2f",(Float(runsScored)!)*100/Float(ballsFaced)!)
+                let strikeRate = String(format: "%.1f",(Float(runsScored)!)*100/Float(ballsFaced)!)
                 mData.strikerate = Float(strikeRate)
             }
         }
         
         if let oversBowled = value["OversBowled"] as? String where oversBowled != "-", let runsGiven = value["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
             
-            let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
+            let economy = String(format: "%.1f",(Float(runsGiven)!)/Float(oversBowled)!)
             mData.economy = Float(economy)
             //matchVenueAndDate.appendContentsOf("\n Economy: \(economy)")
         }
@@ -231,15 +190,12 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             opponentName = opponent as! String
         }
         
-        
         mData.battingBowlingScore = battingBowlingScore
         mData.matchDateAndVenue = matchVenueAndDate
         mData.opponentName = opponentName
         
-        
         return mData
     }
-    
     
     func getCellForRow(indexPath:NSIndexPath)->SummaryDetailsCell{
         if let aCell =  matchSummaryTable.dequeueReusableCellWithIdentifier("SummaryDetailsCell", forIndexPath: indexPath) as? SummaryDetailsCell {
@@ -255,7 +211,6 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 aCell.matchDateAndVenue.text = currentMatch.matchDateAndVenue
                 aCell.oponentName.text = currentMatch.opponentName
                 aCell.stadiumLabel.text = currentMatch.ground
-            
             
             if let isHidden = currentMatch.BattingSectionHidden where isHidden == true{
                 
@@ -282,38 +237,18 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 }
             }
             
-            
-
-//                if let sRate = currentMatch.strikerate {
-//                    //aCell.strikeRateLabel.text = "Strike Rate : \(sRate)"
-//                }
-//                if let economy = currentMatch.economy {
-//                    
-//                    //aCell.economyLabel.text = "Economy : \(economy)"
-//                }
-//            
-//            if currentMatch.BattingSectionHidden!{
-//                
-//                aCell.strikeRateLabel.hidden = true
-//            }
-    
-                //aCell.stadiumLabel.text = currentMatch.
             return aCell
         }
         else
         {
             return SummaryDetailsCell()
         }
-        
-        
-        
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         
         return self.matchDataSource.count
     }
-    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         return getCellForRow(indexPath)
@@ -331,7 +266,6 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         summaryDetailsVC.battingViewHidden = matches[indexPath.row].BattingSectionHidden
         summaryDetailsVC.bowlingViewHidden = matches[indexPath.row].BowlingSectionHidden
-        
         
         let selectedDataSource = self.matchDataSource.filter { (dat) -> Bool in
             return dat["MatchId"]! as! String == matches[indexPath.row].matchId
@@ -369,7 +303,6 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     
     @IBAction func didTapPurchaseButton(){
         
-        
         if let msg = inAppProductPrice {
             
             let message = "Upgrade to Premium by paying : Rs. \(msg)"
@@ -395,9 +328,6 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             }))
             self.presentViewController(refreshAlert, animated: true, completion: nil)
         }
-        
-
-
     }
     
     func doPurchase(){
