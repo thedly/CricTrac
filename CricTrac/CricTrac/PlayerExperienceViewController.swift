@@ -16,56 +16,33 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var battingStyle: UITextField!
     @IBOutlet weak var bowlingStyle: UITextField!
     @IBOutlet weak var teamName: UITextField!
-    
     @IBOutlet weak var pastTeamName: UITextField!
-    
     @IBOutlet weak var addTeamBtn: UIButton!
     var selectedText: UITextField!
     
     @IBOutlet weak var addPastTeamBtn: UIButton!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
-    
-    
-    
     @IBOutlet weak var teamNamesTableHeightConstraint: NSLayoutConstraint!
-    
-    
     @IBOutlet weak var pastTeamNamesTableHeightConstraint: NSLayoutConstraint!
-    
-    
-    
-    
     @IBOutlet weak var currentTeams: UITableView!
-    
     @IBOutlet weak var pastTeams: UITableView!
     
     lazy var ctDataPicker = DataPicker()
-    
     var teamNames = [""]
-    
     var scrollViewTop:CGFloat!
-  
     var profileChanged: Bool! = false
-    
     var pastTeamNames = [""]
-    
     var window = UIWindow(frame: UIScreen.mainScreen().bounds)
-    
-   
     var nextVC: UIViewController!
-    
     var data:[String:AnyObject]{
-        
         return ["PlayingRole":playingRole.textVal,"BattingStyle":battingStyle.textVal,"BowlingStyle":bowlingStyle.textVal,"PlayerCurrentTeams":teamNames, "PlayerPastTeams": pastTeamNames]
     }
     
     let transitionManager = TransitionManager.sharedInstance
     
-    
     @IBAction func goPreviousPage(sender: AnyObject) {
        // dismissViewControllerAnimated(true, completion: nil)
         self.navigationController?.popViewControllerAnimated(true)
-        
     }
     func setNavigationBarProperties(){
         var currentTheme:CTTheme!
@@ -87,18 +64,19 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         navigationItem.leftBarButtonItem = leftbarButton
         navigationItem.rightBarButtonItem = righttbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        
         if self.window.rootViewController == sliderMenu {
             title = "EDIT PROFILE"
         }
         else
         {
             title = "CREATE PROFILE"
-            
-        }        //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        }
+        //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         //navigationController!.navigationBar.titleTextAttributes = titleDict
     }
+    
     @IBAction func goNextPage(sender: AnyObject) {
-        
         profileData.PlayingRole = self.data["PlayingRole"] as! String
         profileData.BattingStyle = self.data["BattingStyle"] as! String
         profileData.BowlingStyle = self.data["BowlingStyle"] as! String
@@ -107,7 +85,6 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         profileData.UserProfile = userProfileType.Player.rawValue
         
         addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
-            
             profileData = Profile(usrObj: data)
             updateMetaData(userImageMetaData)
             
@@ -189,7 +166,6 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         bowlingStyle.delegate = self
         teamName.delegate = self
         
-        
         currentTeams.allowsSelection = false
         currentTeams.separatorStyle = .None
         currentTeams.dataSource = self
@@ -201,18 +177,13 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         pastTeams.delegate = self
         pastTeamName.delegate = self
         
-        
         if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let currentwindow = app.window {
-            
             window = currentwindow
         }
-        
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserInfoViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         ScrollView.setContentOffset(CGPointZero, animated: true)
         scrollViewTop = ScrollView.frame.origin.y
-
-        
     }
     
     func deleteTeamFromCurrentTeams(sender: UIButton) {
@@ -233,12 +204,9 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
                 pastTeams.reloadData()
             }
         }
-        
-        
     }
     
     func keyboardWillShow(sender: NSNotification){
-        
         if let userInfo = sender.userInfo {
             if  let  keyboardframe = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue{
                 let keyboardHeight = keyboardframe.CGRectValue().height
@@ -249,39 +217,28 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
             }
         }
     }
-
     
     @IBAction func addPastTeamsPressed(sender: AnyObject) {
-       
         if pastTeamName.text?.trimWhiteSpace != "" && pastTeamName.text?.trimWhiteSpace != "-" {
-           
             pastTeamNames.append(pastTeamName.textVal.trim())
             pastTeamName.text = ""
             pastTeams.reloadData()
         }
     }
-   
     
     @IBAction func addTeamsPressed(sender: AnyObject) {
         if teamName.text?.trimWhiteSpace != "" && teamName.text?.trimWhiteSpace != "-" {
             teamNames.append(teamName.textVal.trim())
             teamName.text = ""
-            
             currentTeams.reloadData()
         }
-        
-        
     }
    
     func getCellForRow(indexPath:NSIndexPath)->UITableViewCell{
         if let aCell =  currentTeams.dequeueReusableCellWithIdentifier("CurrentTeamsTableViewCell", forIndexPath: indexPath) as? CurrentTeamsTableViewCell {
-            
             aCell.backgroundColor = UIColor.clearColor()
-            
-            
             aCell.teamName.font = UIFont(name: "SourceSansPro-Bold", size: 15)
             aCell.teamName.text = teamNames[indexPath.row]
-            
             aCell.deleteTeamBtn.addTarget(self, action: #selector(PlayerExperienceViewController.deleteTeamFromCurrentTeams(_:)), forControlEvents: .TouchUpInside)
             return aCell
         }
@@ -289,17 +246,12 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         {
             return UITableViewCell()
         }
-        
-        
     }
 
     func getCellForPastTeamsRow(indexPath:NSIndexPath)->UITableViewCell{
         if let aCell =  pastTeams.dequeueReusableCellWithIdentifier("CurrentTeamsTableViewCell", forIndexPath: indexPath) as? CurrentTeamsTableViewCell {
-            
             aCell.backgroundColor = UIColor.clearColor()
-            
             aCell.teamName.text = pastTeamNames[indexPath.row]
-            
             aCell.deleteTeamBtn.addTarget(self, action: #selector(PlayerExperienceViewController.deleteTeamFromCurrentTeams(_:)), forControlEvents: .TouchUpInside)
             return aCell
         }
@@ -307,13 +259,10 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         {
             return UITableViewCell()
         }
-        
-        
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
         if profileData.FirstName.length > 0  {
             self.playingRole.text = profileData.PlayingRole
             self.battingStyle.text = profileData.BattingStyle
@@ -335,13 +284,12 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         
-        
-        
-        
     }
+    
     func fixTableHeight()  {
         
     }
+    
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
@@ -350,9 +298,6 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
         //setUIBackgroundTheme(self.view)
         initializeView()
         setNavigationBarProperties()
@@ -364,13 +309,11 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         // Dispose of any resources that can be recreated.
     }
     
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.isEqual(currentTeams) {
             return teamNames.count
         }
         return pastTeamNames.count
-        
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -386,11 +329,9 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let cell = tableView.rectForRowAtIndexPath(indexPath)
         
         if tableView.isEqual(currentTeams) {
-            
             adjustTblHeight(teamNamesTableHeightConstraint, collectionType: teamNames, cellHeight: cell.size.height)
             
             return getCellForRow(indexPath)
@@ -402,7 +343,6 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func AddDoneButtonTo(inputText:UITextField) {
-        
         let toolBar = UIToolbar()
         toolBar.barStyle = .Default
         toolBar.translucent = true
@@ -426,10 +366,7 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
 }
 
 extension PlayerExperienceViewController:UITextFieldDelegate{
-    
-    
     func textFieldDidBeginEditing(textField: UITextField) {
-    
         self.selectedText = textField
         AddDoneButtonTo(textField)
         
@@ -449,6 +386,7 @@ extension PlayerExperienceViewController:UITextFieldDelegate{
             ctDataPicker.showPicker(self, inputText: textField, data: BowlingStyles, selectedValueIndex: indexPos)
         }
     }
+    
     func textFieldDidEndEditing(textField: UITextField) {
         if textField == pastTeamName {
             addPastTeamsPressed(textField)
@@ -460,6 +398,7 @@ extension PlayerExperienceViewController:UITextFieldDelegate{
         //[textField resignFirstResponder];
        
     }
+    
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         let newLength = textField.text!.characters.count + string.characters.count - range.length
         
@@ -471,7 +410,6 @@ extension PlayerExperienceViewController:UITextFieldDelegate{
             else{
              return newLength <= 30
             }
-        
         }
         else if  textField == pastTeamName {
             if pastTeamNames.count >= 20 {
@@ -482,9 +420,9 @@ extension PlayerExperienceViewController:UITextFieldDelegate{
                 return newLength <= 30
             }
         }
-        
         return true
     }
+    
 //    func textFieldShouldEndEditing(textField: UITextField) -> Bool {
 //        if textField == pastTeamName {
 //            addPastTeamsPressed(textField)

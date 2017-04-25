@@ -195,10 +195,6 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
 //                    
 //                }
 //            }
-//            
-//            
-//            
-//            
 //        }
         
 //        alertController.addAction(chooseFromFacebookAction)
@@ -448,14 +444,10 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
         setBackgroundColor()
-        
-       // viewDidLoad()
         initView()
         setDashboardData()
-        
-       
+        //updateDashBoardMatches()
     }
     
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
@@ -931,7 +923,6 @@ func setDashboardData(){
                                 else {
                                     srEconomy = ("Economy: \(economy)")
                                 }
-
                             }
                             
                             if let opponent  = data["Opponent"]{
@@ -948,16 +939,11 @@ func setDashboardData(){
     
                     
                     dispatch_async(dispatch_get_main_queue(),{
-                        
                         self.SecondRecentMatchSummary.hidden = false
                         self.recentMatchesNotAvailable.hidden = true
-                        
                         self.updateDashBoardMatches()
-                        
                     })
                 }
-
-                
                 
                 //Display Top Batting First Match card
                 /*if !self.FirstRecentMatchView.hidden {
@@ -1363,9 +1349,7 @@ func setDashboardData(){
             self.summaryStackViewHeightConstraint.constant = 0
         }
         else {
-            
             if String(DashboardDetails.Recent1stMatchID) != "-" {
-                
                 self.summaryViewHeightConstraint1.constant = 90
                 self.summaryViewHeightConstraint2.constant = 0
                 self.summaryStackViewHeightConstraint.constant = 110
@@ -1375,40 +1359,30 @@ func setDashboardData(){
                 self.summaryViewHeightConstraint2.constant = 100
                 self.summaryStackViewHeightConstraint.constant = 210
             }
-            
         }
         
         //Top batting view
         if !self.topBattingNotAvailable.hidden {
-            
             self.topBattingStackViewHeightConstraint.constant = 0
         }
         else {
-            
             if String(DashboardDetails.TopBatting1stMatchID) != "-" {
-                
                 self.topBattingStackViewHeightConstraint.constant = 85
             }
             if String(DashboardDetails.TopBatting2ndMatchID) != "-" {
-                
                 self.topBattingStackViewHeightConstraint.constant = 170
             }
         }
         
         //Top Balling view
         if !self.topBowlingNotAvailable.hidden {
-            
             self.topBallingStackViewHeightConstraint.constant = 0
         }
         else {
-            
-            
             if String(DashboardDetails.TopBowling1stMatchID) != "-" {
-                
                 self.topBallingStackViewHeightConstraint.constant = 85
             }
             if String(DashboardDetails.TopBowling2ndMatchID) != "-" {
-                
                 self.topBallingStackViewHeightConstraint.constant = 170
             }
         }
@@ -1419,22 +1393,16 @@ func setDashboardData(){
             self.teamsViewHeightConstraint.constant = 0
         }
         
-        
         //self.scrollViewBottomElementConstraint.constant = 10
         self.view.layoutIfNeeded()
-
-        
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        //getMatchData()
+        //setDashboardData()
+    }
     
-override func viewDidAppear(animated: Bool) {
-    super.viewDidAppear(true)
-    //getMatchData()
-    //setDashboardData()
-
-}
-    
-
     func scrollViewDidScrollToTop(scrollView: UIScrollView) {
         if (scrollView.contentOffset.y > 300) {
             if TopMenu.backgroundColor != darkerThemeColor {
@@ -1446,16 +1414,11 @@ override func viewDidAppear(animated: Bool) {
                 TopMenu.backgroundColor = clearColor
             }
         }
-
     }
 
-        
-    
-    
     // MARK: - Collection view delegates
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         var valueToReturn = 0
         
         switch userProfileData.UserProfile {
@@ -1478,7 +1441,6 @@ override func viewDidAppear(animated: Bool) {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        
 //        let allCells = collectionView.visibleCells() as! [ThemeColorsCollectionViewCell]
 //        
 //        allCells.forEach({ cell in
@@ -1495,7 +1457,6 @@ override func viewDidAppear(animated: Bool) {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("TeamCollectionViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
-            
         
 //            let intIndex = indexPath.row // where intIndex < myDictionary.count
 //            let index = themeColors.startIndex.advancedBy(intIndex) // index 1
@@ -1513,13 +1474,11 @@ override func viewDidAppear(animated: Bool) {
             switch userProfileData.UserProfile {
             case userProfileType.Player.rawValue:
                 if indexPath.row < (userProfileData.PlayerCurrentTeams.count) {
-                   
                     teamNameToReturn = userProfileData.PlayerCurrentTeams[indexPath.row]
                    
                     aCell.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.boxColor)))
                     aCell.TeamAbbr.textColor = UIColor.whiteColor()
                    
-
                 }
                 else if (indexPath.row - (userProfileData.PlayerCurrentTeams.count)) < (userProfileData.PlayerPastTeams.count) {
                  
@@ -1557,7 +1516,6 @@ override func viewDidAppear(animated: Bool) {
                     aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
                 }
             }
-
             
                 return aCell
 //            }

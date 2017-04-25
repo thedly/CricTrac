@@ -41,19 +41,19 @@ struct AppTheme{
     
     let Grass = CTTheme(topColor: UIColor(hex: "#b4ed50"), bottomColor: UIColor(hex: "#429321"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
-    let Flash = CTTheme(topColor: UIColor(hex: "#fdef0f"), bottomColor: UIColor(hex: "#b49b09"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
+    let Flash = CTTheme(topColor: UIColor(hex: "#fceabb"), bottomColor: UIColor(hex: "#f8b500"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
-    let Feather = CTTheme(topColor: UIColor(hex: "#c96dd8"), bottomColor: UIColor(hex: "#3023ae"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
+    let Feather = CTTheme(topColor: UIColor(hex: "#ea9eff"), bottomColor: UIColor(hex: "#692580"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
-    let Peach = CTTheme(topColor: UIColor(hex: "#fbda61"), bottomColor: UIColor(hex: "#f76b1c"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
+    let Peach = CTTheme(topColor: UIColor(hex: "#ffc500"), bottomColor: UIColor(hex: "#c21500"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
     let Cherry = CTTheme(topColor: UIColor(hex: "#f5515f"), bottomColor: UIColor(hex: "#9f031b"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
-    let Daisy = CTTheme(topColor: UIColor(hex: "#eb56c1"), bottomColor: UIColor(hex: "#961b74"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
+    let Daisy = CTTheme(topColor: UIColor(hex: "#F0A5CB"), bottomColor: UIColor(hex: "#EF629F"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
     let Ashes = CTTheme(topColor: UIColor(hex: "#C8CBC3"), bottomColor: UIColor(hex: "#5C635A"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
-    let Beehive = CTTheme(topColor: UIColor(hex: "#B8896B"), bottomColor: UIColor(hex: "#6F401B"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
+    let Beehive = CTTheme(topColor: UIColor(hex: "#ba9779"), bottomColor: UIColor(hex: "#910000"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
     let Ferret = CTTheme(topColor: UIColor(hex: "#8B8484"), bottomColor: UIColor(hex: "#2D2C2A"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
   
