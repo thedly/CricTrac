@@ -39,7 +39,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackgroundColor()
-        username.text = "crictracrahul@gmail.com"
+        username.text = "crictracsajith@gmail.com"
         password.text = "crictrac"
         //setUIBackgroundTheme(self.view)
         //loginWithSavedCredentials()
@@ -265,12 +265,13 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
             }
         
             if CurrentTheme != newTheme! {
+                CurrentTheme = newTheme!
                 NSUserDefaults.standardUserDefaults().setValue(newTheme, forKeyPath: "userTheme")
                 NSNotificationCenter.defaultCenter().postNotificationName("ThemeChanged", object: nil)
             }
+            cricTracTheme.currentTheme = getPersistedTheme()
+            //self.setBackgroundColor()
         })
-        
-        setBackgroundColor()
         
         
         if currentUser != nil && profileData.userExists {
