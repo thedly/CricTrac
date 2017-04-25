@@ -60,7 +60,7 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+      //  navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
     }
     
     @IBAction func EditProfilePressed(sender: AnyObject) {

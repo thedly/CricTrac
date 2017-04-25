@@ -208,10 +208,10 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     }
     
     func changeThemeSettigs() {
-        let currentTheme = cricTracTheme.currentTheme
+       // let currentTheme = cricTracTheme.currentTheme
         MatchesView.backgroundColor = UIColor.blackColor()
         MatchesView.alpha = 0.3
-        navigationController?.navigationBar.barTintColor = currentTheme.topColor
+       // navigationController?.navigationBar.barTintColor = currentTheme.topColor
         //currentTheme.boxColor
         //baseView.backgroundColor = UIColor.clearColor()
     }

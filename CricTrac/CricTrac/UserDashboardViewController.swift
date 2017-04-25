@@ -471,12 +471,12 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     func changeThemeSettigs() {
-        let currentTheme = cricTracTheme.currentTheme
+      //  let currentTheme = cricTracTheme.currentTheme
         MatchesView.backgroundColor = UIColor.blackColor()
         MatchesView.alpha = 0.3
-        if let _ = navigationController{
-            navigationController!.navigationBar.barTintColor = currentTheme.topColor
-        }
+//        if let _ = navigationController{
+//            navigationController!.navigationBar.barTintColor = currentTheme.topColor
+//        }
         
         //currentTheme.boxColor
         //baseView.backgroundColor = UIColor.clearColor()

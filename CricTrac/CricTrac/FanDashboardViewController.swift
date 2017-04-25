@@ -124,8 +124,8 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         //navigationController!.navigationBar.titleTextAttributes = titleDict
     }
     func changeThemeSettigs() {
-        let currentTheme = cricTracTheme.currentTheme
-        navigationController?.navigationBar.barTintColor = currentTheme.topColor
+      //  let currentTheme = cricTracTheme.currentTheme
+      //  navigationController?.navigationBar.barTintColor = currentTheme.topColor
         //currentTheme.boxColor
         //baseView.backgroundColor = UIColor.clearColor()
     }

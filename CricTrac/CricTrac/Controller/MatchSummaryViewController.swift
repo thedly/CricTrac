@@ -20,7 +20,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor
+       // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     var inAppProductPrice : String?

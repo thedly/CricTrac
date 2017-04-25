@@ -23,7 +23,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor
+       // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     override func viewWillAppear(animated: Bool) {
         setBackgroundColor()

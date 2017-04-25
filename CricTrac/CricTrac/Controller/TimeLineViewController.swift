@@ -77,7 +77,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     func changeThemeSettigs() {
-        let currentTheme = cricTracTheme.currentTheme
+      //  let currentTheme = cricTracTheme.currentTheme
         
         
        

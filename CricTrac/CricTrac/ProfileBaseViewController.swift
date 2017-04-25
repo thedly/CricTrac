@@ -213,7 +213,7 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor
+      //  navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     override func viewDidLoad() {
