@@ -120,8 +120,9 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         //self.profileImage.image = LoggedInUserImage
     }
     
-//    override func viewDidAppear(animated: Bool) {
-//        super.viewDidAppear(animated)
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
 //        if profilePic == "-" {
 //            let imageName = defaultProfileImage
 //            let image = UIImage(named: imageName)
@@ -131,8 +132,8 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
 //                profileImage.kf_setImageWithURL(imageURL)
 //            }
 //        }
-//        //self.profileImage.image = LoggedInUserImage
-//    }
+        //self.profileImage.image = LoggedInUserImage
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

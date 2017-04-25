@@ -30,6 +30,7 @@ class SplashScreenViewController: UIViewController,ThemeChangeable {
             window?.makeKeyAndVisible()
         }
         
+        
         if let usrTheme = NSUserDefaults.standardUserDefaults().valueForKey("userTheme") {
             CurrentTheme = usrTheme as! String
         }

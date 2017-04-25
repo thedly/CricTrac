@@ -699,10 +699,17 @@ func registerWithEmailAndPassword(userName:String,password:String,callBack:(user
 
 var newPostIds = [String]()
 
-func addThemeData(theme: String, sucessBlock:()->Void){
-    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings")
+func addThemeData(theme: String){
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings").child("Theme")
     ref.setValue(theme)
-    sucessBlock()
+}
+
+func getAppTheme(userId:String,sucess:(theme:String)->Void){
+    fireBaseRef.child("Users").child(userId).child("UserSettings").child("Theme").observeEventType(.Value, withBlock: { snapshot in
+        if let data = snapshot.value as? String{
+            sucess(theme: data)
+        }
+    })
 }
 
 

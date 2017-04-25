@@ -27,6 +27,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     override func viewWillAppear(animated: Bool) {
         setBackgroundColor()
+        SettingsTableView.reloadData()
+        //initializeView()
     }
     
     override func viewDidLoad() {
@@ -95,7 +97,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         var selectedValue = String()
         
         if settingsMenuData[indexPath.row]["vc"] == "ThemeSettingsViewController" {
-            selectedValue = cricTracTheme.currentThemeTxt
+            selectedValue = CurrentTheme
         }
         
         

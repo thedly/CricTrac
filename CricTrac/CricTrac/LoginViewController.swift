@@ -69,8 +69,8 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
         loginWithMailAndPassword((username.text?.trimWhiteSpace)!, password: (password.text?.trimWhiteSpace)!) { (user, error) in
             if error != nil{
-                KRProgressHUD.dismiss()
                 SCLAlertView().showError("Login Error", subTitle: error!.localizedDescription)
+                KRProgressHUD.dismiss()
             }
             else {
                 KRProgressHUD.dismiss()
@@ -87,7 +87,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
                 }
                 else
                 {
-                    SCLAlertView().showError("Login Error", subTitle: "This email is has not been verified yet")
+                    SCLAlertView().showError("Login Error", subTitle: "This email is not verified yet")
                 }
             }
         }
@@ -255,78 +255,27 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
             }
         }
         
-        if currentUser != nil && profileData.userExists {
-            updateLastLogin()
-        }
-        /*
-        dispatch_group_enter(myGroup)
-        getAllProfileData({ data in
-            profileData = Profile(usrObj: data)
-            dispatch_group_leave(myGroup)
-            
-            if profileData.ProfileImageURL == "" {
-                let userDefaults = NSUserDefaults.standardUserDefaults()
-                if let token = userDefaults.valueForKey("loginToken") {
-                    if token["Facebooktoken"] != nil || token["googletoken"] != nil{
-                        let profileimage = getImageFromFacebook()
-                        addProfileImageData(profileimage)
-                        
-                    }
-                }
+        //get the saved app theme from database
+        var newTheme:String?
+        getAppTheme((currentUser?.uid)!, sucess: { (result) in
+            newTheme = result
+        
+            if let usrTheme = NSUserDefaults.standardUserDefaults().valueForKey("userTheme") {
+                CurrentTheme = usrTheme as! String
             }
-            else
-            {
-                getImageFromFirebase(profileData.ProfileImageURL) { (imgData) in
-                    LoggedInUserImage = imgData
-                }
-                getImageFromFirebase(profileData.CoverPhotoURL) { (imgData) in
-                    LoggedInUserCoverImage = imgData
-                }
+        
+            if CurrentTheme != newTheme! {
+                NSUserDefaults.standardUserDefaults().setValue(newTheme, forKeyPath: "userTheme")
+                NSNotificationCenter.defaultCenter().postNotificationName("ThemeChanged", object: nil)
             }
         })
         
+        setBackgroundColor()
         
-        dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
-            
-            
-            let window = getCurrentWindow()
-            
-            let rootViewController: UIViewController = getRootViewController()
-            
-            let profileVC = viewControllerFrom("Main", vcid: "ProfileBaseViewController") as! ProfileBaseViewController
-
-            self.facebookBtn.enabled = true
-            self.googleBtn.enabled = true
-            
-            
-            print(profileData.Email.length)
-            print(profileData.userExists)
-            if !profileData.userExists || profileData.Email.length == 0 {
-
-                KRProgressHUD.dismiss()
-               // window.rootViewController = profileVC
-                let nav = UINavigationController(rootViewController: profileVC)
-                self.presentViewController(nav, animated: true) { KRProgressHUD.dismiss() }
-            }
-            else
-            {
-                KRProgressHUD.dismiss()
-                /*
-                 [UIView transitionWithView:self.window
-                 duration:0.5
-                 options:UIViewAnimationOptionTransitionFlipFromLeft
-                 animations:^{ self.window.rootViewController = newViewController; }
-                 completion:nil];
- */
-                UIView.transitionWithView(window, duration: 0.5, options: .TransitionFlipFromLeft, animations: {
-                    
-                    window.rootViewController = rootViewController
-                    self.presentViewController(rootViewController, animated: true) { KRProgressHUD.dismiss() }
-                    }, completion: nil)
-
-            }
-            KRProgressHUD.dismiss()
-        })*/
+        
+        if currentUser != nil && profileData.userExists {
+            updateLastLogin()
+        }
         
         let qualityOfServiceClass = QOS_CLASS_BACKGROUND
         let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
