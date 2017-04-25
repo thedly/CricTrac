@@ -50,6 +50,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     @IBOutlet weak var battingView: UIView!
     @IBOutlet weak var bowlingView: UIView!
     @IBOutlet weak var summarizedView: UIView!
+    
     @IBAction func deleteActionPressed(sender: UIButton) {
         
         let actionSheetController = UIAlertController(title: "", message: "Are you sure to delete the match?", preferredStyle: .ActionSheet)

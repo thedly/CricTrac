@@ -308,6 +308,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addTapGestureToUserName() 
         
         //loadBannerAds()
 
@@ -740,8 +741,7 @@ func setDashboardData(){
                     fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
                         
                         if let data = snapshot.value! as? [String:AnyObject]{
-                            
-                            let battingBowlingScore = NSMutableAttributedString()
+                           let battingBowlingScore = NSMutableAttributedString()
                             var matchVenueAndDate = ""
                             var opponentName = ""
                             var groundVenue = ""
@@ -1559,9 +1559,6 @@ override func viewDidAppear(animated: Bool) {
             }
 
             
-            
-                
-            
                 return aCell
 //            }
 //            else
@@ -1580,7 +1577,136 @@ override func viewDidAppear(animated: Bool) {
         // Pass the selected object to the new view controller.
     }
     */
+   
+ 
+    func addTapGestureToUserName() {
+        let gesture1 = UITapGestureRecognizer(target: self,action: #selector(UserDashboardViewController.didTapRecent1stMatchID))
+        FirstRecentMatchSummary.userInteractionEnabled = true
+        FirstRecentMatchSummary.addGestureRecognizer(gesture1)
+        
+         let gesture2 = UITapGestureRecognizer(target: self,action: #selector(UserDashboardViewController.didTapRecent2ndMatchID))
+        SecondRecentMatchSummary.userInteractionEnabled = true
+        SecondRecentMatchSummary.addGestureRecognizer(gesture2)
+        
+        let gesture3 = UITapGestureRecognizer(target: self,action: #selector(UserDashboardViewController.didTapTopBatting1stMatchID))
+        FirstRecentMatchView.userInteractionEnabled = true
+        FirstRecentMatchView.addGestureRecognizer(gesture3)
+        
+        let gesture4 = UITapGestureRecognizer(target: self,action: #selector(UserDashboardViewController.didTapTopBatting2ndMatchID))
+        SecondRecentMatchView.userInteractionEnabled = true
+        SecondRecentMatchView.addGestureRecognizer(gesture4)
+        
+        let gesture5 = UITapGestureRecognizer(target: self,action: #selector(UserDashboardViewController.didTapTopBowling1stMatchID))
+        FirstRecentMatchBowlingView.userInteractionEnabled = true
+        FirstRecentMatchBowlingView.addGestureRecognizer(gesture5)
+        
+        let gesture6 = UITapGestureRecognizer(target: self,action: #selector(UserDashboardViewController.didTapTopBowling2ndMatchID))
+        SecondRecentMatchBowlingView.userInteractionEnabled = true
+        SecondRecentMatchBowlingView.addGestureRecognizer(gesture6)
     
+    }
+  
+    func didTapRecent1stMatchID() {
     
+    if String(DashboardDetails.Recent1stMatchID) != "-" {
 
+        let matchId:String = (String(DashboardDetails.Recent1stMatchID) ?? nil)!
+        let userId:String = self.friendId ?? currentUser!.uid
+        fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+            
+            if let data = snapshot.value! as? [String:AnyObject]{
+                
+            let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
+                summaryDetailsVC.matchDetailsData = data
+                self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+            }
+        })
+    }
 }
+func didTapRecent2ndMatchID() {
+        if String(DashboardDetails.Recent2ndMatchID) != "-" {
+            let matchId:String = (String(DashboardDetails.Recent2ndMatchID) ?? nil)!
+            let userId:String = self.friendId ?? currentUser!.uid
+            fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+                
+                if let data = snapshot.value! as? [String:AnyObject]{
+                let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
+                   
+                    summaryDetailsVC.matchDetailsData = data
+                    self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                }
+            })
+        }
+    }
+   func didTapTopBatting1stMatchID() {
+        if String(DashboardDetails.TopBatting1stMatchID) != "-" {
+            let matchId:String = (String(DashboardDetails.TopBatting1stMatchID) ?? nil)!
+            let userId:String = self.friendId ?? currentUser!.uid
+            fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+                
+                if let data = snapshot.value! as? [String:AnyObject]{
+
+                    let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
+                    
+                    summaryDetailsVC.matchDetailsData = data
+                    self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                }
+            })
+        }
+    }
+    
+    func didTapTopBatting2ndMatchID() {
+        if String(DashboardDetails.TopBatting2ndMatchID) != "-" {
+            let matchId:String = (String(DashboardDetails.TopBatting2ndMatchID) ?? nil)!
+            let userId:String = self.friendId ?? currentUser!.uid
+            fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+                
+                if let data = snapshot.value! as? [String:AnyObject]{
+                    let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
+                    summaryDetailsVC.matchDetailsData = data
+                    self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                }
+            })
+        }
+        
+    }
+
+  func didTapTopBowling1stMatchID() {
+        if String(DashboardDetails.TopBowling1stMatchID) != "-" {
+            let matchId:String = (String(DashboardDetails.TopBowling1stMatchID) ?? nil)!
+            let userId:String = self.friendId ?? currentUser!.uid
+            fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+                
+                if let data = snapshot.value! as? [String:AnyObject]{
+                    
+                    let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
+                    
+                    summaryDetailsVC.matchDetailsData = data
+                    self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                }
+            })
+        }
+    }
+    func didTapTopBowling2ndMatchID() {
+        
+            if String(DashboardDetails.TopBowling2ndMatchID) != "-" {
+                let matchId:String = (String(DashboardDetails.TopBowling2ndMatchID) ?? nil)!
+                let userId:String = self.friendId ?? currentUser!.uid
+                fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+                    
+                    if let data = snapshot.value! as? [String:AnyObject]{
+                    
+                    let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
+                    
+                    summaryDetailsVC.matchDetailsData = data
+                    self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                }
+            })
+        }
+    }
+
+  
+}
+
+
+
