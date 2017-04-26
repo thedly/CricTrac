@@ -22,14 +22,14 @@ class ThemeSettingsViewController: UIViewController, UIGestureRecognizerDelegate
     
     @IBAction func changeColorPressed(sender: UIButton) {
         if testTheme != nil {
-        CurrentTheme = testTheme!
-        cricTracTheme.currentTheme = cricTracTheme.testTheme
-        userDefaults.setValue(testTheme, forKeyPath: "userTheme")
-        NSNotificationCenter.defaultCenter().postNotificationName("ThemeChanged", object: nil)
-        self.navigationController?.popViewControllerAnimated(true)
+            CurrentTheme = testTheme!
+            cricTracTheme.currentTheme = cricTracTheme.testTheme
+            userDefaults.setValue(testTheme, forKeyPath: "userTheme")
+            NSNotificationCenter.defaultCenter().postNotificationName("ThemeChanged", object: nil)
+            self.navigationController?.popViewControllerAnimated(true)
         
-        //save the theme to database
-        addThemeData(testTheme!)
+            //save the theme to database
+            addThemeData(testTheme!)
         }
     }
     

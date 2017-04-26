@@ -149,13 +149,13 @@ let themeColors = [
         "theme":"Grass"
     ],
     "Flash" : [
-        "topColor" : "#fdef0f",
-        "bottomColor" : "#b49b09",
+        "topColor" : "#fffaba",
+        "bottomColor" : "#FFE205",
         "theme":"Flash"
     ],
     "Feather" : [
-        "topColor" : "#c96dd8",
-        "bottomColor": "#3023ae",
+        "topColor" : "#ea9eff",
+        "bottomColor": "#692580",
         "theme":"Feather"
     ],
     "Peach": [
@@ -169,8 +169,8 @@ let themeColors = [
         "theme":"Cherry"
     ],
     "Daisy": [
-        "topColor": "eb56c1",
-        "bottomColor": "961b74",
+        "topColor": "#EDC7D9",
+        "bottomColor": "#EF629F",
         "theme":"Daisy"
     ],
     "Ashes": [
@@ -179,8 +179,8 @@ let themeColors = [
         "theme":"Ashes"
     ],
     "Beehive": [
-        "topColor": "#B8896B",
-        "bottomColor": "#6F401B",
+        "topColor": "#ba9779",
+        "bottomColor": "#910000",
         "theme":"Beehive"
     ],
     "Ferret": [

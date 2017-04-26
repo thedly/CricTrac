@@ -253,10 +253,11 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     func tapCoverPhoto()  {
-        alertMessage = "Change your cover photo"
-        self.photoOptions("CoverPhoto")
-        coverOrProfile = "Cover"
-        
+        if friendId == nil {
+            alertMessage = "Change your cover photo"
+            self.photoOptions("CoverPhoto")
+            coverOrProfile = "Cover"
+        }
     }
     
     @IBAction func imageTapped(sender: UITapGestureRecognizer) {
