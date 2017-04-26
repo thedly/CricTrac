@@ -50,6 +50,15 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     @IBOutlet weak var battingView: UIView!
     @IBOutlet weak var bowlingView: UIView!
     @IBOutlet weak var summarizedView: UIView!
+    @IBOutlet weak var barView: UIView!
+    @IBOutlet weak var barViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var matchEditButton: UIButton!
+    var friendProfile: Bool!  = false
+    @IBOutlet weak var matchDetailsTitle: UILabel!
+    @IBOutlet weak var matchDetailsBack: UIButton!
+    
+    
+    
     
     @IBAction func deleteActionPressed(sender: UIButton) {
         
@@ -109,24 +118,30 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         menuButton.frame = CGRectMake(0, 0, 40, 40)
         let leftbarButton = UIBarButtonItem(customView: menuButton)
         
-        if matchDetailsData["UserId"] as? String == currentUser?.uid {
-            let addNewMatchButton: UIButton = UIButton(type:.Custom)
-            addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
-            addNewMatchButton.setImage(UIImage(named: "Edit-100"), forState: UIControlState.Normal)
-            addNewMatchButton.titleLabel?.font = UIFont(name: appFont_bold, size: 15)
-            addNewMatchButton.addTarget(self, action: #selector(didTapEditButton), forControlEvents: UIControlEvents.TouchUpInside)
-            let righttbarButton = UIBarButtonItem(customView: addNewMatchButton)
-            navigationItem.rightBarButtonItem = righttbarButton
-        }
+        let addNewMatchButton: UIButton = UIButton(type:.Custom)
+        addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
+        addNewMatchButton.setImage(UIImage(named: "Edit-100"), forState: UIControlState.Normal)
+        addNewMatchButton.titleLabel?.font = UIFont(name: appFont_bold, size: 15)
+        addNewMatchButton.addTarget(self, action: #selector(didTapEditButton), forControlEvents:UIControlEvents.TouchUpInside)
+        let righttbarButton = UIBarButtonItem(customView: addNewMatchButton)
+        navigationItem.rightBarButtonItem = righttbarButton
         
         //assign button to navigationbar
         
         navigationItem.leftBarButtonItem = leftbarButton
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        if friendProfile == false {
+            navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        }
+        else {
+            matchDetailsTitle.text = "SCORECARD"
+            matchEditButton.hidden = true
+            matchDetailsBack.addTarget(self, action: #selector(didTapCancelOthers), forControlEvents: UIControlEvents.TouchUpInside)
+        }
         title = "SCORECARD"
         //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         // navigationController!.navigationBar.titleTextAttributes = titleDict
     }
+    
     
     @IBAction func didTapEditButton(sender: AnyObject) {
         let editMatch = viewController("AddMatchDetailsViewController") as! AddMatchDetailsViewController
@@ -139,8 +154,13 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
        // presentViewController(editMatch, animated: true) {}
     }
     
+    @IBAction func didTapCancelOthers(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+        //self.navigationController?.popViewControllerAnimated(true)
+    }
+    
     @IBAction func didTapCancel(sender: AnyObject) {
-       // dismissViewControllerAnimated(true, completion: nil)
+        //dismissViewControllerAnimated(true, completion: nil)
         self.navigationController?.popViewControllerAnimated(true)
     }
     

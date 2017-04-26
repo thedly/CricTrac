@@ -304,7 +304,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addTapGestureToUserName() 
+        addTapGestureToUserName()
+       
         
         //loadBannerAds()
 
@@ -447,7 +448,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         setBackgroundColor()
         initView()
         setDashboardData()
-        //updateDashBoardMatches()
+         TeamsTable.reloadData()
     }
     
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
@@ -1565,18 +1566,24 @@ func setDashboardData(){
     }
   
     func didTapRecent1stMatchID() {
-    
-    if String(DashboardDetails.Recent1stMatchID) != "-" {
+        if String(DashboardDetails.Recent1stMatchID) != "-" {
 
-        let matchId:String = (String(DashboardDetails.Recent1stMatchID) ?? nil)!
-        let userId:String = self.friendId ?? currentUser!.uid
-        fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+            let matchId:String = (String(DashboardDetails.Recent1stMatchID) ?? nil)!
+            let userId:String = self.friendId ?? currentUser!.uid
+            fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
             
             if let data = snapshot.value! as? [String:AnyObject]{
                 
             let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
                 summaryDetailsVC.matchDetailsData = data
-                self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                
+                if let _ = self.friendProfile {
+                    summaryDetailsVC.friendProfile = true
+                    self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
+                }
+                else {
+                    self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                }
             }
         })
     }
@@ -1589,9 +1596,15 @@ func didTapRecent2ndMatchID() {
                 
                 if let data = snapshot.value! as? [String:AnyObject]{
                 let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
-                   
                     summaryDetailsVC.matchDetailsData = data
-                    self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                    
+                    if let _ = self.friendProfile {
+                        summaryDetailsVC.friendProfile = true
+                        self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
+                    }
+                    else {
+                        self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                    }
                 }
             })
         }
@@ -1603,11 +1616,16 @@ func didTapTopBatting1stMatchID() {
             fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
                 
                 if let data = snapshot.value! as? [String:AnyObject]{
-
                     let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
-                    
                     summaryDetailsVC.matchDetailsData = data
-                    self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                    
+                    if let _ = self.friendProfile {
+                        summaryDetailsVC.friendProfile = true
+                        self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
+                    }
+                    else {
+                        self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                    }
                 }
             })
         }
@@ -1622,11 +1640,17 @@ func didTapTopBatting1stMatchID() {
                 if let data = snapshot.value! as? [String:AnyObject]{
                     let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
                     summaryDetailsVC.matchDetailsData = data
-                    self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                    
+                    if let _ = self.friendProfile {
+                        summaryDetailsVC.friendProfile = true
+                        self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
+                    }
+                    else {
+                        self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                    }
                 }
             })
         }
-        
     }
 
   func didTapTopBowling1stMatchID() {
@@ -1636,34 +1660,42 @@ func didTapTopBatting1stMatchID() {
             fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
                 
                 if let data = snapshot.value! as? [String:AnyObject]{
-                    
                     let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
-                    
                     summaryDetailsVC.matchDetailsData = data
-                    self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                    
+                    if let _ = self.friendProfile {
+                        summaryDetailsVC.friendProfile = true
+                        self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
+                    }
+                    else {
+                        self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                    }
                 }
             })
         }
     }
+    
     func didTapTopBowling2ndMatchID() {
-        
             if String(DashboardDetails.TopBowling2ndMatchID) != "-" {
                 let matchId:String = (String(DashboardDetails.TopBowling2ndMatchID) ?? nil)!
                 let userId:String = self.friendId ?? currentUser!.uid
                 fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
                     
                     if let data = snapshot.value! as? [String:AnyObject]{
-                    
                     let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
-                    
                     summaryDetailsVC.matchDetailsData = data
-                    self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
-                }
+                        
+                        if let _ = self.friendProfile {
+                            summaryDetailsVC.friendProfile = true
+                            self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
+                        }
+                        else {
+                            self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                        }
+                    }
             })
         }
     }
-
-  
 }
 
 

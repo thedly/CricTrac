@@ -39,7 +39,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackgroundColor()
-        username.text = "crictracsajith@gmail.com"
+        username.text = "crictracrahul@gmail.com"
         password.text = "crictrac"
         //setUIBackgroundTheme(self.view)
         //loginWithSavedCredentials()

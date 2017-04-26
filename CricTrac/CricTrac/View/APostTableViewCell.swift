@@ -175,7 +175,7 @@ class APostTableViewCell: UITableViewCell {
     func showPostOptions(){
         let optionMenu = UIAlertController(title: nil, message: "Select Action", preferredStyle: .ActionSheet)
        
-        let deleteAlert = UIAlertController(title: "Delete Comment", message: "Are you sure you want to delete this post?", preferredStyle: UIAlertControllerStyle.Alert)
+        let deleteAlert = UIAlertController(title: "Delete Post", message: "Are you sure you want to delete this post?", preferredStyle: UIAlertControllerStyle.Alert)
 
     
         if postOwnerName.text != "CricTrac" {

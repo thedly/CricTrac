@@ -47,6 +47,9 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         setBackgroundColor()
         initView()
         self.updateCoachDashboard()
+        CurrentTeams.reloadData()
+        PlayedFor.reloadData()
+        Certifications.reloadData()
     }
     
     override func viewDidLoad() {

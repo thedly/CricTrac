@@ -35,6 +35,20 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
 //    var currentUserProfileImage = UIImage()
 //    var currentUserCoverImage = UIImage()
     
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        setBackgroundColor()
+        initView()
+        self.updateFanDashBoard()
+        SupportingTeams.reloadData()
+        InterestedSports.reloadData()
+        Hobbies.reloadData()
+        FavoritePlayers.reloadData()
+        
+    }
+    
     @IBAction func CloseDashboardPressed(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -96,13 +110,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
      // Do any additional setup after loading the view.
     }
     
-    override func viewWillAppear(animated: Bool) {
-       
-       setBackgroundColor()
-       initView()
-       self.updateFanDashBoard()
-        
-    }
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
