@@ -112,6 +112,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         teamsPlayedForTxt.delegate = self
         pastTeamName.delegate = self
         Certifications.delegate = self
+        CoachingLevel.delegate = self
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserInfoViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         scrollView.setContentOffset(CGPointZero, animated: true)
@@ -308,7 +309,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     @IBAction func addPastTeamsPressed(sender: AnyObject) {
         
         if pastTeamName.text?.trimWhiteSpace != "" && pastTeamName.text?.trimWhiteSpace != "-" {
-            pastTeamNames.append(pastTeamName.textVal.trim())
+            pastTeamNames.append(pastTeamName.textVal.trim().condenseWhitespace())
             pastTeamName.text = ""
             pastTeams.reloadData()
         }
@@ -317,7 +318,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     
     @IBAction func addTeamsPressed(sender: AnyObject) {
         if teamName.text?.trimWhiteSpace != "" && teamName.text?.trimWhiteSpace != "-" {
-            teamNames.append(teamName.textVal.trim())
+            teamNames.append(teamName.textVal.trim().condenseWhitespace())
             teamName.text = ""
             
             currentTeams.reloadData()
@@ -328,7 +329,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     
     @IBAction func addTeamsPlayedForPressed(sender: AnyObject) {
         if teamsPlayedForTxt.text?.trimWhiteSpace != "" && teamsPlayedForTxt.text?.trimWhiteSpace != "-" {
-            CoachPlayedFor.append(teamsPlayedForTxt.textVal.trim())
+            CoachPlayedFor.append(teamsPlayedForTxt.textVal.trim().condenseWhitespace())
             teamsPlayedForTxt.text = ""
             
             CoachPlayedForTbl.reloadData()
@@ -339,7 +340,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
 
     @IBAction func addCertificationsPressed(sender: AnyObject) {
         if Certifications.text?.trimWhiteSpace != "" && Certifications.text?.trimWhiteSpace != "-" {
-            CertificationsList.append(Certifications.textVal.trim())
+            CertificationsList.append(Certifications.textVal.trim().condenseWhitespace())
             Certifications.text = ""
             
             CertificationsTbl.reloadData()
@@ -526,6 +527,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
                 return newlength <= 0
             }
             else {
+                 addCurrentTeamBtn.enabled = true
                 return newlength <= 30
             }
         }
@@ -535,6 +537,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
                 return newlength <= 0
             }
             else{
+                addPastTeamBtn.enabled = true
                 return newlength <= 30
             }
         }
@@ -544,6 +547,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
                return newlength <= 0
             }
             else {
+                addCoachPlayedForBtn.enabled = true
                 return newlength <= 30
             }
         }
@@ -554,6 +558,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
                     
                 }
             else {
+                addCertificationsBtn.enabled = true
                 return newlength <= 30
             }
         }
@@ -561,6 +566,10 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         else if textField == Experience {
             return newlength <= 2
         }
+        else if textField == CoachingLevel {
+            return newlength <= 30
+        }
+        
         
         return true
     }

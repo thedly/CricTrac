@@ -165,7 +165,7 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     
     @IBAction func addPastTeamsPressed(sender: AnyObject) {
         if pastTeamName.text?.trimWhiteSpace != "" && pastTeamName.text?.trimWhiteSpace != "-" {
-            pastTeamNames.append(pastTeamName.textVal.trim())
+            pastTeamNames.append(pastTeamName.textVal.trim().condenseWhitespace())
             pastTeamName.text = ""
             pastTeams.reloadData()
         }
@@ -173,7 +173,7 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     
     @IBAction func addTeamsPressed(sender: AnyObject) {
         if teamName.text?.trimWhiteSpace != "" && teamName.text?.trimWhiteSpace != "-" {
-            teamNames.append(teamName.textVal.trim())
+            teamNames.append(teamName.textVal.trim().condenseWhitespace())
             teamName.text = ""
             currentTeams.reloadData()
         }
@@ -208,6 +208,8 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        
         if profileData.FirstName.length > 0  {
             if profileData.PlayingRole.length > 0 {
                 self.playingRole.text = profileData.PlayingRole
