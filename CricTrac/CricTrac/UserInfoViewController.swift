@@ -46,8 +46,6 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
 //    @IBOutlet weak var battingStyle: UITextField!
 //    @IBOutlet weak var playingRole: UITextField!
     
-    
-    
     let transitionManager = TransitionManager.sharedInstance
     
     var lastSelectedTab:UIView?
@@ -87,9 +85,8 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         setBackgroundColor()
-
-
     }
+    
     func setNavigationBarProperties(){
         var currentTheme:CTTheme!
         currentTheme = cricTracTheme.currentTheme
@@ -166,46 +163,28 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-            
-                    
-                
-        
-        
 //                    self.teamName.text = profileData.TeamName
 //                    self.battingStyle.text = profileData.BattingStyle
 //                    self.bowlingStyle.text = profileData.BowlingStyle
 //                    self.playingRole.text = profileData.PlayingRole
                 
         }
+    
     func initialization()  {
-        
         self.profileDetailsExists = true
         
         if let fName = profileData.FirstName as? String where fName.length > 0, let lName = profileData.LastName as? String where lName.length > 0 {
-            
-            
             self.firstName.text = fName
             self.lastName.text = lName
-            
-            
         }
         else
         {
-            
-            
             if let displayName = (currentUser?.displayName) where displayName.length > 0  {
-                
                 var fullNameArr = displayName.characters.split{$0 == " "}.map(String.init)
                 self.firstName.text = fullNameArr[0]
                 self.lastName.text = fullNameArr.count > 1 ? fullNameArr[1] : nil
-                
-                
-                
             }
-            
         }
-        
-        
         
         self.dateOfBirth.text = profileData.DateOfBirth
         self.emailId.text = currentUser?.email  //profileData.Email

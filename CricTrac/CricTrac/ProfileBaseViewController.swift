@@ -138,13 +138,8 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
        // self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    
-    
     func setupControls() {
-        
-        
-            
-            if profileData.UserProfile.length > 0 {
+        if profileData.UserProfile.length > 0 {
             switch profileData.UserProfile {
                 case userProfileType.Coach.rawValue:
                     self.coachTextView.isSelected = true

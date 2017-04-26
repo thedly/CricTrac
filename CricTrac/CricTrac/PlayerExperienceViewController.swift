@@ -404,11 +404,12 @@ extension PlayerExperienceViewController:UITextFieldDelegate{
         
         if textField == teamName  {
             if teamNames.count >= 5 {
-            addTeamBtn.enabled = false
-            return newLength <= 0
+                addTeamBtn.enabled = false
+                return newLength <= 0
             }
             else{
-             return newLength <= 30
+                addTeamBtn.enabled = true
+                return newLength <= 30
             }
         }
         else if  textField == pastTeamName {
@@ -417,6 +418,7 @@ extension PlayerExperienceViewController:UITextFieldDelegate{
                 return newLength <= 0
             }
             else {
+                addPastTeamBtn.enabled = true
                 return newLength <= 30
             }
         }
