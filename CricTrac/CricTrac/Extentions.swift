@@ -355,4 +355,11 @@ extension UITextView{
     }
     
 }
-
+extension String {
+    func condenseWhitespace() -> String {
+        return characters
+            .split { $0 == " " }
+            .map { String($0) }
+            .joinWithSeparator(" ")
+    }
+}
