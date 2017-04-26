@@ -123,29 +123,6 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         }
     }
     
-//    func getFriendSuggestions() {
-//        backgroundThread(background: {
-//            KRProgressHUD.showText("Loading ...")
-//            getAllFriendSuggestions({
-//                var modFriendReqData = [Profile]()
-//                for (index, dat) in UserProfilesData.enumerate() {
-//                    if FriendRequestsData.filter({$0.Name == dat.fullName }).count == 0 {
-//                        modFriendReqData.append(dat)
-//                    }
-//                }
-//                UserProfilesData.removeAll()
-//                UserProfilesData = modFriendReqData
-//                                
-//                dispatch_async(dispatch_get_main_queue(),{
-//                    
-//                    KRProgressHUD.dismiss()
-//                    self.suggestionsTblView.reloadData()
-//                    
-//                })
-//            })
-//        })
-//    }
-    
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "REQUESTS")
     }
@@ -237,40 +214,13 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if tableView.isEqual(suggestionsTblView){
-//            return UserProfilesData.count
-//        }
         return FriendRequestsData.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        if tableView.isEqual(suggestionsTblView){
-//            return getCellForSuggestionsRow(indexPath)
-//        }
-//        else
-//        {
             return getCellForRow(indexPath)
-        //}
     }
 
-//    func getCellForSuggestionsRow(indexPath:NSIndexPath)->FriendSuggestionsCell{
-//        if FriendRequestsData.filter({$0.Name == UserProfilesData[indexPath.row].fullName}).first == nil {
-//            if let aCell =  suggestionsTblView.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as? FriendSuggestionsCell {
-//                aCell.configureCell(UserProfilesData[indexPath.row])
-//                aCell.AddFriendBtn.accessibilityIdentifier = UserProfilesData[indexPath.row].id
-//                aCell.AddFriendBtn.addTarget(self, action: #selector(AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-//                aCell.backgroundColor = UIColor.clearColor()
-//                return aCell
-//            }
-//            else {
-//                return FriendSuggestionsCell()
-//            }
-//        }
-//        else {
-//            return FriendSuggestionsCell()
-//        }
-//    }
-    
     
     func CancelRequest(sender: UIButton){
         let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to Cancel this request?", preferredStyle: .ActionSheet)
@@ -373,22 +323,6 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                         
                         FriendData.UserId = FriendObject.id
                         FriendData.City = FriendObject.City
-                        /*switch FriendObject.UserProfile {
-                         case userProfileType.Player.rawValue :
-                         FriendData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
-                         break;
-                         case userProfileType.Coach.rawValue :
-                         FriendData.Club = FriendObject.CoachCurrentTeams.joinWithSeparator(",")
-                         break;
-                         case userProfileType.Fan.rawValue :
-                         FriendData.Club = FriendObject.SupportingTeams.joinWithSeparator(",")
-                         break;
-                         default:
-                         FriendData.Club = FriendObject.PlayerCurrentTeams.joinWithSeparator(",")
-                         break;
-                         
-                         }*/
-                        
                         FriendData.Name = FriendObject.fullName
                         FriendData.FriendshipDateTime = NSDate().getCurrentTimeStamp()
                         
@@ -396,23 +330,6 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                         
                         UserData.UserId = loggedInUserObject.id
                         UserData.City = loggedInUserObject.City
-                        
-                        /*switch FriendObject.UserProfile {
-                         case userProfileType.Player.rawValue :
-                         UserData.Club = loggedInUserObject.PlayerCurrentTeams.joinWithSeparator(",")
-                         break;
-                         case userProfileType.Coach.rawValue :
-                         UserData.Club = loggedInUserObject.CoachCurrentTeams.joinWithSeparator(",")
-                         break;
-                         case userProfileType.Fan.rawValue :
-                         UserData.Club = loggedInUserObject.SupportingTeams.joinWithSeparator(",")
-                         break;
-                         default:
-                         UserData.Club = loggedInUserObject.PlayerCurrentTeams.joinWithSeparator(",")
-                         break
-                         
-                         }*/
-                        
                         UserData.Name = loggedInUserObject.fullName
                         UserData.FriendshipDateTime = NSDate().getCurrentTimeStamp()
                         
@@ -436,45 +353,6 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         }
     }
     
-//    func AddFriendBtnPressed(sender: UIButton) {
-//        if let FriendUserId = sender.accessibilityIdentifier where FriendUserId != "" {
-//            getProfileInfoById(FriendUserId, sucessBlock: { FriendData in
-//                let FriendObject = Profile(usrObj: FriendData)
-//                getProfileInfoById((currentUser?.uid)!, sucessBlock: { data in
-//                    let loggedInUserObject = Profile(usrObj: data)
-//                    let sendFriendRequestData = SentFriendRequest()
-//                    sendFriendRequestData.City = FriendObject.City
-//                    sendFriendRequestData.Name = FriendObject.fullName
-//                    sendFriendRequestData.SentTo = FriendObject.id
-//                    sendFriendRequestData.SentDateTime = NSDate().getCurrentTimeStamp()
-//                    
-//                    let receiveFriendRequestData = ReceivedFriendRequest()
-//                    receiveFriendRequestData.City = loggedInUserObject.City
-//                    
-//                    receiveFriendRequestData.Name = loggedInUserObject.fullName
-//                    receiveFriendRequestData.ReceivedFrom = loggedInUserObject.id
-//                    receiveFriendRequestData.ReceivedDateTime = NSDate().getCurrentTimeStamp()
-//
-//                    if let index = UserProfilesData.indexOf( {$0.id == FriendObject.id}) {
-//                        UserProfilesData.removeAtIndex(index)
-//                    }
-//                    
-//                    //self.suggestionsTblView.reloadData()
-//                    
-//                    backgroundThread(background: {
-//                        AddSentRequestData(["sentRequestData": sendFriendRequestData.GetFriendRequestObject(sendFriendRequestData), "ReceivedRequestData": receiveFriendRequestData.getFriendRequestObject(receiveFriendRequestData)], callback: { data in
-//                           
-//                            dispatch_async(dispatch_get_main_queue(),{
-//                                self.setRequests()
-//                                self.RequestsTblview.reloadData()
-//                                self.suggestionsTblView.reloadData()
-//                            })
-//                        })
-//                    })
-//                })
-//            })
-//        }
-//    }
     /*
     // MARK: - Navigation
 

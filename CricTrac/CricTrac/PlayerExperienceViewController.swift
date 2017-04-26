@@ -105,61 +105,6 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         }
     }
     
-                        
-            //            self.presentViewController(loginBaseViewController, animated: true) {
-            ////                SCLAlertView().showInfo("Logout",subTitle: "Data saved is cleared, Kill the app and relaunch for now")
-            //            }
-
-            
-            
-//            if (self.profileChanged == true) {
-//                
-//                
-//                logout(self)
-//                
-//                
-//            }
-//            else
-//            {
-//                            profileData = Profile(usrObj: data)
-//                
-//                            updateMetaData(userImageMetaData)
-//                
-//                
-//                            if self.window.rootViewController == sliderMenu {
-//                
-//                                let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
-//                                self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
-//                                
-////                                self.window.rootViewController?.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
-//                            }
-//                            else
-//                            {
-//                                let rootViewController: UIViewController = getRootViewController()
-//                                self.window.rootViewController = rootViewController
-//                               // sliderMenu.mainViewController = rootViewController
-//                
-//                            }
-//                
-//                }
-//            
-//            
-////            self.presentViewController(loginBaseViewController, animated: true) {
-//////                SCLAlertView().showInfo("Logout",subTitle: "Data saved is cleared, Kill the app and relaunch for now")
-////            }
-////            
-//
-//            
-//            
-//
-//            
-//            
-//            
-//
-//        }
-//        
-//            }
-    
     func initializeView() {
         playingRole.delegate = self
         battingStyle.delegate = self
@@ -264,8 +209,18 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if profileData.FirstName.length > 0  {
-            self.playingRole.text = profileData.PlayingRole
-            self.battingStyle.text = profileData.BattingStyle
+            if profileData.PlayingRole.length > 0 {
+                self.playingRole.text = profileData.PlayingRole
+            }
+            else {
+                self.playingRole.text = "Batsman"
+            }
+            if profileData.BattingStyle.length > 0 {
+                self.battingStyle.text = profileData.BattingStyle
+            }
+            else {
+                self.battingStyle.text = "Right-hand"
+            }
             self.bowlingStyle.text = profileData.BowlingStyle
             self.teamNames = profileData.PlayerCurrentTeams
             self.pastTeamNames = profileData.PlayerPastTeams

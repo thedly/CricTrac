@@ -27,8 +27,6 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         setBackgroundColor()
     }
     
-   
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -50,20 +48,9 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         SuggestsTblview.dataSource = self
         SuggestsTblview.delegate = self
         
-        
         //setUIBackgroundTheme(self.view)
         self.view.backgroundColor = UIColor.clearColor()
         getFriendSuggestions()
-
-//        SuggestsTblview.registerNib(UINib.init(nibName:"FriendSuggestionsCell", bundle: nil), forCellReuseIdentifier: "FriendSuggestionsCell")
-//        SuggestsTblview.allowsSelection = false
-//        SuggestsTblview.separatorStyle = .None
-//        SuggestsTblview.dataSource = self
-//        SuggestsTblview.delegate = self
-//        self.view.backgroundColor = UIColor.clearColor()
-//        
-//        //setBackgroundColor()
-//        //setUIBackgroundTheme(self.view)
     }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {

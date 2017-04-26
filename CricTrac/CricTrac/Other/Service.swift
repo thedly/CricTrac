@@ -767,25 +767,48 @@ public func getAllFriendSuggestions(callback:()->Void) {
 public func AcceptFriendRequest(data: [String:[String:AnyObject]], callback:(data:String)->Void){
     var dataToBeManipulated = data
     
-    // Add friend to user friends list
+    //sajith - check for duplicate entry
+    let friendSentTo = dataToBeManipulated["FriendData"]!["UserId"] as? String
+    var friendExist = 0
+    
+    //sajith - check for duplicate entry in Friends
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Friends")
-    ref.childByAutoId().setValue(dataToBeManipulated["FriendData"], withCompletionBlock: { error, newlyCreatedUserFriendData in
-        // user's friend record id
-        dataToBeManipulated["FriendData"]!["FriendRecordId"] = newlyCreatedUserFriendData.key
-        dataToBeManipulated["UserData"]!["FriendRecordIdOther"] = newlyCreatedUserFriendData.key
+    ref.queryOrderedByChild("UserId").queryStartingAtValue(friendSentTo!).queryEndingAtValue(friendSentTo!+"\u{f8ff}").observeSingleEventOfType(.Value, withBlock: { snapshot in
         
-        // Add user reference to Friend's friends list
-        let receivedRequestRef = fireBaseRef.child("Users").child(dataToBeManipulated["FriendData"]!["UserId"]! as! String).child("Friends")
-        receivedRequestRef.childByAutoId().setValue(dataToBeManipulated["UserData"], withCompletionBlock: { error, newlyCreatedUserReferenceData in
-            // user's record id other
-            dataToBeManipulated["FriendData"]!["FriendRecordIdOther"] = newlyCreatedUserReferenceData.key
-            dataToBeManipulated["UserData"]!["FriendRecordId"] = newlyCreatedUserReferenceData.key
+        if snapshot.childrenCount > 0 {
+            friendExist = 1
+        }
+
+        if friendExist == 0 {
+            // Add friend to user friends list
+            let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Friends")
+            ref.childByAutoId().setValue(dataToBeManipulated["FriendData"], withCompletionBlock: { error, newlyCreatedUserFriendData in
+                // user's friend record id
+                dataToBeManipulated["FriendData"]!["FriendRecordId"] = newlyCreatedUserFriendData.key
+                dataToBeManipulated["UserData"]!["FriendRecordIdOther"] = newlyCreatedUserFriendData.key
+        
+                // Add user reference to Friend's friends list
+                let receivedRequestRef = fireBaseRef.child("Users").child(dataToBeManipulated["FriendData"]!["UserId"]! as! String).child("Friends")
+                receivedRequestRef.childByAutoId().setValue(dataToBeManipulated["UserData"], withCompletionBlock: { error, newlyCreatedUserReferenceData in
+                // user's record id other
+                    dataToBeManipulated["FriendData"]!["FriendRecordIdOther"] = newlyCreatedUserReferenceData.key
+                    dataToBeManipulated["UserData"]!["FriendRecordId"] = newlyCreatedUserReferenceData.key
             
-            // Friend's record id
-            receivedRequestRef.child(newlyCreatedUserReferenceData.key).updateChildValues(dataToBeManipulated["UserData"]!)
-            ref.child(newlyCreatedUserFriendData.key).updateChildValues(dataToBeManipulated["FriendData"]!)
-            callback(data: newlyCreatedUserReferenceData.key)
-        })
+                    // Friend's record id
+                    receivedRequestRef.child(newlyCreatedUserReferenceData.key).updateChildValues(dataToBeManipulated["UserData"]!)
+                ref.child(newlyCreatedUserFriendData.key).updateChildValues(dataToBeManipulated["FriendData"]!)
+                    
+                    //call the notification api
+                    friendRequestAcceptedNotification(friendSentTo!) { (resultError) in
+                    }
+                    
+                    callback(data: newlyCreatedUserReferenceData.key)
+                })
+            })
+        }
+        else {
+            callback(data:"")
+        }
     })
 }
 
@@ -854,26 +877,67 @@ func CancelSentFriendRequestData(ReceivedRequestId: String, successBlock: Bool -
 public func AddSentRequestData(data: [String:[String:AnyObject]], callback:(data:String)->Void) {
     var dataToBeManipulated = data
     
-    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("SentRequest").childByAutoId()
-    ref.setValue(dataToBeManipulated["sentRequestData"], withCompletionBlock: { error, newlyCreateddata in
+    //sajith - check for duplicate entry
+    let friendSentTo = dataToBeManipulated["sentRequestData"]!["SentTo"] as? String
+    var friendExist = 0
+    
+    //sajith - check for duplicate entry in SentRequest
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("SentRequest")
+    ref.queryOrderedByChild("SentTo").queryStartingAtValue(friendSentTo!).queryEndingAtValue(friendSentTo!+"\u{f8ff}").observeSingleEventOfType(.Value, withBlock: { snapshot in
         
-        var sentcreatedId = [String: AnyObject]()
-        sentcreatedId["SentRequestId"] = newlyCreateddata.key
+        if snapshot.childrenCount > 0 {
+            friendExist = 1
+        }
         
-        let receivedRequestRef = fireBaseRef.child("Users").child(dataToBeManipulated["sentRequestData"]!["SentTo"]! as! String).child("ReceivedRequest").childByAutoId()
+        //sajith - check for duplicate entry in ReceivedRequest
+        let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("ReceivedRequest")
+        ref.queryOrderedByChild("ReceivedFrom").queryStartingAtValue(friendSentTo!).queryEndingAtValue(friendSentTo!+"\u{f8ff}").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            
+            if snapshot.childrenCount > 0 {
+                friendExist = 1
+            }
+            
+            //sajith - check for duplicate entry in Friends
+            let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Friends")
+            ref.queryOrderedByChild("UserId").queryStartingAtValue(friendSentTo!).queryEndingAtValue(friendSentTo!+"\u{f8ff}").observeSingleEventOfType(.Value, withBlock: { snapshot in
+                
+                if snapshot.childrenCount > 0 {
+                    friendExist = 1
+                }
+
+                if friendExist == 0 {
+                    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("SentRequest").childByAutoId()
+                    ref.setValue(dataToBeManipulated["sentRequestData"], withCompletionBlock: { error, newlyCreateddata in
         
-        dataToBeManipulated["ReceivedRequestData"]!["SentRequestId"] = newlyCreateddata.key
-        receivedRequestRef.setValue(data["ReceivedRequestData"], withCompletionBlock: { error, newlyCreatedReceivedRequestData in
-            var createdId = [String: AnyObject]()
-            createdId["RequestId"] = newlyCreatedReceivedRequestData.key
-            createdId["SentRequestId"] = newlyCreateddata.key
-            receivedRequestRef.updateChildValues(createdId)
-            sentcreatedId["ReceivedRequestIdOther"] = newlyCreatedReceivedRequestData.key
-            ref.updateChildValues(sentcreatedId)
-            callback(data: newlyCreatedReceivedRequestData.key)
+                        var sentcreatedId = [String: AnyObject]()
+                        sentcreatedId["SentRequestId"] = newlyCreateddata.key
+        
+                        let receivedRequestRef = fireBaseRef.child("Users").child(dataToBeManipulated["sentRequestData"]!["SentTo"]! as! String).child("ReceivedRequest").childByAutoId()
+        
+                        dataToBeManipulated["ReceivedRequestData"]!["SentRequestId"] = newlyCreateddata.key
+                        receivedRequestRef.setValue(data["ReceivedRequestData"], withCompletionBlock: { error, newlyCreatedReceivedRequestData in
+                            var createdId = [String: AnyObject]()
+                            createdId["RequestId"] = newlyCreatedReceivedRequestData.key
+                            createdId["SentRequestId"] = newlyCreateddata.key
+                            receivedRequestRef.updateChildValues(createdId)
+                            sentcreatedId["ReceivedRequestIdOther"] = newlyCreatedReceivedRequestData.key
+                            ref.updateChildValues(sentcreatedId)
+                            
+                            //call the notification api
+                            friendRequestReceivedNotification(friendSentTo!) { (resultError) in
+                            }
+                            callback(data: newlyCreatedReceivedRequestData.key)
+                        })
+        
+                    })
+                }
+                else {
+                    callback(data:"")
+                }
+            })
         })
-        
     })
+
 }
  //MARK: - Friends
 

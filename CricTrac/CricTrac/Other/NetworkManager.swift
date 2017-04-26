@@ -44,6 +44,28 @@ func updateTimelineWithNewPost(postId:String,result:(resultError:NSError?)->Void
     dataTask?.resume()
 }
 
+func friendRequestReceivedNotification(toId:String,result:(resultError:NSError?)->Void){
+    let notificationURL = serverBaseURL+"/notifications/FRR/\((currentUser!.uid))/\(toId)"
+    let request = NSMutableURLRequest(URL: NSURL(string:notificationURL)!)
+    request.HTTPMethod = "POST"
+    
+    dataTask = defaultSession.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+        result(resultError: error)
+    })
+    dataTask?.resume()
+}
+
+func friendRequestAcceptedNotification(toId:String,result:(resultError:NSError?)->Void){
+    let notificationURL = serverBaseURL+"/notifications/FRA/\((currentUser!.uid))/\(toId)"
+    let request = NSMutableURLRequest(URL: NSURL(string:notificationURL)!)
+    request.HTTPMethod = "POST"
+    
+    dataTask = defaultSession.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+        result(resultError: error)
+    })
+    dataTask?.resume()
+}
+
 func newPostNotification(postId:String,result:(resultError:NSError?)->Void){
     let notificationURL = serverBaseURL+"/notifications/NPA/\((currentUser!.uid))/\(postId)"
     let request = NSMutableURLRequest(URL: NSURL(string:notificationURL)!)
