@@ -306,7 +306,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
     @IBAction func addInterestedSportsPressed(sender: AnyObject) {
         
         if InterestedSportsNames.text?.trimWhiteSpace != "" && InterestedSportsNames.text?.trimWhiteSpace != "-" {
-            InterestedSportsNamesList.append(InterestedSportsNames.textVal.trim())
+            InterestedSportsNamesList.append(InterestedSportsNames.textVal.trim().condenseWhitespace())
             InterestedSportsNames.text = ""
             
             
@@ -320,7 +320,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
     @IBAction func addSupportingTeamsPressed(sender: AnyObject) {
         
         if SupportingTeamNames.text?.trimWhiteSpace != "" && SupportingTeamNames.text?.trimWhiteSpace != "-" {
-            supportingTeamNamesList.append(SupportingTeamNames.textVal.trim())
+            supportingTeamNamesList.append(SupportingTeamNames.textVal.trim().condenseWhitespace())
             SupportingTeamNames.text = ""
             
             SupportingTeams.reloadData()
@@ -333,7 +333,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
     @IBAction func addHobbiesPressed(sender: AnyObject) {
         
         if HobbiesNames.text?.trimWhiteSpace != "" && HobbiesNames.text?.trimWhiteSpace != "-" {
-            HobbiesList.append(HobbiesNames.textVal.trim())
+            HobbiesList.append(HobbiesNames.textVal.trim().condenseWhitespace())
             HobbiesNames.text = ""
             
             Hobies.reloadData()
@@ -345,7 +345,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
     @IBAction func addFavouritePlayerPressed(sender: AnyObject) {
         
         if favouritePlayer.text?.trimWhiteSpace != "" && favouritePlayer.text?.trimWhiteSpace != "-" {
-            favouritePlayerList.append(favouritePlayer.textVal.trim())
+            favouritePlayerList.append(favouritePlayer.textVal.trim().condenseWhitespace())
             favouritePlayer.text = ""
             
             FavouritePlayerTbl.reloadData()
@@ -525,6 +525,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
                 supportingTeamsBtn.enabled = false
                 return newLength <= 0
             }else {
+                supportingTeamsBtn.enabled = true
                 return newLength <= 30
             }
         }
@@ -534,7 +535,8 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
                 return newLength <= 0
             }
             else {
-            return newLength <= 30
+                interestedSportsteamBtn.enabled = true
+                return newLength <= 30
             }
         }
         else if textField == favouritePlayer {
@@ -543,6 +545,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
                 return newLength <= 0
             }
             else {
+                favouritePlayerBtn.enabled = true
                 return newLength <= 30
             }
         }
@@ -552,6 +555,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
                 return newLength <= 0
             }
             else {
+                hobbiesBtn.enabled = true
                 return newLength <= 30
             }
         }

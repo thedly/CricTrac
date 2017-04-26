@@ -133,6 +133,8 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         emailId.delegate = self
         firstName.delegate = self
         lastName.delegate = self
+        mobile.delegate = self
+        userProfileInfo.delegate = self
         
         
         emailId.userInteractionEnabled = false
@@ -210,64 +212,70 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         //dismissViewControllerAnimated(true) {}
         self.navigationController?.popViewControllerAnimated(true)
     }
-    
     @IBAction func addUserBtnPressed(sender: AnyObject) {
-        if validateProfileData() {
-            
-//            if profileData.PlayingRole {
-//
-//            }
-            if userProfileInfo != nil {
-                if profileData.UserProfile != userProfileInfo.text {
-                    //profileData.UserProfile
-                    profileData.UserProfile = userProfileInfo.text!
-                    profileChanged = true
-                    let appearance = SCLAlertView.SCLAppearance(
-                        showCloseButton: false
-                    )
-                    
-                    let alertView = SCLAlertView(appearance: appearance)
-                    
-                    alertView.addButton("OK", target:self, selector:#selector(UserInfoViewController.continueToDismiss))
-                    
-                    alertView.addButton("Cancel", action: { })
-                    
-                    alertView.showNotice("Warning", subTitle: "Changing role will delete all existing data")
-                }else {
-                    profileChanged = false
-                    continueToDismiss()
-                }
-            }else {
-                
-                if profileData.userExists {
-                    
-                    profileChanged = true
-                    let appearance = SCLAlertView.SCLAppearance(
-                        showCloseButton: false
-                    )
-                    
-                    let alertView = SCLAlertView(appearance: appearance)
-                    
-                    alertView.addButton("OK", target:self, selector:#selector(UserInfoViewController.continueToDismiss))
-                    
-                    alertView.addButton("Cancel", action: { })
-                    
-                    alertView.showNotice("Warning", subTitle: "Changing role will delete all existing data")
-                    
-                }
-                else
-                {
-                    profileChanged = false
-                    continueToDismiss()
-                }
-                
-            }
-            
-            
-        }
+        
+        self.continueToDismiss()
         
     }
     
+//    @IBAction func addUserBtnPressed(sender: AnyObject) {
+//        if validateProfileData() {
+//            
+////            if profileData.PlayingRole {
+////
+////            }
+//            if userProfileInfo != nil {
+//                if profileData.UserProfile != userProfileInfo.text {
+//                    //profileData.UserProfile
+//                    profileData.UserProfile = userProfileInfo.text!
+//                    profileChanged = true
+//                    let appearance = SCLAlertView.SCLAppearance(
+//                        showCloseButton: false
+//                    )
+//                    
+//                    let alertView = SCLAlertView(appearance: appearance)
+//                    
+//                    alertView.addButton("OK", target:self, selector:#selector(UserInfoViewController.continueToDismiss))
+//                    
+//                    alertView.addButton("Cancel", action: { })
+//                    
+//                    alertView.showNotice("Warning", subTitle: "Changing role will delete all existing data")
+//                }else {
+//                    profileChanged = false
+//                    continueToDismiss()
+//                }
+//            }
+//            else {
+//                
+//                if profileData.userExists {
+//                    
+//                    profileChanged = true
+//                    let appearance = SCLAlertView.SCLAppearance(
+//                        showCloseButton: false
+//                    )
+//                    
+//                    let alertView = SCLAlertView(appearance: appearance)
+//                    
+//                    alertView.addButton("OK", target:self, selector:#selector(UserInfoViewController.continueToDismiss))
+//                    
+//                    alertView.addButton("Cancel", action: { })
+//                    
+//                    alertView.showNotice("Warning", subTitle: "Changing role will delete all existing data")
+//                    
+//                }
+//                else
+//                {
+//                    profileChanged = false
+//                    continueToDismiss()
+//                }
+//                
+//            }
+//            
+//            
+//        }
+//        
+//    }
+//    
     func continueToDismiss() {
         profileData.FirstName = self.data["FirstName"]!
         profileData.LastName = self.data["LastName"]!
@@ -278,14 +286,13 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         profileData.Country = self.data["Country"]!
         profileData.State = self.data["State"]!
         profileData.City = self.data["City"]!
-        
-        
+      //  profileData.UserProfile = self.data["UserProfile"]!
       
      //   if profileData != nil {
             switch profileData.UserProfile {
             case userProfileType.Player.rawValue :
                 
-                var vc = viewControllerFrom("Main", vcid: "PlayerExperienceViewController") as! PlayerExperienceViewController
+                let vc = viewControllerFrom("Main", vcid: "PlayerExperienceViewController") as! PlayerExperienceViewController
                 
                 vc.profileChanged = self.profileChanged
 
@@ -294,7 +301,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
                 
             case userProfileType.Coach.rawValue :
                 
-                var vc = viewControllerFrom("Main", vcid: "CoachingExperienceViewController") as! CoachingExperienceViewController
+                let vc = viewControllerFrom("Main", vcid: "CoachingExperienceViewController") as! CoachingExperienceViewController
                 
                 vc.profileChanged = self.profileChanged
 
@@ -302,7 +309,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
                 NextVC = vc
             case userProfileType.Fan.rawValue :
                 
-                var vc = viewControllerFrom("Main", vcid: "CricketFanViewController") as! CricketFanViewController
+                let vc = viewControllerFrom("Main", vcid: "CricketFanViewController") as! CricketFanViewController
                 
                 vc.profileChanged = self.profileChanged
 
@@ -311,7 +318,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
                 
             default:
                 
-                var vc = viewControllerFrom("Main", vcid: "PlayerExperienceViewController") as! PlayerExperienceViewController
+                let vc = viewControllerFrom("Main", vcid: "PlayerExperienceViewController") as! PlayerExperienceViewController
                 
                 vc.profileChanged = self.profileChanged
 
@@ -470,11 +477,10 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     }
     
     func donePressed() {
-        selectedText.resignFirstResponder()
+         selectedText.resignFirstResponder()
     }
 
-    
-}
+  }
 
 extension UserInfoViewController:UITextFieldDelegate
 {
@@ -489,6 +495,7 @@ extension UserInfoViewController:UITextFieldDelegate
         }
         else if textField == country {
             state.text = ""
+            city.text = ""
             ctCountryPicker.showPicker(self, inputText: textField)
             //state.text = String()
         }
@@ -503,6 +510,7 @@ extension UserInfoViewController:UITextFieldDelegate
         else if textField == state {
             if country.text?.length >= 0 {
                 state.userInteractionEnabled = true
+                country.text = ""
                 city.text = ""
                 ctStatePicker.showPicker(self, inputText: textField, iso: ctCountryPicker.SelectedISO)
             }else {
@@ -531,11 +539,50 @@ extension UserInfoViewController:UITextFieldDelegate
 //            ctDataPicker.showPicker(self, inputText: textField, data: BowlingStyles,selectedValueIndex: indexPos)
 //        }
     }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        
+        if validateProfileData() {
+            if userProfileInfo != nil {
+                if profileData.UserProfile != userProfileInfo.text {
+                    
+                    profileChanged = true
+                    
+                    let confirmAlert = UIAlertController(title: "Warning!" ,message:"Changing role will delete all existing role related data",preferredStyle: UIAlertControllerStyle.Alert)
+                    confirmAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
+                        
+                       // self.continueToDismiss()
+                        
+                        
+                    }))
+                    
+                    confirmAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction) in
+                        
+                        self.userProfileInfo.text = profileData.UserProfile
+                        
+                    }))
+                    
+                    self.presentViewController(confirmAlert, animated: true, completion: nil)
+                }
+//                else {
+//                    
+//                    profileChanged = false
+//                    continueToDismiss()
+//                }
+            }
+            
+        }
+
+        
+    }
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         let newLength = textField.text!.characters.count + string.characters.count - range.length
-        if textField == firstName || textField == lastName || textField == mobile || textField == city {
+        if textField == firstName || textField == lastName || textField == city {
             return newLength <= nameCharacterLimit // Bool
-        }else if textField == state || textField == country {
+        }else if textField == mobile {
+            return newLength <= 15
+        }
+        else if textField == state || textField == country {
             return false
         }else {
             return true // Bool
