@@ -154,6 +154,7 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
         super.viewWillAppear(animated)
         
         setBackgroundColor()
+        setNavigationBarProperties()
 
     }
     func setNavigationBarProperties(){

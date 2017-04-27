@@ -30,6 +30,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         getMatchData()
         setBackgroundColor()
         self.matchSummaryTable.reloadData()
+        setNavigationBarProperties()
     }
     
     override func viewDidLoad() {
@@ -45,7 +46,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     matchSummaryTable.registerNib(UINib.init(nibName:"SummaryDetailsCell", bundle: nil), forCellReuseIdentifier: "SummaryDetailsCell")
         matchSummaryTable.allowsSelection = true
         matchSummaryTable.separatorStyle = .None
-        setNavigationBarProperties()
+        
 //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MatchSummaryViewController.newDataAdded), name: "MatchDataChanged" , object: nil)
         // Do any additional setup after loading the view.
     }

@@ -107,6 +107,7 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         setBackgroundColor()
+        userName.text = profileData.fullName
         
         if profilePic == "-" {
             let imageName = defaultProfileImage

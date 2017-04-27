@@ -305,7 +305,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         addTapGestureToUserName()
-       
+        TeamsTable.reloadData()
         
         //loadBannerAds()
 
@@ -448,7 +448,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         setBackgroundColor()
         initView()
         setDashboardData()
-         TeamsTable.reloadData()
+        TeamsTable.reloadData()
     }
     
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
