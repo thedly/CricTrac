@@ -121,7 +121,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     }
     var data:[String:String]{
         
-        return ["FirstName": firstName.textVal.trim(),"LastName":lastName.textVal.trim(),"DateOfBirth":dateOfBirth.textVal,"Email":emailId.textVal,"Mobile":mobile.textVal.trim(),"Gender":gender.textVal,"Country":country.textVal,"State":state.textVal,"City":city.textVal,"UserProfile":userProfileInfo.textVal]
+        return ["FirstName": firstName.textVal.trim(),"LastName":lastName.textVal.trim(),"DateOfBirth":dateOfBirth.textVal,"Email":emailId.textVal,"Mobile":mobile.textVal.trim(),"Gender":gender.textVal,"Country":country.textVal,"State":state.textVal,"City":city.textVal]
     }
     
     
@@ -289,7 +289,12 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         profileData.State = self.data["State"]!
         profileData.City = self.data["City"]!
       //  profileData.UserProfile = self.data["UserProfile"]!
-        modProfile = self.data["UserProfile"]!
+        if userProfile == nil  {
+        modProfile = userProfileInfo.text!
+        }
+        else{
+            modProfile = profileData.UserProfile
+        }
       
      //   if profileData != nil {
             switch modProfile {
@@ -516,7 +521,7 @@ extension UserInfoViewController:UITextFieldDelegate
         else if textField == state {
             if country.text?.length >= 0 {
                 state.userInteractionEnabled = true
-                country.text = ""
+                //country.text = ""
                 city.text = ""
                 ctStatePicker.showPicker(self, inputText: textField, iso: ctCountryPicker.SelectedISO)
             }else {
