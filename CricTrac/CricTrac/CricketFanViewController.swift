@@ -52,9 +52,8 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
     @IBOutlet weak var hobbiesBtn: UIButton!
     
     
-    
-    
     var profileChanged: Bool! = false
+    var modProfileFan = ""
     
     var selectedText: UITextField!
     
@@ -187,8 +186,8 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
         profileData.SupportingTeams = self.data["SupportingTeams"] as! [String]
         profileData.InterestedSports = self.data["InterestedSports"] as! [String]
         profileData.Hobbies =  self.data["Hobbies"] as! [String]
-        profileData.UserProfile = userProfileType.Fan.rawValue
-        
+        // profileData.UserProfile = userProfileType.Fan.rawValue
+        profileData.UserProfile = modProfileFan
         
         addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
         

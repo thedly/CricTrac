@@ -50,6 +50,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     var selectedText: UITextField!
     
     var profileChanged: Bool! = false
+    var modProfileCoach = ""
     
     var data:[String:AnyObject]{
         
@@ -197,7 +198,8 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         profileData.CoachCurrentTeams = self.data["CoachCurrentTeams"] as! [String]
         profileData.CoachPastTeams = self.data["CoachPastTeams"] as! [String]
         profileData.CoachPlayedFor = self.data["CoachPlayedFor"] as! [String]
-        profileData.UserProfile = userProfileType.Coach.rawValue
+        //  profileData.UserProfile = userProfileType.Coach.rawValue
+        profileData.UserProfile = modProfileCoach
         
         addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
         

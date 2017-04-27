@@ -34,6 +34,7 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     var pastTeamNames = [""]
     var window = UIWindow(frame: UIScreen.mainScreen().bounds)
     var nextVC: UIViewController!
+    var modProfilePlayer = ""
     var data:[String:AnyObject]{
         return ["PlayingRole":playingRole.textVal,"BattingStyle":battingStyle.textVal,"BowlingStyle":bowlingStyle.textVal,"PlayerCurrentTeams":teamNames, "PlayerPastTeams": pastTeamNames]
     }
@@ -82,7 +83,8 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         profileData.BowlingStyle = self.data["BowlingStyle"] as! String
         profileData.PlayerCurrentTeams = self.data["PlayerCurrentTeams"] as! [String]
         profileData.PlayerPastTeams = self.data["PlayerPastTeams"] as! [String]
-        profileData.UserProfile = userProfileType.Player.rawValue
+        //profileData.UserProfile = userProfileType.Player.rawValue
+        profileData.UserProfile = modProfilePlayer
         
         addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
             profileData = Profile(usrObj: data)

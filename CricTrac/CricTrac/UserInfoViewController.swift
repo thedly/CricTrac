@@ -54,6 +54,8 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     var NextVC : UIViewController!
     
     var userProfile : String!
+    
+    var modProfile = " "
    
     var profileChanged: Bool! = false
     
@@ -119,7 +121,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     }
     var data:[String:String]{
         
-        return ["FirstName": firstName.textVal.trim(),"LastName":lastName.textVal.trim(),"DateOfBirth":dateOfBirth.textVal,"Email":emailId.textVal,"Mobile":mobile.textVal.trim(),"Gender":gender.textVal,"Country":country.textVal,"State":state.textVal,"City":city.textVal]
+        return ["FirstName": firstName.textVal.trim(),"LastName":lastName.textVal.trim(),"DateOfBirth":dateOfBirth.textVal,"Email":emailId.textVal,"Mobile":mobile.textVal.trim(),"Gender":gender.textVal,"Country":country.textVal,"State":state.textVal,"City":city.textVal,"UserProfile":userProfileInfo.textVal]
     }
     
     
@@ -134,7 +136,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         firstName.delegate = self
         lastName.delegate = self
         mobile.delegate = self
-        userProfileInfo.delegate = self
+     //   userProfileInfo.delegate = self
         
         
         emailId.userInteractionEnabled = false
@@ -287,14 +289,16 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         profileData.State = self.data["State"]!
         profileData.City = self.data["City"]!
       //  profileData.UserProfile = self.data["UserProfile"]!
+        modProfile = self.data["UserProfile"]!
       
      //   if profileData != nil {
-            switch profileData.UserProfile {
+            switch modProfile {
             case userProfileType.Player.rawValue :
                 
                 let vc = viewControllerFrom("Main", vcid: "PlayerExperienceViewController") as! PlayerExperienceViewController
                 
                 vc.profileChanged = self.profileChanged
+                vc.modProfilePlayer = modProfile
 
                 
                 NextVC = vc
@@ -304,6 +308,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
                 let vc = viewControllerFrom("Main", vcid: "CoachingExperienceViewController") as! CoachingExperienceViewController
                 
                 vc.profileChanged = self.profileChanged
+                vc.modProfileCoach = modProfile
 
                 
                 NextVC = vc
@@ -312,6 +317,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
                 let vc = viewControllerFrom("Main", vcid: "CricketFanViewController") as! CricketFanViewController
                 
                 vc.profileChanged = self.profileChanged
+                vc.modProfileFan = modProfile
 
                 
                 NextVC = vc
@@ -321,7 +327,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
                 let vc = viewControllerFrom("Main", vcid: "PlayerExperienceViewController") as! PlayerExperienceViewController
                 
                 vc.profileChanged = self.profileChanged
-
+                vc.modProfilePlayer = modProfile
 
                 NextVC = vc
             }
@@ -559,16 +565,17 @@ extension UserInfoViewController:UITextFieldDelegate
                     confirmAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction) in
                         
                         self.userProfileInfo.text = profileData.UserProfile
+                         self.profileChanged = false
                         
                     }))
                     
                     self.presentViewController(confirmAlert, animated: true, completion: nil)
                 }
-//                else {
-//                    
-//                    profileChanged = false
-//                    continueToDismiss()
-//                }
+                else {
+                    
+                    profileChanged = false
+                    //continueToDismiss()
+                }
             }
             
         }
