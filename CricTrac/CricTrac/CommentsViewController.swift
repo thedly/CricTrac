@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftyJSON
-import MessageUI
 
 class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UIActionSheetDelegate,DeleteComment{
     
@@ -76,27 +75,13 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         }
     }
     
-    func moveToPlayer(userInfo:[String : AnyObject]){
-        
-        let message = "Install CricTrac from the Store"
-        
-        var whatsappURL:NSURL? = NSURL(string: "whatsapp://send?text=\(message)")
-        if (UIApplication.sharedApplication().canOpenURL(whatsappURL!)) {
-            UIApplication.sharedApplication().openURL(whatsappURL!)
-        }
-        else {
-            let errorAlert = UIAlertView(title: "Cannot Send Message", message: "Your device is not able to send WhatsApp messages.", delegate: self, cancelButtonTitle: "OK")
-            errorAlert.show()
-        }
-        
-    }
     
-//    func moveToPlayer(userInfo:[String : AnyObject]){
-//        let dashBoard = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
-//        dashBoard.friendId = postOwnerId
-//        dashBoard.friendProfile = userInfo
-//        self.presentViewController(dashBoard, animated: true) {}
-//    }
+    func moveToPlayer(userInfo:[String : AnyObject]){
+        let dashBoard = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
+        dashBoard.friendId = postOwnerId
+        dashBoard.friendProfile = userInfo
+        self.presentViewController(dashBoard, animated: true) {}
+    }
     
     func moveToCoach(userInfo:[String : AnyObject]){            let dashBoard = viewControllerFrom("Main", vcid: "CoachDashboardViewController") as! CoachDashboardViewController
         dashBoard.friendId = postOwnerId
