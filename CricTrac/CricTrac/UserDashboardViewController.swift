@@ -307,7 +307,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         addTapGestureToUserName()
         TeamsTable.reloadData()
         
-        //loadBannerAds()
+        loadBannerAds()
 
     }
     
@@ -1570,15 +1570,17 @@ func setDashboardData(){
 
             let matchId:String = (String(DashboardDetails.Recent1stMatchID) ?? nil)!
             let userId:String = self.friendId ?? currentUser!.uid
-            fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+            fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeSingleEventOfType(.Value, withBlock: { snapshot in
             
             if let data = snapshot.value! as? [String:AnyObject]{
                 
             let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
                 summaryDetailsVC.matchDetailsData = data
                 
+                    summaryDetailsVC.isFriendDashboard = true
                 if let _ = self.friendProfile {
                     summaryDetailsVC.friendProfile = true
+
                     self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
                 }
                 else {
@@ -1592,12 +1594,12 @@ func didTapRecent2ndMatchID() {
         if String(DashboardDetails.Recent2ndMatchID) != "-" {
             let matchId:String = (String(DashboardDetails.Recent2ndMatchID) ?? nil)!
             let userId:String = self.friendId ?? currentUser!.uid
-            fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+            fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeSingleEventOfType(.Value, withBlock: { snapshot in
                 
                 if let data = snapshot.value! as? [String:AnyObject]{
                 let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
                     summaryDetailsVC.matchDetailsData = data
-                    
+                    summaryDetailsVC.isFriendDashboard = true
                     if let _ = self.friendProfile {
                         summaryDetailsVC.friendProfile = true
                         self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
@@ -1613,12 +1615,12 @@ func didTapTopBatting1stMatchID() {
         if String(DashboardDetails.TopBatting1stMatchID) != "-" {
             let matchId:String = (String(DashboardDetails.TopBatting1stMatchID) ?? nil)!
             let userId:String = self.friendId ?? currentUser!.uid
-            fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+            fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeSingleEventOfType(.Value, withBlock: { snapshot in
                 
                 if let data = snapshot.value! as? [String:AnyObject]{
                     let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
                     summaryDetailsVC.matchDetailsData = data
-                    
+                    summaryDetailsVC.isFriendDashboard = true
                     if let _ = self.friendProfile {
                         summaryDetailsVC.friendProfile = true
                         self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
@@ -1635,19 +1637,19 @@ func didTapTopBatting1stMatchID() {
         if String(DashboardDetails.TopBatting2ndMatchID) != "-" {
             let matchId:String = (String(DashboardDetails.TopBatting2ndMatchID) ?? nil)!
             let userId:String = self.friendId ?? currentUser!.uid
-            fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+            fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeSingleEventOfType(.Value, withBlock: { snapshot in
                 
                 if let data = snapshot.value! as? [String:AnyObject]{
                     let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
                     summaryDetailsVC.matchDetailsData = data
-                    
+                    summaryDetailsVC.isFriendDashboard = true
                     if let _ = self.friendProfile {
                         summaryDetailsVC.friendProfile = true
                         self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
                     }
                     else {
                         self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
-                    }
+                  }
                 }
             })
         }
@@ -1657,12 +1659,12 @@ func didTapTopBatting1stMatchID() {
         if String(DashboardDetails.TopBowling1stMatchID) != "-" {
             let matchId:String = (String(DashboardDetails.TopBowling1stMatchID) ?? nil)!
             let userId:String = self.friendId ?? currentUser!.uid
-            fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+            fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeSingleEventOfType(.Value, withBlock: { snapshot in
                 
                 if let data = snapshot.value! as? [String:AnyObject]{
                     let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
                     summaryDetailsVC.matchDetailsData = data
-                    
+                    summaryDetailsVC.isFriendDashboard = true
                     if let _ = self.friendProfile {
                         summaryDetailsVC.friendProfile = true
                         self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
@@ -1679,12 +1681,12 @@ func didTapTopBatting1stMatchID() {
             if String(DashboardDetails.TopBowling2ndMatchID) != "-" {
                 let matchId:String = (String(DashboardDetails.TopBowling2ndMatchID) ?? nil)!
                 let userId:String = self.friendId ?? currentUser!.uid
-                fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
+                fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeSingleEventOfType(.Value, withBlock: { snapshot in
                     
                     if let data = snapshot.value! as? [String:AnyObject]{
                     let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
                     summaryDetailsVC.matchDetailsData = data
-                        
+                        summaryDetailsVC.isFriendDashboard = true
                         if let _ = self.friendProfile {
                             summaryDetailsVC.friendProfile = true
                             self.presentViewController(summaryDetailsVC, animated: true, completion: nil)

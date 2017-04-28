@@ -1,4 +1,4 @@
-    //
+  //
 //  SummaryMatchDetailsViewController.swift
 //  CricTrac
 //
@@ -56,8 +56,10 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     var friendProfile: Bool!  = false
     @IBOutlet weak var matchDetailsTitle: UILabel!
     @IBOutlet weak var matchDetailsBack: UIButton!
+    @IBOutlet weak var bottomView: UIView!
     
-    
+    var isFriendDashboard: Bool!  = false
+
     
     
     @IBAction func deleteActionPressed(sender: UIButton) {
@@ -117,27 +119,44 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         menuButton.addTarget(self, action: #selector(didTapCancel), forControlEvents: UIControlEvents.TouchUpInside)
         menuButton.frame = CGRectMake(0, 0, 40, 40)
         let leftbarButton = UIBarButtonItem(customView: menuButton)
-        
-        let addNewMatchButton: UIButton = UIButton(type:.Custom)
-        addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
-        addNewMatchButton.setImage(UIImage(named: "Edit-100"), forState: UIControlState.Normal)
-        addNewMatchButton.titleLabel?.font = UIFont(name: appFont_bold, size: 15)
-        addNewMatchButton.addTarget(self, action: #selector(didTapEditButton), forControlEvents:UIControlEvents.TouchUpInside)
-        let righttbarButton = UIBarButtonItem(customView: addNewMatchButton)
-        navigationItem.rightBarButtonItem = righttbarButton
-        
         //assign button to navigationbar
         
         navigationItem.leftBarButtonItem = leftbarButton
-        if friendProfile == false {
+        
+
+        
+        if isFriendDashboard == false {
+            
+            let addNewMatchButton: UIButton = UIButton(type:.Custom)
+            addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
+            addNewMatchButton.setImage(UIImage(named: "Edit-100"), forState: UIControlState.Normal)
+            addNewMatchButton.titleLabel?.font = UIFont(name: appFont_bold, size: 15)
+            addNewMatchButton.addTarget(self, action: #selector(didTapEditButton), forControlEvents:UIControlEvents.TouchUpInside)
+            let righttbarButton = UIBarButtonItem(customView: addNewMatchButton)
+            navigationItem.rightBarButtonItem = righttbarButton
+
             navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+            self.bottomView.hidden = false
+
         }
         else {
+            
             matchDetailsTitle.text = "SCORECARD"
             matchEditButton.hidden = true
             matchDetailsBack.addTarget(self, action: #selector(didTapCancelOthers), forControlEvents: UIControlEvents.TouchUpInside)
+            
+            self.bottomView.hidden = true
+            
+
         }
         title = "SCORECARD"
+       
+//        if friendProfile == false {
+//            self.bottomView.hidden = false
+//        }
+//        else {
+//           self.bottomView.hidden = true
+//        }
         //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         // navigationController!.navigationBar.titleTextAttributes = titleDict
     }
@@ -186,6 +205,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackgroundColor()
+        setNavigationBarProperties()
         //setUIBackgroundTheme(self.view)
         setColorForViewsWithSameTag(battingView)
         setColorForViewsWithSameTag(bowlingView)
