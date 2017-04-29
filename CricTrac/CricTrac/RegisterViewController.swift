@@ -22,6 +22,7 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
    
     @IBOutlet weak var username:UITextField!
     @IBOutlet weak var password:UITextField!
+    @IBOutlet weak var confirmPassword: UITextField!
 
     @IBOutlet weak var facebookBtn: UIButton!
     let loginManager = FBSDKLoginManager()
@@ -259,40 +260,64 @@ extension RegisterViewController {
     
     @IBAction func loginWithUserNamePassword(){
         
-        KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
-        
-        
-        registerWithEmailAndPassword((username.text?.trimWhiteSpace)!, password: (password.text?.trimWhiteSpace)!) { (user, error) in
-            KRProgressHUD.dismiss()
-            if error == nil {
+        if username.text?.trimWhiteSpace != "" || password.text?.trimWhiteSpace != "" || confirmPassword.text?.trimWhiteSpace != "" {
+            if password.text?.trimWhiteSpace == confirmPassword.text?.trimWhiteSpace {
                 
-                user?.sendEmailVerificationWithCompletion() { error in
+                KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+                registerWithEmailAndPassword((username.text?.trimWhiteSpace)!, password: (password.text?.trimWhiteSpace)!) { (user, error) in
                     KRProgressHUD.dismiss()
-                    if let error = error {
-                        SCLAlertView().showError("Error", subTitle:error.localizedDescription)
-                        // An error happened.
+                    if error == nil {
+                
+                        user?.sendEmailVerificationWithCompletion() { error in
+                            KRProgressHUD.dismiss()
+                            if let error = error {
+                               // SCLAlertView().showError("Error123", subTitle:error.localizedDescription)
+                                let alert = UIAlertController(title: "", message: "Inavlid details", preferredStyle: UIAlertControllerStyle.Alert)
+                                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                                self.presentViewController(alert, animated: true, completion: nil)
+                          
+                            
+                                // An error happened.
+                            }
+                        
+                                // Email sent.
+                            else {
+                        
+                                self.dismissViewControllerAnimated(true, completion: {
+                                  //  SCLAlertView().showInfo("Verify email", subTitle: "An email has been sent for verification")
+                                    let alert = UIAlertController(title: "", message: "An email has been sent for verification", preferredStyle: UIAlertControllerStyle.Alert)
+                                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                                    self.presentViewController(alert, animated: true, completion: nil)
+                                })
+                            }
+                        }
                     }
-                        
-                        // Email sent.
                     else {
-                        
-                        self.dismissViewControllerAnimated(true, completion: {
-                            SCLAlertView().showInfo("Verify email", subTitle: "An email has been sent for verification")
-                        }) }  } }
-            else {
                 
-                let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
-                dispatch_after(delay, dispatch_get_main_queue()) {
-                    SCLAlertView().showError("Registration Error", subTitle: error!.localizedDescription)
+                        let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
+                        dispatch_after(delay, dispatch_get_main_queue()) {
+                          //  SCLAlertView().showError("Registration Error", subTitle: error!.localizedDescription)
+                            let alert = UIAlertController(title: "", message: "This email address is already in use", preferredStyle: UIAlertControllerStyle.Alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                            self.presentViewController(alert, animated: true, completion: nil)
+                        }
+                    }
                 }
-                
-                
-                
             }
-            
+            else {
+                let alert = UIAlertController(title: "", message: "Passwords are not matching", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
         }
-        
-    }
+        else{
+            let alert = UIAlertController(title: "", message: "Email/Password is empty", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    
+}
+
     @IBAction func loginWithFB(sender: UIButton) {
         self.facebookBtn.enabled = false
         loginWithFacebook()

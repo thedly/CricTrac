@@ -39,10 +39,10 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackgroundColor()
-        username.text = "crictracrahul@gmail.com"
-        password.text = "crictrac"
+        //username.text = "crictracrahul@gmail.com"
+        //password.text = "crictrac"
         //setUIBackgroundTheme(self.view)
-        //loginWithSavedCredentials()
+        loginWithSavedCredentials()
     }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -66,13 +66,19 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     }
 
     @IBAction func loginWithUserNamePassword(){
-        KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+       // KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
         loginWithMailAndPassword((username.text?.trimWhiteSpace)!, password: (password.text?.trimWhiteSpace)!) { (user, error) in
+            // KRProgressHUD.dismiss()
             if error != nil{
-                SCLAlertView().showError("Login Error", subTitle: error!.localizedDescription)
-                KRProgressHUD.dismiss()
+              
+                let alert = UIAlertController(title: "Login Error", message: "This password is invalid or user does not have a password", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+                
+              // KRProgressHUD.dismiss()
             }
             else {
+                KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
                 KRProgressHUD.dismiss()
                 if user!.emailVerified{
                     currentUser = user
@@ -226,7 +232,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     }
     
     func loginWithSavedCredentials(){
-        KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+        // KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
         let keychain = KeychainSwift()
         guard let userName = keychain.get("ct_userName") else {return}
         guard let password = keychain.get("ct_password") else {return}
@@ -236,7 +242,9 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
                 KRProgressHUD.dismiss()
             }
             else {
+                KRProgressHUD.dismiss()
                 if user!.emailVerified{
+                    
                     currentUser = user
                     enableSync()
                     self.navigateToNextScreen()
