@@ -75,6 +75,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         }
     }
     
+    
     func moveToPlayer(userInfo:[String : AnyObject]){
         let dashBoard = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
         dashBoard.friendId = postOwnerId

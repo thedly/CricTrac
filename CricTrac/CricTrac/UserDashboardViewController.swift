@@ -1393,6 +1393,9 @@ func setDashboardData(){
         if ((self.userProfileData.PlayerCurrentTeams.count) + (self.userProfileData.PlayerPastTeams.count)) == 0 {
             self.teamsViewHeightConstraint.constant = 0
         }
+        else {
+            self.teamsViewHeightConstraint.constant = 180
+        }
         
         //self.scrollViewBottomElementConstraint.constant = 10
         self.view.layoutIfNeeded()

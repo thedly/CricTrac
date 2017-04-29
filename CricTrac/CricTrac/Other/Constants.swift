@@ -51,10 +51,10 @@ var menuData = [
 
 var friendInviteData = [
     
-    ["title":"MAIL","vc":"UserDashboardViewController", "img": "mail_icon"],
-    ["title":"MESSAGE","vc":"AddMatchDetailsViewController", "img": "message_icon"],
-    ["title":"FACEBOOK","vc":"MatchSummaryViewController", "img": "facebook_icon"],
-    ["title":"TWITTER","vc":"FriendBaseViewController", "img": "twitter_icon"]
+    ["title":"MAIL","vc":"email", "img": "mail_icon"],
+    ["title":"MESSAGE","vc":"message", "img": "message_icon"],
+    ["title":"FACEBOOK","vc":"facebook", "img": "facebook_icon"],
+    ["title":"WHATSAPP","vc":"whatsapp", "img": "WhatsApp-48"]
 ]
 
 let settingsMenuData = [
