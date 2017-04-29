@@ -171,7 +171,13 @@ class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITabl
     }
     
     func openFaceBookApp() {
-        
+//        [FBWebDialogs
+//            presentRequestsDialogModallyWithSession:nil
+//            message:NSLocalizedString(@"FBinviteMessage", nil)
+//            title:nil
+//            parameters:nil
+//            handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {}
+//        ];
     }
 
     
