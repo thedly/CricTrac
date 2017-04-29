@@ -11,7 +11,7 @@ import UIKit
 import XLPagerTabStrip
 import MessageUI
 
-class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,IndicatorInfoProvider,ThemeChangeable,MFMessageComposeViewControllerDelegate {
+class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,IndicatorInfoProvider,ThemeChangeable,MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate {
     
     
     var friendInviteDataArray = friendInviteData
@@ -76,6 +76,12 @@ class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITabl
         else if itemTitle == "MESSAGE" {
             openMessageApp()
         }
+        else if itemTitle == "MAIL" {
+            openMailApp()
+        }
+        else if itemTitle == "FACEBOOK" {
+            openFaceBookApp()
+        }
     }
     
     
@@ -95,8 +101,49 @@ class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITabl
     }
     
     func openMailApp() {
-        
+        let mailComposeViewController = configuredMailComposeViewController()
+        if MFMailComposeViewController.canSendMail() {
+            self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+        } else {
+            self.showSendMailErrorAlert()
+        }
     }
+    
+    func configuredMailComposeViewController() -> MFMailComposeViewController {
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
+        
+        //mailComposerVC.setToRecipients(["someone@somewhere.com"])
+        mailComposerVC.setSubject("Install CricTrac from the Store")
+        mailComposerVC.setMessageBody("Install CricTrac from the Store", isHTML: false)
+        
+        return mailComposerVC
+    }
+    
+    func showSendMailErrorAlert() {
+        let sendMailErrorAlert = UIAlertView(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", delegate: self, cancelButtonTitle: "OK")
+        sendMailErrorAlert.show()
+    }
+    
+    
+    // MARK: MFMailComposeViewControllerDelegate Method
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        
+        switch result {
+        case MFMailComposeResultCancelled:
+            print("Mail cancelled")
+        case MFMailComposeResultSaved:
+            print("Mail saved")
+        case MFMailComposeResultSent:
+            print("Mail sent")
+        case MFMailComposeResultFailed:
+            print("Mail sent failure: \(error?.localizedDescription)")
+        default:
+            break
+        }
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     
     func openMessageApp() {
         let messageVC = MFMessageComposeViewController()
@@ -124,7 +171,13 @@ class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITabl
     }
     
     func openFaceBookApp() {
-        
+//        [FBWebDialogs
+//            presentRequestsDialogModallyWithSession:nil
+//            message:NSLocalizedString(@"FBinviteMessage", nil)
+//            title:nil
+//            parameters:nil
+//            handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {}
+//        ];
     }
 
     
