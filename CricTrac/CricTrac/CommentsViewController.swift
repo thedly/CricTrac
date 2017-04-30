@@ -247,14 +247,13 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                 }
             }
             else {
-                let alert = UIAlertController(title: "", message: "Post not found", preferredStyle: UIAlertControllerStyle.Alert)
-                //alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-                
+                let alert = UIAlertController(title: "", message: "Post not found", preferredStyle: UIAlertControllerStyle.Alert)                
                 alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!)-> Void in
+                    //print("delete")
                     //delete the nottification
                 }))
-                self.dismissViewControllerAnimated(true) {}
-                return
+                //self.dismissViewControllerAnimated(true) {}
+                //return
             }
         }
     }

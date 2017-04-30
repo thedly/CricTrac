@@ -1099,7 +1099,7 @@ func getAllComments(postId:String,sucess:(data:[[String:AnyObject]])->Void){
 }
 
 func getAllNotifications(sucessBlock:([[String: AnyObject]])->Void){
-    fireBaseRef.child("Users").child(currentUser!.uid).child("Notifications").observeEventType(.Value, withBlock: { snapshot in
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Notifications").queryOrderedByChild("AddedTime").queryLimitedToLast(30).observeEventType(.Value, withBlock: { snapshot in
         if let data = snapshot.value as? [String:[String:AnyObject]] {
             var result = [[String:AnyObject]]()
             for (key,value) in data{
@@ -1107,8 +1107,7 @@ func getAllNotifications(sucessBlock:([[String: AnyObject]])->Void){
                 dataval["notificationId"] = key
                 result.append(dataval)
             }
-            //result.sortInPlace({$0.AddedTime > $1.AddedTime})
-           sucessBlock(result)
+            sucessBlock(result)
         }
 
     })
