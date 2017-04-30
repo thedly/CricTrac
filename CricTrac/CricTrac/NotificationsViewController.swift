@@ -113,6 +113,15 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
         let topicId = self.dataSource[indexPath.row]["TopicID"]! as! String
         let fromId = self.dataSource[indexPath.row]["FromID"]! as! String
         
+        switch topic{
+            case "FRR": self.moveToFRR(topicId)
+            case "FRA": self.moveToFRA(topicId)
+            case "NMA": self.moveToNMA()
+            case "NPA": self.moveToNPA(topicId)
+            case "NCA": self.moveToNCA(topicId)
+            case "NLA": self.moveToNLA(topicId)
+            default: break
+        }
         
     }
     
@@ -139,6 +148,41 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
         
         return [delete, markRead]
     }
+    
+    func moveToFRR(topicId:String) {
+        let friendRequest = viewControllerFrom("Main", vcid: "FriendBaseViewController") as! FriendBaseViewController
+        friendRequest.topicId = topicId
+        self.presentViewController(friendRequest, animated: true) {}
+    }
+    
+    func moveToFRA(topicId:String) {
+        let friendRequest = viewControllerFrom("Main", vcid: "FriendBaseViewController") as! FriendBaseViewController
+        friendRequest.topicId = topicId
+        self.presentViewController(friendRequest, animated: true) {}
+    }
+    
+    func moveToNMA() {
+        print("NMA")
+    }
+    
+    func moveToNPA(topicId:String) {
+        let timelinePost = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
+        timelinePost.postId = topicId
+        self.presentViewController(timelinePost, animated: true) {}
+    }
+    
+    func moveToNCA(topicId:String) {
+        let timelinePost = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
+        timelinePost.postId = topicId
+        self.presentViewController(timelinePost, animated: true) {}
+    }
+    
+    func moveToNLA(topicId:String) {
+        let timelinePost = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
+        timelinePost.postId = topicId
+        self.presentViewController(timelinePost, animated: true) {}
+    }
+
 
     
 }

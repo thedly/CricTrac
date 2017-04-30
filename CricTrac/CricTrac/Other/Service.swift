@@ -1188,6 +1188,9 @@ func getPost(postId:String,sucessBlock:([String:AnyObject])->Void){
         if let data: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
             sucessBlock(data)
         }
+        else {
+            sucessBlock([:])
+        }
     })
 }
 

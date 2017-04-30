@@ -12,6 +12,8 @@ import KRProgressHUD
 
 class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChangeable {
 
+    var topicId:String = ""
+    
     @IBAction func didMenuButtonTapp(sender: UIButton){
         sliderMenu.setDrawerState(.Opened, animated: true)
     }
@@ -27,7 +29,8 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor
+        //sajith commented for Notifications
+        //navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     override func viewWillAppear(animated: Bool) {
         setBackgroundColor()
@@ -69,7 +72,10 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         
         navigationItem.leftBarButtonItem = leftbarButton
         navigationItem.rightBarButtonItem = righttbarButton
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        
+        if topicId == "" {
+            navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        }
         title = "DUGOUT"
     }
    
