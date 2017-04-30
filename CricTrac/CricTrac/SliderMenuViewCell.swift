@@ -13,6 +13,8 @@ class SliderMenuViewCell: UITableViewCell {
     @IBOutlet weak var menuIcon: UIImageView!
     
     @IBOutlet weak var menuName: UILabel!
+    var notificationId:String = ""
+
     
     override func awakeFromNib() {
         super.awakeFromNib()

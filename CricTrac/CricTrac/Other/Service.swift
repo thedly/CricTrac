@@ -1098,6 +1098,32 @@ func getAllComments(postId:String,sucess:(data:[[String:AnyObject]])->Void){
     })
 }
 
+func getAllNotifications(sucessBlock:([[String: AnyObject]])->Void){
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Notifications").observeEventType(.Value, withBlock: { snapshot in
+        if let data = snapshot.value as? [String:[String:AnyObject]] {
+            var result = [[String:AnyObject]]()
+            for (key,value) in data{
+                var dataval = value
+                dataval["notificationId"] = key
+                result.append(dataval)
+            }
+            //result.sortInPlace({$0.AddedTime > $1.AddedTime})
+           sucessBlock(result)
+        }
+
+    })
+}
+
+func markNotificationAsRead(notificationId:String) {
+    //mark notification as READ
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Notifications").child(notificationId).child("isRead")
+    ref.setValue(1)
+}
+
+func deleteNotification(notificationId:String) {
+    //delete Notification
+    _ = fireBaseRef.child("Users").child(currentUser!.uid).child("Notifications").child(notificationId).removeValue()
+}
 
 func likePost(postId:String)->[String:[String:String]]{
     let ref = fireBaseRef.child("TimelinePosts").child(postId).child("Likes").childByAutoId()

@@ -164,12 +164,12 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         sliderMenu.setDrawerState(.Opened, animated: true)
     }
     
-//    func didNewMatchButtonTapp(){
-//        let newMatchVc = viewControllerFrom("Main", vcid: "AddMatchDetailsViewController")
-//        let nav = UINavigationController(rootViewController: newMatchVc)
-//        sliderMenu.mainViewController = nav
-//       // self.presentViewController(nav, animated: true) {}
-//    }
+    func didNotificationButtonTapp(){
+        let newMatchVc = viewControllerFrom("Main", vcid: "NotificationsViewController")
+        let nav = UINavigationController(rootViewController: newMatchVc)
+        sliderMenu.mainViewController = nav
+       // self.presentViewController(nav, animated: true) {}
+    }
     
     func setNavigationBarProperties(){
        
@@ -180,17 +180,18 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         menuButton.frame = CGRectMake(0, 0, 40, 40)
         let leftbarButton = UIBarButtonItem(customView: menuButton)
         
-        //let addNewMatchButton: UIButton = UIButton(type:.Custom)
-        //addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
+        let addNewMatchButton: UIButton = UIButton(type:.Custom)
+        addNewMatchButton.frame = CGRectMake(0, 0, 20, 20)
         //addNewMatchButton.setTitle("+", forState:.Normal)
         //addNewMatchButton.titleLabel?.font = UIFont(name: appFont_bold, size: 30)
-        //addNewMatchButton.addTarget(self, action: #selector(didNewMatchButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
-        //let righttbarButton = UIBarButtonItem(customView: addNewMatchButton)
+        addNewMatchButton.setImage(UIImage(named: "BallIcon"), forState: UIControlState.Normal)
+        addNewMatchButton.addTarget(self, action: #selector(didNotificationButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+        let righttbarButton = UIBarButtonItem(customView: addNewMatchButton)
         
         //assign button to navigationbar
         
         navigationItem.leftBarButtonItem = leftbarButton
-        //navigationItem.rightBarButtonItem = righttbarButton
+        navigationItem.rightBarButtonItem = righttbarButton
         self.view.backgroundColor =  currentTheme.topColor
        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "PAVILION"

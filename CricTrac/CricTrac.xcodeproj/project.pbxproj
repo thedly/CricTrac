@@ -131,6 +131,7 @@
 		89F9911E1DDA1BEF00E5F440 /* UserDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F9911D1DDA1BEF00E5F440 /* UserDashboardViewController.swift */; };
 		89FD59C61D41C3AE003EF45C /* SF-UI-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 89FD59C41D41C3AE003EF45C /* SF-UI-Text-Bold.otf */; };
 		89FD59C71D41C3AE003EF45C /* SF-UI-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 89FD59C51D41C3AE003EF45C /* SF-UI-Text-Regular.otf */; };
+		E1B593691EB4E63A00C8A553 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B593681EB4E63A00C8A553 /* NotificationsViewController.swift */; };
 		F7856BE080406499CCB071C8 /* Pods_CricTrac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA2224284F64FAE77B7776D9 /* Pods_CricTrac.framework */; };
 /* End PBXBuildFile section */
 
@@ -279,6 +280,7 @@
 		89FD59C41D41C3AE003EF45C /* SF-UI-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Bold.otf"; sourceTree = "<group>"; };
 		89FD59C51D41C3AE003EF45C /* SF-UI-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Regular.otf"; sourceTree = "<group>"; };
 		DA2224284F64FAE77B7776D9 /* Pods_CricTrac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CricTrac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1B593681EB4E63A00C8A553 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -547,6 +549,7 @@
 				895BC3CB1E266B500033D330 /* StaticPageViewController.swift */,
 				892520B11E336044006946C0 /* CoachDashboardViewController.swift */,
 				892520B31E3379E7006946C0 /* FanDashboardViewController.swift */,
+				E1B593681EB4E63A00C8A553 /* NotificationsViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -834,6 +837,7 @@
 				462DE9F71D478B9E00E31E8F /* CTDatePicker.swift in Sources */,
 				89067D731DAE9D120021F463 /* radioSelectView.swift in Sources */,
 				89067D751DAEA89C0021F463 /* TransitionManager.swift in Sources */,
+				E1B593691EB4E63A00C8A553 /* NotificationsViewController.swift in Sources */,
 				897C414E1E21FF16005F1231 /* SentFriendRequest.swift in Sources */,
 				89129C4C1D90501B009488FE /* RegisterViewController.swift in Sources */,
 				8951D52F1DB08BF5005D101A /* CricketFanViewController.swift in Sources */,
