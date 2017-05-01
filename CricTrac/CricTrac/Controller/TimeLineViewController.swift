@@ -186,7 +186,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         notificationButton.frame = CGRectMake(0, 0, 20, 20)
         //notificationButton.setTitle("243", forState:.Normal)
         //notificationButton.font = UIFont(name: appFont_bold, size: 30)!
-        notificationButton.setImage(UIImage(named: "BallIcon"), forState: UIControlState.Normal)
+        notificationButton.setImage(UIImage(named: "Notification"), forState: UIControlState.Normal)
         notificationButton.addTarget(self, action: #selector(didNotificationButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
         let righttbarButton = UIBarButtonItem(customView: notificationButton)
         
