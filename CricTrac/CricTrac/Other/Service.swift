@@ -1109,9 +1109,26 @@ func getAllNotifications(sucessBlock:([[String: AnyObject]])->Void){
             }
             sucessBlock(result)
         }
-
     })
 }
+
+//func calcUnreadNotifications() {
+//    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Notifications").queryLimitedToLast(30)
+//    ref.queryOrderedByChild("isRead").queryStartingAtValue(0).queryEndingAtValue(0).observeEventType(.Value, withBlock: { snapshot in
+//        let count = snapshot.childrenCount
+//        
+//        let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").child("Notifications")
+//        ref.setValue(count)
+//    })
+//}
+
+//func getNotificationsCount(sucess:(notificationCount:String)->Void){
+//    fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings").child("Notifications").observeEventType(.Value, withBlock: { snapshot in
+//        if let data = snapshot.value as? String{
+//            sucess(notificationCount: data)
+//        }
+//    })
+//}
 
 func markNotificationAsRead(notificationId:String) {
     //mark notification as READ
@@ -1133,7 +1150,6 @@ func likePost(postId:String)->[String:[String:String]]{
     newLikeNotification(postId) { (resultError) in
         //KRProgressHUD.dismiss()
     }
-    
     return [ref.key:likeDict]
 }
 
@@ -1211,7 +1227,6 @@ func delComment(postId:String, commentId:String){
 // call the API to delete all reference timeline nodes
 func deleteTimelineNodes(postId:String){
     let timelineURL = serverBaseURL+"/deleteTimeline/"+postId
-    
     let request = NSMutableURLRequest(URL: NSURL(string:timelineURL)!)
     request.HTTPMethod = "POST"
     

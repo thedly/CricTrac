@@ -75,6 +75,7 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
             notificationId = data["notificationId"]! as! String
             let message = data["Message"] as? String
             let ownerId = data["FromID"] as? String
+            let isRead = data["isRead"] as? Int
             
             fetchFriendDetail(ownerId!, sucess: { (result) in
                 let proPic = result["proPic"]
@@ -99,6 +100,13 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
             cell.menuIcon.clipsToBounds = true
 
             cell.menuName.text = message
+            
+            if isRead == 0 {
+                cell.backgroundColor = currentTheme.bottomColor
+            }
+            else {
+                cell.backgroundColor = currentTheme.topColor
+            }
 
             cell.menuIcon.contentMode = UIViewContentMode.ScaleAspectFit;
 
@@ -109,6 +117,10 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.notificationId = self.dataSource[indexPath.row]["notificationId"]! as! String
+        
+        //on select, mark as Read
+        markNotificationAsRead(self.notificationId)
+        
         let topic = self.dataSource[indexPath.row]["Topic"]! as! String
         let topicId = self.dataSource[indexPath.row]["TopicID"]! as! String
         let fromId = self.dataSource[indexPath.row]["FromID"]! as! String
@@ -137,7 +149,6 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
                             editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let markRead = UITableViewRowAction(style: .Normal, title: "Mark as read") { action, index in
             self.notificationId = self.dataSource[indexPath.row]["notificationId"]! as! String
-            //print("hide")
             markNotificationAsRead(self.notificationId)
         }
         
@@ -146,7 +157,13 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
             deleteNotification(self.notificationId)
         }
         
-        return [delete, markRead]
+        let isRead = self.dataSource[indexPath.row]["isRead"] as? Int
+        if isRead == 0 {
+            return [delete, markRead]
+        }
+        else {
+            return [delete]
+        }
     }
     
     func moveToFRR(topicId:String) {

@@ -26,15 +26,17 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
    
     override func viewWillAppear(animated: Bool) {
         //loadTimeline()
+        
+        //calculate the Unread Notifications
+        //calcUnreadNotifications()
+        
         self.timeLineTable.reloadData()
         setNavigationBarProperties();
-       
         setBackgroundColor()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         //currentTheme = cricTracTheme.currentTheme
         setBackgroundColor()
@@ -180,20 +182,20 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         menuButton.frame = CGRectMake(0, 0, 40, 40)
         let leftbarButton = UIBarButtonItem(customView: menuButton)
         
-        let addNewMatchButton: UIButton = UIButton(type:.Custom)
-        addNewMatchButton.frame = CGRectMake(0, 0, 20, 20)
-        //addNewMatchButton.setTitle("+", forState:.Normal)
-        //addNewMatchButton.titleLabel?.font = UIFont(name: appFont_bold, size: 30)
-        addNewMatchButton.setImage(UIImage(named: "BallIcon"), forState: UIControlState.Normal)
-        addNewMatchButton.addTarget(self, action: #selector(didNotificationButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
-        let righttbarButton = UIBarButtonItem(customView: addNewMatchButton)
+        let notificationButton: UIButton = UIButton(type:.Custom)
+        notificationButton.frame = CGRectMake(0, 0, 20, 20)
+        //notificationButton.setTitle("243", forState:.Normal)
+        //notificationButton.font = UIFont(name: appFont_bold, size: 30)!
+        notificationButton.setImage(UIImage(named: "BallIcon"), forState: UIControlState.Normal)
+        notificationButton.addTarget(self, action: #selector(didNotificationButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+        let righttbarButton = UIBarButtonItem(customView: notificationButton)
         
         //assign button to navigationbar
         
         navigationItem.leftBarButtonItem = leftbarButton
         navigationItem.rightBarButtonItem = righttbarButton
         self.view.backgroundColor =  currentTheme.topColor
-       navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "PAVILION"
        // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
        // navigationController!.navigationBar.titleTextAttributes = titleDict
