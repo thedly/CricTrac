@@ -131,6 +131,8 @@
 		89F9911E1DDA1BEF00E5F440 /* UserDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F9911D1DDA1BEF00E5F440 /* UserDashboardViewController.swift */; };
 		89FD59C61D41C3AE003EF45C /* SF-UI-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 89FD59C41D41C3AE003EF45C /* SF-UI-Text-Bold.otf */; };
 		89FD59C71D41C3AE003EF45C /* SF-UI-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 89FD59C51D41C3AE003EF45C /* SF-UI-Text-Regular.otf */; };
+		B80B56091EB852220014FA9D /* CPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B56071EB852220014FA9D /* CPostTableViewCell.swift */; };
+		B80B560A1EB852220014FA9D /* CPostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B80B56081EB852220014FA9D /* CPostTableViewCell.xib */; };
 		E1B593691EB4E63A00C8A553 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B593681EB4E63A00C8A553 /* NotificationsViewController.swift */; };
 		F7856BE080406499CCB071C8 /* Pods_CricTrac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA2224284F64FAE77B7776D9 /* Pods_CricTrac.framework */; };
 /* End PBXBuildFile section */
@@ -279,6 +281,8 @@
 		89F9911D1DDA1BEF00E5F440 /* UserDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDashboardViewController.swift; sourceTree = "<group>"; };
 		89FD59C41D41C3AE003EF45C /* SF-UI-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Bold.otf"; sourceTree = "<group>"; };
 		89FD59C51D41C3AE003EF45C /* SF-UI-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Regular.otf"; sourceTree = "<group>"; };
+		B80B56071EB852220014FA9D /* CPostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPostTableViewCell.swift; sourceTree = "<group>"; };
+		B80B56081EB852220014FA9D /* CPostTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPostTableViewCell.xib; sourceTree = "<group>"; };
 		DA2224284F64FAE77B7776D9 /* Pods_CricTrac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CricTrac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1B593681EB4E63A00C8A553 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -487,6 +491,8 @@
 				46DE32C41D900C9F0024CD82 /* AddPostTableViewCell.xib */,
 				46DE32C91D90152F0024CD82 /* APostTableViewCell.swift */,
 				46DE32CA1D90152F0024CD82 /* APostTableViewCell.xib */,
+				B80B56071EB852220014FA9D /* CPostTableViewCell.swift */,
+				B80B56081EB852220014FA9D /* CPostTableViewCell.xib */,
 				46F36E341D93801900EA9C6A /* ImagePostTableViewCell.swift */,
 				46F36E351D93801900EA9C6A /* ImagePostTableViewCell.xib */,
 				894F8B801D95673800B3E936 /* SummaryDetailsCell.xib */,
@@ -665,6 +671,7 @@
 				894CA2A21D96150A0043D3D1 /* SourceSansPro-BoldIt.otf in Resources */,
 				46C9839A1D3922D200DFC607 /* LaunchScreen.storyboard in Resources */,
 				46DE32CC1D90152F0024CD82 /* APostTableViewCell.xib in Resources */,
+				B80B560A1EB852220014FA9D /* CPostTableViewCell.xib in Resources */,
 				895376921DAB846800DDB3A6 /* FriendRequestsCell.xib in Resources */,
 				8922042D1D97A3A6005F555B /* FriendsCell.xib in Resources */,
 				46DE32C61D900C9F0024CD82 /* AddPostTableViewCell.xib in Resources */,
@@ -806,6 +813,7 @@
 				89D7D9D21DAFD97E0069D536 /* PlayerExperienceViewController.swift in Sources */,
 				46FA41D41D6D3F68006635C6 /* MatchDetailsTrackable.swift in Sources */,
 				8930F03C1D5B94C300C7540B /* CTStatePicker.swift in Sources */,
+				B80B56091EB852220014FA9D /* CPostTableViewCell.swift in Sources */,
 				89129C4A1D904F89009488FE /* LoginBaseViewController.swift in Sources */,
 				46F25A031D5B1AAD001EBEF9 /* Service.swift in Sources */,
 				46CE472E1D7A787D00EA63E2 /* CTAlertViewController.swift in Sources */,
