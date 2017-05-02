@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -20,7 +20,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="aPost" selectionStyle="default" indentationWidth="10" rowHeight="226" id="ZPL-UO-qnO" customClass="CPostTableViewCell" customModule="CricTrac" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="cPost" selectionStyle="default" indentationWidth="10" rowHeight="226" id="ZPL-UO-qnO" customClass="CPostTableViewCell" customModule="CricTrac" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="552" height="226"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZPL-UO-qnO" id="t5B-vy-Czt">
@@ -48,7 +48,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2WW-yF-fAo">
                         <rect key="frame" x="12" y="73" width="528" height="105"/>
-                        <string key="text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</string>
+                        <string key="text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </string>
                         <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -71,6 +71,9 @@
                         <state key="normal" image="heart">
                             <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.5" colorSpace="calibratedRGB"/>
                         </state>
+                        <connections>
+                            <action selector="didTapLikeButton:" destination="ZPL-UO-qnO" eventType="touchUpInside" id="nX6-BW-MhJ"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="agS-ce-ci1">
                         <rect key="frame" x="515" y="12" width="32" height="32"/>
@@ -102,7 +105,7 @@
                             <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.5" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Likes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dF8-ih-jMU">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="LIKE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dF8-ih-jMU">
                         <rect key="frame" x="31" y="190" width="34" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -145,6 +148,17 @@
                     </userDefinedRuntimeAttribute>
                 </userDefinedRuntimeAttributes>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="comments" destination="0jc-eE-UXM" id="eeS-PJ-8Iy"/>
+                <outlet property="date" destination="Jdl-QM-Gsx" id="8MU-gJ-Qdv"/>
+                <outlet property="likeButton" destination="RyP-Wr-JLT" id="ino-DU-iDw"/>
+                <outlet property="likeLabel" destination="dF8-ih-jMU" id="Dt9-Rz-jAa"/>
+                <outlet property="likes" destination="2tf-rl-rCG" id="hYh-c0-MeG"/>
+                <outlet property="ownerCity" destination="0MX-9o-ndO" id="3bM-KI-X2U"/>
+                <outlet property="postOwnerName" destination="ATj-uW-JZN" id="2IT-5Z-weB"/>
+                <outlet property="postText" destination="2WW-yF-fAo" id="oIf-1E-n7S"/>
+                <outlet property="profileImage" destination="Xs0-8p-YfS" id="C0A-KU-iSX"/>
+            </connections>
             <point key="canvasLocation" x="411" y="367"/>
         </tableViewCell>
     </objects>
