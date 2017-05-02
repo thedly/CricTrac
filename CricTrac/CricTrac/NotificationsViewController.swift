@@ -71,7 +71,8 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let data = dataSource[indexPath.row]
-        if let cell = tableView.dequeueReusableCellWithIdentifier("SliderMenuViewCell", forIndexPath: indexPath) as? SliderMenuViewCell {
+        if let cell = tableView.dequeueReusableCellWithIdentifier("NotificationTableViewCell", forIndexPath: indexPath) as? NotificationTableViewCell {
+            
             notificationId = data["notificationId"]! as! String
             let message = data["Message"] as? String
             let ownerId = data["FromID"] as? String
@@ -91,13 +92,14 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
                 }
             })
             
-            cell.menuIcon.frame.size.width = 30
-            cell.menuIcon.frame.size.height = 30
-            cell.menuIcon.layer.borderWidth = 1
-            cell.menuIcon.layer.masksToBounds = false
-            cell.menuIcon.layer.borderColor = UIColor.clearColor().CGColor
-            cell.menuIcon.layer.cornerRadius = cell.menuIcon.frame.width/2
-            cell.menuIcon.clipsToBounds = true
+            //cell.menuIcon.frame.size.width = 30
+           // cell.menuIcon.frame.size.height = 30
+//            cell.menuIcon.layer.borderWidth = 1
+//            cell.menuIcon.layer.masksToBounds = false
+//            cell.menuIcon.layer.borderColor = UIColor.clearColor().CGColor
+//            cell.menuIcon.layer.cornerRadius = cell.menuIcon.frame.width/2
+//            cell.menuIcon.clipsToBounds = true
+            
 
             cell.menuName.text = message
             
@@ -112,7 +114,7 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
 
             return cell
         }
-        return SliderMenuViewCell()
+        return NotificationTableViewCell()
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -169,7 +171,8 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
     func moveToFRR(topicId:String) {
         let friendRequest = viewControllerFrom("Main", vcid: "FriendBaseViewController") as! FriendBaseViewController
         friendRequest.topicId = topicId
-        self.presentViewController(friendRequest, animated: true) {}
+        self.navigationController?.pushViewController(friendRequest, animated: true)
+        //self.presentViewController(friendRequest, animated: true) {}
     }
     
     func moveToFRA(topicId:String) {

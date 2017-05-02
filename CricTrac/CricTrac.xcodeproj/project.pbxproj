@@ -133,6 +133,7 @@
 		89FD59C71D41C3AE003EF45C /* SF-UI-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 89FD59C51D41C3AE003EF45C /* SF-UI-Text-Regular.otf */; };
 		B80B56091EB852220014FA9D /* CPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B56071EB852220014FA9D /* CPostTableViewCell.swift */; };
 		B80B560A1EB852220014FA9D /* CPostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B80B56081EB852220014FA9D /* CPostTableViewCell.xib */; };
+		B80B560C1EB863020014FA9D /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B560B1EB863020014FA9D /* NotificationTableViewCell.swift */; };
 		E1B593691EB4E63A00C8A553 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B593681EB4E63A00C8A553 /* NotificationsViewController.swift */; };
 		F7856BE080406499CCB071C8 /* Pods_CricTrac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA2224284F64FAE77B7776D9 /* Pods_CricTrac.framework */; };
 /* End PBXBuildFile section */
@@ -283,6 +284,7 @@
 		89FD59C51D41C3AE003EF45C /* SF-UI-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Regular.otf"; sourceTree = "<group>"; };
 		B80B56071EB852220014FA9D /* CPostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPostTableViewCell.swift; sourceTree = "<group>"; };
 		B80B56081EB852220014FA9D /* CPostTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPostTableViewCell.xib; sourceTree = "<group>"; };
+		B80B560B1EB863020014FA9D /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		DA2224284F64FAE77B7776D9 /* Pods_CricTrac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CricTrac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1B593681EB4E63A00C8A553 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -479,6 +481,7 @@
 			isa = PBXGroup;
 			children = (
 				892EA67C1D58DEBE00BEE5A3 /* ProfileDetails.swift */,
+				B80B560B1EB863020014FA9D /* NotificationTableViewCell.swift */,
 				892E1A951D3BC8D100EBF014 /* Main.storyboard */,
 				46C983981D3922D200DFC607 /* LaunchScreen.storyboard */,
 				46C983B51D39D86800DFC607 /* performanceCell.swift */,
@@ -808,6 +811,7 @@
 				4642DAA51D5039DD001F039D /* LoginViewController.swift in Sources */,
 				89CC84FC1D43E4D6007F2402 /* SummaryMatchDetailsViewController.swift in Sources */,
 				4600689B1D638545007C9457 /* SuggestionCell.swift in Sources */,
+				B80B560C1EB863020014FA9D /* NotificationTableViewCell.swift in Sources */,
 				89F4E4B31D48FECD00EFE46E /* summaryTableViewCell.swift in Sources */,
 				8955DA2D1E0ED1B200891937 /* PostSendable.swift in Sources */,
 				89D7D9D21DAFD97E0069D536 /* PlayerExperienceViewController.swift in Sources */,
