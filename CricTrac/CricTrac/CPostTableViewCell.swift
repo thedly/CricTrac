@@ -57,7 +57,7 @@ class CPostTableViewCell: UITableViewCell {
             }
         }
     }
-    
+  
     
     func moveToPlayer(userInfo:[String : AnyObject]){
         if let parentVC = parent as? UIViewController{

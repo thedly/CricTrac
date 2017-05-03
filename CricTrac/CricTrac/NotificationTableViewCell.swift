@@ -19,12 +19,8 @@ class NotificationTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        menuIcon.layer.borderWidth = 1
-        menuIcon.layer.masksToBounds = false
-        menuIcon.layer.borderColor = UIColor.clearColor().CGColor
-        menuIcon.layer.cornerRadius = menuIcon.frame.height/2
-       
-        menuIcon.clipsToBounds = true
+      
+
         
     }
     

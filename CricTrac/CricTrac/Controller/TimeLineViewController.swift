@@ -167,10 +167,10 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     func didNotificationButtonTapp(){
-        let newMatchVc = viewControllerFrom("Main", vcid: "NotificationsViewController")
-        let nav = UINavigationController(rootViewController: newMatchVc)
-        sliderMenu.mainViewController = nav
-       // self.presentViewController(nav, animated: true) {}
+        let notificationVc = viewControllerFrom("Main", vcid: "NotificationsViewController")
+      //  let nav = UINavigationController(rootViewController: notificationVc)
+        //sliderMenu.mainViewController = nav
+        self.presentViewController(notificationVc, animated: true) {}
     }
     
     func setNavigationBarProperties(){
