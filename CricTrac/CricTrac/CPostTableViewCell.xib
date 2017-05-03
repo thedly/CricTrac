@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -48,7 +48,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2WW-yF-fAo">
-                        <rect key="frame" x="12" y="73" width="528" height="105"/>
+                        <rect key="frame" x="12" y="73" width="528" height="97"/>
                         <string key="text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </string>
                         <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="17"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -61,14 +61,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0jc-eE-UXM">
-                        <rect key="frame" x="454" y="183" width="86" height="29"/>
+                        <rect key="frame" x="454" y="175" width="86" height="29"/>
                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="13"/>
                         <state key="normal" title="123 Comments">
                             <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.5" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RyP-Wr-JLT">
-                        <rect key="frame" x="12" y="190" width="14" height="22"/>
+                        <rect key="frame" x="12" y="182" width="14" height="22"/>
                         <state key="normal" image="heart">
                             <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.5" colorSpace="calibratedRGB"/>
                         </state>
@@ -100,14 +100,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2tf-rl-rCG">
-                        <rect key="frame" x="395" y="183" width="53" height="29"/>
+                        <rect key="frame" x="395" y="175" width="53" height="29"/>
                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="13"/>
                         <state key="normal" title="123 Likes">
                             <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.5" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LIKE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dF8-ih-jMU">
-                        <rect key="frame" x="31" y="188" width="26" height="26"/>
+                        <rect key="frame" x="31" y="180" width="26" height="27"/>
                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="13"/>
                         <color key="textColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.5" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -128,13 +128,13 @@
                     <constraint firstAttribute="trailing" secondItem="0jc-eE-UXM" secondAttribute="trailing" constant="12" id="Xth-0Q-yAS"/>
                     <constraint firstAttribute="trailing" secondItem="agS-ce-ci1" secondAttribute="trailing" constant="5" id="ZgO-4z-0Yg"/>
                     <constraint firstAttribute="trailing" secondItem="2WW-yF-fAo" secondAttribute="trailing" constant="12" id="bru-z3-Kh6"/>
-                    <constraint firstItem="vF4-nT-24g" firstAttribute="top" secondItem="RyP-Wr-JLT" secondAttribute="bottom" constant="5" id="dt0-F9-j52"/>
+                    <constraint firstItem="vF4-nT-24g" firstAttribute="top" secondItem="RyP-Wr-JLT" secondAttribute="bottom" constant="13" id="dt0-F9-j52"/>
                     <constraint firstItem="Jdl-QM-Gsx" firstAttribute="top" secondItem="0MX-9o-ndO" secondAttribute="bottom" id="e8c-3b-cFl"/>
                     <constraint firstItem="RyP-Wr-JLT" firstAttribute="top" secondItem="2WW-yF-fAo" secondAttribute="bottom" constant="12" id="eht-lB-M20"/>
                     <constraint firstItem="dF8-ih-jMU" firstAttribute="top" secondItem="2WW-yF-fAo" secondAttribute="bottom" constant="10" id="fQB-6N-soU"/>
                     <constraint firstItem="0MX-9o-ndO" firstAttribute="leading" secondItem="Xs0-8p-YfS" secondAttribute="trailing" constant="5" id="i3o-aN-KFR"/>
                     <constraint firstItem="0jc-eE-UXM" firstAttribute="top" secondItem="2WW-yF-fAo" secondAttribute="bottom" constant="5" id="iry-Fi-gpu"/>
-                    <constraint firstItem="vF4-nT-24g" firstAttribute="top" secondItem="dF8-ih-jMU" secondAttribute="bottom" constant="3" id="j5t-5V-Gic"/>
+                    <constraint firstItem="vF4-nT-24g" firstAttribute="top" secondItem="dF8-ih-jMU" secondAttribute="bottom" constant="10" id="j5t-5V-Gic"/>
                     <constraint firstItem="ATj-uW-JZN" firstAttribute="leading" secondItem="Xs0-8p-YfS" secondAttribute="trailing" constant="5" id="jYn-cL-6LE"/>
                     <constraint firstItem="Xs0-8p-YfS" firstAttribute="leading" secondItem="t5B-vy-Czt" secondAttribute="leading" constant="12" id="nKg-cH-4aV"/>
                     <constraint firstAttribute="bottomMargin" secondItem="vF4-nT-24g" secondAttribute="bottom" constant="-1" id="rcf-61-kdc"/>

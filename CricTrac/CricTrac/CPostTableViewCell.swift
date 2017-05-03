@@ -18,7 +18,7 @@ class CPostTableViewCell: UITableViewCell {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var likeLabel: UILabel!
-     @IBOutlet weak var delCommentBtn: UIButton!
+    @IBOutlet weak var delCommentBtn: UIButton!
     
     var postOwnerId:String?
     var parent:Deletable?
@@ -64,7 +64,9 @@ class CPostTableViewCell: UITableViewCell {
             let dashBoard = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
             dashBoard.friendId = postOwnerId
             dashBoard.friendProfile = userInfo
-            parentVC.presentViewController(dashBoard, animated: true) {}
+            //parentVC.presentViewController(dashBoard, animated: true) {}
+            self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
+
         }
     }
     
@@ -98,17 +100,33 @@ class CPostTableViewCell: UITableViewCell {
             return
         }
         
-        likeOrUnlike(postId!, like: { (likeDict) in
-            self.likeLabel.textColor = UIColor.whiteColor()
-            self.postLikeCount += 1
-            //self.likes.text = "\(self.postLikeCount) Likes"
-            //timelineData![self.postIndex]["Likes"] = JSON(likeDict)
-        }) {
-            self.removeLikeFromArray()
-            self.likeLabel.textColor = UIColor.grayColor()
-            self.postLikeCount -= 1
-            //self.likes.text = "\(self.postLikeCount) Likes"
-        }
+        //likePost(postId!)
+        
+//        likeOrUnlike(postId!, like: { (likeDict) in
+//            self.addLikeToDataArray(likeDict)
+//            //self.likeButton.titleLabel?.textColor = UIColor.yellowColor()
+//            //self.totalLikeCount += 1
+//            //self.likeCount.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
+//            //self.currentUserHasLikedThePost = true
+//        }) {
+//            self.removeLikeFromArray()
+//            //self.likeButton.titleLabel?.textColor = UIColor.grayColor()
+//            //self.totalLikeCount -= 1
+//            //self.likeCount.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
+//            //self.currentUserHasLikedThePost = false
+//        }
+        
+//        likeOrUnlike(postId!, like: { (likeDict) in
+//            //self.likeLabel.textColor = UIColor.whiteColor()
+//            self.postLikeCount += 1
+//            //self.likes.text = "\(self.postLikeCount) Likes"
+//            timelineData![self.postIndex]["Likes"] = JSON(likeDict)
+//        }) {
+//            self.removeLikeFromArray()
+//            //self.likeLabel.textColor = UIColor.grayColor()
+//            self.postLikeCount -= 1
+//            //self.likes.text = "\(self.postLikeCount) Likes"
+//        }
     }
     
 //    @IBAction func didTapClose(sender: AnyObject) {

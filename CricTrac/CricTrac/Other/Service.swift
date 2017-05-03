@@ -1153,6 +1153,7 @@ func likePost(postId:String)->[String:[String:String]]{
     return [ref.key:likeDict]
 }
 
+
 //func likeOrUnlike(postId:String){
 //    let ref = fireBaseRef.child("TimelinePosts").child(postId).child("Likes")
 //    ref.observeSingleEventOfType(.Value, withBlock: { snapshot in

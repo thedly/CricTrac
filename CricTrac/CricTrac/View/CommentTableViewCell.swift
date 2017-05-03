@@ -71,12 +71,15 @@ class CommentTableViewCell: UITableViewCell {
     }
     
     func moveToPlayer(userInfo:[String : AnyObject]){
-        if let parentVC = parent as? UIViewController{
+        //if let parentVC = parent as? UIViewController{
             let dashBoard = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
             dashBoard.friendId = ownerId
             dashBoard.friendProfile = userInfo
-            parentVC.presentViewController(dashBoard, animated: true) {}
-        }
+        
+        //parentVC.presentViewController(dashBoard, animated: true) {}
+            self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
+
+        //}
     }
     
     func moveToCoach(userInfo:[String : AnyObject]){

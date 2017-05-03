@@ -11,26 +11,16 @@ import SwiftyJSON
 
 class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UIActionSheetDelegate,DeleteComment{
     
-//    @IBOutlet weak var postOwnerName: UILabel!
-//    @IBOutlet weak var date: UILabel!
-//    @IBOutlet weak var ownerCity: UILabel!
-//    @IBOutlet weak var comments: UILabel!
-//    @IBOutlet weak var likes: UILabel!
-//    @IBOutlet weak var postText: UILabel!
-//    @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var contentViewForCommentCell: UIView!
     @IBOutlet weak var postComment: UIButton!
     @IBOutlet weak var commentBox: UITextView!
-//    @IBOutlet weak var likeButton: UIButton!
-//    @IBOutlet weak var likeLabel: UILabel!
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var inerView: UIView!
     @IBOutlet weak var commentTextView: UITextView!
     @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var contentViewHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var barView: UIView!
+    
     var postIndex = 0
 //    var postLikeCount = 0
     var initialLikes = 0
@@ -41,7 +31,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     
     var postId:String = ""
     var comntsHeightConstraint = false
-    //var postData:JSON?
+//    var postData:JSON?
     var currentTheme:CTTheme!
     var commentId:String = ""
     //var postOwnerId:String?
@@ -64,9 +54,6 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         setNavigationBarProperties();
         currentTheme = cricTracTheme.currentTheme
         setBackgroundColor()
-        //inerView.layer.masksToBounds = true
-        //inerView.layer.cornerRadius = inerView.frame.width/56
-        //inerView.backgroundColor = UIColor.clearColor()
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = UIColor.clearColor()
         tableView.backgroundView?.backgroundColor = UIColor.clearColor()
@@ -75,7 +62,6 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         commentTextView.layer.borderWidth = 1
         commentTextView.layer.borderColor = UIColor.darkGrayColor().CGColor
         commentTextView.setPlaceHolder()
-        
         
          tableView.registerNib(UINib.init(nibName:"CPostTableViewCell", bundle: nil), forCellReuseIdentifier: "cPost")
         
@@ -268,13 +254,12 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         let cCell =  tableView.dequeueReusableCellWithIdentifier("cPost", forIndexPath: indexPath) as! CPostTableViewCell
         
         if !postData .isEmpty  {
+            //display the post in the first row of the tableview
             if indexPath.row == 0  {
-//                let cCell =  tableView.dequeueReusableCellWithIdentifier("cPost", forIndexPath: indexPath)         as! CPostTableViewCell
-                
                 let data = postData
+                cCell.postOwnerId = data["OwnerID"] as? String
                 let postedBy = data["PostedBy"] as? String
                
-              
                 if postedBy == "CricTrac" {
                     cCell.postOwnerName.text = "CricTrac"
                 }
@@ -282,7 +267,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                     cCell.postOwnerName.text = data ["OwnerName"] as? String
                 }
                 
-                //display comment owners image
+                //display post owners image
                 if ((data["OwnerID"]) != nil) {
                     fetchFriendDetail((data["OwnerID"]  as? String)!, sucess: { (result) in
                         let proPic = result["proPic"]
@@ -309,13 +294,13 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                 
                 let friendId = data["OwnerID"]!
                 if let city = friendsCity[friendId as! String]{
-                    cCell.ownerCity.text = city as? String
+                    cCell.ownerCity.text = city
                 }
                 else {
                     fetchFriendCity(friendId as! String, sucess: { (city) in
                         friendsCity[friendId as! String] = city
                         dispatch_async(dispatch_get_main_queue(),{
-                            cCell.ownerCity.text = city as? String
+                            cCell.ownerCity.text = city
                         })
                     })
                 }
@@ -328,20 +313,47 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                     dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
                     cCell.date.text = dateFormatter.stringFromDate(date)
                 }
-
-                //aCell.commentDate.text = self.ownerCity + "\n" + self.commentDate
-                    
+                
                 cCell.postText.text = data["Post"] as? String
-                    
                 cCell.delCommentBtn.hidden = true
+                
+                cCell.likeLabel.textColor = UIColor.grayColor()
+                cCell.likeButton.frame = CGRectMake(0, 0, 10, 10)
+                cCell.likeButton.setImage(UIImage(named: "Like-New"), forState: UIControlState.Normal)
+                
+                let childLikes = data["Likes"] as? [String : AnyObject]
+                if childLikes != nil {
+                    for (key, value) in childLikes! {
+                        if currentUser!.uid == value["OwnerID"] as? String {
+                            cCell.likeLabel.textColor = UIColor.whiteColor()
+                            cCell.likeButton.setImage(UIImage(named: "Like-New-Filled"), forState: UIControlState.Normal)
+                        }
+                    }
+                }
+                
+                
+                if (data["LikeCount"] != nil) {
+                    let likeCount = data["LikeCount"] as? Int
+                    cCell.likes.setTitle("\(likeCount!) Likes", forState: .Normal)
+                }
+                else {
+                    cCell.likes.setTitle("0 Likes", forState: .Normal)
+                }
+                
+                if (data["CommentCount"] != nil) {
+                    let cmtCount = data["CommentCount"] as? Int
+                    cCell.comments.setTitle("\(cmtCount!) Comments", forState: .Normal)
+                }
+                else {
+                    cCell.comments.setTitle("0 Comments", forState: .Normal)
+                }
+                
+                cCell.selectionStyle = UITableViewCellSelectionStyle.None
                 cCell.backgroundColor = UIColor.clearColor()
-               
                 return cCell
             }
             else {
-//                let aCell =  tableView.dequeueReusableCellWithIdentifier("commentcell", forIndexPath: indexPath) as! CommentTableViewCell
-               // aCell.parent = self
-                
+                //display the comments
                 let data = dataSource[indexPath.row - 1]
                 aCell.ownerId = data["OwnerID"] as? String
 
@@ -399,17 +411,6 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                     })
                 }
             }
-        }
-        else {
-            let alert = UIAlertController(title: "", message: "Post not found", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!)-> Void in
-              
-                //delete the nottification
-            }))
-           // self.dismissViewControllerAnimated(true) {}
-            self.presentViewController(alert, animated: true, completion: nil)
-            
-            //return
         }
         
         aCell.selectionStyle = UITableViewCellSelectionStyle.None
