@@ -1069,7 +1069,21 @@ func calLikeCnt(postId:String) {
         ref.setValue(LikeCount)
     })
 }
-
+func getAllLikes(postId:String,sucessBlock:([[String: AnyObject]])->Void){
+    fireBaseRef.child("TimelinePosts").child(postId).child("Likes").observeSingleEventOfType(.Value,withBlock: { snapshot in
+        if let data = snapshot.value as? [String:[String:AnyObject]] {
+            var result = [[String:AnyObject]]()
+            for (key,value) in data{
+                let dataval = value
+                result.append(dataval)
+            }
+            sucessBlock(result)
+        }
+        
+        
+    })
+    
+}
 //func decrementCmtCnt(postId:String) {
 //    //fetch the Comment Count and increase by 1
 //    fireBaseRef.child("TimelinePosts").child(postId).child("CommentCount").observeSingleEventOfType(.Value, withBlock: {   snapshot in

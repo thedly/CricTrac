@@ -134,6 +134,8 @@
 		B80B56091EB852220014FA9D /* CPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B56071EB852220014FA9D /* CPostTableViewCell.swift */; };
 		B80B560A1EB852220014FA9D /* CPostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B80B56081EB852220014FA9D /* CPostTableViewCell.xib */; };
 		B80B560C1EB863020014FA9D /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B560B1EB863020014FA9D /* NotificationTableViewCell.swift */; };
+		B80B560E1EB9C2C60014FA9D /* LikesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B560D1EB9C2C60014FA9D /* LikesViewController.swift */; };
+		B80B56101EB9D1580014FA9D /* LikesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B560F1EB9D1580014FA9D /* LikesTableViewCell.swift */; };
 		E1B593691EB4E63A00C8A553 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B593681EB4E63A00C8A553 /* NotificationsViewController.swift */; };
 		F7856BE080406499CCB071C8 /* Pods_CricTrac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA2224284F64FAE77B7776D9 /* Pods_CricTrac.framework */; };
 /* End PBXBuildFile section */
@@ -285,6 +287,8 @@
 		B80B56071EB852220014FA9D /* CPostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPostTableViewCell.swift; sourceTree = "<group>"; };
 		B80B56081EB852220014FA9D /* CPostTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPostTableViewCell.xib; sourceTree = "<group>"; };
 		B80B560B1EB863020014FA9D /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		B80B560D1EB9C2C60014FA9D /* LikesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesViewController.swift; sourceTree = "<group>"; };
+		B80B560F1EB9D1580014FA9D /* LikesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesTableViewCell.swift; sourceTree = "<group>"; };
 		DA2224284F64FAE77B7776D9 /* Pods_CricTrac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CricTrac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1B593681EB4E63A00C8A553 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -480,6 +484,7 @@
 		8958F5F01D39298D0028D5AA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B80B560F1EB9D1580014FA9D /* LikesTableViewCell.swift */,
 				892EA67C1D58DEBE00BEE5A3 /* ProfileDetails.swift */,
 				B80B560B1EB863020014FA9D /* NotificationTableViewCell.swift */,
 				892E1A951D3BC8D100EBF014 /* Main.storyboard */,
@@ -523,6 +528,7 @@
 		8958F5F11D392B780028D5AA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B80B560D1EB9C2C60014FA9D /* LikesViewController.swift */,
 				8955DA2A1E0ED13A00891937 /* NewPostViewController.swift */,
 				89F9911D1DDA1BEF00E5F440 /* UserDashboardViewController.swift */,
 				897194CA1DA34DFD00478F82 /* AddMatchDetailsViewController.swift */,
@@ -785,6 +791,7 @@
 			files = (
 				8997D56E1DBD21BC00F201B6 /* ThemeColorsCollectionViewCell.swift in Sources */,
 				897194CB1DA34DFD00478F82 /* AddMatchDetailsViewController.swift in Sources */,
+				B80B56101EB9D1580014FA9D /* LikesTableViewCell.swift in Sources */,
 				895E04031D5CD134002E322E /* FriendRequestsTableViewCell.swift in Sources */,
 				46ACE0C51E0FA744004118A4 /* CommentsViewController.swift in Sources */,
 				4607A2641D54848A0090A5BD /* MatchViewController.swift in Sources */,
@@ -874,6 +881,7 @@
 				895376981DAB865B00DDB3A6 /* FriendRequestsCell.swift in Sources */,
 				4657D5601D4992D7009E0FBE /* Constants.swift in Sources */,
 				8930411A1D9E0C3B00F0E29C /* BattingBowlingViewController.swift in Sources */,
+				B80B560E1EB9C2C60014FA9D /* LikesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

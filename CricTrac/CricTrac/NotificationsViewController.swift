@@ -11,6 +11,7 @@ import UIKit
 class NotificationsViewController: UIViewController,UITableViewDataSource,UITableViewDelegate, ThemeChangeable {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var barView: UIView!
     
     var currentTheme:CTTheme!
     var dataSource = [[String:AnyObject]]()
@@ -19,11 +20,12 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
+        self.barView.backgroundColor = currentTheme.topColor
         // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     override func viewWillAppear(animated: Bool) {
-        setNavigationBarProperties()
+       // setNavigationBarProperties()
         setBackgroundColor()
     }
     
@@ -35,6 +37,10 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
             self.dataSource = data
             self.tableView.reloadData()
         }
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.topColor
+        self.barView.backgroundColor = currentTheme.topColor
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -45,19 +51,22 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
         sliderMenu.setDrawerState(.Opened, animated: true)
     }
     
-    func setNavigationBarProperties(){
-        currentTheme = cricTracTheme.currentTheme
-        let menuButton: UIButton = UIButton(type:.Custom)
-        menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
-        menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
-        menuButton.frame = CGRectMake(0, 0, 40, 40)
-        let leftbarButton = UIBarButtonItem(customView: menuButton)
-        
-        navigationItem.leftBarButtonItem = leftbarButton
-        self.view.backgroundColor =  currentTheme.topColor
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-        title = "NOTIFICATIONS"
+    @IBAction func menuButton(sender: UIButton) {
+        self.dismissViewControllerAnimated(true, completion:nil)
     }
+//    func setNavigationBarProperties(){
+//        currentTheme = cricTracTheme.currentTheme
+//        let menuButton: UIButton = UIButton(type:.Custom)
+//        menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
+//        menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+//        menuButton.frame = CGRectMake(0, 0, 40, 40)
+//        let leftbarButton = UIBarButtonItem(customView: menuButton)
+//        
+//        navigationItem.leftBarButtonItem = leftbarButton
+//        self.view.backgroundColor =  currentTheme.topColor
+////        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+////        title = "NOTIFICATIONS"
+// }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -77,6 +86,13 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
             let message = data["Message"] as? String
             let ownerId = data["FromID"] as? String
             let isRead = data["isRead"] as? Int
+            
+            cell.menuIcon.layer.borderWidth = 1
+            cell.menuIcon.layer.masksToBounds = false
+            cell.menuIcon.layer.borderColor = UIColor.clearColor().CGColor
+            cell.menuIcon.layer.cornerRadius = cell.menuIcon.frame.width/2
+            cell.menuIcon.clipsToBounds = true
+            cell.backgroundColor = UIColor.clearColor()
             
             fetchFriendDetail(ownerId!, sucess: { (result) in
                 let proPic = result["proPic"]
@@ -104,13 +120,13 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
             cell.menuName.text = message
             
             if isRead == 0 {
-                cell.backgroundColor = currentTheme.bottomColor
+                cell.backgroundColor = cricTracTheme.currentTheme.bottomColor
             }
             else {
-                cell.backgroundColor = currentTheme.topColor
+                cell.backgroundColor = cricTracTheme.currentTheme.topColor
             }
 
-            cell.menuIcon.contentMode = UIViewContentMode.ScaleAspectFit;
+           // cell.menuIcon.contentMode = UIViewContentMode.ScaleAspectFit;
 
             return cell
         }

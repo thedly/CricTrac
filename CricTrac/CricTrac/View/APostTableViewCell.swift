@@ -107,6 +107,18 @@ class APostTableViewCell: UITableViewCell {
     }
     
     
+    @IBAction func DidTapLikeCountButton(sender: UIButton) {
+       
+            if totalLikeCount != 0 {
+                if let parentVC = parent as? UIViewController{
+                    let likePage = viewControllerFrom("Main", vcid: "LikesViewController") as! LikesViewController
+                     likePage.postID = postId!
+                    parentVC.presentViewController(likePage, animated: true) {}
+                }
+            }
+        
+        
+    }
     @IBAction func DidTapLikeButton(sender: UIButton) {
         // network reachability test
         

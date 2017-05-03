@@ -39,11 +39,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     //var ownerCity:String = ""
     var commentDate:String = ""
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
+        
     
     override func viewDidLoad() {
         super.viewDidLoad()
