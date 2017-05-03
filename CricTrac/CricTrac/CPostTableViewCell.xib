@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -7,6 +7,7 @@
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="SourceSansPro-Bold.otf">
+            <string>SourceSansPro-Bold</string>
             <string>SourceSansPro-Bold</string>
             <string>SourceSansPro-Bold</string>
             <string>SourceSansPro-Bold</string>
@@ -20,7 +21,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="cPost" selectionStyle="default" indentationWidth="10" rowHeight="226" id="ZPL-UO-qnO" customClass="CPostTableViewCell" customModule="CricTrac" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="cPost" selectionStyle="default" indentationWidth="10" reuseIdentifier="cPost" rowHeight="226" id="ZPL-UO-qnO" customClass="CPostTableViewCell" customModule="CricTrac" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="552" height="226"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZPL-UO-qnO" id="t5B-vy-Czt">
@@ -40,7 +41,7 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Arjun S" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ATj-uW-JZN">
+                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arjun S" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ATj-uW-JZN">
                         <rect key="frame" x="63" y="12" width="48" height="19"/>
                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="15"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -53,13 +54,13 @@
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="DPS Bangalore" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0MX-9o-ndO">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DPS Bangalore" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0MX-9o-ndO">
                         <rect key="frame" x="63" y="31" width="85" height="17"/>
                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="13"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0jc-eE-UXM">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0jc-eE-UXM">
                         <rect key="frame" x="454" y="183" width="86" height="29"/>
                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="13"/>
                         <state key="normal" title="123 Comments">
@@ -87,28 +88,28 @@
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vF4-nT-24g">
                         <rect key="frame" x="5" y="217" width="542" height="1"/>
-                        <color key="backgroundColor" red="0.64647446070000003" green="0.64647446070000003" blue="0.64647446070000003" alpha="0.44970034250000002" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.29381902028549234" green="0.29381902028549234" blue="0.29381902028549234" alpha="0.44970034250000002" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="2dh-qe-Brw"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jdl-QM-Gsx">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jdl-QM-Gsx">
                         <rect key="frame" x="63" y="48" width="26" height="17"/>
                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="13"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2tf-rl-rCG">
-                        <rect key="frame" x="395" y="181" width="53" height="29"/>
+                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2tf-rl-rCG">
+                        <rect key="frame" x="395" y="183" width="53" height="29"/>
                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="13"/>
                         <state key="normal" title="123 Likes">
                             <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.5" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="LIKE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dF8-ih-jMU">
-                        <rect key="frame" x="31" y="190" width="34" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LIKE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dF8-ih-jMU">
+                        <rect key="frame" x="31" y="188" width="26" height="26"/>
+                        <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="13"/>
+                        <color key="textColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.5" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -130,15 +131,15 @@
                     <constraint firstItem="vF4-nT-24g" firstAttribute="top" secondItem="RyP-Wr-JLT" secondAttribute="bottom" constant="5" id="dt0-F9-j52"/>
                     <constraint firstItem="Jdl-QM-Gsx" firstAttribute="top" secondItem="0MX-9o-ndO" secondAttribute="bottom" id="e8c-3b-cFl"/>
                     <constraint firstItem="RyP-Wr-JLT" firstAttribute="top" secondItem="2WW-yF-fAo" secondAttribute="bottom" constant="12" id="eht-lB-M20"/>
-                    <constraint firstItem="dF8-ih-jMU" firstAttribute="top" secondItem="2WW-yF-fAo" secondAttribute="bottom" constant="12" id="fQB-6N-soU"/>
+                    <constraint firstItem="dF8-ih-jMU" firstAttribute="top" secondItem="2WW-yF-fAo" secondAttribute="bottom" constant="10" id="fQB-6N-soU"/>
                     <constraint firstItem="0MX-9o-ndO" firstAttribute="leading" secondItem="Xs0-8p-YfS" secondAttribute="trailing" constant="5" id="i3o-aN-KFR"/>
                     <constraint firstItem="0jc-eE-UXM" firstAttribute="top" secondItem="2WW-yF-fAo" secondAttribute="bottom" constant="5" id="iry-Fi-gpu"/>
-                    <constraint firstItem="vF4-nT-24g" firstAttribute="top" secondItem="dF8-ih-jMU" secondAttribute="bottom" constant="6" id="j5t-5V-Gic"/>
+                    <constraint firstItem="vF4-nT-24g" firstAttribute="top" secondItem="dF8-ih-jMU" secondAttribute="bottom" constant="3" id="j5t-5V-Gic"/>
                     <constraint firstItem="ATj-uW-JZN" firstAttribute="leading" secondItem="Xs0-8p-YfS" secondAttribute="trailing" constant="5" id="jYn-cL-6LE"/>
                     <constraint firstItem="Xs0-8p-YfS" firstAttribute="leading" secondItem="t5B-vy-Czt" secondAttribute="leading" constant="12" id="nKg-cH-4aV"/>
                     <constraint firstAttribute="bottomMargin" secondItem="vF4-nT-24g" secondAttribute="bottom" constant="-1" id="rcf-61-kdc"/>
                     <constraint firstItem="0jc-eE-UXM" firstAttribute="leading" secondItem="2tf-rl-rCG" secondAttribute="trailing" constant="6" id="vQ2-0w-9FK"/>
-                    <constraint firstItem="2tf-rl-rCG" firstAttribute="top" secondItem="2WW-yF-fAo" secondAttribute="bottom" constant="3" id="xoP-aP-YVc"/>
+                    <constraint firstItem="2tf-rl-rCG" firstAttribute="top" secondItem="2WW-yF-fAo" secondAttribute="bottom" constant="5" id="xoP-aP-YVc"/>
                     <constraint firstAttribute="trailing" secondItem="vF4-nT-24g" secondAttribute="trailing" constant="5" id="yEd-WU-1h6"/>
                 </constraints>
                 <userDefinedRuntimeAttributes>
@@ -151,6 +152,7 @@
             <connections>
                 <outlet property="comments" destination="0jc-eE-UXM" id="eeS-PJ-8Iy"/>
                 <outlet property="date" destination="Jdl-QM-Gsx" id="8MU-gJ-Qdv"/>
+                <outlet property="delCommentBtn" destination="agS-ce-ci1" id="fZV-EG-ATX"/>
                 <outlet property="likeButton" destination="RyP-Wr-JLT" id="ino-DU-iDw"/>
                 <outlet property="likeLabel" destination="dF8-ih-jMU" id="Dt9-Rz-jAa"/>
                 <outlet property="likes" destination="2tf-rl-rCG" id="hYh-c0-MeG"/>

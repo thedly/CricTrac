@@ -75,6 +75,10 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         commentTextView.layer.borderWidth = 1
         commentTextView.layer.borderColor = UIColor.darkGrayColor().CGColor
         commentTextView.setPlaceHolder()
+        
+        
+         tableView.registerNib(UINib.init(nibName:"CPostTableViewCell", bundle: nil), forCellReuseIdentifier: "cPost")
+        
      //   postComment.enabled = false
     //  postComment.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
       
@@ -247,26 +251,35 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+//    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+//        return 2
+//    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       
         return dataSource.count + 1
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        var aCell = UITableViewCell()
+       // let aCell = UITableViewCell()
+        let aCell =  tableView.dequeueReusableCellWithIdentifier("commentcell", forIndexPath: indexPath) as! CommentTableViewCell
         
-        if !postData .isEmpty {
-            if indexPath.section == 0 {
-                let aCell =  tableView.dequeueReusableCellWithIdentifier("cPost", forIndexPath: indexPath) as! CPostTableViewCell
+        let cCell =  tableView.dequeueReusableCellWithIdentifier("cPost", forIndexPath: indexPath) as! CPostTableViewCell
+        
+        if !postData .isEmpty  {
+            if indexPath.row == 0  {
+//                let cCell =  tableView.dequeueReusableCellWithIdentifier("cPost", forIndexPath: indexPath)         as! CPostTableViewCell
                 
                 let data = postData
                 let postedBy = data["PostedBy"] as? String
+               
+              
                 if postedBy == "CricTrac" {
-                    aCell.postOwnerName.text = "CricTrac"
+                    cCell.postOwnerName.text = "CricTrac"
                 }
                 else{
-                    aCell.postOwnerName.text = data ["OwnerName"] as? String
+                    cCell.postOwnerName.text = data ["OwnerName"] as? String
                 }
                 
                 //display comment owners image
@@ -275,20 +288,20 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                         let proPic = result["proPic"]
                             
                         //aCell.profileImage.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-                        aCell.profileImage.layer.borderWidth = 1
-                        aCell.profileImage.layer.masksToBounds = false
-                        aCell.profileImage.layer.borderColor = UIColor.clearColor().CGColor
-                        aCell.profileImage.layer.cornerRadius = aCell.profileImage.frame.width/2
-                        aCell.profileImage.clipsToBounds = true
+                        cCell.profileImage.layer.borderWidth = 1
+                        cCell.profileImage.layer.masksToBounds = false
+                        cCell.profileImage.layer.borderColor = UIColor.clearColor().CGColor
+                        cCell.profileImage.layer.cornerRadius = cCell.profileImage.frame.width/2
+                        cCell.profileImage.clipsToBounds = true
                             
                         if proPic! == "-"{
                             let imageName = defaultProfileImage
                             let image = UIImage(named: imageName)
-                            aCell.profileImage.image = image
+                            cCell.profileImage.image = image
                         }
                         else{
                             if let imageURL = NSURL(string:proPic!){
-                                aCell.profileImage.kf_setImageWithURL(imageURL)
+                                cCell.profileImage.kf_setImageWithURL(imageURL)
                             }
                         }
                     })
@@ -296,13 +309,13 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                 
                 let friendId = data["OwnerID"]!
                 if let city = friendsCity[friendId as! String]{
-                    aCell.ownerCity.text = city as? String
+                    cCell.ownerCity.text = city as? String
                 }
                 else {
                     fetchFriendCity(friendId as! String, sucess: { (city) in
                         friendsCity[friendId as! String] = city
                         dispatch_async(dispatch_get_main_queue(),{
-                            aCell.ownerCity.text = city as? String
+                            cCell.ownerCity.text = city as? String
                         })
                     })
                 }
@@ -313,19 +326,21 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                     dateFormatter.timeZone = NSTimeZone.localTimeZone()
                     dateFormatter.timeStyle = .ShortStyle
                     dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-                    aCell.date.text = dateFormatter.stringFromDate(date)
+                    cCell.date.text = dateFormatter.stringFromDate(date)
                 }
 
                 //aCell.commentDate.text = self.ownerCity + "\n" + self.commentDate
                     
-                aCell.postText.text = data["Post"] as? String
+                cCell.postText.text = data["Post"] as? String
                     
-                //aCell.delCommentBtn.hidden = true
-                aCell.backgroundColor = UIColor.clearColor()
+                cCell.delCommentBtn.hidden = true
+                cCell.backgroundColor = UIColor.clearColor()
+               
+                return cCell
             }
             else {
-                let aCell =  tableView.dequeueReusableCellWithIdentifier("commentcell", forIndexPath: indexPath) as! CommentTableViewCell
-                aCell.parent = self
+//                let aCell =  tableView.dequeueReusableCellWithIdentifier("commentcell", forIndexPath: indexPath) as! CommentTableViewCell
+               // aCell.parent = self
                 
                 let data = dataSource[indexPath.row - 1]
                 aCell.ownerId = data["OwnerID"] as? String
@@ -388,14 +403,17 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         else {
             let alert = UIAlertController(title: "", message: "Post not found", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!)-> Void in
-                print("delete")
+              
                 //delete the nottification
             }))
-            self.dismissViewControllerAnimated(true) {}
+           // self.dismissViewControllerAnimated(true) {}
+            self.presentViewController(alert, animated: true, completion: nil)
+            
             //return
         }
         
         aCell.selectionStyle = UITableViewCellSelectionStyle.None
+        aCell.backgroundColor = UIColor.clearColor()
         return aCell
     }
     

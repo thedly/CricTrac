@@ -18,6 +18,7 @@ class CPostTableViewCell: UITableViewCell {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var likeLabel: UILabel!
+     @IBOutlet weak var delCommentBtn: UIButton!
     
     var postOwnerId:String?
     var parent:Deletable?
@@ -29,6 +30,7 @@ class CPostTableViewCell: UITableViewCell {
         // Initialization code
         addTapGestureToUserName()
     }
+   
     
     func addTapGestureToUserName(){
         if let _ = postOwnerName{
