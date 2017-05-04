@@ -99,6 +99,18 @@ func newLikeNotification(postId:String,result:(resultError:NSError?)->Void){
     dataTask?.resume()
 }
 
+func newMatchNotification(matchId:String,result:(resultError:NSError?)->Void){
+    let notificationURL = serverBaseURL+"/notifications/NMA/\((currentUser!.uid))/\(matchId)"
+    let request = NSMutableURLRequest(URL: NSURL(string:notificationURL)!)
+    request.HTTPMethod = "POST"
+    
+    dataTask = defaultSession.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+        result(resultError: error)
+    })
+    dataTask?.resume()
+}
+
+
 var pageKey:String?
 
 

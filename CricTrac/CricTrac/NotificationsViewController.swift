@@ -37,6 +37,7 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
             self.dataSource = data
             self.tableView.reloadData()
         }
+        
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
         self.barView.backgroundColor = currentTheme.topColor
@@ -86,6 +87,16 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
             let message = data["Message"] as? String
             let ownerId = data["FromID"] as? String
             let isRead = data["isRead"] as? Int
+            var notificationDateTime = ""
+            
+            if let notiDateTS = data["AddedTime"] as? Double{
+                let date = NSDate(timeIntervalSince1970:notiDateTS/1000.0)
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.timeZone = NSTimeZone.localTimeZone()
+                dateFormatter.timeStyle = .ShortStyle
+                dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+                notificationDateTime = dateFormatter.stringFromDate(date)
+            }
             
             cell.menuIcon.layer.borderWidth = 1
             cell.menuIcon.layer.masksToBounds = false
@@ -108,16 +119,7 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
                 }
             })
             
-            //cell.menuIcon.frame.size.width = 30
-           // cell.menuIcon.frame.size.height = 30
-//            cell.menuIcon.layer.borderWidth = 1
-//            cell.menuIcon.layer.masksToBounds = false
-//            cell.menuIcon.layer.borderColor = UIColor.clearColor().CGColor
-//            cell.menuIcon.layer.cornerRadius = cell.menuIcon.frame.width/2
-//            cell.menuIcon.clipsToBounds = true
-            
-
-            cell.menuName.text = message
+            cell.menuName.text = message! + "\n" + notificationDateTime
             
             if isRead == 0 {
                 cell.backgroundColor = cricTracTheme.currentTheme.bottomColor
@@ -127,7 +129,7 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
             }
 
            // cell.menuIcon.contentMode = UIViewContentMode.ScaleAspectFit;
-
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
             return cell
         }
         return NotificationTableViewCell()
@@ -146,7 +148,7 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
         switch topic{
             case "FRR": self.moveToFRR(topicId)
             case "FRA": self.moveToFRA(topicId)
-            case "NMA": self.moveToNMA()
+            case "NMA": self.moveToNMA(topicId, userId: fromId)
             case "NPA": self.moveToNPA(topicId)
             case "NCA": self.moveToNCA(topicId)
             case "NLA": self.moveToNLA(topicId)
@@ -173,6 +175,10 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
         let delete = UITableViewRowAction(style: .Default, title: "Delete") { action, index in
             self.notificationId = self.dataSource[indexPath.row]["notificationId"]! as! String
             deleteNotification(self.notificationId)
+            
+            if self.dataSource.count == 1 {
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
         }
         
         let isRead = self.dataSource[indexPath.row]["isRead"] as? Int
@@ -187,8 +193,8 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
     func moveToFRR(topicId:String) {
         let friendRequest = viewControllerFrom("Main", vcid: "FriendBaseViewController") as! FriendBaseViewController
         friendRequest.topicId = topicId
-        self.navigationController?.pushViewController(friendRequest, animated: true)
-        //self.presentViewController(friendRequest, animated: true) {}
+        //self.navigationController?.pushViewController(friendRequest, animated: true)
+        self.presentViewController(friendRequest, animated: true) {}
     }
     
     func moveToFRA(topicId:String) {
@@ -197,8 +203,25 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
         self.presentViewController(friendRequest, animated: true) {}
     }
     
-    func moveToNMA() {
-        print("NMA")
+    func moveToNMA(topicId:String, userId:String) {
+        let matchId:String = topicId
+        let userId:String = userId
+        
+        fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeSingleEventOfType(.Value, withBlock: { snapshot in
+            
+            if let data = snapshot.value! as? [String:AnyObject]{
+                let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
+                summaryDetailsVC.matchDetailsData = data
+                summaryDetailsVC.isFriendDashboard = true
+                //if let _ = self.friendProfile {
+                  //  summaryDetailsVC.friendProfile = true
+                    self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
+                //}
+                //else {
+                //    self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                //}
+            }
+        })
     }
     
     func moveToNPA(topicId:String) {

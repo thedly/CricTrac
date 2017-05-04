@@ -21,7 +21,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     @IBOutlet weak var contentViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var barView: UIView!
     
-    var postIndex = 0
+//    var postIndex = 0
 //    var postLikeCount = 0
     var initialLikes = 0
     var refreshableParent:Refreshable?
@@ -255,6 +255,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                 let data = postData
                 cCell.postOwnerId = data["OwnerID"] as? String
                 let postedBy = data["PostedBy"] as? String
+                cCell.postId = postId as? String
                
                 if postedBy == "CricTrac" {
                     cCell.postOwnerName.text = "CricTrac"

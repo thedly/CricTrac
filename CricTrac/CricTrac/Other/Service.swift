@@ -112,6 +112,10 @@ func addMatchData(key:String,data:[String:AnyObject], callback: [String:AnyObjec
     }
     
     UpdateDashboardDetails()
+    newMatchNotification((dataToBeModified["MatchId"] as? String)!) { (resultError) in
+        //KRProgressHUD.dismiss()
+    }
+    
     //callback(dataToBeModified)
 }
 
