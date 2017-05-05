@@ -51,9 +51,7 @@ class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
          let data = dataSource[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier("LikesTableViewCell", forIndexPath:
             indexPath) as! LikesTableViewCell
-        
-        
-        
+
         cell.name.text = data["OwnerName"] as? String
         let friendUserId = data["OwnerID"] as? String
         
@@ -80,7 +78,39 @@ class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         })
         
         
-
+        //check if user record exist in Friends
+        let ref1 = fireBaseRef.child("Users").child(currentUser!.uid).child("Friends")
+        ref1.queryOrderedByChild("UserId").queryStartingAtValue(friendUserId!).queryEndingAtValue(friendUserId!+"\u{f8ff}").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            
+            if snapshot.childrenCount > 0 {
+                cell.friendButton.setTitle("Friend", forState: .Normal)
+            }
+        })
+        
+        //check if user record exist in SentRequest
+        let ref2 = fireBaseRef.child("Users").child(currentUser!.uid).child("SentRequest")
+        ref2.queryOrderedByChild("SentTo").queryStartingAtValue(friendUserId!).queryEndingAtValue(friendUserId!+"\u{f8ff}").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            
+            if snapshot.childrenCount > 0 {
+                cell.friendButton.setTitle("Pending", forState: .Normal)
+            }
+        })
+        
+        //check if user record exist in ReceivedRequest
+        let ref3 = fireBaseRef.child("Users").child(currentUser!.uid).child("ReceivedRequest")
+        ref3.queryOrderedByChild("ReceivedFrom").queryStartingAtValue(friendUserId!).queryEndingAtValue(friendUserId!+"\u{f8ff}").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            
+            if snapshot.childrenCount > 0 {
+                cell.friendButton.setTitle("Pending", forState: .Normal)
+            }
+        })
+        
+        //hide friend button for self
+        if friendUserId == currentUser?.uid {
+            cell.friendButton.hidden = true
+        }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         cell.backgroundColor = UIColor.clearColor()
         return cell
     }

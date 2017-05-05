@@ -27,11 +27,11 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     var refreshableParent:Refreshable?
     var dataSource = [[String:AnyObject]]()
     
-    var postData = [String:AnyObject]()
+    var postDataNew = [String:AnyObject]()
     
     var postId:String = ""
     var comntsHeightConstraint = false
-//    var postData:JSON?
+    //var postData:JSON?
     var currentTheme:CTTheme!
     var commentId:String = ""
     //var postOwnerId:String?
@@ -205,7 +205,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
 //        }
         
         getPost(postId) { (data) in
-            self.postData = data
+            self.postDataNew = data
             self.tableView.reloadData()
         }
         
@@ -213,6 +213,8 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
             self.dataSource = data
             self.tableView.reloadData()
         }
+        
+        //dataSource.sort({$0.dataSource["AddedTime"].compare($1.AddedTime) == .OrderedAscending})
         
     }
     
@@ -249,10 +251,10 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         
         let cCell =  tableView.dequeueReusableCellWithIdentifier("cPost", forIndexPath: indexPath) as! CPostTableViewCell
         
-        if !postData .isEmpty  {
+        if !postDataNew .isEmpty  {
             //display the post in the first row of the tableview
             if indexPath.row == 0  {
-                let data = postData
+                let data = postDataNew
                 cCell.postOwnerId = data["OwnerID"] as? String
                 let postedBy = data["PostedBy"] as? String
                 cCell.postId = postId as? String
@@ -314,16 +316,16 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                 cCell.postText.text = data["Post"] as? String
                 cCell.delCommentBtn.hidden = true
                 
-                cCell.likeLabel.textColor = UIColor.grayColor()
                 cCell.likeButton.frame = CGRectMake(0, 0, 10, 10)
-                cCell.likeButton.setImage(UIImage(named: "Like-New"), forState: UIControlState.Normal)
+                cCell.likeButton.setImage(UIImage(named: "Like-100"), forState: UIControlState.Normal)
+                cCell.likeButton.titleLabel?.textColor = UIColor.blackColor()
                 
                 let childLikes = data["Likes"] as? [String : AnyObject]
                 if childLikes != nil {
                     for (key, value) in childLikes! {
                         if currentUser!.uid == value["OwnerID"] as? String {
-                            cCell.likeLabel.textColor = UIColor.whiteColor()
-                            cCell.likeButton.setImage(UIImage(named: "Like-New-Filled"), forState: UIControlState.Normal)
+                            cCell.likeButton.titleLabel?.textColor = UIColor.whiteColor()
+                            cCell.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
                         }
                     }
                 }
@@ -352,6 +354,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
             else {
                 //display the comments
                 let data = dataSource[indexPath.row - 1]
+                
                 aCell.ownerId = data["OwnerID"] as? String
 
                 if let val = data["Comment"] as? String{
@@ -461,7 +464,6 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
 //    }
     
     func deletebuttonTapped() {
-        
     }
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool{

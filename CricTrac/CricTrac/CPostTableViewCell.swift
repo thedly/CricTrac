@@ -18,7 +18,6 @@ class CPostTableViewCell: UITableViewCell {
     @IBOutlet weak var postText: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var likeButton: UIButton!
-    @IBOutlet weak var likeLabel: UILabel!
     @IBOutlet weak var delCommentBtn: UIButton!
     
     var postOwnerId:String?
@@ -68,9 +67,7 @@ class CPostTableViewCell: UITableViewCell {
             dashBoard.friendId = postOwnerId
             dashBoard.friendProfile = userInfo
             //parentVC.presentViewController(dashBoard, animated: true) {}
-        
             self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
-            print(postOwnerId)
         //}
     }
     

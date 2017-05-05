@@ -25,7 +25,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     var totalPosts = 5
    
     override func viewWillAppear(animated: Bool) {
-        //loadTimeline()
+        loadTimeline()
         
         //calculate the Unread Notifications
         //calcUnreadNotifications()
@@ -184,8 +184,6 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         
         let notificationButton: UIButton = UIButton(type:.Custom)
         notificationButton.frame = CGRectMake(0, 0, 20, 20)
-        //notificationButton.setTitle("243", forState:.Normal)
-        //notificationButton.font = UIFont(name: appFont_bold, size: 30)!
         notificationButton.setImage(UIImage(named: "Notification"), forState: UIControlState.Normal)
         notificationButton.addTarget(self, action: #selector(didNotificationButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
         let righttbarButton = UIBarButtonItem(customView: notificationButton)
@@ -328,32 +326,58 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                         }
                     })
                 }
-                    
-                postCell.totalLikeCount = 0
-                postCell.post.text = data.dictionaryValue["Post"]?.stringValue
-                postCell.index = indexPath.section-1
-                var commentsCount = 0
                 
-                if let value = data.dictionaryValue["TimelineComments"]?.count{
-                    commentsCount = value
+                
+                //sajith-  fetch the fresh post data
+                let postid = data.dictionaryValue["postId"]?.stringValue
+                getPost(postid!) { (data) in
+                    if (data["LikeCount"] != nil) {
+                        let likeCount = data["LikeCount"] as? Int
+                        postCell.likeCount.setTitle("\(likeCount!) Likes", forState: .Normal)
+                        postCell.totalLikeCount = likeCount!
+                    }
+                    else {
+                        postCell.likeCount.setTitle("0 Likes", forState: .Normal)
+                    }
+                    if (data["CommentCount"] != nil) {
+                        let cmtCount = data["CommentCount"] as? Int
+                        postCell.commentCount.setTitle("\(cmtCount!) Comments", forState: .Normal)
+                    }
+                    else {
+                        postCell.commentCount.setTitle("0 Comments", forState: .Normal)
+                    }
                 }
                 
-                postCell.commentCount.setTitle("\(commentsCount) Comments", forState: .Normal)
+                    
+               // postCell.totalLikeCount = 0
+                postCell.post.text = data.dictionaryValue["Post"]?.stringValue
+                postCell.index = indexPath.section-1
+//                var commentsCount = 0
+//                
+//                if let value = data.dictionaryValue["TimelineComments"]?.count{
+//                    commentsCount = value
+//                }
+
+                
+                //postCell.commentCount.setTitle("\(commentsCount) Comments", forState: .Normal)
                 postCell.postId = data.dictionaryValue["postId"]?.stringValue
                 
-                var likesCount = 0
-                var likeColor = UIColor.grayColor()
+                //var likesCount = 0
+                //var likeColor = UIColor.grayColor()
+                var likeColor = UIColor.blackColor()
+                postCell.likeButton.setImage(UIImage(named: "Like-100"), forState: UIControlState.Normal)
                 
                 if let likes = data.dictionaryValue["Likes"]?.dictionaryObject as? [String:[String:String]]{
                     let result = likes.filter{ return  $0.1["OwnerID"] == currentUser!.uid }
                     if result.count > 0 {
                         likeColor = UIColor.whiteColor()
+                        postCell.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
                     }
-                    likesCount = likes.count
-                    postCell.totalLikeCount = likesCount
+                    //likesCount = likes.count
+                    //postCell.totalLikeCount = likesCount
                 }
                 
-                postCell.likeCount.setTitle("\(likesCount) Likes", forState: .Normal)
+                //postCell.likeCount.setTitle("\(likesCount) Likes", forState: .Normal)
                 postCell.likeButton.titleLabel?.textColor = likeColor
                 acell = postCell
             }

@@ -181,6 +181,7 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
             })
         }
     }
+    
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.characters.count > 2 {
             backgroundThread(background: {

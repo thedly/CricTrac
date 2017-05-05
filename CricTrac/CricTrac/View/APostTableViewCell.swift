@@ -106,19 +106,16 @@ class APostTableViewCell: UITableViewCell {
         }
     }
     
-    
     @IBAction func DidTapLikeCountButton(sender: UIButton) {
-       
-            if totalLikeCount != 0 {
-                if let parentVC = parent as? UIViewController{
-                    let likePage = viewControllerFrom("Main", vcid: "LikesViewController") as! LikesViewController
-                     likePage.postID = postId!
-                    parentVC.presentViewController(likePage, animated: true) {}
-                }
+        if totalLikeCount != 0 {
+            if let parentVC = parent as? UIViewController{
+                let likePage = viewControllerFrom("Main", vcid: "LikesViewController") as! LikesViewController
+                 likePage.postID = postId!
+                parentVC.presentViewController(likePage, animated: true) {}
             }
-        
-        
+        }
     }
+    
     @IBAction func DidTapLikeButton(sender: UIButton) {
         // network reachability test
         
@@ -136,13 +133,17 @@ class APostTableViewCell: UITableViewCell {
         if let value = postId{
             likeOrUnlike(value, like: { (likeDict) in
                 self.addLikeToDataArray(likeDict)
-                self.likeButton.titleLabel?.textColor = UIColor.yellowColor()
+                //self.likeButton.titleLabel?.textColor = UIColor.yellowColor()
+                self.likeButton.titleLabel?.textColor = UIColor.whiteColor()
+                self.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
                 self.totalLikeCount += 1
                 self.likeCount.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
                 self.currentUserHasLikedThePost = true
             }) {
                 self.removeLikeFromArray()
-                self.likeButton.titleLabel?.textColor = UIColor.grayColor()
+                //self.likeButton.titleLabel?.textColor = UIColor.grayColor()
+                self.likeButton.titleLabel?.textColor = UIColor.blackColor()
+                self.likeButton.setImage(UIImage(named: "Like-100"), forState: UIControlState.Normal)
                 self.totalLikeCount -= 1
                 self.likeCount.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
                 self.currentUserHasLikedThePost = false
