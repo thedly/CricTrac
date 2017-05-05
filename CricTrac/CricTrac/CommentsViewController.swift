@@ -333,7 +333,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                 
                 if (data["LikeCount"] != nil) {
                     let likeCount = data["LikeCount"] as? Int
-                    cCell.likes.setTitle("\(likeCount!) Likes", forState: .Normal)
+                    cCell.likes.setTitle("\(likeCount!) Likes", forState:  .Normal)
                 }
                 else {
                     cCell.likes.setTitle("0 Likes", forState: .Normal)
@@ -490,7 +490,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
          }
          */
         
-        if text ==  "\n"{ return false}
+        //if text ==  "\n"{ return false}
        
         
 //        if textViewContent.characters.count < 0 {
@@ -505,18 +505,29 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
 //        }
        
    
-        let lines  =  textViewContent.characters.count/40
-        let heightConstant = Int((self.textViewHeightConstraint.constant - 30)/18)
+//        let lines  =  textViewContent.characters.count/40
+//        let heightConstant = Int((self.textViewHeightConstraint.constant - 30)/18)
+//        
+//        if lines > heightConstant{
+//            if self.textViewHeightConstraint.constant < 102{
+//                UIView.animateWithDuration(0.1, animations: { () -> Void in
+//                    self.textViewHeightConstraint.constant = self.textViewHeightConstraint.constant+18
+//                })}
+//        }else if heightConstant > lines
+//        {
+//            self.textViewHeightConstraint.constant = self.textViewHeightConstraint.constant - 18
+//        }
         
-        if lines > heightConstant{
-            if self.textViewHeightConstraint.constant < 102{
-                UIView.animateWithDuration(0.1, animations: { () -> Void in
-                    self.textViewHeightConstraint.constant = self.textViewHeightConstraint.constant+18
-                })}
-        }else if heightConstant > lines
-        {
-            self.textViewHeightConstraint.constant = self.textViewHeightConstraint.constant - 18
-        }
+        
+        //sajith - increase the height of the text box and view
+        self.contentViewForCommentCell.frame = CGRect(x: 0, y: 0, width: 350, height: 120)
+        self.contentViewForCommentCell.layoutIfNeeded()
+        
+        let contentSize = textView.sizeThatFits(textView.bounds.size)
+        var frame = textView.frame
+        frame.size.height = contentSize.height
+        textView.frame = frame
+        
         return true
     }
     

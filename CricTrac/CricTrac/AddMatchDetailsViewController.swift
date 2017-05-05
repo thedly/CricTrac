@@ -42,7 +42,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         super.viewDidLoad()
         
         userProfileData = profileData
-        self.fetchProductInfo()
+        //self.fetchProductInfo()
         
         //check Player Status
         if userProfileData.UserStatus != "Premium" {
@@ -52,7 +52,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                 let matchCount = snapshot.childrenCount
                 if matchCount >= 5 {
                     //In App Purchase
-                    self.didTapPurchaseButton()
+                    //self.didTapPurchaseButton()
                 }
             })
             
@@ -511,9 +511,9 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                 self.doPurchase()
             }))
             
-//            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
-//                print("Handle Cancel Logic here")
-//            }))
+            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+                print("Handle Cancel Logic here")
+            }))
         
             presentViewController(refreshAlert, animated: true, completion: nil)
         }
