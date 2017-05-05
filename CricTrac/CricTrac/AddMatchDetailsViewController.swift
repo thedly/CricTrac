@@ -10,6 +10,7 @@ import UIKit
 import XLPagerTabStrip
 import SCLAlertView
 import KRProgressHUD
+import SwiftyStoreKit
 
 class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchParent,ThemeChangeable  {
     
@@ -28,6 +29,9 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     var dataAdded = false
     var data = [String:String]()
     
+    var userProfileData:Profile!
+    var inAppProductPrice : String?
+    
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
@@ -36,6 +40,24 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        userProfileData = profileData
+        self.fetchProductInfo()
+        
+        //check Player Status
+        if userProfileData.UserStatus != "Premium" {
+            let userID = currentUser?.uid
+            //get total match count
+            fireBaseRef.child("Users").child(userID!).child("Matches").observeSingleEventOfType(.Value, withBlock: { snapshot in
+                let matchCount = snapshot.childrenCount
+                if matchCount >= 5 {
+                    //In App Purchase
+                    self.didTapPurchaseButton()
+                }
+            })
+            
+        }
+        
         getUserData()
         if matchBeingEdited{
             if let val = selecetedData!["MatchId"] as? String{
@@ -110,19 +132,17 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
        // navigationController!.navigationBar.titleTextAttributes = titleDict
     }
+    
     func popBack()  {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
     func getUserData(){
-        
         KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
         getAllUserData { (userData) in
             
             if let grounds = userData["Grounds"] as? [String:String]{
-                
                 groundNames = grounds.map({ (key,value) in value })
-                
             }
             
             if let venue = userData["Venue"] as? [String: String]{
@@ -130,25 +150,18 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             }
             
             if let teams = userData["Teams"] as? [String:String]{
-                
                 teamNames = teams.map({ (key,value) in value })
-                
             }
             
             if let opponents = userData["Opponents"] as? [String:String]{
-                
                 opponentTeams = opponents.map({ (key,value) in value })
-                
             }
             
             if let tournamnet = userData["Tournaments"] as? [String:String]{
-                
                 tournaments = tournamnet.map({ (key,value) in value })
             }
             KRProgressHUD.dismiss()
         }
-        
-        
     }
     
     
@@ -461,4 +474,76 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             self.navigationController?.popViewControllerAnimated(true)
         }
     }
+    
+    //MARK: In App purchase
+    
+    // Optional: Use this methode to fetch product info.
+    private func fetchProductInfo(){
+        
+        SwiftyStoreKit.retrieveProductsInfo(["CricTrac_Premium_Player"]) { result in
+            if let product = result.retrievedProducts.first {
+                let numberFormatter = NSNumberFormatter()
+                numberFormatter.locale = product.priceLocale
+                numberFormatter.numberStyle = .CurrencyStyle
+                let priceString = numberFormatter.stringFromNumber(product.price ?? 0) ?? ""
+                print("Product: \(product.localizedDescription), price: \(priceString)")
+                self.inAppProductPrice = priceString
+            }
+            else if let invalidProductId = result.invalidProductIDs.first {
+                //return alertWithTitle("Could not retrieve product info", message: "Invalid product identifier: \(invalidProductId)")
+                print("Invalid product identifier: \(invalidProductId)")
+            }
+            else {
+                print("Error: \(result.error)")
+            }
+        }
+    }
+    
+    @IBAction func didTapPurchaseButton(){
+        
+        if let msg = inAppProductPrice {
+        
+            let message = "Upgrade to Premium by paying : Rs. \(msg)"
+            
+            let refreshAlert = UIAlertController(title: "Upgrade", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            
+            refreshAlert.addAction(UIAlertAction(title: "Buy", style: .Default, handler: { (action: UIAlertAction!) in
+                self.doPurchase()
+            }))
+            
+//            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+//                print("Handle Cancel Logic here")
+//            }))
+        
+            presentViewController(refreshAlert, animated: true, completion: nil)
+        }
+        else {
+            
+            self.fetchProductInfo()
+            
+            let refreshAlert = UIAlertController(title: "Sorry", message: "Please try again", preferredStyle: UIAlertControllerStyle.Alert)
+            refreshAlert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: { (action: UIAlertAction!) in
+            }))
+            self.presentViewController(refreshAlert, animated: true, completion: nil)
+        }
+    }
+    
+    func doPurchase(){
+        
+        SwiftyStoreKit.purchaseProduct("CricTrac_Premium_Player") { result in
+            switch result {
+            case .Success(let productId):
+                print("Purchase Success: \(productId)")
+                //self.upgradeButton.setTitle("", forState: UIControlState.Normal)
+                let refreshAlert = UIAlertController(title: "Success", message: "Purchase successfull", preferredStyle: UIAlertControllerStyle.Alert)
+                refreshAlert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: { (action: UIAlertAction!) in
+                }))
+                self.presentViewController(refreshAlert, animated: true, completion: nil)
+                
+            case .Error(let error):
+                print("Purchase Failed: \(error)")
+            }
+        }
+    }
+
 }

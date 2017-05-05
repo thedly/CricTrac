@@ -396,39 +396,6 @@ func deleteAllPlayerData(){
     fireBaseRef.child("Users").child(currentUser!.uid).child("Grounds").removeValue()
     fireBaseRef.child("Users").child(currentUser!.uid).child("Tournaments").removeValue()
     fireBaseRef.child("Users").child(currentUser!.uid).child("Venue").removeValue()
-    
-    /*
-    fireBaseRef.child("Users").child(currentUser!.uid).observeEventType(.Value, withBlock: { (snapshot) in
-        
-        if snapshot.hasChild("Dashboard"){
-            snapshot.ref.child("Dashboard").removeValue()
-        }
-        
-        if snapshot.hasChild("Matches"){
-            snapshot.ref.child("Matches").removeValue()
-        }
-        
-        if snapshot.hasChild("Opponents"){
-            snapshot.ref.child("Opponents").removeValue()
-        }
-        
-        if snapshot.hasChild("Grounds"){
-            snapshot.ref.child("Grounds").removeValue()
-        }
-        
-        if snapshot.hasChild("Teams"){
-            snapshot.ref.child("Teams").removeValue()
-        }
-        
-        if snapshot.hasChild("Tournaments"){
-            snapshot.ref.child("Tournaments").removeValue()
-        }
-        
-        if snapshot.hasChild("Venue"){
-            snapshot.ref.child("Venue").removeValue()
-        }
-
-    })*/
 }
 
 func UpdateDashboardDetails(){
@@ -437,7 +404,8 @@ func UpdateDashboardDetails(){
         let request = NSMutableURLRequest(URL: NSURL(string: requestUrl)!)
         request.HTTPMethod = "POST"
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
-            guard error == nil && data != nil else {                                                          // check for fundamental networking error
+            guard error == nil && data != nil else {
+                // check for fundamental networking error
                 print("error=\(error)")
                 return
             }

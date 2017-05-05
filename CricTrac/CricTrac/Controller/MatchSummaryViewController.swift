@@ -17,6 +17,9 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     var matchData = [String:AnyObject]()
     var matches = [MatchSummaryData]()
     var matchDataSource = [[String:AnyObject]]()
+    
+    var userProfileData:Profile!
+    
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
@@ -35,6 +38,14 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        userProfileData = profileData
+        if userProfileData.UserStatus == "Premium" {
+            upgradeButton.hidden=true
+        }
+        else {
+            upgradeButton.hidden = false
+        }
         
         //In App Purchase
         fetchProductInfo()
