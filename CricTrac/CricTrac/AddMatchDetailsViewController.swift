@@ -13,11 +13,9 @@ import KRProgressHUD
 import SwiftyStoreKit
 
 class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchParent,ThemeChangeable  {
-    
     var matchVC:MatchViewController!
     var matchBeingEdited = false
     var battingBowlingViewController: BattingBowlingViewController!
-    
     var resVC: MatchResultsViewController!
     var matchId:String?
     var selecetedData:[String:AnyObject]?
@@ -35,7 +33,6 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
-       
     }
     
     override func viewDidLoad() {
@@ -55,16 +52,15 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                     //self.didTapPurchaseButton()
                 }
             })
-            
         }
         
         getUserData()
         if matchBeingEdited{
             if let val = selecetedData!["MatchId"] as? String{
-               
                 matchId = val
             }
         }
+        
         self.automaticallyAdjustsScrollViewInsets = false
         // Do any additional setup after loading the view.
         settings.style.buttonBarItemBackgroundColor = UIColor.clearColor()
@@ -74,22 +70,20 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         self.buttonBarView.collectionViewLayout = UICollectionViewFlowLayout()
         self.buttonBarView.frame.size.height = 40
         settings.style.buttonBarItemFont = UIFont(name: appFont_bold, size: 15)!
-        dataHasChangedAfterLastSave = false
+        //dataHasChangedAfterLastSave = false
         //setUIBackgroundTheme(self.view)
         setBackgroundColor()
         setNavigationBarProperties()
        // containerView.setContentOffset(CGPointMake(pageOffsetForChildIndex(index: 0), -64), animated: true)
        // containerView.setContentOffset(CGPointMake(pageOffsetForChildIndex(index: 1), -64), animated: true)
        // containerView.setContentOffset(CGPointMake(pageOffsetForChildIndex(index: 2), -64), animated: true)
-
-
     }
     
     func dataChangedAfterLastSave(){
-        
         dataHasChangedAfterLastSave = true
         let button = navigationItem.rightBarButtonItem
         let myBtn : UIButton?
+        
         if((button!.customView?.isKindOfClass(UIButton)) != nil)
         {
             myBtn = button!.customView as? UIButton
@@ -97,7 +91,6 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         }
     }
     
-
     func setNavigationBarProperties(){
         var currentTheme:CTTheme!
         currentTheme = cricTracTheme.currentTheme
@@ -106,13 +99,11 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
             menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
             title = "ADD MATCH"
-
-          }else {
+          }
+          else {
             menuButton.setImage(UIImage(named: "Back-100"), forState: UIControlState.Normal)
             menuButton.addTarget(self, action: #selector(popBack), forControlEvents: UIControlEvents.TouchUpInside)
-            
             title = "EDIT MATCH"
-
         }
        
         menuButton.frame = CGRectMake(0, 0, 40, 40)
@@ -164,112 +155,82 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         }
     }
     
-    
-    @IBAction func DidtapCancelButton(sender: AnyObject) {
-        
-        if dataHasChangedAfterLastSave || dataAdded {
-            
-            let appearance = SCLAlertView.SCLAppearance(
-                showCloseButton: false
-            )
-            
-            let alertView = SCLAlertView(appearance: appearance)
-           
-            alertView.addButton("OK", target:self, selector:#selector(AddMatchDetailsViewController.continueToDismiss))
-            
-            alertView.addButton("Cancel", action: { })
-            
-            alertView.showNotice("Warning", subTitle: "All data will be lost if you continue")
-            
-            
-        }
-        else{
-            
-           // self.dismissViewControllerAnimated(true) {}
-            moveToMatchSummary()
-        }
-        
-    }
-    
+//    @IBAction func DidtapCancelButton(sender: AnyObject) {
+//        if dataHasChangedAfterLastSave || dataAdded {
+//            let appearance = SCLAlertView.SCLAppearance(
+//                showCloseButton: false
+//            )
+//            
+//            let alertView = SCLAlertView(appearance: appearance)
+//           
+//            alertView.addButton("OK", target:self, selector:#selector(AddMatchDetailsViewController.continueToDismiss))
+//            alertView.addButton("Cancel", action: { })
+//            alertView.showNotice("Warning", subTitle: "All data will be lost if you continue")
+//        }
+//        else{
+//           // self.dismissViewControllerAnimated(true) {}
+//            moveToMatchSummary()
+//        }
+//    }
     
     func continueToDismiss(){
-        
        // self.dismissViewControllerAnimated(true) {}
         moveToMatchSummary()
     }
     
-    
     @IBAction func didTapSave(sender: UIButton) {
-        
-        
-        
         /*if matchBeingEdited {
             dataHasChangedAfterLastSave = false
         }*/
         
         if validateMatchDetails() {
-            
-            if dataHasChangedAfterLastSave || matchBeingEdited == true {
-            
-            data.removeAll()
-                
-            if let _ =  matchVC?.view{
-                
-                data += matchVC.data
-            }
-            if let _ = battingBowlingViewController?.view{
-                
-                data += battingBowlingViewController.BattingData
-                data += battingBowlingViewController.BowlingData
-            }
-            if let _ = resVC?.view{
-               data += resVC.data
-            }
-                
-                
-        }
-           
-           if let val =  data["FirstBatting"] where val == ""{
-            
-            data["FirstBatting"] =  data["Team"]
-            
-            }
-            
-            if let val =  data["SecondBatting"] where val == ""{
-                
-                data["SecondBatting"] =  data["Opponent"]
-                
-            }
-            
-            if let val =  data["TossWonBy"] where val == "-"{
-                
-                data["TossWonBy"] =  data["Team"]
-                
-            }
-            
-            if let val =  data["Result"] where val == "-"{
-                
-                data["Result"] =  "Won"
-                
-            }
-            
-            //sajith - if condition moved from top
-            if matchBeingEdited {
-                dataHasChangedAfterLastSave = false
-            }
-
-            
-            if !dataHasChangedAfterLastSave {
-                if !matchBeingEdited{
+//          if dataHasChangedAfterLastSave || matchBeingEdited == true {
+                data.removeAll()
                     
+                if let _ =  matchVC?.view{
+                    data += matchVC.data
+                }
+                    
+                if let _ = battingBowlingViewController?.view {
+                    data += battingBowlingViewController.BattingData
+                    data += battingBowlingViewController.BowlingData
+                }
+                    
+                if let _ = resVC?.view{
+                   data += resVC.data
+                }
+//          }
+           
+            if let val =  data["FirstBatting"] where val == ""{
+                data["FirstBatting"] =  data["Team"]
+            }
+                
+            if let val =  data["SecondBatting"] where val == ""{
+                data["SecondBatting"] =  data["Opponent"]
+            }
+                
+            if let val =  data["TossWonBy"] where val == "-"{
+                data["TossWonBy"] =  data["Team"]
+            }
+                
+            if let val =  data["Result"] where val == "-"{
+                data["Result"] =  "Won"
+            }
+                
+            //sajith - if condition moved from top
+//            if matchBeingEdited {
+//                dataHasChangedAfterLastSave = false
+//            }
+            
+            //if !dataHasChangedAfterLastSave {
+                if !matchBeingEdited{
                     addMatchData("date \(String(date))",data: data, callback: { dat in
-                    self.updateGlobalValues()
-                   // self.dismissViewControllerAnimated(true) {}
+                        self.updateGlobalValues()
+                        // self.dismissViewControllerAnimated(true) {}
                         self.moveToMatchSummary()
                     })
                 }
                 else{
-                    
                     if !matchVC.teamOROpponentFieldChanged {
                         if resVC.swapBtnVal == 0 {
                             if data["Team"] == resVC.existFB {
@@ -325,37 +286,32 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                            self.moveToMatchSummary()
                             // self.dismissViewControllerAnimated(true) {}
                         })
-
                     }
                 }
-            }
-            else{
-                
-                let button = navigationItem.rightBarButtonItem
-                //(navigationItem.rightBarButtonItem.customView.subviews.lastObject)
-                let myBtn : UIButton?
-                if((button!.customView?.isKindOfClass(UIButton)) != nil)
-                {
-                    myBtn = button!.customView as? UIButton
-                    myBtn!.setTitle("DONE", forState: .Normal)
-                    
-                }
-                dataHasChangedAfterLastSave = false
-            }
-            
+//            }
+//            else{
+//                
+//                let button = navigationItem.rightBarButtonItem
+//                //(navigationItem.rightBarButtonItem.customView.subviews.lastObject)
+//                let myBtn : UIButton?
+//                if((button!.customView?.isKindOfClass(UIButton)) != nil)
+//                {
+//                    myBtn = button!.customView as? UIButton
+//                    myBtn!.setTitle("DONE", forState: .Normal)
+//                    
+//                }
+//                dataHasChangedAfterLastSave = false
+//            }
             dataAdded = true
         }
-        
     }
     
-    
     func updateGlobalValues(){
-        
         let teamName = self.data["Team"]!
         if teamName != "-" {
             if !teamNames.contains(teamName){
-            addNewTeamName(teamName)
-            teamNames.append(teamName)
+                addNewTeamName(teamName)
+                teamNames.append(teamName)
             }
         }
         
@@ -366,8 +322,8 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             opponentTeams.append(oppoTeamName)
             }
         }
-        let tournament = self.data["Tournament"]!
         
+        let tournament = self.data["Tournament"]!
         if tournament != "-"{
             if !tournaments.contains(tournament){
                 addNewTournamentName(tournament)
@@ -376,33 +332,28 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         }
         
         var groundName = "-"
-        
         if let ground = data["Ground"] {
             groundName = ground
         }
         
-        var venueName = "-"
-        
-        if let venue = data["Venue"] {
-            venueName = venue
-        }
-        
-        
         if groundName != "-"{
-            
             if !groundNames.contains(groundName){
                 addNewGroundName(groundName)
                 groundNames.append(groundName)
             }
         }
+        
+        var venueName = "-"
+        if let venue = data["Venue"] {
+            venueName = venue
+        }
+        
         if venueName != "-"{
-            
             if !venueNames.contains(venueName){
                 addNewVenueName(venueName)
                 venueNames.append(venueName)
             }
         }
-        
     }
     
     
@@ -427,14 +378,9 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         return [matchVC, battingBowlingViewController,resVC]
     }
     
-    
-    
     func validateMatchDetails()->Bool{
-        
         var pageName = ""
-        
         if matchVC.allRequiredFieldsHaveNotFilledProperly{
-            
             pageName = "Match Details"
         }
         else if !battingBowlingViewController.allRequiredFieldsHaveFilledProperly {
@@ -445,7 +391,6 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         }
         
         SCLAlertView().showWarning("Error", subTitle: "Some Fields are not filled properly in \(pageName). Plaese fill it and try saving")
-        
         return false
     }
     
@@ -462,8 +407,8 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
      // Pass the selected object to the new view controller.
      }
      */
+    
     func moveToMatchSummary()  {
-        
         let dashboardVC = viewControllerFrom("Main", vcid: "MatchSummaryViewController") as! MatchSummaryViewController
         if !matchBeingEdited {
             let navigationControl = UINavigationController(rootViewController: dashboardVC)

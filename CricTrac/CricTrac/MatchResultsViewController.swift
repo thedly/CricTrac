@@ -63,17 +63,12 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         var secondBattingformattedStringCollection = [NSMutableAttributedString]()
         
         battingText.normal("BATTING", fontName: appFont_bold, fontSize: 17)
-        
         firstBattingText.bold("1", fontName: appFont_black, fontSize: 30).normal("st", fontName: appFont_bold, fontSize: 12)
-        
         secondBattingText.bold("2", fontName: appFont_black, fontSize: 30).normal("nd", fontName: appFont_bold, fontSize: 12)
-        
         firstBattingformattedStringCollection.append(firstBattingText)
         firstBattingformattedStringCollection.append(battingText)
-        
         secondBattingformattedStringCollection.append(secondBattingText)
         secondBattingformattedStringCollection.append(battingText)
-        
         firstBattingHeaderText.attributedText = firstBattingformattedStringCollection.joinWithSeparator("\n")
         secondBattingHeaderText.attributedText = secondBattingformattedStringCollection.joinWithSeparator("\n")
         
@@ -86,11 +81,8 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         //setUIBackgroundTheme(self.view)
         
         FirstBattingView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
-        
         FirstBattingView.alpha = 0.8
-        
         SecondBattingView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
-        
         SecondBattingView.alpha = 0.8
         
         // Do any additional setup after loading the view.
@@ -120,98 +112,132 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     
     weak var matchDetails:MatchDetailsTrackable?
     var teams = [String]()
-    
     weak var parent:MatchParent?
     
     var data:[String:String]{
-        
         var tossVal = ""
-        
         if let val = tossText{
-            
             tossVal = val.trim()
         }
         
         var firstBatVal = ""
-        
         if let val = firstBatText{
-            
             firstBatVal = val.trim()
         }
         
         var firstScoreVal = ""
-        
         if let val = firstScoreText?.text where val != ""{
-            
             firstScoreVal = val
-        }else{
-            
+        }
+        else{
             firstScoreVal = "0"
         }
         
         var firstWicketsVal = ""
-        
         if let val = firstWicketsText{
-            
             firstWicketsVal = val.textVal
         }
-        var secondBatVal = ""
         
+        var secondBatVal = ""
         if let val = secondBatText{
-            
             secondBatVal = val.trim()
         }
         
         var secondScoreVal = ""
-        
         if let val = secondScoreText?.text where val != ""{
-            
             secondScoreVal = val
-        }else{
-            
+        }
+        else{
             secondScoreVal = "0"
         }
         
         var secondWicketsVal = "0"
-        
         if let val = secondWicketsText?.text where val != ""{
-            
             secondWicketsVal = val
-        }else{
-            
+        }
+        else{
             secondWicketsVal = "0"
         }
         
         var resultVal = ""
-        
         if let val = resultText{
-            
             resultVal = val.textVal
         }
         
         var firstOversVal = "0"
-        
-        if let val = firstOversText?.text where val != ""{
-            
-            firstOversVal = val
-        }else{
-            
-            firstOversVal = "0"
+        //sajith - added code for checking the Decimal value for Overs
+        if let firstOvers = firstOversText.text {
+            if firstOvers.length > 0 && Float(firstOvers) >= 0 {
+                firstOversVal = firstOversText.text!
+                
+                //check the decimal part of OversBowled
+                let floatOvers = firstOversVal.componentsSeparatedByString(".")
+                if floatOvers.count > 1 {
+                    let intOvers = floatOvers[0]
+                    var decOvers = "0"
+                    if floatOvers[1].length != 0 {
+                        decOvers = floatOvers[1]
+                    }
+
+                    if decOvers == "0" {
+                        firstOversVal = intOvers
+                    }
+                    else if Int(decOvers) > 5 {
+                        let newIntOvers = (Int(intOvers) ?? 0) + 1
+                        firstOversVal = String(newIntOvers)
+                    }
+                    else {
+                        firstOversVal = firstOversText.text!
+                    }
+                }
+            }
         }
+        
+//        if let val = firstOversText?.text where val != ""{
+//            firstOversVal = val
+//        }
+//        else{
+//            firstOversVal = "0"
+//        }
         
         var secondOversVal = "0"
-        
-        if let val = secondOversText?.text where val != ""{
-            
-            secondOversVal = val
-        }else{
-            secondOversVal = "0"
+        //sajith - added code for checking the Decimal value for Overs
+        if let secondOvers = secondOversText.text {
+            if secondOvers.length > 0 && Float(secondOvers) >= 0 {
+                secondOversVal = secondOversText.text!
+                
+                //check the decimal part of OversBowled
+                let floatOvers = secondOversVal.componentsSeparatedByString(".")
+                if floatOvers.count > 1 {
+                    let intOvers = floatOvers[0]
+                    var decOvers = "0"
+                    if floatOvers[1].length != 0 {
+                        decOvers = floatOvers[1]
+                    }
+                    
+                    if decOvers == "0" {
+                        secondOversVal = intOvers
+                    }
+                    else if Int(decOvers) > 5 {
+                        let newIntOvers = (Int(intOvers) ?? 0) + 1
+                        secondOversVal = String(newIntOvers)
+                    }
+                    else {
+                        secondOversVal = secondOversText.text!
+                    }
+                }
+            }
         }
+
+//        if let val = secondOversText?.text where val != ""{
+//            secondOversVal = val
+//        }
+//        else{
+//            secondOversVal = "0"
+//        }
         
         var AchievementsVal = ""
-        
         if let val = AchievementsText{
-            
             AchievementsVal = val.textVal
         }
         
@@ -221,7 +247,8 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     @IBAction func FirstTeamWicketsIncrement(sender: AnyObject) {
         if swapBtnVal == 0 {
             incrementDecrementOperation(firstWicketsText, isIncrement: true)
-        } else {
+        }
+        else {
            incrementDecrementOperation(secondWicketsText, isIncrement: true)
         }
         
@@ -244,6 +271,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
            incrementDecrementOperation(firstWicketsText, isIncrement: true)
         }
     }
+    
     @IBAction func SecondTeamWicketsDecrement(sender: AnyObject) {
         if swapBtnVal == 0 {
            incrementDecrementOperation(secondWicketsText, isIncrement: false)
@@ -253,13 +281,13 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         }
         
     }
+    
     @IBAction func tossBtnTapped(sender: UIButton) {
-        
         parent?.dataChangedAfterLastSave()
-        
         firstTeamTossBtn.alpha = 0.2
         secondTeamTossBtn.alpha = 0.2
         sender.alpha = 1.0
+        
         if sender.tag == 1 {
             tossText = firstTeamTitle.text
         }
@@ -275,7 +303,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     }
     
     func loadEditData(){
-        
         tossText = "-"
         if let toss = parent!.selecetedData!["TossWonBy"] {
             tossText = toss as! String
@@ -413,7 +440,8 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         
         if swapBtnVal == 0 {
             swapBtnVal = 1
-        } else {
+        }
+        else {
             swapBtnVal = 0
         }
         

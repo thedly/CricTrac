@@ -22,13 +22,11 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     @IBOutlet weak var positionText:UITextField!
     @IBOutlet weak var dismissalText:UITextField!
     @IBOutlet weak var scrollView:UIScrollView!
-    
-     @IBOutlet weak var oversText:UITextField!
+    @IBOutlet weak var oversText:UITextField!
     //@IBOutlet weak var oversText:SkyFloatingLabelTextField!
     @IBOutlet weak var wicketsText:UITextField!
     @IBOutlet weak var noballText:UITextField!
     @IBOutlet weak var widesText:UITextField!
-    
     @IBOutlet weak var maidensText: UITextField!
     @IBOutlet weak var runsGivenText: UITextField!
     weak var parent:MatchParent?
@@ -48,47 +46,51 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     var Dismissal: String!
     
     var BowlingData:[String:String]{
-        var bowledOvers = ""
-        var takenWickets = ""
-        var givenRuns = ""
-        var noBalls = ""
-        var wides = ""
-        var maidens = ""
+//        var bowledOvers = ""
+//        var takenWickets = ""
+//        var givenRuns = ""
+//        var noBalls = ""
+//        var wides = ""
+//        var maidens = ""
+//
+////        var newOvers = ""
+////        var intOvers = ""
+////        var decOvers = ""
+//        
+//        if let val = oversText {
+////            var newOvers = val.componentsSeparatedByString(".")
+////            if newOvers.count > 0 {
+////                intOvers = newOvers[0]
+////                decOvers = newOvers[1]
+////            }
+//            bowledOvers = val.textVal
+//        }
+//        
+//        if let val = WicketsTaken{
+//            takenWickets = val
+//        }
+//        
+//        if let val = RunsGiven{
+//            givenRuns = val
+//        }
+//        
+//        if let val = NoBalls{
+//            noBalls = val
+//        }
+//        
+//        if let val = Wides{
+//            wides = val
+//        }
+//        
+//        if let val = Maidens{
+//            maidens = val
+//        }
         
-//        var newOvers = ""
-//        var intOvers = ""
-//        var decOvers = ""
         
-        if let val = oversText {
-//            var newOvers = val.componentsSeparatedByString(".")
-//            if newOvers.count > 0 {
-//                intOvers = newOvers[0]
-//                decOvers = newOvers[1]
-//            }
-            bowledOvers = val.textVal
-        }
         
-        if let val = WicketsTaken{
-            takenWickets = val
-        }
+//        return ["OversBowled":bowledOvers,"WicketsTaken":takenWickets,"RunsGiven":givenRuns,"NoBalls":noBalls,"Wides":wides, "Maidens": maidens]
         
-        if let val = RunsGiven{
-            givenRuns = val
-        }
-        
-        if let val = NoBalls{
-            noBalls = val
-        }
-        
-        if let val = Wides{
-            wides = val
-        }
-        
-        if let val = Maidens{
-            maidens = val
-        }
-        
-        return ["OversBowled":bowledOvers,"WicketsTaken":takenWickets,"RunsGiven":givenRuns,"NoBalls":noBalls,"Wides":wides, "Maidens": maidens]
+        return ["OversBowled":bowledOvers,"WicketsTaken":WicketsTaken,"RunsGiven":RunsGiven,"NoBalls":NoBalls,"Wides":Wides, "Maidens": Maidens]
     }
     
     var allRequiredFieldsHaveFilledProperly: Bool {
@@ -151,24 +153,30 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     
     func validateOvers() -> Void {
         if let overText = oversText.text {
-            if overText.length == 0 || Float(overText) <= 0 {
-                self.view.endEditing(true)
-                Wides = "-"
-                NoBalls = "-"
-                WicketsTaken = "-"
-                Maidens = "-"
-                RunsGiven = "-"
-                bowledOvers = "-"
-                
-                widesText.userInteractionEnabled = false
-                noballText.userInteractionEnabled = false
-                wicketsText.userInteractionEnabled = false
-                maidensText.userInteractionEnabled = false
-                runsGivenText.userInteractionEnabled = false
-            }
-            else
-            {
+            if overText.length > 0 && Float(overText) >= 0 {
                 bowledOvers = oversText.text
+                
+                //check the decimal part of OversBowled
+                let floatOvers = bowledOvers.componentsSeparatedByString(".")
+                if floatOvers.count > 1 {
+                    let intOvers = floatOvers[0]
+                    var decOvers = "0"
+                    if floatOvers[1].length != 0 {
+                        decOvers = floatOvers[1]
+                    }
+                        
+                    if decOvers == "0" {
+                        bowledOvers = intOvers
+                    }
+                    else if Int(decOvers) > 5 {
+                        let newIntOvers = (Int(intOvers) ?? 0) + 1
+                        bowledOvers = String(newIntOvers)
+                    }
+                    else {
+                        bowledOvers = oversText.text
+                    }
+                }
+                
                 if let wides = widesText.text {
                     Wides = wides != "-" && wides.length > 0  ? wides : "0"
                 }
@@ -188,12 +196,68 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
                 if let runsgiven = runsGivenText.text {
                     RunsGiven = runsgiven != "-" && runsgiven.length > 0 ? runsgiven : "0"
                 }
-
+                
                 widesText.userInteractionEnabled = true
                 noballText.userInteractionEnabled = true
                 wicketsText.userInteractionEnabled = true
                 maidensText.userInteractionEnabled = true
                 runsGivenText.userInteractionEnabled = true
+//                self.view.endEditing(true)
+//                Wides = "-"
+//                NoBalls = "-"
+//                WicketsTaken = "-"
+//                Maidens = "-"
+//                RunsGiven = "-"
+//                bowledOvers = "-"
+//                
+//                widesText.userInteractionEnabled = false
+//                noballText.userInteractionEnabled = false
+//                wicketsText.userInteractionEnabled = false
+//                maidensText.userInteractionEnabled = false
+//                runsGivenText.userInteractionEnabled = false
+            }
+            else
+            {
+                self.view.endEditing(true)
+                Wides = "-"
+                NoBalls = "-"
+                WicketsTaken = "-"
+                Maidens = "-"
+                RunsGiven = "-"
+                bowledOvers = "-"
+                
+                widesText.userInteractionEnabled = false
+                noballText.userInteractionEnabled = false
+                wicketsText.userInteractionEnabled = false
+                maidensText.userInteractionEnabled = false
+                runsGivenText.userInteractionEnabled = false
+                
+//                bowledOvers = oversText.text
+//                if let wides = widesText.text {
+//                    Wides = wides != "-" && wides.length > 0  ? wides : "0"
+//                }
+//                
+//                if let noball = noballText.text {
+//                    NoBalls = noball != "-" && noball.length > 0 ? noball : "0"
+//                }
+//                
+//                if let wickets = wicketsText.text {
+//                    WicketsTaken = wickets != "-" && wickets.length > 0 ? wickets : "0"
+//                }
+//                
+//                if let maidens = maidensText.text {
+//                    Maidens = maidens != "-" && maidens.length > 0 ? maidens : "0"
+//                }
+//                
+//                if let runsgiven = runsGivenText.text {
+//                    RunsGiven = runsgiven != "-" && runsgiven.length > 0 ? runsgiven : "0"
+//                }
+//
+//                widesText.userInteractionEnabled = true
+//                noballText.userInteractionEnabled = true
+//                wicketsText.userInteractionEnabled = true
+//                maidensText.userInteractionEnabled = true
+//                runsGivenText.userInteractionEnabled = true
             }
         }
     }
@@ -252,38 +316,40 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     }
     
     var BattingData:[String:String]{
-        var takenRuns = ""
-        var facedBalls = ""
-        var fours = ""
-        var sixes = ""
-        var position = ""
-        var dismissal = ""
+//        var takenRuns = ""
+//        var facedBalls = ""
+//        var fours = ""
+//        var sixes = ""
+//        var position = ""
+//        var dismissal = ""
+//        
+//        if let val = RunsTaken{
+//            takenRuns = val
+//        }
+//        
+//        if let val = BallsFaced{
+//            facedBalls = val
+//        }
+//        
+//        if let val = Fours{
+//            fours = val
+//        }
+//        
+//        if let val = Sixes{
+//            sixes = val
+//        }
+//        
+//        if let val = Position{
+//            position = val
+//        }
+//        
+//        if let val = Dismissal{
+//            dismissal = val
+//        }
+//        
+//        return ["RunsTaken":takenRuns,"BallsFaced":facedBalls,"Fours":fours,"Sixes":sixes,"Position":position,"Dismissal":dismissal]
         
-        if let val = RunsTaken{
-            takenRuns = val
-        }
-        
-        if let val = BallsFaced{
-            facedBalls = val
-        }
-        
-        if let val = Fours{
-            fours = val
-        }
-        
-        if let val = Sixes{
-            sixes = val
-        }
-        
-        if let val = Position{
-            position = val
-        }
-        
-        if let val = Dismissal{
-            dismissal = val
-        }
-        
-        return ["RunsTaken":takenRuns,"BallsFaced":facedBalls,"Fours":fours,"Sixes":sixes,"Position":position,"Dismissal":dismissal]
+        return ["RunsTaken":RunsTaken,"BallsFaced":BallsFaced,"Fours":Fours,"Sixes":Sixes,"Position":Position,"Dismissal":Dismissal]
     }
     
     func loadEditData(){
@@ -429,9 +495,6 @@ extension BattingBowlingViewController:UITextFieldDelegate{
     func textFieldDidEndEditing(textField: UITextField){
         if textField.tag == 1 {
             ValidateScore()
-//            if textField == runsText || textField == ballsPlayedText{
-//                //calculateStrikeRate()
-//            }
             
             if textField.text?.trimWhiteSpace.length > 0{
                 parent?.dataChangedAfterLastSave()
@@ -439,40 +502,12 @@ extension BattingBowlingViewController:UITextFieldDelegate{
         }
         else if textField.tag == 2 {
             validateOvers()
-//            if textField == oversText || textField == runsText{
-//                calculateEconomy()
-//            }
             
             if textField.text?.trimWhiteSpace.length > 0{
                 parent?.dataChangedAfterLastSave()
             }
         }
     }
-    
-//    func calculateStrikeRate(){
-//        
-//        if runsText.text?.trimWhiteSpace.length == 0{
-//            strikeRateText.text = ""
-//        }
-//        else if ballsPlayedText.text?.trimWhiteSpace.length == 0{
-//            strikeRateText.text = ""
-//        }
-//        else{
-//            setStrikeRate()
-//        }
-//    }
-//    
-//    
-//    func setStrikeRate(){
-//        
-//        if let runs = Double((runsText.text?.trimWhiteSpace)!){
-//            if let balls = Double((ballsPlayedText.text?.trimWhiteSpace)!){
-//                
-//                strikeRateText.text = String(format: "%.0f",(runs*100 / balls))
-//            }
-//            
-//        }
-//    }
     
     func AddDoneButtonTo(inputText:UITextField) {
         let toolBar = UIToolbar()
@@ -523,5 +558,4 @@ extension BattingBowlingViewController:UITextFieldDelegate{
             return true
         }
     }
-    
 }
