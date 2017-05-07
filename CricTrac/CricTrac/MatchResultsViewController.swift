@@ -251,7 +251,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         else {
            incrementDecrementOperation(secondWicketsText, isIncrement: true)
         }
-        
     }
     
     @IBAction func FirstTeamWicketsDecrement(sender: AnyObject) {
@@ -279,7 +278,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         else {
             incrementDecrementOperation(firstWicketsText, isIncrement: false)
         }
-        
     }
     
     @IBAction func tossBtnTapped(sender: UIButton) {
@@ -350,9 +348,16 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     }
     
     func setTeamData(){
-        if let matchVCInstance = parent?.matchVC {
-            firstTeamTitle.text = matchVCInstance.teamText.text
-            secondTeamTitle.text = matchVCInstance.opponentText.text
+        //sajith - added if condition to fix the issue while in Edit mode
+        if inEditMode {
+            firstTeamTitle.text = data["FirstBatting"]
+            secondTeamTitle.text = data["SecondBatting"]
+        }
+        else {
+            if let matchVCInstance = parent?.matchVC {
+                firstTeamTitle.text = matchVCInstance.teamText.text
+                secondTeamTitle.text = matchVCInstance.opponentText.text
+            }
         }
 
         if inEditMode && parent!.matchVC.teamOROpponentFieldChanged , let matchVCInstance = parent?.matchVC {
@@ -389,27 +394,39 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             secondBatText = secondTeamTitle.text
         }
         
-        if tossText == "" || tossText == "-" {
-            tossText = firstBatText
+        if parent!.matchVC.teamOROpponentFieldChanged , let matchVCInstance = parent?.matchVC {
+            if swapBtnVal == 0 {
+                tossText = matchVCInstance.teamText.text
+                firstTeamTossBtn.alpha = 1.0
+                secondTeamTossBtn.alpha = 0.2
+            }
+            else {
+                tossText = matchVCInstance.opponentText.text
+                firstTeamTossBtn.alpha = 0.2
+                secondTeamTossBtn.alpha = 1.0
+            }
         }
-        
-        if tossText == firstBatText {
-            firstTeamTossBtn.alpha = 1.0
-            secondTeamTossBtn.alpha = 0.2
+        else {
+            if tossText == "" || tossText == "-" {
+                tossText = firstBatText
+            }
+            
+            if tossText == firstBatText {
+                firstTeamTossBtn.alpha = 1.0
+                secondTeamTossBtn.alpha = 0.2
+            }
+            else
+            {
+                firstTeamTossBtn.alpha = 0.2
+                secondTeamTossBtn.alpha = 1.0
+            }
         }
-        else
-        {
-            firstTeamTossBtn.alpha = 0.2
-            secondTeamTossBtn.alpha = 1.0
-        }
-        
+    
         self.isTeambattingSetBtn.alpha = (firstBatText == "-" || firstBatText == "") ? 0.3 : 1.0
         
         teams.removeAll()
         if matchDetails?.opponentText.text?.trimWhiteSpace.length > 0{
-            
             if matchDetails?.teamText.text?.trimWhiteSpace.length > 0{
-                
                 teams.append((matchDetails?.teamText.text?.trimWhiteSpace)!)
                 teams.append((matchDetails?.opponentText.text?.trimWhiteSpace)!)
             }
