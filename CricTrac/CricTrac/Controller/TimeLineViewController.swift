@@ -115,20 +115,20 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
     func modifyPost(text: String, postId: String,index:Int) {
         editPost(text,postId: postId) { (data) in
-            var timeLineData:[JSON]!
-            if let  value = timelineData?.arrayValue{
-                timeLineData = value
-            }else
-            {
-                timeLineData = [JSON]()
-            }
-            
-            timeLineData[index] = JSON(data["timeline"]!)
-            timelineData = JSON(timeLineData)
-            dispatch_async(dispatch_get_main_queue(),{
-                self.timeLineTable.reloadData()
-                KRProgressHUD.dismiss()
-            })
+//            var timeLineData:[JSON]!
+//            if let  value = timelineData?.arrayValue{
+//                timeLineData = value
+//            }else
+//            {
+//                timeLineData = [JSON]()
+//            }
+//            
+//            timeLineData[index] = JSON(data["timeline"]!)
+//            timelineData = JSON(timeLineData)
+//            dispatch_async(dispatch_get_main_queue(),{
+//                self.timeLineTable.reloadData()
+//                KRProgressHUD.dismiss()
+//            })
         }
     }
     
@@ -328,19 +328,19 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 }
                 
                 
-                //sajith-  fetch the fresh post data
-                let postid = data.dictionaryValue["postId"]?.stringValue
-                getPost(postid!) { (data) in
-                    if (data["LikeCount"] != nil) {
-                        let likeCount = data["LikeCount"] as? Int
+//                //sajith-  fetch the fresh post data
+//                let postid = data.dictionaryValue["postId"]?.stringValue
+//                getPost(postid!) { (data) in
+                    if (data.dictionaryValue["LikeCount"]?.int != nil) {
+                        let likeCount = data.dictionaryValue["LikeCount"]?.int
                         postCell.likeCount.setTitle("\(likeCount!) Likes", forState: .Normal)
                         postCell.totalLikeCount = likeCount!
                     }
                     else {
                         postCell.likeCount.setTitle("0 Likes", forState: .Normal)
                     }
-                    if (data["CommentCount"] != nil) {
-                        let cmtCount = data["CommentCount"] as? Int
+                    if (data.dictionaryValue["CommentCount"]?.int != nil) {
+                        let cmtCount = data.dictionaryValue["CommentCount"]?.int
                         postCell.commentCount.setTitle("\(cmtCount!) Comments", forState: .Normal)
                     }
                     else {
@@ -349,20 +349,20 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     
                     var likeColor = UIColor.blackColor()
                     postCell.likeButton.setImage(UIImage(named: "Like-100"), forState: UIControlState.Normal)
+                    postCell.currentUserHasLikedThePost = false
                     
-                    if data["isSelfLiked"] as? String == "1" {
+                    if data.dictionaryValue["isSelfLiked"]?.stringValue == "1" {
                         likeColor = UIColor.whiteColor()
                         postCell.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
+                        postCell.currentUserHasLikedThePost = true
                     }
-                    postCell.likeButton.titleLabel?.textColor = likeColor
                     
-                }
+                //}
                 
                     
                // postCell.totalLikeCount = 0
                 postCell.post.text = data.dictionaryValue["Post"]?.stringValue
                 postCell.index = indexPath.section-1
-                
 //                var commentsCount = 0
 //                
 //                if let value = data.dictionaryValue["TimelineComments"]?.count{
@@ -371,6 +371,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
 
                 
                 //postCell.commentCount.setTitle("\(commentsCount) Comments", forState: .Normal)
+                postCell.postId = data.dictionaryValue["postId"]?.stringValue
                 
                 //var likesCount = 0
                 //var likeColor = UIColor.grayColor()
@@ -388,9 +389,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
 //                }
                 
                 //postCell.likeCount.setTitle("\(likesCount) Likes", forState: .Normal)
-                //postCell.likeButton.titleLabel?.textColor = likeColor
-                
-                postCell.postId = data.dictionaryValue["postId"]?.stringValue
+                postCell.likeButton.titleLabel?.textColor = likeColor
                 acell = postCell
             }
         }

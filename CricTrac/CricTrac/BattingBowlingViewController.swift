@@ -153,7 +153,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     
     func validateOvers() -> Void {
         if let overText = oversText.text {
-            if overText.length > 0 && Float(overText) >= 0 {
+            if overText.length > 0 && Float(overText) > 0 {
                 bowledOvers = oversText.text
                 
                 //check the decimal part of OversBowled
