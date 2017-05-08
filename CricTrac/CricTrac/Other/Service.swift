@@ -120,84 +120,84 @@ func addMatchData(key:String,data:[String:AnyObject], callback: [String:AnyObjec
 }
 
 func addProfileImageData(profileDp:UIImage){
-    let imageData:NSData = UIImageJPEGRepresentation(profileDp, 0.8)!
-    let metaData = FIRStorageMetadata()
-    metaData.contentType = "image/jpg"
-    
-    //    if let usrId = FIRAuth.auth()?.currentUser?.uid {
-      //  let filePath = "\(FIRAuth.auth()?.currentUser?.uid)/UserProfile/profilePhoto"
-        storageRef.child((FIRAuth.auth()?.currentUser?.uid)!).child("UserProfile").child("profileImage").putData(imageData, metadata: metaData){(metaData,error) in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }else{
-                userImageMetaData = (metaData?.downloadURL())!
-                LoggedInUserImage = profileDp
-                let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-                let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-                dispatch_async(backgroundQueue, {
-                    updateMetaData(userImageMetaData)
-                    do {
-                        let data = try? NSData(contentsOfURL: userImageMetaData, options: NSDataReadingOptions())
-                        // let data = try? NSData(contentsOfURL: userImageMetaData)
-                        LoggedInUserImage = UIImage(data: data!)!
-                    }catch {
-                        LoggedInUserImage = placeHolderImage!
-                    }
-                    //print("This is run on the background queue")
-                    
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        if let data = try? NSData(contentsOfURL: userImageMetaData, options: NSDataReadingOptions()){
-                            LoggedInUserImage = UIImage(data: data)!
-                        }else {
-                            LoggedInUserImage = placeHolderImage!
-                        }
-                        //print("This is run on the main queue, after the previous code in outer block")
-                    })
-                })
-            }
-        }
-    //    }
+//    let imageData:NSData = UIImageJPEGRepresentation(profileDp, 0.8)!
+////    let metaData = FIRStorageMetadata()
+//    metaData.contentType = "image/jpg"
+//    
+//    //    if let usrId = FIRAuth.auth()?.currentUser?.uid {
+//      //  let filePath = "\(FIRAuth.auth()?.currentUser?.uid)/UserProfile/profilePhoto"
+//        storageRef.child((FIRAuth.auth()?.currentUser?.uid)!).child("UserProfile").child("profileImage").putData(imageData, metadata: metaData){(metaData,error) in
+//            if let error = error {
+//                print(error.localizedDescription)
+//                return
+//            }else{
+//                userImageMetaData = (metaData?.downloadURL())!
+//                LoggedInUserImage = profileDp
+//                let qualityOfServiceClass = QOS_CLASS_BACKGROUND
+//                let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+//                dispatch_async(backgroundQueue, {
+//                    updateMetaData(userImageMetaData)
+//                    do {
+//                        let data = try? NSData(contentsOfURL: userImageMetaData, options: NSDataReadingOptions())
+//                        // let data = try? NSData(contentsOfURL: userImageMetaData)
+//                        LoggedInUserImage = UIImage(data: data!)!
+//                    }catch {
+//                        LoggedInUserImage = placeHolderImage!
+//                    }
+//                    //print("This is run on the background queue")
+//                    
+//                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+//                        if let data = try? NSData(contentsOfURL: userImageMetaData, options: NSDataReadingOptions()){
+//                            LoggedInUserImage = UIImage(data: data)!
+//                        }else {
+//                            LoggedInUserImage = placeHolderImage!
+//                        }
+//                        //print("This is run on the main queue, after the previous code in outer block")
+//                    })
+//                })
+//            }
+//        }
+//    //    }
 }
 
 func addCoverImageData(profileDp:UIImage){
-    let imageData:NSData = UIImageJPEGRepresentation(profileDp, 0.8)!
-    let metaData = FIRStorageMetadata()
-    metaData.contentType = "image/jpg"
-    
-    //    if let usrId = FIRAuth.auth()?.currentUser?.uid {
-    
-   // let filePath = "\(FIRAuth.auth()?.currentUser?.uid)/UserProfile/coverImage"
-    storageRef.child((FIRAuth.auth()?.currentUser?.uid)!).child("UserProfile").child("coverPhoto").putData(imageData, metadata: metaData){(metaData,error) in
-        if let error = error {
-            print(error.localizedDescription)
-            return
-        }else{
-            userImageMetaData = (metaData?.downloadURL())!
-            LoggedInUserCoverImage = profileDp
-            let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-            let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-            dispatch_async(backgroundQueue, {
-                updateCoverMetaData(userImageMetaData)
-                do {
-                    let data = try? NSData(contentsOfURL: userImageMetaData, options: NSDataReadingOptions())
-                    LoggedInUserCoverImage = UIImage(data: data!)!
-                }catch {
-                    LoggedInUserCoverImage = placeHolderImage!
-                }
-                //print("This is run on the background queue")
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    if let data = try? NSData(contentsOfURL: userImageMetaData, options: NSDataReadingOptions()) {
-                        LoggedInUserCoverImage = UIImage(data: data)!
-                    }else {
-                        LoggedInUserCoverImage = placeHolderImage!
-                    }
-                    //print("This is run on the main queue, after the previous code in outer block")
-                })
-            })
-        }
-    }
-    //    }
+//    let imageData:NSData = UIImageJPEGRepresentation(profileDp, 0.8)!
+////    let metaData = FIRStorageMetadata()
+//    metaData.contentType = "image/jpg"
+//    
+//    //    if let usrId = FIRAuth.auth()?.currentUser?.uid {
+//    
+//   // let filePath = "\(FIRAuth.auth()?.currentUser?.uid)/UserProfile/coverImage"
+////    storageRef.child((FIRAuth.auth()?.currentUser?.uid)!).child("UserProfile").child("coverPhoto").putData(imageData, metadata: metaData){(metaData,error) in
+//        if let error = error {
+//            print(error.localizedDescription)
+//            return
+//        }else{
+//            userImageMetaData = (metaData?.downloadURL())!
+//            LoggedInUserCoverImage = profileDp
+//            let qualityOfServiceClass = QOS_CLASS_BACKGROUND
+//            let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+//            dispatch_async(backgroundQueue, {
+//                updateCoverMetaData(userImageMetaData)
+//                do {
+//                    let data = try? NSData(contentsOfURL: userImageMetaData, options: NSDataReadingOptions())
+//                    LoggedInUserCoverImage = UIImage(data: data!)!
+//                }catch {
+//                    LoggedInUserCoverImage = placeHolderImage!
+//                }
+//                //print("This is run on the background queue")
+//                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+//                    if let data = try? NSData(contentsOfURL: userImageMetaData, options: NSDataReadingOptions()) {
+//                        LoggedInUserCoverImage = UIImage(data: data)!
+//                    }else {
+//                        LoggedInUserCoverImage = placeHolderImage!
+//                    }
+//                    //print("This is run on the main queue, after the previous code in outer block")
+//                })
+//            })
+//        }
+//    }
+//    //    }
     
 }
 
@@ -1068,18 +1068,21 @@ func getAllLikes(postId:String,sucessBlock:([[String: AnyObject]])->Void){
 //    })
 //}
 
-func getAllComments(postId:String,sucess:(data:[[String:AnyObject]])->Void){
+func getAllComments(postId:String,sucess:(data:[[String: AnyObject]])->Void){
     let ref = fireBaseRef.child("TimelinePosts").child(postId).child("TimelineComments").queryOrderedByChild("AddedTime")
     ref.observeEventType(.Value, withBlock: { snapshot in
         if let data = snapshot.value as? [String:[String:AnyObject]] {
-            var result = [[String:AnyObject]]()
+            var result = [TimeLinePost]()
             for (key,value) in data{
-                var dataval = value
+                var dataval = value as [String:AnyObject]
                     dataval["commentId"] = key
-                    result.append(dataval)
+                    result.append(TimeLinePost(dataObj: dataval))
             }
-            //result.sortInPlace({$0.AddedTime > $1.AddedTime})
-            sucess(data: result)
+            
+            result.sortInPlace({$0.AddedTime.compare($1.AddedTime) == NSComparisonResult.OrderedDescending})
+            
+            let resultObj = TimeLinePost.getAnonymous(result)
+            sucess(data: resultObj)
         }
     })
 }

@@ -10,7 +10,7 @@ import UIKit
 import XLPagerTabStrip
 import KDropDownMultipleSelection
 
-class MatchResultsViewController: UIViewController, kDropDownListViewDelegate, IndicatorInfoProvider,ThemeChangeable {
+class MatchResultsViewController: UIViewController, /*kDropDownListViewDelegate,*/ IndicatorInfoProvider,ThemeChangeable {
 
     @IBOutlet weak var firstTeamTitle: UILabel!
     @IBOutlet weak var secondTeamTitle: UILabel!
@@ -39,17 +39,17 @@ class MatchResultsViewController: UIViewController, kDropDownListViewDelegate, I
         navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
-    func DropDownListView(dropdownListView: DropDownListView!, datalist ArryData: NSMutableArray!) {
-        
-    }
-    
-    func DropDownListView(dropdownListView: DropDownListView!, didSelectedIndex anIndex: Int) {
-        
-    }
-    
-    func DropDownListViewDidCancel() {
-        
-    }
+//    func DropDownListView(dropdownListView: DropDownListView!, datalist ArryData: NSMutableArray!) {
+//        
+//    }
+//    
+//    func DropDownListView(dropdownListView: DropDownListView!, didSelectedIndex anIndex: Int) {
+//        
+//    }
+//    
+//    func DropDownListViewDidCancel() {
+//        
+//    }
     
     
     override func viewDidLoad() {

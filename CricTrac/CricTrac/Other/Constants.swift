@@ -95,7 +95,7 @@ let adUnitId = "ca-app-pub-3940256099942544/2934735716"
 let fireBaseRef =  FIRDatabase.database().reference()
 
 
-let storageRef = FIRStorage.storage().referenceForURL("gs://arjun-innovations.appspot.com")
+//let storageRef = FIRStorage.storage().referenceForURL("gs://arjun-innovations.appspot.com")
 
 let serverBaseURL = "http://crictracserver.azurewebsites.net"
 

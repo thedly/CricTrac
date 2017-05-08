@@ -63,6 +63,9 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
                     friendsDataArray.append(reqData)
                 }
             }
+            
+            friendsDataArray.sortInPlace({$0.Name > $1.Name })
+            
             self.SuggestsTblview.reloadData()
             // do something here
         }
