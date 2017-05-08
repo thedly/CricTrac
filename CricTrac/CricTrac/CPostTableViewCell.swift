@@ -101,17 +101,19 @@ class CPostTableViewCell: UITableViewCell {
             return
         }
         
-        likeOrUnlike(postId!, like: { (likeDict) in
-            //self.likeLabel.textColor = UIColor.whiteColor()
-            self.postLikeCount += 1
-            //self.likes.text = "\(self.postLikeCount) Likes"
-            timelineData![self.postIndex]["Likes"] = JSON(likeDict)
-        }) {
-            //self.removeLikeFromArray()
-            //self.likeLabel.textColor = UIColor.grayColor()
-            self.postLikeCount -= 1
-            //self.likes.text = "\(self.postLikeCount) Likes"
-        }
+        likeOrUnlike(postId!)
+        
+//        likeOrUnlike(postId!, like: { (likeDict) in
+//            //self.likeLabel.textColor = UIColor.whiteColor()
+//            self.postLikeCount += 1
+//            //self.likes.text = "\(self.postLikeCount) Likes"
+//            timelineData![self.postIndex]["Likes"] = JSON(likeDict)
+//        }) {
+//            //self.removeLikeFromArray()
+//            //self.likeLabel.textColor = UIColor.grayColor()
+//            self.postLikeCount -= 1
+//            //self.likes.text = "\(self.postLikeCount) Likes"
+//        }
     }
     
 //    @IBAction func didTapClose(sender: AnyObject) {
