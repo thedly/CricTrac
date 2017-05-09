@@ -973,14 +973,14 @@ func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
     dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
     let dispTime = dateFormatter.stringFromDate((date as? NSDate)!)
     
-    let timelineDict:[String:AnyObject] = ["AddedTime":addedTime,"OwnerID":currentUser!.uid,"OwnerName":userName,"isDeleted":"0","Post":postText,"PostedBy":currentUser!.uid,"PostType":"Self","CommentCount":0,"LikeCount":0,"isSelfLiked":"0"]
+    let timelineDict:[String:AnyObject] = ["AddedTime":addedTime,"OwnerID":currentUser!.uid,"OwnerName":userName,"isDeleted":"0","Post":postText,"PostedBy":currentUser!.uid,"PostType":"Self","CommentCount":0,"LikeCount":0]
     
     let ref = fireBaseRef.child("TimelinePosts").childByAutoId()
     
     ref.setValue(timelineDict)
     
     let postKey = ref.key
-    let returnData = ["timeline":["DisplayTime":dispTime,"Post":postText,"CommentCount":"0","LikeCount":"0","OwnerName":userName,"postId":postKey,"OwnerID":currentUser!.uid,"PostedBy":currentUser!.uid,"PostType":"Self","isSelfLiked":"0"]]
+    let returnData = ["timeline":["DisplayTime":dispTime,"Post":postText,"CommentCount":"0","LikeCount":"0","OwnerName":userName,"postId":postKey,"OwnerID":currentUser!.uid,"PostedBy":currentUser!.uid,"PostType":"Self"]]
     
         sucess(data: returnData)
     
@@ -1141,20 +1141,20 @@ func deleteNotification(notificationId:String) {
 //}
 
 func likeOrUnlike(postId:String){
-    let ref1 = fireBaseRef.child("TimelinePosts").child(postId).child("OwnerID")
-    ref1.observeSingleEventOfType(.Value, withBlock: { snapshot in
-        if snapshot.value as? String == currentUser?.uid {
-            let ref2 = fireBaseRef.child("TimelinePosts").child(postId).child("isSelfLiked")
-            ref2.observeSingleEventOfType(.Value, withBlock: { snapshot in
-                if snapshot.value as? String == "0" {
-                    fireBaseRef.child("TimelinePosts").child(postId).child("isSelfLiked").setValue("1")
-                }
-                else {
-                    fireBaseRef.child("TimelinePosts").child(postId).child("isSelfLiked").setValue("0")
-                }
-            })
-        }
-    })
+//    let ref1 = fireBaseRef.child("TimelinePosts").child(postId).child("OwnerID")
+//    ref1.observeSingleEventOfType(.Value, withBlock: { snapshot in
+//        if snapshot.value as? String == currentUser?.uid {
+//            let ref2 = fireBaseRef.child("TimelinePosts").child(postId).child("isSelfLiked")
+//            ref2.observeSingleEventOfType(.Value, withBlock: { snapshot in
+//                if snapshot.value as? String == "0" {
+//                    fireBaseRef.child("TimelinePosts").child(postId).child("isSelfLiked").setValue("1")
+//                }
+//                else {
+//                    fireBaseRef.child("TimelinePosts").child(postId).child("isSelfLiked").setValue("0")
+//                }
+//            })
+//        }
+//    })
     
     let ref = fireBaseRef.child("TimelinePosts").child(postId).child("Likes")
     ref.observeSingleEventOfType(.Value, withBlock: { snapshot in

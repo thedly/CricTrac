@@ -331,6 +331,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
 //                //sajith-  fetch the fresh post data
 //                let postid = data.dictionaryValue["postId"]?.stringValue
 //                getPost(postid!) { (data) in
+                
                     if (data.dictionaryValue["LikeCount"]?.int != nil) {
                         let likeCount = data.dictionaryValue["LikeCount"]?.int
                         postCell.likeCount.setTitle("\(likeCount!) Likes", forState: .Normal)
@@ -352,13 +353,22 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     var likeColor = UIColor.blackColor()
                     postCell.likeButton.setImage(UIImage(named: "Like-100"), forState: UIControlState.Normal)
                     postCell.currentUserHasLikedThePost = false
-                    
-                    if data.dictionaryValue["isSelfLiked"]?.stringValue == "1" {
-                        likeColor = UIColor.whiteColor()
-                        postCell.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
-                        postCell.currentUserHasLikedThePost = true
+                
+                    if let likes = data.dictionaryValue["Likes"]?.dictionaryObject as? [String:[String:String]]{
+                        let result = likes.filter{ return  $0.1["OwnerID"] == currentUser!.uid }
+                        if result.count > 0 {
+                            likeColor = UIColor.whiteColor()
+                            postCell.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
+                            postCell.currentUserHasLikedThePost = true
+                        }
                     }
-                    
+                
+//                    if data.dictionaryValue["isSelfLiked"]?.stringValue == "1" {
+//                        likeColor = UIColor.whiteColor()
+//                        postCell.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
+//                        postCell.currentUserHasLikedThePost = true
+//                    }
+                
                 //}
                 
                     
@@ -389,8 +399,8 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
 //                    //likesCount = likes.count
 //                    //postCell.totalLikeCount = likesCount
 //                }
+//                postCell.likeCount.setTitle("\(likesCount) Likes", forState: .Normal)
                 
-                //postCell.likeCount.setTitle("\(likesCount) Likes", forState: .Normal)
                 postCell.likeButton.titleLabel?.textColor = likeColor
                 acell = postCell
             }

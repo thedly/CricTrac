@@ -319,27 +319,27 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                 cCell.delCommentBtn.hidden = true
                 
 //                cCell.likeButton.frame = CGRectMake(0, 0, 10, 10)
-//                cCell.likeButton.setImage(UIImage(named: "Like-100"), forState: UIControlState.Normal)
-//                cCell.likeButton.titleLabel?.textColor = UIColor.blackColor()
-                
-//                let childLikes = data["Likes"] as? [String : AnyObject]
-//                if childLikes != nil {
-//                    for (key, value) in childLikes! {
-//                        if currentUser!.uid == value["OwnerID"] as? String {
-//                            cCell.likeButton.titleLabel?.textColor = UIColor.whiteColor()
-//                            cCell.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
-//                        }
-//                    }
-//                }
-                
-                var likeColor = UIColor.blackColor()
                 cCell.likeButton.setImage(UIImage(named: "Like-100"), forState: UIControlState.Normal)
+                cCell.likeButton.titleLabel?.textColor = UIColor.blackColor()
                 
-                if data["isSelfLiked"] as? String == "1" {
-                    likeColor = UIColor.whiteColor()
-                    cCell.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
+                let childLikes = data["Likes"] as? [String : AnyObject]
+                if childLikes != nil {
+                    for (key, value) in childLikes! {
+                        if currentUser!.uid == value["OwnerID"] as? String {
+                            cCell.likeButton.titleLabel?.textColor = UIColor.whiteColor()
+                            cCell.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
+                        }
+                    }
                 }
-                cCell.likeButton.titleLabel?.textColor = likeColor
+                
+//                var likeColor = UIColor.blackColor()
+//                cCell.likeButton.setImage(UIImage(named: "Like-100"), forState: UIControlState.Normal)
+//                
+//                if data["isSelfLiked"] as? String == "1" {
+//                    likeColor = UIColor.whiteColor()
+//                    cCell.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
+//                }
+//                cCell.likeButton.titleLabel?.textColor = likeColor
                 
                 
                 if (data["LikeCount"] != nil) {
