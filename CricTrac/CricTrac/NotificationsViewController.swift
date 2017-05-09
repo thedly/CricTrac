@@ -20,8 +20,8 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
-        self.barView.backgroundColor = currentTheme.topColor
-        // navigationController!.navigationBar.barTintColor = currentTheme.topColor
+       self.barView.backgroundColor = currentTheme.topColor
+       // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -55,7 +55,7 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
     @IBAction func menuButton(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion:nil)
     }
-//    func setNavigationBarProperties(){
+  //  func setNavigationBarProperties(){
 //        currentTheme = cricTracTheme.currentTheme
 //        let menuButton: UIButton = UIButton(type:.Custom)
 //        menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
@@ -65,8 +65,8 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
 //        
 //        navigationItem.leftBarButtonItem = leftbarButton
 //        self.view.backgroundColor =  currentTheme.topColor
-////        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-////        title = "NOTIFICATIONS"
+//        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+//        title = "NOTIFICATIONS"
 // }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -193,8 +193,9 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
     func moveToFRR(topicId:String) {
         let friendRequest = viewControllerFrom("Main", vcid: "FriendBaseViewController") as! FriendBaseViewController
         friendRequest.topicId = topicId
-        //self.navigationController?.pushViewController(friendRequest, animated: true)
-        self.presentViewController(friendRequest, animated: true) {}
+        //friendRequest.topic = "FRR"
+        self.navigationController?.pushViewController(friendRequest, animated: true)
+     //  self.presentViewController(friendRequest, animated: true) {}
     }
     
     func moveToFRA(topicId:String) {

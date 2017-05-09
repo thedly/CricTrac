@@ -248,8 +248,10 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     {
        // let aCell = UITableViewCell()
         let aCell =  tableView.dequeueReusableCellWithIdentifier("commentcell", forIndexPath: indexPath) as! CommentTableViewCell
+        aCell.parent = self
         
         let cCell =  tableView.dequeueReusableCellWithIdentifier("cPost", forIndexPath: indexPath) as! CPostTableViewCell
+         cCell.parent = self
         
         if !postDataNew .isEmpty  {
             //display the post in the first row of the tableview
@@ -343,6 +345,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                 if (data["LikeCount"] != nil) {
                     let likeCount = data["LikeCount"] as? Int
                     cCell.likes.setTitle("\(likeCount!) Likes", forState:  .Normal)
+                    cCell.postLikeCount = likeCount!
                 }
                 else {
                     cCell.likes.setTitle("0 Likes", forState: .Normal)
@@ -433,7 +436,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     
     func textViewDidEndEditing(textView: UITextView){
         if textView == commentTextView{
-            commentTextView.setPlaceHolder()
+            //commentTextView.setPlaceHolder()
             textViewHeightConstraint.constant = 30
         }
     }
@@ -454,6 +457,8 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
             commentTextView.resignFirstResponder()
             commentTextView.setPlaceHolder()
             textViewHeightConstraint.constant = 30
+            contentViewHeightConstraint.constant = 50
+            
             dataSource.append(["OwnerName":loggedInUserName ?? "Another Friend","Comment":text])
             //let postId = postData!.dictionaryValue["postId"]?.stringValue
             addNewComment(postId, comment:text)
@@ -473,6 +478,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
 //    }
     
     func deletebuttonTapped() {
+        
     }
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool{
@@ -529,16 +535,28 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         
         
         //sajith - increase the height of the text box and view
-        self.contentViewForCommentCell.frame = CGRect(x: 0, y: 0, width: 350, height: 120)
-        self.contentViewForCommentCell.layoutIfNeeded()
+//        self.contentViewForCommentCell.frame = CGRect(x: 0, y: 0, width: 350, height: 120)
+//        self.contentViewForCommentCell.layoutIfNeeded()
         
         let contentSize = textView.sizeThatFits(textView.bounds.size)
         var frame = textView.frame
         frame.size.height = contentSize.height
+        
+        
+        if contentSize.height < 100 {
         textView.frame = frame
+        contentViewHeightConstraint.constant = contentSize.height + 15
+        }
+        
+        print(contentSize.height)
         
         return true
     }
+    
+//    func adjustTblHeight(constratintType: NSLayoutConstraint, collectionType: [String], cellHeight: CGFloat){
+//        constratintType.constant = CGFloat(collectionType.count * Int(cellHeight))
+//    }
+    
     
     func textViewShouldBeginEditing(textView: UITextView) -> Bool{
         textView.clearPlaceHolder()

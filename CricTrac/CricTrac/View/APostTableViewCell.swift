@@ -30,6 +30,7 @@ class APostTableViewCell: UITableViewCell {
     var parent:Deletable?
     var postOwnerId:String?
     var postIndex = 0
+    var totalCommentCount = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -104,6 +105,18 @@ class APostTableViewCell: UITableViewCell {
             dashBoard.friendProfile = userInfo
             parentVC.presentViewController(dashBoard, animated: true) {}
         }
+    }
+    
+    @IBAction func didTapCommentCountButtonTapped(sender:UIButton) {
+        if totalCommentCount != 0 {
+            if let parentVC = parent as? UIViewController {
+                let commentPage  = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
+                commentPage.postId = postId!
+                parentVC.presentViewController(commentPage, animated: true){}
+                
+            }
+        }
+        
     }
     
     @IBAction func DidTapLikeCountButton(sender: UIButton) {

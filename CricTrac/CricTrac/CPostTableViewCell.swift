@@ -21,7 +21,7 @@ class CPostTableViewCell: UITableViewCell {
     @IBOutlet weak var delCommentBtn: UIButton!
     
     var postOwnerId:String?
-    var parent:Deletable?
+    var parent:DeleteComment?
     var postId:String?
     var postLikeCount = 0
     
@@ -31,6 +31,7 @@ class CPostTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         addTapGestureToUserName()
+         parent?.deletebuttonTapped()
     }
    
     
@@ -40,8 +41,18 @@ class CPostTableViewCell: UITableViewCell {
             postOwnerName.userInteractionEnabled = true
             postOwnerName.addGestureRecognizer(gesture)
         }
+        
     }
-    
+    @IBAction func didTapLikeCountButton(sender:UIButton) {
+        if postLikeCount != 0 {
+            if let parentVC = parent as? UIViewController {
+               let likePage = viewControllerFrom("Main", vcid: "LikesViewController") as! LikesViewController
+                likePage.postID = postId!
+                parentVC.presentViewController(likePage, animated: true) {}
+            }
+        }
+        
+    }
     
     func didTapOwnerName(){
         if postOwnerName.text != "CricTrac" {
@@ -62,13 +73,13 @@ class CPostTableViewCell: UITableViewCell {
   
     
     func moveToPlayer(userInfo:[String : AnyObject]){
-        //if let parentVC = parent as? UIViewController{
+        if let parentVC = parent as? UIViewController{
             let dashBoard = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
             dashBoard.friendId = postOwnerId
             dashBoard.friendProfile = userInfo
-            //parentVC.presentViewController(dashBoard, animated: true) {}
-            self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
-        //}
+            parentVC.presentViewController(dashBoard, animated: true) {}
+           // self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
+        }
     }
     
     func moveToCoach(userInfo:[String : AnyObject]){

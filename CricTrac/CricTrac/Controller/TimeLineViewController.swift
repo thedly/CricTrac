@@ -25,7 +25,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     var totalPosts = 5
    
     override func viewWillAppear(animated: Bool) {
-        loadTimeline()
+        //loadTimeline()
         
         //calculate the Unread Notifications
         //calcUnreadNotifications()
@@ -342,6 +342,8 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     if (data.dictionaryValue["CommentCount"]?.int != nil) {
                         let cmtCount = data.dictionaryValue["CommentCount"]?.int
                         postCell.commentCount.setTitle("\(cmtCount!) Comments", forState: .Normal)
+                        postCell.totalCommentCount = cmtCount!
+                        
                     }
                     else {
                         postCell.commentCount.setTitle("0 Comments", forState: .Normal)

@@ -13,6 +13,7 @@ import KRProgressHUD
 class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChangeable {
 
     var topicId:String = ""
+    var topic:String = ""
     
     @IBAction func didMenuButtonTapp(sender: UIButton){
         sliderMenu.setDrawerState(.Opened, animated: true)
@@ -34,6 +35,7 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
     }
     override func viewWillAppear(animated: Bool) {
         setBackgroundColor()
+        setNavigationBarProperties()
         
     }
 
@@ -73,8 +75,8 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         navigationItem.leftBarButtonItem = leftbarButton
         navigationItem.rightBarButtonItem = righttbarButton
         
-        if topicId == "" {
-            navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        if topicId == ""  {
+            self.navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         }
         title = "DUGOUT"
     }

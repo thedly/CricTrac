@@ -21,35 +21,32 @@ class CommentTableViewCell: UITableViewCell {
     var ownerId:String?
     
     @IBAction func deletebuttonTapped(sender: AnyObject) {
-        //delete comment
-                    if let value = self.commentID {
-                        delComment(self.postID!,commentId: self.commentID!)
-                    }
+      
+        let deleteAlert = UIAlertController(title: "Delete Comment", message: "Are you sure you want to delete this comment?", preferredStyle: UIAlertControllerStyle.Alert)
         
-//        let deleteAlert = UIAlertController(title: "Delete Comment", message: "Are you sure you want to delete this comment?", preferredStyle: UIAlertControllerStyle.Alert)
-//        
-//        deleteAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
-//            //delete comment
-//            if let value = self.commentID {
-//                delComment(self.postID!,commentId: self.commentID!)
-//            }
-//            
-//            self.parent?.deletebuttonTapped()
-//        }))
-//        
-//        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
-//            //print("Handle Cancel Logic here")
-//        }))
-//        
-//        if let parentVc = parent as? UIViewController{
-//            parentVc.presentViewController(deleteAlert, animated: true, completion: nil)
-//        }
+        deleteAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
+            //delete comment
+            if let value = self.commentID {
+                delComment(self.postID!,commentId: value)
+            }
+            
+            self.parent?.deletebuttonTapped()
+        }))
+        
+        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+            //print("Handle Cancel Logic here")
+        }))
+        
+        if let parentVc = parent as? UIViewController{
+            parentVc.presentViewController(deleteAlert, animated: true, completion: nil)
+        }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         addTapGestureToUserName()
         // Initialization code
+        parent?.deletebuttonTapped()
     }
     
     func addTapGestureToUserName(){
@@ -76,15 +73,15 @@ class CommentTableViewCell: UITableViewCell {
     }
     
     func moveToPlayer(userInfo:[String : AnyObject]){
-        //if let parentVC = parent as? UIViewController{
+        if let parentVC = parent as? UIViewController{
             let dashBoard = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
             dashBoard.friendId = ownerId
             dashBoard.friendProfile = userInfo
         
-        //parentVC.presentViewController(dashBoard, animated: true) {}
-            self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
+        parentVC.presentViewController(dashBoard, animated: true) {}
+           // self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
 
-        //}
+        }
     }
     
     func moveToCoach(userInfo:[String : AnyObject]){

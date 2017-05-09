@@ -54,6 +54,8 @@ class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
 
         cell.name.text = data["OwnerName"] as? String
         let friendUserId = data["OwnerID"] as? String
+       
+        cell.friendUserId = friendUserId!
         
         cell.userImage.layer.borderWidth = 1
         cell.userImage.layer.masksToBounds = false
@@ -76,14 +78,15 @@ class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
                 }
             }
         })
-        
-        
+       
+        cell.friendButton.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
         //check if user record exist in Friends
         let ref1 = fireBaseRef.child("Users").child(currentUser!.uid).child("Friends")
         ref1.queryOrderedByChild("UserId").queryStartingAtValue(friendUserId!).queryEndingAtValue(friendUserId!+"\u{f8ff}").observeSingleEventOfType(.Value, withBlock: { snapshot in
             
             if snapshot.childrenCount > 0 {
                 cell.friendButton.setTitle("Friend", forState: .Normal)
+                cell.friendButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
             }
         })
         
@@ -93,6 +96,7 @@ class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             
             if snapshot.childrenCount > 0 {
                 cell.friendButton.setTitle("Pending", forState: .Normal)
+                cell.friendButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
             }
         })
         
@@ -102,6 +106,7 @@ class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             
             if snapshot.childrenCount > 0 {
                 cell.friendButton.setTitle("Pending", forState: .Normal)
+               cell.friendButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
             }
         })
         
