@@ -55,6 +55,7 @@
 		89129C4A1D904F89009488FE /* LoginBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89129C491D904F89009488FE /* LoginBaseViewController.swift */; };
 		89129C4C1D90501B009488FE /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89129C4B1D90501B009488FE /* RegisterViewController.swift */; };
 		8917AE241D94466900E6BC1A /* ThemeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8917AE231D94466900E6BC1A /* ThemeSettingsViewController.swift */; };
+		891969C11EC20C120084AD32 /* TimelinePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891969C01EC20C120084AD32 /* TimelinePost.swift */; };
 		891B2AA51E7CDA6200F6B5BA /* FriendRequestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891B2AA41E7CDA6200F6B5BA /* FriendRequestCollectionViewCell.swift */; };
 		891B2AA71E7CE09800F6B5BA /* RequestsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891B2AA61E7CE09800F6B5BA /* RequestsData.swift */; };
 		8922042D1D97A3A6005F555B /* FriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8922042C1D97A3A6005F555B /* FriendsCell.xib */; };
@@ -207,6 +208,7 @@
 		89129C491D904F89009488FE /* LoginBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginBaseViewController.swift; sourceTree = "<group>"; };
 		89129C4B1D90501B009488FE /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8917AE231D94466900E6BC1A /* ThemeSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeSettingsViewController.swift; sourceTree = "<group>"; };
+		891969C01EC20C120084AD32 /* TimelinePost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelinePost.swift; sourceTree = "<group>"; };
 		891B2AA41E7CDA6200F6B5BA /* FriendRequestCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestCollectionViewCell.swift; sourceTree = "<group>"; };
 		891B2AA61E7CE09800F6B5BA /* RequestsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestsData.swift; sourceTree = "<group>"; };
 		8922042C1D97A3A6005F555B /* FriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsCell.xib; sourceTree = "<group>"; };
@@ -450,6 +452,7 @@
 		893DAD481DB6608E00CC1875 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				891969C01EC20C120084AD32 /* TimelinePost.swift */,
 				893DAD491DB660AC00CC1875 /* Profile.swift */,
 				890CC72A1E162F73005D139A /* DashboardData.swift */,
 				898786421E18BAFD008967AD /* MatchSummaryData.swift */,
@@ -809,6 +812,7 @@
 				89AB5D461D95839C00AA3481 /* SummaryDetailsCell.swift in Sources */,
 				89E83F7C1D4A5AD000232250 /* MenuTableViewCell.swift in Sources */,
 				892520B41E3379E7006946C0 /* FanDashboardViewController.swift in Sources */,
+				891969C11EC20C120084AD32 /* TimelinePost.swift in Sources */,
 				8953769C1DAB8C8E00DDB3A6 /* FriendSuggestionsCell.swift in Sources */,
 				4668E4CB1D68110500E36CB0 /* MatchSummaryViewController.swift in Sources */,
 				46B608701D44A7D3000FE098 /* NewMatchViewController.swift in Sources */,

@@ -1069,18 +1069,21 @@ func getAllLikes(postId:String,sucessBlock:([[String: AnyObject]])->Void){
 //    })
 //}
 
-func getAllComments(postId:String,sucess:(data:[[String:AnyObject]])->Void){
+func getAllComments(postId:String,sucess:(data:[[String: AnyObject]])->Void){
     let ref = fireBaseRef.child("TimelinePosts").child(postId).child("TimelineComments").queryOrderedByChild("AddedTime")
     ref.observeEventType(.Value, withBlock: { snapshot in
         if let data = snapshot.value as? [String:[String:AnyObject]] {
-            var result = [[String:AnyObject]]()
+            var result = [TimeLinePost]()
             for (key,value) in data{
-                var dataval = value
-                    dataval["commentId"] = key
-                    result.append(dataval)
+                var dataval = value as [String:AnyObject]
+                dataval["commentId"] = key
+                result.append(TimeLinePost(dataObj: dataval))
             }
-            //result.sortInPlace({$0.1["AddedTime"] > $1.1["AddedTime"]})
-            sucess(data: result)
+            
+            result.sortInPlace({$0.AddedTime.compare($1.AddedTime) == NSComparisonResult.OrderedDescending})
+            
+            let resultObj = TimeLinePost.getAnonymous(result)
+            sucess(data: resultObj)
         }
     })
 }
