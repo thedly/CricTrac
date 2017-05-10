@@ -262,6 +262,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     dateFormatter.timeStyle = .ShortStyle
                     dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
                     postCell.postedDate.text = dateFormatter.stringFromDate(date)
+                    
                 }
                 
                 
@@ -436,6 +437,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             
             let newPost = viewControllerFrom("Main", vcid: "NewPostViewController") as! NewPostViewController
             newPost.sendPostDelegate = self
+           
             newPost.modalPresentationStyle = .OverCurrentContext
             presentViewController(newPost, animated: true, completion: nil)
         }
