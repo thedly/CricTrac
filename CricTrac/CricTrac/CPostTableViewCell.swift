@@ -24,7 +24,7 @@ class CPostTableViewCell: UITableViewCell {
     var parent:DeleteComment?
     var postId:String?
     var postLikeCount = 0
-    
+    var index:Int?
     var postIndex = 0
 
     override func awakeFromNib() {
@@ -115,15 +115,36 @@ class CPostTableViewCell: UITableViewCell {
         //likeOrUnlike(postId!)
         
         likeOrUnlike(postId!, like: { (likeDict) in
+            self.addLikeToDataArray(likeDict)
             //self.likeLabel.textColor = UIColor.whiteColor()
             self.postLikeCount += 1
             //self.likes.text = "\(self.postLikeCount) Likes"
             timelineData![self.postIndex]["Likes"] = JSON(likeDict)
+            timelineData![self.postIndex]["LikeCount"] = JSON(self.postLikeCount)
         }) {
-            //self.removeLikeFromArray()
+            self.removeLikeFromArray()
             //self.likeLabel.textColor = UIColor.grayColor()
             self.postLikeCount -= 1
             //self.likes.text = "\(self.postLikeCount) Likes"
+            timelineData![self.postIndex]["LikeCount"] = JSON(self.postLikeCount)
+        }
+    }
+    
+    func addLikeToDataArray(likeArray:[String:[String:String]]){
+        timelineData![postIndex]["Likes"] = JSON(likeArray)
+    }
+    
+    func removeLikeFromArray(){
+        var likes = timelineData!.arrayObject![postIndex]["Likes"] as! [String:[String:String]]
+        let keys =  likes.filter{key,val in
+            return val["OwnerID"]! == currentUser!.uid
+            }.map{
+                return $0.0
+        }
+        
+        if keys.count > 0 {
+            likes.removeValueForKey(keys[0])
+            timelineData![postIndex]["Likes"] = JSON(likes)
         }
     }
     
@@ -153,33 +174,7 @@ class CPostTableViewCell: UITableViewCell {
 //        
 //    }
     
-    func addLikeToDataArray(likeArray:[String:[String:String]]){
-        
-        //timelineData![index]["Likes"] = JSON(likeArray)
-    }
-    
-    func removeLikeFromArray(){
-        /*
-         var likes = timelineData!.arrayObject![index]["Likes"] as! [String:[String:String]]
-         let keys =  likes.filter{key,val in
-         
-         return val["OwnerID"]! == currentUser!.uid
-         
-         }.map{
-         
-         return $0.0
-         }
-         
-         if keys.count > 0 {
-         
-         likes.removeValueForKey(keys[0])
-         
-         timelineData![index!]["Likes"] = JSON(likes)
-         }
-         */
-        
-    }
-
+   
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

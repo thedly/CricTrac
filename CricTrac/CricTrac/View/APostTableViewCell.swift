@@ -167,6 +167,7 @@ class APostTableViewCell: UITableViewCell {
                 self.totalLikeCount += 1
                 self.likeCount.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
                 self.currentUserHasLikedThePost = true
+                timelineData![self.index!]["LikeCount"] = JSON(self.totalLikeCount)
             }) {
                 self.removeLikeFromArray()
                 //self.likeButton.titleLabel?.textColor = UIColor.grayColor()
@@ -175,6 +176,7 @@ class APostTableViewCell: UITableViewCell {
                 self.totalLikeCount -= 1
                 self.likeCount.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
                 self.currentUserHasLikedThePost = false
+                timelineData![self.index!]["LikeCount"] = JSON(self.totalLikeCount)
             }
         }
     }
