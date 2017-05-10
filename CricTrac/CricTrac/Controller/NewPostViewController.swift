@@ -31,7 +31,9 @@ class NewPostViewController: UIViewController,ThemeChangeable,UITextViewDelegate
         contentView.backgroundColor = UIColor.clearColor()
         postContent.backgroundColor = UIColor.clearColor()
         profilePic.layer.cornerRadius = profilePic.frame.width/2
-        postContent.placeHolderForTextView()
+        //postContent.placeHolderForTextView()
+        postContent.becomeFirstResponder()
+        
         //postContent.keyboardAppearance
         
         postContent.delegate = self
