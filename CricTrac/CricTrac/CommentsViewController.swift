@@ -21,9 +21,10 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     @IBOutlet weak var contentViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var barView: UIView!
     
-//    var postIndex = 0
-//    var postLikeCount = 0
-    var initialLikes = 0
+  //  var index = 0
+    var postIndex = 0
+    var commentCount = 0
+    var totalLikesCount = 0
     var refreshableParent:Refreshable?
     var dataSource = [[String:AnyObject]]()
     
@@ -344,6 +345,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                     let likeCount = data["LikeCount"] as? Int
                     cCell.likes.setTitle("\(likeCount!) Likes", forState:  .Normal)
                     cCell.postLikeCount = likeCount!
+                    self.totalLikesCount = likeCount!
                 }
                 else {
                     cCell.likes.setTitle("0 Likes", forState: .Normal)
@@ -352,6 +354,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                 if (data["CommentCount"] != nil) {
                     let cmtCount = data["CommentCount"] as? Int
                     cCell.comments.setTitle("\(cmtCount!) Comments", forState: .Normal)
+                    self.commentCount = cmtCount!
                 }
                 else {
                     cCell.comments.setTitle("0 Comments", forState: .Normal)
@@ -559,7 +562,13 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     }
     
     @IBAction func didTapClose(sender: AnyObject) {
+        timelineData![self.postIndex]["CommentCount"] = JSON(self.commentCount)
+        timelineData![self.postIndex]["LikeCount"] = JSON(self.totalLikesCount)
+        
+        
+
         dismissViewControllerAnimated(true) {
+            
 //            if self.postLikeCount < self.initialLikes{
 //                var likes = timelineData!.arrayObject![self.postIndex]["Likes"] as! [String:[String:String]]
 //                let keys =  likes.filter{key,val in

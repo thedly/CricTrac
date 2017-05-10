@@ -115,6 +115,12 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
     func modifyPost(text: String, postId: String,index:Int) {
         editPost(text,postId: postId) { (data) in
+            timelineData![index]["Post"] = JSON(text)
+            self.timeLineTable.reloadData()
+//            let data = timelineData![index]["Post"]
+//          let postCell = APostTableViewCell()
+//            postCell.post?.text = data.dictionaryValue["Post"]?.stringValue
+            
 //            var timeLineData:[JSON]!
 //            if let  value = timelineData?.arrayValue{
 //                timeLineData = value
@@ -250,6 +256,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 postCell.parent = self
                 postCell.postIndex = indexPath.section-1
                 
+                
                 let friendId = data["OwnerID"].stringValue
 
                 if data["DisplayTime"] != nil {
@@ -332,7 +339,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
 //                //sajith-  fetch the fresh post data
 //                let postid = data.dictionaryValue["postId"]?.stringValue
 //                getPost(postid!) { (data) in
-                
+                    postCell.totalLikeCount = 0
                     if (data.dictionaryValue["LikeCount"]?.int != nil) {
                         let likeCount = data.dictionaryValue["LikeCount"]?.int
                         postCell.likeCount.setTitle("\(likeCount!) Likes", forState: .Normal)
@@ -368,7 +375,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 //}
                 
                     
-                //postCell.totalLikeCount = 0
+               // postCell.totalLikeCount = 0
                 postCell.post.text = data.dictionaryValue["Post"]?.stringValue
                 postCell.index = indexPath.section-1
                 

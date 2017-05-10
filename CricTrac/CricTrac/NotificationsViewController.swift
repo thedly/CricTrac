@@ -194,8 +194,8 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
         let friendRequest = viewControllerFrom("Main", vcid: "FriendBaseViewController") as! FriendBaseViewController
         friendRequest.topicId = topicId
         //friendRequest.topic = "FRR"
-        self.navigationController?.pushViewController(friendRequest, animated: true)
-     //  self.presentViewController(friendRequest, animated: true) {}
+       // self.navigationController?.pushViewController(friendRequest, animated: true)
+          self.presentViewController(friendRequest, animated: true) {}
     }
     
     func moveToFRA(topicId:String) {
