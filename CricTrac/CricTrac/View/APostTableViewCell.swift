@@ -75,6 +75,7 @@ class APostTableViewCell: UITableViewCell {
             if let parentVC = parent as? UIViewController{
                 let commentPage = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
                 commentPage.postId = postId!
+                commentPage.postIndex = postIndex
                 parentVC.presentViewController(commentPage, animated: true) {}
             }
         }
