@@ -213,9 +213,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
             self.dataSource = data
             self.tableView.reloadData()
         }
-        
-        //dataSource.sort({$0.dataSource["AddedTime"].compare($1.AddedTime) == .OrderedAscending})
-        
+                
     }
     
     func changeThemeSettigs() {
@@ -370,13 +368,13 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                 aCell.ownerId = data["OwnerID"] as? String
 
                 if let val = data["Comment"] as? String{
-                    aCell.commentID = data["commentId"] as? String
+                    aCell.commentID = data["CommentID"] as? String
                     aCell.postID = postId as? String
                     aCell.commentText.text = val
                     aCell.backgroundColor = UIColor.clearColor()
                 }
             
-                if let dateTimeStamp = data["AddedTime"] as? Double{
+                if let dateTimeStamp = data["AddedTimeDisp"] as? Double{
                     let date = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
                     let dateFormatter = NSDateFormatter()
                     dateFormatter.timeZone = NSTimeZone.localTimeZone()
@@ -542,13 +540,10 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         var frame = textView.frame
         frame.size.height = contentSize.height
         
-        
         if contentSize.height < 100 {
-        textView.frame = frame
-        contentViewHeightConstraint.constant = contentSize.height + 15
+            textView.frame = frame
+            contentViewHeightConstraint.constant = contentSize.height + 15
         }
-        
-        print(contentSize.height)
         
         return true
     }

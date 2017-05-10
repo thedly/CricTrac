@@ -332,74 +332,69 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
 //                let postid = data.dictionaryValue["postId"]?.stringValue
 //                getPost(postid!) { (data) in
                 
-                    if (data.dictionaryValue["LikeCount"]?.int != nil) {
-                        let likeCount = data.dictionaryValue["LikeCount"]?.int
-                        postCell.likeCount.setTitle("\(likeCount!) Likes", forState: .Normal)
-                        postCell.totalLikeCount = likeCount!
-                    }
-                    else {
-                        postCell.likeCount.setTitle("0 Likes", forState: .Normal)
-                    }
-                    if (data.dictionaryValue["CommentCount"]?.int != nil) {
-                        let cmtCount = data.dictionaryValue["CommentCount"]?.int
-                        postCell.commentCount.setTitle("\(cmtCount!) Comments", forState: .Normal)
-                        postCell.totalCommentCount = cmtCount!
-                        
-                    }
-                    else {
-                        postCell.commentCount.setTitle("0 Comments", forState: .Normal)
-                    }
-                    
-                    var likeColor = UIColor.blackColor()
-                    postCell.likeButton.setImage(UIImage(named: "Like-100"), forState: UIControlState.Normal)
-                    postCell.currentUserHasLikedThePost = false
+//                    if (data.dictionaryValue["LikeCount"]?.int != nil) {
+//                        let likeCount = data.dictionaryValue["LikeCount"]?.int
+//                        postCell.likeCount.setTitle("\(likeCount!) Likes", forState: .Normal)
+//                        postCell.totalLikeCount = likeCount!
+//                    }
+//                    else {
+//                        postCell.likeCount.setTitle("0 Likes", forState: .Normal)
+//                    }
                 
-                    if let likes = data.dictionaryValue["Likes"]?.dictionaryObject as? [String:[String:String]]{
-                        let result = likes.filter{ return  $0.1["OwnerID"] == currentUser!.uid }
-                        if result.count > 0 {
-                            likeColor = UIColor.whiteColor()
-                            postCell.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
-                            postCell.currentUserHasLikedThePost = true
-                        }
-                    }
-                
-//                    if data.dictionaryValue["isSelfLiked"]?.stringValue == "1" {
-//                        likeColor = UIColor.whiteColor()
-//                        postCell.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
-//                        postCell.currentUserHasLikedThePost = true
+//                    if (data.dictionaryValue["CommentCount"]?.int != nil) {
+//                        let cmtCount = data.dictionaryValue["CommentCount"]?.int
+//                        postCell.commentCount.setTitle("\(cmtCount!) Comments", forState: .Normal)
+//                        postCell.totalCommentCount = cmtCount!
+//                        
+//                    }
+//                    else {
+//                        postCell.commentCount.setTitle("0 Comments", forState: .Normal)
+//                    }
+//                    
+//                    var likeColor = UIColor.blackColor()
+//                    postCell.likeButton.setImage(UIImage(named: "Like-100"), forState: UIControlState.Normal)
+//                    postCell.currentUserHasLikedThePost = false
+//                
+//                    if let likes = data.dictionaryValue["Likes"]?.dictionaryObject as? [String:[String:String]]{
+//                        let result = likes.filter{ return  $0.1["OwnerID"] == currentUser!.uid }
+//                        if result.count > 0 {
+//                            likeColor = UIColor.whiteColor()
+//                            postCell.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
+//                            postCell.currentUserHasLikedThePost = true
+//                        }
 //                    }
                 
                 //}
                 
                     
-               // postCell.totalLikeCount = 0
+                postCell.totalLikeCount = 0
                 postCell.post.text = data.dictionaryValue["Post"]?.stringValue
                 postCell.index = indexPath.section-1
-//                var commentsCount = 0
-//                
-//                if let value = data.dictionaryValue["TimelineComments"]?.count{
-//                    commentsCount = value
-//                }
-
                 
-                //postCell.commentCount.setTitle("\(commentsCount) Comments", forState: .Normal)
+                var commentsCount = 0
+                
+                if let value = data.dictionaryValue["TimelineComments"]?.count{
+                    commentsCount = value
+                }
+
+                postCell.commentCount.setTitle("\(commentsCount) Comments", forState: .Normal)
                 postCell.postId = data.dictionaryValue["postId"]?.stringValue
                 
-                //var likesCount = 0
+                var likesCount = 0
                 //var likeColor = UIColor.grayColor()
-//                var likeColor = UIColor.blackColor()
-//                postCell.likeButton.setImage(UIImage(named: "Like-100"), forState: UIControlState.Normal)
-//                
-//                if let likes = data.dictionaryValue["Likes"]?.dictionaryObject as? [String:[String:String]]{
-//                    let result = likes.filter{ return  $0.1["OwnerID"] == currentUser!.uid }
-//                    if result.count > 0 {
-//                        likeColor = UIColor.whiteColor()
-//                        postCell.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
-//                    }
-//                    //likesCount = likes.count
-//                    //postCell.totalLikeCount = likesCount
-//                }
-//                postCell.likeCount.setTitle("\(likesCount) Likes", forState: .Normal)
+                var likeColor = UIColor.blackColor()
+                postCell.likeButton.setImage(UIImage(named: "Like-100"), forState: UIControlState.Normal)
+                
+                if let likes = data.dictionaryValue["Likes"]?.dictionaryObject as? [String:[String:String]]{
+                    let result = likes.filter{ return  $0.1["OwnerID"] == currentUser!.uid }
+                    if result.count > 0 {
+                        likeColor = UIColor.whiteColor()
+                        postCell.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
+                    }
+                    likesCount = likes.count
+                    postCell.totalLikeCount = likesCount
+                }
+                postCell.likeCount.setTitle("\(likesCount) Likes", forState: .Normal)
                 
                 postCell.likeButton.titleLabel?.textColor = likeColor
                 acell = postCell

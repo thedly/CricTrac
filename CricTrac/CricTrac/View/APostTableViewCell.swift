@@ -141,42 +141,42 @@ class APostTableViewCell: UITableViewCell {
             return
         }
         
-        if currentUserHasLikedThePost {
-            self.totalLikeCount -= 1
-            self.likeButton.titleLabel?.textColor = UIColor.blackColor()
-            self.likeButton.setImage(UIImage(named: "Like-100"), forState: UIControlState.Normal)
-            self.likeCount.setTitle("\(totalLikeCount) Likes", forState: .Normal)
-            currentUserHasLikedThePost = false
-        }
-        else {
-            self.totalLikeCount += 1
-            self.likeButton.titleLabel?.textColor = UIColor.whiteColor()
-            self.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
-            self.likeCount.setTitle("\(totalLikeCount) Likes", forState: .Normal)
-            currentUserHasLikedThePost = true
-        }
-        
-        likeOrUnlike(postId!)
-        
-//        if let value = postId{
-//            likeOrUnlike(value, like: { (likeDict) in
-//                self.addLikeToDataArray(likeDict)
-//                //self.likeButton.titleLabel?.textColor = UIColor.yellowColor()
-//                self.likeButton.titleLabel?.textColor = UIColor.whiteColor()
-//                self.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
-//                self.totalLikeCount += 1
-//                self.likeCount.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
-//                self.currentUserHasLikedThePost = true
-//            }) {
-//                self.removeLikeFromArray()
-//                //self.likeButton.titleLabel?.textColor = UIColor.grayColor()
-//                self.likeButton.titleLabel?.textColor = UIColor.blackColor()
-//                self.likeButton.setImage(UIImage(named: "Like-100"), forState: UIControlState.Normal)
-//                self.totalLikeCount -= 1
-//                self.likeCount.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
-//                self.currentUserHasLikedThePost = false
-//            }
+//        if currentUserHasLikedThePost {
+//            self.totalLikeCount -= 1
+//            self.likeButton.titleLabel?.textColor = UIColor.blackColor()
+//            self.likeButton.setImage(UIImage(named: "Like-100"), forState: UIControlState.Normal)
+//            self.likeCount.setTitle("\(totalLikeCount) Likes", forState: .Normal)
+//            currentUserHasLikedThePost = false
 //        }
+//        else {
+//            self.totalLikeCount += 1
+//            self.likeButton.titleLabel?.textColor = UIColor.whiteColor()
+//            self.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
+//            self.likeCount.setTitle("\(totalLikeCount) Likes", forState: .Normal)
+//            currentUserHasLikedThePost = true
+//        }
+        
+        //likeOrUnlike(postId!)
+        
+        if let value = postId{
+            likeOrUnlike(value, like: { (likeDict) in
+                self.addLikeToDataArray(likeDict)
+                //self.likeButton.titleLabel?.textColor = UIColor.yellowColor()
+                self.likeButton.titleLabel?.textColor = UIColor.whiteColor()
+                self.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
+                self.totalLikeCount += 1
+                self.likeCount.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
+                self.currentUserHasLikedThePost = true
+            }) {
+                self.removeLikeFromArray()
+                //self.likeButton.titleLabel?.textColor = UIColor.grayColor()
+                self.likeButton.titleLabel?.textColor = UIColor.blackColor()
+                self.likeButton.setImage(UIImage(named: "Like-100"), forState: UIControlState.Normal)
+                self.totalLikeCount -= 1
+                self.likeCount.setTitle("\(self.totalLikeCount) LIKES", forState: .Normal)
+                self.currentUserHasLikedThePost = false
+            }
+        }
     }
     
   
