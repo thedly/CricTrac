@@ -110,6 +110,16 @@ func newMatchNotification(matchId:String,result:(resultError:NSError?)->Void){
     dataTask?.resume()
 }
 
+func timelinePostBump(postId:String,result:(resultError:NSError?)->Void){
+    let timelineBumpURL = serverBaseURL+"/editTimeline/\(postId)"
+    let request = NSMutableURLRequest(URL: NSURL(string:timelineBumpURL)!)
+    request.HTTPMethod = "POST"
+    
+    dataTask = defaultSession.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+        result(resultError: error)
+    })
+    dataTask?.resume()
+}
 
 var pageKey:String?
 

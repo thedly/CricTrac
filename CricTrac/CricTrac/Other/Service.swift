@@ -1019,6 +1019,10 @@ func addNewComment(postId:String,comment:String){
    
     calCmtCnt(postId)
     
+    timelinePostBump(postId)  { (resultError) in
+        //KRProgressHUD.dismiss()
+    }
+
     newCommentNotification(postId) { (resultError) in
         //KRProgressHUD.dismiss()
     }
@@ -1137,9 +1141,15 @@ func likePost(postId:String)->[String:[String:String]]{
     ref.setValue(likeDict)
     
     calLikeCnt(postId)
+    
+    timelinePostBump(postId) { (resultError) in
+        //KRProgressHUD.dismiss()
+    }
+
     newLikeNotification(postId) { (resultError) in
         //KRProgressHUD.dismiss()
     }
+    
     return [ref.key:likeDict]
 }
 
