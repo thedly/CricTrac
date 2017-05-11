@@ -23,6 +23,11 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     
     var selectedText:UITextField!
     
+    var currentCountryName = ""
+    var currentCityName = ""
+    var currentStateName = ""
+
+    
     var userProfiles = [String]()
     
     @IBOutlet weak var scrollView:UIScrollView!
@@ -216,7 +221,19 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     }
     @IBAction func addUserBtnPressed(sender: AnyObject) {
         
-        self.continueToDismiss()
+        if firstName.text == "" || lastName.text == "" || dateOfBirth.text == "" || emailId.text == "" || mobile.text == "" || gender.text == "" || country.text == "" || state.text == "" || city.text == "" {
+            
+            let confirmAlert = UIAlertController(title: "" ,message:"All fields are mandatory",preferredStyle: UIAlertControllerStyle.Alert)
+            confirmAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
+            }))
+            
+            self.presentViewController(confirmAlert, animated: true, completion: nil)
+        }
+        else {
+            self.continueToDismiss()
+
+        }
+        
         
     }
     
@@ -356,7 +373,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         if !(firstName.text?.hasDataPresent)! {
             (firstName as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
             (firstName as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
-            firstName.becomeFirstResponder()
+           // firstName.becomeFirstResponder()
             return false
         }
         else
@@ -368,7 +385,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         if !(dateOfBirth.text?.hasDataPresent)! {
             (dateOfBirth as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
             (dateOfBirth as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
-            dateOfBirth.becomeFirstResponder()
+           // dateOfBirth.becomeFirstResponder()
             return false
         }
         else
@@ -380,7 +397,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         if !(emailId.text?.hasDataPresent)! {
             (emailId as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
             (emailId as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
-            emailId.becomeFirstResponder()
+            //emailId.becomeFirstResponder()
             return false
         }
         else
@@ -392,7 +409,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         if !(mobile.text?.hasDataPresent)! {
             (mobile as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
             (mobile as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
-            mobile.becomeFirstResponder()
+           // mobile.becomeFirstResponder()
             return false
         }
         else
@@ -404,7 +421,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         if !(country.text?.hasDataPresent)! || country.text?.length > 50 {
             (country as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
             (country as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
-            country.becomeFirstResponder()
+            //country.becomeFirstResponder()
             return false
         }
         else
@@ -416,7 +433,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         if !(state.text?.hasDataPresent)! || state.text?.length > 50 {
             (state as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
             (state as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
-            state.becomeFirstResponder()
+            //state.becomeFirstResponder()
             return false
         }
         else
@@ -428,7 +445,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         if !(city.text?.hasDataPresent)! {
             (city as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
             (city as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
-            city.becomeFirstResponder()
+           // city.becomeFirstResponder()
             return false
         }
         else
@@ -505,10 +522,14 @@ extension UserInfoViewController:UITextFieldDelegate
             ctDatePicker.showPicker(self, inputText: textField)
         }
         else if textField == country {
-            state.text = ""
-            city.text = ""
+            
+            currentCountryName = country.text!
+            currentStateName = state.text!
+            currentCityName = city.text!
+            
             ctCountryPicker.showPicker(self, inputText: textField)
             //state.text = String()
+            
         }
             
         else if userProfileInfo != nil && textField == userProfileInfo {
@@ -519,10 +540,11 @@ extension UserInfoViewController:UITextFieldDelegate
             
             
         else if textField == state {
+           
             if country.text?.length >= 0 {
                 state.userInteractionEnabled = true
                 //country.text = ""
-                city.text = ""
+               // city.text = ""
                 ctStatePicker.showPicker(self, inputText: textField, iso: ctCountryPicker.SelectedISO)
             }else {
                state.userInteractionEnabled = false
@@ -551,8 +573,21 @@ extension UserInfoViewController:UITextFieldDelegate
 //        }
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+func textFieldDidEndEditing(textField: UITextField) {
         
+    if textField == country {
+        
+        if currentCountryName == country.text {
+            state.text = currentStateName
+            city.text = currentCityName
+        }else {
+            country.text = ""
+             city.text = ""
+        }
+        
+    }
+
+    
         if validateProfileData() {
             if userProfileInfo != nil {
                 if profileData.UserProfile != userProfileInfo.text {
@@ -579,9 +614,12 @@ extension UserInfoViewController:UITextFieldDelegate
                 else {
                     
                     profileChanged = false
+                    
+                    
                     //continueToDismiss()
                 }
             }
+        
             
         }
 
