@@ -8,7 +8,7 @@
 
 import UIKit
 import XLPagerTabStrip
-import SCLAlertView
+//import SCLAlertView
 import KRProgressHUD
 import SwiftyStoreKit
 
@@ -432,7 +432,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     func validateMatchDetails()->Bool{
         var pageName = ""
         if matchVC.allRequiredFieldsHaveNotFilledProperly{
-            pageName = "Match Details"
+            pageName = "Details"
         }
         else if !battingBowlingViewController.allRequiredFieldsHaveFilledProperly {
             pageName = "Batting and Bowling Details"
@@ -441,7 +441,14 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             return true
         }
         
-        SCLAlertView().showWarning("Error", subTitle: "Some Fields are not filled properly in \(pageName). Plaese fill it and try saving")
+//        SCLAlertView().showWarning("Error", subTitle: "Some Fields are not filled properly in \(pageName). Plaese fill it and try saving")
+        let confirmAlert = UIAlertController(title: "" ,message:"Please fill the mandatory fields in \(pageName) tab before saving the match.",preferredStyle: UIAlertControllerStyle.Alert)
+        confirmAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
+          
+        }))
+        self.presentViewController(confirmAlert, animated: true, completion: nil)
+        
+
         return false
     }
     
