@@ -252,6 +252,8 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         let cCell =  tableView.dequeueReusableCellWithIdentifier("cPost", forIndexPath: indexPath) as! CPostTableViewCell
          cCell.parent = self
         
+        cCell.postIndex = postIndex
+        
         if !postDataNew .isEmpty  {
             //display the post in the first row of the tableview
             if indexPath.row == 0  {
@@ -562,8 +564,8 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     }
     
     @IBAction func didTapClose(sender: AnyObject) {
-        timelineData![self.postIndex]["CommentCount"] = JSON(self.commentCount)
-        timelineData![self.postIndex]["LikeCount"] = JSON(self.totalLikesCount)
+        //timelineData![self.postIndex]["CommentCount"] = JSON(self.commentCount)
+        //timelineData![self.postIndex]["LikeCount"] = JSON(self.totalLikesCount)
         
         
 
