@@ -115,8 +115,8 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
     func modifyPost(text: String, postId: String,index:Int) {
         editPost(text,postId: postId) { (data) in
-            timelineData![index]["Post"] = JSON(text)
-            self.timeLineTable.reloadData()
+//            timelineData![index]["Post"] = JSON(text)
+//            self.timeLineTable.reloadData()
 //            let data = timelineData![index]["Post"]
 //          let postCell = APostTableViewCell()
 //            postCell.post?.text = data.dictionaryValue["Post"]?.stringValue
@@ -136,6 +136,8 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
 //                KRProgressHUD.dismiss()
 //            })
         }
+        timelineData![index]["Post"] = JSON(text)
+        self.timeLineTable.reloadData()
     }
     
     func loadTimeline(){

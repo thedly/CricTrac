@@ -205,13 +205,13 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
 //            }
 //        }
         
-        getPost(postId) { (data) in
-            self.postDataNew = data
+        getPost(postId) { (postData) in
+            self.postDataNew = postData
             self.tableView.reloadData()
         }
         
-        getAllComments(self.postId) { (data) in
-            self.dataSource = data
+        getAllComments(self.postId) { (commentData) in
+            self.dataSource = commentData
             self.tableView.reloadData()
         }
                 
@@ -255,21 +255,21 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         if !postDataNew .isEmpty  {
             //display the post in the first row of the tableview
             if indexPath.row == 0  {
-                let data = postDataNew
-                cCell.postOwnerId = data["OwnerID"] as? String
-                let postedBy = data["PostedBy"] as? String
+                let postData = postDataNew
+                cCell.postOwnerId = postData["OwnerID"] as? String
+                let postedBy = postData["PostedBy"] as? String
                 cCell.postId = postId as? String
                
                 if postedBy == "CricTrac" {
                     cCell.postOwnerName.text = "CricTrac"
                 }
                 else{
-                    cCell.postOwnerName.text = data ["OwnerName"] as? String
+                    cCell.postOwnerName.text = postData ["OwnerName"] as? String
                 }
                 
                 //display post owners image
-                if ((data["OwnerID"]) != nil) {
-                    fetchFriendDetail((data["OwnerID"]  as? String)!, sucess: { (result) in
+                if ((postData["OwnerID"]) != nil) {
+                    fetchFriendDetail((postData["OwnerID"]  as? String)!, sucess: { (result) in
                         let proPic = result["proPic"]
                             
                         //aCell.profileImage.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
@@ -292,7 +292,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                     })
                 }
                 
-                let friendId = data["OwnerID"]!
+                let friendId = postData["OwnerID"]!
                 if let city = friendsCity[friendId as! String]{
                     cCell.ownerCity.text = city
                 }
@@ -305,7 +305,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                     })
                 }
                 
-                if let postDateTS = data["AddedTime"] as? Double{
+                if let postDateTS = postData["AddedTime"] as? Double{
                     let date = NSDate(timeIntervalSince1970:postDateTS/1000.0)
                     let dateFormatter = NSDateFormatter()
                     dateFormatter.timeZone = NSTimeZone.localTimeZone()
@@ -314,14 +314,14 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                     cCell.date.text = dateFormatter.stringFromDate(date)
                 }
                 
-                cCell.postText.text = data["Post"] as? String
+                cCell.postText.text = postData["Post"] as? String
                 cCell.delCommentBtn.hidden = true
                 
 //                cCell.likeButton.frame = CGRectMake(0, 0, 10, 10)
                 cCell.likeButton.setImage(UIImage(named: "Like-100"), forState: UIControlState.Normal)
                 cCell.likeButton.titleLabel?.textColor = UIColor.blackColor()
                 
-                let childLikes = data["Likes"] as? [String : AnyObject]
+                let childLikes = postData["Likes"] as? [String : AnyObject]
                 if childLikes != nil {
                     for (key, value) in childLikes! {
                         if currentUser!.uid == value["OwnerID"] as? String {
@@ -341,8 +341,8 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
 //                cCell.likeButton.titleLabel?.textColor = likeColor
                 
                 
-                if (data["LikeCount"] != nil) {
-                    let likeCount = data["LikeCount"] as? Int
+                if (postData["LikeCount"] != nil) {
+                    let likeCount = postData["LikeCount"] as? Int
                     cCell.likes.setTitle("\(likeCount!) Likes", forState:  .Normal)
                     cCell.postLikeCount = likeCount!
                     self.totalLikesCount = likeCount!
@@ -351,8 +351,8 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                     cCell.likes.setTitle("0 Likes", forState: .Normal)
                 }
                 
-                if (data["CommentCount"] != nil) {
-                    let cmtCount = data["CommentCount"] as? Int
+                if (postData["CommentCount"] != nil) {
+                    let cmtCount = postData["CommentCount"] as? Int
                     cCell.comments.setTitle("\(cmtCount!) Comments", forState: .Normal)
                     self.commentCount = cmtCount!
                 }
@@ -366,18 +366,18 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
             }
             else {
                 //display the comments
-                let data = dataSource[indexPath.row - 1]
+                let commentData = dataSource[indexPath.row - 1]
                 
-                aCell.ownerId = data["OwnerID"] as? String
+                aCell.ownerId = commentData["OwnerID"] as? String
 
-                if let val = data["Comment"] as? String{
-                    aCell.commentID = data["CommentID"] as? String
+                if let val = commentData["Comment"] as? String{
+                    aCell.commentID = commentData["CommentID"] as? String
                     aCell.postID = postId as? String
                     aCell.commentText.text = val
                     aCell.backgroundColor = UIColor.clearColor()
                 }
             
-                if let dateTimeStamp = data["AddedTimeDisp"] as? Double{
+                if let dateTimeStamp = commentData["AddedTimeDisp"] as? Double{
                     let date = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
                     let dateFormatter = NSDateFormatter()
                     dateFormatter.timeZone = NSTimeZone.localTimeZone()
@@ -386,14 +386,14 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                     aCell.commentDate.text = dateFormatter.stringFromDate(date)
                 }
             
-                if var value = data["OwnerName"] as? String{
+                if var value = commentData["OwnerName"] as? String{
                     if value == ""{
                         value = "No Name"
                     }
                     aCell.userName.text =   value
                 }
             
-                if currentUser?.uid == data["OwnerID"]  as? String {
+                if currentUser?.uid == commentData["OwnerID"]  as? String {
                     aCell.delCommentBtn.hidden = false
                 }
                 else {
@@ -401,8 +401,8 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                 }
             
                 //display comment owners image
-                if ((data["OwnerID"]) != nil) {
-                    fetchFriendDetail((data["OwnerID"]  as? String)!, sucess: { (result) in
+                if ((commentData["OwnerID"]) != nil) {
+                    fetchFriendDetail((commentData["OwnerID"]  as? String)!, sucess: { (result) in
                         let proPic = result["proPic"]
                 
                         aCell.userImage.layer.borderWidth = 1
