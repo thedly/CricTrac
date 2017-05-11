@@ -82,7 +82,7 @@ class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         cell.friendButton.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
         //check if user record exist in Friends
         let ref1 = fireBaseRef.child("Users").child(currentUser!.uid).child("Friends")
-        ref1.queryOrderedByChild("UserId").queryStartingAtValue(friendUserId!).queryEndingAtValue(friendUserId!+"\u{f8ff}").observeSingleEventOfType(.Value, withBlock: { snapshot in
+        ref1.queryOrderedByChild("UserId").queryEqualToValue(friendUserId).observeSingleEventOfType(.Value, withBlock: { snapshot in
             
             if snapshot.childrenCount > 0 {
                 cell.friendButton.setTitle("Friend", forState: .Normal)
@@ -92,7 +92,7 @@ class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         
         //check if user record exist in SentRequest
         let ref2 = fireBaseRef.child("Users").child(currentUser!.uid).child("SentRequest")
-        ref2.queryOrderedByChild("SentTo").queryStartingAtValue(friendUserId!).queryEndingAtValue(friendUserId!+"\u{f8ff}").observeSingleEventOfType(.Value, withBlock: { snapshot in
+        ref2.queryOrderedByChild("SentTo").queryEqualToValue(friendUserId).observeSingleEventOfType(.Value, withBlock: { snapshot in
             
             if snapshot.childrenCount > 0 {
                 cell.friendButton.setTitle("Pending", forState: .Normal)
@@ -102,7 +102,7 @@ class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         
         //check if user record exist in ReceivedRequest
         let ref3 = fireBaseRef.child("Users").child(currentUser!.uid).child("ReceivedRequest")
-        ref3.queryOrderedByChild("ReceivedFrom").queryStartingAtValue(friendUserId!).queryEndingAtValue(friendUserId!+"\u{f8ff}").observeSingleEventOfType(.Value, withBlock: { snapshot in
+        ref3.queryOrderedByChild("ReceivedFrom").queryEqualToValue(friendUserId).observeSingleEventOfType(.Value, withBlock: { snapshot in
             
             if snapshot.childrenCount > 0 {
                 cell.friendButton.setTitle("Pending", forState: .Normal)

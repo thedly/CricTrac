@@ -743,7 +743,7 @@ public func AcceptFriendRequest(data: [String:[String:AnyObject]], callback:(dat
     
     //sajith - check for duplicate entry in Friends
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Friends")
-    ref.queryOrderedByChild("UserId").queryStartingAtValue(friendSentTo!).queryEndingAtValue(friendSentTo!+"\u{f8ff}").observeSingleEventOfType(.Value, withBlock: { snapshot in
+    ref.queryOrderedByChild("UserId").queryEqualToValue(friendSentTo).observeSingleEventOfType(.Value, withBlock: { snapshot in
         
         if snapshot.childrenCount > 0 {
             friendExist = 1
@@ -852,7 +852,7 @@ public func AddSentRequestData(data: [String:[String:AnyObject]], callback:(data
     
     //sajith - check for duplicate entry in SentRequest
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("SentRequest")
-    ref.queryOrderedByChild("SentTo").queryStartingAtValue(friendSentTo!).queryEndingAtValue(friendSentTo!+"\u{f8ff}").observeSingleEventOfType(.Value, withBlock: { snapshot in
+    ref.queryOrderedByChild("SentTo").queryEqualToValue(friendSentTo).observeSingleEventOfType(.Value, withBlock: { snapshot in
         
         if snapshot.childrenCount > 0 {
             friendExist = 1
@@ -860,7 +860,7 @@ public func AddSentRequestData(data: [String:[String:AnyObject]], callback:(data
         
         //sajith - check for duplicate entry in ReceivedRequest
         let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("ReceivedRequest")
-        ref.queryOrderedByChild("ReceivedFrom").queryStartingAtValue(friendSentTo!).queryEndingAtValue(friendSentTo!+"\u{f8ff}").observeSingleEventOfType(.Value, withBlock: { snapshot in
+        ref.queryOrderedByChild("ReceivedFrom").queryEqualToValue(friendSentTo).observeSingleEventOfType(.Value, withBlock: { snapshot in
             
             if snapshot.childrenCount > 0 {
                 friendExist = 1
@@ -868,7 +868,7 @@ public func AddSentRequestData(data: [String:[String:AnyObject]], callback:(data
             
             //sajith - check for duplicate entry in Friends
             let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Friends")
-            ref.queryOrderedByChild("UserId").queryStartingAtValue(friendSentTo!).queryEndingAtValue(friendSentTo!+"\u{f8ff}").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            ref.queryOrderedByChild("UserId").queryEqualToValue(friendSentTo).observeSingleEventOfType(.Value, withBlock: { snapshot in
                 
                 if snapshot.childrenCount > 0 {
                     friendExist = 1
