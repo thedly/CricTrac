@@ -28,6 +28,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewWillAppear(animated: Bool) {
         setBackgroundColor()
         SettingsTableView.reloadData()
+        setNavigationBarProperties()
         //initializeView()
     }
     
