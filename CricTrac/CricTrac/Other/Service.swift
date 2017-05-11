@@ -112,9 +112,7 @@ func addMatchData(key:String,data:[String:AnyObject], callback: [String:AnyObjec
     }
     
     UpdateDashboardDetails()
-    newMatchNotification((dataToBeModified["MatchId"] as? String)!) { (resultError) in
-        //KRProgressHUD.dismiss()
-    }
+    newMatchNotification((dataToBeModified["MatchId"] as? String)!)
     
     //callback(dataToBeModified)
 }
@@ -771,8 +769,7 @@ public func AcceptFriendRequest(data: [String:[String:AnyObject]], callback:(dat
                 ref.child(newlyCreatedUserFriendData.key).updateChildValues(dataToBeManipulated["FriendData"]!)
                     
                     //call the notification api
-                    friendRequestAcceptedNotification(friendSentTo!) { (resultError) in
-                    }
+                    friendRequestAcceptedNotification(friendSentTo!)
                     
                     callback(data: newlyCreatedUserReferenceData.key)
                 })
@@ -896,8 +893,7 @@ public func AddSentRequestData(data: [String:[String:AnyObject]], callback:(data
                             ref.updateChildValues(sentcreatedId)
                             
                             //call the notification api
-                            friendRequestReceivedNotification(friendSentTo!) { (resultError) in
-                            }
+                            friendRequestReceivedNotification(friendSentTo!) 
                             callback(data: newlyCreatedReceivedRequestData.key)
                         })
         
@@ -982,15 +978,16 @@ func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
     let postKey = ref.key
     let returnData = ["timeline":["DisplayTime":dispTime,"Post":postText,"CommentCount":"0","LikeCount":"0","OwnerName":userName,"postId":postKey,"OwnerID":currentUser!.uid,"PostedBy":currentUser!.uid,"PostType":"Self"]]
     
-        sucess(data: returnData)
+    sucess(data: returnData)
+    KRProgressHUD.dismiss()
     
-    updateTimelineWithNewPost(postKey) { (resultError) in
-        KRProgressHUD.dismiss()
-    }
+    updateTimelineWithNewPost(postKey)
     
-    newPostNotification(postKey) { (resultError) in
-        //KRProgressHUD.dismiss()
-    }
+    newPostNotification(postKey)
+    
+//    newPostNotification(postKey) { (resultError) in
+//        //KRProgressHUD.dismiss()
+//    }
 }
 
 
@@ -1019,13 +1016,9 @@ func addNewComment(postId:String,comment:String){
    
     calCmtCnt(postId)
     
-    timelinePostBump(postId)  { (resultError) in
-        //KRProgressHUD.dismiss()
-    }
+    timelinePostBump(postId)  
 
-    newCommentNotification(postId) { (resultError) in
-        //KRProgressHUD.dismiss()
-    }
+    newCommentNotification(postId)
 }
 
 func calCmtCnt(postId:String) {
@@ -1142,13 +1135,9 @@ func likePost(postId:String)->[String:[String:String]]{
     
     calLikeCnt(postId)
     
-    timelinePostBump(postId) { (resultError) in
-        //KRProgressHUD.dismiss()
-    }
+    timelinePostBump(postId)
 
-    newLikeNotification(postId) { (resultError) in
-        //KRProgressHUD.dismiss()
-    }
+    newLikeNotification(postId)
     
     return [ref.key:likeDict]
 }
