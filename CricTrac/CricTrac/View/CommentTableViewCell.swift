@@ -19,6 +19,7 @@ class CommentTableViewCell: UITableViewCell {
     var postID:String?
     var parent:DeleteComment?
     var ownerId:String?
+    var postIndex = 0
     
     @IBAction func deletebuttonTapped(sender: AnyObject) {
       

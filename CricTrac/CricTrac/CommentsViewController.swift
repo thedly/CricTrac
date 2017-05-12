@@ -249,6 +249,8 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         let aCell =  tableView.dequeueReusableCellWithIdentifier("commentcell", forIndexPath: indexPath) as! CommentTableViewCell
         aCell.parent = self
         
+        aCell.postIndex = postIndex
+        
         let cCell =  tableView.dequeueReusableCellWithIdentifier("cPost", forIndexPath: indexPath) as! CPostTableViewCell
          cCell.parent = self
         
@@ -481,7 +483,12 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
 //    }
     
     func deletebuttonTapped() {
-        
+//      print("present sir")
+//      //self.view .setNeedsDisplay()
+//        let commentPage = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
+//        commentPage.postId = postId
+//        commentPage.postIndex = postIndex
+//        self.presentViewController(commentPage, animated: false) {}
     }
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool{
@@ -564,10 +571,8 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     }
     
     @IBAction func didTapClose(sender: AnyObject) {
-        //timelineData![self.postIndex]["CommentCount"] = JSON(self.commentCount)
-        //timelineData![self.postIndex]["LikeCount"] = JSON(self.totalLikesCount)
-        
-        
+        timelineData![self.postIndex]["CommentCount"] = JSON(self.commentCount)
+        timelineData![self.postIndex]["LikeCount"] = JSON(self.totalLikesCount)
 
         dismissViewControllerAnimated(true) {
             
