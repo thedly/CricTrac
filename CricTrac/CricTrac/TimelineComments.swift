@@ -9,7 +9,7 @@
 import Foundation
 
 
-class TimeLinePost {
+class TimeLineComments {
     var AddedTime: NSDate!
     var AddedTimeDisp: Double!
     var OwnerID: String!
@@ -28,7 +28,7 @@ class TimeLinePost {
         self.Comment = String(dataObj["Comment"] ?? "-")
     }
     
-    static func getAnonymous(dat: [TimeLinePost]) -> [[String: AnyObject]]{
+    static func getAnonymous(dat: [TimeLineComments]) -> [[String: AnyObject]]{
         var anonymousObjs = [[String: AnyObject]]()
 
         for timelinepost in dat {
