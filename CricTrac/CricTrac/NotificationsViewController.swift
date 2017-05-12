@@ -15,7 +15,7 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
     
     var currentTheme:CTTheme!
     var dataSource = [[String:AnyObject]]()
-    var notificationId:String = ""
+    var NotificationID:String = ""
 
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
@@ -83,13 +83,13 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
         let data = dataSource[indexPath.row]
         if let cell = tableView.dequeueReusableCellWithIdentifier("NotificationTableViewCell", forIndexPath: indexPath) as? NotificationTableViewCell {
             
-            notificationId = data["notificationId"]! as! String
+            NotificationID = data["NotificationID"]! as! String
             let message = data["Message"] as? String
             let ownerId = data["FromID"] as? String
             let isRead = data["isRead"] as? Int
             var notificationDateTime = ""
             
-            if let notiDateTS = data["AddedTime"] as? Double{
+            if let notiDateTS = data["AddedTimeDisp"] as? Double{
                 let date = NSDate(timeIntervalSince1970:notiDateTS/1000.0)
                 let dateFormatter = NSDateFormatter()
                 dateFormatter.timeZone = NSTimeZone.localTimeZone()
@@ -136,10 +136,10 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.notificationId = self.dataSource[indexPath.row]["notificationId"]! as! String
+        self.NotificationID = self.dataSource[indexPath.row]["NotificationID"]! as! String
         
         //on select, mark as Read
-        markNotificationAsRead(self.notificationId)
+        markNotificationAsRead(self.NotificationID)
         
         let topic = self.dataSource[indexPath.row]["Topic"]! as! String
         let topicId = self.dataSource[indexPath.row]["TopicID"]! as! String
@@ -168,13 +168,13 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
     func tableView(tableView: UITableView,
                             editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let markRead = UITableViewRowAction(style: .Normal, title: "Mark as read") { action, index in
-            self.notificationId = self.dataSource[indexPath.row]["notificationId"]! as! String
-            markNotificationAsRead(self.notificationId)
+            self.NotificationID = self.dataSource[indexPath.row]["NotificationID"]! as! String
+            markNotificationAsRead(self.NotificationID)
         }
         
         let delete = UITableViewRowAction(style: .Default, title: "Delete") { action, index in
-            self.notificationId = self.dataSource[indexPath.row]["notificationId"]! as! String
-            deleteNotification(self.notificationId)
+            self.NotificationID = self.dataSource[indexPath.row]["NotificationID"]! as! String
+            deleteNotification(self.NotificationID)
             
             if self.dataSource.count == 1 {
                 self.dismissViewControllerAnimated(true, completion: nil)

@@ -1070,31 +1070,48 @@ func getAllComments(postId:String,sucess:(data:[[String: AnyObject]])->Void){
     let ref = fireBaseRef.child("TimelinePosts").child(postId).child("TimelineComments").queryOrderedByChild("AddedTime")
     ref.observeEventType(.Value, withBlock: { snapshot in
         if let data = snapshot.value as? [String:[String:AnyObject]] {
-            var result = [TimeLinePost]()
+            var result = [TimeLineComments]()
             for (key,value) in data{
                 var dataval = value as [String:AnyObject]
                 dataval["commentId"] = key
-                result.append(TimeLinePost(dataObj: dataval))
+                result.append(TimeLineComments(dataObj: dataval))
             }
             
             result.sortInPlace({$0.AddedTime.compare($1.AddedTime) == NSComparisonResult.OrderedAscending})
             
-            let resultObj = TimeLinePost.getAnonymous(result)
+            let resultObj = TimeLineComments.getAnonymous(result)
             sucess(data: resultObj)
         }
     })
 }
 
-func getAllNotifications(sucessBlock:([[String: AnyObject]])->Void){
-    fireBaseRef.child("Users").child(currentUser!.uid).child("Notifications").queryOrderedByChild("AddedTime").queryLimitedToLast(30).observeEventType(.Value, withBlock: { snapshot in
+func getAllNotifications(sucess:(data:[[String: AnyObject]])->Void){
+//    fireBaseRef.child("Users").child(currentUser!.uid).child("Notifications").queryOrderedByChild("AddedTime").queryLimitedToLast(30).observeEventType(.Value, withBlock: { snapshot in
+//            if let data = snapshot.value as? [String:[String:AnyObject]] {
+//                var result = [[String:AnyObject]]()
+//                for (key,value) in data{
+//                    var dataval = value
+//                    dataval["notificationId"] = key
+//                    result.append(dataval)
+//                }
+//                sucessBlock(result)
+//            }
+//        })
+    
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Notifications").queryOrderedByChild("AddedTime").queryLimitedToLast(30)
+    ref.observeEventType(.Value, withBlock: { snapshot in
         if let data = snapshot.value as? [String:[String:AnyObject]] {
-            var result = [[String:AnyObject]]()
+            var result = [Notifications]()
             for (key,value) in data{
-                var dataval = value
-                dataval["notificationId"] = key
-                result.append(dataval)
+                var dataval = value as [String:AnyObject]
+                dataval["NotificationID"] = key
+                result.append(Notifications(dataObj: dataval))
             }
-            sucessBlock(result)
+            
+            result.sortInPlace({$0.AddedTime.compare($1.AddedTime) == NSComparisonResult.OrderedDescending})
+            
+            let resultObj = Notifications.getAnonymous(result)
+            sucess(data: resultObj)
         }
     })
 }
