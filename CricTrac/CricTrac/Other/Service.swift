@@ -1133,7 +1133,7 @@ func likePost(postId:String)->[String:[String:String]]{
     let likeDict:[String:String] = ["OwnerID":currentUser!.uid,"OwnerName":loggedInUserName ?? ""]
     ref.setValue(likeDict)
     
-    calLikeCnt(postId)
+//    calLikeCnt(postId)
     
     timelinePostBump(postId)
 
@@ -1186,15 +1186,17 @@ func likeOrUnlike(postId:String,like:(likeDict:[String:[String:String]])->Void,u
                 let ref = fireBaseRef.child("TimelinePosts").child(postId).child("Likes").child(result[0].0)
                 ref.removeValueWithCompletionBlock({ (error, ref) in
                     if error == nil{
+                         unlike()
                         calLikeCnt(postId)
-                        unlike()
                     }
                 })
             }else{
                 like(likeDict: likePost(postId))
+                calLikeCnt(postId)
             }
         }else{
             like(likeDict: likePost(postId))
+            calLikeCnt(postId)
         }
     })
 }

@@ -12,6 +12,8 @@ import XLPagerTabStrip
 import SCLAlertView
 import SkyFloatingLabelTextField
 
+import SwiftCountryPicker
+
 class UserInfoViewController: UIViewController,ThemeChangeable  {
     
     
@@ -540,12 +542,22 @@ extension UserInfoViewController:UITextFieldDelegate
             
             
         else if textField == state {
-           
+            
+            currentStateName = state.text!
+            currentCityName = city.text!
+            
+            var currentCountry = ""
+            
             if country.text?.length >= 0 {
                 state.userInteractionEnabled = true
-                //country.text = ""
+                currentCountry = country.text!
                // city.text = ""
-                ctStatePicker.showPicker(self, inputText: textField, iso: ctCountryPicker.SelectedISO)
+                
+                let currentCountryList = CountriesList.filter({$0.name == currentCountry})
+                let currentISO = currentCountryList[0].iso
+                ctStatePicker.showPicker(self, inputText: textField, iso: currentISO)
+                
+                //ctStatePicker.showPicker(self, inputText: textField, iso: ctCountryPicker.SelectedISO)
             }else {
                state.userInteractionEnabled = false
             }
@@ -576,15 +588,22 @@ extension UserInfoViewController:UITextFieldDelegate
 func textFieldDidEndEditing(textField: UITextField) {
         
     if textField == country {
-        
-        if currentCountryName == country.text {
+        if currentCountryName == country.text! {
             state.text = currentStateName
             city.text = currentCityName
         }else {
-            country.text = ""
+            state.text = ""
              city.text = ""
         }
-        
+    }
+    
+    if textField == state {
+        if currentStateName == state.text! {
+            city.text = currentCityName
+        }
+        else {
+            city.text = ""
+        }
     }
 
     
