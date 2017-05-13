@@ -47,16 +47,10 @@ class CTCountryPicker: NSObject {
                 
                 if let pickedCountry = CountriesList.filter({$0.name == newValue}).first as? Country {
                     countryPicker.pickedCountry = pickedCountry
-                    
-                   
-                    
                 }
-                
-                
             }
             
             countryPicker.selectRow(indexPos, inComponent: 0, animated: true)
-            
         }
     }
     
@@ -78,15 +72,12 @@ class CTCountryPicker: NSObject {
         {
             return [String]()
         }
-        
     }
     
     func showPicker(parent:UIViewController,inputText:UITextField){
         
         self.inputText = inputText
         self.parent = parent
-        
-        
         
         inputText.inputView = countryPicker
         
@@ -109,13 +100,18 @@ class CTCountryPicker: NSObject {
     }
     
     func doneClick() {
-        inputText.text = countryPicker.pickedCountry?.name
+        if countryPicker.pickedCountry?.name != nil {
+            inputText.text = countryPicker.pickedCountry?.name
+        }
+        else {
+            inputText.text = inputText.text
+        }
+        
         inputText.resignFirstResponder()
     }
+    
     func cancelClick() {
         inputText.resignFirstResponder()
-    }
-    
-    
+    }    
     
 }

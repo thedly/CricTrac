@@ -630,22 +630,22 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         if difference.day == 1 {
             return "\(difference.day) day ago"
         }
-        else if difference.hour == 1 {
+        else if difference.day < 1 && difference.hour == 1 {
             return "\(difference.hour) hour ago"
         }
-        else if difference.hour > 1 && difference.hour < 24 {
+        else if difference.day < 1 && difference.hour > 1 && difference.hour < 24 {
             return "\(difference.hour) hours ago"
         }
-        else if difference.minute == 1 {
+        else if difference.day < 1 && difference.hour < 1 && difference.minute == 1 {
             return "\(difference.minute) minute ago"
         }
-        else if difference.minute > 1 && difference.minute < 60 {
+        else if difference.day < 1 && difference.hour < 1 && difference.minute > 1 && difference.minute < 60 {
             return "\(difference.minute) minutes ago"
         }
-        else if difference.second == 1 {
+        else if difference.day < 1 && difference.hour < 1 && difference.minute < 1 && difference.second == 1 {
             return "\(difference.second) second ago"
         }
-        else if difference.second > 1 && difference.second < 60 {
+        else if difference.day < 1 && difference.hour < 1 && difference.minute < 1 && difference.second > 1 && difference.second < 60 {
             return "\(difference.second) seconds ago"
         }
         else {

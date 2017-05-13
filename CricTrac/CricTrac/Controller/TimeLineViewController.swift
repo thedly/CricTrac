@@ -266,23 +266,12 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                 }
                 else if let dateTimeStamp = data["AddedTime"].double{
                     let date = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
-                    let date2 = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
                     let dateFormatter = NSDateFormatter()
                     dateFormatter.timeZone = NSTimeZone.localTimeZone()
                     dateFormatter.timeStyle = .ShortStyle
                     dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-                    
-                    let cmtDate = offsetFrom(date2)
-                    if cmtDate == "" {
-                        postCell.postedDate.text = dateFormatter.stringFromDate(date)
-                    }
-                    else {
-                        postCell.postedDate.text = cmtDate
-                    }
-                    
-                    
+                    postCell.postedDate.text = dateFormatter.stringFromDate(date)
                 }
-                
                 
                 postCell.postOwnerId = friendId
                 
@@ -532,49 +521,5 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
      // Pass the selected object to the new view controller.
      }
      */
-    
-    func offsetFrom(date:NSDate) -> String {
-        let now = NSDate()
-        
-        let dayHourMinuteSecond: NSCalendarUnit = [.Day, .Hour, .Minute, .Second]
-        let difference = NSCalendar.currentCalendar().components(dayHourMinuteSecond, fromDate: date, toDate: now, options: [])
-        
-        //        let seconds = "\(difference.second)s"
-        //        let minutes = "\(difference.minute)m" + " " + seconds
-        //        let hours = "\(difference.hour)h" + " " + minutes
-        //        let days = "\(difference.day)d" + " " + hours
-        
-        if difference.day == 1 {
-            return "\(difference.day) day ago"
-        }
-        else if difference.hour == 1 {
-            return "\(difference.hour) hour ago"
-        }
-        else if difference.hour > 1 && difference.hour < 24 {
-            return "\(difference.hour) hours ago"
-        }
-        else if difference.minute == 1 {
-            return "\(difference.minute) minute ago"
-        }
-        else if difference.minute > 1 && difference.minute < 60 {
-            return "\(difference.minute) minutes ago"
-        }
-        else if difference.second == 1 {
-            return "\(difference.second) second ago"
-        }
-        else if difference.second > 1 && difference.second < 60 {
-            return "\(difference.second) seconds ago"
-        }
-        else {
-            return ""
-        }
-        
-        //        if difference.day    > 0 { return days }
-        //        if difference.hour   > 0 { return hours }
-        //        if difference.minute > 0 { return minutes }
-        //        if difference.second > 0 { return seconds }
-        //        return ""
-    }
-
     
 }

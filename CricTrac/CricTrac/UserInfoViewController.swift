@@ -11,35 +11,25 @@ import UIKit
 import XLPagerTabStrip
 import SCLAlertView
 import SkyFloatingLabelTextField
-
 import SwiftCountryPicker
 
 class UserInfoViewController: UIViewController,ThemeChangeable  {
-    
     
     lazy var ctDatePicker = CTDatePicker()
     lazy var ctCountryPicker = CTCountryPicker()
     lazy var ctStatePicker = CTStatePicker()
     lazy var ctDataPicker = DataPicker()
     var profileDetailsExists:Bool = false
-    
     var selectedText:UITextField!
-    
     var currentCountryName = ""
     var currentCityName = ""
     var currentStateName = ""
-
-    
     var userProfiles = [String]()
     
     @IBOutlet weak var scrollView:UIScrollView!
-    
     @IBOutlet weak var userProfileInfo: UITextField!
-    
     @IBOutlet weak var firstName: UITextField!
-    
     @IBOutlet weak var lastName: UITextField!
-    
     @IBOutlet weak var dateOfBirth: UITextField!
     @IBOutlet weak var emailId: UITextField!
     @IBOutlet weak var country: UITextField!
@@ -48,33 +38,20 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     @IBOutlet weak var gender: UITextField!
     @IBOutlet weak var mobile: UITextField!
     
-//    @IBOutlet weak var teamName: UITextField!
-//    @IBOutlet weak var bowlingStyle: UITextField!
-//    @IBOutlet weak var battingStyle: UITextField!
-//    @IBOutlet weak var playingRole: UITextField!
-    
     let transitionManager = TransitionManager.sharedInstance
-    
     var lastSelectedTab:UIView?
     var scrollViewTop:CGFloat!
-    
     var NextVC : UIViewController!
-    
     var userProfile : String!
-    
     var modProfile = " "
-   
     var profileChanged: Bool! = false
     
     @IBAction func goPreviousPage(sender: AnyObject) {
-        
         dismissViewControllerAnimated(true, completion: nil)
-        
     }
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
-        
         self.view.backgroundColor = currentTheme.topColor
        // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
@@ -91,6 +68,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
        // self.navigationController?.navigationBarHidden = true
         // Do any additional setup after loading the view.
     }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         setBackgroundColor()
@@ -117,20 +95,21 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         navigationItem.leftBarButtonItem = leftbarButton
         navigationItem.rightBarButtonItem = righttbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        
         if userProfileInfo != nil {
             title = "EDIT PROFILE"
-        }else {
+        }
+        else {
             title = "CREATE PROFILE"
         }
         
        // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         //navigationController!.navigationBar.titleTextAttributes = titleDict
     }
+    
     var data:[String:String]{
-        
         return ["FirstName": firstName.textVal.trim(),"LastName":lastName.textVal.trim(),"DateOfBirth":dateOfBirth.textVal,"Email":emailId.textVal,"Mobile":mobile.textVal.trim(),"Gender":gender.textVal,"Country":country.textVal,"State":state.textVal,"City":city.textVal]
     }
-    
     
     func initializeView(){
         
@@ -145,9 +124,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         mobile.delegate = self
      //   userProfileInfo.delegate = self
         
-        
         emailId.userInteractionEnabled = false
-        
         
         if userProfileInfo != nil {
             userProfiles.removeAll()
@@ -157,29 +134,14 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
             userProfileInfo.delegate = self
         }
         
-        
-//        playingRole.delegate = self
-//        bowlingStyle.delegate = self
-//        battingStyle.delegate = self
-//        teamName.delegate = self
-        
-        
-        
        // NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserInfoViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         scrollView.setContentOffset(CGPointZero, animated: true)
         scrollViewTop = scrollView.frame.origin.y
-        
-        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-//                    self.teamName.text = profileData.TeamName
-//                    self.battingStyle.text = profileData.BattingStyle
-//                    self.bowlingStyle.text = profileData.BowlingStyle
-//                    self.playingRole.text = profileData.PlayingRole
-                
-        }
+    }
     
     func initialization()  {
         self.profileDetailsExists = true
@@ -239,64 +201,6 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         
     }
     
-//    @IBAction func addUserBtnPressed(sender: AnyObject) {
-//        if validateProfileData() {
-//            
-////            if profileData.PlayingRole {
-////
-////            }
-//            if userProfileInfo != nil {
-//                if profileData.UserProfile != userProfileInfo.text {
-//                    //profileData.UserProfile
-//                    profileData.UserProfile = userProfileInfo.text!
-//                    profileChanged = true
-//                    let appearance = SCLAlertView.SCLAppearance(
-//                        showCloseButton: false
-//                    )
-//                    
-//                    let alertView = SCLAlertView(appearance: appearance)
-//                    
-//                    alertView.addButton("OK", target:self, selector:#selector(UserInfoViewController.continueToDismiss))
-//                    
-//                    alertView.addButton("Cancel", action: { })
-//                    
-//                    alertView.showNotice("Warning", subTitle: "Changing role will delete all existing data")
-//                }else {
-//                    profileChanged = false
-//                    continueToDismiss()
-//                }
-//            }
-//            else {
-//                
-//                if profileData.userExists {
-//                    
-//                    profileChanged = true
-//                    let appearance = SCLAlertView.SCLAppearance(
-//                        showCloseButton: false
-//                    )
-//                    
-//                    let alertView = SCLAlertView(appearance: appearance)
-//                    
-//                    alertView.addButton("OK", target:self, selector:#selector(UserInfoViewController.continueToDismiss))
-//                    
-//                    alertView.addButton("Cancel", action: { })
-//                    
-//                    alertView.showNotice("Warning", subTitle: "Changing role will delete all existing data")
-//                    
-//                }
-//                else
-//                {
-//                    profileChanged = false
-//                    continueToDismiss()
-//                }
-//                
-//            }
-//            
-//            
-//        }
-//        
-//    }
-//    
     func continueToDismiss() {
         profileData.FirstName = self.data["FirstName"]!
         profileData.LastName = self.data["LastName"]!
@@ -324,7 +228,6 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
                 vc.profileChanged = self.profileChanged
                 vc.modProfilePlayer = modProfile
 
-                
                 NextVC = vc
                 
             case userProfileType.Coach.rawValue :
@@ -334,7 +237,6 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
                 vc.profileChanged = self.profileChanged
                 vc.modProfileCoach = modProfile
 
-                
                 NextVC = vc
             case userProfileType.Fan.rawValue :
                 
@@ -342,7 +244,6 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
                 
                 vc.profileChanged = self.profileChanged
                 vc.modProfileFan = modProfile
-
                 
                 NextVC = vc
                 
@@ -357,7 +258,6 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
             }
             
      //   }
-        
         
         
         let toViewController = NextVC
@@ -472,7 +372,6 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
       
     }
     
-    
     func keyboardWillShow(sender: NSNotification){
         
         if let userInfo = sender.userInfo {
@@ -485,7 +384,6 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
             }
         }
     }
-    
     
     func AddDoneButtonTo(inputText:UITextField) {
         
@@ -512,9 +410,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
 
   }
 
-extension UserInfoViewController:UITextFieldDelegate
-{
-    
+extension UserInfoViewController:UITextFieldDelegate {
     func textFieldDidBeginEditing(textField: UITextField) {
         
         selectedText = textField
@@ -533,14 +429,11 @@ extension UserInfoViewController:UITextFieldDelegate
             //state.text = String()
             
         }
-            
         else if userProfileInfo != nil && textField == userProfileInfo {
             ctDataPicker = DataPicker()
             let indexPos = userProfiles.indexOf(profileData.UserProfile) ?? 0
             ctDataPicker.showPicker(self, inputText: textField, data: userProfiles,selectedValueIndex: indexPos)
         }
-            
-            
         else if textField == state {
             
             currentStateName = state.text!
@@ -558,92 +451,65 @@ extension UserInfoViewController:UITextFieldDelegate
                 ctStatePicker.showPicker(self, inputText: textField, iso: currentISO)
                 
                 //ctStatePicker.showPicker(self, inputText: textField, iso: ctCountryPicker.SelectedISO)
-            }else {
+            }
+            else {
                state.userInteractionEnabled = false
             }
-            
         }
         else if  textField == gender{
             ctDataPicker = DataPicker()
             let indexPos = genders.indexOf(gender.text!) ?? 0
             ctDataPicker.showPicker(self, inputText: textField, data: genders,selectedValueIndex: indexPos)
         }
-//        else if  textField == playingRole{
-//            ctDataPicker = DataPicker()
-//            let indexPos = PlayingRoles.indexOf(playingRole.text!) ?? 0
-//            ctDataPicker.showPicker(self, inputText: textField, data: PlayingRoles,selectedValueIndex: indexPos)
-//        }
-//        else if  textField == battingStyle{
-//            ctDataPicker = DataPicker()
-//            let indexPos = BattingStyles.indexOf(battingStyle.text!) ?? 0
-//            ctDataPicker.showPicker(self, inputText: textField, data: BattingStyles,selectedValueIndex: indexPos)
-//        }
-//        else if  textField == bowlingStyle{
-//            ctDataPicker = DataPicker()
-//            let indexPos = BowlingStyles.indexOf(bowlingStyle.text!) ?? 0
-//            ctDataPicker.showPicker(self, inputText: textField, data: BowlingStyles,selectedValueIndex: indexPos)
-//        }
     }
     
-func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(textField: UITextField) {
         
-    if textField == country {
-        if currentCountryName == country.text! {
-            state.text = currentStateName
-            city.text = currentCityName
-        }else {
-            state.text = ""
-             city.text = ""
+        if textField == country {
+            if currentCountryName == country.text! {
+                state.text = currentStateName
+                city.text = currentCityName
+            }else {
+                state.text = ""
+                 city.text = ""
+            }
         }
-    }
-    
-    if textField == state {
-        if currentStateName == state.text! {
-            city.text = currentCityName
+        
+        if textField == state {
+            if currentStateName == state.text! {
+                city.text = currentCityName
+            }
+            else {
+                city.text = ""
+            }
         }
-        else {
-            city.text = ""
-        }
-    }
 
-    
         if validateProfileData() {
             if userProfileInfo != nil {
                 if profileData.UserProfile != userProfileInfo.text {
-                    
                     profileChanged = true
                     
                     let confirmAlert = UIAlertController(title: "Warning!" ,message:"Changing role will delete all existing role related data",preferredStyle: UIAlertControllerStyle.Alert)
                     confirmAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
                         
                        // self.continueToDismiss()
-                        
-                        
                     }))
                     
                     confirmAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction) in
-                        
                         self.userProfileInfo.text = profileData.UserProfile
                          self.profileChanged = false
-                        
                     }))
                     
                     self.presentViewController(confirmAlert, animated: true, completion: nil)
                 }
                 else {
-                    
                     profileChanged = false
-                    
-                    
                     //continueToDismiss()
                 }
             }
-        
-            
         }
-
-        
     }
+    
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         let newLength = textField.text!.characters.count + string.characters.count - range.length
         if textField == firstName || textField == lastName || textField == city {
