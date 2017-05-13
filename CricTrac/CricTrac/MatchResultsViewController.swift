@@ -478,6 +478,8 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             firstScoreText = secondScoreText
             secondScoreText = tempScore
             
+            
+            
             let tempWickets = firstWicketsText
             firstWicketsText = secondWicketsText
             secondWicketsText = tempWickets
@@ -569,7 +571,11 @@ extension MatchResultsViewController:UITextFieldDelegate{
             showPicker(self, inputText: textField, data: results)
         }
         else if textField == AchievementsText {
-            showPicker(self, inputText: textField, data: Achievements)
+          //  showPicker(self, inputText: textField, data: Achievements)
+            
+            let AchievementVC = viewControllerFrom("Main", vcid:"AchievementListViewController") as! AchievementListViewController
+            self.presentViewController(AchievementVC, animated: true) {}
+                                         
         }
     }
     
