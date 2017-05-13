@@ -46,6 +46,8 @@
 		46FA41D41D6D3F68006635C6 /* MatchDetailsTrackable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FA41D31D6D3F68006635C6 /* MatchDetailsTrackable.swift */; };
 		46FDA5BD1DD81D19008F2BC0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FDA5BC1DD81D19008F2BC0 /* NetworkManager.swift */; };
 		6783C11F1E67347D00DEDA55 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6783C11E1E67347D00DEDA55 /* HelperFunctions.swift */; };
+		679367351EC70D250097B187 /* AchievementListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679367341EC70D250097B187 /* AchievementListViewController.swift */; };
+		679367371EC710720097B187 /* AchievementTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679367361EC710720097B187 /* AchievementTableViewCell.swift */; };
 		89067D731DAE9D120021F463 /* radioSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89067D721DAE9D120021F463 /* radioSelectView.swift */; };
 		89067D751DAEA89C0021F463 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89067D741DAEA89C0021F463 /* TransitionManager.swift */; };
 		8909FACB1DB9B49900066FC5 /* DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8909FACA1DB9B49900066FC5 /* DoneButton.swift */; };
@@ -200,6 +202,8 @@
 		46FDA5BC1DD81D19008F2BC0 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkManager.swift; path = Other/NetworkManager.swift; sourceTree = "<group>"; };
 		56129448097263DC6B1F40CF /* Pods-CricTrac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CricTrac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CricTrac/Pods-CricTrac.debug.xcconfig"; sourceTree = "<group>"; };
 		6783C11E1E67347D00DEDA55 /* HelperFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
+		679367341EC70D250097B187 /* AchievementListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementListViewController.swift; sourceTree = "<group>"; };
+		679367361EC710720097B187 /* AchievementTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementTableViewCell.swift; sourceTree = "<group>"; };
 		89067D721DAE9D120021F463 /* radioSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = radioSelectView.swift; sourceTree = "<group>"; };
 		89067D741DAEA89C0021F463 /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		8909FACA1DB9B49900066FC5 /* DoneButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoneButton.swift; sourceTree = "<group>"; };
@@ -490,6 +494,7 @@
 		8958F5F01D39298D0028D5AA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				679367361EC710720097B187 /* AchievementTableViewCell.swift */,
 				B80B560F1EB9D1580014FA9D /* LikesTableViewCell.swift */,
 				892EA67C1D58DEBE00BEE5A3 /* ProfileDetails.swift */,
 				B80B560B1EB863020014FA9D /* NotificationTableViewCell.swift */,
@@ -534,6 +539,7 @@
 		8958F5F11D392B780028D5AA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				679367341EC70D250097B187 /* AchievementListViewController.swift */,
 				B80B560D1EB9C2C60014FA9D /* LikesViewController.swift */,
 				8955DA2A1E0ED13A00891937 /* NewPostViewController.swift */,
 				89F9911D1DDA1BEF00E5F440 /* UserDashboardViewController.swift */,
@@ -841,6 +847,7 @@
 				895E04071D5CE283002E322E /* FriendSuggestViewController.swift in Sources */,
 				89836C5E1E08081D00ABDCA9 /* ProfileReadOnlyViewController.swift in Sources */,
 				89C8196C1D52362300291A7E /* POCViewController.swift in Sources */,
+				679367371EC710720097B187 /* AchievementTableViewCell.swift in Sources */,
 				466AD3FA1D7A869B0033289C /* NewMatchParent.swift in Sources */,
 				89F9911E1DDA1BEF00E5F440 /* UserDashboardViewController.swift in Sources */,
 				89C8196E1D52429500291A7E /* headerView.swift in Sources */,
@@ -877,6 +884,7 @@
 				89358AFE1E197B4800A1A6F0 /* SettingsViewController.swift in Sources */,
 				46DE32C51D900C9F0024CD82 /* AddPostTableViewCell.swift in Sources */,
 				891B2AA71E7CE09800F6B5BA /* RequestsData.swift in Sources */,
+				679367351EC70D250097B187 /* AchievementListViewController.swift in Sources */,
 				89358AFB1E19773E00A1A6F0 /* SettingsViewCell.swift in Sources */,
 				46ACE0C71E0FF625004118A4 /* CommentTableViewCell.swift in Sources */,
 				89E6084D1D6D4ADC00F6BD11 /* CTDataPicker.swift in Sources */,
