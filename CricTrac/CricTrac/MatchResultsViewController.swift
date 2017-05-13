@@ -21,8 +21,8 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     
     var firstBatText: String!
     var secondBatText: String!
-    var swapBtnVal = 0
-    var resultsTab = 0
+    var swapBtnVal: Int!
+    //var resultsTab = 1
     var existFB = ""
     var existSB = ""
     
@@ -86,6 +86,10 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         SecondBattingView.alpha = 0.8
         
         // Do any additional setup after loading the view.
+        
+        if swapBtnVal == nil {
+            swapBtnVal = 0
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -296,7 +300,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     }
 
     override func viewDidAppear(animated: Bool) {
-        resultsTab = 1
         setTeamData()
     }
     
@@ -348,40 +351,58 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     }
     
     func setTeamData(){
-        //sajith - added if condition to fix the issue while in Edit mode
-        if inEditMode {
-            firstTeamTitle.text = data["FirstBatting"]
-            secondTeamTitle.text = data["SecondBatting"]
-        }
-        else {
+        
+        if !inEditMode {
             if let matchVCInstance = parent?.matchVC {
                 firstTeamTitle.text = matchVCInstance.teamText.text
                 secondTeamTitle.text = matchVCInstance.opponentText.text
             }
         }
-
-        if inEditMode && parent!.matchVC.teamOROpponentFieldChanged , let matchVCInstance = parent?.matchVC {
-            if swapBtnVal == 0 {
-                if matchVCInstance.existTeamName == data["FirstBatting"] {
-                    firstTeamTitle.text = matchVCInstance.teamText.text
-                    secondTeamTitle.text = matchVCInstance.opponentText.text
-                }
-                else {
-                    firstTeamTitle.text = matchVCInstance.opponentText.text
-                    secondTeamTitle.text = matchVCInstance.teamText.text
-                }
-            }
-            else {
-                if matchVCInstance.existTeamName == data["FirstBatting"] {
-                    firstTeamTitle.text = matchVCInstance.opponentText.text
-                    secondTeamTitle.text = matchVCInstance.teamText.text
-                }
-                else {
-                    firstTeamTitle.text = matchVCInstance.teamText.text
-                    secondTeamTitle.text = matchVCInstance.opponentText.text
-                }
-            }
+        
+        //sajith - added if condition to fix the issue while in Edit mode
+        if inEditMode && !parent!.matchVC.teamOROpponentFieldChanged {
+            //if swapBtnVal == 0 {
+                firstTeamTitle.text = parent!.selecetedData!["FirstBatting"]! as? String
+                secondTeamTitle.text = parent!.selecetedData!["SecondBatting"]! as? String
+//            }
+//            else {
+//                firstTeamTitle.text = secondBatText
+//                secondTeamTitle.text = firstBatText
+//            }
         }
+        
+        if inEditMode && parent!.matchVC.teamOROpponentFieldChanged , let matchVCInstance = parent?.matchVC {
+            //if swapBtnVal == 0 {
+                if matchVCInstance.existTeamName == parent!.selecetedData!["FirstBatting"]! as? String {
+                    firstTeamTitle.text = matchVCInstance.teamText.text
+                    secondTeamTitle.text = matchVCInstance.opponentText.text
+                }
+                else {
+                    firstTeamTitle.text = matchVCInstance.opponentText.text
+                    secondTeamTitle.text = matchVCInstance.teamText.text
+                }
+//            }
+//            else {
+//                if matchVCInstance.existTeamName == parent!.selecetedData!["FirstBatting"]! as? String {
+//                    firstTeamTitle.text = matchVCInstance.opponentText.text
+//                    secondTeamTitle.text = matchVCInstance.teamText.text
+//                }
+//                else {
+//                    firstTeamTitle.text = matchVCInstance.teamText.text
+//                    secondTeamTitle.text = matchVCInstance.opponentText.text
+//                }
+//            }
+//            if swapBtnVal == 0 {
+//                firstTeamTitle.text = matchVCInstance.teamText.text
+//                secondTeamTitle.text = matchVCInstance.opponentText.text
+//            }
+//            else {
+//                firstTeamTitle.text = matchVCInstance.opponentText.text
+//                secondTeamTitle.text = matchVCInstance.teamText.text
+//            }
+
+        }
+        
         
         //commented by sajith
         //        if inEditMode && parent!.matchVC.teamOROpponentFieldChanged , let matchVCInstance = parent?.matchVC {
@@ -389,10 +410,13 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         //            secondTeamTitle.text = matchVCInstance.opponentText.text
         //        }
         
-        if resultsTab == 1 {
-            firstBatText = firstTeamTitle.text
-            secondBatText = secondTeamTitle.text
-        }
+//        if resultsTab == 1 {
+//            firstBatText = firstTeamTitle.text
+//            secondBatText = secondTeamTitle.text
+//        }
+        
+        firstBatText = firstTeamTitle.text
+        secondBatText = secondTeamTitle.text
         
         if parent!.matchVC.teamOROpponentFieldChanged , let matchVCInstance = parent?.matchVC {
             if swapBtnVal == 0 {
@@ -463,8 +487,14 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         }
         
         if (self.firstBatText != "-" && self.firstBatText != "") {
-            firstBatText = firstTeamTitle.text
-            secondBatText = secondTeamTitle.text
+            if swapBtnVal == 0 {
+                firstBatText = firstTeamTitle.text
+                secondBatText = secondTeamTitle.text
+            }
+            else {
+                firstBatText = secondTeamTitle.text
+                secondBatText = firstTeamTitle.text
+            }
             
             let tempbattingtext = firstBatText
             firstBatText = secondBatText
