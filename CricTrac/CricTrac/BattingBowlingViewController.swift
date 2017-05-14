@@ -484,7 +484,7 @@ extension BattingBowlingViewController:UITextFieldDelegate{
         }
         
         if textField == dismissalText{
-            //addSuggstionBox(textField, dataSource: dismissals, showSuggestions: true)
+           // addSuggstionBox(textField, dataSource: dismissals, showSuggestions: true)
             showPicker(self, inputText: textField, data: dismissals)
         }
         
