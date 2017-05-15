@@ -303,7 +303,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
 
     override func viewDidAppear(animated: Bool) {
         setTeamData()
-        AchievementsText?.text = achievementText.joinWithSeparator("\n")
+      //  AchievementsText?.text = achievementText.joinWithSeparator("\n")
     }
     
     func loadEditData(){
@@ -600,15 +600,18 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
 
 extension MatchResultsViewController:UITextFieldDelegate{
     func textFieldDidBeginEditing(textField: UITextField) {
+        
         if textField == resultText{
-            showPicker(self, inputText: textField, data: results)
+         showPicker(self, inputText: textField, data: results)
+           
         }
         else if textField == AchievementsText {
-          //  showPicker(self, inputText: textField, data: Achievements)
             
-            let AchievementVC = viewControllerFrom("Main", vcid:"AchievementListViewController") as! AchievementListViewController
-            self.presentViewController(AchievementVC, animated: true) {}
-                                         
+            showPicker(self, inputText: textField, data: Achievements)
+            
+//            let AchievementVC = viewControllerFrom("Main", vcid:"AchievementListViewController") as! AchievementListViewController
+//            self.presentViewController(AchievementVC, animated: true) {}
+            
         }
     }
     
@@ -624,6 +627,15 @@ extension MatchResultsViewController:UITextFieldDelegate{
         }
     }
     
+    override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
+        if action == #selector(NSObject.paste(_:)) {
+            return false
+        }
+        
+        return super.canPerformAction(action, withSender: sender)
+    }
+   
+   
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         let newlength = textField.text!.characters.count + string.characters.count - range.length
         if textField == firstScoreText || textField == secondScoreText {
@@ -635,6 +647,13 @@ extension MatchResultsViewController:UITextFieldDelegate{
         else if textField == firstWicketsText || textField == secondWicketsText {
             return newlength <= 2
         }
+        else if textField == AchievementsText {
+            return false
+        }
+        else if textField == resultText {
+            return false
+        }
+            
         else {
             return true
         }
