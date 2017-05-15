@@ -25,6 +25,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     //var resultsTab = 1
     var existFB = ""
     var existSB = ""
+    var achievementText = [String]()
     
     private var inEditMode: Bool = false
     
@@ -117,6 +118,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     weak var matchDetails:MatchDetailsTrackable?
     var teams = [String]()
     weak var parent:MatchParent?
+
     
     var data:[String:String]{
         var tossVal = ""
@@ -301,6 +303,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
 
     override func viewDidAppear(animated: Bool) {
         setTeamData()
+        AchievementsText?.text = achievementText.joinWithSeparator("\n")
     }
     
     func loadEditData(){
