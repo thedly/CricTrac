@@ -121,12 +121,14 @@ class CPostTableViewCell: UITableViewCell {
             //self.likes.text = "\(self.postLikeCount) Likes"
             timelineData![self.postIndex]["Likes"] = JSON(likeDict)
             timelineData![self.postIndex]["LikeCount"] = JSON(self.postLikeCount)
+            //calLikeCnt(self.postId!)
         }) {
             self.removeLikeFromArray()
             //self.likeLabel.textColor = UIColor.grayColor()
             self.postLikeCount -= 1
             //self.likes.text = "\(self.postLikeCount) Likes"
             timelineData![self.postIndex]["LikeCount"] = JSON(self.postLikeCount)
+            //calLikeCnt(self.postId!)
         }
     }
     

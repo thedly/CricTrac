@@ -1150,7 +1150,7 @@ func likePost(postId:String)->[String:[String:String]]{
     let likeDict:[String:String] = ["OwnerID":currentUser!.uid,"OwnerName":loggedInUserName ?? ""]
     ref.setValue(likeDict)
     
-//    calLikeCnt(postId)
+    calLikeCnt(postId)
     
     timelinePostBump(postId)
 
@@ -1209,11 +1209,11 @@ func likeOrUnlike(postId:String,like:(likeDict:[String:[String:String]])->Void,u
                 })
             }else{
                 like(likeDict: likePost(postId))
-                calLikeCnt(postId)
+                //calLikeCnt(postId)
             }
         }else{
             like(likeDict: likePost(postId))
-            calLikeCnt(postId)
+            //calLikeCnt(postId)
         }
     })
 }
