@@ -93,7 +93,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
                 }
                 else
                 {
-                    SCLAlertView().showError("Login Error", subTitle: "This email is not verified yet")
+                    SCLAlertView().showError("Email verification pending", subTitle: "Verify your email id before sign in.")
                 }
             }
         }
