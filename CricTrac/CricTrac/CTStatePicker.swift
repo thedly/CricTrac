@@ -68,10 +68,9 @@ class CTStatePicker: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
         inputText.resignFirstResponder()
     }
     func cancelClick() {
+        _selectedState = ""
         inputText.resignFirstResponder()
     }
-    
-    
     
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {

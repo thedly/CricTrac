@@ -271,9 +271,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     dateFormatter.timeStyle = .ShortStyle
                     dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
                     postCell.postedDate.text = dateFormatter.stringFromDate(date)
-                    
                 }
-                
                 
                 postCell.postOwnerId = friendId
                 
