@@ -2225,7 +2225,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="F73797C7-A054-4412-8371-CEEEE3A113D7" translatesAutoresizingMaskIntoConstraints="NO" id="oF2-e2-1Wz">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="015F31AF-E616-47A3-865E-D3FB196A69C8" translatesAutoresizingMaskIntoConstraints="NO" id="oF2-e2-1Wz">
                                                 <rect key="frame" x="529" y="546" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="16" id="3f0-C6-z59"/>
@@ -2298,7 +2298,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="F73797C7-A054-4412-8371-CEEEE3A113D7" translatesAutoresizingMaskIntoConstraints="NO" id="fsn-M8-eca">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="015F31AF-E616-47A3-865E-D3FB196A69C8" translatesAutoresizingMaskIntoConstraints="NO" id="fsn-M8-eca">
                                                 <rect key="frame" x="529" y="186" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="16" id="Db4-OQ-KbR"/>
@@ -2371,7 +2371,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="F73797C7-A054-4412-8371-CEEEE3A113D7" translatesAutoresizingMaskIntoConstraints="NO" id="bhw-c3-xiz">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="015F31AF-E616-47A3-865E-D3FB196A69C8" translatesAutoresizingMaskIntoConstraints="NO" id="bhw-c3-xiz">
                                                 <rect key="frame" x="529" y="402" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="16" id="65C-T8-6qD"/>
@@ -2411,7 +2411,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="F73797C7-A054-4412-8371-CEEEE3A113D7" translatesAutoresizingMaskIntoConstraints="NO" id="38U-SC-Isu">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="015F31AF-E616-47A3-865E-D3FB196A69C8" translatesAutoresizingMaskIntoConstraints="NO" id="38U-SC-Isu">
                                                 <rect key="frame" x="529" y="474" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="16" id="Fyv-ih-I0W"/>
@@ -2740,6 +2740,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="matchSummaryTable" destination="OY0-ct-INR" id="T5n-Pd-BFk"/>
+                        <outlet property="upgradeBtnHeight" destination="0kv-cy-9vV" id="GgA-Fc-4Av"/>
                         <outlet property="upgradeButton" destination="U5a-eu-FS5" id="xYC-Wf-Bpw"/>
                     </connections>
                 </viewController>
@@ -13997,17 +13998,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Back-100" width="22" height="36"/>
-        <image name="BallIcon" width="26" height="27"/>
-        <image name="BatIcon" width="22" height="22"/>
-        <image name="Calendar-100" width="19" height="17"/>
-        <image name="CricTrac_Img" width="210" height="36"/>
-        <image name="Cricket Filled-100" width="57" height="58"/>
-        <image name="Delete Filled-100 (1)" width="17" height="17"/>
-        <image name="Delete-icon" width="27" height="29"/>
-        <image name="DropdownIcon" width="13" height="8"/>
-        <image name="Edit-100" width="20" height="20"/>
-        <image name="F73797C7-A054-4412-8371-CEEEE3A113D7" width="13" height="8">
+        <image name="015F31AF-E616-47A3-865E-D3FB196A69C8" width="13" height="8">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -14084,6 +14075,16 @@ gACCAIcAkgCUAJYAmACdAKAAogCkAKYAqACtAMQAxgDID3oPfw+KD5MPpg+qD7UPvg/DD8sPzg/TD+IP
 ABBHA
 </mutableData>
         </image>
+        <image name="Back-100" width="22" height="36"/>
+        <image name="BallIcon" width="26" height="27"/>
+        <image name="BatIcon" width="22" height="22"/>
+        <image name="Calendar-100" width="19" height="17"/>
+        <image name="CricTrac_Img" width="210" height="36"/>
+        <image name="Cricket Filled-100" width="57" height="58"/>
+        <image name="Delete Filled-100 (1)" width="17" height="17"/>
+        <image name="Delete-icon" width="27" height="29"/>
+        <image name="DropdownIcon" width="13" height="8"/>
+        <image name="Edit-100" width="20" height="20"/>
         <image name="Facebook-96" width="52" height="52"/>
         <image name="Google Plus-96" width="52" height="52"/>
         <image name="Like-100" width="19" height="18"/>

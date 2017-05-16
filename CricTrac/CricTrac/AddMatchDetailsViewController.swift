@@ -34,13 +34,16 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
     }
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
         userProfileData = profileData
-        //self.fetchProductInfo()
+
         
+       // self.fetchProductInfo()
+      
+        if !matchBeingEdited {
         //check Player Status
         if userProfileData.UserStatus != "Premium" {
             let userID = currentUser?.uid
@@ -48,10 +51,33 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             fireBaseRef.child("Users").child(userID!).child("Matches").observeSingleEventOfType(.Value, withBlock: { snapshot in
                 let matchCount = snapshot.childrenCount
                 if matchCount >= 5 {
+                    // disabling save button
+                    let addNewMatchButton: UIButton = UIButton(type:.Custom)
+                    addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
+                    addNewMatchButton.setTitle("", forState:.Normal)
+                    let righttbarButton = UIBarButtonItem(customView: addNewMatchButton)
+                    self.navigationItem.rightBarButtonItem = righttbarButton
+                    
                     //In App Purchase
-                    //self.didTapPurchaseButton()
+                
+                  // self.didTapPurchaseButton()
+                    self.fetchProductInfo()
+                    
                 }
+//                else {
+//                    let addNewMatchButton: UIButton = UIButton(type:.Custom)
+//                    addNewMatchButton.frame = CGRectMake(0, 0, 50, 50)
+//                    addNewMatchButton.setTitle("SAVE", forState:.Normal)
+//                    addNewMatchButton.titleLabel?.font = UIFont(name: appFont_bold, size: 15)
+//                    addNewMatchButton.addTarget(self, action: #selector(self.didTapSave), forControlEvents: UIControlEvents.TouchUpInside)
+//                    let righttbarButton = UIBarButtonItem(customView: addNewMatchButton)
+//                    
+//                    //assign button to navigationbar
+//                    
+//                    self.navigationItem.rightBarButtonItem = righttbarButton
+//                }
             })
+        }
         }
         
         getUserData()
@@ -79,37 +105,41 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
        // containerView.setContentOffset(CGPointMake(pageOffsetForChildIndex(index: 2), -64), animated: true)
     }
     
-    func dataChangedAfterLastSave(){
-        dataHasChangedAfterLastSave = true
-        let button = navigationItem.rightBarButtonItem
-        let myBtn : UIButton?
-        
-        if((button!.customView?.isKindOfClass(UIButton)) != nil)
-        {
-            myBtn = button!.customView as? UIButton
-            myBtn!.setTitle("SAVE", forState: .Normal)
-        }
-    }
+//    func dataChangedAfterLastSave(){
+//        dataHasChangedAfterLastSave = true
+//        let button = navigationItem.rightBarButtonItem
+//        let myBtn : UIButton?
+//        
+//        if((button!.customView?.isKindOfClass(UIButton)) != nil)
+//        {
+//            myBtn = button!.customView as? UIButton
+//            myBtn!.setTitle("SAVE", forState: .Normal)
+//        }
+//    }
     
     func setNavigationBarProperties(){
         var currentTheme:CTTheme!
         currentTheme = cricTracTheme.currentTheme
         let menuButton: UIButton = UIButton(type:.Custom)
           if selecetedData == nil{
-            menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
+           // menuButton.setImage(UIImage(named: "Cancel"), forState: UIControlState.Normal)
+             menuButton.frame = CGRectMake(0, 0, 55, 50)
+            menuButton.setTitle("CANCEL", forState:.Normal)
+            menuButton.titleLabel?.font = UIFont(name: appFont_bold, size: 15)
             menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
             title = "ADD MATCH"
           }
           else {
+             menuButton.frame = CGRectMake(0, 0, 40, 40)
             menuButton.setImage(UIImage(named: "Back-100"), forState: UIControlState.Normal)
             menuButton.addTarget(self, action: #selector(popBack), forControlEvents: UIControlEvents.TouchUpInside)
             title = "EDIT MATCH"
         }
        
-        menuButton.frame = CGRectMake(0, 0, 40, 40)
+       
         let leftbarButton = UIBarButtonItem(customView: menuButton)
         let addNewMatchButton: UIButton = UIButton(type:.Custom)
-        addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
+        addNewMatchButton.frame = CGRectMake(0, 0, 50, 50)
         addNewMatchButton.setTitle("SAVE", forState:.Normal)
         addNewMatchButton.titleLabel?.font = UIFont(name: appFont_bold, size: 15)
         addNewMatchButton.addTarget(self, action: #selector(didTapSave), forControlEvents: UIControlEvents.TouchUpInside)
@@ -453,7 +483,22 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     }
     
     @IBAction func didMenuButtonTapp(sender: UIButton){
-        sliderMenu.setDrawerState(.Opened, animated: true)
+       // sliderMenu.setDrawerState(.Opened, animated: true)
+        let confirmAlert = UIAlertController(title: "" ,message:"Match data will be lost. Are you sure to Cancel?",preferredStyle: UIAlertControllerStyle.Alert)
+        confirmAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction!)-> Void in
+           // self.dismissViewControllerAnimated(true, completion: nil)
+            let dashboardVC = viewControllerFrom("Main", vcid: "timeline") as! TimeLineViewController
+           
+             self.navigationController?.pushViewController(dashboardVC, animated: true)
+        }))
+
+        confirmAlert.addAction(UIAlertAction(title: "No", style: .Default, handler: { (action: UIAlertAction) in
+          
+        }))
+        self.presentViewController(confirmAlert, animated: true, completion: nil)
+        
+
+        
     }
     
     /*
@@ -491,6 +536,8 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                 let priceString = numberFormatter.stringFromNumber(product.price ?? 0) ?? ""
                 print("Product: \(product.localizedDescription), price: \(priceString)")
                 self.inAppProductPrice = priceString
+                
+                self.didTapPurchaseButton()
             }
             else if let invalidProductId = result.invalidProductIDs.first {
                 //return alertWithTitle("Could not retrieve product info", message: "Invalid product identifier: \(invalidProductId)")

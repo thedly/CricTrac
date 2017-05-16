@@ -12,6 +12,7 @@ import SwiftyStoreKit
 
 class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable {
 
+    @IBOutlet weak var upgradeBtnHeight: NSLayoutConstraint!
     @IBOutlet var matchSummaryTable:UITableView!
     
     var matchData = [String:AnyObject]()
@@ -41,10 +42,13 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         userProfileData = profileData
         if userProfileData.UserStatus == "Premium" {
-            upgradeButton.hidden=true
+            //upgradeButton.hidden=true
+            upgradeBtnHeight.constant = 0
         }
         else {
-            upgradeButton.hidden = false
+            //upgradeButton.hidden = false
+            upgradeBtnHeight.constant = 66
+            
         }
         
         //In App Purchase

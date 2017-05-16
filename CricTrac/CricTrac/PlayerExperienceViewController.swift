@@ -380,6 +380,10 @@ extension PlayerExperienceViewController:UITextFieldDelegate{
                 addPastTeamBtn.enabled = true
                 return newLength <= 30
             }
+            
+        }
+        else if textField == playingRole || textField == battingStyle || textField == bowlingStyle {
+            return false
         }
         return true
     }
