@@ -445,6 +445,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        UpdateDashboardDetails()
         setBackgroundColor()
         initView()
         setDashboardData()
@@ -681,8 +682,21 @@ func setDashboardData(){
             UIView.animateWithDuration(0.0, animations: {
                 //data for Top box on dashboard
                 self.battingMatches.text = String(DashboardDetails.TotalMatches)
-                self.highScore.text = String(DashboardDetails.TopBatting1stMatchDispScore)
-                self.BB.text = String(DashboardDetails.TopBowling1stMatchScore)
+                
+                if String(DashboardDetails.TopBatting1stMatchID) != "-" {
+                    self.highScore.text = String(DashboardDetails.TopBatting1stMatchDispScore)
+                }
+                else {
+                    self.highScore.text = "NA"
+                }
+                
+                if String(DashboardDetails.TopBowling1stMatchID) != "-" {
+                    self.BB.text = String(DashboardDetails.TopBowling1stMatchScore)
+                }
+                else {
+                    self.BB.text = "NA"
+                }
+                
                 let winPercent = Double(String(DashboardDetails.WinPercentage))
                 self.winPerc.text = String(format:"%.1f",winPercent!)
                 //self.winPerc.text = String(DashboardDetails.WinPercentage)
@@ -708,7 +722,9 @@ func setDashboardData(){
                 self.bowlingAverage.text = String(format:"%.1f",bowlingAverageDouble!)
                 //self.bowlingAverage.text = String(DashboardDetails.TotalBowlingAverage)
                 
-                self.bowlingEconomy.text = String(DashboardDetails.TotalEconomy)
+                let bowlingEconomyDouble = Double(String(DashboardDetails.TotalEconomy))
+                self.bowlingEconomy.text = String(format:"%.1f",bowlingEconomyDouble!)
+                //self.bowlingEconomy.text = String(DashboardDetails.TotalEconomy)
                 self.TotalThreeWicketsPerMatch.text = String(DashboardDetails.Total3Wkts)
                 self.TotalMaidens.text = String(DashboardDetails.TotalMaidens)
                 self.TotalFiveWicketsPerMatch.text = String(DashboardDetails.Total5Wkts)
@@ -1332,8 +1348,8 @@ func setDashboardData(){
         self.SecondRecentMatchView.hidden = (DashboardDetails.TopBatting2ndMatchScore == nil || String(DashboardDetails.TopBatting2ndMatchScore) == "0")
         
         //Data for Top Bowling section
-        self.FirstRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling1stMatchScore == nil || DashboardDetails.TopBowling1stMatchScore as! String == "0-0")
-        self.SecondRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling2ndMatchScore == nil || DashboardDetails.TopBowling2ndMatchScore as! String == "0-0")
+        self.FirstRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling1stMatchScore == nil || DashboardDetails.TopBowling1stMatchScore as! String == "0-9999")
+        self.SecondRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling2ndMatchScore == nil || DashboardDetails.TopBowling2ndMatchScore as! String == "0-9999")
         
         self.topBattingNotAvailable.hidden = !(self.FirstRecentMatchView.hidden && self.SecondRecentMatchView.hidden)
         self.topBowlingNotAvailable.hidden = !(self.FirstRecentMatchBowlingView.hidden && self.SecondRecentMatchBowlingView.hidden)

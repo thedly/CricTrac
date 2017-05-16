@@ -258,7 +258,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                         data["SecondBatting"] = data["Team"]
                     }
                     
-                    data["TossWonBy"] = data["Team"]
+                    //data["TossWonBy"] = data["Team"]
                 }
                 else {
                     if matchVC.existTeamName == resVC.existFB {
@@ -269,7 +269,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                         data["FirstBatting"]  = data["Team"]
                         data["SecondBatting"] = data["Opponent"]
                     }
-                    data["TossWonBy"] = data["Opponent"]
+                    //data["TossWonBy"] = data["Opponent"]
                 }
             }
 
@@ -280,6 +280,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                         // self.dismissViewControllerAnimated(true) {}
                         self.moveToMatchSummary()
                     })
+                    
                 }
                 else{
 //                    if !matchVC.teamOROpponentFieldChanged {
@@ -337,6 +338,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                            self.moveToMatchSummary()
                             // self.dismissViewControllerAnimated(true) {}
                         })
+                        
                     }
                 }
 //            }
