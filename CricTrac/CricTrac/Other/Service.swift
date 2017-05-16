@@ -1209,11 +1209,11 @@ func likeOrUnlike(postId:String,like:(likeDict:[String:[String:String]])->Void,u
                 })
             }else{
                 like(likeDict: likePost(postId))
-                //calLikeCnt(postId)
+                calLikeCnt(postId)
             }
         }else{
             like(likeDict: likePost(postId))
-            //calLikeCnt(postId)
+            calLikeCnt(postId)
         }
     })
 }

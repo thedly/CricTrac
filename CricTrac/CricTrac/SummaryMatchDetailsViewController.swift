@@ -90,6 +90,8 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        UpdateDashboardDetails()
+        
         setNavigationBarProperties()
         setBackgroundColor()
     }
@@ -204,6 +206,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setBackgroundColor()
         setNavigationBarProperties()
         //setUIBackgroundTheme(self.view)
