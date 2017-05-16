@@ -681,7 +681,7 @@ func setDashboardData(){
             UIView.animateWithDuration(0.0, animations: {
                 //data for Top box on dashboard
                 self.battingMatches.text = String(DashboardDetails.TotalMatches)
-                self.highScore.text = String(DashboardDetails.TopBatting1stMatchScore)
+                self.highScore.text = String(DashboardDetails.TopBatting1stMatchDispScore)
                 self.BB.text = String(DashboardDetails.TopBowling1stMatchScore)
                 let winPercent = Double(String(DashboardDetails.WinPercentage))
                 self.winPerc.text = String(format:"%.1f",winPercent!)
