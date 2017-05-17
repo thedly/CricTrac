@@ -15,10 +15,11 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
     @IBOutlet weak var CoachingExperienceView: UIView!
     @IBOutlet weak var CricketFanView: UIView!
     
+    @IBOutlet weak var matchViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var playerExprHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var cricketFanHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var coachingExprHeightConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var profileImage: UIImageView!
     
     @IBOutlet weak var activityInd: UIActivityIndicatorView!
@@ -97,8 +98,11 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
             self.CityText.text = profileData.City
             
             if profileData.UserProfile == "Player" {
+                
+             // self.matchViewHeightConstraint.constant = 1058
                 if profileData.PlayerCurrentTeams.count > 0 {
                     self.PlayerCurrentTeams.text = profileData.PlayerCurrentTeams.joinWithSeparator("\n")
+                    
                 }
                 else {
                     self.PlayerCurrentTeams.text = "No Teams"

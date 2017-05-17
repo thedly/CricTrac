@@ -1053,7 +1053,7 @@
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="25"/>
@@ -1213,7 +1213,7 @@
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="25"/>
@@ -2225,7 +2225,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="301E1732-A276-4BBF-9F2F-F0F0B7A99D1B" translatesAutoresizingMaskIntoConstraints="NO" id="oF2-e2-1Wz">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="90DB822A-C31D-4430-8D93-450446B703F9" translatesAutoresizingMaskIntoConstraints="NO" id="oF2-e2-1Wz">
                                                 <rect key="frame" x="529" y="546" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="16" id="3f0-C6-z59"/>
@@ -2298,7 +2298,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="301E1732-A276-4BBF-9F2F-F0F0B7A99D1B" translatesAutoresizingMaskIntoConstraints="NO" id="fsn-M8-eca">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="90DB822A-C31D-4430-8D93-450446B703F9" translatesAutoresizingMaskIntoConstraints="NO" id="fsn-M8-eca">
                                                 <rect key="frame" x="529" y="186" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="16" id="Db4-OQ-KbR"/>
@@ -2371,7 +2371,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="301E1732-A276-4BBF-9F2F-F0F0B7A99D1B" translatesAutoresizingMaskIntoConstraints="NO" id="bhw-c3-xiz">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="90DB822A-C31D-4430-8D93-450446B703F9" translatesAutoresizingMaskIntoConstraints="NO" id="bhw-c3-xiz">
                                                 <rect key="frame" x="529" y="402" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="16" id="65C-T8-6qD"/>
@@ -2411,7 +2411,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="301E1732-A276-4BBF-9F2F-F0F0B7A99D1B" translatesAutoresizingMaskIntoConstraints="NO" id="38U-SC-Isu">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="90DB822A-C31D-4430-8D93-450446B703F9" translatesAutoresizingMaskIntoConstraints="NO" id="38U-SC-Isu">
                                                 <rect key="frame" x="529" y="474" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="16" id="Fyv-ih-I0W"/>
@@ -7031,7 +7031,7 @@
                                 <rect key="frame" x="0.0" y="60" width="600" height="1740"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LE1-0k-DK4" userLabel="MatchView">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="1285"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="1058"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CITY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oSF-R1-MeR">
                                                 <rect key="frame" x="20" y="334" width="30" height="19"/>
@@ -7106,8 +7106,8 @@
                                                                     <rect key="frame" x="20" y="131.5" width="91.5" height="17.5"/>
                                                                 </variation>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BATTING STYLE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kBY-mO-BPp">
-                                                                <rect key="frame" x="20" y="122" width="87" height="17"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLAYING ROLE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kBY-mO-BPp">
+                                                                <rect key="frame" x="20" y="122" width="83" height="17"/>
                                                                 <accessibility key="accessibilityConfiguration" identifier="greyMatter"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="13"/>
                                                                 <nil key="highlightedColor"/>
@@ -7115,8 +7115,8 @@
                                                                     <rect key="frame" x="20" y="179" width="112" height="17.5"/>
                                                                 </variation>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLAYING ROLE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eu5-2a-7zn">
-                                                                <rect key="frame" x="20" y="178" width="83" height="17"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BATTING STYLE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eu5-2a-7zn">
+                                                                <rect key="frame" x="20" y="178" width="87" height="17"/>
                                                                 <accessibility key="accessibilityConfiguration" identifier="greyMatter"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="13"/>
                                                                 <nil key="highlightedColor"/>
@@ -7142,7 +7142,7 @@
                                                                     <rect key="frame" x="240" y="84" width="360" height="17.5"/>
                                                                 </variation>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YIN-Ea-Bjz" userLabel="battingStyleL">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YIN-Ea-Bjz" userLabel="playingRoleL">
                                                                 <rect key="frame" x="20" y="140" width="570" height="0.0"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="15"/>
                                                                 <color key="textColor" red="0.97236786909999995" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -7160,7 +7160,7 @@
                                                                     <rect key="frame" x="240" y="84" width="360" height="17.5"/>
                                                                 </variation>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Omr-06-sno" userLabel="playingRoleL">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Omr-06-sno" userLabel="battingStyleL">
                                                                 <rect key="frame" x="20" y="196" width="570" height="0.0"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="15"/>
                                                                 <color key="textColor" red="0.97236786909999995" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -7803,7 +7803,7 @@
                                             <constraint firstAttribute="trailing" secondItem="EBB-TZ-Fhf" secondAttribute="trailing" id="Uga-nZ-EJa"/>
                                             <constraint firstItem="1C7-Uf-oqb" firstAttribute="trailing" secondItem="ICc-Fd-OxT" secondAttribute="trailing" id="VcS-tg-KmW"/>
                                             <constraint firstItem="uP4-00-jkt" firstAttribute="trailing" secondItem="Jp7-Va-oC5" secondAttribute="trailing" id="Wj8-NT-sj0"/>
-                                            <constraint firstAttribute="height" priority="250" constant="1285" id="WxA-LP-NLb"/>
+                                            <constraint firstAttribute="height" priority="250" constant="1058" id="WxA-LP-NLb"/>
                                             <constraint firstItem="GIC-Kw-VI9" firstAttribute="leading" secondItem="uP4-00-jkt" secondAttribute="leading" id="YO5-0p-UP8"/>
                                             <constraint firstItem="oSF-R1-MeR" firstAttribute="leading" secondItem="Uje-an-kRh" secondAttribute="leading" id="bca-8e-xSf"/>
                                             <constraint firstItem="ICc-Fd-OxT" firstAttribute="leading" secondItem="GIC-Kw-VI9" secondAttribute="leading" id="eMV-ah-Wlm"/>
@@ -7842,7 +7842,7 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="LE1-0k-DK4" secondAttribute="bottom" constant="455" id="4aH-hk-wcm"/>
+                                    <constraint firstAttribute="bottom" secondItem="LE1-0k-DK4" secondAttribute="bottom" id="4aH-hk-wcm"/>
                                     <constraint firstItem="LE1-0k-DK4" firstAttribute="top" secondItem="wwv-xw-Yp6" secondAttribute="top" constant="20" id="DCY-wm-ZCU"/>
                                     <constraint firstItem="LE1-0k-DK4" firstAttribute="top" secondItem="wwv-xw-Yp6" secondAttribute="top" id="bVz-LA-tFd"/>
                                     <constraint firstItem="LE1-0k-DK4" firstAttribute="leading" secondItem="wwv-xw-Yp6" secondAttribute="leading" id="jtx-Ru-xvg"/>
@@ -7898,16 +7898,17 @@
                         <outlet property="MobileText" destination="Jp7-Va-oC5" id="oy9-kY-9Su"/>
                         <outlet property="NameText" destination="izn-oj-Rh3" id="0ag-fe-mWP"/>
                         <outlet property="PersonalInfoView" destination="LE1-0k-DK4" id="qFF-9s-P1S"/>
-                        <outlet property="PlayerBattingStyle" destination="YIN-Ea-Bjz" id="zc3-t4-ssp"/>
+                        <outlet property="PlayerBattingStyle" destination="Omr-06-sno" id="LyF-iY-hAE"/>
                         <outlet property="PlayerBowlingStyle" destination="GKT-Z9-Ynx" id="bbY-yF-rSc"/>
                         <outlet property="PlayerCurrentTeams" destination="AdC-aD-6Cm" id="qeh-qm-qGQ"/>
                         <outlet property="PlayerExperienceView" destination="1pF-2H-KLA" id="hHo-D0-QW4"/>
                         <outlet property="PlayerPastTeams" destination="8X5-z0-ebT" id="4Oh-ol-oQ7"/>
-                        <outlet property="PlayingRole" destination="Omr-06-sno" id="eZU-Fx-c4z"/>
+                        <outlet property="PlayingRole" destination="YIN-Ea-Bjz" id="gDR-W9-EgT"/>
                         <outlet property="StateText" destination="ICc-Fd-OxT" id="wAw-EF-W8Y"/>
                         <outlet property="coachingExprHeightConstraint" destination="GI4-x5-sPL" id="tyO-BK-OBa"/>
                         <outlet property="cricketFanHeightConstraint" destination="Bth-8k-8rf" id="697-6H-gAW"/>
                         <outlet property="lblCoachPastPlayedFor" destination="y8w-kh-7at" id="d8X-Tf-pCH"/>
+                        <outlet property="matchViewHeightConstraint" destination="WxA-LP-NLb" id="Sg7-km-O5Q"/>
                         <outlet property="playerExprHeightConstraint" destination="APB-Al-Nhg" id="W1t-mQ-cU8"/>
                     </connections>
                 </viewController>
@@ -14010,7 +14011,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="301E1732-A276-4BBF-9F2F-F0F0B7A99D1B" width="13" height="8">
+        <image name="90DB822A-C31D-4430-8D93-450446B703F9" width="13" height="8">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
