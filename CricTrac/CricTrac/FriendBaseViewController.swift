@@ -49,6 +49,9 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         self.buttonBarView.collectionViewLayout = UICollectionViewFlowLayout()
         self.buttonBarView.frame.size.height = 40
         settings.style.buttonBarItemFont = UIFont(name: appFont_bold, size: 15)!
+         settings.style.buttonBarItemLeftRightMargin = 0
+      
+        
        // setBackgroundColor()
         setNavigationBarProperties()
        definesPresentationContext = true
