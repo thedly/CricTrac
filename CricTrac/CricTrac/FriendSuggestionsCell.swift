@@ -21,6 +21,10 @@ class FriendSuggestionsCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         addTapGestureToUserName()
+        
+        userProfileView.layer.cornerRadius = userProfileView.frame.size.width/2
+        userProfileView.clipsToBounds = true
+
 
         // Initialization code
         self.baseView.layer.cornerRadius = 10

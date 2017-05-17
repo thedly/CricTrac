@@ -28,7 +28,7 @@
                         <rect key="frame" x="18" y="8" width="460" height="66"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAJITH KUMAR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xyt-c5-ply">
-                                <rect key="frame" x="71" y="14" width="296" height="19"/>
+                                <rect key="frame" x="66" y="14" width="301" height="19"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -52,16 +52,16 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DELHI PUBLIC SCHOOL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCJ-xD-Hpw">
-                                <rect key="frame" x="71" y="37" width="296" height="17"/>
+                                <rect key="frame" x="66" y="37" width="301" height="17"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sachin" translatesAutoresizingMaskIntoConstraints="NO" id="KGl-gl-LBw">
-                                <rect key="frame" x="8" y="6" width="55" height="55"/>
+                                <rect key="frame" x="8" y="8" width="50" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="55" id="FQI-QK-ZHJ"/>
-                                    <constraint firstAttribute="height" constant="55" id="IWh-DS-iti"/>
+                                    <constraint firstAttribute="width" constant="50" id="FQI-QK-ZHJ"/>
+                                    <constraint firstAttribute="height" constant="50" id="IWh-DS-iti"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">

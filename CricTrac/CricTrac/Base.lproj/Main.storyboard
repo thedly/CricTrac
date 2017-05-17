@@ -360,6 +360,7 @@
             <string>SourceSansPro-Bold</string>
             <string>SourceSansPro-Bold</string>
             <string>SourceSansPro-Bold</string>
+            <string>SourceSansPro-Bold</string>
         </mutableArray>
         <mutableArray key="SourceSansPro-Regular.otf">
             <string>SourceSansPro-Regular</string>
@@ -2225,7 +2226,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="015F31AF-E616-47A3-865E-D3FB196A69C8" translatesAutoresizingMaskIntoConstraints="NO" id="oF2-e2-1Wz">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4A49AE3A-0B92-48A1-833E-6A5FBEF52F9B" translatesAutoresizingMaskIntoConstraints="NO" id="oF2-e2-1Wz">
                                                 <rect key="frame" x="529" y="546" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="16" id="3f0-C6-z59"/>
@@ -2298,7 +2299,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="015F31AF-E616-47A3-865E-D3FB196A69C8" translatesAutoresizingMaskIntoConstraints="NO" id="fsn-M8-eca">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4A49AE3A-0B92-48A1-833E-6A5FBEF52F9B" translatesAutoresizingMaskIntoConstraints="NO" id="fsn-M8-eca">
                                                 <rect key="frame" x="529" y="186" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="16" id="Db4-OQ-KbR"/>
@@ -2371,7 +2372,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="015F31AF-E616-47A3-865E-D3FB196A69C8" translatesAutoresizingMaskIntoConstraints="NO" id="bhw-c3-xiz">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4A49AE3A-0B92-48A1-833E-6A5FBEF52F9B" translatesAutoresizingMaskIntoConstraints="NO" id="bhw-c3-xiz">
                                                 <rect key="frame" x="529" y="402" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="16" id="65C-T8-6qD"/>
@@ -2411,7 +2412,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="015F31AF-E616-47A3-865E-D3FB196A69C8" translatesAutoresizingMaskIntoConstraints="NO" id="38U-SC-Isu">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4A49AE3A-0B92-48A1-833E-6A5FBEF52F9B" translatesAutoresizingMaskIntoConstraints="NO" id="38U-SC-Isu">
                                                 <rect key="frame" x="529" y="474" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="16" id="Fyv-ih-I0W"/>
@@ -12487,15 +12488,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="125" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="p5f-ZN-82y">
-                                <rect key="frame" x="0.0" y="40" width="600" height="560"/>
+                                <rect key="frame" x="0.0" y="5" width="600" height="595"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7at-fG-spU">
+                                <rect key="frame" x="0.0" y="5" width="600" height="0.0"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="7at-fG-spU" secondAttribute="trailing" id="4Y3-s9-X0W"/>
+                            <constraint firstItem="p5f-ZN-82y" firstAttribute="top" secondItem="7at-fG-spU" secondAttribute="bottom" id="B0V-SL-xIO"/>
                             <constraint firstItem="lVu-U5-fSk" firstAttribute="top" secondItem="p5f-ZN-82y" secondAttribute="bottom" id="EEi-am-sbc"/>
+                            <constraint firstItem="7at-fG-spU" firstAttribute="leading" secondItem="QKA-KZ-5gE" secondAttribute="leading" id="IVo-Ic-nN5"/>
+                            <constraint firstItem="7at-fG-spU" firstAttribute="top" secondItem="QKA-KZ-5gE" secondAttribute="top" constant="5" id="ReI-cM-T15"/>
                             <constraint firstItem="p5f-ZN-82y" firstAttribute="leading" secondItem="QKA-KZ-5gE" secondAttribute="leading" id="Xdb-6l-uKd"/>
                             <constraint firstAttribute="trailing" secondItem="p5f-ZN-82y" secondAttribute="trailing" id="dsh-4b-LL3"/>
-                            <constraint firstItem="p5f-ZN-82y" firstAttribute="top" secondItem="Zh5-8a-Bbq" secondAttribute="bottom" constant="20" id="npz-Tr-yzJ"/>
+                            <constraint firstItem="p5f-ZN-82y" firstAttribute="top" secondItem="7at-fG-spU" secondAttribute="bottom" id="gUq-Db-7lb"/>
                             <constraint firstItem="p5f-ZN-82y" firstAttribute="top" secondItem="Zh5-8a-Bbq" secondAttribute="bottom" constant="50" id="v0P-cv-O2u"/>
                         </constraints>
                         <variation key="default">
@@ -12506,6 +12518,7 @@
                     </view>
                     <connections>
                         <outlet property="SuggestsTblview" destination="p5f-ZN-82y" id="FrQ-pu-Rgh"/>
+                        <outlet property="friendsInfoLabel" destination="7at-fG-spU" id="tli-7g-00C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jF5-bR-HYu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -13998,7 +14011,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="015F31AF-E616-47A3-865E-D3FB196A69C8" width="13" height="8">
+        <image name="4A49AE3A-0B92-48A1-833E-6A5FBEF52F9B" width="13" height="8">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

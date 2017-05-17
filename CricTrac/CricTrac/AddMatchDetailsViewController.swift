@@ -122,8 +122,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         currentTheme = cricTracTheme.currentTheme
         let menuButton: UIButton = UIButton(type:.Custom)
           if selecetedData == nil{
-           // menuButton.setImage(UIImage(named: "Cancel"), forState: UIControlState.Normal)
-             menuButton.frame = CGRectMake(0, 0, 55, 50)
+            menuButton.frame = CGRectMake(0, 0, 55, 50)
             menuButton.setTitle("CANCEL", forState:.Normal)
             menuButton.titleLabel?.font = UIFont(name: appFont_bold, size: 15)
             menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
