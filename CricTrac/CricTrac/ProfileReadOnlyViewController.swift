@@ -15,6 +15,10 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
     @IBOutlet weak var CoachingExperienceView: UIView!
     @IBOutlet weak var CricketFanView: UIView!
     
+    @IBOutlet weak var playerExprHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var cricketFanHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var coachingExprHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var profileImage: UIImageView!
     
     @IBOutlet weak var activityInd: UIActivityIndicatorView!
@@ -92,27 +96,67 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
             self.StateText.text = profileData.State
             self.CityText.text = profileData.City
             
-            self.PlayerCurrentTeams.text = profileData.PlayerCurrentTeams.joinWithSeparator("\n")
-            self.PlayerPastTeams.text = profileData.PlayerPastTeams.joinWithSeparator("\n")
-            self.PlayerBattingStyle.text = profileData.BattingStyle
-            self.PlayerBowlingStyle.text = profileData.BowlingStyle
-            
-            self.PlayingRole.text = profileData.PlayingRole
-            
-            
-            self.CoachCurrentTeams.text = profileData.CoachCurrentTeams.joinWithSeparator("\n")
-            //lblCoachPastPlayedFor
-            self.CoachPastTeams.text = profileData.CoachPastTeams.joinWithSeparator("\n")
-            self.CoachCoachingLevel.text = profileData.CoachingLevel
-            self.CoachCertifications.text = profileData.Certifications.joinWithSeparator("\n")
-            self.CoachExperience.text = profileData.Experience.uppercaseString
-            //lblCoachPastPlayedFor
-            self.lblCoachPastPlayedFor.text = profileData.CoachPlayedFor.joinWithSeparator("\n")
-            self.FanSupportingTeams.text = profileData.SupportingTeams.joinWithSeparator("\n")
-            self.FanInterestedSports.text = profileData.InterestedSports.joinWithSeparator("\n")
-            self.FanFavouritePlayer.text = profileData.FavoritePlayers.joinWithSeparator("\n")
-            self.FanHobbies.text = profileData.Hobbies.joinWithSeparator("\n")
-            
+            if profileData.UserProfile == "Player" {
+                if profileData.PlayerCurrentTeams.count > 0 {
+                    self.PlayerCurrentTeams.text = profileData.PlayerCurrentTeams.joinWithSeparator("\n")
+                }
+                else {
+                    self.PlayerCurrentTeams.text = "No Teams"
+                }
+                if profileData.PlayerPastTeams.count > 0 {
+                     self.PlayerPastTeams.text = profileData.PlayerPastTeams.joinWithSeparator("\n")
+                }
+                else {
+                     self.PlayerPastTeams.text = "No Teams"
+                }
+               
+                self.PlayerBattingStyle.text = profileData.BattingStyle
+                self.PlayerBowlingStyle.text = profileData.BowlingStyle
+                
+                self.PlayingRole.text = profileData.PlayingRole
+            }
+            else if profileData.UserProfile == "Coach" {
+                if profileData.CoachCurrentTeams.count > 0 {
+                self.CoachCurrentTeams.text = profileData.CoachCurrentTeams.joinWithSeparator("\n")
+                }
+                else {
+                    self.CoachCurrentTeams.text = "No Teams"
+                }
+                  if profileData.CoachCurrentTeams.count > 0 {
+                self.CoachPastTeams.text = profileData.CoachPastTeams.joinWithSeparator("\n")
+                }
+                  else {
+                    self.CoachPastTeams.text = "No Teams"
+                }
+                if profileData.CoachPlayedFor.count > 0 {
+                    self.lblCoachPastPlayedFor.text = profileData.CoachPlayedFor.joinWithSeparator("\n")
+                }
+                else {
+                    self.lblCoachPastPlayedFor.text = "No Teams"
+                }
+                self.CoachCoachingLevel.text = profileData.CoachingLevel
+                self.CoachCertifications.text = profileData.Certifications.joinWithSeparator("\n")
+                self.CoachExperience.text = profileData.Experience.uppercaseString
+                
+            }
+            else {
+                if profileData.SupportingTeams.count > 0 {
+                    self.FanSupportingTeams.text = profileData.SupportingTeams.joinWithSeparator("\n")
+                }
+                else {
+                     self.FanSupportingTeams.text = "No Teams"
+                }
+                if profileData.InterestedSports.count > 0 {
+                    self.FanInterestedSports.text = profileData.InterestedSports.joinWithSeparator("\n")
+                }
+                else {
+                    self.FanInterestedSports.text = "No Teams"
+                }
+                
+               
+                self.FanFavouritePlayer.text = profileData.FavoritePlayers.joinWithSeparator("\n")
+                self.FanHobbies.text = profileData.Hobbies.joinWithSeparator("\n")
+            }
             
             self.CoachingExperienceView.hidden = profileData.UserProfile != userProfileType.Coach.rawValue
             self.CricketFanView.hidden = profileData.UserProfile != userProfileType.Fan.rawValue
