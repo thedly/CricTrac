@@ -1221,6 +1221,11 @@ func likeOrUnlike(postId:String,like:(likeDict:[String:[String:String]])->Void,u
     })
 }
 
+func upgradePlayer() {
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").child("UserStatus")
+    ref.setValue("Premium")
+}
+
 func getPost(postId:String,sucessBlock:([String:AnyObject])->Void){
     fireBaseRef.child("TimelinePosts").child(postId).observeEventType(.Value, withBlock: { snapshot in
         if let data: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
