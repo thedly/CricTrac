@@ -17,6 +17,12 @@ class AddPostTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        self.timelineOwnerPic.layer.cornerRadius = timelineOwnerPic.frame.size.width/2
+        timelineOwnerPic.clipsToBounds = true
+        
+        
+        
         // Initialization code
         //addTapGestureToUserName()
     }

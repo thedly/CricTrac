@@ -62,7 +62,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        self.noRequestsLbl.hidden = true
+      
         setRequests();
         //self.RequestsTblview.reloadData()
     }
