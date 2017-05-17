@@ -488,7 +488,7 @@ extension BattingBowlingViewController:UITextFieldDelegate{
             showPicker(self, inputText: textField, data: dismissals)
         }
         
-        parent?.dataChangedAfterLastSave()
+       // parent?.dataChangedAfterLastSave()
         //textFieldDidEndEditing(textField)
     }
     
@@ -496,16 +496,16 @@ extension BattingBowlingViewController:UITextFieldDelegate{
         if textField.tag == 1 {
             ValidateScore()
             
-            if textField.text?.trimWhiteSpace.length > 0{
-                parent?.dataChangedAfterLastSave()
-            }
+//            if textField.text?.trimWhiteSpace.length > 0{
+//              //  parent?.dataChangedAfterLastSave()
+//            }
         }
         else if textField.tag == 2 {
             validateOvers()
             
-            if textField.text?.trimWhiteSpace.length > 0{
-                parent?.dataChangedAfterLastSave()
-            }
+//            if textField.text?.trimWhiteSpace.length > 0{
+//              //  parent?.dataChangedAfterLastSave()
+//            }
         }
     }
     

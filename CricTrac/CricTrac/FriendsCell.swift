@@ -22,6 +22,8 @@ class FriendsCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         addTapGestureToUserName()
+        FriendProfileImage.layer.cornerRadius = FriendProfileImage.frame.size.width/2
+        FriendProfileImage.clipsToBounds = true
         
         self.baseView.layer.cornerRadius = 10
         self.baseView.clipsToBounds = true

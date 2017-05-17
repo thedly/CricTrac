@@ -50,11 +50,29 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     }
     
     @IBAction func forgotPwdBtnPressed(sender: AnyObject) {
+        // network reachability test
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        if !appDelegate.reachability.isReachable()  {
+            let alert = UIAlertController(title: "", message: networkErrorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            return
+        }
+        
         let forgotPwdVC = viewControllerFrom("Main", vcid: "ForgotPasswordViewController")
         self.presentViewController(forgotPwdVC, animated: true, completion: nil)
     }
     
     @IBAction func registerBtnTapped(sender: UIButton) {
+         // network reachability test
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        if !appDelegate.reachability.isReachable()  {
+            let alert = UIAlertController(title: "", message: networkErrorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            return
+        }
+        
         let registerVC = viewControllerFrom("Main", vcid: "RegisterViewController")
         self.presentViewController(registerVC, animated: true, completion: nil)
     }

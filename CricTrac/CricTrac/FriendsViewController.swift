@@ -12,6 +12,8 @@ import Kingfisher
 
 class FriendsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider,ThemeChangeable {
     
+    @IBOutlet weak var friendsInfoLabel: UILabel!
+    
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.boxColor
@@ -120,10 +122,19 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+//        if friendsDataArray.count == 0 {
+//             self.friendsInfoLabel.hidden = false
+//            self.friendsInfoLabel.text = "Looks like you have not made any friends. Click on Search icon and find your buddies. We have few reccomendations for you in the Suggestions section, check it out."
+//        }
+//        else {
+//            self.friendsInfoLabel.hidden = true
+//        }
         return friendsDataArray.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         return getCellForRow(indexPath)
     }
     
