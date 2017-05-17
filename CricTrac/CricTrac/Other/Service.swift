@@ -1082,6 +1082,9 @@ func getAllComments(postId:String,sucess:(data:[[String: AnyObject]])->Void){
             let resultObj = TimeLineComments.getAnonymous(result)
             sucess(data: resultObj)
         }
+        else {
+            return sucess(data: [[String:AnyObject]]())
+        }
     })
 }
 
