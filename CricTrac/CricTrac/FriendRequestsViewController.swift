@@ -15,6 +15,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     @IBOutlet weak var suggestionsTblView: UITableView!
     @IBOutlet weak var noRequestsLbl: UILabel!
     @IBOutlet weak var RequestsTblview: UITableView!
+    @IBOutlet weak var noRequestLblHeightConstraint: NSLayoutConstraint!
     var currentTheme:CTTheme!
     
     override func viewDidLoad() {
@@ -214,6 +215,15 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if FriendRequestsData.count == 0 {
+            self.noRequestLblHeightConstraint.constant = 38
+            self.noRequestsLbl.text = "No pending request"
+        }
+        else {
+            self.noRequestLblHeightConstraint.constant = 0
+        }
+        
+        
         return FriendRequestsData.count
     }
     

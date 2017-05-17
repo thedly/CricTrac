@@ -484,11 +484,14 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     @IBAction func didMenuButtonTapp(sender: UIButton){
        // sliderMenu.setDrawerState(.Opened, animated: true)
         let confirmAlert = UIAlertController(title: "" ,message:"Match data will be lost. Are you sure to Cancel?",preferredStyle: UIAlertControllerStyle.Alert)
+        
         confirmAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction!)-> Void in
            // self.dismissViewControllerAnimated(true, completion: nil)
             let dashboardVC = viewControllerFrom("Main", vcid: "timeline") as! TimeLineViewController
            
              self.navigationController?.pushViewController(dashboardVC, animated: true)
+            
+          //  self.navigationController?.popViewControllerAnimated(true)
         }))
 
         confirmAlert.addAction(UIAlertAction(title: "No", style: .Default, handler: { (action: UIAlertAction) in
