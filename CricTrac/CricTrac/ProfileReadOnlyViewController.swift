@@ -158,7 +158,7 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
                 
             }
             else {
-                self.matchViewHeightConstraint.constant = 600
+                self.matchViewHeightConstraint.constant = 680
                 
                 if profileData.SupportingTeams.count > 0 {
                     self.FanSupportingTeams.text = profileData.SupportingTeams.joinWithSeparator("\n")
