@@ -49,7 +49,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                 let matchCount = snapshot.childrenCount
                 if matchCount >= 5 {
                     //In App Purchase
-                    //self.didTapPurchaseButton()
+                    self.fetchProductInfo()
                 }
             })
         }

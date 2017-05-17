@@ -607,10 +607,10 @@ extension MatchResultsViewController:UITextFieldDelegate{
         }
         else if textField == AchievementsText {
             
-            showPicker(self, inputText: textField, data: Achievements)
+            //showPicker(self, inputText: textField, data: Achievements)
             
-//            let AchievementVC = viewControllerFrom("Main", vcid:"AchievementListViewController") as! AchievementListViewController
-//            self.presentViewController(AchievementVC, animated: true) {}
+            let AchievementVC = viewControllerFrom("Main", vcid:"AchievementListViewController") as! AchievementListViewController
+            self.presentViewController(AchievementVC, animated: true) {}
             
         }
     }

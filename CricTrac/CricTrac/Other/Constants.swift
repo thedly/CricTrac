@@ -63,13 +63,13 @@ let settingsMenuData = [
     //["title":"Media Auto-Download","vc":"UserDashboardViewController", "img": "Menu_Dashboard", "desc": "Selecting no will auto-download media only while you are using wi-fi", "IsSwitchVisible": false],
     //["title":"Offline Matches","vc":"AddMatchDetailsViewController", "img": "Menu_AddMatch", "desc": "Matches to be downloaded for offline view", "IsSwitchVisible": false],
     ["title":"App Theme","vc":"ThemeSettingsViewController", "img": "Menu_Summary", "desc": "Choose desired theme color for your app", "IsSwitchVisible": false],
-    ["title":"Change Password","vc":  "StaticPageViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/info/PrivacyPolicy.htm" ],
-    ["title":"FAQ","vc":  "StaticPageViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/info/PrivacyPolicy.htm"],
+    ["title":"Change Password","vc":  "StaticPageViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "" ],
+    ["title":"FAQ","vc":  "StaticPageViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/AppFiles/FAQ.htm"],
     ["title":"Feedback","vc":  "StaticPageViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/info/PrivacyPolicy.htm" ],
     ["title":"Rate this app","vc":  "StaticPageViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false, "contentToDisplay": "itms://itunes.apple.com/de/app/x-gift/id839686104?mt=8&uo=4"],
-    ["title":"Terms & Conditions","vc":"StaticPageViewController", "img": "Menu_Statistics", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/info/TermsofUse.htm" ],
-    ["title":"Privacy Policy","vc":  "StaticPageViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/info/PrivacyPolicy.htm" ],
-    ["title":"About","vc":  "StaticPageViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/info/PrivacyPolicy.htm" ],
+    ["title":"Terms & Conditions","vc":"StaticPageViewController", "img": "Menu_Statistics", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/AppFiles/TermsofUse.htm" ],
+    ["title":"Privacy Policy","vc":  "StaticPageViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/AppFiles/PrivacyPolicy.htm" ],
+    ["title":"About","vc":  "StaticPageViewController", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/AppFiles/AboutUs.htm" ],
      ["title":"Logout","vc":  "", "img": "Menu_Profile", "desc": "", "IsSwitchVisible": false]
 ]
 

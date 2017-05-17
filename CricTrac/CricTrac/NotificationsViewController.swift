@@ -154,8 +154,8 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
         let fromId = self.dataSource[indexPath.row]["FromID"]! as! String
         
         switch topic{
-            case "FRR": self.moveToFRR(topicId)
-            case "FRA": self.moveToFRA(topicId)
+            //case "FRR": self.moveToFRR(topicId)
+            //case "FRA": self.moveToFRA(topicId)
             case "NMA": self.moveToNMA(topicId, userId: fromId)
             case "NPA": self.moveToNPA(topicId)
             case "NCA": self.moveToNCA(topicId)
