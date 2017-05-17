@@ -90,6 +90,8 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        //UpdateDashboardDetails()
+        
         setNavigationBarProperties()
         setBackgroundColor()
     }
@@ -107,6 +109,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                     self.dismissViewControllerAnimated(true, completion: { })
                     self.navigationController?.popViewControllerAnimated(true)
                 }
+                UpdateDashboardDetails()
             }
         }
     }
@@ -204,6 +207,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setBackgroundColor()
         setNavigationBarProperties()
         //setUIBackgroundTheme(self.view)

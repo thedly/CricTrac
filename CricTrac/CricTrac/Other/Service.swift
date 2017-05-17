@@ -1082,6 +1082,9 @@ func getAllComments(postId:String,sucess:(data:[[String: AnyObject]])->Void){
             let resultObj = TimeLineComments.getAnonymous(result)
             sucess(data: resultObj)
         }
+        else {
+            return sucess(data: [[String:AnyObject]]())
+        }
     })
 }
 
@@ -1209,13 +1212,18 @@ func likeOrUnlike(postId:String,like:(likeDict:[String:[String:String]])->Void,u
                 })
             }else{
                 like(likeDict: likePost(postId))
-                //calLikeCnt(postId)
+                calLikeCnt(postId)
             }
         }else{
             like(likeDict: likePost(postId))
-            //calLikeCnt(postId)
+            calLikeCnt(postId)
         }
     })
+}
+
+func upgradePlayer() {
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").child("UserStatus")
+    ref.setValue("Premium")
 }
 
 func getPost(postId:String,sucessBlock:([String:AnyObject])->Void){
