@@ -40,7 +40,6 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         
         userProfileData = profileData
 
-        
        // self.fetchProductInfo()
       
         if !matchBeingEdited {
@@ -287,7 +286,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                         data["SecondBatting"] = data["Team"]
                     }
                     
-                    data["TossWonBy"] = data["Team"]
+                    //data["TossWonBy"] = data["Team"]
                 }
                 else {
                     if matchVC.existTeamName == resVC.existFB {
@@ -298,7 +297,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                         data["FirstBatting"]  = data["Team"]
                         data["SecondBatting"] = data["Opponent"]
                     }
-                    data["TossWonBy"] = data["Opponent"]
+                    //data["TossWonBy"] = data["Opponent"]
                 }
             }
 
@@ -555,11 +554,11 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         
         if let msg = inAppProductPrice {
         
-            let message = "Upgrade to Premium by paying : Rs. \(msg)"
+            let message = "Trial version expired. To add more matches please upgrade by paying: \(msg)"
             
             let refreshAlert = UIAlertController(title: "Upgrade", message: message, preferredStyle: UIAlertControllerStyle.Alert)
             
-            refreshAlert.addAction(UIAlertAction(title: "Buy", style: .Default, handler: { (action: UIAlertAction!) in
+            refreshAlert.addAction(UIAlertAction(title: "Upgrade", style: .Default, handler: { (action: UIAlertAction!) in
                 self.doPurchase()
             }))
             
@@ -585,10 +584,13 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         SwiftyStoreKit.purchaseProduct("CricTrac_Premium_Player") { result in
             switch result {
             case .Success(let productId):
-                print("Purchase Success: \(productId)")
+                upgradePlayer()
+                self.userProfileData.UserStatus = "Premium"
+                //print("Purchase Success: \(productId)")
                 //self.upgradeButton.setTitle("", forState: UIControlState.Normal)
-                let refreshAlert = UIAlertController(title: "Success", message: "Purchase successfull", preferredStyle: UIAlertControllerStyle.Alert)
+                let refreshAlert = UIAlertController(title: "Success", message: "Congratulations for upgrading your account", preferredStyle: UIAlertControllerStyle.Alert)
                 refreshAlert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: { (action: UIAlertAction!) in
+                    self.setNavigationBarProperties()
                 }))
                 self.presentViewController(refreshAlert, animated: true, completion: nil)
                 
