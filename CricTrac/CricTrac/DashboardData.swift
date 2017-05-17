@@ -156,8 +156,8 @@ class DashboardData {
         self.Recent3rdMatchID = String(dataObj["Recent3rdMatchID"] ??  "-")
         self.Recent3rdMatchDate = String(dataObj["Recent3rdMatchDate"] ?? "-")
         self.TopBatting1stMatchDispScore = dataObj["TopBatting1stMatchDispScore"] ??  "-"
-        self.TopBatting1stMatchDispScore = dataObj["TopBatting1stMatchDispScore"] ??  "-"
-        self.TopBatting1stMatchDispScore = dataObj["TopBatting1stMatchDispScore"] ??  "-"
+        self.TopBatting2ndMatchDispScore = dataObj["TopBatting2ndMatchDispScore"] ??  "-"
+        self.TopBatting3rdMatchDispScore = dataObj["TopBatting3rdMatchDispScore"] ??  "-"
     }
     
     var dashboardData: [String: AnyObject] {
@@ -233,8 +233,8 @@ class DashboardData {
         "Recent3rdMatchID" : self.Recent3rdMatchID,
         "Recent3rdMatchDate" : self.Recent3rdMatchDate,
         "TopBatting1stMatchDispScore" : self.TopBatting1stMatchDispScore,
-        "TopBatting1stMatchDispScore" : self.TopBatting1stMatchDispScore,
-        "TopBatting1stMatchDispScore" : self.TopBatting1stMatchDispScore
+        "TopBatting2ndMatchDispScore" : self.TopBatting2ndMatchDispScore,
+        "TopBatting3rdMatchDispScore" : self.TopBatting3rdMatchDispScore
         ]
     }
     

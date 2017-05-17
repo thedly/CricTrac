@@ -12,6 +12,7 @@ import Kingfisher
 
 class FriendsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider,ThemeChangeable {
     
+    @IBOutlet weak var FriendsInfoLabelheightConstraint: NSLayoutConstraint!
     @IBOutlet weak var friendsInfoLabel: UILabel!
     
     func changeThemeSettigs() {
@@ -123,13 +124,14 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-//        if friendsDataArray.count == 0 {
-//             self.friendsInfoLabel.hidden = false
-//            self.friendsInfoLabel.text = "Looks like you have not made any friends. Click on Search icon and find your buddies. We have few reccomendations for you in the Suggestions section, check it out."
-//        }
-//        else {
-//            self.friendsInfoLabel.hidden = true
-//        }
+        if friendsDataArray.count == 0 {
+            self.FriendsInfoLabelheightConstraint.constant = 38
+            
+            self.friendsInfoLabel.text = "You have no friends."
+        }
+        else {
+            self.FriendsInfoLabelheightConstraint.constant = 0
+        }
         return friendsDataArray.count
     }
     
