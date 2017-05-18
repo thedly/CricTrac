@@ -33,6 +33,8 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var topBarHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var bannerView: GADBannerView!
 
     
     @IBAction func CloseDashboardPressed(sender: AnyObject) {
@@ -59,7 +61,13 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //loadBannerAds()
+        loadBannerAds()
+    }
+    func loadBannerAds() {
+        
+        bannerView.adUnitID = adUnitId
+        bannerView.rootViewController = self
+        bannerView.loadRequest(GADRequest())
     }
     
     func initView() {

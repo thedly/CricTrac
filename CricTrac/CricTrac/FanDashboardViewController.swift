@@ -9,6 +9,7 @@
 import UIKit
 import Kingfisher
 import SwiftCountryPicker
+import GoogleMobileAds
 
 class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ThemeChangeable {
     
@@ -27,6 +28,9 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var hobbiesHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var topBarHeightConstraint: NSLayoutConstraint!
+    
+     @IBOutlet weak var bannerView: GADBannerView!
+  
     
     var friendProfile:[String:AnyObject]?
     
@@ -108,10 +112,17 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        loadBannerAds()
         
      // Do any additional setup after loading the view.
     }
+    func loadBannerAds() {
+        
+        bannerView.adUnitID = adUnitId
+        bannerView.rootViewController = self
+        bannerView.loadRequest(GADRequest())
+    }
+    
     
    
     override func didReceiveMemoryWarning() {

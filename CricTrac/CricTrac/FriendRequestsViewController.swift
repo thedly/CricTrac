@@ -9,6 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 import KRProgressHUD
+import GoogleMobileAds
 
 class FriendRequestsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider,ThemeChangeable {
     @IBOutlet weak var RequestsTblViewHeight: NSLayoutConstraint!
@@ -16,12 +17,21 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     @IBOutlet weak var noRequestsLbl: UILabel!
     @IBOutlet weak var RequestsTblview: UITableView!
     @IBOutlet weak var noRequestLblHeightConstraint: NSLayoutConstraint!
+    
+     @IBOutlet weak var bannerView: GADBannerView!
     var currentTheme:CTTheme!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()
         // Do any additional setup after loading the view.
+        loadBannerAds()
+    }
+    func loadBannerAds() {
+        
+        bannerView.adUnitID = adUnitId
+        bannerView.rootViewController = self
+        bannerView.loadRequest(GADRequest())
     }
 
     override func didReceiveMemoryWarning() {

@@ -9,9 +9,12 @@
 import UIKit
 import XLPagerTabStrip
 import KRProgressHUD
+import GoogleMobileAds
 
 class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider,ThemeChangeable {
     @IBOutlet weak var SuggestsTblview: UITableView!
+     @IBOutlet weak var bannerView: GADBannerView!
+    
     var currentTheme:CTTheme!
     
     override func viewDidLoad() {
@@ -20,6 +23,13 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         
         initializeView()
         // Do any additional setup after loading the view.
+        loadBannerAds()
+    }
+    func loadBannerAds() {
+        
+        bannerView.adUnitID = adUnitId
+        bannerView.rootViewController = self
+        bannerView.loadRequest(GADRequest())
     }
     
     override func viewWillAppear(animated: Bool) {

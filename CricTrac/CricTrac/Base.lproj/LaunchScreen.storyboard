@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <deployment identifier="iOS"/>
         <development version="7000" identifier="xcode"/>
@@ -19,21 +19,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5wI-ei-qo3">
-                                <rect key="frame" x="113" y="60" width="375" height="180"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="180" id="7Mm-8a-6LP"/>
-                                    <constraint firstAttribute="width" constant="100" id="aGM-P0-zm3"/>
-                                    <constraint firstAttribute="width" constant="375" id="fVk-eq-2mo"/>
-                                    <constraint firstAttribute="height" constant="100" id="qEb-s6-bnz"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="aGM-P0-zm3"/>
-                                        <exclude reference="qEb-s6-bnz"/>
-                                    </mask>
-                                </variation>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cricket Filled-100" translatesAutoresizingMaskIntoConstraints="NO" id="ll4-8O-XCH">
                                 <rect key="frame" x="-76" y="359" width="502" height="366"/>
                                 <constraints>
@@ -41,14 +26,38 @@
                                     <constraint firstAttribute="height" constant="366" id="nsP-Wd-Syr"/>
                                 </constraints>
                             </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="LUd-Bk-oZj">
+                                <rect key="frame" x="150" y="44" width="300" height="212"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Iconlogo" translatesAutoresizingMaskIntoConstraints="NO" id="67S-AK-1ld">
+                                        <rect key="frame" x="100" y="0.0" width="100" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="OJq-pm-eOO"/>
+                                            <constraint firstAttribute="height" constant="100" id="Ypv-ZU-lcH"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TextLogo" translatesAutoresizingMaskIntoConstraints="NO" id="9dn-DO-aCG">
+                                        <rect key="frame" x="25" y="122" width="250" height="90"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="90" id="7L3-mi-Apq"/>
+                                            <constraint firstAttribute="width" constant="250" id="lTA-6q-6H6"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="4bO-Qd-HF5"/>
+                                    <constraint firstAttribute="height" constant="212" id="O8Q-Kx-r1h"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="5wI-ei-qo3" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="3xD-jc-Hbh"/>
+                            <constraint firstItem="LUd-Bk-oZj" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="9KE-gN-7yp"/>
                             <constraint firstItem="ll4-8O-XCH" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" constant="-125" id="OM6-M0-KSE"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ll4-8O-XCH" secondAttribute="trailing" constant="116" id="cqe-4P-wDB"/>
                             <constraint firstAttribute="bottomMargin" secondItem="ll4-8O-XCH" secondAttribute="bottom" constant="-125" id="eCs-lY-dAt"/>
-                            <constraint firstItem="5wI-ei-qo3" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-150" id="tGs-7E-4u8"/>
+                            <constraint firstItem="LUd-Bk-oZj" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-150" id="lEb-ey-3Rc"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -81,7 +90,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Cricket Filled-100" width="171" height="171"/>
-        <image name="Logo" width="217" height="139"/>
+        <image name="Cricket Filled-100" width="57" height="58"/>
+        <image name="Iconlogo" width="838" height="645"/>
+        <image name="TextLogo" width="2500" height="645"/>
     </resources>
 </document>

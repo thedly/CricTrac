@@ -9,11 +9,14 @@
 import UIKit
 import XLPagerTabStrip
 import Kingfisher
+import GoogleMobileAds
 
 class FriendsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider,ThemeChangeable {
     
     @IBOutlet weak var FriendsInfoLabelheightConstraint: NSLayoutConstraint!
     @IBOutlet weak var friendsInfoLabel: UILabel!
+    
+     @IBOutlet weak var bannerView: GADBannerView!
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
@@ -29,7 +32,14 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
         initializeView()
         // Do any additional setup after loading the view.
+        loadBannerAds()
         
+    }
+    func loadBannerAds() {
+        
+        bannerView.adUnitID = adUnitId
+        bannerView.rootViewController = self
+        bannerView.loadRequest(GADRequest())
     }
     
     override func viewWillAppear(animated: Bool) {
