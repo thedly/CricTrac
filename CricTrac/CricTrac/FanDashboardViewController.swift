@@ -24,6 +24,8 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var interstedSportsheightConstraint: NSLayoutConstraint!
     @IBOutlet weak var supportingTeamHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var hobbiesHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topBarView: UIView!
+    @IBOutlet weak var topBarHeightConstraint: NSLayoutConstraint!
     
     var friendProfile:[String:AnyObject]?
     
@@ -126,8 +128,19 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         menuButton.frame = CGRectMake(0, 0, 40, 40)
         let leftbarButton = UIBarButtonItem(customView: menuButton)
         navigationItem.leftBarButtonItem = leftbarButton
-        navigationController?.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-        title = "SIGHTSCREEN"
+       // navigationController?.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+       // title = "SIGHTSCREEN"
+        if let navigation = navigationController{
+            topBarHeightConstraint.constant = 0
+            
+            navigation.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+            title = "SIGHTSCREEN"
+        }
+        else {
+            topBarHeightConstraint.constant = 56
+            self.topBarView.backgroundColor = currentTheme.topColor
+        }
+
         //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         //navigationController!.navigationBar.titleTextAttributes = titleDict
     }
@@ -177,10 +190,10 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         
         if let value = friendProfile{
             userProfileData = Profile(usrObj: value)
-            closeButton.hidden = false
+           // closeButton.hidden = false
         }else{
             userProfileData = profileData
-            closeButton.hidden = true
+           // closeButton.hidden = true
         }
         
         userProfileImage.layer.cornerRadius = userProfileImage.bounds.size.width/2

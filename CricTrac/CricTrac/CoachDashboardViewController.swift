@@ -30,6 +30,10 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var coachPlayedHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var coachCertificationHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var topBarView: UIView!
+    @IBOutlet weak var topBarHeightConstraint: NSLayoutConstraint!
+
+    
     @IBAction func CloseDashboardPressed(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -62,10 +66,10 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         
         if let value = friendProfile{
             userProfileData = Profile(usrObj: value)
-            closeButton.hidden = false
+           // closeButton.hidden = false
         }else{
             userProfileData = profileData
-            closeButton.hidden = true
+          //  closeButton.hidden = true
         }
         
         //setBackgroundColor()
@@ -301,8 +305,18 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         navigationItem.leftBarButtonItem = leftbarButton
         
         if let navigation = navigationController{
-            navigation.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-            title = "SIGHTSCREEN"
+          //  navigation.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+          //  title = "SIGHTSCREEN"
+            if let navigation = navigationController{
+                topBarHeightConstraint.constant = 0
+                
+                navigation.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+                title = "SIGHTSCREEN"
+            }
+            else {
+                topBarHeightConstraint.constant = 56
+                self.topBarView.backgroundColor = currentTheme.topColor
+            }
         //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         //// navigationController!.navigationBar.titleTextAttributes = titleDict
         }

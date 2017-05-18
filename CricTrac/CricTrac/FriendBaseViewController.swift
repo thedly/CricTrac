@@ -14,6 +14,9 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
 
     var topicId:String = ""
     var topic:String = ""
+   
+    @IBOutlet weak var topBarView: UIView!
+    @IBOutlet weak var topBarViewHeightConstraint: NSLayoutConstraint!
     
     @IBAction func didMenuButtonTapp(sender: UIButton){
         sliderMenu.setDrawerState(.Opened, animated: true)
@@ -79,7 +82,12 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         navigationItem.rightBarButtonItem = righttbarButton
         
         if topicId == ""  {
+             //self.topBarViewHeightConstraint.constant = 0
             self.navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+        }
+        else {
+           // self.topBarViewHeightConstraint.constant = 56
+            self.topBarView.backgroundColor = currentTheme.topColor
         }
         title = "DUGOUT"
     }
@@ -88,7 +96,9 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    @IBAction func closeButtonPressed(sender: UIButton) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     override  func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         let friends = viewControllerFrom("Main", vcid: "FriendsViewController")
         let friendReq = viewControllerFrom("Main", vcid: "FriendRequestsViewController")
