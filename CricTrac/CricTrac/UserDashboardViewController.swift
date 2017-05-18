@@ -11,6 +11,7 @@ import KRProgressHUD
 import FirebaseAuth
 import GoogleMobileAds
 import Kingfisher
+import SwiftCountryPicker
 
 class UserDashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ThemeChangeable {
 
@@ -365,12 +366,14 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         TeamsTable.delegate = self
         TeamsTable.dataSource = self
         
+        let currentCountryList = CountriesList.filter({$0.name == userProfileData.Country})
+        let currentISO = currentCountryList[0].iso
         
         let df = NSDateFormatter()
         df.dateFormat = "dd/MM/yyyy"
         self.PlayerName.text = userProfileData.fullName
         let formattedString = NSMutableAttributedString()
-        let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.Country)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.DateOfBirth)\n", fontName: appFont_black, fontSize: 15)
+        let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State), ", fontName: appFont_black, fontSize: 15).bold("\(currentISO)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.DateOfBirth)\n", fontName: appFont_black, fontSize: 15)
         self.PlayerLocation.attributedText = locationText
 //        self.userProfileImage.image = LoggedInUserImage
 //        self.imgCoverPhoto.image = LoggedInUserCoverImage
