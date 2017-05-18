@@ -321,11 +321,11 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         if let msg = inAppProductPrice {
             
-            let message = "Upgrade to Premium by paying : Rs. \(msg)"
+            let message = "Trial version expired. To add more matches please upgrade by paying: \(msg)"
             
             let refreshAlert = UIAlertController(title: "Upgrade", message: message, preferredStyle: UIAlertControllerStyle.Alert)
             
-            refreshAlert.addAction(UIAlertAction(title: "Buy", style: .Default, handler: { (action: UIAlertAction!) in
+            refreshAlert.addAction(UIAlertAction(title: "Upgrade", style: .Default, handler: { (action: UIAlertAction!) in
                 self.doPurchase()
             }))
             
@@ -351,10 +351,13 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         SwiftyStoreKit.purchaseProduct("CricTrac_Premium_Player") { result in
             switch result {
             case .Success(let productId):
-                print("Purchase Success: \(productId)")
+                upgradePlayer()
+                self.userProfileData.UserStatus = "Premium"
+                //print("Purchase Success: \(productId)")
                 self.upgradeButton.setTitle("", forState: UIControlState.Normal)
-                let refreshAlert = UIAlertController(title: "Success", message: "Purchase successfull", preferredStyle: UIAlertControllerStyle.Alert)
+                let refreshAlert = UIAlertController(title: "Success", message: "Congratulations for upgrading your account", preferredStyle: UIAlertControllerStyle.Alert)
                 refreshAlert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: { (action: UIAlertAction!) in
+                    self.upgradeBtnHeight.constant = 0
                 }))
                 self.presentViewController(refreshAlert, animated: true, completion: nil)
                 

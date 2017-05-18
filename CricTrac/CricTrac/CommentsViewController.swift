@@ -40,13 +40,8 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     //var ownerCity:String = ""
     var commentDate:String = ""
     
-        
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //postOwnerName.text = "Arjun"
-        //addTapGestureToUserName()
        
         setNavigationBarProperties();
         currentTheme = cricTracTheme.currentTheme
@@ -62,149 +57,6 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         
          tableView.registerNib(UINib.init(nibName:"CPostTableViewCell", bundle: nil), forCellReuseIdentifier: "cPost")
         
-     //   postComment.enabled = false
-    //  postComment.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
-      
-        //postId = (postData!.dictionaryValue["postId"]?.stringValue)!
-        //postText.text = postData!.dictionaryValue["Post"]?.stringValue
-        //userName.text = postData!.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
-        
-        //sajith-  fetch the fresh post data
-//        getPost(postId) { (data) in
-//            if !data .isEmpty {
-//                self.postOwnerId = data["OwnerID"] as? String
-//                self.postText.text = data["Post"] as? String
-//            
-//                let postedBy = data["PostedBy"] as? String
-//                if postedBy == "CricTrac" {
-//                    self.postOwnerName.text = "CricTrac"
-//                }
-//                else{
-//                    self.postOwnerName.text = data ["OwnerName"] as? String
-//                }
-//            
-//                if let postDateTS = data["AddedTime"] as? Double{
-//                    let date = NSDate(timeIntervalSince1970:postDateTS/1000.0)
-//                    let dateFormatter = NSDateFormatter()
-//                    dateFormatter.timeZone = NSTimeZone.localTimeZone()
-//                    dateFormatter.timeStyle = .ShortStyle
-//                    dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-//                    self.date.text = dateFormatter.stringFromDate(date)
-//                }
-//            
-//                var likeColor = UIColor.redColor()
-//                let childLikes = data["Likes"] as? [String : AnyObject]
-//                if childLikes != nil {
-//                    for (key, value) in childLikes! {
-//                        if currentUser!.uid == value["OwnerID"] as? String {
-//                            likeColor = UIColor.greenColor()
-//                        }
-//                    }
-//                }
-//                self.likeButton.titleLabel?.textColor = likeColor
-//    
-//                if (data["LikeCount"] != nil) {
-//                    let likeCount = data["LikeCount"] as? Int
-//                    self.likes.text = "\(likeCount!) Likes"
-//                }
-//                else {
-//                    self.likes.text = "0 Likes"
-//                }
-//            
-//                if (data["CommentCount"] != nil) {
-//                    let cmtCount = data["CommentCount"] as? Int
-//                    self.comments.text = "\(cmtCount!) Comments"
-//                }
-//                else {
-//                    self.comments.text = "0 Comments"
-//                }
-//                //}
-//        
-////              if let likeCount = postData!.dictionaryValue["Likes"]?.count{
-////              likes.text = "\(likeCount) Likes"
-////              postLikeCount = likeCount
-////              initialLikes = postLikeCount
-////              }else
-////              {
-////              likes.text = "0 Likes"
-////              }
-//        
-////              if let commentCount = postData!.dictionaryValue["TimelineComments"]?.count{
-////              comments.text = "\(commentCount) Comments"
-////              }else
-////              {
-////              comments.text = "0 Comments"
-////              }
-//        
-//                let friendId = data["OwnerID"]!
-//                if let city = friendsCity[friendId as! String]{
-//                    self.userCity.text = city
-//                }else
-//                {
-//                    fetchFriendCity(friendId as! String, sucess: { (city) in
-//                        friendsCity[friendId as! String] = city
-//                        dispatch_async(dispatch_get_main_queue(),{
-//                            //self.userCity.text = city
-//                        })
-//                    })
-//                }
-//        
-//                fetchFriendDetail(friendId as! String, sucess: { (result) in
-//                    let proPic = result["proPic"]
-//                    if proPic! == "-"{
-//                        let imageName = defaultProfileImage
-//                        let image = UIImage(named: imageName)
-//                        self.profileImage.image = image
-//                    }else
-//                    {
-//                        if let imageURL = NSURL(string:proPic!){
-//                            self.profileImage.kf_setImageWithURL(imageURL)
-//                        }
-//                    }
-//                    //sucess(result: ["proPic":proPic,"city":city])
-//                })
-//                
-//        
-////          var likeColor = UIColor.grayColor()
-////        
-////          if let likes = postData!.dictionaryValue["Likes"]?.dictionaryObject as? [String:    [String:String]]{
-////          let result = likes.filter{ return  $0.1["OwnerID"] == currentUser!.uid }
-////            if result.count > 0 {
-////                likeColor = UIColor.whiteColor()
-////            }
-////            //likesCount = likes.count
-////            //postCell.totalLikeCount = likesCount
-////        }
-////        
-////        //postCell.likeCount.setTitle("\(likesCount) Likes", forState: .Normal)
-////        likeButton.titleLabel?.textColor = likeColor
-//        
-//    
-////        if let dateTimeStamp = postData!["AddedTime"].double{
-////            let date = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
-////            let dateFormatter = NSDateFormatter()
-////            dateFormatter.timeZone = NSTimeZone.localTimeZone()
-////            dateFormatter.timeStyle = .ShortStyle
-////            dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-////            self.date.text = dateFormatter.stringFromDate(date)
-////        }
-//        
-//                getAllComments(self.postId) { (data) in
-//                    self.dataSource = data
-//                    self.tableView.reloadData()
-//                }
-//            }
-//            else {
-//                let alert = UIAlertController(title: "", message: "Post not found", preferredStyle: UIAlertControllerStyle.Alert)                
-//                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!)-> Void in
-//                    //print("delete")
-//                    //delete the nottification
-//                }))
-//                //self.dismissViewControllerAnimated(true) {}
-//                //return
-//            }
-//        }
-        
         getPost(postId) { (postData) in
             self.postDataNew = postData
             self.tableView.reloadData()
@@ -214,7 +66,6 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
             self.dataSource = commentData
             self.tableView.reloadData()
         }
-                
     }
     
     func changeThemeSettigs() {
@@ -234,6 +85,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 //    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 //        return 2
 //    }
@@ -266,9 +118,23 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                
                 if postedBy == "CricTrac" {
                     cCell.postOwnerName.text = "CricTrac"
+                    cCell.ownerCity.text = postData["PostType"] as? String
                 }
                 else{
                     cCell.postOwnerName.text = postData ["OwnerName"] as? String
+                    
+                    let friendId = postData["OwnerID"]!
+                    if let city = friendsCity[friendId as! String]{
+                        cCell.ownerCity.text = city
+                    }
+                    else {
+                        fetchFriendCity(friendId as! String, sucess: { (city) in
+                            friendsCity[friendId as! String] = city
+                            dispatch_async(dispatch_get_main_queue(),{
+                                cCell.ownerCity.text = city
+                            })
+                        })
+                    }
                 }
                 
                 //display post owners image
@@ -296,18 +162,18 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                     })
                 }
                 
-                let friendId = postData["OwnerID"]!
-                if let city = friendsCity[friendId as! String]{
-                    cCell.ownerCity.text = city
-                }
-                else {
-                    fetchFriendCity(friendId as! String, sucess: { (city) in
-                        friendsCity[friendId as! String] = city
-                        dispatch_async(dispatch_get_main_queue(),{
-                            cCell.ownerCity.text = city
-                        })
-                    })
-                }
+//                let friendId = postData["OwnerID"]!
+//                if let city = friendsCity[friendId as! String]{
+//                    cCell.ownerCity.text = city
+//                }
+//                else {
+//                    fetchFriendCity(friendId as! String, sucess: { (city) in
+//                        friendsCity[friendId as! String] = city
+//                        dispatch_async(dispatch_get_main_queue(),{
+//                            cCell.ownerCity.text = city
+//                        })
+//                    })
+//                }
                 
                 if let postDateTS = postData["AddedTime"] as? Double{
                     let date = NSDate(timeIntervalSince1970:postDateTS/1000.0)

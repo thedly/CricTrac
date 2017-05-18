@@ -290,8 +290,8 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     
                     fetchFriendDetail(friendId, sucess: { (result) in
                         let proPic = result["proPic"]
-                        let city =   result["city"]
-                        postCell.postOwnerCity.text = city
+                        //let city =   result["city"]
+                        //postCell.postOwnerCity.text = city
                         
                         if proPic! == "-"{
                             let imageName = defaultProfileImage
