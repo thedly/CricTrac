@@ -64,7 +64,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     
     @IBAction func deleteActionPressed(sender: UIButton) {
         
-        let actionSheetController = UIAlertController(title: "", message: "Are you sure to delete the match?", preferredStyle: .ActionSheet)
+        let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to delete this match?", preferredStyle: .ActionSheet)
         
         // Create and add the Cancel action
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in

@@ -466,7 +466,9 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             if let key = pageKey{
                 LoadTimeline(key, sucess: { (data) in
                     pageKey = data.dictionaryValue["pageKey"]?.stringValue
-                    timelineData = JSON(timelineData!.arrayObject! + data.dictionaryValue["timeline"]!.arrayObject!)
+                    if pageKey != nil {
+                        timelineData = JSON(timelineData!.arrayObject! + data.dictionaryValue["timeline"]!.arrayObject!)
+                    }
                     }, failure: { (error) in
                 })
             }

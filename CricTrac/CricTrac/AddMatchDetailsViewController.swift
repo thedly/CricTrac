@@ -556,7 +556,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         
             let message = "Trial version expired. To add more matches please upgrade by paying: \(msg)"
             
-            let refreshAlert = UIAlertController(title: "Upgrade", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            let refreshAlert = UIAlertController(title: "Premium Account", message: message, preferredStyle: UIAlertControllerStyle.Alert)
             
             refreshAlert.addAction(UIAlertAction(title: "Upgrade", style: .Default, handler: { (action: UIAlertAction!) in
                 self.doPurchase()
