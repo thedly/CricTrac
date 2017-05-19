@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Ve3-0R-RX7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Ve3-0R-RX7">
     <dependencies>
         <deployment identifier="iOS"/>
         <development version="7000" identifier="xcode"/>
@@ -2242,7 +2242,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CBF69217-FB4B-4985-8C07-86695329DDE5" translatesAutoresizingMaskIntoConstraints="NO" id="oF2-e2-1Wz">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="60E379C1-C9A1-4080-B94C-EC1C18DB0B61" translatesAutoresizingMaskIntoConstraints="NO" id="oF2-e2-1Wz">
                                                 <rect key="frame" x="529" y="546" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="16" id="3f0-C6-z59"/>
@@ -2315,7 +2315,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CBF69217-FB4B-4985-8C07-86695329DDE5" translatesAutoresizingMaskIntoConstraints="NO" id="fsn-M8-eca">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="60E379C1-C9A1-4080-B94C-EC1C18DB0B61" translatesAutoresizingMaskIntoConstraints="NO" id="fsn-M8-eca">
                                                 <rect key="frame" x="529" y="186" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="16" id="Db4-OQ-KbR"/>
@@ -2388,7 +2388,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CBF69217-FB4B-4985-8C07-86695329DDE5" translatesAutoresizingMaskIntoConstraints="NO" id="bhw-c3-xiz">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="60E379C1-C9A1-4080-B94C-EC1C18DB0B61" translatesAutoresizingMaskIntoConstraints="NO" id="bhw-c3-xiz">
                                                 <rect key="frame" x="529" y="402" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="16" id="65C-T8-6qD"/>
@@ -2428,7 +2428,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CBF69217-FB4B-4985-8C07-86695329DDE5" translatesAutoresizingMaskIntoConstraints="NO" id="38U-SC-Isu">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="60E379C1-C9A1-4080-B94C-EC1C18DB0B61" translatesAutoresizingMaskIntoConstraints="NO" id="38U-SC-Isu">
                                                 <rect key="frame" x="529" y="474" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="16" id="Fyv-ih-I0W"/>
@@ -3233,7 +3233,6 @@
         <!--Summary Match Details View Controller-->
         <scene sceneID="PBX-v4-rYy">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YHf-pK-M8e" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="SummaryMatchDetailsViewController" id="ZJG-fj-0qO" customClass="SummaryMatchDetailsViewController" customModule="CricTrac" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6XU-Ul-vVL"/>
@@ -4444,6 +4443,7 @@
                         <outlet property="wides" destination="T7v-5A-076" id="g0m-z5-YZz"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YHf-pK-M8e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2936" y="-3657"/>
         </scene>
@@ -8631,7 +8631,7 @@
                                 <state key="normal" image="shape"/>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zv1-Yf-OXd">
-                                <rect key="frame" x="0.0" y="56" width="600" height="1164"/>
+                                <rect key="frame" x="0.0" y="56" width="600" height="1214"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XYf-OV-YOh">
                                         <rect key="frame" x="0.0" y="-117" width="600" height="1200"/>
@@ -9306,7 +9306,7 @@
                                     <constraint firstAttribute="trailing" secondItem="6bz-zq-KEY" secondAttribute="trailing" id="lHB-d5-iyD"/>
                                     <constraint firstItem="JIV-ue-iT4" firstAttribute="leading" secondItem="6zD-w6-MNX" secondAttribute="trailing" constant="20" id="mgr-bT-ZBX"/>
                                     <constraint firstItem="6zD-w6-MNX" firstAttribute="top" secondItem="6bz-zq-KEY" secondAttribute="bottom" constant="-100" id="p2x-Ny-OkX"/>
-                                    <constraint firstAttribute="bottom" secondItem="XYf-OV-YOh" secondAttribute="bottom" constant="22" id="q32-rV-LyW"/>
+                                    <constraint firstAttribute="bottom" secondItem="XYf-OV-YOh" secondAttribute="bottom" id="q32-rV-LyW"/>
                                     <constraint firstItem="zmO-BC-Q0a" firstAttribute="bottom" secondItem="6bz-zq-KEY" secondAttribute="bottom" id="qNs-LX-i4w"/>
                                     <constraint firstItem="z9Z-ZQ-2iG" firstAttribute="width" secondItem="6zD-w6-MNX" secondAttribute="width" id="sOh-Aq-1DV"/>
                                     <constraint firstItem="JIV-ue-iT4" firstAttribute="centerY" secondItem="6zD-w6-MNX" secondAttribute="centerY" constant="-20" id="v35-2f-zJL"/>
@@ -9355,7 +9355,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L0P-op-GVU" customClass="GADBannerView">
-                                <rect key="frame" x="0.0" y="1220" width="600" height="50"/>
+                                <rect key="frame" x="0.0" y="1270" width="600" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="ItU-Hg-mNO"/>
@@ -9369,7 +9369,7 @@
                             <constraint firstItem="gLM-fo-VbE" firstAttribute="top" secondItem="Zv1-Yf-OXd" secondAttribute="bottom" id="31Q-En-m82"/>
                             <constraint firstAttribute="trailing" secondItem="L0P-op-GVU" secondAttribute="trailing" id="3Ah-6n-Vjy"/>
                             <constraint firstItem="XYf-OV-YOh" firstAttribute="width" secondItem="GYK-3h-Kzx" secondAttribute="width" id="4Ip-Rc-BCW"/>
-                            <constraint firstItem="gLM-fo-VbE" firstAttribute="top" secondItem="Zv1-Yf-OXd" secondAttribute="bottom" constant="50" id="4ph-Su-Z8B"/>
+                            <constraint firstItem="gLM-fo-VbE" firstAttribute="top" secondItem="Zv1-Yf-OXd" secondAttribute="bottom" id="4ph-Su-Z8B"/>
                             <constraint firstItem="gLM-fo-VbE" firstAttribute="top" secondItem="Zv1-Yf-OXd" secondAttribute="bottom" id="5GE-Mi-KSz"/>
                             <constraint firstItem="XYf-OV-YOh" firstAttribute="centerX" secondItem="GYK-3h-Kzx" secondAttribute="centerX" id="6Ue-1e-zR3"/>
                             <constraint firstItem="Zv1-Yf-OXd" firstAttribute="width" secondItem="GYK-3h-Kzx" secondAttribute="width" id="7zg-bS-ZDX"/>
@@ -9492,7 +9492,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0W8-YI-5mj">
-                                <rect key="frame" x="0.0" y="56" width="600" height="1224"/>
+                                <rect key="frame" x="0.0" y="56" width="600" height="1284"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hNt-ub-oOg">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="1273"/>
@@ -10306,7 +10306,7 @@
                             <constraint firstItem="X0E-nE-G3I" firstAttribute="top" secondItem="H6d-Y6-DnX" secondAttribute="top" constant="20" id="hMF-Ac-5YK"/>
                             <constraint firstAttribute="trailing" secondItem="1vV-1m-vQf" secondAttribute="trailing" id="iya-tR-dRF"/>
                             <constraint firstItem="0W8-YI-5mj" firstAttribute="top" secondItem="rVt-PO-rMX" secondAttribute="bottom" id="laP-5O-tgg"/>
-                            <constraint firstItem="EFS-FT-3B4" firstAttribute="top" secondItem="0W8-YI-5mj" secondAttribute="bottom" constant="60" id="mdS-2H-6zx"/>
+                            <constraint firstItem="EFS-FT-3B4" firstAttribute="top" secondItem="0W8-YI-5mj" secondAttribute="bottom" id="mdS-2H-6zx"/>
                             <constraint firstItem="0W8-YI-5mj" firstAttribute="leading" secondItem="H6d-Y6-DnX" secondAttribute="leading" id="muI-JT-YMz"/>
                             <constraint firstItem="hNt-ub-oOg" firstAttribute="width" secondItem="H6d-Y6-DnX" secondAttribute="width" id="rj5-du-hHm"/>
                             <constraint firstAttribute="trailing" secondItem="vRT-Jn-d9B" secondAttribute="trailing" id="rna-Rj-LLz"/>
@@ -10370,7 +10370,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rJS-oB-aFS">
-                                <rect key="frame" x="0.0" y="56" width="600" height="1893"/>
+                                <rect key="frame" x="0.0" y="56" width="600" height="1944"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5t5-XX-zTF">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="1852"/>
@@ -12228,7 +12228,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Z7y-6i-VmZ" firstAttribute="top" secondItem="tQM-QY-5dA" secondAttribute="top" id="3eD-w9-YBf"/>
-                            <constraint firstItem="eqj-c5-80g" firstAttribute="top" secondItem="rJS-oB-aFS" secondAttribute="bottom" constant="51" id="4Xr-Ew-8YZ"/>
+                            <constraint firstItem="eqj-c5-80g" firstAttribute="top" secondItem="rJS-oB-aFS" secondAttribute="bottom" id="4Xr-Ew-8YZ"/>
                             <constraint firstItem="rJS-oB-aFS" firstAttribute="leading" secondItem="tQM-QY-5dA" secondAttribute="leading" id="5uS-BQ-jdN"/>
                             <constraint firstItem="PtQ-QU-tAO" firstAttribute="leading" secondItem="tQM-QY-5dA" secondAttribute="leading" id="6wB-lh-9Cx"/>
                             <constraint firstItem="eqj-c5-80g" firstAttribute="top" secondItem="rJS-oB-aFS" secondAttribute="bottom" id="7Ra-zl-VTu"/>
@@ -12422,8 +12422,8 @@
                                 <exclude reference="hHF-Pc-cal"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="hVp-In-Fzh"/>
                                 <exclude reference="8ny-Xh-FkM"/>
+                                <exclude reference="hVp-In-Fzh"/>
                             </mask>
                         </variation>
                     </view>
@@ -12442,7 +12442,6 @@
         <!--Friend Suggest View Controller-->
         <scene sceneID="2YE-tu-v38">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3j4-VS-xa9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="FriendSuggestViewController" id="R8b-gc-HJg" customClass="FriendSuggestViewController" customModule="CricTrac" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wrX-Ej-lLz"/>
@@ -12511,6 +12510,7 @@
                         <outlet property="bannerViewHeightConstraint" destination="WKU-mR-vWc" id="qyn-Dq-gcg"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3j4-VS-xa9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1851" y="-5125"/>
         </scene>
@@ -14268,10 +14268,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Back-100" width="22" height="36"/>
-        <image name="BallIcon" width="26" height="27"/>
-        <image name="BatIcon" width="22" height="22"/>
-        <image name="CBF69217-FB4B-4985-8C07-86695329DDE5" width="13" height="8">
+        <image name="60E379C1-C9A1-4080-B94C-EC1C18DB0B61" width="13" height="8">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -14348,6 +14345,9 @@ gACCAIcAkgCUAJYAmACdAKAAogCkAKYAqACtAMQAxgDID3oPfw+KD5MPpg+qD7UPvg/DD8sPzg/TD+IP
 ABBHA
 </mutableData>
         </image>
+        <image name="Back-100" width="22" height="36"/>
+        <image name="BallIcon" width="26" height="27"/>
+        <image name="BatIcon" width="22" height="22"/>
         <image name="Calendar-100" width="19" height="17"/>
         <image name="CricTrac_Img" width="210" height="36"/>
         <image name="Cricket Filled-100" width="57" height="58"/>

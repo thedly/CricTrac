@@ -85,7 +85,7 @@ var versionAndBuildNumber:String{
 }
 
 //variable to decide whether to show the AD or not
-let showAds = 1
+let showAds = 0
 let adUnitId = "ca-app-pub-3940256099942544/2934735716"
 
 
