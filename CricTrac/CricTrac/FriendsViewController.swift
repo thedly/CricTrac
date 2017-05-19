@@ -17,6 +17,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var friendsInfoLabel: UILabel!
     
      @IBOutlet weak var bannerView: GADBannerView!
+     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
@@ -36,12 +37,16 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         
     }
     func loadBannerAds() {
-        
-        bannerView.adUnitID = adUnitId
-        bannerView.rootViewController = self
-        bannerView.loadRequest(GADRequest())
+        if showAds == 1 {
+            self.bannerViewHeightConstraint.constant = 50
+            bannerView.adUnitID = adUnitId
+            bannerView.rootViewController = self
+            bannerView.loadRequest(GADRequest())
+        }
+        else {
+            self.bannerViewHeightConstraint.constant = 0
+        }
     }
-    
     override func viewWillAppear(animated: Bool) {
          self.SuggestsTblview.reloadData()
         setBackgroundColor()

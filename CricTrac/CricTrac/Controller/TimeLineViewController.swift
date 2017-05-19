@@ -17,6 +17,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
     @IBOutlet weak var timeLineTable: UITableView!
     @IBOutlet weak var bannerView: GADBannerView!
+     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
     
     var currentTheme:CTTheme!
     var newPostText:UITextField?
@@ -71,13 +72,17 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     //MARK: Ads related
-    
     func loadBannerAds() {
-        bannerView.adUnitID = adUnitId
-        bannerView.rootViewController = self
-        bannerView.loadRequest(GADRequest())
+        if showAds == 1 {
+            self.bannerViewHeightConstraint.constant = 50
+            bannerView.adUnitID = adUnitId
+            bannerView.rootViewController = self
+            bannerView.loadRequest(GADRequest())
+        }
+        else {
+            self.bannerViewHeightConstraint.constant = 0
+        }
     }
-    
     func changeThemeSettigs() {
       //  let currentTheme = cricTracTheme.currentTheme
         

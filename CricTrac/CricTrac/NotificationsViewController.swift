@@ -7,11 +7,16 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class NotificationsViewController: UIViewController,UITableViewDataSource,UITableViewDelegate, ThemeChangeable {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var barView: UIView!
+    
+    @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bannerView: GADBannerView!
+
     
     var currentTheme:CTTheme!
     var dataSource = [[String:AnyObject]]()
@@ -41,7 +46,19 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
         self.barView.backgroundColor = currentTheme.topColor
-
+        loadBannerAds()
+    }
+    
+    func loadBannerAds() {
+        if showAds == 1 {
+            self.bannerViewHeightConstraint.constant = 50
+            bannerView.adUnitID = adUnitId
+            bannerView.rootViewController = self
+            bannerView.loadRequest(GADRequest())
+        }
+        else {
+            self.bannerViewHeightConstraint.constant = 0
+        }
     }
     
     override func didReceiveMemoryWarning() {

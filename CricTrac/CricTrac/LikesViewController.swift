@@ -7,15 +7,20 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,ThemeChangeable {
 
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var barView: UIView!
+    @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bannerView: GADBannerView!
+    
     var postID: String = ""
      var dataSource = [[String:AnyObject]]()
      var currentTheme:CTTheme!
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         getAllLikes(postID) { (data) in
@@ -25,8 +30,21 @@ class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         self.setBackgroundColor()
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
-       
+       loadBannerAds()
     }
+    
+    func loadBannerAds() {
+        if showAds == 1 {
+            self.bannerViewHeightConstraint.constant = 50
+            bannerView.adUnitID = adUnitId
+            bannerView.rootViewController = self
+            bannerView.loadRequest(GADRequest())
+        }
+        else {
+             self.bannerViewHeightConstraint.constant = 0
+        }
+    }
+    
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor

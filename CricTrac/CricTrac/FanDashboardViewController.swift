@@ -30,6 +30,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var topBarHeightConstraint: NSLayoutConstraint!
     
      @IBOutlet weak var bannerView: GADBannerView!
+     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
   
     
     var friendProfile:[String:AnyObject]?
@@ -117,10 +118,15 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
      // Do any additional setup after loading the view.
     }
     func loadBannerAds() {
-        
-        bannerView.adUnitID = adUnitId
-        bannerView.rootViewController = self
-        bannerView.loadRequest(GADRequest())
+        if showAds == 1 {
+            self.bannerViewHeightConstraint.constant = 50
+            bannerView.adUnitID = adUnitId
+            bannerView.rootViewController = self
+            bannerView.loadRequest(GADRequest())
+        }
+        else {
+            self.bannerViewHeightConstraint.constant = 0
+        }
     }
     
     

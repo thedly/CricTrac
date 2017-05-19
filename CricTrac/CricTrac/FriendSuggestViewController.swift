@@ -14,6 +14,7 @@ import GoogleMobileAds
 class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider,ThemeChangeable {
     @IBOutlet weak var SuggestsTblview: UITableView!
      @IBOutlet weak var bannerView: GADBannerView!
+     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
     
     var currentTheme:CTTheme!
     
@@ -26,10 +27,15 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         loadBannerAds()
     }
     func loadBannerAds() {
-        
-        bannerView.adUnitID = adUnitId
-        bannerView.rootViewController = self
-        bannerView.loadRequest(GADRequest())
+        if showAds == 1 {
+            self.bannerViewHeightConstraint.constant = 50
+            bannerView.adUnitID = adUnitId
+            bannerView.rootViewController = self
+            bannerView.loadRequest(GADRequest())
+        }
+        else {
+            self.bannerViewHeightConstraint.constant = 0
+        }
     }
     
     override func viewWillAppear(animated: Bool) {

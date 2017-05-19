@@ -19,6 +19,8 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     @IBOutlet weak var noRequestLblHeightConstraint: NSLayoutConstraint!
     
      @IBOutlet weak var bannerView: GADBannerView!
+     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
+    
     var currentTheme:CTTheme!
     
     override func viewDidLoad() {
@@ -28,10 +30,15 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         loadBannerAds()
     }
     func loadBannerAds() {
-        
-        bannerView.adUnitID = adUnitId
-        bannerView.rootViewController = self
-        bannerView.loadRequest(GADRequest())
+        if showAds == 1 {
+            self.bannerViewHeightConstraint.constant = 50
+            bannerView.adUnitID = adUnitId
+            bannerView.rootViewController = self
+            bannerView.loadRequest(GADRequest())
+        }
+        else {
+            self.bannerViewHeightConstraint.constant = 0
+        }
     }
 
     override func didReceiveMemoryWarning() {

@@ -35,6 +35,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var topBarHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var bannerView: GADBannerView!
+     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
 
     
     @IBAction func CloseDashboardPressed(sender: AnyObject) {
@@ -64,11 +65,17 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         loadBannerAds()
     }
     func loadBannerAds() {
-        
-        bannerView.adUnitID = adUnitId
-        bannerView.rootViewController = self
-        bannerView.loadRequest(GADRequest())
+        if showAds == 1 {
+            self.bannerViewHeightConstraint.constant = 50
+            bannerView.adUnitID = adUnitId
+            bannerView.rootViewController = self
+            bannerView.loadRequest(GADRequest())
+        }
+        else {
+            self.bannerViewHeightConstraint.constant = 0
+        }
     }
+
     
     func initView() {
         //super.viewDidLoad()

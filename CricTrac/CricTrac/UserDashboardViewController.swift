@@ -25,6 +25,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     private var _currentTheme:String = CurrentTheme
     
     @IBOutlet weak var bannerView: GADBannerView!
+     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var topBarViewHeightConstraint: NSLayoutConstraint!
     
@@ -437,14 +439,18 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     //MARK: Ads related
-    
     func loadBannerAds() {
-        
-        bannerView.adUnitID = adUnitId
-        bannerView.rootViewController = self
-        bannerView.loadRequest(GADRequest())
+        if showAds == 1 {
+            self.bannerViewHeightConstraint.constant = 50
+            bannerView.adUnitID = adUnitId
+            bannerView.rootViewController = self
+            bannerView.loadRequest(GADRequest())
+        }
+        else {
+            self.bannerViewHeightConstraint.constant = 0
+        }
     }
-    
+
     
     func tapCoverPhoto()  {
         if friendId == nil {
