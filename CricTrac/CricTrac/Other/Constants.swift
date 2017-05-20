@@ -9,6 +9,7 @@
 import Foundation
 import AnimatedTextInput
 import Firebase
+import FirebaseStorage
 
 let ProfilePictureUpdated = "ProfilePictureUpdated"
 let CoverPictureUpdated = "CoverPictureUpdated"

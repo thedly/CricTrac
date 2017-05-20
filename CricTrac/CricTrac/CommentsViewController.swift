@@ -492,6 +492,13 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
 //    }
     
     func deletebuttonTapped() {
+        
+//        getAllComments(self.postId) { (commentData) in
+//            self.dataSource = commentData
+//            self.tableView.reloadData()
+//        }
+
+        
 //      print("present sir")
 //      //self.view .setNeedsDisplay()
 //        let commentPage = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
