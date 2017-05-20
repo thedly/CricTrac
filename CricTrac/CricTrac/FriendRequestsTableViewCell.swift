@@ -18,8 +18,7 @@ class FriendRequestsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        friendProfileImage.layer.cornerRadius = friendProfileImage.frame.size.width/2
-        friendProfileImage.clipsToBounds = true
+       
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

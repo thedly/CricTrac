@@ -441,7 +441,7 @@ extension UserInfoViewController:UITextFieldDelegate {
             
             var currentCountry = ""
             
-            if country.text?.length >= 0 {
+            if country.text?.length > 0 {
                 state.userInteractionEnabled = true
                 currentCountry = country.text!
                // city.text = ""
@@ -452,9 +452,9 @@ extension UserInfoViewController:UITextFieldDelegate {
                 
                 //ctStatePicker.showPicker(self, inputText: textField, iso: ctCountryPicker.SelectedISO)
             }
-            else {
-               state.userInteractionEnabled = false
-            }
+//            else {
+//               state.userInteractionEnabled = false
+//            }
         }
         else if  textField == gender{
             ctDataPicker = DataPicker()
@@ -517,7 +517,7 @@ extension UserInfoViewController:UITextFieldDelegate {
         }else if textField == mobile {
             return newLength <= 15
         }
-        else if textField == state || textField == country {
+        else if textField == state || textField == country || textField == gender || textField == dateOfBirth || textField == userProfileInfo {
             return false
         }else {
             return true // Bool

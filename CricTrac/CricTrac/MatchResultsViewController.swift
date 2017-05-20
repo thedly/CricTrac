@@ -19,6 +19,8 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     @IBOutlet weak var FirstBattingView: UIView!
     @IBOutlet weak var SecondBattingView: UIView!
     
+     lazy var ctDataPicker = DataPicker()
+    
     var firstBatText: String!
     var secondBatText: String!
     var swapBtnVal: Int!
@@ -287,7 +289,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     }
     
     @IBAction func tossBtnTapped(sender: UIButton) {
-        parent?.dataChangedAfterLastSave()
+       // parent?.dataChangedAfterLastSave()
         firstTeamTossBtn.alpha = 0.2
         secondTeamTossBtn.alpha = 0.2
         sender.alpha = 1.0
@@ -519,7 +521,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             
             let tempPt = FirstBattingView.center
             
-            parent?.dataChangedAfterLastSave()
+           // parent?.dataChangedAfterLastSave()
             
             UIView.animateWithDuration(1.0,
                                        delay: 0.0,
@@ -602,16 +604,20 @@ extension MatchResultsViewController:UITextFieldDelegate{
     func textFieldDidBeginEditing(textField: UITextField) {
         
         if textField == resultText{
-         showPicker(self, inputText: textField, data: results)
+            ctDataPicker = DataPicker()
+            let indexPos = results.indexOf(resultText.text!) ?? 0
+            ctDataPicker.showPicker(self, inputText: textField, data: results,selectedValueIndex: indexPos)
+        // showPicker(self, inputText: textField, data: results)
            
         }
         else if textField == AchievementsText {
+            ctDataPicker = DataPicker()
+            let indexPos = Achievements.indexOf(AchievementsText.text!) ?? 0
+            ctDataPicker.showPicker(self, inputText: textField, data: Achievements,selectedValueIndex: indexPos)
+            //showPicker(self, inputText: textField, data: Achievements)
             
-            showPicker(self, inputText: textField, data: Achievements)
-            
-//            let AchievementVC = viewControllerFrom("Main", vcid:"AchievementListViewController") as! AchievementListViewController
-//            self.presentViewController(AchievementVC, animated: true) {}
-            
+            //let AchievementVC = viewControllerFrom("Main", vcid:"AchievementListViewController") as! AchievementListViewController
+            //self.presentViewController(AchievementVC, animated: true) {}
         }
     }
     
@@ -621,10 +627,10 @@ extension MatchResultsViewController:UITextFieldDelegate{
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        if textField.text?.trimWhiteSpace.length > 0{
-            
-            parent?.dataChangedAfterLastSave()
-        }
+//        if textField.text?.trimWhiteSpace.length > 0{
+//            
+//            //parent?.dataChangedAfterLastSave()
+//        }
     }
     
     override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {

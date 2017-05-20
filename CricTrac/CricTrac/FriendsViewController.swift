@@ -9,8 +9,14 @@
 import UIKit
 import XLPagerTabStrip
 import Kingfisher
+import GoogleMobileAds
 
 class FriendsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider,ThemeChangeable {
+    
+    @IBOutlet weak var FriendsInfoLabelheightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var friendsInfoLabel: UILabel!
+    
+     @IBOutlet weak var bannerView: GADBannerView!
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
@@ -26,7 +32,14 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
         initializeView()
         // Do any additional setup after loading the view.
+        loadBannerAds()
         
+    }
+    func loadBannerAds() {
+        
+        bannerView.adUnitID = adUnitId
+        bannerView.rootViewController = self
+        bannerView.loadRequest(GADRequest())
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -120,10 +133,20 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if friendsDataArray.count == 0 {
+            self.FriendsInfoLabelheightConstraint.constant = 38
+            
+            self.friendsInfoLabel.text = "You have no friends."
+        }
+        else {
+            self.FriendsInfoLabelheightConstraint.constant = 0
+        }
         return friendsDataArray.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         return getCellForRow(indexPath)
     }
     

@@ -12,6 +12,7 @@ import SwiftyStoreKit
 
 class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable {
 
+    @IBOutlet weak var upgradeBtnHeight: NSLayoutConstraint!
     @IBOutlet var matchSummaryTable:UITableView!
     
     var matchData = [String:AnyObject]()
@@ -39,12 +40,17 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        upgradeButton.setTitle("Upgrade", forState: UIControlState.Normal)
+        
         userProfileData = profileData
         if userProfileData.UserStatus == "Premium" {
-            upgradeButton.hidden=true
+            //upgradeButton.hidden=true
+            upgradeBtnHeight.constant = 0
         }
         else {
-            upgradeButton.hidden = false
+            //upgradeButton.hidden = false
+            upgradeBtnHeight.constant = 66
+            
         }
         
         //In App Purchase
@@ -317,15 +323,15 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         if let msg = inAppProductPrice {
             
-            let message = "Upgrade to Premium by paying : Rs. \(msg)"
+            let message = "Free version allows only maximum 5 matches. Upgrade to premium by paying: \(msg)"
             
-            let refreshAlert = UIAlertController(title: "Upgrade", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            let refreshAlert = UIAlertController(title: "Premium Account", message: message, preferredStyle: UIAlertControllerStyle.Alert)
             
-            refreshAlert.addAction(UIAlertAction(title: "Buy", style: .Default, handler: { (action: UIAlertAction!) in
+            refreshAlert.addAction(UIAlertAction(title: "Upgrade", style: .Default, handler: { (action: UIAlertAction!) in
                 self.doPurchase()
             }))
             
-            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+            refreshAlert.addAction(UIAlertAction(title: "Later", style: .Cancel, handler: { (action: UIAlertAction!) in
                 print("Handle Cancel Logic here")
             }))
             
@@ -347,10 +353,13 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         SwiftyStoreKit.purchaseProduct("CricTrac_Premium_Player") { result in
             switch result {
             case .Success(let productId):
-                print("Purchase Success: \(productId)")
+                upgradePlayer()
+                self.userProfileData.UserStatus = "Premium"
+                //print("Purchase Success: \(productId)")
                 self.upgradeButton.setTitle("", forState: UIControlState.Normal)
-                let refreshAlert = UIAlertController(title: "Success", message: "Purchase successfull", preferredStyle: UIAlertControllerStyle.Alert)
+                let refreshAlert = UIAlertController(title: "Success", message: "Congratulations for upgrading your account", preferredStyle: UIAlertControllerStyle.Alert)
                 refreshAlert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: { (action: UIAlertAction!) in
+                    self.upgradeBtnHeight.constant = 0
                 }))
                 self.presentViewController(refreshAlert, animated: true, completion: nil)
                 

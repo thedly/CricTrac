@@ -46,6 +46,7 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
     }
     override func viewWillAppear(animated: Bool) {
         setBackgroundColor()
+          self.searchBar.becomeFirstResponder()
         
     }
 
@@ -221,8 +222,8 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
         UIView.animateWithDuration(0.5) {
-            self.searchBar.alpha = 0
-            self.searchBar.hidden = true
+            //self.searchBar.alpha = 0
+           // self.searchBar.hidden = true
         }
     }
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {

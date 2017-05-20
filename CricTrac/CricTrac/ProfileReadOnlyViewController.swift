@@ -15,6 +15,11 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
     @IBOutlet weak var CoachingExperienceView: UIView!
     @IBOutlet weak var CricketFanView: UIView!
     
+    @IBOutlet weak var matchViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var playerExprHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var cricketFanHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var coachingExprHeightConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var profileImage: UIImageView!
     
     @IBOutlet weak var activityInd: UIActivityIndicatorView!
@@ -92,27 +97,98 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
             self.StateText.text = profileData.State
             self.CityText.text = profileData.City
             
-            self.PlayerCurrentTeams.text = profileData.PlayerCurrentTeams.joinWithSeparator("\n")
-            self.PlayerPastTeams.text = profileData.PlayerPastTeams.joinWithSeparator("\n")
-            self.PlayerBattingStyle.text = profileData.BattingStyle
-            self.PlayerBowlingStyle.text = profileData.BowlingStyle
-            
-            self.PlayingRole.text = profileData.PlayingRole
-            
-            
-            self.CoachCurrentTeams.text = profileData.CoachCurrentTeams.joinWithSeparator("\n")
-            //lblCoachPastPlayedFor
-            self.CoachPastTeams.text = profileData.CoachPastTeams.joinWithSeparator("\n")
-            self.CoachCoachingLevel.text = profileData.CoachingLevel
-            self.CoachCertifications.text = profileData.Certifications.joinWithSeparator("\n")
-            self.CoachExperience.text = profileData.Experience.uppercaseString
-            //lblCoachPastPlayedFor
-            self.lblCoachPastPlayedFor.text = profileData.CoachPlayedFor.joinWithSeparator("\n")
-            self.FanSupportingTeams.text = profileData.SupportingTeams.joinWithSeparator("\n")
-            self.FanInterestedSports.text = profileData.InterestedSports.joinWithSeparator("\n")
-            self.FanFavouritePlayer.text = profileData.FavoritePlayers.joinWithSeparator("\n")
-            self.FanHobbies.text = profileData.Hobbies.joinWithSeparator("\n")
-            
+            if profileData.UserProfile == "Player" {
+                
+                self.matchViewHeightConstraint.constant = 700
+                
+                if profileData.PlayerCurrentTeams.count > 0 {
+                    self.PlayerCurrentTeams.text = profileData.PlayerCurrentTeams.joinWithSeparator("\n")
+                    self.matchViewHeightConstraint.constant += CGFloat(profileData.PlayerCurrentTeams.count * 16)
+                }
+                else {
+                    self.PlayerCurrentTeams.text = "No Teams"
+                }
+                if profileData.PlayerPastTeams.count > 0 {
+                    self.PlayerPastTeams.text = profileData.PlayerPastTeams.joinWithSeparator("\n")
+                    self.matchViewHeightConstraint.constant += CGFloat(profileData.PlayerPastTeams.count * 16)
+                }
+                else {
+                     self.PlayerPastTeams.text = "No Teams"
+                }
+               
+                self.PlayerBattingStyle.text = profileData.BattingStyle
+                self.PlayerBowlingStyle.text = profileData.BowlingStyle
+                self.PlayingRole.text = profileData.PlayingRole
+            }
+            else if profileData.UserProfile == "Coach" {
+                self.matchViewHeightConstraint.constant = 800
+                
+                if profileData.CoachCurrentTeams.count > 0 {
+                    self.CoachCurrentTeams.text = profileData.CoachCurrentTeams.joinWithSeparator("\n")
+                    self.matchViewHeightConstraint.constant += CGFloat(profileData.CoachCurrentTeams.count * 16)
+                }
+                else {
+                    self.CoachCurrentTeams.text = "No Teams"
+                }
+                if profileData.CoachPastTeams.count > 0 {
+                    self.CoachPastTeams.text = profileData.CoachPastTeams.joinWithSeparator("\n")
+                    self.matchViewHeightConstraint.constant += CGFloat(profileData.CoachPastTeams.count * 16)
+                }
+                  else {
+                    self.CoachPastTeams.text = "No Teams"
+                }
+                if profileData.CoachPlayedFor.count > 0 {
+                    self.lblCoachPastPlayedFor.text = profileData.CoachPlayedFor.joinWithSeparator("\n")
+                    self.matchViewHeightConstraint.constant += CGFloat(profileData.CoachPlayedFor.count * 16)
+                }
+                else {
+                    self.lblCoachPastPlayedFor.text = "No Teams"
+                }
+                self.CoachCoachingLevel.text = profileData.CoachingLevel
+                
+                if profileData.Certifications.count > 0 {
+                    self.CoachCertifications.text = profileData.Certifications.joinWithSeparator("\n")
+                    self.matchViewHeightConstraint.constant += CGFloat(profileData.Certifications.count * 16)
+                }
+                else {
+                     self.CoachCertifications.text = "No Certifications"
+                }
+                
+                self.CoachExperience.text = profileData.Experience.uppercaseString
+                
+            }
+            else {
+                self.matchViewHeightConstraint.constant = 680
+                
+                if profileData.SupportingTeams.count > 0 {
+                    self.FanSupportingTeams.text = profileData.SupportingTeams.joinWithSeparator("\n")
+                    self.matchViewHeightConstraint.constant += CGFloat(profileData.SupportingTeams.count * 16)
+                }
+                else {
+                     self.FanSupportingTeams.text = "No Teams"
+                }
+                if profileData.InterestedSports.count > 0 {
+                    self.FanInterestedSports.text = profileData.InterestedSports.joinWithSeparator("\n")
+                    self.matchViewHeightConstraint.constant += CGFloat(profileData.InterestedSports.count * 16)
+                }
+                else {
+                    self.FanInterestedSports.text = "No Sports"
+                }
+                if profileData.FavoritePlayers.count > 0 {
+                    self.FanFavouritePlayer.text = profileData.FavoritePlayers.joinWithSeparator("\n")
+                    self.matchViewHeightConstraint.constant += CGFloat(profileData.FavoritePlayers.count * 16)
+                }
+                else {
+                    self.FanFavouritePlayer.text = "No Players"
+                }
+                if profileData.Hobbies.count > 0 {
+                    self.FanHobbies.text = profileData.Hobbies.joinWithSeparator("\n")
+                    self.matchViewHeightConstraint.constant += CGFloat(profileData.Hobbies.count * 16)
+                }
+                else {
+                    self.FanHobbies.text = "No Hobbies"
+                }
+            }
             
             self.CoachingExperienceView.hidden = profileData.UserProfile != userProfileType.Coach.rawValue
             self.CricketFanView.hidden = profileData.UserProfile != userProfileType.Fan.rawValue

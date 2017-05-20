@@ -9,18 +9,29 @@
 import UIKit
 import XLPagerTabStrip
 import KRProgressHUD
+import GoogleMobileAds
 
 class FriendRequestsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider,ThemeChangeable {
     @IBOutlet weak var RequestsTblViewHeight: NSLayoutConstraint!
     @IBOutlet weak var suggestionsTblView: UITableView!
     @IBOutlet weak var noRequestsLbl: UILabel!
     @IBOutlet weak var RequestsTblview: UITableView!
+    @IBOutlet weak var noRequestLblHeightConstraint: NSLayoutConstraint!
+    
+     @IBOutlet weak var bannerView: GADBannerView!
     var currentTheme:CTTheme!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()
         // Do any additional setup after loading the view.
+        loadBannerAds()
+    }
+    func loadBannerAds() {
+        
+        bannerView.adUnitID = adUnitId
+        bannerView.rootViewController = self
+        bannerView.loadRequest(GADRequest())
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,7 +72,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        self.noRequestsLbl.hidden = true
+      
         setRequests();
         //self.RequestsTblview.reloadData()
     }
@@ -214,6 +225,15 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if FriendRequestsData.count == 0 {
+            self.noRequestLblHeightConstraint.constant = 38
+            self.noRequestsLbl.text = "No pending request"
+        }
+        else {
+            self.noRequestLblHeightConstraint.constant = 0
+        }
+        
+        
         return FriendRequestsData.count
     }
     

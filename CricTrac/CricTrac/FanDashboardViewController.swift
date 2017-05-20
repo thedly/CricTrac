@@ -8,6 +8,8 @@
 
 import UIKit
 import Kingfisher
+import SwiftCountryPicker
+import GoogleMobileAds
 
 class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ThemeChangeable {
     
@@ -24,6 +26,11 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var interstedSportsheightConstraint: NSLayoutConstraint!
     @IBOutlet weak var supportingTeamHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var hobbiesHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topBarView: UIView!
+    @IBOutlet weak var topBarHeightConstraint: NSLayoutConstraint!
+    
+     @IBOutlet weak var bannerView: GADBannerView!
+  
     
     var friendProfile:[String:AnyObject]?
     
@@ -105,10 +112,17 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        loadBannerAds()
         
      // Do any additional setup after loading the view.
     }
+    func loadBannerAds() {
+        
+        bannerView.adUnitID = adUnitId
+        bannerView.rootViewController = self
+        bannerView.loadRequest(GADRequest())
+    }
+    
     
    
     override func didReceiveMemoryWarning() {
@@ -126,8 +140,19 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         menuButton.frame = CGRectMake(0, 0, 40, 40)
         let leftbarButton = UIBarButtonItem(customView: menuButton)
         navigationItem.leftBarButtonItem = leftbarButton
-        navigationController?.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-        title = "SIGHTSCREEN"
+       // navigationController?.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+       // title = "SIGHTSCREEN"
+        if let navigation = navigationController{
+            topBarHeightConstraint.constant = 0
+            
+            navigation.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+            title = "SIGHTSCREEN"
+        }
+        else {
+            topBarHeightConstraint.constant = 56
+            self.topBarView.backgroundColor = currentTheme.topColor
+        }
+
         //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         //navigationController!.navigationBar.titleTextAttributes = titleDict
     }
@@ -177,10 +202,10 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         
         if let value = friendProfile{
             userProfileData = Profile(usrObj: value)
-            closeButton.hidden = false
+           // closeButton.hidden = false
         }else{
             userProfileData = profileData
-            closeButton.hidden = true
+           // closeButton.hidden = true
         }
         
         userProfileImage.layer.cornerRadius = userProfileImage.bounds.size.width/2
@@ -198,11 +223,14 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         FavoritePlayers.delegate = self
         FavoritePlayers.dataSource = self
         
+        let currentCountryList = CountriesList.filter({$0.name == userProfileData.Country})
+        let currentISO = currentCountryList[0].iso
+        
         let df = NSDateFormatter()
         df.dateFormat = "dd/MM/yyyy"
         self.PlayerName.text = userProfileData.fullName.uppercaseString
         let formattedString = NSMutableAttributedString()
-        let locationText = formattedString.bold("\(userProfileData.City.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.Country.uppercaseString) ", fontName: appFont_black, fontSize: 15)
+        let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State), ", fontName: appFont_black, fontSize: 15).bold("\(currentISO) ", fontName: appFont_black, fontSize: 15)
         self.PlayerLocation.attributedText = locationText
         //self.userProfileImage.image = LoggedInUserImage
         

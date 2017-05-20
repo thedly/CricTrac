@@ -290,8 +290,8 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     
                     fetchFriendDetail(friendId, sucess: { (result) in
                         let proPic = result["proPic"]
-                        let city =   result["city"]
-                        postCell.postOwnerCity.text = city
+                        //let city =   result["city"]
+                        //postCell.postOwnerCity.text = city
                         
                         if proPic! == "-"{
                             let imageName = defaultProfileImage
@@ -466,7 +466,9 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             if let key = pageKey{
                 LoadTimeline(key, sucess: { (data) in
                     pageKey = data.dictionaryValue["pageKey"]?.stringValue
-                    timelineData = JSON(timelineData!.arrayObject! + data.dictionaryValue["timeline"]!.arrayObject!)
+                    if pageKey != nil {
+                        timelineData = JSON(timelineData!.arrayObject! + data.dictionaryValue["timeline"]!.arrayObject!)
+                    }
                     }, failure: { (error) in
                 })
             }

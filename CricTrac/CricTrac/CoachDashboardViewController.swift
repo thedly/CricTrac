@@ -11,6 +11,7 @@ import KRProgressHUD
 import FirebaseAuth
 import GoogleMobileAds
 import Kingfisher
+import SwiftCountryPicker
 
 class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ThemeChangeable {
     
@@ -29,6 +30,12 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var coachCurrentTeamsHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var coachPlayedHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var coachCertificationHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var topBarView: UIView!
+    @IBOutlet weak var topBarHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var bannerView: GADBannerView!
+
     
     @IBAction func CloseDashboardPressed(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -54,7 +61,13 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //loadBannerAds()
+        loadBannerAds()
+    }
+    func loadBannerAds() {
+        
+        bannerView.adUnitID = adUnitId
+        bannerView.rootViewController = self
+        bannerView.loadRequest(GADRequest())
     }
     
     func initView() {
@@ -62,10 +75,10 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         
         if let value = friendProfile{
             userProfileData = Profile(usrObj: value)
-            closeButton.hidden = false
+           // closeButton.hidden = false
         }else{
             userProfileData = profileData
-            closeButton.hidden = true
+          //  closeButton.hidden = true
         }
         
         //setBackgroundColor()
@@ -91,11 +104,15 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         CoachExperience.text = userProfileData.Experience
         CoachLevel.text = userProfileData.CoachingLevel
         
+        
+        let currentCountryList = CountriesList.filter({$0.name == userProfileData.Country})
+        let currentISO = currentCountryList[0].iso
+        
         let df = NSDateFormatter()
         df.dateFormat = "dd/MM/yyyy"
         self.PlayerName.text = userProfileData.fullName.uppercaseString
         let formattedString = NSMutableAttributedString()
-        let locationText = formattedString.bold("\(userProfileData.City.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State.uppercaseString)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.Country.uppercaseString) ", fontName: appFont_black, fontSize: 15)
+        let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State), ", fontName: appFont_black, fontSize: 15).bold("\(currentISO) ", fontName: appFont_black, fontSize: 15)
         self.PlayerLocation.attributedText = locationText
         //self.userProfileImage.image = LoggedInUserImage
         
@@ -301,8 +318,18 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         navigationItem.leftBarButtonItem = leftbarButton
         
         if let navigation = navigationController{
-            navigation.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-            title = "SIGHTSCREEN"
+          //  navigation.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+          //  title = "SIGHTSCREEN"
+            if let navigation = navigationController{
+                topBarHeightConstraint.constant = 0
+                
+                navigation.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+                title = "SIGHTSCREEN"
+            }
+            else {
+                topBarHeightConstraint.constant = 56
+                self.topBarView.backgroundColor = currentTheme.topColor
+            }
         //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         //// navigationController!.navigationBar.titleTextAttributes = titleDict
         }

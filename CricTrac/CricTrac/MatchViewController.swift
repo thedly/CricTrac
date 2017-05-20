@@ -34,9 +34,12 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     var existTeamName = ""
     var existOppName = ""
     
-    let ctDatePicker = CTDatePicker()
+   let ctDatePicker = CTDatePicker()
     
-    let ctDataPicker = CTPicker()
+     lazy var ctDataPicker = DataPicker()
+  
+    
+  //  let ctDataPicker = CTPicker()
     
     weak var parent:MatchParent?
     
@@ -309,13 +312,20 @@ extension MatchViewController:UITextFieldDelegate
         
         selectedText = textField
         if textField == dateText{
+            
             ctDatePicker.showPicker(self, inputText: textField)
         }
-        else if textField == ageGroup {
-            ctDataPicker.showPicker(self, inputText: textField, data: AgeGroupData )
+         if textField == ageGroup {
+            ctDataPicker = DataPicker()
+            let indexPos = AgeGroupData.indexOf(ageGroup.text!) ?? 0
+            ctDataPicker.showPicker(self, inputText: textField, data: AgeGroupData,selectedValueIndex: indexPos)
+           // ctDataPicker.showPicker(self, inputText: textField, data: AgeGroupData )
         }
         else if textField == playingLevel {
-            ctDataPicker.showPicker(self, inputText: textField, data: PlayingLevels )
+            ctDataPicker = DataPicker()
+            let indexPos = PlayingLevels.indexOf(playingLevel.text!) ?? 0
+            ctDataPicker.showPicker(self, inputText: textField, data: PlayingLevels,selectedValueIndex: indexPos)
+           // ctDataPicker.showPicker(self, inputText: textField, data: PlayingLevels )
         }
         else if textField == teamText{
             addSuggstionBox(textField,dataSource: teamNames)
@@ -335,13 +345,17 @@ extension MatchViewController:UITextFieldDelegate
             addSuggstionBox(textField,dataSource: tournaments)
         }
         else if textField == stage {
-            ctDataPicker.showPicker(self, inputText: textField, data: MatchStage )
+            ctDataPicker = DataPicker()
+            let indexPos = MatchStage.indexOf(stage.text!) ?? 0
+            ctDataPicker.showPicker(self, inputText: textField, data: MatchStage,selectedValueIndex: indexPos)
+           // ctDataPicker.showPicker(self, inputText: textField, data: MatchStage )
         }
         else if textField == oversText {
             AddDoneButtonTo(textField)
         }
         
     }
+    
     
     func AddDoneButtonTo(inputText:UITextField) {
         
@@ -368,10 +382,10 @@ extension MatchViewController:UITextFieldDelegate
     
     func textFieldDidEndEditing(textField: UITextField) {
         
-        if textField.text?.trimWhiteSpace.length > 0{
-            
-            parent?.dataChangedAfterLastSave()
-        }
+//        if textField.text?.trimWhiteSpace.length > 0{
+//            
+//            parent?.dataChangedAfterLastSave()
+//        }
     }
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
        
@@ -382,7 +396,7 @@ extension MatchViewController:UITextFieldDelegate
         else if textField == oversText {
             return newLength <= 3
         }
-        else if textField == dateText {
+        else if textField == dateText || textField == ageGroup || textField == playingLevel || textField == stage {
             return false
         }
         else{

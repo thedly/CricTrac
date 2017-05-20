@@ -11,6 +11,7 @@ import KRProgressHUD
 import FirebaseAuth
 import GoogleMobileAds
 import Kingfisher
+import SwiftCountryPicker
 
 class UserDashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ThemeChangeable {
 
@@ -24,6 +25,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     private var _currentTheme:String = CurrentTheme
     
     @IBOutlet weak var bannerView: GADBannerView!
+    @IBOutlet weak var topBarView: UIView!
+    @IBOutlet weak var topBarViewHeightConstraint: NSLayoutConstraint!
     
     var coverOrProfile = ""
     var friendId:String? = nil
@@ -262,11 +265,17 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             //assign button to navigationbar
             
             navigationItem.leftBarButtonItem = leftbarButton
-        if let navigation = navigationController{
+       if let navigation = navigationController{
+          topBarViewHeightConstraint.constant = 0
             
             navigation.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
             title = "SIGHTSCREEN"
+       }
+       else {
+              topBarViewHeightConstraint.constant = 56
+              self.topBarView.backgroundColor = currentTheme.topColor
         }
+        
     
             //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
             //navigationController!.navigationBar.titleTextAttributes = titleDict
@@ -315,11 +324,11 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         if let value = friendProfile{
             userProfileData = Profile(usrObj: value)
-            closeButton.hidden = false
+           // closeButton.hidden = false
         }
         else{
            userProfileData = profileData
-            closeButton.hidden = true
+           // closeButton.hidden = true
         }
         
         //   setBackgroundColor()
@@ -357,12 +366,14 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         TeamsTable.delegate = self
         TeamsTable.dataSource = self
         
+        let currentCountryList = CountriesList.filter({$0.name == userProfileData.Country})
+        let currentISO = currentCountryList[0].iso
         
         let df = NSDateFormatter()
         df.dateFormat = "dd/MM/yyyy"
         self.PlayerName.text = userProfileData.fullName
         let formattedString = NSMutableAttributedString()
-        let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.Country)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.DateOfBirth)\n", fontName: appFont_black, fontSize: 15)
+        let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State), ", fontName: appFont_black, fontSize: 15).bold("\(currentISO)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.DateOfBirth)\n", fontName: appFont_black, fontSize: 15)
         self.PlayerLocation.attributedText = locationText
 //        self.userProfileImage.image = LoggedInUserImage
 //        self.imgCoverPhoto.image = LoggedInUserCoverImage
@@ -451,7 +462,9 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         setDashboardData()
         TeamsTable.reloadData()
     }
-    
+    override func viewWillDisappear(animated: Bool) {
+         setBackgroundColor()
+    }
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
         
         let scale = newWidth / image.size.width
@@ -1591,25 +1604,26 @@ func setDashboardData(){
             let userId:String = self.friendId ?? currentUser!.uid
             fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeSingleEventOfType(.Value, withBlock: { snapshot in
             
-            if let data = snapshot.value! as? [String:AnyObject]{
-                
-            let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
-                summaryDetailsVC.matchDetailsData = data
-                
-                    summaryDetailsVC.isFriendDashboard = true
-                if let _ = self.friendProfile {
-                    summaryDetailsVC.friendProfile = true
+                if let data = snapshot.value! as? [String:AnyObject]{
+                    
+                let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
+                    summaryDetailsVC.matchDetailsData = data
+                    
+                        summaryDetailsVC.isFriendDashboard = true
+                    if let _ = self.friendProfile {
+                        summaryDetailsVC.friendProfile = true
 
-                    self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
+                        self.presentViewController(summaryDetailsVC, animated: false, completion: nil)
+                    }
+                    else {
+                        self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
+                    }
                 }
-                else {
-                    self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
-                }
-            }
-        })
+            })
+        }
     }
-}
-func didTapRecent2ndMatchID() {
+    
+    func didTapRecent2ndMatchID() {
         if String(DashboardDetails.Recent2ndMatchID) != "-" {
             let matchId:String = (String(DashboardDetails.Recent2ndMatchID) ?? nil)!
             let userId:String = self.friendId ?? currentUser!.uid
@@ -1621,16 +1635,23 @@ func didTapRecent2ndMatchID() {
                     summaryDetailsVC.isFriendDashboard = true
                     if let _ = self.friendProfile {
                         summaryDetailsVC.friendProfile = true
-                        self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
+                        self.presentViewController(summaryDetailsVC, animated: false, completion: nil)
                     }
                     else {
-                        self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                        self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
+                        
+//                        let window = getCurrentWindow()
+//                        UIView.transitionWithView(window, duration: 0.5, options: .TransitionFlipFromLeft, animations: {
+//                            //window.rootViewController = summaryDetailsVC
+//                            self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+//                            }, completion: nil)
                     }
                 }
             })
         }
     }
-func didTapTopBatting1stMatchID() {
+    
+    func didTapTopBatting1stMatchID() {
         if String(DashboardDetails.TopBatting1stMatchID) != "-" {
             let matchId:String = (String(DashboardDetails.TopBatting1stMatchID) ?? nil)!
             let userId:String = self.friendId ?? currentUser!.uid
@@ -1642,10 +1663,10 @@ func didTapTopBatting1stMatchID() {
                     summaryDetailsVC.isFriendDashboard = true
                     if let _ = self.friendProfile {
                         summaryDetailsVC.friendProfile = true
-                        self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
+                        self.presentViewController(summaryDetailsVC, animated: false, completion: nil)
                     }
                     else {
-                        self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                        self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
                     }
                 }
             })
@@ -1664,10 +1685,10 @@ func didTapTopBatting1stMatchID() {
                     summaryDetailsVC.isFriendDashboard = true
                     if let _ = self.friendProfile {
                         summaryDetailsVC.friendProfile = true
-                        self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
+                        self.presentViewController(summaryDetailsVC, animated: false, completion: nil)
                     }
                     else {
-                        self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                        self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
                   }
                 }
             })
@@ -1686,10 +1707,10 @@ func didTapTopBatting1stMatchID() {
                     summaryDetailsVC.isFriendDashboard = true
                     if let _ = self.friendProfile {
                         summaryDetailsVC.friendProfile = true
-                        self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
+                        self.presentViewController(summaryDetailsVC, animated: false, completion: nil)
                     }
                     else {
-                        self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+                        self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
                     }
                 }
             })
@@ -1697,23 +1718,23 @@ func didTapTopBatting1stMatchID() {
     }
     
     func didTapTopBowling2ndMatchID() {
-            if String(DashboardDetails.TopBowling2ndMatchID) != "-" {
-                let matchId:String = (String(DashboardDetails.TopBowling2ndMatchID) ?? nil)!
-                let userId:String = self.friendId ?? currentUser!.uid
-                fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeSingleEventOfType(.Value, withBlock: { snapshot in
-                    
-                    if let data = snapshot.value! as? [String:AnyObject]{
-                    let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
-                    summaryDetailsVC.matchDetailsData = data
-                        summaryDetailsVC.isFriendDashboard = true
-                        if let _ = self.friendProfile {
-                            summaryDetailsVC.friendProfile = true
-                            self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
-                        }
-                        else {
-                            self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
-                        }
+        if String(DashboardDetails.TopBowling2ndMatchID) != "-" {
+            let matchId:String = (String(DashboardDetails.TopBowling2ndMatchID) ?? nil)!
+            let userId:String = self.friendId ?? currentUser!.uid
+            fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeSingleEventOfType(.Value, withBlock: { snapshot in
+                
+                if let data = snapshot.value! as? [String:AnyObject]{
+                let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
+                summaryDetailsVC.matchDetailsData = data
+                    summaryDetailsVC.isFriendDashboard = true
+                    if let _ = self.friendProfile {
+                        summaryDetailsVC.friendProfile = true
+                        self.presentViewController(summaryDetailsVC, animated: false, completion: nil)
                     }
+                    else {
+                        self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
+                    }
+                }
             })
         }
     }

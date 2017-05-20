@@ -9,6 +9,7 @@
 import UIKit
 import SCLAlertView
 import KRProgressHUD
+import GoogleMobileAds
 
 class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previousRefershable,UIActionSheetDelegate {
     @IBOutlet weak var matchDetailsTbl: UITableView!
@@ -57,14 +58,17 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     @IBOutlet weak var matchDetailsTitle: UILabel!
     @IBOutlet weak var matchDetailsBack: UIButton!
     @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var bottomViewHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
+     @IBOutlet weak var bannerView: GADBannerView!
     var isFriendDashboard: Bool!  = false
 
     
     
     @IBAction func deleteActionPressed(sender: UIButton) {
         
-        let actionSheetController = UIAlertController(title: "", message: "Are you sure to delete the match?", preferredStyle: .ActionSheet)
+        let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to delete this match?", preferredStyle: .ActionSheet)
         
         // Create and add the Cancel action
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
@@ -140,6 +144,8 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
 
             navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
             self.bottomView.hidden = false
+            self.bannerViewHeightConstraint.constant = 0
+            self.bottomViewHeightConstraint.constant = 50
 
         }
         else {
@@ -147,8 +153,9 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             matchDetailsTitle.text = "SCORECARD"
             matchEditButton.hidden = true
             matchDetailsBack.addTarget(self, action: #selector(didTapCancelOthers), forControlEvents: UIControlEvents.TouchUpInside)
-            
+            self.bannerViewHeightConstraint.constant = 50
             self.bottomView.hidden = true
+            self.bottomViewHeightConstraint.constant = 0
             
 
         }
@@ -218,7 +225,17 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         initializeView()
         // Do any additional setup after loading the view.
         self.automaticallyAdjustsScrollViewInsets = true
+        
+        loadBannerAds()
     }
+    
+    func loadBannerAds() {
+        
+        bannerView.adUnitID = adUnitId
+        bannerView.rootViewController = self
+        bannerView.loadRequest(GADRequest())
+    }
+    
     
     
     override func viewDidAppear(animated: Bool) {

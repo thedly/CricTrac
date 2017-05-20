@@ -10,10 +10,11 @@
 import UIKit
 import XLPagerTabStrip
 import MessageUI
+import GoogleMobileAds
 
 class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,IndicatorInfoProvider,ThemeChangeable,MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate {
     
-    
+     @IBOutlet weak var bannerView: GADBannerView!
     var friendInviteDataArray = friendInviteData
     
     func changeThemeSettigs() {
@@ -33,6 +34,13 @@ class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITabl
       
         setBackgroundColor()
         // Do any additional setup after loading the view.
+    loadBannerAds()
+    }
+    func loadBannerAds() {
+        
+        bannerView.adUnitID = adUnitId
+        bannerView.rootViewController = self
+        bannerView.loadRequest(GADRequest())
     }
     
     override func didReceiveMemoryWarning() {
