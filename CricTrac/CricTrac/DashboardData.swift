@@ -150,11 +150,11 @@ class DashboardData {
         self.TopBatting2ndMatchID = String(dataObj["TopBatting2ndMatchID"] ??  "-")
         self.TopBatting3rdMatchID = String(dataObj["TopBatting3rdMatchID"] ??  "-")
         self.Recent1stMatchID = String(dataObj["Recent1stMatchID"] ??  "-")
-        self.Recent1stMatchDate = String(dataObj["Recent1stMatchDate"] ?? "-")
+        self.Recent1stMatchDate = String(dataObj["Recent1stMatchDate"] ?? "01-Jan-1900")
         self.Recent2ndMatchID = String(dataObj["Recent2ndMatchID"] ??  "-")
-        self.Recent2ndMatchDate = String(dataObj["Recent2ndMatchDate"] ?? "-")
+        self.Recent2ndMatchDate = String(dataObj["Recent2ndMatchDate"] ?? "01-Jan-1900")
         self.Recent3rdMatchID = String(dataObj["Recent3rdMatchID"] ??  "-")
-        self.Recent3rdMatchDate = String(dataObj["Recent3rdMatchDate"] ?? "-")
+        self.Recent3rdMatchDate = String(dataObj["Recent3rdMatchDate"] ?? "01-Jan-1900")
         self.TopBatting1stMatchDispScore = dataObj["TopBatting1stMatchDispScore"] ??  "-"
         self.TopBatting2ndMatchDispScore = dataObj["TopBatting2ndMatchDispScore"] ??  "-"
         self.TopBatting3rdMatchDispScore = dataObj["TopBatting3rdMatchDispScore"] ??  "-"
