@@ -9,7 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 
-class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeChangeable {
+class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeChangeable, AchievementsTextProtocol {
 
     @IBOutlet weak var firstTeamTitle: UILabel!
     @IBOutlet weak var secondTeamTitle: UILabel!
@@ -18,6 +18,8 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     @IBOutlet weak var AchievementsText: UITextField!
     @IBOutlet weak var FirstBattingView: UIView!
     @IBOutlet weak var SecondBattingView: UIView!
+    
+    var achievementsTextValue :String?
     
      lazy var ctDataPicker = DataPicker()
     
@@ -303,9 +305,13 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         }
     }
 
+    func setValueFromMultiSelectAchievements(valueSent: String)
+    {
+        AchievementsText.text = valueSent
+    }
+    
     override func viewDidAppear(animated: Bool) {
         setTeamData()
-      //  AchievementsText?.text = achievementText.joinWithSeparator("\n")
     }
     
     func loadEditData(){
@@ -611,13 +617,16 @@ extension MatchResultsViewController:UITextFieldDelegate{
            
         }
         else if textField == AchievementsText {
-            ctDataPicker = DataPicker()
-            let indexPos = Achievements.indexOf(AchievementsText.text!) ?? 0
-            ctDataPicker.showPicker(self, inputText: textField, data: Achievements,selectedValueIndex: indexPos)
+//            ctDataPicker = DataPicker()
+//            let indexPos = Achievements.indexOf(AchievementsText.text!) ?? 0
+//            ctDataPicker.showPicker(self, inputText: textField, data: Achievements,selectedValueIndex: indexPos)
             //showPicker(self, inputText: textField, data: Achievements)
             
-            //let AchievementVC = viewControllerFrom("Main", vcid:"AchievementListViewController") as! AchievementListViewController
-            //self.presentViewController(AchievementVC, animated: true) {}
+            let AchievementVC = viewControllerFrom("Main", vcid:"AchievementListViewController") as! AchievementListViewController
+            
+            AchievementVC.delegate = self
+            
+            self.presentViewController(AchievementVC, animated: true) {}
         }
     }
     

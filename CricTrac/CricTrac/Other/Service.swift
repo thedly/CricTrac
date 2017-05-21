@@ -11,6 +11,8 @@ import Firebase
 import SCLAlertView
 import KRProgressHUD
 import SwiftyJSON
+
+import FirebaseStorage
 //MARK:- Match Data
 
 func loadInitialValues(){

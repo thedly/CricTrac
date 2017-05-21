@@ -8,7 +8,14 @@
 
 import UIKit
 
+protocol AchievementsTextProtocol {
+    func setValueFromMultiSelectAchievements(valueSent: String)
+}
+
 class AchievementListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,ThemeChangeable {
+    
+    var delegate: AchievementsTextProtocol?
+    
     
     @IBOutlet weak var barView: UIView!
     var dataSource = [String]()
@@ -33,9 +40,12 @@ class AchievementListViewController: UIViewController,UITableViewDelegate,UITabl
     @IBAction func doneButtonTapped(sender: UIButton) {
         
         
-        let resultVC = viewControllerFrom("Main", vcid: "MatchResultsViewController") as! MatchResultsViewController
-        resultVC.AchievementsText?.text = selectedRows.joinWithSeparator("\n")
-        resultVC.achievementText = selectedRows
+        delegate!.setValueFromMultiSelectAchievements(selectedRows.joinWithSeparator(", "))
+        
+        
+//        let resultVC = viewControllerFrom("Main", vcid: "MatchResultsViewController") as! MatchResultsViewController
+//        resultVC.AchievementsText?.text = selectedRows.joinWithSeparator("\n")
+//        resultVC.achievementText = selectedRows
          self.dismissViewControllerAnimated(true, completion: nil)
         
     }
