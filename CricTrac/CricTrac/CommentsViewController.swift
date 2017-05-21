@@ -21,7 +21,6 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     @IBOutlet weak var contentViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var barView: UIView!
     
-  //  var index = 0
     var postIndex = 0
     var commentCount = 0
     var totalLikesCount = 0
@@ -32,12 +31,9 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     
     var postId:String = ""
     var comntsHeightConstraint = false
-    //var postData:JSON?
     var currentTheme:CTTheme!
     var commentId:String = ""
-    //var postOwnerId:String?
     var parent:Deletable?
-    //var ownerCity:String = ""
     var commentDate:String = ""
     
     override func viewDidLoad() {
@@ -162,19 +158,6 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                     })
                 }
                 
-//                let friendId = postData["OwnerID"]!
-//                if let city = friendsCity[friendId as! String]{
-//                    cCell.ownerCity.text = city
-//                }
-//                else {
-//                    fetchFriendCity(friendId as! String, sucess: { (city) in
-//                        friendsCity[friendId as! String] = city
-//                        dispatch_async(dispatch_get_main_queue(),{
-//                            cCell.ownerCity.text = city
-//                        })
-//                    })
-//                }
-                
                 if let postDateTS = postData["AddedTime"] as? Double{
                     let date = NSDate(timeIntervalSince1970:postDateTS/1000.0)
                     let dateFormatter = NSDateFormatter()
@@ -186,8 +169,6 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                 
                 cCell.postText.text = postData["Post"] as? String
                 cCell.delCommentBtn.hidden = true
-                
-//                cCell.likeButton.frame = CGRectMake(0, 0, 10, 10)
                 cCell.likeButton.setImage(UIImage(named: "Like-100"), forState: UIControlState.Normal)
                 cCell.likeButton.titleLabel?.textColor = UIColor.blackColor()
                 
@@ -200,17 +181,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                         }
                     }
                 }
-                
-//                var likeColor = UIColor.blackColor()
-//                cCell.likeButton.setImage(UIImage(named: "Like-100"), forState: UIControlState.Normal)
-//                
-//                if data["isSelfLiked"] as? String == "1" {
-//                    likeColor = UIColor.whiteColor()
-//                    cCell.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
-//                }
-//                cCell.likeButton.titleLabel?.textColor = likeColor
-                
-                
+            
                 if (postData["LikeCount"] != nil) {
                     let likeCount = postData["LikeCount"] as? Int
                     cCell.likes.setTitle("\(likeCount!) Likes", forState:  .Normal)
@@ -347,81 +318,12 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         }
     }
     
-    
-    
-//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//    
-//    }
-//    
-//    func deleteTapp() {
-//
-//    }
-    
     func deletebuttonTapped() {
-//      print("present sir")
-//      //self.view .setNeedsDisplay()
-//        let commentPage = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
-//        commentPage.postId = postId
-//        commentPage.postIndex = postIndex
-//        self.presentViewController(commentPage, animated: false) {}
+
     }
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool{
         let textViewContent = textView.text
-        /*
-         
-         if textViewContent != ""{
-         
-         let lastChar = textViewContent[textViewContent.endIndex.predecessor()]
-         if lastChar == "\n" && text ==  ""{
-         if self.TextViewHeight.constant > 30{
-         self.TextViewHeight.constant = self.TextViewHeight.constant-18
-         }
-         }
-         }
-         if text ==  "\n"{
-         
-         UIView.animateWithDuration(0.1, animations: { () -> Void in
-         if self.TextViewHeight.constant < 102{
-         self.TextViewHeight.constant = self.TextViewHeight.constant+18
-         }
-         
-         })
-         }
-         */
-        
-        //if text ==  "\n"{ return false}
-       
-        
-//        if textViewContent.characters.count < 0 {
-//            postComment.enabled = false
-//            postComment.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
-//
-//        }
-//        else {
-//            postComment.enabled = true
-//            postComment.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-//        
-//        }
-       
-   
-//        let lines  =  textViewContent.characters.count/40
-//        let heightConstant = Int((self.textViewHeightConstraint.constant - 30)/18)
-//        
-//        if lines > heightConstant{
-//            if self.textViewHeightConstraint.constant < 102{
-//                UIView.animateWithDuration(0.1, animations: { () -> Void in
-//                    self.textViewHeightConstraint.constant = self.textViewHeightConstraint.constant+18
-//                })}
-//        }else if heightConstant > lines
-//        {
-//            self.textViewHeightConstraint.constant = self.textViewHeightConstraint.constant - 18
-//        }
-        
-        
-        //sajith - increase the height of the text box and view
-//        self.contentViewForCommentCell.frame = CGRect(x: 0, y: 0, width: 350, height: 120)
-//        self.contentViewForCommentCell.layoutIfNeeded()
         
         let contentSize = textView.sizeThatFits(textView.bounds.size)
         var frame = textView.frame
@@ -435,11 +337,6 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         return true
     }
     
-//    func adjustTblHeight(constratintType: NSLayoutConstraint, collectionType: [String], cellHeight: CGFloat){
-//        constratintType.constant = CGFloat(collectionType.count * Int(cellHeight))
-//    }
-    
-    
     func textViewShouldBeginEditing(textView: UITextView) -> Bool{
         textView.clearPlaceHolder()
         return true
@@ -451,36 +348,8 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
 
         dismissViewControllerAnimated(true) {
             
-//            if self.postLikeCount < self.initialLikes{
-//                var likes = timelineData!.arrayObject![self.postIndex]["Likes"] as! [String:[String:String]]
-//                let keys =  likes.filter{key,val in
-//                    return val["OwnerID"]! == currentUser!.uid
-//                    }.map{
-//                        return $0.0
-//                }
-//
-//                if keys.count > 0 {
-//                    likes.removeValueForKey(keys[0])
-//                    timelineData![self.postIndex]["Likes"] = JSON(likes)
-//                }
-//            }
-//            if self.postLikeCount != self.initialLikes{
-//                self.refreshableParent?.refresh()
-//            }
         }
     }
-    
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
     func offsetFrom(date:NSDate) -> String {
         let now = NSDate()

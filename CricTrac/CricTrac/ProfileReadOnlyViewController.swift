@@ -14,20 +14,13 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
     @IBOutlet weak var PlayerExperienceView: UIView!
     @IBOutlet weak var CoachingExperienceView: UIView!
     @IBOutlet weak var CricketFanView: UIView!
-    
     @IBOutlet weak var matchViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var playerExprHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var cricketFanHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var coachingExprHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var profileImage: UIImageView!
-    
     @IBOutlet weak var activityInd: UIActivityIndicatorView!
-    
-    
     @IBOutlet weak var PlayingRole: UILabel!
-    
-    
     @IBOutlet weak var NameText: UILabel!
     @IBOutlet weak var DOBText: UILabel!
     @IBOutlet weak var EmailText: UILabel!
@@ -36,25 +29,20 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
     @IBOutlet weak var CountryText: UILabel!
     @IBOutlet weak var StateText: UILabel!
     @IBOutlet weak var CityText: UILabel!
-    
     @IBOutlet weak var PlayerCurrentTeams: UILabel!
     @IBOutlet weak var PlayerPastTeams: UILabel!
     @IBOutlet weak var PlayerBattingStyle: UILabel!
     @IBOutlet weak var PlayerBowlingStyle: UILabel!
-    
     @IBOutlet weak var lblCoachPastPlayedFor: UILabel!
-
     @IBOutlet weak var CoachCurrentTeams: UILabel!
     @IBOutlet weak var CoachPastTeams: UILabel!
     @IBOutlet weak var CoachCoachingLevel: UILabel!
     @IBOutlet weak var CoachCertifications: UILabel!
     @IBOutlet weak var CoachExperience: UILabel!
-    
     @IBOutlet weak var FanSupportingTeams: UILabel!
     @IBOutlet weak var FanInterestedSports: UILabel!
     @IBOutlet weak var FanFavouritePlayer: UILabel!
     @IBOutlet weak var FanHobbies: UILabel!
-    
     @IBOutlet weak var editBtn: UIButton!
     let transitionManager = TransitionManager.sharedInstance
     
@@ -72,11 +60,9 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
         
         let vc = viewControllerFrom("Main", vcid: "UserInfoEditViewController") as! UserInfoViewController
         
-        
         self.navigationController?.pushViewController(vc, animated: true)
         
       //  vc.transitioningDelegate = self.transitionManager
-        
         
        // presentViewController(vc, animated: true, completion: nil)
     }

@@ -243,102 +243,97 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         }
         else
         {
-            let data = timelineData!.arrayValue[indexPath.section-1]
-            
-            if let imageurl = data.dictionaryValue["postImage"]?.string {
-                let imageCell =  timeLineTable.dequeueReusableCellWithIdentifier("imagepost", forIndexPath: indexPath) as! ImagePostTableViewCell
-                let postid = data.dictionaryValue["postId"]?.stringValue
+            if indexPath.section < timelineData?.count {
+                let data = timelineData!.arrayValue[indexPath.section-1]
                 
-                imageCell.imagePost.image = nil
-                imageCell.imagePost.loadImage(imageurl, postId:postid!)
-                acell = imageCell
-            }
-            else{
-                let postCell =  timeLineTable.dequeueReusableCellWithIdentifier("aPost", forIndexPath: indexPath) as! APostTableViewCell
-                postCell.parent = self
-                postCell.postIndex = indexPath.section-1
-                
-                
-                let friendId = data["OwnerID"].stringValue
-
-                if data["DisplayTime"] != nil {
-                    postCell.postedDate.text = data["DisplayTime"].stringValue
-                }
-                else if let dateTimeStamp = data["AddedTime"].double{
-                    let date = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
-                    let dateFormatter = NSDateFormatter()
-                    dateFormatter.timeZone = NSTimeZone.localTimeZone()
-                    dateFormatter.timeStyle = .ShortStyle
-                    dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-                    postCell.postedDate.text = dateFormatter.stringFromDate(date)
-                }
-                
-                postCell.postOwnerId = friendId
-                
-                let postedBy = data["PostedBy"].stringValue
-                if postedBy == "CricTrac" {
-                    postCell.postOwnerName.text = "CricTrac"
+                if let imageurl = data.dictionaryValue["postImage"]?.string {
+                    let imageCell =  timeLineTable.dequeueReusableCellWithIdentifier("imagepost", forIndexPath: indexPath) as! ImagePostTableViewCell
+                    let postid = data.dictionaryValue["postId"]?.stringValue
                     
-                    if friendId == currentUser!.uid {
-                        postCell.deleteButton.hidden = false
+                    imageCell.imagePost.image = nil
+                    imageCell.imagePost.loadImage(imageurl, postId:postid!)
+                    acell = imageCell
+                }
+                else {
+                    let postCell =  timeLineTable.dequeueReusableCellWithIdentifier("aPost", forIndexPath: indexPath) as! APostTableViewCell
+                    postCell.parent = self
+                    postCell.postIndex = indexPath.section-1
+                    
+                    let friendId = data["OwnerID"].stringValue
+
+                    if data["DisplayTime"] != nil {
+                        postCell.postedDate.text = data["DisplayTime"].stringValue
+                    }
+                    else if let dateTimeStamp = data["AddedTime"].double{
+                        let date = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
+                        let dateFormatter = NSDateFormatter()
+                        dateFormatter.timeZone = NSTimeZone.localTimeZone()
+                        dateFormatter.timeStyle = .ShortStyle
+                        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+                        postCell.postedDate.text = dateFormatter.stringFromDate(date)
+                    }
+                    
+                    postCell.postOwnerId = friendId
+                    
+                    let postedBy = data["PostedBy"].stringValue
+                    if postedBy == "CricTrac" {
+                        postCell.postOwnerName.text = "CricTrac"
+                        
+                        if friendId == currentUser!.uid {
+                            postCell.deleteButton.hidden = false
+                        }
+                        else {
+                            postCell.deleteButton.hidden = true
+                        }
+                        
+                        postCell.postOwnerCity.text = data["PostType"].stringValue
+                        
+                        fetchFriendDetail(friendId, sucess: { (result) in
+                            let proPic = result["proPic"]
+                            
+                            if proPic! == "-"{
+                                let imageName = defaultProfileImage
+                                let image = UIImage(named: imageName)
+                                postCell.postOwnerPic.image = image
+                            }else{
+                                if let imageURL = NSURL(string:proPic!){
+                                    postCell.postOwnerPic.kf_setImageWithURL(imageURL)
+                                }
+                            }
+                        })
                     }
                     else {
-                        postCell.deleteButton.hidden = true
-                    }
-                    
-                    postCell.postOwnerCity.text = data["PostType"].stringValue
-                    
-                    fetchFriendDetail(friendId, sucess: { (result) in
-                        let proPic = result["proPic"]
-                        //let city =   result["city"]
-                        //postCell.postOwnerCity.text = city
-                        
-                        if proPic! == "-"{
-                            let imageName = defaultProfileImage
-                            let image = UIImage(named: imageName)
-                            postCell.postOwnerPic.image = image
+                        postCell.postOwnerName.text = data.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
+                        if let postedBy = data["OwnerID"].string  where postedBy == currentUser!.uid{
+                            postCell.deleteButton.hidden = false
                         }else{
-                            if let imageURL = NSURL(string:proPic!){
-                                postCell.postOwnerPic.kf_setImageWithURL(imageURL)
-                            }
+                            postCell.deleteButton.hidden = true
                         }
-                    })
-                }else{
-                    postCell.postOwnerName.text = data.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
-                    if let postedBy = data["OwnerID"].string  where postedBy == currentUser!.uid{
-                        postCell.deleteButton.hidden = false
-                    }else{
-                        postCell.deleteButton.hidden = true
-                    }
-                    
-                    fetchFriendCity(friendId, sucess: { (data) in
-                        friendsCity[friendId] = data
-                        dispatch_async(dispatch_get_main_queue(),{
-                            postCell.postOwnerCity.text = data
+                        
+                        fetchFriendCity(friendId, sucess: { (data) in
+                            friendsCity[friendId] = data
+                            dispatch_async(dispatch_get_main_queue(),{
+                                postCell.postOwnerCity.text = data
+                            })
                         })
-                    })
-                    
-                    fetchFriendDetail(friendId, sucess: { (result) in
-                        let proPic = result["proPic"]
-                        let city =   result["city"]
-                        postCell.postOwnerCity.text = city
                         
-                        if proPic! == "-"{
-                            let imageName = defaultProfileImage
-                            let image = UIImage(named: imageName)
-                            postCell.postOwnerPic.image = image
-                        }else{
-                            if let imageURL = NSURL(string:proPic!){
-                                postCell.postOwnerPic.kf_setImageWithURL(imageURL)
+                        fetchFriendDetail(friendId, sucess: { (result) in
+                            let proPic = result["proPic"]
+                            let city =   result["city"]
+                            postCell.postOwnerCity.text = city
+                            
+                            if proPic! == "-"{
+                                let imageName = defaultProfileImage
+                                let image = UIImage(named: imageName)
+                                postCell.postOwnerPic.image = image
+                            }else{
+                                if let imageURL = NSURL(string:proPic!){
+                                    postCell.postOwnerPic.kf_setImageWithURL(imageURL)
+                                }
                             }
-                        }
-                    })
-                }
-                
-                
-//                //sajith-  fetch the fresh post data
-//                let postid = data.dictionaryValue["postId"]?.stringValue
-//                getPost(postid!) { (data) in
+                        })
+                    }
+                    
                     postCell.totalLikeCount = 0
                     if (data.dictionaryValue["LikeCount"]?.int != nil) {
                         let likeCount = data.dictionaryValue["LikeCount"]?.int
@@ -358,7 +353,6 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                     else {
                         postCell.commentCount.setTitle("0 Comments", forState: .Normal)
                     }
-//
                     var likeColor = UIColor.blackColor()
                     postCell.likeButton.setImage(UIImage(named: "Like-100"), forState: UIControlState.Normal)
                     postCell.currentUserHasLikedThePost = false
@@ -371,42 +365,12 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                             postCell.currentUserHasLikedThePost = true
                         }
                     }
-                
-                //}
-                
-                    
-               // postCell.totalLikeCount = 0
-                postCell.post.text = data.dictionaryValue["Post"]?.stringValue
-                postCell.index = indexPath.section-1
-                
-//                var commentsCount = 0
-//                
-//                if let value = data.dictionaryValue["TimelineComments"]?.count{
-//                    commentsCount = value
-//                }
-//
-//                postCell.commentCount.setTitle("\(commentsCount) Comments", forState: .Normal)
-
-                postCell.postId = data.dictionaryValue["postId"]?.stringValue
-                
-//                var likesCount = 0
-//                //var likeColor = UIColor.grayColor()
-//                var likeColor = UIColor.blackColor()
-//                postCell.likeButton.setImage(UIImage(named: "Like-100"), forState: UIControlState.Normal)
-//                
-//                if let likes = data.dictionaryValue["Likes"]?.dictionaryObject as? [String:[String:String]]{
-//                    let result = likes.filter{ return  $0.1["OwnerID"] == currentUser!.uid }
-//                    if result.count > 0 {
-//                        likeColor = UIColor.whiteColor()
-//                        postCell.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
-//                    }
-//                    likesCount = likes.count
-//                    postCell.totalLikeCount = likesCount
-//                }
-//                postCell.likeCount.setTitle("\(likesCount) Likes", forState: .Normal)
-//                
-                postCell.likeButton.titleLabel?.textColor = likeColor
-                acell = postCell
+                    postCell.post.text = data.dictionaryValue["Post"]?.stringValue
+                    postCell.index = indexPath.section-1
+                    postCell.postId = data.dictionaryValue["postId"]?.stringValue
+                    postCell.likeButton.titleLabel?.textColor = likeColor
+                    acell = postCell
+                }
             }
         }
         

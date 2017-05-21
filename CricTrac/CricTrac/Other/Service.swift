@@ -273,17 +273,72 @@ func addNewOppoSitTeamName(oTeamName:String){
     ref.setValue(oTeamName)
 }
 
-func addNewTournamentName(tournamnet:String){
+func addNewTournamentName(tournament:String){
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Tournaments").childByAutoId()
-    ref.setValue(tournamnet)
+    ref.setValue(tournament)
 }
 
-func getAllUserData(sucessBlock:(AnyObject)->Void){
-    fireBaseRef.child("Users").child(currentUser!.uid).observeSingleEventOfType(.Value, withBlock: { snapshot in
+//func getAllUserData(sucessBlock:(AnyObject)->Void){
+//    fireBaseRef.child("Users").child(currentUser!.uid).observeSingleEventOfType(.Value, withBlock: { snapshot in
+//        if let data = snapshot.value as? [String : AnyObject]{
+//            var datToBeManipulated = data
+//            datToBeManipulated["Id"] = currentUser!.uid
+//            sucessBlock(datToBeManipulated)
+//        }
+//        else{
+//            sucessBlock([:])
+//        }
+//    })
+//}
+
+func getAllTeams(sucessBlock:(AnyObject)->Void){
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Teams").observeSingleEventOfType(.Value, withBlock: { snapshot in
         if let data = snapshot.value as? [String : AnyObject]{
-            var datToBeManipulated = data
-            datToBeManipulated["Id"] = currentUser!.uid
-            sucessBlock(datToBeManipulated)
+            sucessBlock(data)
+        }
+        else{
+            sucessBlock([:])
+        }
+    })
+}
+
+func getAllOpponents(sucessBlock:(AnyObject)->Void){
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Opponents").observeSingleEventOfType(.Value, withBlock: { snapshot in
+        if let data = snapshot.value as? [String : AnyObject]{
+            sucessBlock(data)
+        }
+        else{
+            sucessBlock([:])
+        }
+    })
+}
+
+func getAllGrounds(sucessBlock:(AnyObject)->Void){
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Grounds").observeSingleEventOfType(.Value, withBlock: { snapshot in
+        if let data = snapshot.value as? [String : AnyObject]{
+            sucessBlock(data)
+        }
+        else{
+            sucessBlock([:])
+        }
+    })
+}
+
+func getAllVenue(sucessBlock:(AnyObject)->Void){
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Venue").observeSingleEventOfType(.Value, withBlock: { snapshot in
+        if let data = snapshot.value as? [String : AnyObject]{
+            sucessBlock(data)
+        }
+        else{
+            sucessBlock([:])
+        }
+    })
+}
+
+func getAllTournaments(sucessBlock:(AnyObject)->Void){
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Tournaments").observeSingleEventOfType(.Value, withBlock: { snapshot in
+        if let data = snapshot.value as? [String : AnyObject]{
+            sucessBlock(data)
         }
         else{
             sucessBlock([:])
