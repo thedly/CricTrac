@@ -28,7 +28,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         //loadTimeline()
         
         //calculate the Unread Notifications
-        //calcUnreadNotifications()
+        calcUnreadNotifications()
         
         self.timeLineTable.reloadData()
         setNavigationBarProperties();

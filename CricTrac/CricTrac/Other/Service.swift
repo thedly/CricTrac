@@ -1176,15 +1176,26 @@ func getAllNotifications(sucess:(data:[[String: AnyObject]])->Void){
     })
 }
 
-//func calcUnreadNotifications() {
-//    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Notifications").queryLimitedToLast(30)
-//    ref.queryOrderedByChild("isRead").queryStartingAtValue(0).queryEndingAtValue(0).observeEventType(.Value, withBlock: { snapshot in
-//        let count = snapshot.childrenCount
-//        
-//        let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").child("Notifications")
-//        ref.setValue(count)
-//    })
-//}
+func calcUnreadNotifications() {
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Notifications").queryLimitedToLast(30)
+    ref.observeEventType(.Value, withBlock: { snapshot in
+        if let data = snapshot.value as? [String:[String:AnyObject]] {
+            //var result = [Notifications]()
+            var notiCount = 0
+            for (_,value) in data {
+                let unRead = value["isRead"] as? Int
+                if unRead == 0 {
+                    notiCount++
+                }
+            }
+        
+            //let count = snapshot.childrenCount
+        
+            let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings").child("NotificationsCount")
+            ref.setValue(notiCount)
+        }
+    })
+}
 
 //func getNotificationsCount(sucess:(notificationCount:String)->Void){
 //    fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings").child("Notifications").observeEventType(.Value, withBlock: { snapshot in

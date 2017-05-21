@@ -105,11 +105,11 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     }
     
     func getMatchData(){
-        KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+        //KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
         getAllMatchData { (data) in
             self.matchDataSource.removeAll()
             self.makeCells(data)
-            KRProgressHUD.dismiss()
+            //KRProgressHUD.dismiss()
         }
     }
     

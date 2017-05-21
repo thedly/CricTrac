@@ -99,8 +99,14 @@ let fireBaseRef =  FIRDatabase.database().reference()
 
 let storageRef = FIRStorage.storage().referenceForURL("gs://arjun-innovations.appspot.com")
 
-let serverBaseURL = "http://crictracserver.azurewebsites.net"
+//Azure Dev environment url
+//let serverBaseURL = "http://crictracdevserver.azurewebsites.net"
 
+//Azure QA environment url
+let serverBaseURL = "http://crictracqaserver.azurewebsites.net"
+
+//Azure Prod environment url
+//let serverBaseURL = "http://crictracserver.azurewebsites.net"
 
 /*
  
@@ -251,8 +257,8 @@ let themeColors = [
 
 let defaultTheme = "Grass"
 let defaultProfileImage = "propic"
-let DashboardDataUpdateUrl = "http://crictracserver.azurewebsites.net/Users/"
-let FriendSuggstionUrl = "http://crictracserver.azurewebsites.net/suggestions/"
+let DashboardDataUpdateUrl = serverBaseURL + "/Users/"
+let FriendSuggstionUrl = serverBaseURL + "/suggestions/"
 let topColorDefault = themeColors[CurrentTheme]!["topColor"]!
 let bottomColorDefault = themeColors[CurrentTheme]!["bottomColor"]!
 let appFont_black = "SourceSansPro-Black"
