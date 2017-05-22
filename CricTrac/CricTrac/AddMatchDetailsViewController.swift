@@ -128,8 +128,10 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             title = "ADD MATCH"
           }
           else {
-             menuButton.frame = CGRectMake(0, 0, 40, 40)
-            menuButton.setImage(UIImage(named: "Back-100"), forState: UIControlState.Normal)
+            menuButton.frame = CGRectMake(0, 0, 55, 50)
+            menuButton.setTitle("CANCEL", forState:.Normal)
+            menuButton.titleLabel?.font = UIFont(name: appFont_bold, size: 15)
+            //menuButton.setImage(UIImage(named: "Back-100"), forState: UIControlState.Normal)
             menuButton.addTarget(self, action: #selector(popBack), forControlEvents: UIControlEvents.TouchUpInside)
             title = "EDIT MATCH"
         }
@@ -153,7 +155,19 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     }
     
     func popBack()  {
-        self.navigationController?.popViewControllerAnimated(true)
+        let confirmAlert = UIAlertController(title: "" ,message:"Are you sure you want to Cancel the changes without saving?",preferredStyle: UIAlertControllerStyle.Alert)
+        
+        confirmAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction!)-> Void in
+                      self.navigationController?.popViewControllerAnimated(true)
+            
+                   }))
+        
+        confirmAlert.addAction(UIAlertAction(title: "No", style: .Default, handler: { (action: UIAlertAction) in
+            
+        }))
+        self.presentViewController(confirmAlert, animated: true, completion: nil)
+        
+      
     }
     
     func getUserData(){

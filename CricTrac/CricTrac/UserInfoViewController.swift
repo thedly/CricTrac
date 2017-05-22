@@ -78,10 +78,11 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         var currentTheme:CTTheme!
         currentTheme = cricTracTheme.currentTheme
         let menuButton: UIButton = UIButton(type:.Custom)
-        menuButton.setImage(UIImage(named: "Back-100"), forState: UIControlState.Normal)
+       // menuButton.setImage(UIImage(named: "Back-100"), forState: UIControlState.Normal)
+        menuButton.setTitle("CANCEL", forState: .Normal)
         menuButton.addTarget(self, action: #selector(didTapCancel), forControlEvents: UIControlEvents.TouchUpInside)
-        menuButton.frame = CGRectMake(0, 0, 40, 40)
-        menuButton.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5)
+        menuButton.frame = CGRectMake(0, 0, 55, 50)
+        //menuButton.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5)
         let leftbarButton = UIBarButtonItem(customView: menuButton)
         let addNewMatchButton: UIButton = UIButton(type:.Custom)
         addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
@@ -185,7 +186,17 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         getAllProfileData({ data in
             profileData = Profile(usrObj: data)
         })
-        self.navigationController?.popViewControllerAnimated(true)
+        let confirmAlert = UIAlertController(title: "" ,message:"Are you sure you want to Cancel the changes without saving?",preferredStyle: UIAlertControllerStyle.Alert)
+        
+        confirmAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction!)-> Void in
+            self.navigationController?.popViewControllerAnimated(true)
+            
+        }))
+        
+        confirmAlert.addAction(UIAlertAction(title: "No", style: .Default, handler: { (action: UIAlertAction) in
+            
+        }))
+        self.presentViewController(confirmAlert, animated: true, completion: nil)
     }
     
     @IBAction func addUserBtnPressed(sender: AnyObject) {

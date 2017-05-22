@@ -14,7 +14,7 @@ import KRProgressHUD
 class ForgotPasswordViewController: UIViewController,ThemeChangeable {
 
     @IBOutlet weak var resetLinkEmailTxt: UITextField!
-    
+    @IBOutlet weak var forgotPasswordLabel: UILabel!
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
@@ -28,6 +28,7 @@ class ForgotPasswordViewController: UIViewController,ThemeChangeable {
         //setUIBackgroundTheme(self.view)
         setBackgroundColor()
         // Do any additional setup after loading the view.
+        forgotPasswordLabel.text = "RESET PASSWORD"
     }
 
     override func didReceiveMemoryWarning() {

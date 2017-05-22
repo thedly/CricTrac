@@ -621,10 +621,13 @@ extension MatchResultsViewController:UITextFieldDelegate{
 //            let indexPos = Achievements.indexOf(AchievementsText.text!) ?? 0
 //            ctDataPicker.showPicker(self, inputText: textField, data: Achievements,selectedValueIndex: indexPos)
             //showPicker(self, inputText: textField, data: Achievements)
+    
+            AchievementsText.resignFirstResponder()
             
             let AchievementVC = viewControllerFrom("Main", vcid:"AchievementListViewController") as! AchievementListViewController
             
             AchievementVC.delegate = self
+            AchievementVC.achievementData = AchievementsText.text!
             
             self.presentViewController(AchievementVC, animated: true) {}
         }

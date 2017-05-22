@@ -198,12 +198,21 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         let notificationButton: UIButton = UIButton(type:.Custom)
         notificationButton.frame = CGRectMake(0, 0, 20, 20)
         notificationButton.setImage(UIImage(named: "Notification"), forState: UIControlState.Normal)
+        
         notificationButton.addTarget(self, action: #selector(didNotificationButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
         let righttbarButton = UIBarButtonItem(customView: notificationButton)
+       
+//        let notifyLabel: UILabel = UILabel()
+//        notifyLabel.frame = CGRectMake(0, 0, 10, 10)
+//        notifyLabel.textColor = UIColor.redColor()
+//        notifyLabel.text = "2"
+//        let rightbarButtonItem = UIBarButtonItem(customView: notifyLabel)
+        
         
         //assign button to navigationbar
         
         navigationItem.leftBarButtonItem = leftbarButton
+       // navigationItem.rightBarButtonItems = [ righttbarButton,rightbarButtonItem]
         navigationItem.rightBarButtonItem = righttbarButton
         self.view.backgroundColor =  currentTheme.topColor
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)

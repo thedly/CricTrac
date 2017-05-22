@@ -15,6 +15,7 @@ protocol AchievementsTextProtocol {
 class AchievementListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,ThemeChangeable {
     
     var delegate: AchievementsTextProtocol?
+    var achievementData = ""
     
     
     @IBOutlet weak var barView: UIView!
@@ -26,6 +27,8 @@ class AchievementListViewController: UIViewController,UITableViewDelegate,UITabl
         super.viewDidLoad()
         changeThemeSettigs()
         self.setBackgroundColor()
+        
+       
        
         // Do any additional setup after loading the view.
         dataSource = Achievements
@@ -79,63 +82,41 @@ class AchievementListViewController: UIViewController,UITableViewDelegate,UITabl
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("AchievementCell", forIndexPath: indexPath) as! AchievementTableViewCell
-        cell.achievementNames.text = dataSource[indexPath.row]
-        
-        
-        
-        
-        return cell
-    }
-//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        let cell = tableView.cellForRowAtIndexPath(indexPath)
-//        
-//       
-//        if cell!.selected {
-//            cell!.selected = false
-//            
-//            if cell!.accessoryType == UITableViewCellAccessoryType.None {
-//                cell!.accessoryType = UITableViewCellAccessoryType.Checkmark
-//            }
-//            else {
-//                cell!.accessoryType = UITableViewCellAccessoryType.None
-//            }
-//        }
-//        
-//    }
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        //print("selected  \(intervalNames[indexPath.row])")
-       //  let cell1 = tableView.dequeueReusableCellWithIdentifier("AchievementCell", forIndexPath: indexPath) as! AchievementTableViewCell
-        
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-            if cell.selected {
+            let cell = tableView.dequeueReusableCellWithIdentifier("AchievementCell", forIndexPath: indexPath) as! AchievementTableViewCell
+            cell.achievementNames.text = dataSource[indexPath.row]
+            
+          
+            if achievementData.containsString(dataSource[indexPath.row]){
                 cell.accessoryType = .Checkmark
+                selectedRows.append(dataSource[indexPath.row])
+             
+            }
+            
+            return cell
+        }
+
+     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+            
+            if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+                if cell.selected {
+                    cell.accessoryType = .Checkmark
+                   
+                }
+                if cell.accessoryType == .Checkmark {
+                   let str = dataSource[indexPath.row]
+                    selectedRows.append(str)
+                }
                
             }
-            if cell.accessoryType == .Checkmark {
-               let str = dataSource[indexPath.row]
-                selectedRows.append(str)
-            }
-
            
         }
-        
-        if let sr = tableView.indexPathsForSelectedRows {
-            print("didDeselectRowAtIndexPath selected rows:\(sr)")
-        }
-    }
     
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         
-      //  print("deselected  \(intervalNames[indexPath.row])")
-        
         if let cell = tableView.cellForRowAtIndexPath(indexPath) {
             cell.accessoryType = .None
+            cell.backgroundColor = UIColor.clearColor()
         }
-        
-        if let sr = tableView.indexPathsForSelectedRows {
-            print("didDeselectRowAtIndexPath selected rows:\(sr)")
-        }
+      
     }
 }

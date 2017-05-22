@@ -131,7 +131,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             let vc  = storyboard.instantiateViewControllerWithIdentifier(vcName! as! String)
             self.navigationController?.pushViewController(vc, animated: true)
         }
+        else if vcName == "ChangePassword" {
+            let forgotPwdVC = viewControllerFrom("Main", vcid: "ForgotPasswordViewController") as! ForgotPasswordViewController
+          // forgotPwdVC.change
         
+           // forgotPwdVC.forgotPasswordLabel.text = "Change Password"
+            
+            self.presentViewController(forgotPwdVC, animated: true, completion: nil)
+        }
         else if vcName == "StaticPageViewController" {
             let viewCtrl = storyboard.instantiateViewControllerWithIdentifier(vcName! as! String) as! StaticPageViewController
             

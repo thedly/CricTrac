@@ -89,7 +89,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
             // KRProgressHUD.dismiss()
             if error != nil{
               
-                let alert = UIAlertController(title: "Login Error", message: "This password is invalid or user does not have a password", preferredStyle: UIAlertControllerStyle.Alert)
+                let alert = UIAlertController(title: "Login Error", message: "Invalid username or password./n If you are a new user, register using SIGN UP", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
                 

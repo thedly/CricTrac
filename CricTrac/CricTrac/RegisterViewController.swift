@@ -18,8 +18,11 @@ import FBSDKLoginKit
 import KRProgressHUD
 import SCLAlertView
 
-class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChangeable ,GIDSignInDelegate, GIDSignInUIDelegate {
+class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChangeable ,GIDSignInDelegate, GIDSignInUIDelegate,UITextFieldDelegate{
    
+    @IBOutlet weak var registerBottomViewLabel: UILabel!
+    @IBOutlet weak var fbGoogleButtonsHeightConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var username:UITextField!
     @IBOutlet weak var password:UITextField!
     @IBOutlet weak var confirmPassword: UITextField!
@@ -37,8 +40,9 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        password.delegate = self
         setBackgroundColor()
+        fbGoogleButtonsHeightConstraint.constant = 0
         //username.text = "bharathi92m@gmail.com"
        // password.text = "qwerty"
         //setUIBackgroundTheme(self.view)
@@ -241,14 +245,37 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
         self.presentViewController(sliderMenu, animated: true) {}
         KRProgressHUD.dismiss()
     }
-    
-    
+    func textFieldDidEndEditing(textField: UITextField) {
+        if textField ==  password {
+          if  password.text?.characters.count <= 6 {
+                let alert = UIAlertController(title: "", message: "Password must be more than 6 characters", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+
+            
+        }
+        
+    }
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        let newLength = textField.text!.characters.count + string.characters.count - range.length
+        
+        if textField == password {
+           return newLength <= 20
+        }
+        return true
+    }
     
 }
+    
+
 
 extension RegisterViewController {
+
     
     @IBAction func closeRegisterViewTapped(sender: AnyObject) {
+        //
         
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -257,6 +284,7 @@ extension RegisterViewController {
         loginWithGoogle()
         
     }
+    
     
     @IBAction func loginWithUserNamePassword(){
         
@@ -282,13 +310,13 @@ extension RegisterViewController {
                         
                                 // Email sent.
                             else {
-                        
-                                self.dismissViewControllerAnimated(true, completion: {
+                               
                                   //  SCLAlertView().showInfo("Verify email", subTitle: "An email has been sent for verification")
-                                    let alert = UIAlertController(title: "", message: "An email has been sent for verification", preferredStyle: UIAlertControllerStyle.Alert)
-                                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                                    let alert = UIAlertController(title: "", message: "Please check your email and verify the account", preferredStyle: UIAlertControllerStyle.Alert)
+                                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
+                                    self.dismissViewControllerAnimated(true, completion: nil)
+                                }))
                                     self.presentViewController(alert, animated: true, completion: nil)
-                                })
                             }
                         }
                     }
@@ -297,7 +325,7 @@ extension RegisterViewController {
                         let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
                         dispatch_after(delay, dispatch_get_main_queue()) {
                           //  SCLAlertView().showError("Registration Error", subTitle: error!.localizedDescription)
-                            let alert = UIAlertController(title: "", message: "This email address is already in use", preferredStyle: UIAlertControllerStyle.Alert)
+                            let alert = UIAlertController(title: "", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
                             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                             self.presentViewController(alert, animated: true, completion: nil)
                         }

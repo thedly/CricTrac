@@ -64,7 +64,7 @@ let settingsMenuData = [
     //["title":"Media Auto-Download","vc":"UserDashboardViewController", "img": "Menu_Dashboard", "desc": "Selecting no will auto-download media only while you are using wi-fi", "IsSwitchVisible": false],
     //["title":"Offline Matches","vc":"AddMatchDetailsViewController", "img": "Menu_AddMatch", "desc": "Matches to be downloaded for offline view", "IsSwitchVisible": false],
     ["title":"App Theme","vc":"ThemeSettingsViewController", "img": "Menu_Settings", "desc": "Choose desired theme color for your app", "IsSwitchVisible": false],
-    ["title":"Change Password","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "" ],
+    ["title":"Change Password","vc":  "ChangePassword", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "" ],
     ["title":"FAQ","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/info/FAQ.htm"],
     ["title":"Feedback","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "" ],
     ["title":"Rate this app","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay": "itms://itunes.apple.com/de/app/x-gift/id839686104?mt=8&uo=4"],

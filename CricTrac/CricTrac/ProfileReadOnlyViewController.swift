@@ -48,6 +48,8 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
     
     @IBAction func didMenuButtonTapp(sender: UIButton){
         sliderMenu.setDrawerState(.Opened, animated: true)
+        
+        
     }
     
     func changeThemeSettigs() {
@@ -206,6 +208,7 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
         //setColorForViewsWithSameTag(CricketFanView)
         
         // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {
