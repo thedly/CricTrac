@@ -243,7 +243,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         }
         else
         {
-            if indexPath.section < timelineData?.count {
+            if indexPath.section <= timelineData?.count {
                 let data = timelineData!.arrayValue[indexPath.section-1]
                 
                 if let imageurl = data.dictionaryValue["postImage"]?.string {
