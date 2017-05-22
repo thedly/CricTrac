@@ -200,22 +200,22 @@ class SplashScreenViewController: UIViewController,ThemeChangeable {
 //        }
         
         //get the saved app theme from database
-//        var newTheme:String?
-//        getAppTheme((currentUser?.uid)!, sucess: { (result) in
-//            newTheme = result
-//            
-//            if let usrTheme = NSUserDefaults.standardUserDefaults().valueForKey("userTheme") {
-//                CurrentTheme = usrTheme as! String
-//            }
-//            
-//            if CurrentTheme != newTheme! {
-//                CurrentTheme = newTheme!
-//                NSUserDefaults.standardUserDefaults().setValue(newTheme, forKeyPath: "userTheme")
-//                NSNotificationCenter.defaultCenter().postNotificationName("ThemeChanged", object: nil)
-//            }
-//            cricTracTheme.currentTheme = getPersistedTheme()
-//            //self.setBackgroundColor()
-//        })
+        var newTheme:String?
+        getAppTheme((currentUser?.uid)!, sucess: { (result) in
+            newTheme = result
+            
+            if let usrTheme = NSUserDefaults.standardUserDefaults().valueForKey("userTheme") {
+                CurrentTheme = usrTheme as! String
+            }
+            
+            if CurrentTheme != newTheme! {
+                CurrentTheme = newTheme!
+                NSUserDefaults.standardUserDefaults().setValue(newTheme, forKeyPath: "userTheme")
+                NSNotificationCenter.defaultCenter().postNotificationName("ThemeChanged", object: nil)
+            }
+            cricTracTheme.currentTheme = getPersistedTheme()
+            //self.setBackgroundColor()
+        })
         
         
         if currentUser != nil && profileData.userExists {

@@ -181,13 +181,18 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     
     @IBAction func didTapCancel(sender: UIButton) {
         //dismissViewControllerAnimated(true) {}
+        //reset the profile data on cancel
+        getAllProfileData({ data in
+            profileData = Profile(usrObj: data)
+        })
         self.navigationController?.popViewControllerAnimated(true)
     }
+    
     @IBAction func addUserBtnPressed(sender: AnyObject) {
         
         if firstName.text == "" || lastName.text == "" || dateOfBirth.text == "" || emailId.text == "" || mobile.text == "" || gender.text == "" || country.text == "" || state.text == "" || city.text == "" {
             
-            let confirmAlert = UIAlertController(title: "" ,message:"All fields are mandatory",preferredStyle: UIAlertControllerStyle.Alert)
+            let confirmAlert = UIAlertController(title: "" ,message:"Please fill all the fields.",preferredStyle: UIAlertControllerStyle.Alert)
             confirmAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
             }))
             

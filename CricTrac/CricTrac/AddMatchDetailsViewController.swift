@@ -157,30 +157,63 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     }
     
     func getUserData(){
-        KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
-        getAllUserData { (userData) in
-            
-            if let grounds = userData["Grounds"] as? [String:String]{
-                groundNames = grounds.map({ (key,value) in value })
-            }
-            
-            if let venue = userData["Venue"] as? [String: String]{
-                venueNames = venue.map({ (key, value) in value })
-            }
-            
-            if let teams = userData["Teams"] as? [String:String]{
+        //KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+        
+        //code by sajith to optimize the auto suggestion data
+        getAllTeams { (teamData) in
+            if let teams = teamData as? [String:String]{
                 teamNames = teams.map({ (key,value) in value })
             }
-            
-            if let opponents = userData["Opponents"] as? [String:String]{
+        }
+        
+        getAllOpponents { (teamData) in
+            if let opponents = teamData as? [String:String]{
                 opponentTeams = opponents.map({ (key,value) in value })
             }
-            
-            if let tournamnet = userData["Tournaments"] as? [String:String]{
+        }
+        
+        getAllGrounds { (groundData) in
+            if let grounds = groundData as? [String:String]{
+                groundNames = grounds.map({ (key,value) in value })
+            }
+        }
+        
+        getAllVenue { (venueData) in
+            if let venue = venueData as? [String: String]{
+                venueNames = venue.map({ (key, value) in value })
+            }
+        }
+        
+        getAllTournaments { (tournamentData) in
+            if let tournamnet = tournamentData as? [String:String]{
                 tournaments = tournamnet.map({ (key,value) in value })
             }
-            KRProgressHUD.dismiss()
         }
+        //KRProgressHUD.dismiss()
+        
+//        getAllUserData { (userData) in
+//            
+//            if let grounds = userData["Grounds"] as? [String:String]{
+//                groundNames = grounds.map({ (key,value) in value })
+//            }
+//            
+//            if let venue = userData["Venue"] as? [String: String]{
+//                venueNames = venue.map({ (key, value) in value })
+//            }
+//            
+//            if let teams = userData["Teams"] as? [String:String]{
+//                teamNames = teams.map({ (key,value) in value })
+//            }
+//            
+//            if let opponents = userData["Opponents"] as? [String:String]{
+//                opponentTeams = opponents.map({ (key,value) in value })
+//            }
+//            
+//            if let tournamnet = userData["Tournaments"] as? [String:String]{
+//                tournaments = tournamnet.map({ (key,value) in value })
+//            }
+//            KRProgressHUD.dismiss()
+//        }
     }
     
 //    @IBAction func DidtapCancelButton(sender: AnyObject) {
@@ -482,7 +515,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     
     @IBAction func didMenuButtonTapp(sender: UIButton){
        // sliderMenu.setDrawerState(.Opened, animated: true)
-        let confirmAlert = UIAlertController(title: "" ,message:"Match data will be lost. Are you sure to Cancel?",preferredStyle: UIAlertControllerStyle.Alert)
+        let confirmAlert = UIAlertController(title: "" ,message:"Are you sure you want to Cancel this match without saving?",preferredStyle: UIAlertControllerStyle.Alert)
         
         confirmAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction!)-> Void in
            // self.dismissViewControllerAnimated(true, completion: nil)

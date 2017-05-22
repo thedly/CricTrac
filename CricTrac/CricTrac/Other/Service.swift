@@ -11,6 +11,8 @@ import Firebase
 import SCLAlertView
 import KRProgressHUD
 import SwiftyJSON
+
+import FirebaseStorage
 //MARK:- Match Data
 
 func loadInitialValues(){
@@ -273,17 +275,72 @@ func addNewOppoSitTeamName(oTeamName:String){
     ref.setValue(oTeamName)
 }
 
-func addNewTournamentName(tournamnet:String){
+func addNewTournamentName(tournament:String){
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Tournaments").childByAutoId()
-    ref.setValue(tournamnet)
+    ref.setValue(tournament)
 }
 
-func getAllUserData(sucessBlock:(AnyObject)->Void){
-    fireBaseRef.child("Users").child(currentUser!.uid).observeSingleEventOfType(.Value, withBlock: { snapshot in
+//func getAllUserData(sucessBlock:(AnyObject)->Void){
+//    fireBaseRef.child("Users").child(currentUser!.uid).observeSingleEventOfType(.Value, withBlock: { snapshot in
+//        if let data = snapshot.value as? [String : AnyObject]{
+//            var datToBeManipulated = data
+//            datToBeManipulated["Id"] = currentUser!.uid
+//            sucessBlock(datToBeManipulated)
+//        }
+//        else{
+//            sucessBlock([:])
+//        }
+//    })
+//}
+
+func getAllTeams(sucessBlock:(AnyObject)->Void){
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Teams").observeSingleEventOfType(.Value, withBlock: { snapshot in
         if let data = snapshot.value as? [String : AnyObject]{
-            var datToBeManipulated = data
-            datToBeManipulated["Id"] = currentUser!.uid
-            sucessBlock(datToBeManipulated)
+            sucessBlock(data)
+        }
+        else{
+            sucessBlock([:])
+        }
+    })
+}
+
+func getAllOpponents(sucessBlock:(AnyObject)->Void){
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Opponents").observeSingleEventOfType(.Value, withBlock: { snapshot in
+        if let data = snapshot.value as? [String : AnyObject]{
+            sucessBlock(data)
+        }
+        else{
+            sucessBlock([:])
+        }
+    })
+}
+
+func getAllGrounds(sucessBlock:(AnyObject)->Void){
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Grounds").observeSingleEventOfType(.Value, withBlock: { snapshot in
+        if let data = snapshot.value as? [String : AnyObject]{
+            sucessBlock(data)
+        }
+        else{
+            sucessBlock([:])
+        }
+    })
+}
+
+func getAllVenue(sucessBlock:(AnyObject)->Void){
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Venue").observeSingleEventOfType(.Value, withBlock: { snapshot in
+        if let data = snapshot.value as? [String : AnyObject]{
+            sucessBlock(data)
+        }
+        else{
+            sucessBlock([:])
+        }
+    })
+}
+
+func getAllTournaments(sucessBlock:(AnyObject)->Void){
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Tournaments").observeSingleEventOfType(.Value, withBlock: { snapshot in
+        if let data = snapshot.value as? [String : AnyObject]{
+            sucessBlock(data)
         }
         else{
             sucessBlock([:])
@@ -1119,15 +1176,26 @@ func getAllNotifications(sucess:(data:[[String: AnyObject]])->Void){
     })
 }
 
-//func calcUnreadNotifications() {
-//    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Notifications").queryLimitedToLast(30)
-//    ref.queryOrderedByChild("isRead").queryStartingAtValue(0).queryEndingAtValue(0).observeEventType(.Value, withBlock: { snapshot in
-//        let count = snapshot.childrenCount
-//        
-//        let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").child("Notifications")
-//        ref.setValue(count)
-//    })
-//}
+func calcUnreadNotifications() {
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Notifications").queryLimitedToLast(30)
+    ref.observeEventType(.Value, withBlock: { snapshot in
+        if let data = snapshot.value as? [String:[String:AnyObject]] {
+            //var result = [Notifications]()
+            var notiCount = 0
+            for (_,value) in data {
+                let unRead = value["isRead"] as? Int
+                if unRead == 0 {
+                    notiCount++
+                }
+            }
+        
+            //let count = snapshot.childrenCount
+        
+            let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings").child("NotificationsCount")
+            ref.setValue(notiCount)
+        }
+    })
+}
 
 //func getNotificationsCount(sucess:(notificationCount:String)->Void){
 //    fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings").child("Notifications").observeEventType(.Value, withBlock: { snapshot in
