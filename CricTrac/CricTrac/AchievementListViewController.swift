@@ -43,7 +43,7 @@ class AchievementListViewController: UIViewController,UITableViewDelegate,UITabl
     @IBAction func doneButtonTapped(sender: UIButton) {
         
         
-        delegate!.setValueFromMultiSelectAchievements(selectedRows.joinWithSeparator(", "))
+        delegate!.setValueFromMultiSelectAchievements(selectedRows.joinWithSeparator(","))
         
         
 //        let resultVC = viewControllerFrom("Main", vcid: "MatchResultsViewController") as! MatchResultsViewController
@@ -65,19 +65,27 @@ class AchievementListViewController: UIViewController,UITableViewDelegate,UITabl
     func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
        // let cell = tableView.dequeueReusableCellWithIdentifier("AchievementCell", forIndexPath: indexPath) as! AchievementTableViewCell
          let limit = 3
-        if let selectedRow = tableView.indexPathsForSelectedRows {
-        if selectedRow.count == limit {
-            
-            let alertController = UIAlertController(title: "Max Limit ", message:
-                "You are limited to \(limit) selections", preferredStyle: .Alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: {action in
-            }))
-            self.presentViewController(alertController, animated: true, completion: nil)
-            
-            return nil
-            
+        
+        
+        
+        
+        //if let selectedRow = tableView.indexPathsForSelectedRows {
+        //if selectedRow.count == limit {
+        
+        if !selectedRows.contains(dataSource[indexPath.row]){ // about to unselect
+            if selectedRows.count >= limit {
+                let alertController = UIAlertController(title: "Max Limit ", message:
+                    "You are limited to \(limit) selections", preferredStyle: .Alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: {action in
+                }))
+                self.presentViewController(alertController, animated: true, completion: nil)
+                
+                return nil
+                
+            }
         }
-      }
+        
+      //}
         return indexPath
     }
     
@@ -86,26 +94,31 @@ class AchievementListViewController: UIViewController,UITableViewDelegate,UITabl
             cell.achievementNames.text = dataSource[indexPath.row]
             
           
-            if achievementData.containsString(dataSource[indexPath.row]){
-                cell.accessoryType = .Checkmark
-                selectedRows.append(dataSource[indexPath.row])
-             
-            }
-            
+//            if achievementData.containsString(dataSource[indexPath.row]){
+//                cell.accessoryType = .Checkmark
+//                selectedRows.append(dataSource[indexPath.row])
+//             
+//            }
+        
+        
+                if selectedRows.contains(dataSource[indexPath.row]){
+                    cell.accessoryType = .Checkmark
+                }
+        
             return cell
         }
 
      func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-            
+        
             if let cell = tableView.cellForRowAtIndexPath(indexPath) {
                 if cell.selected {
                     cell.accessoryType = .Checkmark
-                   
+                    selectedRows.append(dataSource[indexPath.row])
                 }
-                if cell.accessoryType == .Checkmark {
-                   let str = dataSource[indexPath.row]
-                    selectedRows.append(str)
-                }
+//                if cell.accessoryType == .Checkmark {
+//                   let str = dataSource[indexPath.row]
+//                    selectedRows.append(str)
+//                }
                
             }
            
@@ -115,6 +128,7 @@ class AchievementListViewController: UIViewController,UITableViewDelegate,UITabl
         
         if let cell = tableView.cellForRowAtIndexPath(indexPath) {
             cell.accessoryType = .None
+            selectedRows = selectedRows.filter() { $0 != dataSource[indexPath.row] }
             cell.backgroundColor = UIColor.clearColor()
         }
       

@@ -627,7 +627,10 @@ extension MatchResultsViewController:UITextFieldDelegate{
             let AchievementVC = viewControllerFrom("Main", vcid:"AchievementListViewController") as! AchievementListViewController
             
             AchievementVC.delegate = self
-            AchievementVC.achievementData = AchievementsText.text!
+            //AchievementVC.achievementData = AchievementsText.text!
+            
+            
+            AchievementVC.selectedRows = (AchievementsText.text?.characters.split{$0 == ","}.map(String.init))!
             
             self.presentViewController(AchievementVC, animated: true) {}
         }
