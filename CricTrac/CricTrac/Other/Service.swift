@@ -1197,13 +1197,13 @@ func calcUnreadNotifications() {
     })
 }
 
-//func getNotificationsCount(sucess:(notificationCount:String)->Void){
-//    fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings").child("Notifications").observeEventType(.Value, withBlock: { snapshot in
-//        if let data = snapshot.value as? String{
-//            sucess(notificationCount: data)
-//        }
-//    })
-//}
+func getNotificationsCount(sucess:(notificationCount:String)->Void){
+    fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings").child("NotificationsCount").observeEventType(.Value, withBlock: { snapshot in
+        if let data = snapshot.value as? String{
+            sucess(notificationCount: data)
+        }
+    })
+}
 
 func markNotificationAsRead(notificationId:String) {
     //mark notification as READ
