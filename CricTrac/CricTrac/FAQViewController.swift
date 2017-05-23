@@ -16,7 +16,7 @@ class FAQViewController: UIViewController,ThemeChangeable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        //set
         setBackgroundColor()
         
     }
