@@ -20,8 +20,6 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UserProfilesData.removeAll()
-        
         initializeView()
         // Do any additional setup after loading the view.
         loadBannerAds()
@@ -39,7 +37,9 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     override func viewWillAppear(animated: Bool) {
-         self.SuggestsTblview.reloadData()
+        UserProfilesData.removeAll()
+        self.SuggestsTblview.reloadData()
+        getFriendSuggestions()
         setBackgroundColor()
     }
     
@@ -66,7 +66,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         
         //setUIBackgroundTheme(self.view)
         self.view.backgroundColor = UIColor.clearColor()
-        getFriendSuggestions()
+        //getFriendSuggestions()
     }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -86,25 +86,22 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         
         backgroundThread(background: {
             KRProgressHUD.showText("Loading ...")
-             
+            
             getAllFriendSuggestions({
-                var modFriendReqData = [Profile]()
-                for (index, dat) in UserProfilesData.enumerate() {
-                    //if FriendRequestsData.filter({$0.Name == dat.fullName }).count == 0 {
-                        modFriendReqData.append(dat)
-                    //}
-                }
-                UserProfilesData.removeAll()
-                UserProfilesData = modFriendReqData
+//                var modFriendReqData = [Profile]()
+//                for (_, dat) in UserProfilesData.enumerate() {
+//                    //if FriendRequestsData.filter({$0.Name == dat.fullName }).count == 0 {
+//                        modFriendReqData.append(dat)
+//                    //}
+//                }
+//                UserProfilesData.removeAll()
+//                UserProfilesData = modFriendReqData
                 
                 dispatch_async(dispatch_get_main_queue(),{
-                    
                     KRProgressHUD.dismiss()
                     self.SuggestsTblview.reloadData()
-                    
                 })
             })
-           
         })
     }
 
@@ -114,6 +111,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     @IBAction func getAllProfilesBtnPressed(sender: AnyObject) {
         
     }
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
