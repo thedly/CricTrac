@@ -360,7 +360,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         }
         
         if let dat = matchDetailsData["Achievements"] as? String {
-            if dat != "-" {
+            if dat != "" {
                 self.achievements.text = dat
             }
         }
@@ -470,6 +470,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                 else
                 {
                     awayTeam.text = "Unknown"
+                    
                 }
             }
             

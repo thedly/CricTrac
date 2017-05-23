@@ -65,12 +65,12 @@ let settingsMenuData = [
     //["title":"Offline Matches","vc":"AddMatchDetailsViewController", "img": "Menu_AddMatch", "desc": "Matches to be downloaded for offline view", "IsSwitchVisible": false],
     ["title":"App Theme","vc":"ThemeSettingsViewController", "img": "Menu_Settings", "desc": "Choose desired theme color for your app", "IsSwitchVisible": false],
     ["title":"Change Password","vc":  "ChangePassword", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "" ],
-    ["title":"FAQ","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/info/FAQ.htm"],
+    ["title":"FAQ","vc":  "FAQ", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : ""],
     ["title":"Feedback","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "" ],
     ["title":"Rate this app","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay": "itms://itunes.apple.com/de/app/x-gift/id839686104?mt=8&uo=4"],
-    ["title":"Terms & Conditions","vc":"StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/info/TermsofUse.htm" ],
-    ["title":"Privacy Policy","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/info/PrivacyPolicy.htm" ],
-    ["title":"About","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/info/AboutUs.htm" ],
+    ["title":"Terms & Conditions","vc":"TermsAndConditions", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "" ],
+    ["title":"Privacy Policy","vc":  "PrivacyPolicy", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "" ],
+    ["title":"About","vc":  "About", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "" ],
      ["title":"Logout","vc":  "", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false]
 ]
 
@@ -86,7 +86,7 @@ var versionAndBuildNumber:String{
 }
 
 //variable to decide whether to show the AD or not
-let showAds = 0
+let showAds = 1
 let adUnitId = "ca-app-pub-3940256099942544/2934735716"
 
 

@@ -30,6 +30,10 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     @IBOutlet weak var maidensText: UITextField!
     @IBOutlet weak var runsGivenText: UITextField!
     weak var parent:MatchParent?
+   
+    @IBOutlet weak var battingDetailsLabel: UILabel!
+    @IBOutlet weak var bowlingdetailsLabel: UILabel!
+    @IBOutlet weak var lineView: UIView!
     
     var bowledOvers: String!
     var WicketsTaken: String!
@@ -382,6 +386,9 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         super.viewDidLoad()
         runsText.errorColor = UIColor.redColor()
         if ((parent?.selecetedData) != nil){ loadEditData() }
+        
+        setColorForViewsWithSameTag(lineView)
+        setColorForViewsWithSameTag(battingDetailsLabel)
         
         //setBackgroundColor()
         self.view.backgroundColor = UIColor.clearColor()

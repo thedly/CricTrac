@@ -14,6 +14,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
 
     @IBOutlet weak var upgradeBtnHeight: NSLayoutConstraint!
     @IBOutlet var matchSummaryTable:UITableView!
+    @IBOutlet weak var noMatchesHeightConstraint: NSLayoutConstraint!
     
     var matchData = [String:AnyObject]()
     var matches = [MatchSummaryData]()
@@ -264,6 +265,13 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+        
+        if self.matchDataSource.count == 0 {
+            noMatchesHeightConstraint.constant = 21
+        }
+        else {
+             noMatchesHeightConstraint.constant = 0
+        }
         
         return self.matchDataSource.count
     }

@@ -31,6 +31,7 @@ class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
        loadBannerAds()
+        tableView.tableFooterView = UIView()
     }
     
     func loadBannerAds() {

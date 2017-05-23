@@ -136,6 +136,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 85
     }
+   
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         

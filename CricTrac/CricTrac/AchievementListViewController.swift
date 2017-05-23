@@ -17,6 +17,7 @@ class AchievementListViewController: UIViewController,UITableViewDelegate,UITabl
     var delegate: AchievementsTextProtocol?
     var achievementData = ""
     
+    @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var barView: UIView!
     var dataSource = [String]()
@@ -28,7 +29,7 @@ class AchievementListViewController: UIViewController,UITableViewDelegate,UITabl
         changeThemeSettigs()
         self.setBackgroundColor()
         
-       
+       tableView.tableFooterView = UIView()
        
         // Do any additional setup after loading the view.
         dataSource = Achievements
@@ -54,6 +55,10 @@ class AchievementListViewController: UIViewController,UITableViewDelegate,UITabl
     }
     
     
+    @IBAction func cancelButtonTapped(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -146,8 +146,37 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             viewCtrl.pageHeaderText = (settingsMenuData[indexPath.row]["title"] as! String).uppercaseString
             
             presentViewController(viewCtrl, animated: true, completion: nil)
-        }else if vcName == "" {
-            logout(self)
+        }
+       
+        else if vcName == "About" {
+            let aboutVC = viewControllerFrom("Main",vcid:"AboutViewController") as! AboutViewController
+            self.presentViewController(aboutVC, animated: true, completion: nil)
+            
+        }
+            
+        else if vcName == "PrivacyPolicy" {
+            let privacyVC = viewControllerFrom("Main",vcid:"PrivacyPolicyViewController") as! PrivacyPolicyViewController
+            self.presentViewController(privacyVC, animated: true, completion: nil)
+
+        }
+         
+        else if vcName == "FAQ" {
+            let fAQVC = viewControllerFrom("Main",vcid:"FAQViewController") as! FAQViewController
+            self.presentViewController(fAQVC, animated: true, completion: nil)
+        }
+        
+        else if vcName == "TermsAndConditions" {
+            let termsVC = viewControllerFrom("Main",vcid:"Terms_ConditionsViewController") as! Terms_ConditionsViewController
+            self.presentViewController(termsVC, animated: true, completion: nil)
+        }
+        else if vcName == "" {
+            let alert = UIAlertController(title:"", message: "Are you sure you want to logout?", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
+                 logout(self)
+            }))
+             alert.addAction(UIAlertAction(title: "CANCEL", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+           // logout(self)
         }
         else
         {

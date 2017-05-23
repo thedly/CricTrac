@@ -244,11 +244,11 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
 //        }
 //        else{
 //            secondOversVal = "0"
-//        }
+//
         
         var AchievementsVal = ""
         if let val = AchievementsText{
-            AchievementsVal = val.textVal
+            AchievementsVal = val.text!
         }
         
         return ["TossWonBy":tossVal,"FirstBatting":firstBatVal,"FirstBattingScore":firstScoreVal,"FirstBattingWickets":firstWicketsVal,"SecondBatting":secondBatVal, "SecondBattingScore":secondScoreVal,"SecondBattingWickets":secondWicketsVal,"Result":resultVal,"FirstBattingOvers":firstOversVal,"SecondBattingOvers":secondOversVal,"Achievements":AchievementsVal]
@@ -328,7 +328,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         existFB = firstBatText
         existSB = secondBatText
         
-        AchievementsText.text = parent?.selecetedData!["Achievements"] as? String ?? "-"
+        AchievementsText.text = parent?.selecetedData!["Achievements"] as? String ?? ""
         
         firstTeamTitle.text = firstBatText
         secondTeamTitle.text = secondBatText

@@ -17,6 +17,7 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bannerView: GADBannerView!
 
+  
     
     var currentTheme:CTTheme!
     var dataSource = [[String:AnyObject]]()
@@ -47,6 +48,7 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
         self.view.backgroundColor = currentTheme.topColor
         self.barView.backgroundColor = currentTheme.topColor
         loadBannerAds()
+        tableView.tableFooterView = UIView()
     }
     
     func loadBannerAds() {

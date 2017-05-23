@@ -39,12 +39,12 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //currentTheme = cricTracTheme.currentTheme
+        currentTheme = cricTracTheme.currentTheme
         setBackgroundColor()
         self.automaticallyAdjustsScrollViewInsets = false
         
         timeLineTable.rowHeight = UITableViewAutomaticDimension;
-        timeLineTable.estimatedRowHeight = 50.0;
+       timeLineTable.estimatedRowHeight = 50.0;
         
         //setUIBackgroundTheme(view)
         
@@ -56,7 +56,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         
         timeLineTable.registerNib(UINib.init(nibName:"AddPostTableViewCell", bundle: nil), forCellReuseIdentifier: "addpost")
         
-        timeLineTable.registerNib(UINib.init(nibName:"ImagePostTableViewCell", bundle: nil), forCellReuseIdentifier: "imagepost")
+       timeLineTable.registerNib(UINib.init(nibName:"ImagePostTableViewCell", bundle: nil), forCellReuseIdentifier: "imagepost")
         
         timeLineTable.registerNib(UINib.init(nibName:"APostTableViewCell", bundle: nil), forCellReuseIdentifier: "aPost")
         
@@ -201,19 +201,21 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         
         notificationButton.addTarget(self, action: #selector(didNotificationButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
         let righttbarButton = UIBarButtonItem(customView: notificationButton)
-       
+//       
 //        let notifyLabel: UILabel = UILabel()
-//        notifyLabel.frame = CGRectMake(0, 0, 10, 10)
-//        notifyLabel.textColor = UIColor.redColor()
+//        notifyLabel.frame = CGRectMake(555, 13, 20, 10)
+//        notifyLabel.backgroundColor = UIColor.redColor()
+//        notifyLabel.textColor = UIColor.whiteColor()
 //        notifyLabel.text = "2"
-//        let rightbarButtonItem = UIBarButtonItem(customView: notifyLabel)
+//        self.view.addSubview(notifyLabel)
+       // let rightbarButtonItem = UIBarButtonItem(customView: notifyLabel)
         
         
         //assign button to navigationbar
         
         navigationItem.leftBarButtonItem = leftbarButton
-       // navigationItem.rightBarButtonItems = [ righttbarButton,rightbarButtonItem]
-        navigationItem.rightBarButtonItem = righttbarButton
+        //navigationItem.rightBarButtonItems = [ righttbarButton,rightbarButtonItem]
+       navigationItem.rightBarButtonItem = righttbarButton
         self.view.backgroundColor =  currentTheme.topColor
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "PAVILION"
