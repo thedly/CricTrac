@@ -462,7 +462,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        UpdateDashboardDetails()
+        //UpdateDashboardDetails()
         setBackgroundColor()
         initView()
         setDashboardData()

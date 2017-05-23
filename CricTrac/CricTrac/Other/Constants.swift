@@ -51,12 +51,11 @@ var menuData = [
 ]
 
 var friendInviteData = [
-    
     ["title":"MAIL","vc":"email", "img": "Mail"],
     ["title":"MESSAGE","vc":"message", "img": "SMS"],
-    ["title":"FACEBOOK","vc":"facebook", "img": "Facebook"],
     ["title":"WHATSAPP","vc":"whatsapp", "img": "WhatsApp-96"]
 ]
+//["title":"FACEBOOK","vc":"facebook", "img": "Facebook"],
 
 let settingsMenuData = [
     
@@ -65,9 +64,9 @@ let settingsMenuData = [
     //["title":"Offline Matches","vc":"AddMatchDetailsViewController", "img": "Menu_AddMatch", "desc": "Matches to be downloaded for offline view", "IsSwitchVisible": false],
     ["title":"App Theme","vc":"ThemeSettingsViewController", "img": "Menu_Settings", "desc": "Choose desired theme color for your app", "IsSwitchVisible": false],
     ["title":"Change Password","vc":  "ChangePassword", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "" ],
-    ["title":"FAQ","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/info/FAQ.htm"],
-    ["title":"Feedback","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "" ],
     ["title":"Rate this app","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay": "itms://itunes.apple.com/de/app/x-gift/id839686104?mt=8&uo=4"],
+    ["title":"Feedback","vc":  "Feedback", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "" ],
+    ["title":"FAQ","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/info/FAQ.htm"],
     ["title":"Terms & Conditions","vc":"StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/info/TermsofUse.htm" ],
     ["title":"Privacy Policy","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/info/PrivacyPolicy.htm" ],
     ["title":"About","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/info/AboutUs.htm" ],
@@ -321,4 +320,6 @@ let states = ["Alabama",
 //Marks -- profileSettings
 let nameCharacterLimit = 30
 let networkErrorMessage = "Please check your internet connection"
+let feedbackEmail = "cricktrack@gmail.com"
+
 

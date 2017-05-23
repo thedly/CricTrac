@@ -7,17 +7,14 @@
 //
 
 import UIKit
+import MessageUI
 
-class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,ThemeChangeable {
+class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,ThemeChangeable,MFMailComposeViewControllerDelegate {
 
-    
     @IBOutlet weak var SettingsTableView: UITableView!
-    
-    
+
     @IBAction func closeBtnPressed(sender: AnyObject) {
-        
         dismissViewControllerAnimated(true, completion: nil)
-        
     }
     
     func changeThemeSettigs() {
@@ -25,6 +22,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         self.view.backgroundColor = currentTheme.topColor
        // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
+    
     override func viewWillAppear(animated: Bool) {
         setBackgroundColor()
         SettingsTableView.reloadData()
@@ -34,16 +32,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initializeView()
         setNavigationBarProperties()
         // Do any additional setup after loading the view.
        
     }
+    
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView(frame: .zero)
     }
-
     
     func setNavigationBarProperties(){
         var currentTheme:CTTheme!
@@ -60,6 +57,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
        // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
        // navigationController!.navigationBar.titleTextAttributes = titleDict
     }
+    
     @IBAction func didMenuButtonTapp(sender: UIButton){
         sliderMenu.setDrawerState(.Opened, animated: true)
     }
@@ -78,49 +76,37 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
-   
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return settingsMenuData.count
     }
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 60
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCellWithIdentifier("SettingsViewCell", forIndexPath: indexPath) as! SettingsViewCell
         let itemTitle = settingsMenuData[indexPath.row]["title"] as! String
-        
         let menuIcon = UIImage(named: settingsMenuData[indexPath.row]["img"]! as! String)
-        
         let menuDesc = settingsMenuData[indexPath.row]["desc"] as! String
-        
         var selectedValue = String()
         
         if settingsMenuData[indexPath.row]["vc"] == "ThemeSettingsViewController" {
             selectedValue = CurrentTheme
         }
         
-        
         let toggleConfig = settingsMenuData[indexPath.row]["IsSwitchVisible"] as! Bool
         
-        
         cell.backgroundColor = UIColor.clearColor()
-        
-        
         cell.menuItemName.text = itemTitle
         cell.menuItemIcon.image = menuIcon
         cell.menuItemSelectedValue.text = selectedValue
         
-        
       //  cell.menuItemToggleSwitch.hidden = !toggleConfig
         cell.menuItemSelectedValue.hidden = toggleConfig
-        
-        
         cell.menuItemDescription.text = menuDesc
         
         return cell
-
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -133,11 +119,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         else if vcName == "ChangePassword" {
             let forgotPwdVC = viewControllerFrom("Main", vcid: "ForgotPasswordViewController") as! ForgotPasswordViewController
-          // forgotPwdVC.change
-        
-           // forgotPwdVC.forgotPasswordLabel.text = "Change Password"
-            
             self.presentViewController(forgotPwdVC, animated: true, completion: nil)
+        }
+        else if vcName == "ChangePassword" {
+            openMailApp()
         }
         else if vcName == "StaticPageViewController" {
             let viewCtrl = storyboard.instantiateViewControllerWithIdentifier(vcName! as! String) as! StaticPageViewController
@@ -159,5 +144,51 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
+    
+    
+    func openMailApp() {
+        let mailComposeViewController = configuredMailComposeViewController()
+        if MFMailComposeViewController.canSendMail() {
+            self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+        } else {
+            self.showSendMailErrorAlert()
+        }
+    }
+    
+    func configuredMailComposeViewController() -> MFMailComposeViewController {
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
+        
+        mailComposerVC.setToRecipients([feedbackEmail])
+        mailComposerVC.setSubject("Let us know your feedback on CricTrac")
+        mailComposerVC.setMessageBody("", isHTML: false)
+        
+        return mailComposerVC
+    }
+    
+    func showSendMailErrorAlert() {
+        let sendMailErrorAlert = UIAlertView(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", delegate: self, cancelButtonTitle: "OK")
+        sendMailErrorAlert.show()
+    }
+    
+    
+    // MARK: MFMailComposeViewControllerDelegate Method
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        
+        switch result {
+        case MFMailComposeResultCancelled:
+            print("Mail cancelled")
+        case MFMailComposeResultSaved:
+            print("Mail saved")
+        case MFMailComposeResultSent:
+            print("Mail sent")
+        case MFMailComposeResultFailed:
+            print("Mail sent failure: \(error?.localizedDescription)")
+        default:
+            break
+        }
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+
 
 }

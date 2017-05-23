@@ -80,6 +80,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         let menuButton: UIButton = UIButton(type:.Custom)
        // menuButton.setImage(UIImage(named: "Back-100"), forState: UIControlState.Normal)
         menuButton.setTitle("CANCEL", forState: .Normal)
+        menuButton.titleLabel?.font = UIFont(name: appFont_bold, size: 15)
         menuButton.addTarget(self, action: #selector(didTapCancel), forControlEvents: UIControlEvents.TouchUpInside)
         menuButton.frame = CGRectMake(0, 0, 55, 50)
         //menuButton.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5)
