@@ -240,25 +240,66 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
                 summaryDetailsVC.isFriendDashboard = true
                 self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
             }
+            else {
+                let alert = UIAlertController(title: "", message: "Data not available.", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
+                    deleteNotification(self.NotificationID)
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+
+            }
         })
     }
     
     func moveToNPA(topicId:String) {
-        let timelinePost = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
-        timelinePost.postId = topicId
-        self.presentViewController(timelinePost, animated: true) {}
+        getPost(topicId) { (postData) in
+            if postData["isDeleted"]?.integerValue == 1 {
+                let alert = UIAlertController(title: "", message: "Data not available.", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
+                    deleteNotification(self.NotificationID)
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+            else {
+                let timelinePost = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
+                timelinePost.postId = topicId
+                self.presentViewController(timelinePost, animated: true) {}
+            }
+        }
     }
     
     func moveToNCA(topicId:String) {
-        let timelinePost = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
-        timelinePost.postId = topicId
-        self.presentViewController(timelinePost, animated: true) {}
+        getPost(topicId) { (postData) in
+            if postData["isDeleted"]?.integerValue == 1 {
+                let alert = UIAlertController(title: "", message: "Data not available.", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
+                    deleteNotification(self.NotificationID)
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+            else {
+                let timelinePost = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
+                timelinePost.postId = topicId
+                self.presentViewController(timelinePost, animated: true) {}
+            }
+        }
     }
     
     func moveToNLA(topicId:String) {
-        let timelinePost = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
-        timelinePost.postId = topicId
-        self.presentViewController(timelinePost, animated: true) {}
+        getPost(topicId) { (postData) in
+            if postData["isDeleted"]?.integerValue == 1 {
+                let alert = UIAlertController(title: "", message: "Data not available.", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
+                    deleteNotification(self.NotificationID)
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+            else {
+                let timelinePost = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
+                timelinePost.postId = topicId
+                self.presentViewController(timelinePost, animated: true) {}
+            }
+        }
     }
 
     func offsetFrom(date:NSDate) -> String {

@@ -104,174 +104,176 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         
         cCell.postIndex = postIndex
         
-        if !postDataNew .isEmpty  {
-            //display the post in the first row of the tableview
-            if indexPath.row == 0  {
-                let postData = postDataNew
-                cCell.postOwnerId = postData["OwnerID"] as? String
-                let postedBy = postData["PostedBy"] as? String
-                cCell.postId = postId as? String
-               
-                if postedBy == "CricTrac" {
-                    cCell.postOwnerName.text = "CricTrac"
-                    cCell.ownerCity.text = postData["PostType"] as? String
-                }
-                else{
-                    cCell.postOwnerName.text = postData ["OwnerName"] as? String
-                    
-                    let friendId = postData["OwnerID"]!
-                    if let city = friendsCity[friendId as! String]{
-                        cCell.ownerCity.text = city
+        if !postDataNew .isEmpty {
+            if postDataNew["isDeleted"]?.integerValue != 1 {
+                //display the post in the first row of the tableview
+                if indexPath.row == 0  {
+                    let postData = postDataNew
+                    cCell.postOwnerId = postData["OwnerID"] as? String
+                    let postedBy = postData["PostedBy"] as? String
+                    cCell.postId = postId as? String
+                   
+                    if postedBy == "CricTrac" {
+                        cCell.postOwnerName.text = "CricTrac"
+                        cCell.ownerCity.text = postData["PostType"] as? String
                     }
-                    else {
-                        fetchFriendCity(friendId as! String, sucess: { (city) in
-                            friendsCity[friendId as! String] = city
-                            dispatch_async(dispatch_get_main_queue(),{
-                                cCell.ownerCity.text = city
+                    else{
+                        cCell.postOwnerName.text = postData ["OwnerName"] as? String
+                        
+                        let friendId = postData["OwnerID"]!
+                        if let city = friendsCity[friendId as! String]{
+                            cCell.ownerCity.text = city
+                        }
+                        else {
+                            fetchFriendCity(friendId as! String, sucess: { (city) in
+                                friendsCity[friendId as! String] = city
+                                dispatch_async(dispatch_get_main_queue(),{
+                                    cCell.ownerCity.text = city
+                                })
                             })
+                        }
+                    }
+                    
+                    //display post owners image
+                    if ((postData["OwnerID"]) != nil) {
+                        fetchFriendDetail((postData["OwnerID"]  as? String)!, sucess: { (result) in
+                            let proPic = result["proPic"]
+                                
+                            //aCell.profileImage.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+                            cCell.profileImage.layer.borderWidth = 1
+                            cCell.profileImage.layer.masksToBounds = false
+                            cCell.profileImage.layer.borderColor = UIColor.clearColor().CGColor
+                            cCell.profileImage.layer.cornerRadius = cCell.profileImage.frame.width/2
+                            cCell.profileImage.clipsToBounds = true
+                                
+                            if proPic! == "-"{
+                                let imageName = defaultProfileImage
+                                let image = UIImage(named: imageName)
+                                cCell.profileImage.image = image
+                            }
+                            else{
+                                if let imageURL = NSURL(string:proPic!){
+                                    cCell.profileImage.kf_setImageWithURL(imageURL)
+                                }
+                            }
                         })
                     }
-                }
-                
-                //display post owners image
-                if ((postData["OwnerID"]) != nil) {
-                    fetchFriendDetail((postData["OwnerID"]  as? String)!, sucess: { (result) in
-                        let proPic = result["proPic"]
-                            
-                        //aCell.profileImage.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-                        cCell.profileImage.layer.borderWidth = 1
-                        cCell.profileImage.layer.masksToBounds = false
-                        cCell.profileImage.layer.borderColor = UIColor.clearColor().CGColor
-                        cCell.profileImage.layer.cornerRadius = cCell.profileImage.frame.width/2
-                        cCell.profileImage.clipsToBounds = true
-                            
-                        if proPic! == "-"{
-                            let imageName = defaultProfileImage
-                            let image = UIImage(named: imageName)
-                            cCell.profileImage.image = image
-                        }
-                        else{
-                            if let imageURL = NSURL(string:proPic!){
-                                cCell.profileImage.kf_setImageWithURL(imageURL)
+                    
+                    if let postDateTS = postData["AddedTime"] as? Double{
+                        let date = NSDate(timeIntervalSince1970:postDateTS/1000.0)
+                        let dateFormatter = NSDateFormatter()
+                        dateFormatter.timeZone = NSTimeZone.localTimeZone()
+                        dateFormatter.timeStyle = .ShortStyle
+                        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+                        cCell.date.text = dateFormatter.stringFromDate(date)
+                    }
+                    
+                    cCell.postText.text = postData["Post"] as? String
+                    cCell.delCommentBtn.hidden = true
+                    cCell.likeButton.setImage(UIImage(named: "Like-100"), forState: UIControlState.Normal)
+                    cCell.likeButton.titleLabel?.textColor = UIColor.blackColor()
+                    
+                    let childLikes = postData["Likes"] as? [String : AnyObject]
+                    if childLikes != nil {
+                        for (key, value) in childLikes! {
+                            if currentUser!.uid == value["OwnerID"] as? String {
+                                cCell.likeButton.titleLabel?.textColor = UIColor.whiteColor()
+                                cCell.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
                             }
                         }
-                    })
-                }
-                
-                if let postDateTS = postData["AddedTime"] as? Double{
-                    let date = NSDate(timeIntervalSince1970:postDateTS/1000.0)
-                    let dateFormatter = NSDateFormatter()
-                    dateFormatter.timeZone = NSTimeZone.localTimeZone()
-                    dateFormatter.timeStyle = .ShortStyle
-                    dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-                    cCell.date.text = dateFormatter.stringFromDate(date)
-                }
-                
-                cCell.postText.text = postData["Post"] as? String
-                cCell.delCommentBtn.hidden = true
-                cCell.likeButton.setImage(UIImage(named: "Like-100"), forState: UIControlState.Normal)
-                cCell.likeButton.titleLabel?.textColor = UIColor.blackColor()
-                
-                let childLikes = postData["Likes"] as? [String : AnyObject]
-                if childLikes != nil {
-                    for (key, value) in childLikes! {
-                        if currentUser!.uid == value["OwnerID"] as? String {
-                            cCell.likeButton.titleLabel?.textColor = UIColor.whiteColor()
-                            cCell.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
-                        }
                     }
-                }
-            
-                if (postData["LikeCount"] != nil) {
-                    let likeCount = postData["LikeCount"] as? Int
-                    cCell.likes.setTitle("\(likeCount!) Likes", forState:  .Normal)
-                    cCell.postLikeCount = likeCount!
-                    self.totalLikesCount = likeCount!
-                }
-                else {
-                    cCell.likes.setTitle("0 Likes", forState: .Normal)
-                }
                 
-                if (postData["CommentCount"] != nil) {
-                    let cmtCount = postData["CommentCount"] as? Int
-                    cCell.comments.setTitle("\(cmtCount!) Comments", forState: .Normal)
-                    self.commentCount = cmtCount!
-                }
-                else {
-                    cCell.comments.setTitle("0 Comments", forState: .Normal)
-                }
-                
-                cCell.selectionStyle = UITableViewCellSelectionStyle.None
-                cCell.backgroundColor = UIColor.clearColor()
-                return cCell
-            }
-            else {
-                //display the comments
-                let commentData = dataSource[indexPath.row - 1]
-                
-                aCell.ownerId = commentData["OwnerID"] as? String
-
-                if let val = commentData["Comment"] as? String{
-                    aCell.commentID = commentData["CommentID"] as? String
-                    aCell.postID = postId as? String
-                    aCell.commentText.text = val
-                    aCell.backgroundColor = UIColor.clearColor()
-                }
-            
-                if let dateTimeStamp = commentData["AddedTimeDisp"] as? Double{
-                    let date = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
-                    let date2 = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
-                    let dateFormatter = NSDateFormatter()
-                    dateFormatter.timeZone = NSTimeZone.localTimeZone()
-                    dateFormatter.timeStyle = .ShortStyle
-                    dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-                    
-                    let cmtDate = offsetFrom(date2)
-                    if cmtDate == "" {
-                        aCell.commentDate.text = dateFormatter.stringFromDate(date)
+                    if (postData["LikeCount"] != nil) {
+                        let likeCount = postData["LikeCount"] as? Int
+                        cCell.likes.setTitle("\(likeCount!) Likes", forState:  .Normal)
+                        cCell.postLikeCount = likeCount!
+                        self.totalLikesCount = likeCount!
                     }
                     else {
-                        aCell.commentDate.text = cmtDate
+                        cCell.likes.setTitle("0 Likes", forState: .Normal)
                     }
                     
-                }
-            
-                if var value = commentData["OwnerName"] as? String{
-                    if value == ""{
-                        value = "No Name"
+                    if (postData["CommentCount"] != nil) {
+                        let cmtCount = postData["CommentCount"] as? Int
+                        cCell.comments.setTitle("\(cmtCount!) Comments", forState: .Normal)
+                        self.commentCount = cmtCount!
                     }
-                    aCell.userName.text =   value
-                }
-            
-                if currentUser?.uid == commentData["OwnerID"]  as? String {
-                    aCell.delCommentBtn.hidden = false
+                    else {
+                        cCell.comments.setTitle("0 Comments", forState: .Normal)
+                    }
+                    
+                    cCell.selectionStyle = UITableViewCellSelectionStyle.None
+                    cCell.backgroundColor = UIColor.clearColor()
+                    return cCell
                 }
                 else {
-                    aCell.delCommentBtn.hidden = true
-                }
-            
-                //display comment owners image
-                if ((commentData["OwnerID"]) != nil) {
-                    fetchFriendDetail((commentData["OwnerID"]  as? String)!, sucess: { (result) in
-                        let proPic = result["proPic"]
+                    //display the comments
+                    let commentData = dataSource[indexPath.row - 1]
+                    
+                    aCell.ownerId = commentData["OwnerID"] as? String
+
+                    if let val = commentData["Comment"] as? String{
+                        aCell.commentID = commentData["CommentID"] as? String
+                        aCell.postID = postId as? String
+                        aCell.commentText.text = val
+                        aCell.backgroundColor = UIColor.clearColor()
+                    }
                 
-                        aCell.userImage.layer.borderWidth = 1
-                        aCell.userImage.layer.masksToBounds = false
-                        aCell.userImage.layer.borderColor = UIColor.clearColor().CGColor
-                        aCell.userImage.layer.cornerRadius = aCell.userImage.frame.width/2
-                        aCell.userImage.clipsToBounds = true
-                
-                        if proPic! == "-"{
-                            let imageName = defaultProfileImage
-                            let image = UIImage(named: imageName)
-                            aCell.userImage.image = image
+                    if let dateTimeStamp = commentData["AddedTimeDisp"] as? Double{
+                        let date = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
+                        let date2 = NSDate(timeIntervalSince1970:dateTimeStamp/1000.0)
+                        let dateFormatter = NSDateFormatter()
+                        dateFormatter.timeZone = NSTimeZone.localTimeZone()
+                        dateFormatter.timeStyle = .ShortStyle
+                        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+                        
+                        let cmtDate = offsetFrom(date2)
+                        if cmtDate == "" {
+                            aCell.commentDate.text = dateFormatter.stringFromDate(date)
                         }
-                        else{
-                            if let imageURL = NSURL(string:proPic!){
-                                aCell.userImage.kf_setImageWithURL(imageURL)
+                        else {
+                            aCell.commentDate.text = cmtDate
+                        }
+                        
+                    }
+                
+                    if var value = commentData["OwnerName"] as? String{
+                        if value == ""{
+                            value = "No Name"
+                        }
+                        aCell.userName.text =   value
+                    }
+                
+                    if currentUser?.uid == commentData["OwnerID"]  as? String {
+                        aCell.delCommentBtn.hidden = false
+                    }
+                    else {
+                        aCell.delCommentBtn.hidden = true
+                    }
+                
+                    //display comment owners image
+                    if ((commentData["OwnerID"]) != nil) {
+                        fetchFriendDetail((commentData["OwnerID"]  as? String)!, sucess: { (result) in
+                            let proPic = result["proPic"]
+                    
+                            aCell.userImage.layer.borderWidth = 1
+                            aCell.userImage.layer.masksToBounds = false
+                            aCell.userImage.layer.borderColor = UIColor.clearColor().CGColor
+                            aCell.userImage.layer.cornerRadius = aCell.userImage.frame.width/2
+                            aCell.userImage.clipsToBounds = true
+                    
+                            if proPic! == "-"{
+                                let imageName = defaultProfileImage
+                                let image = UIImage(named: imageName)
+                                aCell.userImage.image = image
                             }
-                        }
-                    })
+                            else{
+                                if let imageURL = NSURL(string:proPic!){
+                                    aCell.userImage.kf_setImageWithURL(imageURL)
+                                }
+                            }
+                        })
+                    }
                 }
             }
         }
