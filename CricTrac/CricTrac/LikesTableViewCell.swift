@@ -8,12 +8,13 @@
 
 import UIKit
 
-class LikesTableViewCell: UITableViewCell {
+class LikesTableViewCell: UITableViewCell{
 
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var city: UILabel!
     @IBOutlet weak var friendButton: UIButton!
+    var parent:DeleteComment?
     
     var friendUserId:String = ""
     
@@ -22,6 +23,58 @@ class LikesTableViewCell: UITableViewCell {
         // Initialization code
        //  userImage.layer.cornerRadius = userImage.bounds.size.width/2
         self.friendButton.layer.cornerRadius = 10
+         addTapGestureToUserName()
+        parent?.deletebuttonTapped()
+    }
+    func addTapGestureToUserName(){
+        if let _ = name{
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(LikesTableViewCell.didTapOwnerName))
+            name.userInteractionEnabled = true
+            name.addGestureRecognizer(gesture)
+            
+        }
+    }
+    func didTapOwnerName(){
+            if  friendUserId != ""{
+                getFriendProfileInfo(friendUserId, sucess: { (friendInfo) in
+                    if let friendType = friendInfo["UserProfile"] as? String{
+                        switch friendType{
+                        case "Player": self.moveToPlayer(friendInfo)
+                        case "Coach": self.moveToCoach(friendInfo)
+                        case "Cricket Fan": self.moveToFan(friendInfo)
+                        default: break
+                        }
+                    }
+                })
+            }
+    }
+    func moveToPlayer(userInfo:[String : AnyObject]){
+        if let parentVC = parent as? UIViewController{
+            let dashBoard = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
+            dashBoard.friendId = friendUserId
+            dashBoard.friendProfile = userInfo
+        
+        parentVC.presentViewController(dashBoard, animated: true) {}
+            
+        }
+    }
+    
+    func moveToCoach(userInfo:[String : AnyObject]){
+        if let parentVC = parent as? UIViewController{
+            let dashBoard = viewControllerFrom("Main", vcid: "CoachDashboardViewController") as! CoachDashboardViewController
+            dashBoard.friendId = friendUserId
+            dashBoard.friendProfile = userInfo
+            parentVC.presentViewController(dashBoard, animated: true) {}
+        }
+    }
+    
+    func moveToFan(userInfo:[String : AnyObject]){
+        if let parentVC = parent as? UIViewController{
+            let dashBoard = viewControllerFrom("Main", vcid: "FanDashboardViewController") as! FanDashboardViewController
+            dashBoard.friendId = friendUserId
+            dashBoard.friendProfile = userInfo
+            parentVC.presentViewController(dashBoard, animated: true) {}
+        }
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -29,7 +82,7 @@ class LikesTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+  
     
     
     @IBAction func didTapFriendButton(sender: UIButton) {

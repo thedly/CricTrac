@@ -609,11 +609,14 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
 extension MatchResultsViewController:UITextFieldDelegate{
     func textFieldDidBeginEditing(textField: UITextField) {
         
+        
         if textField == resultText{
+             //resultText.becomeFirstResponder()
             ctDataPicker = DataPicker()
             let indexPos = results.indexOf(resultText.text!) ?? 0
             ctDataPicker.showPicker(self, inputText: textField, data: results,selectedValueIndex: indexPos)
         // showPicker(self, inputText: textField, data: results)
+            AchievementsText.userInteractionEnabled = false
            
         }
         else if textField == AchievementsText {
@@ -621,8 +624,10 @@ extension MatchResultsViewController:UITextFieldDelegate{
 //            let indexPos = Achievements.indexOf(AchievementsText.text!) ?? 0
 //            ctDataPicker.showPicker(self, inputText: textField, data: Achievements,selectedValueIndex: indexPos)
             //showPicker(self, inputText: textField, data: Achievements)
-    
+            
+           // resultText.resignFirstResponder()
             AchievementsText.resignFirstResponder()
+          
             
             let AchievementVC = viewControllerFrom("Main", vcid:"AchievementListViewController") as! AchievementListViewController
             
@@ -642,10 +647,10 @@ extension MatchResultsViewController:UITextFieldDelegate{
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-//        if textField.text?.trimWhiteSpace.length > 0{
-//            
-//            //parent?.dataChangedAfterLastSave()
-//        }
+        if textField == resultText{
+             AchievementsText.userInteractionEnabled = true
+        }
+        
     }
     
     override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {

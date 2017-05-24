@@ -19,6 +19,7 @@ class StaticPageViewController: UIViewController,ThemeChangeable {
     
     @IBAction func closeButtonPressed(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
+        setBackgroundColor()
     }
     
     
@@ -27,19 +28,18 @@ class StaticPageViewController: UIViewController,ThemeChangeable {
         self.pageHeader.text = pageHeaderText
         self.view.backgroundColor = currentTheme.topColor
       //  navigationController!.navigationBar.barTintColor = currentTheme.topColor
+       HtmlContentHolder.backgroundColor = UIColor.clearColor()
+        HtmlContentHolder.opaque = false
+       
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
-        
-        
         setBackgroundColor()
         
         let req = NSURLRequest(URL: NSURL(string: pageToLoad)!)
-        
-        
         
         HtmlContentHolder.loadRequest(req)
         

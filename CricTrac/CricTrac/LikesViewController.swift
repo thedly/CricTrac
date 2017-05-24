@@ -9,7 +9,8 @@
 import UIKit
 import GoogleMobileAds
 
-class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,ThemeChangeable {
+
+class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,ThemeChangeable,DeleteComment {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -45,7 +46,9 @@ class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
              self.bannerViewHeightConstraint.constant = 0
         }
     }
-    
+    func deletebuttonTapped() {
+        //lines
+    }
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
@@ -70,9 +73,10 @@ class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
          let data = dataSource[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier("LikesTableViewCell", forIndexPath:
             indexPath) as! LikesTableViewCell
-
+          
         cell.name.text = data["OwnerName"] as? String
         let friendUserId = data["OwnerID"] as? String
+        cell.parent = self
        
         cell.friendUserId = friendUserId!
         
