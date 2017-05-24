@@ -121,7 +121,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             let forgotPwdVC = viewControllerFrom("Main", vcid: "ForgotPasswordViewController") as! ForgotPasswordViewController
             self.presentViewController(forgotPwdVC, animated: true, completion: nil)
         }
-        else if vcName == "ChangePassword" {
+        else if vcName == "Feedback" {
             openMailApp()
         }
         else if vcName == "StaticPageViewController" {

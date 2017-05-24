@@ -129,7 +129,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func getCellForSuggestionsRow(indexPath:NSIndexPath)->FriendSuggestionsCell{
-        if FriendRequestsData.filter({$0.Name == UserProfilesData[indexPath.row].fullName}).first == nil {
+        //if FriendRequestsData.filter({$0.Name == UserProfilesData[indexPath.row].fullName}).first == nil {
             if let aCell =  SuggestsTblview.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as? FriendSuggestionsCell {
                 
                 let friendUserId = UserProfilesData[indexPath.row].id
@@ -165,10 +165,10 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
             else {
                 return FriendSuggestionsCell()
             }
-        }
-        else {
-            return FriendSuggestionsCell()
-        }
+//        }
+//        else {
+//            return FriendSuggestionsCell()
+//        }
     }
     
     func AddFriendBtnPressed(sender: UIButton) {

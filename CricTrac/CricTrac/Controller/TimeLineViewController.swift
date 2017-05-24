@@ -24,6 +24,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     var timelineDS = [[String:String]]()
     let refreshControl = UIRefreshControl()
     var totalPosts = 5
+    var notCount = 0
    
     override func viewWillAppear(animated: Bool) {
         //loadTimeline()
@@ -188,6 +189,8 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
     func setNavigationBarProperties(){
        
+        
+        
         currentTheme = cricTracTheme.currentTheme
         let menuButton: UIButton = UIButton(type:.Custom)
         menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
@@ -201,26 +204,31 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         
         notificationButton.addTarget(self, action: #selector(didNotificationButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
         let righttbarButton = UIBarButtonItem(customView: notificationButton)
-//       
-//        let notifyLabel: UILabel = UILabel()
-//        notifyLabel.frame = CGRectMake(555, 13, 20, 10)
-//        notifyLabel.backgroundColor = UIColor.redColor()
-//        notifyLabel.textColor = UIColor.whiteColor()
-//        notifyLabel.text = "2"
-//        self.view.addSubview(notifyLabel)
-       // let rightbarButtonItem = UIBarButtonItem(customView: notifyLabel)
+        
+        let notifyLabel: UILabel = UILabel()
+        notifyLabel.frame = CGRectMake(0, 0, 40, 20)
+        //notifyLabel.backgroundColor = UIColor.redColor()
+        notifyLabel.textColor = UIColor.whiteColor()
+        //notifyLabel.text = "2"
+       // self.view.addSubview(notifyLabel)
+        let rightbarButtonItem = UIBarButtonItem(customView: notifyLabel)
         
         
         //assign button to navigationbar
         
         navigationItem.leftBarButtonItem = leftbarButton
-        //navigationItem.rightBarButtonItems = [ righttbarButton,rightbarButtonItem]
-       navigationItem.rightBarButtonItem = righttbarButton
+        navigationItem.rightBarButtonItems = [ righttbarButton,rightbarButtonItem]
+      // navigationItem.rightBarButtonItem = righttbarButton
         self.view.backgroundColor =  currentTheme.topColor
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "PAVILION"
        // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
        // navigationController!.navigationBar.titleTextAttributes = titleDict
+        
+        fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings").child("NotificationsCount").observeEventType(.Value, withBlock: { snapshot in
+            self.notCount = (snapshot.value as? Int)!
+            notifyLabel.text = String(self.notCount)
+        })
     }
     
     override func didReceiveMemoryWarning() {
