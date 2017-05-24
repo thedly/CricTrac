@@ -263,7 +263,6 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
             else {
                 let timelinePost = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
                 timelinePost.postId = topicId
-                timelinePost.notificationId = self.NotificationID
                 self.presentViewController(timelinePost, animated: true) {}
             }
         }
@@ -281,7 +280,6 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
             else {
                 let timelinePost = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
                 timelinePost.postId = topicId
-                timelinePost.notificationId = self.NotificationID
                 self.presentViewController(timelinePost, animated: true) {}
             }
         }
@@ -299,7 +297,6 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
             else {
                 let timelinePost = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
                 timelinePost.postId = topicId
-                timelinePost.notificationId = self.NotificationID
                 self.presentViewController(timelinePost, animated: true) {}
             }
         }

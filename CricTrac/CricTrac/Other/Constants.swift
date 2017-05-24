@@ -104,13 +104,13 @@ let fireBaseRef =  FIRDatabase.database().reference()
 let storageRef = FIRStorage.storage().referenceForURL("gs://arjun-innovations.appspot.com")
 
 //Azure Dev environment url
-let serverBaseURL = "http://crictracdevserver.azurewebsites.net"
+let serverBaseURL = "https://crictracdevserver.azurewebsites.net"
 
 //Azure QA environment url
-//let serverBaseURL = "http://crictracqaserver.azurewebsites.net"
+//let serverBaseURL = "https://crictracqaserver.azurewebsites.net"
 
 //Azure Prod environment url
-//let serverBaseURL = "http://crictracserver.azurewebsites.net"
+//let serverBaseURL = "https://crictracserver.azurewebsites.net"
 
 /*
  
