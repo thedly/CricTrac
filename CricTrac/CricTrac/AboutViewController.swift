@@ -18,6 +18,15 @@ class AboutViewController: UIViewController,ThemeChangeable {
 
         // Do any additional setup after loading the view.
         setBackgroundColor()
+        
+        //textView.text = "About Us"
+        
+        let formattedString = NSMutableAttributedString()
+        formattedString.bold("The Team" , fontName: appFont_black, fontSize: 20)
+        formattedString.bold("\n\nSajith Kumar (Founder, CEO)" , fontName: appFont_black, fontSize: 20)
+        formattedString.bold("\nSajith Kumar is the Founder and CEO of CricTrac, a product from Arjun Innovations Pvt Ltd. He is responsible for the company's overall vision and strategy as well as day-to-day operations. \n\nSince the beginning, Sajith has focused on inspiring creativity through solving problems with thoughtful product design. As a result, CricTrac has become the essential accessory for any cricketer to carry along with his cricket kit. \n\nPrior to founding Arjun Innovations and CricTrac, Sajith was part of multiple organizations like Harman, Wipro etc with an extensive service experience of 15 plus years." , fontName: appFont_regular, fontSize: 15)
+
+        textView.attributedText = formattedString
     }
 
     override func didReceiveMemoryWarning() {

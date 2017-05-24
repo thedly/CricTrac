@@ -234,18 +234,11 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
         let userId:String = userId
         
         fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeSingleEventOfType(.Value, withBlock: { snapshot in
-            
             if let data = snapshot.value! as? [String:AnyObject]{
                 let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
                 summaryDetailsVC.matchDetailsData = data
                 summaryDetailsVC.isFriendDashboard = true
-                //if let _ = self.friendProfile {
-                  //  summaryDetailsVC.friendProfile = true
-                    self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
-                //}
-                //else {
-                //    self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
-                //}
+                self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
             }
         })
     }
