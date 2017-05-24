@@ -15,6 +15,11 @@ let ProfilePictureUpdated = "ProfilePictureUpdated"
 let CoverPictureUpdated = "CoverPictureUpdated"
 public var date = 0
 
+//dev website url
+var websiteUrl = "https://arjun-innovations.firebaseapp.com"
+//prod website url
+//var websiteUrl = "https://crictrac.com"
+
 public var loggedInUserInfo = [String:AnyObject]()
 var friendsCity = [String:String]()
 
@@ -67,13 +72,12 @@ let settingsMenuData = [
     ["title":"Change Password","vc":  "ChangePassword", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "" ],
     ["title":"Rate this app","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay": "itms://itunes.apple.com/de/app/x-gift/id839686104?mt=8&uo=4"],
     ["title":"Feedback","vc":  "Feedback", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "" ],
-    ["title":"FAQ","vc":  "FAQ", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : ""],
-    ["title":"Terms & Conditions","vc":"TermsAndConditions", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "" ],
-    ["title":"Privacy Policy","vc":  "PrivacyPolicy", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "" ],
-    ["title":"About","vc":  "About", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "" ],
+    ["title":"FAQ","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/AppFiles/FAQ.htm"],
+    ["title":"Terms & Conditions","vc":"StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/AppFiles/TermsofUse.htm" ],
+    ["title":"Privacy Policy","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/AppFiles/PrivacyPolicy.htm" ],
+    ["title":"About","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/AppFiles/AboutUs.htm" ],
      ["title":"Logout","vc":  "", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false]
 ]
-
 
 var versionAndBuildNumber:String{
 
