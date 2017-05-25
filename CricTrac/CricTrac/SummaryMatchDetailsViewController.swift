@@ -102,10 +102,10 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     }
     
     func deleteMatch(){
-        KRProgressHUD.show(progressHUDStyle: .White, message: "Deleting...")
+        //KRProgressHUD.show(progressHUDStyle: .White, message: "Deleting...")
         if let matchKey = matchDetailsData["MatchId"] as? String{
             deleteMatchData(matchKey) { (error) in
-                KRProgressHUD.dismiss()
+                //KRProgressHUD.dismiss()
                 if error != nil{
                     SCLAlertView().showError("Error",subTitle:error!.localizedDescription)
                 }

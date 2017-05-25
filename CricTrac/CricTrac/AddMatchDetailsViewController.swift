@@ -601,7 +601,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         
         if let msg = inAppProductPrice {
         
-            let message = "Trial version expired. To add more matches please upgrade by paying: \(msg)"
+            let message = "You can add only 5 matches in the free version. To add more matches please upgrade by paying: \(msg)"
             
             let refreshAlert = UIAlertController(title: "Premium Account", message: message, preferredStyle: UIAlertControllerStyle.Alert)
             

@@ -398,6 +398,27 @@ func fetchFriendDetail(id:String,sucess:(result:[String:String])->Void){
     })
 }
 
+func fetchBasicProfile(id:String,sucess:(result:[String:String])->Void){
+    fireBaseRef.child("Users").child(id).child("UserProfile").observeEventType(.Value, withBlock: { snapshot in
+        if let data = snapshot.value {
+            guard let firstname = data["FirstName"]! as? String else {return }
+            guard let lastname = data["LastName"]! as? String else {return }
+            guard let proPic = data["ProfileImageURL"] as? String else {return }
+            guard let city = data["City"]! as? String else {return }
+            sucess(result: ["proPic":proPic,"city":city,"firstname":firstname,"lastname":lastname])
+        }
+    })
+}
+
+func fetchCoverPhoto(id:String,sucess:(result:[String:String])->Void){
+    fireBaseRef.child("Users").child(id).child("UserProfile").observeEventType(.Value, withBlock: { snapshot in
+        if let data = snapshot.value {
+            guard let coverPic = data["CoverPhotoURL"] as? String else {return }
+            sucess(result: ["coverPic":coverPic])
+        }
+    })
+}
+
 func enableSync(){
     //fireBaseRef.database.persistenceEnabled = true
     fireBaseRef.keepSynced(true)
@@ -407,7 +428,7 @@ func enableSync(){
 // MARK: - Profile
 
 func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject])->Void){
-    KRProgressHUD.showText("Updating ...")
+    //KRProgressHUD.showText("Updating ...")
     var dataToBeModified = data
 //    let formatter = NSDateFormatter()
 //    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -439,7 +460,7 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
             UpdateDashboardDetails()
         }
     }
-    KRProgressHUD.dismiss()
+    //KRProgressHUD.dismiss()
     sucessBlock(dataToBeModified)
 }
 
@@ -1015,7 +1036,7 @@ func getFriendRequestById(id: String) -> [String: String]{
 
 //func addNewPost(postText:String, sucess:()->Void){
 func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
-    KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+    //KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
     let userName = loggedInUserName ?? "No Name"
     let addedTime =  NSDate().getCurrentTimeStamp()
     
@@ -1036,7 +1057,7 @@ func addNewPost(postText:String, sucess:(data:[String:AnyObject])->Void){
     let returnData = ["timeline":["DisplayTime":dispTime,"Post":postText,"CommentCount":"0","LikeCount":"0","OwnerName":userName,"postId":postKey,"OwnerID":currentUser!.uid,"PostedBy":currentUser!.uid,"PostType":"Self"]]
     
     sucess(data: returnData)
-    KRProgressHUD.dismiss()
+    //KRProgressHUD.dismiss()
     
     updateTimelineWithNewPost(postKey)
     
@@ -1179,21 +1200,19 @@ func getAllNotifications(sucess:(data:[[String: AnyObject]])->Void){
 func calcUnreadNotifications() {
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Notifications").queryLimitedToLast(30)
     ref.observeEventType(.Value, withBlock: { snapshot in
+        var notiCount = 0
         if let data = snapshot.value as? [String:[String:AnyObject]] {
             //var result = [Notifications]()
-            var notiCount = 0
             for (_,value) in data {
                 let unRead = value["isRead"] as? Int
                 if unRead == 0 {
                     notiCount++
                 }
             }
-        
-            //let count = snapshot.childrenCount
-        
-            let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings").child("NotificationsCount")
-            ref.setValue(notiCount)
         }
+        
+        let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings").child("NotificationsCount")
+        ref.setValue(notiCount)
     })
 }
 
