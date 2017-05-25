@@ -63,6 +63,9 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
      @IBOutlet weak var bannerView: GADBannerView!
     
+    @IBOutlet weak var firstTeamTossBtn: UIButton!
+    @IBOutlet weak var secondTeamTossBtn: UIButton!
+    
     var isFriendDashboard: Bool!  = false
 
     
@@ -442,6 +445,13 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         
         if let hTeam: String = matchDetailsData["FirstBatting"] as? String {
             if hTeam != "-" {
+                if hTeam == matchDetailsData["TossWonBy"] as? String {
+                    firstTeamTossBtn.hidden = false
+                   
+                }
+                else {
+                    firstTeamTossBtn.hidden = true
+                }
                 if hTeam.length > 15 {
                     var subString =  hTeam[hTeam.startIndex.advancedBy(0)...hTeam.startIndex.advancedBy(15)]
                     subString = subString.stringByAppendingString("..")
@@ -458,6 +468,12 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             
             if let opponent: String = matchDetailsData["SecondBatting"] as? String {
                 if opponent != "-" {
+                    if opponent == matchDetailsData["TossWonBy"] as? String {
+                        secondTeamTossBtn.hidden = false
+                    }
+                    else {
+                        secondTeamTossBtn.hidden = true
+                    }
                     if opponent.length > 15 {
                         var subString =  opponent[opponent.startIndex.advancedBy(0)...opponent.startIndex.advancedBy(15)]
                         subString = subString.stringByAppendingString("..")

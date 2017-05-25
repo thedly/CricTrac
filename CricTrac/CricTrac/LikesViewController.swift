@@ -18,21 +18,24 @@ class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bannerView: GADBannerView!
     
+    var currentTheme:CTTheme!
     var postID: String = ""
      var dataSource = [[String:AnyObject]]()
-     var currentTheme:CTTheme!
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         getAllLikes(postID) { (data) in
            self.dataSource = data
-           self.tableView.reloadData()
+             self.tableView.reloadData()
         }
         self.setBackgroundColor()
-        let currentTheme = cricTracTheme.currentTheme
-        self.view.backgroundColor = currentTheme.topColor
+       
        loadBannerAds()
         tableView.tableFooterView = UIView()
+      
+    }
+    override func viewWillAppear(animated: Bool) {
+        setBackgroundColor()
     }
     
     func loadBannerAds() {
@@ -63,21 +66,48 @@ class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     @IBAction func backButton(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-
+        func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return 5
+        }
+    
+        func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    
+            let aView = UIView()
+            aView.backgroundColor = UIColor.clearColor()
+            return aView
+        }
+
+
+//    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        
+//        let aView = UIView(frame: CGRectMake(0, 0, view.frame.width, 0) )
+//        aView.backgroundColor = UIColor.clearColor()
+//        
+//        return aView
+//    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return dataSource.count
     }
-    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+   
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-         let data = dataSource[indexPath.row]
+        let data = dataSource[indexPath.section]
+
         let cell = tableView.dequeueReusableCellWithIdentifier("LikesTableViewCell", forIndexPath:
             indexPath) as! LikesTableViewCell
-          
+        
         cell.name.text = data["OwnerName"] as? String
         let friendUserId = data["OwnerID"] as? String
         cell.parent = self
-       
+        cell.layer.cornerRadius = 10
+        cell.layer.masksToBounds = true
+        cell.layer.borderWidth = 5
+        cell.layer.borderColor = UIColor.clearColor().CGColor
+        
         cell.friendUserId = friendUserId!
         
         cell.userImage.layer.borderWidth = 1
@@ -137,9 +167,13 @@ class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         if friendUserId == currentUser?.uid {
             cell.friendButton.hidden = true
         }
-        
+       
         cell.selectionStyle = UITableViewCellSelectionStyle.None
+       
+        let currentTheme = cricTracTheme.currentTheme
+        cell.contentView.backgroundColor = currentTheme.bottomColor
         cell.backgroundColor = UIColor.clearColor()
+        
         return cell
     }
 

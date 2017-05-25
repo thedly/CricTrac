@@ -74,33 +74,31 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
     @IBAction func menuButton(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion:nil)
     }
-  //  func setNavigationBarProperties(){
-//        currentTheme = cricTracTheme.currentTheme
-//        let menuButton: UIButton = UIButton(type:.Custom)
-//        menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
-//        menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
-//        menuButton.frame = CGRectMake(0, 0, 40, 40)
-//        let leftbarButton = UIBarButtonItem(customView: menuButton)
-//        
-//        navigationItem.leftBarButtonItem = leftbarButton
-//        self.view.backgroundColor =  currentTheme.topColor
-//        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-//        title = "NOTIFICATIONS"
-// }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+       
         return dataSource.count
     }
     
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       
+        return 1
+    }
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 5
+    }
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let aView = UIView()
+        aView.backgroundColor = UIColor.clearColor()
+        return aView
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let data = dataSource[indexPath.row]
+        let data = dataSource[indexPath.section]
         if let cell = tableView.dequeueReusableCellWithIdentifier("NotificationTableViewCell", forIndexPath: indexPath) as? NotificationTableViewCell {
+            
+            cell.layer.cornerRadius = 10
+            cell.layer.masksToBounds = true
             
             NotificationID = data["NotificationID"]! as! String
             let message = data["Message"] as? String
@@ -157,20 +155,21 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
 
            // cell.menuIcon.contentMode = UIViewContentMode.ScaleAspectFit;
             cell.selectionStyle = UITableViewCellSelectionStyle.None
+            
             return cell
         }
         return NotificationTableViewCell()
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.NotificationID = self.dataSource[indexPath.row]["NotificationID"]! as! String
+        self.NotificationID = self.dataSource[indexPath.section]["NotificationID"]! as! String
         
         //on select, mark as Read
         markNotificationAsRead(self.NotificationID)
         
-        let topic = self.dataSource[indexPath.row]["Topic"]! as! String
-        let topicId = self.dataSource[indexPath.row]["TopicID"]! as! String
-        let fromId = self.dataSource[indexPath.row]["FromID"]! as! String
+        let topic = self.dataSource[indexPath.section]["Topic"]! as! String
+        let topicId = self.dataSource[indexPath.section]["TopicID"]! as! String
+        let fromId = self.dataSource[indexPath.section]["FromID"]! as! String
         
         switch topic{
             case "FRR": self.moveToFRR(topicId)
@@ -195,12 +194,12 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
     func tableView(tableView: UITableView,
                             editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let markRead = UITableViewRowAction(style: .Normal, title: "Mark as read") { action, index in
-            self.NotificationID = self.dataSource[indexPath.row]["NotificationID"]! as! String
+            self.NotificationID = self.dataSource[indexPath.section]["NotificationID"]! as! String
             markNotificationAsRead(self.NotificationID)
         }
         
         let delete = UITableViewRowAction(style: .Default, title: "Delete") { action, index in
-            self.NotificationID = self.dataSource[indexPath.row]["NotificationID"]! as! String
+            self.NotificationID = self.dataSource[indexPath.section]["NotificationID"]! as! String
             deleteNotification(self.NotificationID)
             
             if self.dataSource.count == 1 {
@@ -208,7 +207,7 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
             }
         }
         
-        let isRead = self.dataSource[indexPath.row]["isRead"] as? Int
+        let isRead = self.dataSource[indexPath.section]["isRead"] as? Int
         if isRead == 0 {
             return [delete, markRead]
         }
