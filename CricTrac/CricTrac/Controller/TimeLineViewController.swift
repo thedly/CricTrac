@@ -206,18 +206,30 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         let righttbarButton = UIBarButtonItem(customView: notificationButton)
         
         let notifyLabel: UILabel = UILabel()
-        notifyLabel.frame = CGRectMake(0, 0, 40, 20)
+        
+        let notificationButtonframeBounds: CGRect =  (righttbarButton.customView?.bounds)!;
+
+        
+        
+        notifyLabel.frame = CGRectMake(0, -10, 40, 20)
         //notifyLabel.backgroundColor = UIColor.redColor()
         notifyLabel.textColor = UIColor.whiteColor()
-        //notifyLabel.text = "2"
+        
+        righttbarButton.customView?.addSubview(notifyLabel)
+        
+        righttbarButton.customView?.center = CGPointMake(notificationButtonframeBounds.origin.x, notificationButtonframeBounds.origin.y)
+        notifyLabel.textAlignment = NSTextAlignment.Center
+        
+        
        // self.view.addSubview(notifyLabel)
-        let rightbarButtonItem = UIBarButtonItem(customView: notifyLabel)
+        //let rightbarButtonItem = UIBarButtonItem(customView: notifyLabel)
         
         
         //assign button to navigationbar
         
         navigationItem.leftBarButtonItem = leftbarButton
-        navigationItem.rightBarButtonItems = [ righttbarButton,rightbarButtonItem]
+        navigationItem.rightBarButtonItems = [righttbarButton]
+        
       // navigationItem.rightBarButtonItem = righttbarButton
         self.view.backgroundColor =  currentTheme.topColor
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
