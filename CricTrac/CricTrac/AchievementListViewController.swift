@@ -108,6 +108,7 @@ class AchievementListViewController: UIViewController,UITableViewDelegate,UITabl
         
                 if selectedRows.contains(dataSource[indexPath.row]){
                     cell.accessoryType = .Checkmark
+                    self.tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
                 }
         
             return cell
