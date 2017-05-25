@@ -88,7 +88,15 @@ class NewPostViewController: UIViewController,ThemeChangeable,UITextViewDelegate
     }
 
     @IBAction func close(sender: AnyObject) {
-        dismissViewControllerAnimated(true) {}
+        let alert = UIAlertController(title: "", message: "Are you sure you want to cancel the post?", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:{(UIAlertAction) in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        return
+
+      
     }
     
     @IBAction func sendNewPostToTimline(sender:UIButton){

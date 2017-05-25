@@ -141,7 +141,17 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     var alertMessage = "Change picture"
     
     @IBAction func editImageBtnPressed(sender: AnyObject) {
+        
         if friendId == nil {
+            // network reachability test
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            if !appDelegate.reachability.isReachable()  {
+                let alert = UIAlertController(title: "", message: networkErrorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+                return
+            }
+
             alertMessage = "Change your profile photo"
             self.photoOptions("ProfilePhoto")
             coverOrProfile = "Profile"
@@ -296,7 +306,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        if coverOrProfile == "Profile" {
+             if coverOrProfile == "Profile" {
             //dispatch_async(dispatch_get_main_queue(),{
             self.userProfileImage.image = image
             self.dismissViewControllerAnimated(true) {
@@ -490,6 +500,15 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     func tapCoverPhoto()  {
         if friendId == nil {
+            // network reachability test
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            if !appDelegate.reachability.isReachable()  {
+                let alert = UIAlertController(title: "", message: networkErrorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+                return
+            }
+
             alertMessage = "Change your cover photo"
             self.photoOptions("CoverPhoto")
             coverOrProfile = "Cover"

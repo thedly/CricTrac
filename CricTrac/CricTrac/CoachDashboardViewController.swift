@@ -123,27 +123,58 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         self.PlayerLocation.attributedText = locationText
         //self.userProfileImage.image = LoggedInUserImage
         
-        let proPic = userProfileData.ProfileImageURL
-        if proPic == "-"{
-            let imageName = defaultProfileImage
-            let image = UIImage(named: imageName)
-            userProfileImage.image = image!
-        }else{
-            if let imageURL = NSURL(string:proPic){
-                userProfileImage.kf_setImageWithURL(imageURL)
-            }
-        }
+//        let proPic = userProfileData.ProfileImageURL
+//        if proPic == "-"{
+//            let imageName = defaultProfileImage
+//            let image = UIImage(named: imageName)
+//            userProfileImage.image = image!
+//        }else{
+//            if let imageURL = NSURL(string:proPic){
+//                userProfileImage.kf_setImageWithURL(imageURL)
+//            }
+//        }
         
-        let coverPic = userProfileData.CoverPhotoURL
-        if coverPic == "-"{
-            let imageName = defaultProfileImage
-            let image = UIImage(named: imageName)
-            imgCoverPhoto.image = image!
-        }else{
-            if let imageURL = NSURL(string:coverPic){
-                imgCoverPhoto.kf_setImageWithURL(imageURL)
+        fetchBasicProfile((currentUser?.uid)!, sucess: { (result) in
+            let proPic = result["proPic"]
+            
+            if proPic! == "-"{
+                let imageName = defaultProfileImage
+                let image = UIImage(named: imageName)
+                self.userProfileImage.image = image
             }
-        }
+            else{
+                if let imageURL = NSURL(string:proPic!){
+                    self.userProfileImage.kf_setImageWithURL(imageURL)
+                }
+            }
+        })
+        
+//        let coverPic = userProfileData.CoverPhotoURL
+//        if coverPic == "-"{
+//            let imageName = defaultProfileImage
+//            let image = UIImage(named: imageName)
+//            imgCoverPhoto.image = image!
+//        }else{
+//            if let imageURL = NSURL(string:coverPic){
+//                imgCoverPhoto.kf_setImageWithURL(imageURL)
+//            }
+//        }
+        
+        fetchCoverPhoto((currentUser?.uid)!, sucess: { (result) in
+            let coverPic = result["coverPic"]
+            
+            if coverPic! == "-"{
+                let imageName = defaultProfileImage
+                let image = UIImage(named: imageName)
+                self.imgCoverPhoto.image = image
+            }
+            else{
+                if let imageURL = NSURL(string:coverPic!){
+                    self.imgCoverPhoto.kf_setImageWithURL(imageURL)
+                }
+            }
+        })
+
         
 //        if userProfileData.ProfileImageURL != "-" {
 //            getImageFromFirebase(userProfileData.ProfileImageURL) { (imgData) in
