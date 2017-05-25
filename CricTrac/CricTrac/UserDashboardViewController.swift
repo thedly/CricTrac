@@ -300,12 +300,12 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             //dispatch_async(dispatch_get_main_queue(),{
             self.userProfileImage.image = image
             self.dismissViewControllerAnimated(true) {
-                    addProfileImageData(self.resizeImage(image, newWidth: 200))
+                addProfileImageData(self.resizeImage(image, newWidth: 200))
                 //self.initView()
-                }
+            }
             //})
-            
-        }else {
+        }
+        else {
             self.imgCoverPhoto.image = image
             self.dismissViewControllerAnimated(true) {
                 addCoverImageData(self.resizeImage(image, newWidth: 200))
@@ -380,27 +380,63 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
 //        self.userProfileImage.image = LoggedInUserImage
 //        self.imgCoverPhoto.image = LoggedInUserCoverImage
         
-        let proPic = userProfileData.ProfileImageURL
-        if proPic == "-"{
-            let imageName = defaultProfileImage
-            let image = UIImage(named: imageName)
-            userProfileImage.image = image!
-        }else{
-            if let imageURL = NSURL(string:proPic){
-                userProfileImage.kf_setImageWithURL(imageURL)
-            }
-        }
         
-        let coverPic = userProfileData.CoverPhotoURL
-        if coverPic == "-"{
-            let imageName = defaultProfileImage
-            let image = UIImage(named: imageName)
-            imgCoverPhoto.image = image!
-        }else{
-            if let imageURL = NSURL(string:coverPic){
-                imgCoverPhoto.kf_setImageWithURL(imageURL)
+//        let proPic = userProfileData.ProfileImageURL
+//        if proPic == "-"{
+//            let imageName = defaultProfileImage
+//            let image = UIImage(named: imageName)
+//            userProfileImage.image = image!
+//        }else{
+//            if let imageURL = NSURL(string:proPic){
+//                userProfileImage.kf_setImageWithURL(imageURL)
+//            }
+//        }
+        
+        fetchBasicProfile((currentUser?.uid)!, sucess: { (result) in
+            let proPic = result["proPic"]
+            
+            if proPic! == "-"{
+                let imageName = defaultProfileImage
+                let image = UIImage(named: imageName)
+                self.userProfileImage.image = image
             }
-        }
+            else{
+                if let imageURL = NSURL(string:proPic!){
+                    self.userProfileImage.kf_setImageWithURL(imageURL)
+                }
+            }
+        })
+        
+//        let coverPic = userProfileData.CoverPhotoURL
+//        if coverPic == "-"{
+//            let imageName = defaultProfileImage
+//            let image = UIImage(named: imageName)
+//            imgCoverPhoto.image = image!
+//        }else{
+//            if let imageURL = NSURL(string:coverPic){
+//                imgCoverPhoto.kf_setImageWithURL(imageURL)
+//            }
+//        }
+        
+        fetchCoverPhoto((currentUser?.uid)!, sucess: { (result) in
+            let coverPic = result["coverPic"]
+            
+            if coverPic! == "-"{
+                let imageName = defaultProfileImage
+                let image = UIImage(named: imageName)
+                self.imgCoverPhoto.image = image
+            }
+            else{
+                if let imageURL = NSURL(string:coverPic!){
+                    self.imgCoverPhoto.kf_setImageWithURL(imageURL)
+                }
+            }
+        })
+
+        
+        
+        
+        
         
 //        if userProfileData.ProfileImageURL != "-" {
 //                getImageFromFirebase(userProfileData.ProfileImageURL) { (imgData) in
@@ -468,9 +504,11 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         setDashboardData()
         TeamsTable.reloadData()
     }
+    
     override func viewWillDisappear(animated: Bool) {
          setBackgroundColor()
     }
+    
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
         
         let scale = newWidth / image.size.width
@@ -548,140 +586,6 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     func dismissFullscreenImage(sender: UITapGestureRecognizer) {
         sender.view?.removeFromSuperview()
     }
-    
-    
-    //commmented by sajith
-    /*func getMatchData(){
-        
-        recentMatchesNotAvailable.hidden = true
-        KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
-        
-        getAllMatchData(friendId) { (data) in
-            
-            
-            for (key,val) in data{
-                
-                //var dataDict = val as! [String:String]
-                //dataDict["key"] = key
-                
-                if  var value = val as? [String : AnyObject]{
-                    
-                    value += ["key":key]
-                    
-                    let battingBowlingScore = NSMutableAttributedString()
-                    var matchVenueAndDate = ""
-                    var opponentName = ""
-                    
-                    let mData = MatchSummaryData()
-                    if let runsTaken = value["RunsTaken"]{
-                        
-                        mData.BattingSectionHidden = (runsTaken as! String == "-")
-                        
-                        if mData.BattingSectionHidden == false {
-                            
-                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 30).bold("\nRUNS", fontName: appFont_black, fontSize: 12)
-                            
-                        }
-                    }
-                    
-                    if let wicketsTaken = value["WicketsTaken"], let runsGiven = value["RunsGiven"] {
-                        
-                        
-                        mData.BowlingSectionHidden = (runsGiven as! String == "-")
-                        
-                        
-                        if mData.BowlingSectionHidden == false {
-                            if battingBowlingScore.length > 0 {
-                                
-                                battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 30).bold("\nWICKETS", fontName: appFont_black, fontSize: 12)
-                                
-                            }
-                            else{
-                                battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 53).bold("\nWICKETS", fontName: appFont_black, fontSize: 12)
-                            }
-                            
-                            
-                        }
-                        
-                    }
-                    
-                    
-                    if battingBowlingScore.length == 0 {
-                        battingBowlingScore.bold("DNP", fontName: appFont_black, fontSize: 30)
-                    }
-                    
-                    
-                    
-                    if let date = value["MatchDate"]{
-                        
-                        
-                        
-                        let DateFormatter = NSDateFormatter()
-                        DateFormatter.dateFormat = "dd-MM-yyyy"
-                        DateFormatter.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
-                        let dateFromString = DateFormatter.dateFromString(date as! String)
-                        
-                        mData.matchDate = dateFromString
-                        
-                        
-                        //matchVenueAndDate.appendContentsOf(date as? String ?? "NA")
-                    }
-                    if let venue = value["Ground"]{
-                        matchVenueAndDate.appendContentsOf("\(venue)")
-                    }
-                    
-                    if let opponent  = value["Opponent"]{
-                        opponentName = opponent.uppercaseString
-                    }
-                    
-                    
-                    mData.battingBowlingScore = battingBowlingScore
-                    mData.matchDateAndVenue = matchVenueAndDate
-                    mData.opponentName = opponentName
-                    
-                    self.matches.append(mData)
-                    
-                }
-            }
-            
-            self.matches.sortInPlace({ $0.matchDate.compare($1.matchDate) == NSComparisonResult.OrderedDescending })
-            
-            self.SecondRecentMatchSummary.hidden = true
-            self.FirstRecentMatchSummary.hidden = true
- 
-            
-            if self.matches.count > 0 {
-                self.firstRecentMatchScoreCard.attributedText = self.matches[0].battingBowlingScore
-                
-                
-                self.firstRecentMatchOpponentName.text = self.matches[0].opponentName
-                
-                self.firstRecentMatchDateAndVenue.text = self.matches[0].matchDateAndVenue
-                
-                self.FirstRecentMatchSummary.hidden = false
-                
-                if self.matches.count > 1 {
-                    self.secondRecentMatchScoreCard.attributedText = self.matches[1].battingBowlingScore
-                    self.secondRecentMatchOpponentName.text = self.matches[1].opponentName
-                    self.secondRecentMatchDateAndVenue.text = self.matches[1].matchDateAndVenue
-                    
-                    self.SecondRecentMatchSummary.hidden = (self.matches[1].battingBowlingScore == nil || self.matches[1].battingBowlingScore == "0")
-                    
-                }
-                
-            }
-            else
-            {
-                self.FirstRecentMatchSummary.hidden = true
-                self.SecondRecentMatchSummary.hidden = true
-                self.recentMatchesNotAvailable.hidden = false
-            }
-            
-            KRProgressHUD.dismiss()
-            
-        }
-    }*/
-   
     
     
 func setDashboardData(){

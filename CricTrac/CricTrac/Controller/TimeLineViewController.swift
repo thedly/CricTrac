@@ -226,7 +226,9 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
        // navigationController!.navigationBar.titleTextAttributes = titleDict
         
         fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings").child("NotificationsCount").observeEventType(.Value, withBlock: { snapshot in
-            self.notCount = (snapshot.value as? Int)!
+            if (snapshot.value != nil) {
+                self.notCount = (snapshot.value as? Int)!
+            }
             notifyLabel.text = String(self.notCount)
         })
     }

@@ -32,7 +32,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>20</string>
+	<string>21</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -83,9 +83,9 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Camera</string>
+	<string>$(PRODUCT_NAME) Camera Use</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Photos</string>
+	<string>$(PRODUCT_NAME) Photo Use</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SF-UI-Text-Bold.otf</string>

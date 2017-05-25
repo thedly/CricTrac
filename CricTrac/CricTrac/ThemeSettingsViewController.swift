@@ -30,6 +30,9 @@ class ThemeSettingsViewController: UIViewController, UIGestureRecognizerDelegate
         
             //save the theme to database
             addThemeData(testTheme!)
+            
+//            let sliderMenuVC = viewControllerFrom("Main", vcid: "SliderMenuViewController") as! SliderMenuViewController
+//            sliderMenuVC.reloadInputViews()
         }
     }
     

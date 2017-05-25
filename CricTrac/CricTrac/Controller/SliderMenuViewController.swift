@@ -43,8 +43,8 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setBackgroundColor()
-        userName.text = profileData.fullName
+        //setBackgroundColor()
+//        userName.text = profileData.fullName
         profilePic = profileData.ProfileImageURL
         
         //baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
@@ -59,18 +59,36 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         
         loadInitialValues();
         
-        NSNotificationCenter.defaultCenter().addObserverForName(ProfilePictureUpdated, object: nil, queue: nil) { (notification) in
-            if self.profilePic == "-" {
+        fetchBasicProfile((currentUser?.uid)!, sucess: { (result) in
+            let fullname = result["firstname"]! + " " + result["lastname"]!
+            self.userName.text = fullname
+            
+            let proPic = result["proPic"]
+            
+            if proPic! == "-"{
                 let imageName = defaultProfileImage
                 let image = UIImage(named: imageName)
-                self.profileImage.image = image!
-            }else{
-                if let imageURL = NSURL(string:self.profilePic!){
+                self.profileImage.image = image
+            }
+            else{
+                if let imageURL = NSURL(string:proPic!){
                     self.profileImage.kf_setImageWithURL(imageURL)
                 }
             }
-            //self.profileImage.image = LoggedInUserImage
-        }
+        })
+        
+//        NSNotificationCenter.defaultCenter().addObserverForName(ProfilePictureUpdated, object: nil, queue: nil) { (notification) in
+//            if self.profilePic == "-" {
+//                let imageName = defaultProfileImage
+//                let image = UIImage(named: imageName)
+//                self.profileImage.image = image!
+//            }else{
+//                if let imageURL = NSURL(string:self.profilePic!){
+//                    self.profileImage.kf_setImageWithURL(imageURL)
+//                }
+//            }
+//            //self.profileImage.image = LoggedInUserImage
+//        }
         // Do any additional setup after loading the view.
     }
     
