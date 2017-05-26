@@ -204,49 +204,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             }
         }
         //KRProgressHUD.dismiss()
-        
-//        getAllUserData { (userData) in
-//            
-//            if let grounds = userData["Grounds"] as? [String:String]{
-//                groundNames = grounds.map({ (key,value) in value })
-//            }
-//            
-//            if let venue = userData["Venue"] as? [String: String]{
-//                venueNames = venue.map({ (key, value) in value })
-//            }
-//            
-//            if let teams = userData["Teams"] as? [String:String]{
-//                teamNames = teams.map({ (key,value) in value })
-//            }
-//            
-//            if let opponents = userData["Opponents"] as? [String:String]{
-//                opponentTeams = opponents.map({ (key,value) in value })
-//            }
-//            
-//            if let tournamnet = userData["Tournaments"] as? [String:String]{
-//                tournaments = tournamnet.map({ (key,value) in value })
-//            }
-//            KRProgressHUD.dismiss()
-//        }
     }
-    
-//    @IBAction func DidtapCancelButton(sender: AnyObject) {
-//        if dataHasChangedAfterLastSave || dataAdded {
-//            let appearance = SCLAlertView.SCLAppearance(
-//                showCloseButton: false
-//            )
-//            
-//            let alertView = SCLAlertView(appearance: appearance)
-//           
-//            alertView.addButton("OK", target:self, selector:#selector(AddMatchDetailsViewController.continueToDismiss))
-//            alertView.addButton("Cancel", action: { })
-//            alertView.showNotice("Warning", subTitle: "All data will be lost if you continue")
-//        }
-//        else{
-//           // self.dismissViewControllerAnimated(true) {}
-//            moveToMatchSummary()
-//        }
-//    }
     
     func continueToDismiss(){
        // self.dismissViewControllerAnimated(true) {}
@@ -346,6 +304,23 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                     }
                     //data["TossWonBy"] = data["Opponent"]
                 }
+                
+                if matchVC.existTeamName != "" {
+                    if data["TossWonBy"] == matchVC.existTeamName {
+                        data["TossWonBy"] = data["Team"]
+                    }
+                    else {
+                        data["TossWonBy"] = data["Opponent"]
+                    }
+                }
+                else {
+                    if data["TossWonBy"] == matchVC.teamText.text {
+                        data["TossWonBy"] = data["Team"]
+                    }
+                    else {
+                        data["TossWonBy"] = data["Opponent"]
+                    }
+                }
             }
 
             
@@ -357,52 +332,6 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                     })
                 }
                 else{
-//                    if !matchVC.teamOROpponentFieldChanged {
-//                        if resVC.swapBtnVal == 0 {
-//                            if data["Team"] == resVC.existFB {
-//                                data["FirstBatting"]  = data["Team"]
-//                                data["SecondBatting"] = data["Opponent"]
-//                            }
-//                            else {
-//                                data["FirstBatting"]  = data["Opponent"]
-//                                data["SecondBatting"] = data["Team"]
-//                            }
-//                        }
-//                        else {
-//                            if data["Team"] == resVC.existFB {
-//                                data["FirstBatting"]  = data["Opponent"]
-//                                data["SecondBatting"] = data["Team"]
-//                                
-//                            }
-//                            else {
-//                                data["FirstBatting"]  = data["Team"]
-//                                data["SecondBatting"] = data["Opponent"]
-//                            }
-//                        }
-//                    }
-//                    else {
-//                        if resVC.swapBtnVal == 0 {
-//                            if matchVC.existTeamName == resVC.existFB {
-//                                data["FirstBatting"]  = data["Team"]
-//                                data["SecondBatting"] = data["Opponent"]
-//                            }
-//                            else {
-//                                data["FirstBatting"]  = data["Opponent"]
-//                                data["SecondBatting"] = data["Team"]
-//                            }
-//                        }
-//                        else {
-//                            if matchVC.existTeamName == resVC.existFB {
-//                                data["FirstBatting"]  = data["Opponent"]
-//                                data["SecondBatting"] = data["Team"]
-//                            }
-//                            else {
-//                                data["FirstBatting"]  = data["Team"]
-//                                data["SecondBatting"] = data["Opponent"]
-//                            }
-//                        }
-//                    }
-                    
                     if let matchKey = matchId{
                         updateMatchData(matchKey, data: data, callback: { dat in
                             self.updateGlobalValues()
@@ -487,17 +416,10 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         
         matchVC = viewControllerFrom("Main", vcid: "MatchViewController") as! MatchViewController
         
-//        battingVC = viewControllerFrom("Main", vcid: "BattingViewController") as! BattingViewController
-//
-//        bowlingVC = viewControllerFrom("Main", vcid: "BowlingViewController") as! BowlingViewController
-        
         battingBowlingViewController = viewControllerFrom("Main", vcid: "BattingBowlingViewController") as! BattingBowlingViewController
-        
-        //extraVC = viewControllerFrom("Main", vcid: "ExtraViewController") as! ExtraViewController
         
         resVC = viewControllerFrom("Main", vcid: "MatchResultsViewController") as! MatchResultsViewController
         
-        //extraVC.matchDetails = matchVC
         matchVC.parent = self
         battingBowlingViewController.parent = self
         resVC.parent = self
@@ -516,7 +438,6 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             return true
         }
         
-//        SCLAlertView().showWarning("Error", subTitle: "Some Fields are not filled properly in \(pageName). Plaese fill it and try saving")
         let confirmAlert = UIAlertController(title: "" ,message:"Please fill the mandatory fields in \(pageName) tab before saving the match.",preferredStyle: UIAlertControllerStyle.Alert)
         confirmAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
           

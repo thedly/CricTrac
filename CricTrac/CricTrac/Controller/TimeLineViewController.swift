@@ -30,7 +30,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         //loadTimeline()
         
         //calculate the Unread Notifications
-        calcUnreadNotifications()
+        //calcUnreadNotifications()
         
         self.timeLineTable.reloadData()
         setNavigationBarProperties();
@@ -213,7 +213,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         
         notifyLabel.frame = CGRectMake(0, -10, 40, 20)
         //notifyLabel.backgroundColor = UIColor.redColor()
-        notifyLabel.textColor = UIColor.whiteColor()
+        notifyLabel.textColor = UIColor.blackColor()
         
         righttbarButton.customView?.addSubview(notifyLabel)
         
@@ -241,7 +241,9 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             if (snapshot.value != nil) {
                 self.notCount = (snapshot.value as? Int)!
             }
-            notifyLabel.text = String(self.notCount)
+            let formattedString = NSMutableAttributedString()
+            formattedString.bold(String(self.notCount), fontName: appFont_bold, fontSize: 15)
+            notifyLabel.attributedText = formattedString
         })
     }
     

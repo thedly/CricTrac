@@ -208,7 +208,7 @@ func updateMetaData(profileImgUrl: NSURL) {
         ref.updateChildValues(profileImageObject)
         //if profileData.ProfileImageURL == "-" {
             profileData.ProfileImageURL = profileImgUrl.absoluteString
-             NSNotificationCenter.defaultCenter().postNotificationName(ProfilePictureUpdated, object: nil)
+             NSNotificationCenter.defaultCenter().postNotificationName("ProfilePictureUpdated", object: nil)
         //}
     }
     //print("Image url updated successfully")
@@ -222,7 +222,7 @@ func updateCoverMetaData(coverImgUrl: NSURL) {
         ref.updateChildValues(coverImageObject)
         //if profileData.CoverPhotoURL == "-" {
             profileData.CoverPhotoURL = coverImgUrl.absoluteString
-            NSNotificationCenter.defaultCenter().postNotificationName(CoverPictureUpdated, object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName("CoverPictureUpdated", object: nil)
         //}
     }
     //print("Cover Image url updated successfully")
@@ -1197,24 +1197,24 @@ func getAllNotifications(sucess:(data:[[String: AnyObject]])->Void){
     })
 }
 
-func calcUnreadNotifications() {
-    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Notifications").queryLimitedToLast(30)
-    ref.observeEventType(.Value, withBlock: { snapshot in
-        var notiCount = 0
-        if let data = snapshot.value as? [String:[String:AnyObject]] {
-            //var result = [Notifications]()
-            for (_,value) in data {
-                let unRead = value["isRead"] as? Int
-                if unRead == 0 {
-                    notiCount++
-                }
-            }
-        }
-        
-        let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings").child("NotificationsCount")
-        ref.setValue(notiCount)
-    })
-}
+//func calcUnreadNotifications() {
+//    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Notifications").queryLimitedToLast(30)
+//    ref.observeEventType(.Value, withBlock: { snapshot in
+//        var notiCount = 0
+//        if let data = snapshot.value as? [String:[String:AnyObject]] {
+//            //var result = [Notifications]()
+//            for (_,value) in data {
+//                let unRead = value["isRead"] as? Int
+//                if unRead == 0 {
+//                    notiCount++
+//                }
+//            }
+//        }
+//        
+//        let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings").child("NotificationsCount")
+//        ref.setValue(notiCount)
+//    })
+//}
 
 func getNotificationsCount(sucess:(notificationCount:String)->Void){
     fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings").child("NotificationsCount").observeEventType(.Value, withBlock: { snapshot in

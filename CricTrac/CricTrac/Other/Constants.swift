@@ -11,8 +11,6 @@ import AnimatedTextInput
 import Firebase
 import FirebaseStorage
 
-let ProfilePictureUpdated = "ProfilePictureUpdated"
-let CoverPictureUpdated = "CoverPictureUpdated"
 public var date = 0
 
 //dev website url
@@ -70,12 +68,12 @@ let settingsMenuData = [
     //["title":"Offline Matches","vc":"AddMatchDetailsViewController", "img": "Menu_AddMatch", "desc": "Matches to be downloaded for offline view", "IsSwitchVisible": false],
     ["title":"App Theme","vc":"ThemeSettingsViewController", "img": "Menu_Settings", "desc": "Choose desired theme color for your app", "IsSwitchVisible": false],
     ["title":"Change Password","vc":  "ChangePassword", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "" ],
-    ["title":"Rate this app","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay": "itms://itunes.apple.com/de/app/x-gift/id839686104?mt=8&uo=4"],
+//    ["title":"Rate this app","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay": "itms://itunes.apple.com/de/app/x-gift/id839686104?mt=8&uo=4"],
     ["title":"Feedback","vc":  "Feedback", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "" ],
-    ["title":"FAQ","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/AppFiles/FAQ.htm"],
-    ["title":"Terms & Conditions","vc":"StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/AppFiles/TermsofUse.htm" ],
-    ["title":"Privacy Policy","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/AppFiles/PrivacyPolicy.htm" ],
-    ["title":"About","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://arjun-innovations.firebaseapp.com/AppFiles/AboutUs.htm" ],
+    ["title":"FAQ","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://crictrac.com/AppFiles/FAQ.htm"],
+    ["title":"Terms & Conditions","vc":"StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://crictrac.com/AppFiles/TermsofUse.htm" ],
+    ["title":"Privacy Policy","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://crictrac.com/AppFiles/PrivacyPolicy.htm" ],
+    ["title":"About","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://crictrac.com/AppFiles/AboutUs.htm" ],
      ["title":"Logout","vc":  "", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false]
 ]
 
@@ -100,7 +98,6 @@ let adUnitId = "ca-app-pub-3940256099942544/2934735716"
 
 let fireBaseRef =  FIRDatabase.database().reference()
 
-
 let storageRef = FIRStorage.storage().referenceForURL("gs://arjun-innovations.appspot.com")
 
 //Azure Dev environment url
@@ -111,29 +108,6 @@ let serverBaseURL = "https://crictracdevserver.azurewebsites.net"
 
 //Azure Prod environment url
 //let serverBaseURL = "https://crictracserver.azurewebsites.net"
-
-/*
- 
- struct CustomTextInputStyle: AnimatedTextInputStyle {
- 
- var activeColor =   UIColor(hex: "#B12420")
- var inactiveColor = UIColor(hex: "#667815")
- var errorColor = UIColor.redColor()
- var lineInactiveColor = UIColor.redColor()
- var textInputFont = UIFont.systemFontOfSize(14)
- var textInputFontColor = UIColor.blackColor()
- var placeholderMinFontSize: CGFloat = 15
- var counterLabelFont: UIFont? = UIFont.systemFontOfSize(9)
- var leftMargin: CGFloat = 0
- var topMargin: CGFloat = 40
- var rightMargin: CGFloat = 0
- var  bottomMargin: CGFloat = 00
- var yHintPositionOffset: CGFloat = 7
- var yPlaceholderPositionOffset = 0
- }
- 
- */
-
 
  struct CustomTextInputStyle: AnimatedTextInputStyle  {
     var activeColor =   UIColor(hex: "#B12420")
@@ -202,63 +176,6 @@ let themeColors = [
     ]
 ]
 
-
-
-//let themeColors = [
-//    "Dawn" : [
-//        "topColor" : "#4DA0B0",
-//        "bottomColor" : "#D39D38",
-//        "theme":"dawn"
-//    ],
-//    "MeanGreen" : [                                      
-//        "topColor" : "#84CC00",
-//        "bottomColor" : "#4D9D00",
-//        "theme":"meanGreen"
-//    ],
-//    "Dusk" : [
-//        "topColor" : "#434343",
-//        "bottomColor": "#000000",
-//        "theme":"dusk"
-//    ],
-//    "Sunset456": [
-//        "topColor": "#FF9500",
-//        "bottomColor": "#FF5E3A",
-//        "theme":"sunSet678"
-//    ],
-//    "Turquoise": [
-//        "topColor": "#136a8a",
-//        "bottomColor": "#267871",
-//        "theme":"turquoise"
-//    ],
-//    "Instagram": [
-//        "topColor": "#517fa4",
-//        "bottomColor": "#243949",
-//        "theme":"instagram"
-//    ],
-//    "Mango": [
-//        "topColor": "#ffcc33",
-//        "bottomColor": "#ffb347",
-//        "theme":"mango"
-//    ],
-//    "Hersheys": [
-//        "topColor": "#9a8478",
-//        "bottomColor": "#1e130c",
-//        "theme":"hersheys"
-//    ],
-//    "Cocktail": [
-//        "topColor": "#D38312",
-//        "bottomColor": "#A83279",
-//        "theme":"cocktail"
-//    ],
-//    "Earthly": [
-//        "topColor": "#DBD5A4",
-//        "bottomColor": "#649173",
-//        "theme":"earthly"
-//    ]
-//]
-//
-
-
 let defaultTheme = "Grass"
 let defaultProfileImage = "propic"
 let defaultCoverImage = "cover"
@@ -271,61 +188,9 @@ let appFont_bold = "SourceSansPro-Bold"
 let appFont_regular = "SourceSansPro-Regular"
 let appFont_light = "SourceSansPro-Light"
 
-//let states = ["Alabama",
-//              "Alaska",
-//              "Arizona",
-//              "Arkansas",
-//              "California",
-//              "Colorado",
-//              "Connecticut",
-//              "Delaware",
-//              "Florida",
-//              "Georgia",
-//              "Hawaii",
-//              "Idaho",
-//              "Illinois",
-//              "Indiana",
-//              "Iowa",
-//              "Kansas",
-//              "Kentucky",
-//              "Louisiana",
-//              "Maine",
-//              "Maryland",
-//              "Massachusetts",
-//              "Michigan",
-//              "Minnesota",
-//              "Mississippi",
-//              "Missouri",
-//              "Montana",
-//              "Nebraska",
-//              "Nevada",
-//              "New Hampshire",
-//              "New Jersey",
-//              "New Mexico",
-//              "New York",
-//              "North Carolina",
-//              "North Dakota",
-//              "Ohio",
-//              "Oklahoma",
-//              "Oregon",
-//              "Pennsylvania",
-//              "Rhode Island",
-//              "South Carolina",
-//              "South Dakota",
-//              "Tennessee",
-//              "Texas",
-//              "Utah",
-//              "Vermont",
-//              "Virginia",
-//              "Washington",
-//              "West Virginia",
-//              "Wisconsin",
-//              "Wyoming"]
-//
-
 //Marks -- profileSettings
 let nameCharacterLimit = 30
 let networkErrorMessage = "Please check your internet connection"
-let feedbackEmail = "cricktrack@gmail.com"
+let feedbackEmail = "crictrac@outlook.com"
 
 

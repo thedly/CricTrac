@@ -282,7 +282,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
             let coverPic = result["coverPic"]
             
             if coverPic! == "-"{
-                let imageName = defaultProfileImage
+                let imageName = defaultCoverImage
                 let image = UIImage(named: imageName)
                 self.imgCoverPhoto.image = image
             }
