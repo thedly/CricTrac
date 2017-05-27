@@ -28,6 +28,12 @@ public var loggedInUserName:String?{
     return firstName + " " + lastName
 }
 
+var versionAndBuildNumber:String{
+    let nsObject: AnyObject? = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"]
+    let build = NSBundle.mainBundle().objectForInfoDictionaryKey(kCFBundleVersionKey as String) as! String
+    return  (nsObject as! String)+" || Build: "+build
+}
+
 var menuData = [
 
     ["title":"PAVILION","vc":"timeline", "img": "Menu_TimeLine"],
@@ -73,19 +79,12 @@ let settingsMenuData = [
     ["title":"FAQ","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://crictrac.com/AppFiles/FAQ.htm"],
     ["title":"Terms & Conditions","vc":"StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://crictrac.com/AppFiles/TermsofUse.htm" ],
     ["title":"Privacy Policy","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://crictrac.com/AppFiles/PrivacyPolicy.htm" ],
-    ["title":"About","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://crictrac.com/AppFiles/AboutUs.htm" ],
+//    ["title":"About","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://crictrac.com/AppFiles/AboutUs.htm" ],
+    ["title":"About","vc":  "About", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "" ],
      ["title":"Logout","vc":  "", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false]
 ]
 
-var versionAndBuildNumber:String{
 
-    let nsObject: AnyObject? = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"]
-    
-    let build = NSBundle.mainBundle().objectForInfoDictionaryKey(kCFBundleVersionKey as String) as! String
-    
-    return  (nsObject as! String)+" || Build: "+build
-
-}
 
 //variable to decide whether to show the AD or not
 let showAds = 1

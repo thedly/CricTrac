@@ -49,6 +49,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     
     var coverOrProfile = ""
     var friendId:String? = nil
+    var currentUserId = ""
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -134,7 +135,14 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
 //            }
 //        }
         
-        fetchBasicProfile((currentUser?.uid)!, sucess: { (result) in
+        if friendId == nil {
+            currentUserId = (currentUser?.uid)!
+        }
+        else {
+            currentUserId = friendId!
+        }
+        
+        fetchBasicProfile(currentUserId, sucess: { (result) in
             let proPic = result["proPic"]
             
             if proPic! == "-"{
@@ -160,7 +168,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
 //            }
 //        }
         
-        fetchCoverPhoto((currentUser?.uid)!, sucess: { (result) in
+        fetchCoverPhoto(currentUserId, sucess: { (result) in
             let coverPic = result["coverPic"]
             
             if coverPic! == "-"{

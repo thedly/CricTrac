@@ -39,6 +39,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     
     var coverOrProfile = ""
     var friendId:String? = nil
+    var currentUserId = ""
     
 //    var currentUserProfileImage = UIImage()
 //    var currentUserCoverImage = UIImage()
@@ -251,7 +252,14 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
 //            }
 //        }
         
-        fetchBasicProfile((currentUser?.uid)!, sucess: { (result) in
+        if friendId == nil {
+            currentUserId = (currentUser?.uid)!
+        }
+        else {
+            currentUserId = friendId!
+        }
+        
+        fetchBasicProfile(currentUserId, sucess: { (result) in
             let proPic = result["proPic"]
             
             if proPic! == "-"{
@@ -278,7 +286,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
 //            }
 //        }
         
-        fetchCoverPhoto((currentUser?.uid)!, sucess: { (result) in
+        fetchCoverPhoto(currentUserId, sucess: { (result) in
             let coverPic = result["coverPic"]
             
             if coverPic! == "-"{

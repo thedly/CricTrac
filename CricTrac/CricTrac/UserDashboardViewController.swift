@@ -32,6 +32,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     var coverOrProfile = ""
     var friendId:String? = nil
+    var currentUserId = ""
     
     var isFriendDashboard = false
     
@@ -310,7 +311,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             //dispatch_async(dispatch_get_main_queue(),{
             self.userProfileImage.image = image
             self.dismissViewControllerAnimated(true) {
-                addProfileImageData(self.resizeImage(image, newWidth: 200))
+                addProfileImageData(self.resizeImage(image, newWidth: 400))
                 //self.initView()
             }
             //})
@@ -402,7 +403,14 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
 //            }
 //        }
         
-        fetchBasicProfile((currentUser?.uid)!, sucess: { (result) in
+        if friendId == nil {
+            currentUserId = (currentUser?.uid)!
+        }
+        else {
+            currentUserId = friendId!
+        }
+        
+        fetchBasicProfile(currentUserId, sucess: { (result) in
             let proPic = result["proPic"]
             
             if proPic! == "-"{
@@ -428,7 +436,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
 //            }
 //        }
         
-        fetchCoverPhoto((currentUser?.uid)!, sucess: { (result) in
+        fetchCoverPhoto(currentUserId, sucess: { (result) in
             let coverPic = result["coverPic"]
             
             if coverPic! == "-"{

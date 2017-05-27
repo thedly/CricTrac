@@ -17,7 +17,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
     @IBOutlet weak var timeLineTable: UITableView!
     @IBOutlet weak var bannerView: GADBannerView!
-     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
     
     var currentTheme:CTTheme!
     var newPostText:UITextField?
@@ -30,7 +30,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         //loadTimeline()
         
         //calculate the Unread Notifications
-        //calcUnreadNotifications()
+        calcUnreadNotifications()
         
         self.timeLineTable.reloadData()
         setNavigationBarProperties();
@@ -45,7 +45,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         self.automaticallyAdjustsScrollViewInsets = false
         
         timeLineTable.rowHeight = UITableViewAutomaticDimension;
-       timeLineTable.estimatedRowHeight = 50.0;
+        timeLineTable.estimatedRowHeight = 50.0;
         
         //setUIBackgroundTheme(view)
         
@@ -56,9 +56,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         timeLineTable.addSubview(refreshControl)
         
         timeLineTable.registerNib(UINib.init(nibName:"AddPostTableViewCell", bundle: nil), forCellReuseIdentifier: "addpost")
-        
-       timeLineTable.registerNib(UINib.init(nibName:"ImagePostTableViewCell", bundle: nil), forCellReuseIdentifier: "imagepost")
-        
+        timeLineTable.registerNib(UINib.init(nibName:"ImagePostTableViewCell", bundle: nil), forCellReuseIdentifier: "imagepost")
         timeLineTable.registerNib(UINib.init(nibName:"APostTableViewCell", bundle: nil), forCellReuseIdentifier: "aPost")
         
         if !directoryExistsInsideDocuments("cachedImages"){
