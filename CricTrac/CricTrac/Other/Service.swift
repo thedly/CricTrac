@@ -101,7 +101,7 @@ func addMatchData(key:String,data:[String:AnyObject], callback: [String:AnyObjec
     
     dataToBeModified["MatchDateTS"] = NSDate().getCurrentTimeStamp()// MatchDate in timestamp format
     dataToBeModified["UserId"] = currentUser!.uid //Current user ID
-    dataToBeModified["DeviceInfo"] = "iOS || " + versionAndBuildNumber //Device info and App info
+    dataToBeModified["DeviceInfo"] = modelName + "|" + versionAndBuildNumber //Device info and App info
     
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").childByAutoId()
     dataToBeModified["MatchId"] = ref.key
@@ -419,6 +419,17 @@ func fetchCoverPhoto(id:String,sucess:(result:[String:String])->Void){
     })
 }
 
+func fetchAdDetails(sucess:(result:[String:String])->Void){
+    fireBaseRef.child("Constants").observeEventType(.Value, withBlock: { snapshot in
+        if let data = snapshot.value {
+            let adUnitId = data["AdUnitId"] as? String
+            let showAds = data["ShowADs"] as? String
+            sucess(result: ["adUnitId":adUnitId!,"showAds":showAds!])
+        }
+    })
+}
+
+
 func enableSync(){
     //fireBaseRef.database.persistenceEnabled = true
     fireBaseRef.keepSynced(true)
@@ -439,6 +450,7 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
     {
         dataToBeModified["UserAddedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
         dataToBeModified["UserEditedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
+        dataToBeModified["DeviceInfo"] = modelName + "|" + versionAndBuildNumber //Device info and App info
     }
     else
     {

@@ -319,7 +319,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         else {
             self.imgCoverPhoto.image = image
             self.dismissViewControllerAnimated(true) {
-                addCoverImageData(self.resizeImage(image, newWidth: 200))
+                addCoverImageData(self.resizeImage(image, newWidth: 800))
             }
         }
     }
@@ -494,7 +494,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     //MARK: Ads related
     func loadBannerAds() {
-        if showAds == 1 {
+        if showAds == "1" {
             self.bannerViewHeightConstraint.constant = 50
             bannerView.adUnitID = adUnitId
             bannerView.rootViewController = self

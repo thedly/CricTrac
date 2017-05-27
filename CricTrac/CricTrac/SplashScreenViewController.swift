@@ -44,6 +44,11 @@ class SplashScreenViewController: UIViewController,ThemeChangeable {
         super.viewDidAppear(true)
         loginWithSavedCredentials()
         //authorizeUser()
+                
+        fetchAdDetails({ (result) in
+            adUnitId = result["adUnitId"]!
+            showAds = result["showAds"]!
+        })
     }
 
     override func didReceiveMemoryWarning() {

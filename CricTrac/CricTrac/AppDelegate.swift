@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
        // let refreshedToken = FIRInstanceID.instanceID().token()
         
-        GADMobileAds.configureWithApplicationID("ca-app-pub-3940256099942544~1458002511")
+        GADMobileAds.configureWithApplicationID(adUnitId)
         
         setDefaultAppTheme()
         UINavigationBar.appearance().titleTextAttributes = [

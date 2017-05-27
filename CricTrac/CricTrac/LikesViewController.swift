@@ -39,7 +39,7 @@ class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     }
     
     func loadBannerAds() {
-        if showAds == 1 {
+        if showAds == "1" {
             self.bannerViewHeightConstraint.constant = 50
             bannerView.adUnitID = adUnitId
             bannerView.rootViewController = self
