@@ -17,8 +17,8 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
      var searchedProfiles = [Profile]()
     
     func changeThemeSettigs() {
-        let currentTheme = cricTracTheme.currentTheme
-        self.view.backgroundColor = currentTheme.topColor
+//        let currentTheme = cricTracTheme.currentTheme
+//        self.view.backgroundColor = currentTheme.topColor
       
         
     }
@@ -45,7 +45,8 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
         }
     }
     override func viewWillAppear(animated: Bool) {
-        setBackgroundColor()
+        //setBackgroundColor()
+        self.view.backgroundColor = UIColor.clearColor()
           self.searchBar.becomeFirstResponder()
         
     }

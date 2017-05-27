@@ -117,7 +117,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                     self.dismissViewControllerAnimated(true, completion: { })
                     self.navigationController?.popViewControllerAnimated(true)
                 }
-                UpdateDashboardDetails()
+                //UpdateDashboardDetails()
             }
         }
     }

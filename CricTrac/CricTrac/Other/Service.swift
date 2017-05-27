@@ -107,7 +107,7 @@ func addMatchData(key:String,data:[String:AnyObject], callback: [String:AnyObjec
     dataToBeModified["MatchId"] = ref.key
     ref.setValue(dataToBeModified)
     
-    callback(dataToBeModified)
+    
     
     if let matchId = dataToBeModified["MatchId"] as? String{
         writeAutomaticMessage(matchId)
@@ -115,7 +115,7 @@ func addMatchData(key:String,data:[String:AnyObject], callback: [String:AnyObjec
     
     UpdateDashboardDetails()
     newMatchNotification((dataToBeModified["MatchId"] as? String)!)
-    
+    callback(dataToBeModified)
     //callback(dataToBeModified)
 }
 
@@ -644,8 +644,9 @@ func updateMatchData(key:String,data:[String:AnyObject], callback:(data:[String:
     
     dataToBeModified["MatchEditedDate"] = NSDate().getCurrentTimeStamp() //formatter.stringFromDate(NSDate())
     ref.updateChildValues(dataToBeModified)
-    callback(data: dataToBeModified)
     UpdateDashboardDetails()
+    callback(data: dataToBeModified)
+    
 }
 
 //MARK:- Delete Match
@@ -653,9 +654,10 @@ func updateMatchData(key:String,data:[String:AnyObject], callback:(data:[String:
 func deleteMatchData(matchId:String, callback:(error:NSError?)->Void ){
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").child(matchId)
     ref.removeValueWithCompletionBlock { (error, dataRef) in
+        UpdateDashboardDetails()
         callback(error: error)
     }
-    UpdateDashboardDetails()
+    
 }
 
 //MARK:- Login

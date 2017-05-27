@@ -40,7 +40,8 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         UserProfilesData.removeAll()
         self.SuggestsTblview.reloadData()
         getFriendSuggestions()
-        setBackgroundColor()
+        self.view.backgroundColor = UIColor.clearColor()
+        //setBackgroundColor()
     }
     
     override func didReceiveMemoryWarning() {
@@ -51,8 +52,8 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     // MARK: - Methods
     
     func changeThemeSettigs() {
-        let currentTheme = cricTracTheme.currentTheme
-        self.view.backgroundColor = currentTheme.topColor
+//        let currentTheme = cricTracTheme.currentTheme
+//        self.view.backgroundColor = currentTheme.topColor
        // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
@@ -65,7 +66,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         SuggestsTblview.delegate = self
         
         //setUIBackgroundTheme(self.view)
-        self.view.backgroundColor = UIColor.clearColor()
+        
         //getFriendSuggestions()
     }
     
