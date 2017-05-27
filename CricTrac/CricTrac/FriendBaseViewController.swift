@@ -38,6 +38,7 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
     }
     override func viewWillAppear(animated: Bool) {
         setBackgroundColor()
+        self.view.backgroundColor = UIColor.clearColor()
         setNavigationBarProperties()
         
     }
@@ -55,7 +56,7 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
          settings.style.buttonBarItemLeftRightMargin = 0
       
         
-       // setBackgroundColor()
+       
         setNavigationBarProperties()
        definesPresentationContext = true
        

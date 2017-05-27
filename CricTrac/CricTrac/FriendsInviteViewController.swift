@@ -20,21 +20,21 @@ class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITabl
     var friendInviteDataArray = friendInviteData
     
     func changeThemeSettigs() {
-        let currentTheme = cricTracTheme.currentTheme
-        self.view.backgroundColor = currentTheme.topColor
+        //let currentTheme = cricTracTheme.currentTheme
+        //self.view.backgroundColor = currentTheme.topColor
        // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     override func viewWillAppear(animated: Bool) {
-        setBackgroundColor()
-        
+        //setBackgroundColor()
+        self.view.backgroundColor = UIColor.clearColor()
     }
 
   
   override func viewDidLoad() {
         super.viewDidLoad()
       
-        setBackgroundColor()
+        //setBackgroundColor()
         // Do any additional setup after loading the view.
     loadBannerAds()
     }
