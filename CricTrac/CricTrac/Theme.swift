@@ -41,15 +41,15 @@ struct AppTheme{
     
     let Grass = CTTheme(topColor: UIColor(hex: "#b4ed50"), bottomColor: UIColor(hex: "#429321"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
-    let Flash = CTTheme(topColor: UIColor(hex: "#fceabb"), bottomColor: UIColor(hex: "#f8b500"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
+    let Flash = CTTheme(topColor: UIColor(hex: "#FFE205"), bottomColor: UIColor(hex: "#FF8F05"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
     let Feather = CTTheme(topColor: UIColor(hex: "#ea9eff"), bottomColor: UIColor(hex: "#692580"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
-    let Peach = CTTheme(topColor: UIColor(hex: "#ffc500"), bottomColor: UIColor(hex: "#c21500"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
+    let Peach = CTTheme(topColor: UIColor(hex: "#fbda61"), bottomColor: UIColor(hex: "#f76b1c"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
-    let Cherry = CTTheme(topColor: UIColor(hex: "#f5515f"), bottomColor: UIColor(hex: "#9f031b"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
+    let Cherry = CTTheme(topColor: UIColor(hex: "#D40D12"), bottomColor: UIColor(hex: "#5C0002"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
-    let Daisy = CTTheme(topColor: UIColor(hex: "#F0A5CB"), bottomColor: UIColor(hex: "#EF629F"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
+    let Daisy = CTTheme(topColor: UIColor(hex: "#EDC7D9"), bottomColor: UIColor(hex: "#EF629F"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
     let Ashes = CTTheme(topColor: UIColor(hex: "#C8CBC3"), bottomColor: UIColor(hex: "#5C635A"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
@@ -57,6 +57,13 @@ struct AppTheme{
     
     let Ferret = CTTheme(topColor: UIColor(hex: "#8B8484"), bottomColor: UIColor(hex: "#2D2C2A"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
   
+    let Ocean = CTTheme(topColor: UIColor(hex: "#3BACB2"), bottomColor: UIColor(hex: "#295154"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
+    
+    let Pista = CTTheme(topColor: UIColor(hex: "#CDE855"), bottomColor: UIColor(hex: "#85DB18"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
+    
+    let Lemon = CTTheme(topColor: UIColor(hex: "#40627C"), bottomColor: UIColor(hex: "#26393D"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
+
+    
     var currentTheme:CTTheme!
     var testTheme:CTTheme!
     var currentThemeTxt : String! {
@@ -81,6 +88,9 @@ enum Themes:String{
     case Ashes
     case Beehive
     case Ferret
+    case Ocean
+    case Pista
+    case Lemon
 }
 
 func setCurrentTheme(theme:Themes){
@@ -122,6 +132,9 @@ func themeFor(key:Themes)->CTTheme{
     case .Ashes:return cricTracTheme.Ashes
     case .Beehive:return cricTracTheme.Beehive
     case .Ferret:return cricTracTheme.Ferret
+    case .Ocean:return cricTracTheme.Ocean
+    case .Pista:return cricTracTheme.Pista
+    case .Lemon:return cricTracTheme.Lemon
     }
 }
 

@@ -101,7 +101,7 @@ func addMatchData(key:String,data:[String:AnyObject], callback: [String:AnyObjec
     
     dataToBeModified["MatchDateTS"] = NSDate().getCurrentTimeStamp()// MatchDate in timestamp format
     dataToBeModified["UserId"] = currentUser!.uid //Current user ID
-    dataToBeModified["DeviceInfo"] = modelName + "|" + versionAndBuildNumber //Device info and App info
+    dataToBeModified["DeviceInfo"] = modelName + "|" + systemVersion + "|" + versionAndBuildNumber //Device info and App info
     
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").childByAutoId()
     dataToBeModified["MatchId"] = ref.key
@@ -450,7 +450,7 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
     {
         dataToBeModified["UserAddedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
         dataToBeModified["UserEditedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
-        dataToBeModified["DeviceInfo"] = modelName + "|" + versionAndBuildNumber //Device info and App info
+        dataToBeModified["DeviceInfo"] = modelName + "|" + systemVersion + "|" + versionAndBuildNumber //Device info and App info
     }
     else
     {

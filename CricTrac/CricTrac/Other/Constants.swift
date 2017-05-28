@@ -70,6 +70,7 @@ public extension UIDevice {
 }
 
 let modelName = UIDevice.currentDevice().modelName
+var systemVersion = UIDevice.currentDevice().systemVersion
 
 var versionAndBuildNumber:String{
     let nsObject: AnyObject? = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"]
@@ -179,8 +180,8 @@ let themeColors = [
         "theme":"Grass"
     ],
     "Flash" : [
-        "topColor" : "#fffaba",
-        "bottomColor" : "#FFE205",
+        "topColor" : "#FFE205",
+        "bottomColor" : "#FF8F05",
         "theme":"Flash"
     ],
     "Feather" : [
@@ -194,8 +195,8 @@ let themeColors = [
         "theme":"Peach"
     ],
     "Cherry": [
-        "topColor": "#f5515f",
-        "bottomColor": "9f031b",
+        "topColor": "#D40D12",
+        "bottomColor": "5C0002",
         "theme":"Cherry"
     ],
     "Daisy": [
@@ -217,6 +218,21 @@ let themeColors = [
         "topColor": "#8B8484",
         "bottomColor": "#2D2C2A",
         "theme":"Ferret"
+    ],
+    "Ocean": [
+        "topColor": "#3BACB2",
+        "bottomColor": "#295154",
+        "theme":"Ocean"
+    ],
+    "Pista": [
+        "topColor": "#CDE855",
+        "bottomColor": "#85DB18",
+        "theme":"Pista"
+    ],
+    "Lemon": [
+        "topColor": "#40627C",
+        "bottomColor": "#26393D",
+        "theme":"Lemon"
     ]
 ]
 
