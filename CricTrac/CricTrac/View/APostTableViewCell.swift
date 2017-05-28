@@ -222,13 +222,11 @@ class APostTableViewCell: UITableViewCell {
             
               deleteAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!)-> Void in
                 self.deletePostFromFB()
-                print("Handle Cancel Logic here")
+                //print("Handle Cancel Logic here")
                }))
             
-              deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction!)-> Void in
-                
-                         self.cancel()
-                          print("Handle Cancel Logic here")
+              deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction!)-> Void in                         self.cancel()
+                //print("Handle Cancel Logic here")
               }))
             
               let parentVc = self.parent as? UIViewController

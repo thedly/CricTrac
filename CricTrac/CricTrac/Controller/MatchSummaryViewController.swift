@@ -340,7 +340,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             }))
             
             refreshAlert.addAction(UIAlertAction(title: "Later", style: .Cancel, handler: { (action: UIAlertAction!) in
-                print("Handle Cancel Logic here")
+                //print("Handle Cancel Logic here")
             }))
             
             presentViewController(refreshAlert, animated: true, completion: nil)

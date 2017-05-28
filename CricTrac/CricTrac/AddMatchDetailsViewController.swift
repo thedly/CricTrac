@@ -503,7 +503,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                 numberFormatter.locale = product.priceLocale
                 numberFormatter.numberStyle = .CurrencyStyle
                 let priceString = numberFormatter.stringFromNumber(product.price ?? 0) ?? ""
-                print("Product: \(product.localizedDescription), price: \(priceString)")
+                //print("Product: \(product.localizedDescription), price: \(priceString)")
                 self.inAppProductPrice = priceString
                 
                 self.didTapPurchaseButton()
@@ -531,7 +531,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             }))
             
             refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
-                print("Handle Cancel Logic here")
+                //print("Handle Cancel Logic here")
             }))
         
             presentViewController(refreshAlert, animated: true, completion: nil)

@@ -164,7 +164,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         if coverOrProfile == "Profile" {
             self.userProfileImage.image = image
             self.dismissViewControllerAnimated(true) {
-                addProfileImageData(self.resizeImage(image, newWidth: 400))
+                addProfileImageData(self.resizeImage(image, newWidth: 200))
             }
         }
         else {

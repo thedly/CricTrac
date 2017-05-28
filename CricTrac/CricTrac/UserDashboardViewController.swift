@@ -311,7 +311,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             //dispatch_async(dispatch_get_main_queue(),{
             self.userProfileImage.image = image
             self.dismissViewControllerAnimated(true) {
-                addProfileImageData(self.resizeImage(image, newWidth: 400))
+                addProfileImageData(self.resizeImage(image, newWidth: 200))
                 //self.initView()
             }
             //})
@@ -1545,10 +1545,10 @@ func setDashboardData(){
                     if let _ = self.friendProfile {
                         summaryDetailsVC.friendProfile = true
 
-                        self.presentViewController(summaryDetailsVC, animated: false, completion: nil)
+                        self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
                     }
                     else {
-                        self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
+                        self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
                     }
                 }
             })
@@ -1567,10 +1567,10 @@ func setDashboardData(){
                     summaryDetailsVC.isFriendDashboard = true
                     if let _ = self.friendProfile {
                         summaryDetailsVC.friendProfile = true
-                        self.presentViewController(summaryDetailsVC, animated: false, completion: nil)
+                        self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
                     }
                     else {
-                        self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
+                        self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
                         
 //                        let window = getCurrentWindow()
 //                        UIView.transitionWithView(window, duration: 0.5, options: .TransitionFlipFromLeft, animations: {
@@ -1595,10 +1595,10 @@ func setDashboardData(){
                     summaryDetailsVC.isFriendDashboard = true
                     if let _ = self.friendProfile {
                         summaryDetailsVC.friendProfile = true
-                        self.presentViewController(summaryDetailsVC, animated: false, completion: nil)
+                        self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
                     }
                     else {
-                        self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
+                        self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
                     }
                 }
             })
@@ -1617,10 +1617,10 @@ func setDashboardData(){
                     summaryDetailsVC.isFriendDashboard = true
                     if let _ = self.friendProfile {
                         summaryDetailsVC.friendProfile = true
-                        self.presentViewController(summaryDetailsVC, animated: false, completion: nil)
+                        self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
                     }
                     else {
-                        self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
+                        self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
                   }
                 }
             })
@@ -1639,10 +1639,10 @@ func setDashboardData(){
                     summaryDetailsVC.isFriendDashboard = true
                     if let _ = self.friendProfile {
                         summaryDetailsVC.friendProfile = true
-                        self.presentViewController(summaryDetailsVC, animated: false, completion: nil)
+                        self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
                     }
                     else {
-                        self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
+                        self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
                     }
                 }
             })
@@ -1661,10 +1661,10 @@ func setDashboardData(){
                     summaryDetailsVC.isFriendDashboard = true
                     if let _ = self.friendProfile {
                         summaryDetailsVC.friendProfile = true
-                        self.presentViewController(summaryDetailsVC, animated: false, completion: nil)
+                        self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
                     }
                     else {
-                        self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
+                        self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
                     }
                 }
             })
