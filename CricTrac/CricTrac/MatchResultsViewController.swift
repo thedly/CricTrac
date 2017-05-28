@@ -472,8 +472,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             firstScoreText = secondScoreText
             secondScoreText = tempScore
             
-            
-            
             let tempWickets = firstWicketsText
             firstWicketsText = secondWicketsText
             secondWicketsText = tempWickets
@@ -580,16 +578,13 @@ extension MatchResultsViewController:UITextFieldDelegate{
             
            // resultText.resignFirstResponder()
             AchievementsText.resignFirstResponder()
-          
             
             let AchievementVC = viewControllerFrom("Main", vcid:"AchievementListViewController") as! AchievementListViewController
             
             AchievementVC.delegate = self
             //AchievementVC.achievementData = AchievementsText.text!
             
-            
             AchievementVC.selectedRows = (AchievementsText.text?.characters.split{$0 == ","}.map(String.init))!
-            
             self.presentViewController(AchievementVC, animated: true) {}
         }
     }

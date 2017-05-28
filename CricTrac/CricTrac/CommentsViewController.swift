@@ -175,7 +175,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                     
                     let childLikes = postData["Likes"] as? [String : AnyObject]
                     if childLikes != nil {
-                        for (key, value) in childLikes! {
+                        for (_, value) in childLikes! {
                             if currentUser!.uid == value["OwnerID"] as? String {
                                 cCell.likeButton.titleLabel?.textColor = UIColor.whiteColor()
                                 cCell.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
@@ -234,7 +234,6 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                         else {
                             aCell.commentDate.text = cmtDate
                         }
-                        
                     }
                 
                     if var value = commentData["OwnerName"] as? String{
@@ -325,7 +324,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     }
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool{
-        let textViewContent = textView.text
+        _ = textView.text
         
         let contentSize = textView.sizeThatFits(textView.bounds.size)
         var frame = textView.frame

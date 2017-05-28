@@ -149,34 +149,6 @@ class CPostTableViewCell: UITableViewCell {
             timelineData![postIndex]["Likes"] = JSON(likes)
         }
     }
-    
-//    @IBAction func didTapClose(sender: AnyObject) {
-//        dismissViewControllerAnimated(true) {
-//            if self.postLikeCount < self.initialLikes{
-//                var likes = timelineData!.arrayObject![self.postIndex]["Likes"] as! [String:[String:String]]
-//                let keys =  likes.filter{key,val in
-//                    return val["OwnerID"]! == currentUser!.uid
-//                    }.map{
-//                        return $0.0
-//                }
-//                
-//                if keys.count > 0 {
-//                    likes.removeValueForKey(keys[0])
-//                    timelineData![self.postIndex]["Likes"] = JSON(likes)
-//                }
-//            }
-//            if self.postLikeCount != self.initialLikes{
-//                self.refreshableParent?.refresh()
-//            }
-//        }
-//        
-//    }
-//    
-//    func deletebuttonTapped() {
-//        
-//    }
-    
-   
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

@@ -450,11 +450,6 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 }
             }
         })
-
-        
-        
-        
-        
         
 //        if userProfileData.ProfileImageURL != "-" {
 //                getImageFromFirebase(userProfileData.ProfileImageURL) { (imgData) in

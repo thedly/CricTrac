@@ -19,14 +19,11 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
 
     @IBAction func nextBtnPressed(sender: AnyObject) {
         
-        
        // let nav1 = UINavigationController()
         let usrViewController = viewControllerFrom("Main", vcid: "UserInfoViewController") as! UserInfoViewController
         usrViewController.userProfile = profileData.UserProfile
         
-        
-        
-      //  let nextViewController = viewControllerFrom("Main", vcid: "UserInfoViewController") as! UserInfoViewController
+        //  let nextViewController = viewControllerFrom("Main", vcid: "UserInfoViewController") as! UserInfoViewController
         var toViewController: UIViewController
         
         switch profileData.UserProfile {
@@ -41,20 +38,6 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
             toViewController = viewControllerFrom("Main", vcid: "PlayerExperienceViewController")
         }
         
-       // nav1.viewControllers.append(toViewController)
-        //nav1.viewControllers.append(usrViewController)
-
-//        NextVC = toViewController
-//        nextViewController.NextVC = toViewController
-//        nextViewController.transitioningDelegate = self.transitionManager
-       // presentViewController(nav1, animated: true, completion: nil)
-       // self.presentViewController(toViewController, animated: true, completion: nil)
-        //presentViewController(nav1, animated: true, completion: nil)
-        /*
-         UIWindow *windows = [[UIApplication sharedApplication].delegate window];
-         UIViewController *vc = windows.rootViewController;
-         [vc presentViewController:alertController animated: YES completion:nil];
- */
         let window = UIApplication.sharedApplication().delegate?.window
         let vc = window!!.rootViewController
        // vc?.presentViewController(nav1, animated: true, completion: nil)
@@ -66,8 +49,6 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
     @IBOutlet weak var cricketFanTextView: radioSelectView!
     
     let transitionManager = TransitionManager.sharedInstance
-    
-    
     
     func handleProfileTap(sender: UITapGestureRecognizer? = nil) {
         deselectAll(self.view)
@@ -185,8 +166,6 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
         
         let fantap = UITapGestureRecognizer(target: self, action: #selector(ProfileBaseViewController.handleFanTap(_:)))
         fantap.delegate = self
-
-        
         
         playerTextView.userInteractionEnabled = true
         playerTextView.addGestureRecognizer(playertap)
@@ -200,7 +179,6 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
         self.imgPlayer.image = UIImage(named: "OkFilled")
         self.imgCoach.image = UIImage(named: "OkUnfilled")
         self.imgFan.image = UIImage(named: "OkUnfilled")
-
         
     }
     
@@ -213,8 +191,6 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         //setUIBackgroundTheme(self.view)
         setupControls();
         

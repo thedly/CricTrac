@@ -213,9 +213,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         else {
             self.continueToDismiss()
 
-        }
-        
-        
+        }        
     }
     
     func continueToDismiss() {

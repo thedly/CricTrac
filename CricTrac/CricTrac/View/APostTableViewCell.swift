@@ -143,23 +143,6 @@ class APostTableViewCell: UITableViewCell {
             return
         }
         
-//        if currentUserHasLikedThePost {
-//            self.totalLikeCount -= 1
-//            self.likeButton.titleLabel?.textColor = UIColor.blackColor()
-//            self.likeButton.setImage(UIImage(named: "Like-100"), forState: UIControlState.Normal)
-//            self.likeCount.setTitle("\(totalLikeCount) Likes", forState: .Normal)
-//            currentUserHasLikedThePost = false
-//        }
-//        else {
-//            self.totalLikeCount += 1
-//            self.likeButton.titleLabel?.textColor = UIColor.whiteColor()
-//            self.likeButton.setImage(UIImage(named: "Like-Filled"), forState: UIControlState.Normal)
-//            self.likeCount.setTitle("\(totalLikeCount) Likes", forState: .Normal)
-//            currentUserHasLikedThePost = true
-//        }
-        
-        //likeOrUnlike(postId!)
-        
         if let value = postId{
             likeOrUnlike(value, like: { (likeDict) in
                 self.addLikeToDataArray(likeDict)

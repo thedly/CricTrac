@@ -22,7 +22,6 @@ class StaticPageViewController: UIViewController,ThemeChangeable {
         setBackgroundColor()
     }
     
-    
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.pageHeader.text = pageHeaderText
@@ -30,21 +29,14 @@ class StaticPageViewController: UIViewController,ThemeChangeable {
       //  navigationController!.navigationBar.barTintColor = currentTheme.topColor
        HtmlContentHolder.backgroundColor = UIColor.clearColor()
         HtmlContentHolder.opaque = false
-       
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setBackgroundColor()
-        
         let req = NSURLRequest(URL: NSURL(string: pageToLoad)!)
-        
         HtmlContentHolder.loadRequest(req)
-        
-        
-        
+          
         // Do any additional setup after loading the view.
     }
 

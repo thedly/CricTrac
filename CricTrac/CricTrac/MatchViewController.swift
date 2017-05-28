@@ -12,7 +12,6 @@ import AnimatedTextInput
 
 class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTrackable,ThemeChangeable {
     
-    
     @IBOutlet weak var stage: UITextField!
     @IBOutlet weak var dateText:UITextField!
     @IBOutlet weak var teamText:UITextField!
@@ -20,102 +19,73 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     @IBOutlet weak var groundText:UITextField!
     @IBOutlet weak var oversText:UITextField!
     @IBOutlet weak var tournamentText:UITextField!
-    
     @IBOutlet weak var venueText: UITextField!
     @IBOutlet weak var ageGroup: UITextField!
     @IBOutlet weak var playingLevel: UITextField!
     @IBOutlet weak var scrollView:UIScrollView!
     @IBInspectable var placeholderColor: UIColor = UIColor.blackColor()
+
     var teamOROpponentFieldChanged : Bool = false
-    
     var selectedText:UITextField!
     var scrollViewTop:CGFloat!
-    
     var existTeamName = ""
     var existOppName = ""
-    
-   let ctDatePicker = CTDatePicker()
-    
-     lazy var ctDataPicker = DataPicker()
-  
-    
-  //  let ctDataPicker = CTPicker()
-    
+    let ctDatePicker = CTDatePicker()
+    lazy var ctDataPicker = DataPicker()
     weak var parent:MatchParent?
-    
-    //var data = ["key1":"value1","key2":"value2","key3":"value3","key4":"value4"]
-    
     var data:[String:String]{
-        
-        var matchDateVal = ""
-        
-        if let val = dateText{
-            
-            matchDateVal = val.textVal
-        }
-        
-        var teamVal = ""
-        
-        if let val = teamText{
-            
-            teamVal = val.textVal.trim()
-        }
-        
-        var opponentVal = ""
-        
-        if let val = opponentText{
-            
-            opponentVal = val.textVal.trim()
-        }
-        
-        var groundVal = ""
-        
-        if let val = groundText{
-            
-            groundVal = val.textVal.trim()
-        }
-        var oversVal = ""
-        
-        if let val = oversText{
-            
-            oversVal = val.textVal
-        }
-        
-        var tournamentVal = ""
-        
-        if let val = tournamentText{
-            
-            tournamentVal = val.textVal.trim()
-        }
-        
-        var ageGroupVal = ""
-        
-        if let val = ageGroup{
-            
-            ageGroupVal = val.textVal
-        }
-        
-        var playingLevelVal = ""
-        
-        if let val = playingLevel{
-            
-            playingLevelVal = val.textVal
-        }
-        
-        var stageVal = ""
-        
-        if let val = stage{
-            
-            stageVal = val.textVal
-        }
-        
-        var venueVal = ""
-        
-        if let val = venueText{
-            
-            venueVal = val.textVal.trim()
-        }
-        return ["MatchDate":matchDateVal,"Team":teamVal,"Opponent":opponentVal,"Ground":groundVal,"MatchOvers":oversVal,"Tournament":tournamentVal, "AgeGroup":ageGroupVal, "Level": playingLevelVal, "MatchStage":stageVal, "Venue": venueVal]
+    
+    var matchDateVal = ""
+    if let val = dateText{
+        matchDateVal = val.textVal
+    }
+    
+    var teamVal = ""
+    if let val = teamText{
+        teamVal = val.textVal.trim()
+    }
+    
+    var opponentVal = ""
+    if let val = opponentText{
+        opponentVal = val.textVal.trim()
+    }
+    
+    var groundVal = ""
+    if let val = groundText{
+        groundVal = val.textVal.trim()
+    }
+    
+    var oversVal = ""
+    if let val = oversText{
+        oversVal = val.textVal
+    }
+    
+    var tournamentVal = ""
+    if let val = tournamentText{
+        tournamentVal = val.textVal.trim()
+    }
+    
+    var ageGroupVal = ""
+    if let val = ageGroup{
+        ageGroupVal = val.textVal
+    }
+    
+    var playingLevelVal = ""
+    if let val = playingLevel{
+        playingLevelVal = val.textVal
+    }
+    
+    var stageVal = ""
+    if let val = stage{
+        stageVal = val.textVal
+    }
+    
+    var venueVal = ""
+    if let val = venueText{
+        venueVal = val.textVal.trim()
+    }
+    
+    return ["MatchDate":matchDateVal,"Team":teamVal,"Opponent":opponentVal,"Ground":groundVal,"MatchOvers":oversVal,"Tournament":tournamentVal, "AgeGroup":ageGroupVal, "Level": playingLevelVal, "MatchStage":stageVal, "Venue": venueVal]
     }
     
     
@@ -134,11 +104,8 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
             loadDefaultData()
         }
         
-        //oversText.keyboardType = UIKeyboardType.DecimalPad
         oversText.keyboardType = UIKeyboardType.NumberPad
         self.view.backgroundColor = UIColor.clearColor()
-        
-        
         
         self.stage.delegate = self
         self.dateText.delegate = self
@@ -147,22 +114,13 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         self.groundText.delegate = self
         self.oversText.delegate = self
         self.tournamentText.delegate = self
-        
         self.venueText.delegate = self
         self.ageGroup.delegate = self
         self.playingLevel.delegate = self
         
-        
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MatchViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         scrollView.setContentOffset(CGPointZero, animated: true)
         scrollViewTop = scrollView.frame.origin.y
-        
-        //setBackgroundColor()
-        
-        //setUIBackgroundTheme(self.view)
-        
-        
     }
     
     func keyboardWillShow(sender: NSNotification){
@@ -211,55 +169,46 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     func loadEditData(){
         
         if  let selectedData = parent?.selecetedData{
-        
-        
-        if let val = selectedData["MatchDate"] as? String{
+            if let val = selectedData["MatchDate"] as? String{
+                dateText.textVal = val
+            }
             
-            dateText.textVal = val
-        }
-        
-        if let val = selectedData["Tournament"] as? String{
+            if let val = selectedData["Tournament"] as? String{
+                tournamentText.textVal = val
+            }
             
-            tournamentText.textVal = val
-        }
-        
-        if let val = selectedData["Team"] as? String{
-            existTeamName = val
-            teamText.textVal = val
-        }
-        
-        if let val = selectedData["Opponent"] as? String{
-            existOppName = val
-            opponentText.textVal = val
-        }
-        
-        if let val = selectedData["Ground"] as? String{
+            if let val = selectedData["Team"] as? String{
+                existTeamName = val
+                teamText.textVal = val
+            }
             
-            groundText.textVal = val
-        }
-        
-        if let val = selectedData["Venue"] as? String{
+            if let val = selectedData["Opponent"] as? String{
+                existOppName = val
+                opponentText.textVal = val
+            }
             
-            venueText.textVal = val
-        }
-        
-        if let val = selectedData["MatchOvers"] as? String{
+            if let val = selectedData["Ground"] as? String{
+                groundText.textVal = val
+            }
             
-            oversText.textVal = val
-        }
-        
-        
-        
-        if let ag = selectedData["AgeGroup"] as? String{
-            ageGroup.textVal = ag
-        }
+            if let val = selectedData["Venue"] as? String{
+                venueText.textVal = val
+            }
+            
+            if let val = selectedData["MatchOvers"] as? String{
+                oversText.textVal = val
+            }
+                
+            if let ag = selectedData["AgeGroup"] as? String{
+                ageGroup.textVal = ag
+            }
 
-        if let pl = selectedData["Level"] as? String {
-            playingLevel.textVal = pl
-        }
-        if let pl = selectedData["MatchStage"] as? String {
-            stage.textVal = pl
-        }
+            if let pl = selectedData["Level"] as? String {
+                playingLevel.textVal = pl
+            }
+            if let pl = selectedData["MatchStage"] as? String {
+                stage.textVal = pl
+            }
         }
         
     }
@@ -268,9 +217,6 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "DETAILS")
@@ -295,8 +241,6 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         
         return false
     }
-    
-    
 }
 
 
@@ -403,7 +347,6 @@ extension MatchViewController:UITextFieldDelegate
             return true // Bool
         }
     }
-    
     
 }
 

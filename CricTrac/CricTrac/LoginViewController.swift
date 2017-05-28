@@ -324,17 +324,6 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
                         }
                     }
                 }
-//                else
-//                {
-                    //let profilePic = profileData.ProfileImageURL
-//                    getImageFromFirebase(profileData.ProfileImageURL) { (imgData) in
-//                        LoggedInUserImage = imgData
-//                    }
-//                    getImageFromFirebase(profileData.CoverPhotoURL) { (imgData) in
-//                        LoggedInUserCoverImage = imgData
-//                    }
-                //}
-
 
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     let window = getCurrentWindow()

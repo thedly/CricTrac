@@ -103,8 +103,6 @@ class ThemeSettingsViewController: UIViewController, UIGestureRecognizerDelegate
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
-
         if let currentCell = collectionView.cellForItemAtIndexPath(indexPath) as? ThemeColorsCollectionViewCell{
             if (testTheme != currentCell.theme) && (CurrentTheme != currentCell.theme) {
                 setCurrentTheme(Themes(rawValue: currentCell.theme)!)

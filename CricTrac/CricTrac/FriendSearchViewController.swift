@@ -50,7 +50,6 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
           self.searchBar.becomeFirstResponder()
         
     }
-
     
     override func viewDidLoad() {
          friendSearchTbl.registerNib(UINib.init(nibName:"FriendSuggestionsCell", bundle: nil), forCellReuseIdentifier: "FriendSuggestionsCell")

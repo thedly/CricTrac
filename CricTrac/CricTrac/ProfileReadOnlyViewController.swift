@@ -48,8 +48,6 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
     
     @IBAction func didMenuButtonTapp(sender: UIButton){
         sliderMenu.setDrawerState(.Opened, animated: true)
-        
-        
     }
     
     func changeThemeSettigs() {
@@ -59,23 +57,14 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
     }
     
     @IBAction func EditProfilePressed(sender: AnyObject) {
-        
         let vc = viewControllerFrom("Main", vcid: "UserInfoEditViewController") as! UserInfoViewController
-        
         self.navigationController?.pushViewController(vc, animated: true)
-        
-      //  vc.transitioningDelegate = self.transitionManager
-        
-       // presentViewController(vc, animated: true, completion: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         
-//        self.profileImage.image = LoggedInUserImage
-        
         if profileData.userExists {
-            
             self.NameText.text = profileData.fullName
             self.DOBText.text = profileData.DateOfBirth
             self.EmailText.text = profileData.Email
@@ -86,7 +75,6 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
             self.CityText.text = profileData.City
             
             if profileData.UserProfile == "Player" {
-                
                 self.matchViewHeightConstraint.constant = 700
                 
                 if profileData.PlayerCurrentTeams.count > 0 {
@@ -96,6 +84,7 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
                 else {
                     self.PlayerCurrentTeams.text = "No Teams"
                 }
+                
                 if profileData.PlayerPastTeams.count > 0 {
                     self.PlayerPastTeams.text = profileData.PlayerPastTeams.joinWithSeparator("\n")
                     self.matchViewHeightConstraint.constant += CGFloat(profileData.PlayerPastTeams.count * 16)
@@ -118,6 +107,7 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
                 else {
                     self.CoachCurrentTeams.text = "No Teams"
                 }
+                
                 if profileData.CoachPastTeams.count > 0 {
                     self.CoachPastTeams.text = profileData.CoachPastTeams.joinWithSeparator("\n")
                     self.matchViewHeightConstraint.constant += CGFloat(profileData.CoachPastTeams.count * 16)
@@ -125,6 +115,7 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
                   else {
                     self.CoachPastTeams.text = "No Teams"
                 }
+                
                 if profileData.CoachPlayedFor.count > 0 {
                     self.lblCoachPastPlayedFor.text = profileData.CoachPlayedFor.joinWithSeparator("\n")
                     self.matchViewHeightConstraint.constant += CGFloat(profileData.CoachPlayedFor.count * 16)
@@ -143,7 +134,6 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
                 }
                 
                 self.CoachExperience.text = profileData.Experience.uppercaseString
-                
             }
             else {
                 self.matchViewHeightConstraint.constant = 680
@@ -162,6 +152,7 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
                 else {
                     self.FanInterestedSports.text = "No Sports"
                 }
+                
                 if profileData.FavoritePlayers.count > 0 {
                     self.FanFavouritePlayer.text = profileData.FavoritePlayers.joinWithSeparator("\n")
                     self.matchViewHeightConstraint.constant += CGFloat(profileData.FavoritePlayers.count * 16)
@@ -169,6 +160,7 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
                 else {
                     self.FanFavouritePlayer.text = "No Players"
                 }
+                
                 if profileData.Hobbies.count > 0 {
                     self.FanHobbies.text = profileData.Hobbies.joinWithSeparator("\n")
                     self.matchViewHeightConstraint.constant += CGFloat(profileData.Hobbies.count * 16)
@@ -181,34 +173,13 @@ class ProfileReadOnlyViewController: UIViewController, UIImagePickerControllerDe
             self.CoachingExperienceView.hidden = profileData.UserProfile != userProfileType.Coach.rawValue
             self.CricketFanView.hidden = profileData.UserProfile != userProfileType.Fan.rawValue
             self.PlayerExperienceView.hidden = profileData.UserProfile != userProfileType.Player.rawValue
-            
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //setUIBackgroundTheme(self.view)
         setNavigationBarProperties()
-//        profileImage.layer.cornerRadius = profileImage.frame.size.width/2
-//        profileImage.clipsToBounds = true
-//        
-//        activityInd.layer.cornerRadius = profileImage.frame.size.width/2
-//        activityInd.clipsToBounds = true
-//        
-//        editBtn.layer.cornerRadius = editBtn.frame.size.width/2
-//        editBtn.clipsToBounds = true
-        
-        
-        
-        
-        //setColorForViewsWithSameTag(PersonalInfoView)
-        //setColorForViewsWithSameTag(PlayerExperienceView)
-        //setColorForViewsWithSameTag(CoachingExperienceView)
-        //setColorForViewsWithSameTag(CricketFanView)
-        
-        // Do any additional setup after loading the view.
-        
     }
 
     override func didReceiveMemoryWarning() {

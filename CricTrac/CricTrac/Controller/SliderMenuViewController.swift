@@ -49,7 +49,7 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         
         //baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
         
-        if let _ = profileData.UserProfile as? String{
+        if let _ = profileData.UserProfile as? String {
             removeUnwantedMenu()
         }else{
             getAllUserProfileInfo {
@@ -119,7 +119,6 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
                 profileImage.kf_setImageWithURL(imageURL)
             }
         }
-        //self.profileImage.image = LoggedInUserImage
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -136,22 +135,10 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
                 profileImage.kf_setImageWithURL(imageURL)
             }
         }
-        //self.profileImage.image = LoggedInUserImage
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-//        if profilePic == "-" {
-//            let imageName = defaultProfileImage
-//            let image = UIImage(named: imageName)
-//            profileImage.image = image!
-//        }else{
-//            if let imageURL = NSURL(string:profilePic!){
-//                profileImage.kf_setImageWithURL(imageURL)
-//            }
-//        }
-        //self.profileImage.image = LoggedInUserImage
     }
     
     override func didReceiveMemoryWarning() {

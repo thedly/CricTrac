@@ -13,7 +13,6 @@ import GoogleMobileAds
 class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,ThemeChangeable,DeleteComment {
 
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var barView: UIView!
     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bannerView: GADBannerView!

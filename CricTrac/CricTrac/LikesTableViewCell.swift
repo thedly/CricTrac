@@ -82,26 +82,10 @@ class LikesTableViewCell: UITableViewCell{
 
         // Configure the view for the selected state
     }
-  
-    
-    
+      
     @IBAction func didTapFriendButton(sender: UIButton) {
         
         if self.friendButton.titleLabel?.text == "Add Friend" {
-            
-            
-//        
-//            // network reachability test
-//            
-//            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//            if !appDelegate.reachability.isReachable()  {
-//                let alert = UIAlertController(title: "", message: networkErrorMessage, preferredStyle: UIAlertControllerStyle.Alert)
-//                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-//                self.presentViewController(alert, animated: true, completion: nil)
-//                return
-//            }
-        
-        
             if friendUserId != "" {
                 getProfileInfoById(friendUserId, sucessBlock: { FriendData in
                     let FriendObject = Profile(usrObj: FriendData)
@@ -118,8 +102,6 @@ class LikesTableViewCell: UITableViewCell{
                         receiveFriendRequestData.Name = loggedInUserObject.fullName
                         receiveFriendRequestData.ReceivedFrom = loggedInUserObject.id
                         receiveFriendRequestData.ReceivedDateTime = NSDate().getCurrentTimeStamp()
-                        
-                       
                         
                         backgroundThread(background: {
                             AddSentRequestData(["sentRequestData": sendFriendRequestData.GetFriendRequestObject(sendFriendRequestData), "ReceivedRequestData": receiveFriendRequestData.getFriendRequestObject(receiveFriendRequestData)], callback: { data in

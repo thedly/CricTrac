@@ -55,19 +55,11 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     
     func initializeView() {
         RequestsTblview.registerNib(UINib.init(nibName:"FriendRequestsCell", bundle: nil), forCellReuseIdentifier: "FriendRequestsCell")
-        //suggestionsTblView.registerNib(UINib.init(nibName:"FriendSuggestionsCell", bundle: nil), forCellReuseIdentifier: "FriendSuggestionsCell")
-        
         RequestsTblview.allowsSelection = false
         RequestsTblview.separatorStyle = .None
         RequestsTblview.dataSource = self
         RequestsTblview.delegate = self
-        
-//        suggestionsTblView.allowsSelection = false
-//        suggestionsTblView.separatorStyle = .None
-//        suggestionsTblView.dataSource = self
-//        suggestionsTblView.delegate = self
-        
-        //setUIBackgroundTheme(self.view)
+
         self.view.backgroundColor = UIColor.clearColor()
         //getFriendSuggestions()
     }
@@ -92,14 +84,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     func AdjustHeight(){
-//        self.noRequestsLbl.hidden = !(FriendRequestsData.count == 0)
-//        if FriendRequestsData.count < 3 {
-//            self.RequestsTblViewHeight.constant = CGFloat(FriendRequestsData.count * 100)
-//        }
-//        else{
-//            self.RequestsTblViewHeight.constant = CGFloat(2.5 * 100)
-//        }
-       // self.RequestsTblViewHeight.constant = self.RequestsTblview.contentSize.height
+
     }
     
     func ReloadTbl() {
@@ -111,7 +96,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
             for (_, req) in data {
                 var modReq = req as! [String : AnyObject]
                 modReq["IsSentRequest"] = false
-                var reqData = RequestsData(dataObj: modReq)
+                let reqData = RequestsData(dataObj: modReq)
                 FriendRequestsData.append(reqData)
             }
             dispatch_async(dispatch_get_main_queue(),{
@@ -347,14 +332,14 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                         loggedInUserObject = Profile(usrObj: loggedInUserObjectData)
                         
                         let RequestObjectid = sender.restorationIdentifier
-                        var FriendData = Friends(dataObj: [:])
+                        let FriendData = Friends(dataObj: [:])
                         
                         FriendData.UserId = FriendObject.id
                         FriendData.City = FriendObject.City
                         FriendData.Name = FriendObject.fullName
                         FriendData.FriendshipDateTime = NSDate().getCurrentTimeStamp()
                         
-                        var UserData = Friends(dataObj: [:])
+                        let UserData = Friends(dataObj: [:])
                         
                         UserData.UserId = loggedInUserObject.id
                         UserData.City = loggedInUserObject.City

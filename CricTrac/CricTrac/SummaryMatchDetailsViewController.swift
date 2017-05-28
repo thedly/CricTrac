@@ -59,16 +59,12 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     @IBOutlet weak var matchDetailsBack: UIButton!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var bottomViewHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
-     @IBOutlet weak var bannerView: GADBannerView!
-    
+    @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var firstTeamTossBtn: UIButton!
     @IBOutlet weak var secondTeamTossBtn: UIButton!
     
     var isFriendDashboard: Bool!  = false
-
-    
     
     @IBAction func deleteActionPressed(sender: UIButton) {
         
@@ -92,8 +88,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         
         // Present the AlertController
         self.presentViewController(actionSheetController, animated: true, completion: nil)
-        
-       
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -134,8 +128,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         
         navigationItem.leftBarButtonItem = leftbarButton
         
-
-        
         if isFriendDashboard == false {
             
             let addNewMatchButton: UIButton = UIButton(type:.Custom)
@@ -150,18 +142,14 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             self.bottomView.hidden = false
             self.bannerViewHeightConstraint.constant = 0
             self.bottomViewHeightConstraint.constant = 50
-
         }
         else {
-            
             matchDetailsTitle.text = "SCORECARD"
             matchEditButton.hidden = true
             matchDetailsBack.addTarget(self, action: #selector(didTapCancelOthers), forControlEvents: UIControlEvents.TouchUpInside)
             self.bannerViewHeightConstraint.constant = 50
             self.bottomView.hidden = true
             self.bottomViewHeightConstraint.constant = 0
-            
-
         }
         title = "SCORECARD"
        
@@ -183,7 +171,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         editMatch.matchBeingEdited = true
         self.navigationController?.pushViewController(editMatch, animated: true)
       //  presentViewController(editMatch, animated: true) {}
-      
        // presentViewController(editMatch, animated: true) {}
     }
     
@@ -243,9 +230,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         else {
             self.bannerViewHeightConstraint.constant = 0
         }
-    }
-    
-    
+    }    
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)

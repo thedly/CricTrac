@@ -30,23 +30,17 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var coachCurrentTeamsHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var coachPlayedHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var coachCertificationHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var topBarHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var bannerView: GADBannerView!
-     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
-
+    @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
     
     @IBAction func CloseDashboardPressed(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-//    var currentUserProfileImage = UIImage()
-//    var currentUserCoverImage = UIImage()
     var friendProfile:[String:AnyObject]?
     var userProfileData:Profile!
-    
     var coverOrProfile = ""
     var friendId:String? = nil
     var currentUserId = ""
@@ -65,6 +59,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         super.viewDidLoad()
         loadBannerAds()
     }
+    
     func loadBannerAds() {
         if showAds == "1" {
             self.bannerViewHeightConstraint.constant = 50
@@ -84,7 +79,8 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         if let value = friendProfile{
             userProfileData = Profile(usrObj: value)
            // closeButton.hidden = false
-        }else{
+        }
+        else{
             userProfileData = profileData
           //  closeButton.hidden = true
         }
@@ -122,18 +118,6 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         let formattedString = NSMutableAttributedString()
         let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State), ", fontName: appFont_black, fontSize: 15).bold("\(currentISO) ", fontName: appFont_black, fontSize: 15)
         self.PlayerLocation.attributedText = locationText
-        //self.userProfileImage.image = LoggedInUserImage
-        
-//        let proPic = userProfileData.ProfileImageURL
-//        if proPic == "-"{
-//            let imageName = defaultProfileImage
-//            let image = UIImage(named: imageName)
-//            userProfileImage.image = image!
-//        }else{
-//            if let imageURL = NSURL(string:proPic){
-//                userProfileImage.kf_setImageWithURL(imageURL)
-//            }
-//        }
         
         if friendId == nil {
             currentUserId = (currentUser?.uid)!
@@ -157,17 +141,6 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             }
         })
         
-//        let coverPic = userProfileData.CoverPhotoURL
-//        if coverPic == "-"{
-//            let imageName = defaultProfileImage
-//            let image = UIImage(named: imageName)
-//            imgCoverPhoto.image = image!
-//        }else{
-//            if let imageURL = NSURL(string:coverPic){
-//                imgCoverPhoto.kf_setImageWithURL(imageURL)
-//            }
-//        }
-        
         fetchCoverPhoto(currentUserId, sucess: { (result) in
             let coverPic = result["coverPic"]
             
@@ -182,32 +155,6 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
                 }
             }
         })
-
-        
-//        if userProfileData.ProfileImageURL != "-" {
-//            getImageFromFirebase(userProfileData.ProfileImageURL) { (imgData) in
-//                self.currentUserProfileImage = imgData
-//            }
-//        }
-//        else {
-//            let imageName = defaultProfileImage
-//            let image = UIImage(named: imageName)
-//            self.currentUserProfileImage = image!
-//        }
-        
-//        if userProfileData.CoverPhotoURL != "-" {
-//            getImageFromFirebase(userProfileData.CoverPhotoURL) { (imgData) in
-//                self.currentUserCoverImage = imgData
-//            }
-//        }
-//        else {
-//            let imageName = defaultProfileImage
-//            let image = UIImage(named: imageName)
-//            self.currentUserCoverImage = image!
-//        }
-
-        //self.userProfileImage.image = currentUserProfileImage
-        //self.imgCoverPhoto.image = currentUserCoverImage
         
         setNavigationBarProperties()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapCoverPhoto))
@@ -288,15 +235,14 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         if coverOrProfile == "Profile" {
-            
             self.userProfileImage.image = image
             self.dismissViewControllerAnimated(true) {
-                addProfileImageData(self.resizeImage(image, newWidth: 200))
+                addProfileImageData(self.resizeImage(image, newWidth: 400))
             }
         }else {
             self.imgCoverPhoto.image = image
             self.dismissViewControllerAnimated(true) {
-                addCoverImageData(self.resizeImage(image, newWidth: 200))
+                addCoverImageData(self.resizeImage(image, newWidth: 800))
             }
         }
     }

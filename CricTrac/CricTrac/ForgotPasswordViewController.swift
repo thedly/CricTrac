@@ -22,7 +22,6 @@ class ForgotPasswordViewController: UIViewController,ThemeChangeable {
        // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         //setUIBackgroundTheme(self.view)
@@ -41,30 +40,20 @@ class ForgotPasswordViewController: UIViewController,ThemeChangeable {
     }
 
     @IBAction func sendResetPwdLinkBtnPressed(sender: AnyObject) {
-       // KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
         let email = resetLinkEmailTxt.textVal
         
-        
         FIRAuth.auth()?.sendPasswordResetWithEmail(email) { error in
-            
-          //  KRProgressHUD.dismiss()
-            
             if error != nil {
-//                SCLAlertView().showError("Error", subTitle: "Email was not sent")
                 let alert = UIAlertController(title: "Error", message: "Invalid Details", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
             }
             else {
-                
-              // self.dismissViewControllerAnimated(true, completion: {void in
-               // SCLAlertView().showInfo("Verify email", subTitle: "A reset password link has been sent to your mail account")
-              let alert = UIAlertController(title: "Verify email", message: "A reset password link has been sent to your mail account", preferredStyle: UIAlertControllerStyle.Alert)
+                let alert = UIAlertController(title: "Verify email", message: "A reset password link has been sent to your mail account", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
                      self.dismissViewControllerAnimated(true, completion: nil)
                     }))
               self.presentViewController(alert, animated: true, completion: nil)
-              //  })
             }
         }
     }

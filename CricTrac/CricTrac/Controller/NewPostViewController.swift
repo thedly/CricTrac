@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftyJSON
-import SCLAlertView
 
 class NewPostViewController: UIViewController,ThemeChangeable,UITextViewDelegate {
     @IBOutlet weak var contentView: UIView!
@@ -40,12 +39,6 @@ class NewPostViewController: UIViewController,ThemeChangeable,UITextViewDelegate
         let postOwnerId = currentUser?.uid
         fetchFriendDetail(postOwnerId!, sucess: { (result) in
             let proPic = result["proPic"]
-//            
-//            aCell.userImage.layer.borderWidth = 1
-//            aCell.userImage.layer.masksToBounds = false
-//            aCell.userImage.layer.borderColor = UIColor.clearColor().CGColor
-//            aCell.userImage.layer.cornerRadius = aCell.userImage.frame.width/2
-//            aCell.userImage.clipsToBounds = true
             
             if proPic! == "-"{
                 let imageName = defaultProfileImage
@@ -95,8 +88,6 @@ class NewPostViewController: UIViewController,ThemeChangeable,UITextViewDelegate
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
         return
-
-      
     }
     
     @IBAction func sendNewPostToTimline(sender:UIButton){

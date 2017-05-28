@@ -12,72 +12,32 @@ import XLPagerTabStrip
 class NewMatchViewController: UIViewController,IndicatorInfoProvider,ThemeChangeable {
 
     lazy var ctDatePicker = CTDatePicker()
-    
     @IBOutlet weak var scrollView:UIScrollView!
-    
     @IBOutlet weak var matchView:UIView!
-    
     @IBOutlet weak var batView:UIView!
-    
     @IBOutlet weak var bowlView:UIView!
-    
     @IBOutlet weak var extraView:UIView!
-    
     @IBOutlet weak var dateTest: UITextField!
-    
     @IBOutlet weak var datePickerButton:UIButton!
-    
-    
     @IBOutlet weak var teamText: UITextField!
-    
-    
     @IBOutlet weak var opponentText: UITextField!
-    
-    
     @IBOutlet weak var groundText: UITextField!
-    
-    
     @IBOutlet weak var OversText: UITextField!
-    
-    
     @IBOutlet weak var tournamnetText: UITextField!
-    
-    
     @IBOutlet weak var dismissText: UITextField!
-    
-    
-    
     @IBOutlet weak var extraOverText: UITextField!
-    
-    
     @IBOutlet weak var wicketsText: UITextField!
-    
-    
     @IBOutlet weak var resultsText: UITextField!
-    
-    
-    
-    
     @IBOutlet weak var commentsText: UITextView!
-    
-    
-    
     @IBOutlet weak var matchSelector: UIView!
-    
     @IBOutlet weak var bowlingSelector: UIView!
-    
-   
     @IBOutlet weak var extraSelector: UIView!
-    
     @IBOutlet weak var battingSelector: UIView!
-    
     
     var lastSelectedTab:UIView?
     var keyboardHeight:Int?
     var selectedText:UITextField?
-    
     var scrollViewTop:CGFloat!
-    
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
@@ -85,58 +45,37 @@ class NewMatchViewController: UIViewController,IndicatorInfoProvider,ThemeChange
         navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setBackgroundColor()
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(NewMatchViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         lastSelectedTab = matchSelector
- scrollView.setContentOffset(CGPointZero, animated: true)
- scrollViewTop = scrollView.frame.origin.y
+        scrollView.setContentOffset(CGPointZero, animated: true)
+        scrollViewTop = scrollView.frame.origin.y
         
-    setSwipe()
-        
+        setSwipe()
     }
-
-    
-    
-    
+  
     func keyboardWillShow(sender: NSNotification){
-        
         if let userInfo = sender.userInfo {
             if  let  keyboardframe = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue{
                 let keyboardHeight = keyboardframe.CGRectValue().height
                 
                 if selectedText != nil {
-                let viewBottom = view.frame.maxY
-                let textDesiredPosition = viewBottom - keyboardHeight - (selectedText?.frame.height)! - scrollViewTop
-                
+                    let viewBottom = view.frame.maxY
+                    let textDesiredPosition = viewBottom - keyboardHeight - (selectedText?.frame.height)! - scrollViewTop
                     if textDesiredPosition < selectedText?.frame.minY {
-                        
                         let aPoint = CGPoint(x: 0, y: textDesiredPosition)
                         scrollView.setContentOffset(aPoint, animated: true)
-                        
                     }
-                    
-                
                 }
-                
-                
             }
         }
-        
-        
-        
     }
 
-  
     @IBAction func didTapCancel(sender: UIButton) {
-        
         dismissViewControllerAnimated(true) {}
     }
-
     
     @IBAction func didTapMatch(sender: AnyObject) {
         lastSelectedTab?.hidden = true
@@ -148,7 +87,6 @@ class NewMatchViewController: UIViewController,IndicatorInfoProvider,ThemeChange
         bowlView.hidden = true
         extraView.hidden = true
     }
-  
     
     @IBAction func didTapBat(sender: AnyObject){
         lastSelectedTab?.hidden = true
@@ -161,7 +99,6 @@ class NewMatchViewController: UIViewController,IndicatorInfoProvider,ThemeChange
        extraView.hidden = true
     }
     
-    
     @IBAction func didTapBowl(sender: AnyObject) {
         lastSelectedTab?.hidden = true
         bowlingSelector.hidden = false
@@ -171,20 +108,17 @@ class NewMatchViewController: UIViewController,IndicatorInfoProvider,ThemeChange
         batView.hidden = true
         matchView.hidden = true
         extraView.hidden = true
-
     }
-    
     
     @IBAction func didTapExtra(sender: AnyObject) {
          lastSelectedTab?.hidden = true
         extraSelector.hidden = false
         lastSelectedTab = extraSelector
          scrollView.setContentOffset(CGPointZero, animated: true)
-   extraView.hidden = false
+        extraView.hidden = false
         bowlView.hidden = true
         batView.hidden = true
         matchView.hidden = true
-        
     }
     
     func hideAllSelectors(){
@@ -195,7 +129,6 @@ class NewMatchViewController: UIViewController,IndicatorInfoProvider,ThemeChange
     }
 
     func setSwipe(){
-        
         var swipe = UISwipeGestureRecognizer(target: self, action: #selector(NewMatchViewController.rightSwipeRecognized(_:)))
         swipe.direction = UISwipeGestureRecognizerDirection.Right
         self.view.addGestureRecognizer(swipe)
@@ -207,51 +140,39 @@ class NewMatchViewController: UIViewController,IndicatorInfoProvider,ThemeChange
     
     
     func rightSwipeRecognized(gesture: UIGestureRecognizer) {
-        
         switch lastSelectedTab! {
-        case matchSelector: didTapExtra(matchSelector)
-        case battingSelector: didTapMatch(battingSelector)
-        case bowlingSelector: didTapBat(bowlingSelector)
-        case extraSelector: didTapBowl(extraSelector)
-        default: break
-            
+            case matchSelector: didTapExtra(matchSelector)
+            case battingSelector: didTapMatch(battingSelector)
+            case bowlingSelector: didTapBat(bowlingSelector)
+            case extraSelector: didTapBowl(extraSelector)
+            default: break
         }
-        
     }
     
     func leftSwipeRecognized(gesture: UIGestureRecognizer) {
-        
         switch lastSelectedTab! {
-        case matchSelector: didTapBat(matchSelector)
-        case battingSelector: didTapBowl(battingSelector)
-        case bowlingSelector: didTapExtra(bowlingSelector)
-        case extraSelector: didTapMatch(extraSelector)
-        default: break
-            
+            case matchSelector: didTapBat(matchSelector)
+            case battingSelector: didTapBowl(battingSelector)
+            case bowlingSelector: didTapExtra(bowlingSelector)
+            case extraSelector: didTapMatch(extraSelector)
+            default: break
         }
     }
-
 }
 
-
 extension NewMatchViewController:UITextFieldDelegate{
-    
     func textFieldDidBeginEditing(textField: UITextField) {
-        
         selectedText = textField
-
         if textField == dateTest{
-        ctDatePicker.showPicker(self, inputText: textField)
+            ctDatePicker.showPicker(self, inputText: textField)
         }
     }
-    
     
     func textFieldShouldReturn(textField: UITextField) -> Bool
     {
         textField.resignFirstResponder()
         return true
     }
-    
  
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "BATTING")

@@ -22,15 +22,12 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
    
     @IBOutlet weak var registerBottomViewLabel: UILabel!
     @IBOutlet weak var fbGoogleButtonsHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var username:UITextField!
     @IBOutlet weak var password:UITextField!
     @IBOutlet weak var confirmPassword: UITextField!
-
     @IBOutlet weak var facebookBtn: UIButton!
     let loginManager = FBSDKLoginManager()
     @IBOutlet weak var googleBtn: UIButton!
-    
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
@@ -43,9 +40,8 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
         password.delegate = self
         setBackgroundColor()
         fbGoogleButtonsHeightConstraint.constant = 0
-        //username.text = "bharathi92m@gmail.com"
-       // password.text = "qwerty"
-        //setUIBackgroundTheme(self.view)
+        //username.text = ""
+        // password.text = ""
         // Do any additional setup after loading the view.
     }
     
@@ -58,22 +54,11 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
-    
-    // MARK:- GoogleSignIn
-    
-   
-    
-    
-    
     func loginWithGoogle(){
-        
-                GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
-                GIDSignIn.sharedInstance().uiDelegate = self
-                GIDSignIn.sharedInstance().delegate = self
-                GIDSignIn.sharedInstance().signIn()
-        
+        GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().signIn()
     }
     
     
@@ -102,27 +87,19 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
                         self.googleBtn.enabled = true
                         SCLAlertView().showError("Login Error", subTitle: error.localizedDescription)
                     }
-    
             })
-    
         }
     
-    
         func saveGoogleTocken(idToken:String,accessToken:String ){
-    
             let userDefaults = NSUserDefaults.standardUserDefaults()
             let googleTokens = ["idToken":idToken,"accessToken":accessToken]
     
             var facebookToken:[String:String]!
     
-    
             if let loginToken = userDefaults.valueForKey("loginToken") as? [String:AnyObject]{
-    
                 if let fbtoken = loginToken["Facebooktoken"]{
-    
                     facebookToken = fbtoken as! [String : String]
                 }
-    
             }
     
             var token = [String:AnyObject]()
@@ -132,23 +109,12 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
             token["googletoken"] = googleTokens
     
             userDefaults.setValue(token, forKey: "loginToken")
-    
             userDefaults.synchronize()
-    
-    
-    
         }
-    
     
     // MARK:- FBSignIn
     
-    
-    
-  
-    
-    
     func loginWithFacebook(){
-        
         
         loginManager.logInWithReadPermissions(["email"], fromViewController: self, handler: { (result, error) in
             if let error = error {
@@ -161,7 +127,6 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
             }
             else {
                 let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
-                
                 
                 firebaseLogin(credential, sucess: { (user) in
                     
@@ -178,10 +143,7 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
                             self.facebookBtn.enabled = true
                             SCLAlertView().showError("Login Error", subTitle: error.localizedDescription)
                         }
-                        
-                        
-                })
-                
+                    })
             }
         })
     }
@@ -193,14 +155,12 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
         
         var googleToken:[String:AnyObject]!
         
-        
         if let loginToken = userDefaults.valueForKey("loginToken") as? [String:AnyObject]{
             
             if let fbtoken = loginToken["googletoken"]{
                 
                 googleToken = fbtoken as! [String : String]
             }
-            
         }
         
         var token = [String:AnyObject]()
@@ -253,11 +213,10 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
             
                 self.presentViewController(alert, animated: true, completion: nil)
             }
-
-            
         }
         
     }
+    
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         let newLength = textField.text!.characters.count + string.characters.count - range.length
         
@@ -266,25 +225,19 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
         }
         return true
     }
-    
 }
-    
-
 
 extension RegisterViewController {
 
     
     @IBAction func closeRegisterViewTapped(sender: AnyObject) {
-        //
-        
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
     @IBAction func loginWithGoogle(sender: UIButton) {
         googleBtn.enabled = false
         loginWithGoogle()
-        
     }
-    
     
     @IBAction func loginWithUserNamePassword(){
         
@@ -304,7 +257,6 @@ extension RegisterViewController {
                                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                                 self.presentViewController(alert, animated: true, completion: nil)
                           
-                            
                                 // An error happened.
                             }
                         
@@ -344,7 +296,7 @@ extension RegisterViewController {
             self.presentViewController(alert, animated: true, completion: nil)
         }
     
-}
+    }
 
     @IBAction func loginWithFB(sender: UIButton) {
         self.facebookBtn.enabled = false

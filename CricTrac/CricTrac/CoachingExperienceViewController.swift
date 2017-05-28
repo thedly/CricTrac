@@ -11,63 +11,38 @@ import UIKit
 class CoachingExperienceViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, ThemeChangeable {
 
     @IBOutlet weak var teamName: UITextField!
-    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var teamsPlayedForTxt: UITextField!
     @IBOutlet weak var pastTeamName: UITextField!
-    
     @IBOutlet weak var currentTeams: UITableView!
-    
-    
     @IBOutlet weak var CertificationsTbl: UITableView!
-    
     @IBOutlet weak var CoachPlayedForTbl: UITableView!
-
     @IBOutlet weak var pastTeams: UITableView!
-    
     @IBOutlet weak var CoachingLevel: UITextField!
-    
     @IBOutlet weak var Certifications: UITextField!
-    
     @IBOutlet weak var Experience: UITextField!
-    
-    
-    
     @IBOutlet weak var currentTeamsTableHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var playedForTableHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var pastTeamsTableHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var certificationsTableHeightConstraint: NSLayoutConstraint!
-   
     @IBOutlet weak var addCurrentTeamBtn: UIButton!
     @IBOutlet weak var addPastTeamBtn: UIButton!
     @IBOutlet weak var addCoachPlayedForBtn: UIButton!
     @IBOutlet weak var addCertificationsBtn: UIButton!
-   
     
     var selectedText: UITextField!
-    
     var profileChanged: Bool! = false
     var modProfileCoach = ""
-    
     var data:[String:AnyObject]{
-        
         return ["Certifications":CertificationsList,"Experience":Experience.textVal.trim(),"CoachingLevel":CoachingLevel.textVal.trim(),"CoachCurrentTeams":teamNames, "CoachPastTeams": pastTeamNames, "CoachPlayedFor": CoachPlayedFor]
     }
+    
     var scrollViewTop:CGFloat!
     var window = UIWindow(frame: UIScreen.mainScreen().bounds)
-
-    
     var teamNames = [""]
-    
     var CertificationsList = [""]
-    
     var CoachPlayedFor = [""]
-    
     var pastTeamNames = [""]
-    
     var currentwindow = UIWindow()
     
     func changeThemeSettigs() {
@@ -120,7 +95,6 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         scrollViewTop = scrollView.frame.origin.y
         
         if let app = UIApplication.sharedApplication().delegate as? AppDelegate, let currentwindow = app.window {
-            
             window = currentwindow
         }
         setNavigationBarProperties()
@@ -144,11 +118,11 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         }
         
     }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        
-        
     }
+    
     func setNavigationBarProperties(){
         var currentTheme:CTTheme!
         currentTheme = cricTracTheme.currentTheme
@@ -171,7 +145,6 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         if self.window.rootViewController == sliderMenu {
             title = "EDIT PROFILE"
-            
         }
         else
         {
@@ -181,17 +154,18 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
        // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
        // navigationController!.navigationBar.titleTextAttributes = titleDict
     }
+    
     @IBAction func backBtnPressed(sender: AnyObject) {
        // dismissViewControllerAnimated(true, completion: nil)
         self.navigationController?.popViewControllerAnimated(true)
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     @IBAction func CreateCoachingProfileBtnPressed(sender: AnyObject) {
-        
         profileData.Certifications = self.data["Certifications"] as! [String]
         profileData.Experience = self.data["Experience"] as! String
         profileData.CoachingLevel = self.data["CoachingLevel"] as! String
@@ -202,7 +176,6 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         profileData.UserProfile = modProfileCoach
         
         addUserProfileData(profileData.ProfileObject) { (data: [String: AnyObject]) in
-        
             profileData = Profile(usrObj: data)
             updateMetaData(userImageMetaData)
             
@@ -223,40 +196,7 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         }
     }
     
-            
-//            if (self.profileChanged == true) {
-//                logout(self)
-//            }
-//            else
-//            {
-//                profileData = Profile(usrObj: data)
-//                
-//                updateMetaData(userImageMetaData)
-//                
-//                
-//                if self.window.rootViewController == sliderMenu {
-//                    
-//                    
-//                    let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
-//                    self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
-//                }
-//                else
-//                {
-//                    let rootViewController: UIViewController = getRootViewController()
-//                    self.window.rootViewController = rootViewController
-//                   // sliderMenu.mainViewController = rootViewController
-//
-//                    
-//                }
-//                
-//            }
-//        }
-  
-        
-//    }
-    
     func keyboardWillShow(sender: NSNotification){
-        
         if let userInfo = sender.userInfo {
             if  let  keyboardframe = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue{
                 let keyboardHeight = keyboardframe.CGRectValue().height
@@ -267,8 +207,6 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
             }
         }
     }
-
-    
     
     func deleteTeamFromCurrentTeams(sender: UIButton) {
         let but = sender
@@ -276,26 +214,21 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         let cell = view.superview as! CurrentTeamsTableViewCell
         
         if let tblView = cell.superview?.superview as? UITableView {
-            
             if tblView.isEqual(self.currentTeams) {
                 let indexPath = currentTeams.indexPathForCell(cell)
                 teamNames.removeAtIndex((indexPath?.row)!)
                 currentTeams.reloadData()
             }
             else if tblView.isEqual(self.CoachPlayedForTbl){
-                
                 let indexPath = CoachPlayedForTbl.indexPathForCell(cell)
                 CoachPlayedFor.removeAtIndex((indexPath?.row)!)
                 CoachPlayedForTbl.reloadData()
-                
             }
                 
             else if tblView.isEqual(self.CertificationsTbl){
-                
                 let indexPath = CertificationsTbl.indexPathForCell(cell)
                 CertificationsList.removeAtIndex((indexPath?.row)!)
                 CertificationsTbl.reloadData()
-                
             }
             else {
                 let indexPath = pastTeams.indexPathForCell(cell)
@@ -303,13 +236,9 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
                 pastTeams.reloadData()
             }
         }
-        
-        
     }
     
-    
     @IBAction func addPastTeamsPressed(sender: AnyObject) {
-        
         if pastTeamName.text?.trimWhiteSpace != "" && pastTeamName.text?.trimWhiteSpace != "-" {
             pastTeamNames.append(pastTeamName.textVal.trim().condenseWhitespace())
             pastTeamName.text = ""
@@ -317,75 +246,47 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         }
     }
     
-    
     @IBAction func addTeamsPressed(sender: AnyObject) {
         if teamName.text?.trimWhiteSpace != "" && teamName.text?.trimWhiteSpace != "-" {
             teamNames.append(teamName.textVal.trim().condenseWhitespace())
             teamName.text = ""
-            
             currentTeams.reloadData()
         }
-        
-        
     }
     
     @IBAction func addTeamsPlayedForPressed(sender: AnyObject) {
         if teamsPlayedForTxt.text?.trimWhiteSpace != "" && teamsPlayedForTxt.text?.trimWhiteSpace != "-" {
             CoachPlayedFor.append(teamsPlayedForTxt.textVal.trim().condenseWhitespace())
             teamsPlayedForTxt.text = ""
-            
             CoachPlayedForTbl.reloadData()
         }
-        
-        
     }
 
     @IBAction func addCertificationsPressed(sender: AnyObject) {
         if Certifications.text?.trimWhiteSpace != "" && Certifications.text?.trimWhiteSpace != "-" {
             CertificationsList.append(Certifications.textVal.trim().condenseWhitespace())
             Certifications.text = ""
-            
             CertificationsTbl.reloadData()
         }
-        
-        
     }
-
-    
     
     func getCellForCertifications(indexPath:NSIndexPath)->UITableViewCell{
         if let aCell =  CertificationsTbl.dequeueReusableCellWithIdentifier("CurrentTeamsTableViewCell", forIndexPath: indexPath) as? CurrentTeamsTableViewCell {
-            
             aCell.backgroundColor = UIColor.clearColor()
-            
-            
-            
             aCell.teamName.text = CertificationsList[indexPath.row]
-            
             aCell.deleteTeamBtn.addTarget(self, action: #selector(CoachingExperienceViewController.deleteTeamFromCurrentTeams(_:)), forControlEvents: .TouchUpInside)
-           
-            
             return aCell
         }
         else
         {
             return UITableViewCell()
         }
-       
-        
     }
-    
-    
     
     func getCellForRow(indexPath:NSIndexPath)->UITableViewCell{
         if let aCell =  currentTeams.dequeueReusableCellWithIdentifier("CurrentTeamsTableViewCell", forIndexPath: indexPath) as? CurrentTeamsTableViewCell {
-            
             aCell.backgroundColor = UIColor.clearColor()
-            
-            
-            
             aCell.teamName.text = teamNames[indexPath.row]
-            
             aCell.deleteTeamBtn.addTarget(self, action: #selector(CoachingExperienceViewController.deleteTeamFromCurrentTeams(_:)), forControlEvents: .TouchUpInside)
             return aCell
         }
@@ -393,17 +294,12 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         {
             return UITableViewCell()
         }
-        
-        
     }
     
     func getCellForPastTeamsRow(indexPath:NSIndexPath)->UITableViewCell{
         if let aCell =  pastTeams.dequeueReusableCellWithIdentifier("CurrentTeamsTableViewCell", forIndexPath: indexPath) as? CurrentTeamsTableViewCell {
-            
             aCell.backgroundColor = UIColor.clearColor()
-            
             aCell.teamName.text = pastTeamNames[indexPath.row]
-            
             aCell.deleteTeamBtn.addTarget(self, action: #selector(CoachingExperienceViewController.deleteTeamFromCurrentTeams(_:)), forControlEvents: .TouchUpInside)
             return aCell
         }
@@ -411,17 +307,12 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         {
             return UITableViewCell()
         }
-        
-        
     }
     
     func getCellForPlayedTeamsRow(indexPath:NSIndexPath)->UITableViewCell{
         if let aCell =  CoachPlayedForTbl.dequeueReusableCellWithIdentifier("CurrentTeamsTableViewCell", forIndexPath: indexPath) as? CurrentTeamsTableViewCell {
-            
             aCell.backgroundColor = UIColor.clearColor()
-            
             aCell.teamName.text = CoachPlayedFor[indexPath.row]
-            
             aCell.deleteTeamBtn.addTarget(self, action: #selector(CoachingExperienceViewController.deleteTeamFromCurrentTeams(_:)), forControlEvents: .TouchUpInside)
             return aCell
         }
@@ -429,8 +320,6 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         {
             return UITableViewCell()
         }
-        
-        
     }
     
     
@@ -457,7 +346,6 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        
         self.selectedText = textField
         AddDoneButtonTo(textField)
     }
@@ -571,7 +459,6 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
         else if textField == CoachingLevel {
             return newlength <= 30
         }
-        
         
         return true
     }

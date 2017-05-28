@@ -20,31 +20,10 @@ class AddPostTableViewCell: UITableViewCell {
         
         self.timelineOwnerPic.layer.cornerRadius = timelineOwnerPic.frame.size.width/2
         timelineOwnerPic.clipsToBounds = true
-        
-        
-        
-        // Initialization code
-        //addTapGestureToUserName()
     }
-//    var timelineVc = TimeLineViewController()
-//    func addTapGestureToUserName(){
-//        if let _ = freeHitLabel{
-//            let gesture = UITapGestureRecognizer(target: self, action: #selector(AddPostTableViewCell.didTapLabelName))
-//            freeHitLabel.userInteractionEnabled = true
-//            freeHitLabel.addGestureRecognizer(gesture)
-//        }
-//    }
-    
-//    func didTapLabelName(){
-//            //if let parentVC = parent as? UIViewController{
-//                 let newPost = viewControllerFrom("Main", vcid: "NewPostViewController") as! NewPostViewController
-//                //newPost.postId = postId!
-//                timelineVc.navigationController?.presentViewController(newPost, animated: true) {}
-//           // }
-//    }
+
     
     @IBAction func didTapPostButton(sender: AnyObject) {
-        
         
     }
 

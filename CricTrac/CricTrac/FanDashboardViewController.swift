@@ -28,26 +28,16 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var hobbiesHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var topBarHeightConstraint: NSLayoutConstraint!
-    
-     @IBOutlet weak var bannerView: GADBannerView!
-     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bannerView: GADBannerView!
+    @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
   
-    
     var friendProfile:[String:AnyObject]?
-    
     var userProfileData:Profile!
-    
     var coverOrProfile = ""
     var friendId:String? = nil
     var currentUserId = ""
-    
-//    var currentUserProfileImage = UIImage()
-//    var currentUserCoverImage = UIImage()
-    
-    
-    
+
     override func viewWillAppear(animated: Bool) {
-        
         setBackgroundColor()
         initView()
         self.updateFanDashBoard()
@@ -55,7 +45,6 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         InterestedSports.reloadData()
         Hobbies.reloadData()
         FavoritePlayers.reloadData()
-        
     }
     
     @IBAction func CloseDashboardPressed(sender: AnyObject) {
@@ -75,7 +64,6 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     func photoOptions(option:String)  {
         
         let alertController = UIAlertController(title: nil, message: alertMessage, preferredStyle: .ActionSheet)
-        
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
             // ...
         }
@@ -106,18 +94,16 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         alertController.addAction(chooseExistingAction)
         
         self.presentViewController(alertController, animated: true) {
-            // ...
         }
     }
 
-
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         loadBannerAds()
         
      // Do any additional setup after loading the view.
     }
+    
     func loadBannerAds() {
         if showAds == "1" {
             self.bannerViewHeightConstraint.constant = 50
@@ -130,8 +116,6 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         }
     }
     
-    
-   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -163,6 +147,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         //navigationController!.navigationBar.titleTextAttributes = titleDict
     }
+    
     func changeThemeSettigs() {
       //  let currentTheme = cricTracTheme.currentTheme
       //  navigationController?.navigationBar.barTintColor = currentTheme.topColor
@@ -177,19 +162,17 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         if coverOrProfile == "Profile" {
-            
             self.userProfileImage.image = image
             self.dismissViewControllerAnimated(true) {
-                addProfileImageData(self.resizeImage(image, newWidth: 200))
-            }
-        }else {
-            self.imgCoverPhoto.image = image
-            self.dismissViewControllerAnimated(true) {
-                addCoverImageData(self.resizeImage(image, newWidth: 200))
+                addProfileImageData(self.resizeImage(image, newWidth: 400))
             }
         }
-        
-        
+        else {
+            self.imgCoverPhoto.image = image
+            self.dismissViewControllerAnimated(true) {
+                addCoverImageData(self.resizeImage(image, newWidth: 800))
+            }
+        }
     }
     
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
@@ -205,8 +188,6 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     func initView() {
-        
-        
         if let value = friendProfile{
             userProfileData = Profile(usrObj: value)
            // closeButton.hidden = false
@@ -239,18 +220,6 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         let formattedString = NSMutableAttributedString()
         let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State), ", fontName: appFont_black, fontSize: 15).bold("\(currentISO) ", fontName: appFont_black, fontSize: 15)
         self.PlayerLocation.attributedText = locationText
-        //self.userProfileImage.image = LoggedInUserImage
-        
-//        let proPic = userProfileData.ProfileImageURL
-//        if proPic == "-"{
-//            let imageName = defaultProfileImage
-//            let image = UIImage(named: imageName)
-//            userProfileImage.image = image!
-//        }else{
-//            if let imageURL = NSURL(string:proPic){
-//                userProfileImage.kf_setImageWithURL(imageURL)
-//            }
-//        }
         
         if friendId == nil {
             currentUserId = (currentUser?.uid)!
@@ -273,18 +242,6 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
                 }
             }
         })
-
-      
-//        let coverPic = userProfileData.CoverPhotoURL
-//        if coverPic == "-"{
-//            let imageName = defaultProfileImage
-//            let image = UIImage(named: imageName)
-//            imgCoverPhoto.image = image!
-//        }else{
-//            if let imageURL = NSURL(string:coverPic){
-//                imgCoverPhoto.kf_setImageWithURL(imageURL)
-//            }
-//        }
         
         fetchCoverPhoto(currentUserId, sucess: { (result) in
             let coverPic = result["coverPic"]
@@ -300,32 +257,6 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
                 }
             }
         })
-
-        
-//        if userProfileData.ProfileImageURL != "-" {
-//            getImageFromFirebase(userProfileData.ProfileImageURL) { (imgData) in
-//                self.currentUserProfileImage = imgData
-//            }
-//        }
-//        else {
-//            let imageName = defaultProfileImage
-//            let image = UIImage(named: imageName)
-//            self.currentUserProfileImage = image!
-//        }
-//        
-//        if userProfileData.CoverPhotoURL != "-" {
-//            getImageFromFirebase(userProfileData.CoverPhotoURL) { (imgData) in
-//                self.currentUserCoverImage = imgData
-//            }
-//        }
-//        else {
-//            let imageName = defaultProfileImage
-//            let image = UIImage(named: imageName)
-//            self.currentUserCoverImage = image!
-//        }
-//        
-//        self.userProfileImage.image = currentUserProfileImage
-//        self.imgCoverPhoto.image = currentUserCoverImage
         
         setNavigationBarProperties()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapCoverPhoto))
@@ -397,15 +328,12 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         }
         
         self.view.layoutIfNeeded()
-        
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         var valueToReturn = 0
         
         switch collectionView {
-            
         case SupportingTeams:
             valueToReturn = userProfileData.SupportingTeams.count
             break
@@ -428,32 +356,20 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
-        
         var teamNameToReturn = ""
-        
-        
-        
+
         switch collectionView {
-            
         case FavoritePlayers:
             teamNameToReturn = userProfileData.FavoritePlayers[indexPath.row]
             
-            
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("FanFavouriteViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
-                
-                
                 aCell.TeamImage.image = UIImage()
                 
-                
                 if teamNameToReturn != "" {
-                    
                     aCell.TeamName.text = teamNameToReturn
-                    
                     let teamName = teamNameToReturn.componentsSeparatedByString(" ")
                     
                     if teamName.count == 1 {
@@ -471,25 +387,15 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
             }
             return ThemeColorsCollectionViewCell()
             
-            
-            
-        //break
         case SupportingTeams:
             teamNameToReturn = userProfileData.SupportingTeams[indexPath.row]
             
-            
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CoachPastTeamsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
-                
-                
                 aCell.TeamImage.image = UIImage()
                 
-                
                 if teamNameToReturn != "" {
-                    
                     aCell.TeamName.text = teamNameToReturn
-                    
                     let teamName = teamNameToReturn.componentsSeparatedByString(" ")
-                    
                     if teamName.count == 1 {
                         aCell.TeamAbbr.text = "\(teamName[0].characters.first!)"
                     }
@@ -500,27 +406,18 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
                         aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
                     }
                 }
-                
-
-                
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
             
-            
-        //  break;
         case InterestedSports:
             teamNameToReturn = userProfileData.InterestedSports[indexPath.row]
             
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("FanInterestedSportsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
-                
-                
                 aCell.TeamImage.image = UIImage()
                 
                 if teamNameToReturn != "" {
-                    
                     aCell.TeamName.text = teamNameToReturn
-                    
                     let teamName = teamNameToReturn.componentsSeparatedByString(" ")
                     
                     if teamName.count == 1 {
@@ -533,26 +430,19 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
                         aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
                     }
                 }
-                
-
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
             
-            
-        //  break
         case Hobbies:
             teamNameToReturn = userProfileData.Hobbies[indexPath.row]
             
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("FanHobbiesViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
                 
-                
                 aCell.TeamImage.image = UIImage()
                 
                 if teamNameToReturn != "" {
-                    
                     aCell.TeamName.text = teamNameToReturn
-                    
                     let teamName = teamNameToReturn.componentsSeparatedByString(" ")
                     
                     if teamName.count == 1 {
@@ -565,28 +455,19 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
                         aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
                     }
                 }
-                
-
-
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
             
-            
-        // break
         default:
             teamNameToReturn = userProfileData.SupportingTeams[indexPath.row]
             
-            
             if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("TeamCollectionViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
-                
                 
                 aCell.TeamImage.image = UIImage()
                 
                 if teamNameToReturn != "" {
-                    
                     aCell.TeamName.text = teamNameToReturn
-                    
                     let teamName = teamNameToReturn.componentsSeparatedByString(" ")
                     
                     if teamName.count == 1 {
@@ -599,27 +480,11 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
                         aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
                     }
                 }
-                
-                
-                
                 return aCell
             }
             return ThemeColorsCollectionViewCell()
-            
-            //  break
-            
         }
-        
-        
-        
     }
-    
-    
-    
-    
-    
-    
-    
     
     /*
      // MARK: - Navigation

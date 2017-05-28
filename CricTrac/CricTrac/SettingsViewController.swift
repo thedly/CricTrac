@@ -12,7 +12,7 @@ import MessageUI
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,ThemeChangeable,MFMailComposeViewControllerDelegate {
 
     @IBOutlet weak var SettingsTableView: UITableView!
-
+    
     @IBAction func closeBtnPressed(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -63,17 +63,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func initializeView() {
-        
         SettingsTableView.registerNib(UINib.init(nibName:"SettingsViewCell", bundle: nil), forCellReuseIdentifier: "SettingsViewCell")
         SettingsTableView.separatorStyle = .SingleLine
-        
         SettingsTableView.dataSource = self
         SettingsTableView.delegate = self
         
         setBackgroundColor()
-        
         //setUIBackgroundTheme(self.view)
-        
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -106,6 +102,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         cell.menuItemSelectedValue.hidden = toggleConfig
         cell.menuItemDescription.text = menuDesc
         
+        if settingsMenuData[indexPath.row]["vc"] == "Version" {
+            let formattedString = NSMutableAttributedString()
+            formattedString.bold(itemTitle, fontName: appFont_black, fontSize: 15)
+            formattedString.bold(": ", fontName: appFont_black, fontSize: 15)
+            formattedString.normal(versionAndBuildNumber, fontName: appFont_black, fontSize: 15)
+            cell.menuItemName.attributedText = formattedString
+        }
+        
         return cell
     }
     
@@ -124,6 +128,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         else if vcName == "Feedback" {
             openMailApp()
         }
+        else if vcName == "Version" {
+            
+        }
         else if vcName == "StaticPageViewController" {
             let viewCtrl = storyboard.instantiateViewControllerWithIdentifier(vcName! as! String) as! StaticPageViewController
             viewCtrl.pageToLoad = settingsMenuData[indexPath.row]["contentToDisplay"] as! String + "?color=\(topColor)"
@@ -134,18 +141,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             let aboutVC = viewControllerFrom("Main",vcid:"AboutViewController") as! AboutViewController
             self.presentViewController(aboutVC, animated: true, completion: nil)
         }
-//        else if vcName == "PrivacyPolicy" {
-//            let privacyVC = viewControllerFrom("Main",vcid:"PrivacyPolicyViewController") as! PrivacyPolicyViewController
-//            self.presentViewController(privacyVC, animated: true, completion: nil)
-//        }
-//        else if vcName == "FAQ" {
-//            let fAQVC = viewControllerFrom("Main",vcid:"FAQViewController") as! FAQViewController
-//            self.presentViewController(fAQVC, animated: true, completion: nil)
-//        }
-//        else if vcName == "TermsAndConditions" {
-//            let termsVC = viewControllerFrom("Main",vcid:"Terms_ConditionsViewController") as! Terms_ConditionsViewController
-//            self.presentViewController(termsVC, animated: true, completion: nil)
-//        }
         else if vcName == "" {
             let alert = UIAlertController(title:"", message: "Are you sure you want to logout?", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
@@ -153,7 +148,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             }))
              alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
-           // logout(self)
         }
         else
         {
@@ -165,7 +159,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-    
     
     func openMailApp() {
         let mailComposeViewController = configuredMailComposeViewController()

@@ -13,11 +13,8 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var barView: UIView!
-    
     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bannerView: GADBannerView!
-
-  
+    @IBOutlet weak var bannerView: GADBannerView!  
     
     var currentTheme:CTTheme!
     var dataSource = [[String:AnyObject]]()

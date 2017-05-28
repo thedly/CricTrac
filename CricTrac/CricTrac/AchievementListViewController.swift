@@ -42,18 +42,13 @@ class AchievementListViewController: UIViewController,UITableViewDelegate,UITabl
         // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     @IBAction func doneButtonTapped(sender: UIButton) {
-        
-        
         delegate!.setValueFromMultiSelectAchievements(selectedRows.joinWithSeparator(","))
-        
         
 //        let resultVC = viewControllerFrom("Main", vcid: "MatchResultsViewController") as! MatchResultsViewController
 //        resultVC.AchievementsText?.text = selectedRows.joinWithSeparator("\n")
 //        resultVC.achievementText = selectedRows
          self.dismissViewControllerAnimated(true, completion: nil)
-        
     }
-    
     
     @IBAction func cancelButtonTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -68,15 +63,8 @@ class AchievementListViewController: UIViewController,UITableViewDelegate,UITabl
         return dataSource.count
     }
     func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-       // let cell = tableView.dequeueReusableCellWithIdentifier("AchievementCell", forIndexPath: indexPath) as! AchievementTableViewCell
-         let limit = 3
-        
-        
-        
-        
-        //if let selectedRow = tableView.indexPathsForSelectedRows {
-        //if selectedRow.count == limit {
-        
+        let limit = 3
+
         if !selectedRows.contains(dataSource[indexPath.row]){ // about to unselect
             if selectedRows.count >= limit {
                 let alertController = UIAlertController(title: "Max Limit ", message:
@@ -89,54 +77,35 @@ class AchievementListViewController: UIViewController,UITableViewDelegate,UITabl
                 
             }
         }
-        
-      //}
         return indexPath
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCellWithIdentifier("AchievementCell", forIndexPath: indexPath) as! AchievementTableViewCell
             cell.achievementNames.text = dataSource[indexPath.row]
-            
-          
-//            if achievementData.containsString(dataSource[indexPath.row]){
-//                cell.accessoryType = .Checkmark
-//                selectedRows.append(dataSource[indexPath.row])
-//             
-//            }
         
-        
-                if selectedRows.contains(dataSource[indexPath.row]){
-                    cell.accessoryType = .Checkmark
-                    self.tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
-                }
+            if selectedRows.contains(dataSource[indexPath.row]){
+                cell.accessoryType = .Checkmark
+                self.tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+            }
         
             return cell
         }
 
      func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
             if let cell = tableView.cellForRowAtIndexPath(indexPath) {
                 if cell.selected {
                     cell.accessoryType = .Checkmark
                     selectedRows.append(dataSource[indexPath.row])
                 }
-//                if cell.accessoryType == .Checkmark {
-//                   let str = dataSource[indexPath.row]
-//                    selectedRows.append(str)
-//                }
-               
             }
-           
         }
     
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        
         if let cell = tableView.cellForRowAtIndexPath(indexPath) {
             cell.accessoryType = .None
             selectedRows = selectedRows.filter() { $0 != dataSource[indexPath.row] }
             cell.backgroundColor = UIColor.clearColor()
         }
-      
     }
 }

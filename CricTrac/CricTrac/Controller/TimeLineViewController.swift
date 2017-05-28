@@ -62,11 +62,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         if !directoryExistsInsideDocuments("cachedImages"){
             createDirectoryInsideDocuments("cachedImages")
         }
-        
-        //loadAllNewPosts()
-        
-        // Do any additional setup after loading the view.
-        
+
         loadBannerAds()
     }
     
@@ -82,11 +78,10 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             self.bannerViewHeightConstraint.constant = 0
         }
     }
+    
     func changeThemeSettigs() {
       //  let currentTheme = cricTracTheme.currentTheme
-        
-        
-       
+
      //  navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
@@ -119,26 +114,6 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
     func modifyPost(text: String, postId: String,index:Int) {
         editPost(text,postId: postId) { (data) in
-//            timelineData![index]["Post"] = JSON(text)
-//            self.timeLineTable.reloadData()
-//            let data = timelineData![index]["Post"]
-//          let postCell = APostTableViewCell()
-//            postCell.post?.text = data.dictionaryValue["Post"]?.stringValue
-            
-//            var timeLineData:[JSON]!
-//            if let  value = timelineData?.arrayValue{
-//                timeLineData = value
-//            }else
-//            {
-//                timeLineData = [JSON]()
-//            }
-//            
-//            timeLineData[index] = JSON(data["timeline"]!)
-//            timelineData = JSON(timeLineData)
-//            dispatch_async(dispatch_get_main_queue(),{
-//                self.timeLineTable.reloadData()
-//                KRProgressHUD.dismiss()
-//            })
         }
         timelineData![index]["Post"] = JSON(text)
         self.timeLineTable.reloadData()
@@ -186,9 +161,6 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     func setNavigationBarProperties(){
-       
-        
-        
         currentTheme = cricTracTheme.currentTheme
         let menuButton: UIButton = UIButton(type:.Custom)
         menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
@@ -204,11 +176,8 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         let righttbarButton = UIBarButtonItem(customView: notificationButton)
         
         let notifyLabel: UILabel = UILabel()
-        
         let notificationButtonframeBounds: CGRect =  (righttbarButton.customView?.bounds)!;
 
-        
-        
         notifyLabel.frame = CGRectMake(0, -10, 40, 20)
         //notifyLabel.backgroundColor = UIColor.redColor()
         notifyLabel.textColor = UIColor.blackColor()
@@ -217,11 +186,6 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         
         righttbarButton.customView?.center = CGPointMake(notificationButtonframeBounds.origin.x, notificationButtonframeBounds.origin.y)
         notifyLabel.textAlignment = NSTextAlignment.Center
-        
-        
-       // self.view.addSubview(notifyLabel)
-        //let rightbarButtonItem = UIBarButtonItem(customView: notifyLabel)
-        
         
         //assign button to navigationbar
         
@@ -262,8 +226,6 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             
             fetchFriendDetail((currentUser?.uid)!, sucess: { (result) in
                 let proPic = result["proPic"]
-                //let city =   result["city"]
-                //postCell.postOwnerCity.text = city
                 
                 if proPic! == "-"{
                     let imageName = defaultProfileImage
@@ -451,14 +413,6 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             newPost.modalPresentationStyle = .OverCurrentContext
             presentViewController(newPost, animated: true, completion: nil)
         }
-//        else
-//        {
-//            let newPost = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
-//            newPost.postData =  timelineData!.arrayValue[indexPath.section-1]
-//            newPost.postIndex = indexPath.section-1
-//            newPost.refreshableParent = self
-//            presentViewController(newPost, animated: true, completion: nil)
-//        }
     }
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -477,18 +431,6 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         }
     }
     
-    //    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    //
-    //        return 15
-    //    }
-    
-    //    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    //
-    //        let aView = UIView(frame: CGRectMake(0, 0, view.frame.width, 10) )
-    //        aView.backgroundColor = UIColor.clearColor()
-    //
-    //        return aView
-    //    }
     
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
