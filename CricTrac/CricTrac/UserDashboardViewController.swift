@@ -288,6 +288,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
               topBarViewHeightConstraint.constant = 56
               self.topBarView.backgroundColor = currentTheme.topColor
         }
+        self.view.backgroundColor = currentTheme.topColor
         
     
             //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]

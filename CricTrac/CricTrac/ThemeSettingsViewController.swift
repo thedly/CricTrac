@@ -40,7 +40,7 @@ class ThemeSettingsViewController: UIViewController, UIGestureRecognizerDelegate
         super.viewDidLoad()
         setBackgroundColor()
         initializeView()
-        
+      
         // Do any additional setup after loading the view.
     }
     
@@ -66,6 +66,8 @@ class ThemeSettingsViewController: UIViewController, UIGestureRecognizerDelegate
         
         navigationController!.navigationBar.barTintColor = currentTheme.topColor
         self.title = "THEMES"
+        self.view.backgroundColor = currentTheme.topColor
+
     }
     
     func changeThemeSettigs(){
@@ -144,7 +146,7 @@ class ThemeSettingsViewController: UIViewController, UIGestureRecognizerDelegate
         }
         return ThemeColorsCollectionViewCell()
     }
-    
+   
 
     /*
     // MARK: - Navigation

@@ -41,11 +41,11 @@ struct AppTheme{
     
     let Grass = CTTheme(topColor: UIColor(hex: "#b4ed50"), bottomColor: UIColor(hex: "#429321"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
-    let Flash = CTTheme(topColor: UIColor(hex: "#FFE205"), bottomColor: UIColor(hex: "#FF8F05"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
+    let Beamer = CTTheme(topColor: UIColor(hex: "#F0FE00"), bottomColor: UIColor(hex: "#FF8F05"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
     let Feather = CTTheme(topColor: UIColor(hex: "#ea9eff"), bottomColor: UIColor(hex: "#692580"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
-    let Peach = CTTheme(topColor: UIColor(hex: "#fbda61"), bottomColor: UIColor(hex: "#f76b1c"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
+    let Slice = CTTheme(topColor: UIColor(hex: "#fbda61"), bottomColor: UIColor(hex: "#f76b1c"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
     let Cherry = CTTheme(topColor: UIColor(hex: "#D40D12"), bottomColor: UIColor(hex: "#5C0002"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
@@ -57,11 +57,11 @@ struct AppTheme{
     
     let Ferret = CTTheme(topColor: UIColor(hex: "#8B8484"), bottomColor: UIColor(hex: "#2D2C2A"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
   
-    let Ocean = CTTheme(topColor: UIColor(hex: "#3BACB2"), bottomColor: UIColor(hex: "#295154"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
+    let Glove = CTTheme(topColor: UIColor(hex: "#3BACB2"), bottomColor: UIColor(hex: "#295154"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
-    let Pista = CTTheme(topColor: UIColor(hex: "#CDE855"), bottomColor: UIColor(hex: "#85DB18"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
+    let Flash = CTTheme(topColor: UIColor(hex: "#09BD66"), bottomColor: UIColor(hex: "#044C29"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
-    let Lemon = CTTheme(topColor: UIColor(hex: "#40627C"), bottomColor: UIColor(hex: "#26393D"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
+    let Swing = CTTheme(topColor: UIColor(hex: "#40627C"), bottomColor: UIColor(hex: "#26393D"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
 
     
     var currentTheme:CTTheme!
@@ -80,17 +80,17 @@ struct AppTheme{
 
 enum Themes:String{
     case Grass
-    case Flash
+    case Beamer
     case Feather
-    case Peach
+    case Slice
     case Cherry
     case Daisy
     case Ashes
     case Beehive
     case Ferret
-    case Ocean
-    case Pista
-    case Lemon
+    case Glove
+    case Flash
+    case Swing
 }
 
 func setCurrentTheme(theme:Themes){
@@ -99,7 +99,12 @@ func setCurrentTheme(theme:Themes){
 
 func getPersistedTheme()->CTTheme {
     if let savedTheme = NSUserDefaults.standardUserDefaults().valueForKey("userTheme") as? String{
-        return themeFor(Themes(rawValue: savedTheme)!)
+        if themeColors[savedTheme] != nil {
+            return themeFor(Themes(rawValue: savedTheme)!)
+        }
+        else {
+            return cricTracTheme.Grass
+        }
     }
     else{
         return cricTracTheme.Grass
@@ -124,17 +129,17 @@ func getPersistedTheme()->CTTheme {
 func themeFor(key:Themes)->CTTheme{
     switch key {
     case .Grass : return cricTracTheme.Grass
-    case .Flash : return cricTracTheme.Flash
+    case .Beamer : return cricTracTheme.Beamer
     case .Feather: return cricTracTheme.Feather
-    case .Peach:return cricTracTheme.Peach
+    case .Slice:return cricTracTheme.Slice
     case .Cherry:return cricTracTheme.Cherry
     case .Daisy:return cricTracTheme.Daisy
     case .Ashes:return cricTracTheme.Ashes
     case .Beehive:return cricTracTheme.Beehive
     case .Ferret:return cricTracTheme.Ferret
-    case .Ocean:return cricTracTheme.Ocean
-    case .Pista:return cricTracTheme.Pista
-    case .Lemon:return cricTracTheme.Lemon
+    case .Glove:return cricTracTheme.Glove
+    case .Flash:return cricTracTheme.Flash
+    case .Swing:return cricTracTheme.Swing
     }
 }
 
