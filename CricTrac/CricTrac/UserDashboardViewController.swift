@@ -612,10 +612,15 @@ func setDashboardData(){
     //KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
 
     //reset values
+    self.FirstRecentMatchSummary.hidden = false
+    self.SecondRecentMatchSummary.hidden = false
+    
     self.FirstRecentMatchView.hidden = false
     self.SecondRecentMatchView.hidden = false
+    
     self.FirstRecentMatchBowlingView.hidden = false
-    self.SecondRecentMatchSummary.hidden = false
+    self.SecondRecentMatchBowlingView.hidden = false
+
     self.topBattingNotAvailable.hidden = false
     self.topBowlingNotAvailable.hidden = false
     
