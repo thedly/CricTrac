@@ -220,9 +220,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         if let aCell =  matchSummaryTable.dequeueReusableCellWithIdentifier("SummaryDetailsCell", forIndexPath: indexPath) as? SummaryDetailsCell {
             
             aCell.backgroundColor = UIColor.clearColor()
-            aCell.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
+          
+            aCell.baseView.backgroundColor = cricTracTheme.currentTheme.bottomColor
             
-            aCell.baseView.alpha = 0.8
+           aCell.baseView.alpha = 1
             
              let currentMatch = self.matches[indexPath.row]
                 
@@ -281,8 +282,22 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+      
+         let currentMatch = self.matches[indexPath.row]
         
-        return 120
+        if currentMatch.BattingSectionHidden == false && currentMatch.BowlingSectionHidden == false {
+            return 120
+        }
+       else if currentMatch.BattingSectionHidden == false {
+            return 105
+        }
+        else if currentMatch.BowlingSectionHidden == false {
+            return 105
+        }
+       
+        else {
+            return 90
+        }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

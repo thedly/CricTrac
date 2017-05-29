@@ -211,8 +211,9 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         //setUIBackgroundTheme(self.view)
         setColorForViewsWithSameTag(battingView)
         setColorForViewsWithSameTag(bowlingView)
-        self.summarizedView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
-        self.summarizedView.alpha = 0.8
+
+        self.summarizedView.alpha = 1
+        self.summarizedView.backgroundColor = cricTracTheme.currentTheme.bottomColor
         initializeView()
         // Do any additional setup after loading the view.
         self.automaticallyAdjustsScrollViewInsets = true

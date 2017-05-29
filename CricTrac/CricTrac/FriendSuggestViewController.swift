@@ -156,10 +156,9 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                 aCell.userName.text = UserProfilesData[indexPath.row].fullName
                 aCell.AddFriendBtn.accessibilityIdentifier = UserProfilesData[indexPath.row].id
                 aCell.AddFriendBtn.addTarget(self, action: #selector(AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-                aCell.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
-                
-                aCell.baseView.alpha = 0.8
 
+               aCell.baseView.alpha = 1
+              aCell.baseView.backgroundColor = cricTracTheme.currentTheme.bottomColor
                 aCell.backgroundColor = UIColor.clearColor()
                 return aCell
             }

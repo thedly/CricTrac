@@ -91,9 +91,9 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         MatchesView.layer.cornerRadius = 10
         userProfileImage.clipsToBounds = true
         
-        MatchesView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
+         MatchesView.alpha = 1
         
-        MatchesView.alpha = 0.8
+          MatchesView.backgroundColor = cricTracTheme.currentTheme.bottomColor
         
         CurrentTeams.delegate = self
         CurrentTeams.dataSource = self
@@ -388,7 +388,9 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
                 
                 if indexPath.row < (userProfileData.CoachCurrentTeams.count) {
                     teamNameToReturn = userProfileData.CoachCurrentTeams[indexPath.row]
-                    aCell.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.boxColor)))
+                    
+                    aCell.baseView.backgroundColor = cricTracTheme.currentTheme.bottomColor
+                    aCell.baseView.alpha = 1
                     aCell.TeamAbbr.textColor = UIColor.whiteColor()
                 }
                 else if (indexPath.row - (userProfileData.CoachCurrentTeams.count)) < (userProfileData.CoachPastTeams.count) {

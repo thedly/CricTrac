@@ -47,8 +47,7 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
 //        userName.text = profileData.fullName
         profilePic = profileData.ProfileImageURL
         
-        //baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: topColor))
-        
+               
         if let _ = profileData.UserProfile as? String {
             removeUnwantedMenu()
         }else{

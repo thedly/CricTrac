@@ -201,9 +201,9 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
             aCell.rejectBtn.addTarget(self, action: #selector(FriendRequestsViewController.RejectFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             aCell.confirmBtn.addTarget(self, action: #selector(FriendRequestsViewController.ConfirmFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         }
-        aCell.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
         
-        aCell.baseView.alpha = 0.8
+         aCell.baseView.alpha = 1
+         aCell.baseView.backgroundColor = cricTracTheme.currentTheme.bottomColor
         aCell.backgroundColor = UIColor.clearColor()
         return aCell
     }

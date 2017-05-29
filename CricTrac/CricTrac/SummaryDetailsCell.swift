@@ -33,9 +33,8 @@ class SummaryDetailsCell: UITableViewCell {
         baseView.alpha = 0.7
         
         
-        self.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
-        
-        self.baseView.alpha = 0.8
+         self.baseView.alpha = 1
+         self.baseView.backgroundColor = cricTracTheme.currentTheme.bottomColor
 
         self.selectionStyle = .None
         //self.vsView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: "#660000"))

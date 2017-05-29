@@ -85,11 +85,10 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         
         //setUIBackgroundTheme(self.view)
         
-        FirstBattingView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
-        FirstBattingView.alpha = 0.8
-        SecondBattingView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
-        SecondBattingView.alpha = 0.8
-        
+       FirstBattingView.backgroundColor = cricTracTheme.currentTheme.bottomColor
+        self.FirstBattingView.alpha = 1
+        SecondBattingView.backgroundColor = cricTracTheme.currentTheme.bottomColor
+        self.SecondBattingView.alpha = 1
         // Do any additional setup after loading the view.
         
         if swapBtnVal == nil {

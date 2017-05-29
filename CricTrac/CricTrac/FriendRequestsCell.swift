@@ -28,10 +28,6 @@ class FriendRequestsCell: UITableViewCell {
 
         self.baseView.layer.cornerRadius = 10
         self.baseView.clipsToBounds = true
-//        self.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
-//        
-//        self.baseView.alpha = 0.8
-        
         self.confirmBtn.userInteractionEnabled = true
         self.rejectBtn.userInteractionEnabled = true
         self.cancelBtn.userInteractionEnabled = true

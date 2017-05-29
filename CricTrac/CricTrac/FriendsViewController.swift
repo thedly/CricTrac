@@ -117,8 +117,9 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         //aCell.FriendProfileImage.image = extractImages(friendsDataArray[indexPath.row].UserId!)
         aCell.UnfriendBtn.addTarget(self, action: #selector(FriendsViewController.UnfriendBtnBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         aCell.UnfriendBtn.restorationIdentifier = friendsDataArray[indexPath.row].FriendRecordId
-        aCell.baseView.backgroundColor = UIColor().darkerColorForColor(UIColor(hex: UIColor().hexFromUIColor(cricTracTheme.currentTheme.bottomColor)))
-         aCell.baseView.alpha = 0.8
+
+         aCell.baseView.alpha = 1
+        aCell.baseView.backgroundColor = cricTracTheme.currentTheme.bottomColor
         aCell.backgroundColor = UIColor.clearColor()
         return aCell
     }
