@@ -32,6 +32,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     @IBOutlet var upgradeButton : UIButton!
     
     override func viewWillAppear(animated: Bool) {
+        UpdateDashboardDetails()
         getMatchData()
         setBackgroundColor()
         self.matchSummaryTable.reloadData()
