@@ -20,6 +20,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var contentViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var barView: UIView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     var postIndex = 0
     var commentCount = 0
@@ -38,7 +39,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+       hideKeyboardWhenTappedAround()
         setNavigationBarProperties();
         currentTheme = cricTracTheme.currentTheme
         setBackgroundColor()
@@ -75,6 +76,20 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         self.barView.backgroundColor = currentTheme.topColor
       //  navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         self.contentViewForCommentCell.backgroundColor =  currentTheme.topColor
+    }
+    
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        
+        tap.cancelsTouchesInView = false
+      // view.addGestureRecognizer(tap)
+        self.scrollView.addGestureRecognizer(tap)
+        [self.view .addSubview(scrollView)]
+    }
+    
+    func dismissKeyboard() {
+        self.resignFirstResponder()
+        self.scrollView.endEditing(true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -282,9 +297,9 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         return aCell
     }
     
-    func textViewDidBeginEditing(textView: UITextView){
-        textView.text = ""
-    }
+//    func textViewDidBeginEditing(textView: UITextView){
+//        textView.text = ""
+//    }
     
     func textViewDidEndEditing(textView: UITextView){
         if textView == commentTextView{
