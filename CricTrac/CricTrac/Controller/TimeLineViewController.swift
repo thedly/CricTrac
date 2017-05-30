@@ -18,6 +18,8 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     @IBOutlet weak var timeLineTable: UITableView!
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var noPostLabel: UILabel!
     
     var currentTheme:CTTheme!
     var newPostText:UITextField?
@@ -35,6 +37,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         self.timeLineTable.reloadData()
         setNavigationBarProperties();
         setBackgroundColor()
+        self.noPostLabel.hidden = true
     }
     
     override func viewDidLoad() {
@@ -222,6 +225,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         var acell = UITableViewCell()
         
         if indexPath.section == 0{
+            
             let cell = timeLineTable.dequeueReusableCellWithIdentifier("addpost", forIndexPath: indexPath) as! AddPostTableViewCell
             
             fetchFriendDetail((currentUser?.uid)!, sucess: { (result) in
@@ -244,6 +248,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         else
         {
             if indexPath.section <= timelineData?.count {
+                noPostLabel.hidden = true
                 let data = timelineData!.arrayValue[indexPath.section-1]
                 
                 if let imageurl = data.dictionaryValue["postImage"]?.string {
@@ -394,8 +399,14 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
        
     func numberOfSectionsInTableView(tableView: UITableView) -> Int{
         
-        if timelineData == nil{
+        if timelineData == nil || timelineData?.count == 0{
+            noPostLabel.hidden = false
+            tableViewHeightConstraint.constant = tableViewHeightConstraint.constant - 300
+            self.noPostLabel?.text = "Pavilion is empty. \nTournament is yet to start. \nGo for a Free Hit."
             return 1
+        }
+        else {
+            self.noPostLabel?.text = ""
         }
         
         return timelineData!.count+1
