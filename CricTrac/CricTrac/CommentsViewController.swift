@@ -82,6 +82,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         
         tap.cancelsTouchesInView = false
+        
       // view.addGestureRecognizer(tap)
         self.scrollView.addGestureRecognizer(tap)
         [self.view .addSubview(scrollView)]

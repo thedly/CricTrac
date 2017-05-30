@@ -28,6 +28,8 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
     @IBOutlet weak var facebookBtn: UIButton!
     let loginManager = FBSDKLoginManager()
     @IBOutlet weak var googleBtn: UIButton!
+    @IBOutlet weak var facebookBtnHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var googleBtnHeightConstraint: NSLayoutConstraint!
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
@@ -40,6 +42,8 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
         password.delegate = self
         setBackgroundColor()
         fbGoogleButtonsHeightConstraint.constant = 0
+        facebookBtnHeightConstraint.constant = 0
+        googleBtnHeightConstraint.constant = 0
         //username.text = ""
         // password.text = ""
         // Do any additional setup after loading the view.

@@ -26,6 +26,8 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     @IBOutlet weak var username:UITextField!
     @IBOutlet weak var password:UITextField!
     @IBOutlet weak var loginBtn: UIButton!
+    @IBOutlet weak var facebookBtnHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var googleBtnHeightConstraint: NSLayoutConstraint!
     let loginManager = FBSDKLoginManager()
     
     var profileImage: UIImage?
@@ -43,6 +45,8 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         //password.text = "crictrac"
         //setUIBackgroundTheme(self.view)
         loginWithSavedCredentials()
+        facebookBtnHeightConstraint.constant = 0
+        googleBtnHeightConstraint.constant = 0
     }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
