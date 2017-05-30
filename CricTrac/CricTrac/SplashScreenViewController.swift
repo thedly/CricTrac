@@ -255,7 +255,7 @@ class SplashScreenViewController: UIViewController,ThemeChangeable {
                 
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     let window = getCurrentWindow()
-                    //let rootViewController: UIViewController = getRootViewController()
+                    let rootViewController: UIViewController = getRootViewController()
                     let profileVC = viewControllerFrom("Main", vcid: "ProfileBaseViewController") as! ProfileBaseViewController
 //                    self.facebookBtn.enabled = true
 //                    self.googleBtn.enabled = true
@@ -268,7 +268,7 @@ class SplashScreenViewController: UIViewController,ThemeChangeable {
                     }
                     else
                     {
-                        let rootViewController: UIViewController = getRootViewController()
+                        //let rootViewController: UIViewController = getRootViewController()
                         KRProgressHUD.dismiss()
                         /*
                          [UIView transitionWithView:self.window

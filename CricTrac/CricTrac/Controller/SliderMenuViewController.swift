@@ -44,7 +44,7 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         //setBackgroundColor()
-//        userName.text = profileData.fullName
+        userName.text = profileData.fullName
         profilePic = profileData.ProfileImageURL
         
                
@@ -58,23 +58,23 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         
         loadInitialValues();
         
-        fetchBasicProfile((currentUser?.uid)!, sucess: { (result) in
-            let fullname = result["firstname"]! + " " + result["lastname"]!
-            self.userName.text = fullname
-            
-            let proPic = result["proPic"]
-            
-            if proPic! == "-"{
-                let imageName = defaultProfileImage
-                let image = UIImage(named: imageName)
-                self.profileImage.image = image
-            }
-            else{
-                if let imageURL = NSURL(string:proPic!){
-                    self.profileImage.kf_setImageWithURL(imageURL)
-                }
-            }
-        })
+//        fetchBasicProfile((currentUser?.uid)!, sucess: { (result) in
+//            let fullname = result["firstname"]! + " " + result["lastname"]!
+//            self.userName.text = fullname
+//            
+//            let proPic = result["proPic"]
+//            
+//            if proPic! == "-"{
+//                let imageName = defaultProfileImage
+//                let image = UIImage(named: imageName)
+//                self.profileImage.image = image
+//            }
+//            else{
+//                if let imageURL = NSURL(string:proPic!){
+//                    self.profileImage.kf_setImageWithURL(imageURL)
+//                }
+//            }
+//        })
         
 //        NSNotificationCenter.defaultCenter().addObserverForName(ProfilePictureUpdated, object: nil, queue: nil) { (notification) in
 //            if self.profilePic == "-" {

@@ -327,7 +327,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
             self.interstedSportsheightConstraint.constant = 160
         }
         
-        self.view.layoutIfNeeded()
+        //self.view.layoutIfNeeded()
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
