@@ -1178,9 +1178,13 @@ func getNotificationsCount(sucess:(notificationCount:String)->Void){
 }
 
 func markNotificationAsRead(notificationId:String) {
-    //mark notification as READ
-    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Notifications").child(notificationId).child("isRead")
-    ref.setValue(1)
+    _ = fireBaseRef.child("Users").child(currentUser!.uid).child("Notifications").child(notificationId).observeSingleEventOfType(.Value, withBlock: { snapshot in
+        if snapshot.childrenCount > 0 {
+            //mark notification as READ
+            let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Notifications").child(notificationId).child("isRead")
+            ref.setValue(1)
+        }
+    })
 }
 
 func deleteNotification(notificationId:String) {
