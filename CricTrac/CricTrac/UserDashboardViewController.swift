@@ -622,8 +622,8 @@ func setDashboardData(){
     self.FirstRecentMatchBowlingView.hidden = false
     self.SecondRecentMatchBowlingView.hidden = false
 
-    self.topBattingNotAvailable.hidden = false
-    self.topBowlingNotAvailable.hidden = false
+    //self.topBattingNotAvailable.hidden = false
+    //self.topBowlingNotAvailable.hidden = false
     
     getAllDashboardData(friendId) { (data) in
         DashboardDetails = DashboardData(dataObj: data)
@@ -684,6 +684,10 @@ func setDashboardData(){
                     //sajith - new code for Recent First Match
                     self.FirstRecentMatchSummary.hidden = true
                     self.SecondRecentMatchSummary.hidden = true
+                    self.FirstRecentMatchView.hidden = true
+                    self.SecondRecentMatchView.hidden = true
+                    self.FirstRecentMatchBowlingView.hidden = true
+                    self.SecondRecentMatchBowlingView.hidden = true
                     
                     self.updateDashBoardMatches()
                     
