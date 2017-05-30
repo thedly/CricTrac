@@ -39,7 +39,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       hideKeyboardWhenTappedAround()
+      // hideKeyboardWhenTappedAround()
         setNavigationBarProperties();
         currentTheme = cricTracTheme.currentTheme
         setBackgroundColor()
@@ -78,21 +78,24 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         self.contentViewForCommentCell.backgroundColor =  currentTheme.topColor
     }
     
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
-        
-        tap.cancelsTouchesInView = false
-        
-      // view.addGestureRecognizer(tap)
-        self.scrollView.addGestureRecognizer(tap)
-        [self.view .addSubview(scrollView)]
-    }
-    
-    func dismissKeyboard() {
-        self.resignFirstResponder()
-        self.scrollView.endEditing(true)
-    }
-    
+//    func hideKeyboardWhenTappedAround() {
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+//        
+//        tap.cancelsTouchesInView = false
+//        
+//      // view.addGestureRecognizer(tap)
+//        self.scrollView.addGestureRecognizer(tap)
+//        [self.view .addSubview(scrollView)]
+//    }
+//    
+//    func dismissKeyboard() {
+//      
+//       // self.resignFirstResponder()
+//       
+//        self.scrollView.endEditing(true)
+//       
+//    }
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -298,9 +301,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
         return aCell
     }
     
-//    func textViewDidBeginEditing(textView: UITextView){
-//        textView.text = ""
-//    }
+
     
     func textViewDidEndEditing(textView: UITextView){
         if textView == commentTextView{
