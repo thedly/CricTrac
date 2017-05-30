@@ -14,7 +14,7 @@ import FirebaseStorage
 public var date = 0
 
 //dev website url
-var websiteUrl = "https://arjun-innovations.firebaseapp.com"
+//var websiteUrl = "https://arjun-innovations.firebaseapp.com"
 //prod website url
 //var websiteUrl = "https://crictrac.com"
 
@@ -173,27 +173,26 @@ let serverBaseURL = "https://crictracdevserver.azurewebsites.net"
 }
 
 
-
 let themeColors = [
     "Grass" : [
         "topColor" : "#b4ed50",
         "bottomColor" : "#429321",
         "theme":"Grass"
     ],
-    "Flash" : [
-        "topColor" : "#FFE205",
+    "Beamer" : [
+        "topColor" : "#F0FE00",
         "bottomColor" : "#FF8F05",
-        "theme":"Flash"
+        "theme":"Beamer"
     ],
     "Feather" : [
         "topColor" : "#ea9eff",
         "bottomColor": "#692580",
         "theme":"Feather"
     ],
-    "Peach": [
+    "Slice": [
         "topColor": "#fbda61",
         "bottomColor": "#f76b1c",
-        "theme":"Peach"
+        "theme":"Slice"
     ],
     "Cherry": [
         "topColor": "#D40D12",
@@ -220,20 +219,20 @@ let themeColors = [
         "bottomColor": "#2D2C2A",
         "theme":"Ferret"
     ],
-    "Ocean": [
+    "Glove": [
         "topColor": "#3BACB2",
         "bottomColor": "#295154",
-        "theme":"Ocean"
+        "theme":"Glove"
     ],
-    "Pista": [
-        "topColor": "#CDE855",
-        "bottomColor": "#85DB18",
-        "theme":"Pista"
+    "Flash": [
+        "topColor": "#09BD66",
+        "bottomColor": "#044C29",
+        "theme":"Flash"
     ],
-    "Lemon": [
+    "Swing": [
         "topColor": "#40627C",
         "bottomColor": "#26393D",
-        "theme":"Lemon"
+        "theme":"Swing"
     ]
 ]
 

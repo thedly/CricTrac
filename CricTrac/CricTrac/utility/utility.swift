@@ -69,6 +69,11 @@ var CurrentTheme: String {
     {
        
         _currentTheme = newValue
+        
+        if themeColors[CurrentTheme] == nil {
+            CurrentTheme = "Grass"
+            NSUserDefaults.standardUserDefaults().setValue(CurrentTheme, forKeyPath: "userTheme")
+        }
       
         topColor = themeColors[_currentTheme]!["topColor"]!
         bottomColor = themeColors[_currentTheme]!["bottomColor"]!
