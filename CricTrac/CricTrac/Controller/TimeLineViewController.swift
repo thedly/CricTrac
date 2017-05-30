@@ -203,7 +203,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
        // navigationController!.navigationBar.titleTextAttributes = titleDict
         
         fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings").child("NotificationsCount").observeEventType(.Value, withBlock: { snapshot in
-            if (snapshot.value != nil) {
+            if (snapshot.childrenCount > 0) {
                 self.notCount = (snapshot.value as? Int)!
             }
             let formattedString = NSMutableAttributedString()
@@ -402,12 +402,12 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         if timelineData == nil || timelineData?.count == 0{
             noPostLabel.hidden = false
             tableViewHeightConstraint.constant = tableViewHeightConstraint.constant - 300
-            self.noPostLabel?.text = "Pavilion is empty. \nTournament is yet to start. \nGo for a Free Hit."
+            //self.noPostLabel?.text = "Pavilion is empty. \nTournament is yet to start. \nGo for a Free Hit."
             return 1
         }
-        else {
-            self.noPostLabel?.text = ""
-        }
+//        else {
+//            self.noPostLabel?.text = ""
+//        }
         
         return timelineData!.count+1
     }

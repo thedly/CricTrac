@@ -1377,7 +1377,7 @@ func setDashboardData(){
         }
         
         //self.scrollViewBottomElementConstraint.constant = 10
-        self.view.layoutIfNeeded()
+        //self.view.layoutIfNeeded()
     }
     
     override func viewDidAppear(animated: Bool) {
