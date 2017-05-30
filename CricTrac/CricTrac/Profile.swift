@@ -45,6 +45,7 @@ class Profile {
     var UserEditedDate: AnyObject = ""
     var UserLastLoggedin: AnyObject = ""
     var userExists: Bool = false
+    var DeviceInfo: String = ""
     
     init(usrObj : [String: AnyObject]) {
         
@@ -99,6 +100,10 @@ class Profile {
         
         if let coverUrl = usrObj["CoverPhotoURL"] as? String {
             self.CoverPhotoURL = coverUrl
+        }
+        
+        if let deviceinfo = usrObj["DeviceInfo"] as? String {
+            self.DeviceInfo = deviceinfo
         }
         
         
@@ -185,6 +190,7 @@ class Profile {
                 "Country": self.Country,
                 "State": self.State,
                 "DateOfBirth": self.DateOfBirth,
+                "DeviceInfo": self.DeviceInfo,
                 "Email": self.Email.whiteSpacesTrimmedString(),
                 "Gender": self.Gender,
                 "Mobile": self.Mobile.whiteSpacesTrimmedString(),
@@ -215,6 +221,7 @@ class Profile {
                 "DateOfBirth": self.DateOfBirth,
                 "Email": self.Email.whiteSpacesTrimmedString(),
                 "Gender": self.Gender,
+                "DeviceInfo": self.DeviceInfo,
                 "Mobile": self.Mobile.whiteSpacesTrimmedString(),
                 "PlayingRole":self.PlayingRole,
                 //"Level":self.PlayingLevel,
@@ -241,6 +248,7 @@ class Profile {
                 "DateOfBirth": self.DateOfBirth,
                 "Email": self.Email.whiteSpacesTrimmedString(),
                 "Gender": self.Gender,
+                "DeviceInfo": self.DeviceInfo,
                 "Mobile": self.Mobile.whiteSpacesTrimmedString(),
                 "ProfileImageURL": self.ProfileImageURL ,
                 "CoverPhotoURL" : self.CoverPhotoURL,

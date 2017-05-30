@@ -203,8 +203,9 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
        // navigationController!.navigationBar.titleTextAttributes = titleDict
         
         fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings").child("NotificationsCount").observeEventType(.Value, withBlock: { snapshot in
-            if (snapshot.childrenCount > 0) {
-                self.notCount = (snapshot.value as? Int)!
+            let dataCount = snapshot.value as? Int
+            if dataCount > 0 {
+                self.notCount = dataCount!
             }
             let formattedString = NSMutableAttributedString()
             formattedString.bold(String(self.notCount), fontName: appFont_bold, fontSize: 15)

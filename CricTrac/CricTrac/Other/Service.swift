@@ -424,34 +424,42 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
     
     dataToBeModified["UserLastLoggedin"] = NSDate().getCurrentTimeStamp()
     
-    if !profileData.userExists
-    {
-        dataToBeModified["UserAddedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
-        dataToBeModified["UserEditedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
-        dataToBeModified["DeviceInfo"] = modelName + "|" + systemVersion + "|" + versionAndBuildNumber //Device info and App info
-    }
-    else
-    {
-        dataToBeModified["UserEditedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
-    }
-    
-    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
-    ref.setValue(dataToBeModified)
-    
-    if let usrProfileType = dataToBeModified["UserProfile"] {
-        if usrProfileType as! String != userProfileType.Player.rawValue {
-            deleteAllPlayerData()
+    fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").child("Email").observeSingleEventOfType(.Value, withBlock: { snapshot in
+        let userRegistered = snapshot.value as? String
+        
+        if userRegistered == nil
+            //if !profileData.userExists || profileData.UserAddedDate as! String == ""
+        {
+            dataToBeModified["UserAddedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
+            dataToBeModified["UserEditedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
+            dataToBeModified["DeviceInfo"] = modelName + "|" + systemVersion + "|" + versionAndBuildNumber //Device info and App info
+            
+            _ = fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings").child("NotificationsCount").setValue(0)
+            _ = fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings").child("Theme").setValue("Grass")
         }
         else
         {
-            let dataToBeCreated = DashboardData(dataObj: [String:AnyObject]())
-            let dataToBeSent = dataToBeCreated.dashboardData
-            createDashboardData(dataToBeSent)
-            UpdateDashboardDetails()
+            dataToBeModified["UserEditedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
         }
-    }
-    //KRProgressHUD.dismiss()
-    sucessBlock(dataToBeModified)
+            
+        let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile")
+        ref.setValue(dataToBeModified)
+        
+        if let usrProfileType = dataToBeModified["UserProfile"] {
+            if usrProfileType as! String != userProfileType.Player.rawValue {
+                deleteAllPlayerData()
+            }
+            else
+            {
+                let dataToBeCreated = DashboardData(dataObj: [String:AnyObject]())
+                let dataToBeSent = dataToBeCreated.dashboardData
+                createDashboardData(dataToBeSent)
+                UpdateDashboardDetails()
+            }
+        }
+        //KRProgressHUD.dismiss()
+        sucessBlock(dataToBeModified)
+    })
 }
 
 func deleteAllPlayerData(){

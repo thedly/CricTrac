@@ -760,7 +760,8 @@ func setDashboardData(){
                                 groundVenue = ("\(mData.ground)")
                             }
                             
-                             self.summaryViewHeightConstraint1.constant = 70
+                            self.summaryViewHeightConstraint1.constant = 70
+                            self.summaryStackViewHeightConstraint.constant = 80
                             if let ballsFaced = data["BallsFaced"] as? String where ballsFaced != "-", let runsScored = data["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
                                 
                                 if ballsFaced == "0" {
@@ -773,6 +774,7 @@ func setDashboardData(){
                                     
                                 }
                                 self.summaryViewHeightConstraint1.constant = 90
+                                self.summaryStackViewHeightConstraint.constant = self.summaryStackViewHeightConstraint.constant + 20
                             }
                             
                             if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
@@ -782,10 +784,12 @@ func setDashboardData(){
                                 if srEconomy.length > 0 {
                                     srEconomy.appendContentsOf("\nEconomy: \(economy)")
                                      self.summaryViewHeightConstraint1.constant = 110
+                                    self.summaryStackViewHeightConstraint.constant = self.summaryStackViewHeightConstraint.constant + 20
                                 }
                                 else {
                                     srEconomy = ("Economy: \(economy)")
                                      self.summaryViewHeightConstraint1.constant = 90
+                                    self.summaryStackViewHeightConstraint.constant = self.summaryStackViewHeightConstraint.constant + 20
                                 }
                             }
                             
@@ -877,7 +881,9 @@ func setDashboardData(){
                                 }
                                 groundVenue = ("\(mData.ground)")
                             }
+                            
                             self.summaryViewHeightConstraint2.constant = 70
+                            self.summaryStackViewHeightConstraint.constant = self.summaryStackViewHeightConstraint.constant + 70
                             if let ballsFaced = data["BallsFaced"] as? String where ballsFaced != "-", let runsScored = data["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
                                 
                                 if ballsFaced == "0" {
@@ -888,7 +894,8 @@ func setDashboardData(){
                                     mData.strikerate = Float(strikeRate)
                                     srEconomy = ("Strike Rate: \(strikeRate)")
                                 }
-                                 self.summaryViewHeightConstraint2.constant = 90
+                                self.summaryViewHeightConstraint2.constant = 90
+                                self.summaryStackViewHeightConstraint.constant = self.summaryStackViewHeightConstraint.constant + 20
                             }
                             
                             if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
@@ -898,10 +905,12 @@ func setDashboardData(){
                                 if srEconomy.length > 0 {
                                     srEconomy.appendContentsOf("\nEconomy: \(economy)")
                                      self.summaryViewHeightConstraint2.constant = 110
+                                    self.summaryStackViewHeightConstraint.constant = self.summaryStackViewHeightConstraint.constant + 20
                                 }
                                 else {
                                     srEconomy = ("Economy: \(economy)")
                                      self.summaryViewHeightConstraint2.constant = 90
+                                    self.summaryStackViewHeightConstraint.constant = self.summaryStackViewHeightConstraint.constant + 20
                                 }
                             }
                             
@@ -1335,8 +1344,8 @@ func setDashboardData(){
                 self.summaryStackViewHeightConstraint.constant = 110
             }
             if String(DashboardDetails.Recent2ndMatchID) != "-" {
-                self.summaryViewHeightConstraint1.constant = 80
-                self.summaryViewHeightConstraint2.constant = 80
+                self.summaryViewHeightConstraint1.constant = 70
+                self.summaryViewHeightConstraint2.constant = 70
                 self.summaryStackViewHeightConstraint.constant = 210
             }
         }
