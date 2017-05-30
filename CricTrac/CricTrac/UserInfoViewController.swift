@@ -504,7 +504,7 @@ extension UserInfoViewController:UITextFieldDelegate {
                 if profileData.UserProfile != userProfileInfo.text {
                     profileChanged = true
                     
-                    let confirmAlert = UIAlertController(title: "Warning!" ,message:"Changing role will delete all existing role related data",preferredStyle: UIAlertControllerStyle.Alert)
+                    let confirmAlert = UIAlertController(title: "Warning!" ,message:"Changing role will delete all existing role-related data. Are you sure you want to change the role?",preferredStyle: UIAlertControllerStyle.Alert)
                     confirmAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
                         
                        // self.continueToDismiss()
