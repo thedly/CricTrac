@@ -15,15 +15,16 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet var SearchDisplayCtrlr: UISearchDisplayController!
      var searchedProfiles = [Profile]()
-    
+    var currentTheme:CTTheme!
+   
     func changeThemeSettigs() {
-//        let currentTheme = cricTracTheme.currentTheme
-//        self.view.backgroundColor = currentTheme.topColor
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.topColor
       
         
     }
     func setNavigationBarProperties(){
-        var currentTheme:CTTheme!
+        
         currentTheme = cricTracTheme.currentTheme
         let backButton: UIButton = UIButton(type:.Custom)
         backButton.setImage(UIImage(named: "Back-100"), forState: UIControlState.Normal)
@@ -45,7 +46,7 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
         }
     }
     override func viewWillAppear(animated: Bool) {
-        //setBackgroundColor()
+        setBackgroundColor()
         self.view.backgroundColor = UIColor.clearColor()
           self.searchBar.becomeFirstResponder()
         

@@ -20,8 +20,8 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
      @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
     
     func changeThemeSettigs() {
-        //let currentTheme = cricTracTheme.currentTheme
-        //self.view.backgroundColor = currentTheme.boxColor
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.boxColor
        // navigationController!.navigationBar.barTintColor = currentTheme.topColor
        
     }
@@ -50,7 +50,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewWillAppear(animated: Bool) {
          self.SuggestsTblview.reloadData()
         self.view.backgroundColor = UIColor.clearColor()
-        //setBackgroundColor()
+        setBackgroundColor()
         
 
     }

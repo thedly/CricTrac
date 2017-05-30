@@ -41,7 +41,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         self.SuggestsTblview.reloadData()
         getFriendSuggestions()
         self.view.backgroundColor = UIColor.clearColor()
-        //setBackgroundColor()
+        setBackgroundColor()
     }
     
     override func didReceiveMemoryWarning() {
@@ -52,8 +52,8 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     // MARK: - Methods
     
     func changeThemeSettigs() {
-//        let currentTheme = cricTracTheme.currentTheme
-//        self.view.backgroundColor = currentTheme.topColor
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.topColor
        // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     

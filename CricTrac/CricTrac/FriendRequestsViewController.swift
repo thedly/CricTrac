@@ -48,8 +48,8 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     
     // MARK: - Methods
     func changeThemeSettigs() {
-//        let currentTheme = cricTracTheme.currentTheme
-//        self.view.backgroundColor = currentTheme.topColor
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.topColor
        // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
@@ -65,7 +65,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     override func viewWillAppear(animated: Bool) {
-        //setBackgroundColor()
+        setBackgroundColor()
         self.view.backgroundColor = UIColor.clearColor()
 
     }

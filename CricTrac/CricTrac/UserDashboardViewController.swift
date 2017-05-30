@@ -760,6 +760,7 @@ func setDashboardData(){
                                 groundVenue = ("\(mData.ground)")
                             }
                             
+                             self.summaryViewHeightConstraint1.constant = 70
                             if let ballsFaced = data["BallsFaced"] as? String where ballsFaced != "-", let runsScored = data["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
                                 
                                 if ballsFaced == "0" {
@@ -769,7 +770,9 @@ func setDashboardData(){
                                     let strikeRate = String(format: "%.1f",(Float(runsScored)!)*100/Float(ballsFaced)!)
                                     mData.strikerate = Float(strikeRate)
                                     srEconomy = ("Strike Rate: \(strikeRate)")
+                                    
                                 }
+                                self.summaryViewHeightConstraint1.constant = 90
                             }
                             
                             if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
@@ -778,15 +781,19 @@ func setDashboardData(){
                                 mData.economy = Float(economy)
                                 if srEconomy.length > 0 {
                                     srEconomy.appendContentsOf("\nEconomy: \(economy)")
+                                     self.summaryViewHeightConstraint1.constant = 110
                                 }
                                 else {
                                     srEconomy = ("Economy: \(economy)")
+                                     self.summaryViewHeightConstraint1.constant = 90
                                 }
                             }
                             
                             if let opponent  = data["Opponent"]{
                                 opponentName = opponent as! String
                             }
+                            
+                            
                             
                             self.firstRecentMatchScoreCard.attributedText = battingBowlingScore
                             self.firstRecentMatchOpponentName.text = opponentName
@@ -870,7 +877,7 @@ func setDashboardData(){
                                 }
                                 groundVenue = ("\(mData.ground)")
                             }
-                            
+                            self.summaryViewHeightConstraint2.constant = 70
                             if let ballsFaced = data["BallsFaced"] as? String where ballsFaced != "-", let runsScored = data["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
                                 
                                 if ballsFaced == "0" {
@@ -881,6 +888,7 @@ func setDashboardData(){
                                     mData.strikerate = Float(strikeRate)
                                     srEconomy = ("Strike Rate: \(strikeRate)")
                                 }
+                                 self.summaryViewHeightConstraint2.constant = 90
                             }
                             
                             if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
@@ -889,9 +897,11 @@ func setDashboardData(){
                                 mData.economy = Float(economy)
                                 if srEconomy.length > 0 {
                                     srEconomy.appendContentsOf("\nEconomy: \(economy)")
+                                     self.summaryViewHeightConstraint2.constant = 110
                                 }
                                 else {
                                     srEconomy = ("Economy: \(economy)")
+                                     self.summaryViewHeightConstraint2.constant = 90
                                 }
                             }
                             
@@ -1320,13 +1330,13 @@ func setDashboardData(){
         }
         else {
             if String(DashboardDetails.Recent1stMatchID) != "-" {
-                self.summaryViewHeightConstraint1.constant = 90
+                self.summaryViewHeightConstraint1.constant = 70
                 self.summaryViewHeightConstraint2.constant = 0
                 self.summaryStackViewHeightConstraint.constant = 110
             }
             if String(DashboardDetails.Recent2ndMatchID) != "-" {
-                self.summaryViewHeightConstraint1.constant = 100
-                self.summaryViewHeightConstraint2.constant = 100
+                self.summaryViewHeightConstraint1.constant = 80
+                self.summaryViewHeightConstraint2.constant = 80
                 self.summaryStackViewHeightConstraint.constant = 210
             }
         }

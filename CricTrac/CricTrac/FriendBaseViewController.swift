@@ -24,6 +24,7 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
     
     func didSearchTapp(sender: UIButton){
         UIView.animateWithDuration(0.3) {
+           // self.view.backgroundColor = cricTracTheme.currentTheme.topColor
             let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
              let vc  = storyboard.instantiateViewControllerWithIdentifier("FriendSearchViewController") as! FriendSearchViewController
              self.navigationController?.pushViewController(vc, animated: true)
@@ -38,7 +39,7 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
     }
     override func viewWillAppear(animated: Bool) {
         setBackgroundColor()
-        self.view.backgroundColor = UIColor.clearColor()
+      //  self.view.backgroundColor = UIColor.clearColor()
         setNavigationBarProperties()
         
     }
