@@ -128,7 +128,6 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     @IBOutlet weak var FirstRecentMatchBowlingEconomy: UILabel!
     @IBOutlet weak var SecondRecentMatchBowlingGroundVenue: UILabel!
     @IBOutlet weak var SecondRecentMatchBowlingEconomy: UILabel!
-    
     @IBOutlet weak var summaryViewHeightConstraint1 : NSLayoutConstraint!
     @IBOutlet weak var summaryViewHeightConstraint2 : NSLayoutConstraint!
     @IBOutlet weak var summaryStackViewHeightConstraint : NSLayoutConstraint!
@@ -241,6 +240,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             // ...
         }
     }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         /*
@@ -257,30 +257,20 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             contentRect = CGRectUnion(contentRect, view.frame)
         }
         //scrollView.contentSize = contentRect.size
-        
     }
-    
 
     func setNavigationBarProperties(){
-        
             var currentTheme:CTTheme!
-
             currentTheme = cricTracTheme.currentTheme
-            
             let menuButton: UIButton = UIButton(type:.Custom)
             menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
             menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
             menuButton.frame = CGRectMake(0, 0, 40, 40)
             let leftbarButton = UIBarButtonItem(customView: menuButton)
-            
-            
-        
-            //assign button to navigationbar
-            
             navigationItem.leftBarButtonItem = leftbarButton
-       if let navigation = navigationController{
-          topBarViewHeightConstraint.constant = 0
-            
+
+        if let navigation = navigationController{
+            topBarViewHeightConstraint.constant = 0
             navigation.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
             title = "SIGHTSCREEN"
        }
@@ -289,11 +279,6 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
               self.topBarView.backgroundColor = currentTheme.topColor
         }
         self.view.backgroundColor = currentTheme.topColor
-        
-    
-            //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-            //navigationController!.navigationBar.titleTextAttributes = titleDict
-    
     }
     
     

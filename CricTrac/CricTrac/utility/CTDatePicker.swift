@@ -21,10 +21,17 @@ class CTDatePicker: NSObject {
         
         // DatePicker
         if datePicker == nil{
-        datePicker = UIDatePicker(frame:CGRectMake(0, 0, parent.view.frame.size.width, 216))
-        datePicker.backgroundColor = UIColor.whiteColor()
-        datePicker.datePickerMode = UIDatePickerMode.Date
-        datePicker.maximumDate = NSDate()
+            datePicker = UIDatePicker(frame:CGRectMake(0, 0, parent.view.frame.size.width, 216))
+            datePicker.backgroundColor = UIColor.whiteColor()
+            datePicker.datePickerMode = UIDatePickerMode.Date
+            
+            let dateText = inputText.text
+            if dateText != "" {
+                let df = NSDateFormatter()
+                df.dateFormat = "dd-MMM-yyyy"
+                datePicker.date = df.dateFromString(dateText!)!
+            }
+            datePicker.maximumDate = NSDate()
         }
         inputText.inputView = datePicker
         
