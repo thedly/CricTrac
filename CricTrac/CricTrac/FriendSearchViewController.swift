@@ -125,7 +125,7 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
                 aCell.AddFriendBtn.accessibilityIdentifier = searchedProfiles[indexPath.row].id
                 aCell.AddFriendBtn.addTarget(self, action: #selector(AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                
-
+                aCell.baseView.backgroundColor = cricTracTheme.currentTheme.bottomColor
                 aCell.backgroundColor = UIColor.clearColor()
                 aCell.selectionStyle = .None
             }
