@@ -204,7 +204,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         
         fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings").child("NotificationsCount").observeEventType(.Value, withBlock: { snapshot in
             let dataCount = snapshot.value as? Int
-            if dataCount > 0 {
+            if dataCount != nil {
                 self.notCount = dataCount!
             }
             let formattedString = NSMutableAttributedString()

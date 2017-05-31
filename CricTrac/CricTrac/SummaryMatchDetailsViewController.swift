@@ -92,8 +92,9 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        UpdateDashboardDetails()
-        
+        if isFriendDashboard == false {
+            UpdateDashboardDetails()
+        }
         setNavigationBarProperties()
         setBackgroundColor()
     }
