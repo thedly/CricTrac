@@ -3212,6 +3212,8 @@
                             </mask>
                         </variation>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="600"/>
                     <connections>
                         <outlet property="ThemeColorSet" destination="tXG-Ac-gjU" id="MGF-PF-1eF"/>
                     </connections>
