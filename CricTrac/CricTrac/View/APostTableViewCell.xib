@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <development version="7000" identifier="xcode"/>
@@ -30,7 +30,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="552" height="259"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sachin" translatesAutoresizingMaskIntoConstraints="NO" id="F5q-Ml-KiJ">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="propic" translatesAutoresizingMaskIntoConstraints="NO" id="F5q-Ml-KiJ">
                         <rect key="frame" x="12" y="12" width="46" height="46"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="46" id="9Kb-IG-FQG"/>
@@ -200,7 +200,7 @@
     <resources>
         <image name="down_arrow" width="26" height="16"/>
         <image name="heart" width="14" height="13"/>
-        <image name="sachin" width="160" height="206"/>
+        <image name="propic" width="32" height="32"/>
         <image name="speech_bubble" width="29" height="25"/>
     </resources>
 </document>
