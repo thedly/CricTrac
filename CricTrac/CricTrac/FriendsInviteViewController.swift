@@ -26,7 +26,7 @@ class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITabl
     }
     
     override func viewWillAppear(animated: Bool) {
-        setBackgroundColor()
+        //setBackgroundColor()
         self.view.backgroundColor = UIColor.clearColor()
     }
 

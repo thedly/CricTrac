@@ -440,13 +440,13 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
             //welcome post for the new user
             var postText = "Welcome to CricTrac."
             if profileData.UserProfile == "Player" {
-                postText = "Welcome to CricTrac, an ultimate e-accessory for your cricket kit. Start registering the scores of your matches, and track your performance. Chase your passion, share your success, encourage your buddies for their great knocks. \n\nEveryone has the fire, but the champions know when to ignite the spark. Wishing you all the very best on your journey towards becoming a fantastic cricketer and a great individual."
+                postText = "Welcome to CricTrac, an ultimate e-accessory for your cricket kit. Chase your passion, share your success, encourage your buddies for their great knocks. Everyone has the fire, but the champions know when to ignite the spark. \nWishing you all the very best on your journey towards becoming a fantastic cricketer and a great individual."
             }
             else if profileData.UserProfile == "Coach" {
-                postText = "Welcome to CricTrac. You are the one who identified a player's potential and worked towards maximising their performance. Without your support and dedication they would have never excelled in their career. You are the one who taught them the right way to hold bat and ball. \n\nFollow them, track them and mentor them to shape them as an excellent player and a great individual."
+                postText = "Welcome to CricTrac. You are the one who identified a player's potential and worked towards maximising the performance. Without your support and dedication they would have never excelled in their career. You are the one who taught them the right way to hold bat and ball. \nFollow them, track them and mentor them to shape them as an excellent player and a great individual."
             }
             else {
-                postText = "Welcome to CricTrac, an innovative arena for cricket lovers. You can now get the latest updates on cricket from your near and dear one's who are sweating out on the ground. \n\nTrack them, monitor them and hold their hands to chase their passion."
+                postText = "Welcome to CricTrac, an innovative arena for cricket lovers. You can now get the latest cricket updates about your near and dear one's who are sweating out on the ground. \n\nTrack them, monitor them and hold their hands to chase their passion."
             }
             
             let addedTime =  NSDate().getCurrentTimeStamp()

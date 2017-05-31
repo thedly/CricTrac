@@ -94,6 +94,7 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         title = "DUGOUT"
     }
    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
