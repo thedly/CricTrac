@@ -65,7 +65,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     override func viewWillAppear(animated: Bool) {
-        setBackgroundColor()
+        //setBackgroundColor()
         self.view.backgroundColor = UIColor.clearColor()
 
     }

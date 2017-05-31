@@ -45,26 +45,26 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
             self.searchBar.becomeFirstResponder()
         }
     }
+    
     override func viewWillAppear(animated: Bool) {
         setBackgroundColor()
         self.view.backgroundColor = UIColor.clearColor()
-          self.searchBar.becomeFirstResponder()
+        self.searchBar.becomeFirstResponder()
         
     }
     
     override func viewDidLoad() {
          friendSearchTbl.registerNib(UINib.init(nibName:"FriendSuggestionsCell", bundle: nil), forCellReuseIdentifier: "FriendSuggestionsCell")
         super.viewDidLoad()
-       // setBackgroundColor()
+        setBackgroundColor()
         setNavigationBarProperties()
         self.title = "SEARCH"
         self.searchBar.hidden = false
-           self.searchBar.alpha = 1
-           self.friendSearchTbl.alpha = 1
-         self.searchBar.becomeFirstResponder()
+        self.searchBar.alpha = 1
+        self.friendSearchTbl.alpha = 1
+        self.searchBar.becomeFirstResponder()
         
         searchBar.delegate = self
-//        setBackgroundColor()
         friendSearchTbl.delegate = self
         friendSearchTbl.dataSource = self
         definesPresentationContext = true

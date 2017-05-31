@@ -41,7 +41,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         self.SuggestsTblview.reloadData()
         getFriendSuggestions()
         self.view.backgroundColor = UIColor.clearColor()
-        setBackgroundColor()
+        //setBackgroundColor()
     }
     
     override func didReceiveMemoryWarning() {

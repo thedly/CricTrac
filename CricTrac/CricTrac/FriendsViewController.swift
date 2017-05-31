@@ -50,7 +50,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewWillAppear(animated: Bool) {
          self.SuggestsTblview.reloadData()
         self.view.backgroundColor = UIColor.clearColor()
-        setBackgroundColor()
+        //setBackgroundColor()
         
 
     }
