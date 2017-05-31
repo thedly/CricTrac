@@ -139,17 +139,19 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                     else{
                         cCell.postOwnerName.text = postData ["OwnerName"] as? String
                         
-                        let friendId = postData["OwnerID"]!
-                        if let city = friendsCity[friendId as! String]{
-                            cCell.ownerCity.text = city
-                        }
-                        else {
-                            fetchFriendCity(friendId as! String, sucess: { (city) in
-                                friendsCity[friendId as! String] = city
-                                dispatch_async(dispatch_get_main_queue(),{
-                                    cCell.ownerCity.text = city
+                       if postData["OwnerID"] != nil {
+                            let friendId = postData["OwnerID"]!
+                            if let city = friendsCity[friendId as! String]{
+                                cCell.ownerCity.text = city
+                            }
+                            else {
+                                fetchFriendCity(friendId as! String, sucess: { (city) in
+                                    friendsCity[friendId as! String] = city
+                                    dispatch_async(dispatch_get_main_queue(),{
+                                        cCell.ownerCity.text = city
+                                    })
                                 })
-                            })
+                            }
                         }
                     }
                     
