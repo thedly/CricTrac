@@ -60,40 +60,41 @@ class SplashScreenViewController: UIViewController,ThemeChangeable {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         
         if let credential = userDefaults.valueForKey("loginToken") {
-            if let googleCredentials = credential.valueForKey("googletoken") as? [String:String]{
-                KRProgressHUD.show(message: "Loading...")
-                firebaseLoginWithGoogle(googleCredentials["idToken"]!, accessToken:googleCredentials["accessToken"]! , sucess: { (user) in
-                    currentUser = user
-                    self.moveToNextScreen(true)
-                    
-                    }, failure: { (error) in
-                        KRProgressHUD.dismiss()
-                        self.moveToNextScreen(false)
-                        print(error.localizedDescription)
-                })
-            }
-            else if let fbCredentials = credential.valueForKey("Facebooktoken") as? [String:String]{
-                KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
-                firebaseLoginWithFacebook(fbCredentials["tokenString"]! , sucess: { (user) in
-                    currentUser = user
-                    self.moveToNextScreen(true)
-                    }, failure: { (error) in
-                        self.moveToNextScreen(false)
-                })
-            }
-//            else if let emailCredentials = credential.valueForKey("emailToken") as? [String:String]{
-//                KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
-//                FIRAuth.auth()?.signInWithCustomToken(emailCredentials["tokenString"]!, completion: { (user, error) in
-//                    if error == nil {
-//                        currentUser = user
-//                        self.moveToNextScreen(true)
-//                    }
-//                    else
-//                    {
+//            if let googleCredentials = credential.valueForKey("googletoken") as? [String:String]{
+//                KRProgressHUD.show(message: "Loading...")
+//                firebaseLoginWithGoogle(googleCredentials["idToken"]!, accessToken:googleCredentials["accessToken"]! , sucess: { (user) in
+//                    currentUser = user
+//                    self.moveToNextScreen(true)
+//                    
+//                    }, failure: { (error) in
+//                        KRProgressHUD.dismiss()
 //                        self.moveToNextScreen(false)
-//                    }
+//                        print(error.localizedDescription)
 //                })
 //            }
+//            else if let fbCredentials = credential.valueForKey("Facebooktoken") as? [String:String]{
+//                KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+//                firebaseLoginWithFacebook(fbCredentials["tokenString"]! , sucess: { (user) in
+//                    currentUser = user
+//                    self.moveToNextScreen(true)
+//                    }, failure: { (error) in
+//                        self.moveToNextScreen(false)
+//                })
+//            }
+//            else if let emailCredentials = credential.valueForKey("emailToken") as? [String:String]{
+            if let emailCredentials = credential.valueForKey("emailToken") as? [String:String]{
+                KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+                FIRAuth.auth()?.signInWithCustomToken(emailCredentials["tokenString"]!, completion: { (user, error) in
+                    if error == nil {
+                        currentUser = user
+                        self.moveToNextScreen(true)
+                    }
+                    else
+                    {
+                        self.moveToNextScreen(false)
+                    }
+                })
+            }
             else
             {
                 self.moveToNextScreen(false)
@@ -181,6 +182,7 @@ class SplashScreenViewController: UIViewController,ThemeChangeable {
             KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
             if error != nil{
                 KRProgressHUD.dismiss()
+                self.authorizeUser()
             }
             else {
                 KRProgressHUD.dismiss()
@@ -232,15 +234,15 @@ class SplashScreenViewController: UIViewController,ThemeChangeable {
         dispatch_async(backgroundQueue, {
             getAllProfileData({ data in
                 profileData = Profile(usrObj: data)
-                if profileData.ProfileImageURL == "" {
-                    let userDefaults = NSUserDefaults.standardUserDefaults()
-                    if let token = userDefaults.valueForKey("loginToken") {
-                        if token["Facebooktoken"] != nil || token["googletoken"] != nil{
-                            let profileimage = getImageFromFacebook()
-                            addProfileImageData(profileimage)
-                        }
-                    }
-                }
+//                if profileData.ProfileImageURL == "" {
+//                    let userDefaults = NSUserDefaults.standardUserDefaults()
+//                    if let token = userDefaults.valueForKey("loginToken") {
+//                        if token["Facebooktoken"] != nil || token["googletoken"] != nil{
+//                            let profileimage = getImageFromFacebook()
+//                            addProfileImageData(profileimage)
+//                        }
+//                    }
+//                }
                 //                else
                 //                {
                 //let profilePic = profileData.ProfileImageURL
@@ -260,6 +262,7 @@ class SplashScreenViewController: UIViewController,ThemeChangeable {
 //                    self.facebookBtn.enabled = true
 //                    self.googleBtn.enabled = true
                     
+                    //if profileData.DeviceInfo == "" {
                     if !profileData.userExists || profileData.Email.length == 0 {
                         KRProgressHUD.dismiss()
                         // window.rootViewController = profileVC

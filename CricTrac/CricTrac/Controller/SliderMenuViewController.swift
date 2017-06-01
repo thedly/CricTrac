@@ -58,23 +58,29 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         
         loadInitialValues();
         
-//        fetchBasicProfile((currentUser?.uid)!, sucess: { (result) in
-//            let fullname = result["firstname"]! + " " + result["lastname"]!
-//            self.userName.text = fullname
-//            
-//            let proPic = result["proPic"]
-//            
-//            if proPic! == "-"{
-//                let imageName = defaultProfileImage
-//                let image = UIImage(named: imageName)
-//                self.profileImage.image = image
-//            }
-//            else{
-//                if let imageURL = NSURL(string:proPic!){
-//                    self.profileImage.kf_setImageWithURL(imageURL)
-//                }
-//            }
-//        })
+        if profileData.Email != "" {
+            fetchBasicProfile((currentUser?.uid)!, sucess: { (result) in
+                let fullname = result["firstname"]! + " " + result["lastname"]!
+                self.userName.text = fullname
+                
+                let proPic = result["proPic"]
+                
+                if proPic! == "-"{
+                    let imageName = defaultProfileImage
+                    let image = UIImage(named: imageName)
+                    self.profileImage.image = image
+                }
+                else{
+                    if let imageURL = NSURL(string:proPic!){
+                        self.profileImage.kf_setImageWithURL(imageURL)
+                    }
+                }
+            })
+        }
+        else {
+            userName.text = profileData.fullName
+            profilePic = profileData.ProfileImageURL
+        }
         
 //        NSNotificationCenter.defaultCenter().addObserverForName(ProfilePictureUpdated, object: nil, queue: nil) { (notification) in
 //            if self.profilePic == "-" {
