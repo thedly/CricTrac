@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.listenForReachability()
         FIRApp.configure()
         
-        //registerForPushNotifications(application)
+        registerForPushNotifications(application)
         
         FIRDatabase.database().persistenceEnabled = true
         Fabric.with([Crashlytics.self])

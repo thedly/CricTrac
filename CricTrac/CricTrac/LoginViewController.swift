@@ -68,7 +68,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     }
     
     @IBAction func registerBtnTapped(sender: UIButton) {
-         // network reachability test
+        // network reachability test
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         if !appDelegate.reachability.isReachable()  {
             let alert = UIAlertController(title: "", message: networkErrorMessage, preferredStyle: UIAlertControllerStyle.Alert)
@@ -89,6 +89,15 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
 
     @IBAction func loginWithUserNamePassword(){
        // KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+        // network reachability test
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        if !appDelegate.reachability.isReachable()  {
+            let alert = UIAlertController(title: "", message: networkErrorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            return
+        }
+        
         loginWithMailAndPassword((username.text?.trimWhiteSpace)!, password: (password.text?.trimWhiteSpace)!) { (user, error) in
             // KRProgressHUD.dismiss()
             if error != nil{
@@ -115,13 +124,9 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
                 }
                 else
                 {
-                    //SCLAlertView().showError("Email verification pending", subTitle: "Verify your email id before sign in.")
-                    
                     let alert = UIAlertController(title: "Verify Email", message: "Verify your email id before sign in.", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                     self.presentViewController(alert, animated: true, completion: nil)
-                    
-
                 }
             }
         }
