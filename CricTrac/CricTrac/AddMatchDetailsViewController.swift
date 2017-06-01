@@ -556,7 +556,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                 self.userProfileData.UserStatus = "Premium"
                 //print("Purchase Success: \(productId)")
                 //self.upgradeButton.setTitle("", forState: UIControlState.Normal)
-                let refreshAlert = UIAlertController(title: "Success", message: "Congratulations for upgrading your account", preferredStyle: UIAlertControllerStyle.Alert)
+                let refreshAlert = UIAlertController(title: "Success", message: "Congratulations for upgrading your account.", preferredStyle: UIAlertControllerStyle.Alert)
                 refreshAlert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: { (action: UIAlertAction!) in
                     self.setNavigationBarProperties()
                 }))

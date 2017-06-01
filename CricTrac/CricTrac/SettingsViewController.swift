@@ -128,9 +128,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         else if vcName == "Feedback" {
             openMailApp()
         }
-        else if vcName == "Version" {
-            
-        }
         else if vcName == "StaticPageViewController" {
             let viewCtrl = storyboard.instantiateViewControllerWithIdentifier(vcName! as! String) as! StaticPageViewController
             viewCtrl.pageToLoad = settingsMenuData[indexPath.row]["contentToDisplay"] as! String + "?color=\(topColor)"
@@ -141,7 +138,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             let aboutVC = viewControllerFrom("Main",vcid:"AboutViewController") as! AboutViewController
             self.presentViewController(aboutVC, animated: true, completion: nil)
         }
-        else if vcName == "" {
+        else if vcName == "Logout" {
             let alert = UIAlertController(title:"", message: "Are you sure you want to logout?", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
                  logout(self)
