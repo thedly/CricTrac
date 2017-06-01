@@ -200,6 +200,7 @@ class APostTableViewCell: UITableViewCell {
     
     
     @IBAction func deletePost(sender: UIButton){
+       
         showPostOptions()
     }
     
@@ -219,8 +220,18 @@ class APostTableViewCell: UITableViewCell {
         
         let deleteAction = UIAlertAction(title: "Delete", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
+            // network reachability test
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            if !appDelegate.reachability.isReachable()  {
+                let alert = UIAlertController(title: "", message: networkErrorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                let parentVC = self.parent as? UIViewController
+                parentVC!.presentViewController(alert, animated: true, completion: nil)
+                return
+            }
             
               deleteAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!)-> Void in
+                
                 self.deletePostFromFB()
                 //print("Handle Cancel Logic here")
                }))

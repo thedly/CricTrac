@@ -363,6 +363,14 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                     })
                 })
             }
+            let alert = UIAlertController(title: "", message:"Friend Request Confirmed", preferredStyle: UIAlertControllerStyle.Alert)
+           // alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            let delay = 1.0 * Double(NSEC_PER_SEC)
+            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            dispatch_after(time, dispatch_get_main_queue(), {
+                alert.dismissViewControllerAnimated(true, completion: nil)
+            })
         }
     }
     
