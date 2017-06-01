@@ -152,9 +152,16 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
                     self.imgPlayer.image = UIImage(named: "OkFilled")
                     self.imgCoach.image = UIImage(named: "OkUnfilled")
                     self.imgFan.image = UIImage(named: "OkUnfilled")
-                }
-                
             }
+        }
+        else {
+            self.playerTextView.isSelected = true
+            self.coachTextView.isSelected = false
+            self.cricketFanTextView.isSelected = false
+            self.imgPlayer.image = UIImage(named: "OkFilled")
+            self.imgCoach.image = UIImage(named: "OkUnfilled")
+            self.imgFan.image = UIImage(named: "OkUnfilled")
+        }
       
         
         
@@ -192,14 +199,14 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         //setUIBackgroundTheme(self.view)
-        setupControls();
+//        setupControls();
         
         setNavigationBarProperties()
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+        setupControls();
         setBackgroundColor()
 
     }
