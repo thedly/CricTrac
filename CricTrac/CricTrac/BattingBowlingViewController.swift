@@ -440,6 +440,9 @@ extension BattingBowlingViewController:UITextFieldDelegate{
         else if textField == wicketsText {
             return newlength <= 2
         }
+        else if textField == dismissalText {
+            return false
+        }
         else {
             return true
         }
