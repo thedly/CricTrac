@@ -457,6 +457,17 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
             ref.setValue(welcomePost)
             let postKey = ref.key
             fireBaseRef.child("Users").child(currentUser!.uid).child("TimelineID").childByAutoId().setValue(postKey)
+            
+            var timeLineData:[JSON]!
+            if let  value = timelineData?.arrayValue{
+                timeLineData = value
+            }else{
+                timeLineData = [JSON]()
+            }
+            
+            timeLineData.insert(JSON(welcomePost), atIndex: 0)
+            timelineData = JSON(timeLineData)
+            
         }
         else
         {

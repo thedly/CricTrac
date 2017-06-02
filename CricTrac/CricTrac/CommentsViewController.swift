@@ -264,7 +264,7 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                         aCell.userName.text =   value
                     }
                 
-                    if currentUser?.uid == commentData["OwnerID"]  as? String {
+                    if currentUser?.uid == commentData["OwnerID"] as? String || currentUser!.uid == postDataNew["OwnerID"]  as? String {
                         aCell.delCommentBtn.hidden = false
                     }
                     else {

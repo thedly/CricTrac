@@ -126,7 +126,7 @@ let settingsMenuData = [
     ["title":"Privacy Policy","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://crictrac.com/AppFiles/PrivacyPolicy.htm" ],
     ["title":"About","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "https://crictrac.com/AppFiles/AboutUs.htm" ],
 //    ["title":"About","vc":  "About", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "" ],
-     ["title":"Logout","vc":  "", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false],
+     ["title":"Logout","vc":  "Logout", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false],
      ["title":"Version","vc":  "Version", "img": "", "desc": "", "IsSwitchVisible": false]
 ]
 
@@ -144,13 +144,21 @@ var adUnitId = ""
 
 let fireBaseRef =  FIRDatabase.database().reference()
 
-let storageRef = FIRStorage.storage().referenceForURL("gs://arjun-innovations.appspot.com")
+//Dev Storage
+//let storageRef = FIRStorage.storage().referenceForURL("gs://arjun-innovations.appspot.com")
+
+//QA Storage
+let storageRef = FIRStorage.storage().referenceForURL("gs://crictracweb.appspot.com")
+
+//Prod Storgage
+//let storageRef = FIRStorage.storage().referenceForURL("gs://crictrac-2e4c7.appspot.com")
+
 
 //Azure Dev environment url
-let serverBaseURL = "https://crictracdevserver.azurewebsites.net"
+//let serverBaseURL = "https://crictracdevserver.azurewebsites.net"
 
 //Azure QA environment url
-//let serverBaseURL = "https://crictracqaserver.azurewebsites.net"
+let serverBaseURL = "https://crictracqaserver.azurewebsites.net"
 
 //Azure Prod environment url
 //let serverBaseURL = "https://crictracserver.azurewebsites.net"
@@ -250,7 +258,7 @@ let appFont_light = "SourceSansPro-Light"
 
 //Marks -- profileSettings
 let nameCharacterLimit = 30
-let networkErrorMessage = "Please check your internet connection"
+let networkErrorMessage = "Please check your internet connection."
 let feedbackEmail = "crictrac@outlook.com"
 
 
