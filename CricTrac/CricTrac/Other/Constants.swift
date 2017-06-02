@@ -139,27 +139,20 @@ var adUnitId = ""
 
 
 //MARK:-URLS
-
-//let fireBaseRef =  FIRDatabase.database().referenceFromURL("https://arjun-innovations.firebaseio.com")
-
 let fireBaseRef =  FIRDatabase.database().reference()
 
-//Dev Storage
-//let storageRef = FIRStorage.storage().referenceForURL("gs://arjun-innovations.appspot.com")
-
-//QA Storage
-let storageRef = FIRStorage.storage().referenceForURL("gs://crictracweb.appspot.com")
-
-//Prod Storgage
-//let storageRef = FIRStorage.storage().referenceForURL("gs://crictrac-2e4c7.appspot.com")
-
-
+//Dev File Storage
+let storageRef = FIRStorage.storage().referenceForURL("gs://arjun-innovations.appspot.com")
 //Azure Dev environment url
-//let serverBaseURL = "https://crictracdevserver.azurewebsites.net"
+let serverBaseURL = "https://crictracdevserver.azurewebsites.net"
 
+//QA File Storage
+//let storageRef = FIRStorage.storage().referenceForURL("gs://crictracweb.appspot.com")
 //Azure QA environment url
-let serverBaseURL = "https://crictracqaserver.azurewebsites.net"
+//let serverBaseURL = "https://crictracqaserver.azurewebsites.net"
 
+//Prod File Storgage
+//let storageRef = FIRStorage.storage().referenceForURL("gs://crictrac-2e4c7.appspot.com")
 //Azure Prod environment url
 //let serverBaseURL = "https://crictracserver.azurewebsites.net"
 
