@@ -134,10 +134,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             viewCtrl.pageHeaderText = (settingsMenuData[indexPath.row]["title"] as! String).uppercaseString
             presentViewController(viewCtrl, animated: true, completion: nil)
         }
-        else if vcName == "About" {
-            let aboutVC = viewControllerFrom("Main",vcid:"AboutViewController") as! AboutViewController
-            self.presentViewController(aboutVC, animated: true, completion: nil)
-        }
+//        else if vcName == "About" {
+//            let aboutVC = viewControllerFrom("Main",vcid:"AboutViewController") as! AboutViewController
+//            self.presentViewController(aboutVC, animated: true, completion: nil)
+//        }
         else if vcName == "Logout" {
             let alert = UIAlertController(title:"", message: "Are you sure you want to logout?", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in

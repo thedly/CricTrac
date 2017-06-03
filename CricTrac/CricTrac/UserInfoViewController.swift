@@ -183,15 +183,15 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     
     @IBAction func didTapCancel(sender: UIButton) {
         //dismissViewControllerAnimated(true) {}
-        //reset the profile data on cancel
-        getAllProfileData({ data in
-            profileData = Profile(usrObj: data)
-        })
+
         let confirmAlert = UIAlertController(title: "" ,message:"Are you sure you want to Cancel the changes without saving?",preferredStyle: UIAlertControllerStyle.Alert)
         
         confirmAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction!)-> Void in
             self.navigationController?.popViewControllerAnimated(true)
-            
+            //reset the profile data on cancel
+            getAllProfileData({ data in
+                profileData = Profile(usrObj: data)
+            })
         }))
         
         confirmAlert.addAction(UIAlertAction(title: "No", style: .Default, handler: { (action: UIAlertAction) in

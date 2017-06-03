@@ -19,6 +19,18 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
 
     @IBAction func nextBtnPressed(sender: AnyObject) {
         
+        if profileData.UserProfile == "" {
+            if playerTextView.isSelected == true {
+                profileData.UserProfile = "Player"
+            }
+            else if coachTextView.isSelected == true {
+                profileData.UserProfile = "Coach"
+            }
+            else {
+                profileData.UserProfile = "Cricket Fan"
+            }
+        }
+        
        // let nav1 = UINavigationController()
         let usrViewController = viewControllerFrom("Main", vcid: "UserInfoViewController") as! UserInfoViewController
         usrViewController.userProfile = profileData.UserProfile
@@ -129,8 +141,7 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
                     self.imgPlayer.image = UIImage(named: "OkUnfilled")
                     self.imgCoach.image = UIImage(named: "OkFilled")
                     self.imgFan.image = UIImage(named: "OkUnfilled")
-
-                //OkFilled
+                    profileData.UserProfile = userProfileType.Coach.rawValue
                 case userProfileType.Player.rawValue:
                     self.playerTextView.isSelected = true
                     self.coachTextView.isSelected = false
@@ -138,6 +149,7 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
                     self.imgPlayer.image = UIImage(named: "OkFilled")
                     self.imgCoach.image = UIImage(named: "OkUnfilled")
                     self.imgFan.image = UIImage(named: "OkUnfilled")
+                    profileData.UserProfile = userProfileType.Player.rawValue
                 case userProfileType.Fan.rawValue:
                     self.cricketFanTextView.isSelected = true
                     self.playerTextView.isSelected = false
@@ -145,6 +157,7 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
                     self.imgPlayer.image = UIImage(named: "OkUnfilled")
                     self.imgCoach.image = UIImage(named: "OkUnfilled")
                     self.imgFan.image = UIImage(named: "OkFilled")
+                    profileData.UserProfile = userProfileType.Fan.rawValue
                 default:
                     self.playerTextView.isSelected = true
                     self.coachTextView.isSelected = false
@@ -152,6 +165,7 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
                     self.imgPlayer.image = UIImage(named: "OkFilled")
                     self.imgCoach.image = UIImage(named: "OkUnfilled")
                     self.imgFan.image = UIImage(named: "OkUnfilled")
+                    profileData.UserProfile = userProfileType.Player.rawValue
             }
         }
         else {
@@ -161,6 +175,7 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
             self.imgPlayer.image = UIImage(named: "OkFilled")
             self.imgCoach.image = UIImage(named: "OkUnfilled")
             self.imgFan.image = UIImage(named: "OkUnfilled")
+            profileData.UserProfile = userProfileType.Player.rawValue
         }
       
         
@@ -182,10 +197,10 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
         
         cricketFanTextView.userInteractionEnabled = true
         cricketFanTextView.addGestureRecognizer(fantap)
-        profileData.UserProfile = userProfileType.Player.rawValue
-        self.imgPlayer.image = UIImage(named: "OkFilled")
-        self.imgCoach.image = UIImage(named: "OkUnfilled")
-        self.imgFan.image = UIImage(named: "OkUnfilled")
+//        profileData.UserProfile = userProfileType.Player.rawValue
+//        self.imgPlayer.image = UIImage(named: "OkFilled")
+//        self.imgCoach.image = UIImage(named: "OkUnfilled")
+//        self.imgFan.image = UIImage(named: "OkUnfilled")
         
     }
     

@@ -72,12 +72,6 @@ public extension UIDevice {
 let modelName = UIDevice.currentDevice().modelName
 var systemVersion = UIDevice.currentDevice().systemVersion
 
-var versionAndBuildNumber:String{
-    let nsObject: AnyObject? = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"]
-    let build = NSBundle.mainBundle().objectForInfoDictionaryKey(kCFBundleVersionKey as String) as! String
-    return  (nsObject as! String) + "(" + build + ")"
-}
-
 var menuData = [
 
     ["title":"PAVILION","vc":"timeline", "img": "Menu_TimeLine"],
@@ -155,6 +149,13 @@ let serverBaseURL = "https://crictracdevserver.azurewebsites.net"
 //let storageRef = FIRStorage.storage().referenceForURL("gs://crictrac-2e4c7.appspot.com")
 //Azure Prod environment url
 //let serverBaseURL = "https://crictracserver.azurewebsites.net"
+
+var versionAndBuildNumber:String{
+    let nsObject: AnyObject? = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"]
+    let build = NSBundle.mainBundle().objectForInfoDictionaryKey(kCFBundleVersionKey as String) as! String
+    return  (nsObject as! String) + "(" + build + ")"
+}
+//var versionAndBuildNumber = "1.0"
 
  struct CustomTextInputStyle: AnimatedTextInputStyle  {
     var activeColor =   UIColor(hex: "#B12420")

@@ -130,6 +130,7 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         super.viewWillAppear(animated)
         setBackgroundColor()
         userName.text = profileData.fullName
+        profilePic = profileData.ProfileImageURL
         
         if profilePic == "-" {
             let imageName = defaultProfileImage
