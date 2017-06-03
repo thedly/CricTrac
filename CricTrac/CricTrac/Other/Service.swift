@@ -1318,4 +1318,9 @@ func deleteTimelineNodes(postId:String){
     dataTask?.resume()
 }
 
+//save device tokens for push notification
+func saveFCMToken(token:String) {
+    fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings").child("FCMToken").setValue(token)
+}
+
 

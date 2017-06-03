@@ -95,6 +95,14 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
 //            //self.profileImage.image = LoggedInUserImage
 //        }
         // Do any additional setup after loading the view.
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let deviceToken = appDelegate.tokenString
+        
+        if deviceToken != "" {
+            saveFCMToken(deviceToken)
+        }
+        
     }
     
     func removeUnwantedMenu(){
