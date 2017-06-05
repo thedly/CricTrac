@@ -140,10 +140,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 //        }
         else if vcName == "Logout" {
             let alert = UIAlertController(title:"", message: "Are you sure you want to logout?", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
+            alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
                  logout(self)
             }))
-             alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+             alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         }
         else
