@@ -101,7 +101,8 @@ class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITabl
     
     
     func openWhatsApp(){
-        let message = "Install CricTrac from the Store. Download it now from https://appurl.io/j3ffpw3o"
+//        let message = "Install CricTrac from the Store. Download it now from https://appurl.io/j3i4oq7v"
+        let message = "https://appurl.io/j3i4oq7v"
         let urlStringEncoded = message.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())
         
         
@@ -130,7 +131,7 @@ class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITabl
         
         //mailComposerVC.setToRecipients(["someone@somewhere.com"])
         mailComposerVC.setSubject("Install CricTrac from the Store")
-        mailComposerVC.setMessageBody("Install CricTrac from the Store. Download it now from https://appurl.io/j3ffpw3o", isHTML: false)
+        mailComposerVC.setMessageBody("CricTrac is an innovative platform for any cricket player or folks who are related to cricket. It helps to track the cricket scores and generate the performance reports. Download it now from https://appurl.io/j3i4oq7v", isHTML: false)
         
         return mailComposerVC
     }
@@ -162,7 +163,8 @@ class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITabl
     
     func openMessageApp() {
         let messageVC = MFMessageComposeViewController()
-        messageVC.body = "Install CricTrac from the Store. Download it now from https://appurl.io/j3ffpw3o";
+        messageVC.body = "Install CricTrac from the Store. Download it now from https://appurl.io/j3i4oq7v";
+        //messageVC.body = "https://itunes.apple.com/in/app/crictrac/id1137502744?mt=8";
         //messageVC.recipients = ["Enter tel-nr"]
         messageVC.messageComposeDelegate = self;
         self.presentViewController(messageVC, animated: false, completion: nil)
