@@ -94,6 +94,16 @@ func timelinePostBump(postId:String){
     dataTask?.resume()
 }
 
+func sendWelcomeMail(emailid:String, role:String){
+    let welcomeMailURL = serverBaseURL+"/welcomeMail/\((emailid))/\(role)"
+    let request = NSMutableURLRequest(URL: NSURL(string:welcomeMailURL)!)
+    request.HTTPMethod = "GET"
+    
+    dataTask = defaultSession.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+    })
+    dataTask?.resume()
+}
+
 var pageKey:String?
 
 func getLatestTimelines(sucess:(JSON)->Void,failure:(NSError?)->Void){

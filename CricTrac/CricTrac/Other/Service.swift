@@ -468,6 +468,8 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
             timeLineData.insert(JSON(welcomePost), atIndex: 0)
             timelineData = JSON(timeLineData)
             
+            //send welcome mail
+            sendWelcomeMail(profileData.Email,role: profileData.UserProfile)
         }
         else
         {
@@ -1322,5 +1324,7 @@ func deleteTimelineNodes(postId:String){
 func saveFCMToken(token:String) {
     fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings").child("FCMToken").setValue(token)
 }
+
+
 
 
