@@ -2343,19 +2343,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CRICKET FAN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AOn-cA-V1N" customClass="radioSelectView" customModule="CricTrac" customModuleProvider="target">
-                                <rect key="frame" x="184" y="337" width="233" height="51"/>
+                                <rect key="frame" x="198" y="323" width="204" height="44"/>
                                 <accessibility key="accessibilityConfiguration" identifier="radioSelect"/>
-                                <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="40"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="35"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="72.5" y="325" width="256.5" height="47"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COACH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l2c-2z-ztx" customClass="radioSelectView" customModule="CricTrac" customModuleProvider="target">
-                                <rect key="frame" x="239" y="273" width="123" height="51"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CRICKET COACH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l2c-2z-ztx" customClass="radioSelectView" customModule="CricTrac" customModuleProvider="target">
+                                <rect key="frame" x="175" y="266" width="250" height="44"/>
                                 <accessibility key="accessibilityConfiguration" identifier="radioSelect"/>
-                                <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="40"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="35"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
@@ -2371,10 +2371,10 @@
                                     <rect key="frame" x="153.5" y="131" width="93.5" height="47"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLAYER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Waf-1C-Oot" customClass="radioSelectView" customModule="CricTrac" customModuleProvider="target">
-                                <rect key="frame" x="232" y="202" width="137" height="51"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CRICKET PLAYER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Waf-1C-Oot" customClass="radioSelectView" customModule="CricTrac" customModuleProvider="target">
+                                <rect key="frame" x="169" y="202" width="263" height="44"/>
                                 <accessibility key="accessibilityConfiguration" identifier="radioSelect"/>
-                                <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="40"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="35"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
@@ -2382,7 +2382,7 @@
                                 </variation>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OkFilled" translatesAutoresizingMaskIntoConstraints="NO" id="gvi-dp-rlI">
-                                <rect key="frame" x="197" y="215" width="25" height="25"/>
+                                <rect key="frame" x="134" y="212" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="25" id="S6D-dw-atj"/>
                                     <constraint firstAttribute="width" secondItem="gvi-dp-rlI" secondAttribute="height" multiplier="1:1" id="wRq-46-WY1"/>
@@ -2392,7 +2392,7 @@
                                 </variation>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OkFilled" translatesAutoresizingMaskIntoConstraints="NO" id="Rc6-Ut-Xtz">
-                                <rect key="frame" x="204" y="286" width="25" height="25"/>
+                                <rect key="frame" x="140" y="276" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Rc6-Ut-Xtz" secondAttribute="height" multiplier="1:1" id="KDM-1v-jl7"/>
                                     <constraint firstAttribute="width" constant="25" id="Omx-g4-05X"/>
@@ -2402,7 +2402,7 @@
                                 </variation>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OkFilled" translatesAutoresizingMaskIntoConstraints="NO" id="YYa-wr-3Ks">
-                                <rect key="frame" x="149" y="350" width="25" height="25"/>
+                                <rect key="frame" x="163" y="333" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="YYa-wr-3Ks" secondAttribute="height" multiplier="1:1" id="JOE-q7-Xbm"/>
                                     <constraint firstAttribute="width" constant="25" id="rob-RD-1Ss"/>

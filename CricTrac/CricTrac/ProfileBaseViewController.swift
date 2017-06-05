@@ -17,9 +17,17 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
     @IBOutlet weak var imgCoach: UIImageView!
     @IBOutlet weak var imgFan: UIImageView!
 
-    @IBAction func nextBtnPressed(sender: AnyObject) {
+    @IBAction func nextBtnPressed(sender: UIButton) {
+        if playerTextView.isSelected == false && coachTextView.isSelected == false && cricketFanTextView.isSelected == false {
+            let alert = UIAlertController(title:"", message: "Please select your role", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:nil))
+            // alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+
+        }
         
         if profileData.UserProfile == "" {
+            
             if playerTextView.isSelected == true {
                 profileData.UserProfile = "Player"
             }
@@ -169,13 +177,13 @@ class ProfileBaseViewController: UIViewController , UIGestureRecognizerDelegate,
             }
         }
         else {
-            self.playerTextView.isSelected = true
+            self.playerTextView.isSelected = false
             self.coachTextView.isSelected = false
             self.cricketFanTextView.isSelected = false
-            self.imgPlayer.image = UIImage(named: "OkFilled")
+            self.imgPlayer.image = UIImage(named: "OkUnfilled")
             self.imgCoach.image = UIImage(named: "OkUnfilled")
             self.imgFan.image = UIImage(named: "OkUnfilled")
-            profileData.UserProfile = userProfileType.Player.rawValue
+            //profileData.UserProfile = userProfileType.Player.rawValue
         }
       
         
