@@ -112,6 +112,7 @@ let settingsMenuData = [
     //["title":"Offline Matches","vc":"AddMatchDetailsViewController", "img": "Menu_AddMatch", "desc": "Matches to be downloaded for offline view", "IsSwitchVisible": false],
     ["title":"App Theme","vc":"ThemeSettingsViewController", "img": "Menu_Settings", "desc": "Choose desired theme color for your app", "IsSwitchVisible": false],
     ["title":"Change Password","vc":  "ChangePassword", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "" ],
+    ["title":"Master Data","vc":  "MasterDataViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "" ],
 //    ["title":"Rate this app","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay": "itms://itunes.apple.com/de/app/x-gift/id839686104?mt=8&uo=4"],
     ["title":"Rate this app","vc":  "StaticPageViewController", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay": "https://itunes.apple.com/in/app/crictrac/id1137502744?mt=8"],
     ["title":"Feedback","vc":  "Feedback", "img": "Menu_Settings", "desc": "", "IsSwitchVisible": false, "contentToDisplay" : "" ],

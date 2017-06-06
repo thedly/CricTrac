@@ -15,6 +15,8 @@ import SwiftyJSON
 import FirebaseStorage
 //MARK:- Match Data
 
+
+
 func loadInitialValues(){
     fireBaseRef.child("Dismissals").observeSingleEventOfType(.Value, withBlock: { snapshot in
         if let value = snapshot.value as? [String]{
@@ -273,7 +275,7 @@ func addNewTournamentName(tournament:String){
 }
 
 func getAllTeams(sucessBlock:(AnyObject)->Void){
-    fireBaseRef.child("Users").child(currentUser!.uid).child("Teams").observeSingleEventOfType(.Value, withBlock: { snapshot in
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Teams").observeEventType(.Value, withBlock: { snapshot in
         if let data = snapshot.value as? [String : AnyObject]{
             sucessBlock(data)
         }
@@ -284,7 +286,7 @@ func getAllTeams(sucessBlock:(AnyObject)->Void){
 }
 
 func getAllOpponents(sucessBlock:(AnyObject)->Void){
-    fireBaseRef.child("Users").child(currentUser!.uid).child("Opponents").observeSingleEventOfType(.Value, withBlock: { snapshot in
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Opponents").observeEventType(.Value, withBlock: { snapshot in
         if let data = snapshot.value as? [String : AnyObject]{
             sucessBlock(data)
         }
@@ -295,7 +297,7 @@ func getAllOpponents(sucessBlock:(AnyObject)->Void){
 }
 
 func getAllGrounds(sucessBlock:(AnyObject)->Void){
-    fireBaseRef.child("Users").child(currentUser!.uid).child("Grounds").observeSingleEventOfType(.Value, withBlock: { snapshot in
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Grounds").observeEventType(.Value, withBlock: { snapshot in
         if let data = snapshot.value as? [String : AnyObject]{
             sucessBlock(data)
         }
@@ -306,7 +308,7 @@ func getAllGrounds(sucessBlock:(AnyObject)->Void){
 }
 
 func getAllVenue(sucessBlock:(AnyObject)->Void){
-    fireBaseRef.child("Users").child(currentUser!.uid).child("Venue").observeSingleEventOfType(.Value, withBlock: { snapshot in
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Venue").observeEventType(.Value, withBlock: { snapshot in
         if let data = snapshot.value as? [String : AnyObject]{
             sucessBlock(data)
         }
@@ -317,7 +319,7 @@ func getAllVenue(sucessBlock:(AnyObject)->Void){
 }
 
 func getAllTournaments(sucessBlock:(AnyObject)->Void){
-    fireBaseRef.child("Users").child(currentUser!.uid).child("Tournaments").observeSingleEventOfType(.Value, withBlock: { snapshot in
+    fireBaseRef.child("Users").child(currentUser!.uid).child("Tournaments").observeEventType(.Value, withBlock: { snapshot in
         if let data = snapshot.value as? [String : AnyObject]{
             sucessBlock(data)
         }
@@ -1236,6 +1238,10 @@ func markNotificationAsRead(notificationId:String) {
 func deleteNotification(notificationId:String) {
     //delete Notification
     _ = fireBaseRef.child("Users").child(currentUser!.uid).child("Notifications").child(notificationId).removeValue()
+}
+
+func deleteTeamNames(vcName:String,teamName:String){
+     _ = fireBaseRef.child("Users").child(currentUser!.uid).child(vcName).child(teamName).removeValue()
 }
 
 func likePost(postId:String)->[String:[String:String]]{

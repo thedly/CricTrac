@@ -45,6 +45,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func setNavigationBarProperties(){
         var currentTheme:CTTheme!
         currentTheme = cricTracTheme.currentTheme
+        
         let menuButton: UIButton = UIButton(type:.Custom)
         menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
         menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
@@ -124,6 +125,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         else if vcName == "ChangePassword" {
             let forgotPwdVC = viewControllerFrom("Main", vcid: "ForgotPasswordViewController") as! ForgotPasswordViewController
             self.presentViewController(forgotPwdVC, animated: true, completion: nil)
+        }
+        else if vcName == "MasterDataViewController" {
+            let vc = storyboard.instantiateViewControllerWithIdentifier(vcName as! String)
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         else if vcName == "Feedback" {
             openMailApp()

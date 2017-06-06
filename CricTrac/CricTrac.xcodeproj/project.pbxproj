@@ -144,6 +144,8 @@
 		B80B560E1EB9C2C60014FA9D /* LikesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B560D1EB9C2C60014FA9D /* LikesViewController.swift */; };
 		B80B56101EB9D1580014FA9D /* LikesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B560F1EB9D1580014FA9D /* LikesTableViewCell.swift */; };
 		B80B56121EC5AA3D0014FA9D /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B56111EC5AA3D0014FA9D /* Notifications.swift */; };
+		B88CB6BA1EE67110009CD077 /* MasterDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88CB6B91EE67110009CD077 /* MasterDataViewController.swift */; };
+		B88CB6BC1EE68499009CD077 /* MasterDataListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88CB6BB1EE68498009CD077 /* MasterDataListViewController.swift */; };
 		E1B593691EB4E63A00C8A553 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B593681EB4E63A00C8A553 /* NotificationsViewController.swift */; };
 		F7856BE080406499CCB071C8 /* Pods_CricTrac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA2224284F64FAE77B7776D9 /* Pods_CricTrac.framework */; };
 /* End PBXBuildFile section */
@@ -305,6 +307,8 @@
 		B80B560D1EB9C2C60014FA9D /* LikesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesViewController.swift; sourceTree = "<group>"; };
 		B80B560F1EB9D1580014FA9D /* LikesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesTableViewCell.swift; sourceTree = "<group>"; };
 		B80B56111EC5AA3D0014FA9D /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		B88CB6B91EE67110009CD077 /* MasterDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterDataViewController.swift; sourceTree = "<group>"; };
+		B88CB6BB1EE68498009CD077 /* MasterDataListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterDataListViewController.swift; sourceTree = "<group>"; };
 		DA2224284F64FAE77B7776D9 /* Pods_CricTrac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CricTrac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1B593681EB4E63A00C8A553 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -547,6 +551,8 @@
 		8958F5F11D392B780028D5AA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B88CB6BB1EE68498009CD077 /* MasterDataListViewController.swift */,
+				B88CB6B91EE67110009CD077 /* MasterDataViewController.swift */,
 				672035541ED4532600833F03 /* FAQViewController.swift */,
 				672035561ED4535D00833F03 /* Terms&ConditionsViewController.swift */,
 				672035581ED4538B00833F03 /* PrivacyPolicyViewController.swift */,
@@ -884,6 +890,7 @@
 				462DE9F71D478B9E00E31E8F /* CTDatePicker.swift in Sources */,
 				89067D731DAE9D120021F463 /* radioSelectView.swift in Sources */,
 				89067D751DAEA89C0021F463 /* TransitionManager.swift in Sources */,
+				B88CB6BC1EE68499009CD077 /* MasterDataListViewController.swift in Sources */,
 				672035571ED4535D00833F03 /* Terms&ConditionsViewController.swift in Sources */,
 				E1B593691EB4E63A00C8A553 /* NotificationsViewController.swift in Sources */,
 				6720355B1ED453A200833F03 /* AboutViewController.swift in Sources */,
@@ -901,6 +908,7 @@
 				891B2AA71E7CE09800F6B5BA /* RequestsData.swift in Sources */,
 				679367351EC70D250097B187 /* AchievementListViewController.swift in Sources */,
 				89358AFB1E19773E00A1A6F0 /* SettingsViewCell.swift in Sources */,
+				B88CB6BA1EE67110009CD077 /* MasterDataViewController.swift in Sources */,
 				46ACE0C71E0FF625004118A4 /* CommentTableViewCell.swift in Sources */,
 				89E6084D1D6D4ADC00F6BD11 /* CTDataPicker.swift in Sources */,
 				6783C11F1E67347D00DEDA55 /* HelperFunctions.swift in Sources */,
