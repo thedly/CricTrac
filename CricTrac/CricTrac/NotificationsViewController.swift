@@ -216,7 +216,7 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
     func moveToFRR(topicId:String) {
         let friendRequest = viewControllerFrom("Main", vcid: "FriendBaseViewController") as! FriendBaseViewController
         friendRequest.topicId = topicId
-       self.presentViewController(friendRequest, animated: true) {}
+        self.presentViewController(friendRequest, animated: true) {}
     }
     
     func moveToFRA(topicId:String) {
@@ -229,73 +229,82 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
         let matchId:String = topicId
         let userId:String = userId
         
-        fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeSingleEventOfType(.Value, withBlock: { snapshot in
-            if let data = snapshot.value! as? [String:AnyObject]{
-                let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
-                summaryDetailsVC.matchDetailsData = data
-                summaryDetailsVC.isFriendDashboard = true
-                self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
-            }
-            else {
-                let alert = UIAlertController(title: "", message: "Data not available.", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
-                    deleteNotification(self.NotificationID)
-                }))
-                self.presentViewController(alert, animated: true, completion: nil)
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeSingleEventOfType(.Value, withBlock: { snapshot in
+                if let data = snapshot.value! as? [String:AnyObject]{
+                    let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
+                    summaryDetailsVC.matchDetailsData = data
+                    summaryDetailsVC.isFriendDashboard = true
+                    self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
+                }
+                else {
+                    let alert = UIAlertController(title: "", message: "Data not available.", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
+                        deleteNotification(self.NotificationID)
+                    }))
+                    self.presentViewController(alert, animated: true, completion: nil)
 
+                }
+            })
+        })
+            
+    }
+    
+    func moveToNPA(topicId:String) {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            getPost(topicId) { (postData) in
+                if postData["isDeleted"]?.integerValue == 1 {
+                    let alert = UIAlertController(title: "", message: "Data not available.", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
+                        deleteNotification(self.NotificationID)
+                    }))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+                else {
+                    let timelinePost = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
+                    timelinePost.postId = topicId
+                    self.presentViewController(timelinePost, animated: true) {}
+                }
             }
         })
     }
     
-    func moveToNPA(topicId:String) {
-        getPost(topicId) { (postData) in
-            if postData["isDeleted"]?.integerValue == 1 {
-                let alert = UIAlertController(title: "", message: "Data not available.", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
-                    deleteNotification(self.NotificationID)
-                }))
-                self.presentViewController(alert, animated: true, completion: nil)
-            }
-            else {
-                let timelinePost = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
-                timelinePost.postId = topicId
-                self.presentViewController(timelinePost, animated: true) {}
-            }
-        }
-    }
-    
     func moveToNCA(topicId:String) {
-        getPost(topicId) { (postData) in
-            if postData["isDeleted"]?.integerValue == 1 {
-                let alert = UIAlertController(title: "", message: "Data not available.", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
-                    deleteNotification(self.NotificationID)
-                }))
-                self.presentViewController(alert, animated: true, completion: nil)
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            getPost(topicId) { (postData) in
+                if postData["isDeleted"]?.integerValue == 1 {
+                    let alert = UIAlertController(title: "", message: "Data not available.", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
+                        deleteNotification(self.NotificationID)
+                    }))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+                else {
+                    let timelinePost = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
+                    timelinePost.postId = topicId
+                    self.presentViewController(timelinePost, animated: true) {}
+                }
             }
-            else {
-                let timelinePost = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
-                timelinePost.postId = topicId
-                self.presentViewController(timelinePost, animated: true) {}
-            }
-        }
+        })
     }
     
     func moveToNLA(topicId:String) {
-        getPost(topicId) { (postData) in
-            if postData["isDeleted"]?.integerValue == 1 {
-                let alert = UIAlertController(title: "", message: "Data not available.", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
-                    deleteNotification(self.NotificationID)
-                }))
-                self.presentViewController(alert, animated: true, completion: nil)
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            getPost(topicId) { (postData) in
+                if postData["isDeleted"]?.integerValue == 1 {
+                    let alert = UIAlertController(title: "", message: "Data not available.", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
+                        deleteNotification(self.NotificationID)
+                    }))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+                else {
+                    let timelinePost = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
+                    timelinePost.postId = topicId
+                    self.presentViewController(timelinePost, animated: true) {}
+                }
             }
-            else {
-                let timelinePost = viewControllerFrom("Main", vcid: "CommentsViewController") as! CommentsViewController
-                timelinePost.postId = topicId
-                self.presentViewController(timelinePost, animated: true) {}
-            }
-        }
+        })
     }
 
     func offsetFrom(date:NSDate) -> String {

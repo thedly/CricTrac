@@ -468,12 +468,7 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
             timeLineData.insert(JSON(welcomePost), atIndex: 0)
             timelineData = JSON(timeLineData)
             
-            //send welcome mail
-            var userRole = profileData.UserProfile
-            if userRole == "Cricket Fan" {
-                userRole = "CricketFan"
-            }
-            sendWelcomeMail(profileData.Email,role: userRole)
+            sendWelcomeMail(currentUser!.uid)
         }
         else
         {
