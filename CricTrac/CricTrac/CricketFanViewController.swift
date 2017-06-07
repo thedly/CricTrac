@@ -12,6 +12,8 @@ import KRProgressHUD
 
 class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFieldDelegate, UITableViewDataSource,ThemeChangeable {
     
+    @IBOutlet weak var matchViewHeightConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var currentTeamsTblViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var interestedSportsTblViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var favouritePlayersTblViewHeightConstraint: NSLayoutConstraint!
@@ -47,16 +49,20 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+     
+        
         if profileData.FirstName.length > 0 {
             self.favouritePlayerList = profileData.FavoritePlayers
             self.HobbiesList = profileData.Hobbies
             self.InterestedSportsNamesList = profileData.InterestedSports
             self.supportingTeamNamesList = profileData.SupportingTeams
+            
             self.FavouritePlayerTbl.reloadData()
             self.Hobies.reloadData()
             self.InterestedSports.reloadData()
             self.SupportingTeams.reloadData()
         }
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -100,6 +106,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
         SupportingTeamNames.delegate = self
         InterestedSportsNames.delegate = self
         HobbiesNames.delegate = self
+        
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserInfoViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         scrollView.setContentOffset(CGPointZero, animated: true)
@@ -243,6 +250,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
     
     @IBAction func addHobbiesPressed(sender: AnyObject) {
         if HobbiesNames.text?.trimWhiteSpace != "" && HobbiesNames.text?.trimWhiteSpace != "-" {
+           
             HobbiesList.append(HobbiesNames.textVal.trim().condenseWhitespace())
             HobbiesNames.text = ""
             Hobies.reloadData()
@@ -274,7 +282,7 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
         if let aCell =  InterestedSports.dequeueReusableCellWithIdentifier("CurrentTeamsTableViewCell", forIndexPath: indexPath) as? CurrentTeamsTableViewCell {
             aCell.backgroundColor = UIColor.clearColor()
             aCell.teamName.text = InterestedSportsNamesList[indexPath.row]
-            aCell.deleteTeamBtn.addTarget(self, action: "deleteTeamFromCurrentTeams:", forControlEvents: .TouchUpInside)
+            aCell.deleteTeamBtn.addTarget(self, action: #selector(CricketFanViewController.deleteTeamFromCurrentTeams(_:)), forControlEvents: .TouchUpInside)
             return aCell
         }
         else
@@ -311,13 +319,39 @@ class CricketFanViewController: UIViewController, UITableViewDelegate,UITextFiel
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.isEqual(SupportingTeams) {
+            
+            if supportingTeamNamesList.count == 0 {
+             currentTeamsTblViewHeightConstraint.constant = 0
+            }
+            else {
+               
+                currentTeamsTblViewHeightConstraint.constant = 60
+            }
             return supportingTeamNamesList.count
         }
         else if tableView.isEqual(InterestedSports) {
+            if InterestedSportsNamesList.count == 0{
+                interestedSportsTblViewHeightConstraint.constant = 0
+            }
+            else {
+                interestedSportsTblViewHeightConstraint.constant = 60
+            }
             return InterestedSportsNamesList.count
         }
         else if tableView.isEqual(FavouritePlayerTbl) {
+            if favouritePlayerList.count == 0 {
+                favouritePlayersTblViewHeightConstraint.constant = 0
+            }
+            else {
+                favouritePlayersTblViewHeightConstraint.constant = 60
+            }
             return favouritePlayerList.count
+        }
+        if HobbiesList.count == 0 {
+            hobbiesTblViewHeightConstraint.constant = 0
+        }
+        else {
+            hobbiesTblViewHeightConstraint.constant = 60
         }
         return HobbiesList.count
         

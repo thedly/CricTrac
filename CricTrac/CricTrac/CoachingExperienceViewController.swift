@@ -325,13 +325,37 @@ class CoachingExperienceViewController: UIViewController, UITableViewDelegate, U
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.isEqual(currentTeams) {
+            if teamNames.count == 0 {
+                currentTeamsTableHeightConstraint.constant = 0
+            }
+            else {
+                 currentTeamsTableHeightConstraint.constant = 60
+            }
             return teamNames.count
         }
         else if tableView.isEqual(CoachPlayedForTbl) {
+            if CoachPlayedFor.count == 0 {
+                playedForTableHeightConstraint.constant = 0
+            }
+            else {
+                playedForTableHeightConstraint.constant = 60
+            }
             return CoachPlayedFor.count
         }
         else if tableView.isEqual(CertificationsTbl){
+            if CertificationsList.count == 0 {
+                certificationsTableHeightConstraint.constant = 0
+            }
+            else {
+                certificationsTableHeightConstraint.constant = 60
+            }
             return CertificationsList.count
+        }
+        if pastTeamNames.count == 0 {
+            pastTeamsTableHeightConstraint.constant = 0
+        }
+        else {
+             pastTeamsTableHeightConstraint.constant = 60
         }
         return pastTeamNames.count
         

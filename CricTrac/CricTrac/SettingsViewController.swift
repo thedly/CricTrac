@@ -13,6 +13,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
     @IBOutlet weak var SettingsTableView: UITableView!
     
+    var userType = ""
+     var menuDataArray = settingsMenuData
+    
     @IBAction func closeBtnPressed(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -34,8 +37,24 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         initializeView()
         setNavigationBarProperties()
+         userType = profileData.UserProfile
+        
+        if let _ = profileData.UserProfile as? String {
+            removeUnwantedMenu()
+        }else{
+            getAllUserProfileInfo {
+                self.removeUnwantedMenu()
+            }
+        }
         // Do any additional setup after loading the view.
        
+    }
+    func removeUnwantedMenu() {
+        if userType != "Player" {
+            if let newMatchIndex =  self.menuDataArray.indexOf({ $0["title"] == "Master Data"}){
+                self.menuDataArray.removeAtIndex(newMatchIndex)
+            }
+        }
     }
     
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -73,8 +92,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         //setUIBackgroundTheme(self.view)
     }
     
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return settingsMenuData.count
+        return menuDataArray.count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -83,16 +103,16 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("SettingsViewCell", forIndexPath: indexPath) as! SettingsViewCell
-        let itemTitle = settingsMenuData[indexPath.row]["title"] as! String
-        let menuIcon = UIImage(named: settingsMenuData[indexPath.row]["img"]! as! String)
-        let menuDesc = settingsMenuData[indexPath.row]["desc"] as! String
+        let itemTitle = menuDataArray[indexPath.row]["title"] as! String
+        let menuIcon = UIImage(named: menuDataArray[indexPath.row]["img"]! as! String)
+        let menuDesc = menuDataArray[indexPath.row]["desc"] as! String
         var selectedValue = String()
         
-        if settingsMenuData[indexPath.row]["vc"] == "ThemeSettingsViewController" {
+        if menuDataArray[indexPath.row]["vc"] == "ThemeSettingsViewController" {
             selectedValue = CurrentTheme
         }
         
-        let toggleConfig = settingsMenuData[indexPath.row]["IsSwitchVisible"] as! Bool
+        let toggleConfig = menuDataArray[indexPath.row]["IsSwitchVisible"] as! Bool
         
         cell.backgroundColor = UIColor.clearColor()
         cell.menuItemName.text = itemTitle
@@ -103,7 +123,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         cell.menuItemSelectedValue.hidden = toggleConfig
         cell.menuItemDescription.text = menuDesc
         
-        if settingsMenuData[indexPath.row]["vc"] == "Version" {
+        if menuDataArray[indexPath.row]["vc"] == "Version" {
             let formattedString = NSMutableAttributedString()
             formattedString.bold(itemTitle, fontName: appFont_black, fontSize: 15)
             formattedString.bold(": ", fontName: appFont_black, fontSize: 15)
@@ -115,7 +135,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let vcName = settingsMenuData[indexPath.row]["vc"]
+        let vcName = menuDataArray[indexPath.row]["vc"]
         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
         if vcName == "ThemeSettingsViewController" {
@@ -135,8 +155,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         else if vcName == "StaticPageViewController" {
             let viewCtrl = storyboard.instantiateViewControllerWithIdentifier(vcName! as! String) as! StaticPageViewController
-            viewCtrl.pageToLoad = settingsMenuData[indexPath.row]["contentToDisplay"] as! String + "?color=\(topColor)"
-            viewCtrl.pageHeaderText = (settingsMenuData[indexPath.row]["title"] as! String).uppercaseString
+            viewCtrl.pageToLoad = menuDataArray[indexPath.row]["contentToDisplay"] as! String + "?color=\(topColor)"
+            viewCtrl.pageHeaderText = (menuDataArray[indexPath.row]["title"] as! String).uppercaseString
             presentViewController(viewCtrl, animated: true, completion: nil)
         }
 //        else if vcName == "About" {

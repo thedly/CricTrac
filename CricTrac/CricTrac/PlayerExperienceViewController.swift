@@ -270,7 +270,19 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.isEqual(currentTeams) {
+            if teamNames.count == 0 {
+                teamNamesTableHeightConstraint.constant = 0
+            }
+            else {
+               teamNamesTableHeightConstraint.constant = 60
+            }
             return teamNames.count
+        }
+        if pastTeamNames.count == 0 {
+            pastTeamNamesTableHeightConstraint.constant = 0
+        }
+        else {
+            pastTeamNamesTableHeightConstraint.constant = 60
         }
         return pastTeamNames.count
     }

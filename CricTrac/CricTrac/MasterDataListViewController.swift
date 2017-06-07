@@ -107,20 +107,41 @@ class MasterDataListViewController: UIViewController,UITableViewDelegate,UITable
         self.view.backgroundColor = currentTheme.topColor
     }
     
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return teamNames.count
+        if section == 0 {
+            return 1
+        }
+       
+            return teamNames.count
+       
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        if indexPath.section == 0 {
+            cell.textLabel?.text = "Swipe to delete the auto-suggestions data. This will not impact your match deta."
+            cell.textLabel?.numberOfLines = 3
+            cell.textLabel?.textColor = UIColor.blackColor()
+            cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 15)
+        }
+        else {
+        
         cell.textLabel?.text = teamNames[indexPath.row]
        
         cell.textLabel?.textColor = UIColor.whiteColor()
         cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 17)
+        }
         return cell
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+         if indexPath.section == 0 {
+            return false
+        }
         return true
     }
     
