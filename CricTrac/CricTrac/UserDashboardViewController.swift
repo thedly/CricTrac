@@ -657,12 +657,14 @@ func setDashboardData(){
                 //self.bowlingAverage.text = String(DashboardDetails.TotalBowlingAverage)
                 
                 let bowlingEconomyDouble = Double(String(DashboardDetails.TotalEconomy))
-                self.bowlingEconomy.text = String(format:"%.1f",bowlingEconomyDouble!)
+                self.bowlingEconomy.text = String(format:"%.2f",bowlingEconomyDouble!)
                 //self.bowlingEconomy.text = String(DashboardDetails.TotalEconomy)
                 self.TotalThreeWicketsPerMatch.text = String(DashboardDetails.Total3Wkts)
                 self.TotalMaidens.text = String(DashboardDetails.TotalMaidens)
                 self.TotalFiveWicketsPerMatch.text = String(DashboardDetails.Total5Wkts)
-                self.PlayerOversBowld.text = String(DashboardDetails.TotalOvers)
+                let PlayerOversBowldDouble = Double(String(DashboardDetails.TotalOvers))
+                self.PlayerOversBowld.text = String(format:"%.1f",PlayerOversBowldDouble!)
+                //self.PlayerOversBowld.text = String(DashboardDetails.TotalOvers)
                 
                 dispatch_async(dispatch_get_main_queue(),{
                     
@@ -764,7 +766,7 @@ func setDashboardData(){
                             
                             if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
                                 
-                                let economy = String(format: "%.1f",(Float(runsGiven)!)/Float(oversBowled)!)
+                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
                                 mData.economy = Float(economy)
                                 if srEconomy.length > 0 {
                                     srEconomy.appendContentsOf("\nEconomy: \(economy)")
@@ -885,7 +887,7 @@ func setDashboardData(){
                             
                             if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
                                 
-                                let economy = String(format: "%.1f",(Float(runsGiven)!)/Float(oversBowled)!)
+                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
                                 mData.economy = Float(economy)
                                 if srEconomy.length > 0 {
                                     srEconomy.appendContentsOf("\nEconomy: \(economy)")
@@ -1173,7 +1175,7 @@ func setDashboardData(){
                             
                             if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
                                 
-                                let economy = String(format: "%.1f",(Float(runsGiven)!)/Float(oversBowled)!)
+                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
                                 mData.economy = Float(economy)
                                 srEconomy = ("Economy: \(economy)")
                             }
@@ -1261,7 +1263,7 @@ func setDashboardData(){
                             
                             if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
                                 
-                                let economy = String(format: "%.1f",(Float(runsGiven)!)/Float(oversBowled)!)
+                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
                                 mData.economy = Float(economy)
                                 srEconomy = ("Economy: \(economy)")
                             }

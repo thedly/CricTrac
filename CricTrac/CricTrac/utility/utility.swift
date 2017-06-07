@@ -412,6 +412,9 @@ func saveToCachedImages(image:UIImage,imageName:String){
 
 
 public func logout(currentController: UIViewController) {
+    
+    fireBaseRef.child("Users").child((currentUser?.uid)!).child("UserSettings").child("FCMToken").removeValue()
+    
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
     

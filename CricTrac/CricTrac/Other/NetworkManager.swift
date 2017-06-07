@@ -94,8 +94,8 @@ func timelinePostBump(postId:String){
     dataTask?.resume()
 }
 
-func sendWelcomeMail(emailid:String, role:String){
-    let welcomeMailURL = serverBaseURL+"/welcomeMail/\((emailid))/\(role)"
+func sendWelcomeMail(userId:String){
+    let welcomeMailURL = serverBaseURL+"/welcomeMail/\((userId))"
     let request = NSMutableURLRequest(URL: NSURL(string:welcomeMailURL)!)
     request.HTTPMethod = "GET"
     
