@@ -123,7 +123,13 @@ class MasterDataListViewController: UIViewController,UITableViewDelegate,UITable
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         if indexPath.section == 0 {
-            cell.textLabel?.text = "Swipe to delete the auto-suggestions data. This will not impact your match deta."
+            if teamNames.count == 0 {
+                 cell.textLabel?.text = "No data"
+            }
+            else {
+               cell.textLabel?.text = "Swipe to delete the auto-suggestions data. This will not impact your match data."
+            }
+            
             cell.textLabel?.numberOfLines = 3
             cell.textLabel?.textColor = UIColor.blackColor()
             cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 15)
