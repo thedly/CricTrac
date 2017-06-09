@@ -23,6 +23,7 @@ import SwiftyStoreKit
 import GoogleMobileAds
 import ReachabilitySwift
     
+    
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -32,6 +33,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var tokenString = ""
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+       
+      //  window?.makeKeyAndVisible()
+        let launchedBefore = NSUserDefaults.standardUserDefaults().boolForKey("launchedBefore")
+        
+        if !launchedBefore  {
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "launchedBefore")
+            
+            let rootVC = viewControllerFrom("Main", vcid: "AppIntroductionScreens" )
+            window!.rootViewController = rootVC
+            return true
+        }
+        
         self.listenForReachability()
         FIRApp.configure()
         
@@ -69,6 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //self.fetchProductInfo()
             //self.didTapPurchaseButton()
         }
+        
         
         return true
     }
@@ -213,6 +228,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         let splashScreenVC = viewControllerFrom("Main", vcid: "SplashScreenViewController")
         window?.rootViewController = splashScreenVC
+        
     }
     
 
