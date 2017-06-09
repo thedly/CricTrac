@@ -1282,6 +1282,9 @@ func likeOrUnlike(postId:String,like:(likeDict:[String:[String:String]])->Void,u
 func upgradePlayer() {
     let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").child("UserStatus")
     ref.setValue("Premium")
+    
+    //API call to send the upgrade mail
+    sendUpgradeMail(currentUser!.uid)
 }
 
 func getPost(postId:String,sucessBlock:([String:AnyObject])->Void){
@@ -1307,22 +1310,6 @@ func delComment(postId:String, commentId:String){
     fireBaseRef.child("TimelinePosts").child(postId).child("TimelineComments").child(commentId).removeValue()
    
     calCmtCnt(postId)
-}
-
-// call the API to delete all reference timeline nodes
-func deleteTimelineNodes(postId:String){
-    let timelineURL = serverBaseURL+"/deleteTimeline/"+postId
-    let request = NSMutableURLRequest(URL: NSURL(string:timelineURL)!)
-    request.HTTPMethod = "POST"
-    
-    dataTask = defaultSession.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
-        guard error == nil && data != nil else {
-            // check for fundamental networking error
-            print("error=\(error)")
-            return
-        }
-    })
-    dataTask?.resume()
 }
 
 //save device tokens for push notification

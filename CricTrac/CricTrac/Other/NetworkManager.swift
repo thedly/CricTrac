@@ -84,6 +84,22 @@ func newMatchNotification(matchId:String){
     dataTask?.resume()
 }
 
+func deleteTimelineNodes(postId:String){
+    let timelineURL = serverBaseURL+"/deleteTimeline/"+postId
+    let request = NSMutableURLRequest(URL: NSURL(string:timelineURL)!)
+    request.HTTPMethod = "POST"
+    
+    dataTask = defaultSession.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+        guard error == nil && data != nil else {
+            // check for fundamental networking error
+            print("error=\(error)")
+            return
+        }
+    })
+    dataTask?.resume()
+}
+
+
 func timelinePostBump(postId:String){
     let timelineBumpURL = serverBaseURL+"/editTimeline/\(postId)"
     let request = NSMutableURLRequest(URL: NSURL(string:timelineBumpURL)!)
@@ -103,6 +119,18 @@ func sendWelcomeMail(userId:String){
     })
     dataTask?.resume()
 }
+
+func sendUpgradeMail(userId:String){
+    let welcomeMailURL = serverBaseURL+"/upgradeMail/\((userId))"
+    let request = NSMutableURLRequest(URL: NSURL(string:welcomeMailURL)!)
+    request.HTTPMethod = "GET"
+    
+    dataTask = defaultSession.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+    })
+    dataTask?.resume()
+}
+
+
 
 var pageKey:String?
 
