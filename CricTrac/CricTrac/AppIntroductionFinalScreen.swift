@@ -12,6 +12,7 @@ class AppIntroductionFinalScreen: UIViewController{
 
     @IBOutlet weak var FirstTextLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var doneButton: UIButton!
     
     override func viewDidLoad() {
      self.FirstTextLabel.backgroundColor = UIColor.clearColor()
@@ -30,8 +31,8 @@ class AppIntroductionFinalScreen: UIViewController{
         FirstTextLabel.center.x -= view.bounds.width // Place it on the left of the view with the width = the bounds'width of the view.
         // animate it from the left to the right
         UIView.animateWithDuration(1.5, delay: 1.0, options: [.CurveEaseOut], animations: {
-            self.imageView.alpha = 0.5
-
+            self.imageView.alpha = 0.3
+            self.FirstTextLabel.text = "Your cooling place. Hang out with your friends and socialize. \nAdd more friends from the SUGGESTIONS  or SEARCH for new friends. \nINVITE new friends to your Dugout. \nClick on Name to view their profile."
             self.FirstTextLabel.center.x += self.view.bounds.width
             self.view.layoutIfNeeded()
             }, completion: nil)
@@ -40,6 +41,8 @@ class AppIntroductionFinalScreen: UIViewController{
     
     
     @IBAction func doneButtonTapped(sender: AnyObject) {
+      //  self.doneButton.setTitle("Loading...", forState: .Normal)
+        //doneButton!.setTitle("Loading...", forState: .Normal)
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         appDelegate.application(UIApplication.sharedApplication(), didFinishLaunchingWithOptions: nil)

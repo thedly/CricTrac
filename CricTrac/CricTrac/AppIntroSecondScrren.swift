@@ -24,9 +24,9 @@ class AppIntroSecondScrren:UIViewController {
         FirstTextLabel.center.x = view.center.x // Place it in the center x of the view.
         FirstTextLabel.center.x -= view.bounds.width // Place it on the left of the view with the width = the bounds'width of the view.
         // animate it from the left to the right
-        UIView.animateWithDuration(1.5, delay: 1.0, options: [.BeginFromCurrentState], animations: {
+        UIView.animateWithDuration(1.5, delay: 1.0, options: [.CurveEaseOut], animations: {
              self.imageView.alpha = 0.5
-            self.FirstTextLabel.text = "Place it in the center x of the view. \nPlace it on the left of the view with the width = the bounds'width of the view."
+            self.FirstTextLabel.text = "Fill all the personal information which is required to create the Profile. You can edit your details anytime later from your Profile page. \n\nClick NEXT to fill out additional information about you, which are optional."
             self.FirstTextLabel.center.x += self.view.bounds.width
             self.view.layoutIfNeeded()
             }, completion: nil)
