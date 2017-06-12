@@ -493,6 +493,19 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                 }
                 secondTeamScore = secondScore as! String
             }
+            
+            //set White Color for Player's Team and Gray Color for Opponent team
+            
+            if hTeam == matchDetailsData["Team"] as? String {
+               homeTeam.textColor = UIColor.whiteColor()
+                awayTeam.textColor = UIColor.blackColor()
+            }
+            else {
+                awayTeam.textColor = UIColor.whiteColor()
+                homeTeam.textColor = UIColor.blackColor()
+            }
+
+            
         }
         setResult()
         
