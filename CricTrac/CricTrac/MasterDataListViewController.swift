@@ -124,7 +124,8 @@ class MasterDataListViewController: UIViewController,UITableViewDelegate,UITable
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         if indexPath.section == 0 {
             if teamNames.count == 0 {
-                 cell.textLabel?.text = "No data"
+                 cell.textLabel?.text = "No data."
+                cell.textLabel?.textAlignment = .Center
             }
             else {
                cell.textLabel?.text = "Swipe to delete the auto-suggestions data. This will not impact your match data."

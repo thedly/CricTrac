@@ -489,6 +489,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                 if let secondWickets = matchDetailsData["SecondBattingWickets"] {
                     let secondTeamOvers: String = (matchDetailsData["SecondBattingOvers"] ?? "-") as! String
                     awayTeam.text?.appendContentsOf("\n\(secondScore)/\(secondWickets)\n\(secondTeamOvers) Overs")
+                    
                 }
                 secondTeamScore = secondScore as! String
             }

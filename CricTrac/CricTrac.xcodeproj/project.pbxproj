@@ -147,6 +147,7 @@
 		B835B3581EEA7D7A001048A6 /* AppIntroThirdScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3571EEA7D7A001048A6 /* AppIntroThirdScreen.swift */; };
 		B835B35A1EEA7D92001048A6 /* AppIntroFourthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3591EEA7D92001048A6 /* AppIntroFourthScreen.swift */; };
 		B835B35C1EEA7DAF001048A6 /* AppIntroFifthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B35B1EEA7DAF001048A6 /* AppIntroFifthScreen.swift */; };
+		B835B3981EEE6947001048A6 /* AppIntroBasicScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3971EEE6946001048A6 /* AppIntroBasicScreen.swift */; };
 		B88CB6BA1EE67110009CD077 /* MasterDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88CB6B91EE67110009CD077 /* MasterDataViewController.swift */; };
 		B88CB6BC1EE68499009CD077 /* MasterDataListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88CB6BB1EE68498009CD077 /* MasterDataListViewController.swift */; };
 		E1B593691EB4E63A00C8A553 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B593681EB4E63A00C8A553 /* NotificationsViewController.swift */; };
@@ -313,6 +314,7 @@
 		B835B3571EEA7D7A001048A6 /* AppIntroThirdScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroThirdScreen.swift; sourceTree = "<group>"; };
 		B835B3591EEA7D92001048A6 /* AppIntroFourthScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroFourthScreen.swift; sourceTree = "<group>"; };
 		B835B35B1EEA7DAF001048A6 /* AppIntroFifthScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroFifthScreen.swift; sourceTree = "<group>"; };
+		B835B3971EEE6946001048A6 /* AppIntroBasicScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroBasicScreen.swift; sourceTree = "<group>"; };
 		B88CB6B91EE67110009CD077 /* MasterDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterDataViewController.swift; sourceTree = "<group>"; };
 		B88CB6BB1EE68498009CD077 /* MasterDataListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterDataListViewController.swift; sourceTree = "<group>"; };
 		DA2224284F64FAE77B7776D9 /* Pods_CricTrac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CricTrac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -513,6 +515,7 @@
 		8958F5F01D39298D0028D5AA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B835B3971EEE6946001048A6 /* AppIntroBasicScreen.swift */,
 				679367361EC710720097B187 /* AchievementTableViewCell.swift */,
 				B80B560F1EB9D1580014FA9D /* LikesTableViewCell.swift */,
 				892EA67C1D58DEBE00BEE5A3 /* ProfileDetails.swift */,
@@ -858,6 +861,7 @@
 				8909FACB1DB9B49900066FC5 /* DoneButton.swift in Sources */,
 				895BC3CC1E266B500033D330 /* StaticPageViewController.swift in Sources */,
 				892520B21E336044006946C0 /* CoachDashboardViewController.swift in Sources */,
+				B835B3981EEE6947001048A6 /* AppIntroBasicScreen.swift in Sources */,
 				4642DAA51D5039DD001F039D /* LoginViewController.swift in Sources */,
 				89CC84FC1D43E4D6007F2402 /* SummaryMatchDetailsViewController.swift in Sources */,
 				4600689B1D638545007C9457 /* SuggestionCell.swift in Sources */,

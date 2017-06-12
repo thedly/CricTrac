@@ -11,7 +11,8 @@ import UIKit
 class AppIntroductionScreens: UIPageViewController,UIPageViewControllerDelegate,UIPageViewControllerDataSource {
     
     lazy var vcArray:[UIViewController] = {
-        return [self.VCInstance("FirstScreenVC"),
+        return [self.VCInstance("AppIntroBasicScreen"),
+                self.VCInstance("FirstScreenVC"),
                 self.VCInstance("SecondScreenVC"),
                 self.VCInstance("ThirdScreenVC"),
                 self.VCInstance("FourthScreenVC"),
