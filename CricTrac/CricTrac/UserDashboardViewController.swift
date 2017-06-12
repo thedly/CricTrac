@@ -621,14 +621,14 @@ func setDashboardData(){
                     self.highScore.text = String(DashboardDetails.TopBatting1stMatchDispScore)
                 }
                 else {
-                    self.highScore.text = "NA"
+                    self.highScore.text = "-"
                 }
                 
                 if String(DashboardDetails.TopBowling1stMatchID) != "-" {
                     self.BB.text = String(DashboardDetails.TopBowling1stMatchScore)
                 }
                 else {
-                    self.BB.text = "NA"
+                    self.BB.text = "-"
                 }
                 
                 let winPercent = Double(String(DashboardDetails.WinPercentage))

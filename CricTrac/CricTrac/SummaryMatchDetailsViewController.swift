@@ -489,9 +489,23 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                 if let secondWickets = matchDetailsData["SecondBattingWickets"] {
                     let secondTeamOvers: String = (matchDetailsData["SecondBattingOvers"] ?? "-") as! String
                     awayTeam.text?.appendContentsOf("\n\(secondScore)/\(secondWickets)\n\(secondTeamOvers) Overs")
+                    
                 }
                 secondTeamScore = secondScore as! String
             }
+            
+            //set White Color for Player's Team and Gray Color for Opponent team
+            
+            if hTeam == matchDetailsData["Team"] as? String {
+               homeTeam.textColor = UIColor.whiteColor()
+                awayTeam.textColor = UIColor.blackColor()
+            }
+            else {
+                awayTeam.textColor = UIColor.whiteColor()
+                homeTeam.textColor = UIColor.blackColor()
+            }
+
+            
         }
         setResult()
         

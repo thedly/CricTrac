@@ -129,7 +129,7 @@ let settingsMenuData = [
 
 //variable to decide whether to show the AD or not
 var showAds = "1"
-//let adUnitId = "ca-app-pub-3940256099942544/2934735716"
+//let adUnitId = "ca-app-pub-6910997127655647/2857690612"
 var adUnitId = ""
 
 
