@@ -136,10 +136,10 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         let aCell =  RequestsTblview.dequeueReusableCellWithIdentifier("FriendRequestsCell", forIndexPath: indexPath) as! FriendRequestsCell
         if FriendRequestsData[indexPath.row].isSentRequest == true {
             
-            let friendUserId = FriendRequestsData[indexPath.row].SentTo
-            aCell.friendId = friendUserId
+            let reqFriendUserId = FriendRequestsData[indexPath.row].SentTo
+            aCell.friendId = reqFriendUserId
 
-            fetchFriendDetail(friendUserId, sucess: { (result) in
+            fetchFriendDetail(reqFriendUserId, sucess: { (result) in
                 let proPic = result["proPic"]
                 let city =   result["city"]
                 aCell.FriendCity.text = city
@@ -169,10 +169,10 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         }
         else
         {
-            let friendUserId = FriendRequestsData[indexPath.row].ReceivedFrom
-            aCell.friendId = friendUserId
+            let reqFriendUserId = FriendRequestsData[indexPath.row].ReceivedFrom
+            aCell.friendId = reqFriendUserId
 
-            fetchFriendDetail(friendUserId, sucess: { (result) in
+            fetchFriendDetail(reqFriendUserId, sucess: { (result) in
                 let proPic = result["proPic"]
                 let city =   result["city"]
                 aCell.FriendCity.text = city

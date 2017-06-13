@@ -133,10 +133,10 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         //if FriendRequestsData.filter({$0.Name == UserProfilesData[indexPath.row].fullName}).first == nil {
             if let aCell =  SuggestsTblview.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as? FriendSuggestionsCell {
                 
-                let friendUserId = UserProfilesData[indexPath.row].id
-                aCell.friendId = friendUserId
+                let sugFriendUserId = UserProfilesData[indexPath.row].id
+                aCell.friendId = sugFriendUserId
 
-                fetchFriendDetail(friendUserId, sucess: { (result) in
+                fetchFriendDetail(sugFriendUserId, sucess: { (result) in
                     let proPic = result["proPic"]
                     let city =   result["city"]
                     aCell.userCity.text = city

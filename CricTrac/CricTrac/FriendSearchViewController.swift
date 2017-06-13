@@ -102,10 +102,10 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
         if let aCell =  friendSearchTbl.dequeueReusableCellWithIdentifier("FriendSuggestionsCell") as? FriendSuggestionsCell {
             if searchedProfiles.count > 0 && indexPath.row < searchedProfiles.count {
                 
-                let friendUserId = searchedProfiles[indexPath.row].id
-                aCell.friendId = friendUserId
+                let searchFriendUserId = searchedProfiles[indexPath.row].id
+                aCell.friendId = searchFriendUserId
                 
-                fetchFriendDetail(friendUserId, sucess: { (result) in
+                fetchFriendDetail(searchFriendUserId, sucess: { (result) in
                     let proPic = result["proPic"]
                     let city =   result["city"]
                     aCell.userCity.text = city
