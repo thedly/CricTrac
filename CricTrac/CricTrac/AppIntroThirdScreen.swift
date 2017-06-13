@@ -28,7 +28,7 @@ class AppIntroThirdScreen:UIViewController {
         // animate it from the left to the right
         UIView.animateWithDuration(1.5, delay: 1.0, options: [.CurveEaseOut], animations: {
             self.imageView.alpha = 0.5
-            self.FirstTextLabel.text = "Fill out your cricket related or additional information. Skip to SAVE if you feel to add these data later."
+            self.FirstTextLabel.text = "Enter your cricket related and additional information. \nSkip to SAVE if you wish to add these data later. \nThis page contents will vary based on the role you selected."
             self.FirstTextLabel.center.x += self.view.bounds.width
             self.view.layoutIfNeeded()
             }, completion: nil)

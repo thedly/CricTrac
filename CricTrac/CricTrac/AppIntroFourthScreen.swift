@@ -28,7 +28,7 @@ class AppIntroFourthScreen: UIViewController {
         // animate it from the left to the right
         UIView.animateWithDuration(1.5, delay: 1.0, options: [.CurveEaseOut], animations: {
             self.imageView.alpha = 0.3
-            self.FirstTextLabel.text = "This is the summary page for a Cricket Player. Information on this page will vary for Coaches and Fans."
+            self.FirstTextLabel.text = "Performance and Summary page for a Cricket Player. \nInformation on this page will vary for Coach and Fan."
             self.FirstTextLabel.center.x += self.view.bounds.width
             self.view.layoutIfNeeded()
             }, completion: nil)
