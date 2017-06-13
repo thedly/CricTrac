@@ -30,7 +30,7 @@ class AppIntroFifthScreen:UIViewController {
         // animate it from the left to the right
         UIView.animateWithDuration(1.5, delay: 1.0, options: [.CurveEaseOut], animations: {
             self.imageView.alpha = 0.3
-            self.FirstTextLabel.text = "View all your posts here. Click on Free Hit to add a new post. \nClick on Notifications icon to view all the notifications."
+            self.FirstTextLabel.text = "Your social media room. \nClick on Free Hit to add new post, which will be visible to all your Friends. \n\nClick on Notifications icon to view the latest feeds for you."
             self.FirstTextLabel.center.x += self.view.bounds.width
             self.view.layoutIfNeeded()
             }, completion: nil)

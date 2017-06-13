@@ -32,7 +32,7 @@ class AppIntroductionFinalScreen: UIViewController{
         // animate it from the left to the right
         UIView.animateWithDuration(1.5, delay: 1.0, options: [.CurveEaseOut], animations: {
             self.imageView.alpha = 0.3
-            self.FirstTextLabel.text = "Your cooling place. Hang out with your friends and socialize. \nAdd more friends from the SUGGESTIONS  or SEARCH for new friends. \nINVITE new friends to your Dugout. \nClick on Name to view their profile."
+            self.FirstTextLabel.text = "Your cooling place to hang out with friends. \nAdd friends from SUGGESTIONS or SEARCH for new friends. \nINVITE friends to your Dugout. \n\nClick on Name to view their sightscreen. \n\n\nClick DONE to start your innings."
             self.FirstTextLabel.center.x += self.view.bounds.width
             self.view.layoutIfNeeded()
             }, completion: nil)
