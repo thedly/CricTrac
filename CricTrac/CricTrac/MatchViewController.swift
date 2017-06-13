@@ -279,6 +279,7 @@ extension MatchViewController:UITextFieldDelegate
             addSuggstionBox(textField,dataSource: groundNames)
         }
         else if textField == venueText{
+             animateViewMoving(true, moveValue: 100)
             addSuggstionBox(textField,dataSource: venueNames)
         }
         else if textField == opponentText{
@@ -286,6 +287,7 @@ extension MatchViewController:UITextFieldDelegate
             self.teamOROpponentFieldChanged = true
         }
         else if textField == tournamentText{
+            animateViewMoving(true, moveValue: 100)
             addSuggstionBox(textField,dataSource: tournaments)
         }
         else if textField == stage {
@@ -300,6 +302,16 @@ extension MatchViewController:UITextFieldDelegate
         
     }
     
+    
+    func animateViewMoving (up:Bool, moveValue :CGFloat){
+        let movementDuration:NSTimeInterval = 0.3
+        let movement:CGFloat = ( up ? -moveValue : moveValue)
+        UIView.beginAnimations( "animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration )
+        self.view.frame = CGRectOffset(self.view.frame, 0,  movement)
+        UIView.commitAnimations()
+    }
     
     func AddDoneButtonTo(inputText:UITextField) {
         
@@ -325,6 +337,10 @@ extension MatchViewController:UITextFieldDelegate
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
+         if textField == venueText || textField == tournamentText {
+            animateViewMoving(false, moveValue: 100)
+           // addSuggstionBox(textField,dataSource: venueNames)
+        }
         
 //        if textField.text?.trimWhiteSpace.length > 0{
 //            
