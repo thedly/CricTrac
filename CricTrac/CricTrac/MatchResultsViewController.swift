@@ -94,6 +94,9 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         if swapBtnVal == nil {
             swapBtnVal = 0
         }
+        if resultText.text == "" {
+            resultText.text = "Won"
+        }
     }
     
     override func didReceiveMemoryWarning() {

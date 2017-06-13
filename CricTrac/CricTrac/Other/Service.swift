@@ -62,7 +62,7 @@ func loadInitialValues(){
     
     fireBaseRef.child("MatchStage").observeSingleEventOfType(.Value, withBlock: { snapshot in
         if let value = snapshot.value as? [String]{
-            MatchStage = value
+            MatchStage = value.reverse()
         }
     })
     
