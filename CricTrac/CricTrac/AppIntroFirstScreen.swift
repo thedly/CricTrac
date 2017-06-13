@@ -28,7 +28,7 @@ class AppIntroFirstScreen:UIViewController {
         // animate it from the left to the right
         UIView.animateWithDuration(1.5, delay: 0, options: [.CurveEaseOut], animations: {
              self.imageView.alpha = 0.5
-            self.FirstTextLabel.text = "Select your role and click NEXT to fill your personal information which is mandatory."
+            self.FirstTextLabel.text = "Select your role and click NEXT to fill your personal information. \n\nIf you are not a player or coach, select Cricket Fan to proceed."
             self.FirstTextLabel.center.x += self.view.bounds.width
             self.view.layoutIfNeeded()
             }, completion: nil)
