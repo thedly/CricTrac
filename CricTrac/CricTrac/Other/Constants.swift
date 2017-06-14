@@ -137,9 +137,9 @@ var adUnitId = ""
 let fireBaseRef =  FIRDatabase.database().reference()
 
 //Dev File Storage
-//let storageRef = FIRStorage.storage().referenceForURL("gs://arjun-innovations.appspot.com")
+let storageRef = FIRStorage.storage().referenceForURL("gs://arjun-innovations.appspot.com")
 //Azure Dev environment url
-//let serverBaseURL = "https://crictracdevserver.azurewebsites.net"
+let serverBaseURL = "https://crictracdevserver.azurewebsites.net"
 
 //QA File Storage
 //let storageRef = FIRStorage.storage().referenceForURL("gs://crictracweb.appspot.com")
@@ -147,9 +147,9 @@ let fireBaseRef =  FIRDatabase.database().reference()
 //let serverBaseURL = "https://crictracqaserver.azurewebsites.net"
 
 //Prod File Storgage
-let storageRef = FIRStorage.storage().referenceForURL("gs://crictrac-2e4c7.appspot.com")
+//let storageRef = FIRStorage.storage().referenceForURL("gs://crictrac-2e4c7.appspot.com")
 //Azure Prod environment url
-let serverBaseURL = "https://crictracserver.azurewebsites.net"
+//let serverBaseURL = "https://crictracserver.azurewebsites.net"
 
 //var versionAndBuildNumber:String{
 //    let nsObject: AnyObject? = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"]
