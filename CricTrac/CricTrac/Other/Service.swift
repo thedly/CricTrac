@@ -1314,7 +1314,9 @@ func delComment(postId:String, commentId:String){
 
 //save device tokens for push notification
 func saveFCMToken(token:String) {
-    fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings").child("FCMToken").setValue(token)
+    if currentUser?.uid != nil {
+        fireBaseRef.child("Users").child(currentUser!.uid).child("UserSettings").child("FCMToken").setValue(token)
+    }
 }
 
 

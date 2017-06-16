@@ -49,6 +49,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.listenForReachability()
         FIRApp.configure()
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(tokenRefreshNotification(_:)), name: "NotificationIdentifier", object: nil)
+        
         registerForPushNotifications(application)
         
         FIRDatabase.database().persistenceEnabled = true
@@ -109,6 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    
     func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
         if notificationSettings.types != .None {
             application.registerForRemoteNotifications()
@@ -116,14 +119,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        let tokenChars = UnsafePointer<CChar>(deviceToken.bytes)
-//        var tokenString = ""
-        
-        for i in 0..<deviceToken.length {
-            tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
-        }
-        
+//        let tokenChars = UnsafePointer<CChar>(deviceToken.bytes)
+////        var tokenString = ""
+//        
+//        for i in 0..<deviceToken.length {
+//            tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
+//        }
         //print("Device Token:", tokenString)
+        
+        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.Sandbox)
+        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.Prod)
+        print("FIRInstanceID: \(FIRInstanceID.instanceID().token())")
+        if let initialToken = FIRInstanceID.instanceID().token() {
+            tokenString = initialToken
+        }
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
@@ -132,6 +141,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func tokenRefreshNotification(notification: NSNotification) {
         if let refreshedToken = FIRInstanceID.instanceID().token() {
+            tokenString = refreshedToken
             print("InstanceID token: \(refreshedToken)")
         }
         
@@ -139,6 +149,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        //connectToFcm()
         
     }
+    
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject],
                      fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
@@ -211,6 +222,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        //update the FCM Token
+        if FIRInstanceID.instanceID().token() != nil {
+            saveFCMToken(FIRInstanceID.instanceID().token()!)
+        }
     }
 
     func applicationWillTerminate(application: UIApplication) {
@@ -230,7 +245,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = splashScreenVC
         
     }
+}
     
 
-}
+    
 

@@ -276,6 +276,7 @@ extension MatchViewController:UITextFieldDelegate
             self.teamOROpponentFieldChanged = true
         }
         else if textField == groundText{
+            animateViewMoving(true, moveValue: 100)
             addSuggstionBox(textField,dataSource: groundNames)
         }
         else if textField == venueText{
