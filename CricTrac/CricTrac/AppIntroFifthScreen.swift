@@ -10,7 +10,6 @@ import UIKit
 
 class AppIntroFifthScreen:UIViewController {
     
-    @IBOutlet weak var FirstTextLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
     override func viewDidLoad() {
@@ -25,13 +24,9 @@ class AppIntroFifthScreen:UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        FirstTextLabel.center.x = view.center.x // Place it in the center x of the view.
-        FirstTextLabel.center.x -= view.bounds.width // Place it on the left of the view with the width = the bounds'width of the view.
         // animate it from the left to the right
         UIView.animateWithDuration(1.5, delay: 1.0, options: [.CurveEaseOut], animations: {
-            self.imageView.alpha = 0.3
-            self.FirstTextLabel.text = "Your social media room. \nClick on Free Hit to add new post, which will be visible to all your Friends. \n\nClick on Notifications icon to view the latest feeds for you."
-            self.FirstTextLabel.center.x += self.view.bounds.width
+            //self.imageView.alpha = 0.3
             self.view.layoutIfNeeded()
             }, completion: nil)
     }

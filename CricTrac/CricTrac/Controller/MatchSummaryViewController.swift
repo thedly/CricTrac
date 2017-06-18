@@ -179,13 +179,32 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             matchVenueAndDate.appendContentsOf(" | \(group)")
         }
         
-        if let ground = value["Ground"]{
-            mData.ground = ground as! String
-            
-            if let venue = value["Venue"] as? String where venue != "-" {
-                mData.ground = "\(ground), \(venue)"
-            }
+        var groundData = ""
+        
+        let ground = value["Ground"] as? String
+        if ground != "-" {
+            groundData = ground! + " "
         }
+        
+        let venue = value["Venue"] as? String
+        if venue != "-" {
+            groundData = groundData + venue!
+        }
+        
+        if ground == "-" && venue == "-" {
+            groundData = (value["Level"] as? String)! + " Match"
+        }
+        
+        mData.ground = groundData
+        
+        
+//        if let ground = value["Ground"]{
+//            mData.ground = ground as! String
+//            
+//            if let venue = value["Venue"] as? String where venue != "-" {
+//                mData.ground = "\(ground), \(venue)"
+//            }
+//        }
         
         if let ballsFaced = value["BallsFaced"] as? String where ballsFaced != "-", let runsScored = value["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
             

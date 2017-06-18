@@ -337,13 +337,18 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             formattedString.appendAttributedString(dateAttachmentString)
             formattedString.bold("  \(dat)  ", fontName: appFont_bold, fontSize: 15)
             
-            if let grnd = matchDetailsData["Ground"] {
+            let groundData = matchDetailsData["Ground"] as? String
+            
+            if let grnd = matchDetailsData["Ground"] as? String where grnd != "-" {
                 formattedString.appendAttributedString(groundAttachmentString)
-                formattedString.bold("  \(grnd)", fontName: appFont_bold, fontSize: 15)
+                formattedString.bold(" \(grnd)", fontName: appFont_bold, fontSize: 15)
             }
             
             if let venue = matchDetailsData["Venue"] as? String where venue != "-"  {
-                formattedString.bold(", \(venue)", fontName: appFont_bold, fontSize: 15)
+                if groundData == "-" {
+                    formattedString.appendAttributedString(groundAttachmentString)
+                }
+                    formattedString.bold(" \(venue)", fontName: appFont_bold, fontSize: 15)
             }
             
             matchDateAndVenue.attributedText = formattedString

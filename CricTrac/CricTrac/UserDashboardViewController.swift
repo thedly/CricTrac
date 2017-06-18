@@ -738,14 +738,32 @@ func setDashboardData(){
                                 matchVenueAndDate.appendContentsOf(" | \(group)")
                             }
                             
-                            if let ground = data["Ground"]{
-                                mData.ground = ground as! String
-                                
-                                if let venue = data["Venue"] as? String where venue != "-" {
-                                    mData.ground = "\(ground), \(venue)"
-                                }
-                                groundVenue = ("\(mData.ground)")
+                            var groundData = ""
+                            
+                            let ground = data["Ground"] as? String
+                            if ground != "-" {
+                                groundData = ground! + " "
                             }
+                            
+                            let venue = data["Venue"] as? String
+                            if venue != "-" {
+                                groundData = groundData + venue!
+                            }
+                            
+                            if ground == "-" && venue == "-" {
+                                groundData = (data["Level"] as? String)! + " Match"
+                            }
+                            
+                            groundVenue = groundData
+                            
+//                            if let ground = data["Ground"]{
+//                                mData.ground = ground as! String
+//                                
+//                                if let venue = data["Venue"] as? String where venue != "-" {
+//                                    mData.ground = "\(ground), \(venue)"
+//                                }
+//                                groundVenue = ("\(mData.ground)")
+//                            }
                             
                             self.summaryViewHeightConstraint1.constant = 70
                             self.summaryStackViewHeightConstraint.constant = 80
@@ -783,8 +801,6 @@ func setDashboardData(){
                             if let opponent  = data["Opponent"]{
                                 opponentName = opponent as! String
                             }
-                            
-                            
                             
                             self.firstRecentMatchScoreCard.attributedText = battingBowlingScore
                             self.firstRecentMatchOpponentName.text = opponentName
@@ -860,14 +876,32 @@ func setDashboardData(){
                                 matchVenueAndDate.appendContentsOf(" | \(group)")
                             }
                             
-                            if let ground = data["Ground"]{
-                                mData.ground = ground as! String
-                                
-                                if let venue = data["Venue"] as? String where venue != "-" {
-                                    mData.ground = "\(ground), \(venue)"
-                                }
-                                groundVenue = ("\(mData.ground)")
+                            var groundData = ""
+                            
+                            let ground = data["Ground"] as? String
+                            if ground != "-" {
+                                groundData = ground! + " "
                             }
+                            
+                            let venue = data["Venue"] as? String
+                            if venue != "-" {
+                                groundData = groundData + venue!
+                            }
+                            
+                            if ground == "-" && venue == "-" {
+                                groundData = (data["Level"] as? String)! + " Match"
+                            }
+                            
+                            groundVenue = groundData
+                            
+//                            if let ground = data["Ground"]{
+//                                mData.ground = ground as! String
+//                                
+//                                if let venue = data["Venue"] as? String where venue != "-" {
+//                                    mData.ground = "\(ground), \(venue)"
+//                                }
+//                                groundVenue = ("\(mData.ground)")
+//                            }
                             
                             self.summaryViewHeightConstraint2.constant = 70
                             self.summaryStackViewHeightConstraint.constant = self.summaryStackViewHeightConstraint.constant + 70
@@ -974,14 +1008,32 @@ func setDashboardData(){
                                 matchVenueAndDate.appendContentsOf(" | \(group)")
                             }
                             
-                            if let ground = data["Ground"]{
-                                mData.ground = ground as! String
-                                
-                                if let venue = data["Venue"] as? String where venue != "-" {
-                                    mData.ground = "\(ground), \(venue)"
-                                }
-                                groundVenue = ("\(mData.ground)")
+                            var groundData = ""
+                            
+                            let ground = data["Ground"] as? String
+                            if ground != "-" {
+                                groundData = ground! + " "
                             }
+                            
+                            let venue = data["Venue"] as? String
+                            if venue != "-" {
+                                groundData = groundData + venue!
+                            }
+                            
+                            if ground == "-" && venue == "-" {
+                                groundData = (data["Level"] as? String)! + " Match"
+                            }
+                            
+                            groundVenue = groundData
+                            
+//                            if let ground = data["Ground"]{
+//                                mData.ground = ground as! String
+//                                
+//                                if let venue = data["Venue"] as? String where venue != "-" {
+//                                    mData.ground = "\(ground), \(venue)"
+//                                }
+//                                groundVenue = ("\(mData.ground)")
+//                            }
                             
                             if let ballsFaced = data["BallsFaced"] as? String where ballsFaced != "-", let runsScored = data["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
                                 
@@ -1071,14 +1123,32 @@ func setDashboardData(){
                                 matchVenueAndDate.appendContentsOf(" | \(group)")
                             }
                             
-                            if let ground = data["Ground"]{
-                                mData.ground = ground as! String
-                                
-                                if let venue = data["Venue"] as? String where venue != "-" {
-                                    mData.ground = "\(ground), \(venue)"
-                                }
-                                groundVenue = ("\(mData.ground)")
+                            var groundData = ""
+                            
+                            let ground = data["Ground"] as? String
+                            if ground != "-" {
+                                groundData = ground! + " "
                             }
+                            
+                            let venue = data["Venue"] as? String
+                            if venue != "-" {
+                                groundData = groundData + venue!
+                            }
+                            
+                            if ground == "-" && venue == "-" {
+                                groundData = (data["Level"] as? String)! + " Match"
+                            }
+                            
+                            groundVenue = groundData
+                            
+//                            if let ground = data["Ground"]{
+//                                mData.ground = ground as! String
+//                                
+//                                if let venue = data["Venue"] as? String where venue != "-" {
+//                                    mData.ground = "\(ground), \(venue)"
+//                                }
+//                                groundVenue = ("\(mData.ground)")
+//                            }
                             
                             if let ballsFaced = data["BallsFaced"] as? String where ballsFaced != "-", let runsScored = data["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
                                 
@@ -1164,14 +1234,32 @@ func setDashboardData(){
                                 matchVenueAndDate.appendContentsOf(" | \(group)")
                             }
                             
-                            if let ground = data["Ground"]{
-                                mData.ground = ground as! String
-                                
-                                if let venue = data["Venue"] as? String where venue != "-" {
-                                    mData.ground = "\(ground), \(venue)"
-                                }
-                                groundVenue = ("\(mData.ground)")
+                            var groundData = ""
+                            
+                            let ground = data["Ground"] as? String
+                            if ground != "-" {
+                                groundData = ground! + " "
                             }
+                            
+                            let venue = data["Venue"] as? String
+                            if venue != "-" {
+                                groundData = groundData + venue!
+                            }
+                            
+                            if ground == "-" && venue == "-" {
+                                groundData = (data["Level"] as? String)! + " Match"
+                            }
+                            
+                            groundVenue = groundData
+                            
+//                            if let ground = data["Ground"]{
+//                                mData.ground = ground as! String
+//                                
+//                                if let venue = data["Venue"] as? String where venue != "-" {
+//                                    mData.ground = "\(ground), \(venue)"
+//                                }
+//                                groundVenue = ("\(mData.ground)")
+//                            }
                             
                             if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
                                 
@@ -1252,14 +1340,32 @@ func setDashboardData(){
                                 matchVenueAndDate.appendContentsOf(" | \(group)")
                             }
                             
-                            if let ground = data["Ground"]{
-                                mData.ground = ground as! String
-                                
-                                if let venue = data["Venue"] as? String where venue != "-" {
-                                    mData.ground = "\(ground), \(venue)"
-                                }
-                                groundVenue = ("\(mData.ground)")
+                            var groundData = ""
+                            
+                            let ground = data["Ground"] as? String
+                            if ground != "-" {
+                                groundData = ground! + " "
                             }
+                            
+                            let venue = data["Venue"] as? String
+                            if venue != "-" {
+                                groundData = groundData + venue!
+                            }
+                            
+                            if ground == "-" && venue == "-" {
+                                groundData = (data["Level"] as? String)! + " Match"
+                            }
+                            
+                            groundVenue = groundData
+                            
+//                            if let ground = data["Ground"]{
+//                                mData.ground = ground as! String
+//                                
+//                                if let venue = data["Venue"] as? String where venue != "-" {
+//                                    mData.ground = "\(ground), \(venue)"
+//                                }
+//                                groundVenue = ("\(mData.ground)")
+//                            }
                             
                             if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
                                 

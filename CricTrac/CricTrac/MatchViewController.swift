@@ -234,10 +234,11 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         else if !(opponentText.text?.hasDataPresent)!{
             
             return true
-        }else if !(groundText.text?.hasDataPresent)!{
-            
-            return true
         }
+//        else if !(groundText.text?.hasDataPresent)!{
+//            
+//            return true
+//        }
         
         return false
     }

@@ -8,7 +8,6 @@
 
 import UIKit
 class AppIntroFirstScreen:UIViewController {
-    @IBOutlet weak var FirstTextLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
     override func viewDidLoad() {
@@ -23,13 +22,9 @@ class AppIntroFirstScreen:UIViewController {
         super.viewDidAppear(animated)
        
         
-        FirstTextLabel.center.x = view.center.x // Place it in the center x of the view.
-        FirstTextLabel.center.x -= view.bounds.width // Place it on the left of the view with the width = the bounds'width of the view.
         // animate it from the left to the right
         UIView.animateWithDuration(1.5, delay: 0, options: [.CurveEaseOut], animations: {
-             self.imageView.alpha = 0.5
-            self.FirstTextLabel.text = "Select your role and click NEXT to fill your personal information. \n\nIf you are not a player or coach, select Cricket Fan to proceed."
-            self.FirstTextLabel.center.x += self.view.bounds.width
+             //self.imageView.alpha = 0.5
             self.view.layoutIfNeeded()
             }, completion: nil)
     }
