@@ -26,7 +26,7 @@ class AppIntroBasicScreen:UIViewController {
         super.viewDidAppear(animated)
         
         // animate it from the left to the right
-        UIView.animateWithDuration(1.5, delay: 0.5, options: [.CurveEaseOut], animations: {
+        UIView.animateWithDuration(1.5, delay: 0, options: [.CurveEaseOut], animations: {
             self.imageView2.alpha = 1
             self.imageView.alpha = 0
             self.view.layoutIfNeeded()

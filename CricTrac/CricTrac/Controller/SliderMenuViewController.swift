@@ -10,6 +10,7 @@ import UIKit
 import SCLAlertView
 import KYDrawerController
 import Kingfisher
+import Firebase
 
 class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable,KYDrawerControllerDelegate {
     
@@ -96,12 +97,18 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
 //        }
         // Do any additional setup after loading the view.
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let deviceToken = appDelegate.tokenString
+       // let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
-        if deviceToken != "" {
-            saveFCMToken(deviceToken)
+        if FIRInstanceID.instanceID().token() != nil {
+            saveFCMToken(FIRInstanceID.instanceID().token()!)
         }
+        
+//        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+//        let deviceToken = appDelegate.tokenString
+//        
+//        if deviceToken != "" {
+//            saveFCMToken(deviceToken)
+//        }
         
     }
     

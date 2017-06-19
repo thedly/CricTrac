@@ -130,8 +130,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.Sandbox)
         FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.Prod)
         print("FIRInstanceID: \(FIRInstanceID.instanceID().token())")
-        if let initialToken = FIRInstanceID.instanceID().token() {
-            tokenString = initialToken
+//        if let initialToken = FIRInstanceID.instanceID().token() {
+//            tokenString = initialToken
+//        }
+        
+        if FIRInstanceID.instanceID().token() != nil {
+            saveFCMToken(FIRInstanceID.instanceID().token()!)
         }
     }
     
@@ -140,10 +144,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func tokenRefreshNotification(notification: NSNotification) {
-        if let refreshedToken = FIRInstanceID.instanceID().token() {
-            tokenString = refreshedToken
-            print("InstanceID token: \(refreshedToken)")
+        if FIRInstanceID.instanceID().token() != nil {
+            saveFCMToken(FIRInstanceID.instanceID().token()!)
         }
+//        if let refreshedToken = FIRInstanceID.instanceID().token() {
+//            tokenString = refreshedToken
+//            print("InstanceID token: \(refreshedToken)")
+//        }
         
         // Connect to FCM since connection may have failed when attempted before having a token.
        //connectToFcm()
@@ -223,9 +230,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         //update the FCM Token
-        if FIRInstanceID.instanceID().token() != nil {
-            saveFCMToken(FIRInstanceID.instanceID().token()!)
-        }
+//        if FIRInstanceID.instanceID().token() != nil {
+//            saveFCMToken(FIRInstanceID.instanceID().token()!)
+//        }
     }
 
     func applicationWillTerminate(application: UIApplication) {
