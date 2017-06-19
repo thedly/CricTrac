@@ -31,6 +31,7 @@ class CTDatePicker: NSObject {
                 df.dateFormat = "dd-MMM-yyyy"
                 datePicker.date = df.dateFromString(dateText!)!
             }
+            
             datePicker.maximumDate = NSDate()
         }
         inputText.inputView = datePicker

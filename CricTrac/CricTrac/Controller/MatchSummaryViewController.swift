@@ -12,6 +12,9 @@ import SwiftyStoreKit
 
 class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable {
 
+    @IBOutlet weak var yearDropdown: UITextField!
+    @IBOutlet weak var levelDropdown: UITextField!
+    @IBOutlet weak var ageGroupDropdown: UITextField!
     @IBOutlet weak var upgradeBtnHeight: NSLayoutConstraint!
     @IBOutlet var matchSummaryTable:UITableView!
     @IBOutlet weak var noMatchesHeightConstraint: NSLayoutConstraint!
@@ -22,6 +25,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     
     var userProfileData:Profile!
     
+    let ctDatePicker = CTDatePicker()
+    lazy var ctDataPicker = DataPicker()
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
@@ -41,6 +46,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.yearDropdown.delegate = self
+        self.ageGroupDropdown.delegate = self
+        self.levelDropdown.delegate = self
         
         upgradeButton.setTitle("Upgrade", forState: UIControlState.Normal)
         
@@ -394,3 +403,31 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     }
 
 }
+
+extension MatchSummaryViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(textField: UITextField) {
+        if textField == ageGroupDropdown {
+            
+           // addSuggstionBox(textField,dataSource: AgeGroupData)
+            
+            ctDataPicker = DataPicker()
+            let indexPos = AgeGroupData.indexOf(ageGroupDropdown.text!) ?? 0
+            ctDataPicker.showPicker(self, inputText: textField, data: AgeGroupData,selectedValueIndex: indexPos)
+        }
+        if textField == levelDropdown {
+            ctDataPicker = DataPicker()
+            let indexPos = PlayingLevels.indexOf(ageGroupDropdown.text!) ?? 0
+            ctDataPicker.showPicker(self, inputText: textField, data: PlayingLevels,selectedValueIndex: indexPos)
+        }
+        if textField == yearDropdown {
+            ctDatePicker.showPicker(self, inputText: textField)
+        }
+    }
+}
+
+
+
+
+
+
+
