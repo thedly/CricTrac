@@ -159,7 +159,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func UnfriendBtnBtnPressed(sender: UIButton) {
-        let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to remove this friend  ?", preferredStyle: .ActionSheet)
+        let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to remove this friend?", preferredStyle: .ActionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
             // Just dismiss the action sheet
             actionSheetController.dismissViewControllerAnimated(true, completion: nil)
