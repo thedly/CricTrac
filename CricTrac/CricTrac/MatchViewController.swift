@@ -299,6 +299,7 @@ extension MatchViewController:UITextFieldDelegate
            // ctDataPicker.showPicker(self, inputText: textField, data: MatchStage )
         }
         else if textField == oversText {
+             animateViewMoving(true, moveValue: 70)
             AddDoneButtonTo(textField)
         }
         
@@ -339,9 +340,11 @@ extension MatchViewController:UITextFieldDelegate
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-         if textField == venueText || textField == tournamentText {
+         if textField == venueText || textField == tournamentText || textField == groundText {
             animateViewMoving(false, moveValue: 100)
-           // addSuggstionBox(textField,dataSource: venueNames)
+        }
+         else if textField == oversText {
+           animateViewMoving(false, moveValue: 70)
         }
         
 //        if textField.text?.trimWhiteSpace.length > 0{

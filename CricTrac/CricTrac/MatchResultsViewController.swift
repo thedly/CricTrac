@@ -562,6 +562,17 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
 extension MatchResultsViewController:UITextFieldDelegate{
     func textFieldDidBeginEditing(textField: UITextField) {
         
+        if textField == firstScoreText || textField == secondScoreText {
+          animateViewMoving(true, moveValue: 40)
+        }
+        
+        if textField == firstOversText || textField == secondOversText {
+            animateViewMoving(true, moveValue: 160)
+        }
+        
+//        if textField == firstWicketsText {
+//            animateViewMoving(true, moveValue: 160)
+//        }
         
         if textField == resultText{
              //resultText.becomeFirstResponder()
@@ -591,12 +602,37 @@ extension MatchResultsViewController:UITextFieldDelegate{
         }
     }
     
+    func animateViewMoving (up:Bool, moveValue :CGFloat){
+        let movementDuration:NSTimeInterval = 0.3
+        let movement:CGFloat = ( up ? -moveValue : moveValue)
+        UIView.beginAnimations( "animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration )
+        self.view.frame = CGRectOffset(self.view.frame, 0,  movement)
+        UIView.commitAnimations()
+    }
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
+        
+        if textField == firstScoreText || textField == secondScoreText{
+            animateViewMoving(false, moveValue: 40)
+        }
+        
+        if textField == firstOversText || textField == secondOversText {
+            animateViewMoving(false, moveValue: 160)
+        }
+        
+//        if textField == firstWicketsText {
+//            animateViewMoving(false, moveValue: 160)
+//        }
+
+        
+        
         if textField == resultText{
              AchievementsText.userInteractionEnabled = true
         }

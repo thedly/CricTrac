@@ -147,9 +147,13 @@
 		B835B35A1EEA7D92001048A6 /* AppIntroFourthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3591EEA7D92001048A6 /* AppIntroFourthScreen.swift */; };
 		B835B35C1EEA7DAF001048A6 /* AppIntroFifthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B35B1EEA7DAF001048A6 /* AppIntroFifthScreen.swift */; };
 		B835B3981EEE6947001048A6 /* AppIntroBasicScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3971EEE6946001048A6 /* AppIntroBasicScreen.swift */; };
+		B85ECAB31EF8EC5A00CC29E5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B85ECAB21EF8EC5A00CC29E5 /* GoogleService-Info.plist */; };
+		B85ECAB51EF91B3B00CC29E5 /* AddMatchIntroScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85ECAB41EF91B3B00CC29E5 /* AddMatchIntroScreens.swift */; };
+		B85ECAB71EF91C7C00CC29E5 /* AddMatchFirstIntroScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85ECAB61EF91C7C00CC29E5 /* AddMatchFirstIntroScreen.swift */; };
+		B85ECAB91EF91CC900CC29E5 /* AddMatchSceIntroScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85ECAB81EF91CC900CC29E5 /* AddMatchSceIntroScreen.swift */; };
+		B85ECABB1EF91CF200CC29E5 /* AddMatchThirdIntroScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85ECABA1EF91CF200CC29E5 /* AddMatchThirdIntroScreen.swift */; };
 		B88CB6BA1EE67110009CD077 /* MasterDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88CB6B91EE67110009CD077 /* MasterDataViewController.swift */; };
 		B88CB6BC1EE68499009CD077 /* MasterDataListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88CB6BB1EE68498009CD077 /* MasterDataListViewController.swift */; };
-		E113C8CC1EF7D6D4009DBE0D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E113C8CB1EF7D6D4009DBE0D /* GoogleService-Info.plist */; };
 		E1B593691EB4E63A00C8A553 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B593681EB4E63A00C8A553 /* NotificationsViewController.swift */; };
 		F7856BE080406499CCB071C8 /* Pods_CricTrac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA2224284F64FAE77B7776D9 /* Pods_CricTrac.framework */; };
 /* End PBXBuildFile section */
@@ -314,10 +318,14 @@
 		B835B3591EEA7D92001048A6 /* AppIntroFourthScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroFourthScreen.swift; sourceTree = "<group>"; };
 		B835B35B1EEA7DAF001048A6 /* AppIntroFifthScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroFifthScreen.swift; sourceTree = "<group>"; };
 		B835B3971EEE6946001048A6 /* AppIntroBasicScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroBasicScreen.swift; sourceTree = "<group>"; };
+		B85ECAB21EF8EC5A00CC29E5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B85ECAB41EF91B3B00CC29E5 /* AddMatchIntroScreens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMatchIntroScreens.swift; sourceTree = "<group>"; };
+		B85ECAB61EF91C7C00CC29E5 /* AddMatchFirstIntroScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMatchFirstIntroScreen.swift; sourceTree = "<group>"; };
+		B85ECAB81EF91CC900CC29E5 /* AddMatchSceIntroScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMatchSceIntroScreen.swift; sourceTree = "<group>"; };
+		B85ECABA1EF91CF200CC29E5 /* AddMatchThirdIntroScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMatchThirdIntroScreen.swift; sourceTree = "<group>"; };
 		B88CB6B91EE67110009CD077 /* MasterDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterDataViewController.swift; sourceTree = "<group>"; };
 		B88CB6BB1EE68498009CD077 /* MasterDataListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterDataListViewController.swift; sourceTree = "<group>"; };
 		DA2224284F64FAE77B7776D9 /* Pods_CricTrac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CricTrac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E113C8CB1EF7D6D4009DBE0D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../backups/plist/Dev-plist/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E1B593681EB4E63A00C8A553 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -383,7 +391,7 @@
 		46C983831D3922D200DFC607 = {
 			isa = PBXGroup;
 			children = (
-				E113C8CB1EF7D6D4009DBE0D /* GoogleService-Info.plist */,
+				B85ECAB21EF8EC5A00CC29E5 /* GoogleService-Info.plist */,
 				89ABEB1E1E5BD0D7006BC0BC /* GoogleService-Info-new.plist */,
 				46C9838E1D3922D200DFC607 /* CricTrac */,
 				46C983A31D3922D200DFC607 /* CricTracTests */,
@@ -488,6 +496,7 @@
 				897C414D1E21FF16005F1231 /* SentFriendRequest.swift */,
 				897C414F1E21FFA4005F1231 /* Friends.swift */,
 				891B2AA61E7CE09800F6B5BA /* RequestsData.swift */,
+				B85ECAB41EF91B3B00CC29E5 /* AddMatchIntroScreens.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -607,6 +616,9 @@
 				892520B11E336044006946C0 /* CoachDashboardViewController.swift */,
 				892520B31E3379E7006946C0 /* FanDashboardViewController.swift */,
 				E1B593681EB4E63A00C8A553 /* NotificationsViewController.swift */,
+				B85ECAB61EF91C7C00CC29E5 /* AddMatchFirstIntroScreen.swift */,
+				B85ECAB81EF91CC900CC29E5 /* AddMatchSceIntroScreen.swift */,
+				B85ECABA1EF91CF200CC29E5 /* AddMatchThirdIntroScreen.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -745,7 +757,7 @@
 				894CA29E1D96150A0043D3D1 /* SIL Open Font License.txt in Resources */,
 				8953769A1DAB8BF200DDB3A6 /* FriendSuggestionsCell.xib in Resources */,
 				894CA2A61D96150A0043D3D1 /* SourceSansPro-Light.otf in Resources */,
-				E113C8CC1EF7D6D4009DBE0D /* GoogleService-Info.plist in Resources */,
+				B85ECAB31EF8EC5A00CC29E5 /* GoogleService-Info.plist in Resources */,
 				893823B61E113AE000BCD0CD /* SliderMenuViewCell.xib in Resources */,
 				46C983971D3922D200DFC607 /* App.xcassets in Resources */,
 				89ABEB1F1E5BD0D7006BC0BC /* GoogleService-Info-new.plist in Resources */,
@@ -821,7 +833,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -832,6 +844,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8997D56E1DBD21BC00F201B6 /* ThemeColorsCollectionViewCell.swift in Sources */,
+				B85ECAB71EF91C7C00CC29E5 /* AddMatchFirstIntroScreen.swift in Sources */,
 				897194CB1DA34DFD00478F82 /* AddMatchDetailsViewController.swift in Sources */,
 				B80B56101EB9D1580014FA9D /* LikesTableViewCell.swift in Sources */,
 				895E04031D5CD134002E322E /* FriendRequestsTableViewCell.swift in Sources */,
@@ -849,6 +862,7 @@
 				896407CE1DA7FE51002212EB /* SplashScreenViewController.swift in Sources */,
 				46C983901D3922D200DFC607 /* AppDelegate.swift in Sources */,
 				898786431E18BAFD008967AD /* MatchSummaryData.swift in Sources */,
+				B85ECAB51EF91B3B00CC29E5 /* AddMatchIntroScreens.swift in Sources */,
 				895E04091D5CE33E002E322E /* FriendBaseViewController.swift in Sources */,
 				89AB5D461D95839C00AA3481 /* SummaryDetailsCell.swift in Sources */,
 				89E83F7C1D4A5AD000232250 /* MenuTableViewCell.swift in Sources */,
@@ -889,6 +903,7 @@
 				46C983C41D40968300DFC607 /* Extentions.swift in Sources */,
 				46B0D66B1D8B881500C93247 /* TimeLineViewController.swift in Sources */,
 				8997D56C1DBCFCA000F201B6 /* CurrentTeamsTableViewCell.swift in Sources */,
+				B85ECAB91EF91CC900CC29E5 /* AddMatchSceIntroScreen.swift in Sources */,
 				894625001E1580E700FE79C2 /* TeamCollectionViewCell.swift in Sources */,
 				466AD3FC1D7A8EC10033289C /* CTPicker.swift in Sources */,
 				8922042F1D97A7EC005F555B /* FriendsCell.swift in Sources */,
@@ -907,6 +922,7 @@
 				462DE9F71D478B9E00E31E8F /* CTDatePicker.swift in Sources */,
 				B835B3561EEA7D58001048A6 /* AppIntroSecondScrren.swift in Sources */,
 				89067D731DAE9D120021F463 /* radioSelectView.swift in Sources */,
+				B85ECABB1EF91CF200CC29E5 /* AddMatchThirdIntroScreen.swift in Sources */,
 				89067D751DAEA89C0021F463 /* TransitionManager.swift in Sources */,
 				B88CB6BC1EE68499009CD077 /* MasterDataListViewController.swift in Sources */,
 				E1B593691EB4E63A00C8A553 /* NotificationsViewController.swift in Sources */,
