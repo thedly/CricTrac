@@ -12,6 +12,7 @@ import KYDrawerController
 import Kingfisher
 import Firebase
 
+
 class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable,KYDrawerControllerDelegate {
     
     // NavigationControllers
@@ -47,7 +48,7 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         //setBackgroundColor()
         userName.text = profileData.fullName
         profilePic = profileData.ProfileImageURL
-        
+
                
         if let _ = profileData.UserProfile as? String {
             removeUnwantedMenu()
@@ -244,7 +245,9 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
  ["title":"VERSION: \(versionAndBuildNumber)","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
  */
 
+
 extension SliderMenuViewController {
+    
     func getNavigationControllerFor(vcName:String) -> UINavigationController {
         //let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         //let vc  = storyboard.instantiateViewControllerWithIdentifier(vcName)
@@ -278,9 +281,25 @@ extension SliderMenuViewController {
             return navFanDashBoard!
         case "AddMatchDetailsViewController":
             //if navAddMatch == nil {
+            let launchedAddMatch = NSUserDefaults.standardUserDefaults().boolForKey("launchedAddMatch")
+            
+            if !launchedAddMatch  {
+                NSUserDefaults.standardUserDefaults().setBool(true, forKey: "launchedAddMatch")
+                let rootVC = viewControllerFrom("Main", vcid: "AddMatchIntroScreens" ) as! AddMatchIntroScreens
+                 navAddMatch = UINavigationController(rootViewController: rootVC)
+               
+                UINavigationBar.appearance().shadowImage = UIImage()
+                UINavigationBar.appearance().setBackgroundImage(UIImage(), forBarMetrics: .Default)
+//                self.navigationController?.navigationBarHidden
+            }
+            
+            else {
                 let dashboardVC = viewControllerFrom("Main", vcid: "AddMatchDetailsViewController") as! AddMatchDetailsViewController
-
+                
                 navAddMatch = UINavigationController(rootViewController: dashboardVC)
+                
+            }
+            
             //  }
             return navAddMatch!
         case "MatchSummaryViewController":

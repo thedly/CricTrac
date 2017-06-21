@@ -1,14 +1,15 @@
 //
-//  AppIntroBasicScreen.swift
+//  AddMatchFirstIntroScreen.swift
 //  CricTrac
 //
-//  Created by AIPL on 12/06/17.
+//  Created by AIPL on 20/06/17.
 //  Copyright © 2017 CricTrac. All rights reserved.
 //
 
 import UIKit
 
-class AppIntroBasicScreen:UIViewController {
+class AddMatchFirstIntroScreen: UIViewController {
+   
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var imageView2 : UIImageView!
     
@@ -26,7 +27,7 @@ class AppIntroBasicScreen:UIViewController {
         super.viewDidAppear(animated)
         
         // animate it from the left to the right
-        UIView.animateWithDuration(1.5, delay: 0, options:.BeginFromCurrentState, animations: {
+        UIView.animateWithDuration(1.5, delay: 0, options:.TransitionNone , animations: {
             self.imageView2.alpha = 1
             self.imageView.alpha = 0
             self.view.layoutIfNeeded()
@@ -34,4 +35,5 @@ class AppIntroBasicScreen:UIViewController {
     }
     
 
+ 
 }

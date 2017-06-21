@@ -100,11 +100,11 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
                 Position = "-"
                 BallsFaced = "-"
                 
-                foursText.userInteractionEnabled = false
-                sixesText.userInteractionEnabled = false
-                dismissalText.userInteractionEnabled = false
-                positionText.userInteractionEnabled = false
-                ballsPlayedText.userInteractionEnabled = false
+               // foursText.userInteractionEnabled = false
+               // sixesText.userInteractionEnabled = false
+               // dismissalText.userInteractionEnabled = false
+               // positionText.userInteractionEnabled = false
+               // ballsPlayedText.userInteractionEnabled = false
             }
         }
     }
@@ -171,11 +171,11 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
                 RunsGiven = "-"
                 bowledOvers = "-"
                 
-                widesText.userInteractionEnabled = false
-                noballText.userInteractionEnabled = false
-                wicketsText.userInteractionEnabled = false
-                maidensText.userInteractionEnabled = false
-                runsGivenText.userInteractionEnabled = false
+//                widesText.userInteractionEnabled = false
+//                noballText.userInteractionEnabled = false
+//                wicketsText.userInteractionEnabled = false
+//                maidensText.userInteractionEnabled = false
+//                runsGivenText.userInteractionEnabled = false
             }
         }
     }
@@ -356,6 +356,9 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
 
 }
 
+
+
+
 extension BattingBowlingViewController:UITextFieldDelegate{
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -369,6 +372,13 @@ extension BattingBowlingViewController:UITextFieldDelegate{
             AddDoneButtonTo(textField)
         }
         
+        if textField == oversText  {
+           animateViewMoving(true, moveValue: 100)
+        }
+         if textField == runsGivenText {
+           animateViewMoving(true, moveValue: 170)
+        }
+        
         if textField == dismissalText{
            // addSuggstionBox(textField, dataSource: dismissals, showSuggestions: true)
             showPicker(self, inputText: textField, data: dismissals)
@@ -379,6 +389,14 @@ extension BattingBowlingViewController:UITextFieldDelegate{
     }
     
     func textFieldDidEndEditing(textField: UITextField){
+       
+        if textField == oversText  {
+            animateViewMoving(false, moveValue: 100)
+        }
+        if textField == runsGivenText {
+            animateViewMoving(false, moveValue: 170)
+        }
+
         if textField.tag == 1 {
             ValidateScore()
             
@@ -395,6 +413,16 @@ extension BattingBowlingViewController:UITextFieldDelegate{
         }
     }
     
+    func animateViewMoving (up:Bool, moveValue :CGFloat){
+        let movementDuration:NSTimeInterval = 0.3
+        let movement:CGFloat = ( up ? -moveValue : moveValue)
+        UIView.beginAnimations( "animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration )
+        self.view.frame = CGRectOffset(self.view.frame, 0,  movement)
+        UIView.commitAnimations()
+    }
+
     func AddDoneButtonTo(inputText:UITextField) {
         let toolBar = UIToolbar()
         toolBar.barStyle = .Default
