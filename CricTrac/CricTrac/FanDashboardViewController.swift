@@ -303,28 +303,28 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
             self.supportingTeamHeightConstraint.constant = 0
             
         }else {
-            self.supportingTeamHeightConstraint.constant = 160
+            self.supportingTeamHeightConstraint.constant = 150
         }
         
         if userProfileData.FavoritePlayers.count == 0 {
             self.favouritePlayerHeightConstraint.constant = 0
         }
         else{
-            self.favouritePlayerHeightConstraint.constant = 160
+            self.favouritePlayerHeightConstraint.constant = 150
         }
         
         if userProfileData.Hobbies.count == 0 {
             self.hobbiesHeightConstraint.constant = 0
         }
         else {
-            self.hobbiesHeightConstraint.constant = 160
+            self.hobbiesHeightConstraint.constant = 150
         }
         
         if userProfileData.InterestedSports.count == 0 {
             self.interstedSportsheightConstraint.constant = 0
         }
         else {
-            self.interstedSportsheightConstraint.constant = 160
+            self.interstedSportsheightConstraint.constant = 150
         }
         
         //self.view.layoutIfNeeded()

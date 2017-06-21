@@ -43,6 +43,14 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
+    override func viewWillAppear(animated: Bool) {
+        firstScoreText.resignFirstResponder()
+        secondScoreText.resignFirstResponder()
+        
+        firstOversText.resignFirstResponder()
+        secondOversText.resignFirstResponder()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -563,11 +571,11 @@ extension MatchResultsViewController:UITextFieldDelegate{
     func textFieldDidBeginEditing(textField: UITextField) {
         
         if textField == firstScoreText || textField == secondScoreText {
-          animateViewMoving(true, moveValue: 40)
+          animateViewMoving(true, moveValue: 100)
         }
         
         if textField == firstOversText || textField == secondOversText {
-            animateViewMoving(true, moveValue: 160)
+            animateViewMoving(true, moveValue: 210)
         }
         
 //        if textField == firstWicketsText {
@@ -620,11 +628,11 @@ extension MatchResultsViewController:UITextFieldDelegate{
     func textFieldDidEndEditing(textField: UITextField) {
         
         if textField == firstScoreText || textField == secondScoreText{
-            animateViewMoving(false, moveValue: 40)
+            animateViewMoving(false, moveValue: 100)
         }
         
         if textField == firstOversText || textField == secondOversText {
-            animateViewMoving(false, moveValue: 160)
+            animateViewMoving(false, moveValue: 210)
         }
         
 //        if textField == firstWicketsText {

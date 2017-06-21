@@ -261,6 +261,11 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
+    override func viewWillAppear(animated: Bool) {
+        oversText.resignFirstResponder()
+        runsGivenText.resignFirstResponder()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         runsText.errorColor = UIColor.redColor()
@@ -373,10 +378,10 @@ extension BattingBowlingViewController:UITextFieldDelegate{
         }
         
         if textField == oversText  {
-           animateViewMoving(true, moveValue: 100)
+           animateViewMoving(true, moveValue: 140)
         }
          if textField == runsGivenText {
-           animateViewMoving(true, moveValue: 170)
+           animateViewMoving(true, moveValue: 210)
         }
         
         if textField == dismissalText{
@@ -391,10 +396,10 @@ extension BattingBowlingViewController:UITextFieldDelegate{
     func textFieldDidEndEditing(textField: UITextField){
        
         if textField == oversText  {
-            animateViewMoving(false, moveValue: 100)
+            animateViewMoving(false, moveValue: 140)
         }
         if textField == runsGivenText {
-            animateViewMoving(false, moveValue: 170)
+            animateViewMoving(false, moveValue: 210)
         }
 
         if textField.tag == 1 {

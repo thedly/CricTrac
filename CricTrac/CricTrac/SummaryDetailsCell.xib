@@ -32,7 +32,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="juz-ti-m9S">
                             <rect key="frame" x="166" y="52" width="20" height="20"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6J-Oc-KVZ">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="VS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6J-Oc-KVZ">
                                     <rect key="frame" x="6" y="6" width="9" height="9"/>
                                     <fontDescription key="fontDescription" name="SourceSansPro-Semibold" family="Source Sans Pro" pointSize="7"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -53,37 +53,37 @@
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 sept 2016, at MVIT Yelahanka" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0rp-zH-tn4">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="5 sept 2016, at MVIT Yelahanka" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0rp-zH-tn4">
                             <rect key="frame" x="191" y="29" width="389" height="18"/>
                             <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="15"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@ stadium" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fnn-i8-AfA">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="@ stadium" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fnn-i8-AfA">
                             <rect key="frame" x="191" y="47" width="389" height="18"/>
                             <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="15"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Strike rate" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VZA-dB-aZZ">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Strike rate" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VZA-dB-aZZ">
                             <rect key="frame" x="191" y="65" width="389" height="18"/>
                             <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="15"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="JAWANS CRICKET CLUB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWf-eg-Bxn">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="JAWANS CRICKET CLUB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWf-eg-Bxn">
                             <rect key="frame" x="191" y="5" width="389" height="24"/>
                             <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="20"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="53" textAlignment="center" lineBreakMode="middleTruncation" numberOfLines="4" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efA-kH-jAy">
-                            <rect key="frame" x="5" y="0.0" width="156" height="113"/>
+                            <rect key="frame" x="5" y="0.0" width="161" height="113"/>
                             <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="40"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Economy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ILa-hf-ZMV">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Economy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ILa-hf-ZMV">
                             <rect key="frame" x="191" y="83" width="389" height="18"/>
                             <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="15"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -97,7 +97,7 @@
                         <constraint firstItem="0rp-zH-tn4" firstAttribute="top" secondItem="aWf-eg-Bxn" secondAttribute="bottom" id="3T0-e1-wn6"/>
                         <constraint firstItem="aWf-eg-Bxn" firstAttribute="top" secondItem="LR6-d8-nCz" secondAttribute="top" constant="5" id="4ed-Db-3S8"/>
                         <constraint firstItem="Fnn-i8-AfA" firstAttribute="top" secondItem="0rp-zH-tn4" secondAttribute="bottom" id="67P-je-O9D"/>
-                        <constraint firstItem="juz-ti-m9S" firstAttribute="leading" secondItem="efA-kH-jAy" secondAttribute="trailing" constant="5" id="6aq-iZ-kFN"/>
+                        <constraint firstItem="juz-ti-m9S" firstAttribute="leading" secondItem="efA-kH-jAy" secondAttribute="trailing" id="6aq-iZ-kFN"/>
                         <constraint firstItem="efA-kH-jAy" firstAttribute="top" secondItem="LR6-d8-nCz" secondAttribute="top" id="9ZH-FR-pJF"/>
                         <constraint firstAttribute="trailing" secondItem="aWf-eg-Bxn" secondAttribute="trailing" constant="5" id="F7S-oy-qCT"/>
                         <constraint firstAttribute="bottom" secondItem="efA-kH-jAy" secondAttribute="bottom" id="FSP-wR-7JW"/>
@@ -109,7 +109,7 @@
                         <constraint firstItem="ILa-hf-ZMV" firstAttribute="trailing" secondItem="VZA-dB-aZZ" secondAttribute="trailing" id="Pcq-Zn-j1l"/>
                         <constraint firstItem="ILa-hf-ZMV" firstAttribute="leading" secondItem="VZA-dB-aZZ" secondAttribute="leading" id="bqN-qA-C2D"/>
                         <constraint firstItem="juz-ti-m9S" firstAttribute="centerX" secondItem="LR6-d8-nCz" secondAttribute="centerX" multiplier="0.6" id="cSi-gs-Rmb"/>
-                        <constraint firstItem="aWf-eg-Bxn" firstAttribute="leading" secondItem="juz-ti-m9S" secondAttribute="trailing" constant="5" id="dc1-w1-kKB"/>
+                        <constraint firstItem="aWf-eg-Bxn" firstAttribute="leading" secondItem="juz-ti-m9S" secondAttribute="trailing" constant="10" id="dc1-w1-kKB"/>
                         <constraint firstItem="Fnn-i8-AfA" firstAttribute="trailing" secondItem="0rp-zH-tn4" secondAttribute="trailing" id="h0d-kU-eh4"/>
                         <constraint firstItem="efA-kH-jAy" firstAttribute="leading" secondItem="LR6-d8-nCz" secondAttribute="leading" constant="5" id="i3A-Td-Mvu"/>
                         <constraint firstItem="ILa-hf-ZMV" firstAttribute="top" secondItem="VZA-dB-aZZ" secondAttribute="bottom" id="jnz-iF-RHp"/>

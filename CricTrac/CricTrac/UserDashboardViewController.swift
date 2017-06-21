@@ -1475,7 +1475,7 @@ func setDashboardData(){
             self.teamsViewHeightConstraint.constant = 0
         }
         else {
-            self.teamsViewHeightConstraint.constant = 180
+            self.teamsViewHeightConstraint.constant = 150
         }
         
         //self.scrollViewBottomElementConstraint.constant = 10

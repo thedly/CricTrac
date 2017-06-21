@@ -331,21 +331,21 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             self.coachCurrentTeamsHeightConstraint.constant = 0
         }
         else {
-            self.coachCurrentTeamsHeightConstraint.constant = 180
+            self.coachCurrentTeamsHeightConstraint.constant = 160
         }
         
         if userProfileData.CoachPlayedFor.count == 0{
             self.coachPlayedHeightConstraint.constant = 0
         }
         else {
-            self.coachPlayedHeightConstraint.constant = 180
+            self.coachPlayedHeightConstraint.constant = 150
         }
         
         if userProfileData.Certifications.count == 0 {
             self.coachCertificationHeightConstraint.constant = 0
         }
         else {
-            self.coachCertificationHeightConstraint.constant = 180
+            self.coachCertificationHeightConstraint.constant = 150
         }
     }
     

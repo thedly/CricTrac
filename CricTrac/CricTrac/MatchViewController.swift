@@ -121,6 +121,16 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MatchViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         scrollView.setContentOffset(CGPointZero, animated: true)
         scrollViewTop = scrollView.frame.origin.y
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        venueText.resignFirstResponder()
+        tournamentText.resignFirstResponder()
+        groundText.resignFirstResponder()
+        oversText.resignFirstResponder()
+ 
     }
     
     func keyboardWillShow(sender: NSNotification){
