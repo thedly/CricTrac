@@ -42,7 +42,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        upgradeButton.setTitle("Upgrade", forState: UIControlState.Normal)
+        upgradeButton.setTitle("UPGRADE", forState: UIControlState.Normal)
         
         userProfileData = profileData
         if userProfileData.UserStatus == "Premium" {
