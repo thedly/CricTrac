@@ -8,8 +8,8 @@
 
 import UIKit
 
-class SuggestionView: UIView,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate {
-
+class SuggestionView: UIView,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate{
+    
     @IBOutlet weak var suggestionTable:UITableView!
     private var dataSource:[String]? = nil
     weak var textField:UITextField? = nil
@@ -34,6 +34,13 @@ class SuggestionView: UIView,UITableViewDelegate,UITableViewDataSource,UITextFie
         let aCell = suggestionTable.dequeueReusableCellWithIdentifier("suggCell", forIndexPath: indexPath) as! SuggestionCell
         aCell.selectionStyle = .None
         aCell.contentlabel?.text = filturedData![indexPath.row]
+        aCell.contentlabel?.textColor = UIColor.whiteColor()
+        aCell.contentlabel?.font = UIFont(name: "SourceSansPro-Bold", size: 15)
+        aCell.backgroundColor = UIColor.clearColor()
+        
+        
+        suggestionTable.backgroundColor = UIColor.clearColor()
+        suggestionTable.backgroundColor = cricTracTheme.currentTheme.topColor
         return aCell
     }
  
@@ -114,6 +121,7 @@ var  suggestionView:SuggestionView{
         ).instantiateWithOwner(nil, options: nil)[0] as! SuggestionView
 
     suggestionView.suggestionTable.registerNib(UINib.init(nibName: "SuggestionCell", bundle: nil), forCellReuseIdentifier: "suggCell")
+    suggestionView.backgroundColor = UIColor.clearColor()
     
     return suggestionView
     

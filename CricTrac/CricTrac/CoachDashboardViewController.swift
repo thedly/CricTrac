@@ -48,6 +48,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         setBackgroundColor()
+        
         initView()
         self.updateCoachDashboard()
         CurrentTeams.reloadData()
@@ -331,21 +332,21 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             self.coachCurrentTeamsHeightConstraint.constant = 0
         }
         else {
-            self.coachCurrentTeamsHeightConstraint.constant = 160
+            self.coachCurrentTeamsHeightConstraint.constant = 130
         }
         
         if userProfileData.CoachPlayedFor.count == 0{
             self.coachPlayedHeightConstraint.constant = 0
         }
         else {
-            self.coachPlayedHeightConstraint.constant = 150
+            self.coachPlayedHeightConstraint.constant = 130
         }
         
         if userProfileData.Certifications.count == 0 {
             self.coachCertificationHeightConstraint.constant = 0
         }
         else {
-            self.coachCertificationHeightConstraint.constant = 150
+            self.coachCertificationHeightConstraint.constant = 130
         }
     }
     

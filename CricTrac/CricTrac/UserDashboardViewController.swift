@@ -675,7 +675,9 @@ func setDashboardData(){
                     self.SecondRecentMatchView.hidden = true
                     self.FirstRecentMatchBowlingView.hidden = true
                     self.SecondRecentMatchBowlingView.hidden = true
-                    
+                   
+                   self.TeamsTable.reloadData()
+
                     self.updateDashBoardMatches()
                     
                 })
@@ -814,7 +816,9 @@ func setDashboardData(){
                         self.FirstRecentMatchSummary.hidden = false
                         self.recentMatchesNotAvailable.hidden = true
                         
+                        //self.TeamsTable.reloadData()
                         self.updateDashBoardMatches()
+                        
                         
                     })
                     
@@ -951,7 +955,10 @@ func setDashboardData(){
                     dispatch_async(dispatch_get_main_queue(),{
                         self.SecondRecentMatchSummary.hidden = false
                         self.recentMatchesNotAvailable.hidden = true
+                        
+                         //self.TeamsTable.reloadData()
                         self.updateDashBoardMatches()
+                        
                     })
                 }
                 
@@ -1065,7 +1072,10 @@ func setDashboardData(){
                         
                         self.FirstRecentMatchView.hidden = false
                         
+                         //self.TeamsTable.reloadData()
                         self.updateDashBoardMatches()
+                        
+                        
                         
                     })
                 }
@@ -1178,8 +1188,9 @@ func setDashboardData(){
                     dispatch_async(dispatch_get_main_queue(),{
                         
                         self.SecondRecentMatchView.hidden = false
-                        
+                        // self.TeamsTable.reloadData()
                         self.updateDashBoardMatches()
+                        
                         
                     })
                 }
@@ -1284,8 +1295,9 @@ func setDashboardData(){
                     dispatch_async(dispatch_get_main_queue(),{
                         
                         self.FirstRecentMatchBowlingView.hidden = false
-                        
+                        //  self.TeamsTable.reloadData()
                         self.updateDashBoardMatches()
+                       
                         
                     })
                 }
@@ -1391,7 +1403,9 @@ func setDashboardData(){
                     dispatch_async(dispatch_get_main_queue(),{
                         
                         self.SecondRecentMatchBowlingView.hidden = false
+                       // self.TeamsTable.reloadData()
                         self.updateDashBoardMatches()
+                        
                         
                     })
                 }
@@ -1407,6 +1421,8 @@ func setDashboardData(){
     
 
     func updateDashBoardMatches() {
+        
+       
         
         //Data for Top Batting section
         self.FirstRecentMatchView.hidden = (DashboardDetails.TopBatting1stMatchScore == nil || String(DashboardDetails.TopBatting1stMatchScore) == "0")
@@ -1475,11 +1491,12 @@ func setDashboardData(){
             self.teamsViewHeightConstraint.constant = 0
         }
         else {
-            self.teamsViewHeightConstraint.constant = 150
+            self.teamsViewHeightConstraint.constant = 130
         }
         
         //self.scrollViewBottomElementConstraint.constant = 10
         //self.view.layoutIfNeeded()
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -1551,7 +1568,7 @@ func setDashboardData(){
             
 //            if let colorObject = themeColors[themeColors.keys[index]] {
 //                
-                aCell.TeamImage.image = UIImage()
+              //  aCell.TeamImage.image = UIImage()
             
             var teamNameToReturn = ""
             
