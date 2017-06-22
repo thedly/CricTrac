@@ -11,7 +11,10 @@ import KRProgressHUD
 import SwiftyStoreKit
 
 class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable {
-
+    
+    @IBOutlet weak var yearDropdown: UITextField!
+    @IBOutlet weak var levelDropdown: UITextField!
+    @IBOutlet weak var ageGroupDropdown: UITextField!
     @IBOutlet weak var upgradeBtnHeight: NSLayoutConstraint!
     @IBOutlet var matchSummaryTable:UITableView!
     @IBOutlet weak var noMatchesHeightConstraint: NSLayoutConstraint!
@@ -22,10 +25,12 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     
     var userProfileData:Profile!
     
+    let ctDatePicker = CTDatePicker()
+    lazy var ctDataPicker = DataPicker()
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
-       // navigationController!.navigationBar.barTintColor = currentTheme.topColor
+        // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     var inAppProductPrice : String?
@@ -41,6 +46,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.yearDropdown.delegate = self
+        self.ageGroupDropdown.delegate = self
+        self.levelDropdown.delegate = self
         
         upgradeButton.setTitle("UPGRADE", forState: UIControlState.Normal)
         
@@ -59,17 +68,17 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         fetchProductInfo()
         
         self.automaticallyAdjustsScrollViewInsets = false
-
+        
         setBackgroundColor()
-       // getMatchData()
-    matchSummaryTable.registerNib(UINib.init(nibName:"SummaryDetailsCell", bundle: nil), forCellReuseIdentifier: "SummaryDetailsCell")
+        // getMatchData()
+        matchSummaryTable.registerNib(UINib.init(nibName:"SummaryDetailsCell", bundle: nil), forCellReuseIdentifier: "SummaryDetailsCell")
         matchSummaryTable.allowsSelection = true
         matchSummaryTable.separatorStyle = .None
         
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MatchSummaryViewController.newDataAdded), name: "MatchDataChanged" , object: nil)
+        //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MatchSummaryViewController.newDataAdded), name: "MatchDataChanged" , object: nil)
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -82,7 +91,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     func newDataAdded(){
         getMatchData()
     }
-
+    
     func setNavigationBarProperties(){
         var currentTheme:CTTheme!
         currentTheme = cricTracTheme.currentTheme
@@ -94,8 +103,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         navigationItem.leftBarButtonItem = leftbarButton
         navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
         title = "SCOREBOARD"
-       // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-       // navigationController!.navigationBar.titleTextAttributes = titleDict
+        // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        // navigationController!.navigationBar.titleTextAttributes = titleDict
     }
     @IBAction func didTapCancel(sender: UIButton) {
         
@@ -129,7 +138,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         self.matches.sortInPlace({ $0.matchDate.compare($1.matchDate) == NSComparisonResult.OrderedDescending })
         self.matchSummaryTable.reloadData()
     }
-
+    
     func makeSummaryCell(value: [String : AnyObject]) -> MatchSummaryData {
         let battingBowlingScore = NSMutableAttributedString()
         var matchVenueAndDate = ""
@@ -142,7 +151,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             mData.BattingSectionHidden = (runsTaken as! String == "-")
             if mData.BattingSectionHidden == false {
                 if let dismissal = value["Dismissal"] as? String where dismissal == "Not out"{
-                   battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("*", fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
+                    battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("*", fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
                 }
                 else{
                     battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
@@ -179,32 +188,13 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             matchVenueAndDate.appendContentsOf(" | \(group)")
         }
         
-        var groundData = ""
-        
-        let ground = value["Ground"] as? String
-        if ground != "-" {
-            groundData = ground! + " "
+        if let ground = value["Ground"]{
+            mData.ground = ground as! String
+            
+            if let venue = value["Venue"] as? String where venue != "-" {
+                mData.ground = "\(ground), \(venue)"
+            }
         }
-        
-        let venue = value["Venue"] as? String
-        if venue != "-" {
-            groundData = groundData + venue!
-        }
-        
-        if ground == "-" && venue == "-" {
-            groundData = (value["Level"] as? String)! + " Match"
-        }
-        
-        mData.ground = groundData
-        
-        
-//        if let ground = value["Ground"]{
-//            mData.ground = ground as! String
-//            
-//            if let venue = value["Venue"] as? String where venue != "-" {
-//                mData.ground = "\(ground), \(venue)"
-//            }
-//        }
         
         if let ballsFaced = value["BallsFaced"] as? String where ballsFaced != "-", let runsScored = value["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
             
@@ -240,17 +230,17 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         if let aCell =  matchSummaryTable.dequeueReusableCellWithIdentifier("SummaryDetailsCell", forIndexPath: indexPath) as? SummaryDetailsCell {
             
             aCell.backgroundColor = UIColor.clearColor()
-          
+            
             aCell.baseView.backgroundColor = cricTracTheme.currentTheme.bottomColor
             
-           aCell.baseView.alpha = 1
+            aCell.baseView.alpha = 1
             
-             let currentMatch = self.matches[indexPath.row]
-                
-                aCell.BattingOrBowlingScore.attributedText = currentMatch.battingBowlingScore
-                aCell.matchDateAndVenue.text = currentMatch.matchDateAndVenue
-                aCell.oponentName.text = currentMatch.opponentName
-                aCell.stadiumLabel.text = currentMatch.ground
+            let currentMatch = self.matches[indexPath.row]
+            
+            aCell.BattingOrBowlingScore.attributedText = currentMatch.battingBowlingScore
+            aCell.matchDateAndVenue.text = currentMatch.matchDateAndVenue
+            aCell.oponentName.text = currentMatch.opponentName
+            aCell.stadiumLabel.text = currentMatch.ground
             
             if let isHidden = currentMatch.BattingSectionHidden where isHidden == true{
                 
@@ -291,7 +281,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             noMatchesHeightConstraint.constant = 21
         }
         else {
-             noMatchesHeightConstraint.constant = 0
+            noMatchesHeightConstraint.constant = 0
         }
         
         return self.matchDataSource.count
@@ -302,19 +292,19 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-      
-         let currentMatch = self.matches[indexPath.row]
+        
+        let currentMatch = self.matches[indexPath.row]
         
         if currentMatch.BattingSectionHidden == false && currentMatch.BowlingSectionHidden == false {
             return 120
         }
-       else if currentMatch.BattingSectionHidden == false {
+        else if currentMatch.BattingSectionHidden == false {
             return 105
         }
         else if currentMatch.BowlingSectionHidden == false {
             return 105
         }
-       
+            
         else {
             return 90
         }
@@ -322,8 +312,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-//        let cell = tableView.cellForRowAtIndexPath(indexPath) as! SummaryDetailsCell
-                let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
+        //        let cell = tableView.cellForRowAtIndexPath(indexPath) as! SummaryDetailsCell
+        let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
         
         summaryDetailsVC.battingViewHidden = matches[indexPath.row].BattingSectionHidden
         summaryDetailsVC.bowlingViewHidden = matches[indexPath.row].BowlingSectionHidden
@@ -333,7 +323,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         }
         
         summaryDetailsVC.matchDetailsData = selectedDataSource.first
-          //  presentViewController(summaryDetailsVC, animated: true, completion: nil)
+        //  presentViewController(summaryDetailsVC, animated: true, completion: nil)
         self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
         CFRunLoopWakeUp(CFRunLoopGetCurrent())
     }
@@ -411,5 +401,33 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             }
         }
     }
-
+    
 }
+
+extension MatchSummaryViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(textField: UITextField) {
+        if textField == ageGroupDropdown {
+            
+            // addSuggstionBox(textField,dataSource: AgeGroupData)
+            
+            ctDataPicker = DataPicker()
+            let indexPos = AgeGroupData.indexOf(ageGroupDropdown.text!) ?? 0
+            ctDataPicker.showPicker(self, inputText: textField, data: AgeGroupData,selectedValueIndex: indexPos)
+        }
+        if textField == levelDropdown {
+            ctDataPicker = DataPicker()
+            let indexPos = PlayingLevels.indexOf(ageGroupDropdown.text!) ?? 0
+            ctDataPicker.showPicker(self, inputText: textField, data: PlayingLevels,selectedValueIndex: indexPos)
+        }
+        if textField == yearDropdown {
+            ctDatePicker.showPicker(self, inputText: textField)
+        }
+    }
+}
+
+
+
+
+
+
+
