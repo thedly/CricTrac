@@ -288,8 +288,8 @@ extension SliderMenuViewController {
                 let rootVC = viewControllerFrom("Main", vcid: "AddMatchIntroScreens" ) as! AddMatchIntroScreens
                  navAddMatch = UINavigationController(rootViewController: rootVC)
                
-                UINavigationBar.appearance().shadowImage = UIImage()
-                UINavigationBar.appearance().setBackgroundImage(UIImage(), forBarMetrics: .Default)
+//                UINavigationBar.appearance().shadowImage = UIImage()
+//                UINavigationBar.appearance().setBackgroundImage(UIImage(), forBarMetrics: .Default)
 //                self.navigationController?.navigationBarHidden
             }
             

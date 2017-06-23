@@ -40,7 +40,8 @@ class AddMatchThirdIntroScreen: UIViewController {
 
     @IBAction func doneButtonTapped(sender: AnyObject) {
     
-   
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+
         print(self.navigationController?.viewControllers)
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

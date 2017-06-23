@@ -20,6 +20,8 @@ class AddMatchFirstIntroScreen: UIViewController {
         self.imageView2.alpha = 0
         self.imageView.alpha = 1
         
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
     }
     
     
