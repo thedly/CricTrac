@@ -10,7 +10,7 @@ import UIKit
 import KRProgressHUD
 import SwiftyStoreKit
 
-class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable {
+class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable{
     
     @IBOutlet weak var yearDropdown: UITextField!
     @IBOutlet weak var levelDropdown: UITextField!
@@ -19,17 +19,41 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     @IBOutlet var matchSummaryTable:UITableView!
     @IBOutlet weak var noMatchesHeightConstraint: NSLayoutConstraint!
     
+    //For dropdowns
+    @IBOutlet weak var levelDropDownButton: UIButton!
+    @IBOutlet weak var tableView1: UITableView!
+    @IBOutlet weak var tableView1HeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var ageDropdownButton: UIButton!
+    @IBOutlet weak var tableview2: UITableView!
+    @IBOutlet weak var tableView2HeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var yearDropdownButton: UIButton!
+    @IBOutlet weak var tableView3: UITableView!
+    @IBOutlet weak var tableView3HeightConstraint: NSLayoutConstraint!
+    
+    
     var matchData = [String:AnyObject]()
     var matches = [MatchSummaryData]()
     var matchDataSource = [[String:AnyObject]]()
     
+    var filterYear = [String]()
+    var filterLevel = [String]()
+    var filterAgeGroup = [String]()
+    
+    var filterCurrentMatch = [[String:AnyObject]]()
+    
     var userProfileData:Profile!
     
-    let ctDatePicker = CTDatePicker()
-    lazy var ctDataPicker = DataPicker()
+    
+    
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
+        
+        self.tableView1.backgroundColor = currentTheme.topColor
+        self.tableview2.backgroundColor = currentTheme.topColor
+        self.tableView3.backgroundColor = currentTheme.topColor
         // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
@@ -41,16 +65,18 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         getMatchData()
         setBackgroundColor()
         self.matchSummaryTable.reloadData()
+        self.tableView1.reloadData()
         setNavigationBarProperties()
+        
+        tableView1.hidden = true
+        tableview2.hidden = true
+        tableView3.hidden = true
+
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.yearDropdown.delegate = self
-        self.ageGroupDropdown.delegate = self
-        self.levelDropdown.delegate = self
-        
+  
         upgradeButton.setTitle("UPGRADE", forState: UIControlState.Normal)
         
         userProfileData = profileData
@@ -77,6 +103,22 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MatchSummaryViewController.newDataAdded), name: "MatchDataChanged" , object: nil)
         // Do any additional setup after loading the view.
+        
+        
+        //For dropdowns
+        self.ageGroupDropdown.text = "Age Group"
+        self.ageGroupDropdown.font = UIFont(name: "SourceSansPro-Bold", size: 15)
+        self.ageGroupDropdown.textColor = UIColor.blackColor()
+        
+        self.levelDropdown.text = "Level"
+        self.levelDropdown.font = UIFont(name: "SourceSansPro-Bold", size: 15)
+        self.levelDropdown.textColor = UIColor.blackColor()
+        
+        self.yearDropdown.text = "Year"
+        self.yearDropdown.font = UIFont(name: "SourceSansPro-Bold", size: 15)
+        self.yearDropdown.textColor = UIColor.blackColor()
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -119,6 +161,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         //KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
         getAllMatchData { (data) in
             self.matchDataSource.removeAll()
+            self.filterLevel.removeAll()
+            self.filterAgeGroup.removeAll()
+            self.filterYear.removeAll()
+          //  self.filterCurrentMatch.removeAll()
             self.makeCells(data)
             //KRProgressHUD.dismiss()
         }
@@ -127,22 +173,120 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     func makeCells(data: [String: AnyObject]) {
         self.matchData = data
         self.matches.removeAll()
+        self.filterAgeGroup.append("Age Group")
+        self.filterLevel.append("Level")
+        self.filterYear.append("Year")
+        
+        //var matchsf = ""
+        
+        
+        
         for (key,val) in data{
             if  var value = val as? [String : AnyObject]{
                 value += ["key":key]
+                
+                if filterLevel.indexOf(value["Level"] as! String) == nil {
+                    self.filterLevel.append(value["Level"] as! String)
+                }
+                
+                
+                if filterAgeGroup.indexOf(value["AgeGroup"] as! String) == nil {
+                    self.filterAgeGroup.append(value["AgeGroup"] as! String)
+                }
+                
+                let calendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+                let matchDate = value["MatchDate"] as? String
+                
+                let dateFormater = NSDateFormatter()
+                dateFormater.dateFormat = "dd-MM-yyyy"
+                dateFormater.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
+                let matchDate2 = dateFormater.dateFromString(matchDate!)
+                let match = calendar.components(.Year, fromDate: matchDate2!)
+                let matchYear = match.year
+                if filterYear.indexOf(String(matchYear)) == nil {
+
+                    filterYear.append(String(matchYear))
+
+                }
+                
+            if ageGroupDropdown.text == "Age Group" && levelDropdown.text == "Level" && yearDropdown.text == "Year" {
+                self.matchDataSource.append(value)
+                self.matches.append(makeSummaryCell(value))
+
+            }
+            else if ageGroupDropdown.text != "Age Group" && levelDropdown.text != "Level" && yearDropdown.text != "Year"{
+                
+                if ageGroupDropdown.text == value["AgeGroup"] as? String && levelDropdown.text == value["Level"] as? String && yearDropdown.text == String(matchYear) {
+                self.matchDataSource.append(value)
+                self.matches.append(makeSummaryCell(value))
+                }
+
+            }
+                
+        else {
+                if ageGroupDropdown.text != "Age Group"   && levelDropdown.text != "Level" {
+            
+            if ageGroupDropdown.text == value["AgeGroup"] as? String && levelDropdown.text == value["Level"] as? String {
                 self.matchDataSource.append(value)
                 self.matches.append(makeSummaryCell(value))
             }
         }
+            
+        else if ageGroupDropdown.text != "Age Group"  && yearDropdown.text != "Year" {
+                if ageGroupDropdown.text == value["AgeGroup"] as? String && yearDropdown.text == String(matchYear) {
+                    self.matchDataSource.append(value)
+                    self.matches.append(makeSummaryCell(value))
+
+                }
+        }
+            
+        else if levelDropdown.text != "Level" && yearDropdown.text != "Year" {
+            if levelDropdown.text == value["Level"] as? String && yearDropdown.text == String(matchYear) {
+            self.matchDataSource.append(value)
+            self.matches.append(makeSummaryCell(value))
+            }
+            
+        }
+        else if ageGroupDropdown.text != "Age Group" {
+            if ageGroupDropdown.text == value["AgeGroup"] as? String {
+            self.matchDataSource.append(value)
+            self.matches.append(makeSummaryCell(value))
+            
+            }
+
+        }
+            
+        else if levelDropdown.text != "Level" {
+          if levelDropdown.text == value["Level"] as? String {
+            self.matchDataSource.append(value)
+            self.matches.append(makeSummaryCell(value))
+
+            }
+        }
+            
+        else if yearDropdown.text != "Year" {
+          if yearDropdown.text == String(matchYear) {
+            self.matchDataSource.append(value)
+            self.matches.append(makeSummaryCell(value))
+          }
+
+         }
+                
+        }
+    
+            }
+        }
         
         self.matches.sortInPlace({ $0.matchDate.compare($1.matchDate) == NSComparisonResult.OrderedDescending })
-        self.matchSummaryTable.reloadData()
+               self.matchSummaryTable.reloadData()
     }
     
     func makeSummaryCell(value: [String : AnyObject]) -> MatchSummaryData {
         let battingBowlingScore = NSMutableAttributedString()
         var matchVenueAndDate = ""
         var opponentName = ""
+        var ageGroupName = ""
+        var levelName = ""
         
         let mData = MatchSummaryData()
         mData.matchId = value["key"] as! String
@@ -176,6 +320,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         }
         
         if let date = value["MatchDate"]{
+
             let DateFormatter = NSDateFormatter()
             DateFormatter.dateFormat = "dd-MM-yyyy"
             DateFormatter.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
@@ -238,9 +383,18 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             opponentName = opponent as! String
         }
         
+        if let ageGroup = value["AgeGroup"] {
+            ageGroupName = ageGroup as! String
+        }
+        
+        if let level = value["Level"] {
+            levelName = level as! String
+        }
         mData.battingBowlingScore = battingBowlingScore
         mData.matchDateAndVenue = matchVenueAndDate
         mData.opponentName = opponentName
+        mData.ageGroup = ageGroupName
+        mData.level = levelName
         
         return mData
     }
@@ -255,7 +409,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             aCell.baseView.alpha = 1
             
             let currentMatch = self.matches[indexPath.row]
-            
+           
             aCell.BattingOrBowlingScore.attributedText = currentMatch.battingBowlingScore
             aCell.matchDateAndVenue.text = currentMatch.matchDateAndVenue
             aCell.oponentName.text = currentMatch.opponentName
@@ -286,7 +440,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 }
             }
             
-            return aCell
+            
+         return aCell
         }
         else
         {
@@ -296,6 +451,20 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         
+       // let matchData1 = MatchSummaryData()
+        
+        if tableView == tableView1 {
+            return filterLevel.count
+        }
+        
+        if tableView == tableview2 {
+            return filterAgeGroup.count
+        }
+        
+        if tableView == tableView3 {
+            return filterYear.count
+        }
+        
         if self.matchDataSource.count == 0 {
             noMatchesHeightConstraint.constant = 21
         }
@@ -303,14 +472,73 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             noMatchesHeightConstraint.constant = 0
         }
         
+//        if ageGroupDropdown.text != "Age Group" {
+//       
+//            return self.filterCurrentMatch.count
+//         
+//        }
+        
         return self.matchDataSource.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        if tableView == tableView1 {
+            let cell = tableView1.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+            cell.textLabel?.text = filterLevel[indexPath.row]
+            if filterLevel[indexPath.row] == "Level"{
+                cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 15)
+                cell.textLabel?.textColor = UIColor.grayColor()
+            }
+            else {
+                cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 15)
+                cell.textLabel?.textColor = UIColor.whiteColor()
+            }
+            
+            return cell
+        }
+        
+        if tableView == tableview2 {
+            let cell = tableview2.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+            cell.textLabel?.text = filterAgeGroup[indexPath.row]
+            
+            if filterAgeGroup[indexPath.row] == "Age Group"{
+                cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 15)
+                cell.textLabel?.textColor = UIColor.grayColor()
+            }
+            else {
+                cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 15)
+                cell.textLabel?.textColor = UIColor.whiteColor()
+            }
+            return cell
+        }
+        
+        if tableView == tableView3 {
+            let cell = tableView3.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+            cell.textLabel?.text = filterYear[indexPath.row]
+            if filterYear[indexPath.row] == "Year" {
+                cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 15)
+                cell.textLabel?.textColor = UIColor.grayColor()
+            }
+            else {
+                cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 15)
+                cell.textLabel?.textColor = UIColor.whiteColor()
+            }
+            
+            return cell
+        }
+        
+        
+        
         return getCellForRow(indexPath)
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
+        if tableView == tableView1 || tableView == tableview2 || tableView == tableView3
+        {
+              return 20
+        }
         
         let currentMatch = self.matches[indexPath.row]
         
@@ -327,9 +555,48 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         else {
             return 90
         }
+ 
+      
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+//        if ageGroupDropdown.text  != "Age Group" {
+//            if ageGroupDropdown.text == currentMatch.ageGroup {
+        
+
+        
+        
+        if tableView == tableView1 {
+            let cell = tableView1.cellForRowAtIndexPath(indexPath)
+            levelDropdown.text = cell?.textLabel?.text
+            
+            getMatchData()
+            self.matchSummaryTable.reloadData()
+            tableView1.hidden = true
+        }
+            
+        else if tableView == tableview2 {
+            let cell = tableview2.cellForRowAtIndexPath(indexPath)
+            ageGroupDropdown.text = cell?.textLabel?.text
+
+            getMatchData()
+            self.matchSummaryTable.reloadData()
+
+            tableview2.hidden = true
+        }
+            
+        else if tableView == tableView3 {
+            let cell = tableView3.cellForRowAtIndexPath(indexPath)
+            yearDropdown.text = cell?.textLabel?.text
+            
+            getMatchData()
+            self.matchSummaryTable.reloadData()
+            tableView3.hidden = true
+            
+        }
+        
+        else if tableView == matchSummaryTable {
         
         //        let cell = tableView.cellForRowAtIndexPath(indexPath) as! SummaryDetailsCell
         let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
@@ -345,6 +612,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         //  presentViewController(summaryDetailsVC, animated: true, completion: nil)
         self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
         CFRunLoopWakeUp(CFRunLoopGetCurrent())
+        
+        }
     }
     
     //MARK: In App purchase
@@ -421,28 +690,57 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         }
     }
     
+    @IBAction func levelDropDownButtonTapped(sender: UIButton) {
+        if sender.tag == 2 {
+            if tableView1.hidden == true {
+            tableView3.hidden = true
+            tableview2.hidden = true
+            self.tableView1.reloadData()
+
+            tableView1HeightConstraint.constant = 100
+            tableView1.hidden = false
+            }
+            else {
+            tableView1HeightConstraint.constant = 0
+            tableView1.hidden = true
+            }
+        }
+        
+        if sender.tag == 1 {
+            if tableview2.hidden == true {
+                tableView1.hidden = true
+                tableView3.hidden = true
+
+                self.tableview2.reloadData()
+                tableView2HeightConstraint.constant = 100
+                tableview2.hidden = false
+                
+            }
+            else {
+                tableView2HeightConstraint.constant = 0
+                tableview2.hidden = true
+            }
+        }
+        
+        if sender.tag == 3 {
+            if tableView3.hidden == true {
+                tableView1.hidden = true
+                tableview2.hidden = true
+                self.tableView3.reloadData()
+                tableView3HeightConstraint.constant = 100
+                tableView3.hidden = false
+            }
+            else {
+                tableView3HeightConstraint.constant = 0
+                tableView3.hidden = true
+            }
+        }
+        
+    }
+    
+    
 }
 
-extension MatchSummaryViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(textField: UITextField) {
-        if textField == ageGroupDropdown {
-            
-            // addSuggstionBox(textField,dataSource: AgeGroupData)
-            
-            ctDataPicker = DataPicker()
-            let indexPos = AgeGroupData.indexOf(ageGroupDropdown.text!) ?? 0
-            ctDataPicker.showPicker(self, inputText: textField, data: AgeGroupData,selectedValueIndex: indexPos)
-        }
-        if textField == levelDropdown {
-            ctDataPicker = DataPicker()
-            let indexPos = PlayingLevels.indexOf(ageGroupDropdown.text!) ?? 0
-            ctDataPicker.showPicker(self, inputText: textField, data: PlayingLevels,selectedValueIndex: indexPos)
-        }
-        if textField == yearDropdown {
-            ctDatePicker.showPicker(self, inputText: textField)
-        }
-    }
-}
 
 
 
