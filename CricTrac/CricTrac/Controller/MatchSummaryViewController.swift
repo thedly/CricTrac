@@ -85,8 +85,6 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     var totalOvers = 0
     var totalBallsFaced = 0
     
-    var tableView3Height = 0
-    
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
