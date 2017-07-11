@@ -85,6 +85,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     var totalOvers = 0
     var totalBallsFaced = 0
     
+    var tableView3Height = 0
+    
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
@@ -229,7 +231,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         self.matches.removeAll()
         self.filterAgeGroup.append("Age Group")
         self.filterLevel.append("Level")
-        self.filterYear.append("Year")
+        //self.filterYear.append("Year")
        
         
         for (key,val) in data{
@@ -518,8 +520,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
 
         //Total Economy & TotalBowlingAvg
             if totalRunsGiven != 0 {
-                self.bowlingAvg.text = String( totalRunsGiven / TotalWicketsTaken)
-                self.economy.text = String(totalRunsGiven / totalOvers)
+                self.bowlingAvg.text = String(format: "%.1f",Float(totalRunsGiven) / Float(TotalWicketsTaken))
+                self.economy.text = String(format: "%.1f",Float(totalRunsGiven) / Float(totalOvers))
                 }
                 else{
                  self.bowlingAvg.text = "-"
@@ -527,14 +529,16 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 }
         // TotalBattingAvg
             if (toatalBattingmatches - totalDismissal) > 0 {
-                self.battingAvg.text = String(totalRuns / (toatalBattingmatches - totalDismissal))
+                self.battingAvg.text = String(format: "%.1f",(Float(totalRuns))/Float(toatalBattingmatches - totalDismissal))
+               // String(totalRuns / (toatalBattingmatches - totalDismissal))
                 }
                 else{
                  self.battingAvg.text = "-"
                 }
           // TotalStrikeRate
             if totalBallsFaced != 0 {
-                self.strikeRate.text = String((totalRuns * 100) / totalBallsFaced)
+                let strikeRate = String(format: "%.1f",(Float(totalRuns))*100/Float(totalBallsFaced))
+                 self.strikeRate.text = strikeRate
             }
             else{
                self.strikeRate.text = "-"
@@ -735,8 +739,15 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             noMatchesHeightConstraint.constant = 21
             self.noMatchesLabel.text = "No Matches"
             self.baseViewHeightConstraint.constant = 0
+            self.ageDropdownButton.userInteractionEnabled = false
+            self.levelDropDownButton.userInteractionEnabled = false
+            self.yearDropdownButton.userInteractionEnabled = false
         }
         else {
+            self.ageDropdownButton.userInteractionEnabled = true
+            self.levelDropDownButton.userInteractionEnabled = true
+            self.yearDropdownButton.userInteractionEnabled = true
+            
             if toatalBowlingMatches == 0 && toatalBattingmatches != 0 {
                 self.baseViewHeightConstraint.constant = 40
                 self.subView3.hidden = true
@@ -781,10 +792,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
 
                 self.horizontalDividerView.constant = 1
 
-                noMatchesHeightConstraint.constant = 0
-                self.noMatchesLabel.text = ""
-
             }
+            noMatchesHeightConstraint.constant = 0
+            self.noMatchesLabel.text = ""
+            
         }
        
         return self.matchDataSource.count
@@ -800,10 +811,13 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             if filterLevel[indexPath.row] == "Level"{
                 cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 15)
                 cell.textLabel?.textColor = UIColor.grayColor()
+                cell.textLabel?.textAlignment = .Left
             }
             else {
-                cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 15)
+                cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 16)
                 cell.textLabel?.textColor = UIColor.whiteColor()
+                cell.textLabel?.sizeToFit()
+                
             }
            
             return cell
@@ -819,7 +833,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 cell.textLabel?.textColor = UIColor.grayColor()
             }
             else {
-                cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 15)
+                cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 16)
                 cell.textLabel?.textColor = UIColor.whiteColor()
             }
             return cell
@@ -828,13 +842,17 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         if tableView == tableView3 {
             let cell = tableView3.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
             cell.backgroundColor = currentTheme.topColor
-            cell.textLabel?.text = filterYear[indexPath.row]
-            if filterYear[indexPath.row] == "Year" {
+            //self.filterYear.sortInPlace()
+            filterYear = filterYear.sort { $0 > $1 }
+            //self.filterYear.reverse()
+            if indexPath.row == 0 {
+                cell.textLabel?.text = "Year"
                 cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 15)
                 cell.textLabel?.textColor = UIColor.grayColor()
             }
-            else {
-                cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 15)
+            else  {
+                cell.textLabel?.text = filterYear[indexPath.row - 1]
+                cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 16)
                 cell.textLabel?.textColor = UIColor.whiteColor()
             }
             
@@ -849,7 +867,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
 
         if tableView == tableView1 || tableView == tableview2 || tableView == tableView3
         {
-              return 20
+              return 30
         }
         
         let currentMatch = self.matches[indexPath.row]
@@ -1010,7 +1028,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             self.tableView1.reloadData()
             self.totalMatchesLabel.textColor = UIColor.whiteColor()
             self.totalMatchesText.textColor = UIColor.blackColor()
-            tableView1HeightConstraint.constant = 100
+               tableView1HeightConstraint.constant = CGFloat(filterLevel.count * 30)
             tableView1.hidden = false
                 baseViewHeightConstraint.constant = 0
                 //baseView.hidden = true
@@ -1030,7 +1048,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 self.totalMatchesLabel.textColor = UIColor.clearColor()
                 self.totalMatchesText.textColor = UIColor.clearColor()
                 self.tableview2.reloadData()
-                tableView2HeightConstraint.constant = 100
+                tableView2HeightConstraint.constant = CGFloat(filterLevel.count * 30)
                 tableview2.hidden = false
                 baseViewHeightConstraint.constant = 0
                // baseView.hidden = true
@@ -1052,7 +1070,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 self.totalMatchesLabel.textColor = UIColor.whiteColor()
                 self.totalMatchesText.textColor = UIColor.blackColor()
                 self.tableView3.reloadData()
-                tableView3HeightConstraint.constant = 100
+                tableView3HeightConstraint.constant = CGFloat(filterYear.count * 30)
                 tableView3.hidden = false
                 baseViewHeightConstraint.constant = 0
                // baseView.hidden = true
