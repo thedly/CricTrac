@@ -229,7 +229,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         self.matches.removeAll()
         self.filterAgeGroup.append("Age Group")
         self.filterLevel.append("Level")
-        //self.filterYear.append("Year")
+        self.filterYear.append("Year")
        
         
         for (key,val) in data{
@@ -737,14 +737,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             noMatchesHeightConstraint.constant = 21
             self.noMatchesLabel.text = "No Matches"
             self.baseViewHeightConstraint.constant = 0
-            self.ageDropdownButton.userInteractionEnabled = false
-            self.levelDropDownButton.userInteractionEnabled = false
-            self.yearDropdownButton.userInteractionEnabled = false
         }
         else {
-            self.ageDropdownButton.userInteractionEnabled = true
-            self.levelDropDownButton.userInteractionEnabled = true
-            self.yearDropdownButton.userInteractionEnabled = true
             
             if toatalBowlingMatches == 0 && toatalBattingmatches != 0 {
                 self.baseViewHeightConstraint.constant = 40
@@ -808,8 +802,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             cell.backgroundColor = currentTheme.topColor
             if filterLevel[indexPath.row] == "Level"{
                 cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 15)
-                cell.textLabel?.textColor = UIColor.grayColor()
-                cell.textLabel?.textAlignment = .Left
+                cell.textLabel?.textColor = UIColor.blackColor()
             }
             else {
                 cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 16)
@@ -828,7 +821,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             
             if filterAgeGroup[indexPath.row] == "Age Group"{
                 cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 15)
-                cell.textLabel?.textColor = UIColor.grayColor()
+                cell.textLabel?.textColor = UIColor.blackColor()
             }
             else {
                 cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 16)
@@ -840,16 +833,15 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         if tableView == tableView3 {
             let cell = tableView3.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
             cell.backgroundColor = currentTheme.topColor
-            //self.filterYear.sortInPlace()
             filterYear = filterYear.sort { $0 > $1 }
-            //self.filterYear.reverse()
-            if indexPath.row == 0 {
+            
+            if filterYear[indexPath.row] == "Year" {
                 cell.textLabel?.text = "Year"
                 cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 15)
-                cell.textLabel?.textColor = UIColor.grayColor()
+                cell.textLabel?.textColor = UIColor.blackColor()
             }
             else  {
-                cell.textLabel?.text = filterYear[indexPath.row - 1]
+                cell.textLabel?.text = filterYear[indexPath.row]
                 cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 16)
                 cell.textLabel?.textColor = UIColor.whiteColor()
             }
@@ -896,20 +888,14 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             getMatchData()
             self.matchSummaryTable.reloadData()
             tableView1.hidden = true
-            baseViewHeightConstraint.constant = 80
-            baseView.hidden = false
         }
             
         else if tableView == tableview2 {
             let cell = tableview2.cellForRowAtIndexPath(indexPath)
             ageGroupDropdown.text = cell?.textLabel?.text
-            self.totalMatchesLabel.textColor = UIColor.whiteColor()
-            self.totalMatchesText.textColor = UIColor.blackColor()
             getMatchData()
             self.matchSummaryTable.reloadData()
             tableview2.hidden = true
-            baseViewHeightConstraint.constant = 80
-            baseView.hidden = false
         }
             
         else if tableView == tableView3 {
@@ -919,8 +905,6 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             getMatchData()
             self.matchSummaryTable.reloadData()
             tableView3.hidden = true
-            baseView.hidden = false
-            baseViewHeightConstraint.constant = 80
         }
         
         else if tableView == matchSummaryTable {
@@ -1024,15 +1008,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             tableView3.hidden = true
             tableview2.hidden = true
             self.tableView1.reloadData()
-            self.totalMatchesLabel.textColor = UIColor.whiteColor()
-            self.totalMatchesText.textColor = UIColor.blackColor()
                tableView1HeightConstraint.constant = CGFloat(filterLevel.count * 30)
             tableView1.hidden = false
-                baseViewHeightConstraint.constant = 0
-                //baseView.hidden = true
             }
             else {
-            baseViewHeightConstraint.constant = 80
             tableView1HeightConstraint.constant = 0
             tableView1.hidden = true
 
@@ -1043,19 +1022,14 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             if tableview2.hidden == true {
                 tableView1.hidden = true
                 tableView3.hidden = true
-                self.totalMatchesLabel.textColor = UIColor.clearColor()
-                self.totalMatchesText.textColor = UIColor.clearColor()
                 self.tableview2.reloadData()
                 tableView2HeightConstraint.constant = CGFloat(filterLevel.count * 30)
                 tableview2.hidden = false
-                baseViewHeightConstraint.constant = 0
-               // baseView.hidden = true
 
             }
             else {
                 tableView2HeightConstraint.constant = 0
                 tableview2.hidden = true
-                baseView.hidden = false
                 self.totalMatchesLabel.textColor = UIColor.whiteColor()
                 self.totalMatchesText.textColor = UIColor.blackColor()
             }
@@ -1070,15 +1044,11 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 self.tableView3.reloadData()
                 tableView3HeightConstraint.constant = CGFloat(filterYear.count * 30)
                 tableView3.hidden = false
-                baseViewHeightConstraint.constant = 0
-               // baseView.hidden = true
 
             }
             else {
                 tableView3HeightConstraint.constant = 0
                 tableView3.hidden = true
-                baseViewHeightConstraint.constant = 80
-                baseView.hidden = false
 
             }
         }
