@@ -20,5 +20,7 @@ class MatchSummaryData {
     var BattingSectionHidden: Bool!
     var BowlingSectionHidden: Bool!
     var matchDate: NSDate!
+    var ageGroup: String!
+    var level: String!
     
 }
