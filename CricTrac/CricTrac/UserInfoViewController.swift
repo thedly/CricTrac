@@ -25,6 +25,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     var currentCityName = ""
     var currentStateName = ""
     var userProfiles = [String]()
+    var countryList = [String]()
     
     @IBOutlet weak var scrollView:UIScrollView!
     @IBOutlet weak var userProfileInfo: UITextField!
@@ -183,6 +184,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     
     @IBAction func didTapCancel(sender: UIButton) {
         //dismissViewControllerAnimated(true) {}
+        self.country.resignFirstResponder()
 
         let confirmAlert = UIAlertController(title: "" ,message:"Are you sure you want to Cancel the changes without saving?",preferredStyle: UIAlertControllerStyle.Alert)
         
@@ -191,6 +193,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
             //reset the profile data on cancel
             getAllProfileData({ data in
                 profileData = Profile(usrObj: data)
+               
             })
         }))
         
@@ -201,6 +204,8 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
     }
     
     @IBAction func addUserBtnPressed(sender: AnyObject) {
+        country.resignFirstResponder()
+        
         
         if firstName.text == "" || lastName.text == "" || dateOfBirth.text == "" || emailId.text == "" || mobile.text == "" || gender.text == "" || country.text == "" || state.text == "" || city.text == "" {
             
@@ -338,7 +343,8 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         if !(country.text?.hasDataPresent)! || country.text?.length > 50 {
             (country as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
             (country as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
-            //country.becomeFirstResponder()
+            
+           // country.resignFirstResponder()
             return false
         }
         else
@@ -350,7 +356,7 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         if !(state.text?.hasDataPresent)! || state.text?.length > 50 {
             (state as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
             (state as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
-            //state.becomeFirstResponder()
+           // state.resignFirstResponder()
             return false
         }
         else
@@ -362,7 +368,8 @@ class UserInfoViewController: UIViewController,ThemeChangeable  {
         if !(city.text?.hasDataPresent)! {
             (city as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
             (city as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
-           // city.becomeFirstResponder()
+            
+          // city.resignFirstResponder()
             return false
         }
         else
@@ -435,12 +442,15 @@ extension UserInfoViewController:UITextFieldDelegate {
             ctDatePicker.showPicker(self, inputText: textField)
         }
         else if textField == country {
+            animateViewMoving(true, moveValue: 300)
             
             currentCountryName = country.text!
             currentStateName = state.text!
             currentCityName = city.text!
-            
-            ctCountryPicker.showPicker(self, inputText: textField)
+            countryList.removeAll()
+            loadingCountriesList()
+            addSuggstionBox(textField, dataSource: countryList)
+          //  ctCountryPicker.showPicker(self, inputText: textField)
             //state.text = String()
             
         }
@@ -465,12 +475,9 @@ extension UserInfoViewController:UITextFieldDelegate {
                 let currentISO = currentCountryList[0].iso
                 ctStatePicker.showPicker(self, inputText: textField, iso: currentISO)
                 
-                //ctStatePicker.showPicker(self, inputText: textField, iso: ctCountryPicker.SelectedISO)
             }
-//            else {
-//               state.userInteractionEnabled = false
-//            }
         }
+            
         else if  textField == gender{
             ctDataPicker = DataPicker()
             let indexPos = genders.indexOf(gender.text!) ?? 0
@@ -478,24 +485,92 @@ extension UserInfoViewController:UITextFieldDelegate {
         }
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func animateViewMoving (up:Bool, moveValue :CGFloat){
+        let movementDuration:NSTimeInterval = 0.3
+        let movement:CGFloat = ( up ? -moveValue : moveValue)
+        UIView.beginAnimations( "animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration )
+        self.view.frame = CGRectOffset(self.view.frame, 0,  movement)
+        UIView.commitAnimations()
+    }
+
+    func loadingCountriesList() {
+        let bundlePath = NSBundle(forClass: CountryPicker.self).pathForResource("SwiftCountryPicker", ofType: "bundle")
         
-        if textField == country {
-            if currentCountryName == country.text! {
-                state.text = currentStateName
-                city.text = currentCityName
-            }else {
-                state.text = ""
-                 city.text = ""
+        if let path = NSBundle(path: bundlePath!)!.pathForResource("EmojiCountryCodes", ofType: "json")
+        {
+            
+            do {
+                let jsonData = try NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe)
+                let json = try NSJSONSerialization.JSONObjectWithData(jsonData, options: .AllowFragments)
+                
+                    guard let countries = json as? NSArray else {
+                    return
+                }
+                
+                for subJson in countries{
+                    
+                    guard let name = subJson["name"] as? String, iso = subJson["code"] as? String, emoji = subJson["emoji"] as? String else {
+                        
+                        print("couldn't parse json")
+                        
+                        break
+                    }
+                    
+                    let country = CustomCountry(name: name, iso: iso, emoji: emoji)
+                    
+                    // append country
+                    countryList.append(country.name)
+                }
+                
+                countryList.sortInPlace { $1 > $0 }
+                
+            } catch {
+                print("error reading file")
+                
             }
         }
         
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        if textField == country {
+            animateViewMoving(false, moveValue: 300)
+            country.resignFirstResponder()
+            state.resignFirstResponder()
+            
+            if currentCountryName == country.text! {
+                state.text = currentStateName
+                city.text = currentCityName
+            }
+            else {
+                state.text = ""
+                city.text = ""
+           
+            if countryList.contains(country.text!) {
+                (country as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
+                (country as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
+                state.userInteractionEnabled = true
+            }else{
+                country.text = ""
+                (country as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
+                (country as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
+                country.becomeFirstResponder()
+                state.userInteractionEnabled = false
+                
+                // state.resignFirstResponder()
+            }
+        }
+           country.resignFirstResponder()
+        }
         if textField == state {
             if currentStateName == state.text! {
                 city.text = currentCityName
             }
             else {
                 city.text = ""
+                state.resignFirstResponder()
             }
         }
 

@@ -545,6 +545,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         self.matches.sortInPlace({ $0.matchDate.compare($1.matchDate) == NSComparisonResult.OrderedDescending })
                self.matchSummaryTable.reloadData()
+        self.totalMatchesLabel.text =  String(self.matchDataSource.count)
 }
     
     func makeSummaryCell(value: [String : AnyObject]) -> MatchSummaryData {
