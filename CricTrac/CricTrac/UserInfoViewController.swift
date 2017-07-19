@@ -549,8 +549,7 @@ extension UserInfoViewController:UITextFieldDelegate {
                 city.text = ""
            
             if countryList.contains(country.text!) {
-                (country as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
-                (country as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
+                
                 state.userInteractionEnabled = true
             }else{
                 country.text = ""
