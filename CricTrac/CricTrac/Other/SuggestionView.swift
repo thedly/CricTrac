@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SuggestionView: UIView,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate{
+class SuggestionView: UIView,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,ThemeChangeable{
     
     @IBOutlet weak var suggestionTable:UITableView!
     private var dataSource:[String]? = nil
@@ -27,6 +27,12 @@ class SuggestionView: UIView,UITableViewDelegate,UITableViewDataSource,UITextFie
         
         dataSource = data
         filturedData = data
+        changeThemeSettigs()
+    }
+    
+    func changeThemeSettigs() {
+        let currentTheme = cricTracTheme.currentTheme
+        suggestionTable.backgroundColor = currentTheme.topColor
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
@@ -37,7 +43,7 @@ class SuggestionView: UIView,UITableViewDelegate,UITableViewDataSource,UITextFie
         aCell.contentlabel?.textColor = UIColor.whiteColor()
         aCell.contentlabel?.font = UIFont(name: "SourceSansPro-Bold", size: 15)
         aCell.backgroundColor = UIColor.clearColor()
-        suggestionTable.backgroundColor = UIColor.clearColor()
+       // suggestionTable.backgroundColor = UIColor.clearColor()
         
         return aCell
     }
@@ -53,6 +59,7 @@ class SuggestionView: UIView,UITableViewDelegate,UITableViewDataSource,UITextFie
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
         textField?.text = filturedData![indexPath.row]
         self.hidden = true
     }

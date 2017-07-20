@@ -33,7 +33,7 @@ class CTStatePicker: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
         self.parent = parent
         self.inputISO = iso
         pickerData = getStatesByISO(iso)
-        
+         _selectedState = pickerData[0]
         if statePicker == nil {
             statePicker = UIPickerView(frame: CGRectMake(0,0,parent.view.frame.size.width, 216))
             statePicker.backgroundColor = UIColor.whiteColor()

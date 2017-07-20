@@ -99,8 +99,9 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
 //                UserProfilesData = modFriendReqData
                 
                 dispatch_async(dispatch_get_main_queue(),{
-                    KRProgressHUD.dismiss()
+                    
                     self.SuggestsTblview.reloadData()
+                    KRProgressHUD.dismiss()
                 })
             })
         })

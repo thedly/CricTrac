@@ -1024,7 +1024,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 tableView1.hidden = true
                 tableView3.hidden = true
                 self.tableview2.reloadData()
-                tableView2HeightConstraint.constant = CGFloat(filterLevel.count * 30)
+                tableView2HeightConstraint.constant = CGFloat(filterAgeGroup.count * 30)
                 tableview2.hidden = false
 
             }

@@ -346,13 +346,23 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         else
         {
             if let currentValue = Int(controlText.text!) {
-                if currentValue > 0 {
+                if controlText == positionText {
+                    if currentValue > 1 {
+                        controlText.text = String(currentValue - 1)
+                    }
+                }
+                else if currentValue > 0 {
                     controlText.text = String(currentValue - 1)
                 }
             }
             else
             {
+                if controlText == positionText {
+                    controlText.text = String(1)
+                }
+                else {
                 controlText.text = String(0)
+                }
             }
         }
         

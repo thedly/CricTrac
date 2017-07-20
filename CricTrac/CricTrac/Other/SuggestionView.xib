@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -17,15 +17,19 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TWE-us-X9P">
-                    <rect key="frame" x="0.0" y="0.0" width="550" height="600"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="iN0-l3-epB" id="06R-Lc-dhZ"/>
                         <outlet property="delegate" destination="iN0-l3-epB" id="WBf-7x-qjC"/>
                     </connections>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4J-jB-TAW">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4J-jB-TAW">
                     <rect key="frame" x="555" y="0.0" width="34" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="34" id="Jga-e9-cTb"/>
+                        <constraint firstAttribute="height" constant="30" id="iK6-Fe-onu"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                     <state key="normal">
                         <color key="titleColor" red="0.69411764710000001" green="0.14117647059999999" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -37,14 +41,22 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="p4J-jB-TAW" secondAttribute="trailing" constant="11" id="1u5-y2-lMp"/>
                 <constraint firstItem="TWE-us-X9P" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="62x-ww-19o"/>
                 <constraint firstItem="p4J-jB-TAW" firstAttribute="leading" secondItem="TWE-us-X9P" secondAttribute="trailing" constant="5" id="F0P-Id-KHF"/>
                 <constraint firstItem="TWE-us-X9P" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" constant="-50" id="SFB-ks-EwT"/>
                 <constraint firstItem="TWE-us-X9P" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="YUm-zp-7tb"/>
                 <constraint firstItem="TWE-us-X9P" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="if9-Wv-ayC"/>
                 <constraint firstItem="p4J-jB-TAW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="q6M-vs-qqn"/>
+                <constraint firstAttribute="trailing" secondItem="TWE-us-X9P" secondAttribute="trailing" id="xI1-65-YbN"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="SFB-ks-EwT"/>
+                    <exclude reference="F0P-Id-KHF"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="suggestionTable" destination="TWE-us-X9P" id="JsQ-Ry-Ftw"/>
             </connections>

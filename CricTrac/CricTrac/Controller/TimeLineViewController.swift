@@ -124,6 +124,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     
     func loadTimeline(){
         getLatestTimelines({ (result) in
+             KRProgressHUD.showText("Loading ...")
             timelineData = result.dictionaryValue["timeline"]
             if let key = result.dictionaryValue["pageKey"]?.stringValue{
                 pageKey = key
@@ -143,7 +144,9 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
             
             dispatch_async(dispatch_get_main_queue(),{
                 self.refreshControl.endRefreshing()
+                  KRProgressHUD.dismiss()
                 self.timeLineTable.reloadData()
+              
             })
         }) { (error) in }
         

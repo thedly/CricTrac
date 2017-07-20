@@ -442,11 +442,11 @@ extension UserInfoViewController:UITextFieldDelegate {
             ctDatePicker.showPicker(self, inputText: textField)
         }
         else if textField == country {
-            animateViewMoving(true, moveValue: 300)
+            self.scrollView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height + 110.0)
             
-            currentCountryName = country.text!
-            currentStateName = state.text!
-            currentCityName = city.text!
+            currentCountryName = profileData.Country
+            currentStateName = profileData.State
+            currentCityName = profileData.City
             countryList.removeAll()
             loadingCountriesList()
             addSuggstionBox(textField, dataSource: countryList)
@@ -460,10 +460,8 @@ extension UserInfoViewController:UITextFieldDelegate {
             ctDataPicker.showPicker(self, inputText: textField, data: userProfiles,selectedValueIndex: indexPos)
         }
         else if textField == state {
-            
-            currentStateName = state.text!
-            currentCityName = city.text!
-            
+            currentStateName = profileData.State
+            currentCityName = profileData.City
             var currentCountry = ""
             
             if country.text?.length > 0 {
@@ -473,6 +471,7 @@ extension UserInfoViewController:UITextFieldDelegate {
                 
                 let currentCountryList = CountriesList.filter({$0.name == currentCountry})
                 let currentISO = currentCountryList[0].iso
+               
                 ctStatePicker.showPicker(self, inputText: textField, iso: currentISO)
                 
             }
@@ -485,16 +484,6 @@ extension UserInfoViewController:UITextFieldDelegate {
         }
     }
     
-    func animateViewMoving (up:Bool, moveValue :CGFloat){
-        let movementDuration:NSTimeInterval = 0.3
-        let movement:CGFloat = ( up ? -moveValue : moveValue)
-        UIView.beginAnimations( "animateView", context: nil)
-        UIView.setAnimationBeginsFromCurrentState(true)
-        UIView.setAnimationDuration(movementDuration )
-        self.view.frame = CGRectOffset(self.view.frame, 0,  movement)
-        UIView.commitAnimations()
-    }
-
     func loadingCountriesList() {
         let bundlePath = NSBundle(forClass: CountryPicker.self).pathForResource("SwiftCountryPicker", ofType: "bundle")
         
@@ -536,7 +525,6 @@ extension UserInfoViewController:UITextFieldDelegate {
     
     func textFieldDidEndEditing(textField: UITextField) {
         if textField == country {
-            animateViewMoving(false, moveValue: 300)
             country.resignFirstResponder()
             state.resignFirstResponder()
             
@@ -549,13 +537,12 @@ extension UserInfoViewController:UITextFieldDelegate {
                 city.text = ""
            
             if countryList.contains(country.text!) {
-                
                 state.userInteractionEnabled = true
             }else{
                 country.text = ""
                 (country as! SkyFloatingLabelTextField).lineColor = UIColor(hex: "#F00")
                 (country as! SkyFloatingLabelTextField).selectedLineColor = UIColor(hex: "#F00")
-                country.becomeFirstResponder()
+                //country.becomeFirstResponder()
                 state.userInteractionEnabled = false
                 
                 // state.resignFirstResponder()
@@ -568,8 +555,8 @@ extension UserInfoViewController:UITextFieldDelegate {
                 city.text = currentCityName
             }
             else {
-                city.text = ""
-                state.resignFirstResponder()
+                    city.text = ""
+                    state.resignFirstResponder()
             }
         }
 
