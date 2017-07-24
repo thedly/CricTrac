@@ -35,8 +35,9 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     
     // For TotalMatches
      @IBOutlet weak var totalMatchesLabel: UILabel!
-    @IBOutlet weak var totalMatchesText: UILabel!
     @IBOutlet weak var baseView: UIView!
+    @IBOutlet weak var matchFilterView: UIView!
+    @IBOutlet weak var matchFilterViewHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var strikeRate: UILabel!
     @IBOutlet weak var battingAvg: UILabel!
@@ -61,7 +62,6 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     @IBOutlet weak var subView4: UIView!
     @IBOutlet weak var subView1: UIView!
     @IBOutlet weak var subView2: UIView!
-    
     
     var matchData = [String:AnyObject]()
     var matches = [MatchSummaryData]()
@@ -120,9 +120,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-  
-        upgradeButton.setTitle("UPGRADE", forState: UIControlState.Normal)
+       // navigationBarOriginalOffset = navigationController!.navigationBar.frame.origin.y
         
+        upgradeButton.setTitle("UPGRADE", forState: UIControlState.Normal)
+        //self.matchSummaryTable.addSubview(matchFilterView)
         userProfileData = profileData
         if userProfileData.UserStatus == "Premium" {
             //upgradeButton.hidden=true
@@ -723,7 +724,9 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         
         if tableView == tableView1 {
+           
             return filterLevel.count
+            
         }
         
         if tableView == tableview2 {
@@ -735,14 +738,28 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         }
    
         if self.matchDataSource.count == 0 {
-            noMatchesHeightConstraint.constant = 21
-            self.noMatchesLabel.text = "No Matches"
-            self.baseViewHeightConstraint.constant = 0
+            if filterLevel.count > 0 {
+                self.matchFilterView.hidden = false
+                self.matchFilterViewHeightConstraint.constant = 71
+                self.baseViewHeightConstraint.constant = 0
+                noMatchesHeightConstraint.constant = 21
+                self.noMatchesLabel.text = "No Matches"
+            }
+            else{
+                self.matchFilterView.hidden = true
+                self.matchFilterViewHeightConstraint.constant = 0
+                
+                noMatchesHeightConstraint.constant = 21
+                self.noMatchesLabel.text = "No Matches"
+                self.baseViewHeightConstraint.constant = 0
+            }
         }
         else {
-            
+            self.matchFilterView.hidden = false
+
             if toatalBowlingMatches == 0 && toatalBattingmatches != 0 {
                 self.baseViewHeightConstraint.constant = 40
+                self.matchFilterViewHeightConstraint.constant = 111
                 self.subView3.hidden = true
                 self.subView4.hidden = true
                 self.subView1.hidden = false
@@ -756,7 +773,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             }
             else if toatalBattingmatches == 0 && toatalBowlingMatches != 0 {
                 self.baseViewHeightConstraint.constant = 40
-                
+                self.matchFilterViewHeightConstraint.constant = 111
                 self.subView1.hidden = true
                 self.subView2.hidden = true
                 self.subView3.hidden = false
@@ -770,8 +787,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             }
            else if toatalBowlingMatches == 0 && toatalBattingmatches == 0 {
                  self.baseViewHeightConstraint.constant = 0
+                self.matchFilterViewHeightConstraint.constant = 71
             }
             else {
+                self.matchFilterViewHeightConstraint.constant = 151
                 self.baseViewHeightConstraint.constant = 80
                 self.subView1.hidden = false
                 self.subView2.hidden = false
@@ -797,8 +816,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let currentTheme = cricTracTheme.currentTheme
         
-        if tableView == tableView1 {
-            let cell = tableView1.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        if tableView == tableview2 {
+            let cell = tableview2.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
             cell.textLabel?.text = filterLevel[indexPath.row]
             cell.backgroundColor = currentTheme.topColor
             if filterLevel[indexPath.row] == "Level"{
@@ -815,12 +834,13 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             return cell
         }
         
-        if tableView == tableview2 {
-            let cell = tableview2.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        if tableView == tableView1 {
+            let cell = tableView1.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
             cell.backgroundColor = currentTheme.topColor
             cell.textLabel?.text = filterAgeGroup[indexPath.row]
             
             if filterAgeGroup[indexPath.row] == "Age Group"{
+                
                 cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 15)
                 cell.textLabel?.textColor = UIColor.blackColor()
             }
@@ -884,7 +904,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         if tableView == tableView1 {
             let cell = tableView1.cellForRowAtIndexPath(indexPath)
-            levelDropdown.text = cell?.textLabel?.text
+            ageGroupDropdown.text = cell?.textLabel?.text
             
             getMatchData()
             self.matchSummaryTable.reloadData()
@@ -893,7 +913,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             
         else if tableView == tableview2 {
             let cell = tableview2.cellForRowAtIndexPath(indexPath)
-            ageGroupDropdown.text = cell?.textLabel?.text
+            levelDropdown.text = cell?.textLabel?.text
             getMatchData()
             self.matchSummaryTable.reloadData()
             tableview2.hidden = true
@@ -925,6 +945,17 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
         CFRunLoopWakeUp(CFRunLoopGetCurrent())
         
+        }
+        
+    }
+
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        var rect:CGRect = self.view.frame
+        rect.origin.y = -scrollView.contentOffset.y
+        //self.matchFilterView.alpha = 0.5
+        if rect.origin.y < 20 {
+            self.view.frame = rect
+
         }
         
     }
@@ -1005,34 +1036,32 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     
     @IBAction func levelDropDownButtonTapped(sender: UIButton) {
         if sender.tag == 2 {
-            if tableView1.hidden == true {
+            if tableview2.hidden == true {
+            tableView1.hidden = true
             tableView3.hidden = true
-            tableview2.hidden = true
-            self.tableView1.reloadData()
-               tableView1HeightConstraint.constant = CGFloat(filterLevel.count * 30)
-            tableView1.hidden = false
+            self.tableview2.reloadData()
+               tableView2HeightConstraint.constant = CGFloat(filterLevel.count * 30)
+            tableview2.hidden = false
             }
             else {
-            tableView1HeightConstraint.constant = 0
-            tableView1.hidden = true
+            tableView2HeightConstraint.constant = 0
+            tableview2.hidden = true
 
             }
         }
         
         if sender.tag == 1 {
-            if tableview2.hidden == true {
-                tableView1.hidden = true
+            if tableView1.hidden == true {
+                tableview2.hidden = true
                 tableView3.hidden = true
-                self.tableview2.reloadData()
-                tableView2HeightConstraint.constant = CGFloat(filterAgeGroup.count * 30)
-                tableview2.hidden = false
+                self.tableView1.reloadData()
+                tableView1HeightConstraint.constant = CGFloat(filterAgeGroup.count * 30)
+                tableView1.hidden = false
 
             }
             else {
-                tableView2HeightConstraint.constant = 0
-                tableview2.hidden = true
-                self.totalMatchesLabel.textColor = UIColor.whiteColor()
-                self.totalMatchesText.textColor = UIColor.blackColor()
+                tableView1HeightConstraint.constant = 0
+                tableView1.hidden = true
             }
         }
         
@@ -1041,11 +1070,9 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 tableView1.hidden = true
                 tableview2.hidden = true
                 self.totalMatchesLabel.textColor = UIColor.whiteColor()
-                self.totalMatchesText.textColor = UIColor.blackColor()
                 self.tableView3.reloadData()
                 tableView3HeightConstraint.constant = CGFloat(filterYear.count * 30)
                 tableView3.hidden = false
-
             }
             else {
                 tableView3HeightConstraint.constant = 0
