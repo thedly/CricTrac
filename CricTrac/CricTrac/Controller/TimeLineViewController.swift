@@ -123,8 +123,9 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     func loadTimeline(){
+        KRProgressHUD.showText("Loading ...")
         getLatestTimelines({ (result) in
-             KRProgressHUD.showText("Loading ...")
+            // KRProgressHUD.showText("Loading ...")
             timelineData = result.dictionaryValue["timeline"]
             if let key = result.dictionaryValue["pageKey"]?.stringValue{
                 pageKey = key

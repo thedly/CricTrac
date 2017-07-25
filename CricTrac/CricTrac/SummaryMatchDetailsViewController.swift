@@ -325,6 +325,15 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         }
         
         if let dat = matchDetailsData["MatchDate"] {
+            
+            let dob = profileData.DateOfBirth
+            let dateFormater = NSDateFormatter()
+            dateFormater.dateFormat = "dd-MM-yyyy"
+            let birthdayDate = dateFormater.dateFromString(dob)
+            
+            let date = dat
+            let matchDate = dateFormater.dateFromString(date as! String)
+            
             let dateImageAttachment = NSTextAttachment()
             dateImageAttachment.image = UIImage(named: "Calendar-100")
             let dateAttachmentString = NSAttributedString(attachment: dateImageAttachment)
@@ -336,21 +345,45 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             let formattedString = NSMutableAttributedString()
             formattedString.appendAttributedString(dateAttachmentString)
             formattedString.bold("  \(dat)  ", fontName: appFont_bold, fontSize: 15)
+            let calender:NSCalendar  = NSCalendar.currentCalendar()
+            
+            let matchMonth = calender.component(.Month, fromDate: matchDate!)
+            let birthmonth = calender.component(.Month, fromDate: birthdayDate!)
+            
+            var years = calender.component(.Year, fromDate: matchDate!) - calender.component(.Year, fromDate: birthdayDate!)
+            
+            var months = matchMonth - birthmonth
+            
+            if months < 0 {
+                years = years - 1
+                months = 12 - birthmonth + matchMonth
+                if calender.component(.Day, fromDate: matchDate!) < calender.component(.Day, fromDate: birthdayDate!){
+                    months = months - 1
+                }
+            }
+            else if months == 0 && calender.component(.Day, fromDate: matchDate!) < calender.component(.Day, fromDate: birthdayDate!)
+            {
+                years = years - 1
+                months = 11
+            }
+            let ageStr = "Age on Match: \(years)yrs \(months) months"
+           
+            formattedString.bold(" |  \(ageStr)\n", fontName: appFont_bold, fontSize: 15)
             
             let groundData = matchDetailsData["Ground"] as? String
-            
+            let formattedString1 = NSMutableAttributedString()
             if let grnd = matchDetailsData["Ground"] as? String where grnd != "-" {
-                formattedString.appendAttributedString(groundAttachmentString)
-                formattedString.bold(" \(grnd)", fontName: appFont_bold, fontSize: 15)
+                formattedString1.appendAttributedString(groundAttachmentString)
+                formattedString1.bold(" \(grnd)", fontName: appFont_bold, fontSize: 15)
             }
             
             if let venue = matchDetailsData["Venue"] as? String where venue != "-"  {
                 if groundData == "-" {
-                    formattedString.appendAttributedString(groundAttachmentString)
+                    formattedString1.appendAttributedString(groundAttachmentString)
                 }
-                    formattedString.bold(" \(venue)", fontName: appFont_bold, fontSize: 15)
+                    formattedString1.bold(" \(venue)", fontName: appFont_bold, fontSize: 15)
             }
-            
+            ground.attributedText = formattedString1
             matchDateAndVenue.attributedText = formattedString
         }
         

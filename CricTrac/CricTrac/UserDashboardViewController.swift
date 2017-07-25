@@ -17,6 +17,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
 
     //MARK: - Variable declaration
     
+    @IBOutlet weak var playerInfoLabel: UILabel!
     @IBOutlet weak var imgCoverPhoto: UIImageView!
     var battingDetails: [String:String]!
     var bowlingDetails: [String:String]!
@@ -241,8 +242,40 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         }
     }
     
+    func playerInfoUpdating(){
+        let formattedStr = NSMutableAttributedString()
+        
+        let batImageAttachment = NSTextAttachment()
+        batImageAttachment.image = UIImage(named: "BatIcon")
+        batImageAttachment.bounds = CGRect(x: 0, y: -2, width: 15, height: 15)
+        let imageAttachmentString = NSAttributedString(attachment: batImageAttachment)
+        
+        
+        let ballImageAttachment = NSTextAttachment()
+        ballImageAttachment.image = UIImage(named: "BallIcon")
+        ballImageAttachment.bounds = CGRect(x: 0, y: -2, width: 14, height: 14)
+        let ballImageAttachmentString = NSAttributedString(attachment: ballImageAttachment)
+        
+        
+        if profileData.BattingStyle == "Right-hand" {
+            formattedStr.appendAttributedString(imageAttachmentString)
+            formattedStr.bold(" RH", fontName: appFont_bold, fontSize: 15)
+        }else{
+            formattedStr.appendAttributedString(imageAttachmentString)
+            formattedStr.bold(" LH", fontName: appFont_bold, fontSize: 15)
+        }
+        formattedStr.bold(" - \(profileData.PlayingRole)   ", fontName: appFont_bold, fontSize: 15)
+        if profileData.BowlingStyle != "-" {
+            formattedStr.appendAttributedString(ballImageAttachmentString)
+            formattedStr.bold(" \(profileData.BowlingStyle)", fontName: appFont_bold, fontSize: 15)
+        }
+        playerInfoLabel.attributedText = formattedStr
+    }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        playerInfoUpdating()
+        
         /*
 
          CGRect contentRect = CGRectZero;
@@ -314,6 +347,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         super.viewDidLoad()
         addTapGestureToUserName()
         TeamsTable.reloadData()
+        
         
         loadBannerAds()
 
