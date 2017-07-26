@@ -268,7 +268,7 @@ extension RegisterViewController {
                             else {
                                
                                   //  SCLAlertView().showInfo("Verify email", subTitle: "An email has been sent for verification")
-                                    let alert = UIAlertController(title: "", message: "Please check your email and verify the account.", preferredStyle: UIAlertControllerStyle.Alert)
+                                    let alert = UIAlertController(title: "", message: "Please check your email (\(self.username.text!)) and verify the account.", preferredStyle: UIAlertControllerStyle.Alert)
                                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
                                     self.dismissViewControllerAnimated(true, completion: nil)
                                 }))

@@ -366,7 +366,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                 years = years - 1
                 months = 11
             }
-            let ageStr = "Age on Match: \(years)yrs \(months) months"
+            let ageStr = "Age on Match: \(years) yrs \(months) months"
            
             formattedString.bold(" |  \(ageStr)\n", fontName: appFont_bold, fontSize: 15)
             

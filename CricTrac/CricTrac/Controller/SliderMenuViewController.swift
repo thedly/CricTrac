@@ -101,7 +101,9 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
        // let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         if FIRInstanceID.instanceID().token() != nil {
-            saveFCMToken(FIRInstanceID.instanceID().token()!)
+            if profileData.FirstName != "" {
+                saveFCMToken(FIRInstanceID.instanceID().token()!)
+            }
         }
         
 //        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate

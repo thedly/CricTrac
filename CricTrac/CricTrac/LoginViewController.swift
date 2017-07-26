@@ -315,7 +315,8 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         })
         
         
-        if currentUser != nil && profileData.userExists {
+       // if currentUser != nil && profileData.userExists {
+        if profileData.FirstName != "" {
             updateLastLogin()
         }
         

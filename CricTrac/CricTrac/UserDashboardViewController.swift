@@ -400,11 +400,44 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         let currentCountryList = CountriesList.filter({$0.name == userProfileData.Country})
         let currentISO = currentCountryList[0].iso
         
+        //For age calculating
+        let dob = profileData.DateOfBirth
+        let dateFormater = NSDateFormatter()
+         dateFormater.dateFormat = "dd-MM-yyyy"
+        let birthdayDate = dateFormater.dateFromString(dob)
+        
+        let date = NSDate()
+
+        let calender:NSCalendar  = NSCalendar.currentCalendar()
+        
+        let currentMonth = calender.component(.Month, fromDate: date)
+        let birthmonth = calender.component(.Month, fromDate: birthdayDate!)
+       
+        var years = calender.component(.Year, fromDate: date) - calender.component(.Year, fromDate: birthdayDate!)
+        
+        var months = currentMonth - birthmonth
+        
+        if months < 0 {
+            years = years - 1
+            months = 12 - birthmonth + currentMonth
+            if calender.component(.Day, fromDate: date) < calender.component(.Day, fromDate: birthdayDate!){
+                months = months - 1
+            }
+        }
+        else if months == 0 && calender.component(.Day, fromDate: date) < calender.component(.Day, fromDate: birthdayDate!)
+        {
+            years = years - 1
+            months = 11
+        }
+        let ageString = "\(years) yrs \(months) months"
+
+        
+        
         let df = NSDateFormatter()
         df.dateFormat = "dd/MM/yyyy"
         self.PlayerName.text = userProfileData.fullName
         let formattedString = NSMutableAttributedString()
-        let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State), ", fontName: appFont_black, fontSize: 15).bold("\(currentISO)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.DateOfBirth)\n", fontName: appFont_black, fontSize: 15)
+        let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State), ", fontName: appFont_black, fontSize: 15).bold("\(currentISO)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.DateOfBirth)\n", fontName: appFont_black, fontSize: 15).bold("Age: \(ageString)\n", fontName: appFont_black, fontSize: 15)
         self.PlayerLocation.attributedText = locationText
 //        self.userProfileImage.image = LoggedInUserImage
 //        self.imgCoverPhoto.image = LoggedInUserCoverImage
@@ -1108,8 +1141,6 @@ func setDashboardData(){
                         
                          //self.TeamsTable.reloadData()
                         self.updateDashBoardMatches()
-                        
-                        
                         
                     })
                 }

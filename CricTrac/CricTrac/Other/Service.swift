@@ -424,7 +424,7 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
 //    let formatter = NSDateFormatter()
 //    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     
-    dataToBeModified["UserLastLoggedin"] = NSDate().getCurrentTimeStamp()
+   // dataToBeModified["UserLastLoggedin"] = NSDate().getCurrentTimeStamp()
     
     fireBaseRef.child("Users").child(currentUser!.uid).child("UserProfile").child("Email").observeSingleEventOfType(.Value, withBlock: { snapshot in
         let userRegistered = snapshot.value as? String

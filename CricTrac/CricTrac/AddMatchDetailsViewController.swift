@@ -522,7 +522,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         
         if let msg = inAppProductPrice {
         
-            let message = "You can add only 5 matches in the free version. To add more matches please upgrade by paying: \(msg)"
+            let message =  "Free version allows only maximum 5 matches. Add unlimited matches by upgrading to premium by paying: \(msg)\n\nYou can also upgrade from crictrac.com website with multiple payment options."
             
             let refreshAlert = UIAlertController(title: "Premium Account", message: message, preferredStyle: UIAlertControllerStyle.Alert)
             
