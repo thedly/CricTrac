@@ -51,12 +51,12 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
         timeLineTable.estimatedRowHeight = 50.0;
         
         //setUIBackgroundTheme(view)
-        
-        loadTimeline()
         KRProgressHUD.showText("Loading ...")
 
+        loadTimeline()
+
         getAllUserProfileInfo(){
-           // KRProgressHUD.dismiss()
+            KRProgressHUD.dismiss()
         }
         refreshControl.attributedTitle = NSAttributedString(string: "Loading New Posts")
         refreshControl.addTarget(self, action: #selector(TimeLineViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
@@ -127,9 +127,9 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     func loadTimeline(){
-        KRProgressHUD.showText("Loading ...")
+       // KRProgressHUD.showText("Loading ...")
         getLatestTimelines({ (result) in
-            // KRProgressHUD.showText("Loading ...")
+             KRProgressHUD.showText("Loading ...")
             timelineData = result.dictionaryValue["timeline"]
             if let key = result.dictionaryValue["pageKey"]?.stringValue{
                 pageKey = key
