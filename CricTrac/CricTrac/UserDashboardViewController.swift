@@ -257,17 +257,17 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         let ballImageAttachmentString = NSAttributedString(attachment: ballImageAttachment)
         
         
-        if profileData.BattingStyle == "Right-hand" {
+        if userProfileData.BattingStyle == "Right-hand" {
             formattedStr.appendAttributedString(imageAttachmentString)
             formattedStr.bold(" RH", fontName: appFont_bold, fontSize: 15)
         }else{
             formattedStr.appendAttributedString(imageAttachmentString)
             formattedStr.bold(" LH", fontName: appFont_bold, fontSize: 15)
         }
-        formattedStr.bold(" - \(profileData.PlayingRole)   ", fontName: appFont_bold, fontSize: 15)
-        if profileData.BowlingStyle != "-" {
+        formattedStr.bold(" - \(userProfileData.PlayingRole)   ", fontName: appFont_bold, fontSize: 15)
+        if userProfileData.BowlingStyle != "-" {
             formattedStr.appendAttributedString(ballImageAttachmentString)
-            formattedStr.bold(" \(profileData.BowlingStyle)", fontName: appFont_bold, fontSize: 15)
+            formattedStr.bold(" \(userProfileData.BowlingStyle)", fontName: appFont_bold, fontSize: 15)
         }
         playerInfoLabel.attributedText = formattedStr
     }
@@ -401,7 +401,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         let currentISO = currentCountryList[0].iso
         
         //For age calculating
-        let dob = profileData.DateOfBirth
+        let dob = userProfileData.DateOfBirth
         let dateFormater = NSDateFormatter()
          dateFormater.dateFormat = "dd-MM-yyyy"
         let birthdayDate = dateFormater.dateFromString(dob)
@@ -1743,8 +1743,9 @@ func setDashboardData(){
                     
                 let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
                     summaryDetailsVC.matchDetailsData = data
+                    summaryDetailsVC.friendDOB = self.userProfileData.DateOfBirth
+                    summaryDetailsVC.isFriendDashboard = true
                     
-                        summaryDetailsVC.isFriendDashboard = true
                     if let _ = self.friendProfile {
                         summaryDetailsVC.friendProfile = true
 
@@ -1767,6 +1768,7 @@ func setDashboardData(){
                 if let data = snapshot.value! as? [String:AnyObject]{
                 let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
                     summaryDetailsVC.matchDetailsData = data
+                    summaryDetailsVC.friendDOB = self.userProfileData.DateOfBirth
                     summaryDetailsVC.isFriendDashboard = true
                     if let _ = self.friendProfile {
                         summaryDetailsVC.friendProfile = true
@@ -1795,6 +1797,7 @@ func setDashboardData(){
                 if let data = snapshot.value! as? [String:AnyObject]{
                     let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
                     summaryDetailsVC.matchDetailsData = data
+                    summaryDetailsVC.friendDOB = self.userProfileData.DateOfBirth
                     summaryDetailsVC.isFriendDashboard = true
                     if let _ = self.friendProfile {
                         summaryDetailsVC.friendProfile = true
@@ -1817,6 +1820,7 @@ func setDashboardData(){
                 if let data = snapshot.value! as? [String:AnyObject]{
                     let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
                     summaryDetailsVC.matchDetailsData = data
+                    summaryDetailsVC.friendDOB = self.userProfileData.DateOfBirth
                     summaryDetailsVC.isFriendDashboard = true
                     if let _ = self.friendProfile {
                         summaryDetailsVC.friendProfile = true
@@ -1839,6 +1843,7 @@ func setDashboardData(){
                 if let data = snapshot.value! as? [String:AnyObject]{
                     let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
                     summaryDetailsVC.matchDetailsData = data
+                    summaryDetailsVC.friendDOB = self.userProfileData.DateOfBirth
                     summaryDetailsVC.isFriendDashboard = true
                     if let _ = self.friendProfile {
                         summaryDetailsVC.friendProfile = true
@@ -1860,7 +1865,8 @@ func setDashboardData(){
                 
                 if let data = snapshot.value! as? [String:AnyObject]{
                 let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
-                summaryDetailsVC.matchDetailsData = data
+                    summaryDetailsVC.matchDetailsData = data
+                    summaryDetailsVC.friendDOB = self.userProfileData.DateOfBirth
                     summaryDetailsVC.isFriendDashboard = true
                     if let _ = self.friendProfile {
                         summaryDetailsVC.friendProfile = true

@@ -64,6 +64,8 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     @IBOutlet weak var firstTeamTossBtn: UIButton!
     @IBOutlet weak var secondTeamTossBtn: UIButton!
     
+    var friendDOB = ""
+    
     var isFriendDashboard: Bool!  = false
     
     @IBAction func deleteActionPressed(sender: UIButton) {
@@ -293,7 +295,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             }
             
             let fullRange = NSRange(location: 0,length: formattedString.length)
-            let batLength = formattedString.length
+           // let batLength = formattedString.length
             
             if let Balls = matchDetailsData["BallsFaced"] {
                 formattedString.bold("(\(Balls))", fontName: appFont_bold, fontSize: 30)
@@ -326,7 +328,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         
         if let dat = matchDetailsData["MatchDate"] {
             
-            let dob = profileData.DateOfBirth
+            let dob = friendDOB
             let dateFormater = NSDateFormatter()
             dateFormater.dateFormat = "dd-MM-yyyy"
             let birthdayDate = dateFormater.dateFromString(dob)
@@ -366,6 +368,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                 years = years - 1
                 months = 11
             }
+            
             let ageStr = "Age on Match: \(years) yrs \(months) months"
            
             formattedString.bold(" |  \(ageStr)\n", fontName: appFont_bold, fontSize: 15)
