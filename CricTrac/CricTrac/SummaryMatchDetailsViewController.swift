@@ -327,8 +327,14 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         }
         
         if let dat = matchDetailsData["MatchDate"] {
+            var dob = ""
+            if isFriendDashboard == false {
+                  dob = profileData.DateOfBirth
+            }
+            else{
+                dob = friendDOB
+            }
             
-            let dob = friendDOB
             let dateFormater = NSDateFormatter()
             dateFormater.dateFormat = "dd-MM-yyyy"
             let birthdayDate = dateFormater.dateFromString(dob)

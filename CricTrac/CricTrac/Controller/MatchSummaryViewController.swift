@@ -261,6 +261,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 
             if ageGroupDropdown.text == "Age Group" && levelDropdown.text == "Level" && yearDropdown.text == "Year" {
                 self.matchDataSource.append(value)
+                
                 self.matches.append(makeSummaryCell(value))
                 self.totalMatchesLabel.text = String(self.matchDataSource.count)
                 
@@ -720,9 +721,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        
+       
         
         if tableView == tableView1 {
+           
             return filterLevel.count
         }
         
@@ -956,10 +958,24 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     @IBAction func didTapPurchaseButton(){
         
         if let msg = inAppProductPrice {
-            
-            let message = "Free version allows only maximum 5 matches. Add unlimited matches by upgrading to premium by paying: \(msg)\n\nYou can also upgrade from crictrac.com website with multiple payment options."
+            let message =  "\n\n\n\n\n\n\n\n"
             
             let refreshAlert = UIAlertController(title: "Premium Account", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let rect  = CGRect(x: 0, y: 50, width: 270, height: 150)
+            let textView    = UITextView(frame: rect)
+            
+            textView.font               = UIFont(name: "Helvetica", size: 15)
+            textView.textColor          = UIColor.blackColor()
+            textView.backgroundColor    = UIColor.clearColor()
+            textView.layer.borderColor  = UIColor.lightGrayColor().CGColor
+            textView.layer.borderWidth  = 1.0
+            textView.text               = "  Free version allows only maximum 5 matches. Add unlimited matches by upgrading to premium by paying:\(msg) \n \n   You can also upgrade from CricTrac.com website with multiple payment options."
+            textView.delegate = self as? UITextViewDelegate
+            textView.editable = false
+            textView.dataDetectorTypes = UIDataDetectorTypes.Link
+            refreshAlert.view.addSubview(textView)
+ 
             
             refreshAlert.addAction(UIAlertAction(title: "Upgrade", style: .Default, handler: { (action: UIAlertAction!) in
                 self.doPurchase()

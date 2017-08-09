@@ -95,10 +95,12 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         
         let friendUserId = friendsDataArray[indexPath.row].UserId
         aCell.friendId = friendUserId
-        fetchFriendDetail(friendUserId, sucess: { (result) in
+        fetchBasicProfile(friendUserId, sucess: { (result) in
             let proPic = result["proPic"]
             let city =   result["city"]
+            let name = "\(result["firstname"]!) \(result["lastname"]!)"
             aCell.FriendCity.text = city
+            aCell.FriendName.text = name
 
             if proPic! == "-"{
                 let imageName = defaultProfileImage
@@ -112,7 +114,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         })
         
         
-        aCell.FriendName.text = friendsDataArray[indexPath.row].Name
+       // aCell.FriendName.text = friendsDataArray[indexPath.row].Name
         //aCell.FriendCity.text = friendsDataArray[indexPath.row].City
         //aCell.FriendProfileImage.image = extractImages(friendsDataArray[indexPath.row].UserId!)
         aCell.UnfriendBtn.addTarget(self, action: #selector(FriendsViewController.UnfriendBtnBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)

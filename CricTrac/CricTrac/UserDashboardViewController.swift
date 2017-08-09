@@ -401,7 +401,9 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         let currentISO = currentCountryList[0].iso
         
         //For age calculating
-        let dob = userProfileData.DateOfBirth
+       
+          let  dob = userProfileData.DateOfBirth
+        
         let dateFormater = NSDateFormatter()
          dateFormater.dateFormat = "dd-MM-yyyy"
         let birthdayDate = dateFormater.dateFromString(dob)

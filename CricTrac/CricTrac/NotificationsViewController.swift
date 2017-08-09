@@ -15,6 +15,7 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
     @IBOutlet weak var barView: UIView!
     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bannerView: GADBannerView!  
+    @IBOutlet weak var noNotificationLabel: UILabel!
     
     var currentTheme:CTTheme!
     var dataSource = [[String:AnyObject]]()
@@ -73,6 +74,12 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        if dataSource.count == 0 {
+            noNotificationLabel.text = "No notifications found"
+        }
+        else{
+             noNotificationLabel.text = ""
+        }
        
         return dataSource.count
     }

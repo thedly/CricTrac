@@ -139,10 +139,12 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
             let reqFriendUserId = FriendRequestsData[indexPath.row].SentTo
             aCell.friendId = reqFriendUserId
 
-            fetchFriendDetail(reqFriendUserId, sucess: { (result) in
+            fetchBasicProfile(reqFriendUserId, sucess: { (result) in
                 let proPic = result["proPic"]
                 let city =   result["city"]
+                let name = "\(result["firstname"]!) \(result["lastname"]!)"
                 aCell.FriendCity.text = city
+                aCell.FriendName.text = name
                 
                 if proPic! == "-"{
                     let imageName = defaultProfileImage
@@ -159,7 +161,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
             aCell.rejectBtn.hidden = true
             aCell.cancelBtn.hidden = false
             //aCell.rejectBtn.setTitle("CANCEL", forState: UIControlState.Normal)
-            aCell.FriendName.text = FriendRequestsData[indexPath.row].Name
+           // aCell.FriendName.text = FriendRequestsData[indexPath.row].Name
             //aCell.FriendCity.text = FriendRequestsData[indexPath.row].City
             //aCell.FriendProfileImage.image = extractImages(FriendRequestsData[indexPath.row].SentTo)
             //aCell.confirmBtn.accessibilityIdentifier = FriendRequestsData[indexPath.row].SentTo
@@ -172,10 +174,12 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
             let reqFriendUserId = FriendRequestsData[indexPath.row].ReceivedFrom
             aCell.friendId = reqFriendUserId
 
-            fetchFriendDetail(reqFriendUserId, sucess: { (result) in
+            fetchBasicProfile(reqFriendUserId, sucess: { (result) in
                 let proPic = result["proPic"]
                 let city =   result["city"]
+                let name = "\(result["firstname"]!) \(result["lastname"]!)"
                 aCell.FriendCity.text = city
+                aCell.FriendName.text = name
                 
                 if proPic! == "-"{
                     let imageName = defaultProfileImage
@@ -192,7 +196,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
             aCell.rejectBtn.hidden = false
             aCell.cancelBtn.hidden = true
             //aCell.rejectBtn.setTitle("REJECT", forState: UIControlState.Normal)
-            aCell.FriendName.text = FriendRequestsData[indexPath.row].Name
+            //aCell.FriendName.text = FriendRequestsData[indexPath.row].Name
             //aCell.FriendCity.text = FriendRequestsData[indexPath.row].City
             //aCell.FriendProfileImage.image = extractImages(FriendRequestsData[indexPath.row].ReceivedFrom)
             aCell.confirmBtn.accessibilityIdentifier = FriendRequestsData[indexPath.row].ReceivedFrom

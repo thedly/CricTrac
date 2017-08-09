@@ -333,7 +333,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
             }
             else if controlText == positionText || controlText == wicketsText {
                 if let currentValue = Int(controlText.text!) {
-                    if currentValue < 99 {
+                    if currentValue < 15 {
                         controlText.text = String(currentValue + 1)
                     }
                 }
@@ -411,6 +411,11 @@ extension BattingBowlingViewController:UITextFieldDelegate{
         if textField == runsGivenText {
             animateViewMoving(false, moveValue: 210)
         }
+        if textField == positionText {
+            if positionText.text == "0" || positionText.text == "00"  {
+                positionText.text = "1"
+            }
+        }
 
         if textField.tag == 1 {
             ValidateScore()
@@ -471,6 +476,7 @@ extension BattingBowlingViewController:UITextFieldDelegate{
             return newlength <= 3
         }
         else if textField == positionText {
+            
             return newlength <= 2
         }
          // bowling details

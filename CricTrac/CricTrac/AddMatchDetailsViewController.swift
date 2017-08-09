@@ -12,7 +12,7 @@ import XLPagerTabStrip
 import KRProgressHUD
 import SwiftyStoreKit
 
-class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchParent,ThemeChangeable  {
+class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchParent,ThemeChangeable,UITextViewDelegate  {
     var matchVC:MatchViewController!
     var matchBeingEdited = false
     var battingBowlingViewController: BattingBowlingViewController!
@@ -522,9 +522,24 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         
         if let msg = inAppProductPrice {
         
-            let message =  "Free version allows only maximum 5 matches. Add unlimited matches by upgrading to premium by paying: \(msg)\n\nYou can also upgrade from crictrac.com website with multiple payment options."
+            let message =  "\n\n\n\n\n\n\n\n"
+        
             
             let refreshAlert = UIAlertController(title: "Premium Account", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let rect  = CGRect(x: 0, y: 50, width: 270, height: 150)
+                let textView    = UITextView(frame: rect)
+            
+                textView.font               = UIFont(name: "Helvetica", size: 15)
+                textView.textColor          = UIColor.blackColor()
+                textView.backgroundColor    = UIColor.clearColor()
+                textView.layer.borderColor  = UIColor.lightGrayColor().CGColor
+                textView.layer.borderWidth  = 1.0
+                textView.text               = "  Free version allows only maximum 5 matches. Add unlimited matches by upgrading to premium by paying:\(msg) \n \n   You can also upgrade from CricTrac.com website with multiple payment options."
+                textView.delegate = self as? UITextViewDelegate
+                textView.editable = false
+                textView.dataDetectorTypes = UIDataDetectorTypes.Link
+               refreshAlert.view.addSubview(textView)
             
             refreshAlert.addAction(UIAlertAction(title: "Upgrade", style: .Default, handler: { (action: UIAlertAction!) in
                 self.doPurchase()
@@ -536,6 +551,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         
             presentViewController(refreshAlert, animated: true, completion: nil)
         }
+            
         else {
             
             self.fetchProductInfo()
@@ -545,6 +561,11 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             }))
             self.presentViewController(refreshAlert, animated: true, completion: nil)
         }
+    }
+   
+    func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
+       // print("Link Selected!")
+        return true
     }
     
     func doPurchase(){
@@ -569,3 +590,4 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     }
 
 }
+
