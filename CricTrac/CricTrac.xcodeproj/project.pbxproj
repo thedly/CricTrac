@@ -140,6 +140,7 @@
 		B80B56101EB9D1580014FA9D /* LikesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B560F1EB9D1580014FA9D /* LikesTableViewCell.swift */; };
 		B80B56121EC5AA3D0014FA9D /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B56111EC5AA3D0014FA9D /* Notifications.swift */; };
 		B8200C6E1F39A22800026F4D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8200C6D1F39A22800026F4D /* GoogleService-Info.plist */; };
+		B8200C701F3B13B300026F4D /* MatchFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8200C6F1F3B13B300026F4D /* MatchFilterCell.swift */; };
 		B835B3501EE94BF7001048A6 /* AppIntroductionScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B34F1EE94BF7001048A6 /* AppIntroductionScreens.swift */; };
 		B835B3521EE9622B001048A6 /* AppIntroductionFinalScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3511EE9622B001048A6 /* AppIntroductionFinalScreen.swift */; };
 		B835B3541EEA7D2F001048A6 /* AppIntroFirstScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3531EEA7D2F001048A6 /* AppIntroFirstScreen.swift */; };
@@ -311,6 +312,7 @@
 		B80B560F1EB9D1580014FA9D /* LikesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesTableViewCell.swift; sourceTree = "<group>"; };
 		B80B56111EC5AA3D0014FA9D /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		B8200C6D1F39A22800026F4D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Desktop/CT Plist/QA-plist/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B8200C6F1F3B13B300026F4D /* MatchFilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchFilterCell.swift; sourceTree = "<group>"; };
 		B835B34F1EE94BF7001048A6 /* AppIntroductionScreens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroductionScreens.swift; sourceTree = "<group>"; };
 		B835B3511EE9622B001048A6 /* AppIntroductionFinalScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroductionFinalScreen.swift; sourceTree = "<group>"; };
 		B835B3531EEA7D2F001048A6 /* AppIntroFirstScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroFirstScreen.swift; sourceTree = "<group>"; };
@@ -568,6 +570,7 @@
 				B835B3571EEA7D7A001048A6 /* AppIntroThirdScreen.swift */,
 				B835B3591EEA7D92001048A6 /* AppIntroFourthScreen.swift */,
 				B835B35B1EEA7DAF001048A6 /* AppIntroFifthScreen.swift */,
+				B8200C6F1F3B13B300026F4D /* MatchFilterCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -894,6 +897,7 @@
 				89D7D9D41DAFEAB80069D536 /* CoachingExperienceViewController.swift in Sources */,
 				B835B3521EE9622B001048A6 /* AppIntroductionFinalScreen.swift in Sources */,
 				895E04071D5CE283002E322E /* FriendSuggestViewController.swift in Sources */,
+				B8200C701F3B13B300026F4D /* MatchFilterCell.swift in Sources */,
 				89836C5E1E08081D00ABDCA9 /* ProfileReadOnlyViewController.swift in Sources */,
 				89C8196C1D52362300291A7E /* POCViewController.swift in Sources */,
 				679367371EC710720097B187 /* AchievementTableViewCell.swift in Sources */,

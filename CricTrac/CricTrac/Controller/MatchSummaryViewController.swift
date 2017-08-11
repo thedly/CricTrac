@@ -12,15 +12,20 @@ import SwiftyStoreKit
 
 class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ThemeChangeable{
     
-    @IBOutlet weak var yearDropdown: UITextField!
-    @IBOutlet weak var levelDropdown: UITextField!
-    @IBOutlet weak var ageGroupDropdown: UITextField!
     @IBOutlet weak var upgradeBtnHeight: NSLayoutConstraint!
     @IBOutlet var matchSummaryTable:UITableView!
     @IBOutlet weak var noMatchesHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var noMatchesLabel: UILabel!
+    
+    @IBOutlet weak var matchFilterView: UIView!
+    @IBOutlet weak var filterViewHeightConstarint: NSLayoutConstraint!
     //For dropdowns
+    
+    @IBOutlet weak var yearDropdown: UITextField!
+    @IBOutlet weak var levelDropdown: UITextField!
+    @IBOutlet weak var ageGroupDropdown: UITextField!
+
     @IBOutlet weak var levelDropDownButton: UIButton!
     @IBOutlet weak var tableView1: UITableView!
     @IBOutlet weak var tableView1HeightConstraint: NSLayoutConstraint!
@@ -32,36 +37,6 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     @IBOutlet weak var yearDropdownButton: UIButton!
     @IBOutlet weak var tableView3: UITableView!
     @IBOutlet weak var tableView3HeightConstraint: NSLayoutConstraint!
-    
-    // For TotalMatches
-     @IBOutlet weak var totalMatchesLabel: UILabel!
-    @IBOutlet weak var totalMatchesText: UILabel!
-    @IBOutlet weak var baseView: UIView!
-    
-    @IBOutlet weak var strikeRate: UILabel!
-    @IBOutlet weak var battingAvg: UILabel!
-    @IBOutlet weak var battingMatches: UILabel!
-    @IBOutlet weak var runs: UILabel!
-    @IBOutlet weak var bowlingMatches: UILabel!
-    @IBOutlet weak var wickets: UILabel!
-    @IBOutlet weak var economy: UILabel!
-    @IBOutlet weak var bowlingAvg: UILabel!
-    
-    //height constraints
-    @IBOutlet weak var view1HeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var view2HeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var view3HeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var view4heightConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var baseViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var horizontalDividerView: NSLayoutConstraint!
-    @IBOutlet weak var verticalDividerView: NSLayoutConstraint!
-    
-    @IBOutlet weak var subView3: UIView!
-    @IBOutlet weak var subView4: UIView!
-    @IBOutlet weak var subView1: UIView!
-    @IBOutlet weak var subView2: UIView!
-    
     
     var matchData = [String:AnyObject]()
     var matches = [MatchSummaryData]()
@@ -89,13 +64,11 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
-        baseView.backgroundColor = currentTheme.bottomColor
-        baseView.layer.cornerRadius = 10
-        baseView.clipsToBounds = true
+     
         
         self.tableView1.backgroundColor = currentTheme.topColor
         self.tableview2.backgroundColor = currentTheme.topColor
-        self.tableView3.backgroundColor = currentTheme.topColor
+        self.tableView3.backgroundColor = currentTheme.bottomColor
         // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
@@ -263,7 +236,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 self.matchDataSource.append(value)
                 
                 self.matches.append(makeSummaryCell(value))
-                self.totalMatchesLabel.text = String(self.matchDataSource.count)
+               // self.totalMatchesLabel.text = String(self.matchDataSource.count)
                 
                 if value["RunsTaken"] as! String != "-" {
                     toatalBattingmatches += 1
@@ -274,9 +247,9 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                     totalBallsFaced += Int(value["BallsFaced"] as! String)!
                     totalRuns += Int(value["RunsTaken"] as! String)!
                     }
-                    self.battingMatches.text = String(toatalBattingmatches)
-                    self.runs.text = String(totalRuns)
-                    self.battingAvg.text = String(totalDismissal)
+                   // self.battingMatches.text = String(toatalBattingmatches)
+                   // self.runs.text = String(totalRuns)
+                   // self.battingAvg.text = String(totalDismissal)
                 
                 if value["OversBowled"] as! String != "-" {
                     toatalBowlingMatches += 1
@@ -284,8 +257,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                     totalRunsGiven += Int(value["RunsGiven"] as! String)!
                     TotalWicketsTaken += Int(value["WicketsTaken"] as! String)!
                     }
-                    self.bowlingMatches.text = String(toatalBowlingMatches)
-                    self.wickets.text = String(TotalWicketsTaken)
+//                    self.bowlingMatches.text = String(toatalBowlingMatches)
+//                    self.wickets.text = String(TotalWicketsTaken)
                 }
             
             else if ageGroupDropdown.text != "Age Group" && levelDropdown.text != "Level" && yearDropdown.text != "Year"{
@@ -293,7 +266,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 if ageGroupDropdown.text == value["AgeGroup"] as? String && levelDropdown.text == value["Level"] as? String && yearDropdown.text == String(matchYear) {
                     self.matchDataSource.append(value)
                     self.matches.append(makeSummaryCell(value))
-                    self.totalMatchesLabel.text =  String(self.matchDataSource.count)
+                   // self.totalMatchesLabel.text =  String(self.matchDataSource.count)
                     
                     if value["RunsTaken"] as! String != "-" {
                         toatalBattingmatches += 1
@@ -304,9 +277,9 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                         totalBallsFaced += Int(value["BallsFaced"] as! String)!
                         totalRuns += Int(value["RunsTaken"] as! String)!
                         }
-                        self.battingMatches.text = String(toatalBattingmatches)
-                        self.runs.text = String(totalRuns)
-                        self.battingAvg.text = String(totalDismissal)
+//                        self.battingMatches.text = String(toatalBattingmatches)
+//                        self.runs.text = String(totalRuns)
+//                        self.battingAvg.text = String(totalDismissal)
  
                     if value["OversBowled"] as! String != "-" {
                        toatalBowlingMatches += 1
@@ -314,11 +287,11 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                         totalRunsGiven += Int(value["RunsGiven"] as! String)!
                         TotalWicketsTaken += Int(value["WicketsTaken"] as! String)!
                         }
-                        self.bowlingMatches.text = String(toatalBowlingMatches)
-                        self.wickets.text = String(TotalWicketsTaken)
+//                        self.bowlingMatches.text = String(toatalBowlingMatches)
+//                        self.wickets.text = String(TotalWicketsTaken)
                     }
                 else {
-                    self.totalMatchesLabel.text =  String(self.matchDataSource.count)
+                    //self.totalMatchesLabel.text =  String(self.matchDataSource.count)
                     }
 
                 }
@@ -328,7 +301,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 if ageGroupDropdown.text == value["AgeGroup"] as? String && levelDropdown.text == value["Level"] as? String {
                     self.matchDataSource.append(value)
                     self.matches.append(makeSummaryCell(value))
-                    self.totalMatchesLabel.text =  String(self.matchDataSource.count)
+                   // self.totalMatchesLabel.text =  String(self.matchDataSource.count)
                 
                 if value["RunsTaken"] as! String != "-" {
                     toatalBattingmatches += 1
@@ -339,9 +312,9 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                     totalBallsFaced += Int(value["BallsFaced"] as! String)!
                     totalRuns += Int(value["RunsTaken"] as! String)!
                     }
-                    self.battingMatches.text = String(toatalBattingmatches)
-                    self.runs.text = String(totalRuns)
-                    self.battingAvg.text = String(totalDismissal)
+                   // self.battingMatches.text = String(toatalBattingmatches)
+                  //  self.runs.text = String(totalRuns)
+                   // self.battingAvg.text = String(totalDismissal)
                 
                 if value["OversBowled"] as! String != "-" {
                     toatalBowlingMatches += 1
@@ -349,11 +322,11 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                     totalRunsGiven += Int(value["RunsGiven"] as! String)!
                     TotalWicketsTaken += Int(value["WicketsTaken"] as! String)!
                     }
-                    self.bowlingMatches.text = String(toatalBowlingMatches)
-                    self.wickets.text = String(TotalWicketsTaken)
+                    //self.bowlingMatches.text = String(toatalBowlingMatches)
+                   // self.wickets.text = String(TotalWicketsTaken)
                 }
             else {
-                self.totalMatchesLabel.text =  String(self.matchDataSource.count)
+               // self.totalMatchesLabel.text =  String(self.matchDataSource.count)
                 }
             }
             
@@ -361,7 +334,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 if ageGroupDropdown.text == value["AgeGroup"] as? String && yearDropdown.text == String(matchYear) {
                     self.matchDataSource.append(value)
                     self.matches.append(makeSummaryCell(value))
-                    self.totalMatchesLabel.text =  String(self.matchDataSource.count)
+                   // self.totalMatchesLabel.text =  String(self.matchDataSource.count)
                     
                     if value["RunsTaken"] as! String != "-" {
                         toatalBattingmatches += 1
@@ -372,9 +345,9 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                         totalBallsFaced += Int(value["BallsFaced"] as! String)!
                         totalRuns += Int(value["RunsTaken"] as! String)!
                         }
-                        self.battingMatches.text = String(toatalBattingmatches)
-                        self.runs.text = String(totalRuns)
-                        self.battingAvg.text = String(totalDismissal)
+//                        self.battingMatches.text = String(toatalBattingmatches)
+//                        self.runs.text = String(totalRuns)
+//                        self.battingAvg.text = String(totalDismissal)
                     
                     if value["OversBowled"] as! String != "-" {
                         toatalBowlingMatches += 1
@@ -382,12 +355,12 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                         totalRunsGiven += Int(value["RunsGiven"] as! String)!
                         TotalWicketsTaken += Int(value["WicketsTaken"] as! String)!
                         }
-                        self.bowlingMatches.text = String(toatalBowlingMatches)
-                        self.wickets.text = String(TotalWicketsTaken)
-                   
+//                        self.bowlingMatches.text = String(toatalBowlingMatches)
+//                        self.wickets.text = String(TotalWicketsTaken)
+//                   
                     }
                 else {
-                    self.totalMatchesLabel.text =  String(self.matchDataSource.count)
+                   // self.totalMatchesLabel.text =  String(self.matchDataSource.count)
                     }
                 }
             
@@ -395,7 +368,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             if levelDropdown.text == value["Level"] as? String && yearDropdown.text == String(matchYear) {
                 self.matchDataSource.append(value)
                 self.matches.append(makeSummaryCell(value))
-                self.totalMatchesLabel.text =  String(self.matchDataSource.count)
+               // self.totalMatchesLabel.text =  String(self.matchDataSource.count)
                 if value["RunsTaken"] as! String != "-" {
                     toatalBattingmatches += 1
                     let dismissal = value["Dismissal"] as? String
@@ -405,9 +378,9 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                     totalBallsFaced += Int(value["BallsFaced"] as! String)!
                     totalRuns += Int(value["RunsTaken"] as! String)!
                     }
-                    self.battingMatches.text = String(toatalBattingmatches)
-                    self.runs.text = String(totalRuns)
-                    self.battingAvg.text = String(totalDismissal)
+//                    self.battingMatches.text = String(toatalBattingmatches)
+//                    self.runs.text = String(totalRuns)
+//                    self.battingAvg.text = String(totalDismissal)
                 
                 if value["OversBowled"] as! String != "-" {
                     toatalBowlingMatches += 1
@@ -415,11 +388,11 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                     totalRunsGiven += Int(value["RunsGiven"] as! String)!
                     TotalWicketsTaken += Int(value["WicketsTaken"] as! String)!
                     }
-                    self.bowlingMatches.text = String(toatalBowlingMatches)
-                    self.wickets.text = String(TotalWicketsTaken)
+//                    self.bowlingMatches.text = String(toatalBowlingMatches)
+//                    self.wickets.text = String(TotalWicketsTaken)
                 }
             else {
-                 self.totalMatchesLabel.text =  String(self.matchDataSource.count)
+                // self.totalMatchesLabel.text =  String(self.matchDataSource.count)
                 }
             
             }
@@ -427,7 +400,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             if ageGroupDropdown.text == value["AgeGroup"] as? String {
                 self.matchDataSource.append(value)
                 self.matches.append(makeSummaryCell(value))
-                self.totalMatchesLabel.text =  String(self.matchDataSource.count)
+               // self.totalMatchesLabel.text =  String(self.matchDataSource.count)
                
                 if value["RunsTaken"] as! String != "-" {
                     toatalBattingmatches += 1
@@ -438,9 +411,9 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                      totalBallsFaced += Int(value["BallsFaced"] as! String)!
                      totalRuns += Int(value["RunsTaken"] as! String)!
                     }
-                    self.battingMatches.text = String(toatalBattingmatches)
-                    self.runs.text = String(totalRuns)
-                    self.battingAvg.text = String(totalDismissal)
+//                    self.battingMatches.text = String(toatalBattingmatches)
+//                    self.runs.text = String(totalRuns)
+//                    self.battingAvg.text = String(totalDismissal)
 
                 if value["OversBowled"] as! String != "-" {
                     toatalBowlingMatches += 1
@@ -448,8 +421,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                     totalRunsGiven += Int(value["RunsGiven"] as! String)!
                     TotalWicketsTaken += Int(value["WicketsTaken"] as! String)!
                     }
-                    self.bowlingMatches.text = String(toatalBowlingMatches)
-                    self.wickets.text = String(TotalWicketsTaken)
+//                    self.bowlingMatches.text = String(toatalBowlingMatches)
+//                    self.wickets.text = String(TotalWicketsTaken)
                 
                 }
         }
@@ -458,7 +431,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
           if levelDropdown.text == value["Level"] as? String {
             self.matchDataSource.append(value)
             self.matches.append(makeSummaryCell(value))
-            self.totalMatchesLabel.text =  String(self.matchDataSource.count)
+           // self.totalMatchesLabel.text =  String(self.matchDataSource.count)
             
             if value["RunsTaken"] as! String != "-" {
                 toatalBattingmatches += 1
@@ -469,9 +442,9 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 totalBallsFaced += Int(value["BallsFaced"] as! String)!
                 totalRuns += Int(value["RunsTaken"] as! String)!
                 }
-                self.battingMatches.text = String(toatalBattingmatches)
-                self.runs.text = String(totalRuns)
-                self.battingAvg.text = String(totalDismissal)
+//                self.battingMatches.text = String(toatalBattingmatches)
+//                self.runs.text = String(totalRuns)
+//                self.battingAvg.text = String(totalDismissal)
             
             if value["OversBowled"] as! String != "-" {
                 toatalBowlingMatches += 1
@@ -479,8 +452,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 totalRunsGiven += Int(value["RunsGiven"] as! String)!
                 TotalWicketsTaken += Int(value["WicketsTaken"] as! String)!
                 }
-                self.bowlingMatches.text = String(toatalBowlingMatches)
-                self.wickets.text = String(TotalWicketsTaken)
+//                self.bowlingMatches.text = String(toatalBowlingMatches)
+//                self.wickets.text = String(TotalWicketsTaken)
             }
         }
             
@@ -488,7 +461,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
           if yearDropdown.text == String(matchYear) {
             self.matchDataSource.append(value)
             self.matches.append(makeSummaryCell(value))
-            self.totalMatchesLabel.text =  String(self.matchDataSource.count)
+          //  self.totalMatchesLabel.text =  String(self.matchDataSource.count)
             
             if value["RunsTaken"] as! String != "-" {
                 toatalBattingmatches += 1
@@ -499,9 +472,9 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 totalBallsFaced += Int(value["BallsFaced"] as! String)!
                 totalRuns += Int(value["RunsTaken"] as! String)!
                 }
-                self.battingMatches.text = String(toatalBattingmatches)
-                self.runs.text = String(totalRuns)
-                self.battingAvg.text = String(totalDismissal)
+//                self.battingMatches.text = String(toatalBattingmatches)
+//                self.runs.text = String(totalRuns)
+//                self.battingAvg.text = String(totalDismissal)
             
             if value["OversBowled"] as! String != "-" {
                 toatalBowlingMatches += 1
@@ -509,8 +482,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 totalRunsGiven += Int(value["RunsGiven"] as! String)!
                 TotalWicketsTaken += Int(value["WicketsTaken"] as! String)!
                 }
-                self.bowlingMatches.text = String(toatalBowlingMatches)
-                self.wickets.text = String(TotalWicketsTaken)
+//                self.bowlingMatches.text = String(toatalBowlingMatches)
+//                self.wickets.text = String(TotalWicketsTaken)
             }
           }
         }
@@ -519,34 +492,34 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
 
         //Total Economy & TotalBowlingAvg
             if totalRunsGiven != 0 {
-                self.bowlingAvg.text = String(format: "%.1f",Float(totalRunsGiven) / Float(TotalWicketsTaken))
-                self.economy.text = String(format: "%.1f",Float(totalRunsGiven) / Float(totalOvers))
+               // self.bowlingAvg.text = String(format: "%.1f",Float(totalRunsGiven) / Float(TotalWicketsTaken))
+               // self.economy.text = String(format: "%.1f",Float(totalRunsGiven) / Float(totalOvers))
                 }
                 else{
-                 self.bowlingAvg.text = "-"
-                 self.economy.text = "-"
+//                 self.bowlingAvg.text = "-"
+//                 self.economy.text = "-"
                 }
         // TotalBattingAvg
             if (toatalBattingmatches - totalDismissal) > 0 {
-                self.battingAvg.text = String(format: "%.1f",(Float(totalRuns))/Float(toatalBattingmatches - totalDismissal))
+               // self.battingAvg.text = String(format: "%.1f",(Float(totalRuns))/Float(toatalBattingmatches - totalDismissal))
                // String(totalRuns / (toatalBattingmatches - totalDismissal))
                 }
                 else{
-                 self.battingAvg.text = "-"
+                // self.battingAvg.text = "-"
                 }
           // TotalStrikeRate
             if totalBallsFaced != 0 {
                 let strikeRate = String(format: "%.1f",(Float(totalRuns))*100/Float(totalBallsFaced))
-                 self.strikeRate.text = strikeRate
+               //  self.strikeRate.text = strikeRate
             }
             else{
-               self.strikeRate.text = "-"
+               //self.strikeRate.text = "-"
             }
  
         
         self.matches.sortInPlace({ $0.matchDate.compare($1.matchDate) == NSComparisonResult.OrderedDescending })
                self.matchSummaryTable.reloadData()
-        self.totalMatchesLabel.text =  String(self.matchDataSource.count)
+      //  self.totalMatchesLabel.text =  String(self.matchDataSource.count)
 }
     
     func makeSummaryCell(value: [String : AnyObject]) -> MatchSummaryData {
@@ -622,7 +595,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
 //        if let ground = value["Ground"]{
 //            mData.ground = ground as! String
-//            
+//
 //            if let venue = value["Venue"] as? String where venue != "-" {
 //                mData.ground = "\(ground), \(venue)"
 //            }
@@ -668,10 +641,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     }
     
     func getCellForRow(indexPath:NSIndexPath)->SummaryDetailsCell{
-        
       
         if let aCell =  matchSummaryTable.dequeueReusableCellWithIdentifier("SummaryDetailsCell", forIndexPath: indexPath) as? SummaryDetailsCell {
-            
             
             aCell.backgroundColor = UIColor.clearColor()
             
@@ -679,7 +650,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             
             aCell.baseView.alpha = 1
             
-            let currentMatch = self.matches[indexPath.row]
+            let currentMatch = self.matches[indexPath.row - 1]
            
             aCell.BattingOrBowlingScore.attributedText = currentMatch.battingBowlingScore
             aCell.matchDateAndVenue.text = currentMatch.matchDateAndVenue
@@ -711,7 +682,6 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 }
             }
             
-            
          return aCell
         }
         else
@@ -739,61 +709,23 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         if self.matchDataSource.count == 0 {
             noMatchesHeightConstraint.constant = 21
             self.noMatchesLabel.text = "No Matches"
-            self.baseViewHeightConstraint.constant = 0
+            if self.matchData.count == 0 {
+                self.filterViewHeightConstarint.constant = 0
+                self.matchFilterView.hidden = true
+                self.matchSummaryTable.hidden = true
+            }
         }
         else {
-            
-            if toatalBowlingMatches == 0 && toatalBattingmatches != 0 {
-                self.baseViewHeightConstraint.constant = 40
-                self.subView3.hidden = true
-                self.subView4.hidden = true
-                self.subView1.hidden = false
-                self.subView2.hidden = false
-                self.view1HeightConstraint.constant = 36
-                self.view2HeightConstraint.constant = 36
-                self.view3HeightConstraint.constant = 0
-                self.view4heightConstraint.constant = 0
-                self.horizontalDividerView.constant = 0
-                
-            }
-            else if toatalBattingmatches == 0 && toatalBowlingMatches != 0 {
-                self.baseViewHeightConstraint.constant = 40
-                
-                self.subView1.hidden = true
-                self.subView2.hidden = true
-                self.subView3.hidden = false
-                self.subView4.hidden = false
-                self.view1HeightConstraint.constant = 0
-                self.view2HeightConstraint.constant = 0
-                self.view3HeightConstraint.constant = 36
-                self.view4heightConstraint.constant = 36
-                self.horizontalDividerView.constant = 0
-
-            }
-           else if toatalBowlingMatches == 0 && toatalBattingmatches == 0 {
-                 self.baseViewHeightConstraint.constant = 0
-            }
-            else {
-                self.baseViewHeightConstraint.constant = 80
-                self.subView1.hidden = false
-                self.subView2.hidden = false
-                self.subView3.hidden = false
-                self.subView4.hidden = false
-
-                self.view1HeightConstraint.constant = 36
-                self.view2HeightConstraint.constant = 36
-                self.view3HeightConstraint.constant = 36
-                self.view4heightConstraint.constant = 36
-
-                self.horizontalDividerView.constant = 1
-
-            }
-            noMatchesHeightConstraint.constant = 0
+            self.filterViewHeightConstarint.constant = 34
+            self.matchFilterView.hidden = false
+            self.matchSummaryTable.hidden = false
+ 
+             noMatchesHeightConstraint.constant = 0
             self.noMatchesLabel.text = ""
             
         }
        
-        return self.matchDataSource.count
+        return self.matchDataSource.count + 1
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -801,15 +733,16 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         if tableView == tableView1 {
             let cell = tableView1.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-            cell.textLabel?.text = filterLevel[indexPath.row]
+            cell.textLabel?.text = filterAgeGroup[indexPath.row]
             cell.backgroundColor = currentTheme.topColor
-            if filterLevel[indexPath.row] == "Level"{
+            if filterAgeGroup[indexPath.row] == "Age Group"{
                 cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 15)
                 cell.textLabel?.textColor = UIColor.blackColor()
+                cell.textLabel?.alpha = 0.3
             }
             else {
                 cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 16)
-                cell.textLabel?.textColor = UIColor.whiteColor()
+                cell.textLabel?.textColor = UIColor.blackColor()
                 cell.textLabel?.sizeToFit()
                 
             }
@@ -820,15 +753,16 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         if tableView == tableview2 {
             let cell = tableview2.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
             cell.backgroundColor = currentTheme.topColor
-            cell.textLabel?.text = filterAgeGroup[indexPath.row]
+            cell.textLabel?.text = filterLevel[indexPath.row]
             
-            if filterAgeGroup[indexPath.row] == "Age Group"{
+            if filterLevel[indexPath.row] == "Level"{
                 cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 15)
                 cell.textLabel?.textColor = UIColor.blackColor()
+                cell.textLabel?.alpha = 0.3
             }
             else {
                 cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 16)
-                cell.textLabel?.textColor = UIColor.whiteColor()
+                cell.textLabel?.textColor = UIColor.blackColor()
             }
             return cell
         }
@@ -842,14 +776,109 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 cell.textLabel?.text = "Year"
                 cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 15)
                 cell.textLabel?.textColor = UIColor.blackColor()
+                cell.textLabel?.alpha = 0.3
             }
             else  {
                 cell.textLabel?.text = filterYear[indexPath.row]
                 cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 16)
-                cell.textLabel?.textColor = UIColor.whiteColor()
+                cell.textLabel?.textColor = UIColor.blackColor()
             }
             
             return cell
+        }
+        
+        if tableView == matchSummaryTable {
+            if indexPath.row == 0 {
+                let aCell = matchSummaryTable.dequeueReusableCellWithIdentifier("cell") as! MatchFilterCell
+                 aCell.baseView.backgroundColor = currentTheme.bottomColor
+                 aCell.baseView.layer.cornerRadius = 10
+                 aCell.baseView.clipsToBounds = true
+                
+                 aCell.totalMatchesLabel.text = String(self.matchDataSource.count)
+                 aCell.battingMatches.text = String(toatalBattingmatches)
+                 aCell.bowlingMatches.text = String(toatalBowlingMatches)
+                 aCell.runs.text = String(totalRuns)
+                 aCell.wickets.text = String(TotalWicketsTaken)
+                
+                // TotalBattingAvg
+                if (toatalBattingmatches - totalDismissal) > 0 {
+                     aCell.battingAvg.text = String(format: "%.1f",(Float(totalRuns))/Float(toatalBattingmatches - totalDismissal))
+                    }
+                    else{
+                     aCell.battingAvg.text = "-"
+                    }
+                
+                //Total Economy & TotalBowlingAvg
+                if totalRunsGiven != 0 {
+                     aCell.bowlingAvg.text = String(format: "%.1f",Float(totalRunsGiven) / Float(TotalWicketsTaken))
+                     aCell.economy.text = String(format: "%.1f",Float(totalRunsGiven) / Float(totalOvers))
+                    }
+                    else{
+                        aCell.bowlingAvg.text = "-"
+                        aCell.economy.text = "-"
+                    }
+                // TotalStrikeRate
+                if totalBallsFaced != 0 {
+                    let strikeRate = String(format: "%.1f",(Float(totalRuns))*100/Float(totalBallsFaced))
+                     aCell.strikeRate.text = strikeRate
+                    }
+                    else{
+                        aCell.strikeRate.text = "-"
+                    }
+              // for expanding matchfilter views
+                
+                    if toatalBowlingMatches == 0 && toatalBattingmatches != 0 {
+                                        aCell.baseViewHeightConstraint.constant = 40
+                                        aCell.subView3.hidden = true
+                                        aCell.subView4.hidden = true
+                                        aCell.subView1.hidden = false
+                                        aCell.subView2.hidden = false
+                                        aCell.view1HeightConstraint.constant = 36
+                                        aCell.view2HeightConstraint.constant = 36
+                                        aCell.view3HeightConstraint.constant = 0
+                                        aCell.view4heightConstraint.constant = 0
+                                        aCell.horizontalDividerView.constant = 0
+                        
+                    }
+                    else if toatalBattingmatches == 0 && toatalBowlingMatches != 0 {
+                                        aCell.baseViewHeightConstraint.constant = 40
+                        
+                                        aCell.subView1.hidden = true
+                                        aCell.subView2.hidden = true
+                                        aCell.subView3.hidden = false
+                                        aCell.subView4.hidden = false
+                                        aCell.view1HeightConstraint.constant = 0
+                                        aCell.view2HeightConstraint.constant = 0
+                                        aCell.view3HeightConstraint.constant = 36
+                                        aCell.view4heightConstraint.constant = 36
+                                        aCell.horizontalDividerView.constant = 0
+                        
+                    }
+                    else if toatalBowlingMatches == 0 && toatalBattingmatches == 0 {
+                         aCell.baseViewHeightConstraint.constant = 0
+                        
+                        }
+                        else {
+                                        aCell.baseViewHeightConstraint.constant = 80
+                                        aCell.subView1.hidden = false
+                                        aCell.subView2.hidden = false
+                                        aCell.subView3.hidden = false
+                                        aCell.subView4.hidden = false
+                        
+                                        aCell.view1HeightConstraint.constant = 36
+                                        aCell.view2HeightConstraint.constant = 36
+                                        aCell.view3HeightConstraint.constant = 36
+                                        aCell.view4heightConstraint.constant = 36
+                        
+                                        aCell.horizontalDividerView.constant = 1
+                        
+                    }
+                
+                return aCell
+            }
+            else{
+                 return getCellForRow(indexPath)
+            }
         }
   
        return getCellForRow(indexPath)
@@ -863,22 +892,35 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
               return 30
         }
         
-        let currentMatch = self.matches[indexPath.row]
         
-        if currentMatch.BattingSectionHidden == false && currentMatch.BowlingSectionHidden == false {
-            return 120
+        if tableView == matchSummaryTable {
+            if indexPath.row == 0 {
+                if toatalBowlingMatches == 0 && toatalBattingmatches == 0{
+                    return 25
+                }
+                else if toatalBowlingMatches != 0 && toatalBattingmatches == 0{
+                    return 80
+                }
+                else if toatalBowlingMatches == 0 && toatalBattingmatches != 0{
+                    return 80
+                }
+                return 115
+            }
+            else{
+                let currentMatch = self.matches[indexPath.row - 1]
+                
+                if currentMatch.BattingSectionHidden == false && currentMatch.BowlingSectionHidden == false {
+                    return 120
+                }
+                else if currentMatch.BattingSectionHidden == false {
+                    return 105
+                }
+                else if currentMatch.BowlingSectionHidden == false {
+                    return 105
+                }
+            }
         }
-        else if currentMatch.BattingSectionHidden == false {
-            return 105
-        }
-        else if currentMatch.BowlingSectionHidden == false {
-            return 105
-        }
-            
-        else {
-            return 90
-        }
- 
+        return 90
       
     }
     
@@ -886,7 +928,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         if tableView == tableView1 {
             let cell = tableView1.cellForRowAtIndexPath(indexPath)
-            levelDropdown.text = cell?.textLabel?.text
+            ageGroupDropdown.text = cell?.textLabel?.text
             
             getMatchData()
             self.matchSummaryTable.reloadData()
@@ -895,7 +937,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             
         else if tableView == tableview2 {
             let cell = tableview2.cellForRowAtIndexPath(indexPath)
-            ageGroupDropdown.text = cell?.textLabel?.text
+            levelDropdown.text = cell?.textLabel?.text
             getMatchData()
             self.matchSummaryTable.reloadData()
             tableview2.hidden = true
@@ -913,20 +955,22 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         else if tableView == matchSummaryTable {
         
         //        let cell = tableView.cellForRowAtIndexPath(indexPath) as! SummaryDetailsCell
-        let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
+        if indexPath.row != 0 {
+            
+            let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
         
-        summaryDetailsVC.battingViewHidden = matches[indexPath.row].BattingSectionHidden
-        summaryDetailsVC.bowlingViewHidden = matches[indexPath.row].BowlingSectionHidden
+            summaryDetailsVC.battingViewHidden = matches[indexPath.row - 1].BattingSectionHidden
+            summaryDetailsVC.bowlingViewHidden = matches[indexPath.row - 1].BowlingSectionHidden
         
-        let selectedDataSource = self.matchDataSource.filter { (dat) -> Bool in
-            return dat["MatchId"]! as! String == matches[indexPath.row].matchId
-        }
+            let selectedDataSource = self.matchDataSource.filter { (dat) -> Bool in
+            return dat["MatchId"]! as! String == matches[indexPath.row - 1].matchId
+            }
         
-        summaryDetailsVC.matchDetailsData = selectedDataSource.first
-        //  presentViewController(summaryDetailsVC, animated: true, completion: nil)
-        self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
-        CFRunLoopWakeUp(CFRunLoopGetCurrent())
-        
+            summaryDetailsVC.matchDetailsData = selectedDataSource.first
+            //  presentViewController(summaryDetailsVC, animated: true, completion: nil)
+            self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+            CFRunLoopWakeUp(CFRunLoopGetCurrent())
+            }
         }
         
     }
@@ -1020,7 +1064,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     }
     
     @IBAction func levelDropDownButtonTapped(sender: UIButton) {
-        if sender.tag == 2 {
+        if sender.tag == 1 {
             if tableView1.hidden == true {
             tableView3.hidden = true
             tableview2.hidden = true
@@ -1035,7 +1079,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             }
         }
         
-        if sender.tag == 1 {
+        if sender.tag == 2 {
             if tableview2.hidden == true {
                 tableView1.hidden = true
                 tableView3.hidden = true
@@ -1047,8 +1091,6 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             else {
                 tableView2HeightConstraint.constant = 0
                 tableview2.hidden = true
-                self.totalMatchesLabel.textColor = UIColor.whiteColor()
-                self.totalMatchesText.textColor = UIColor.blackColor()
             }
         }
         
@@ -1056,8 +1098,6 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             if tableView3.hidden == true {
                 tableView1.hidden = true
                 tableview2.hidden = true
-                self.totalMatchesLabel.textColor = UIColor.whiteColor()
-                self.totalMatchesText.textColor = UIColor.blackColor()
                 self.tableView3.reloadData()
                 tableView3HeightConstraint.constant = CGFloat(filterYear.count * 30)
                 tableView3.hidden = false
