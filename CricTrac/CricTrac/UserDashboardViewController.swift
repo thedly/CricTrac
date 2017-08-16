@@ -157,8 +157,52 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             self.photoOptions("ProfilePhoto")
             coverOrProfile = "Profile"
         }
+        else{
+            let profileImageVc = viewControllerFrom("Main", vcid: "ProfileImageExpandingVC") as! ProfileImageExpandingVC
+            profileImageVc.imageString = userProfileData.ProfileImageURL
+            if userProfileData.ProfileImageURL != "-" {
+              self.presentViewController(profileImageVc, animated: true) {}
+            }
+            
+        }
     }
     
+    func photoOptionsToCoverPic(option:String)  {
+        let alertController = UIAlertController(title: nil, message: alertMessage, preferredStyle: .ActionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+            // ...
+        }
+        alertController.addAction(cancelAction)
+        
+        let TakePictureAction = UIAlertAction(title: "Take Photo", style: .Default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
+                imagePicker.allowsEditing = false
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+            }
+        }
+        
+        alertController.addAction(TakePictureAction)
+        
+        let chooseExistingAction = UIAlertAction(title: "Choose Existing", style: .Default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+                imagePicker.allowsEditing = false
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+            }
+        }
+        
+        alertController.addAction(chooseExistingAction)
+        
+        self.presentViewController(alertController, animated: true) {
+            // ...
+        }
+    }
+
     func photoOptions(option:String)  {
         
         let alertController = UIAlertController(title: nil, message: alertMessage, preferredStyle: .ActionSheet)
@@ -228,13 +272,13 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
 //        alertController.addAction(removePhotoAction)
 //        
 //        
-//        let viewPhotoAction = UIAlertAction(title: "View Photo", style: .Default) { (action) in
-//            
-//            self.viewImage(option)
-//            
-//        }
-//        
-//        alertController.addAction(viewPhotoAction)
+        let viewPhotoAction = UIAlertAction(title: "View Photo", style: .Default) { (action) in
+            
+            self.viewImage(option)
+            
+        }
+        
+        alertController.addAction(viewPhotoAction)
         
         
         self.presentViewController(alertController, animated: true) {
@@ -566,7 +610,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             }
 
             alertMessage = "Change your cover photo"
-            self.photoOptions("CoverPhoto")
+            self.photoOptionsToCoverPic("CoverPhoto")
             coverOrProfile = "Cover"
         }
     }
@@ -620,20 +664,28 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     func viewImage(option:String){
         
-        let newImageView = UIImageView()
-        if option == "CoverPhoto" {
-            newImageView.image = imgCoverPhoto.image
-        }else {
-            newImageView.image = userProfileImage.image
+        let profileImageVc = viewControllerFrom("Main", vcid: "ProfileImageExpandingVC") as! ProfileImageExpandingVC
+        
+        profileImageVc.imageString = profileData.ProfileImageURL
+        if profileData.ProfileImageURL != "-" {
+             self.presentViewController(profileImageVc, animated: true) {}
         }
-        newImageView.frame = self.view.frame
-        newImageView.backgroundColor = .blackColor()
-        newImageView.contentMode = .ScaleAspectFit
-        newImageView.userInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(UserDashboardViewController.dismissFullscreenImage(_:)))
-        newImageView.addGestureRecognizer(tap)
-        //        self.view.addSubview(navBarView)
-        self.view.addSubview(newImageView)
+       
+        
+//        let newImageView = UIImageView()
+//        if option == "CoverPhoto" {
+//            newImageView.image = imgCoverPhoto.image
+//        }else {
+//            newImageView.image = userProfileImage.image
+//        }
+//        newImageView.frame = self.view.frame
+//        newImageView.backgroundColor = .blackColor()
+//        newImageView.contentMode = .ScaleAspectFit
+//        newImageView.userInteractionEnabled = true
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(UserDashboardViewController.dismissFullscreenImage(_:)))
+//        newImageView.addGestureRecognizer(tap)
+//        //        self.view.addSubview(navBarView)
+//        self.view.addSubview(newImageView)
         
     }
     

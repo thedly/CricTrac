@@ -115,6 +115,16 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         
     }
     
+    @IBAction func profileImageButtonTapped(sender: UIButton) {
+        
+       let profileImageVc = viewControllerFrom("Main", vcid: "ProfileImageExpandingVC") as! ProfileImageExpandingVC
+        
+        profileImageVc.imageString = profileData.ProfileImageURL
+        if profileData.ProfileImageURL != "-" {
+            self.presentViewController(profileImageVc, animated: true) {}
+        }
+    }
+    
     func removeUnwantedMenu(){
         //if let userType = loggedInUserInfo["UserProfile"] as? String where userType != "Player"{
         if let userType = profileData.UserProfile as? String where userType != "Player"{

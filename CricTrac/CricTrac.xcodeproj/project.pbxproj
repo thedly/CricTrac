@@ -141,6 +141,7 @@
 		B80B56121EC5AA3D0014FA9D /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B56111EC5AA3D0014FA9D /* Notifications.swift */; };
 		B8200C6E1F39A22800026F4D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8200C6D1F39A22800026F4D /* GoogleService-Info.plist */; };
 		B8200C701F3B13B300026F4D /* MatchFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8200C6F1F3B13B300026F4D /* MatchFilterCell.swift */; };
+		B8200C721F3EE4F900026F4D /* ProfileImageExpandingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8200C711F3EE4F800026F4D /* ProfileImageExpandingVC.swift */; };
 		B835B3501EE94BF7001048A6 /* AppIntroductionScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B34F1EE94BF7001048A6 /* AppIntroductionScreens.swift */; };
 		B835B3521EE9622B001048A6 /* AppIntroductionFinalScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3511EE9622B001048A6 /* AppIntroductionFinalScreen.swift */; };
 		B835B3541EEA7D2F001048A6 /* AppIntroFirstScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3531EEA7D2F001048A6 /* AppIntroFirstScreen.swift */; };
@@ -313,6 +314,7 @@
 		B80B56111EC5AA3D0014FA9D /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		B8200C6D1F39A22800026F4D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Desktop/CT Plist/QA-plist/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B8200C6F1F3B13B300026F4D /* MatchFilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchFilterCell.swift; sourceTree = "<group>"; };
+		B8200C711F3EE4F800026F4D /* ProfileImageExpandingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageExpandingVC.swift; sourceTree = "<group>"; };
 		B835B34F1EE94BF7001048A6 /* AppIntroductionScreens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroductionScreens.swift; sourceTree = "<group>"; };
 		B835B3511EE9622B001048A6 /* AppIntroductionFinalScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroductionFinalScreen.swift; sourceTree = "<group>"; };
 		B835B3531EEA7D2F001048A6 /* AppIntroFirstScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroFirstScreen.swift; sourceTree = "<group>"; };
@@ -622,6 +624,7 @@
 				B85ECAB61EF91C7C00CC29E5 /* AddMatchFirstIntroScreen.swift */,
 				B85ECAB81EF91CC900CC29E5 /* AddMatchSceIntroScreen.swift */,
 				B85ECABA1EF91CF200CC29E5 /* AddMatchThirdIntroScreen.swift */,
+				B8200C711F3EE4F800026F4D /* ProfileImageExpandingVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -860,6 +863,7 @@
 				B835B3501EE94BF7001048A6 /* AppIntroductionScreens.swift in Sources */,
 				895E04051D5CE24B002E322E /* FriendSearchViewController.swift in Sources */,
 				891B2AA51E7CDA6200F6B5BA /* FriendRequestCollectionViewCell.swift in Sources */,
+				B8200C721F3EE4F900026F4D /* ProfileImageExpandingVC.swift in Sources */,
 				892CE2D41D9EC126001E098E /* MatchResultsViewController.swift in Sources */,
 				899206261D61BA6700F99A97 /* FriendsInviteViewController.swift in Sources */,
 				896407CE1DA7FE51002212EB /* SplashScreenViewController.swift in Sources */,

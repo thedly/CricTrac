@@ -186,6 +186,9 @@ public func getRootViewController() -> UIViewController {
     sliderMenu.mainViewController = navigationControl
     sliderMenu.drawerViewController = drawerViewController
     return sliderMenu
+    
+    
+    
 }
 
 public func setUIBackgroundTheme(baseView: UIView) {

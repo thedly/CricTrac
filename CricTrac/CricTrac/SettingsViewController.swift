@@ -196,7 +196,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
         
         mailComposerVC.setToRecipients([feedbackEmail])
-        mailComposerVC.setSubject("Let us know your feedback on CricTrac")
+        mailComposerVC.setSubject("Feedback on CricTrac - iOS")
         mailComposerVC.setMessageBody("", isHTML: false)
         
         return mailComposerVC
