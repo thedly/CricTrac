@@ -530,7 +530,8 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             let rect  = CGRect(x: 0, y: 50, width: 270, height: 100)
                 let textView    = UITextView(frame: rect)
             
-                textView.font               = UIFont(name: "Helvetica", size: 15)
+                textView.font               = UIFont(name: "SourceSansPro-Bold", size: 15)
+                //textView.textAlignment      = NSTextAlignment.Center
                 textView.textColor          = UIColor.blackColor()
                 textView.backgroundColor    = UIColor.clearColor()
                 textView.layer.borderColor  = UIColor.clearColor().CGColor

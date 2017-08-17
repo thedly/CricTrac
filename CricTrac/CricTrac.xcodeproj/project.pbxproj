@@ -139,7 +139,6 @@
 		B80B560E1EB9C2C60014FA9D /* LikesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B560D1EB9C2C60014FA9D /* LikesViewController.swift */; };
 		B80B56101EB9D1580014FA9D /* LikesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B560F1EB9D1580014FA9D /* LikesTableViewCell.swift */; };
 		B80B56121EC5AA3D0014FA9D /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B56111EC5AA3D0014FA9D /* Notifications.swift */; };
-		B8200C6E1F39A22800026F4D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8200C6D1F39A22800026F4D /* GoogleService-Info.plist */; };
 		B8200C701F3B13B300026F4D /* MatchFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8200C6F1F3B13B300026F4D /* MatchFilterCell.swift */; };
 		B8200C721F3EE4F900026F4D /* ProfileImageExpandingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8200C711F3EE4F800026F4D /* ProfileImageExpandingVC.swift */; };
 		B835B3501EE94BF7001048A6 /* AppIntroductionScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B34F1EE94BF7001048A6 /* AppIntroductionScreens.swift */; };
@@ -150,6 +149,7 @@
 		B835B35A1EEA7D92001048A6 /* AppIntroFourthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3591EEA7D92001048A6 /* AppIntroFourthScreen.swift */; };
 		B835B35C1EEA7DAF001048A6 /* AppIntroFifthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B35B1EEA7DAF001048A6 /* AppIntroFifthScreen.swift */; };
 		B835B3981EEE6947001048A6 /* AppIntroBasicScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3971EEE6946001048A6 /* AppIntroBasicScreen.swift */; };
+		B83E370E1F457A3B003CB05C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B83E370D1F457A3B003CB05C /* GoogleService-Info.plist */; };
 		B85ECAB51EF91B3B00CC29E5 /* AddMatchIntroScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85ECAB41EF91B3B00CC29E5 /* AddMatchIntroScreens.swift */; };
 		B85ECAB71EF91C7C00CC29E5 /* AddMatchFirstIntroScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85ECAB61EF91C7C00CC29E5 /* AddMatchFirstIntroScreen.swift */; };
 		B85ECAB91EF91CC900CC29E5 /* AddMatchSceIntroScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85ECAB81EF91CC900CC29E5 /* AddMatchSceIntroScreen.swift */; };
@@ -312,7 +312,6 @@
 		B80B560D1EB9C2C60014FA9D /* LikesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesViewController.swift; sourceTree = "<group>"; };
 		B80B560F1EB9D1580014FA9D /* LikesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesTableViewCell.swift; sourceTree = "<group>"; };
 		B80B56111EC5AA3D0014FA9D /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
-		B8200C6D1F39A22800026F4D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Desktop/CT Plist/QA-plist/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B8200C6F1F3B13B300026F4D /* MatchFilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchFilterCell.swift; sourceTree = "<group>"; };
 		B8200C711F3EE4F800026F4D /* ProfileImageExpandingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageExpandingVC.swift; sourceTree = "<group>"; };
 		B835B34F1EE94BF7001048A6 /* AppIntroductionScreens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroductionScreens.swift; sourceTree = "<group>"; };
@@ -323,6 +322,7 @@
 		B835B3591EEA7D92001048A6 /* AppIntroFourthScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroFourthScreen.swift; sourceTree = "<group>"; };
 		B835B35B1EEA7DAF001048A6 /* AppIntroFifthScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroFifthScreen.swift; sourceTree = "<group>"; };
 		B835B3971EEE6946001048A6 /* AppIntroBasicScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroBasicScreen.swift; sourceTree = "<group>"; };
+		B83E370D1F457A3B003CB05C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B85ECAB41EF91B3B00CC29E5 /* AddMatchIntroScreens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMatchIntroScreens.swift; sourceTree = "<group>"; };
 		B85ECAB61EF91C7C00CC29E5 /* AddMatchFirstIntroScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMatchFirstIntroScreen.swift; sourceTree = "<group>"; };
 		B85ECAB81EF91CC900CC29E5 /* AddMatchSceIntroScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMatchSceIntroScreen.swift; sourceTree = "<group>"; };
@@ -395,7 +395,7 @@
 		46C983831D3922D200DFC607 = {
 			isa = PBXGroup;
 			children = (
-				B8200C6D1F39A22800026F4D /* GoogleService-Info.plist */,
+				B83E370D1F457A3B003CB05C /* GoogleService-Info.plist */,
 				89ABEB1E1E5BD0D7006BC0BC /* GoogleService-Info-new.plist */,
 				46C9838E1D3922D200DFC607 /* CricTrac */,
 				46C983A31D3922D200DFC607 /* CricTracTests */,
@@ -763,7 +763,7 @@
 				894CA29E1D96150A0043D3D1 /* SIL Open Font License.txt in Resources */,
 				8953769A1DAB8BF200DDB3A6 /* FriendSuggestionsCell.xib in Resources */,
 				894CA2A61D96150A0043D3D1 /* SourceSansPro-Light.otf in Resources */,
-				B8200C6E1F39A22800026F4D /* GoogleService-Info.plist in Resources */,
+				B83E370E1F457A3B003CB05C /* GoogleService-Info.plist in Resources */,
 				893823B61E113AE000BCD0CD /* SliderMenuViewCell.xib in Resources */,
 				46C983971D3922D200DFC607 /* App.xcassets in Resources */,
 				89ABEB1F1E5BD0D7006BC0BC /* GoogleService-Info-new.plist in Resources */,
@@ -839,7 +839,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
