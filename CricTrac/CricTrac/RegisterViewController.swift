@@ -41,6 +41,9 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
         super.viewDidLoad()
         password.delegate = self
         setBackgroundColor()
+        facebookBtn.hidden = true
+        googleBtn.hidden = true
+        
         fbGoogleButtonsHeightConstraint.constant = 0
         facebookBtnHeightConstraint.constant = 0
         googleBtnHeightConstraint.constant = 0
@@ -98,18 +101,18 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
             let userDefaults = NSUserDefaults.standardUserDefaults()
             let googleTokens = ["idToken":idToken,"accessToken":accessToken]
     
-            var facebookToken:[String:String]!
+            //var facebookToken:[String:String]!
     
-            if let loginToken = userDefaults.valueForKey("loginToken") as? [String:AnyObject]{
-                if let fbtoken = loginToken["Facebooktoken"]{
-                    facebookToken = fbtoken as! [String : String]
-                }
-            }
+//            if let loginToken = userDefaults.valueForKey("loginToken") as? [String:AnyObject]{
+//                if let fbtoken = loginToken["Facebooktoken"]{
+//                    facebookToken = fbtoken as! [String : String]
+//                }
+//            }
     
             var token = [String:AnyObject]()
-            if facebookToken != nil{
-                token["Facebooktoken"] = facebookToken
-            }
+//            if facebookToken != nil{
+//                token["Facebooktoken"] = facebookToken
+//            }
             token["googletoken"] = googleTokens
     
             userDefaults.setValue(token, forKey: "loginToken")
@@ -202,7 +205,7 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
         let navigationControl = UINavigationController(rootViewController: dashboardVC )
         sliderMenu.mainViewController = navigationControl
         sliderMenu.drawerViewController = drawerViewController
-        // self.googleBtn.enabled = true
+         self.googleBtn.enabled = true
         //self.facebookBtn.enabled = true
         window?.rootViewController = sliderMenu
         
@@ -251,7 +254,7 @@ extension RegisterViewController {
                 KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
                 registerWithEmailAndPassword((username.text?.trimWhiteSpace)!, password: (password.text?.trimWhiteSpace)!) { (user, error) in
                     KRProgressHUD.dismiss()
-                    if error == nil {
+                     if error == nil {
                 
                         user?.sendEmailVerificationWithCompletion() { error in
                             KRProgressHUD.dismiss()

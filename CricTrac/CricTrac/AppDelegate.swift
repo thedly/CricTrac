@@ -15,7 +15,7 @@ import Crashlytics
 import FirebaseDatabase
 import FirebaseAuth
 import FirebaseInstanceID
-//import GoogleSignIn
+import GoogleSignIn
 import KRProgressHUD
 import IQKeyboardManagerSwift
 //import SCLAlertView
@@ -177,40 +177,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerUserNotificationSettings(notificationSettings)
     }
     
-//    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
-//        
-//         KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
-//        
-////        if GIDSignIn.sharedInstance().handleURL(url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String, annotation: options [UIApplicationOpenURLOptionsAnnotationKey]) {
-////            return true
-////        }
-//        
-////        let fb =  FBSDKApplicationDelegate.sharedInstance().application( app,  openURL: url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String, annotation: options [UIApplicationOpenURLOptionsAnnotationKey])
-//        
-////        return fb
-//        
-//        
-//        let checkFB = FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String, annotation: options [UIApplicationOpenURLOptionsAnnotationKey])
-//        
-//        
-//        let checkGoogle = GIDSignIn.sharedInstance().handleURL(url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String,annotation: options [UIApplicationOpenURLOptionsAnnotationKey])
-//        return checkGoogle || checkFB
-//
-//        
-//        
-//    }
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        
+         KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+        
+        if GIDSignIn.sharedInstance().handleURL(url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String, annotation: options [UIApplicationOpenURLOptionsAnnotationKey]) {
+            return true
+        }
+        
+//        let fb =  FBSDKApplicationDelegate.sharedInstance().application( app,  openURL: url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String, annotation: options [UIApplicationOpenURLOptionsAnnotationKey])
+        
+//        return fb
+        
+        
+    //    let checkFB = FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String, annotation: options [UIApplicationOpenURLOptionsAnnotationKey])
+        
+        
+        let checkGoogle = GIDSignIn.sharedInstance().handleURL(url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String,annotation: options [UIApplicationOpenURLOptionsAnnotationKey])
+       // return checkGoogle || checkFB
+        
+        return checkGoogle
+        
+        
+    }
     
     
-//    func application(application: UIApplication, openURL url: NSURL,  sourceApplication: String?,  annotation: AnyObject) -> Bool {
-//        
-//        KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
-//        
-//        let checkFB = FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
-////        let checkGoogle = GIDSignIn.sharedInstance().handleURL(url, sourceApplication: sourceApplication,annotation: annotation)
-//        return /*checkGoogle ||*/ checkFB
-//        
-//        //return FBSDKApplicationDelegate.sharedInstance().application( application,  openURL: url, sourceApplication: sourceApplication, annotation: annotation)
-//    }
+    func application(application: UIApplication, openURL url: NSURL,  sourceApplication: String?,  annotation: AnyObject) -> Bool {
+        
+        KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+        
+      //  let checkFB = FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+        let checkGoogle = GIDSignIn.sharedInstance().handleURL(url, sourceApplication: sourceApplication,annotation: annotation)
+        //return /*checkGoogle ||*/ checkFB
+        
+        return checkGoogle
+        //return FBSDKApplicationDelegate.sharedInstance().application( application,  openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+    }
     
     
     func applicationWillResignActive(application: UIApplication) {

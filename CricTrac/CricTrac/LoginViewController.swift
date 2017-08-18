@@ -45,8 +45,9 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         //password.text = "crictrac"
         //setUIBackgroundTheme(self.view)
         loginWithSavedCredentials()
-        facebookBtnHeightConstraint.constant = 0
-        googleBtnHeightConstraint.constant = 0
+       // facebookBtnHeightConstraint.constant = 0
+        //googleBtnHeightConstraint.constant = 0
+        facebookBtn.hidden = true
     }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -101,7 +102,9 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         loginWithMailAndPassword((username.text?.trimWhiteSpace)!, password: (password.text?.trimWhiteSpace)!) { (user, error) in
             // KRProgressHUD.dismiss()
             if error != nil{
-              
+                if user == nil {
+                    
+                }
                 let alert = UIAlertController(title: "Login Error", message: "Invalid username or password.\n If you are a new user, register using SIGN UP", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
@@ -158,6 +161,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
+        
         GIDSignIn.sharedInstance().signIn()
     }
     
@@ -174,6 +178,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         firebaseLogin(credential, sucess: { (user) in
             self.saveGoogleTocken(authentication.idToken, accessToken: authentication.accessToken)
             currentUser = user
+            
             enableSync()
             self.navigateToNextScreen()
             }, failure: { (error) in

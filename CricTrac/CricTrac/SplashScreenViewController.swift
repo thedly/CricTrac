@@ -60,18 +60,18 @@ class SplashScreenViewController: UIViewController,ThemeChangeable {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         
         if let credential = userDefaults.valueForKey("loginToken") {
-//            if let googleCredentials = credential.valueForKey("googletoken") as? [String:String]{
-//                KRProgressHUD.show(message: "Loading...")
-//                firebaseLoginWithGoogle(googleCredentials["idToken"]!, accessToken:googleCredentials["accessToken"]! , sucess: { (user) in
-//                    currentUser = user
-//                    self.moveToNextScreen(true)
-//                    
-//                    }, failure: { (error) in
-//                        KRProgressHUD.dismiss()
-//                        self.moveToNextScreen(false)
-//                        print(error.localizedDescription)
-//                })
-//            }
+            if let googleCredentials = credential.valueForKey("googletoken") as? [String:String]{
+                KRProgressHUD.show(message: "Loading...")
+                firebaseLoginWithGoogle(googleCredentials["idToken"]!, accessToken:googleCredentials["accessToken"]! , sucess: { (user) in
+                   currentUser = user
+                    self.moveToNextScreen(true)
+                    
+                   }, failure: { (error) in
+                       KRProgressHUD.dismiss()
+                        self.moveToNextScreen(false)
+                        print(error.localizedDescription)
+               })
+            }
 //            else if let fbCredentials = credential.valueForKey("Facebooktoken") as? [String:String]{
 //                KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
 //                firebaseLoginWithFacebook(fbCredentials["tokenString"]! , sucess: { (user) in

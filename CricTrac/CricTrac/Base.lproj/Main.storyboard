@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Ve3-0R-RX7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Ve3-0R-RX7">
     <dependencies>
         <deployment identifier="iOS"/>
         <development version="7000" identifier="xcode"/>
@@ -1166,17 +1166,16 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or Sign in with a social account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H62-W5-QCx">
-                                <rect key="frame" x="20" y="509" width="560" height="21"/>
+                                <rect key="frame" x="20" y="502" width="560" height="21"/>
                                 <accessibility key="accessibilityConfiguration" identifier="whiteMatter"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="16"/>
-                                <color key="textColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="20" y="711" width="360" height="19"/>
                                 </variation>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hLX-r4-VfY">
-                                <rect key="frame" x="240" y="542" width="120" height="50"/>
+                                <rect key="frame" x="240" y="535" width="120" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jMn-aG-Kux">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -1288,8 +1287,8 @@
                                 </constraints>
                             </imageView>
                             <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="noX-JL-blx">
-                                <rect key="frame" x="20" y="493" width="560" height="1"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="20" y="486" width="560" height="1"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="PHF-Jm-iuZ"/>
                                 </constraints>
@@ -1341,7 +1340,7 @@
                             <constraint firstItem="Wfw-7U-fqh" firstAttribute="centerX" secondItem="h5N-Ry-xNg" secondAttribute="centerX" id="8ai-WT-5e8"/>
                             <constraint firstItem="h5N-Ry-xNg" firstAttribute="trailing" secondItem="Y0V-rG-LP9" secondAttribute="trailing" id="9Kw-a7-wlb"/>
                             <constraint firstItem="0dt-3f-sL8" firstAttribute="trailing" secondItem="h5N-Ry-xNg" secondAttribute="trailing" id="9b3-wn-aYu"/>
-                            <constraint firstItem="e4z-pL-Fy0" firstAttribute="top" secondItem="hLX-r4-VfY" secondAttribute="bottom" constant="8" id="9vE-fQ-rap"/>
+                            <constraint firstItem="e4z-pL-Fy0" firstAttribute="top" secondItem="hLX-r4-VfY" secondAttribute="bottom" constant="15" id="9vE-fQ-rap"/>
                             <constraint firstItem="AQ6-RS-ttk" firstAttribute="centerY" secondItem="Y0V-rG-LP9" secondAttribute="centerY" id="A3d-rc-Wel"/>
                             <constraint firstItem="c24-ML-Q9b" firstAttribute="top" secondItem="0LD-4Y-fHC" secondAttribute="bottom" constant="50" id="CGh-Gg-8pd"/>
                             <constraint firstItem="H62-W5-QCx" firstAttribute="leading" secondItem="Wfw-7U-fqh" secondAttribute="leading" id="Dfs-CV-aKb"/>
@@ -3123,7 +3122,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <view alpha="0.30000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rFM-vj-DKX">
-                                <rect key="frame" x="20" y="495" width="560" height="1"/>
+                                <rect key="frame" x="20" y="488" width="560" height="1"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Mei-XI-1xN"/>
@@ -3133,7 +3132,7 @@
                                 </variation>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="um2-ah-YSg">
-                                <rect key="frame" x="242" y="544" width="116" height="48"/>
+                                <rect key="frame" x="242" y="537" width="116" height="48"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4Y-a4-jiz">
                                         <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
@@ -3163,7 +3162,7 @@
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or Sign in with a social account" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aak-nx-xjC">
-                                <rect key="frame" x="20" y="511" width="560" height="21"/>
+                                <rect key="frame" x="20" y="504" width="560" height="21"/>
                                 <accessibility key="accessibilityConfiguration" identifier="whiteMatter"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="16"/>
                                 <color key="textColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -3297,7 +3296,7 @@
                             <constraint firstItem="FwB-Rl-rVR" firstAttribute="centerX" secondItem="b3E-EJ-ty5" secondAttribute="centerX" id="6fs-IA-rKB"/>
                             <constraint firstItem="h3l-lY-X7Q" firstAttribute="leading" secondItem="mQr-AB-Cw0" secondAttribute="leading" id="7rl-sz-KcQ"/>
                             <constraint firstItem="FwB-Rl-rVR" firstAttribute="top" secondItem="WmR-Vg-5y4" secondAttribute="bottom" constant="1" id="7xC-Pd-a5A"/>
-                            <constraint firstItem="9rh-nr-d1W" firstAttribute="top" secondItem="um2-ah-YSg" secondAttribute="bottom" constant="8" id="8uZ-lN-sIp"/>
+                            <constraint firstItem="9rh-nr-d1W" firstAttribute="top" secondItem="um2-ah-YSg" secondAttribute="bottom" constant="15" id="8uZ-lN-sIp"/>
                             <constraint firstItem="um2-ah-YSg" firstAttribute="top" secondItem="aak-nx-xjC" secondAttribute="bottom" constant="12" id="DVb-FC-YTd"/>
                             <constraint firstItem="McQ-nS-xMr" firstAttribute="top" secondItem="J4V-oP-RhG" secondAttribute="bottom" constant="10" id="FMc-f1-fLs"/>
                             <constraint firstItem="b3E-EJ-ty5" firstAttribute="top" secondItem="L5F-Gc-3h2" secondAttribute="bottom" constant="50" id="FmN-jb-bg2"/>
@@ -3355,8 +3354,10 @@
                     </view>
                     <connections>
                         <outlet property="confirmPassword" destination="4OS-SI-nzr" id="CMO-T4-jvW"/>
+                        <outlet property="facebookBtn" destination="b4Y-a4-jiz" id="i1M-q7-A6g"/>
                         <outlet property="facebookBtnHeightConstraint" destination="G7z-yt-hQL" id="MJk-IM-WFj"/>
                         <outlet property="fbGoogleButtonsHeightConstraint" destination="Mja-LO-cou" id="oEl-ut-lNB"/>
+                        <outlet property="googleBtn" destination="Sxz-h9-uxV" id="wSH-Tz-aL3"/>
                         <outlet property="googleBtnHeightConstraint" destination="dBI-p2-0iC" id="Li6-K0-pya"/>
                         <outlet property="password" destination="pOt-yQ-gr6" id="cFH-kt-JNw"/>
                         <outlet property="registerBottomViewLabel" destination="aak-nx-xjC" id="dJd-lv-NdS"/>
