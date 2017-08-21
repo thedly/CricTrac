@@ -38,6 +38,10 @@ class APostTableViewCell: UITableViewCell {
         addTapGestureToUserName()
     }
     
+    @IBAction func friendImageTapped(sender: AnyObject) {
+       didTapOwnerName()
+    }
+    
     func addTapGestureToUserName(){
         if let _ = postOwnerName{
             let gesture = UITapGestureRecognizer(target: self, action: #selector(APostTableViewCell.didTapOwnerName))

@@ -20,6 +20,9 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
     var currentTheme:CTTheme!
     var dataSource = [[String:AnyObject]]()
     var NotificationID:String = ""
+    
+    var friendProfile:[String:AnyObject]?
+    var userProfileData:Profile!
 
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
@@ -31,6 +34,17 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
     override func viewWillAppear(animated: Bool) {
        // setNavigationBarProperties()
         setBackgroundColor()
+        
+    }
+    
+    func initView() {
+        
+        if let value = friendProfile{
+            userProfileData = Profile(usrObj: value)
+        }
+        else{
+            userProfileData = profileData
+        }
     }
     
     override func viewDidLoad() {
@@ -175,6 +189,7 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
         let topicId = self.dataSource[indexPath.section]["TopicID"]! as! String
         let fromId = self.dataSource[indexPath.section]["FromID"]! as! String
         
+        
         switch topic{
             case "FRR": self.moveToFRR(topicId)
             case "FRA": self.moveToFRA(topicId)
@@ -236,11 +251,18 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
         let matchId:String = topicId
         let userId:String = userId
         
+        getFriendProfileInfo(userId, sucess: { (friendInfo) in
+            self.friendProfile = friendInfo
+            self.initView()
+        })
+
+        
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeSingleEventOfType(.Value, withBlock: { snapshot in
                 if let data = snapshot.value! as? [String:AnyObject]{
                     let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
                     summaryDetailsVC.matchDetailsData = data
+                   summaryDetailsVC.friendDOB = self.userProfileData.DateOfBirth
                     summaryDetailsVC.isFriendDashboard = true
                     self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
                 }

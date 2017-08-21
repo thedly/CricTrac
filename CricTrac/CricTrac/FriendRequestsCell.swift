@@ -38,6 +38,9 @@ class FriendRequestsCell: UITableViewCell {
         self.rejectBtn.layer.borderColor = UIColor.whiteColor().CGColor
     }
     
+    @IBAction func friendImageTapped(sender: AnyObject) {
+        didTapFriendName()
+    }
     func addTapGestureToUserName(){
         if let _ = FriendName{
             let gesture = UITapGestureRecognizer(target: self, action: #selector(FriendRequestsCell.didTapFriendName))

@@ -35,6 +35,9 @@ class FriendSuggestionsCell: UITableViewCell {
         self.AddFriendBtn.userInteractionEnabled = true
     }
     
+    @IBAction func friendImageTapped(sender: AnyObject) {
+       didTapFriendName()
+    }
     func addTapGestureToUserName(){
         if let _ = userName{
             let gesture = UITapGestureRecognizer(target: self, action: #selector(FriendSuggestionsCell.didTapFriendName))

@@ -58,6 +58,10 @@ class CommentTableViewCell: UITableViewCell {
         }
     }
     
+    @IBAction func ownerImageTapped(sender: AnyObject) {
+        didTapOwnerName()
+    }
+    
     func didTapOwnerName(){
         if ownerId != nil{
             getFriendProfileInfo(ownerId, sucess: { (friendInfo) in

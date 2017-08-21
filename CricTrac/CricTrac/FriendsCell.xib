@@ -70,10 +70,17 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bob-Cj-MeO">
+                                <rect key="frame" x="8" y="8" width="50" height="50"/>
+                                <connections>
+                                    <action selector="friendImageTapped:" destination="nSd-Ds-rI7" eventType="touchUpInside" id="mkV-B4-KF3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="dCJ-xD-Hpw" firstAttribute="trailing" secondItem="Xyt-c5-ply" secondAttribute="trailing" id="1gk-dr-lC3"/>
                             <constraint firstItem="KGl-gl-LBw" firstAttribute="leading" secondItem="2Ee-1f-FbC" secondAttribute="leading" constant="8" id="1hs-Q1-ItE"/>
+                            <constraint firstItem="Bob-Cj-MeO" firstAttribute="leading" secondItem="KGl-gl-LBw" secondAttribute="leading" id="24c-Z8-agt"/>
                             <constraint firstItem="Xyt-c5-ply" firstAttribute="centerY" secondItem="KGl-gl-LBw" secondAttribute="centerY" constant="-10" id="D2e-8G-8e7"/>
                             <constraint firstItem="dCJ-xD-Hpw" firstAttribute="centerX" secondItem="Xyt-c5-ply" secondAttribute="centerX" id="GK3-dT-IXW"/>
                             <constraint firstAttribute="trailing" secondItem="Jf5-OW-4fC" secondAttribute="trailing" constant="8" id="Gci-Zf-av2"/>
@@ -81,6 +88,9 @@
                             <constraint firstItem="KGl-gl-LBw" firstAttribute="centerY" secondItem="2Ee-1f-FbC" secondAttribute="centerY" id="Nc5-ay-ysM"/>
                             <constraint firstItem="dCJ-xD-Hpw" firstAttribute="top" secondItem="Xyt-c5-ply" secondAttribute="bottom" constant="4" id="QYz-Uq-iED"/>
                             <constraint firstItem="dCJ-xD-Hpw" firstAttribute="leading" secondItem="Xyt-c5-ply" secondAttribute="leading" id="YDm-EA-yjk"/>
+                            <constraint firstItem="Bob-Cj-MeO" firstAttribute="height" secondItem="KGl-gl-LBw" secondAttribute="height" id="azh-dg-jcF"/>
+                            <constraint firstItem="Bob-Cj-MeO" firstAttribute="trailing" secondItem="KGl-gl-LBw" secondAttribute="trailing" id="bi7-eJ-JdZ"/>
+                            <constraint firstItem="Bob-Cj-MeO" firstAttribute="centerY" secondItem="KGl-gl-LBw" secondAttribute="centerY" id="g0K-B5-ITF"/>
                             <constraint firstItem="Xyt-c5-ply" firstAttribute="leading" secondItem="KGl-gl-LBw" secondAttribute="trailing" constant="8" id="gto-Fm-EGc"/>
                             <constraint firstItem="Jf5-OW-4fC" firstAttribute="leading" secondItem="Xyt-c5-ply" secondAttribute="trailing" constant="10" id="ilS-pR-2tk"/>
                         </constraints>

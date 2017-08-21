@@ -140,10 +140,17 @@
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hgx-FM-2ll">
+                        <rect key="frame" x="12" y="12" width="46" height="46"/>
+                        <connections>
+                            <action selector="friendImageTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="PEF-jQ-XMf"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Jn2-2i-CGw" firstAttribute="top" secondItem="Glb-Ym-hQ7" secondAttribute="bottom" id="0Ya-AL-xBA"/>
                     <constraint firstItem="Glb-Ym-hQ7" firstAttribute="top" secondItem="UIx-fb-WlC" secondAttribute="bottom" id="2DC-zN-tCn"/>
+                    <constraint firstItem="Hgx-FM-2ll" firstAttribute="centerY" secondItem="F5q-Ml-KiJ" secondAttribute="centerY" id="3jH-QB-pvH"/>
                     <constraint firstItem="aLx-nn-Rhs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="40K-bO-gVF"/>
                     <constraint firstItem="UIx-fb-WlC" firstAttribute="leading" secondItem="F5q-Ml-KiJ" secondAttribute="trailing" constant="5" id="8hr-ct-q94"/>
                     <constraint firstAttribute="trailing" secondItem="HT5-zA-qQ7" secondAttribute="trailing" constant="12" id="CDA-e4-OJR"/>
@@ -158,14 +165,17 @@
                     <constraint firstItem="aLx-nn-Rhs" firstAttribute="top" secondItem="LYJ-aE-uqd" secondAttribute="bottom" constant="5" id="ZMJ-f7-hvf"/>
                     <constraint firstItem="FYt-Kg-9A5" firstAttribute="top" secondItem="aLx-nn-Rhs" secondAttribute="bottom" constant="5" id="cbe-LO-sz1"/>
                     <constraint firstItem="asJ-kQ-Jqv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="d3F-X2-FND"/>
+                    <constraint firstItem="Hgx-FM-2ll" firstAttribute="height" secondItem="F5q-Ml-KiJ" secondAttribute="height" id="dSj-ze-h9u"/>
                     <constraint firstAttribute="bottomMargin" secondItem="sao-ME-HsA" secondAttribute="bottom" constant="10" id="e2M-g7-bHa"/>
                     <constraint firstItem="LYJ-aE-uqd" firstAttribute="top" secondItem="asJ-kQ-Jqv" secondAttribute="bottom" constant="5" id="eLh-WQ-fL0"/>
                     <constraint firstItem="F5q-Ml-KiJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="f8S-E7-Qry"/>
                     <constraint firstItem="sao-ME-HsA" firstAttribute="top" secondItem="aLx-nn-Rhs" secondAttribute="bottom" constant="5" id="gdd-be-bzq"/>
                     <constraint firstItem="Jn2-2i-CGw" firstAttribute="leading" secondItem="Glb-Ym-hQ7" secondAttribute="leading" id="iSd-zA-gJQ"/>
+                    <constraint firstItem="Hgx-FM-2ll" firstAttribute="leading" secondItem="F5q-Ml-KiJ" secondAttribute="leading" id="j98-pD-D8e"/>
                     <constraint firstAttribute="trailing" secondItem="aLx-nn-Rhs" secondAttribute="trailing" constant="5" id="jif-kL-FmG"/>
                     <constraint firstAttribute="trailing" secondItem="FYt-Kg-9A5" secondAttribute="trailing" constant="12" id="kBy-C9-czb"/>
                     <constraint firstItem="UIx-fb-WlC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="kWe-zw-pXc"/>
+                    <constraint firstItem="Hgx-FM-2ll" firstAttribute="trailing" secondItem="F5q-Ml-KiJ" secondAttribute="trailing" id="lFn-Rg-Ql0"/>
                     <constraint firstItem="asJ-kQ-Jqv" firstAttribute="top" secondItem="F5q-Ml-KiJ" secondAttribute="bottom" constant="15" id="pTL-0F-pzU"/>
                     <constraint firstItem="F5q-Ml-KiJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="tGV-Jm-kfa"/>
                     <constraint firstItem="LYJ-aE-uqd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="wSY-fh-f8w"/>

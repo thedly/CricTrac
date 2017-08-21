@@ -26,6 +26,11 @@ class LikesTableViewCell: UITableViewCell{
          addTapGestureToUserName()
         parent?.deletebuttonTapped()
     }
+    
+    @IBAction func ownerImageTapped(sender: AnyObject) {
+        didTapOwnerName()
+    }
+    
     func addTapGestureToUserName(){
         if let _ = name{
             let gesture = UITapGestureRecognizer(target: self, action: #selector(LikesTableViewCell.didTapOwnerName))

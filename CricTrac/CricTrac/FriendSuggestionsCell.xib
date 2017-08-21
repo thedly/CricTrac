@@ -70,19 +70,29 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FR4-Qa-YFX">
+                                <rect key="frame" x="8" y="6" width="55" height="55"/>
+                                <connections>
+                                    <action selector="friendImageTapped:" destination="Pvh-sN-CCs" eventType="touchUpInside" id="uSO-8H-qJJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="FR4-Qa-YFX" firstAttribute="trailing" secondItem="bAv-xC-FpS" secondAttribute="trailing" id="0Cl-bO-UVZ"/>
+                            <constraint firstItem="FR4-Qa-YFX" firstAttribute="centerY" secondItem="bAv-xC-FpS" secondAttribute="centerY" id="2Oa-eL-GFM"/>
                             <constraint firstItem="jUM-lX-fcQ" firstAttribute="top" secondItem="hTW-d9-87Z" secondAttribute="bottom" constant="4" id="2e1-B4-USf"/>
                             <constraint firstItem="hTW-d9-87Z" firstAttribute="centerY" secondItem="bAv-xC-FpS" secondAttribute="centerY" constant="-10" id="43Q-8X-yJJ"/>
                             <constraint firstAttribute="trailing" secondItem="14K-3d-Vso" secondAttribute="trailing" constant="8" id="Ond-7G-s0k"/>
                             <constraint firstItem="jUM-lX-fcQ" firstAttribute="centerX" secondItem="hTW-d9-87Z" secondAttribute="centerX" id="PcZ-d5-9rw"/>
                             <constraint firstItem="14K-3d-Vso" firstAttribute="centerY" secondItem="WJD-Wr-YyA" secondAttribute="centerY" id="YBd-e7-uqR"/>
                             <constraint firstItem="bAv-xC-FpS" firstAttribute="leading" secondItem="WJD-Wr-YyA" secondAttribute="leading" constant="8" id="YhK-mk-Aqe"/>
+                            <constraint firstItem="FR4-Qa-YFX" firstAttribute="height" secondItem="bAv-xC-FpS" secondAttribute="height" id="gO9-Ei-dy7"/>
                             <constraint firstItem="jUM-lX-fcQ" firstAttribute="trailing" secondItem="hTW-d9-87Z" secondAttribute="trailing" id="gQa-7I-ndP"/>
                             <constraint firstItem="bAv-xC-FpS" firstAttribute="centerY" secondItem="WJD-Wr-YyA" secondAttribute="centerY" id="hlb-Gx-bHs"/>
                             <constraint firstItem="14K-3d-Vso" firstAttribute="leading" secondItem="hTW-d9-87Z" secondAttribute="trailing" constant="10" id="lbK-S5-ZhL"/>
                             <constraint firstItem="jUM-lX-fcQ" firstAttribute="leading" secondItem="hTW-d9-87Z" secondAttribute="leading" id="sf1-Ub-Y9q"/>
                             <constraint firstItem="hTW-d9-87Z" firstAttribute="leading" secondItem="bAv-xC-FpS" secondAttribute="trailing" constant="8" id="sq0-bq-vfN"/>
+                            <constraint firstItem="FR4-Qa-YFX" firstAttribute="leading" secondItem="bAv-xC-FpS" secondAttribute="leading" id="y29-Vo-Snf"/>
                         </constraints>
                     </view>
                 </subviews>
