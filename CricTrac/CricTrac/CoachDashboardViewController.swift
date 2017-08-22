@@ -13,7 +13,7 @@ import GoogleMobileAds
 import Kingfisher
 import SwiftCountryPicker
 
-class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ThemeChangeable {
+class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ThemeChangeable,UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var MatchesView: UIView!
     @IBOutlet weak var CurrentTeams: UICollectionView!
@@ -35,6 +35,8 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var tableView: UITableView!
+    
     @IBAction func CloseDashboardPressed(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -50,10 +52,10 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         setBackgroundColor()
         
         initView()
-        self.updateCoachDashboard()
-        CurrentTeams.reloadData()
-        PlayedFor.reloadData()
-        Certifications.reloadData()
+        //self.updateCoachDashboard()
+       // CurrentTeams.reloadData()
+       // PlayedFor.reloadData()
+       // Certifications.reloadData()
     }
     
     override func viewDidLoad() {
@@ -89,25 +91,25 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         //setBackgroundColor()
         
         userProfileImage.layer.cornerRadius = userProfileImage.bounds.size.width/2
-        MatchesView.layer.cornerRadius = 10
+       // MatchesView.layer.cornerRadius = 10
         userProfileImage.clipsToBounds = true
         
-         MatchesView.alpha = 1
+         //MatchesView.alpha = 1
         
-          MatchesView.backgroundColor = cricTracTheme.currentTheme.bottomColor
+         // MatchesView.backgroundColor = cricTracTheme.currentTheme.bottomColor
         
-        CurrentTeams.delegate = self
-        CurrentTeams.dataSource = self
+//        CurrentTeams.delegate = self
+//        CurrentTeams.dataSource = self
         
         //        PastTeams.delegate = self
         //        PastTeams.dataSource = self
         
-        PlayedFor.delegate = self
-        PlayedFor.dataSource = self
-        Certifications.delegate = self
-        Certifications.dataSource = self
-        CoachExperience.text = userProfileData.Experience
-        CoachLevel.text = userProfileData.CoachingLevel
+//        PlayedFor.delegate = self
+//        PlayedFor.dataSource = self
+//        Certifications.delegate = self
+//        Certifications.dataSource = self
+//        CoachExperience.text = userProfileData.Experience
+//        CoachLevel.text = userProfileData.CoachingLevel
         
         
         let currentCountryList = CountriesList.filter({$0.name == userProfileData.Country})
@@ -285,9 +287,10 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     }
     
     func changeThemeSettigs() {
-       // let currentTheme = cricTracTheme.currentTheme
-        MatchesView.backgroundColor = UIColor.blackColor()
-        MatchesView.alpha = 0.3
+        //let currentTheme = cricTracTheme.currentTheme
+        tableView.backgroundColor = UIColor.clearColor()
+       // MatchesView.backgroundColor = UIColor.blackColor()
+       // MatchesView.alpha = 0.3
        // navigationController?.navigationBar.barTintColor = currentTheme.topColor
         //currentTheme.boxColor
         //baseView.backgroundColor = UIColor.clearColor()
@@ -548,15 +551,54 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             //  break
         }
     }
+    // tableview functions
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        cell?.backgroundColor = UIColor.clearColor()
+        //let currentTheme = cricTracTheme.currentTheme
+        tableView.backgroundColor = UIColor.clearColor()
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+            //cell.backgroundColor = UIColor.clearColor()
+            return cell
+        }
+        if indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCellWithIdentifier("cell1", forIndexPath: indexPath)
+            //cell.backgroundColor = UIColor.clearColor()
+            return cell
+        }
+        if indexPath.row == 2 {
+            let cell = tableView.dequeueReusableCellWithIdentifier("cell2", forIndexPath: indexPath)
+           //cell.backgroundColor = UIColor.clearColor()
+            return cell
+        }
+        if indexPath.row == 3 {
+            let cell = tableView.dequeueReusableCellWithIdentifier("cell3", forIndexPath: indexPath)
+            //cell.backgroundColor = UIColor.clearColor()  
+            return cell
+        }
+        if  indexPath.row == 4 {
+            let cell = tableView.dequeueReusableCellWithIdentifier("cell4", forIndexPath: indexPath)
+            //cell.backgroundColor = UIColor.clearColor()
+            return cell
+        }
+        return cell!
+        }
+   
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return 75
+        }
+        if indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4 {
+            return 38
+        }
+        return 75
+    }
+    
     
 }
