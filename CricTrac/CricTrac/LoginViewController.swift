@@ -48,6 +48,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
        // facebookBtnHeightConstraint.constant = 0
         //googleBtnHeightConstraint.constant = 0
         facebookBtn.hidden = true
+        googleBtn.hidden = true
     }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {

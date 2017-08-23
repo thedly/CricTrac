@@ -137,7 +137,8 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                         cCell.ownerCity.text = postData["PostType"] as? String
                     }
                     else{
-                        cCell.postOwnerName.text = postData ["OwnerName"] as? String
+                      //  cCell.postOwnerName.text = postData ["OwnerName"] as? String
+                        
                         
                        if postData["OwnerID"] != nil {
                             let friendId = postData["OwnerID"]!
@@ -157,8 +158,10 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                     
                     //display post owners image
                     if ((postData["OwnerID"]) != nil) {
-                        fetchFriendDetail((postData["OwnerID"]  as? String)!, sucess: { (result) in
+                       fetchBasicProfile((postData["OwnerID"]  as? String)!, sucess: { (result) in
                             let proPic = result["proPic"]
+                        let name = "\(result["firstname"]!) \(result["lastname"]!)"
+                        cCell.postOwnerName.text = name
                                 
                             //aCell.profileImage.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
                             cCell.profileImage.layer.borderWidth = 1
@@ -257,12 +260,12 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                         }
                     }
                 
-                    if var value = commentData["OwnerName"] as? String{
-                        if value == ""{
-                            value = "No Name"
-                        }
-                        aCell.userName.text =   value
-                    }
+//                    if var value = commentData["OwnerName"] as? String{
+//                        if value == ""{
+//                            value = "No Name"
+//                        }
+//                        aCell.userName.text =   value
+//                    }
                 
                     if currentUser?.uid == commentData["OwnerID"] as? String || currentUser!.uid == postDataNew["OwnerID"]  as? String {
                         aCell.delCommentBtn.hidden = false
@@ -273,9 +276,11 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
                 
                     //display comment owners image
                     if ((commentData["OwnerID"]) != nil) {
-                        fetchFriendDetail((commentData["OwnerID"]  as? String)!, sucess: { (result) in
+                        fetchBasicProfile((commentData["OwnerID"]  as? String)!, sucess: { (result) in
                             let proPic = result["proPic"]
-                    
+                            let name = "\(result["firstname"]!) \(result["lastname"]!)"
+                            aCell.userName.text = name
+                            
                             aCell.userImage.layer.borderWidth = 1
                             aCell.userImage.layer.masksToBounds = false
                             aCell.userImage.layer.borderColor = UIColor.clearColor().CGColor

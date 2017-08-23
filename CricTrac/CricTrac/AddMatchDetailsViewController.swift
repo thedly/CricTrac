@@ -530,7 +530,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             let rect  = CGRect(x: 0, y: 50, width: 270, height: 100)
                 let textView    = UITextView(frame: rect)
             
-                textView.font               = UIFont(name: "SourceSansPro-Bold", size: 15)
+                textView.font               = UIFont(name: "SourceSansPro-Bold", size: 16)
                 //textView.textAlignment      = NSTextAlignment.Center
                 textView.textColor          = UIColor.blackColor()
                 textView.backgroundColor    = UIColor.clearColor()
@@ -540,9 +540,6 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
             
             let attributedString = NSMutableAttributedString(string:"Free version allows only maximum 5 matches. Add unlimited matches by upgrading to premium by paying:\(msg) \n \nYou can also upgrade from CricTrac.com website with multiple payment options.")
             
-           // attributedString.addAttribute(NSLinkAttributeName, value: "CricTrac.com", range: NSRange(location: 139, length: 12))
-            
-          //  attributedString.addAttribute(NSLinkAttributeName, value: "https://crictrac.com/\(currentUser!.uid)", range: NSRange(location: 139, length: 12))
             
               textView.attributedText = attributedString
             
@@ -555,7 +552,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                 self.doPurchase()
             }))
             
-            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction!) in
                 //print("Handle Cancel Logic here")
             }))
         
@@ -574,7 +571,6 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
    
     func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
         print(currentUser!.uid)
-      //let url = "https://crictrac.com/user/timeline"
       
         return true
     }
