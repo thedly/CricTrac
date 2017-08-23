@@ -341,11 +341,10 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                             })
                         })
                         
-                        fetchFriendDetail(friendId, sucess: { (result) in
+                        fetchBasicProfile(friendId, sucess: { (result) in
                             let proPic = result["proPic"]
-                            let city =   result["city"]
-                            postCell.postOwnerCity.text = city
-                            
+                            let name = "\(result["firstname"]!) \(result["lastname"]!)"
+                            postCell.postOwnerName.text = name
                             if proPic! == "-"{
                                 let imageName = defaultProfileImage
                                 let image = UIImage(named: imageName)

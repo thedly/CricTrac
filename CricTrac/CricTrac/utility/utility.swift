@@ -14,6 +14,7 @@ import SCLAlertView
 import KRProgressHUD
 import SwiftCountryPicker
 import KeychainSwift
+import GoogleSignIn
 
 var sliderMenu = KYDrawerController()
 var currentUser:FIRUser?
@@ -421,7 +422,9 @@ public func logout(currentController: UIViewController) {
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
     
-    try! FIRAuth.auth()!.signOut() 
+    try! FIRAuth.auth()!.signOut()
+    try! GIDSignIn.sharedInstance().signOut()
+    
     
     let keychain = KeychainSwift()
     keychain.delete("ct_userName")
