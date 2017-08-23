@@ -10,7 +10,7 @@ import UIKit
 import XLPagerTabStrip
 import KRProgressHUD
 
-class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChangeable {
+class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChangeable{
 
     var topicId:String = ""
     var topic:String = ""
@@ -43,6 +43,7 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         setNavigationBarProperties()
         
     }
+   
 
     override func viewDidLoad() {
         super.viewDidLoad()

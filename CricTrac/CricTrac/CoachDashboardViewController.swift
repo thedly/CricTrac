@@ -35,7 +35,19 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var tableView: UITableView!
+    
+   // for new features
+    @IBOutlet weak var totalPlayers: UILabel!
+    @IBOutlet weak var totalBatsmen: UILabel!
+    @IBOutlet weak var totalBowlers: UILabel!
+    @IBOutlet weak var totalWickets: UILabel!
+    @IBOutlet weak var totalAllRounders: UILabel!
+    @IBOutlet weak var totalAvgAge: UILabel!
+    @IBOutlet weak var topBowlingTableView: UITableView!
+    @IBOutlet weak var topBattingtableView: UITableView!
+    @IBOutlet weak var coachFrndButton: UIButton!
+    
+    var topBattingnames = ["Arjun Kumar","Kushal Rajiv","Krit Gupta","Noel Phlip","Lochan goudal"]
     
     @IBAction func CloseDashboardPressed(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -61,6 +73,8 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         loadBannerAds()
+        coachFrndButton.layer.cornerRadius = 10
+        coachFrndButton.clipsToBounds = true
     }
     
     func loadBannerAds() {
@@ -288,7 +302,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     
     func changeThemeSettigs() {
         //let currentTheme = cricTracTheme.currentTheme
-        tableView.backgroundColor = UIColor.clearColor()
+        topBattingtableView.backgroundColor = UIColor.clearColor()
        // MatchesView.backgroundColor = UIColor.blackColor()
        // MatchesView.alpha = 0.3
        // navigationController?.navigationBar.barTintColor = currentTheme.topColor
@@ -551,53 +565,47 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             //  break
         }
     }
+    
     // tableview functions
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        if tableView == topBattingtableView {
+            return 6
+        }
+        return 6
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
-        cell?.backgroundColor = UIColor.clearColor()
-        //let currentTheme = cricTracTheme.currentTheme
         tableView.backgroundColor = UIColor.clearColor()
+        let currentTheme = cricTracTheme.currentTheme
+        
+        if tableView == topBattingtableView {
+            if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+                //cell.backgroundColor = currentTheme.bottomColor
+                return cell
+                }
+            else{
+                let cell = tableView.dequeueReusableCellWithIdentifier("cell1", forIndexPath: indexPath) as! CoachTopBattingBowlingTableViewCell
+                cell.topBattingPlayerName.text = topBattingnames[indexPath.row - 1]
+                return cell
+                }
+        }
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-            //cell.backgroundColor = UIColor.clearColor()
+             let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+           // cell.backgroundColor = currentTheme.bottomColor
+             return cell
+            }
+        else{
+            let cell = tableView.dequeueReusableCellWithIdentifier("cell1", forIndexPath: indexPath) as! CoachTopBattingBowlingTableViewCell
+            cell.topBowlingPlayerName.text = topBattingnames[indexPath.row - 1]
+            
             return cell
-        }
-        if indexPath.row == 1 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("cell1", forIndexPath: indexPath)
-            //cell.backgroundColor = UIColor.clearColor()
-            return cell
-        }
-        if indexPath.row == 2 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("cell2", forIndexPath: indexPath)
-           //cell.backgroundColor = UIColor.clearColor()
-            return cell
-        }
-        if indexPath.row == 3 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("cell3", forIndexPath: indexPath)
-            //cell.backgroundColor = UIColor.clearColor()  
-            return cell
-        }
-        if  indexPath.row == 4 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("cell4", forIndexPath: indexPath)
-            //cell.backgroundColor = UIColor.clearColor()
-            return cell
-        }
-        return cell!
-        }
+            }
+    }
    
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            return 75
-        }
-        if indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4 {
-            return 38
-        }
-        return 75
+        return 30
     }
     
     
