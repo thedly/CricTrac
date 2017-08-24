@@ -102,8 +102,7 @@ class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITabl
     
     func openWhatsApp(){
 //        let message = "Install CricTrac from the Store. Download it now from https://appurl.io/j3i4oq7v"
-        //let message = "https://appurl.io/j3i4oq7v"
-        let message = "http://onelink.to/huwg4w"
+        let message = "CricTrac is a Cricket Productivity tool targeted for passionate Cricket Players and Coaches to track and analyze performance. Install CricTrac App on your device by downloading it from http://onelink.to/huwg4w"
         let urlStringEncoded = message.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())
         
         
@@ -131,8 +130,8 @@ class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITabl
         mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
         
         //mailComposerVC.setToRecipients(["someone@somewhere.com"])
-        mailComposerVC.setSubject("Install CricTrac from the Store")
-        mailComposerVC.setMessageBody("CricTrac is an innovative platform for any cricket player or those who are related to cricket. It helps to track the cricket scores and generate the performance reports. Download the app now from http://onelink.to/huwg4w", isHTML: false)
+        mailComposerVC.setSubject("CricTrac - Cricket Productivity App")
+        mailComposerVC.setMessageBody("CricTrac is a Cricket Productivity tool targeted for passionate Cricket Players and Coaches to track and analyze performance. Install CricTrac App on your device by downloading it from http://onelink.to/huwg4w or visit website CricTrac.com", isHTML: false)
         
         return mailComposerVC
     }
@@ -164,7 +163,7 @@ class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITabl
     
     func openMessageApp() {
         let messageVC = MFMessageComposeViewController()
-        messageVC.body = "Install CricTrac from the Store. Download it now from http://onelink.to/huwg4w";
+        messageVC.body = "CricTrac is a Cricket Productivity tool targeted for passionate Cricket Players and Coaches to track and analyze performance. Install CricTrac App on your device by downloading it from http://onelink.to/huwg4w";
         //messageVC.body = "https://itunes.apple.com/in/app/crictrac/id1137502744?mt=8";
         //messageVC.recipients = ["Enter tel-nr"]
         messageVC.messageComposeDelegate = self;
