@@ -13,30 +13,23 @@ import GoogleMobileAds
 import Kingfisher
 import SwiftCountryPicker
 
-class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ThemeChangeable,UITableViewDelegate,UITableViewDataSource {
+class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDelegate, UINavigationControllerDelegate, ThemeChangeable,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource {
     
-    @IBOutlet weak var MatchesView: UIView!
-    @IBOutlet weak var CurrentTeams: UICollectionView!
-    // @IBOutlet weak var PastTeams: UICollectionView!
-    @IBOutlet weak var PlayedFor: UICollectionView!
-    @IBOutlet weak var Certifications: UICollectionView!
     @IBOutlet weak var userProfileImage: UIImageView!
     @IBOutlet weak var imgCoverPhoto: UIImageView!
     @IBOutlet weak var PlayerName: UILabel!
     @IBOutlet weak var PlayerLocation: UILabel!
-    @IBOutlet weak var CoachExperience: UILabel!
-    @IBOutlet weak var CoachLevel: UILabel!
     @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var coachCurrentTeamsHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var coachPlayedHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var coachCertificationHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var topBarHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
+    // for teams
+    @IBOutlet weak var coachTeams: UICollectionView!
+    @IBOutlet weak var coachTeamsHeightConstraint: NSLayoutConstraint!
     
     
-   // for new features
+    // for new features
     @IBOutlet weak var totalPlayers: UILabel!
     @IBOutlet weak var totalBatsmen: UILabel!
     @IBOutlet weak var totalBowlers: UILabel!
@@ -46,6 +39,9 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var topBowlingTableView: UITableView!
     @IBOutlet weak var topBattingtableView: UITableView!
     @IBOutlet weak var coachFrndButton: UIButton!
+    
+    @IBOutlet weak var battingTableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bowlingTableViewHeightConstraint: NSLayoutConstraint!
     
     var topBattingnames = ["Arjun Kumar","Kushal Rajiv","Krit Gupta","Noel Phlip","Lochan goudal"]
     
@@ -58,16 +54,12 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     var coverOrProfile = ""
     var friendId:String? = nil
     var currentUserId = ""
-    
+    var isSelect:Bool?
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         setBackgroundColor()
         
         initView()
-        //self.updateCoachDashboard()
-       // CurrentTeams.reloadData()
-       // PlayedFor.reloadData()
-       // Certifications.reloadData()
     }
     
     override func viewDidLoad() {
@@ -75,6 +67,9 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         loadBannerAds()
         coachFrndButton.layer.cornerRadius = 10
         coachFrndButton.clipsToBounds = true
+        isSelect = true
+        coachTeams.delegate = self
+        coachTeams.dataSource = self
     }
     
     func loadBannerAds() {
@@ -91,40 +86,18 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
 
     
     func initView() {
-        //super.viewDidLoad()
         
         if let value = friendProfile{
             userProfileData = Profile(usrObj: value)
            // closeButton.hidden = false
-        }
-        else{
-            userProfileData = profileData
-          //  closeButton.hidden = true
-        }
-        
-        //setBackgroundColor()
+            }
+            else{
+                userProfileData = profileData
+                //  closeButton.hidden = true
+            }
         
         userProfileImage.layer.cornerRadius = userProfileImage.bounds.size.width/2
-       // MatchesView.layer.cornerRadius = 10
         userProfileImage.clipsToBounds = true
-        
-         //MatchesView.alpha = 1
-        
-         // MatchesView.backgroundColor = cricTracTheme.currentTheme.bottomColor
-        
-//        CurrentTeams.delegate = self
-//        CurrentTeams.dataSource = self
-        
-        //        PastTeams.delegate = self
-        //        PastTeams.dataSource = self
-        
-//        PlayedFor.delegate = self
-//        PlayedFor.dataSource = self
-//        Certifications.delegate = self
-//        Certifications.dataSource = self
-//        CoachExperience.text = userProfileData.Experience
-//        CoachLevel.text = userProfileData.CoachingLevel
-        
         
         let currentCountryList = CountriesList.filter({$0.name == userProfileData.Country})
         let currentISO = currentCountryList[0].iso
@@ -178,6 +151,22 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         tapGesture.numberOfTapsRequired = 1
         imgCoverPhoto.addGestureRecognizer(tapGesture)
     }
+    
+    @IBAction func markMyCoachBtnTapped(sender: AnyObject) {
+        
+//        if isSelect == true {
+//            markMyCoach(friendId!)
+//            coachFrndButton.setTitle("Cancel coach request", forState: .Normal)
+//            isSelect = false
+//        }
+//        else{
+            coachFrndButton.setTitle("Mark as my Coach", forState: .Normal)
+        cancelCoachRequest(currentUserId,type: "Player")
+            isSelect = true
+        //}
+        
+    }
+    
     
     var alertMessage = "Change picture"
     
@@ -303,11 +292,6 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     func changeThemeSettigs() {
         //let currentTheme = cricTracTheme.currentTheme
         topBattingtableView.backgroundColor = UIColor.clearColor()
-       // MatchesView.backgroundColor = UIColor.blackColor()
-       // MatchesView.alpha = 0.3
-       // navigationController?.navigationBar.barTintColor = currentTheme.topColor
-        //currentTheme.boxColor
-        //baseView.backgroundColor = UIColor.clearColor()
     }
     
     @IBAction func didMenuButtonTapp(sender: UIButton){
@@ -407,163 +391,15 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
         //// navigationController!.navigationBar.titleTextAttributes = titleDict
         }
     }
-    func updateCoachDashboard(){
-        if (userProfileData.CoachCurrentTeams.count) + (userProfileData.CoachPastTeams.count) == 0 {
-            self.coachCurrentTeamsHeightConstraint.constant = 0
-        }
-        else {
-            self.coachCurrentTeamsHeightConstraint.constant = 130
-        }
-        
-        if userProfileData.CoachPlayedFor.count == 0{
-            self.coachPlayedHeightConstraint.constant = 0
-        }
-        else {
-            self.coachPlayedHeightConstraint.constant = 130
-        }
-        
-        if userProfileData.Certifications.count == 0 {
-            self.coachCertificationHeightConstraint.constant = 0
-        }
-        else {
-            self.coachCertificationHeightConstraint.constant = 130
-        }
-    }
     
-    // MARK: - Collection view delegates
+    // mark: For coach Teams
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        var valueToReturn = 0
-        switch collectionView {
-        case CurrentTeams:
-            valueToReturn = (userProfileData.CoachCurrentTeams.count) + userProfileData.CoachPastTeams.count
-            break
-            // case PastTeams:
-            //  valueToReturn = userProfileData.CoachPastTeams.count
-        //  break;
-        case PlayedFor:
-            valueToReturn = userProfileData.CoachPlayedFor.count
-            break
-        case Certifications:
-            valueToReturn = userProfileData.Certifications.count
-            break
-        default:
-            valueToReturn = userProfileData.CoachCurrentTeams.count
-            break
-            
-        }
-        return valueToReturn
-    }
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
+        <#code#>
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var teamNameToReturn = ""
-        switch collectionView {
-        case CurrentTeams:
-            // teamNameToReturn = userProfileData.CoachCurrentTeams[indexPath.row]
-            if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CoachCurrentTeamsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
-                //aCell.TeamImage.image = UIImage()
-                
-                if indexPath.row < (userProfileData.CoachCurrentTeams.count) {
-                    teamNameToReturn = userProfileData.CoachCurrentTeams[indexPath.row]
-                    
-                    aCell.baseView.backgroundColor = cricTracTheme.currentTheme.bottomColor
-                    aCell.baseView.alpha = 1
-                    aCell.TeamAbbr.textColor = UIColor.whiteColor()
-                }
-                else if (indexPath.row - (userProfileData.CoachCurrentTeams.count)) < (userProfileData.CoachPastTeams.count) {
-                    teamNameToReturn = userProfileData.CoachPastTeams[(indexPath.row - userProfileData.CoachCurrentTeams.count)]
-                    aCell.baseView.backgroundColor = UIColor.grayColor()
-                    aCell.TeamAbbr.textColor = UIColor.blackColor()
-                }
-                
-                if teamNameToReturn != "" {
-                    aCell.TeamName.text = teamNameToReturn
-                    let teamName = teamNameToReturn.componentsSeparatedByString(" ")
-                    if teamName.count == 1 {
-                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)"
-                    }
-                    else if teamName.count == 2 {
-                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)"
-                    }
-                    else {
-                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
-                    }
-                }
-                return aCell
-            }
-            return ThemeColorsCollectionViewCell()
-            
-            case PlayedFor:
-            teamNameToReturn = userProfileData.CoachPlayedFor[indexPath.row]
-            
-            if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CoachPlayedForViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
-                //aCell.TeamImage.image = UIImage()
-                if teamNameToReturn != "" {
-                    aCell.TeamName.text = teamNameToReturn
-                    let teamName = teamNameToReturn.componentsSeparatedByString(" ")
-                    if teamName.count == 1 {
-                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)"
-                    }
-                    else if teamName.count == 2 {
-                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)"
-                    }
-                    else {
-                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
-                    }
-                }
-                return aCell
-            }
-            return ThemeColorsCollectionViewCell()
-        // break
-        case Certifications:
-            teamNameToReturn = userProfileData.Certifications[indexPath.row]
-            if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CertificationsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
-                //aCell.TeamImage.image = UIImage()
-                if teamNameToReturn != "" {
-                    aCell.TeamName.text = teamNameToReturn
-                    let teamName = teamNameToReturn.componentsSeparatedByString(" ")
-                    
-                    if teamName.count == 1 {
-                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)"
-                    }
-                    else if teamName.count == 2 {
-                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)"
-                    }
-                    else {
-                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
-                    }
-                }
-                return aCell
-            }
-            return ThemeColorsCollectionViewCell()
-        //  break
-        default:
-            teamNameToReturn = userProfileData.CoachCurrentTeams[indexPath.row]
-            if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("TeamCollectionViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
-                //aCell.TeamImage.image = UIImage()
-                if teamNameToReturn != "" {
-                    aCell.TeamName.text = teamNameToReturn
-                    let teamName = teamNameToReturn.componentsSeparatedByString(" ")
-                    
-                    if teamName.count == 1 {
-                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)"
-                    }
-                    else if teamName.count == 2 {
-                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)"
-                    }
-                    else {
-                        aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
-                    }
-                }
-                return aCell
-            }
-            return ThemeColorsCollectionViewCell()
-            //  break
-        }
+        <#code#>
     }
     
     // tableview functions
@@ -576,7 +412,7 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         tableView.backgroundColor = UIColor.clearColor()
-        let currentTheme = cricTracTheme.currentTheme
+        //let currentTheme = cricTracTheme.currentTheme
         
         if tableView == topBattingtableView {
             if indexPath.row == 0 {
@@ -603,7 +439,6 @@ class CoachDashboardViewController: UIViewController, UICollectionViewDelegate, 
             }
     }
    
-    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 30
     }

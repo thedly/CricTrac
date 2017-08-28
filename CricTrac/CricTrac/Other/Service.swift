@@ -1055,7 +1055,77 @@ func getAllFriends(sucessBlock:([String: AnyObject])->Void){
 //    }
 //    return [:]
 //}
-//   
+//
+
+
+
+// sravani MARK: - Coach Friends and players
+
+func markMyCoach(userId: String) {
+    
+    let playerId = currentUser!.uid
+    let coachId = userId
+    let isAccepted = 0
+    let addedTime =  NSDate().getCurrentTimeStamp()
+    
+    let refForCoach = fireBaseRef.child("Users").child(coachId).child("MyPlayers").childByAutoId()
+    let playerDictVal:[String:AnyObject] = ["PlayerID": playerId,"Request Time": addedTime,"isAccepted": isAccepted]
+    refForCoach.setValue(playerDictVal)
+    
+    
+    let refForPlayer = fireBaseRef.child("Users").child(playerId).child("MyCoaches").childByAutoId()
+    let coachDictVal:[String:AnyObject] = ["CoachID": coachId,"RequestTime":addedTime,"isAccepted": isAccepted]
+    refForPlayer.setValue(coachDictVal)
+
+}
+
+func cancelCoachRequest(userId: String, type:String) {
+    var coachId = ""
+    var playerId = ""
+    
+    if type == "Coach" {
+         coachId = currentUser!.uid
+         playerId = userId
+    }
+    else{
+         playerId = currentUser!.uid
+         coachId = userId
+    }
+    
+    fireBaseRef.child("Users").child(coachId).child("MyPlayers").observeEventType(.Value, withBlock: { snapshot in
+        if let data:[String : AnyObject] = snapshot.value as? [String: AnyObject] {
+            for(key, value) in data {
+                if playerId == value["PlayerID"] as! String {
+                   fireBaseRef.child("Users").child(coachId).child("MyPlayers").child(key).removeValue()
+                    }
+                }
+            }
+        })
+    fireBaseRef.child("Users").child(playerId).child("MyCoaches").observeEventType(.Value, withBlock: { snapshot in
+        if let data:[String : AnyObject] = snapshot.value as? [String: AnyObject] {
+            for(key, value) in data {
+                if coachId == value["CoachID"] as! String {
+                    fireBaseRef.child("Users").child(playerId).child("MyCoaches").child(key).removeValue()
+                }
+            }
+        }
+    })
+}
+
+
+
+// // Node for Player
+//func getAllCoaches(sucessBlock:([String: AnyObject])->Void) {
+//    fireBaseRef.child("Users").child(currentUser!.uid).child("MyCoaches").observeEventType(.Value, withBlock: { snapshot in
+//        if let data = snapshot.value as? [String: AnyObject] {
+//           sucessBlock(data)
+//          }
+//        else{
+//            sucessBlock([:])
+//        }
+//    })
+// }
+
 
 
  //MARK: - Add Post

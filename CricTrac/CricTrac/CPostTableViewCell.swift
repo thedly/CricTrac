@@ -34,6 +34,9 @@ class CPostTableViewCell: UITableViewCell {
          parent?.deletebuttonTapped()
     }
    
+    @IBAction func profileImageTapped(sender: AnyObject) {
+        didTapOwnerName()
+    }
     
     func addTapGestureToUserName(){
         if let _ = postOwnerName{

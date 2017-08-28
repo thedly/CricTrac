@@ -110,14 +110,22 @@
                             <action selector="didTapLikeCountButton:" destination="ZPL-UO-qnO" eventType="touchUpInside" id="a0p-bi-BY6"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2IA-rn-R13">
+                        <rect key="frame" x="12" y="12" width="46" height="46"/>
+                        <connections>
+                            <action selector="profileImageTapped:" destination="ZPL-UO-qnO" eventType="touchUpInside" id="FY8-lY-u4H"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Jdl-QM-Gsx" firstAttribute="leading" secondItem="0MX-9o-ndO" secondAttribute="leading" id="0D6-SI-tlx"/>
                     <constraint firstItem="Xs0-8p-YfS" firstAttribute="top" secondItem="t5B-vy-Czt" secondAttribute="top" constant="12" id="0Ro-aI-12u"/>
                     <constraint firstItem="vF4-nT-24g" firstAttribute="leading" secondItem="t5B-vy-Czt" secondAttribute="leading" constant="5" id="1oR-Z9-fvm"/>
+                    <constraint firstItem="2IA-rn-R13" firstAttribute="centerY" secondItem="Xs0-8p-YfS" secondAttribute="centerY" id="84r-gW-jDv"/>
                     <constraint firstItem="RyP-Wr-JLT" firstAttribute="top" secondItem="2WW-yF-fAo" secondAttribute="bottom" constant="12" id="8l7-cZ-uud"/>
                     <constraint firstItem="2WW-yF-fAo" firstAttribute="top" secondItem="Xs0-8p-YfS" secondAttribute="bottom" constant="15" id="BLM-jc-DpK"/>
                     <constraint firstItem="RyP-Wr-JLT" firstAttribute="leading" secondItem="t5B-vy-Czt" secondAttribute="leading" constant="12" id="C9h-DO-e6E"/>
+                    <constraint firstItem="2IA-rn-R13" firstAttribute="height" secondItem="Xs0-8p-YfS" secondAttribute="height" id="Fj8-xL-npA"/>
                     <constraint firstItem="2WW-yF-fAo" firstAttribute="leading" secondItem="t5B-vy-Czt" secondAttribute="leading" constant="12" id="Hch-XQ-FGN"/>
                     <constraint firstItem="agS-ce-ci1" firstAttribute="top" secondItem="t5B-vy-Czt" secondAttribute="top" constant="12" id="K6L-3b-DSj"/>
                     <constraint firstItem="0MX-9o-ndO" firstAttribute="top" secondItem="ATj-uW-JZN" secondAttribute="bottom" id="LC2-og-h2W"/>
@@ -128,6 +136,7 @@
                     <constraint firstItem="vF4-nT-24g" firstAttribute="top" secondItem="RyP-Wr-JLT" secondAttribute="bottom" constant="13" id="dt0-F9-j52"/>
                     <constraint firstItem="Jdl-QM-Gsx" firstAttribute="top" secondItem="0MX-9o-ndO" secondAttribute="bottom" id="e8c-3b-cFl"/>
                     <constraint firstItem="RyP-Wr-JLT" firstAttribute="top" secondItem="2WW-yF-fAo" secondAttribute="bottom" constant="12" id="eht-lB-M20"/>
+                    <constraint firstItem="2IA-rn-R13" firstAttribute="leading" secondItem="Xs0-8p-YfS" secondAttribute="leading" id="hho-hA-7LR"/>
                     <constraint firstItem="0MX-9o-ndO" firstAttribute="leading" secondItem="Xs0-8p-YfS" secondAttribute="trailing" constant="5" id="i3o-aN-KFR"/>
                     <constraint firstItem="0jc-eE-UXM" firstAttribute="top" secondItem="2WW-yF-fAo" secondAttribute="bottom" constant="5" id="iry-Fi-gpu"/>
                     <constraint firstItem="ATj-uW-JZN" firstAttribute="leading" secondItem="Xs0-8p-YfS" secondAttribute="trailing" constant="5" id="jYn-cL-6LE"/>
@@ -135,6 +144,7 @@
                     <constraint firstAttribute="bottomMargin" secondItem="vF4-nT-24g" secondAttribute="bottom" constant="-1" id="rcf-61-kdc"/>
                     <constraint firstItem="0jc-eE-UXM" firstAttribute="leading" secondItem="2tf-rl-rCG" secondAttribute="trailing" constant="6" id="vQ2-0w-9FK"/>
                     <constraint firstItem="2tf-rl-rCG" firstAttribute="top" secondItem="2WW-yF-fAo" secondAttribute="bottom" constant="5" id="xoP-aP-YVc"/>
+                    <constraint firstItem="2IA-rn-R13" firstAttribute="trailing" secondItem="Xs0-8p-YfS" secondAttribute="trailing" id="yCj-5a-klZ"/>
                     <constraint firstAttribute="trailing" secondItem="vF4-nT-24g" secondAttribute="trailing" constant="5" id="yEd-WU-1h6"/>
                 </constraints>
                 <userDefinedRuntimeAttributes>

@@ -327,7 +327,7 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                         })
                     }
                     else {
-                        postCell.postOwnerName.text = data.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
+                       // postCell.postOwnerName.text = data.dictionaryValue["OwnerName"]?.stringValue ?? "No Name"
                         if let postedBy = data["OwnerID"].string  where postedBy == currentUser!.uid{
                             postCell.deleteButton.hidden = false
                         }else{
