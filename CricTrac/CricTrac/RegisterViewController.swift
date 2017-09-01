@@ -266,7 +266,6 @@ extension RegisterViewController {
                           
                                 // An error happened.
                             }
-                        
                                 // Email sent.
                             else {
                                
@@ -280,14 +279,32 @@ extension RegisterViewController {
                         }
                     }
                     else {
-                
+                        if FIRAuth.auth()?.currentUser != "" && FIRAuth.auth()?.currentUser?.emailVerified == false && FIRAuth.auth()?.currentUser?.email == self.username.text {
+                            
+                            let alert = UIAlertController(title: "Verify Email", message: "Email verification is pending for this account. Do you want to resend the verification email?", preferredStyle: UIAlertControllerStyle.Alert)
+                            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+                            
+                            alert.addAction(UIAlertAction(title: "Resend", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
+                                FIRAuth.auth()?.currentUser?.sendEmailVerificationWithCompletion({ (error) in
+                                    self.verifyAlertForRegisteration()
+                                })
+                                
+                            }))
+                            
+                            self.presentViewController(alert, animated: true, completion: nil)
+                        }
+                        else {
                         let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
                         dispatch_after(delay, dispatch_get_main_queue()) {
                           //  SCLAlertView().showError("Registration Error", subTitle: error!.localizedDescription)
                             let alert = UIAlertController(title: "", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
-                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
+                                self.dismissViewControllerAnimated(true, completion: nil)
+                            }))
+                            
                             self.presentViewController(alert, animated: true, completion: nil)
                         }
+                      }
                     }
                 }
             }
@@ -303,6 +320,16 @@ extension RegisterViewController {
             self.presentViewController(alert, animated: true, completion: nil)
         }
     
+    }
+    
+    func verifyAlertForRegisteration(){
+        
+        //  SCLAlertView().showInfo("Verify email", subTitle: "An email has been sent for verification")
+        let alert = UIAlertController(title: "", message: "Please check your email (\(self.username.text!)) and verify the account.", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 
     @IBAction func loginWithFB(sender: UIButton) {

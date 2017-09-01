@@ -14,6 +14,7 @@
         </mutableArray>
         <mutableArray key="SourceSansPro-Regular.otf">
             <string>SourceSansPro-Regular</string>
+            <string>SourceSansPro-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -43,7 +44,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAJITH KUMAR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBq-Ub-tKL">
-                                <rect key="frame" x="71" y="23" width="296" height="19"/>
+                                <rect key="frame" x="71" y="20" width="296" height="19"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -67,7 +68,7 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DELHI PUBLIC SCHOOL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ua-TL-Kyc">
-                                <rect key="frame" x="71" y="46" width="296" height="17"/>
+                                <rect key="frame" x="71" y="39" width="296" height="17"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -108,6 +109,12 @@
                                     <action selector="friendImageTapped:" destination="7yt-IC-xDq" eventType="touchUpInside" id="Rh9-46-cfq"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playing Role" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92U-8G-M2S">
+                                <rect key="frame" x="71" y="56" width="296" height="17"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="13"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstItem="7eF-61-CA5" firstAttribute="leading" secondItem="WBq-Ub-tKL" secondAttribute="trailing" constant="10" id="04c-yw-TLG"/>
@@ -124,15 +131,19 @@
                             <constraint firstAttribute="trailing" secondItem="7eF-61-CA5" secondAttribute="trailing" constant="8" id="Q0i-dx-OLn"/>
                             <constraint firstItem="HgU-pp-HLq" firstAttribute="trailing" secondItem="qJF-gX-S8I" secondAttribute="trailing" id="Q3f-Vp-Gnc"/>
                             <constraint firstItem="qJF-gX-S8I" firstAttribute="leading" secondItem="eAd-Sj-Pzi" secondAttribute="leading" constant="8" id="UMA-Bb-MXa"/>
-                            <constraint firstItem="WBq-Ub-tKL" firstAttribute="centerY" secondItem="qJF-gX-S8I" secondAttribute="centerY" constant="-10" id="WVY-Jl-V1s"/>
+                            <constraint firstItem="WBq-Ub-tKL" firstAttribute="centerY" secondItem="qJF-gX-S8I" secondAttribute="centerY" constant="-13" id="WVY-Jl-V1s"/>
                             <constraint firstItem="qJF-gX-S8I" firstAttribute="centerY" secondItem="eAd-Sj-Pzi" secondAttribute="centerY" id="cBt-Ua-5dp"/>
                             <constraint firstItem="5ua-TL-Kyc" firstAttribute="trailing" secondItem="WBq-Ub-tKL" secondAttribute="trailing" id="d2Z-Va-Hlk"/>
-                            <constraint firstItem="5ua-TL-Kyc" firstAttribute="top" secondItem="WBq-Ub-tKL" secondAttribute="bottom" constant="4" id="kKz-Rw-8Sa"/>
+                            <constraint firstItem="5ua-TL-Kyc" firstAttribute="top" secondItem="WBq-Ub-tKL" secondAttribute="bottom" id="kKz-Rw-8Sa"/>
                             <constraint firstItem="HgU-pp-HLq" firstAttribute="leading" secondItem="qJF-gX-S8I" secondAttribute="leading" id="oXI-fi-Lkl"/>
+                            <constraint firstItem="92U-8G-M2S" firstAttribute="leading" secondItem="5ua-TL-Kyc" secondAttribute="leading" id="q8d-Rn-oqc"/>
                             <constraint firstAttribute="trailing" secondItem="Gvq-qS-C2a" secondAttribute="trailing" constant="8" id="r1y-tl-LI5"/>
+                            <constraint firstItem="92U-8G-M2S" firstAttribute="top" secondItem="5ua-TL-Kyc" secondAttribute="bottom" id="u1W-7I-Uu2"/>
+                            <constraint firstItem="92U-8G-M2S" firstAttribute="trailing" secondItem="5ua-TL-Kyc" secondAttribute="trailing" id="vk5-B1-RbR"/>
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="eAd-Sj-Pzi" secondAttribute="trailing" constant="10" id="GAR-PS-yAd"/>
                     <constraint firstItem="eAd-Sj-Pzi" firstAttribute="leading" secondItem="0NI-1T-8TY" secondAttribute="leadingMargin" constant="10" id="OVw-tg-C2t"/>
@@ -145,6 +156,7 @@
                 <outlet property="FriendCity" destination="5ua-TL-Kyc" id="B4R-b3-Ff5"/>
                 <outlet property="FriendName" destination="WBq-Ub-tKL" id="xXC-JS-Je2"/>
                 <outlet property="FriendProfileImage" destination="qJF-gX-S8I" id="0AG-1z-dMH"/>
+                <outlet property="FriendRole" destination="92U-8G-M2S" id="M1q-Ux-oAc"/>
                 <outlet property="baseView" destination="eAd-Sj-Pzi" id="FWQ-e3-Moz"/>
                 <outlet property="cancelBtn" destination="Gvq-qS-C2a" id="Bjl-eM-7sT"/>
                 <outlet property="confirmBtn" destination="7eF-61-CA5" id="xQB-2d-lGv"/>

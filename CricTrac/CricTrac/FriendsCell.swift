@@ -15,6 +15,7 @@ class FriendsCell: UITableViewCell {
     @IBOutlet weak var FriendProfileImage: UIImageView!
     @IBOutlet weak var FriendName: UILabel!
     @IBOutlet weak var FriendCity: UILabel!
+    @IBOutlet weak var friendRole: UILabel!
     
     var friendId:String?
     

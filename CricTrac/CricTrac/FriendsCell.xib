@@ -12,6 +12,7 @@
         </mutableArray>
         <mutableArray key="SourceSansPro-Regular.otf">
             <string>SourceSansPro-Regular</string>
+            <string>SourceSansPro-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -28,7 +29,7 @@
                         <rect key="frame" x="18" y="8" width="460" height="66"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAJITH KUMAR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xyt-c5-ply">
-                                <rect key="frame" x="66" y="14" width="301" height="19"/>
+                                <rect key="frame" x="66" y="8" width="301" height="19"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -52,7 +53,7 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DELHI PUBLIC SCHOOL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCJ-xD-Hpw">
-                                <rect key="frame" x="66" y="37" width="301" height="17"/>
+                                <rect key="frame" x="66" y="27" width="301" height="17"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -76,23 +77,33 @@
                                     <action selector="friendImageTapped:" destination="nSd-Ds-rI7" eventType="touchUpInside" id="mkV-B4-KF3"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLAYER ROLE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6xe-6L-guT">
+                                <rect key="frame" x="66" y="44" width="301" height="17"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="13"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
+                        <color key="backgroundColor" red="1" green="0.22892405490000001" blue="0.37267073319999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="dCJ-xD-Hpw" firstAttribute="trailing" secondItem="Xyt-c5-ply" secondAttribute="trailing" id="1gk-dr-lC3"/>
                             <constraint firstItem="KGl-gl-LBw" firstAttribute="leading" secondItem="2Ee-1f-FbC" secondAttribute="leading" constant="8" id="1hs-Q1-ItE"/>
                             <constraint firstItem="Bob-Cj-MeO" firstAttribute="leading" secondItem="KGl-gl-LBw" secondAttribute="leading" id="24c-Z8-agt"/>
-                            <constraint firstItem="Xyt-c5-ply" firstAttribute="centerY" secondItem="KGl-gl-LBw" secondAttribute="centerY" constant="-10" id="D2e-8G-8e7"/>
+                            <constraint firstItem="Xyt-c5-ply" firstAttribute="centerY" secondItem="KGl-gl-LBw" secondAttribute="centerY" constant="-16" id="D2e-8G-8e7"/>
                             <constraint firstItem="dCJ-xD-Hpw" firstAttribute="centerX" secondItem="Xyt-c5-ply" secondAttribute="centerX" id="GK3-dT-IXW"/>
                             <constraint firstAttribute="trailing" secondItem="Jf5-OW-4fC" secondAttribute="trailing" constant="8" id="Gci-Zf-av2"/>
+                            <constraint firstItem="6xe-6L-guT" firstAttribute="leading" secondItem="dCJ-xD-Hpw" secondAttribute="leading" id="LJ9-Gp-RGe"/>
                             <constraint firstItem="Jf5-OW-4fC" firstAttribute="centerY" secondItem="2Ee-1f-FbC" secondAttribute="centerY" id="Mea-m2-qEG"/>
                             <constraint firstItem="KGl-gl-LBw" firstAttribute="centerY" secondItem="2Ee-1f-FbC" secondAttribute="centerY" id="Nc5-ay-ysM"/>
-                            <constraint firstItem="dCJ-xD-Hpw" firstAttribute="top" secondItem="Xyt-c5-ply" secondAttribute="bottom" constant="4" id="QYz-Uq-iED"/>
+                            <constraint firstItem="dCJ-xD-Hpw" firstAttribute="top" secondItem="Xyt-c5-ply" secondAttribute="bottom" id="QYz-Uq-iED"/>
                             <constraint firstItem="dCJ-xD-Hpw" firstAttribute="leading" secondItem="Xyt-c5-ply" secondAttribute="leading" id="YDm-EA-yjk"/>
                             <constraint firstItem="Bob-Cj-MeO" firstAttribute="height" secondItem="KGl-gl-LBw" secondAttribute="height" id="azh-dg-jcF"/>
                             <constraint firstItem="Bob-Cj-MeO" firstAttribute="trailing" secondItem="KGl-gl-LBw" secondAttribute="trailing" id="bi7-eJ-JdZ"/>
+                            <constraint firstItem="6xe-6L-guT" firstAttribute="top" secondItem="dCJ-xD-Hpw" secondAttribute="bottom" id="cab-P0-RA5"/>
                             <constraint firstItem="Bob-Cj-MeO" firstAttribute="centerY" secondItem="KGl-gl-LBw" secondAttribute="centerY" id="g0K-B5-ITF"/>
                             <constraint firstItem="Xyt-c5-ply" firstAttribute="leading" secondItem="KGl-gl-LBw" secondAttribute="trailing" constant="8" id="gto-Fm-EGc"/>
                             <constraint firstItem="Jf5-OW-4fC" firstAttribute="leading" secondItem="Xyt-c5-ply" secondAttribute="trailing" constant="10" id="ilS-pR-2tk"/>
+                            <constraint firstItem="6xe-6L-guT" firstAttribute="trailing" secondItem="dCJ-xD-Hpw" secondAttribute="trailing" id="t5d-0A-ZoC"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -110,6 +121,7 @@
                 <outlet property="FriendProfileImage" destination="KGl-gl-LBw" id="oxR-0c-uy2"/>
                 <outlet property="UnfriendBtn" destination="Jf5-OW-4fC" id="Swe-WG-UZ7"/>
                 <outlet property="baseView" destination="2Ee-1f-FbC" id="c0v-Lu-4NU"/>
+                <outlet property="friendRole" destination="6xe-6L-guT" id="wl6-xa-TMD"/>
             </connections>
             <point key="canvasLocation" x="267" y="441.5"/>
         </tableViewCell>

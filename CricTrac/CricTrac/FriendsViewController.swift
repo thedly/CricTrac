@@ -98,10 +98,26 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         fetchBasicProfile(friendUserId, sucess: { (result) in
             let proPic = result["proPic"]
             let city =   result["city"]
+            
+            let userProfile = result["userProfile"]
             let name = "\(result["firstname"]!) \(result["lastname"]!)"
             aCell.FriendCity.text = city
             aCell.FriendName.text = name
+            
+            if userProfile == "Player" {
+                fetchPlayingRole(friendUserId, sucess: { (result) in
+                    let playingRole = result["playingRole"]
+                    aCell.friendRole.text = playingRole
+                })
+            }
 
+           else if userProfile == "Coach" {
+                aCell.friendRole.text = "Coach"
+            }
+            else if userProfile == "Cricket Fan" {
+                aCell.friendRole.text = "Cricket Fan"
+            }
+            
             if proPic! == "-"{
                 let imageName = defaultProfileImage
                 let image = UIImage(named: imageName)

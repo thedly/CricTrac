@@ -13,6 +13,7 @@ class FriendSuggestionsCell: UITableViewCell {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userCity: UILabel!
     @IBOutlet weak var userProfileView: UIImageView!
+    @IBOutlet weak var userRole: UILabel!
     @IBOutlet weak var AddFriendBtn: UIButton!
     private var _userObj: Profile!
     

@@ -1544,8 +1544,8 @@ func setDashboardData(){
        
         
         //Data for Top Batting section
-        self.FirstRecentMatchView.hidden = (DashboardDetails.TopBatting1stMatchScore == nil || String(DashboardDetails.TopBatting1stMatchScore) == "0")
-        self.SecondRecentMatchView.hidden = (DashboardDetails.TopBatting2ndMatchScore == nil || String(DashboardDetails.TopBatting2ndMatchScore) == "0")
+        self.FirstRecentMatchView.hidden = (DashboardDetails.TopBatting1stMatchDispScore == nil || String(DashboardDetails.TopBatting1stMatchDispScore) == "-")
+        self.SecondRecentMatchView.hidden = (DashboardDetails.TopBatting2ndMatchDispScore == nil || String(DashboardDetails.TopBatting2ndMatchDispScore) == "-")
         
         //Data for Top Bowling section
         self.FirstRecentMatchBowlingView.hidden = (DashboardDetails.TopBowling1stMatchScore == nil || DashboardDetails.TopBowling1stMatchScore as! String == "0-9999")

@@ -25,9 +25,12 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
     // for teams
+    @IBOutlet weak var baseViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var coachTeams: UICollectionView!
     @IBOutlet weak var coachTeamsHeightConstraint: NSLayoutConstraint!
     
+    var myCoachFrndNodeId = ""
+    var myPlayersFrndNodeId = ""
     
     // for new features
     @IBOutlet weak var totalPlayers: UILabel!
@@ -39,6 +42,8 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     @IBOutlet weak var topBowlingTableView: UITableView!
     @IBOutlet weak var topBattingtableView: UITableView!
     @IBOutlet weak var coachFrndButton: UIButton!
+    @IBOutlet weak var pendingRequests: UIButton!
+    @IBOutlet weak var coachFrndBtnHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var battingTableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bowlingTableViewHeightConstraint: NSLayoutConstraint!
@@ -54,20 +59,33 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     var coverOrProfile = ""
     var friendId:String? = nil
     var currentUserId = ""
-    var isSelect:Bool?
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        setBackgroundColor()
+        coachTeams.reloadData()
         
+        setBackgroundColor()
         initView()
+        updateCoachDashboard()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadBannerAds()
+        let currentTheme = cricTracTheme.currentTheme
+
+        pendingRequests.layer.cornerRadius = 10
+        pendingRequests.clipsToBounds = true
+        pendingRequests.backgroundColor = currentTheme.bottomColor
+        pendingRequests.layer.borderWidth = 2.0
+        pendingRequests.layer.borderColor = UIColor.whiteColor().CGColor
+        
         coachFrndButton.layer.cornerRadius = 10
         coachFrndButton.clipsToBounds = true
-        isSelect = true
+        coachFrndButton.backgroundColor = currentTheme.bottomColor
+        coachFrndButton.layer.borderWidth = 2.0
+        coachFrndButton.layer.borderColor = UIColor.whiteColor().CGColor
+        
         coachTeams.delegate = self
         coachTeams.dataSource = self
     }
@@ -83,18 +101,77 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             self.bannerViewHeightConstraint.constant = 0
         }
     }
+    func coachValidation() {
+        
+        if profileData.UserProfile == "Player" {
+            
+            coachFrndBtnHeightConstraint.constant = 30
+            pendingRequests.hidden = true
+            var coachExist = 0
+            getMyCoaches({ (result) in
+                for (key, req) in result {
+                    if let data = req as? [String : AnyObject] {
+                        let coachID = String(data["CoachID"]!)
+                        let isAccepted = String(data["isAccepted"]!)
+                        if coachID == self.currentUserId {
+                            coachExist = 1
+                            
+//                            getMyPlayers({ (Result) in
+//                                for (key, req) in Result {
+//                                  if let data = req as? [String : AnyObject] {
+//                                     let plaerID = String(data["PlayerID"]!)
+//                                     if plaerID == self.currentUserId {
+//                                        self.myPlayersFrndNodeId = key
+//                                        }
+//                                     break
+//                                    }
+//                                }
+//                            })
+                            
+                             self.myCoachFrndNodeId = key
+                            if isAccepted == "0" {
+                                
+                                self.coachFrndButton.setTitle("Cancel Request", forState: .Normal)
+                            }
+                            else{
+                                self.coachFrndButton.setTitle("Remove Coach", forState: .Normal)
+                            }
+                            break
+                        }
+                    }
+                }
+            })
+            if coachExist == 0 {
+                self.coachFrndButton.setTitle("Mark as my Coach", forState: .Normal)
+            }
+            
+        }
+       
+        else if profileData.UserProfile == "Coach" {
+            coachFrndButton.setTitle("My Players", forState: .Normal)
+            coachFrndBtnHeightConstraint.constant = 30
+            pendingRequests.hidden = false
+            
+        }
+        else if profileData.UserProfile == "Cricket Fan" {
+            coachFrndBtnHeightConstraint.constant = 0
+            coachFrndButton.hidden = true
+            pendingRequests.hidden = true
+        }
 
+    }
     
     func initView() {
         
+        coachValidation()
+        
         if let value = friendProfile{
             userProfileData = Profile(usrObj: value)
-           // closeButton.hidden = false
             }
             else{
                 userProfileData = profileData
-                //  closeButton.hidden = true
             }
+        
         
         userProfileImage.layer.cornerRadius = userProfileImage.bounds.size.width/2
         userProfileImage.clipsToBounds = true
@@ -152,19 +229,58 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         imgCoverPhoto.addGestureRecognizer(tapGesture)
     }
     
-    @IBAction func markMyCoachBtnTapped(sender: AnyObject) {
+    
+    // Only players can see this button
+    @IBAction func coachActionBtnTapped(sender: UIButton) {
         
-//        if isSelect == true {
-//            markMyCoach(friendId!)
-//            coachFrndButton.setTitle("Cancel coach request", forState: .Normal)
-//            isSelect = false
-//        }
-//        else{
+        switch coachFrndButton.currentTitle! {
+        case "Mark as my Coach":
+            
+                markMyCoach(currentUserId)
+                //coachValidation()
+                coachFrndButton.setTitle("Cancel Request", forState: .Normal)
+                break
+            
+        case "Cancel Request":
+            
+            cancelCoachRequest(currentUserId,type: profileData.UserProfile)
             coachFrndButton.setTitle("Mark as my Coach", forState: .Normal)
-        cancelCoachRequest(currentUserId,type: "Player")
-            isSelect = true
-        //}
+            break
+            
+        case "Remove Coach":
+            
+            cancelCoachRequest(currentUserId,type: profileData.UserProfile)
+            coachFrndButton.setTitle("Mark as my Coach", forState: .Normal)
+            break
+            
+        default:
+            
+            let dashBoard = viewControllerFrom("Main", vcid: "CoachPlayersListViewController") as! CoachPlayersListViewController
+            self.presentViewController(dashBoard, animated: false, completion: nil)
+            break
+
+        }
         
+        
+//        if coachFrndButton.currentTitle! == "Mark as my Coach" {
+//            markMyCoach(currentUserId)
+//            coachValidation()
+//        }
+//        
+//       else if coachFrndButton.currentTitle! == "Cancel Request" {
+//            cancelCoachRequest(currentUserId,type: profileData.UserProfile)
+//            coachFrndButton.setTitle("Mark as my Coach", forState: .Normal)
+//        }
+//        
+//        else if coachFrndButton.currentTitle! == "Remove Coach" {
+//            cancelCoachRequest(currentUserId,type: profileData.UserProfile)
+//            coachFrndButton.setTitle("Mark as my Coach", forState: .Normal)
+//        }
+//
+//        else if coachFrndButton.currentTitle! == "My Players" {
+//            let dashBoard = viewControllerFrom("Main", vcid: "CoachPlayersListViewController") as! CoachPlayersListViewController
+//            self.presentViewController(dashBoard, animated: false, completion: nil)
+//        }
     }
     
     
@@ -290,10 +406,11 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     }
     
     func changeThemeSettigs() {
-        //let currentTheme = cricTracTheme.currentTheme
+       // let currentTheme = cricTracTheme.currentTheme
+       
         topBattingtableView.backgroundColor = UIColor.clearColor()
     }
-    
+
     @IBAction func didMenuButtonTapp(sender: UIButton){
         sliderMenu.setDrawerState(.Opened, animated: true)
     }
@@ -392,55 +509,130 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         }
     }
     
-    // mark: For coach Teams
+    //Sravani mark: For coach Teams
+    func updateCoachDashboard(){
+                if (userProfileData.CoachCurrentTeams.count) + (userProfileData.CoachPastTeams.count) == 0 {
+                    self.coachTeamsHeightConstraint.constant = 0
+                }
+                else {
+                    self.coachTeamsHeightConstraint.constant = 130
+                }
+    }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        <#code#>
+        var valueToReturn = 0
+        valueToReturn = (userProfileData.CoachCurrentTeams.count) + userProfileData.CoachPastTeams.count
+        return valueToReturn
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        <#code#>
+        var teamNameToReturn = ""
+                    // teamNameToReturn = userProfileData.CoachCurrentTeams[indexPath.row]
+                    if let aCell = collectionView.dequeueReusableCellWithReuseIdentifier("CoachCurrentTeamsViewCell", forIndexPath: indexPath) as? TeamCollectionViewCell {
+                        //aCell.TeamImage.image = UIImage()
+        
+                        if indexPath.row < (userProfileData.CoachCurrentTeams.count) {
+                            teamNameToReturn = userProfileData.CoachCurrentTeams[indexPath.row]
+        
+                            aCell.baseView.backgroundColor = cricTracTheme.currentTheme.bottomColor
+                            aCell.baseView.alpha = 1
+                            aCell.TeamAbbr.textColor = UIColor.whiteColor()
+                        }
+                        else if (indexPath.row - (userProfileData.CoachCurrentTeams.count)) < (userProfileData.CoachPastTeams.count) {
+                            teamNameToReturn = userProfileData.CoachPastTeams[(indexPath.row - userProfileData.CoachCurrentTeams.count)]
+                            aCell.baseView.backgroundColor = UIColor.grayColor()
+                            aCell.TeamAbbr.textColor = UIColor.blackColor()
+                        }
+        
+                        if teamNameToReturn != "" {
+                            aCell.TeamName.text = teamNameToReturn
+                            let teamName = teamNameToReturn.componentsSeparatedByString(" ")
+                            if teamName.count == 1 {
+                                aCell.TeamAbbr.text = "\(teamName[0].characters.first!)"
+                            }
+                            else if teamName.count == 2 {
+                                aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)"
+                            }
+                            else {
+                                aCell.TeamAbbr.text = "\(teamName[0].characters.first!)\(teamName[1].characters.first!)\(teamName[2].characters.first!)"
+                            }
+                        }
+                        return aCell
+                    }
+                    return ThemeColorsCollectionViewCell()
+
+    }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+
+        baseViewHeightConstraint.constant = 927
+         baseViewHeightConstraint.constant += CGFloat(8 * 70)
+        
     }
     
     // tableview functions
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if tableView == topBattingtableView {
-            return 6
+            return 4
         }
-        return 6
+        return 4
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+        
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 7
+    }
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let aView = UIView()
+        aView.backgroundColor = UIColor.clearColor()
+        return aView
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         tableView.backgroundColor = UIColor.clearColor()
         //let currentTheme = cricTracTheme.currentTheme
         
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
         if tableView == topBattingtableView {
-            if indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-                //cell.backgroundColor = currentTheme.bottomColor
-                return cell
-                }
-            else{
-                let cell = tableView.dequeueReusableCellWithIdentifier("cell1", forIndexPath: indexPath) as! CoachTopBattingBowlingTableViewCell
-                cell.topBattingPlayerName.text = topBattingnames[indexPath.row - 1]
-                return cell
-                }
-        }
-        if indexPath.row == 0 {
-             let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-           // cell.backgroundColor = currentTheme.bottomColor
-             return cell
-            }
-        else{
-            let cell = tableView.dequeueReusableCellWithIdentifier("cell1", forIndexPath: indexPath) as! CoachTopBattingBowlingTableViewCell
-            cell.topBowlingPlayerName.text = topBattingnames[indexPath.row - 1]
             
+                let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! CoachTopBattingBowlingTableViewCell
+                cell.layer.cornerRadius = 10
+                cell.layer.masksToBounds = true
+                cell.backgroundColor = cricTracTheme.currentTheme.bottomColor
+             battingTableViewHeightConstraint.constant = CGFloat(4 * 80)
             return cell
-            }
+        }
+       if tableView == topBowlingTableView {
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! CoachTopBattingBowlingTableViewCell
+            cell.topBowlingPlayerName.text = topBattingnames[indexPath.section]
+             cell.backgroundColor = cricTracTheme.currentTheme.bottomColor
+        bowlingTableViewHeightConstraint.constant = CGFloat(4 * 80)
+       
+            cell.layer.cornerRadius = 10
+            cell.layer.masksToBounds = true
+            return cell
+        }
+        return cell!
     }
    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 30
+        return 66
+    }
+    // For Coach can see dis button
+//    @IBAction func MyPlayersButtonTapped(sender: AnyObject) {
+//        let dashBoard = viewControllerFrom("Main", vcid: "CoachPlayersListViewController") as! CoachPlayersListViewController
+//        self.presentViewController(dashBoard, animated: false, completion: nil)
+//
+//    }
+    
+    @IBAction func pendingRequestsButtonTapped(sender: AnyObject) {
+        let pendingRequests = viewControllerFrom("Main", vcid: "CoachPendingRequetsVC") as! CoachPendingRequetsVC
+        self.presentViewController(pendingRequests, animated: false, completion: nil)
     }
     
     

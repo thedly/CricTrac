@@ -127,14 +127,30 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
                 }
                 else
                 {
-                    let alert = UIAlertController(title: "Verify Email", message: "Verify your email id before sign in.", preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                    let alert = UIAlertController(title: "Verify Email", message: "Verify your email id before sign in. Do you want to resend the verification email?", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+                    alert.addAction(UIAlertAction(title: "Resend", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
+                        FIRAuth.auth()?.currentUser?.sendEmailVerificationWithCompletion({ (error) in
+                            self.verifyAlertForLogin()
+                        })
+                    }))
+                        
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
             }
         }
     }
    
+    func verifyAlertForLogin(){
+        
+            //  SCLAlertView().showInfo("Verify email", subTitle: "An email has been sent for verification")
+            let alert = UIAlertController(title: "", message: "Please check your email (\(self.username.text!)) and verify the account.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) in
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }))
+            self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
     func saveEmailToken(idToken:String){
         let userDefaults = NSUserDefaults.standardUserDefaults()
         var googleTokens: [String:String]!

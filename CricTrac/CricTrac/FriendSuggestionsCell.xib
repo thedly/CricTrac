@@ -12,6 +12,7 @@
         </mutableArray>
         <mutableArray key="SourceSansPro-Regular.otf">
             <string>SourceSansPro-Regular</string>
+            <string>SourceSansPro-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -40,8 +41,8 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAJITH KUMAR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hTW-d9-87Z">
-                                <rect key="frame" x="71" y="14" width="296" height="19"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="SAJITH KUMAR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hTW-d9-87Z">
+                                <rect key="frame" x="71" y="8" width="296" height="19"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -64,8 +65,8 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BANGALORE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUM-lX-fcQ">
-                                <rect key="frame" x="71" y="37" width="296" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="BANGALORE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUM-lX-fcQ">
+                                <rect key="frame" x="71" y="27" width="296" height="17"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -76,12 +77,21 @@
                                     <action selector="friendImageTapped:" destination="Pvh-sN-CCs" eventType="touchUpInside" id="uSO-8H-qJJ"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PlayingRole" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZi-wy-oSG">
+                                <rect key="frame" x="71" y="44" width="296" height="17"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="13"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
+                        <color key="backgroundColor" red="0.80000001190000003" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="FR4-Qa-YFX" firstAttribute="trailing" secondItem="bAv-xC-FpS" secondAttribute="trailing" id="0Cl-bO-UVZ"/>
                             <constraint firstItem="FR4-Qa-YFX" firstAttribute="centerY" secondItem="bAv-xC-FpS" secondAttribute="centerY" id="2Oa-eL-GFM"/>
-                            <constraint firstItem="jUM-lX-fcQ" firstAttribute="top" secondItem="hTW-d9-87Z" secondAttribute="bottom" constant="4" id="2e1-B4-USf"/>
-                            <constraint firstItem="hTW-d9-87Z" firstAttribute="centerY" secondItem="bAv-xC-FpS" secondAttribute="centerY" constant="-10" id="43Q-8X-yJJ"/>
+                            <constraint firstItem="jUM-lX-fcQ" firstAttribute="top" secondItem="hTW-d9-87Z" secondAttribute="bottom" id="2e1-B4-USf"/>
+                            <constraint firstItem="hTW-d9-87Z" firstAttribute="centerY" secondItem="bAv-xC-FpS" secondAttribute="centerY" constant="-16" id="43Q-8X-yJJ"/>
+                            <constraint firstItem="AZi-wy-oSG" firstAttribute="trailing" secondItem="jUM-lX-fcQ" secondAttribute="trailing" id="C8S-RP-eM3"/>
+                            <constraint firstItem="AZi-wy-oSG" firstAttribute="leading" secondItem="jUM-lX-fcQ" secondAttribute="leading" id="Gtb-ey-4yw"/>
                             <constraint firstAttribute="trailing" secondItem="14K-3d-Vso" secondAttribute="trailing" constant="8" id="Ond-7G-s0k"/>
                             <constraint firstItem="jUM-lX-fcQ" firstAttribute="centerX" secondItem="hTW-d9-87Z" secondAttribute="centerX" id="PcZ-d5-9rw"/>
                             <constraint firstItem="14K-3d-Vso" firstAttribute="centerY" secondItem="WJD-Wr-YyA" secondAttribute="centerY" id="YBd-e7-uqR"/>
@@ -89,6 +99,7 @@
                             <constraint firstItem="FR4-Qa-YFX" firstAttribute="height" secondItem="bAv-xC-FpS" secondAttribute="height" id="gO9-Ei-dy7"/>
                             <constraint firstItem="jUM-lX-fcQ" firstAttribute="trailing" secondItem="hTW-d9-87Z" secondAttribute="trailing" id="gQa-7I-ndP"/>
                             <constraint firstItem="bAv-xC-FpS" firstAttribute="centerY" secondItem="WJD-Wr-YyA" secondAttribute="centerY" id="hlb-Gx-bHs"/>
+                            <constraint firstItem="AZi-wy-oSG" firstAttribute="top" secondItem="jUM-lX-fcQ" secondAttribute="bottom" id="i1d-qY-1qI"/>
                             <constraint firstItem="14K-3d-Vso" firstAttribute="leading" secondItem="hTW-d9-87Z" secondAttribute="trailing" constant="10" id="lbK-S5-ZhL"/>
                             <constraint firstItem="jUM-lX-fcQ" firstAttribute="leading" secondItem="hTW-d9-87Z" secondAttribute="leading" id="sf1-Ub-Y9q"/>
                             <constraint firstItem="hTW-d9-87Z" firstAttribute="leading" secondItem="bAv-xC-FpS" secondAttribute="trailing" constant="8" id="sq0-bq-vfN"/>
@@ -110,6 +121,7 @@
                 <outlet property="userCity" destination="jUM-lX-fcQ" id="R8Z-5e-aBq"/>
                 <outlet property="userName" destination="hTW-d9-87Z" id="9uP-eS-9ye"/>
                 <outlet property="userProfileView" destination="bAv-xC-FpS" id="rTC-Rn-ol3"/>
+                <outlet property="userRole" destination="AZi-wy-oSG" id="Qey-4P-dzM"/>
             </connections>
             <point key="canvasLocation" x="195" y="164"/>
         </tableViewCell>

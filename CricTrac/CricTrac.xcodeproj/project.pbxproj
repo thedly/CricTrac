@@ -142,6 +142,8 @@
 		B81E08631F4C560300460B0F /* CoachTopBattingBowlingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81E08621F4C560200460B0F /* CoachTopBattingBowlingTableViewCell.swift */; };
 		B8200C701F3B13B300026F4D /* MatchFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8200C6F1F3B13B300026F4D /* MatchFilterCell.swift */; };
 		B8200C721F3EE4F900026F4D /* ProfileImageExpandingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8200C711F3EE4F800026F4D /* ProfileImageExpandingVC.swift */; };
+		B83180FB1F56BD2800AEA396 /* CoachPlayersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83180FA1F56BD2800AEA396 /* CoachPlayersListViewController.swift */; };
+		B83180FD1F57EB7700AEA396 /* CoachPendingRequetsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83180FC1F57EB7700AEA396 /* CoachPendingRequetsVC.swift */; };
 		B835B3501EE94BF7001048A6 /* AppIntroductionScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B34F1EE94BF7001048A6 /* AppIntroductionScreens.swift */; };
 		B835B3521EE9622B001048A6 /* AppIntroductionFinalScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3511EE9622B001048A6 /* AppIntroductionFinalScreen.swift */; };
 		B835B3541EEA7D2F001048A6 /* AppIntroFirstScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3531EEA7D2F001048A6 /* AppIntroFirstScreen.swift */; };
@@ -316,6 +318,8 @@
 		B81E08621F4C560200460B0F /* CoachTopBattingBowlingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachTopBattingBowlingTableViewCell.swift; sourceTree = "<group>"; };
 		B8200C6F1F3B13B300026F4D /* MatchFilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchFilterCell.swift; sourceTree = "<group>"; };
 		B8200C711F3EE4F800026F4D /* ProfileImageExpandingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageExpandingVC.swift; sourceTree = "<group>"; };
+		B83180FA1F56BD2800AEA396 /* CoachPlayersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachPlayersListViewController.swift; sourceTree = "<group>"; };
+		B83180FC1F57EB7700AEA396 /* CoachPendingRequetsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachPendingRequetsVC.swift; sourceTree = "<group>"; };
 		B835B34F1EE94BF7001048A6 /* AppIntroductionScreens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroductionScreens.swift; sourceTree = "<group>"; };
 		B835B3511EE9622B001048A6 /* AppIntroductionFinalScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroductionFinalScreen.swift; sourceTree = "<group>"; };
 		B835B3531EEA7D2F001048A6 /* AppIntroFirstScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroFirstScreen.swift; sourceTree = "<group>"; };
@@ -628,6 +632,8 @@
 				B85ECAB81EF91CC900CC29E5 /* AddMatchSceIntroScreen.swift */,
 				B85ECABA1EF91CF200CC29E5 /* AddMatchThirdIntroScreen.swift */,
 				B8200C711F3EE4F800026F4D /* ProfileImageExpandingVC.swift */,
+				B83180FA1F56BD2800AEA396 /* CoachPlayersListViewController.swift */,
+				B83180FC1F57EB7700AEA396 /* CoachPendingRequetsVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -943,11 +949,13 @@
 				8951D52F1DB08BF5005D101A /* CricketFanViewController.swift in Sources */,
 				46C983B61D39D86800DFC607 /* performanceCell.swift in Sources */,
 				46DE32CB1D90152F0024CD82 /* APostTableViewCell.swift in Sources */,
+				B83180FD1F57EB7700AEA396 /* CoachPendingRequetsVC.swift in Sources */,
 				897C41501E21FFA4005F1231 /* Friends.swift in Sources */,
 				8955DA2B1E0ED13A00891937 /* NewPostViewController.swift in Sources */,
 				890B42C71D60472C00736F03 /* CollapsibleTableViewCell.swift in Sources */,
 				B835B35C1EEA7DAF001048A6 /* AppIntroFifthScreen.swift in Sources */,
 				893823B41E113ACE00BCD0CD /* SliderMenuViewCell.swift in Sources */,
+				B83180FB1F56BD2800AEA396 /* CoachPlayersListViewController.swift in Sources */,
 				89358AFE1E197B4800A1A6F0 /* SettingsViewController.swift in Sources */,
 				46DE32C51D900C9F0024CD82 /* AddPostTableViewCell.swift in Sources */,
 				891B2AA71E7CE09800F6B5BA /* RequestsData.swift in Sources */,

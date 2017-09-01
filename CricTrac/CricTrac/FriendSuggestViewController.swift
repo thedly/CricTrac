@@ -137,10 +137,27 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                 let sugFriendUserId = UserProfilesData[indexPath.row].id
                 aCell.friendId = sugFriendUserId
 
-                fetchFriendDetail(sugFriendUserId, sucess: { (result) in
+                fetchBasicProfile(sugFriendUserId, sucess: { (result) in
                     let proPic = result["proPic"]
                     let city =   result["city"]
+                    let userProfile = result["userProfile"]
                     aCell.userCity.text = city
+                    
+                    if userProfile == "Player" {
+                        fetchPlayingRole(sugFriendUserId, sucess: { (result) in
+                            let playingRole = result["playingRole"]
+                            aCell.userRole.text = playingRole
+                        })
+                    }
+                        
+                    else if userProfile == "Coach" {
+                        aCell.userRole.text = "Coach"
+                    }
+                    else if userProfile == "Cricket Fan" {
+                        aCell.userRole.text = "Cricket Fan"
+                    }
+
+                    
                     
                     if proPic! == "-"{
                         let imageName = defaultProfileImage

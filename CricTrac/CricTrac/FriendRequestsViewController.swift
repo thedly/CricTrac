@@ -143,8 +143,26 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                 let proPic = result["proPic"]
                 let city =   result["city"]
                 let name = "\(result["firstname"]!) \(result["lastname"]!)"
+                let userProfile = result["userProfile"]
+
                 aCell.FriendCity.text = city
                 aCell.FriendName.text = name
+                
+                if userProfile == "Player" {
+                    fetchPlayingRole(reqFriendUserId, sucess: { (result) in
+                        let playingRole = result["playingRole"]
+                        aCell.FriendRole.text = playingRole
+                    })
+                }
+                    
+                else if userProfile == "Coach" {
+                    aCell.FriendRole.text = "Coach"
+                }
+                else if userProfile == "Cricket Fan" {
+                    aCell.FriendRole.text = "Cricket Fan"
+                }
+                
+
                 
                 if proPic! == "-"{
                     let imageName = defaultProfileImage
