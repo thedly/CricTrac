@@ -32,6 +32,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     var myCoachFrndNodeId = ""
     var myPlayersFrndNodeId = ""
     
+    
     // for new features
     @IBOutlet weak var totalPlayers: UILabel!
     @IBOutlet weak var totalBatsmen: UILabel!
@@ -113,6 +114,8 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                     if let data = req as? [String : AnyObject] {
                         let coachID = String(data["CoachID"]!)
                         let isAccepted = String(data["isAccepted"]!)
+                        self.myCoachFrndNodeId = String(data["CoachNodeIdOther"]!)
+                        self.myPlayersFrndNodeId = String(data["PlayerNodeId"]!)
                         if coachID == self.currentUserId {
                             coachExist = 1
                             
@@ -128,7 +131,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
 //                                }
 //                            })
                             
-                             self.myCoachFrndNodeId = key
+                             //self.myCoachFrndNodeId = key
                             if isAccepted == "0" {
                                 
                                 self.coachFrndButton.setTitle("Cancel Request", forState: .Normal)
@@ -243,7 +246,11 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             
         case "Cancel Request":
             
-            cancelCoachRequest(currentUserId,type: profileData.UserProfile)
+            fireBaseRef.child("Users").child(currentUserId).child("MyPlayers").child(myPlayersFrndNodeId).removeValue()
+            fireBaseRef.child("Users").child((currentUser?.uid)!).child("MyCoaches").child(myCoachFrndNodeId).removeValue()
+
+            
+         //  cancelCoachRequest(currentUserId,type: profileData.UserProfile)
             coachFrndButton.setTitle("Mark as my Coach", forState: .Normal)
             break
             

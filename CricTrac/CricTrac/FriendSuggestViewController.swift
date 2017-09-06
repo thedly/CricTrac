@@ -22,8 +22,15 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         super.viewDidLoad()
         initializeView()
         // Do any additional setup after loading the view.
+        
+        UserProfilesData.removeAll()
+        self.SuggestsTblview.reloadData()
+        getFriendSuggestions()
+        self.view.backgroundColor = UIColor.clearColor()
+        
         loadBannerAds()
     }
+    
     func loadBannerAds() {
         if showAds == "1" {
             self.bannerViewHeightConstraint.constant = 50
@@ -36,13 +43,13 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
-        UserProfilesData.removeAll()
-        self.SuggestsTblview.reloadData()
-        getFriendSuggestions()
-        self.view.backgroundColor = UIColor.clearColor()
-        //setBackgroundColor()
-    }
+//    override func viewWillAppear(animated: Bool) {
+//        UserProfilesData.removeAll()
+//        self.SuggestsTblview.reloadData()
+//        getFriendSuggestions()
+//        self.view.backgroundColor = UIColor.clearColor()
+//        //setBackgroundColor()
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

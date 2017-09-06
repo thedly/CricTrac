@@ -1082,18 +1082,17 @@ func markMyCoach(userId: String) {
     let addedTime =  NSDate().getCurrentTimeStamp()
     
     let refForCoach = fireBaseRef.child("Users").child(coachId).child("MyPlayers").childByAutoId()
-    let playerDictVal:[String:AnyObject] = ["PlayerID": playerId,"Request Time": addedTime,"isAccepted": isAccepted]
-    refForCoach.setValue(playerDictVal)
-   // playernodeid = refForCoach.key
-    
+    let playerNodeId = refForCoach.key
     
     let refForPlayer = fireBaseRef.child("Users").child(playerId).child("MyCoaches").childByAutoId()
-    let coachDictVal:[String:AnyObject] = ["CoachID": coachId,"RequestTime":addedTime,"isAccepted": isAccepted]
+    let coachNodeId = refForPlayer.key
+    
+    let playerDictVal:[String:AnyObject] = ["PlayerID": playerId,"Request Time": addedTime,"isAccepted": isAccepted, "CoachNodeId": coachNodeId, "PlayerNodeIdOther": playerNodeId]
+    refForCoach.setValue(playerDictVal)
+    
+    let coachDictVal:[String:AnyObject] = ["CoachID": coachId,"RequestTime":addedTime,"isAccepted": isAccepted, "PlayerNodeId": playerNodeId, "CoachNodeIdOther": coachNodeId]
     refForPlayer.setValue(coachDictVal)
-   // refForPlayer.key
     
-    
-
 }
 
 func cancelCoachRequest(userId: String, type:String) {
