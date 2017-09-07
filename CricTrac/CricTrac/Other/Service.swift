@@ -1090,6 +1090,9 @@ func markMyCoach(userId: String) {
     let coachDictVal:[String:AnyObject] = ["CoachID": coachId,"RequestTime":addedTime,"isAccepted": isAccepted, "PlayerNodeId": playerNodeId, "CoachNodeIdOther": coachNodeId]
     refForPlayer.setValue(coachDictVal)
     
+    //call the notification api
+    //coachRequestNotification(coachId)
+    
 }
 
 

@@ -44,6 +44,26 @@ func friendRequestAcceptedNotification(toId:String){
     dataTask?.resume()
 }
 
+func coachRequestNotification(toId:String){
+    let notificationURL = serverBaseURL+"/notifications/CRR/\((currentUser!.uid))/\(toId)"
+    let request = NSMutableURLRequest(URL: NSURL(string:notificationURL)!)
+    request.HTTPMethod = "POST"
+    
+    dataTask = defaultSession.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+    })
+    dataTask?.resume()
+}
+
+func coachRequesAcceptedtNotification(toId:String){
+    let notificationURL = serverBaseURL+"/notifications/CRA/\((currentUser!.uid))/\(toId)"
+    let request = NSMutableURLRequest(URL: NSURL(string:notificationURL)!)
+    request.HTTPMethod = "POST"
+    
+    dataTask = defaultSession.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+    })
+    dataTask?.resume()
+}
+
 func newPostNotification(postId:String){
     let notificationURL = serverBaseURL+"/notifications/NPA/\((currentUser!.uid))/\(postId)"
     let request = NSMutableURLRequest(URL: NSURL(string:notificationURL)!)

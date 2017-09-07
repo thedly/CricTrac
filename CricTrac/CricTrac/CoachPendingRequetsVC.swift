@@ -160,7 +160,10 @@ class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDat
         
         fireBaseRef.child("Users").child(playerId!).child("MyCoaches").child(coachNodeId!).child("isAccepted").setValue(1)
         
-    fireBaseRef.child("Users").child((currentUser?.uid)!).child("MyPlayers").child(playerNodeId!).child("isAccepted").setValue(1)
+        fireBaseRef.child("Users").child((currentUser?.uid)!).child("MyPlayers").child(playerNodeId!).child("isAccepted").setValue(1)
+        
+        //call the notification api
+        //coachRequesAcceptedtNotification(playerId)
         
         let alert = UIAlertController(title: "", message:"Player Request Confirmed", preferredStyle: UIAlertControllerStyle.Alert)
         self.presentViewController(alert, animated: true, completion: nil)

@@ -193,6 +193,8 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
         switch topic{
             case "FRR": self.moveToFRR(topicId)
             case "FRA": self.moveToFRA(topicId)
+            case "CRR": self.moveToCRR(topicId)
+            case "CRA": self.moveToCRA(topicId)
             case "NMA": self.moveToNMA(topicId, userId: fromId)
             case "NPA": self.moveToNPA(topicId)
             case "NCA": self.moveToNCA(topicId)
@@ -241,10 +243,22 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
         self.presentViewController(friendRequest, animated: true) {}
     }
     
+    func moveToCRR(topicId:String) {
+//        let friendRequest = viewControllerFrom("Main", vcid: "FriendBaseViewController") as! FriendBaseViewController
+//        friendRequest.topicId = topicId
+//        self.presentViewController(friendRequest, animated: true) {}
+    }
+    
     func moveToFRA(topicId:String) {
         let friendRequest = viewControllerFrom("Main", vcid: "FriendBaseViewController") as! FriendBaseViewController
         friendRequest.topicId = topicId
         self.presentViewController(friendRequest, animated: true) {}
+    }
+    
+    func moveToCRA(topicId:String) {
+//        let friendRequest = viewControllerFrom("Main", vcid: "FriendBaseViewController") as! FriendBaseViewController
+//        friendRequest.topicId = topicId
+//        self.presentViewController(friendRequest, animated: true) {}
     }
     
     func moveToNMA(topicId:String, userId:String) {
@@ -262,7 +276,7 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
                 if let data = snapshot.value! as? [String:AnyObject]{
                     let summaryDetailsVC = viewControllerFrom("Main", vcid: "SummaryMatchDetailsViewController") as! SummaryMatchDetailsViewController
                     summaryDetailsVC.matchDetailsData = data
-                   summaryDetailsVC.friendDOB = self.userProfileData.DateOfBirth
+                    summaryDetailsVC.friendDOB = self.userProfileData.DateOfBirth
                     summaryDetailsVC.isFriendDashboard = true
                     self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
                 }
