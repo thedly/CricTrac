@@ -9,7 +9,7 @@
 import UIKit
 
 class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDataSource,ThemeChangeable {
-
+    
     @IBOutlet weak var RequestsTblview: UITableView!
     
     let currentTheme = cricTracTheme.currentTheme
@@ -18,14 +18,14 @@ class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDat
     
     var playerNodeIdOthers = [String]()
     var coachNodeIds = [String]()
-   
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initializeView()
-       
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -34,8 +34,8 @@ class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDat
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-         reloadData()
-         self.RequestsTblview.reloadData()
+        reloadData()
+        self.RequestsTblview.reloadData()
     }
     
     func reloadData() {
@@ -50,7 +50,7 @@ class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDat
                 if isAcceptVal as! NSObject == 0 {
                     let pendingReqs = pendingReq["PlayerID"]!
                     self.playerNodeIdOthers.append(pendingReq["PlayerNodeIdOther"]! as! String)
-                    self.coachNodeIds.append(pendingReq["CoachNodeId"]! as! String)
+                    self.coachNodeIds.append(pendingReq["CoachNodeID"]! as! String)
                     self.playerRequests.append(pendingReqs as! String)
                 }
             }
@@ -72,7 +72,7 @@ class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDat
         self.view.backgroundColor = UIColor.clearColor()
         self.view.backgroundColor = currentTheme.topColor
     }
-
+    
     @IBAction func backButtonTapped(sender: AnyObject) {
         
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -90,46 +90,47 @@ class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDat
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 90
     }
-
+    
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let aCell = RequestsTblview.dequeueReusableCellWithIdentifier("FriendRequestsCell", forIndexPath: indexPath) as! FriendRequestsCell
-        if playerRequests.count != 0 {
-        let pendingReqId = playerRequests[indexPath.row]
         
-        fetchBasicProfile(pendingReqId) { (result) in
-            let proPic = result["proPic"]
-            let city =   result["city"]
-            let name = "\(result["firstname"]!) \(result["lastname"]!)"
-            let userProfile = result["userProfile"]
-            let playingRole = result["playingRole"]
+        if playerRequests.count != 0 {
+            let pendingReqId = playerRequests[indexPath.row]
             
-            aCell.FriendCity.text = city
-            aCell.FriendName.text = name
-            
-            if userProfile == "Player" {
-                aCell.FriendRole.text = playingRole
-            }
+            fetchBasicProfile(pendingReqId) { (result) in
+                let proPic = result["proPic"]
+                let city =   result["city"]
+                let name = "\(result["firstname"]!) \(result["lastname"]!)"
+                let userProfile = result["userProfile"]
+                let playingRole = result["playingRole"]
                 
-            else if userProfile == "Coach" {
-                aCell.FriendRole.text = "Coach"
-            }
-            else if userProfile == "Cricket Fan" {
-                aCell.FriendRole.text = "Cricket Fan"
-            }
-           
-            if proPic! == "-"{
-                let imageName = defaultProfileImage
-                let image = UIImage(named: imageName)
-                aCell.FriendProfileImage.image = image
-            }else{
-                if let imageURL = NSURL(string:proPic!){
-                    aCell.FriendProfileImage.kf_setImageWithURL(imageURL)
+                aCell.FriendCity.text = city
+                aCell.FriendName.text = name
+                
+                if userProfile == "Player" {
+                    aCell.FriendRole.text = playingRole
+                }
+                    
+                else if userProfile == "Coach" {
+                    aCell.FriendRole.text = "Coach"
+                }
+                else if userProfile == "Cricket Fan" {
+                    aCell.FriendRole.text = "Cricket Fan"
+                }
+                
+                if proPic! == "-"{
+                    let imageName = defaultProfileImage
+                    let image = UIImage(named: imageName)
+                    aCell.FriendProfileImage.image = image
+                }else{
+                    if let imageURL = NSURL(string:proPic!){
+                        aCell.FriendProfileImage.kf_setImageWithURL(imageURL)
+                    }
                 }
             }
         }
-    }
         
         aCell.backgroundColor = UIColor.clearColor()
         aCell.baseView.backgroundColor = currentTheme.bottomColor
@@ -169,7 +170,7 @@ class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDat
         dispatch_after(time, dispatch_get_main_queue(), {
             alert.dismissViewControllerAnimated(true, completion: nil)
         })
-
+        
         reloadData()
         
     }
@@ -197,7 +198,7 @@ class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDat
             
             self.reloadData()
         }
-         actionSheetController.addAction(unfriendAction)
+        actionSheetController.addAction(unfriendAction)
         
         self.presentViewController(actionSheetController, animated: true, completion: nil)
         
