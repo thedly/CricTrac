@@ -1092,7 +1092,6 @@ func markMyCoach(userId: String) {
     
 }
 
-
 func getMyPlayers(sucessBlock:([String: AnyObject])->Void) {
     fireBaseRef.child("Users").child(currentUser!.uid).child("MyPlayers").observeSingleEventOfType(.Value, withBlock: { snapshot in
         

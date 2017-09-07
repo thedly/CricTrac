@@ -140,8 +140,8 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
        
         else if profileData.UserProfile == "Coach" {
             coachFrndButton.setTitle("My Players", forState: .Normal)
-            coachFrndBtnHeightConstraint.constant = 30
-            pendingRequests.hidden = false
+//            coachFrndBtnHeightConstraint.constant = 30
+//            pendingRequests.hidden = false
             
         }
         else if profileData.UserProfile == "Cricket Fan" {
@@ -244,13 +244,12 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 dispatch_after(time, dispatch_get_main_queue(), {
                     alert.dismissViewControllerAnimated(true, completion: nil)
                 })
-                
-                coachFrndButton.setTitle("Cancel Request", forState: .Normal)
+                 coachValidation()
 
                 break
             
         case "Cancel Request":
-            
+        
             let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to Cancel this request?", preferredStyle: .ActionSheet)
             
             let cancelAction = UIAlertAction(title: "No", style: .Cancel) { action -> Void in
@@ -260,23 +259,20 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             actionSheetController.addAction(cancelAction)
             
             let unfriendAction = UIAlertAction(title: "Yes", style: .Default) { action -> Void in
-                
                 fireBaseRef.child("Users").child(self.currentUserId).child("MyPlayers").child(self.myPlayersFrndNodeId).removeValue()
                 fireBaseRef.child("Users").child((currentUser?.uid)!).child("MyCoaches").child(self.myCoachFrndNodeId).removeValue()
+                self.coachValidation()
                 
-                
-                self.coachFrndButton.setTitle("Mark as my Coach", forState: .Normal)
             }
             actionSheetController.addAction(unfriendAction)
             
             self.presentViewController(actionSheetController, animated: true, completion: nil)
-           
+        
             break
             
         case "Remove Coach":
             
            
-            
             let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to Remove this coach?", preferredStyle: .ActionSheet)
             
             let cancelAction = UIAlertAction(title: "No", style: .Cancel) { action -> Void in
