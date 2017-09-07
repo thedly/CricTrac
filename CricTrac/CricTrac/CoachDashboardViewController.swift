@@ -115,7 +115,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                         let coachID = String(data["CoachID"]!)
                         let isAccepted = String(data["isAccepted"]!)
                         self.myCoachFrndNodeId = String(data["CoachNodeIdOther"]!)
-                        self.myPlayersFrndNodeId = String(data["PlayerNodeId"]!)
+                        self.myPlayersFrndNodeId = String(data["PlayerNodeID"]!)
                         if coachID == self.currentUserId {
                             coachExist = 1
 
@@ -156,11 +156,19 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         coachValidation()
         
         if let value = friendProfile{
-            userProfileData = Profile(usrObj: value)
+            if profileData.UserProfile == "Coach" {
+                coachFrndButton.hidden = true
+                pendingRequests.hidden = true
+                coachFrndBtnHeightConstraint.constant = 0
             }
-            else{
-                userProfileData = profileData
-            }
+          userProfileData = Profile(usrObj: value)
+        }
+        else{
+            coachFrndButton.hidden = false
+            pendingRequests.hidden = false
+            coachFrndBtnHeightConstraint.constant = 30
+            userProfileData = profileData
+        }
         
         
         userProfileImage.layer.cornerRadius = userProfileImage.bounds.size.width/2
