@@ -102,6 +102,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             self.bannerViewHeightConstraint.constant = 0
         }
     }
+    
     func coachValidation() {
         
         if profileData.UserProfile == "Player" {
@@ -227,8 +228,17 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         case "Mark as my Coach":
             
                 markMyCoach(currentUserId)
-                //coachValidation()
+               
+                let alert = UIAlertController(title: "", message:"Coach Request Sent", preferredStyle: UIAlertControllerStyle.Alert)
+                self.presentViewController(alert, animated: true, completion: nil)
+                let delay = 1.0 * Double(NSEC_PER_SEC)
+                let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                dispatch_after(time, dispatch_get_main_queue(), {
+                    alert.dismissViewControllerAnimated(true, completion: nil)
+                })
+                
                 coachFrndButton.setTitle("Cancel Request", forState: .Normal)
+
                 break
             
         case "Cancel Request":

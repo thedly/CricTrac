@@ -95,6 +95,7 @@ class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDat
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let aCell = RequestsTblview.dequeueReusableCellWithIdentifier("FriendRequestsCell", forIndexPath: indexPath) as! FriendRequestsCell
+        
         if playerRequests.count != 0 {
         let pendingReqId = playerRequests[indexPath.row]
         

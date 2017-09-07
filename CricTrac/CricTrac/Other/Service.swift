@@ -1097,11 +1097,7 @@ func getMyPlayers(sucessBlock:([String: AnyObject])->Void) {
     fireBaseRef.child("Users").child(currentUser!.uid).child("MyPlayers").observeSingleEventOfType(.Value, withBlock: { snapshot in
         
         if let data = snapshot.value as? [String: AnyObject] {
-//            for(_,req) in data {
-//                if req["isAccepted"] as! String == "1" {
-//                    
-//                }
-//            }
+
            sucessBlock(data)
           }
         else{
