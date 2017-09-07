@@ -1090,8 +1090,10 @@ func markMyCoach(userId: String) {
     let coachDictVal:[String:AnyObject] = ["CoachID": coachId,"RequestTime":addedTime,"isAccepted": isAccepted, "PlayerNodeID": playerNodeId, "CoachNodeIdOther": coachNodeId]
     refForPlayer.setValue(coachDictVal)
     
+    //call the notification api
+    coachRequestReceivedNotification(coachId)
+    
 }
-
 
 func getMyPlayers(sucessBlock:([String: AnyObject])->Void) {
     fireBaseRef.child("Users").child(currentUser!.uid).child("MyPlayers").observeSingleEventOfType(.Value, withBlock: { snapshot in

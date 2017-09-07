@@ -44,7 +44,7 @@ func friendRequestAcceptedNotification(toId:String){
     dataTask?.resume()
 }
 
-func coachRequestNotification(toId:String){
+func coachRequestReceivedNotification(toId:String){
     let notificationURL = serverBaseURL+"/notifications/CRR/\((currentUser!.uid))/\(toId)"
     let request = NSMutableURLRequest(URL: NSURL(string:notificationURL)!)
     request.HTTPMethod = "POST"
