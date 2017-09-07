@@ -250,13 +250,13 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             fireBaseRef.child("Users").child((currentUser?.uid)!).child("MyCoaches").child(myCoachFrndNodeId).removeValue()
 
             
-         //  cancelCoachRequest(currentUserId,type: profileData.UserProfile)
             coachFrndButton.setTitle("Mark as my Coach", forState: .Normal)
             break
             
         case "Remove Coach":
             
-            cancelCoachRequest(currentUserId,type: profileData.UserProfile)
+            fireBaseRef.child("Users").child(currentUserId).child("MyPlayers").child(myPlayersFrndNodeId).removeValue()
+            fireBaseRef.child("Users").child((currentUser?.uid)!).child("MyCoaches").child(myCoachFrndNodeId).removeValue()
             coachFrndButton.setTitle("Mark as my Coach", forState: .Normal)
             break
             
@@ -267,27 +267,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             break
 
         }
-        
-        
-//        if coachFrndButton.currentTitle! == "Mark as my Coach" {
-//            markMyCoach(currentUserId)
-//            coachValidation()
-//        }
-//        
-//       else if coachFrndButton.currentTitle! == "Cancel Request" {
-//            cancelCoachRequest(currentUserId,type: profileData.UserProfile)
-//            coachFrndButton.setTitle("Mark as my Coach", forState: .Normal)
-//        }
-//        
-//        else if coachFrndButton.currentTitle! == "Remove Coach" {
-//            cancelCoachRequest(currentUserId,type: profileData.UserProfile)
-//            coachFrndButton.setTitle("Mark as my Coach", forState: .Normal)
-//        }
-//
-//        else if coachFrndButton.currentTitle! == "My Players" {
-//            let dashBoard = viewControllerFrom("Main", vcid: "CoachPlayersListViewController") as! CoachPlayersListViewController
-//            self.presentViewController(dashBoard, animated: false, completion: nil)
-//        }
+
     }
     
     

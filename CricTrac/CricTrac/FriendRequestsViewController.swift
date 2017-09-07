@@ -144,15 +144,13 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                 let city =   result["city"]
                 let name = "\(result["firstname"]!) \(result["lastname"]!)"
                 let userProfile = result["userProfile"]
-
+                let playingRole = result["playingRole"]
+                
                 aCell.FriendCity.text = city
                 aCell.FriendName.text = name
                 
                 if userProfile == "Player" {
-                    fetchPlayingRole(reqFriendUserId, sucess: { (result) in
-                        let playingRole = result["playingRole"]
-                        aCell.FriendRole.text = playingRole
-                    })
+                    aCell.FriendRole.text = playingRole
                 }
                     
                 else if userProfile == "Coach" {

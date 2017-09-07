@@ -98,6 +98,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         fetchBasicProfile(friendUserId, sucess: { (result) in
             let proPic = result["proPic"]
             let city =   result["city"]
+            let playingRole = result["playingRole"]
             
             let userProfile = result["userProfile"]
             let name = "\(result["firstname"]!) \(result["lastname"]!)"
@@ -105,10 +106,7 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
             aCell.FriendName.text = name
             
             if userProfile == "Player" {
-                fetchPlayingRole(friendUserId, sucess: { (result) in
-                    let playingRole = result["playingRole"]
-                    aCell.friendRole.text = playingRole
-                })
+                aCell.friendRole.text = playingRole
             }
 
            else if userProfile == "Coach" {

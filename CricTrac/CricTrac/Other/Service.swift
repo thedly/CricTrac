@@ -379,6 +379,8 @@ func fetchFriendDetail(id:String,sucess:(result:[String:String])->Void){
 }
 
 func fetchBasicProfile(id:String,sucess:(result:[String:String])->Void){
+    var playingRole = ""
+    var battingStyle = ""
     fireBaseRef.child("Users").child(id).child("UserProfile").observeEventType(.Value, withBlock: { snapshot in
         if let data = snapshot.value {
             guard let firstname = data["FirstName"]! as? String else {return }
@@ -386,18 +388,13 @@ func fetchBasicProfile(id:String,sucess:(result:[String:String])->Void){
             guard let proPic = data["ProfileImageURL"] as? String else {return }
             guard let city = data["City"]! as? String else {return }
              guard let userProfile = data["UserProfile"]! as? String else {return }
-            sucess(result: ["proPic":proPic,"city":city,"firstname":firstname,"lastname":lastname,"userProfile":userProfile])
-        }
-    })
-}
-
-
-func fetchPlayingRole(id:String,sucess:(result:[String:String])->Void){
-    fireBaseRef.child("Users").child(id).child("UserProfile").observeEventType(.Value, withBlock: { snapshot in
-        if let data = snapshot.value {
-            guard let playingRole = data["PlayingRole"]! as? String else {return }
-            guard let battingStyle = data["BattingStyle"]! as? String else {return }
-            sucess(result: ["playingRole":playingRole,"battingStyle":battingStyle])
+            
+            if userProfile == "Player" {
+                playingRole = (data["PlayingRole"]! as? String)!
+                battingStyle = (data["BattingStyle"]! as? String)!
+            }
+          
+            sucess(result: ["proPic":proPic,"city":city,"firstname":firstname,"lastname":lastname,"userProfile":userProfile,"playingRole":playingRole,"battingStyle":battingStyle])
         }
     })
 }
@@ -1093,49 +1090,6 @@ func markMyCoach(userId: String) {
     let coachDictVal:[String:AnyObject] = ["CoachID": coachId,"RequestTime":addedTime,"isAccepted": isAccepted, "PlayerNodeId": playerNodeId, "CoachNodeIdOther": coachNodeId]
     refForPlayer.setValue(coachDictVal)
     
-}
-
-func cancelCoachRequest(userId: String, type:String) {
-//    
-//    playerNodeId=""
-//    coachNodeId = ""
-//    
-//    firebase.child(playernodeid).removevalue
-//    
-//    firebase.child(coachnodeid).rmeovevaluw
-//    
-    
-    var coachId = ""
-    var playerId = ""
-    
-    if type == "Coach" {
-         coachId = currentUser!.uid
-         playerId = userId
-    }
-    else{
-         playerId = currentUser!.uid
-         coachId = userId
-    }
-    
-    fireBaseRef.child("Users").child(coachId).child("MyPlayers").observeEventType(.Value, withBlock: { snapshot in
-        if let data:[String : AnyObject] = snapshot.value as? [String: AnyObject] {
-            for(key, value) in data {
-                if playerId == value["PlayerID"] as! String {
-                   fireBaseRef.child("Users").child(coachId).child("MyPlayers").child(key).removeValue()
-                    }
-                }
-            }
-        })
-    
-    fireBaseRef.child("Users").child(playerId).child("MyCoaches").observeEventType(.Value, withBlock: { snapshot in
-        if let data:[String : AnyObject] = snapshot.value as? [String: AnyObject] {
-            for(key, value) in data {
-                if coachId == value["CoachID"] as! String {
-                    fireBaseRef.child("Users").child(playerId).child("MyCoaches").child(key).removeValue()
-                }
-            }
-        }
-    })
 }
 
 

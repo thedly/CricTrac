@@ -109,13 +109,13 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
                     let proPic = result["proPic"]
                     let city =   result["city"]
                     let userProfile = result["userProfile"]
+                     let playingRole = result["playingRole"]
+                    
                     aCell.userCity.text = city
+                   
                     
                     if userProfile == "Player" {
-                        fetchPlayingRole(searchFriendUserId, sucess: { (result) in
-                            let playingRole = result["playingRole"]
-                            aCell.userRole.text = playingRole
-                        })
+                        aCell.userRole.text = playingRole 
                     }
                         
                     else if userProfile == "Coach" {
