@@ -110,7 +110,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             pendingRequests.hidden = true
             var coachExist = 0
             getMyCoaches({ (result) in
-                for (key, req) in result {
+                for (_, req) in result {
                     if let data = req as? [String : AnyObject] {
                         let coachID = String(data["CoachID"]!)
                         let isAccepted = String(data["isAccepted"]!)
@@ -118,20 +118,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                         self.myPlayersFrndNodeId = String(data["PlayerNodeId"]!)
                         if coachID == self.currentUserId {
                             coachExist = 1
-                            
-//                            getMyPlayers({ (Result) in
-//                                for (key, req) in Result {
-//                                  if let data = req as? [String : AnyObject] {
-//                                     let plaerID = String(data["PlayerID"]!)
-//                                     if plaerID == self.currentUserId {
-//                                        self.myPlayersFrndNodeId = key
-//                                        }
-//                                     break
-//                                    }
-//                                }
-//                            })
-                            
-                             //self.myCoachFrndNodeId = key
+
                             if isAccepted == "0" {
                                 
                                 self.coachFrndButton.setTitle("Cancel Request", forState: .Normal)
@@ -246,19 +233,53 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             
         case "Cancel Request":
             
-            fireBaseRef.child("Users").child(currentUserId).child("MyPlayers").child(myPlayersFrndNodeId).removeValue()
-            fireBaseRef.child("Users").child((currentUser?.uid)!).child("MyCoaches").child(myCoachFrndNodeId).removeValue()
-
+            let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to Cancel this request?", preferredStyle: .ActionSheet)
             
-            coachFrndButton.setTitle("Mark as my Coach", forState: .Normal)
+            let cancelAction = UIAlertAction(title: "No", style: .Cancel) { action -> Void in
+                // Just dismiss the action sheet
+                actionSheetController.dismissViewControllerAnimated(true, completion: nil)
+            }
+            actionSheetController.addAction(cancelAction)
+            
+            let unfriendAction = UIAlertAction(title: "Yes", style: .Default) { action -> Void in
+                
+                fireBaseRef.child("Users").child(self.currentUserId).child("MyPlayers").child(self.myPlayersFrndNodeId).removeValue()
+                fireBaseRef.child("Users").child((currentUser?.uid)!).child("MyCoaches").child(self.myCoachFrndNodeId).removeValue()
+                
+                
+                self.coachFrndButton.setTitle("Mark as my Coach", forState: .Normal)
+            }
+            actionSheetController.addAction(unfriendAction)
+            
+            self.presentViewController(actionSheetController, animated: true, completion: nil)
+           
             break
             
         case "Remove Coach":
             
-            fireBaseRef.child("Users").child(currentUserId).child("MyPlayers").child(myPlayersFrndNodeId).removeValue()
-            fireBaseRef.child("Users").child((currentUser?.uid)!).child("MyCoaches").child(myCoachFrndNodeId).removeValue()
-            coachFrndButton.setTitle("Mark as my Coach", forState: .Normal)
+           
+            
+            let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to Remove this coach?", preferredStyle: .ActionSheet)
+            
+            let cancelAction = UIAlertAction(title: "No", style: .Cancel) { action -> Void in
+                // Just dismiss the action sheet
+                actionSheetController.dismissViewControllerAnimated(true, completion: nil)
+            }
+            actionSheetController.addAction(cancelAction)
+            
+            let unfriendAction = UIAlertAction(title: "Yes", style: .Default) { action -> Void in
+                
+                fireBaseRef.child("Users").child(self.currentUserId).child("MyPlayers").child(self.myPlayersFrndNodeId).removeValue()
+                fireBaseRef.child("Users").child((currentUser?.uid)!).child("MyCoaches").child(self.myCoachFrndNodeId).removeValue()
+                self.coachFrndButton.setTitle("Mark as my Coach", forState: .Normal)
+                
+            }
+            actionSheetController.addAction(unfriendAction)
+            
+            self.presentViewController(actionSheetController, animated: true, completion: nil)
+            
             break
+
             
         default:
             

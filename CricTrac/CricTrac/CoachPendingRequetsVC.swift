@@ -15,6 +15,7 @@ class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDat
     let currentTheme = cricTracTheme.currentTheme
     
     var playerRequests = [String]()
+    
     var playerNodeIdOthers = [String]()
     var coachNodeIds = [String]()
    
@@ -24,6 +25,7 @@ class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDat
         super.viewDidLoad()
         
         initializeView()
+       
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -32,6 +34,15 @@ class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDat
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
+         reloadData()
+         self.RequestsTblview.reloadData()
+    }
+    
+    func reloadData() {
+        playerRequests.removeAll()
+        coachNodeIds.removeAll()
+        playerNodeIdOthers.removeAll()
+        
         getMyPlayers { (data) in
             for(_,req) in data {
                 let pendingReq = req as! [String : AnyObject]
@@ -84,7 +95,6 @@ class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDat
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let aCell = RequestsTblview.dequeueReusableCellWithIdentifier("FriendRequestsCell", forIndexPath: indexPath) as! FriendRequestsCell
-        
         if playerRequests.count != 0 {
         let pendingReqId = playerRequests[indexPath.row]
         
@@ -125,20 +135,75 @@ class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDat
         aCell.baseView.backgroundColor = currentTheme.bottomColor
         aCell.baseView.alpha = 1
         aCell.cancelBtn.hidden = true
+        
         aCell.confirmBtn.accessibilityIdentifier = playerNodeIdOthers[indexPath.row]
         aCell.confirmBtn.restorationIdentifier = coachNodeIds[indexPath.row]
+        aCell.confirmBtn.accessibilityValue = playerRequests[indexPath.row]
+        
+        aCell.rejectBtn.accessibilityIdentifier = playerNodeIdOthers[indexPath.row]
+        aCell.rejectBtn.restorationIdentifier = coachNodeIds[indexPath.row]
+        aCell.rejectBtn.accessibilityValue = playerRequests[indexPath.row]
+        
         aCell.confirmBtn.addTarget(self, action: #selector(CoachPendingRequetsVC.confirmPlayerRequest(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        aCell.rejectBtn.addTarget(self, action: #selector(CoachPendingRequetsVC.rejectPlayerRequest(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
         return aCell
     }
     
-    // confirm btn
+    // Confirm btn
     
     func confirmPlayerRequest(sender:UIButton) {
-     
+        let coachNodeId = sender.restorationIdentifier
+        let playerNodeId = sender.accessibilityIdentifier
+        let playerId = sender.accessibilityValue
         
+        fireBaseRef.child("Users").child(playerId!).child("MyCoaches").child(coachNodeId!).child("isAccepted").setValue(1)
         
+    fireBaseRef.child("Users").child((currentUser?.uid)!).child("MyPlayers").child(playerNodeId!).child("isAccepted").setValue(1)
+        
+        let alert = UIAlertController(title: "", message:"Player Request Confirmed", preferredStyle: UIAlertControllerStyle.Alert)
+        self.presentViewController(alert, animated: true, completion: nil)
+        let delay = 1.0 * Double(NSEC_PER_SEC)
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(time, dispatch_get_main_queue(), {
+            alert.dismissViewControllerAnimated(true, completion: nil)
+        })
+
+        reloadData()
         
     }
+    // Reject button
+    
+    func rejectPlayerRequest(sender:UIButton) {
+        
+        let coachNodeId = sender.restorationIdentifier
+        let playerNodeId = sender.accessibilityIdentifier
+        let playerId = sender.accessibilityValue
+        
+        let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to Reject this request?", preferredStyle: .ActionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
+            // Just dismiss the action sheet
+            actionSheetController.dismissViewControllerAnimated(true, completion: nil)
+        }
+        actionSheetController.addAction(cancelAction)
+        
+        let unfriendAction = UIAlertAction(title: "Reject", style: .Default) { action -> Void in
+            
+            fireBaseRef.child("Users").child(playerId!).child("MyCoaches").child(coachNodeId!).removeValue()
+            
+            fireBaseRef.child("Users").child((currentUser?.uid)!).child("MyPlayers").child(playerNodeId!).removeValue()
+            
+            self.reloadData()
+        }
+         actionSheetController.addAction(unfriendAction)
+        
+        self.presentViewController(actionSheetController, animated: true, completion: nil)
+        
+    }
+    
+    
     
     
 }
