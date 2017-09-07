@@ -50,7 +50,7 @@ class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDat
                 if isAcceptVal as! NSObject == 0 {
                     let pendingReqs = pendingReq["PlayerID"]!
                     self.playerNodeIdOthers.append(pendingReq["PlayerNodeIdOther"]! as! String)
-                    self.coachNodeIds.append(pendingReq["CoachNodeId"]! as! String)
+                    self.coachNodeIds.append(pendingReq["CoachNodeID"]! as! String)
                     self.playerRequests.append(pendingReqs as! String)
                 }
             }

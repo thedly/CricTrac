@@ -1084,10 +1084,10 @@ func markMyCoach(userId: String) {
     let refForPlayer = fireBaseRef.child("Users").child(playerId).child("MyCoaches").childByAutoId()
     let coachNodeId = refForPlayer.key
     
-    let playerDictVal:[String:AnyObject] = ["PlayerID": playerId,"Request Time": addedTime,"isAccepted": isAccepted, "CoachNodeId": coachNodeId, "PlayerNodeIdOther": playerNodeId]
+    let playerDictVal:[String:AnyObject] = ["PlayerID": playerId,"RequestTime": addedTime,"isAccepted": isAccepted, "CoachNodeID": coachNodeId, "PlayerNodeIdOther": playerNodeId]
     refForCoach.setValue(playerDictVal)
     
-    let coachDictVal:[String:AnyObject] = ["CoachID": coachId,"RequestTime":addedTime,"isAccepted": isAccepted, "PlayerNodeId": playerNodeId, "CoachNodeIdOther": coachNodeId]
+    let coachDictVal:[String:AnyObject] = ["CoachID": coachId,"RequestTime":addedTime,"isAccepted": isAccepted, "PlayerNodeID": playerNodeId, "CoachNodeIdOther": coachNodeId]
     refForPlayer.setValue(coachDictVal)
     
 }

@@ -157,9 +157,15 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         coachValidation()
         
         if let value = friendProfile{
+            coachFrndButton.hidden = true
+            pendingRequests.hidden = true
+            coachFrndBtnHeightConstraint.constant = 0
             userProfileData = Profile(usrObj: value)
             }
             else{
+                coachFrndButton.hidden = false
+                pendingRequests.hidden = false
+                coachFrndBtnHeightConstraint.constant = 30
                 userProfileData = profileData
             }
         
