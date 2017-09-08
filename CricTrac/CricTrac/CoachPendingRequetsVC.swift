@@ -11,6 +11,8 @@ import UIKit
 class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDataSource,ThemeChangeable {
     
     @IBOutlet weak var RequestsTblview: UITableView!
+    @IBOutlet weak var noPendingRequetsLbl: UILabel!
+    @IBOutlet weak var topBarView: UIView!
     
     let currentTheme = cricTracTheme.currentTheme
     
@@ -60,6 +62,7 @@ class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDat
     
     func changeThemeSettigs() {
         self.view.backgroundColor = currentTheme.topColor
+        self.topBarView.backgroundColor = currentTheme.topColor
     }
     
     func initializeView() {
@@ -84,6 +87,14 @@ class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDat
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if playerRequests.count == 0 {
+            noPendingRequetsLbl.text = "No Pending Requests"
+        }
+        else{
+            noPendingRequetsLbl.text = ""
+        }
+        
         return playerRequests.count
     }
     

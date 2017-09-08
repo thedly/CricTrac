@@ -24,6 +24,9 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     @IBOutlet weak var topBarHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var exprOfCoach: UILabel!
+    
+    
     // for teams
     @IBOutlet weak var baseViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var coachTeams: UICollectionView!
@@ -51,6 +54,17 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     
     var topBattingnames = ["Arjun Kumar","Kushal Rajiv","Krit Gupta","Noel Phlip","Lochan goudal"]
     
+    var players = [String]()
+    var batsmen = [String]()
+    var bowlers = [String]()
+    var wicketKeepers = [String]()
+    var allRounders = [String]()
+    
+    
+    
+    
+    
+    
     @IBAction func CloseDashboardPressed(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -68,6 +82,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         setBackgroundColor()
         initView()
         updateCoachDashboard()
+        updateCoachSummary()
     }
     
     override func viewDidLoad() {
@@ -89,6 +104,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         
         coachTeams.delegate = self
         coachTeams.dataSource = self
+        
     }
     
     func loadBannerAds() {
@@ -180,7 +196,22 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         
         let df = NSDateFormatter()
         df.dateFormat = "dd/MM/yyyy"
-        self.PlayerName.text = userProfileData.fullName.uppercaseString
+        self.PlayerName.text = userProfileData.fullName
+        
+        var coachExpr = ""
+        var coachLevel = ""
+        if userProfileData.Experience != "-" {
+             coachExpr =  userProfileData.Experience
+        }
+       if userProfileData.CoachingLevel != "-" {
+            coachLevel = userProfileData.CoachingLevel
+        }
+        
+        let formattedStr = NSMutableAttributedString()
+        let coachExprStrLevel = formattedStr.bold("Exp: \(coachExpr) Years \n", fontName: appFont_black, fontSize: 15).bold("\(coachLevel)", fontName: appFont_black, fontSize: 15)
+        self.exprOfCoach.attributedText = coachExprStrLevel
+        
+        
         let formattedString = NSMutableAttributedString()
         let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State), ", fontName: appFont_black, fontSize: 15).bold("\(currentISO) ", fontName: appFont_black, fontSize: 15)
         self.PlayerLocation.attributedText = locationText
@@ -228,6 +259,64 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         imgCoverPhoto.addGestureRecognizer(tapGesture)
     }
     
+    //Coach Summary
+    
+    func updateCoachSummary() {
+        
+        players.removeAll()
+        batsmen.removeAll()
+        bowlers.removeAll()
+        wicketKeepers.removeAll()
+        allRounders.removeAll()
+        
+        getMyPlayers { (data) in
+            for(_,req) in data {
+                let playersData = req as! [String : AnyObject]
+                let isAcceptVal = playersData["isAccepted"]!
+                if isAcceptVal as! NSObject == 1 {
+                    let playerId = playersData["PlayerID"]!
+                    self.players.append(playerId as! String)
+                    
+                    fetchBasicProfile(playerId as! String) { (result) in
+                        //let proPic = result["proPic"]
+                        //let city =   result["city"]
+                        //let name = "\(result["firstname"]!) \(result["lastname"]!)"
+                        //let userProfile = result["userProfile"]
+                        let playingRole = result["playingRole"]
+                        
+                        if playingRole == "Batsman" {
+                            self.batsmen.append(playerId as! String)
+                        }
+                        else if playingRole == "Bowler" {
+                            self.bowlers.append(playerId as! String)
+                        }
+                        else if playingRole == "All-rounder" || playingRole == "Batting all-rounder" || playingRole == "Bowling all-rounder" {
+                            self.allRounders.append(playerId as! String)
+                        }
+                        else if playingRole == "Wicketkeeper" {
+                            self.wicketKeepers.append(playerId as! String)
+                        }
+                        
+//                        dispatch_async(dispatch_get_main_queue(),{
+                            // Assigning values
+                            self.totalPlayers.text = String(self.players.count)
+                            self.totalBatsmen.text = String(self.batsmen.count)
+                            self.totalBowlers.text = String(self.bowlers.count)
+                            self.totalWickets.text = String(self.wicketKeepers.count)
+                            self.totalAllRounders.text = String(self.allRounders.count)
+                            
+//                        })
+                    }
+                }
+            }
+        }
+    }
+    
+ 
+    
+    
+    
+    
     
     // Only players can see this button
     @IBAction func coachActionBtnTapped(sender: UIButton) {
@@ -272,7 +361,6 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             
         case "Remove Coach":
             
-           
             let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to Remove this coach?", preferredStyle: .ActionSheet)
             
             let cancelAction = UIAlertAction(title: "No", style: .Cancel) { action -> Void in
@@ -293,18 +381,14 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             self.presentViewController(actionSheetController, animated: true, completion: nil)
             
             break
-
             
         default:
             
             let dashBoard = viewControllerFrom("Main", vcid: "CoachPlayersListViewController") as! CoachPlayersListViewController
             self.presentViewController(dashBoard, animated: false, completion: nil)
             break
-
         }
-
     }
-    
     
     var alertMessage = "Change picture"
     
@@ -645,13 +729,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 66
     }
-    // For Coach can see dis button
-//    @IBAction func MyPlayersButtonTapped(sender: AnyObject) {
-//        let dashBoard = viewControllerFrom("Main", vcid: "CoachPlayersListViewController") as! CoachPlayersListViewController
-//        self.presentViewController(dashBoard, animated: false, completion: nil)
-//
-//    }
-    
+
     @IBAction func pendingRequestsButtonTapped(sender: AnyObject) {
         let pendingRequests = viewControllerFrom("Main", vcid: "CoachPendingRequetsVC") as! CoachPendingRequetsVC
         self.presentViewController(pendingRequests, animated: false, completion: nil)

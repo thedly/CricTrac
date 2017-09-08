@@ -1,98 +1,85 @@
 //
-//  CoachPlayersListViewController.swift
+//  PlayerCoachesListVC.swift
 //  CricTrac
 //
-//  Created by AIPL on 30/08/17.
+//  Created by AIPL on 08/09/17.
 //  Copyright © 2017 CricTrac. All rights reserved.
 //
 
 import UIKit
 
-class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,ThemeChangeable {
-    
-    
-    @IBOutlet weak var CoachPlayersTableView: UITableView!
-    
+class PlayerCoachesListVC: UIViewController,UITableViewDelegate,UITableViewDataSource,ThemeChangeable {
+
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var noCoachesLabel: UILabel!
     @IBOutlet weak var topBarView: UIView!
-    @IBOutlet weak var noPlayersLbl: UILabel!
+    
     let currentTheme = cricTracTheme.currentTheme
     
-    var myPlayers = [String]()
+    var myCoaches = [String]()
     
-    var playerNodeIdOthers = [String]()
-    var coachNodeIds = [String]()
+    var coachNodeIdOthers = [String]()
+    var playerNodeIds = [String]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
         initializeView()
+
+        // Do any additional setup after loading the view.
     }
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         reloadData()
-        self.CoachPlayersTableView.reloadData()
+        self.tableView.reloadData()
     }
-    
-    func reloadData() {
-        myPlayers.removeAll()
-        coachNodeIds.removeAll()
-        playerNodeIdOthers.removeAll()
-        
-        getMyPlayers { (data) in
-            for(_,req) in data {
-                let pendingReq = req as! [String : AnyObject]
-                let isAcceptVal = pendingReq["isAccepted"]!
-                if isAcceptVal as! NSObject == 1 {
-                    let pendingReqs = pendingReq["PlayerID"]!
-                    self.playerNodeIdOthers.append(pendingReq["PlayerNodeIdOther"]! as! String)
-                    self.coachNodeIds.append(pendingReq["CoachNodeID"]! as! String)
-                    self.myPlayers.append(pendingReqs as! String)
-                }
-            }
-            self.CoachPlayersTableView.reloadData()
-        }
-    }
-    
     
     override func viewWillAppear(animated: Bool) {
-        let currentTheme = cricTracTheme.currentTheme
-        self.view.backgroundColor = currentTheme.topColor
         setBackgroundColor()
     }
     
-    @IBAction func backButtonTapped(sender: AnyObject) {
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     func initializeView() {
-        CoachPlayersTableView.registerNib(UINib.init(nibName: "FriendSuggestionsCell", bundle: nil), forCellReuseIdentifier: "FriendSuggestionsCell")
+        tableView.registerNib(UINib.init(nibName: "FriendSuggestionsCell", bundle: nil), forCellReuseIdentifier: "FriendSuggestionsCell")
         
-        CoachPlayersTableView.allowsSelection = false
-        CoachPlayersTableView.separatorStyle = .None
+        tableView.allowsSelection = false
+        tableView.separatorStyle = .None
     }
+
     
+    func reloadData() {
+        myCoaches.removeAll()
+        playerNodeIds.removeAll()
+        coachNodeIdOthers.removeAll()
+        
+        getMyCoaches { (data) in
+            for(_,req) in data {
+                let acceptedData = req as! [String : AnyObject]
+                let isAcceptVal = acceptedData["isAccepted"]!
+                if isAcceptVal as! NSObject == 1 {
+                    let acceptedIds = acceptedData["CoachID"]!
+                    self.coachNodeIdOthers.append(acceptedData["CoachNodeIdOther"]! as! String)
+                    self.playerNodeIds.append(acceptedData["PlayerNodeID"]! as! String)
+                    self.myCoaches.append(acceptedIds as! String)
+                }
+            }
+            self.tableView.reloadData()
+        }
+    }
+
     func changeThemeSettigs() {
         self.view.backgroundColor = currentTheme.topColor
         self.topBarView.backgroundColor = currentTheme.topColor
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if myPlayers.count == 0 {
-            noPlayersLbl.text = "No Players"
+        if myCoaches.count == 0 {
+            self.noCoachesLabel.text = "No Coaches"
         }
         else{
-            noPlayersLbl.text = ""
+            self.noCoachesLabel.text = ""
         }
-        return myPlayers.count
+        return myCoaches.count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -100,13 +87,12 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let aCell = tableView.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as! FriendSuggestionsCell
-        
-        if myPlayers.count != 0 {
-            let pendingReqId = myPlayers[indexPath.row]
+    
+        if myCoaches.count != 0 {
+            let acceptedId = myCoaches[indexPath.row]
             
-            fetchBasicProfile(pendingReqId) { (result) in
+            fetchBasicProfile(acceptedId) { (result) in
                 let proPic = result["proPic"]
                 let city =   result["city"]
                 let name = "\(result["firstname"]!) \(result["lastname"]!)"
@@ -145,22 +131,23 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
         aCell.AddFriendBtn.setTitle("Remove", forState: .Normal)
         aCell.AddFriendBtn.setTitleColor(UIColor.redColor(), forState: .Normal)
         
-        aCell.AddFriendBtn.accessibilityIdentifier = playerNodeIdOthers[indexPath.row]
-        aCell.AddFriendBtn.restorationIdentifier = coachNodeIds[indexPath.row]
-        aCell.AddFriendBtn.accessibilityValue = myPlayers[indexPath.row]
+        aCell.AddFriendBtn.accessibilityIdentifier = coachNodeIdOthers[indexPath.row]
+        aCell.AddFriendBtn.restorationIdentifier = playerNodeIds[indexPath.row]
+        aCell.AddFriendBtn.accessibilityValue = myCoaches[indexPath.row]
         
-        aCell.AddFriendBtn.addTarget(self, action: #selector(CoachPlayersListViewController.removePlayer(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        aCell.AddFriendBtn.addTarget(self, action: #selector(PlayerCoachesListVC.removeCoach(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         return aCell
+
     }
     
-    func removePlayer(sender:UIButton) {
+    func removeCoach(sender: UIButton){
         
-        let coachNodeId = sender.restorationIdentifier
-        let playerNodeId = sender.accessibilityIdentifier
-        let playerId = sender.accessibilityValue
+        let coachNodeId = sender.accessibilityIdentifier
+        let playerNodeId = sender.restorationIdentifier
+        let coachId = sender.accessibilityValue
         
-        let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to Remove this player?", preferredStyle: .ActionSheet)
+        let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to Remove this Coach?", preferredStyle: .ActionSheet)
         
         let cancelAction = UIAlertAction(title: "No", style: .Cancel) { action -> Void in
             // Just dismiss the action sheet
@@ -170,9 +157,9 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
         
         let removeAction = UIAlertAction(title: "Yes", style: .Default) { action -> Void in
             
-            fireBaseRef.child("Users").child(playerId!).child("MyCoaches").child(coachNodeId!).removeValue()
+            fireBaseRef.child("Users").child(coachId!).child("MyPlayers").child(playerNodeId!).removeValue()
             
-            fireBaseRef.child("Users").child((currentUser?.uid)!).child("MyPlayers").child(playerNodeId!).removeValue()
+            fireBaseRef.child("Users").child((currentUser?.uid)!).child("MyCoaches").child(coachNodeId!).removeValue()
             
             self.reloadData()
         }
@@ -180,13 +167,13 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
         
         self.presentViewController(actionSheetController, animated: true, completion: nil)
         
-        
-        
+
     }
     
     
-    
-    
-    
+    @IBAction func backButtonTapped(sender: AnyObject) {
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
 }

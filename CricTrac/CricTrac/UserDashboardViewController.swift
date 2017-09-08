@@ -139,6 +139,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     @IBOutlet weak var scrollViewBottomElementConstraint : NSLayoutConstraint!
     
+    @IBOutlet weak var myCoachesButton: UIButton!
+    
     var alertMessage = "Change picture"
     
     @IBAction func editImageBtnPressed(sender: AnyObject) {
@@ -392,9 +394,23 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         addTapGestureToUserName()
         TeamsTable.reloadData()
         
+        let currentTheme = cricTracTheme.currentTheme
+        myCoachesButton.layer.cornerRadius = 10
+        myCoachesButton.clipsToBounds = true
+        myCoachesButton.backgroundColor = currentTheme.bottomColor
+        myCoachesButton.layer.borderWidth = 2.0
+        myCoachesButton.layer.borderColor = UIColor.whiteColor().CGColor
         
         loadBannerAds()
 
+    }
+    
+    
+    @IBAction func myCoachesButtonTapped(sender: AnyObject) {
+       
+        let myCoachesVC = viewControllerFrom("Main", vcid: "PlayerCoachesListVC") as! PlayerCoachesListVC
+        self.presentViewController(myCoachesVC, animated: false, completion: nil)
+        
     }
     
     func initView() {

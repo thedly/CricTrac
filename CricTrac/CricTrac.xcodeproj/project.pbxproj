@@ -144,6 +144,7 @@
 		B8200C721F3EE4F900026F4D /* ProfileImageExpandingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8200C711F3EE4F800026F4D /* ProfileImageExpandingVC.swift */; };
 		B83180FB1F56BD2800AEA396 /* CoachPlayersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83180FA1F56BD2800AEA396 /* CoachPlayersListViewController.swift */; };
 		B83180FD1F57EB7700AEA396 /* CoachPendingRequetsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83180FC1F57EB7700AEA396 /* CoachPendingRequetsVC.swift */; };
+		B83180FF1F628EEA00AEA396 /* PlayerCoachesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83180FE1F628EE900AEA396 /* PlayerCoachesListVC.swift */; };
 		B835B3501EE94BF7001048A6 /* AppIntroductionScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B34F1EE94BF7001048A6 /* AppIntroductionScreens.swift */; };
 		B835B3521EE9622B001048A6 /* AppIntroductionFinalScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3511EE9622B001048A6 /* AppIntroductionFinalScreen.swift */; };
 		B835B3541EEA7D2F001048A6 /* AppIntroFirstScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3531EEA7D2F001048A6 /* AppIntroFirstScreen.swift */; };
@@ -320,6 +321,7 @@
 		B8200C711F3EE4F800026F4D /* ProfileImageExpandingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageExpandingVC.swift; sourceTree = "<group>"; };
 		B83180FA1F56BD2800AEA396 /* CoachPlayersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachPlayersListViewController.swift; sourceTree = "<group>"; };
 		B83180FC1F57EB7700AEA396 /* CoachPendingRequetsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachPendingRequetsVC.swift; sourceTree = "<group>"; };
+		B83180FE1F628EE900AEA396 /* PlayerCoachesListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerCoachesListVC.swift; sourceTree = "<group>"; };
 		B835B34F1EE94BF7001048A6 /* AppIntroductionScreens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroductionScreens.swift; sourceTree = "<group>"; };
 		B835B3511EE9622B001048A6 /* AppIntroductionFinalScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroductionFinalScreen.swift; sourceTree = "<group>"; };
 		B835B3531EEA7D2F001048A6 /* AppIntroFirstScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroFirstScreen.swift; sourceTree = "<group>"; };
@@ -634,6 +636,7 @@
 				B8200C711F3EE4F800026F4D /* ProfileImageExpandingVC.swift */,
 				B83180FA1F56BD2800AEA396 /* CoachPlayersListViewController.swift */,
 				B83180FC1F57EB7700AEA396 /* CoachPendingRequetsVC.swift */,
+				B83180FE1F628EE900AEA396 /* PlayerCoachesListVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -887,6 +890,7 @@
 				891969C11EC20C120084AD32 /* TimelineComments.swift in Sources */,
 				8953769C1DAB8C8E00DDB3A6 /* FriendSuggestionsCell.swift in Sources */,
 				4668E4CB1D68110500E36CB0 /* MatchSummaryViewController.swift in Sources */,
+				B83180FF1F628EEA00AEA396 /* PlayerCoachesListVC.swift in Sources */,
 				46B608701D44A7D3000FE098 /* NewMatchViewController.swift in Sources */,
 				8909FACB1DB9B49900066FC5 /* DoneButton.swift in Sources */,
 				895BC3CC1E266B500033D330 /* StaticPageViewController.swift in Sources */,
