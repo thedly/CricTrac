@@ -14,29 +14,29 @@ import GoogleMobileAds
 
 class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,IndicatorInfoProvider,ThemeChangeable,MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate {
     
-     @IBOutlet weak var bannerView: GADBannerView!
-     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bannerView: GADBannerView!
+    @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
     
     var friendInviteDataArray = friendInviteData
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
-       // navigationController!.navigationBar.barTintColor = currentTheme.topColor
+        // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     override func viewWillAppear(animated: Bool) {
         //setBackgroundColor()
         self.view.backgroundColor = UIColor.clearColor()
     }
-
-  
-  override func viewDidLoad() {
+    
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
-      
+        
         //setBackgroundColor()
         // Do any additional setup after loading the view.
-    loadBannerAds()
+        loadBannerAds()
     }
     func loadBannerAds() {
         if showAds == "1" {
@@ -70,7 +70,7 @@ class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITabl
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-         if let cell = tableView.dequeueReusableCellWithIdentifier("SliderMenuViewCell", forIndexPath: indexPath) as? SliderMenuViewCell {
+        if let cell = tableView.dequeueReusableCellWithIdentifier("SliderMenuViewCell", forIndexPath: indexPath) as? SliderMenuViewCell {
             let itemTitle = friendInviteDataArray[indexPath.row]["title"]
             let menuIcon = UIImage(named: friendInviteDataArray[indexPath.row]["img"]!)
             cell.menuName.text = itemTitle
@@ -81,10 +81,10 @@ class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITabl
             return cell
         }
         return SliderMenuViewCell()
-     }
+    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-       let itemTitle = friendInviteDataArray[indexPath.row]["title"]
+        let itemTitle = friendInviteDataArray[indexPath.row]["title"]
         if itemTitle == "WHATSAPP" {
             openWhatsApp()
         }
@@ -101,9 +101,8 @@ class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITabl
     
     
     func openWhatsApp(){
-//        let message = "Install CricTrac from the Store. Download it now from https://appurl.io/j3i4oq7v"
-        //let message = "https://appurl.io/j3i4oq7v"
-        let message = "http://onelink.to/huwg4w"
+        //        let message = "Install CricTrac from the Store. Download it now from https://appurl.io/j3i4oq7v"
+        let message = "CricTrac is a Cricket Productivity tool targeted for passionate Cricket Players and Coaches to track and analyze performance. Install CricTrac App on your device by downloading it from http://onelink.to/huwg4w"
         let urlStringEncoded = message.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())
         
         
@@ -131,8 +130,8 @@ class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITabl
         mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
         
         //mailComposerVC.setToRecipients(["someone@somewhere.com"])
-        mailComposerVC.setSubject("Install CricTrac from the Store")
-        mailComposerVC.setMessageBody("CricTrac is an innovative platform for any cricket player or those who are related to cricket. It helps to track the cricket scores and generate the performance reports. Download the app now from http://onelink.to/huwg4w", isHTML: false)
+        mailComposerVC.setSubject("CricTrac - Cricket Productivity App")
+        mailComposerVC.setMessageBody("CricTrac is a Cricket Productivity tool targeted for passionate Cricket Players and Coaches to track and analyze performance. Install CricTrac App on your device by downloading it from http://onelink.to/huwg4w or visit website CricTrac.com", isHTML: false)
         
         return mailComposerVC
     }
@@ -164,12 +163,12 @@ class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITabl
     
     func openMessageApp() {
         let messageVC = MFMessageComposeViewController()
-        messageVC.body = "Install CricTrac from the Store. Download it now from http://onelink.to/huwg4w";
+        messageVC.body = "CricTrac is a Cricket Productivity tool targeted for passionate Cricket Players and Coaches to track and analyze performance. Install CricTrac App on your device by downloading it from http://onelink.to/huwg4w";
         //messageVC.body = "https://itunes.apple.com/in/app/crictrac/id1137502744?mt=8";
         //messageVC.recipients = ["Enter tel-nr"]
         messageVC.messageComposeDelegate = self;
         self.presentViewController(messageVC, animated: false, completion: nil)
- 
+        
     }
     
     func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
@@ -189,15 +188,15 @@ class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITabl
     }
     
     func openFaceBookApp() {
-//        [FBWebDialogs
-//            presentRequestsDialogModallyWithSession:nil
-//            message:NSLocalizedString(@"FBinviteMessage", nil)
-//            title:nil
-//            parameters:nil
-//            handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {}
-//        ];
+        //        [FBWebDialogs
+        //            presentRequestsDialogModallyWithSession:nil
+        //            message:NSLocalizedString(@"FBinviteMessage", nil)
+        //            title:nil
+        //            parameters:nil
+        //            handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {}
+        //        ];
     }
-
+    
     
     
     /*
@@ -211,6 +210,4 @@ class FriendsInviteViewController: UIViewController,UITableViewDataSource,UITabl
      */
     
 }
-
-
 

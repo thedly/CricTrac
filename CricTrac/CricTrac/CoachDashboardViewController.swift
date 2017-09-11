@@ -61,7 +61,29 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     var allRounders = [String]()
     
     
-    
+    //by sajith
+    var playerId = ""
+    var totalMatches = 0
+    var totalBatInnings = 0
+    var totalBowlInnings = 0
+    var batAverage:Float = 0
+    var bowlAverage:Float = 0
+    var strikeRate:Float = 0
+    var economy:Float = 0
+    var totalRunsTaken = 0
+    var totalWicketsTaken = 0
+    var totalRunsGiven = 0
+    var tempHS = 0
+    var dispHS = ""
+    var tempWicketsTaken = 0
+    var tempRunsGiven = 0
+    var dispBB = ""
+    var totalNotouts = 0
+    var totalOversBowled:Float = 0
+    var totalBallsFaced = 0
+    var matchData = [String:AnyObject]()
+    var matches = [MatchSummaryData]()
+    var matchDataSource = [[String:AnyObject]]()
     
     
     
@@ -263,6 +285,8 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     
     func updateCoachSummary() {
         
+        self.matches.removeAll()
+        
         players.removeAll()
         batsmen.removeAll()
         bowlers.removeAll()
@@ -307,16 +331,152 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                             
 //                        })
                     }
+                    
+                    
+                    //Sajith: Top Batting and Bowling data
+                    getAllMatchData(playerId as! String) { (data) in
+                        self.matchDataSource.removeAll()
+                        self.makeCells(data)
+                    }
                 }
             }
         }
     }
     
+    //Sajith:
+    func makeCells(data: [String: AnyObject]) {
+        self.matchData = data
+        
+        totalMatches = 0
+        totalBatInnings = 0
+        totalBowlInnings = 0
+        totalRunsTaken = 0
+        totalBallsFaced = 0
+        strikeRate = 0
+        batAverage = 0
+        tempHS = 0
+        dispHS = "0"
+        totalNotouts = 0
+        totalBowlInnings = 0
+        totalOversBowled = 0
+        totalWicketsTaken = 0
+        totalRunsGiven = 0
+        tempWicketsTaken = 0
+        tempRunsGiven = 0
+        dispBB = "0-0"
+        bowlAverage = 0
+        economy = 0
+        
+        for (key,val) in data{
+            if  var value = val as? [String : AnyObject]{
+                value += ["key":key]
+                totalMatches += 1
+                playerId = value["UserId"] as! String
+
+                if value["RunsTaken"] as! String != "-" {
+                    let runsTaken = Int(value["RunsTaken"] as! String)!
+                    totalBatInnings += 1
+                    let dismissal = value["Dismissal"] as? String
+                    if  dismissal == "Not out" || dismissal == "Retired hurt" {
+                        totalNotouts += 1
+                    }
+                    totalBallsFaced += Int(value["BallsFaced"] as! String)!
+                    totalRunsTaken += Int(value["RunsTaken"] as! String)!
+                    
+                    if runsTaken >= tempHS {
+                        if  dismissal == "Not out" || dismissal == "Retired hurt" {
+                            tempHS = runsTaken
+                            dispHS = String(runsTaken) + "*"
+                        }
+                        else {
+                            tempHS = runsTaken
+                            dispHS = String(runsTaken)
+                        }
+                    }
+                }
+                
+                if value["OversBowled"] as! String != "-" {
+                    let wicketsTaken = Int(value["WicketsTaken"] as! String)!
+                    let runsGiven = Int(value["RunsGiven"] as! String)!
+                    totalBowlInnings += 1
+                    totalOversBowled += Float(value["OversBowled"] as! String)!
+                    totalRunsGiven += Int(value["RunsGiven"] as! String)!
+                    totalWicketsTaken += Int(value["WicketsTaken"] as! String)!
+                    
+                    if wicketsTaken > tempWicketsTaken {
+                        tempWicketsTaken = wicketsTaken
+                        tempRunsGiven = runsGiven
+                        dispBB = String(wicketsTaken) + "-" + String(runsGiven)
+                    }
+                    else if wicketsTaken == tempWicketsTaken {
+                        if runsGiven <= tempRunsGiven {
+                            tempWicketsTaken = wicketsTaken
+                            tempRunsGiven = runsGiven
+                            dispBB = String(wicketsTaken) + "-" + String(runsGiven)
+                        }
+                    }
+                }
+            }
+        }
+        
+        self.matches.append(makeSummaryCell(data))
+        self.matches.sortInPlace({ $0.totalRunsTaken > $1.totalRunsTaken })
+        
+        //self.matchSummaryTable.reloadData()
+    }
+    
+    func makeSummaryCell(value: [String : AnyObject]) -> MatchSummaryData {
+        
+        let mData = MatchSummaryData()
+        
+        if totalBallsFaced != 0 {
+            strikeRate = (Float(totalRunsTaken))*100/Float(totalBallsFaced)
+        }
+        else {
+            strikeRate = 0.0
+        }
+        
+        if (totalBatInnings-totalNotouts) != 0 {
+            batAverage = Float(totalRunsTaken)/Float(totalBatInnings - totalNotouts)
+        }
+        else {
+            batAverage = 0.0
+        }
+        
+        if totalOversBowled != 0 {
+            economy = Float(totalRunsGiven)/Float(totalOversBowled)
+        }
+        else {
+            economy = 0.0
+        }
+        
+        if totalWicketsTaken != 0 {
+            bowlAverage = Float(totalRunsGiven)/Float(totalWicketsTaken)
+        }
+        else {
+            bowlAverage = 0.0
+        }
+        
+        mData.playerId = playerId
+        mData.totalMatches = totalMatches
+        
+        mData.totalBatInnings = totalBatInnings
+        mData.totalRunsTaken = totalRunsTaken
+        mData.strikeRate = strikeRate
+        mData.batAverage = batAverage
+        mData.dispHS = dispHS
+        
+        mData.totalBowlInnings = totalBowlInnings
+        mData.totalOversBowled = totalOversBowled
+        mData.totalWicketsTaken = totalWicketsTaken
+        mData.bowlAverage = bowlAverage
+        mData.economy = economy
+        mData.dispBB = dispBB
+        
+        return mData
+    }
  
-    
-    
-    
-    
+
     
     // Only players can see this button
     @IBAction func coachActionBtnTapped(sender: UIButton) {
