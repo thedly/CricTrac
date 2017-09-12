@@ -63,6 +63,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     
     //by sajith
     var playerId = ""
+    var name = ""
     var totalMatches = 0
     var totalBatInnings = 0
     var totalBowlInnings = 0
@@ -469,9 +470,14 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             bowlAverage = 0.0
         }
         
+//        fetchBasicProfile(playerId, sucess: { (result) in
+//            self.name = "\(result["firstname"]!) \(result["lastname"]!)"
+//            mData.playerName = self.name
+//
+//        })
+        
         mData.playerId = playerId
         mData.totalMatches = totalMatches
-        
         mData.totalBatInnings = totalBatInnings
         mData.totalRunsTaken = totalRunsTaken
         mData.strikeRate = strikeRate
@@ -900,16 +906,20 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         
         if tableView == topBattingtableView {
-             self.matches.sortInPlace({ $0.totalRunsTaken > $1.totalRunsTaken })
+             self.matches.sortInPlace({ $0.batAverage > $1.batAverage })
             
                 let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! CoachTopBattingBowlingTableViewCell
             
-                cell.topBattingPlayerName.text = String(matches[indexPath.section].playerId)
-                cell.battingMatches.text = String(matches[indexPath.section].totalBatInnings)
-                cell.battingRuns.text = String(matches[indexPath.section].totalRunsTaken)
-                cell.battingHS.text = String(matches[indexPath.section].dispHS)
-                cell.battingStrikeRate.text = String(matches[indexPath.section].strikeRate)
-                cell.battingAvg.text = String(matches[indexPath.section].batAverage)
+                fetchBasicProfile(self.matches[indexPath.section].playerId, sucess: { (result) in
+                    let name = "\(result["firstname"]!) \(result["lastname"]!)"
+                    cell.topBattingPlayerName.text = name
+                })
+            
+                cell.battingMatches.text = String(self.matches[indexPath.section].totalBatInnings)
+                cell.battingRuns.text = String(self.matches[indexPath.section].totalRunsTaken)
+                cell.battingHS.text = String(self.matches[indexPath.section].dispHS)
+                cell.battingStrikeRate.text = String(format:"%.1f",self.matches[indexPath.section].strikeRate)
+                cell.battingAvg.text = String(format:"%.1f",self.matches[indexPath.section].batAverage)
             
                 cell.layer.cornerRadius = 10
                 cell.layer.masksToBounds = true
@@ -922,11 +932,16 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         self.matches.sortInPlace({ $0.bowlAverage > $1.bowlAverage })
             
             let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! CoachTopBattingBowlingTableViewCell
-            cell.topBowlingPlayerName.text = String(matches[indexPath.section].playerId)
+        
+            fetchBasicProfile(self.matches[indexPath.section].playerId, sucess: { (result) in
+                let name = "\(result["firstname"]!) \(result["lastname"]!)"
+                cell.topBowlingPlayerName.text = name
+            })
+        
             cell.bowlingMatches.text = String(matches[indexPath.section].totalBowlInnings)
             cell.bestBowling.text = String(matches[indexPath.section].dispBB)
-            cell.bowlingAve.text = String(matches[indexPath.section].bowlAverage)
-            cell.economy.text = String(matches[indexPath.section].economy)
+            cell.bowlingAve.text = String(format:"%.1f",matches[indexPath.section].bowlAverage)
+            cell.economy.text = String(format:"%.2f",matches[indexPath.section].economy)
         
             cell.backgroundColor = cricTracTheme.currentTheme.bottomColor
             //bowlingTableViewHeightConstraint.constant = CGFloat(2  * 80)

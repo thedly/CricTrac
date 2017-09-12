@@ -11,6 +11,7 @@ import Foundation
 class PlayerMatchesData {
     
     var playerId: String!
+    var playerName: String!
     var totalMatches: Int!
     var totalRunsTaken: Int!
     var totalWicketsTaken: Int!
