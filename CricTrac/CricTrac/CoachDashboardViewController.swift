@@ -859,6 +859,8 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         
         if tableView == topBattingtableView || tableView == topBowlingTableView {
             baseViewHeightConstraint.constant = 927
+            battingTableViewHeightConstraint.constant = 0
+             bowlingTableViewHeightConstraint.constant = 0
             
             if matches.count >= 5 {
                 battingTableViewHeightConstraint.constant = CGFloat(5 * 65)
@@ -868,9 +870,9 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 return 5
             }
             else {
-                battingTableViewHeightConstraint.constant += CGFloat(matches.count * 65)
-                bowlingTableViewHeightConstraint.constant += CGFloat(matches.count * 65)
-                baseViewHeightConstraint.constant += CGFloat(matches.count * 65)
+                battingTableViewHeightConstraint.constant += CGFloat(matches.count * 75)
+                bowlingTableViewHeightConstraint.constant += CGFloat(matches.count * 75)
+                baseViewHeightConstraint.constant += CGFloat(matches.count * 70)
                 return matches.count
             }
         }
@@ -912,7 +914,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 cell.layer.cornerRadius = 10
                 cell.layer.masksToBounds = true
                 cell.backgroundColor = cricTracTheme.currentTheme.bottomColor
-             battingTableViewHeightConstraint.constant = CGFloat(2 * 80)
+           //  battingTableViewHeightConstraint.constant = CGFloat(2 * 80)
             return cell
         }
        if tableView == topBowlingTableView {
@@ -927,7 +929,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             cell.economy.text = String(matches[indexPath.section].economy)
         
             cell.backgroundColor = cricTracTheme.currentTheme.bottomColor
-            bowlingTableViewHeightConstraint.constant = CGFloat(2    * 80)
+            //bowlingTableViewHeightConstraint.constant = CGFloat(2  * 80)
        
             cell.layer.cornerRadius = 10
             cell.layer.masksToBounds = true
