@@ -82,7 +82,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     var totalOversBowled:Float = 0
     var totalBallsFaced = 0
     var matchData = [String:AnyObject]()
-    var matches = [MatchSummaryData]()
+    var matches = [PlayerMatchesData]()
     var matchDataSource = [[String:AnyObject]]()
     
     
@@ -292,6 +292,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         bowlers.removeAll()
         wicketKeepers.removeAll()
         allRounders.removeAll()
+        self.matchDataSource.removeAll()
         
         getMyPlayers { (data) in
             for(_,req) in data {
@@ -299,6 +300,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 let isAcceptVal = playersData["isAccepted"]!
                 if isAcceptVal as! NSObject == 1 {
                     let playerId = playersData["PlayerID"]!
+                    self.getMatchData(playerId as! String)
                     self.players.append(playerId as! String)
                     
                     fetchBasicProfile(playerId as! String) { (result) in
@@ -333,14 +335,23 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                     }
                     
                     
-                    //Sajith: Top Batting and Bowling data
-                    getAllMatchData(playerId as! String) { (data) in
-                        self.matchDataSource.removeAll()
-                        self.makeCells(data)
-                    }
+//                    //Sajith: Top Batting and Bowling data
+//                    getAllMatchData(playerId as? String) { (data) in
+//                        self.matchDataSource.append(data)
+//                        self.makeCells(data)
+//                    }
                 }
             }
         }
+    }
+    
+    // sravani
+    func getMatchData(playerId: String) {
+        getAllMatchData(playerId) { (data) in
+            self.matchDataSource.append(data)
+            self.makeCells(data)
+        }
+
     }
     
     //Sajith:
@@ -422,12 +433,13 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         self.matches.append(makeSummaryCell(data))
         self.matches.sortInPlace({ $0.totalRunsTaken > $1.totalRunsTaken })
         
-        //self.matchSummaryTable.reloadData()
+        self.topBattingtableView.reloadData()
+        self.topBowlingTableView.reloadData()
     }
     
-    func makeSummaryCell(value: [String : AnyObject]) -> MatchSummaryData {
+    func makeSummaryCell(value: [String : AnyObject]) -> PlayerMatchesData {
         
-        let mData = MatchSummaryData()
+        let mData = PlayerMatchesData()
         
         if totalBallsFaced != 0 {
             strikeRate = (Float(totalRunsTaken))*100/Float(totalBallsFaced)
@@ -494,7 +506,8 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                     alert.dismissViewControllerAnimated(true, completion: nil)
                 })
                  coachValidation()
-
+                updateCoachSummary()
+                
                 break
             
         case "Cancel Request":
@@ -511,6 +524,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 fireBaseRef.child("Users").child(self.currentUserId).child("MyPlayers").child(self.myPlayersFrndNodeId).removeValue()
                 fireBaseRef.child("Users").child((currentUser?.uid)!).child("MyCoaches").child(self.myCoachFrndNodeId).removeValue()
                 self.coachValidation()
+                self.updateCoachSummary()
                 
             }
             actionSheetController.addAction(unfriendAction)
@@ -828,20 +842,39 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                     return ThemeColorsCollectionViewCell()
 
     }
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
-
-        baseViewHeightConstraint.constant = 927
-         baseViewHeightConstraint.constant += CGFloat(8 * 70)
-        
-    }
+//    override func viewDidAppear(animated: Bool) {
+//        super.viewDidAppear(true)
+//
+//        baseViewHeightConstraint.constant = 927
+//         baseViewHeightConstraint.constant += CGFloat(8 * 70)
+//        
+//    }
     
     // tableview functions
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if tableView == topBattingtableView {
-            return 4
+//        if tableView == topBattingtableView {
+//            return 4
+//        }
+//        return 4
+        
+        if tableView == topBattingtableView || tableView == topBowlingTableView {
+            baseViewHeightConstraint.constant = 927
+            
+            if matches.count >= 5 {
+                battingTableViewHeightConstraint.constant = CGFloat(5 * 65)
+                bowlingTableViewHeightConstraint.constant = CGFloat(5 * 65)
+                baseViewHeightConstraint.constant += CGFloat(5 * 65)
+
+                return 5
+            }
+            else {
+                battingTableViewHeightConstraint.constant += CGFloat(matches.count * 65)
+                bowlingTableViewHeightConstraint.constant += CGFloat(matches.count * 65)
+                baseViewHeightConstraint.constant += CGFloat(matches.count * 65)
+                return matches.count
+            }
         }
-        return 4
+        return matches.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -863,21 +896,38 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         //let currentTheme = cricTracTheme.currentTheme
         
         let cell = tableView.cellForRowAtIndexPath(indexPath)
+        
         if tableView == topBattingtableView {
+             self.matches.sortInPlace({ $0.totalRunsTaken > $1.totalRunsTaken })
             
                 let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! CoachTopBattingBowlingTableViewCell
+            
+                cell.topBattingPlayerName.text = String(matches[indexPath.section].playerId)
+                cell.battingMatches.text = String(matches[indexPath.section].totalBatInnings)
+                cell.battingRuns.text = String(matches[indexPath.section].totalRunsTaken)
+                cell.battingHS.text = String(matches[indexPath.section].dispHS)
+                cell.battingStrikeRate.text = String(matches[indexPath.section].strikeRate)
+                cell.battingAvg.text = String(matches[indexPath.section].batAverage)
+            
                 cell.layer.cornerRadius = 10
                 cell.layer.masksToBounds = true
                 cell.backgroundColor = cricTracTheme.currentTheme.bottomColor
-             battingTableViewHeightConstraint.constant = CGFloat(4 * 80)
+             battingTableViewHeightConstraint.constant = CGFloat(2 * 80)
             return cell
         }
        if tableView == topBowlingTableView {
+        
+        self.matches.sortInPlace({ $0.bowlAverage > $1.bowlAverage })
             
             let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! CoachTopBattingBowlingTableViewCell
-            cell.topBowlingPlayerName.text = topBattingnames[indexPath.section]
-             cell.backgroundColor = cricTracTheme.currentTheme.bottomColor
-        bowlingTableViewHeightConstraint.constant = CGFloat(4 * 80)
+            cell.topBowlingPlayerName.text = String(matches[indexPath.section].playerId)
+            cell.bowlingMatches.text = String(matches[indexPath.section].totalBowlInnings)
+            cell.bestBowling.text = String(matches[indexPath.section].dispBB)
+            cell.bowlingAve.text = String(matches[indexPath.section].bowlAverage)
+            cell.economy.text = String(matches[indexPath.section].economy)
+        
+            cell.backgroundColor = cricTracTheme.currentTheme.bottomColor
+            bowlingTableViewHeightConstraint.constant = CGFloat(2    * 80)
        
             cell.layer.cornerRadius = 10
             cell.layer.masksToBounds = true

@@ -16,13 +16,16 @@ class CoachTopBattingBowlingTableViewCell: UITableViewCell {
     @IBOutlet weak var battingAvg: UILabel!
     @IBOutlet weak var battingStrikeRate: UILabel!
     @IBOutlet weak var battingRuns: UILabel!
+    @IBOutlet weak var battingHS: UILabel!
+    
     
     //Top Bowling
     @IBOutlet weak var topBowlingPlayerName: UILabel!
     @IBOutlet weak var bowlingMatches: UILabel!
     @IBOutlet weak var bowlingAve: UILabel!
-    @IBOutlet weak var bowlingStrikeRate: UILabel!
-    @IBOutlet weak var BowlingRuns: UILabel!
+    @IBOutlet weak var wickets: UILabel!
+    @IBOutlet weak var bestBowling: UILabel!
+    @IBOutlet weak var economy: UILabel!
     
 
     override func awakeFromNib() {

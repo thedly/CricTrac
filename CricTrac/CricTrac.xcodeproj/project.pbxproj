@@ -145,6 +145,7 @@
 		B83180FB1F56BD2800AEA396 /* CoachPlayersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83180FA1F56BD2800AEA396 /* CoachPlayersListViewController.swift */; };
 		B83180FD1F57EB7700AEA396 /* CoachPendingRequetsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83180FC1F57EB7700AEA396 /* CoachPendingRequetsVC.swift */; };
 		B83180FF1F628EEA00AEA396 /* PlayerCoachesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83180FE1F628EE900AEA396 /* PlayerCoachesListVC.swift */; };
+		B83389381F668D830049357D /* PlayerMatchesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83389371F668D830049357D /* PlayerMatchesData.swift */; };
 		B835B3501EE94BF7001048A6 /* AppIntroductionScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B34F1EE94BF7001048A6 /* AppIntroductionScreens.swift */; };
 		B835B3521EE9622B001048A6 /* AppIntroductionFinalScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3511EE9622B001048A6 /* AppIntroductionFinalScreen.swift */; };
 		B835B3541EEA7D2F001048A6 /* AppIntroFirstScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3531EEA7D2F001048A6 /* AppIntroFirstScreen.swift */; };
@@ -322,6 +323,7 @@
 		B83180FA1F56BD2800AEA396 /* CoachPlayersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachPlayersListViewController.swift; sourceTree = "<group>"; };
 		B83180FC1F57EB7700AEA396 /* CoachPendingRequetsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachPendingRequetsVC.swift; sourceTree = "<group>"; };
 		B83180FE1F628EE900AEA396 /* PlayerCoachesListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerCoachesListVC.swift; sourceTree = "<group>"; };
+		B83389371F668D830049357D /* PlayerMatchesData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerMatchesData.swift; sourceTree = "<group>"; };
 		B835B34F1EE94BF7001048A6 /* AppIntroductionScreens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroductionScreens.swift; sourceTree = "<group>"; };
 		B835B3511EE9622B001048A6 /* AppIntroductionFinalScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroductionFinalScreen.swift; sourceTree = "<group>"; };
 		B835B3531EEA7D2F001048A6 /* AppIntroFirstScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroFirstScreen.swift; sourceTree = "<group>"; };
@@ -509,6 +511,7 @@
 				897C414F1E21FFA4005F1231 /* Friends.swift */,
 				891B2AA61E7CE09800F6B5BA /* RequestsData.swift */,
 				B85ECAB41EF91B3B00CC29E5 /* AddMatchIntroScreens.swift */,
+				B83389371F668D830049357D /* PlayerMatchesData.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -939,6 +942,7 @@
 				46C983C21D4078EB00DFC607 /* utility.swift in Sources */,
 				4657D56C1D4DA4E7009E0FBE /* Enums.swift in Sources */,
 				4657D5681D49A060009E0FBE /* SliderMenuCell.swift in Sources */,
+				B83389381F668D830049357D /* PlayerMatchesData.swift in Sources */,
 				B835B35A1EEA7D92001048A6 /* AppIntroFourthScreen.swift in Sources */,
 				8930F0361D5B5ED600C7540B /* UserInfoViewController.swift in Sources */,
 				462DE9F71D478B9E00E31E8F /* CTDatePicker.swift in Sources */,
