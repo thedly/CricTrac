@@ -470,12 +470,6 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             bowlAverage = 0.0
         }
         
-//        fetchBasicProfile(playerId, sucess: { (result) in
-//            self.name = "\(result["firstname"]!) \(result["lastname"]!)"
-//            mData.playerName = self.name
-//
-//        })
-        
         mData.playerId = playerId
         mData.totalMatches = totalMatches
         mData.totalBatInnings = totalBatInnings
