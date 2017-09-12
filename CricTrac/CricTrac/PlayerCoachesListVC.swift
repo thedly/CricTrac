@@ -57,8 +57,8 @@ class PlayerCoachesListVC: UIViewController,UITableViewDelegate,UITableViewDataS
                 let isAcceptVal = acceptedData["isAccepted"]!
                 if isAcceptVal as! NSObject == 1 {
                     let acceptedIds = acceptedData["CoachID"]!
-                    self.coachNodeIdOthers.append(acceptedData["CoachNodeIdOther"]! as! String)
-                    self.playerNodeIds.append(acceptedData["PlayerNodeID"]! as! String)
+                    self.playerNodeIds.append(acceptedData["CoachNodeIdOther"]! as! String)
+                    self.coachNodeIdOthers.append(acceptedData["PlayerNodeID"]! as! String)
                     self.myCoaches.append(acceptedIds as! String)
                 }
             }

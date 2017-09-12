@@ -1080,10 +1080,10 @@ func markMyCoach(userId: String) {
     let addedTime =  NSDate().getCurrentTimeStamp()
     
     let refForCoach = fireBaseRef.child("Users").child(coachId).child("MyPlayers").childByAutoId()
-    let playerNodeId = refForCoach.key
+    let coachNodeId = refForCoach.key
     
     let refForPlayer = fireBaseRef.child("Users").child(playerId).child("MyCoaches").childByAutoId()
-    let coachNodeId = refForPlayer.key
+    let playerNodeId = refForPlayer.key
     
     let playerDictVal:[String:AnyObject] = ["PlayerID": playerId,"RequestTime": addedTime,"isAccepted": isAccepted, "CoachNodeID": coachNodeId, "PlayerNodeIdOther": playerNodeId]
     refForCoach.setValue(playerDictVal)
@@ -1098,9 +1098,7 @@ func markMyCoach(userId: String) {
 
 func getMyPlayers(sucessBlock:([String: AnyObject])->Void) {
     fireBaseRef.child("Users").child(currentUser!.uid).child("MyPlayers").observeSingleEventOfType(.Value, withBlock: { snapshot in
-        
         if let data = snapshot.value as? [String: AnyObject] {
-            
             sucessBlock(data)
         }
         else{

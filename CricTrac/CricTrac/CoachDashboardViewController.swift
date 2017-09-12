@@ -154,8 +154,8 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                     if let data = req as? [String : AnyObject] {
                         let coachID = String(data["CoachID"]!)
                         let isAccepted = String(data["isAccepted"]!)
-                        self.myCoachFrndNodeId = String(data["CoachNodeIdOther"]!)
-                        self.myPlayersFrndNodeId = String(data["PlayerNodeID"]!)
+                        self.myPlayersFrndNodeId = String(data["CoachNodeIdOther"]!)
+                        self.myCoachFrndNodeId = String(data["PlayerNodeID"]!)
                         if coachID == self.currentUserId {
                             coachExist = 1
 
@@ -324,38 +324,26 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                             self.wicketKeepers.append(playerId as! String)
                         }
                         
-//                        dispatch_async(dispatch_get_main_queue(),{
-                            // Assigning values
-                            self.totalPlayers.text = String(self.players.count)
-                            self.totalBatsmen.text = String(self.batsmen.count)
-                            self.totalBowlers.text = String(self.bowlers.count)
-                            self.totalWickets.text = String(self.wicketKeepers.count)
-                            self.totalAllRounders.text = String(self.allRounders.count)
-                            
-//                        })
+                        // Assigning values
+                        self.totalPlayers.text = String(self.players.count)
+                        self.totalBatsmen.text = String(self.batsmen.count)
+                        self.totalBowlers.text = String(self.bowlers.count)
+                        self.totalWickets.text = String(self.wicketKeepers.count)
+                        self.totalAllRounders.text = String(self.allRounders.count)
                     }
-                    
-                    
-//                    //Sajith: Top Batting and Bowling data
-//                    getAllMatchData(playerId as? String) { (data) in
-//                        self.matchDataSource.append(data)
-//                        self.makeCells(data)
-//                    }
                 }
             }
         }
     }
     
-    // sravani
+    // Get all match data
     func getMatchData(playerId: String) {
         getAllMatchData(playerId) { (data) in
             self.matchDataSource.append(data)
             self.makeCells(data)
         }
-
     }
     
-    //Sajith:
     func makeCells(data: [String: AnyObject]) {
         self.matchData = data
         
@@ -933,6 +921,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             })
         
             cell.bowlingMatches.text = String(matches[indexPath.section].totalBowlInnings)
+            cell.wickets.text = String(matches[indexPath.section].totalWicketsTaken)
             cell.bestBowling.text = String(matches[indexPath.section].dispBB)
             cell.bowlingAve.text = String(format:"%.1f",matches[indexPath.section].bowlAverage)
             cell.economy.text = String(format:"%.2f",matches[indexPath.section].economy)
