@@ -34,6 +34,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     
     var myCoachFrndNodeId = ""
     var myPlayersFrndNodeId = ""
+    let currentTheme = cricTracTheme.currentTheme
     
     
     // for new features
@@ -48,6 +49,10 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     @IBOutlet weak var coachFrndButton: UIButton!
     @IBOutlet weak var pendingRequests: UIButton!
     @IBOutlet weak var coachFrndBtnHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var viewAllBtnForTopBatting: UIButton!
+    
+    @IBOutlet weak var viewAllBtnForTopBowling: UIButton!
     
     @IBOutlet weak var battingTableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bowlingTableViewHeightConstraint: NSLayoutConstraint!
@@ -124,6 +129,19 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         coachFrndButton.backgroundColor = currentTheme.bottomColor
         coachFrndButton.layer.borderWidth = 2.0
         coachFrndButton.layer.borderColor = UIColor.whiteColor().CGColor
+        
+        viewAllBtnForTopBatting.layer.cornerRadius = 10
+        viewAllBtnForTopBatting.clipsToBounds = true
+        viewAllBtnForTopBatting.backgroundColor = currentTheme.bottomColor
+        viewAllBtnForTopBatting.layer.borderWidth = 2.0
+        viewAllBtnForTopBatting.layer.borderColor = UIColor.whiteColor().CGColor
+        
+        viewAllBtnForTopBowling.layer.cornerRadius = 10
+        viewAllBtnForTopBowling.clipsToBounds = true
+        viewAllBtnForTopBowling.backgroundColor = currentTheme.bottomColor
+        viewAllBtnForTopBowling.layer.borderWidth = 2.0
+        viewAllBtnForTopBowling.layer.borderColor = UIColor.whiteColor().CGColor
+        
         
         coachTeams.delegate = self
         coachTeams.dataSource = self
@@ -209,7 +227,6 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             coachFrndBtnHeightConstraint.constant = 30
             userProfileData = profileData
         }
-        
         
         userProfileImage.layer.cornerRadius = userProfileImage.bounds.size.width/2
         userProfileImage.clipsToBounds = true
@@ -535,7 +552,8 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 
                 fireBaseRef.child("Users").child(self.currentUserId).child("MyPlayers").child(self.myPlayersFrndNodeId).removeValue()
                 fireBaseRef.child("Users").child((currentUser?.uid)!).child("MyCoaches").child(self.myCoachFrndNodeId).removeValue()
-                self.coachFrndButton.setTitle("Mark as my Coach", forState: .Normal)
+                self.coachValidation()
+                self.updateCoachSummary()
                 
             }
             actionSheetController.addAction(unfriendAction)
@@ -851,16 +869,16 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
              bowlingTableViewHeightConstraint.constant = 0
             
             if matches.count >= 5 {
-                battingTableViewHeightConstraint.constant = CGFloat(5 * 65)
-                bowlingTableViewHeightConstraint.constant = CGFloat(5 * 65)
-                baseViewHeightConstraint.constant += CGFloat(5 * 65)
+                battingTableViewHeightConstraint.constant = CGFloat(5 * 78)
+                bowlingTableViewHeightConstraint.constant = CGFloat(5 * 78)
+                baseViewHeightConstraint.constant += CGFloat(5 * 120)
 
                 return 5
             }
             else {
-                battingTableViewHeightConstraint.constant += CGFloat(matches.count * 75)
-                bowlingTableViewHeightConstraint.constant += CGFloat(matches.count * 75)
-                baseViewHeightConstraint.constant += CGFloat(matches.count * 70)
+                battingTableViewHeightConstraint.constant += CGFloat(matches.count * 78)
+                bowlingTableViewHeightConstraint.constant += CGFloat(matches.count * 78)
+                baseViewHeightConstraint.constant += CGFloat(matches.count * 110)
                 return matches.count
             }
         }
@@ -875,6 +893,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 7
     }
+    
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let aView = UIView()
         aView.backgroundColor = UIColor.clearColor()
@@ -903,10 +922,21 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 cell.battingStrikeRate.text = String(format:"%.1f",self.matches[indexPath.section].strikeRate)
                 cell.battingAvg.text = String(format:"%.1f",self.matches[indexPath.section].batAverage)
             
+            cell.viewScoreboardForBattingList.addTarget(self, action: #selector(CoachDashboardViewController.viewScoreboardForBatsmen(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            
+            
                 cell.layer.cornerRadius = 10
                 cell.layer.masksToBounds = true
                 cell.backgroundColor = cricTracTheme.currentTheme.bottomColor
-           //  battingTableViewHeightConstraint.constant = CGFloat(2 * 80)
+            
+            cell.viewScoreboardForBattingList.layer.cornerRadius = 10
+            cell.viewScoreboardForBattingList.clipsToBounds = true
+            cell.viewScoreboardForBattingList.backgroundColor = currentTheme.topColor
+            cell.viewScoreboardForBattingList.layer.borderWidth = 2.0
+            cell.viewScoreboardForBattingList.layer.borderColor = UIColor.whiteColor().CGColor
+
+            
+            
             return cell
         }
        if tableView == topBowlingTableView {
@@ -926,23 +956,55 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             cell.bowlingAve.text = String(format:"%.1f",matches[indexPath.section].bowlAverage)
             cell.economy.text = String(format:"%.2f",matches[indexPath.section].economy)
         
+            cell.viewScoreboardForBowlingList.addTarget(self, action: #selector(CoachDashboardViewController.viewScoreboardForBowlers(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
             cell.backgroundColor = cricTracTheme.currentTheme.bottomColor
-            //bowlingTableViewHeightConstraint.constant = CGFloat(2  * 80)
-       
             cell.layer.cornerRadius = 10
             cell.layer.masksToBounds = true
-            return cell
+        
+        cell.viewScoreboardForBowlingList.layer.cornerRadius = 10
+        cell.viewScoreboardForBowlingList.clipsToBounds = true
+        cell.viewScoreboardForBowlingList.backgroundColor = currentTheme.topColor
+        cell.viewScoreboardForBowlingList.layer.borderWidth = 2.0
+        cell.viewScoreboardForBowlingList.layer.borderColor = UIColor.whiteColor().CGColor
+        
+        return cell
+        
         }
         return cell!
     }
    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 66
+        return 70
     }
 
     @IBAction func pendingRequestsButtonTapped(sender: AnyObject) {
         let pendingRequests = viewControllerFrom("Main", vcid: "CoachPendingRequetsVC") as! CoachPendingRequetsVC
         self.presentViewController(pendingRequests, animated: false, completion: nil)
+    }
+    
+    @IBAction func viewAllForBattingList(sender: AnyObject) {
+       
+        let battingList = viewControllerFrom("Main", vcid: "TopBattingPlayersList") as! TopBattingPlayersList
+        battingList.battingMatches = matches
+        self.presentViewController(battingList, animated: false, completion: nil)
+
+    }
+    
+    @IBAction func viewAllForBowlingList(sender: AnyObject) {
+        
+        let bowlingList = viewControllerFrom("Main", vcid: "TopBowlingPlayersList") as! TopBowlingPlayersList
+        bowlingList.bowlingMatches = matches
+        self.presentViewController(bowlingList, animated: false, completion: nil)
+
+    }
+    
+    func viewScoreboardForBatsmen(sender:UIButton) {
+        
+    }
+    
+    func viewScoreboardForBowlers(sender:UIButton) {
+        
     }
     
     

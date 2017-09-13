@@ -1,0 +1,91 @@
+//
+//  TopBowlingPlayersList.swift
+//  CricTrac
+//
+//  Created by AIPL on 13/09/17.
+//  Copyright © 2017 CricTrac. All rights reserved.
+//
+
+import UIKit
+
+class TopBowlingPlayersList: UIViewController,UITableViewDelegate,UITableViewDataSource,ThemeChangeable {
+    
+     @IBOutlet weak var topBarView: UIView!
+    
+    var bowlingMatches = [PlayerMatchesData]()
+   
+    let currentTheme = cricTracTheme.currentTheme
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setBackgroundColor()
+    }
+    
+    func changeThemeSettigs() {
+        
+        self.view.backgroundColor = currentTheme.topColor
+        self.topBarView.backgroundColor = currentTheme.topColor
+        
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return bowlingMatches.count
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 7
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let aView = UIView()
+        aView.backgroundColor = UIColor.clearColor()
+        return aView
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+       
+        self.bowlingMatches.sortInPlace({ $0.bowlAverage > $1.bowlAverage })
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! CoachTopBattingBowlingTableViewCell
+        
+        fetchBasicProfile(self.bowlingMatches[indexPath.section].playerId, sucess: { (result) in
+            let name = "\(result["firstname"]!) \(result["lastname"]!)"
+            cell.topBowlingPlayerName.text = name
+        })
+        
+        cell.bowlingMatches.text = String(bowlingMatches[indexPath.section].totalBowlInnings)
+        cell.wickets.text = String(bowlingMatches[indexPath.section].totalWicketsTaken)
+        cell.bestBowling.text = String(bowlingMatches[indexPath.section].dispBB)
+        cell.bowlingAve.text = String(format:"%.1f",bowlingMatches[indexPath.section].bowlAverage)
+        cell.economy.text = String(format:"%.2f",bowlingMatches[indexPath.section].economy)
+        
+        cell.backgroundColor = cricTracTheme.currentTheme.bottomColor
+        cell.layer.cornerRadius = 10
+        cell.layer.masksToBounds = true
+        
+        cell.viewScoreboardForBowlingList.layer.cornerRadius = 10
+        cell.viewScoreboardForBowlingList.clipsToBounds = true
+        cell.viewScoreboardForBowlingList.backgroundColor = currentTheme.topColor
+        cell.viewScoreboardForBowlingList.layer.borderWidth = 2.0
+        cell.viewScoreboardForBowlingList.layer.borderColor = UIColor.whiteColor().CGColor
+        
+        return cell
+        
+
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 70
+    }
+    
+    @IBAction func backButtonTapped(sender: AnyObject) {
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+}

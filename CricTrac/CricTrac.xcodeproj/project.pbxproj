@@ -146,6 +146,8 @@
 		B83180FD1F57EB7700AEA396 /* CoachPendingRequetsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83180FC1F57EB7700AEA396 /* CoachPendingRequetsVC.swift */; };
 		B83180FF1F628EEA00AEA396 /* PlayerCoachesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83180FE1F628EE900AEA396 /* PlayerCoachesListVC.swift */; };
 		B83389381F668D830049357D /* PlayerMatchesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83389371F668D830049357D /* PlayerMatchesData.swift */; };
+		B833893A1F6933080049357D /* TopBattingPlayersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83389391F6933070049357D /* TopBattingPlayersList.swift */; };
+		B833893C1F69332E0049357D /* TopBowlingPlayersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B833893B1F69332E0049357D /* TopBowlingPlayersList.swift */; };
 		B835B3501EE94BF7001048A6 /* AppIntroductionScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B34F1EE94BF7001048A6 /* AppIntroductionScreens.swift */; };
 		B835B3521EE9622B001048A6 /* AppIntroductionFinalScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3511EE9622B001048A6 /* AppIntroductionFinalScreen.swift */; };
 		B835B3541EEA7D2F001048A6 /* AppIntroFirstScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3531EEA7D2F001048A6 /* AppIntroFirstScreen.swift */; };
@@ -324,6 +326,8 @@
 		B83180FC1F57EB7700AEA396 /* CoachPendingRequetsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachPendingRequetsVC.swift; sourceTree = "<group>"; };
 		B83180FE1F628EE900AEA396 /* PlayerCoachesListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerCoachesListVC.swift; sourceTree = "<group>"; };
 		B83389371F668D830049357D /* PlayerMatchesData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerMatchesData.swift; sourceTree = "<group>"; };
+		B83389391F6933070049357D /* TopBattingPlayersList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBattingPlayersList.swift; sourceTree = "<group>"; };
+		B833893B1F69332E0049357D /* TopBowlingPlayersList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBowlingPlayersList.swift; sourceTree = "<group>"; };
 		B835B34F1EE94BF7001048A6 /* AppIntroductionScreens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroductionScreens.swift; sourceTree = "<group>"; };
 		B835B3511EE9622B001048A6 /* AppIntroductionFinalScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroductionFinalScreen.swift; sourceTree = "<group>"; };
 		B835B3531EEA7D2F001048A6 /* AppIntroFirstScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroFirstScreen.swift; sourceTree = "<group>"; };
@@ -640,6 +644,8 @@
 				B83180FA1F56BD2800AEA396 /* CoachPlayersListViewController.swift */,
 				B83180FC1F57EB7700AEA396 /* CoachPendingRequetsVC.swift */,
 				B83180FE1F628EE900AEA396 /* PlayerCoachesListVC.swift */,
+				B83389391F6933070049357D /* TopBattingPlayersList.swift */,
+				B833893B1F69332E0049357D /* TopBowlingPlayersList.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -969,11 +975,13 @@
 				891B2AA71E7CE09800F6B5BA /* RequestsData.swift in Sources */,
 				679367351EC70D250097B187 /* AchievementListViewController.swift in Sources */,
 				89358AFB1E19773E00A1A6F0 /* SettingsViewCell.swift in Sources */,
+				B833893A1F6933080049357D /* TopBattingPlayersList.swift in Sources */,
 				B88CB6BA1EE67110009CD077 /* MasterDataViewController.swift in Sources */,
 				46ACE0C71E0FF625004118A4 /* CommentTableViewCell.swift in Sources */,
 				89E6084D1D6D4ADC00F6BD11 /* CTDataPicker.swift in Sources */,
 				6783C11F1E67347D00DEDA55 /* HelperFunctions.swift in Sources */,
 				4657D5661D499FDD009E0FBE /* SliderMenuViewController.swift in Sources */,
+				B833893C1F69332E0049357D /* TopBowlingPlayersList.swift in Sources */,
 				893DAD4A1DB660AC00CC1875 /* Profile.swift in Sources */,
 				46F36E361D93801900EA9C6A /* ImagePostTableViewCell.swift in Sources */,
 				461F5A5F1DE136D600B4616F /* Theme.swift in Sources */,

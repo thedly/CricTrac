@@ -17,6 +17,8 @@ class CoachTopBattingBowlingTableViewCell: UITableViewCell {
     @IBOutlet weak var battingStrikeRate: UILabel!
     @IBOutlet weak var battingRuns: UILabel!
     @IBOutlet weak var battingHS: UILabel!
+    @IBOutlet weak var viewScoreboardForBattingList: UIButton!
+    
     
     
     //Top Bowling
@@ -26,11 +28,18 @@ class CoachTopBattingBowlingTableViewCell: UITableViewCell {
     @IBOutlet weak var wickets: UILabel!
     @IBOutlet weak var bestBowling: UILabel!
     @IBOutlet weak var economy: UILabel!
+    @IBOutlet weak var viewScoreboardForBowlingList: UIButton!
+    
+    
     
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+               
+        
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
