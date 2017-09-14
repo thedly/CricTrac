@@ -395,11 +395,19 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         TeamsTable.reloadData()
         
         let currentTheme = cricTracTheme.currentTheme
+        
         myCoachesButton.layer.cornerRadius = 10
         myCoachesButton.clipsToBounds = true
         myCoachesButton.backgroundColor = currentTheme.bottomColor
         myCoachesButton.layer.borderWidth = 2.0
         myCoachesButton.layer.borderColor = UIColor.whiteColor().CGColor
+        
+        if friendId == nil {
+            myCoachesButton.hidden = false
+        }
+        else {
+            myCoachesButton.hidden = true
+        }
         
         loadBannerAds()
 
@@ -461,11 +469,10 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         let currentISO = currentCountryList[0].iso
         
         //For age calculating
-       
-          let  dob = userProfileData.DateOfBirth
+        let  dob = userProfileData.DateOfBirth
         
         let dateFormater = NSDateFormatter()
-         dateFormater.dateFormat = "dd-MM-yyyy"
+        dateFormater.dateFormat = "dd-MM-yyyy"
         let birthdayDate = dateFormater.dateFromString(dob)
         
         let date = NSDate()

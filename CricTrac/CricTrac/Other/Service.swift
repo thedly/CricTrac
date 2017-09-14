@@ -388,14 +388,14 @@ func fetchBasicProfile(id:String,sucess:(result:[String:String])->Void){
             guard let proPic = data["ProfileImageURL"] as? String else {return }
             guard let city = data["City"]! as? String else {return }
             guard let userProfile = data["UserProfile"]! as? String else {return }
+            guard let dob = data["DateOfBirth"]! as? String else {return }
             
             if userProfile == "Player" {
                 playingRole = (data["PlayingRole"]! as? String)!
                 battingStyle = (data["BattingStyle"]! as? String)!
-                
             }
             
-            sucess(result: ["proPic":proPic,"city":city,"firstname":firstname,"lastname":lastname,"userProfile":userProfile,"playingRole":playingRole,"battingStyle":battingStyle])
+            sucess(result: ["proPic":proPic,"city":city,"firstname":firstname,"lastname":lastname,"userProfile":userProfile,"dob":dob,"playingRole":playingRole,"battingStyle":battingStyle])
         }
     })
 }

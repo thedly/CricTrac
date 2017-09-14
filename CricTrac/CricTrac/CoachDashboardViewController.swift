@@ -57,8 +57,6 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     @IBOutlet weak var battingTableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bowlingTableViewHeightConstraint: NSLayoutConstraint!
     
-    var topBattingnames = ["Arjun Kumar","Kushal Rajiv","Krit Gupta","Noel Phlip","Lochan goudal"]
-    
     var players = [String]()
     var batsmen = [String]()
     var bowlers = [String]()
@@ -67,6 +65,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     
     
     //by sajith
+    var avgAge:Float = 0
     var playerId = ""
     var name = ""
     var totalMatches = 0
@@ -243,14 +242,19 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         if userProfileData.Experience != "-" {
              coachExpr =  userProfileData.Experience
         }
-       if userProfileData.CoachingLevel != "-" {
+        if userProfileData.CoachingLevel != "-" {
             coachLevel = userProfileData.CoachingLevel
         }
         
         let formattedStr = NSMutableAttributedString()
-        let coachExprStrLevel = formattedStr.bold("Exp: \(coachExpr) Years \n", fontName: appFont_black, fontSize: 15).bold("\(coachLevel)", fontName: appFont_black, fontSize: 15)
-        self.exprOfCoach.attributedText = coachExprStrLevel
         
+        if coachExpr != "" {
+            formattedStr.bold("Exp: \(coachExpr) Years", fontName: appFont_black, fontSize: 15)
+        }
+        if coachLevel != "" {
+            formattedStr.bold("\nLevel: \(coachLevel)", fontName: appFont_black, fontSize: 15)
+        }
+        self.exprOfCoach.attributedText = formattedStr
         
         let formattedString = NSMutableAttributedString()
         let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State), ", fontName: appFont_black, fontSize: 15).bold("\(currentISO) ", fontName: appFont_black, fontSize: 15)
@@ -322,10 +326,6 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                     self.players.append(playerId as! String)
                     
                     fetchBasicProfile(playerId as! String) { (result) in
-                        //let proPic = result["proPic"]
-                        //let city =   result["city"]
-                        //let name = "\(result["firstname"]!) \(result["lastname"]!)"
-                        //let userProfile = result["userProfile"]
                         let playingRole = result["playingRole"]
                         
                         if playingRole == "Batsman" {
@@ -341,12 +341,40 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                             self.wicketKeepers.append(playerId as! String)
                         }
                         
+                        //For age calculating
+                        let  dob = result["dob"]
+                        let dateFormater = NSDateFormatter()
+                        dateFormater.dateFormat = "dd-MM-yyyy"
+                        let birthdayDate = dateFormater.dateFromString(dob!)
+                        let date = NSDate()
+                        let calender:NSCalendar  = NSCalendar.currentCalendar()
+                        let currentMonth = calender.component(.Month, fromDate: date)
+                        let birthmonth = calender.component(.Month, fromDate: birthdayDate!)
+                        var years = calender.component(.Year, fromDate: date) - calender.component(.Year, fromDate: birthdayDate!)
+                        var months = currentMonth - birthmonth
+                        
+                        if months < 0 {
+                            years = years - 1
+                            months = 12 - birthmonth + currentMonth
+                            if calender.component(.Day, fromDate: date) < calender.component(.Day, fromDate: birthdayDate!){
+                                months = months - 1
+                            }
+                        }
+                        else if months == 0 && calender.component(.Day, fromDate: date) < calender.component(.Day, fromDate: birthdayDate!)
+                        {
+                            years = years - 1
+                            months = 11
+                        }
+                        let ageString = "\(years).\(months)"
+                        self.avgAge += Float(ageString)!
+                        
                         // Assigning values
                         self.totalPlayers.text = String(self.players.count)
                         self.totalBatsmen.text = String(self.batsmen.count)
                         self.totalBowlers.text = String(self.bowlers.count)
                         self.totalWickets.text = String(self.wicketKeepers.count)
                         self.totalAllRounders.text = String(self.allRounders.count)
+                        self.totalAvgAge.text = String(format:"%.1f",self.avgAge/Float(self.players.count))
                     }
                 }
             }
@@ -439,7 +467,6 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         }
         
         self.matches.append(makeSummaryCell(data))
-        self.matches.sortInPlace({ $0.totalRunsTaken > $1.totalRunsTaken })
         
         self.topBattingtableView.reloadData()
         self.topBowlingTableView.reloadData()
