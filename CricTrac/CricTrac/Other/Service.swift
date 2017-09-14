@@ -1096,8 +1096,13 @@ func markMyCoach(userId: String) {
     
 }
 
-func getMyPlayers(sucessBlock:([String: AnyObject])->Void) {
-    fireBaseRef.child("Users").child(currentUser!.uid).child("MyPlayers").observeSingleEventOfType(.Value, withBlock: { snapshot in
+        
+
+func getMyPlayers(friendId:String? = nil,sucessBlock:([String: AnyObject])->Void) {
+    
+    let userId:String = friendId ?? currentUser!.uid
+    
+    fireBaseRef.child("Users").child(userId).child("MyPlayers").observeSingleEventOfType(.Value, withBlock: { snapshot in
         if let data = snapshot.value as? [String: AnyObject] {
             sucessBlock(data)
         }

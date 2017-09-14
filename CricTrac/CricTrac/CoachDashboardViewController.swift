@@ -312,7 +312,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         allRounders.removeAll()
         self.matchDataSource.removeAll()
         
-        getMyPlayers { (data) in
+        getMyPlayers(currentUserId) { (data)  in
             for(_,req) in data {
                 let playersData = req as! [String : AnyObject]
                 let isAcceptVal = playersData["isAccepted"]!
@@ -356,8 +356,10 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     // Get all match data
     func getMatchData(playerId: String) {
         getAllMatchData(playerId) { (data) in
-            self.matchDataSource.append(data)
-            self.makeCells(data)
+              if !data.isEmpty {
+                self.matchDataSource.append(data)
+                self.makeCells(data)
+            }
         }
     }
     
@@ -848,20 +850,8 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                     return ThemeColorsCollectionViewCell()
 
     }
-//    override func viewDidAppear(animated: Bool) {
-//        super.viewDidAppear(true)
-//
-//        baseViewHeightConstraint.constant = 927
-//         baseViewHeightConstraint.constant += CGFloat(8 * 70)
-//        
-//    }
-    
-    // tableview functions
+
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//        if tableView == topBattingtableView {
-//            return 4
-//        }
-//        return 4
         
         if tableView == topBattingtableView || tableView == topBowlingTableView {
             baseViewHeightConstraint.constant = 927
@@ -922,19 +912,12 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 cell.battingStrikeRate.text = String(format:"%.1f",self.matches[indexPath.section].strikeRate)
                 cell.battingAvg.text = String(format:"%.1f",self.matches[indexPath.section].batAverage)
             
-            cell.viewScoreboardForBattingList.addTarget(self, action: #selector(CoachDashboardViewController.viewScoreboardForBatsmen(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-            
             
                 cell.layer.cornerRadius = 10
                 cell.layer.masksToBounds = true
                 cell.backgroundColor = cricTracTheme.currentTheme.bottomColor
             
-            cell.viewScoreboardForBattingList.layer.cornerRadius = 10
-            cell.viewScoreboardForBattingList.clipsToBounds = true
-            cell.viewScoreboardForBattingList.backgroundColor = currentTheme.topColor
-            cell.viewScoreboardForBattingList.layer.borderWidth = 2.0
-            cell.viewScoreboardForBattingList.layer.borderColor = UIColor.whiteColor().CGColor
-
+          
             
             
             return cell
@@ -956,22 +939,29 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             cell.bowlingAve.text = String(format:"%.1f",matches[indexPath.section].bowlAverage)
             cell.economy.text = String(format:"%.2f",matches[indexPath.section].economy)
         
-            cell.viewScoreboardForBowlingList.addTarget(self, action: #selector(CoachDashboardViewController.viewScoreboardForBowlers(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
             cell.backgroundColor = cricTracTheme.currentTheme.bottomColor
             cell.layer.cornerRadius = 10
             cell.layer.masksToBounds = true
         
-        cell.viewScoreboardForBowlingList.layer.cornerRadius = 10
-        cell.viewScoreboardForBowlingList.clipsToBounds = true
-        cell.viewScoreboardForBowlingList.backgroundColor = currentTheme.topColor
-        cell.viewScoreboardForBowlingList.layer.borderWidth = 2.0
-        cell.viewScoreboardForBowlingList.layer.borderColor = UIColor.whiteColor().CGColor
+        UIColor.whiteColor().CGColor
         
         return cell
         
         }
         return cell!
+    }
+    
+    
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if tableView == topBattingtableView {
+            
+        }
+        
+        if tableView == topBowlingTableView {
+            
+        }
     }
    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -999,13 +989,6 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
 
     }
     
-    func viewScoreboardForBatsmen(sender:UIButton) {
         
-    }
-    
-    func viewScoreboardForBowlers(sender:UIButton) {
-        
-    }
-    
     
 }

@@ -11,6 +11,7 @@ import UIKit
 class TopBowlingPlayersList: UIViewController,UITableViewDelegate,UITableViewDataSource,ThemeChangeable {
     
      @IBOutlet weak var topBarView: UIView!
+     @IBOutlet weak var tableView: UITableView!
     
     var bowlingMatches = [PlayerMatchesData]()
    
@@ -19,6 +20,7 @@ class TopBowlingPlayersList: UIViewController,UITableViewDelegate,UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackgroundColor()
+        tableView.tableFooterView = UIView()
     }
     
     func changeThemeSettigs() {
@@ -67,19 +69,17 @@ class TopBowlingPlayersList: UIViewController,UITableViewDelegate,UITableViewDat
         cell.layer.cornerRadius = 10
         cell.layer.masksToBounds = true
         
-        cell.viewScoreboardForBowlingList.layer.cornerRadius = 10
-        cell.viewScoreboardForBowlingList.clipsToBounds = true
-        cell.viewScoreboardForBowlingList.backgroundColor = currentTheme.topColor
-        cell.viewScoreboardForBowlingList.layer.borderWidth = 2.0
-        cell.viewScoreboardForBowlingList.layer.borderColor = UIColor.whiteColor().CGColor
         
         return cell
-        
-
+     
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 70
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
     }
     
     @IBAction func backButtonTapped(sender: AnyObject) {

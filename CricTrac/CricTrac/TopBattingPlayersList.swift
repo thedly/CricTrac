@@ -10,8 +10,11 @@ import UIKit
 
 class TopBattingPlayersList: UIViewController,UITableViewDelegate,UITableViewDataSource,ThemeChangeable {
 
-     var battingMatches = [PlayerMatchesData]()
+    
     @IBOutlet weak var topBarView: UIView!
+    @IBOutlet weak var tableView: UITableView!
+    
+    var battingMatches = [PlayerMatchesData]()
    
     let currentTheme = cricTracTheme.currentTheme
     
@@ -20,6 +23,7 @@ class TopBattingPlayersList: UIViewController,UITableViewDelegate,UITableViewDat
         super.viewDidLoad()
         
         setBackgroundColor()
+        tableView.tableFooterView = UIView()
     }
     
     func changeThemeSettigs() {
@@ -69,19 +73,15 @@ class TopBattingPlayersList: UIViewController,UITableViewDelegate,UITableViewDat
         cell.backgroundColor = UIColor.clearColor()
         cell.backgroundColor = cricTracTheme.currentTheme.bottomColor
         
-        cell.viewScoreboardForBattingList.layer.cornerRadius = 10
-        cell.viewScoreboardForBattingList.clipsToBounds = true
-        cell.viewScoreboardForBattingList.backgroundColor = currentTheme.bottomColor
-        cell.viewScoreboardForBattingList.layer.borderWidth = 2.0
-        cell.viewScoreboardForBattingList.layer.borderColor = UIColor.whiteColor().CGColor
-        
-        
-        
         return cell
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 70
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
     }
     
     @IBAction func backButtonTapped(sender: AnyObject) {
