@@ -30,6 +30,12 @@ class TopBattingPlayersList: UIViewController,UITableViewDelegate,UITableViewDat
         self.view.backgroundColor = currentTheme.topColor
     }
     
+        
+    func didMenuButtonTapp() {
+      self.dismissViewControllerAnimated(false, completion: nil)
+    }
+    
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
         
@@ -81,6 +87,14 @@ class TopBattingPlayersList: UIViewController,UITableViewDelegate,UITableViewDat
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
+        let summaryDetailsVC = viewControllerFrom("Main", vcid: "MatchSummaryViewController") as! MatchSummaryViewController
+        
+        summaryDetailsVC.playerID = battingMatches[indexPath.section].playerId
+        summaryDetailsVC.isCoach = true
+      // self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
+        self.presentViewController(summaryDetailsVC, animated: false, completion: nil)
         
     }
     

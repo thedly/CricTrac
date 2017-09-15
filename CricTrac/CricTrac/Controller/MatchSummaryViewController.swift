@@ -38,6 +38,11 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     @IBOutlet weak var tableView3: UITableView!
     @IBOutlet weak var tableView3HeightConstraint: NSLayoutConstraint!
     
+    
+    @IBOutlet weak var topBarView: UIView!
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var topBarHeightConstraint: NSLayoutConstraint!
+    
     var matchData = [String:AnyObject]()
     var matches = [MatchSummaryData]()
     var matchDataSource = [[String:AnyObject]]()
@@ -47,6 +52,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     var filterAgeGroup = [String]()
     
     var userProfileData:Profile!
+    var isCoach: Bool = false
     
     var toatalBowlingMatches = 0
     var toatalBattingmatches = 0
@@ -57,6 +63,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     var totalDismissal = 0
     var totalOvers:Float = 0
     var totalBallsFaced = 0
+    var playerID = ""
     
     
     func changeThemeSettigs() {
@@ -150,19 +157,35 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         var currentTheme:CTTheme!
         currentTheme = cricTracTheme.currentTheme
         let menuButton: UIButton = UIButton(type:.Custom)
-        menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
-        menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+//        menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
+//        menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
         menuButton.frame = CGRectMake(0, 0, 40, 40)
         let leftbarButton = UIBarButtonItem(customView: menuButton)
         navigationItem.leftBarButtonItem = leftbarButton
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-        title = "SCOREBOARD"
-        // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+                // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         // navigationController!.navigationBar.titleTextAttributes = titleDict
+        
+        if isCoach == true {
+            
+            topBarView.backgroundColor = currentTheme.topColor
+            cancelButton.addTarget(self, action: #selector(didTapCancel), forControlEvents: UIControlEvents.TouchUpInside)
+            topBarHeightConstraint.constant = 56
+        }
+            
+        else {
+            topBarHeightConstraint.constant = 0
+            menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
+            menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+            navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+            title = "SCOREBOARD"
+
+        }
+        
     }
     @IBAction func didTapCancel(sender: UIButton) {
         
         self.dismissViewControllerAnimated(true) {}
+        //self.navigationController?.popViewControllerAnimated(true)
     }
     
     @IBAction func didMenuButtonTapp(sender: UIButton){
@@ -171,7 +194,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     
     func getMatchData(){
         //KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
-        getAllMatchData { (data) in
+        if playerID == "" {
+            playerID = (currentUser?.uid)!
+        }
+       getAllMatchData(playerID) { (data) in
             self.matchDataSource.removeAll()
             self.filterLevel.removeAll()
             self.filterAgeGroup.removeAll()

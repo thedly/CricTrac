@@ -57,6 +57,9 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     @IBOutlet weak var battingTableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bowlingTableViewHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var noPlayersForBatting: UILabel!
+    @IBOutlet weak var noPlayersForBowling: UILabel!
+    
     var players = [String]()
     var batsmen = [String]()
     var bowlers = [String]()
@@ -88,7 +91,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     var totalBallsFaced = 0
     var matchData = [String:AnyObject]()
     var matches = [PlayerMatchesData]()
-    var matchDataSource = [[String:AnyObject]]()
+    var matchDataSource = [String:AnyObject]()
     
     
     
@@ -144,6 +147,9 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         
         coachTeams.delegate = self
         coachTeams.dataSource = self
+        
+        topBowlingTableView.separatorStyle = .None
+        topBattingtableView.separatorStyle = .None
         
     }
     
@@ -385,7 +391,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     func getMatchData(playerId: String) {
         getAllMatchData(playerId) { (data) in
               if !data.isEmpty {
-                self.matchDataSource.append(data)
+                self.matchDataSource = data
                 self.makeCells(data)
             }
         }
@@ -885,6 +891,19 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             battingTableViewHeightConstraint.constant = 0
              bowlingTableViewHeightConstraint.constant = 0
             
+            if matches.count == 0 {
+                viewAllBtnForTopBatting.hidden = true
+                viewAllBtnForTopBowling.hidden = true
+                noPlayersForBatting.text = "No Players"
+                noPlayersForBowling.text = "No Players"
+            }
+            else{
+                noPlayersForBatting.text = ""
+                noPlayersForBowling.text = ""
+                viewAllBtnForTopBatting.hidden = false
+                viewAllBtnForTopBowling.hidden = false
+            }
+            
             if matches.count >= 5 {
                 battingTableViewHeightConstraint.constant = CGFloat(5 * 78)
                 bowlingTableViewHeightConstraint.constant = CGFloat(5 * 78)
@@ -982,13 +1001,27 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    if currentUserId == (currentUser?.uid)! {
         if tableView == topBattingtableView {
             
+            let summaryDetailsVC = viewControllerFrom("Main", vcid: "MatchSummaryViewController") as! MatchSummaryViewController
+            
+            summaryDetailsVC.playerID = matches[indexPath.section].playerId
+            summaryDetailsVC.isCoach = true
+            //self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
+             self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
         }
         
         if tableView == topBowlingTableView {
             
+            let summaryDetailsVC = viewControllerFrom("Main", vcid: "MatchSummaryViewController") as! MatchSummaryViewController
+            summaryDetailsVC.isCoach = true
+            summaryDetailsVC.playerID = matches[indexPath.section].playerId
+            //self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
+             self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
+
         }
+      }
     }
    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -1009,6 +1042,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     }
     
     @IBAction func viewAllForBowlingList(sender: AnyObject) {
+        
         
         let bowlingList = viewControllerFrom("Main", vcid: "TopBowlingPlayersList") as! TopBowlingPlayersList
         bowlingList.bowlingMatches = matches

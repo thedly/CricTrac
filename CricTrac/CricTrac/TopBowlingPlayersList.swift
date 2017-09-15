@@ -79,7 +79,15 @@ class TopBowlingPlayersList: UIViewController,UITableViewDelegate,UITableViewDat
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+       
         
+                let summaryDetailsVC = viewControllerFrom("Main", vcid: "MatchSummaryViewController") as! MatchSummaryViewController
+                
+                summaryDetailsVC.playerID = bowlingMatches[indexPath.section].playerId
+                summaryDetailsVC.isCoach = true
+                //self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
+                self.presentViewController(summaryDetailsVC, animated: false, completion: nil)
+       
     }
     
     @IBAction func backButtonTapped(sender: AnyObject) {
