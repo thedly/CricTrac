@@ -516,6 +516,18 @@ func deleteAllPlayerData(){
     fireBaseRef.child("Users").child(currentUser!.uid).child("Grounds").removeValue()
     fireBaseRef.child("Users").child(currentUser!.uid).child("Tournaments").removeValue()
     fireBaseRef.child("Users").child(currentUser!.uid).child("Venue").removeValue()
+    
+    //delete the player entry from other coaches MyPlayers node
+    
+    //delete MyCoaches node
+
+}
+
+func deleteAllCoachData() {
+    //delete the coach entry from other players MyCoaches node
+    
+    //delete MyPlayers node
+
 }
 
 func UpdateDashboardDetails(){

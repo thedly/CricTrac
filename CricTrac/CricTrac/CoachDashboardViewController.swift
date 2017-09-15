@@ -321,6 +321,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         wicketKeepers.removeAll()
         allRounders.removeAll()
         self.matchDataSource.removeAll()
+        self.avgAge = 0
         
         getMyPlayers(currentUserId) { (data)  in
             for(_,req) in data {
@@ -1001,27 +1002,23 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    if currentUserId == (currentUser?.uid)! {
-        if tableView == topBattingtableView {
+        if currentUserId == (currentUser?.uid)! {
+            if tableView == topBattingtableView {
+                let summaryDetailsVC = viewControllerFrom("Main", vcid: "MatchSummaryViewController") as! MatchSummaryViewController
+                summaryDetailsVC.playerID = matches[indexPath.section].playerId
+                summaryDetailsVC.isCoach = true
+                //self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
+                self.presentViewController(summaryDetailsVC, animated: false, completion: nil)
+            }
             
-            let summaryDetailsVC = viewControllerFrom("Main", vcid: "MatchSummaryViewController") as! MatchSummaryViewController
-            
-            summaryDetailsVC.playerID = matches[indexPath.section].playerId
-            summaryDetailsVC.isCoach = true
-            //self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
-             self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
+            if tableView == topBowlingTableView {
+                let summaryDetailsVC = viewControllerFrom("Main", vcid: "MatchSummaryViewController") as! MatchSummaryViewController
+                summaryDetailsVC.isCoach = true
+                summaryDetailsVC.playerID = matches[indexPath.section].playerId
+                //self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
+                self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
+            }
         }
-        
-        if tableView == topBowlingTableView {
-            
-            let summaryDetailsVC = viewControllerFrom("Main", vcid: "MatchSummaryViewController") as! MatchSummaryViewController
-            summaryDetailsVC.isCoach = true
-            summaryDetailsVC.playerID = matches[indexPath.section].playerId
-            //self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
-             self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
-
-        }
-      }
     }
    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -1034,22 +1031,15 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     }
     
     @IBAction func viewAllForBattingList(sender: AnyObject) {
-       
         let battingList = viewControllerFrom("Main", vcid: "TopBattingPlayersList") as! TopBattingPlayersList
         battingList.battingMatches = matches
         self.presentViewController(battingList, animated: false, completion: nil)
-
     }
     
     @IBAction func viewAllForBowlingList(sender: AnyObject) {
-        
-        
         let bowlingList = viewControllerFrom("Main", vcid: "TopBowlingPlayersList") as! TopBowlingPlayersList
         bowlingList.bowlingMatches = matches
         self.presentViewController(bowlingList, animated: false, completion: nil)
-
     }
-    
-        
     
 }
