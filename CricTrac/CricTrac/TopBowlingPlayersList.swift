@@ -19,8 +19,12 @@ class TopBowlingPlayersList: UIViewController,UITableViewDelegate,UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setBackgroundColor()
+        
         tableView.tableFooterView = UIView()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        setBackgroundColor()
     }
     
     func changeThemeSettigs() {
@@ -69,7 +73,6 @@ class TopBowlingPlayersList: UIViewController,UITableViewDelegate,UITableViewDat
         cell.layer.cornerRadius = 10
         cell.layer.masksToBounds = true
         
-        
         return cell
      
     }
@@ -80,11 +83,13 @@ class TopBowlingPlayersList: UIViewController,UITableViewDelegate,UITableViewDat
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
        
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! CoachTopBattingBowlingTableViewCell
         
                 let summaryDetailsVC = viewControllerFrom("Main", vcid: "MatchSummaryViewController") as! MatchSummaryViewController
                 
                 summaryDetailsVC.playerID = bowlingMatches[indexPath.section].playerId
-                summaryDetailsVC.isCoach = true
+                summaryDetailsVC.coachVal = 1
+                summaryDetailsVC.coachTappedPlayerName = cell.topBowlingPlayerName.text!
                 //self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
                 self.presentViewController(summaryDetailsVC, animated: false, completion: nil)
        

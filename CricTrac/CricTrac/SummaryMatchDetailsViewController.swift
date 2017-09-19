@@ -142,9 +142,17 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             navigationItem.rightBarButtonItem = righttbarButton
 
             navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
-            self.bottomView.hidden = false
-            self.bannerViewHeightConstraint.constant = 0
-            self.bottomViewHeightConstraint.constant = 50
+            if profileData.UserProfile == "Coach" {
+                self.bottomView.hidden = true
+                self.bannerViewHeightConstraint.constant = 50
+                self.bottomViewHeightConstraint.constant = 0
+            }
+            else {
+                self.bottomView.hidden = false
+                self.bannerViewHeightConstraint.constant = 0
+                self.bottomViewHeightConstraint.constant = 50
+            }
+            
         }
         else {
             matchDetailsTitle.text = "SCORECARD"

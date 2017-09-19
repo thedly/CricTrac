@@ -9034,7 +9034,7 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="18" id="lkW-go-ytE"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="14"/>
+                                                                <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="13"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -9136,7 +9136,7 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="18" id="6TO-WR-Ppp"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="14"/>
+                                                                <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="12"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -9422,7 +9422,7 @@
                                                                 </mask>
                                                             </variation>
                                                         </tableViewCellContentView>
-                                                        <color key="backgroundColor" red="1" green="0.22892405490000001" blue="0.37267073319999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <connections>
                                                             <outlet property="battingAvg" destination="Kna-aT-08T" id="bAM-2d-70o"/>
                                                             <outlet property="battingHS" destination="elr-Jt-gCE" id="OJG-4v-ebN"/>
@@ -9601,7 +9601,7 @@
                                                                 </mask>
                                                             </variation>
                                                         </tableViewCellContentView>
-                                                        <color key="backgroundColor" red="1" green="0.22892405490000001" blue="0.37267073319999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <connections>
                                                             <outlet property="bestBowling" destination="Qre-Zq-e0p" id="4sv-YQ-TSx"/>
                                                             <outlet property="bowlingAve" destination="5Pa-wu-zeT" id="tgU-AG-d7S"/>
@@ -16250,7 +16250,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCOREBOARD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tpj-wD-q7K">
-                                        <rect key="frame" x="252" y="28" width="97" height="15"/>
+                                        <rect key="frame" x="252" y="28" width="97" height="14"/>
                                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -16286,8 +16286,10 @@
                             <constraint firstItem="8Uq-DU-QB6" firstAttribute="top" secondItem="rxH-7S-BNS" secondAttribute="bottom" constant="78" id="PAK-HH-VTR"/>
                             <constraint firstItem="8Uq-DU-QB6" firstAttribute="top" secondItem="9Nt-2g-kHR" secondAttribute="bottom" constant="3" id="U1T-Ta-hkB"/>
                             <constraint firstItem="bTg-dW-Re7" firstAttribute="leading" secondItem="y0U-nu-fsf" secondAttribute="leading" id="W0Q-l3-zdz"/>
+                            <constraint firstItem="bTg-dW-Re7" firstAttribute="top" secondItem="rxH-7S-BNS" secondAttribute="bottom" id="Xq7-ko-O5g"/>
                             <constraint firstAttribute="trailing" secondItem="9Nt-2g-kHR" secondAttribute="trailing" id="YsR-69-hy4"/>
                             <constraint firstItem="uxw-QN-Vd6" firstAttribute="trailing" secondItem="s3v-3w-1uC" secondAttribute="trailing" id="aJj-T8-1rh"/>
+                            <constraint firstItem="bTg-dW-Re7" firstAttribute="top" secondItem="rxH-7S-BNS" secondAttribute="bottom" id="cUx-q6-0ux"/>
                             <constraint firstItem="8Uq-DU-QB6" firstAttribute="leading" secondItem="y0U-nu-fsf" secondAttribute="leadingMargin" constant="-10" id="d5y-DL-tNG"/>
                             <constraint firstItem="FWn-cT-KTu" firstAttribute="top" secondItem="8Uq-DU-QB6" secondAttribute="bottom" constant="16" id="d9x-ox-WgB"/>
                             <constraint firstItem="XuF-48-ZTs" firstAttribute="centerX" secondItem="y0U-nu-fsf" secondAttribute="centerX" id="dIT-Wb-Juo"/>
@@ -16298,12 +16300,16 @@
                             <constraint firstItem="Jxt-Hf-Y6a" firstAttribute="trailing" secondItem="kGq-wA-0Ls" secondAttribute="trailing" id="rB7-4S-S73"/>
                             <constraint firstItem="8Uq-DU-QB6" firstAttribute="centerX" secondItem="y0U-nu-fsf" secondAttribute="centerX" id="sTs-9j-4CQ"/>
                             <constraint firstItem="uxw-QN-Vd6" firstAttribute="leading" secondItem="s3v-3w-1uC" secondAttribute="leading" id="tVp-JS-Q6d"/>
+                            <constraint firstItem="bTg-dW-Re7" firstAttribute="top" secondItem="rxH-7S-BNS" secondAttribute="bottom" id="wYs-SI-Hs9"/>
                             <constraint firstItem="AMS-Av-Wzb" firstAttribute="top" secondItem="rxH-7S-BNS" secondAttribute="bottom" constant="33" id="wr9-Jh-rn1"/>
                             <constraint firstItem="bTg-dW-Re7" firstAttribute="top" secondItem="rxH-7S-BNS" secondAttribute="bottom" id="wtP-Sk-Uof"/>
                             <constraint firstItem="FWn-cT-KTu" firstAttribute="centerX" secondItem="y0U-nu-fsf" secondAttribute="centerX" id="yPP-2Y-lUF"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="Xq7-ko-O5g"/>
+                                <exclude reference="wYs-SI-Hs9"/>
+                                <exclude reference="wtP-Sk-Uof"/>
                                 <exclude reference="OgO-Ua-16F"/>
                                 <exclude reference="PAK-HH-VTR"/>
                             </mask>
@@ -16328,6 +16334,7 @@
                         <outlet property="tableView3HeightConstraint" destination="F9X-p1-uH0" id="IEc-v8-IiA"/>
                         <outlet property="tableview2" destination="AMS-Av-Wzb" id="WFT-W8-dev"/>
                         <outlet property="topBarHeightConstraint" destination="1rg-Ig-ow4" id="DgS-nv-Brc"/>
+                        <outlet property="topBarLabelText" destination="tpj-wD-q7K" id="KJd-vh-OLE"/>
                         <outlet property="topBarView" destination="bTg-dW-Re7" id="ct5-zF-Vms"/>
                         <outlet property="upgradeBtnHeight" destination="6Pr-Lv-08Q" id="Uvk-IG-ZOE"/>
                         <outlet property="upgradeButton" destination="FWn-cT-KTu" id="3n8-3m-xlR"/>
@@ -17444,7 +17451,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOP BATTING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZPs-3C-duD">
-                                        <rect key="frame" x="253" y="24" width="94" height="21"/>
+                                        <rect key="frame" x="253" y="28" width="94" height="21"/>
                                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -17470,7 +17477,7 @@
                                     <constraint firstItem="GIg-7E-5GQ" firstAttribute="centerY" secondItem="1sz-5c-tY6" secondAttribute="centerY" constant="10" id="6ys-qR-KxF"/>
                                     <constraint firstItem="GIg-7E-5GQ" firstAttribute="leading" secondItem="1sz-5c-tY6" secondAttribute="leading" constant="10" id="8W0-I4-d84"/>
                                     <constraint firstAttribute="height" constant="56" id="A94-R2-FVs"/>
-                                    <constraint firstItem="ZPs-3C-duD" firstAttribute="centerY" secondItem="1sz-5c-tY6" secondAttribute="centerY" constant="6" id="Cvg-g3-wYQ"/>
+                                    <constraint firstItem="ZPs-3C-duD" firstAttribute="centerY" secondItem="1sz-5c-tY6" secondAttribute="centerY" constant="10" id="Cvg-g3-wYQ"/>
                                     <constraint firstItem="ZPs-3C-duD" firstAttribute="centerX" secondItem="1sz-5c-tY6" secondAttribute="centerX" id="Mq6-Vb-btJ"/>
                                 </constraints>
                             </view>
@@ -17654,7 +17661,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOP BOWLING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Uz-lO-U7O">
-                                        <rect key="frame" x="250" y="24" width="100" height="21"/>
+                                        <rect key="frame" x="250" y="28" width="100" height="21"/>
                                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -17680,7 +17687,7 @@
                                     <constraint firstItem="Lab-KV-0IB" firstAttribute="leading" secondItem="h7k-jw-fb2" secondAttribute="leading" constant="10" id="0Ln-wz-yc1"/>
                                     <constraint firstAttribute="height" constant="56" id="3RQ-Pp-eV9"/>
                                     <constraint firstItem="Lab-KV-0IB" firstAttribute="centerY" secondItem="h7k-jw-fb2" secondAttribute="centerY" constant="10" id="lhN-8m-zvW"/>
-                                    <constraint firstItem="5Uz-lO-U7O" firstAttribute="centerY" secondItem="h7k-jw-fb2" secondAttribute="centerY" constant="6" id="n0E-Kp-OCX"/>
+                                    <constraint firstItem="5Uz-lO-U7O" firstAttribute="centerY" secondItem="h7k-jw-fb2" secondAttribute="centerY" constant="10" id="n0E-Kp-OCX"/>
                                     <constraint firstItem="5Uz-lO-U7O" firstAttribute="centerX" secondItem="h7k-jw-fb2" secondAttribute="centerX" id="zy5-gg-XaZ"/>
                                 </constraints>
                             </view>

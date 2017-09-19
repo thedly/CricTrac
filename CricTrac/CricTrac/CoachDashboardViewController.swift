@@ -222,6 +222,8 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             if profileData.UserProfile == "Coach" {
                 coachFrndButton.hidden = true
                 pendingRequests.hidden = true
+                viewAllBtnForTopBowling.hidden = true
+                viewAllBtnForTopBatting.hidden = true
                 coachFrndBtnHeightConstraint.constant = 0
             }
           userProfileData = Profile(usrObj: value)
@@ -229,6 +231,8 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         else{
             coachFrndButton.hidden = false
             pendingRequests.hidden = false
+            viewAllBtnForTopBowling.hidden = false
+            viewAllBtnForTopBatting.hidden = false
             coachFrndBtnHeightConstraint.constant = 30
             userProfileData = profileData
         }
@@ -893,16 +897,16 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
              bowlingTableViewHeightConstraint.constant = 0
             
             if matches.count == 0 {
-                viewAllBtnForTopBatting.hidden = true
-                viewAllBtnForTopBowling.hidden = true
+//                viewAllBtnForTopBatting.hidden = true
+//                viewAllBtnForTopBowling.hidden = true
                 noPlayersForBatting.text = "No Players"
                 noPlayersForBowling.text = "No Players"
             }
             else{
                 noPlayersForBatting.text = ""
                 noPlayersForBowling.text = ""
-                viewAllBtnForTopBatting.hidden = false
-                viewAllBtnForTopBowling.hidden = false
+//                viewAllBtnForTopBatting.hidden = false
+//                viewAllBtnForTopBowling.hidden = false
             }
             
             if matches.count >= 5 {
@@ -1002,21 +1006,25 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! CoachTopBattingBowlingTableViewCell
+        
         if currentUserId == (currentUser?.uid)! {
             if tableView == topBattingtableView {
                 let summaryDetailsVC = viewControllerFrom("Main", vcid: "MatchSummaryViewController") as! MatchSummaryViewController
                 summaryDetailsVC.playerID = matches[indexPath.section].playerId
                 summaryDetailsVC.isCoach = true
-                //self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
-                self.presentViewController(summaryDetailsVC, animated: false, completion: nil)
+                summaryDetailsVC.coachTappedPlayerName = cell.topBattingPlayerName.text!
+                self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
+                //self.presentViewController(summaryDetailsVC, animated: false, completion: nil)
             }
             
             if tableView == topBowlingTableView {
                 let summaryDetailsVC = viewControllerFrom("Main", vcid: "MatchSummaryViewController") as! MatchSummaryViewController
                 summaryDetailsVC.isCoach = true
+                summaryDetailsVC.coachTappedPlayerName = cell.topBowlingPlayerName.text!
                 summaryDetailsVC.playerID = matches[indexPath.section].playerId
-                //self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
-                self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
+                self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
+               // self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
             }
         }
     }
@@ -1030,13 +1038,13 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         self.presentViewController(pendingRequests, animated: false, completion: nil)
     }
     
-    @IBAction func viewAllForBattingList(sender: AnyObject) {
+    @IBAction func viewAllForBattingList(sender: UIButton) {
         let battingList = viewControllerFrom("Main", vcid: "TopBattingPlayersList") as! TopBattingPlayersList
         battingList.battingMatches = matches
         self.presentViewController(battingList, animated: false, completion: nil)
     }
     
-    @IBAction func viewAllForBowlingList(sender: AnyObject) {
+    @IBAction func viewAllForBowlingList(sender: UIButton) {
         let bowlingList = viewControllerFrom("Main", vcid: "TopBowlingPlayersList") as! TopBowlingPlayersList
         bowlingList.bowlingMatches = matches
         self.presentViewController(bowlingList, animated: false, completion: nil)
