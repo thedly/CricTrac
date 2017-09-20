@@ -52,8 +52,10 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     
     @IBOutlet weak var viewAllBtnForTopBatting: UIButton!
     
+    @IBOutlet weak var viewAllBtnForTopBattingHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var viewAllBtnForTopBowling: UIButton!
     
+    @IBOutlet weak var viewAllBtnForTopBowlingHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var battingTableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bowlingTableViewHeightConstraint: NSLayoutConstraint!
     
@@ -222,8 +224,6 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             if profileData.UserProfile == "Coach" {
                 coachFrndButton.hidden = true
                 pendingRequests.hidden = true
-                viewAllBtnForTopBowling.hidden = true
-                viewAllBtnForTopBatting.hidden = true
                 coachFrndBtnHeightConstraint.constant = 0
             }
           userProfileData = Profile(usrObj: value)
@@ -231,8 +231,6 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         else{
             coachFrndButton.hidden = false
             pendingRequests.hidden = false
-            viewAllBtnForTopBowling.hidden = false
-            viewAllBtnForTopBatting.hidden = false
             coachFrndBtnHeightConstraint.constant = 30
             userProfileData = profileData
         }
@@ -541,8 +539,18 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         switch coachFrndButton.currentTitle! {
         case "Mark as my Coach":
             
-                markMyCoach(currentUserId)
+            let actionSheetController = UIAlertController(title: "", message: "Coach will be allowed to view and edit all your matches. Are you sure to continue?", preferredStyle: .ActionSheet)
+            
+            let cancelAction = UIAlertAction(title: "No", style: .Cancel) { action -> Void in
+                // Just dismiss the action sheet
+                actionSheetController.dismissViewControllerAnimated(true, completion: nil)
+            }
+            actionSheetController.addAction(cancelAction)
+            
+            let okAction = UIAlertAction(title: "Yes", style: .Default) { action -> Void in
                
+                markMyCoach(self.currentUserId)
+                
                 let alert = UIAlertController(title: "", message:"Coach Request Sent", preferredStyle: UIAlertControllerStyle.Alert)
                 self.presentViewController(alert, animated: true, completion: nil)
                 let delay = 1.0 * Double(NSEC_PER_SEC)
@@ -550,9 +558,13 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 dispatch_after(time, dispatch_get_main_queue(), {
                     alert.dismissViewControllerAnimated(true, completion: nil)
                 })
-                 coachValidation()
-                updateCoachSummary()
+                self.coachValidation()
+                self.updateCoachSummary()
                 
+            }
+            actionSheetController.addAction(okAction)
+            
+            self.presentViewController(actionSheetController, animated: true, completion: nil)
                 break
             
         case "Cancel Request":
@@ -866,6 +878,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                         }
                         else if (indexPath.row - (userProfileData.CoachCurrentTeams.count)) < (userProfileData.CoachPastTeams.count) {
                             teamNameToReturn = userProfileData.CoachPastTeams[(indexPath.row - userProfileData.CoachCurrentTeams.count)]
+                            aCell.baseView.backgroundColor = UIColor.clearColor()
                             aCell.baseView.backgroundColor = UIColor.grayColor()
                             aCell.TeamAbbr.textColor = UIColor.blackColor()
                         }
@@ -892,34 +905,56 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
         if tableView == topBattingtableView || tableView == topBowlingTableView {
-            baseViewHeightConstraint.constant = 927
             battingTableViewHeightConstraint.constant = 0
              bowlingTableViewHeightConstraint.constant = 0
             
             if matches.count == 0 {
-//                viewAllBtnForTopBatting.hidden = true
-//                viewAllBtnForTopBowling.hidden = true
+                if friendId != nil {
+                    viewAllBtnForTopBatting.hidden = true
+                    viewAllBtnForTopBowling.hidden = true
+                    viewAllBtnForTopBattingHeightConstraint.constant = 0
+                    viewAllBtnForTopBowlingHeightConstraint.constant = 0
+
+                }
+                else{
+                    viewAllBtnForTopBatting.hidden = true
+                    viewAllBtnForTopBowling.hidden = true
+                    viewAllBtnForTopBattingHeightConstraint.constant = 0
+                    viewAllBtnForTopBowlingHeightConstraint.constant = 0
+                }
                 noPlayersForBatting.text = "No Players"
                 noPlayersForBowling.text = "No Players"
+                baseViewHeightConstraint.constant = 850
             }
             else{
+                baseViewHeightConstraint.constant = 947
                 noPlayersForBatting.text = ""
                 noPlayersForBowling.text = ""
-//                viewAllBtnForTopBatting.hidden = false
-//                viewAllBtnForTopBowling.hidden = false
+                
+                if  friendId != nil {
+                    viewAllBtnForTopBatting.hidden = true
+                    viewAllBtnForTopBowling.hidden = true
+                    viewAllBtnForTopBattingHeightConstraint.constant = 0
+                    viewAllBtnForTopBowlingHeightConstraint.constant = 0
+                }
+                else{
+                    viewAllBtnForTopBatting.hidden = false
+                    viewAllBtnForTopBowling.hidden = false
+                    viewAllBtnForTopBattingHeightConstraint.constant = 30
+                    viewAllBtnForTopBowlingHeightConstraint.constant = 30
+                }
             }
-            
             if matches.count >= 5 {
                 battingTableViewHeightConstraint.constant = CGFloat(5 * 78)
                 bowlingTableViewHeightConstraint.constant = CGFloat(5 * 78)
-                baseViewHeightConstraint.constant += CGFloat(5 * 120)
+                baseViewHeightConstraint.constant += CGFloat(5 * 125)
 
                 return 5
             }
             else {
                 battingTableViewHeightConstraint.constant += CGFloat(matches.count * 78)
                 bowlingTableViewHeightConstraint.constant += CGFloat(matches.count * 78)
-                baseViewHeightConstraint.constant += CGFloat(matches.count * 110)
+                baseViewHeightConstraint.constant += CGFloat(matches.count * 125)
                 return matches.count
             }
         }
@@ -967,9 +1002,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 cell.layer.cornerRadius = 10
                 cell.layer.masksToBounds = true
                 cell.backgroundColor = cricTracTheme.currentTheme.bottomColor
-            
-          
-            
+           
             
             return cell
         }
@@ -1010,6 +1043,9 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         
         if currentUserId == (currentUser?.uid)! {
             if tableView == topBattingtableView {
+                
+                self.matches.sortInPlace({ $0.batAverage > $1.batAverage })
+                
                 let summaryDetailsVC = viewControllerFrom("Main", vcid: "MatchSummaryViewController") as! MatchSummaryViewController
                 summaryDetailsVC.playerID = matches[indexPath.section].playerId
                 summaryDetailsVC.isCoach = true
@@ -1019,6 +1055,8 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             }
             
             if tableView == topBowlingTableView {
+                self.matches.sortInPlace({ $0.bowlAverage > $1.bowlAverage })
+                
                 let summaryDetailsVC = viewControllerFrom("Main", vcid: "MatchSummaryViewController") as! MatchSummaryViewController
                 summaryDetailsVC.isCoach = true
                 summaryDetailsVC.coachTappedPlayerName = cell.topBowlingPlayerName.text!
@@ -1050,4 +1088,56 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         self.presentViewController(bowlingList, animated: false, completion: nil)
     }
     
+    @IBAction func CoachSummaryResultTapped(sender: UIButton) {
+        
+        switch sender.tag {
+        case 1:
+            if players.count != 0 {
+            let playersList = viewControllerFrom("Main", vcid: "CoachPlayersListViewController") as! CoachPlayersListViewController
+            playersList.playingRole = "AllPlayers"
+            self.presentViewController(playersList, animated: false, completion: nil)
+            }
+            
+            break
+        case 2 :
+            
+            if batsmen.count != 0 {
+                let batsmenList = viewControllerFrom("Main", vcid: "CoachPlayersListViewController") as! CoachPlayersListViewController
+                batsmenList.batsmen = batsmen
+                batsmenList.playingRole = "Batsmen"
+                self.presentViewController(batsmenList, animated: false, completion: nil)
+            }
+            break
+        case 3 :
+             if bowlers.count != 0 {
+                let bowlersList = viewControllerFrom("Main", vcid: "CoachPlayersListViewController") as! CoachPlayersListViewController
+                bowlersList.bowlers = bowlers
+                bowlersList.playingRole = "Bowlers"
+                self.presentViewController(bowlersList, animated: false, completion: nil)
+             }
+            
+            break
+        case 4 :
+             if wicketKeepers.count != 0 {
+                let wicketsList = viewControllerFrom("Main", vcid: "CoachPlayersListViewController") as! CoachPlayersListViewController
+                wicketsList.wicketsKeepers = wicketKeepers
+                wicketsList.playingRole = "WicketKeeper"
+                self.presentViewController(wicketsList, animated: false, completion: nil)
+             }
+            break
+            
+
+        default:
+            
+            if allRounders.count != 0 {
+                let allRoundersList = viewControllerFrom("Main", vcid: "CoachPlayersListViewController") as! CoachPlayersListViewController
+                allRoundersList.allrounders = allRounders
+                allRoundersList.playingRole = "AllRounder"
+                self.presentViewController(allRoundersList, animated: false, completion: nil)
+            }
+            break
+        }
+    
+    }
+  
 }

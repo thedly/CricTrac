@@ -492,23 +492,31 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
         ref.setValue(dataToBeModified)
         
         if let usrProfileType = dataToBeModified["UserProfile"] {
+            
             if usrProfileType as! String != userProfileType.Player.rawValue {
                 deleteAllPlayerData()
             }
-            else
-            {
+            
+            if usrProfileType as! String != userProfileType.Coach.rawValue {
+                deleteAllCoachData()
+            }
+            
+            //else
+            if usrProfileType as! String == userProfileType.Player.rawValue {
                 let dataToBeCreated = DashboardData(dataObj: [String:AnyObject]())
                 let dataToBeSent = dataToBeCreated.dashboardData
                 createDashboardData(dataToBeSent)
                 UpdateDashboardDetails()
             }
         }
+        
         //KRProgressHUD.dismiss()
         sucessBlock(dataToBeModified)
     })
 }
 
 func deleteAllPlayerData(){
+    
     fireBaseRef.child("Users").child(currentUser!.uid).child("Dashboard").removeValue()
     fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").removeValue()
     fireBaseRef.child("Users").child(currentUser!.uid).child("Opponents").removeValue()
@@ -519,16 +527,43 @@ func deleteAllPlayerData(){
     
     //delete the player entry from other coaches MyPlayers node
     
+    fireBaseRef.child("Users").child(currentUser!.uid).child("MyCoaches").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        if let data: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
+            var coachId = ""
+            var coachNodeId = ""
+            for (_, value) in data {
+                coachId = (value["CoachID"] as? String)!
+                coachNodeId = (value["CoachNodeIdOther"] as? String)!
+                fireBaseRef.child("Users").child(coachId).child("MyPlayers").child(coachNodeId).removeValue()
+            }
+        }
+    })
+    
     //delete MyCoaches node
-
+    fireBaseRef.child("Users").child(currentUser!.uid).child("MyCoaches").removeValue()
 }
 
 func deleteAllCoachData() {
+    
     //delete the coach entry from other players MyCoaches node
     
+    fireBaseRef.child("Users").child(currentUser!.uid).child("MyPlayers").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        
+        if let data: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
+            var playerId = ""
+            var playerNodeId = ""
+            for (_, value) in data {
+                playerId = (value["PlayerID"] as? String)!
+                playerNodeId = (value["PlayerNodeIdOther"] as? String)!
+                fireBaseRef.child("Users").child(playerId).child("MyCoaches").child(playerNodeId).removeValue()
+            }
+        }
+    })
+    
     //delete MyPlayers node
-
+    fireBaseRef.child("Users").child(currentUser!.uid).child("MyPlayers").removeValue()
 }
+
 
 func UpdateDashboardDetails(){
     if let usrId = currentUser?.uid {

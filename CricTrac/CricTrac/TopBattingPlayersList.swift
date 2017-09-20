@@ -22,7 +22,6 @@ class TopBattingPlayersList: UIViewController,UITableViewDelegate,UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setBackgroundColor()
         tableView.tableFooterView = UIView()
     }
     
@@ -107,7 +106,7 @@ class TopBattingPlayersList: UIViewController,UITableViewDelegate,UITableViewDat
     
     @IBAction func backButtonTapped(sender: AnyObject) {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(false, completion: nil)
     }
     
     

@@ -183,7 +183,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     
     func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError?) {
         if error != nil{
-            SCLAlertView().showError("Login Error", subTitle: "Error Occoured")
+            //SCLAlertView().showError("Login Error", subTitle: "Error Occoured")
             self.googleBtn.enabled = true
             return
         }

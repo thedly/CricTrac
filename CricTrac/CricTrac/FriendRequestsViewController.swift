@@ -156,11 +156,9 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                 else if userProfile == "Coach" {
                     aCell.FriendRole.text = "Coach"
                 }
-                else if userProfile == "Cricket Fan" {
+                else  {
                     aCell.FriendRole.text = "Cricket Fan"
                 }
-                
-
                 
                 if proPic! == "-"{
                     let imageName = defaultProfileImage
@@ -194,9 +192,23 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                 let proPic = result["proPic"]
                 let city =   result["city"]
                 let name = "\(result["firstname"]!) \(result["lastname"]!)"
+                let userProfile = result["userProfile"]
+                let playingRole = result["playingRole"]
+                
                 aCell.FriendCity.text = city
                 aCell.FriendName.text = name
                 
+                if userProfile == "Player" {
+                    aCell.FriendRole.text = playingRole
+                }
+                    
+                else if userProfile == "Coach" {
+                    aCell.FriendRole.text = "Coach"
+                }
+                else  {
+                    aCell.FriendRole.text = "Cricket Fan"
+                }
+
                 if proPic! == "-"{
                     let imageName = defaultProfileImage
                     let image = UIImage(named: imageName)

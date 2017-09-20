@@ -187,6 +187,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             
         else if isCoach == false && coachVal == 0 {
             topBarHeightConstraint.constant = 0
+            topBarView.hidden = true
             menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
             menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
             navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)

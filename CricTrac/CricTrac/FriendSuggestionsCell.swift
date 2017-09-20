@@ -18,10 +18,13 @@ class FriendSuggestionsCell: UITableViewCell {
     private var _userObj: Profile!
     
     var friendId:String?
+    var parent:DeleteComment?
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
         addTapGestureToUserName()
+        parent?.deletebuttonTapped()
         
         userProfileView.layer.cornerRadius = userProfileView.frame.size.width/2
         userProfileView.clipsToBounds = true
@@ -67,20 +70,23 @@ class FriendSuggestionsCell: UITableViewCell {
         dashBoard.friendId = friendId
         dashBoard.friendProfile = userInfo
         self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
+        if let parentVc = parent as? UIViewController{
+            parentVc.presentViewController(dashBoard, animated: true, completion: nil)
+        }
     }
     
     func moveToCoach(userInfo:[String : AnyObject]){
         let dashBoard = viewControllerFrom("Main", vcid: "CoachDashboardViewController") as! CoachDashboardViewController
         dashBoard.friendId = friendId
         dashBoard.friendProfile = userInfo
-        self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
+       self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
     }
     
     func moveToFan(userInfo:[String : AnyObject]){
         let dashBoard = viewControllerFrom("Main", vcid: "FanDashboardViewController") as! FanDashboardViewController
         dashBoard.friendId = friendId
         dashBoard.friendProfile = userInfo
-        self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
+       self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
