@@ -10950,8 +10950,8 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P1M-nJ-HMJ">
                                         <rect key="frame" x="265" y="605" width="70" height="70"/>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="ARJUN KUMAR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMp-o8-2yz">
-                                        <rect key="frame" x="130" y="119" width="187" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ARJUN KUMAR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMp-o8-2yz">
+                                        <rect key="frame" x="130" y="119" width="112" height="22"/>
                                         <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -11232,8 +11232,8 @@
                                                             <rect key="frame" x="0.0" y="9.5" width="146" height="41"/>
                                                         </variation>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="M" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G25-hw-Cp8">
-                                                        <rect key="frame" x="35" y="49" width="76" height="23"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="M" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G25-hw-Cp8">
+                                                        <rect key="frame" x="66" y="49" width="14" height="23"/>
                                                         <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="18"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -12913,8 +12913,8 @@
                                             <constraint firstAttribute="height" constant="200" id="PJh-1y-9s1"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="ARJUN KUMAR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgi-aL-40G">
-                                        <rect key="frame" x="130" y="99" width="187" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ARJUN KUMAR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgi-aL-40G">
+                                        <rect key="frame" x="130" y="99" width="112" height="22"/>
                                         <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -17033,8 +17033,8 @@
                                             <action selector="editImageBtnPressed:" destination="ml4-gX-NDC" eventType="touchUpInside" id="Wfu-qs-h0l"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RAVICHANDRAN ASHWIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uwo-73-waN">
-                                        <rect key="frame" x="130" y="119" width="187" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ARJUN KUMAR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uwo-73-waN">
+                                        <rect key="frame" x="130" y="119" width="112" height="22"/>
                                         <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -17225,7 +17225,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="niv-f5-tLl">
-                                <rect key="frame" x="0.0" y="56" width="600" height="544"/>
+                                <rect key="frame" x="0.0" y="60" width="600" height="540"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="epT-FL-Dtq" id="vgM-h5-PAg"/>
@@ -17233,19 +17233,19 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VUb-II-Uqt">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MY PLAYERS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="umL-kc-pto">
-                                        <rect key="frame" x="257" y="24" width="87" height="21"/>
+                                        <rect key="frame" x="257" y="30" width="87" height="21"/>
                                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgB-Ot-r6G">
-                                        <rect key="frame" x="10" y="22" width="25" height="25"/>
+                                        <rect key="frame" x="5" y="16" width="40" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="IBb-gr-nJO"/>
-                                            <constraint firstAttribute="width" constant="25" id="sa0-Tf-0nL"/>
+                                            <constraint firstAttribute="height" constant="40" id="IBb-gr-nJO"/>
+                                            <constraint firstAttribute="width" constant="40" id="sa0-Tf-0nL"/>
                                         </constraints>
                                         <state key="normal" image="Back-100">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -17257,15 +17257,15 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="umL-kc-pto" firstAttribute="centerY" secondItem="VUb-II-Uqt" secondAttribute="centerY" constant="6" id="IUf-Ua-UO6"/>
+                                    <constraint firstItem="umL-kc-pto" firstAttribute="centerY" secondItem="VUb-II-Uqt" secondAttribute="centerY" constant="10" id="IUf-Ua-UO6"/>
                                     <constraint firstItem="hgB-Ot-r6G" firstAttribute="centerY" secondItem="VUb-II-Uqt" secondAttribute="centerY" constant="6" id="MeP-NG-gGD"/>
-                                    <constraint firstItem="hgB-Ot-r6G" firstAttribute="leading" secondItem="VUb-II-Uqt" secondAttribute="leading" constant="10" id="cJr-9n-zfd"/>
+                                    <constraint firstItem="hgB-Ot-r6G" firstAttribute="leading" secondItem="VUb-II-Uqt" secondAttribute="leading" constant="5" id="cJr-9n-zfd"/>
                                     <constraint firstItem="umL-kc-pto" firstAttribute="centerX" secondItem="VUb-II-Uqt" secondAttribute="centerX" id="lOe-Xy-uUl"/>
-                                    <constraint firstAttribute="height" constant="56" id="qml-y5-uV9"/>
+                                    <constraint firstAttribute="height" constant="60" id="qml-y5-uV9"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3G-vB-m3b">
-                                <rect key="frame" x="260" y="156" width="80" height="0.0"/>
+                                <rect key="frame" x="260" y="160" width="80" height="0.0"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="b5s-Wl-NqH"/>
                                 </constraints>

@@ -18,6 +18,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
     var battingBowlingViewController: BattingBowlingViewController!
     var resVC: MatchResultsViewController!
     var matchId:String?
+    var playerId:String?
     var selecetedData:[String:AnyObject]?
     var previous:previousRefershable?
     
@@ -83,6 +84,9 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         if matchBeingEdited{
             if let val = selecetedData!["MatchId"] as? String{
                 matchId = val
+            }
+            if let val = selecetedData!["UserId"] as? String{
+                playerId = val
             }
         }
         
@@ -333,6 +337,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                 }
                 else{
                     if let matchKey = matchId{
+                        data["UserId"] = self.playerId
                         updateMatchData(matchKey, data: data, callback: { dat in
                             self.updateGlobalValues()
                             var data = dat

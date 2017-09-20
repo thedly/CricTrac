@@ -727,7 +727,8 @@ func getImageFromFirebase(imagePath: String ,sucessBlock:(UIImage)->Void){
 
 func updateMatchData(key:String,data:[String:AnyObject], callback:(data:[String:AnyObject])->Void ){
     var dataToBeModified = data
-    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Matches").child(key)
+    var playerId = data["UserId"] as? String
+    let ref = fireBaseRef.child("Users").child(playerId!).child("Matches").child(key)
     
     //let formatter = NSDateFormatter()
     //formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"

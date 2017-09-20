@@ -104,31 +104,31 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
             
         case  "AllPlayers" :
             
-            topBarTitle.text = "All Players"
+            topBarTitle.text = "ALL PLAYERS"
             return myPlayers.count
 
         case  "Batsmen" :
             
-            topBarTitle.text = "Batsmen"
+            topBarTitle.text = "BATSMEN"
             return batsmen.count
             
         case  "Bowlers" :
             
-            topBarTitle.text = "Bowlers"
+            topBarTitle.text = "BOWLERS"
             return bowlers.count
         case "WicketKeeper" :
            
-            topBarTitle.text = "Wicket Keepers"
+            topBarTitle.text = "WICKET KEEPERS"
             return wicketsKeepers.count
             
         case  "AllRounder" :
             
-            topBarTitle.text = "All-Rounders"
+            topBarTitle.text = "ALL-ROUNDERS"
             return allrounders.count
             
         default:
             
-             topBarTitle.text = "My Players"
+             topBarTitle.text = "MY PLAYERS"
             if myPlayers.count == 0 {
                 noPlayersLbl.text = "No Players"
             }
