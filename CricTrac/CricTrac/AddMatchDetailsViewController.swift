@@ -338,7 +338,8 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                 else{
                     if let matchKey = matchId{
                         data["UserId"] = self.playerId
-                        updateMatchData(matchKey, data: data, callback: { dat in
+                        data["MatchEditedBy"] = currentUser?.uid
+                        updateMatchData(matchKey, data: data    , callback: { dat in
                             self.updateGlobalValues()
                             var data = dat
                             data["MatchId"] =  matchKey

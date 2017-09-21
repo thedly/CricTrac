@@ -27,16 +27,32 @@ class TopBattingPlayersList: UIViewController,UITableViewDelegate,UITableViewDat
     
     override func viewWillAppear(animated: Bool) {
         setBackgroundColor()
+        setNavigationProperties()
     }
     
     func changeThemeSettigs() {
         self.view.backgroundColor = currentTheme.topColor
         self.topBarView.backgroundColor = currentTheme.topColor
+        topBarView.hidden = true
+    }
+    
+    
+    func setNavigationProperties() {
+        var currentTheme:CTTheme!
+        currentTheme = cricTracTheme.currentTheme
+        let menuButton: UIButton = UIButton(type:.Custom)
+        menuButton.setImage(UIImage(named: "Back-100"), forState: UIControlState.Normal)
+        menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+        menuButton.frame = CGRectMake(0, 0, 40, 40)
+        let leftbarButton = UIBarButtonItem(customView: menuButton)
+        navigationItem.leftBarButtonItem = leftbarButton
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor
+        title = "TOP BATTING"
     }
     
         
     func didMenuButtonTapp() {
-      self.dismissViewControllerAnimated(false, completion: nil)
+      self.navigationController?.popViewControllerAnimated(true)
     }
     
     
@@ -97,10 +113,10 @@ class TopBattingPlayersList: UIViewController,UITableViewDelegate,UITableViewDat
         let summaryDetailsVC = viewControllerFrom("Main", vcid: "MatchSummaryViewController") as! MatchSummaryViewController
         
         summaryDetailsVC.playerID = battingMatches[indexPath.section].playerId
-        summaryDetailsVC.coachVal = 1
+        summaryDetailsVC.isCoach = true
         summaryDetailsVC.coachTappedPlayerName = cell.topBattingPlayerName.text!
-      // self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
-        self.presentViewController(summaryDetailsVC, animated: false, completion: nil)
+       self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
+       // self.presentViewController(summaryDetailsVC, animated: false, completion: nil)
         
     }
     

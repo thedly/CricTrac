@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDataSource,ThemeChangeable {
+class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDataSource,ThemeChangeable,DeleteComment {
     
     @IBOutlet weak var RequestsTblview: UITableView!
     @IBOutlet weak var noPendingRequetsLbl: UILabel!
@@ -22,22 +22,24 @@ class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDat
     var coachNodeIds = [String]()
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initializeView()
-        
     }
     
     override func viewWillAppear(animated: Bool) {
         setBackgroundColor()
+        //self.RequestsTblview.reloadData()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         reloadData()
-        self.RequestsTblview.reloadData()
+    }
+    
+    // for parent class
+    func deletebuttonTapped(){
+        
     }
     
     func reloadData() {
@@ -107,8 +109,11 @@ class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDat
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let aCell = RequestsTblview.dequeueReusableCellWithIdentifier("FriendRequestsCell", forIndexPath: indexPath) as! FriendRequestsCell
         
+        aCell.parent = self
+        
         if playerRequests.count != 0 {
             let pendingReqId = playerRequests[indexPath.row]
+            aCell.friendId = pendingReqId
             
             fetchBasicProfile(pendingReqId) { (result) in
                 let proPic = result["proPic"]

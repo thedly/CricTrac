@@ -55,7 +55,6 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     
     var userProfileData:Profile!
     var isCoach: Bool = false
-    var coachVal = 0
     var coachTappedPlayerName = ""
     
     var toatalBowlingMatches = 0
@@ -68,6 +67,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     var totalOvers:Float = 0
     var totalBallsFaced = 0
     var playerID = ""
+    var playerDob = ""
     
     
     func changeThemeSettigs() {
@@ -164,28 +164,17 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
 //        menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
         menuButton.frame = CGRectMake(0, 0, 40, 40)
         let leftbarButton = UIBarButtonItem(customView: menuButton)
-        navigationItem.leftBarButtonItem = leftbarButton
-                // let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        // navigationController!.navigationBar.titleTextAttributes = titleDict
         
         if isCoach == true {
             topBarHeightConstraint.constant = 0
             topBarView.hidden = true
-            menuButton.setImage(UIImage(named: "shape"), forState: UIControlState.Normal)
+            menuButton.setImage(UIImage(named: "Back-100"), forState: UIControlState.Normal)
             menuButton.addTarget(self, action: #selector(didTapCancel), forControlEvents: UIControlEvents.TouchUpInside)
             navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
             title = coachTappedPlayerName
         }
-        
-        if coachVal == 1 {
-            topBarView.hidden = false
-            topBarHeightConstraint.constant = 50
-            topBarView.backgroundColor = currentTheme.topColor
-            cancelButton.addTarget(self, action: #selector(didTapCancel), forControlEvents: UIControlEvents.TouchUpInside)
-            topBarLabelText.text  = coachTappedPlayerName
-        }
-            
-        else if isCoach == false && coachVal == 0 {
+
+        else if isCoach == false  {
             topBarHeightConstraint.constant = 0
             topBarView.hidden = true
             menuButton.setImage(UIImage(named: "menu-icon"), forState: UIControlState.Normal)
@@ -194,16 +183,12 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             title = "SCOREBOARD"
         }
         
+         navigationItem.leftBarButtonItem = leftbarButton
+        
     }
     @IBAction func didTapCancel(sender: UIButton) {
         
-        if coachVal == 1 {
-             self.dismissViewControllerAnimated(true) {}
-        }
-        else{
-            self.navigationController?.popViewControllerAnimated(true)
-        }
-        
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     @IBAction func didMenuButtonTapp(sender: UIButton){
@@ -215,6 +200,11 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         if playerID == "" {
             playerID = (currentUser?.uid)!
         }
+        
+        fetchFriendDOB(playerID) { (dob) in
+            self.playerDob = dob
+        }
+        
        getAllMatchData(playerID) { (data) in
             self.matchDataSource.removeAll()
             self.filterLevel.removeAll()
@@ -913,22 +903,16 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
             let selectedDataSource = self.matchDataSource.filter { (dat) -> Bool in
             return dat["MatchId"]! as! String == matches[indexPath.row - 1].matchId
+                
             }
-                if coachVal == 1 {
-
-                summaryDetailsVC.matchDetailsData = selectedDataSource.first
-                summaryDetailsVC.isFriendDashboard = true
-                summaryDetailsVC.friendDOB = self.userProfileData.DateOfBirth
-               // self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
-                self.presentViewController(summaryDetailsVC, animated: false, completion: nil)
-                CFRunLoopWakeUp(CFRunLoopGetCurrent())
-                }
-                else{
-                    summaryDetailsVC.matchDetailsData = selectedDataSource.first
-                    
-                    self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
-                    CFRunLoopWakeUp(CFRunLoopGetCurrent())
-                }
+            
+            if isCoach == true {
+                summaryDetailsVC.isCoach = true
+                summaryDetailsVC.playerDob = playerDob
+            }
+            summaryDetailsVC.matchDetailsData = selectedDataSource.first
+            self.navigationController?.pushViewController(summaryDetailsVC, animated: true)
+            CFRunLoopWakeUp(CFRunLoopGetCurrent())
             }
         }
         

@@ -368,6 +368,15 @@ func fetchFriendCity(id:String,sucess:(city:String)->Void){
     })
 }
 
+func fetchFriendDOB(id:String,sucess:(dob:String)->Void){
+    fireBaseRef.child("Users").child(id).child("UserProfile").child("DateOfBirth").observeEventType(.Value, withBlock: { snapshot in
+        if let data = snapshot.value as? String{
+            sucess(dob: data)
+        }
+    })
+}
+
+
 func fetchFriendDetail(id:String,sucess:(result:[String:String])->Void){
     fireBaseRef.child("Users").child(id).child("UserProfile").observeEventType(.Value, withBlock: { snapshot in
         if let data = snapshot.value {

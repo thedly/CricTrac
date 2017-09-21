@@ -115,6 +115,8 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         initView()
         updateCoachDashboard()
         updateCoachSummary()
+        self.topBattingtableView.reloadData()
+        self.topBowlingTableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -475,6 +477,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             }
         }
         
+        
         self.matches.append(makeSummaryCell(data))
         
         self.topBattingtableView.reloadData()
@@ -560,6 +563,8 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 })
                 self.coachValidation()
                 self.updateCoachSummary()
+                self.topBattingtableView.reloadData()
+                self.topBowlingTableView.reloadData()
                 
             }
             actionSheetController.addAction(okAction)
@@ -606,6 +611,8 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 fireBaseRef.child("Users").child((currentUser?.uid)!).child("MyCoaches").child(self.myCoachFrndNodeId).removeValue()
                 self.coachValidation()
                 self.updateCoachSummary()
+                self.topBattingtableView.reloadData()
+                self.topBowlingTableView.reloadData()
                 
             }
             actionSheetController.addAction(unfriendAction)
@@ -1051,7 +1058,6 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 summaryDetailsVC.isCoach = true
                 summaryDetailsVC.coachTappedPlayerName = cell.topBattingPlayerName.text!
                 self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
-                //self.presentViewController(summaryDetailsVC, animated: false, completion: nil)
             }
             
             if tableView == topBowlingTableView {
@@ -1062,7 +1068,6 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 summaryDetailsVC.coachTappedPlayerName = cell.topBowlingPlayerName.text!
                 summaryDetailsVC.playerID = matches[indexPath.section].playerId
                 self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
-               // self.presentViewController(summaryDetailsVC, animated: true, completion: nil)
             }
         }
     }
@@ -1079,14 +1084,13 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     @IBAction func viewAllForBattingList(sender: UIButton) {
         let battingList = viewControllerFrom("Main", vcid: "TopBattingPlayersList") as! TopBattingPlayersList
         battingList.battingMatches = matches
-        self.presentViewController(battingList, animated: false, completion: nil)
+        self.navigationController?.pushViewController(battingList, animated: false)
     }
     
     @IBAction func viewAllForBowlingList(sender: UIButton) {
         let bowlingList = viewControllerFrom("Main", vcid: "TopBowlingPlayersList") as! TopBowlingPlayersList
         bowlingList.bowlingMatches = matches
-        self.presentViewController(bowlingList, animated: false, completion: nil)
-    }
+        self.navigationController?.pushViewController(bowlingList, animated: false)    }
     
     @IBAction func CoachSummaryResultTapped(sender: UIButton) {
         
@@ -1137,7 +1141,6 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             }
             break
         }
-    
-    }
+     }
   
 }

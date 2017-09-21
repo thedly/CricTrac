@@ -25,14 +25,34 @@ class TopBowlingPlayersList: UIViewController,UITableViewDelegate,UITableViewDat
     
     override func viewWillAppear(animated: Bool) {
         setBackgroundColor()
+        setNavigationProperties()
     }
     
     func changeThemeSettigs() {
         
         self.view.backgroundColor = currentTheme.topColor
         self.topBarView.backgroundColor = currentTheme.topColor
+        topBarView.hidden = true
         
     }
+    
+    func setNavigationProperties() {
+        var currentTheme:CTTheme!
+        currentTheme = cricTracTheme.currentTheme
+        let menuButton: UIButton = UIButton(type:.Custom)
+        menuButton.setImage(UIImage(named: "Back-100"), forState: UIControlState.Normal)
+        menuButton.addTarget(self, action: #selector(didMenuButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+        menuButton.frame = CGRectMake(0, 0, 40, 40)
+        let leftbarButton = UIBarButtonItem(customView: menuButton)
+        navigationItem.leftBarButtonItem = leftbarButton
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor
+        title = "TOP BOWLING"
+    }
+    
+    func didMenuButtonTapp() {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return bowlingMatches.count
@@ -86,12 +106,10 @@ class TopBowlingPlayersList: UIViewController,UITableViewDelegate,UITableViewDat
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! CoachTopBattingBowlingTableViewCell
         
                 let summaryDetailsVC = viewControllerFrom("Main", vcid: "MatchSummaryViewController") as! MatchSummaryViewController
-                
+                summaryDetailsVC.isCoach = true
                 summaryDetailsVC.playerID = bowlingMatches[indexPath.section].playerId
-                summaryDetailsVC.coachVal = 1
                 summaryDetailsVC.coachTappedPlayerName = cell.topBowlingPlayerName.text!
-                //self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
-                self.presentViewController(summaryDetailsVC, animated: false, completion: nil)
+                self.navigationController?.pushViewController(summaryDetailsVC, animated: false)
        
     }
     

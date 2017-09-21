@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlayerCoachesListVC: UIViewController,UITableViewDelegate,UITableViewDataSource,ThemeChangeable {
+class PlayerCoachesListVC: UIViewController,UITableViewDelegate,UITableViewDataSource,ThemeChangeable,DeleteComment {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noCoachesLabel: UILabel!
@@ -31,7 +31,12 @@ class PlayerCoachesListVC: UIViewController,UITableViewDelegate,UITableViewDataS
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         reloadData()
-        self.tableView.reloadData()
+        //self.tableView.reloadData()
+    }
+    
+    // for parent class
+    func deletebuttonTapped(){
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -88,9 +93,11 @@ class PlayerCoachesListVC: UIViewController,UITableViewDelegate,UITableViewDataS
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let aCell = tableView.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as! FriendSuggestionsCell
+        aCell.parent = self
     
         if myCoaches.count != 0 {
             let acceptedId = myCoaches[indexPath.row]
+            aCell.friendId = acceptedId
             
             fetchBasicProfile(acceptedId) { (result) in
                 let proPic = result["proPic"]

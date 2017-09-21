@@ -23,10 +23,7 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
     var wicketsKeepers = [String]()
     var allrounders = [String]()
     
-     var playerReqId = ""
-    
-    
-    
+    var playerReqId = ""
     var playingRole = ""
     
     var playerNodeIdOthers = [String]()
@@ -43,7 +40,7 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         reloadData()
-        self.CoachPlayersTableView.reloadData()
+       // self.CoachPlayersTableView.reloadData()
     }
     
     func reloadData() {

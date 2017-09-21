@@ -18,11 +18,13 @@ class FriendRequestsCell: UITableViewCell {
     @IBOutlet weak var FriendRole: UILabel!
     
     var friendId:String?
+    var parent:DeleteComment?
     
     @IBOutlet weak var baseView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         addTapGestureToUserName()
+        parent?.deletebuttonTapped()
         
         FriendProfileImage.layer.cornerRadius = FriendProfileImage.frame.size.width/2
         FriendProfileImage.clipsToBounds = true
@@ -70,6 +72,9 @@ class FriendRequestsCell: UITableViewCell {
         dashBoard.friendId = friendId
         dashBoard.friendProfile = userInfo
         self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
+        if let parentVc = parent as? UIViewController{
+            parentVc.presentViewController(dashBoard, animated: true, completion: nil)
+        }
     }
     
     func moveToCoach(userInfo:[String : AnyObject]){
@@ -77,6 +82,9 @@ class FriendRequestsCell: UITableViewCell {
         dashBoard.friendId = friendId
         dashBoard.friendProfile = userInfo
         self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
+        if let parentVc = parent as? UIViewController{
+            parentVc.presentViewController(dashBoard, animated: true, completion: nil)
+        }
     }
     
     func moveToFan(userInfo:[String : AnyObject]){
@@ -84,6 +92,9 @@ class FriendRequestsCell: UITableViewCell {
         dashBoard.friendId = friendId
         dashBoard.friendProfile = userInfo
         self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
+        if let parentVc = parent as? UIViewController{
+            parentVc.presentViewController(dashBoard, animated: true, completion: nil)
+        }
     }
     
     override func setSelected(selected: Bool, animated: Bool) {

@@ -67,6 +67,9 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     var friendDOB = ""
     
     var isFriendDashboard: Bool!  = false
+    var isCoach: Bool! = false
+    var playerDob = ""
+
     
     @IBAction func deleteActionPressed(sender: UIButton) {
         
@@ -142,6 +145,8 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             navigationItem.rightBarButtonItem = righttbarButton
 
             navigationController!.navigationBar.barTintColor = currentTheme.topColor //UIColor(hex: topColor)
+            title = "SCORECARD"
+
             if profileData.UserProfile == "Coach" {
                 self.bottomView.hidden = true
                 self.bannerViewHeightConstraint.constant = 50
@@ -181,7 +186,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         editMatch.previous = self
         editMatch.matchBeingEdited = true
         self.navigationController?.pushViewController(editMatch, animated: true)
-      //  presentViewController(editMatch, animated: true) {}
+        //presentViewController(editMatch, animated: true) {}
        // presentViewController(editMatch, animated: true) {}
     }
     
@@ -336,12 +341,18 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         
         if let dat = matchDetailsData["MatchDate"] {
             var dob = ""
-            if isFriendDashboard == false {
-                  dob = profileData.DateOfBirth
-            }
-            else{
-                dob = friendDOB
-            }
+                if isFriendDashboard == false {
+                        if isCoach == true {
+                            dob = playerDob
+                        }
+                        else{
+                             dob = profileData.DateOfBirth
+                        }
+                    }
+               
+                else{
+                    dob = friendDOB
+                }
             
             let dateFormater = NSDateFormatter()
             dateFormater.dateFormat = "dd-MM-yyyy"
