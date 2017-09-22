@@ -167,7 +167,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             self.bottomView.hidden = true
             self.bottomViewHeightConstraint.constant = 0
         }
-        title = "SCORECARD"
        
 //        if friendProfile == false {
 //            self.bottomView.hidden = false

@@ -40,7 +40,6 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
     override func viewDidLoad() {
         super.viewDidLoad()
         password.delegate = self
-        setBackgroundColor()
         facebookBtn.hidden = true
         googleBtn.hidden = true
         
@@ -52,6 +51,10 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        setBackgroundColor()
+
+    }
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Register")
     }
@@ -336,4 +339,19 @@ extension RegisterViewController {
         self.facebookBtn.enabled = false
         loginWithFacebook()
     }
+    
+    @IBAction func termsAndConditionsBtnTapped(sender: UIButton) {
+        let menuDataArray = settingsMenuData
+         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vcName = menuDataArray[6]["vc"]
+        
+        if vcName == "StaticPageViewController" {
+            let viewCtrl = storyboard.instantiateViewControllerWithIdentifier(vcName! as! String) as! StaticPageViewController
+            viewCtrl.pageToLoad = menuDataArray[6]["contentToDisplay"] as! String + "?color=\(topColor)"
+            viewCtrl.pageHeaderText = (menuDataArray[6]["title"] as! String).uppercaseString
+            presentViewController(viewCtrl, animated: true, completion: nil)
+        }
+        
+    }
+    
 }

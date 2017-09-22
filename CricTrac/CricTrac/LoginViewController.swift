@@ -40,7 +40,6 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setBackgroundColor()
         //username.text = "crictracrahul@gmail.com"
         //password.text = "crictrac"
         //setUIBackgroundTheme(self.view)
@@ -48,6 +47,10 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
        // facebookBtnHeightConstraint.constant = 0
         //googleBtnHeightConstraint.constant = 0
         facebookBtn.hidden = true
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        setBackgroundColor()
     }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {

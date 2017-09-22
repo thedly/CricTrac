@@ -6,6 +6,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="SourceSansPro-Bold.otf">
+            <string>SourceSansPro-Bold</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
@@ -50,13 +55,30 @@
                                     <constraint firstAttribute="height" constant="212" id="O8Q-Kx-r1h"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A product from Arjun Innovations" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BPj-Bi-CXD">
+                                <rect key="frame" x="176" y="553" width="249" height="22"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AIPL Logo" translatesAutoresizingMaskIntoConstraints="NO" id="lgg-s5-9dt">
+                                <rect key="frame" x="238" y="423" width="125" height="125"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="125" id="1Y4-HM-BtV"/>
+                                    <constraint firstAttribute="height" constant="125" id="H22-BR-N40"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="lgg-s5-9dt" firstAttribute="centerX" secondItem="BPj-Bi-CXD" secondAttribute="centerX" id="8n4-Sq-6T6"/>
                             <constraint firstItem="LUd-Bk-oZj" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="9KE-gN-7yp"/>
+                            <constraint firstItem="BPj-Bi-CXD" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="9VT-8n-edO"/>
+                            <constraint firstItem="BPj-Bi-CXD" firstAttribute="top" secondItem="lgg-s5-9dt" secondAttribute="bottom" constant="5" id="Kmc-5c-aYk"/>
                             <constraint firstItem="ll4-8O-XCH" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" constant="-125" id="OM6-M0-KSE"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ll4-8O-XCH" secondAttribute="trailing" constant="116" id="cqe-4P-wDB"/>
                             <constraint firstAttribute="bottomMargin" secondItem="ll4-8O-XCH" secondAttribute="bottom" constant="-125" id="eCs-lY-dAt"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="BPj-Bi-CXD" secondAttribute="bottom" constant="25" id="jjP-61-kTf"/>
                             <constraint firstItem="LUd-Bk-oZj" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-150" id="lEb-ey-3Rc"/>
                         </constraints>
                         <variation key="default">
@@ -90,6 +112,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AIPL Logo" width="382" height="382"/>
         <image name="Cricket Filled-100" width="57" height="58"/>
         <image name="Iconlogo" width="838" height="645"/>
     </resources>

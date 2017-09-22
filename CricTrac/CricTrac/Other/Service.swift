@@ -546,10 +546,9 @@ func deleteAllPlayerData(){
                 fireBaseRef.child("Users").child(coachId).child("MyPlayers").child(coachNodeId).removeValue()
             }
         }
+            //delete MyCoaches node
+            fireBaseRef.child("Users").child(currentUser!.uid).child("MyCoaches").removeValue()
     })
-    
-    //delete MyCoaches node
-    fireBaseRef.child("Users").child(currentUser!.uid).child("MyCoaches").removeValue()
 }
 
 func deleteAllCoachData() {
@@ -567,10 +566,11 @@ func deleteAllCoachData() {
                 fireBaseRef.child("Users").child(playerId).child("MyCoaches").child(playerNodeId).removeValue()
             }
         }
+        //delete MyPlayers node
+        fireBaseRef.child("Users").child(currentUser!.uid).child("MyPlayers").removeValue()
+
     })
     
-    //delete MyPlayers node
-    fireBaseRef.child("Users").child(currentUser!.uid).child("MyPlayers").removeValue()
 }
 
 
