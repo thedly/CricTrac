@@ -109,10 +109,17 @@ class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDat
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let aCell = RequestsTblview.dequeueReusableCellWithIdentifier("FriendRequestsCell", forIndexPath: indexPath) as! FriendRequestsCell
         
+        var coachNodeId = ""
+        var playerNodeIdOther = ""
+
+        
         aCell.parent = self
         
         if playerRequests.count != 0 {
             let pendingReqId = playerRequests[indexPath.row]
+            coachNodeId = coachNodeIds[indexPath.row]
+            playerNodeIdOther = playerNodeIdOthers[indexPath.row]
+            
             aCell.friendId = pendingReqId
             
             fetchBasicProfile(pendingReqId) { (result) in
@@ -130,6 +137,9 @@ class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDat
                 }
                     
                 else if userProfile == "Coach" {
+                    fireBaseRef.child("Users").child(pendingReqId).child("MyCoaches").child(coachNodeId).removeValue()
+                    fireBaseRef.child("Users").child(currentUser!.uid).child("MyPlayers").child(playerNodeIdOther).removeValue()
+                    
                     aCell.FriendRole.text = "Coach"
                 }
                 else if userProfile == "Cricket Fan" {

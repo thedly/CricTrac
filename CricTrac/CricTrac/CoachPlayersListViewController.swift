@@ -143,6 +143,9 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        var coachNodeId = ""
+        var playerNodeIdOther = ""
+        
         let aCell = tableView.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as! FriendSuggestionsCell
         aCell.parent = self
         
@@ -197,6 +200,10 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
             
                 if myPlayers.count != 0 {
                      playerReqId = myPlayers[indexPath.row]
+                    coachNodeId = coachNodeIds[indexPath.row]
+                    playerNodeIdOther = playerNodeIdOthers[indexPath.row]
+                    
+                    
                      aCell.friendId = playerReqId
                     
                     aCell.AddFriendBtn.accessibilityIdentifier = playerNodeIdOthers[indexPath.row]
@@ -226,6 +233,9 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
             }
                 
             else if userProfile == "Coach" {
+                fireBaseRef.child("Users").child(self.playerReqId).child("MyCoaches").child(coachNodeId).removeValue()
+                fireBaseRef.child("Users").child(currentUser!.uid).child("MyPlayers").child(playerNodeIdOther).removeValue()
+                
                 aCell.userRole.text = "Coach"
             }
             else if userProfile == "Cricket Fan" {

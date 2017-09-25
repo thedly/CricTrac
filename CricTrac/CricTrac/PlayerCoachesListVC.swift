@@ -94,9 +94,16 @@ class PlayerCoachesListVC: UIViewController,UITableViewDelegate,UITableViewDataS
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let aCell = tableView.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as! FriendSuggestionsCell
         aCell.parent = self
+        
+        var coachNodeId = ""
+        var playerNodeIdOther = ""
+        
     
         if myCoaches.count != 0 {
             let acceptedId = myCoaches[indexPath.row]
+            coachNodeId = playerNodeIds[indexPath.row]
+            playerNodeIdOther = coachNodeIdOthers[indexPath.row]
+            
             aCell.friendId = acceptedId
             
             fetchBasicProfile(acceptedId) { (result) in
@@ -110,6 +117,9 @@ class PlayerCoachesListVC: UIViewController,UITableViewDelegate,UITableViewDataS
                 aCell.userName.text = name
                 
                 if userProfile == "Player" {
+                    fireBaseRef.child("Users").child(acceptedId).child("MyPlayers").child(coachNodeId).removeValue()
+                    fireBaseRef.child("Users").child(currentUser!.uid).child("MyCoaches").child(playerNodeIdOther).removeValue()
+                    
                     aCell.userRole.text = playingRole
                 }
                     

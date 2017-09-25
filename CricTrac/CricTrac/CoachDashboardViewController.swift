@@ -328,66 +328,77 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         self.avgAge = 0
         
         getMyPlayers(currentUserId) { (data)  in
-            for(_,req) in data {
-                let playersData = req as! [String : AnyObject]
-                let isAcceptVal = playersData["isAccepted"]!
-                if isAcceptVal as! NSObject == 1 {
-                    let playerId = playersData["PlayerID"]!
-                    self.getMatchData(playerId as! String)
-                    self.players.append(playerId as! String)
-                    
-                    fetchBasicProfile(playerId as! String) { (result) in
-                        let playingRole = result["playingRole"]
+            if  data.isEmpty == false  {
+                for(_,req) in data {
+                    let playersData = req as! [String : AnyObject]
+                    let isAcceptVal = playersData["isAccepted"]!
+                    if isAcceptVal as! NSObject == 1 {
+                        let playerId = playersData["PlayerID"]!
+                        self.getMatchData(playerId as! String)
+                        self.players.append(playerId as! String)
                         
-                        if playingRole == "Batsman" {
-                            self.batsmen.append(playerId as! String)
-                        }
-                        else if playingRole == "Bowler" {
-                            self.bowlers.append(playerId as! String)
-                        }
-                        else if playingRole == "All-rounder" || playingRole == "Batting all-rounder" || playingRole == "Bowling all-rounder" {
-                            self.allRounders.append(playerId as! String)
-                        }
-                        else if playingRole == "Wicketkeeper" {
-                            self.wicketKeepers.append(playerId as! String)
-                        }
-                        
-                        //For age calculating
-                        let  dob = result["dob"]
-                        let dateFormater = NSDateFormatter()
-                        dateFormater.dateFormat = "dd-MM-yyyy"
-                        let birthdayDate = dateFormater.dateFromString(dob!)
-                        let date = NSDate()
-                        let calender:NSCalendar  = NSCalendar.currentCalendar()
-                        let currentMonth = calender.component(.Month, fromDate: date)
-                        let birthmonth = calender.component(.Month, fromDate: birthdayDate!)
-                        var years = calender.component(.Year, fromDate: date) - calender.component(.Year, fromDate: birthdayDate!)
-                        var months = currentMonth - birthmonth
-                        
-                        if months < 0 {
-                            years = years - 1
-                            months = 12 - birthmonth + currentMonth
-                            if calender.component(.Day, fromDate: date) < calender.component(.Day, fromDate: birthdayDate!){
-                                months = months - 1
+                        fetchBasicProfile(playerId as! String) { (result) in
+                            let playingRole = result["playingRole"]
+                            
+                            if playingRole == "Batsman" {
+                                self.batsmen.append(playerId as! String)
                             }
+                            else if playingRole == "Bowler" {
+                                self.bowlers.append(playerId as! String)
+                            }
+                            else if playingRole == "All-rounder" || playingRole == "Batting all-rounder" || playingRole == "Bowling all-rounder" {
+                                self.allRounders.append(playerId as! String)
+                            }
+                            else if playingRole == "Wicketkeeper" {
+                                self.wicketKeepers.append(playerId as! String)
+                            }
+                            
+                            //For age calculating
+                            let  dob = result["dob"]
+                            let dateFormater = NSDateFormatter()
+                            dateFormater.dateFormat = "dd-MM-yyyy"
+                            let birthdayDate = dateFormater.dateFromString(dob!)
+                            let date = NSDate()
+                            let calender:NSCalendar  = NSCalendar.currentCalendar()
+                            let currentMonth = calender.component(.Month, fromDate: date)
+                            let birthmonth = calender.component(.Month, fromDate: birthdayDate!)
+                            var years = calender.component(.Year, fromDate: date) - calender.component(.Year, fromDate: birthdayDate!)
+                            var months = currentMonth - birthmonth
+                            
+                            if months < 0 {
+                                years = years - 1
+                                months = 12 - birthmonth + currentMonth
+                                if calender.component(.Day, fromDate: date) < calender.component(.Day, fromDate: birthdayDate!){
+                                    months = months - 1
+                                }
+                            }
+                            else if months == 0 && calender.component(.Day, fromDate: date) < calender.component(.Day, fromDate: birthdayDate!)
+                            {
+                                years = years - 1
+                                months = 11
+                            }
+                            let ageString = "\(years).\(months)"
+                            self.avgAge += Float(ageString)!
+                            
+                            // Assigning values
+                            self.totalPlayers.text = String(self.players.count)
+                            self.totalBatsmen.text = String(self.batsmen.count)
+                            self.totalBowlers.text = String(self.bowlers.count)
+                            self.totalWickets.text = String(self.wicketKeepers.count)
+                            self.totalAllRounders.text = String(self.allRounders.count)
+                            self.totalAvgAge.text = String(format:"%.1f",self.avgAge/Float(self.players.count))
                         }
-                        else if months == 0 && calender.component(.Day, fromDate: date) < calender.component(.Day, fromDate: birthdayDate!)
-                        {
-                            years = years - 1
-                            months = 11
-                        }
-                        let ageString = "\(years).\(months)"
-                        self.avgAge += Float(ageString)!
-                        
-                        // Assigning values
-                        self.totalPlayers.text = String(self.players.count)
-                        self.totalBatsmen.text = String(self.batsmen.count)
-                        self.totalBowlers.text = String(self.bowlers.count)
-                        self.totalWickets.text = String(self.wicketKeepers.count)
-                        self.totalAllRounders.text = String(self.allRounders.count)
-                        self.totalAvgAge.text = String(format:"%.1f",self.avgAge/Float(self.players.count))
                     }
                 }
+            }
+            else{
+                // Assigning values
+                self.totalPlayers.text = "0"
+                self.totalBatsmen.text = "0"
+                self.totalBowlers.text = "0"
+                self.totalWickets.text = "0"
+                self.totalAllRounders.text = "0"
+                self.totalAvgAge.text = "0"
             }
         }
     }
