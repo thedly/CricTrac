@@ -111,24 +111,21 @@ class PlayerCoachesListVC: UIViewController,UITableViewDelegate,UITableViewDataS
                 let city =   result["city"]
                 let name = "\(result["firstname"]!) \(result["lastname"]!)"
                 let userProfile = result["userProfile"]
-                let playingRole = result["playingRole"]
+               // let playingRole = result["playingRole"]
                 
                 aCell.userCity.text = city
                 aCell.userName.text = name
                 
-                if userProfile == "Player" {
-                    fireBaseRef.child("Users").child(acceptedId).child("MyPlayers").child(coachNodeId).removeValue()
-                    fireBaseRef.child("Users").child(currentUser!.uid).child("MyCoaches").child(playerNodeIdOther).removeValue()
                     
-                    aCell.userRole.text = playingRole
-                }
-                    
-                else if userProfile == "Coach" {
+                if userProfile == "Coach" {
                     aCell.userRole.text = "Coach"
                 }
-                else if userProfile == "Cricket Fan" {
-                    aCell.userRole.text = "Cricket Fan"
+                else{
+                    
+                fireBaseRef.child("Users").child(acceptedId).child("MyPlayers").child(coachNodeId).removeValue()
+                fireBaseRef.child("Users").child(currentUser!.uid).child("MyCoaches").child(playerNodeIdOther).removeValue()
                 }
+                
                 
                 if proPic! == "-"{
                     let imageName = defaultProfileImage

@@ -179,15 +179,23 @@ public func extractImages(userId:String) -> UIImage {
 
 public func getRootViewController() -> UIViewController {
     
+    var dashboardVC = UIViewController()
     let drawerViewController: UIViewController = viewControllerFrom("Main", vcid: "SliderMenuViewController") as!SliderMenuViewController
     
-    
-    let dashboardVC = viewControllerFrom("Main", vcid: "timeline") as! TimeLineViewController
+    if profileData.UserProfile == "Player" {
+         dashboardVC = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
+    }
+    else if profileData.UserProfile == "Coach" {
+         dashboardVC = viewControllerFrom("Main", vcid: "CoachDashboardViewController") as! CoachDashboardViewController
+    }
+    else{
+         dashboardVC = viewControllerFrom("Main", vcid: "timeline") as! TimeLineViewController
+    }
     let navigationControl = UINavigationController(rootViewController: dashboardVC )
     sliderMenu.mainViewController = navigationControl
     sliderMenu.drawerViewController = drawerViewController
     return sliderMenu
-    
+   
     
     
 }

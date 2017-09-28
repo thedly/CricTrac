@@ -231,17 +231,22 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
             if userProfile == "Player" {
                 aCell.userRole.text = playingRole
             }
-                
-            else if userProfile == "Coach" {
-                fireBaseRef.child("Users").child(self.playerReqId).child("MyCoaches").child(coachNodeId).removeValue()
-                fireBaseRef.child("Users").child(currentUser!.uid).child("MyPlayers").child(playerNodeIdOther).removeValue()
-                
-                aCell.userRole.text = "Coach"
+            else{
+            fireBaseRef.child("Users").child(self.playerReqId).child("MyCoaches").child(coachNodeId).removeValue()
+            fireBaseRef.child("Users").child(currentUser!.uid).child("MyPlayers").child(playerNodeIdOther).removeValue()
             }
-            else if userProfile == "Cricket Fan" {
-                aCell.userRole.text = "Cricket Fan"
-            }
+                
             
+            
+//                aCell.userRole.text = "Coach"
+//            }
+//            else if userProfile == "Cricket Fan" {
+//                fireBaseRef.child("Users").child(self.playerReqId).child("MyCoaches").child(coachNodeId).removeValue()
+//                fireBaseRef.child("Users").child(currentUser!.uid).child("MyPlayers").child(playerNodeIdOther).removeValue()
+//                
+//                aCell.userRole.text = "Cricket Fan"
+////            }
+        
             if proPic! == "-"{
                 let imageName = defaultProfileImage
                 let image = UIImage(named: imageName)

@@ -160,13 +160,15 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             
         }
         else {
-            matchDetailsTitle.text = "SCORECARD"
+            barView.backgroundColor = currentTheme.topColor
+            matchDetailsTitle.text! = "SCORECARD"
             matchEditButton.hidden = true
             matchDetailsBack.addTarget(self, action: #selector(didTapCancelOthers), forControlEvents: UIControlEvents.TouchUpInside)
             self.bannerViewHeightConstraint.constant = 50
             self.bottomView.hidden = true
             self.bottomViewHeightConstraint.constant = 0
         }
+         title = "SCORECARD"
        
 //        if friendProfile == false {
 //            self.bottomView.hidden = false

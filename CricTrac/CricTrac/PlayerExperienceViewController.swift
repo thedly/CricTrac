@@ -96,9 +96,8 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
             }
             else
             {
-                let rootViewController: UIViewController = getRootViewController()
-                self.window.rootViewController = rootViewController
-                // sliderMenu.mainViewController = rootViewController
+                  let rootViewController: UIViewController = getRootViewController()
+                  self.window.rootViewController = rootViewController
             }
             
             if (self.profileChanged == true) {

@@ -435,12 +435,28 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         dispBB = "0-0"
         bowlAverage = 0
         economy = 0
+        var matchdays = 0
         
         for (key,val) in data{
+            matchdays = 0
             if  var value = val as? [String : AnyObject]{
                 value += ["key":key]
                 totalMatches += 1
                 playerId = value["UserId"] as! String
+                
+                if let matchDat = value["MatchDate"]  {
+                    let dateFormater = NSDateFormatter()
+                    dateFormater.dateFormat = "dd-MM-yyyy"
+                    let matchDate = dateFormater.dateFromString(matchDat as! String)
+                    
+                    let date = NSDate()
+                    
+                    let calender:NSCalendar  = NSCalendar.currentCalendar()
+                    let days = calender.components(.Day, fromDate: matchDate!, toDate: date, options: [])
+                    matchdays = days.day
+                }
+
+            if matchdays <= 365  {
 
                 if value["RunsTaken"] as! String != "-" {
                     let runsTaken = Int(value["RunsTaken"] as! String)!
@@ -485,12 +501,14 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                         }
                     }
                 }
+                }
+
             }
+            
         }
         
-        
         self.matches.append(makeSummaryCell(data))
-        
+
         self.topBattingtableView.reloadData()
         self.topBowlingTableView.reloadData()
     }
@@ -922,60 +940,75 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        if tableView == topBattingtableView || tableView == topBowlingTableView {
-            battingTableViewHeightConstraint.constant = 0
-             bowlingTableViewHeightConstraint.constant = 0
-            
-            if matches.count == 0 {
-                if friendId != nil {
-                    viewAllBtnForTopBatting.hidden = true
-                    viewAllBtnForTopBowling.hidden = true
-                    viewAllBtnForTopBattingHeightConstraint.constant = 0
-                    viewAllBtnForTopBowlingHeightConstraint.constant = 0
-
-                }
-                else{
-                    viewAllBtnForTopBatting.hidden = true
-                    viewAllBtnForTopBowling.hidden = true
-                    viewAllBtnForTopBattingHeightConstraint.constant = 0
-                    viewAllBtnForTopBowlingHeightConstraint.constant = 0
-                }
-                noPlayersForBatting.text = "No Players"
-                noPlayersForBowling.text = "No Players"
-                baseViewHeightConstraint.constant = 850
-            }
-            else{
-                baseViewHeightConstraint.constant = 947
-                noPlayersForBatting.text = ""
-                noPlayersForBowling.text = ""
+            if tableView == topBattingtableView || tableView == topBowlingTableView {
+                battingTableViewHeightConstraint.constant = 0
+                 bowlingTableViewHeightConstraint.constant = 0
                 
-                if  friendId != nil {
-                    viewAllBtnForTopBatting.hidden = true
-                    viewAllBtnForTopBowling.hidden = true
-                    viewAllBtnForTopBattingHeightConstraint.constant = 0
-                    viewAllBtnForTopBowlingHeightConstraint.constant = 0
+                if matches.count == 0 {
+                    if (userProfileData.CoachCurrentTeams.count) + (userProfileData.CoachPastTeams.count) == 0 {
+                        baseViewHeightConstraint.constant = 730
+                    }else{
+                        baseViewHeightConstraint.constant = 850
+                    }
+                    if friendId != nil {
+                        viewAllBtnForTopBatting.hidden = true
+                        viewAllBtnForTopBowling.hidden = true
+                        viewAllBtnForTopBattingHeightConstraint.constant = 0
+                        viewAllBtnForTopBowlingHeightConstraint.constant = 0
+
+                    }
+                    else{
+                        viewAllBtnForTopBatting.hidden = true
+                        viewAllBtnForTopBowling.hidden = true
+                        viewAllBtnForTopBattingHeightConstraint.constant = 0
+                        viewAllBtnForTopBowlingHeightConstraint.constant = 0
+                    }
+                    noPlayersForBatting.text = "No Players"
+                    noPlayersForBowling.text = "No Players"
                 }
                 else{
-                    viewAllBtnForTopBatting.hidden = false
-                    viewAllBtnForTopBowling.hidden = false
-                    viewAllBtnForTopBattingHeightConstraint.constant = 30
-                    viewAllBtnForTopBowlingHeightConstraint.constant = 30
+                    
+                    noPlayersForBatting.text = ""
+                    noPlayersForBowling.text = ""
+                    
+                    if  friendId != nil {
+                        viewAllBtnForTopBatting.hidden = true
+                        viewAllBtnForTopBowling.hidden = true
+                        viewAllBtnForTopBattingHeightConstraint.constant = 0
+                        viewAllBtnForTopBowlingHeightConstraint.constant = 0
+                    }
+                    else{
+                        viewAllBtnForTopBatting.hidden = false
+                        viewAllBtnForTopBowling.hidden = false
+                        viewAllBtnForTopBattingHeightConstraint.constant = 30
+                        viewAllBtnForTopBowlingHeightConstraint.constant = 30
+                    }
+                }
+                if matches.count >= 5 {
+                    if (userProfileData.CoachCurrentTeams.count) + (userProfileData.CoachPastTeams.count) == 0 {
+                        baseViewHeightConstraint.constant = 790
+                    }else{
+                        baseViewHeightConstraint.constant = 900
+                    }
+                    battingTableViewHeightConstraint.constant = CGFloat(5 * 78)
+                    bowlingTableViewHeightConstraint.constant = CGFloat(5 * 78)
+                    baseViewHeightConstraint.constant += CGFloat(5 * 125)
+
+                    return 5
+                }
+                else {
+                    if (userProfileData.CoachCurrentTeams.count) + (userProfileData.CoachPastTeams.count) == 0 {
+                        baseViewHeightConstraint.constant = 750
+                    }else{
+                        baseViewHeightConstraint.constant = 870
+                    }
+                    
+                    battingTableViewHeightConstraint.constant += CGFloat(matches.count * 78)
+                    bowlingTableViewHeightConstraint.constant += CGFloat(matches.count * 78)
+                    baseViewHeightConstraint.constant += CGFloat(matches.count * 125)
+                    return matches.count
                 }
             }
-            if matches.count >= 5 {
-                battingTableViewHeightConstraint.constant = CGFloat(5 * 78)
-                bowlingTableViewHeightConstraint.constant = CGFloat(5 * 78)
-                baseViewHeightConstraint.constant += CGFloat(5 * 125)
-
-                return 5
-            }
-            else {
-                battingTableViewHeightConstraint.constant += CGFloat(matches.count * 78)
-                bowlingTableViewHeightConstraint.constant += CGFloat(matches.count * 78)
-                baseViewHeightConstraint.constant += CGFloat(matches.count * 125)
-                return matches.count
-            }
-        }
         return matches.count
     }
     

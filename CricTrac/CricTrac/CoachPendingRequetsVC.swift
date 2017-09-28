@@ -136,14 +136,9 @@ class CoachPendingRequetsVC: UIViewController,UITableViewDelegate,UITableViewDat
                     aCell.FriendRole.text = playingRole
                 }
                     
-                else if userProfile == "Coach" {
+                else  {
                     fireBaseRef.child("Users").child(pendingReqId).child("MyCoaches").child(coachNodeId).removeValue()
                     fireBaseRef.child("Users").child(currentUser!.uid).child("MyPlayers").child(playerNodeIdOther).removeValue()
-                    
-                    aCell.FriendRole.text = "Coach"
-                }
-                else if userProfile == "Cricket Fan" {
-                    aCell.FriendRole.text = "Cricket Fan"
                 }
                 
                 if proPic! == "-"{
