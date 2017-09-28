@@ -560,27 +560,29 @@ extension UserInfoViewController:UITextFieldDelegate {
             }
         }
 
-        if validateProfileData() {
-            if userProfileInfo != nil {
-                if profileData.UserProfile != userProfileInfo.text {
-                    profileChanged = true
-                    
-                    let confirmAlert = UIAlertController(title: "Warning!" ,message:"Changing role will delete all existing role-related data. Are you sure you want to change the role?",preferredStyle: UIAlertControllerStyle.Alert)
-                    confirmAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
+        if textField == userProfileInfo {
+            if validateProfileData() {
+                if userProfileInfo != nil {
+                    if profileData.UserProfile != userProfileInfo.text {
+                        profileChanged = true
                         
-                       // self.continueToDismiss()
-                    }))
-                    
-                    confirmAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction) in
-                        self.userProfileInfo.text = profileData.UserProfile
-                         self.profileChanged = false
-                    }))
-                    
-                    self.presentViewController(confirmAlert, animated: true, completion: nil)
-                }
-                else {
-                    profileChanged = false
-                    //continueToDismiss()
+                        let confirmAlert = UIAlertController(title: "Warning!" ,message:"Changing role will delete all existing role-related data. Are you sure you want to change the role?",preferredStyle: UIAlertControllerStyle.Alert)
+                        confirmAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction) in
+                            
+                           // self.continueToDismiss()
+                        }))
+                        
+                        confirmAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction) in
+                            self.userProfileInfo.text = profileData.UserProfile
+                             self.profileChanged = false
+                        }))
+                        
+                        self.presentViewController(confirmAlert, animated: true, completion: nil)
+                    }
+                    else {
+                        profileChanged = false
+                        //continueToDismiss()
+                    }
                 }
             }
         }

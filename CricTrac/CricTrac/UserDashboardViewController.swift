@@ -417,7 +417,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     @IBAction func myCoachesButtonTapped(sender: AnyObject) {
        
         let myCoachesVC = viewControllerFrom("Main", vcid: "PlayerCoachesListVC") as! PlayerCoachesListVC
-        self.presentViewController(myCoachesVC, animated: false, completion: nil)
+        self.navigationController?.pushViewController(myCoachesVC, animated: false)
         
     }
     

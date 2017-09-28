@@ -72,6 +72,7 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
         setBackgroundColor()
+        setNavigationProperties()
     }
     
     @IBAction func backButtonTapped(sender: AnyObject) {
@@ -89,7 +90,26 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
     func changeThemeSettigs() {
         self.view.backgroundColor = currentTheme.topColor
         self.topBarView.backgroundColor = currentTheme.topColor
+        topBarView.hidden = true
     }
+    
+    func setNavigationProperties() {
+        var currentTheme:CTTheme!
+        currentTheme = cricTracTheme.currentTheme
+        let menuButton: UIButton = UIButton(type:.Custom)
+        menuButton.setImage(UIImage(named: "Back-100"), forState: UIControlState.Normal)
+        menuButton.addTarget(self, action: #selector(backButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+        menuButton.frame = CGRectMake(0, 0, 40, 40)
+        let leftbarButton = UIBarButtonItem(customView: menuButton)
+        navigationItem.leftBarButtonItem = leftbarButton
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor
+        title = "MY PLAYERS"
+    }
+    
+    func backButtonTapp() {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1

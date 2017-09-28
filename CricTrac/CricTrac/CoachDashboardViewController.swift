@@ -653,7 +653,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         default:
             
             let dashBoard = viewControllerFrom("Main", vcid: "CoachPlayersListViewController") as! CoachPlayersListViewController
-            self.presentViewController(dashBoard, animated: false, completion: nil)
+            self.navigationController?.pushViewController(dashBoard, animated: false)
             break
         }
     }
@@ -1122,7 +1122,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
 
     @IBAction func pendingRequestsButtonTapped(sender: AnyObject) {
         let pendingRequests = viewControllerFrom("Main", vcid: "CoachPendingRequetsVC") as! CoachPendingRequetsVC
-        self.presentViewController(pendingRequests, animated: false, completion: nil)
+       self.navigationController?.pushViewController(pendingRequests, animated: false)
     }
     
     @IBAction func viewAllForBattingList(sender: UIButton) {
@@ -1134,7 +1134,8 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     @IBAction func viewAllForBowlingList(sender: UIButton) {
         let bowlingList = viewControllerFrom("Main", vcid: "TopBowlingPlayersList") as! TopBowlingPlayersList
         bowlingList.bowlingMatches = matches
-        self.navigationController?.pushViewController(bowlingList, animated: false)    }
+        self.navigationController?.pushViewController(bowlingList, animated: false)
+    }
     
     @IBAction func CoachSummaryResultTapped(sender: UIButton) {
         
@@ -1143,7 +1144,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             if players.count != 0 {
             let playersList = viewControllerFrom("Main", vcid: "CoachPlayersListViewController") as! CoachPlayersListViewController
             playersList.playingRole = "AllPlayers"
-            self.presentViewController(playersList, animated: false, completion: nil)
+            self.navigationController?.pushViewController(playersList, animated: false)
             }
             
             break
@@ -1153,7 +1154,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 let batsmenList = viewControllerFrom("Main", vcid: "CoachPlayersListViewController") as! CoachPlayersListViewController
                 batsmenList.batsmen = batsmen
                 batsmenList.playingRole = "Batsmen"
-                self.presentViewController(batsmenList, animated: false, completion: nil)
+               self.navigationController?.pushViewController(batsmenList, animated: false)
             }
             break
         case 3 :
@@ -1161,7 +1162,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 let bowlersList = viewControllerFrom("Main", vcid: "CoachPlayersListViewController") as! CoachPlayersListViewController
                 bowlersList.bowlers = bowlers
                 bowlersList.playingRole = "Bowlers"
-                self.presentViewController(bowlersList, animated: false, completion: nil)
+               self.navigationController?.pushViewController(bowlersList, animated: false)
              }
             
             break
@@ -1170,7 +1171,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 let wicketsList = viewControllerFrom("Main", vcid: "CoachPlayersListViewController") as! CoachPlayersListViewController
                 wicketsList.wicketsKeepers = wicketKeepers
                 wicketsList.playingRole = "WicketKeeper"
-                self.presentViewController(wicketsList, animated: false, completion: nil)
+                self.navigationController?.pushViewController(wicketsList, animated: false)
              }
             break
             
@@ -1181,7 +1182,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 let allRoundersList = viewControllerFrom("Main", vcid: "CoachPlayersListViewController") as! CoachPlayersListViewController
                 allRoundersList.allrounders = allRounders
                 allRoundersList.playingRole = "AllRounder"
-                self.presentViewController(allRoundersList, animated: false, completion: nil)
+                self.navigationController?.pushViewController(allRoundersList, animated: false)
             }
             break
         }

@@ -41,6 +41,7 @@ class PlayerCoachesListVC: UIViewController,UITableViewDelegate,UITableViewDataS
     
     override func viewWillAppear(animated: Bool) {
         setBackgroundColor()
+        setNavigationProperties()
     }
     
     func initializeView() {
@@ -74,6 +75,24 @@ class PlayerCoachesListVC: UIViewController,UITableViewDelegate,UITableViewDataS
     func changeThemeSettigs() {
         self.view.backgroundColor = currentTheme.topColor
         self.topBarView.backgroundColor = currentTheme.topColor
+        topBarView.hidden = true
+    }
+    
+    func setNavigationProperties() {
+        var currentTheme:CTTheme!
+        currentTheme = cricTracTheme.currentTheme
+        let menuButton: UIButton = UIButton(type:.Custom)
+        menuButton.setImage(UIImage(named: "Back-100"), forState: UIControlState.Normal)
+        menuButton.addTarget(self, action: #selector(backButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+        menuButton.frame = CGRectMake(0, 0, 40, 40)
+        let leftbarButton = UIBarButtonItem(customView: menuButton)
+        navigationItem.leftBarButtonItem = leftbarButton
+        navigationController!.navigationBar.barTintColor = currentTheme.topColor
+        title = "MY COACHES"
+    }
+    
+    func backButtonTapp() {
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
