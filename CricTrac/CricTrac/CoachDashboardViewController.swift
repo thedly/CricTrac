@@ -1138,6 +1138,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     
     @IBAction func CoachSummaryResultTapped(sender: UIButton) {
         
+        if friendId == nil {
         switch sender.tag {
         case 1:
             if players.count != 0 {
@@ -1184,6 +1185,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 self.presentViewController(allRoundersList, animated: false, completion: nil)
             }
             break
+        }
         }
      }
   
