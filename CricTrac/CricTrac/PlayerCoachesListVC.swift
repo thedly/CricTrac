@@ -31,6 +31,7 @@ class PlayerCoachesListVC: UIViewController,UITableViewDelegate,UITableViewDataS
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         reloadData()
+         setBackgroundColor()
         //self.tableView.reloadData()
     }
     
@@ -92,7 +93,7 @@ class PlayerCoachesListVC: UIViewController,UITableViewDelegate,UITableViewDataS
     }
     
     func backButtonTapp() {
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewControllerAnimated(false)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -206,7 +207,7 @@ class PlayerCoachesListVC: UIViewController,UITableViewDelegate,UITableViewDataS
     
     @IBAction func backButtonTapped(sender: AnyObject) {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(false, completion: nil)
     }
     
 }

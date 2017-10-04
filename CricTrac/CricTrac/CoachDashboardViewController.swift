@@ -98,7 +98,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     
     
     @IBAction func CloseDashboardPressed(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(false, completion: nil)
     }
     
     var friendProfile:[String:AnyObject]?
@@ -1145,6 +1145,10 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             let playersList = viewControllerFrom("Main", vcid: "CoachPlayersListViewController") as! CoachPlayersListViewController
             playersList.playingRole = "AllPlayers"
             self.navigationController?.pushViewController(playersList, animated: false)
+                if currentUserId != (currentUser?.uid)! {
+                    self.presentViewController(playersList, animated: false, completion: nil)
+                    playersList.friendID = self.friendId!
+                }
             }
             
             break
@@ -1155,6 +1159,12 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 batsmenList.batsmen = batsmen
                 batsmenList.playingRole = "Batsmen"
                self.navigationController?.pushViewController(batsmenList, animated: false)
+                if currentUserId != (currentUser?.uid)! {
+                    self.presentViewController(batsmenList, animated: false, completion: nil)
+                    batsmenList.friendID = self.friendId!
+                }
+                
+                
             }
             break
         case 3 :
@@ -1163,6 +1173,11 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 bowlersList.bowlers = bowlers
                 bowlersList.playingRole = "Bowlers"
                self.navigationController?.pushViewController(bowlersList, animated: false)
+                if currentUserId != (currentUser?.uid)! {
+                    self.presentViewController(bowlersList, animated: false, completion: nil)
+                    bowlersList.friendID = self.friendId!
+                }
+                
              }
             
             break
@@ -1172,6 +1187,10 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 wicketsList.wicketsKeepers = wicketKeepers
                 wicketsList.playingRole = "WicketKeeper"
                 self.navigationController?.pushViewController(wicketsList, animated: false)
+                if currentUserId != (currentUser?.uid)! {
+                    self.presentViewController(wicketsList, animated: false, completion: nil)
+                    wicketsList.friendID = self.friendId!
+                }
              }
             break
             
@@ -1183,6 +1202,10 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 allRoundersList.allrounders = allRounders
                 allRoundersList.playingRole = "AllRounder"
                 self.navigationController?.pushViewController(allRoundersList, animated: false)
+                if currentUserId != (currentUser?.uid)! {
+                    self.presentViewController(allRoundersList, animated: false, completion: nil)
+                    allRoundersList.friendID = self.friendId!
+                }
             }
             break
         }

@@ -15,6 +15,7 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var noPlayersLbl: UILabel!
     @IBOutlet weak var topBarTitle: UILabel!
+    @IBOutlet weak var topBarViewHeightConstraint: NSLayoutConstraint!
     let currentTheme = cricTracTheme.currentTheme
     
     var myPlayers = [String]()
@@ -25,6 +26,7 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
     
     var playerReqId = ""
     var playingRole = ""
+    var friendID = ""
     
     var playerNodeIdOthers = [String]()
     var coachNodeIds = [String]()
@@ -48,7 +50,11 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
         coachNodeIds.removeAll()
         playerNodeIdOthers.removeAll()
         
-        getMyPlayers { (data) in
+        if friendID == "" {
+            friendID = (currentUser?.uid)!
+        }
+        
+        getMyPlayers(friendID) { (data) in
             for(_,req) in data {
                 let pendingReq = req as! [String : AnyObject]
                 let isAcceptVal = pendingReq["isAccepted"]!
@@ -90,20 +96,30 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
     func changeThemeSettigs() {
         self.view.backgroundColor = currentTheme.topColor
         self.topBarView.backgroundColor = currentTheme.topColor
-        topBarView.hidden = true
+        
     }
     
     func setNavigationProperties() {
-        var currentTheme:CTTheme!
-        currentTheme = cricTracTheme.currentTheme
-        let menuButton: UIButton = UIButton(type:.Custom)
-        menuButton.setImage(UIImage(named: "Back-100"), forState: UIControlState.Normal)
-        menuButton.addTarget(self, action: #selector(backButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
-        menuButton.frame = CGRectMake(0, 0, 40, 40)
-        let leftbarButton = UIBarButtonItem(customView: menuButton)
-        navigationItem.leftBarButtonItem = leftbarButton
-        navigationController!.navigationBar.barTintColor = currentTheme.topColor
-        title = "MY PLAYERS"
+        
+        
+        if friendID != "" {
+             topBarView.hidden = false
+            topBarViewHeightConstraint.constant = 56
+        }
+        else{
+            topBarView.hidden = true
+            topBarViewHeightConstraint.constant = 0
+            var currentTheme:CTTheme!
+            currentTheme = cricTracTheme.currentTheme
+            let menuButton: UIButton = UIButton(type:.Custom)
+            menuButton.setImage(UIImage(named: "Back-100"), forState: UIControlState.Normal)
+            menuButton.addTarget(self, action: #selector(backButtonTapp), forControlEvents: UIControlEvents.TouchUpInside)
+            menuButton.frame = CGRectMake(0, 0, 40, 40)
+            let leftbarButton = UIBarButtonItem(customView: menuButton)
+            navigationItem.leftBarButtonItem = leftbarButton
+            navigationController!.navigationBar.barTintColor = currentTheme.topColor
+            title = "MY PLAYERS"
+        }
     }
     
     func backButtonTapp() {
@@ -122,25 +138,30 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
         case  "AllPlayers" :
             
             topBarTitle.text = "ALL PLAYERS"
+            title = "ALL PLAYERS"
             return myPlayers.count
 
         case  "Batsmen" :
             
             topBarTitle.text = "BATSMEN"
+            title = "BATSMEN"
             return batsmen.count
             
         case  "Bowlers" :
             
             topBarTitle.text = "BOWLERS"
+            title = "BOWLERS"
             return bowlers.count
         case "WicketKeeper" :
            
             topBarTitle.text = "WICKET KEEPERS"
+            title = "WICKET KEEPERS"
             return wicketsKeepers.count
             
         case  "AllRounder" :
             
             topBarTitle.text = "ALL-ROUNDERS"
+            title = "ALL-ROUNDERS"
             return allrounders.count
             
         default:

@@ -647,9 +647,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         TeamsTable.reloadData()
     }
     
-    override func viewWillDisappear(animated: Bool) {
-         setBackgroundColor()
-    }
+    
     
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
         

@@ -129,6 +129,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             formattedString.bold(": ", fontName: appFont_black, fontSize: 15)
             formattedString.normal(versionAndBuildNumber, fontName: appFont_black, fontSize: 15)
             cell.menuItemName.attributedText = formattedString
+            cell.userInteractionEnabled = false
         }
         
         return cell
