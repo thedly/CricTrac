@@ -108,10 +108,11 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     var currentUserId = ""
     
     override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+         super.viewWillAppear(animated)
+        setBackgroundColor()
+
         coachTeams.reloadData()
         
-        setBackgroundColor()
         initView()
         updateCoachDashboard()
         updateCoachSummary()
@@ -679,7 +680,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             
             profileImageVc.imageString = userProfileData.ProfileImageURL
             if userProfileData.ProfileImageURL != "-" {
-                self.presentViewController(profileImageVc, animated: true) {}
+                self.presentViewController(profileImageVc, animated: false) {}
             }
         }
     }
@@ -697,7 +698,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 imagePicker.delegate = self
                 imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
                 imagePicker.allowsEditing = false
-                self.presentViewController(imagePicker, animated: true, completion: nil)
+                self.presentViewController(imagePicker, animated: false, completion: nil)
             }
         }
         
@@ -709,13 +710,13 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 imagePicker.delegate = self
                 imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
                 imagePicker.allowsEditing = false
-                self.presentViewController(imagePicker, animated: true, completion: nil)
+                self.presentViewController(imagePicker, animated: false, completion: nil)
             }
         }
         
         alertController.addAction(chooseExistingAction)
         
-        self.presentViewController(alertController, animated: true) {
+        self.presentViewController(alertController, animated: false) {
             // ...
         }
     }
@@ -734,7 +735,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 imagePicker.delegate = self
                 imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
                 imagePicker.allowsEditing = false
-                self.presentViewController(imagePicker, animated: true, completion: nil)
+                self.presentViewController(imagePicker, animated: false, completion: nil)
             }
         }
         
@@ -746,7 +747,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 imagePicker.delegate = self
                 imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
                 imagePicker.allowsEditing = false
-                self.presentViewController(imagePicker, animated: true, completion: nil)
+                self.presentViewController(imagePicker, animated: false, completion: nil)
             }
         }
         
@@ -770,7 +771,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         
         profileImageVc.imageString = profileData.ProfileImageURL
         if profileData.ProfileImageURL != "-" {
-            self.presentViewController(profileImageVc, animated: true) {}
+            self.presentViewController(profileImageVc, animated: false) {}
         }
     }
     
@@ -780,7 +781,8 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     }
     
     func changeThemeSettigs() {
-       // let currentTheme = cricTracTheme.currentTheme
+        let currentTheme = cricTracTheme.currentTheme
+        view.backgroundColor = currentTheme.topColor
        
         topBattingtableView.backgroundColor = UIColor.clearColor()
     }
@@ -792,12 +794,12 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         if coverOrProfile == "Profile" {
             self.userProfileImage.image = image
-            self.dismissViewControllerAnimated(true) {
+            self.dismissViewControllerAnimated(false) {
                 addProfileImageData(self.resizeImage(image, newWidth: 200))
             }
         }else {
             self.imgCoverPhoto.image = image
-            self.dismissViewControllerAnimated(true) {
+            self.dismissViewControllerAnimated(false) {
                 addCoverImageData(self.resizeImage(image, newWidth: 800))
             }
         }

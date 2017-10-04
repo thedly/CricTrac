@@ -75,15 +75,16 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
     }
     
     override func viewWillAppear(animated: Bool) {
-        let currentTheme = cricTracTheme.currentTheme
-        self.view.backgroundColor = currentTheme.topColor
+         super.viewWillAppear(animated)
+        //let currentTheme = cricTracTheme.currentTheme
+       // self.view.backgroundColor = currentTheme.topColor
         setBackgroundColor()
         setNavigationProperties()
     }
     
     @IBAction func backButtonTapped(sender: AnyObject) {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(false, completion: nil)
     }
     
     func initializeView() {
@@ -95,20 +96,19 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
     
     func changeThemeSettigs() {
         self.view.backgroundColor = currentTheme.topColor
-        self.topBarView.backgroundColor = currentTheme.topColor
         
     }
     
     func setNavigationProperties() {
         
-        
-        if friendID != "" {
+        if friendID != (currentUser?.uid)! && friendID != ""{
              topBarView.hidden = false
             topBarViewHeightConstraint.constant = 56
+            self.topBarView.backgroundColor = currentTheme.topColor
+
         }
         else{
             topBarView.hidden = true
-            topBarViewHeightConstraint.constant = 0
             var currentTheme:CTTheme!
             currentTheme = cricTracTheme.currentTheme
             let menuButton: UIButton = UIButton(type:.Custom)
@@ -118,12 +118,13 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
             let leftbarButton = UIBarButtonItem(customView: menuButton)
             navigationItem.leftBarButtonItem = leftbarButton
             navigationController!.navigationBar.barTintColor = currentTheme.topColor
+            self.view.backgroundColor = currentTheme.topColor
             title = "MY PLAYERS"
         }
     }
     
     func backButtonTapp() {
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewControllerAnimated(false)
     }
 
     

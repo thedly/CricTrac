@@ -3388,10 +3388,10 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="5ry-lR-KaS">
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="5ry-lR-KaS">
                                 <rect key="frame" x="150" y="566" width="300" height="19"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By signing up I agree to the" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AU0-QT-mAy">
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="By signing up I agree to the" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AU0-QT-mAy">
                                         <rect key="frame" x="0.0" y="0.0" width="168" height="19"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="19" id="uBj-zZ-d38"/>
@@ -3400,7 +3400,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0t8-mK-6c4">
+                                    <button opaque="NO" alpha="0.5" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0t8-mK-6c4">
                                         <rect key="frame" x="171" y="0.0" width="129" height="19"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="19" id="Ohg-Da-umO"/>
@@ -17276,7 +17276,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="niv-f5-tLl">
-                                <rect key="frame" x="0.0" y="56" width="600" height="544"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="epT-FL-Dtq" id="vgM-h5-PAg"/>
@@ -17284,16 +17284,16 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VUb-II-Uqt">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="0.0"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MY PLAYERS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="umL-kc-pto">
-                                        <rect key="frame" x="254" y="27" width="92" height="22"/>
+                                        <rect key="frame" x="254" y="-1" width="92" height="22"/>
                                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgB-Ot-r6G">
-                                        <rect key="frame" x="5" y="14" width="40" height="40"/>
+                                        <rect key="frame" x="5" y="-14" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="IBb-gr-nJO"/>
                                             <constraint firstAttribute="width" constant="40" id="sa0-Tf-0nL"/>
@@ -17312,11 +17312,11 @@
                                     <constraint firstItem="hgB-Ot-r6G" firstAttribute="centerY" secondItem="VUb-II-Uqt" secondAttribute="centerY" constant="6" id="MeP-NG-gGD"/>
                                     <constraint firstItem="hgB-Ot-r6G" firstAttribute="leading" secondItem="VUb-II-Uqt" secondAttribute="leading" constant="5" id="cJr-9n-zfd"/>
                                     <constraint firstItem="umL-kc-pto" firstAttribute="centerX" secondItem="VUb-II-Uqt" secondAttribute="centerX" id="lOe-Xy-uUl"/>
-                                    <constraint firstAttribute="height" constant="56" id="qml-y5-uV9"/>
+                                    <constraint firstAttribute="height" id="qml-y5-uV9"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3G-vB-m3b">
-                                <rect key="frame" x="260" y="156" width="80" height="0.0"/>
+                                <rect key="frame" x="260" y="100" width="80" height="0.0"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="b5s-Wl-NqH"/>
                                 </constraints>
