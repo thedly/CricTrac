@@ -654,6 +654,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         default:
             
             let dashBoard = viewControllerFrom("Main", vcid: "CoachPlayersListViewController") as! CoachPlayersListViewController
+            dashBoard.title = "MY PLAYERS"
             self.navigationController?.pushViewController(dashBoard, animated: false)
             break
         }

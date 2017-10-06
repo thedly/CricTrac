@@ -119,7 +119,7 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
             navigationItem.leftBarButtonItem = leftbarButton
             navigationController!.navigationBar.barTintColor = currentTheme.topColor
             self.view.backgroundColor = currentTheme.topColor
-            title = "MY PLAYERS"
+           // title = "MY PLAYERS"
         }
     }
     
