@@ -25,6 +25,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var exprOfCoach: UILabel!
+    @IBOutlet weak var noTeamsLbl: UILabel!
     
     
     // for teams
@@ -899,6 +900,12 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var valueToReturn = 0
         valueToReturn = (userProfileData.CoachCurrentTeams.count) + userProfileData.CoachPastTeams.count
+        if valueToReturn == 0 {
+            noTeamsLbl.text = "No Teams"
+        }
+        else{
+            noTeamsLbl.text = ""
+        }
         return valueToReturn
     }
     
@@ -1062,7 +1069,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         }
        if tableView == topBowlingTableView {
         
-        self.matches.sortInPlace({ $0.bowlAverage > $1.bowlAverage })
+        self.matches.sortInPlace({ $1.bowlAverage > $0.bowlAverage })
             
             let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! CoachTopBattingBowlingTableViewCell
         

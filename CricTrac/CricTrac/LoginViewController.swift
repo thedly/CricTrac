@@ -173,6 +173,7 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         token["googletoken"] = googleTokens
         token["emailToken"] = emailToken
         userDefaults.setValue(token, forKey: "loginToken")
+        
         userDefaults.synchronize()
     }
 

@@ -42,8 +42,9 @@ class SplashScreenViewController: UIViewController,ThemeChangeable {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
+        
         loginWithSavedCredentials()
-        //authorizeUser()
+        authorizeUser()
                 
         fetchAdDetails({ (result) in
             adUnitId = result["adUnitId"]!
@@ -82,23 +83,25 @@ class SplashScreenViewController: UIViewController,ThemeChangeable {
 //                })
 //            }
 //            else if let emailCredentials = credential.valueForKey("emailToken") as? [String:String]{
-            if let emailCredentials = credential.valueForKey("emailToken") as? [String:String]{
-                KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
-                FIRAuth.auth()?.signInWithCustomToken(emailCredentials["tokenString"]!, completion: { (user, error) in
-                    if error == nil {
-                        currentUser = user
-                        self.moveToNextScreen(true)
-                    }
-                    else
-                    {
-                        self.moveToNextScreen(false)
-                    }
-                })
-            }
-            else
-            {
-                self.moveToNextScreen(false)
-            }
+          
+            //
+//            if let emailCredentials = credential.valueForKey("emailToken") as? [String:String]{
+//                KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+//                FIRAuth.auth()?.signInWithCustomToken(emailCredentials["tokenString"]!, completion: { (user, error) in
+//                    if error == nil {
+//                        currentUser = user
+//                        self.moveToNextScreen(true)
+//                    }
+//                    else
+//                    {
+//                        self.moveToNextScreen(false)
+//                    }
+//                })
+//            }
+//            else
+//            {
+//                self.moveToNextScreen(false)
+//            }
         }
         else
         {
@@ -168,13 +171,13 @@ class SplashScreenViewController: UIViewController,ThemeChangeable {
         // KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
         let keychain = KeychainSwift()
         if keychain.get("ct_userName") == nil {
-            self.moveToNextScreen(false)
+            //self.moveToNextScreen(false)
             return
         }
-        if keychain.get("ct_password") == nil {
-            self.moveToNextScreen(false)
-            return
-        }
+//        if keychain.get("ct_password") == nil {
+//            self.moveToNextScreen(false)
+//            return
+//        }
         
         guard let userName = keychain.get("ct_userName") else {return}
         guard let password = keychain.get("ct_password") else {return}

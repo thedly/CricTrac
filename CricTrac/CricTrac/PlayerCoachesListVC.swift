@@ -99,7 +99,7 @@ class PlayerCoachesListVC: UIViewController,UITableViewDelegate,UITableViewDataS
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if myCoaches.count == 0 {
-            self.noCoachesLabel.text = "No Coaches"
+            self.noCoachesLabel.text = "No Coaches \n\n To add a Coach, visit your Coach profile and tap on 'Mark as my Coach'"
         }
         else{
             self.noCoachesLabel.text = ""
