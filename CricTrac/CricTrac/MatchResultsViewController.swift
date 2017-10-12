@@ -49,6 +49,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         
         firstOversText.resignFirstResponder()
         secondOversText.resignFirstResponder()
+        
     }
     
     override func viewDidLoad() {

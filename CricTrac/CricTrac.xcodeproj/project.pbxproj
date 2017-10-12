@@ -156,13 +156,13 @@
 		B835B35A1EEA7D92001048A6 /* AppIntroFourthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3591EEA7D92001048A6 /* AppIntroFourthScreen.swift */; };
 		B835B35C1EEA7DAF001048A6 /* AppIntroFifthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B35B1EEA7DAF001048A6 /* AppIntroFifthScreen.swift */; };
 		B835B3981EEE6947001048A6 /* AppIntroBasicScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3971EEE6946001048A6 /* AppIntroBasicScreen.swift */; };
-		B83E370E1F457A3B003CB05C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B83E370D1F457A3B003CB05C /* GoogleService-Info.plist */; };
 		B85ECAB51EF91B3B00CC29E5 /* AddMatchIntroScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85ECAB41EF91B3B00CC29E5 /* AddMatchIntroScreens.swift */; };
 		B85ECAB71EF91C7C00CC29E5 /* AddMatchFirstIntroScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85ECAB61EF91C7C00CC29E5 /* AddMatchFirstIntroScreen.swift */; };
 		B85ECAB91EF91CC900CC29E5 /* AddMatchSceIntroScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85ECAB81EF91CC900CC29E5 /* AddMatchSceIntroScreen.swift */; };
 		B85ECABB1EF91CF200CC29E5 /* AddMatchThirdIntroScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85ECABA1EF91CF200CC29E5 /* AddMatchThirdIntroScreen.swift */; };
 		B88CB6BA1EE67110009CD077 /* MasterDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88CB6B91EE67110009CD077 /* MasterDataViewController.swift */; };
 		B88CB6BC1EE68499009CD077 /* MasterDataListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88CB6BB1EE68498009CD077 /* MasterDataListViewController.swift */; };
+		E1A655851F8B76F000213719 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1A655841F8B76F000213719 /* GoogleService-Info.plist */; };
 		E1B593691EB4E63A00C8A553 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B593681EB4E63A00C8A553 /* NotificationsViewController.swift */; };
 		F7856BE080406499CCB071C8 /* Pods_CricTrac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA2224284F64FAE77B7776D9 /* Pods_CricTrac.framework */; };
 /* End PBXBuildFile section */
@@ -336,7 +336,6 @@
 		B835B3591EEA7D92001048A6 /* AppIntroFourthScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroFourthScreen.swift; sourceTree = "<group>"; };
 		B835B35B1EEA7DAF001048A6 /* AppIntroFifthScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroFifthScreen.swift; sourceTree = "<group>"; };
 		B835B3971EEE6946001048A6 /* AppIntroBasicScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroBasicScreen.swift; sourceTree = "<group>"; };
-		B83E370D1F457A3B003CB05C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B85ECAB41EF91B3B00CC29E5 /* AddMatchIntroScreens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMatchIntroScreens.swift; sourceTree = "<group>"; };
 		B85ECAB61EF91C7C00CC29E5 /* AddMatchFirstIntroScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMatchFirstIntroScreen.swift; sourceTree = "<group>"; };
 		B85ECAB81EF91CC900CC29E5 /* AddMatchSceIntroScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMatchSceIntroScreen.swift; sourceTree = "<group>"; };
@@ -344,6 +343,7 @@
 		B88CB6B91EE67110009CD077 /* MasterDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterDataViewController.swift; sourceTree = "<group>"; };
 		B88CB6BB1EE68498009CD077 /* MasterDataListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterDataListViewController.swift; sourceTree = "<group>"; };
 		DA2224284F64FAE77B7776D9 /* Pods_CricTrac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CricTrac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1A655841F8B76F000213719 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E1B593681EB4E63A00C8A553 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -409,7 +409,7 @@
 		46C983831D3922D200DFC607 = {
 			isa = PBXGroup;
 			children = (
-				B83E370D1F457A3B003CB05C /* GoogleService-Info.plist */,
+				E1A655841F8B76F000213719 /* GoogleService-Info.plist */,
 				89ABEB1E1E5BD0D7006BC0BC /* GoogleService-Info-new.plist */,
 				46C9838E1D3922D200DFC607 /* CricTrac */,
 				46C983A31D3922D200DFC607 /* CricTracTests */,
@@ -784,7 +784,7 @@
 				894CA29E1D96150A0043D3D1 /* SIL Open Font License.txt in Resources */,
 				8953769A1DAB8BF200DDB3A6 /* FriendSuggestionsCell.xib in Resources */,
 				894CA2A61D96150A0043D3D1 /* SourceSansPro-Light.otf in Resources */,
-				B83E370E1F457A3B003CB05C /* GoogleService-Info.plist in Resources */,
+				E1A655851F8B76F000213719 /* GoogleService-Info.plist in Resources */,
 				893823B61E113AE000BCD0CD /* SliderMenuViewCell.xib in Resources */,
 				46C983971D3922D200DFC607 /* App.xcassets in Resources */,
 				89ABEB1F1E5BD0D7006BC0BC /* GoogleService-Info-new.plist in Resources */,
@@ -1136,6 +1136,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "CricTrac-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1157,6 +1158,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "CricTrac-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
