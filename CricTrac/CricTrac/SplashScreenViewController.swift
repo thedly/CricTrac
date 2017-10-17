@@ -44,7 +44,7 @@ class SplashScreenViewController: UIViewController,ThemeChangeable {
         super.viewDidAppear(true)
         
         loginWithSavedCredentials()
-        authorizeUser()
+        //authorizeUser()
                 
         fetchAdDetails({ (result) in
             adUnitId = result["adUnitId"]!
@@ -169,33 +169,64 @@ class SplashScreenViewController: UIViewController,ThemeChangeable {
     
     func loginWithSavedCredentials(){
         // KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
-        let keychain = KeychainSwift()
-        if keychain.get("ct_userName") == nil {
-            //self.moveToNextScreen(false)
-            return
-        }
-//        if keychain.get("ct_password") == nil {
-//            self.moveToNextScreen(false)
-//            return
-//        }
         
-        guard let userName = keychain.get("ct_userName") else {return}
-        guard let password = keychain.get("ct_password") else {return}
-        loginWithMailAndPassword(userName, password:password) { (user, error) in
-            KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
-            if error != nil{
-                KRProgressHUD.dismiss()
-                self.authorizeUser()
-            }
-            else {
-                KRProgressHUD.dismiss()
-                if user!.emailVerified{
-                    
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        
+        if let credential = userDefaults.valueForKey("loginToken") {
+            if let googleCredentials = credential.valueForKey("googletoken") as? [String:String]{
+                KRProgressHUD.show(message: "Loading...")
+                firebaseLoginWithGoogle(googleCredentials["idToken"]!, accessToken:googleCredentials["accessToken"]! , sucess: { (user) in
                     currentUser = user
-                    enableSync()
-                    self.navigateToNextScreen()
+                    self.moveToNextScreen(true)
+                    
+                    }, failure: { (error) in
+                        KRProgressHUD.dismiss()
+                        self.moveToNextScreen(false)
+                        print(error.localizedDescription)
+                })
+            }
+            else  if ((credential.valueForKey("emailToken") as? [String:String]) != nil){
+            
+        
+                let keychain = KeychainSwift()
+                if keychain.get("ct_userName") == nil {
+                    self.authorizeUser()
+                    self.moveToNextScreen(false)
+                    return
+                }
+                if keychain.get("ct_password") == nil {
+                    self.moveToNextScreen(false)
+                    return
+                }
+                
+                guard let userName = keychain.get("ct_userName") else {return}
+                guard let password = keychain.get("ct_password") else {return}
+                loginWithMailAndPassword(userName, password:password) { (user, error) in
+                    KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+                    if error != nil{
+                        KRProgressHUD.dismiss()
+                        self.authorizeUser()
+                    }
+                    else {
+                        KRProgressHUD.dismiss()
+                        if user!.emailVerified{
+                            
+                            currentUser = user
+                            enableSync()
+                            self.navigateToNextScreen()
+                        }
+                    }
                 }
             }
+            else
+            {
+                self.moveToNextScreen(false)
+            }
+            
+        }
+        else
+        {
+            self.moveToNextScreen(false)
         }
     }
 

@@ -44,6 +44,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     @IBOutlet weak var topBarHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var topBarLabelText: UILabel!
+    @IBOutlet weak var bottomView: UIView!
     
     var matchData = [String:AnyObject]()
     var matches = [MatchSummaryData]()
@@ -109,8 +110,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             upgradeBtnHeight.constant = 0
         }
         else {
+            setColorForViewsWithSameTag(bottomView)
+
             //upgradeButton.hidden = false
-            upgradeBtnHeight.constant = 66
+            upgradeBtnHeight.constant = 50
             
         }
         

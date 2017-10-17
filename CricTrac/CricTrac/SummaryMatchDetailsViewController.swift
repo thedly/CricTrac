@@ -228,6 +228,8 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         //setUIBackgroundTheme(self.view)
         setColorForViewsWithSameTag(battingView)
         setColorForViewsWithSameTag(bowlingView)
+        setColorForViewsWithSameTag(bottomView)
+        
 
         self.summarizedView.alpha = 1
         self.summarizedView.backgroundColor = cricTracTheme.currentTheme.bottomColor
@@ -301,7 +303,10 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     func initializeView() {
         if let runs = matchDetailsData["RunsTaken"] as? String  where runs != "-" {
             let formattedString = NSMutableAttributedString()
-            if let dismissal = matchDetailsData["Dismissal"] as? String where dismissal == "Not out"{
+            if let dismissal = matchDetailsData["Dismissal"] as? String where dismissal != "Not out" {
+                self.dismissal.text = "(\(dismissal))"
+            }
+            if  let dismissal = matchDetailsData["Dismissal"] as? String where dismissal == "Not out"{
                 formattedString.bold(runs+"*" , fontName: appFont_black, fontSize: 83)
             }
             else{
