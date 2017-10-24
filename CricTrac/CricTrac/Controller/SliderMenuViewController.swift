@@ -48,7 +48,8 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         //setBackgroundColor()
         userName.text = profileData.fullName
         profilePic = profileData.ProfileImageURL
-
+        
+        loginWithSavedCredentials()
                
         if let _ = profileData.UserProfile as? String {
             removeUnwantedMenu()
@@ -240,22 +241,27 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         sliderMenu.mainViewController = navigationControl
         sliderMenu.setDrawerState(.Closed, animated: true)
     }
+    
+    func loginWithSavedCredentials(){
+        // KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
+        
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let loggedInImage: UIButton = UIButton(type:.Custom)
+        
+        if let credential = userDefaults.valueForKey("loginToken") {
+            if (credential.valueForKey("emailToken") as? [String:String]) != nil{
+                    loggedInImage.setImage(UIImage(named: "mail_icon"), forState: UIControlState.Normal)
+                    loggedInImage.frame = CGRectMake(165, 28, 30, 30)
+            }
+            
+            else  {
+                loggedInImage.setImage(UIImage(named: "Google Plus-96"), forState: UIControlState.Normal)
+                loggedInImage.frame = CGRectMake(170, 30, 25, 25)
+            }
+            self.baseView.addSubview(loggedInImage)
+        }
+    }
 }
-
-/*
- ["title":"TIMELINE","vc":"timeline", "img": "Menu_TimeLine"],
- ["title":"DASHBOARD","vc":"UserDashboardViewController", "img": "Menu_Dashboard"],
- ["title":"NEW MATCH","vc":"AddMatchDetailsViewController", "img": "Menu_AddMatch"],
- ["title":"MATCH SUMMARY","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
- ["title":"FRIENDS","vc":"FriendBaseViewController", "img": "Menu_Friends"],
- ["title":"PROFILE","vc":  "ProfileBaseViewController", "img": "Menu_Profile"],
- //    ["title":"STATISTICS","vc":"AddMatchDetailsViewController", "img": "Menu_Statistics"],
- //    ["title":"NOTIFICATION","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
- ["title":"SETTINGS","vc":"SettingsViewController", "img": "Menu_Settings"],
- //    ["title":"FEEDBACK","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
- //    ["title":"HELP & SUPPORT","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
- ["title":"VERSION: \(versionAndBuildNumber)","vc":"MatchSummaryViewController", "img": "Menu_Summary"],
- */
 
 
 extension SliderMenuViewController {

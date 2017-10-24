@@ -117,8 +117,8 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         initView()
         updateCoachDashboard()
         updateCoachSummary()
-        self.topBattingtableView.reloadData()
-        self.topBowlingTableView.reloadData()
+//        self.topBattingtableView.reloadData()
+//        self.topBowlingTableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -1044,7 +1044,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         
         if tableView == topBattingtableView {
-             self.matches.sortInPlace({ $0.batAverage > $1.batAverage })
+             self.matches.sortInPlace({ $0.totalRunsTaken > $1.totalRunsTaken })
             
                 let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! CoachTopBattingBowlingTableViewCell
             
@@ -1069,7 +1069,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         }
        if tableView == topBowlingTableView {
         
-        self.matches.sortInPlace({ $1.bowlAverage > $0.bowlAverage })
+        self.matches.sortInPlace({ $0.totalWicketsTaken > $1.totalWicketsTaken })
             
             let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! CoachTopBattingBowlingTableViewCell
         

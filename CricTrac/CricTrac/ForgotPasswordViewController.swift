@@ -10,15 +10,18 @@ import UIKit
 import FirebaseAuth
 import SCLAlertView
 import KRProgressHUD
+import MessageUI
 
-class ForgotPasswordViewController: UIViewController,ThemeChangeable {
+class ForgotPasswordViewController: UIViewController,ThemeChangeable,MFMailComposeViewControllerDelegate{
 
     @IBOutlet weak var resetLinkEmailTxt: UITextField!
     @IBOutlet weak var forgotPasswordLabel: UILabel!
+    @IBOutlet weak var barView: UIView!
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
+        barView.backgroundColor = currentTheme.topColor
        // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
@@ -57,6 +60,60 @@ class ForgotPasswordViewController: UIViewController,ThemeChangeable {
             }
         }
     }
+    @IBAction func contactUsButtonTapped(sender: AnyObject) {
+        
+        openMailApp()
+    }
+    
+    func openMailApp() {
+        let mailComposeViewController = configuredMailComposeViewController()
+        if MFMailComposeViewController.canSendMail() {
+            self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+        } else {
+            self.showSendMailErrorAlert()
+        }
+    }
+    
+    func configuredMailComposeViewController() -> MFMailComposeViewController {
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
+        
+        mailComposerVC.setToRecipients([feedbackEmail])
+        mailComposerVC.setSubject("Trouble signing in - iOS")
+        mailComposerVC.setMessageBody("", isHTML: false)
+        
+        return mailComposerVC
+    }
+    
+    func showSendMailErrorAlert() {
+        let sendMailErrorAlert = UIAlertView(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", delegate: self, cancelButtonTitle: "OK")
+        sendMailErrorAlert.show()
+    }
+    
+    // MARK: MFMailComposeViewControllerDelegate Method
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        
+        switch result {
+        case MFMailComposeResultCancelled:
+            print("Mail cancelled")
+        case MFMailComposeResultSaved:
+            print("Mail saved")
+        case MFMailComposeResultSent:
+            print("Mail sent")
+            //Thank you for contacting CricTrac. We will get back to you soon.
+            let sendMailConfirmationAlert = UIAlertView(title: "", message: "Thank you for contacting CricTrac. We will get back to you soon.", delegate: self, cancelButtonTitle: "OK")
+            sendMailConfirmationAlert.show()
+        case MFMailComposeResultFailed:
+            print("Mail sent failure: \(error?.localizedDescription)")
+        default:
+            break
+        }
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+
+    
+    
+    
     /*
     // MARK: - Navigation
 

@@ -31,9 +31,11 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
     @IBOutlet weak var facebookBtnHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var googleBtnHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var topBarView: UIView!
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
+        topBarView.backgroundColor = currentTheme.topColor
        // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     

@@ -198,6 +198,11 @@ class LoginViewController: UIViewController,IndicatorInfoProvider,GIDSignInDeleg
         firebaseLogin(credential, sucess: { (user) in
             self.saveGoogleTocken(authentication.idToken, accessToken: authentication.accessToken)
             currentUser = user
+            currentUser?.getTokenForcingRefresh(true) { accessToken, error in
+                if error == nil {
+                    self.saveGoogleTocken(authentication.idToken, accessToken: accessToken!)
+                }
+            }
             
             enableSync()
             self.navigateToNextScreen()

@@ -78,7 +78,7 @@ class TopBattingPlayersList: UIViewController,UITableViewDelegate,UITableViewDat
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        self.battingMatches.sortInPlace({ $0.batAverage > $1.batAverage })
+        self.battingMatches.sortInPlace({ $0.totalRunsTaken > $1.totalRunsTaken })
 
         
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! CoachTopBattingBowlingTableViewCell
