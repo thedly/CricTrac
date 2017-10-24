@@ -628,7 +628,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             
         case "Remove Coach":
             
-            let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to Remove this coach?", preferredStyle: .ActionSheet)
+            let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to Remove this Coach?", preferredStyle: .ActionSheet)
             
             let cancelAction = UIAlertAction(title: "No", style: .Cancel) { action -> Void in
                 // Just dismiss the action sheet

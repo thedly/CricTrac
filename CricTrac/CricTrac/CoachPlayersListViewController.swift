@@ -313,7 +313,7 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
         let playerNodeId = sender.accessibilityIdentifier
         let playerId = sender.accessibilityValue
         
-        let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to Remove this player?", preferredStyle: .ActionSheet)
+        let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to Remove this Player?", preferredStyle: .ActionSheet)
         
         let cancelAction = UIAlertAction(title: "No", style: .Cancel) { action -> Void in
             // Just dismiss the action sheet
