@@ -64,7 +64,15 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     @IBOutlet weak var firstTeamTossBtn: UIButton!
     @IBOutlet weak var secondTeamTossBtn: UIButton!
     
+    // palyer and coach analysis
+    @IBOutlet weak var selfAnalysisHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var selfAnalysisTextView: UITextView!
     var friendDOB = ""
+    @IBOutlet weak var selfAnalysisTextViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var coachAnalysisViewHeightConstarint: NSLayoutConstraint!
+    @IBOutlet weak var coachAnalysisTextView: UITextView!
+    @IBOutlet weak var coachAnalysisTextViewHeightConstraint: NSLayoutConstraint!
+    
     
     var isFriendDashboard: Bool!  = false
     var isCoach: Bool! = false
@@ -286,6 +294,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     }
     
     func setResult(){
+        
         if matchDetailsData["Result"]! as! String == "Abandoned" {
             result.text = "Match Abandoned"
         }
@@ -298,6 +307,24 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         else {
             result.text = "\(matchDetailsData["Team"]!) \(matchDetailsData["Result"]!)"
         }
+        
+        // sravani
+        
+        if matchDetailsData["SelfAnalysis"] != nil {
+            selfAnalysisTextView.text = (matchDetailsData["SelfAnalysis"]!) as! String
+            selfAnalysisTextView.textColor = UIColor.whiteColor()
+            selfAnalysisTextView.font = UIFont(name:"SourceSansPro-Bold",size: 15)
+
+        }
+        if matchDetailsData["CoachAnalysis"] != nil {
+        coachAnalysisTextView.text = (matchDetailsData["CoachAnalysis"]!) as! String
+        selfAnalysisTextView.textColor = UIColor.whiteColor()
+        selfAnalysisTextView.font = UIFont(name:"SourceSansPro-Bold",size: 15)
+        
+        coachAnalysisTextView.textColor = UIColor.whiteColor()
+        coachAnalysisTextView.font = UIFont(name:"SourceSansPro-Bold",size: 15)
+        }
+
     }
     
     func initializeView() {

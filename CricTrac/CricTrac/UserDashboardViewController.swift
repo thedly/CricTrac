@@ -394,11 +394,9 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         addTapGestureToUserName()
         TeamsTable.reloadData()
         
-        let currentTheme = cricTracTheme.currentTheme
         
         myCoachesButton.layer.cornerRadius = 10
         myCoachesButton.clipsToBounds = true
-        myCoachesButton.backgroundColor = currentTheme.bottomColor
         myCoachesButton.layer.borderWidth = 2.0
         myCoachesButton.layer.borderColor = UIColor.whiteColor().CGColor
         
@@ -641,6 +639,11 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         //UpdateDashboardDetails()
+        
+        let currentTheme = cricTracTheme.currentTheme
+        myCoachesButton.backgroundColor = currentTheme.bottomColor
+
+
         setBackgroundColor()
         initView()
         setDashboardData()

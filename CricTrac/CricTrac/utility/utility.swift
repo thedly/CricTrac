@@ -47,6 +47,8 @@ var friendsDataArray = [Friends]()
 var FriendRequestsData = [RequestsData]()
 
 var Achievements = [String]()
+var selfAnalysis = [String]()
+var coachAnalysis = [String]()
 
 var DashboardDetails : DashboardData!
 

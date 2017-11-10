@@ -9,7 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 
-class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeChangeable, AchievementsTextProtocol {
+class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeChangeable, AchievementsTextProtocol,UITextViewDelegate {
 
     @IBOutlet weak var firstTeamTitle: UILabel!
     @IBOutlet weak var secondTeamTitle: UILabel!
@@ -18,6 +18,15 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     @IBOutlet weak var AchievementsText: UITextField!
     @IBOutlet weak var FirstBattingView: UIView!
     @IBOutlet weak var SecondBattingView: UIView!
+    
+    @IBOutlet weak var screenShotHeight: NSLayoutConstraint!
+    // player and coach analysis
+    
+    @IBOutlet weak var selfAnalysisTextView: UITextView!
+    @IBOutlet weak var selfAnalysisHeightConstarint: NSLayoutConstraint!
+    @IBOutlet weak var coachAnalysisViewHeightConstarint: NSLayoutConstraint!
+    @IBOutlet weak var coachAnalysisTextView: UITextView!
+    @IBOutlet weak var coachAnalysisTextViewHeightConstarint: NSLayoutConstraint!
     
     var achievementsTextValue :String?
     
@@ -30,6 +39,8 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     var existFB = ""
     var existSB = ""
     var achievementText = [String]()
+    let placeHolderTextForSelfAnalysis = "Enter learnings and improvements from the match."
+    let placeHolderTextForCoachAnalysis = "Enter reviews and feedback for the player."
     
     private var inEditMode: Bool = false
     
@@ -106,6 +117,8 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         if resultText.text == "" {
             resultText.text = "Won"
         }
+        
+        playerAndCoachAnalysis()
     }
     
     override func didReceiveMemoryWarning() {
@@ -249,7 +262,16 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             AchievementsVal = val.text!
         }
         
-        return ["TossWonBy":tossVal,"FirstBatting":firstBatVal,"FirstBattingScore":firstScoreVal,"FirstBattingWickets":firstWicketsVal,"SecondBatting":secondBatVal, "SecondBattingScore":secondScoreVal,"SecondBattingWickets":secondWicketsVal,"Result":resultVal,"FirstBattingOvers":firstOversVal,"SecondBattingOvers":secondOversVal,"Achievements":AchievementsVal]
+        var selfAnalysis = ""
+        if let val = selfAnalysisTextView {
+            selfAnalysis = val.text!
+        }
+        var coachAnalysis = ""
+        if let val = coachAnalysisTextView {
+            coachAnalysis = val.text!
+        }
+        
+        return ["TossWonBy":tossVal,"FirstBatting":firstBatVal,"FirstBattingScore":firstScoreVal,"FirstBattingWickets":firstWicketsVal,"SecondBatting":secondBatVal, "SecondBattingScore":secondScoreVal,"SecondBattingWickets":secondWicketsVal,"Result":resultVal,"FirstBattingOvers":firstOversVal,"SecondBattingOvers":secondOversVal,"Achievements":AchievementsVal,"SelfAnalysis": selfAnalysis,"CoachAnalysis":coachAnalysis]
     }
     
     @IBAction func FirstTeamWicketsIncrement(sender: AnyObject) {
@@ -327,6 +349,8 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         existSB = secondBatText
         
         AchievementsText.text = parent?.selecetedData!["Achievements"] as? String ?? ""
+        selfAnalysisTextView.text = parent?.selecetedData!["SelfAnalysis"] as? String ?? ""
+        coachAnalysisTextView.text = parent?.selecetedData!["CoachAnalysis"] as? String ?? ""
         
         firstTeamTitle.text = firstBatText
         secondTeamTitle.text = secondBatText
@@ -565,6 +589,104 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         anim.path = path.CGPath
         anim.duration = 2.0
         return anim
+    }
+    
+    // Fro player and coach analysis
+    
+    func playerAndCoachAnalysis() {
+        if selfAnalysisTextView.text == "" {
+            selfAnalysisTextView.text = placeHolderTextForSelfAnalysis
+            selfAnalysisTextView.alpha = 0.7
+            //selfAnalysisTextView.font = UIFont(name:"SourceSansPro-Regular",size: 13)
+        }
+        if coachAnalysisTextView.text == "" {
+            coachAnalysisTextView.text = placeHolderTextForCoachAnalysis
+            coachAnalysisTextView.alpha = 0.7
+            //coachAnalysisTextView.font = UIFont(name:"SourceSansPro-Regular",size: 13)
+        }
+    }
+   // textView delegates
+    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+        if textView == selfAnalysisTextView {
+            if selfAnalysisTextView.text == placeHolderTextForSelfAnalysis {
+                selfAnalysisTextView.text = ""
+            }
+        }
+        if textView == coachAnalysisTextView {
+            if coachAnalysisTextView.text == placeHolderTextForCoachAnalysis {
+                coachAnalysisTextView.text = ""
+            }
+        }
+        return true
+    }
+    func textViewShouldEndEditing(textView: UITextView) -> Bool {
+        if textView == selfAnalysisTextView {
+            if selfAnalysisTextView.text == "" {
+                selfAnalysisTextView.text = placeHolderTextForSelfAnalysis
+            }
+        }
+        if textView == coachAnalysisTextView {
+            if coachAnalysisTextView.text == "" {
+                coachAnalysisTextView.text = placeHolderTextForCoachAnalysis
+            }
+        }
+        return true
+    }
+    func textViewDidEndEditing(textView: UITextView) {
+        if textView == selfAnalysisTextView {
+            if selfAnalysisHeightConstarint.constant >= 50 {
+                screenShotHeight.constant = screenShotHeight.constant + 35
+            }
+        }
+        if textView == coachAnalysisTextView{
+            if selfAnalysisHeightConstarint.constant >= 50 {
+                screenShotHeight.constant = screenShotHeight.constant + 35
+            }
+        }
+    }
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+       
+        // selfAnalysis TextView
+        if textView == selfAnalysisTextView {
+            let newLength = textView.text.characters.count
+            if newLength <= 300 {
+                    _ = textView.text
+                let contentSize = textView.sizeThatFits(textView.bounds.size)
+                var frame = textView.frame
+                frame.size.height = contentSize.height
+                if contentSize.height < 100 {
+                    textView.frame = frame
+                    selfAnalysisHeightConstarint.constant = contentSize.height
+                }
+            return true
+            }
+            else {
+            return false
+            }
+        }
+        // coachAnalysis 
+        
+        if textView == coachAnalysisTextView {
+            let newLength = textView.text.characters.count
+            if newLength <= 300 {
+                _ = textView.text
+                let contentSize = textView.sizeThatFits(textView.bounds.size)
+                var frame = textView.frame
+                frame.size.height = contentSize.height
+                if contentSize.height < 100 {
+                    textView.frame = frame
+                    coachAnalysisViewHeightConstarint.constant = contentSize.height
+                    coachAnalysisTextViewHeightConstarint.constant = contentSize.height
+                }
+                return true
+            }
+            else {
+                return false
+            }
+        }
+        
+        return true
     }
 }
 
