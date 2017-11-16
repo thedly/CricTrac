@@ -22,12 +22,14 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     @IBOutlet weak var screenShotHeight: NSLayoutConstraint!
     // player and coach analysis
     
+    @IBOutlet weak var selfAnalysisView: UIView!
+    @IBOutlet weak var selfAnalysisViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var selfAnalysisTextView: UITextView!
     @IBOutlet weak var selfAnalysisHeightConstarint: NSLayoutConstraint!
     @IBOutlet weak var coachAnalysisViewHeightConstarint: NSLayoutConstraint!
     @IBOutlet weak var coachAnalysisTextView: UITextView!
     @IBOutlet weak var coachAnalysisTextViewHeightConstarint: NSLayoutConstraint!
-    
+    @IBOutlet weak var coachAnalysisView: UIView!
     var achievementsTextValue :String?
     
      lazy var ctDataPicker = DataPicker()
@@ -60,7 +62,53 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         
         firstOversText.resignFirstResponder()
         secondOversText.resignFirstResponder()
+        setNavigationProperties()
+        //layoutSubViewForAnalysis()
         
+    }
+   
+//    
+//    func layoutSubViewForAnalysis() {
+// 
+//                _ = selfAnalysisTextView.text
+//                let contentSize = selfAnalysisTextView.sizeThatFits(selfAnalysisTextView.bounds.size)
+//                var frame = selfAnalysisTextView.frame
+//                frame.size.height = contentSize.height
+//                selfAnalysisTextView.frame = frame
+//                selfAnalysisHeightConstarint.constant = contentSize.height
+//                selfAnalysisViewHeightConstraint.constant = contentSize.height + 15
+//    
+//    }
+    
+    func setNavigationProperties() {
+        if profileData.UserProfile == "Coach" {
+            selfAnalysisView.hidden = true
+           selfAnalysisViewHeightConstraint.constant = 0
+            coachAnalysisView.hidden = false
+            
+            _ = coachAnalysisTextView.text
+            let contentSize = coachAnalysisTextView.sizeThatFits(coachAnalysisTextView.bounds.size)
+            var frame = coachAnalysisTextView.frame
+            frame.size.height = contentSize.height
+            coachAnalysisTextView.frame = frame
+            coachAnalysisTextViewHeightConstarint.constant = contentSize.height
+            coachAnalysisViewHeightConstarint.constant = contentSize.height + 15
+            
+        }
+        else {
+            selfAnalysisView.hidden = false
+            coachAnalysisView.hidden = true
+            coachAnalysisViewHeightConstarint.constant = 0
+            
+            _ = selfAnalysisTextView.text
+            let contentSize = selfAnalysisTextView.sizeThatFits(selfAnalysisTextView.bounds.size)
+            var frame = selfAnalysisTextView.frame
+            frame.size.height = contentSize.height
+            selfAnalysisTextView.frame = frame
+            selfAnalysisHeightConstarint.constant = contentSize.height
+            selfAnalysisViewHeightConstraint.constant = contentSize.height + 15
+
+        }
     }
     
     override func viewDidLoad() {
@@ -264,11 +312,21 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         
         var selfAnalysis = ""
         if let val = selfAnalysisTextView {
-            selfAnalysis = val.text!
+            if selfAnalysisTextView.text != placeHolderTextForSelfAnalysis {
+                selfAnalysis = val.text!
+            }
+            else {
+                selfAnalysis = ""
+            }
         }
         var coachAnalysis = ""
         if let val = coachAnalysisTextView {
-            coachAnalysis = val.text!
+            if coachAnalysisTextView.text != placeHolderTextForCoachAnalysis{
+                coachAnalysis = val.text!
+            }
+            else {
+                coachAnalysis = ""
+            }
         }
         
         return ["TossWonBy":tossVal,"FirstBatting":firstBatVal,"FirstBattingScore":firstScoreVal,"FirstBattingWickets":firstWicketsVal,"SecondBatting":secondBatVal, "SecondBattingScore":secondScoreVal,"SecondBattingWickets":secondWicketsVal,"Result":resultVal,"FirstBattingOvers":firstOversVal,"SecondBattingOvers":secondOversVal,"Achievements":AchievementsVal,"SelfAnalysis": selfAnalysis,"CoachAnalysis":coachAnalysis]
@@ -597,12 +655,10 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         if selfAnalysisTextView.text == "" {
             selfAnalysisTextView.text = placeHolderTextForSelfAnalysis
             selfAnalysisTextView.alpha = 0.7
-            //selfAnalysisTextView.font = UIFont(name:"SourceSansPro-Regular",size: 13)
         }
         if coachAnalysisTextView.text == "" {
             coachAnalysisTextView.text = placeHolderTextForCoachAnalysis
             coachAnalysisTextView.alpha = 0.7
-            //coachAnalysisTextView.font = UIFont(name:"SourceSansPro-Regular",size: 13)
         }
     }
    // textView delegates
@@ -649,27 +705,26 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
        
         // selfAnalysis TextView
         if textView == selfAnalysisTextView {
-            let newLength = textView.text.characters.count
-            if newLength <= 300 {
+            let newLength = textView.text.characters.count + text.characters.count - range.length
+
+            if newLength <= 200 {
                     _ = textView.text
                 let contentSize = textView.sizeThatFits(textView.bounds.size)
                 var frame = textView.frame
                 frame.size.height = contentSize.height
-                if contentSize.height < 100 {
+                //if contentSize.height < 100 {
                     textView.frame = frame
                     selfAnalysisHeightConstarint.constant = contentSize.height
-                }
-            return true
+                    selfAnalysisViewHeightConstraint.constant = contentSize.height + 10
+                //}
             }
-            else {
-            return false
-            }
+           return newLength < 201
         }
         // coachAnalysis 
         
         if textView == coachAnalysisTextView {
-            let newLength = textView.text.characters.count
-            if newLength <= 300 {
+            let newLength = textView.text.characters.count + text.characters.count - range.length
+            if newLength <= 200 {
                 _ = textView.text
                 let contentSize = textView.sizeThatFits(textView.bounds.size)
                 var frame = textView.frame
@@ -679,11 +734,8 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
                     coachAnalysisViewHeightConstarint.constant = contentSize.height
                     coachAnalysisTextViewHeightConstarint.constant = contentSize.height
                 }
-                return true
             }
-            else {
-                return false
-            }
+             return newLength <= 200
         }
         
         return true

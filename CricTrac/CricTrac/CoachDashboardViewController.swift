@@ -1098,14 +1098,13 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     }
     
     
-    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! CoachTopBattingBowlingTableViewCell
         
         if currentUserId == (currentUser?.uid)! {
             if tableView == topBattingtableView {
                 
-                self.matches.sortInPlace({ $0.batAverage > $1.batAverage })
+                self.matches.sortInPlace({ $0.totalRunsTaken > $1.totalRunsTaken })
                 
                 let summaryDetailsVC = viewControllerFrom("Main", vcid: "MatchSummaryViewController") as! MatchSummaryViewController
                 summaryDetailsVC.playerID = matches[indexPath.section].playerId
@@ -1115,7 +1114,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             }
             
             if tableView == topBowlingTableView {
-                self.matches.sortInPlace({ $0.bowlAverage > $1.bowlAverage })
+                self.matches.sortInPlace({ $0.totalWicketsTaken > $1.totalWicketsTaken })
                 
                 let summaryDetailsVC = viewControllerFrom("Main", vcid: "MatchSummaryViewController") as! MatchSummaryViewController
                 summaryDetailsVC.isCoach = true

@@ -73,6 +73,9 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     @IBOutlet weak var coachAnalysisTextView: UITextView!
     @IBOutlet weak var coachAnalysisTextViewHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var selfAnalysisView: UIView!
+    @IBOutlet weak var coachAnalysisView: UIView!
+    @IBOutlet weak var additionalInfoView: UIView!
     
     var isFriendDashboard: Bool!  = false
     var isCoach: Bool! = false
@@ -237,7 +240,8 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         setColorForViewsWithSameTag(battingView)
         setColorForViewsWithSameTag(bowlingView)
         setColorForViewsWithSameTag(bottomView)
-        
+        setColorForViewsWithSameTag(selfAnalysisView)
+        setColorForViewsWithSameTag(additionalInfoView)
 
         self.summarizedView.alpha = 1
         self.summarizedView.backgroundColor = cricTracTheme.currentTheme.bottomColor
@@ -248,6 +252,36 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         loadBannerAds()
     }
     
+        override func viewDidLayoutSubviews() {
+        
+        super.viewDidLayoutSubviews()
+        
+          if  matchDetailsData["SelfAnalysis"] as? String != "" && matchDetailsData["SelfAnalysis"] != nil {
+        let contentSize = self.selfAnalysisTextView.sizeThatFits(self.selfAnalysisTextView.bounds.size)
+        var frame = self.selfAnalysisTextView.frame
+        frame.size.height = contentSize.height
+        
+            self.selfAnalysisTextView.frame = frame
+            let aspectRatioTextViewConstraint = NSLayoutConstraint(item: self.selfAnalysisTextView, attribute: .Height, relatedBy: .Equal, toItem: self.selfAnalysisTextView, attribute: .Width, multiplier: selfAnalysisTextView.bounds.height/selfAnalysisTextView.bounds.width, constant: 1)
+            self.selfAnalysisTextView.addConstraint(aspectRatioTextViewConstraint)
+             self.selfAnalysisHeightConstraint.constant = contentSize.height + 15
+            }
+        
+        // coach analysis
+            if matchDetailsData["CoachAnalysis"] as? String != "" && matchDetailsData["CoachAnalysis"] != nil {
+                let contentSize1 = self.coachAnalysisTextView.sizeThatFits(self.coachAnalysisTextView.bounds.size)
+                var frame1 = self.coachAnalysisTextView.frame
+                frame1.size.height = contentSize1.height
+                
+                    self.coachAnalysisTextView.frame = frame1
+                    
+                    let aspectRatioTextViewConstraint1 = NSLayoutConstraint(item: self.coachAnalysisTextView, attribute: .Height, relatedBy: .Equal, toItem: self.coachAnalysisTextView, attribute: .Width, multiplier: coachAnalysisTextView.bounds.height/coachAnalysisTextView.bounds.width, constant: 1)
+                    self.coachAnalysisTextView.addConstraint(aspectRatioTextViewConstraint1)
+                    self.coachAnalysisTextViewHeightConstraint.constant = contentSize1.height
+                    self.coachAnalysisViewHeightConstarint.constant = contentSize1.height + 15
+            }
+    }
+
     func loadBannerAds() {
         if showAds == "1" {
             self.bannerViewHeightConstraint.constant = 50
@@ -310,19 +344,30 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         
         // sravani
         
-        if matchDetailsData["SelfAnalysis"] != nil {
+        if matchDetailsData["SelfAnalysis"] as? String != "" && matchDetailsData["SelfAnalysis"] != nil {
             selfAnalysisTextView.text = (matchDetailsData["SelfAnalysis"]!) as! String
             selfAnalysisTextView.textColor = UIColor.whiteColor()
             selfAnalysisTextView.font = UIFont(name:"SourceSansPro-Bold",size: 15)
-
+            selfAnalysisHeightConstraint.constant = 60
+            selfAnalysisView.hidden = false
         }
-        if matchDetailsData["CoachAnalysis"] != nil {
+        else {
+            selfAnalysisHeightConstraint.constant = 0
+             selfAnalysisView.hidden = true
+        }
+        if matchDetailsData["CoachAnalysis"] as? String != "" && matchDetailsData["CoachAnalysis"] != nil {
         coachAnalysisTextView.text = (matchDetailsData["CoachAnalysis"]!) as! String
         selfAnalysisTextView.textColor = UIColor.whiteColor()
         selfAnalysisTextView.font = UIFont(name:"SourceSansPro-Bold",size: 15)
         
         coachAnalysisTextView.textColor = UIColor.whiteColor()
         coachAnalysisTextView.font = UIFont(name:"SourceSansPro-Bold",size: 15)
+        coachAnalysisViewHeightConstarint.constant = 60
+            coachAnalysisView.hidden = false
+        }
+        else {
+           coachAnalysisViewHeightConstarint.constant = 0
+            coachAnalysisView.hidden = true
         }
 
     }
