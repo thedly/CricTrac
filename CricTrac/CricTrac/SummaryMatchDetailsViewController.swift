@@ -77,6 +77,14 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     @IBOutlet weak var coachAnalysisView: UIView!
     @IBOutlet weak var additionalInfoView: UIView!
     
+    // Fielding
+    @IBOutlet weak var fieldingRole: UILabel!
+    @IBOutlet weak var sumpingsText: UILabel!
+    @IBOutlet weak var catchesText: UILabel!
+    @IBOutlet weak var runoutsText: UILabel!
+    @IBOutlet weak var additionalInfoViewHeightConstraint: NSLayoutConstraint!
+    
+    
     var isFriendDashboard: Bool!  = false
     var isCoach: Bool! = false
     var playerDob = ""
@@ -342,7 +350,33 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             result.text = "\(matchDetailsData["Team"]!) \(matchDetailsData["Result"]!)"
         }
         
-        // sravani
+        // for feilding
+        
+        if matchDetailsData["FieldingRole"] as? String != "-" && matchDetailsData["FieldingRole"] != nil {
+            // fieldingRole.text!.uppercaseString
+            let roleText = matchDetailsData["FieldingRole"] as! String
+            fieldingRole.text! = roleText.uppercaseString
+            fieldingRole.textColor = UIColor.whiteColor()
+           
+        }
+        if matchDetailsData["Stumpings"] != nil && matchDetailsData["Catches"]  != nil && matchDetailsData["Runouts"] != nil {
+            if (matchDetailsData["Stumpings"]!) as! String == "0" && (matchDetailsData["Catches"]!) as! String == "0" && (matchDetailsData["Runouts"]!) as! String == "0" {
+                additionalInfoView.hidden = true
+                additionalInfoViewHeightConstraint.constant = 0
+            }
+            else {
+                additionalInfoView.hidden = false
+                additionalInfoViewHeightConstraint.constant = 84
+                sumpingsText.text = (matchDetailsData["Stumpings"]!) as? String
+                catchesText.text = (matchDetailsData["Catches"]!) as? String
+                runoutsText.text = (matchDetailsData["Runouts"]!) as? String
+            }
+        }
+        else {
+            additionalInfoView.hidden = true
+            additionalInfoViewHeightConstraint.constant = 0
+        }
+        // sravani for self and coach analysis
         
         if matchDetailsData["SelfAnalysis"] as? String != "" && matchDetailsData["SelfAnalysis"] != nil {
             selfAnalysisTextView.text = (matchDetailsData["SelfAnalysis"]!) as! String

@@ -90,6 +90,12 @@ func loadInitialValues(){
         }
     })
     
+    fireBaseRef.child("FieldingRole").observeSingleEventOfType(.Value, withBlock: { snapshot in
+        if let value = snapshot.value as? [String]{
+            fieldingRole = value
+        }
+    })
+    
     loadCountriesData()
 }
 

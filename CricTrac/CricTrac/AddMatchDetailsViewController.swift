@@ -231,6 +231,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
                 if let _ = battingBowlingViewController?.view {
                     data += battingBowlingViewController.BattingData
                     data += battingBowlingViewController.BowlingData
+                    data += battingBowlingViewController.FieldingData
                 }
                     
                 if let _ = resVC?.view{

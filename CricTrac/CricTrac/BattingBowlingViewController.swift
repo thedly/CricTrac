@@ -32,7 +32,13 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     @IBOutlet weak var battingDetailsLabel: UILabel!
     @IBOutlet weak var bowlingdetailsLabel: UILabel!
     @IBOutlet weak var lineView: UIView!
+    // FIELDING
+    @IBOutlet weak var roleText: SkyFloatingLabelTextField!
+    @IBOutlet weak var catchesText: SkyFloatingLabelTextField!
+    @IBOutlet weak var stumpingsText: SkyFloatingLabelTextField!
     
+    @IBOutlet weak var runoutsText: SkyFloatingLabelTextField!
+   
     var bowledOvers: String!
     var WicketsTaken: String!
     var RunsGiven: String!
@@ -47,8 +53,46 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     var Position: String!
     var Dismissal: String!
     
+    var FieldingRole: String!
+    var catches: String!
+    var stumpings: String!
+    var runouts: String!
+    
+    
     var BowlingData:[String:String]{
         return ["OversBowled":bowledOvers,"WicketsTaken":WicketsTaken,"RunsGiven":RunsGiven,"NoBalls":NoBalls,"Wides":Wides, "Maidens": Maidens]
+    }
+    
+    var FieldingData:[String:String] {
+        
+        if roleText.text != ""{
+            FieldingRole = roleText.text
+        }
+        else {
+            FieldingRole = "-"
+        }
+        
+        if catchesText.text != "" {
+            catches = catchesText.text
+        }
+        else {
+            catches = "0"
+        }
+        
+        if stumpingsText.text != "" {
+            stumpings = stumpingsText.text
+        }
+        else {
+            stumpings = "0"
+        }
+        
+        if runoutsText.text != "" {
+            runouts = runoutsText.text
+        }
+        else {
+           runouts = "0"
+        }
+       return["FieldingRole":FieldingRole,"Catches":catches,"Stumpings":stumpings,"Runouts":runouts]
     }
     
     var allRequiredFieldsHaveFilledProperly: Bool {
@@ -233,6 +277,31 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         self.incrementDecrementOperation(foursText, isIncrement: false)
     }
     
+    @IBAction func incrementCatches(sender: AnyObject) {
+        self.incrementDecrementOperation(catchesText, isIncrement: true)
+    }
+    
+    @IBAction func decrementCatches(sender: AnyObject) {
+        self.incrementDecrementOperation(catchesText, isIncrement: false)
+    }
+    
+    @IBAction func incrementStumpings(sender: AnyObject) {
+        self.incrementDecrementOperation(stumpingsText, isIncrement: true)
+    }
+    
+    @IBAction func decrementStumpings(sender: AnyObject) {
+        self.incrementDecrementOperation(stumpingsText, isIncrement: false)
+    }
+    
+    @IBAction func incrementRunouts(sender: AnyObject) {
+        self.incrementDecrementOperation(runoutsText, isIncrement: true)
+    }
+    
+    @IBAction func decrementRunouts(sender: AnyObject) {
+        self.incrementDecrementOperation(runoutsText, isIncrement: false)
+    }
+    
+    
     var BattingData:[String:String]{
         return ["RunsTaken":RunsTaken,"BallsFaced":BallsFaced,"Fours":Fours,"Sixes":Sixes,"Position":Position,"Dismissal":Dismissal]
     }
@@ -252,6 +321,11 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         noballText.textVal = parent!.selecetedData!["NoBalls"]! as! String
         widesText.textVal = parent!.selecetedData!["Wides"]! as! String
         maidensText.textVal = parent!.selecetedData!["Maidens"] as! String
+        
+        roleText.textVal = parent!.selecetedData!["FieldingRole"] as! String 
+        catchesText.textVal = parent!.selecetedData!["Catches"] as! String
+        stumpingsText.textVal = parent!.selecetedData!["Stumpings"] as! String
+        runoutsText.textVal = parent!.selecetedData!["Runouts"] as! String
 
     }
     
@@ -293,6 +367,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         Position = (parent?.selecetedData?["Position"] ?? "-") as! String
         Dismissal = (parent?.selecetedData?["Dismissal"] ?? "-") as! String
         
+        
         dismissalText.delegate = self
         runsText.delegate = self
         oversText.delegate = self
@@ -307,6 +382,13 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         widesText.delegate = self
         maidensText.delegate = self
         runsGivenText.delegate = self
+        
+        roleText.delegate = self
+        catchesText.delegate = self
+        stumpingsText.delegate = self
+        runoutsText.delegate = self
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -334,6 +416,18 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
             else if controlText == positionText || controlText == wicketsText {
                 if let currentValue = Int(controlText.text!) {
                     if currentValue < 15 {
+                        controlText.text = String(currentValue + 1)
+                    }
+                }
+                else
+                {
+                    controlText.text = String(1)
+                }
+            }
+            
+            else if controlText == catchesText || controlText == runoutsText || controlText == stumpingsText {
+                if let currentValue = Int(controlText.text!) {
+                    if currentValue < 99 {
                         controlText.text = String(currentValue + 1)
                     }
                 }
@@ -397,6 +491,11 @@ extension BattingBowlingViewController:UITextFieldDelegate{
         if textField == dismissalText{
            // addSuggstionBox(textField, dataSource: dismissals, showSuggestions: true)
             showPicker(self, inputText: textField, data: dismissals)
+        }
+        
+        if textField == roleText {
+            showPicker(self, inputText: textField, data: fieldingRole)
+
         }
         
        // parent?.dataChangedAfterLastSave()
@@ -491,6 +590,18 @@ extension BattingBowlingViewController:UITextFieldDelegate{
         }
         else if textField == dismissalText {
             return false
+        }
+        else if textField == roleText {
+            return false
+        }
+        else if textField == catchesText {
+            return newlength <= 2
+        }
+        else if textField == stumpingsText {
+            return newlength <= 2
+        }
+        else if textField == runoutsText {
+            return newlength <= 2
         }
         else {
             return true

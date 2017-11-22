@@ -49,6 +49,10 @@ var FriendRequestsData = [RequestsData]()
 var Achievements = [String]()
 var selfAnalysis = [String]()
 var coachAnalysis = [String]()
+var fieldingRole = [String]()
+var catches = [String]()
+var stumpings = [String]()
+var runouts = [String]()
 
 var DashboardDetails : DashboardData!
 
