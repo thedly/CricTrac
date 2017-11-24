@@ -707,7 +707,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         if textView == selfAnalysisTextView {
             let newLength = textView.text.characters.count + text.characters.count - range.length
 
-            if newLength <= 200 {
+            if newLength <= 300 {
                     _ = textView.text
                 let contentSize = textView.sizeThatFits(textView.bounds.size)
                 var frame = textView.frame
@@ -718,13 +718,13 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
                     selfAnalysisViewHeightConstraint.constant = contentSize.height + 10
                 //}
             }
-           return newLength < 201
+           return newLength < 301
         }
         // coachAnalysis 
         
         if textView == coachAnalysisTextView {
             let newLength = textView.text.characters.count + text.characters.count - range.length
-            if newLength <= 200 {
+            if newLength <= 300 {
                 _ = textView.text
                 let contentSize = textView.sizeThatFits(textView.bounds.size)
                 var frame = textView.frame
@@ -735,7 +735,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
                     coachAnalysisTextViewHeightConstarint.constant = contentSize.height
                 }
             }
-             return newLength <= 200
+             return newLength <= 301
         }
         
         return true
