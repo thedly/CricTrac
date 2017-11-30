@@ -170,7 +170,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
 
             if profileData.UserProfile == "Coach" {
                 self.bottomView.hidden = true
-                self.bannerViewHeightConstraint.constant = 50
+                //self.bannerViewHeightConstraint.constant = 50
                 self.bottomViewHeightConstraint.constant = 0
             }
             else {
