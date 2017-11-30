@@ -666,11 +666,14 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         if textView == selfAnalysisTextView {
             if selfAnalysisTextView.text == placeHolderTextForSelfAnalysis {
                 selfAnalysisTextView.text = ""
+                selfAnalysisTextView.alpha = 1
+
             }
         }
         if textView == coachAnalysisTextView {
             if coachAnalysisTextView.text == placeHolderTextForCoachAnalysis {
                 coachAnalysisTextView.text = ""
+                coachAnalysisTextView.alpha = 1
             }
         }
         return true

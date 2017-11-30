@@ -117,36 +117,36 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         initView()
         updateCoachDashboard()
         updateCoachSummary()
-//        self.topBattingtableView.reloadData()
-//        self.topBowlingTableView.reloadData()
+        
+        let currentTheme = cricTracTheme.currentTheme
+
+        coachFrndButton.backgroundColor = currentTheme.bottomColor
+        pendingRequests.backgroundColor = currentTheme.bottomColor
+        viewAllBtnForTopBatting.backgroundColor = currentTheme.bottomColor
+        viewAllBtnForTopBowling.backgroundColor = currentTheme.bottomColor
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadBannerAds()
-        let currentTheme = cricTracTheme.currentTheme
 
         pendingRequests.layer.cornerRadius = 10
         pendingRequests.clipsToBounds = true
-        pendingRequests.backgroundColor = currentTheme.bottomColor
         pendingRequests.layer.borderWidth = 2.0
         pendingRequests.layer.borderColor = UIColor.whiteColor().CGColor
         
         coachFrndButton.layer.cornerRadius = 10
         coachFrndButton.clipsToBounds = true
-        coachFrndButton.backgroundColor = currentTheme.bottomColor
         coachFrndButton.layer.borderWidth = 2.0
         coachFrndButton.layer.borderColor = UIColor.whiteColor().CGColor
         
         viewAllBtnForTopBatting.layer.cornerRadius = 10
         viewAllBtnForTopBatting.clipsToBounds = true
-        viewAllBtnForTopBatting.backgroundColor = currentTheme.bottomColor
         viewAllBtnForTopBatting.layer.borderWidth = 2.0
         viewAllBtnForTopBatting.layer.borderColor = UIColor.whiteColor().CGColor
         
         viewAllBtnForTopBowling.layer.cornerRadius = 10
         viewAllBtnForTopBowling.clipsToBounds = true
-        viewAllBtnForTopBowling.backgroundColor = currentTheme.bottomColor
         viewAllBtnForTopBowling.layer.borderWidth = 2.0
         viewAllBtnForTopBowling.layer.borderColor = UIColor.whiteColor().CGColor
         

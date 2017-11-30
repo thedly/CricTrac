@@ -84,6 +84,8 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     @IBOutlet weak var runoutsText: UILabel!
     @IBOutlet weak var additionalInfoViewHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var fieldingRoleView: UIView!
+    @IBOutlet weak var fieldingRoleViewHeightConstaraint: NSLayoutConstraint!
     
     var isFriendDashboard: Bool!  = false
     var isCoach: Bool! = false
@@ -249,7 +251,9 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         setColorForViewsWithSameTag(bowlingView)
         setColorForViewsWithSameTag(bottomView)
         setColorForViewsWithSameTag(selfAnalysisView)
+        setColorForViewsWithSameTag(coachAnalysisView)
         setColorForViewsWithSameTag(additionalInfoView)
+        setColorForViewsWithSameTag(fieldingRoleView)
 
         self.summarizedView.alpha = 1
         self.summarizedView.backgroundColor = cricTracTheme.currentTheme.bottomColor
@@ -352,13 +356,25 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         
         // for feilding
         
-        if matchDetailsData["FieldingRole"] as? String != "-" && matchDetailsData["FieldingRole"] != nil {
+        if matchDetailsData["FieldingRole"] != nil {
             // fieldingRole.text!.uppercaseString
-            let roleText = matchDetailsData["FieldingRole"] as! String
-            fieldingRole.text! = roleText.uppercaseString
-            fieldingRole.textColor = UIColor.whiteColor()
+            if matchDetailsData["FieldingRole"] as! String != "-" {
+                let roleText = matchDetailsData["FieldingRole"] as! String
+                fieldingRole.text! = roleText.uppercaseString
+                fieldingRoleViewHeightConstaraint.constant = 22
+            }
+            else {
+                fieldingRoleViewHeightConstaraint.constant = 0
+                 fieldingRole.text = ""
+            }
+            
+            //fieldingRole.textColor = UIColor.whiteColor()
            
         }
+        else {
+            fieldingRoleViewHeightConstaraint.constant = 0
+        }
+        
         if matchDetailsData["Stumpings"] != nil && matchDetailsData["Catches"]  != nil && matchDetailsData["Runouts"] != nil {
             if (matchDetailsData["Stumpings"]!) as! String == "0" && (matchDetailsData["Catches"]!) as! String == "0" && (matchDetailsData["Runouts"]!) as! String == "0" {
                 additionalInfoView.hidden = true
@@ -551,7 +567,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         
         if (bowlingViewHidden == true) {
             //self.bowlingView.hidden = true
-            self.screenShotHeightConstraint.constant -= 240
+            self.screenShotHeightConstraint.constant -= 280
         }
         else{
             self.screenShotHeightConstraint.constant += 240

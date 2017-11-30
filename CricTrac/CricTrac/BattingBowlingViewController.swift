@@ -322,10 +322,18 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         widesText.textVal = parent!.selecetedData!["Wides"]! as! String
         maidensText.textVal = parent!.selecetedData!["Maidens"] as! String
         
-        roleText.textVal = parent!.selecetedData!["FieldingRole"] as! String 
-        catchesText.textVal = parent!.selecetedData!["Catches"] as! String
-        stumpingsText.textVal = parent!.selecetedData!["Stumpings"] as! String
+        if parent!.selecetedData!["FieldingRole"]  != nil {
+            roleText.textVal = parent!.selecetedData!["FieldingRole"] as! String
+        }
+        if parent!.selecetedData!["Catches"] != nil {
+            catchesText.textVal = parent!.selecetedData!["Catches"] as! String
+        }
+        if parent!.selecetedData!["Stumpings"] != nil {
+            stumpingsText.textVal = parent!.selecetedData!["Stumpings"] as! String
+        }
+        if parent!.selecetedData!["Runouts"] != nil {
         runoutsText.textVal = parent!.selecetedData!["Runouts"] as! String
+        }
 
     }
     
