@@ -162,6 +162,7 @@
 		B85ECABB1EF91CF200CC29E5 /* AddMatchThirdIntroScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85ECABA1EF91CF200CC29E5 /* AddMatchThirdIntroScreen.swift */; };
 		B88CB6BA1EE67110009CD077 /* MasterDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88CB6B91EE67110009CD077 /* MasterDataViewController.swift */; };
 		B88CB6BC1EE68499009CD077 /* MasterDataListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88CB6BB1EE68498009CD077 /* MasterDataListViewController.swift */; };
+		B8F258C11FD6645D0095425E /* CoachPlayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F258C01FD6645C0095425E /* CoachPlayers.swift */; };
 		E1A655851F8B76F000213719 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1A655841F8B76F000213719 /* GoogleService-Info.plist */; };
 		E1B593691EB4E63A00C8A553 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B593681EB4E63A00C8A553 /* NotificationsViewController.swift */; };
 		F7856BE080406499CCB071C8 /* Pods_CricTrac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA2224284F64FAE77B7776D9 /* Pods_CricTrac.framework */; };
@@ -342,6 +343,7 @@
 		B85ECABA1EF91CF200CC29E5 /* AddMatchThirdIntroScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMatchThirdIntroScreen.swift; sourceTree = "<group>"; };
 		B88CB6B91EE67110009CD077 /* MasterDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterDataViewController.swift; sourceTree = "<group>"; };
 		B88CB6BB1EE68498009CD077 /* MasterDataListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterDataListViewController.swift; sourceTree = "<group>"; };
+		B8F258C01FD6645C0095425E /* CoachPlayers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachPlayers.swift; sourceTree = "<group>"; };
 		DA2224284F64FAE77B7776D9 /* Pods_CricTrac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CricTrac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1A655841F8B76F000213719 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E1B593681EB4E63A00C8A553 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
@@ -516,6 +518,7 @@
 				891B2AA61E7CE09800F6B5BA /* RequestsData.swift */,
 				B85ECAB41EF91B3B00CC29E5 /* AddMatchIntroScreens.swift */,
 				B83389371F668D830049357D /* PlayerMatchesData.swift */,
+				B8F258C01FD6645C0095425E /* CoachPlayers.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -936,6 +939,7 @@
 				8997D56C1DBCFCA000F201B6 /* CurrentTeamsTableViewCell.swift in Sources */,
 				B85ECAB91EF91CC900CC29E5 /* AddMatchSceIntroScreen.swift in Sources */,
 				894625001E1580E700FE79C2 /* TeamCollectionViewCell.swift in Sources */,
+				B8F258C11FD6645D0095425E /* CoachPlayers.swift in Sources */,
 				466AD3FC1D7A8EC10033289C /* CTPicker.swift in Sources */,
 				8922042F1D97A7EC005F555B /* FriendsCell.swift in Sources */,
 				897C414C1E21FD4B005F1231 /* ReceivedFriendRequest.swift in Sources */,
