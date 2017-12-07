@@ -54,17 +54,17 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
             friendID = (currentUser?.uid)!
         }
         
-        getMyPlayers2(friendID) { (data) in
-//            for(_,req) in data {
-//                let pendingReq = req as! [String : AnyObject]
-//                let isAcceptVal = pendingReq["isAccepted"]!
-//                if isAcceptVal as! NSObject == 1 {
-//                    let pendingReqs = pendingReq["PlayerID"]!
-//                    self.coachNodeIds.append(pendingReq["PlayerNodeIdOther"]! as! String)
-//                    self.playerNodeIdOthers.append(pendingReq["CoachNodeID"]! as! String)
-//                    self.myPlayers.append(pendingReqs as! String)
-//                }
-//            }
+        getMyPlayers(friendID) { (data) in
+            for(_,req) in data {
+                let pendingReq = req as! [String : AnyObject]
+                let isAcceptVal = pendingReq["isAccepted"]!
+                if isAcceptVal as! NSObject == 1 {
+                    let pendingReqs = pendingReq["PlayerID"]!
+                    self.coachNodeIds.append(pendingReq["PlayerNodeIdOther"]! as! String)
+                    self.playerNodeIdOthers.append(pendingReq["CoachNodeID"]! as! String)
+                    self.myPlayers.append(pendingReqs as! String)
+                }
+            }
             self.CoachPlayersTableView.reloadData()
         }
     }
