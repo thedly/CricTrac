@@ -48,7 +48,7 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
     
     override func viewWillAppear(animated: Bool) {
         setBackgroundColor()
-        self.view.backgroundColor = UIColor.clearColor()
+        //self.view.backgroundColor = UIColor.clearColor()
         self.searchBar.becomeFirstResponder()
         
     }

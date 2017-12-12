@@ -110,6 +110,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     
     override func viewWillAppear(animated: Bool) {
          super.viewWillAppear(animated)
+       
         setBackgroundColor()
 
         coachTeams.reloadData()
@@ -124,6 +125,10 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         pendingRequests.backgroundColor = currentTheme.bottomColor
         viewAllBtnForTopBatting.backgroundColor = currentTheme.bottomColor
         viewAllBtnForTopBowling.backgroundColor = currentTheme.bottomColor
+        
+        view.backgroundColor = currentTheme.topColor
+        
+        topBattingtableView.backgroundColor = UIColor.clearColor()
     }
     
     override func viewDidLoad() {
@@ -132,23 +137,23 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
 
         pendingRequests.layer.cornerRadius = 10
         pendingRequests.clipsToBounds = true
-        pendingRequests.layer.borderWidth = 2.0
-        pendingRequests.layer.borderColor = UIColor.whiteColor().CGColor
+//        pendingRequests.layer.borderWidth = 2.0
+//        pendingRequests.layer.borderColor = UIColor.whiteColor().CGColor
         
         coachFrndButton.layer.cornerRadius = 10
         coachFrndButton.clipsToBounds = true
-        coachFrndButton.layer.borderWidth = 2.0
-        coachFrndButton.layer.borderColor = UIColor.whiteColor().CGColor
+//        coachFrndButton.layer.borderWidth = 2.0
+//        coachFrndButton.layer.borderColor = UIColor.whiteColor().CGColor
         
         viewAllBtnForTopBatting.layer.cornerRadius = 10
         viewAllBtnForTopBatting.clipsToBounds = true
-        viewAllBtnForTopBatting.layer.borderWidth = 2.0
-        viewAllBtnForTopBatting.layer.borderColor = UIColor.whiteColor().CGColor
+//        viewAllBtnForTopBatting.layer.borderWidth = 2.0
+//        viewAllBtnForTopBatting.layer.borderColor = UIColor.whiteColor().CGColor
         
         viewAllBtnForTopBowling.layer.cornerRadius = 10
         viewAllBtnForTopBowling.clipsToBounds = true
-        viewAllBtnForTopBowling.layer.borderWidth = 2.0
-        viewAllBtnForTopBowling.layer.borderColor = UIColor.whiteColor().CGColor
+//        viewAllBtnForTopBowling.layer.borderWidth = 2.0
+//        viewAllBtnForTopBowling.layer.borderColor = UIColor.whiteColor().CGColor
         
         
         coachTeams.delegate = self
@@ -783,10 +788,10 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     }
     
     func changeThemeSettigs() {
-        let currentTheme = cricTracTheme.currentTheme
-        view.backgroundColor = currentTheme.topColor
-       
-        topBattingtableView.backgroundColor = UIColor.clearColor()
+//        let currentTheme = cricTracTheme.currentTheme
+//        view.backgroundColor = currentTheme.topColor
+//       
+//        topBattingtableView.backgroundColor = UIColor.clearColor()
     }
 
     @IBAction func didMenuButtonTapp(sender: UIButton){

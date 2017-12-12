@@ -28,6 +28,7 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
        self.barView.backgroundColor = currentTheme.topColor
+        setPlainShadow(barView, color: currentTheme.bottomColor.CGColor)
        // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     

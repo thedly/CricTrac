@@ -185,7 +185,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             matchDetailsTitle.text! = "SCORECARD"
             matchEditButton.hidden = true
             matchDetailsBack.addTarget(self, action: #selector(didTapCancelOthers), forControlEvents: UIControlEvents.TouchUpInside)
-            self.bannerViewHeightConstraint.constant = 50
+            //self.bannerViewHeightConstraint.constant = 50
             self.bottomView.hidden = true
             self.bottomViewHeightConstraint.constant = 0
         }
@@ -237,7 +237,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
-        self.view.backgroundColor = currentTheme.boxColor
+        self.view.backgroundColor = currentTheme.topColor
        // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     

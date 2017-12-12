@@ -397,8 +397,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         myCoachesButton.layer.cornerRadius = 10
         myCoachesButton.clipsToBounds = true
-        myCoachesButton.layer.borderWidth = 2.0
-        myCoachesButton.layer.borderColor = UIColor.whiteColor().CGColor
+       // myCoachesButton.layer.borderWidth = 2.0
+       // myCoachesButton.layer.borderColor = UIColor.whiteColor().CGColor
         
         if friendId == nil {
             myCoachesButton.hidden = false
@@ -644,7 +644,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         myCoachesButton.backgroundColor = currentTheme.bottomColor
 
 
-        setBackgroundColor()
+       setBackgroundColor()
         initView()
         setDashboardData()
         TeamsTable.reloadData()
@@ -1730,6 +1730,7 @@ func setDashboardData(){
                  
                     teamNameToReturn = userProfileData.PlayerPastTeams[(indexPath.row - userProfileData.PlayerCurrentTeams.count)]
                      aCell.baseView.backgroundColor = UIColor.grayColor()
+                    aCell.baseView.alpha = 1
                     aCell.TeamAbbr.textColor = UIColor.blackColor()
                     
                 }

@@ -60,6 +60,7 @@ class NewPostViewController: UIViewController,ThemeChangeable,UITextViewDelegate
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
+        setPlainShadow(barView, color: currentTheme.bottomColor.CGColor)
        // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     

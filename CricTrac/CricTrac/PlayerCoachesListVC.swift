@@ -162,9 +162,9 @@ class PlayerCoachesListVC: UIViewController,UITableViewDelegate,UITableViewDataS
         aCell.backgroundColor = UIColor.clearColor()
         aCell.baseView.backgroundColor = currentTheme.bottomColor
         aCell.baseView.alpha = 1
-        aCell.AddFriendBtn.setTitle("Remove", forState: .Normal)
-        aCell.AddFriendBtn.setTitleColor(UIColor.redColor(), forState: .Normal)
-        
+        aCell.AddFriendBtn.setTitle("REMOVE", forState: .Normal)
+        aCell.AddFriendBtn.setTitleColor(UIColor(red: 0.76, green: 0.18, blue: 0.25, alpha: 1.0), forState: .Normal)
+        aCell.AddFriendBtn.titleLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 12)
         aCell.AddFriendBtn.accessibilityIdentifier = coachNodeIdOthers[indexPath.row]
         aCell.AddFriendBtn.restorationIdentifier = playerNodeIds[indexPath.row]
         aCell.AddFriendBtn.accessibilityValue = myCoaches[indexPath.row]

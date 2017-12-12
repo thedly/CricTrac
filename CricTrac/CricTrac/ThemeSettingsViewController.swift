@@ -110,6 +110,7 @@ class ThemeSettingsViewController: UIViewController, UIGestureRecognizerDelegate
                 setCurrentTheme(Themes(rawValue: currentCell.theme)!)
                 testTheme = currentCell.theme
                 navigationController!.navigationBar.barTintColor = cricTracTheme.testTheme.topColor
+                self.view.backgroundColor = cricTracTheme.testTheme.topColor
                 setTestBackgroundColor()
                 //self.view.setBackgroundColor()
             }

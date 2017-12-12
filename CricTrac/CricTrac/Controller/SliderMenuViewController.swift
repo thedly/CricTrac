@@ -39,7 +39,7 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
-       // navigationController!.navigationBar.barTintColor = currentTheme.topColor
+//       // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
     
@@ -48,6 +48,10 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         //setBackgroundColor()
         userName.text = profileData.fullName
         profilePic = profileData.ProfileImageURL
+        
+        userName.text = profileData.fullName
+        profilePic = profileData.ProfileImageURL
+
         
         loginWithSavedCredentials()
                
@@ -160,6 +164,9 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
         setBackgroundColor()
         userName.text = profileData.fullName
         profilePic = profileData.ProfileImageURL
+        
+        let currentTheme = cricTracTheme.currentTheme
+        self.view.backgroundColor = currentTheme.topColor
         
         if profilePic == "-" {
             let imageName = defaultProfileImage

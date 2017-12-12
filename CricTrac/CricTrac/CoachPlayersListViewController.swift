@@ -252,9 +252,10 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
                     aCell.AddFriendBtn.restorationIdentifier = coachNodeIds[indexPath.row]
                     aCell.AddFriendBtn.accessibilityValue = myPlayers[indexPath.row]
                     
-                    aCell.AddFriendBtn.setTitle("Remove", forState: .Normal)
-                    aCell.AddFriendBtn.setTitleColor(UIColor.redColor(), forState: .Normal)
-                    
+                    aCell.AddFriendBtn.setTitle("REMOVE", forState: .Normal)
+                    aCell.AddFriendBtn.setTitleColor(UIColor(red: 0.76, green: 0.18, blue: 0.25, alpha: 1.0), forState: .Normal)
+                    aCell.AddFriendBtn.titleLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 12)
+
                     aCell.AddFriendBtn.addTarget(self, action: #selector(CoachPlayersListViewController.removePlayer(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                 }
             break

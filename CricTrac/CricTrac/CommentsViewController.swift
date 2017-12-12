@@ -39,9 +39,14 @@ class CommentsViewController: UIViewController,ThemeChangeable,UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        currentTheme = cricTracTheme.currentTheme
+        let viewColor = currentTheme.bottomColor.CGColor
+        setPlainShadow(barView,color: viewColor)
+        setPlainShadow(contentViewForCommentCell, color: viewColor)
+        
+        
       // hideKeyboardWhenTappedAround()
         setNavigationBarProperties();
-        currentTheme = cricTracTheme.currentTheme
         setBackgroundColor()
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = UIColor.clearColor()

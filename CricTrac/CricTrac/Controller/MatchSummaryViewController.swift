@@ -92,6 +92,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         self.matchSummaryTable.reloadData()
         self.tableView1.reloadData()
         setNavigationBarProperties()
+        setColorForViewsWithSameTag(bottomView)
         
         tableView1.hidden = true
         tableview2.hidden = true

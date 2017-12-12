@@ -185,6 +185,7 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
             aCell.backgroundColor = UIColor.clearColor()
             aCell.teamName.font = UIFont(name: "SourceSansPro-Bold", size: 15)
             aCell.teamName.text = teamNames[indexPath.row]
+            aCell.teamName.textColor = UIColor.blackColor()
             aCell.deleteTeamBtn.addTarget(self, action: #selector(PlayerExperienceViewController.deleteTeamFromCurrentTeams(_:)), forControlEvents: .TouchUpInside)
             return aCell
         }
@@ -198,6 +199,8 @@ class PlayerExperienceViewController: UIViewController, UITableViewDelegate, UIT
         if let aCell =  pastTeams.dequeueReusableCellWithIdentifier("CurrentTeamsTableViewCell", forIndexPath: indexPath) as? CurrentTeamsTableViewCell {
             aCell.backgroundColor = UIColor.clearColor()
             aCell.teamName.text = pastTeamNames[indexPath.row]
+            aCell.teamName.font = UIFont(name: "SourceSansPro-Bold", size: 15)
+            aCell.teamName.textColor = UIColor.blackColor()
             aCell.deleteTeamBtn.addTarget(self, action: #selector(PlayerExperienceViewController.deleteTeamFromCurrentTeams(_:)), forControlEvents: .TouchUpInside)
             return aCell
         }

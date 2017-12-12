@@ -229,6 +229,14 @@ public func setCustomUIBackgroundTheme(baseView: UIView, _topColor:String, _bott
     
 }
 
+func setPlainShadow(view: UIView, color: CGColor) {
+    view.layer.shadowColor = color
+    view.layer.shadowOffset = CGSize(width: 0, height: 5)
+    view.layer.shadowOpacity = 0.4
+    view.layer.shadowRadius = 5
+
+}
+
 func setColorForViewsWithSameTag(baseView: UIView) {
     for view in baseView.subviews {
         
