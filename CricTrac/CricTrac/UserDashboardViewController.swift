@@ -148,6 +148,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         if friendId == nil {
             // network reachability test
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            
             if !appDelegate.reachability.isReachable()  {
                 let alert = UIAlertController(title: "", message: networkErrorMessage, preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
@@ -181,7 +182,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 let imagePicker = UIImagePickerController()
                 imagePicker.delegate = self
                 imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
-                imagePicker.allowsEditing = false
+                imagePicker.allowsEditing = true
                 self.presentViewController(imagePicker, animated: true, completion: nil)
             }
         }
@@ -193,12 +194,21 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 let imagePicker = UIImagePickerController()
                 imagePicker.delegate = self
                 imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
-                imagePicker.allowsEditing = false
+                imagePicker.allowsEditing = true
                 self.presentViewController(imagePicker, animated: true, completion: nil)
             }
         }
         
         alertController.addAction(chooseExistingAction)
+        
+        let viewPhotoAction = UIAlertAction(title: "View Photo", style: .Default) { (action) in
+            
+            self.viewImage(option)
+            
+        }
+        
+        alertController.addAction(viewPhotoAction)
+        
         
         self.presentViewController(alertController, animated: true) {
             // ...
@@ -219,7 +229,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 let imagePicker = UIImagePickerController()
                 imagePicker.delegate = self
                 imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
-                imagePicker.allowsEditing = false
+                imagePicker.allowsEditing = true
                 self.presentViewController(imagePicker, animated: true, completion: nil)
             }
         }
@@ -231,7 +241,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 let imagePicker = UIImagePickerController()
                 imagePicker.delegate = self
                 imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
-                imagePicker.allowsEditing = false
+                imagePicker.allowsEditing = true
                 self.presentViewController(imagePicker, animated: true, completion: nil)
             }
         }
@@ -371,10 +381,47 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         }
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-             if coverOrProfile == "Profile" {
+    // sravani - for image crop re-writing dis fun
+//    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+//             if coverOrProfile == "Profile" {
+//            //dispatch_async(dispatch_get_main_queue(),{
+//
+//            //self.userProfileImage.image = image
+//            self.dismissViewControllerAnimated(true) {
+//                addProfileImageData(self.resizeImage(image, newWidth: 200))
+//                //self.initView()
+//            }
+//            //})
+//        }
+//        else {
+//            self.imgCoverPhoto.image = image
+//            self.dismissViewControllerAnimated(true) {
+//                addCoverImageData(self.resizeImage(image, newWidth: 800))
+//            }
+//        }
+//    }
+    
+    // sravani - for image crop
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+        var image : UIImage!
+        if coverOrProfile == "Profile" {
             //dispatch_async(dispatch_get_main_queue(),{
-            self.userProfileImage.image = image
+            
+            if let img = info[UIImagePickerControllerEditedImage] as? UIImage
+            {
+                image = img
+                self.userProfileImage.image = img
+                
+            }
+            else if let img = info[UIImagePickerControllerOriginalImage] as? UIImage
+            {
+                image = img
+                self.userProfileImage.image = img
+            }
+            
+            
+            //self.userProfileImage.image = image
             self.dismissViewControllerAnimated(true) {
                 addProfileImageData(self.resizeImage(image, newWidth: 200))
                 //self.initView()
@@ -382,11 +429,26 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             //})
         }
         else {
-            self.imgCoverPhoto.image = image
+            
+            
+            if let img = info[UIImagePickerControllerEditedImage] as? UIImage
+            {
+                image = img
+               self.imgCoverPhoto.image = image
+                
+            }
+            else if let img = info[UIImagePickerControllerOriginalImage] as? UIImage
+            {
+                image = img
+                self.imgCoverPhoto.image = image
+            }
+            
+           // self.imgCoverPhoto.image = image
             self.dismissViewControllerAnimated(true) {
-                addCoverImageData(self.resizeImage(image, newWidth: 800))
+                addCoverImageData(self.resizeCoverImage(image, newWidth: 800))
             }
         }
+
     }
     
     override func viewDidLoad() {
@@ -650,14 +712,26 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         TeamsTable.reloadData()
     }
     
+    func resizeCoverImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+        
+        let scale =  newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+
     
     
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
         
-        let scale = newWidth / image.size.width
-        let newHeight = image.size.height * scale
-        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
-        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        let scale =  image.size.width
+        let newHeight = image.size.height
+        UIGraphicsBeginImageContext(CGSizeMake(scale, newHeight))
+        image.drawInRect(CGRectMake(0, 0, scale, newHeight))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
@@ -689,8 +763,13 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     func viewImage(option:String){
         
         let profileImageVc = viewControllerFrom("Main", vcid: "ProfileImageExpandingVC") as! ProfileImageExpandingVC
+        if option == "ProfilePhoto" {
+            profileImageVc.imageString = profileData.ProfileImageURL
+         }
+        if option == "CoverPhoto" {
+            profileImageVc.imageString = profileData.CoverPhotoURL
+        }
         
-        profileImageVc.imageString = profileData.ProfileImageURL
         if profileData.ProfileImageURL != "-" {
              self.presentViewController(profileImageVc, animated: true) {}
         }
@@ -1958,6 +2037,7 @@ func setDashboardData(){
             })
         }
     }
+    
 }
 
 
