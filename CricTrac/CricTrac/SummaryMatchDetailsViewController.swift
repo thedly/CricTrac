@@ -396,7 +396,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         
         if matchDetailsData["SelfAnalysis"] as? String != "" && matchDetailsData["SelfAnalysis"] != nil {
             selfAnalysisTextView.text = (matchDetailsData["SelfAnalysis"]!) as! String
-            selfAnalysisTextView.textColor = UIColor.whiteColor()
+            //selfAnalysisTextView.textColor = UIColor.whiteColor()
             selfAnalysisTextView.font = UIFont(name:"SourceSansPro-Bold",size: 15)
             selfAnalysisHeightConstraint.constant = 60
             selfAnalysisView.hidden = false
@@ -407,10 +407,10 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         }
         if matchDetailsData["CoachAnalysis"] as? String != "" && matchDetailsData["CoachAnalysis"] != nil {
         coachAnalysisTextView.text = (matchDetailsData["CoachAnalysis"]!) as! String
-        selfAnalysisTextView.textColor = UIColor.whiteColor()
+        //selfAnalysisTextView.textColor = UIColor.whiteColor()
         selfAnalysisTextView.font = UIFont(name:"SourceSansPro-Bold",size: 15)
         
-        coachAnalysisTextView.textColor = UIColor.whiteColor()
+        //coachAnalysisTextView.textColor = UIColor.whiteColor()
         coachAnalysisTextView.font = UIFont(name:"SourceSansPro-Bold",size: 15)
         coachAnalysisViewHeightConstarint.constant = 60
             coachAnalysisView.hidden = false

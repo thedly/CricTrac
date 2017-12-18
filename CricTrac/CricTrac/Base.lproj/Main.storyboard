@@ -4873,7 +4873,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uSy-20-bLq">
-                                                <rect key="frame" x="8" y="19" width="576" height="41"/>
+                                                <rect key="frame" x="7" y="14" width="577" height="41"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="41" id="o9T-Z0-rXs"/>
@@ -4890,14 +4890,14 @@
                                         <constraints>
                                             <constraint firstItem="L60-8P-unU" firstAttribute="leading" secondItem="Ddl-hj-CRG" secondAttribute="leading" constant="8" id="2Cj-DE-db2"/>
                                             <constraint firstItem="L60-8P-unU" firstAttribute="top" secondItem="Ddl-hj-CRG" secondAttribute="top" id="DZC-xl-Jmb"/>
-                                            <constraint firstItem="uSy-20-bLq" firstAttribute="top" secondItem="L60-8P-unU" secondAttribute="bottom" id="O7U-S8-6jW"/>
-                                            <constraint firstItem="uSy-20-bLq" firstAttribute="leading" secondItem="Ddl-hj-CRG" secondAttribute="leading" constant="8" id="Pbj-m7-bHD"/>
+                                            <constraint firstItem="uSy-20-bLq" firstAttribute="top" secondItem="L60-8P-unU" secondAttribute="bottom" constant="-5" id="O7U-S8-6jW"/>
+                                            <constraint firstItem="uSy-20-bLq" firstAttribute="leading" secondItem="Ddl-hj-CRG" secondAttribute="leading" constant="7" id="Pbj-m7-bHD"/>
                                             <constraint firstAttribute="height" constant="60" id="bLk-Pi-AVb"/>
                                             <constraint firstAttribute="trailing" secondItem="uSy-20-bLq" secondAttribute="trailing" id="vby-lP-DPr"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hho-e4-B3u" userLabel="coach analysis">
-                                        <rect key="frame" x="8" y="792" width="584" height="60"/>
+                                        <rect key="frame" x="8" y="786" width="584" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COACH ANALYSIS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lt1-ur-4vw">
                                                 <rect key="frame" x="8" y="0.0" width="111" height="19"/>
@@ -4906,7 +4906,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SzJ-CJ-ufN">
-                                                <rect key="frame" x="8" y="19" width="576" height="41"/>
+                                                <rect key="frame" x="8" y="13" width="576" height="41"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="41" id="cry-gC-1qP"/>
@@ -4929,12 +4929,17 @@
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="SzJ-CJ-ufN" secondAttribute="trailing" id="0b1-aS-Lah"/>
                                             <constraint firstItem="SzJ-CJ-ufN" firstAttribute="top" secondItem="lt1-ur-4vw" secondAttribute="bottom" id="GhP-3m-rFd"/>
-                                            <constraint firstItem="SzJ-CJ-ufN" firstAttribute="top" secondItem="lt1-ur-4vw" secondAttribute="bottom" id="NLD-Xr-sWo"/>
+                                            <constraint firstItem="SzJ-CJ-ufN" firstAttribute="top" secondItem="lt1-ur-4vw" secondAttribute="bottom" constant="-6" id="NLD-Xr-sWo"/>
                                             <constraint firstItem="lt1-ur-4vw" firstAttribute="leading" secondItem="hho-e4-B3u" secondAttribute="leading" constant="8" id="NmB-aW-LJs"/>
                                             <constraint firstItem="lt1-ur-4vw" firstAttribute="top" secondItem="hho-e4-B3u" secondAttribute="top" id="aQs-za-kJS"/>
                                             <constraint firstItem="SzJ-CJ-ufN" firstAttribute="leading" secondItem="hho-e4-B3u" secondAttribute="leading" constant="8" id="cUK-Dj-U3U"/>
                                             <constraint firstAttribute="height" constant="60" id="v7t-TB-6Ss"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="GhP-3m-rFd"/>
+                                            </mask>
+                                        </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A20-jC-mKK">
                                         <rect key="frame" x="10" y="4" width="580" height="22"/>
@@ -4974,7 +4979,7 @@
                                     <constraint firstItem="Ddl-hj-CRG" firstAttribute="leading" secondItem="qNG-QM-eJb" secondAttribute="leading" constant="8" id="ReA-ip-y3q"/>
                                     <constraint firstItem="ck6-Q4-mi6" firstAttribute="top" secondItem="qNG-QM-eJb" secondAttribute="top" id="YVb-wA-DFG"/>
                                     <constraint firstAttribute="trailing" secondItem="Ddl-hj-CRG" secondAttribute="trailing" constant="8" id="a7e-bf-UG2"/>
-                                    <constraint firstItem="hho-e4-B3u" firstAttribute="top" secondItem="Ddl-hj-CRG" secondAttribute="bottom" constant="8" id="axv-Kx-nba"/>
+                                    <constraint firstItem="hho-e4-B3u" firstAttribute="top" secondItem="Ddl-hj-CRG" secondAttribute="bottom" constant="2" id="axv-Kx-nba"/>
                                     <constraint firstItem="A20-jC-mKK" firstAttribute="leading" secondItem="qNG-QM-eJb" secondAttribute="leading" constant="10" id="hrx-Wd-FEq"/>
                                     <constraint firstAttribute="bottom" secondItem="hho-e4-B3u" secondAttribute="bottom" id="oxp-lP-i9p"/>
                                     <constraint firstItem="Ddl-hj-CRG" firstAttribute="top" secondItem="ck6-Q4-mi6" secondAttribute="bottom" id="qxZ-lC-Jih"/>
@@ -17876,6 +17881,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="niv-f5-tLl">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="epT-FL-Dtq" id="vgM-h5-PAg"/>
                                     <outlet property="delegate" destination="epT-FL-Dtq" id="jrJ-dG-sDm"/>

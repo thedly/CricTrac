@@ -18,7 +18,7 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
     @IBOutlet weak var topBarViewHeightConstraint: NSLayoutConstraint!
     let currentTheme = cricTracTheme.currentTheme
     
-    var myPlayers = [String]()
+   // var myPlayers = [String]()
     var batsmen = [String]()
     var bowlers = [String]()
     var wicketsKeepers = [String]()
@@ -30,7 +30,7 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
     
     var playerNodeIdOthers = [String]()
     var coachNodeIds = [String]()
-    
+    var myPlayers = [[String:AnyObject]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,24 +49,32 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
         myPlayers.removeAll()
         coachNodeIds.removeAll()
         playerNodeIdOthers.removeAll()
+       // dataSource.removeAll()
         
         if friendID == "" {
             friendID = (currentUser?.uid)!
         }
         
-        getMyPlayers(friendID) { (data) in
-            for(_,req) in data {
-                let pendingReq = req as! [String : AnyObject]
-                let isAcceptVal = pendingReq["isAccepted"]!
-                if isAcceptVal as! NSObject == 1 {
-                    let pendingReqs = pendingReq["PlayerID"]!
-                    self.coachNodeIds.append(pendingReq["PlayerNodeIdOther"]! as! String)
-                    self.playerNodeIdOthers.append(pendingReq["CoachNodeID"]! as! String)
-                    self.myPlayers.append(pendingReqs as! String)
-                }
-            }
+        getMyPlayers1(friendID,playingRole: playingRole) { (data) in
+            self.myPlayers = data
             self.CoachPlayersTableView.reloadData()
+
         }
+    
+    
+        
+//        getMyPlayers(friendID) { (data) in
+//            for(_,req) in data {
+//                let pendingReq = req 
+//                let isAcceptVal = pendingReq["isAccepted"]!
+//                if isAcceptVal as! NSObject == 1 {
+//                    let pendingReqs = pendingReq["PlayerID"]!
+////                    self.coachNodeIds.append(pendingReq["PlayerNodeIdOther"]! as! String)
+////                    self.playerNodeIdOthers.append(pendingReq["CoachNodeID"]! as! String)
+//                    self.myPlayers.append(pendingReqs as! String)
+//                }
+//            }
+//        }
     }
     
     // for parent class
@@ -96,6 +104,7 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
     
     func changeThemeSettigs() {
         self.view.backgroundColor = currentTheme.topColor
+        self.CoachPlayersTableView.backgroundColor = currentTheme.topColor
         
     }
     
@@ -146,24 +155,24 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
             
             topBarTitle.text = "BATSMEN"
             title = "BATSMEN"
-            return batsmen.count
+            return myPlayers.count
             
         case  "Bowlers" :
             
             topBarTitle.text = "BOWLERS"
             title = "BOWLERS"
-            return bowlers.count
+            return myPlayers.count
         case "WicketKeeper" :
            
             topBarTitle.text = "WICKET KEEPERS"
             title = "WICKET KEEPERS"
-            return wicketsKeepers.count
+            return myPlayers.count
             
         case  "AllRounder" :
             
             topBarTitle.text = "ALL-ROUNDERS"
             title = "ALL-ROUNDERS"
-            return allrounders.count
+            return myPlayers.count
             
         default:
             
@@ -179,133 +188,107 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
         
     }
     
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 85
     }
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var coachNodeId = ""
         var playerNodeIdOther = ""
-        
+        tableView.backgroundColor = currentTheme.topColor
         let aCell = tableView.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as! FriendSuggestionsCell
         aCell.parent = self
         
        
         switch playingRole {
         
-        case "AllPlayers" :
-            
-            if myPlayers.count != 0 {
-                playerReqId = myPlayers[indexPath.row]
-                aCell.friendId = playerReqId
-            }
-            aCell.AddFriendBtn.hidden = true
-            break
-    
-            
-        case "Batsmen" :
-            
-               if batsmen.count != 0 {
-                     playerReqId = batsmen[indexPath.row]
-                    aCell.friendId = playerReqId
-                }
-               aCell.AddFriendBtn.hidden = true
-            break
-        
-        case "Bowlers" :
-            
-            if bowlers.count != 0 {
-                playerReqId = bowlers[indexPath.row]
-                 aCell.friendId = playerReqId
-            }
-             aCell.AddFriendBtn.hidden = true
-            break
-            
-         case "WicketKeeper" :
-            
-            if wicketsKeepers.count != 0 {
-                playerReqId = wicketsKeepers[indexPath.row]
-                 aCell.friendId = playerReqId
-            }
-             aCell.AddFriendBtn.hidden = true
-            break
-        case  "AllRounder" :
-            
-            if allrounders.count != 0 {
-                playerReqId = allrounders[indexPath.row]
-                 aCell.friendId = playerReqId
-            }
-             aCell.AddFriendBtn.hidden = true
-            break
-        default:
-            
-                if myPlayers.count != 0 {
-                     playerReqId = myPlayers[indexPath.row]
-                    coachNodeId = coachNodeIds[indexPath.row]
-                    playerNodeIdOther = playerNodeIdOthers[indexPath.row]
-                    
-                    
-                     aCell.friendId = playerReqId
-                    
-                    aCell.AddFriendBtn.accessibilityIdentifier = playerNodeIdOthers[indexPath.row]
-                    aCell.AddFriendBtn.restorationIdentifier = coachNodeIds[indexPath.row]
-                    aCell.AddFriendBtn.accessibilityValue = myPlayers[indexPath.row]
-                    
-                    aCell.AddFriendBtn.setTitle("REMOVE", forState: .Normal)
-                    aCell.AddFriendBtn.setTitleColor(UIColor(red: 0.76, green: 0.18, blue: 0.25, alpha: 1.0), forState: .Normal)
-                    aCell.AddFriendBtn.titleLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 12)
-
-                    aCell.AddFriendBtn.addTarget(self, action: #selector(CoachPlayersListViewController.removePlayer(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-                }
-            break
-        }
-        
-        fetchBasicProfile(playerReqId) { (result) in
-            let proPic = result["proPic"]
-            let city =   result["city"]
-            let name = "\(result["firstname"]!) \(result["lastname"]!)"
-            let userProfile = result["userProfile"]
-            let playingRole = result["playingRole"]
-            
-            aCell.userCity.text = city
-            aCell.userName.text = name
-            
-            if userProfile == "Player" {
-                aCell.userRole.text = playingRole
-            }
-            else{
-            fireBaseRef.child("Users").child(self.playerReqId).child("MyCoaches").child(coachNodeId).removeValue()
-            fireBaseRef.child("Users").child(currentUser!.uid).child("MyPlayers").child(playerNodeIdOther).removeValue()
-            }
+            case "AllPlayers" :
                 
-            
-            
-//                aCell.userRole.text = "Coach"
-//            }
-//            else if userProfile == "Cricket Fan" {
-//                fireBaseRef.child("Users").child(self.playerReqId).child("MyCoaches").child(coachNodeId).removeValue()
-//                fireBaseRef.child("Users").child(currentUser!.uid).child("MyPlayers").child(playerNodeIdOther).removeValue()
-//                
-//                aCell.userRole.text = "Cricket Fan"
-////            }
+                aCell.AddFriendBtn.hidden = true
+                break
         
-            if proPic! == "-"{
-                let imageName = defaultProfileImage
-                let image = UIImage(named: imageName)
-                aCell.userProfileView.image = image
-            }else{
-                if let imageURL = NSURL(string:proPic!){
-                    aCell.userProfileView.kf_setImageWithURL(imageURL)
-                }
-            }
+            case "Batsmen" :
+                
+                aCell.AddFriendBtn.hidden = true
+                break
+            
+            case "Bowlers" :
+                
+                aCell.AddFriendBtn.hidden = true
+                break
+                
+             case "WicketKeeper" :
+                
+                aCell.AddFriendBtn.hidden = true
+                break
+            
+            case  "AllRounder" :
+                
+                 aCell.AddFriendBtn.hidden = true
+                break
+            
+            default:
+               
+                break
         }
-
-        aCell.backgroundColor = UIColor.clearColor()
-        aCell.baseView.backgroundColor = currentTheme.bottomColor
-        aCell.baseView.alpha = 1
         
-        return aCell
+            if myPlayers.count != 0 {
+                
+                let playerData = myPlayers[indexPath.row]
+                
+                let proPic = playerData["ProfilePic"]! as! String
+                let city =   playerData["City"]! as! String
+                let name = "\(playerData["FirstName"]!) \(playerData["LastName"]!)"
+                let userProfile = playerData["UserProfile"]! as! String
+                let playingRole = playerData["PlayingRole"]! as! String
+                
+                aCell.userCity.text = city
+                aCell.userName.text = name
+                aCell.userCity.text = playerData["DOB"]! as? String
+                if userProfile == "Player" {
+                    aCell.userRole.text = playingRole
+                }
+                else{
+                    fireBaseRef.child("Users").child(self.playerReqId).child("MyCoaches").child(coachNodeId).removeValue()
+                    fireBaseRef.child("Users").child(currentUser!.uid).child("MyPlayers").child(playerNodeIdOther).removeValue()
+                }
+                
+                if proPic == "-"{
+                    let imageName = defaultProfileImage
+                    let image = UIImage(named: imageName)
+                    aCell.userProfileView.image = image
+                }else{
+                    if let imageURL = NSURL(string:proPic){
+                        aCell.userProfileView.kf_setImageWithURL(imageURL)
+                    }
+                }
+                
+                
+                playerReqId = playerData["playerId"]! as! String
+                coachNodeId = playerData["playerNodeIdOther"]! as! String
+                playerNodeIdOther = playerData["coachNodeId"]! as! String
+                
+                aCell.friendId = playerReqId
+                aCell.AddFriendBtn.accessibilityIdentifier = coachNodeId
+                aCell.AddFriendBtn.restorationIdentifier = playerNodeIdOther
+                aCell.AddFriendBtn.accessibilityValue = playerReqId
+                aCell.AddFriendBtn.setTitle("REMOVE", forState: .Normal)
+                aCell.AddFriendBtn.setTitleColor(UIColor(red: 0.76, green: 0.18, blue: 0.25, alpha: 1.0), forState: .Normal)
+                aCell.AddFriendBtn.titleLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 12)
+                
+                aCell.AddFriendBtn.addTarget(self, action: #selector(CoachPlayersListViewController.removePlayer(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                
+                aCell.backgroundColor = UIColor.clearColor()
+                aCell.baseView.backgroundColor = currentTheme.bottomColor
+                aCell.baseView.alpha = 1
+                CoachPlayersTableView.backgroundColor = currentTheme.topColor
+                
+            }
+
+         return aCell
     }
     
     func removePlayer(sender:UIButton) {
@@ -336,10 +319,5 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
         
         
     }
-    
-    
-    
-    
-    
     
 }

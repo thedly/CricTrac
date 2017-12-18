@@ -62,6 +62,7 @@ struct AppTheme{
     let Flash = CTTheme(topColor: UIColor(hex: "#0EE37C"), bottomColor: UIColor(hex: "#0BA85C"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
     
     let Swing = CTTheme(topColor: UIColor(hex: "#609BC8"), bottomColor: UIColor(hex: "#477497"), largeFontColor: UIColor(hex: "#ffffff"), mediumFontColor: UIColor(hex: "#ffffff"), smallFontColor: UIColor(hex: "#ffffff"))
+    
 
     
     var currentTheme:CTTheme!

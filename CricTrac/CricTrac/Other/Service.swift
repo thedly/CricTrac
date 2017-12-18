@@ -1175,6 +1175,159 @@ func getMyPlayers(friendId:String? = nil,sucessBlock:([String: AnyObject])->Void
     })
 }
 
+
+func getMyPlayers1(friendId:String? = nil,playingRole:String,sucess:(data:[[String: AnyObject]])->Void){
+    let ref = fireBaseRef.child("Users").child(friendId!).child("MyPlayers")
+    ref.observeEventType(.Value, withBlock: { snapshot in
+        if let data = snapshot.value as? [String:[String:AnyObject]] {
+            var result = [CoachPlayers]()
+            
+            let myGroup = dispatch_group_create()
+            
+            for (_,value) in data{
+                let isAccepetdVal = value["isAccepted"]!
+               
+                if isAccepetdVal as! NSObject == 1 {
+                    dispatch_group_enter(myGroup)
+                let playerid = value["PlayerID"] as! String
+                
+                let ref2 = fireBaseRef.child("Users").child(playerid).child("UserProfile")
+                ref2.observeEventType(.Value, withBlock: { snapshot in
+                    
+                   // let snapshotVal = snapshot.value!
+                    
+                    if let snapshotVal = snapshot.value {
+                       
+                        switch playingRole {
+                    case  "Batsmen" :
+                        if snapshotVal["PlayingRole"]! as! String == "Batsman" {
+                            var dataval = value as [String:AnyObject]
+                            
+                            let dob_ts = snapshotVal["DateOfBirth"]! as! String
+                            let dateFormater = NSDateFormatter()
+                            dateFormater.dateFormat = "dd-MM-yyyy"
+                            dateFormater.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
+                            let playerdob_ts = dateFormater.dateFromString(dob_ts)
+                            
+                            dataval["DOB_TS"] = playerdob_ts
+                            dataval["DOB"] = snapshotVal["DateOfBirth"]! as! String
+                            dataval["UserProfile"] = snapshotVal["UserProfile"]! as! String
+                            dataval["PlayingRole"] = snapshotVal["PlayingRole"]! as! String
+                            dataval["ProfilePic"] = snapshotVal["ProfileImageURL"]! as! String
+                            dataval["City"] = snapshotVal["City"]! as! String
+                            dataval["FirstName"] = snapshotVal["FirstName"]! as! String
+                            dataval["LastName"] = snapshotVal["LastName"]! as! String
+                            
+                            result.append(CoachPlayers(dataObj: dataval))
+                            }
+                    case  "Bowlers" :
+                            if snapshotVal["PlayingRole"]! as! String == "Bowler" {
+                                var dataval = value as [String:AnyObject]
+                                
+                                let dob_ts = snapshotVal["DateOfBirth"]! as! String
+                                let dateFormater = NSDateFormatter()
+                                dateFormater.dateFormat = "dd-MM-yyyy"
+                                dateFormater.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
+                                let playerdob_ts = dateFormater.dateFromString(dob_ts)
+                                
+                                dataval["DOB_TS"] = playerdob_ts
+                                dataval["DOB"] = snapshotVal["DateOfBirth"]! as! String
+                                dataval["UserProfile"] = snapshotVal["UserProfile"]! as! String
+                                dataval["PlayingRole"] = snapshotVal["PlayingRole"]! as! String
+                                dataval["ProfilePic"] = snapshotVal["ProfileImageURL"]! as! String
+                                dataval["City"] = snapshotVal["City"]! as! String
+                                dataval["FirstName"] = snapshotVal["FirstName"]! as! String
+                                dataval["LastName"] = snapshotVal["LastName"]! as! String
+                                
+                                result.append(CoachPlayers(dataObj: dataval))
+                            }
+                    case "WicketKeeper" :
+                            
+                        if snapshotVal["PlayingRole"]! as! String == "Wicketkeeper" {
+                            var dataval = value as [String:AnyObject]
+                            
+                            let dob_ts = snapshotVal["DateOfBirth"]! as! String
+                            let dateFormater = NSDateFormatter()
+                            dateFormater.dateFormat = "dd-MM-yyyy"
+                            dateFormater.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
+                            let playerdob_ts = dateFormater.dateFromString(dob_ts)
+                            
+                            dataval["DOB_TS"] = playerdob_ts
+                            dataval["DOB"] = snapshotVal["DateOfBirth"]! as! String
+                            dataval["UserProfile"] = snapshotVal["UserProfile"]! as! String
+                            dataval["PlayingRole"] = snapshotVal["PlayingRole"]! as! String
+                            dataval["ProfilePic"] = snapshotVal["ProfileImageURL"]! as! String
+                            dataval["City"] = snapshotVal["City"]! as! String
+                            dataval["FirstName"] = snapshotVal["FirstName"]! as! String
+                            dataval["LastName"] = snapshotVal["LastName"]! as! String
+                            
+                            result.append(CoachPlayers(dataObj: dataval))
+                            }
+                    case "AllRounder" :
+                            if snapshotVal["PlayingRole"]! as! String == "All-rounder" || snapshotVal["PlayingRole"]! as! String == "Bowling all-rounder" || snapshotVal["PlayingRole"]! as! String ==  "Batting all-rounder" {
+                                var dataval = value as [String:AnyObject]
+                                
+                                let dob_ts = snapshotVal["DateOfBirth"]! as! String
+                                let dateFormater = NSDateFormatter()
+                                dateFormater.dateFormat = "dd-MM-yyyy"
+                                dateFormater.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
+                                let playerdob_ts = dateFormater.dateFromString(dob_ts)
+                                
+                                dataval["DOB_TS"] = playerdob_ts
+                                dataval["DOB"] = snapshotVal["DateOfBirth"]! as! String
+                                dataval["UserProfile"] = snapshotVal["UserProfile"]! as! String
+                                dataval["PlayingRole"] = snapshotVal["PlayingRole"]! as! String
+                                dataval["ProfilePic"] = snapshotVal["ProfileImageURL"]! as! String
+                                dataval["City"] = snapshotVal["City"]! as! String
+                                dataval["FirstName"] = snapshotVal["FirstName"]! as! String
+                                dataval["LastName"] = snapshotVal["LastName"]! as! String
+                                
+                                result.append(CoachPlayers(dataObj: dataval))
+                            }
+
+
+                        default :
+                            
+                            var dataval = value as [String:AnyObject]
+                            
+                            let dob_ts = snapshotVal["DateOfBirth"]! as! String
+                            let dateFormater = NSDateFormatter()
+                            dateFormater.dateFormat = "dd-MM-yyyy"
+                            dateFormater.locale =  NSLocale(localeIdentifier: "en_US_POSIX")
+                            let playerdob_ts = dateFormater.dateFromString(dob_ts)
+                            
+                            dataval["DOB_TS"] = playerdob_ts
+                            dataval["DOB"] = snapshotVal["DateOfBirth"]! as! String
+                            dataval["UserProfile"] = snapshotVal["UserProfile"]! as! String
+                            dataval["PlayingRole"] = snapshotVal["PlayingRole"]! as! String
+                            dataval["ProfilePic"] = snapshotVal["ProfileImageURL"]! as! String
+                            dataval["City"] = snapshotVal["City"]! as! String
+                            dataval["FirstName"] = snapshotVal["FirstName"]! as! String
+                            dataval["LastName"] = snapshotVal["LastName"]! as! String
+
+                            result.append(CoachPlayers(dataObj: dataval))
+                            break
+                        }
+                    }
+                    dispatch_group_leave(myGroup)
+                })
+              }
+            }
+            
+            
+            dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
+                result.sortInPlace({$0.DOB_TS.compare($1.DOB_TS) == NSComparisonResult.OrderedAscending})
+                let resultObj = CoachPlayers.getAnonymous(result)
+                sucess(data: resultObj)
+                
+            })
+            
+        }
+    })
+}
+
+
+
 func getMyCoaches(sucessBlock:([String: AnyObject])->Void) {
     fireBaseRef.child("Users").child(currentUser!.uid).child("MyCoaches").observeSingleEventOfType(.Value, withBlock: { snapshot in
         if let data = snapshot.value as? [String: AnyObject] {

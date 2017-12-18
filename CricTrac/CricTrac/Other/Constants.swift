@@ -181,63 +181,63 @@ var versionAndBuildNumber:String{
 
 let themeColors = [
     "Grass" : [
-        "topColor" : "#b4ed50",
-        "bottomColor" : "#429321",
+        "topColor" : "#90F500",
+        "bottomColor" : "#6BB403",
         "theme":"Grass"
     ],
     "Beamer" : [
-        "topColor" : "#F0FE00",
-        "bottomColor" : "#FF8F05",
+        "topColor" : "#E1E863",
+        "bottomColor" : "#AEB44E",
         "theme":"Beamer"
     ],
     "Feather" : [
         "topColor" : "#ea9eff",
-        "bottomColor": "#692580",
+        "bottomColor": "#C864E6",
         "theme":"Feather"
     ],
     "Slice": [
-        "topColor": "#fbda61",
-        "bottomColor": "#f76b1c",
+        "topColor": "#F59560",
+        "bottomColor": "#CB7849",
         "theme":"Slice"
     ],
     "Cherry": [
-        "topColor": "#D40D12",
-        "bottomColor": "5C0002",
+        "topColor": "#EF5F5F",
+        "bottomColor": "CE4545",
         "theme":"Cherry"
     ],
     "Daisy": [
-        "topColor": "#EDC7D9",
-        "bottomColor": "#EF629F",
+        "topColor": "#EE549C",
+        "bottomColor": "#C2447F",
         "theme":"Daisy"
     ],
     "Ashes": [
         "topColor": "#C8CBC3",
-        "bottomColor": "#5C635A",
+        "bottomColor": "#949793",
         "theme":"Ashes"
     ],
     "Beehive": [
         "topColor": "#ba9779",
-        "bottomColor": "#910000",
+        "bottomColor": "#9A7D64",
         "theme":"Beehive"
     ],
     "Ferret": [
         "topColor": "#8B8484",
-        "bottomColor": "#2D2C2A",
+        "bottomColor": "#6D6C68",
         "theme":"Ferret"
     ],
     "Glove": [
         "topColor": "#3BACB2",
-        "bottomColor": "#295154",
+        "bottomColor": "#1E797E",
         "theme":"Glove"
     ],
     "Flash": [
-        "topColor": "#09BD66",
-        "bottomColor": "#044C29",
+        "topColor": "#0EE37C",
+        "bottomColor": "#0BA85C",
         "theme":"Flash"
     ],
     "Swing": [
-        "topColor": "#40627C",
-        "bottomColor": "#26393D",
+        "topColor": "#609BC8",
+        "bottomColor": "#477497",
         "theme":"Swing"
     ]
 ]

@@ -156,6 +156,7 @@
 		B835B35A1EEA7D92001048A6 /* AppIntroFourthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3591EEA7D92001048A6 /* AppIntroFourthScreen.swift */; };
 		B835B35C1EEA7DAF001048A6 /* AppIntroFifthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B35B1EEA7DAF001048A6 /* AppIntroFifthScreen.swift */; };
 		B835B3981EEE6947001048A6 /* AppIntroBasicScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3971EEE6946001048A6 /* AppIntroBasicScreen.swift */; };
+		B846FA751FE25469000F24D2 /* CoachPlayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B846FA741FE25468000F24D2 /* CoachPlayers.swift */; };
 		B85ECAB51EF91B3B00CC29E5 /* AddMatchIntroScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85ECAB41EF91B3B00CC29E5 /* AddMatchIntroScreens.swift */; };
 		B85ECAB71EF91C7C00CC29E5 /* AddMatchFirstIntroScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85ECAB61EF91C7C00CC29E5 /* AddMatchFirstIntroScreen.swift */; };
 		B85ECAB91EF91CC900CC29E5 /* AddMatchSceIntroScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85ECAB81EF91CC900CC29E5 /* AddMatchSceIntroScreen.swift */; };
@@ -336,6 +337,7 @@
 		B835B3591EEA7D92001048A6 /* AppIntroFourthScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroFourthScreen.swift; sourceTree = "<group>"; };
 		B835B35B1EEA7DAF001048A6 /* AppIntroFifthScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroFifthScreen.swift; sourceTree = "<group>"; };
 		B835B3971EEE6946001048A6 /* AppIntroBasicScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroBasicScreen.swift; sourceTree = "<group>"; };
+		B846FA741FE25468000F24D2 /* CoachPlayers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachPlayers.swift; sourceTree = "<group>"; };
 		B85ECAB41EF91B3B00CC29E5 /* AddMatchIntroScreens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMatchIntroScreens.swift; sourceTree = "<group>"; };
 		B85ECAB61EF91C7C00CC29E5 /* AddMatchFirstIntroScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMatchFirstIntroScreen.swift; sourceTree = "<group>"; };
 		B85ECAB81EF91CC900CC29E5 /* AddMatchSceIntroScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMatchSceIntroScreen.swift; sourceTree = "<group>"; };
@@ -516,6 +518,7 @@
 				891B2AA61E7CE09800F6B5BA /* RequestsData.swift */,
 				B85ECAB41EF91B3B00CC29E5 /* AddMatchIntroScreens.swift */,
 				B83389371F668D830049357D /* PlayerMatchesData.swift */,
+				B846FA741FE25468000F24D2 /* CoachPlayers.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -936,6 +939,7 @@
 				8997D56C1DBCFCA000F201B6 /* CurrentTeamsTableViewCell.swift in Sources */,
 				B85ECAB91EF91CC900CC29E5 /* AddMatchSceIntroScreen.swift in Sources */,
 				894625001E1580E700FE79C2 /* TeamCollectionViewCell.swift in Sources */,
+				B846FA751FE25469000F24D2 /* CoachPlayers.swift in Sources */,
 				466AD3FC1D7A8EC10033289C /* CTPicker.swift in Sources */,
 				8922042F1D97A7EC005F555B /* FriendsCell.swift in Sources */,
 				897C414C1E21FD4B005F1231 /* ReceivedFriendRequest.swift in Sources */,
