@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import XLPagerTabStrip
 
-class ThemeSettingsViewController: UIViewController, UIGestureRecognizerDelegate, UICollectionViewDelegate, UICollectionViewDataSource,ThemeChangeable {
+class ThemeSettingsViewController: UIViewController, UIGestureRecognizerDelegate, UICollectionViewDelegate, UICollectionViewDataSource,ThemeChangeable,IndicatorInfoProvider {
 
     @IBOutlet weak var topColorTxt: UITextField!
     @IBOutlet weak var bottomColorTxt: UITextField!
@@ -42,6 +43,10 @@ class ThemeSettingsViewController: UIViewController, UIGestureRecognizerDelegate
         initializeView()
       
         // Do any additional setup after loading the view.
+    }
+    
+    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "CELEBRITIES")
     }
     
     func setNavigationBarProperties(){

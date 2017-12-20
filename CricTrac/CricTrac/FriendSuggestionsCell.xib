@@ -9,6 +9,7 @@
         <mutableArray key="SourceSansPro-Bold.otf">
             <string>SourceSansPro-Bold</string>
             <string>SourceSansPro-Bold</string>
+            <string>SourceSansPro-Bold</string>
         </mutableArray>
         <mutableArray key="SourceSansPro-Regular.otf">
             <string>SourceSansPro-Regular</string>
@@ -41,13 +42,13 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAJITH KUMAR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hTW-d9-87Z">
-                                <rect key="frame" x="71" y="8" width="296" height="19"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="SAJITH KUMAR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hTW-d9-87Z">
+                                <rect key="frame" x="71" y="9" width="296" height="18"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="15"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="14K-3d-Vso">
-                                <rect key="frame" x="377" y="20" width="75" height="28"/>
+                                <rect key="frame" x="377" y="5" width="75" height="28"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="OhR-3F-GPk"/>
@@ -64,8 +65,8 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BANGALORE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUM-lX-fcQ">
-                                <rect key="frame" x="71" y="27" width="296" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="BANGALORE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUM-lX-fcQ">
+                                <rect key="frame" x="71" y="27" width="296" height="16"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="13"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -75,11 +76,35 @@
                                     <action selector="friendImageTapped:" destination="Pvh-sN-CCs" eventType="touchUpInside" id="uSO-8H-qJJ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PlayingRole" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZi-wy-oSG">
-                                <rect key="frame" x="71" y="44" width="296" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PlayingRole" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZi-wy-oSG">
+                                <rect key="frame" x="71" y="43" width="296" height="16"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="13"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hvc-6q-Bg0">
+                                <rect key="frame" x="377" y="38" width="75" height="28"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="32G-gZ-x4X"/>
+                                    <constraint firstAttribute="height" constant="28" id="Bsh-2M-eiY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="12"/>
+                                <state key="normal" title="FOLLOW">
+                                    <color key="titleColor" red="0.40784313729999999" green="0.73333333329999995" blue="0.0078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Bsh-2M-eiY"/>
+                                        <exclude reference="32G-gZ-x4X"/>
+                                    </mask>
+                                </variation>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.80000001190000003" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -88,16 +113,21 @@
                             <constraint firstItem="jUM-lX-fcQ" firstAttribute="top" secondItem="hTW-d9-87Z" secondAttribute="bottom" id="2e1-B4-USf"/>
                             <constraint firstItem="hTW-d9-87Z" firstAttribute="centerY" secondItem="bAv-xC-FpS" secondAttribute="centerY" constant="-16" id="43Q-8X-yJJ"/>
                             <constraint firstItem="AZi-wy-oSG" firstAttribute="trailing" secondItem="jUM-lX-fcQ" secondAttribute="trailing" id="C8S-RP-eM3"/>
+                            <constraint firstItem="hvc-6q-Bg0" firstAttribute="leading" secondItem="14K-3d-Vso" secondAttribute="leading" id="Gdb-2B-5AM"/>
                             <constraint firstItem="AZi-wy-oSG" firstAttribute="leading" secondItem="jUM-lX-fcQ" secondAttribute="leading" id="Gtb-ey-4yw"/>
+                            <constraint firstItem="hvc-6q-Bg0" firstAttribute="top" secondItem="14K-3d-Vso" secondAttribute="bottom" constant="5" id="Gu0-dG-lQ3"/>
                             <constraint firstAttribute="trailing" secondItem="14K-3d-Vso" secondAttribute="trailing" constant="8" id="Ond-7G-s0k"/>
                             <constraint firstItem="jUM-lX-fcQ" firstAttribute="centerX" secondItem="hTW-d9-87Z" secondAttribute="centerX" id="PcZ-d5-9rw"/>
-                            <constraint firstItem="14K-3d-Vso" firstAttribute="centerY" secondItem="WJD-Wr-YyA" secondAttribute="centerY" id="YBd-e7-uqR"/>
+                            <constraint firstItem="14K-3d-Vso" firstAttribute="centerY" secondItem="WJD-Wr-YyA" secondAttribute="centerY" constant="-15" id="YBd-e7-uqR"/>
                             <constraint firstItem="bAv-xC-FpS" firstAttribute="leading" secondItem="WJD-Wr-YyA" secondAttribute="leading" constant="8" id="YhK-mk-Aqe"/>
+                            <constraint firstItem="hvc-6q-Bg0" firstAttribute="trailing" secondItem="14K-3d-Vso" secondAttribute="trailing" id="dOJ-SZ-a66"/>
                             <constraint firstItem="FR4-Qa-YFX" firstAttribute="height" secondItem="bAv-xC-FpS" secondAttribute="height" id="gO9-Ei-dy7"/>
                             <constraint firstItem="jUM-lX-fcQ" firstAttribute="trailing" secondItem="hTW-d9-87Z" secondAttribute="trailing" id="gQa-7I-ndP"/>
                             <constraint firstItem="bAv-xC-FpS" firstAttribute="centerY" secondItem="WJD-Wr-YyA" secondAttribute="centerY" id="hlb-Gx-bHs"/>
                             <constraint firstItem="AZi-wy-oSG" firstAttribute="top" secondItem="jUM-lX-fcQ" secondAttribute="bottom" id="i1d-qY-1qI"/>
+                            <constraint firstItem="hvc-6q-Bg0" firstAttribute="width" secondItem="14K-3d-Vso" secondAttribute="width" id="iSu-Vj-7HN"/>
                             <constraint firstItem="14K-3d-Vso" firstAttribute="leading" secondItem="hTW-d9-87Z" secondAttribute="trailing" constant="10" id="lbK-S5-ZhL"/>
+                            <constraint firstItem="hvc-6q-Bg0" firstAttribute="height" secondItem="14K-3d-Vso" secondAttribute="height" id="nYY-5j-Ha6"/>
                             <constraint firstItem="jUM-lX-fcQ" firstAttribute="leading" secondItem="hTW-d9-87Z" secondAttribute="leading" id="sf1-Ub-Y9q"/>
                             <constraint firstItem="hTW-d9-87Z" firstAttribute="leading" secondItem="bAv-xC-FpS" secondAttribute="trailing" constant="8" id="sq0-bq-vfN"/>
                             <constraint firstItem="FR4-Qa-YFX" firstAttribute="leading" secondItem="bAv-xC-FpS" secondAttribute="leading" id="y29-Vo-Snf"/>
@@ -115,6 +145,7 @@
             <accessibility key="accessibilityConfiguration" identifier="FriendSuggestionsCell"/>
             <connections>
                 <outlet property="AddFriendBtn" destination="14K-3d-Vso" id="HRs-R2-cgX"/>
+                <outlet property="FollowBtn" destination="hvc-6q-Bg0" id="T5Y-F7-Na2"/>
                 <outlet property="baseView" destination="WJD-Wr-YyA" id="LDD-Gl-yVF"/>
                 <outlet property="userCity" destination="jUM-lX-fcQ" id="R8Z-5e-aBq"/>
                 <outlet property="userName" destination="hTW-d9-87Z" id="9uP-eS-9ye"/>

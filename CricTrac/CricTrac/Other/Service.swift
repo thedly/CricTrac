@@ -1131,6 +1131,25 @@ func getAllFriends(sucessBlock:([String: AnyObject])->Void){
 //}
 //
 
+// sravani MARK - Following feature
+
+func createFollowingAndFolloers(userId: String) {
+    let playerId = currentUser!.uid
+    let followerId = userId
+    let followingTime = NSDate().getCurrentTimeStamp()
+    
+    let refForFollowing = fireBaseRef.child("Users").child(playerId).child("Following").childByAutoId()
+    let refForFollowers = fireBaseRef.child("Users").child(followerId).child("Followers").childByAutoId()
+    
+    let currentUserFollwingDictVal:[String:AnyObject] = ["FollowingDateTime":followingTime, "FollowingId": followerId]
+    refForFollowing.setValue(currentUserFollwingDictVal)
+    
+    let otherUserFollowersDictVal:[String:AnyObject] = ["FollowersDateTime":followingTime,"FollowerId": playerId]
+    
+    refForFollowers.setValue(otherUserFollowersDictVal)
+    
+    
+}
 
 
 // sravani MARK: - Coach Friends and players

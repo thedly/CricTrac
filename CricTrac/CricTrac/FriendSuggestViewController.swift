@@ -126,7 +126,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 85
+        return 90
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -180,7 +180,11 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                 aCell.userName.text = UserProfilesData[indexPath.row].fullName
                 aCell.AddFriendBtn.accessibilityIdentifier = UserProfilesData[indexPath.row].id
                 aCell.AddFriendBtn.addTarget(self, action: #selector(AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                aCell.FollowBtn.accessibilityIdentifier = UserProfilesData[indexPath.row].id
+                aCell.FollowBtn.accessibilityHint = aCell.FollowBtn.titleLabel?.text
 
+               aCell.FollowBtn.addTarget(self, action: #selector(followBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                
                aCell.baseView.alpha = 1
               aCell.baseView.backgroundColor = cricTracTheme.currentTheme.bottomColor
                 aCell.backgroundColor = UIColor.clearColor()
@@ -250,6 +254,20 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
 
 
         }
+    }
+    
+    // sravani - mark for follow 
+    
+    func followBtnPressed(sender: UIButton) {
+        
+        let newStr = sender.accessibilityHint
+        if newStr == "FOLLOW" {
+            createFollowingAndFolloers(sender.accessibilityIdentifier!)
+//            let cell = FriendSuggestionsCell()
+//            cell.FollowBtn.titleLabel?.text = "UNFOLLOW"
+
+        }
+        
     }
 
     

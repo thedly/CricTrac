@@ -53,9 +53,11 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         buttonBarView.selectedBar.backgroundColor = UIColor.whiteColor()
         
         self.buttonBarView.collectionViewLayout = UICollectionViewFlowLayout()
-        self.buttonBarView.frame.size.height = 40
-        settings.style.buttonBarItemFont = UIFont(name: appFont_bold, size: 15)!
-         settings.style.buttonBarItemLeftRightMargin = 0
+        self.buttonBarView.frame.size.height = 45
+        settings.style.buttonBarItemFont = UIFont(name: appFont_bold, size: 14)!
+        settings.style.buttonBarItemLeftRightMargin = 0
+        settings.style.buttonBarMinimumLineSpacing = 1
+        
       
         
        
@@ -108,7 +110,8 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         let friendReq = viewControllerFrom("Main", vcid: "FriendRequestsViewController")
         let friendSug = viewControllerFrom("Main", vcid: "FriendSuggestViewController")
         let friendInv = viewControllerFrom("Main", vcid: "FriendsInviteViewController")
-        return [friends, friendReq, friendSug, friendInv]
+        let celebritiesVC = viewControllerFrom("Main", vcid: "ThemeSettingsViewController")
+        return [friends, friendReq, friendSug, friendInv, celebritiesVC]
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
