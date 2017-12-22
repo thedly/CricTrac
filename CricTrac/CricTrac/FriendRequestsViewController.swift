@@ -94,10 +94,11 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     func setAllReceivedRequests() {
         getAllFriendRequests { (data) in
             for (_, req) in data {
-                var modReq = req as! [String : AnyObject]
-                modReq["IsSentRequest"] = false
-                let reqData = RequestsData(dataObj: modReq)
-                FriendRequestsData.append(reqData)
+                    var modReq = req as! [String : AnyObject]
+                    modReq["IsSentRequest"] = false
+                    let reqData = RequestsData(dataObj: modReq)
+                    FriendRequestsData.append(reqData)
+                
             }
             dispatch_async(dispatch_get_main_queue(),{
                 

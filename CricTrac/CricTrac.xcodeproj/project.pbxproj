@@ -163,6 +163,8 @@
 		B85ECABB1EF91CF200CC29E5 /* AddMatchThirdIntroScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85ECABA1EF91CF200CC29E5 /* AddMatchThirdIntroScreen.swift */; };
 		B88CB6BA1EE67110009CD077 /* MasterDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88CB6B91EE67110009CD077 /* MasterDataViewController.swift */; };
 		B88CB6BC1EE68499009CD077 /* MasterDataListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88CB6BB1EE68498009CD077 /* MasterDataListViewController.swift */; };
+		B89A3F611FEA8B8500A9506A /* FollowerAndFollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89A3F601FEA8B8500A9506A /* FollowerAndFollowingViewController.swift */; };
+		B89A3F631FEB944500A9506A /* Follow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89A3F621FEB944500A9506A /* Follow.swift */; };
 		E1A655851F8B76F000213719 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1A655841F8B76F000213719 /* GoogleService-Info.plist */; };
 		E1B593691EB4E63A00C8A553 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B593681EB4E63A00C8A553 /* NotificationsViewController.swift */; };
 		F7856BE080406499CCB071C8 /* Pods_CricTrac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA2224284F64FAE77B7776D9 /* Pods_CricTrac.framework */; };
@@ -344,6 +346,8 @@
 		B85ECABA1EF91CF200CC29E5 /* AddMatchThirdIntroScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMatchThirdIntroScreen.swift; sourceTree = "<group>"; };
 		B88CB6B91EE67110009CD077 /* MasterDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterDataViewController.swift; sourceTree = "<group>"; };
 		B88CB6BB1EE68498009CD077 /* MasterDataListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterDataListViewController.swift; sourceTree = "<group>"; };
+		B89A3F601FEA8B8500A9506A /* FollowerAndFollowingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowerAndFollowingViewController.swift; sourceTree = "<group>"; };
+		B89A3F621FEB944500A9506A /* Follow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Follow.swift; sourceTree = "<group>"; };
 		DA2224284F64FAE77B7776D9 /* Pods_CricTrac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CricTrac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1A655841F8B76F000213719 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E1B593681EB4E63A00C8A553 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
@@ -519,6 +523,7 @@
 				B85ECAB41EF91B3B00CC29E5 /* AddMatchIntroScreens.swift */,
 				B83389371F668D830049357D /* PlayerMatchesData.swift */,
 				B846FA741FE25468000F24D2 /* CoachPlayers.swift */,
+				B89A3F621FEB944500A9506A /* Follow.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -649,6 +654,7 @@
 				B83180FE1F628EE900AEA396 /* PlayerCoachesListVC.swift */,
 				B83389391F6933070049357D /* TopBattingPlayersList.swift */,
 				B833893B1F69332E0049357D /* TopBowlingPlayersList.swift */,
+				B89A3F601FEA8B8500A9506A /* FollowerAndFollowingViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -885,6 +891,7 @@
 				899206241D61BA0700F99A97 /* FriendsViewController.swift in Sources */,
 				B835B3541EEA7D2F001048A6 /* AppIntroFirstScreen.swift in Sources */,
 				B835B3501EE94BF7001048A6 /* AppIntroductionScreens.swift in Sources */,
+				B89A3F611FEA8B8500A9506A /* FollowerAndFollowingViewController.swift in Sources */,
 				895E04051D5CE24B002E322E /* FriendSearchViewController.swift in Sources */,
 				891B2AA51E7CDA6200F6B5BA /* FriendRequestCollectionViewCell.swift in Sources */,
 				B8200C721F3EE4F900026F4D /* ProfileImageExpandingVC.swift in Sources */,
@@ -905,6 +912,7 @@
 				B83180FF1F628EEA00AEA396 /* PlayerCoachesListVC.swift in Sources */,
 				46B608701D44A7D3000FE098 /* NewMatchViewController.swift in Sources */,
 				8909FACB1DB9B49900066FC5 /* DoneButton.swift in Sources */,
+				B89A3F631FEB944500A9506A /* Follow.swift in Sources */,
 				895BC3CC1E266B500033D330 /* StaticPageViewController.swift in Sources */,
 				892520B21E336044006946C0 /* CoachDashboardViewController.swift in Sources */,
 				B835B3981EEE6947001048A6 /* AppIntroBasicScreen.swift in Sources */,

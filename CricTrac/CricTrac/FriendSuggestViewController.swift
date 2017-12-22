@@ -1,3 +1,4 @@
+
 //
 //  FriendSuggestViewController.swift
 //  CricTrac
@@ -182,6 +183,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                 aCell.AddFriendBtn.addTarget(self, action: #selector(AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                 aCell.FollowBtn.accessibilityIdentifier = UserProfilesData[indexPath.row].id
                 aCell.FollowBtn.accessibilityHint = aCell.FollowBtn.titleLabel?.text
+                aCell.FollowBtn.tag = indexPath.row
 
                aCell.FollowBtn.addTarget(self, action: #selector(followBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                 
@@ -260,16 +262,17 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     
     func followBtnPressed(sender: UIButton) {
         
+        let indexP = NSIndexPath(forRow: sender.tag, inSection: 0)
+        let cell = SuggestsTblview.cellForRowAtIndexPath(indexP) as! FriendSuggestionsCell
+        
         let newStr = sender.accessibilityHint
         if newStr == "FOLLOW" {
             createFollowingAndFolloers(sender.accessibilityIdentifier!)
-//            let cell = FriendSuggestionsCell()
-//            cell.FollowBtn.titleLabel?.text = "UNFOLLOW"
+            cell.FollowBtn.setTitle("UNFOLLOW", forState: .Normal)
 
         }
         
     }
-
     
     /*
      // MARK: - Navigation

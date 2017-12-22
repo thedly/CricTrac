@@ -1,3 +1,4 @@
+
 //
 //  Service.swift
 //  CricTrac
@@ -1150,6 +1151,35 @@ func createFollowingAndFolloers(userId: String) {
     
     
 }
+
+func getMyFollowingList(sucessBlock:([String: AnyObject])->Void) {
+    
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Following")
+    ref.observeEventType(.Value, withBlock: { snapshot in
+        if let data = snapshot.value as? [String: AnyObject] {
+            sucessBlock(data)
+        }
+        else{
+            sucessBlock([:])
+        }
+    })
+    
+}
+
+func getMyFollowersList(sucessBlock:([String: AnyObject])->Void) {
+    
+    let ref = fireBaseRef.child("Users").child(currentUser!.uid).child("Followers")
+    ref.observeEventType(.Value, withBlock: { snapshot in
+        if let data = snapshot.value as? [String: AnyObject] {
+            sucessBlock(data)
+        }
+        else{
+            sucessBlock([:])
+        }
+    })
+    
+}
+
 
 
 // sravani MARK: - Coach Friends and players

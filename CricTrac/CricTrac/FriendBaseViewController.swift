@@ -110,8 +110,8 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         let friendReq = viewControllerFrom("Main", vcid: "FriendRequestsViewController")
         let friendSug = viewControllerFrom("Main", vcid: "FriendSuggestViewController")
         let friendInv = viewControllerFrom("Main", vcid: "FriendsInviteViewController")
-        let celebritiesVC = viewControllerFrom("Main", vcid: "ThemeSettingsViewController")
-        return [friends, friendReq, friendSug, friendInv, celebritiesVC]
+        let celebritiesVC = viewControllerFrom("Main", vcid: "FollowerAndFollowingViewController") 
+        return [friends, friendReq, celebritiesVC, friendSug, friendInv]
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
