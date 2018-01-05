@@ -19,6 +19,12 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     
     var currentTheme:CTTheme!
     
+    var followingIds = [String]()
+    var followingNodeId = [String]()
+    var followingNodeIdOther = [String]()
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()
@@ -96,6 +102,25 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         backgroundThread(background: {
             KRProgressHUD.showText("Loading ...")
             
+            //sravani - mark for follow
+            
+            getMyFollowingList { (data) in
+                
+                self.followingIds.removeAll()
+                self.followingNodeId.removeAll()
+                self.followingNodeIdOther.removeAll()
+                
+                for(_,req) in data {
+                    let followingId = req["FollowingId"] as? String
+                    
+                    self.followingIds.append(followingId!)
+                    self.followingNodeId.append(req["FollowingNodeId"] as! String)
+                    self.followingNodeIdOther.append(req["FollowingNodeIdOther"] as! String)
+                    
+                }
+            }
+            
+            
             getAllFriendSuggestions({
 //                var modFriendReqData = [Profile]()
 //                for (_, dat) in UserProfilesData.enumerate() {
@@ -144,7 +169,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                 
                 let sugFriendUserId = UserProfilesData[indexPath.row].id
                 aCell.friendId = sugFriendUserId
-
+              
                 fetchBasicProfile(sugFriendUserId, sucess: { (result) in
                     let proPic = result["proPic"]
                     let city =   result["city"]
@@ -181,11 +206,37 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                 aCell.userName.text = UserProfilesData[indexPath.row].fullName
                 aCell.AddFriendBtn.accessibilityIdentifier = UserProfilesData[indexPath.row].id
                 aCell.AddFriendBtn.addTarget(self, action: #selector(AddFriendBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                
+                // sravani - mark for follow
+                
+                if followingIds.contains(sugFriendUserId) {
+                    
+                    aCell.FollowBtn.setTitle("FOLLOWING", forState: .Normal)
+                    let indexNub = followingIds.indexOf(sugFriendUserId)
+                    print(indexNub)
+                    aCell.FollowBtn.accessibilityValue = followingNodeId[indexNub!]
+                    aCell.FollowBtn.accessibilityHint = followingNodeIdOther[indexNub!]
+                    aCell.FollowBtn.accessibilityLabel = aCell.FollowBtn.titleLabel?.text
+                    aCell.FollowBtn.userInteractionEnabled = false
+                    aCell.FollowBtn.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
+                   // aCell.FollowBtn.alpha = 0.2
+                    
+                }
+                    
+                else {
+                     aCell.FollowBtn.setTitle("FOLLOW", forState: .Normal)
+                    aCell.FollowBtn.userInteractionEnabled = true
+                    aCell.FollowBtn.alpha = 1
+                    aCell.FollowBtn.setTitleColor(UIColor.greenColor(), forState: UIControlState.Normal)
+                    
+                    aCell.FollowBtn.accessibilityLabel = aCell.FollowBtn.titleLabel?.text
+                    
+                    aCell.FollowBtn.addTarget(self, action: #selector(followBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                }
+                
                 aCell.FollowBtn.accessibilityIdentifier = UserProfilesData[indexPath.row].id
-                aCell.FollowBtn.accessibilityHint = aCell.FollowBtn.titleLabel?.text
                 aCell.FollowBtn.tag = indexPath.row
 
-               aCell.FollowBtn.addTarget(self, action: #selector(followBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                 
                aCell.baseView.alpha = 1
               aCell.baseView.backgroundColor = cricTracTheme.currentTheme.bottomColor
@@ -211,7 +262,6 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
             self.presentViewController(alert, animated: true, completion: nil)
             return
         }
-        
         
         if let FriendUserId = sender.accessibilityIdentifier where FriendUserId != "" {
             getProfileInfoById(FriendUserId, sucessBlock: { FriendData in
@@ -265,10 +315,13 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         let indexP = NSIndexPath(forRow: sender.tag, inSection: 0)
         let cell = SuggestsTblview.cellForRowAtIndexPath(indexP) as! FriendSuggestionsCell
         
-        let newStr = sender.accessibilityHint
+        let newStr = sender.accessibilityLabel
         if newStr == "FOLLOW" {
-            createFollowingAndFolloers(sender.accessibilityIdentifier!)
-            cell.FollowBtn.setTitle("UNFOLLOW", forState: .Normal)
+            createFollowingAndFollowers(sender.accessibilityIdentifier!)
+            cell.FollowBtn.setTitle("FOLLOWING", forState: .Normal)
+            cell.FollowBtn.userInteractionEnabled = false
+            cell.FollowBtn.titleLabel?.textColor = UIColor.grayColor()
+            //cell.FollowBtn.alpha = 0.2
 
         }
         

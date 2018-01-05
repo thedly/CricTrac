@@ -1134,21 +1134,25 @@ func getAllFriends(sucessBlock:([String: AnyObject])->Void){
 
 // sravani MARK - Following feature
 
-func createFollowingAndFolloers(userId: String) {
+func createFollowingAndFollowers(userId: String) {
+    
     let playerId = currentUser!.uid
     let followerId = userId
     let followingTime = NSDate().getCurrentTimeStamp()
     
     let refForFollowing = fireBaseRef.child("Users").child(playerId).child("Following").childByAutoId()
-    let refForFollowers = fireBaseRef.child("Users").child(followerId).child("Followers").childByAutoId()
+    let followingNodeId = refForFollowing.key
     
-    let currentUserFollwingDictVal:[String:AnyObject] = ["FollowingDateTime":followingTime, "FollowingId": followerId]
+    let refForFollowers = fireBaseRef.child("Users").child(followerId).child("Followers").childByAutoId()
+    let followingNodeIdOther = refForFollowers.key
+    
+    let currentUserFollwingDictVal:[String:AnyObject] = ["FollowingDateTime":followingTime, "FollowingId": followerId, "FollowingNodeId": followingNodeId, "FollowingNodeIdOther": followingNodeIdOther]
+    
     refForFollowing.setValue(currentUserFollwingDictVal)
     
-    let otherUserFollowersDictVal:[String:AnyObject] = ["FollowersDateTime":followingTime,"FollowerId": playerId]
+    let otherUserFollowersDictVal:[String:AnyObject] = ["FollowersDateTime":followingTime,"FollowerId": playerId, "FollowingNodeId": followingNodeId, "FollowingNodeIdOther": followingNodeIdOther]
     
     refForFollowers.setValue(otherUserFollowersDictVal)
-    
     
 }
 

@@ -138,7 +138,7 @@ class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         ref1.queryOrderedByChild("UserId").queryEqualToValue(friendUserId).observeSingleEventOfType(.Value, withBlock: { snapshot in
             
             if snapshot.childrenCount > 0 {
-                cell.friendButton.setTitle("Friend", forState: .Normal)
+                cell.friendButton.setTitle("FRIEND", forState: .Normal)
                 cell.friendButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
             }
         })
@@ -148,7 +148,7 @@ class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         ref2.queryOrderedByChild("SentTo").queryEqualToValue(friendUserId).observeSingleEventOfType(.Value, withBlock: { snapshot in
             
             if snapshot.childrenCount > 0 {
-                cell.friendButton.setTitle("Pending", forState: .Normal)
+                cell.friendButton.setTitle("PENDING", forState: .Normal)
                 cell.friendButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
             }
         })
@@ -158,7 +158,7 @@ class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         ref3.queryOrderedByChild("ReceivedFrom").queryEqualToValue(friendUserId).observeSingleEventOfType(.Value, withBlock: { snapshot in
             
             if snapshot.childrenCount > 0 {
-                cell.friendButton.setTitle("Pending", forState: .Normal)
+                cell.friendButton.setTitle("PENDING", forState: .Normal)
                cell.friendButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
             }
         })

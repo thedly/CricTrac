@@ -14,9 +14,15 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
     @IBOutlet weak var friendSearchTbl: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet var SearchDisplayCtrlr: UISearchDisplayController!
-     var searchedProfiles = [Profile]()
+    var searchedProfiles = [Profile]()
     var currentTheme:CTTheme!
    
+    var followingIds = [String]()
+    var followingNodeId = [String]()
+    var followingNodeIdOther = [String]()
+    
+
+    
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
@@ -34,9 +40,11 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
         navigationItem.leftBarButtonItem = leftbarButton
          // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
+    
     func didBackButtonTapp() {
        self.navigationController?.popViewControllerAnimated(true)
     }
+    
     func didSearchTapp(sender: UIButton){
         UIView.animateWithDuration(0.3) {
             self.searchBar.hidden = false
@@ -50,7 +58,26 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
         setBackgroundColor()
         //self.view.backgroundColor = UIColor.clearColor()
         self.searchBar.becomeFirstResponder()
+        getFollowingIds()
         
+    }
+    
+    func getFollowingIds() {
+        getMyFollowingList { (data) in
+            
+            self.followingIds.removeAll()
+            self.followingNodeId.removeAll()
+            self.followingNodeIdOther.removeAll()
+            
+            for(_,req) in data {
+                let followingId = req["FollowingId"] as? String
+                
+                self.followingIds.append(followingId!)
+                self.followingNodeId.append(req["FollowingNodeId"] as! String)
+                self.followingNodeIdOther.append(req["FollowingNodeIdOther"] as! String)
+                
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -134,7 +161,40 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
                             aCell.userProfileView.kf_setImageWithURL(imageURL)
                         }
                     }
+                    
+                    // sravani - mark for follow
+                    
+                    if self.followingIds.contains(searchFriendUserId) {
+                        
+                        aCell.FollowBtn.setTitle("FOLLOWING", forState: .Normal)
+                        let indexNub = self.followingIds.indexOf(searchFriendUserId)
+                        print(indexNub)
+                        aCell.FollowBtn.accessibilityValue = self.followingNodeId[indexNub!]
+                        aCell.FollowBtn.accessibilityHint = self.followingNodeIdOther[indexNub!]
+                        aCell.FollowBtn.userInteractionEnabled = false
+                        //aCell.FollowBtn.alpha = 0.7
+                        aCell.FollowBtn.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
+                        
+                    }
+                        
+                    else {
+                        aCell.FollowBtn.setTitle("FOLLOW", forState: .Normal)
+                        aCell.FollowBtn.userInteractionEnabled = true
+                        aCell.FollowBtn.alpha = 1
+                        aCell.FollowBtn.setTitleColor(UIColor.greenColor(), forState: UIControlState.Normal)
+                        
+                       // aCell.FollowBtn.accessibilityLabel = aCell.FollowBtn.titleLabel?.text
+                        
+                        aCell.FollowBtn.addTarget(self, action: #selector(self.followBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                    }
+                    
+                    
                 })
+                
+                aCell.FollowBtn.accessibilityIdentifier = searchedProfiles[indexPath.row].id
+                aCell.FollowBtn.tag = indexPath.row
+                aCell.FollowBtn.accessibilityLabel = aCell.FollowBtn.titleLabel?.text
+                
                 //aCell.configureCell(searchedProfiles[indexPath.row])
                 aCell.userName.text = searchedProfiles[indexPath.row].fullName
                 aCell.AddFriendBtn.accessibilityIdentifier = searchedProfiles[indexPath.row].id
@@ -149,6 +209,23 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
         else {
             return FriendSuggestionsCell()
         }
+    }
+    
+    func followBtnPressed(sender: UIButton) {
+        
+        let indexP = NSIndexPath(forRow: sender.tag, inSection: 0)
+        let cell = friendSearchTbl.cellForRowAtIndexPath(indexP) as! FriendSuggestionsCell
+        
+        let newStr = sender.accessibilityLabel!
+        if newStr == "FOLLOW" {
+            createFollowingAndFollowers(sender.accessibilityIdentifier!)
+            cell.FollowBtn.setTitle("FOLLOWING", forState: .Normal)
+            cell.FollowBtn.userInteractionEnabled = false
+            cell.FollowBtn.titleLabel?.textColor = UIColor.grayColor()
+            //cell.FollowBtn.alpha = 0.7
+            
+        }
+        
     }
 
     func AddFriendBtnPressed(sender:UIButton) {
@@ -259,5 +336,4 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
         // Pass the selected object to the new view controller.
     }
     */
-
 }

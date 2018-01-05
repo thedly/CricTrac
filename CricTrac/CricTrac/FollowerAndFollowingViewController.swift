@@ -20,7 +20,9 @@ class FollowerAndFollowingViewController: UIViewController,IndicatorInfoProvider
     var followingId = [String]()
     var followerId = [String]()
      var followerAndFollowingId = ""
-
+    
+    var followingNodeId = [String]()
+    var followingNodeIdOther = [String]()
     
     let currentTheme = cricTracTheme.currentTheme
 
@@ -31,12 +33,13 @@ class FollowerAndFollowingViewController: UIViewController,IndicatorInfoProvider
         setBackgroundColor()
         initializeView()
         loadBannerAds()
+        //getFollowingAndFollowerList()
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        getFollowingList()
+        getFollowingAndFollowerList()
     }
     
     func loadBannerAds() {
@@ -62,9 +65,11 @@ class FollowerAndFollowingViewController: UIViewController,IndicatorInfoProvider
     }
     
     
-    func getFollowingList() {
+    func getFollowingAndFollowerList() {
         self.followingId.removeAll()
         self.followerId.removeAll()
+        self.followingNodeId.removeAll()
+        self.followingNodeIdOther.removeAll()
         
         let myGroup = dispatch_group_create()
         dispatch_group_enter(myGroup)
@@ -73,16 +78,24 @@ class FollowerAndFollowingViewController: UIViewController,IndicatorInfoProvider
         getMyFollowingList { (data) in
             
             print(data)
+             self.followingId.removeAll()
+            self.followingNodeId.removeAll()
+            self.followingNodeIdOther.removeAll()
+            
             for(_,req) in data {
                 let id = req["FollowingId"] as? String
+                self.followingNodeId.append(req["FollowingNodeId"] as! String)
+                self.followingNodeIdOther.append(req["FollowingNodeIdOther"] as! String)
                 self.followingId.append(id!)
             }
            
         }
         getMyFollowersList{ (data) in
-            
+            // self.followerId.removeAll()
             for(_,req) in data {
                 let id = req["FollowerId"] as? String
+                
+                
                 self.followerId.append(id!)
             }
             dispatch_group_leave(myGroup)
@@ -91,23 +104,6 @@ class FollowerAndFollowingViewController: UIViewController,IndicatorInfoProvider
             
             self.followingTableView.reloadData()
         })
-    }
-    
-    func getFollowerList() {
-        self.followerId.removeAll()
-        
-        getMyFollowersList{ (data) in
-          
-            for(_,req) in data {
-                    let id = req["FollowerId"] as? String
-                    self.followerId.append(id!)
-            }
-        }
-        dispatch_async(dispatch_get_main_queue(),{
-            
-            self.followingTableView.reloadData()
-        })
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -140,6 +136,15 @@ class FollowerAndFollowingViewController: UIViewController,IndicatorInfoProvider
         return ""
     }
     
+   
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        (view as! UITableViewHeaderFooterView).backgroundView?.backgroundColor = UIColor.clearColor()
+        
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel!.textColor = UIColor.blackColor()
+        header.textLabel!.font = UIFont(name: "SourceSansPro-Bold", size: 18)!
+    }
+    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -162,26 +167,31 @@ class FollowerAndFollowingViewController: UIViewController,IndicatorInfoProvider
     }
     
     func getCellForFollowingRow(indexPath:NSIndexPath) -> FriendsCell {
-        
-        if indexPath.section == 0 {
-            self.followerAndFollowingId = followingId[indexPath.row]
-        }
-        else {
-            self.followerAndFollowingId = followerId[indexPath.row]
-        }
-        
+       
         let aCell = followingTableView.dequeueReusableCellWithIdentifier("FriendsCell", forIndexPath: indexPath) as! FriendsCell
         
+       var FollowingNodeId = ""
+        var FollowingNodeIdOther = ""
+        
+        if indexPath.section == 0 {
+            aCell.UnfriendBtn.hidden = false
+            self.followerAndFollowingId = followingId[indexPath.row]
+            FollowingNodeId = followingNodeId[indexPath.row]
+            FollowingNodeIdOther = followingNodeIdOther[indexPath.row]
+        }
+        else {
+            aCell.UnfriendBtn.hidden = true
+            self.followerAndFollowingId = followerId[indexPath.row]
+        }
         
         fetchBasicProfile(followerAndFollowingId, sucess: { (result) in
             let proPic = result["proPic"]
             let city =   result["city"]
             let userProfile = result["userProfile"]
             let playingRole = result["playingRole"]
-            let name = "\(result["firstname"]!) \(result["lastname"]!)"
+            let followerName = "\(result["firstname"]!) \(result["lastname"]!)"
             
-            aCell.FriendName.text = name
-            
+            aCell.FriendName.text = followerName
             
             aCell.FriendCity.text = city
             
@@ -210,9 +220,49 @@ class FollowerAndFollowingViewController: UIViewController,IndicatorInfoProvider
         aCell.baseView.alpha = 1
         aCell.baseView.backgroundColor = cricTracTheme.currentTheme.bottomColor
         aCell.backgroundColor = UIColor.clearColor()
-        aCell.UnfriendBtn.setTitle("UNFOLLOW", forState: .Normal)
+        
+            aCell.UnfriendBtn.setTitle("UNFOLLOW", forState: .Normal)
+            aCell.UnfriendBtn.accessibilityIdentifier = followerAndFollowingId
+            aCell.UnfriendBtn.accessibilityValue = FollowingNodeId
+            aCell.UnfriendBtn.accessibilityHint = FollowingNodeIdOther
+            aCell.UnfriendBtn.tag = indexPath.section
+        
+            aCell.UnfriendBtn.addTarget(self, action: #selector(unfollowBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+       
         //aCell.FollowBtn.hidden = true
         
         return aCell
+    }
+    
+    func unfollowBtnPressed(sender: UIButton) {
+        
+        let followerId = sender.accessibilityIdentifier
+        let followingNodeId = sender.accessibilityValue
+        let followingNodeIdOther = sender.accessibilityHint
+        
+        
+        let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to Unfollow this user?", preferredStyle: .ActionSheet)
+            
+            let cancelAction = UIAlertAction(title: "No", style: .Cancel) { action -> Void in
+                // Just dismiss the action sheet
+                actionSheetController.dismissViewControllerAnimated(true, completion: nil)
+            }
+            actionSheetController.addAction(cancelAction)
+            
+            let removeAction = UIAlertAction(title: "Yes", style: .Default) { action -> Void in
+                
+                fireBaseRef.child("Users").child(followerId!).child("Followers").child(followingNodeIdOther!).removeValue()
+                fireBaseRef.child("Users").child((currentUser?.uid)!).child("Following").child(followingNodeId!).removeValue()
+                
+                self.getFollowingAndFollowerList()
+                
+
+                
+            }
+            actionSheetController.addAction(removeAction)
+            
+            self.presentViewController(actionSheetController, animated: false, completion: nil)
+      
+        
     }
 }
