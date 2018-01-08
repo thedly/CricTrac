@@ -21,6 +21,9 @@ class PlayerCoachesListVC: UIViewController,UITableViewDelegate,UITableViewDataS
     var coachNodeIdOthers = [String]()
     var playerNodeIds = [String]()
     
+    var followingIds = [String]()
+    var followingNodeId = [String]()
+    var followingNodeIdOther = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +60,24 @@ class PlayerCoachesListVC: UIViewController,UITableViewDelegate,UITableViewDataS
         myCoaches.removeAll()
         playerNodeIds.removeAll()
         coachNodeIdOthers.removeAll()
+        
+        getMyFollowingList { (data) in
+            
+            self.followingIds.removeAll()
+            self.followingNodeId.removeAll()
+            self.followingNodeIdOther.removeAll()
+            
+            for(_,req) in data {
+                let followingId = req["FollowingId"] as? String
+                
+                self.followingIds.append(followingId!)
+                self.followingNodeId.append(req["FollowingNodeId"] as! String)
+                self.followingNodeIdOther.append(req["FollowingNodeIdOther"] as! String)
+                
+            }
+            
+            
+        }
         
         getMyCoaches { (data) in
             for(_,req) in data {
@@ -156,8 +177,39 @@ class PlayerCoachesListVC: UIViewController,UITableViewDelegate,UITableViewDataS
                         aCell.userProfileView.kf_setImageWithURL(imageURL)
                     }
                 }
+                
+                if self.followingIds.contains(acceptedId) {
+                    
+                    aCell.FollowBtn.setTitle("FOLLOWING", forState: .Normal)
+                    let indexNub = self.followingIds.indexOf(acceptedId)
+                    print(indexNub)
+                    aCell.FollowBtn.accessibilityValue = self.followingNodeId[indexNub!]
+                    aCell.FollowBtn.accessibilityHint = self.followingNodeIdOther[indexNub!]
+                    aCell.FollowBtn.accessibilityLabel = aCell.FollowBtn.titleLabel?.text
+                    aCell.FollowBtn.userInteractionEnabled = false
+                    aCell.FollowBtn.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
+                    // aCell.FollowBtn.alpha = 0.2
+                    
+                }
+                    
+                else {
+                    aCell.FollowBtn.setTitle("FOLLOW", forState: .Normal)
+                    aCell.FollowBtn.userInteractionEnabled = true
+                    aCell.FollowBtn.alpha = 1
+                    // aCell.FollowBtn.setTitleColor(UIColor.greenColor(), forState: UIControlState.Normal)
+                    aCell.FollowBtn.setTitleColor(UIColor(red: 104/255, green: 187/255, blue: 2/255, alpha: 1.0), forState: .Normal)
+                    
+                    aCell.FollowBtn.accessibilityLabel = aCell.FollowBtn.titleLabel?.text
+                    
+                    aCell.FollowBtn.addTarget(self, action: #selector(self.followBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                }
+                
+                aCell.FollowBtn.accessibilityIdentifier = acceptedId
+                aCell.FollowBtn.tag = indexPath.row
+               
             }
         }
+        
         
         aCell.backgroundColor = UIColor.clearColor()
         aCell.baseView.backgroundColor = currentTheme.bottomColor
@@ -174,6 +226,26 @@ class PlayerCoachesListVC: UIViewController,UITableViewDelegate,UITableViewDataS
         return aCell
 
     }
+    
+    // sravani - mark for follow
+    
+    func followBtnPressed(sender: UIButton) {
+        
+        let indexP = NSIndexPath(forRow: sender.tag, inSection: 0)
+        let cell = tableView.cellForRowAtIndexPath(indexP) as! FriendSuggestionsCell
+        
+        let newStr = sender.accessibilityLabel
+        if newStr == "FOLLOW" {
+            createFollowingAndFollowers(sender.accessibilityIdentifier!)
+            cell.FollowBtn.setTitle("FOLLOWING", forState: .Normal)
+            cell.FollowBtn.userInteractionEnabled = false
+            cell.FollowBtn.setTitleColor(UIColor.grayColor(), forState: .Normal)
+            //cell.FollowBtn.alpha = 0.2
+            
+        }
+        
+    }
+    
     
     func removeCoach(sender: UIButton){
         

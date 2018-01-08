@@ -227,7 +227,8 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                      aCell.FollowBtn.setTitle("FOLLOW", forState: .Normal)
                     aCell.FollowBtn.userInteractionEnabled = true
                     aCell.FollowBtn.alpha = 1
-                    aCell.FollowBtn.setTitleColor(UIColor.greenColor(), forState: UIControlState.Normal)
+                   // aCell.FollowBtn.setTitleColor(UIColor.greenColor(), forState: UIControlState.Normal)
+                    aCell.FollowBtn.setTitleColor(UIColor(red: 104/255, green: 187/255, blue: 2/255, alpha: 1.0), forState: .Normal)
                     
                     aCell.FollowBtn.accessibilityLabel = aCell.FollowBtn.titleLabel?.text
                     
@@ -320,7 +321,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
             createFollowingAndFollowers(sender.accessibilityIdentifier!)
             cell.FollowBtn.setTitle("FOLLOWING", forState: .Normal)
             cell.FollowBtn.userInteractionEnabled = false
-            cell.FollowBtn.titleLabel?.textColor = UIColor.grayColor()
+            cell.FollowBtn.setTitleColor(UIColor.grayColor(), forState: .Normal)
             //cell.FollowBtn.alpha = 0.2
 
         }
