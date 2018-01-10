@@ -106,12 +106,12 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         dismissViewControllerAnimated(true, completion: nil)
     }
     override  func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        let friends = viewControllerFrom("Main", vcid: "FriendsViewController")
-        let friendReq = viewControllerFrom("Main", vcid: "FriendRequestsViewController")
+        let friends = viewControllerFrom("Main", vcid: "FollowingViewController")
+        let friendReq = viewControllerFrom("Main", vcid: "FollowerListViewController")
         let friendSug = viewControllerFrom("Main", vcid: "FriendSuggestViewController")
         let friendInv = viewControllerFrom("Main", vcid: "FriendsInviteViewController")
-        let celebritiesVC = viewControllerFrom("Main", vcid: "FollowerAndFollowingViewController") 
-        return [friends, friendReq, celebritiesVC, friendSug, friendInv]
+        //let celebritiesVC = viewControllerFrom("Main", vcid: "FollowerAndFollowingViewController")
+        return [friends, friendReq,friendSug, friendInv]
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {

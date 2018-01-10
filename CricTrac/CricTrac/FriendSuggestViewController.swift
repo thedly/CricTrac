@@ -317,10 +317,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         let indexP = NSIndexPath(forRow: sender.tag, inSection: 0)
         let cell = SuggestsTblview.cellForRowAtIndexPath(indexP) as! FriendSuggestionsCell
         
-        let newStr = sender.accessibilityLabel
-        
         if followingIds.contains(sender.accessibilityIdentifier!) {
-            
             
         }
         else {
@@ -330,15 +327,6 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
             cell.FollowBtn.setTitleColor(UIColor.grayColor(), forState: .Normal)
             
         }
-        
-//        if newStr == "FOLLOW" {
-//            createFollowingAndFollowers(sender.accessibilityIdentifier!)
-//            cell.FollowBtn.setTitle("FOLLOWING", forState: .Normal)
-//            cell.FollowBtn.userInteractionEnabled = false
-//            cell.FollowBtn.setTitleColor(UIColor.grayColor(), forState: .Normal)
-//            //cell.FollowBtn.alpha = 0.2
-//
-//        }
         
     }
     

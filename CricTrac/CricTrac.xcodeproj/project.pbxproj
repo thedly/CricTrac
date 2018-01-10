@@ -142,6 +142,8 @@
 		B81E08631F4C560300460B0F /* CoachTopBattingBowlingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81E08621F4C560200460B0F /* CoachTopBattingBowlingTableViewCell.swift */; };
 		B8200C701F3B13B300026F4D /* MatchFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8200C6F1F3B13B300026F4D /* MatchFilterCell.swift */; };
 		B8200C721F3EE4F900026F4D /* ProfileImageExpandingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8200C711F3EE4F800026F4D /* ProfileImageExpandingVC.swift */; };
+		B82436122004A574004220B6 /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82436112004A574004220B6 /* FollowingViewController.swift */; };
+		B82436142004A59C004220B6 /* FollowerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82436132004A59C004220B6 /* FollowerListViewController.swift */; };
 		B83180FB1F56BD2800AEA396 /* CoachPlayersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83180FA1F56BD2800AEA396 /* CoachPlayersListViewController.swift */; };
 		B83180FD1F57EB7700AEA396 /* CoachPendingRequetsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83180FC1F57EB7700AEA396 /* CoachPendingRequetsVC.swift */; };
 		B83180FF1F628EEA00AEA396 /* PlayerCoachesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83180FE1F628EE900AEA396 /* PlayerCoachesListVC.swift */; };
@@ -325,6 +327,8 @@
 		B81E08621F4C560200460B0F /* CoachTopBattingBowlingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachTopBattingBowlingTableViewCell.swift; sourceTree = "<group>"; };
 		B8200C6F1F3B13B300026F4D /* MatchFilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchFilterCell.swift; sourceTree = "<group>"; };
 		B8200C711F3EE4F800026F4D /* ProfileImageExpandingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageExpandingVC.swift; sourceTree = "<group>"; };
+		B82436112004A574004220B6 /* FollowingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingViewController.swift; sourceTree = "<group>"; };
+		B82436132004A59C004220B6 /* FollowerListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowerListViewController.swift; sourceTree = "<group>"; };
 		B83180FA1F56BD2800AEA396 /* CoachPlayersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachPlayersListViewController.swift; sourceTree = "<group>"; };
 		B83180FC1F57EB7700AEA396 /* CoachPendingRequetsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachPendingRequetsVC.swift; sourceTree = "<group>"; };
 		B83180FE1F628EE900AEA396 /* PlayerCoachesListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerCoachesListVC.swift; sourceTree = "<group>"; };
@@ -655,6 +659,8 @@
 				B83389391F6933070049357D /* TopBattingPlayersList.swift */,
 				B833893B1F69332E0049357D /* TopBowlingPlayersList.swift */,
 				B89A3F601FEA8B8500A9506A /* FollowerAndFollowingViewController.swift */,
+				B82436112004A574004220B6 /* FollowingViewController.swift */,
+				B82436132004A59C004220B6 /* FollowerListViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -959,6 +965,7 @@
 				46FDA5BD1DD81D19008F2BC0 /* NetworkManager.swift in Sources */,
 				46C983C21D4078EB00DFC607 /* utility.swift in Sources */,
 				4657D56C1D4DA4E7009E0FBE /* Enums.swift in Sources */,
+				B82436122004A574004220B6 /* FollowingViewController.swift in Sources */,
 				4657D5681D49A060009E0FBE /* SliderMenuCell.swift in Sources */,
 				B83389381F668D830049357D /* PlayerMatchesData.swift in Sources */,
 				B835B35A1EEA7D92001048A6 /* AppIntroFourthScreen.swift in Sources */,
@@ -977,6 +984,7 @@
 				46DE32CB1D90152F0024CD82 /* APostTableViewCell.swift in Sources */,
 				B83180FD1F57EB7700AEA396 /* CoachPendingRequetsVC.swift in Sources */,
 				897C41501E21FFA4005F1231 /* Friends.swift in Sources */,
+				B82436142004A59C004220B6 /* FollowerListViewController.swift in Sources */,
 				8955DA2B1E0ED13A00891937 /* NewPostViewController.swift in Sources */,
 				890B42C71D60472C00736F03 /* CollapsibleTableViewCell.swift in Sources */,
 				B835B35C1EEA7DAF001048A6 /* AppIntroFifthScreen.swift in Sources */,

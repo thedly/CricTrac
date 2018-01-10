@@ -181,13 +181,10 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
                         aCell.FollowBtn.setTitle("FOLLOW", forState: .Normal)
                         aCell.FollowBtn.userInteractionEnabled = true
                         aCell.FollowBtn.alpha = 1
-                        aCell.FollowBtn.setTitleColor(UIColor.greenColor(), forState: UIControlState.Normal)
-                        
-                       // aCell.FollowBtn.accessibilityLabel = aCell.FollowBtn.titleLabel?.text
+                        aCell.FollowBtn.setTitleColor(UIColor(red: 104/255, green: 187/255, blue: 2/255, alpha: 1.0), forState: .Normal)
                         
                         aCell.FollowBtn.addTarget(self, action: #selector(self.followBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                     }
-                    
                     
                 })
                 
@@ -221,7 +218,7 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
             createFollowingAndFollowers(sender.accessibilityIdentifier!)
             cell.FollowBtn.setTitle("FOLLOWING", forState: .Normal)
             cell.FollowBtn.userInteractionEnabled = false
-            cell.FollowBtn.titleLabel?.textColor = UIColor.grayColor()
+            cell.FollowBtn.setTitleColor(UIColor.grayColor(), forState: .Normal)
             //cell.FollowBtn.alpha = 0.7
             
         }

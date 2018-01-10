@@ -71,8 +71,8 @@ class FollowerAndFollowingViewController: UIViewController,IndicatorInfoProvider
         self.followingNodeId.removeAll()
         self.followingNodeIdOther.removeAll()
         
-        let myGroup = dispatch_group_create()
-        dispatch_group_enter(myGroup)
+//        let myGroup = dispatch_group_create()
+//        dispatch_group_enter(myGroup)
 
 
         getMyFollowingList { (data) in
@@ -90,20 +90,21 @@ class FollowerAndFollowingViewController: UIViewController,IndicatorInfoProvider
             }
            
         }
+        
         getMyFollowersList{ (data) in
             // self.followerId.removeAll()
             for(_,req) in data {
                 let id = req["FollowerId"] as? String
                 
-                
                 self.followerId.append(id!)
             }
-            dispatch_group_leave(myGroup)
-        }
-        dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
-            
             self.followingTableView.reloadData()
-        })
+
+            //dispatch_group_leave(myGroup)
+        }
+       // dispatch_group_notify(myGroup, dispatch_get_main_queue(), {
+            
+                   // })
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -256,9 +257,8 @@ class FollowerAndFollowingViewController: UIViewController,IndicatorInfoProvider
                 
                 self.getFollowingAndFollowerList()
                 
-
-                
             }
+        
             actionSheetController.addAction(removeAction)
             
             self.presentViewController(actionSheetController, animated: false, completion: nil)
