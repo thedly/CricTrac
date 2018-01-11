@@ -23,8 +23,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     var followingNodeId = [String]()
     var followingNodeIdOther = [String]()
     
-    
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()

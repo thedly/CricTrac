@@ -1151,7 +1151,7 @@ func createFollowingAndFollowers(userId: String) {
     
     refForFollowing.setValue(currentUserFollwingDictVal)
     
-    let otherUserFollowersDictVal:[String:AnyObject] = ["FollowersDateTime":followingTime,"FollowerId": playerId, "FollowingNodeId": followingNodeId, "FollowingNodeIdOther": followingNodeIdOther, "isBlocked": isBlocked]
+    let otherUserFollowersDictVal:[String:AnyObject] = ["FollowersDateTime":followingTime,"FollowerId": playerId, "FollowerNodeId": followingNodeIdOther, "FollowerNodeIdOther": followingNodeId, "isBlocked": isBlocked]
     
     refForFollowers.setValue(otherUserFollowersDictVal)
     

@@ -16,6 +16,7 @@ class FollowingViewController: UIViewController,IndicatorInfoProvider,ThemeChang
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var noFollowingListLabel: UILabel!
     let currentTheme = cricTracTheme.currentTheme
     
      var followingId = [String]()
@@ -96,6 +97,14 @@ class FollowingViewController: UIViewController,IndicatorInfoProvider,ThemeChang
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if followingId.count == 0 {
+            self.noFollowingListLabel.text = "Your not Following anyone"
+            noFollowingListLabel.hidden = false
+        }
+        else {
+             noFollowingListLabel.hidden = true
+        }
       
         return followingId.count
     }
@@ -144,6 +153,7 @@ class FollowingViewController: UIViewController,IndicatorInfoProvider,ThemeChang
         aCell.backgroundColor = UIColor.clearColor()
         
         aCell.UnfriendBtn.setTitle("UNFOLLOW", forState: .Normal)
+        aCell.UnfriendBtn.setTitleColor(UIColor(red: 34/255, green: 54/255, blue: 221/255, alpha: 1.0), forState: .Normal)
         aCell.UnfriendBtn.accessibilityIdentifier = followingId[indexPath.row]
         aCell.UnfriendBtn.accessibilityValue = followingNodeId[indexPath.row]
         aCell.UnfriendBtn.accessibilityHint = followingNodeIdOther[indexPath.row]

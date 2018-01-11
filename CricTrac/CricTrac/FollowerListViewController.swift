@@ -15,14 +15,18 @@ class FollowerListViewController: UIViewController,IndicatorInfoProvider,ThemeCh
     @IBOutlet weak var followersTableView: UITableView!
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var noFollowersListLabel: UILabel!
     
     let currentTheme = cricTracTheme.currentTheme
     
      var followerId = [String]()
     
     var followingId = [String]()
-    var followingNodeId = [String]()
-    var followingNodeIdOther = [String]()
+    
+    var followerNodeId = [String]()
+    var followerNodeIdOther = [String]()
+    var blockedList = [Int]()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,25 +83,30 @@ class FollowerListViewController: UIViewController,IndicatorInfoProvider,ThemeCh
         getMyFollowingList { (data) in
             
             self.followingId.removeAll()
-            self.followingNodeId.removeAll()
-            self.followingNodeIdOther.removeAll()
+            
             
             for(_,req) in data {
                 let id = req["FollowingId"] as? String
-                self.followingNodeId.append(req["FollowingNodeId"] as! String)
-                self.followingNodeIdOther.append(req["FollowingNodeIdOther"] as! String)
                 self.followingId.append(id!)
             }
         }
 
         getMyFollowersList{ (data) in
              self.followerId.removeAll()
+            self.followerNodeId.removeAll()
+            self.followerNodeIdOther.removeAll()
+            self.blockedList.removeAll()
             
             for(_,req) in data {
                 let id = req["FollowerId"] as? String
                 
                 self.followerId.append(id!)
+                self.followerNodeId.append(req["FollowerNodeId"] as! String)
+                self.followerNodeIdOther.append(req["FollowerNodeIdOther"] as! String)
+                self.blockedList.append(req["isBlocked"] as! Int)
+                
             }
+            
             self.followersTableView.reloadData()
         }
     }
@@ -107,6 +116,15 @@ class FollowerListViewController: UIViewController,IndicatorInfoProvider,ThemeCh
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if followerId.count == 0 {
+            self.noFollowersListLabel.text = "No Followers"
+            noFollowersListLabel.hidden = false
+        }
+        else {
+            
+            noFollowersListLabel.hidden = true
+        }
         
         return followerId.count
     }
@@ -152,12 +170,8 @@ class FollowerListViewController: UIViewController,IndicatorInfoProvider,ThemeCh
                
                 aCell.confirmBtn.setTitle("FOLLOWING", forState: .Normal)
                 aCell.confirmBtn.userInteractionEnabled = false
-                
-//                let indexNub = self.followingId.indexOf(self.followerId[indexPath.row])
-//                print(indexNub)
-//                aCell.confirmBtn.accessibilityValue = self.followingNodeId[indexNub!]
-//                aCell.confirmBtn.accessibilityHint = self.followingNodeIdOther[indexNub!]
-                
+                aCell.confirmBtn.setTitleColor(UIColor.grayColor(), forState: .Normal)
+
             }
                 
             else {
@@ -171,18 +185,36 @@ class FollowerListViewController: UIViewController,IndicatorInfoProvider,ThemeCh
                 aCell.confirmBtn.tag = indexPath.row
             }
             
+            if self.blockedList[indexPath.row] == 0 {
+               
+                aCell.rejectBtn.addTarget(self, action: #selector(self.blockButtonTapped(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                
+ 
+                aCell.rejectBtn.setTitle("BLOCK", forState: .Normal)
+                aCell.rejectBtn.restorationIdentifier = "BLOCK"
+                //aCell.rejectBtn.tag = indexPath.row
+
+            }
+                
+            else {
+                
+                aCell.rejectBtn.addTarget(self, action: #selector(self.unBlockBtnTapped(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+//
+                
+                aCell.rejectBtn.setTitle("UNBLOCK", forState: .Normal)
+                aCell.rejectBtn.restorationIdentifier = "UNBLOCK"
+                aCell.rejectBtn.setTitleColor(UIColor(red: 34/255, green: 54/255, blue: 221/255, alpha: 1.0), forState: .Normal)
+                //aCell.rejectBtn.tag = indexPath.row
+
+            }
+            
         })
         
-        aCell.rejectBtn.addTarget(self, action: #selector(self.blockButtonTapped(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         aCell.rejectBtn.accessibilityIdentifier = self.followerId[indexPath.row]
-        aCell.rejectBtn.accessibilityValue = self.followingNodeId[indexPath.row]
-        aCell.rejectBtn.accessibilityHint = self.followingNodeIdOther[indexPath.row]
-        
-        
-        
+        aCell.rejectBtn.accessibilityValue = self.followerNodeId[indexPath.row]
+        aCell.rejectBtn.accessibilityHint = self.followerNodeIdOther[indexPath.row]
         
         aCell.cancelBtn.hidden = true
-        aCell.rejectBtn.setTitle("BLOCK", forState: .Normal)
        // aCell.confirmBtn.setTitle("FOLLOW", forState: .Normal)
         
         aCell.baseView.alpha = 1
@@ -198,30 +230,81 @@ class FollowerListViewController: UIViewController,IndicatorInfoProvider,ThemeCh
         let indexP = NSIndexPath(forRow: sender.tag, inSection: 0)
         let cell = followersTableView.cellForRowAtIndexPath(indexP) as! FriendRequestsCell
         
-        if followingId.contains(sender.accessibilityIdentifier!) {
+        if !followingId.contains(sender.accessibilityIdentifier!) {
             
-        }
-        else {
             createFollowingAndFollowers(sender.accessibilityIdentifier!)
             cell.confirmBtn.setTitle("FOLLOWING", forState: .Normal)
             cell.confirmBtn.userInteractionEnabled = false
             cell.confirmBtn.setTitleColor(UIColor.grayColor(), forState: .Normal)
+            
+            //call the follow notification api
+            followNotification(sender.accessibilityIdentifier!)
         }
         
     }
     
     func blockButtonTapped(sender:UIButton) {
+ 
+    if sender.restorationIdentifier == "BLOCK" {
         
-//        let indexP = NSIndexPath(forRow: sender.tag, inSection: 0)
-//        let cell = followersTableView.cellForRowAtIndexPath(indexP) as! FriendRequestsCell
-        
-        let followerId = sender.accessibilityIdentifier
-        let followerNodeId = sender.accessibilityHint
-        let followerOtherNodeId = sender.accessibilityValue
-        
-        fireBaseRef.child("Users").child((currentUser?.uid)!).child("Followers").child(followerNodeId!).child("isBlocked").setValue(1)
-        
-        fireBaseRef.child("Users").child(followerId!).child("Following").child(followerOtherNodeId!).child("isBlocked").setValue(1)
+            let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to Block this user?", preferredStyle: .ActionSheet)
+            
+            let cancelAction = UIAlertAction(title: "No", style: .Cancel) { action -> Void in
+                // Just dismiss the action sheet
+                actionSheetController.dismissViewControllerAnimated(true, completion: nil)
+            }
+            actionSheetController.addAction(cancelAction)
+            
+            let removeAction = UIAlertAction(title: "Yes", style: .Default) { action -> Void in
+                
+                let followerId = sender.accessibilityIdentifier
+                let followerNodeId = sender.accessibilityValue
+                let followerOtherNodeId = sender.accessibilityHint
+                
+            
+            fireBaseRef.child("Users").child((currentUser?.uid)!).child("Followers").child(followerNodeId!).child("isBlocked").setValue(1)
+                
+            fireBaseRef.child("Users").child(followerId!).child("Following").child(followerOtherNodeId!).child("isBlocked").setValue(1)
+                
+                self.getFollowersList()
+                
+            }
+            
+            actionSheetController.addAction(removeAction)
+            
+            self.presentViewController(actionSheetController, animated: false, completion: nil)
+      }
+      
+    }
+    
+    func unBlockBtnTapped(sender: UIButton) {
+    
+        if sender.restorationIdentifier == "UNBLOCK" {
+            let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to Unblock this user?", preferredStyle: .ActionSheet)
+            
+            let cancelAction = UIAlertAction(title: "No", style: .Cancel) { action -> Void in
+                // Just dismiss the action sheet
+                actionSheetController.dismissViewControllerAnimated(true, completion: nil)
+            }
+            actionSheetController.addAction(cancelAction)
+            
+            let removeAction = UIAlertAction(title: "Yes", style: .Default) { action -> Void in
+                
+                let followerId = sender.accessibilityIdentifier
+                let followerNodeId = sender.accessibilityValue
+                let followerOtherNodeId = sender.accessibilityHint
+                
+                fireBaseRef.child("Users").child((currentUser?.uid)!).child("Followers").child(followerNodeId!).child("isBlocked").setValue(0)
+                
+                fireBaseRef.child("Users").child(followerId!).child("Following").child(followerOtherNodeId!).child("isBlocked").setValue(0)
+                
+                 self.getFollowersList()
+            }
+            
+            actionSheetController.addAction(removeAction)
+            
+            self.presentViewController(actionSheetController, animated: false, completion: nil)
+        }
         
     }
 

@@ -24,6 +24,16 @@ func updateTimelineWithNewPost(postId:String){
     dataTask?.resume()
 }
 
+func followNotification(toId:String){
+    let notificationURL = serverBaseURL+"/notifications/NFR/\((currentUser!.uid))/\(toId)"
+    let request = NSMutableURLRequest(URL: NSURL(string:notificationURL)!)
+    request.HTTPMethod = "POST"
+    
+    dataTask = defaultSession.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+    })
+    dataTask?.resume()
+}
+
 func friendRequestReceivedNotification(toId:String){
     let notificationURL = serverBaseURL+"/notifications/FRR/\((currentUser!.uid))/\(toId)"
     let request = NSMutableURLRequest(URL: NSURL(string:notificationURL)!)
