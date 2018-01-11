@@ -179,6 +179,8 @@ class FollowerListViewController: UIViewController,IndicatorInfoProvider,ThemeCh
                 aCell.confirmBtn.setTitle("FOLLOW", forState: .Normal)
                 aCell.confirmBtn.userInteractionEnabled = true
                 
+                aCell.confirmBtn.setTitleColor(UIColor(red: 104/255, green: 187/255, blue: 2/255, alpha: 1.0), forState: .Normal)
+                
                  aCell.confirmBtn.addTarget(self, action: #selector(self.followBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                 
                 aCell.confirmBtn.accessibilityIdentifier = self.followerId[indexPath.row]

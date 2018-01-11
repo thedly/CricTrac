@@ -865,7 +865,6 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             }
         }
         return 90
-      
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

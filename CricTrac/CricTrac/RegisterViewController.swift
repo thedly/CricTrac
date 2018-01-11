@@ -32,11 +32,13 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
     @IBOutlet weak var googleBtnHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var topBarView: UIView!
+    
+    
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
         topBarView.backgroundColor = currentTheme.topColor
-       // navigationController!.navigationBar.barTintColor = currentTheme.topColor
+         setPlainShadow(topBarView, color: currentTheme.bottomColor.CGColor)
     }
     
     override func viewDidLoad() {
@@ -217,6 +219,7 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
         self.presentViewController(sliderMenu, animated: true) {}
         KRProgressHUD.dismiss()
     }
+    
     func textFieldDidEndEditing(textField: UITextField) {
         if textField ==  password {
           if  password.text?.characters.count <= 6 {

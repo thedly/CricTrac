@@ -42,7 +42,7 @@ class SuggestionView: UIView,UITableViewDelegate,UITableViewDataSource,UITextFie
         aCell.contentlabel?.text = filturedData![indexPath.row]
         aCell.contentlabel?.textColor = UIColor.whiteColor()
         aCell.contentlabel?.font = UIFont(name: "SourceSansPro-Bold", size: 15)
-        aCell.backgroundColor = UIColor.clearColor()
+        aCell.backgroundColor = cricTracTheme.currentTheme.bottomColor
        // suggestionTable.backgroundColor = UIColor.clearColor()
         
         return aCell
@@ -126,7 +126,7 @@ var  suggestionView:SuggestionView{
         ).instantiateWithOwner(nil, options: nil)[0] as! SuggestionView
 
     suggestionView.suggestionTable.registerNib(UINib.init(nibName: "SuggestionCell", bundle: nil), forCellReuseIdentifier: "suggCell")
-    suggestionView.backgroundColor = cricTracTheme.currentTheme.topColor
+    suggestionView.backgroundColor = cricTracTheme.currentTheme.bottomColor
     
     return suggestionView
     

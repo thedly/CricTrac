@@ -219,7 +219,9 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
             cell.FollowBtn.setTitle("FOLLOWING", forState: .Normal)
             cell.FollowBtn.userInteractionEnabled = false
             cell.FollowBtn.setTitleColor(UIColor.grayColor(), forState: .Normal)
-            //cell.FollowBtn.alpha = 0.7
+            
+            //call the follow notification api
+            followNotification(sender.accessibilityIdentifier!)
             
         }
         

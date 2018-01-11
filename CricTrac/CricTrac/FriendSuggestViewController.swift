@@ -325,6 +325,9 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
             cell.FollowBtn.userInteractionEnabled = false
             cell.FollowBtn.setTitleColor(UIColor.grayColor(), forState: .Normal)
             
+            //call the follow notification api
+            followNotification(sender.accessibilityIdentifier!)
+            
         }
         
     }

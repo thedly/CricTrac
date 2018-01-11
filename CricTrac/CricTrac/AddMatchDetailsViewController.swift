@@ -93,7 +93,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         self.automaticallyAdjustsScrollViewInsets = false
         // Do any additional setup after loading the view.
         settings.style.buttonBarItemBackgroundColor = UIColor.clearColor()
-        settings.style.buttonBarItemTitleColor = UIColor.whiteColor()
+        settings.style.buttonBarItemTitleColor = UIColor.blackColor()
         
         buttonBarView.selectedBar.backgroundColor = UIColor.whiteColor()
         self.buttonBarView.collectionViewLayout = UICollectionViewFlowLayout()

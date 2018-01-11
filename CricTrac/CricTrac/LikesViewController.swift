@@ -100,6 +100,8 @@ class LikesViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         let cell = tableView.dequeueReusableCellWithIdentifier("LikesTableViewCell", forIndexPath:
             indexPath) as! LikesTableViewCell
         
+        cell.friendButton.hidden = true
+        
         cell.name.text = data["OwnerName"] as? String
         let friendUserId = data["OwnerID"] as? String
         cell.parent = self

@@ -153,7 +153,7 @@ class FollowingViewController: UIViewController,IndicatorInfoProvider,ThemeChang
         aCell.backgroundColor = UIColor.clearColor()
         
         aCell.UnfriendBtn.setTitle("UNFOLLOW", forState: .Normal)
-        aCell.UnfriendBtn.setTitleColor(UIColor(red: 34/255, green: 54/255, blue: 221/255, alpha: 1.0), forState: .Normal)
+        //aCell.UnfriendBtn.setTitleColor(UIColor(red: 34/255, green: 54/255, blue: 221/255, alpha: 1.0), forState: .Normal)
         aCell.UnfriendBtn.accessibilityIdentifier = followingId[indexPath.row]
         aCell.UnfriendBtn.accessibilityValue = followingNodeId[indexPath.row]
         aCell.UnfriendBtn.accessibilityHint = followingNodeIdOther[indexPath.row]

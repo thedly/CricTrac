@@ -239,9 +239,9 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
     }
     
     func moveToFRR(topicId:String) {
-        let friendRequest = viewControllerFrom("Main", vcid: "FriendBaseViewController") as! FriendBaseViewController
-        friendRequest.topicId = topicId
-        self.presentViewController(friendRequest, animated: true) {}
+//        let friendRequest = viewControllerFrom("Main", vcid: "FriendBaseViewController") as! FriendBaseViewController
+//        friendRequest.topicId = topicId
+//        self.presentViewController(friendRequest, animated: true) {}
     }
     
     func moveToCRR(topicId:String) {
@@ -251,9 +251,9 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
     }
     
     func moveToFRA(topicId:String) {
-        let friendRequest = viewControllerFrom("Main", vcid: "FriendBaseViewController") as! FriendBaseViewController
-        friendRequest.topicId = topicId
-        self.presentViewController(friendRequest, animated: true) {}
+//        let friendRequest = viewControllerFrom("Main", vcid: "FriendBaseViewController") as! FriendBaseViewController
+//        friendRequest.topicId = topicId
+//        self.presentViewController(friendRequest, animated: true) {}
     }
     
     func moveToCRA(topicId:String) {

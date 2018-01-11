@@ -182,6 +182,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         }
         else {
             barView.backgroundColor = currentTheme.topColor
+            setPlainShadow(barView, color: currentTheme.bottomColor.CGColor)
             matchDetailsTitle.text! = "SCORECARD"
             matchEditButton.hidden = true
             matchDetailsBack.addTarget(self, action: #selector(didTapCancelOthers), forControlEvents: UIControlEvents.TouchUpInside)

@@ -22,6 +22,7 @@ class ForgotPasswordViewController: UIViewController,ThemeChangeable,MFMailCompo
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
         barView.backgroundColor = currentTheme.topColor
+        setPlainShadow(barView, color: currentTheme.bottomColor.CGColor)
        // navigationController!.navigationBar.barTintColor = currentTheme.topColor
     }
     
