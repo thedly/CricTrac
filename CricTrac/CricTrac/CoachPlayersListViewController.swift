@@ -60,33 +60,24 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
             friendID = (currentUser?.uid)!
         }
         
-        
-        getMyFollowingList { (data) in
-            
-            self.followingIds.removeAll()
-            self.followingNodeId.removeAll()
-            self.followingNodeIdOther.removeAll()
-            
-            for(_,req) in data {
-                let followingId = req["FollowingId"] as? String
-                
-                self.followingIds.append(followingId!)
-                self.followingNodeId.append(req["FollowingNodeId"] as! String)
-                self.followingNodeIdOther.append(req["FollowingNodeIdOther"] as! String)
-                
-            }
-            
-            
-        }
+//        getMyFollowingList { (data) in
+//            self.followingIds.removeAll()
+//            self.followingNodeId.removeAll()
+//            self.followingNodeIdOther.removeAll()
+//            
+//            for(_,req) in data {
+//                let followingId = req["FollowingId"] as? String
+//                self.followingIds.append(followingId!)
+//                self.followingNodeId.append(req["FollowingNodeId"] as! String)
+//                self.followingNodeIdOther.append(req["FollowingNodeIdOther"] as! String)
+//            }
+//        }
         
         getMyPlayers1(friendID,playingRole: playingRole) { (data) in
             self.myPlayers = data
             self.CoachPlayersTableView.reloadData()
             
         }
-        
-    
-    
         
 //        getMyPlayers(friendID) { (data) in
 //            for(_,req) in data {
@@ -296,46 +287,56 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
                 coachNodeId = playerData["playerNodeIdOther"]! as! String
                 playerNodeIdOther = playerData["coachNodeId"]! as! String
                 
-                if followingIds.contains(playerData["playerId"]! as! String) {
-                    
-                    aCell.FollowBtn.setTitle("FOLLOWING", forState: .Normal)
-                    let indexNub = followingIds.indexOf(playerData["playerId"]! as! String)
-                    print(indexNub)
-                    aCell.FollowBtn.accessibilityValue = followingNodeId[indexNub!]
-                    aCell.FollowBtn.accessibilityHint = followingNodeIdOther[indexNub!]
-                    aCell.FollowBtn.accessibilityLabel = aCell.FollowBtn.titleLabel?.text
-                    aCell.FollowBtn.userInteractionEnabled = false
-                    aCell.FollowBtn.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
-                    // aCell.FollowBtn.alpha = 0.2
-                    
-                }
-                    
-                else {
-                    aCell.FollowBtn.setTitle("FOLLOW", forState: .Normal)
-                    aCell.FollowBtn.userInteractionEnabled = true
-                    aCell.FollowBtn.alpha = 1
-                    // aCell.FollowBtn.setTitleColor(UIColor.greenColor(), forState: UIControlState.Normal)
-                    aCell.FollowBtn.setTitleColor(UIColor(red: 104/255, green: 187/255, blue: 2/255, alpha: 1.0), forState: .Normal)
-                    
-                    aCell.FollowBtn.accessibilityLabel = aCell.FollowBtn.titleLabel?.text
-                    
-                    aCell.FollowBtn.addTarget(self, action: #selector(followBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-                }
-                
-                aCell.FollowBtn.accessibilityIdentifier = playerData["playerId"]! as? String
-                aCell.FollowBtn.tag = indexPath.row
+//                if followingIds.contains(playerData["playerId"]! as! String) {
+//                    
+//                    aCell.FollowBtn.setTitle("FOLLOWING", forState: .Normal)
+//                    let indexNub = followingIds.indexOf(playerData["playerId"]! as! String)
+//                    print(indexNub)
+//                    aCell.FollowBtn.accessibilityValue = followingNodeId[indexNub!]
+//                    aCell.FollowBtn.accessibilityHint = followingNodeIdOther[indexNub!]
+//                    aCell.FollowBtn.accessibilityLabel = aCell.FollowBtn.titleLabel?.text
+//                    aCell.FollowBtn.userInteractionEnabled = false
+//                    aCell.FollowBtn.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
+//                    // aCell.FollowBtn.alpha = 0.2
+//                    
+//                }
+//                    
+//                else {
+//                    aCell.FollowBtn.setTitle("FOLLOW", forState: .Normal)
+//                    aCell.FollowBtn.userInteractionEnabled = true
+//                    aCell.FollowBtn.alpha = 1
+//                    // aCell.FollowBtn.setTitleColor(UIColor.greenColor(), forState: UIControlState.Normal)
+//                    aCell.FollowBtn.setTitleColor(UIColor(red: 104/255, green: 187/255, blue: 2/255, alpha: 1.0), forState: .Normal)
+//                    
+//                    aCell.FollowBtn.accessibilityLabel = aCell.FollowBtn.titleLabel?.text
+//                    
+//                    aCell.FollowBtn.addTarget(self, action: #selector(followBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+//                }
+//                
+//                aCell.FollowBtn.accessibilityIdentifier = playerData["playerId"]! as? String
+//                aCell.FollowBtn.tag = indexPath.row
                 
 
                 
-                aCell.friendId = playerReqId
-                aCell.AddFriendBtn.accessibilityIdentifier = coachNodeId
-                aCell.AddFriendBtn.restorationIdentifier = playerNodeIdOther
-                aCell.AddFriendBtn.accessibilityValue = playerReqId
-                aCell.AddFriendBtn.setTitle("REMOVE", forState: .Normal)
-                aCell.AddFriendBtn.setTitleColor(UIColor(red: 0.76, green: 0.18, blue: 0.25, alpha: 1.0), forState: .Normal)
-                aCell.AddFriendBtn.titleLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 12)
+//                aCell.friendId = playerReqId
+//                aCell.AddFriendBtn.accessibilityIdentifier = coachNodeId
+//                aCell.AddFriendBtn.restorationIdentifier = playerNodeIdOther
+//                aCell.AddFriendBtn.accessibilityValue = playerReqId
+//                aCell.AddFriendBtn.setTitle("REMOVE", forState: .Normal)
+//                aCell.AddFriendBtn.setTitleColor(UIColor(red: 0.76, green: 0.18, blue: 0.25, alpha: 1.0), forState: .Normal)
+//                aCell.AddFriendBtn.titleLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 12)
+//                
+//                aCell.AddFriendBtn.addTarget(self, action: #selector(CoachPlayersListViewController.removePlayer(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                 
-                aCell.AddFriendBtn.addTarget(self, action: #selector(CoachPlayersListViewController.removePlayer(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                aCell.friendId = playerReqId
+                aCell.FollowBtn.accessibilityIdentifier = coachNodeId
+                aCell.FollowBtn.restorationIdentifier = playerNodeIdOther
+                aCell.FollowBtn.accessibilityValue = playerReqId
+                aCell.FollowBtn.setTitle("REMOVE", forState: .Normal)
+                aCell.FollowBtn.setTitleColor(UIColor(red: 0.76, green: 0.18, blue: 0.25, alpha: 1.0), forState: .Normal)
+                aCell.FollowBtn.titleLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 12)
+                
+                aCell.FollowBtn.addTarget(self, action: #selector(CoachPlayersListViewController.removePlayer(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                 
                 aCell.backgroundColor = UIColor.clearColor()
                 aCell.baseView.backgroundColor = currentTheme.bottomColor
@@ -349,28 +350,31 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
     
     // sravani - mark for follow
     
-    func followBtnPressed(sender: UIButton) {
-        
-        let indexP = NSIndexPath(forRow: sender.tag, inSection: 0)
-        let cell = CoachPlayersTableView.cellForRowAtIndexPath(indexP) as! FriendSuggestionsCell
-        
-        let newStr = sender.accessibilityLabel
-        if newStr == "FOLLOW" {
-            createFollowingAndFollowers(sender.accessibilityIdentifier!)
-            cell.FollowBtn.setTitle("FOLLOWING", forState: .Normal)
-            cell.FollowBtn.userInteractionEnabled = false
-            cell.FollowBtn.setTitleColor(UIColor.grayColor(), forState: .Normal)
-            //cell.FollowBtn.alpha = 0.2
-            
-        }
-        
-    }
+//    func followBtnPressed(sender: UIButton) {
+//        
+//        let indexP = NSIndexPath(forRow: sender.tag, inSection: 0)
+//        let cell = CoachPlayersTableView.cellForRowAtIndexPath(indexP) as! FriendSuggestionsCell
+//        
+//        let newStr = sender.accessibilityLabel
+//        if newStr == "FOLLOW" {
+//            createFollowingAndFollowers(sender.accessibilityIdentifier!)
+//            cell.FollowBtn.setTitle("FOLLOWING", forState: .Normal)
+//            cell.FollowBtn.userInteractionEnabled = false
+//            cell.FollowBtn.setTitleColor(UIColor.grayColor(), forState: .Normal)
+//            //cell.FollowBtn.alpha = 0.2
+//            
+//        }
+//        
+//    }
     
     
     func removePlayer(sender:UIButton) {
         
-        let coachNodeId = sender.restorationIdentifier
-        let playerNodeId = sender.accessibilityIdentifier
+//        let coachNodeId = sender.restorationIdentifier
+//        let playerNodeId = sender.accessibilityIdentifier
+        let playerNodeId = sender.restorationIdentifier
+        let coachNodeId = sender.accessibilityIdentifier
+
         let playerId = sender.accessibilityValue
         
         let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to Remove this player?", preferredStyle: .ActionSheet)

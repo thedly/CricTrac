@@ -118,7 +118,7 @@ class FollowerListViewController: UIViewController,IndicatorInfoProvider,ThemeCh
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if followerId.count == 0 {
-            self.noFollowersListLabel.text = "No Followers"
+            self.noFollowersListLabel.text = "You don't have any followers. \nWhen someone follows you, you will see them here."
             noFollowersListLabel.hidden = false
         }
         else {

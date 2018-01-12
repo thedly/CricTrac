@@ -645,39 +645,39 @@ func searchProfiles(searchParameter: String, sucessBlock:([Profile])->Void) {
         if let data: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
             
             for (key, value) in data {
-                var retVal = 0
+                //var retVal = 0
                 
                 //exclude the users from Friends node
-                fireBaseRef.child("Users").child(currentUser!.uid).child("Friends").observeSingleEventOfType(.Value, withBlock: { snapshot in
-                    if let data2: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
-                        for (_, value2) in data2 {
-                            if key == value2["UserId"] as? String {
-                                retVal = 1
-                            }
-                        }
-                    }
+                //fireBaseRef.child("Users").child(currentUser!.uid).child("Friends").observeSingleEventOfType(.Value, withBlock: { snapshot in
+//                    if let data2: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
+//                        for (_, value2) in data2 {
+//                            if key == value2["UserId"] as? String {
+//                                retVal = 1
+//                            }
+//                        }
+//                    }
                     
                     //exclude the users from Recieved Request node
-                    fireBaseRef.child("Users").child(currentUser!.uid).child("ReceivedRequest").observeSingleEventOfType(.Value, withBlock: { snapshot in
-                        if let data3: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
-                            for (_, value3) in data3 {
-                                if key == value3["ReceivedFrom"] as? String {
-                                    retVal = 1
-                                }
-                            }
-                        }
+                    //fireBaseRef.child("Users").child(currentUser!.uid).child("ReceivedRequest").observeSingleEventOfType(.Value, withBlock: { snapshot in
+//                        if let data3: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
+//                            for (_, value3) in data3 {
+//                                if key == value3["ReceivedFrom"] as? String {
+//                                    retVal = 1
+//                                }
+//                            }
+//                        }
                         
                         //exclude the users from Sent Request node
-                        fireBaseRef.child("Users").child(currentUser!.uid).child("SentRequest").observeSingleEventOfType(.Value, withBlock: { snapshot in
-                            if let data4: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
-                                for (_, value4) in data4 {
-                                    if key == value4["SentTo"] as? String {
-                                        retVal = 1
-                                    }
-                                }
-                            }
+                        //fireBaseRef.child("Users").child(currentUser!.uid).child("SentRequest").observeSingleEventOfType(.Value, withBlock: { snapshot in
+//                            if let data4: [String : AnyObject] = snapshot.value as? [String : AnyObject] {
+//                                for (_, value4) in data4 {
+//                                    if key == value4["SentTo"] as? String {
+//                                        retVal = 1
+//                                    }
+//                                }
+//                            }
                             
-                            if retVal == 0 {
+                            //if retVal == 0 {
                                 if var profile = value["UserProfile"] as? [String : AnyObject] {
                                     profile["Id"] = key
                                     if key != currentUser?.uid {
@@ -685,12 +685,12 @@ func searchProfiles(searchParameter: String, sucessBlock:([Profile])->Void) {
                                         users.append(profileObject)
                                     }
                                 }
-                            }
+                            //}
                             
                             sucessBlock(users)
-                        })
-                    })
-                })
+                        //})
+                    //})
+                //})
             }
             //sucessBlock(users)
         }

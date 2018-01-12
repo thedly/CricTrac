@@ -99,7 +99,7 @@ class FollowingViewController: UIViewController,IndicatorInfoProvider,ThemeChang
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if followingId.count == 0 {
-            self.noFollowingListLabel.text = "Your not Following anyone"
+            self.noFollowingListLabel.text = "You are not following anyone yet. \nOnce you start following, they will be listed here \nand you can see their posts in your pavilion. \n\nFind people in Suggestions or Search."
             noFollowingListLabel.hidden = false
         }
         else {
