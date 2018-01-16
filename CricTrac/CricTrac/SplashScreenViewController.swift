@@ -10,8 +10,11 @@ import UIKit
 import KRProgressHUD
 import FirebaseAuth
 import KeychainSwift
+import GoogleSignIn
+import Firebase
+import SCLAlertView
 
-class SplashScreenViewController: UIViewController,ThemeChangeable {
+class SplashScreenViewController: UIViewController,ThemeChangeable, GIDSignInDelegate, GIDSignInUIDelegate {
 
     var window: UIWindow? = UIWindow(frame:UIScreen.mainScreen().bounds)
     
@@ -167,6 +170,66 @@ class SplashScreenViewController: UIViewController,ThemeChangeable {
         }
     }
     
+    func loginWithGoogle(){
+        GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().delegate = self
+        
+        GIDSignIn.sharedInstance().signIn()
+    }
+    
+    func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError?) {
+//        if error != nil{
+//            //SCLAlertView().showError("Login Error", subTitle: "Error Occoured")
+//            self.googleBtn.enabled = true
+//            return
+//        }
+        
+        let authentication = user.authentication
+        let credential = FIRGoogleAuthProvider.credentialWithIDToken(authentication.idToken,
+                                                                     accessToken: authentication.accessToken)
+        firebaseLogin(credential, sucess: { (user) in
+            self.saveGoogleTocken(authentication.idToken, accessToken: authentication.accessToken)
+            currentUser = user
+            currentUser?.getTokenForcingRefresh(true) { accessToken, error in
+                if error == nil {
+                    self.saveGoogleTocken(authentication.idToken, accessToken: accessToken!)
+                }
+            }
+            
+            enableSync()
+            self.navigateToNextScreen()
+            }, failure: { (error) in
+                KRProgressHUD.dismiss()
+                let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
+                dispatch_after(delay, dispatch_get_main_queue()) {
+                    SCLAlertView().showError("Login Error", subTitle: error.localizedDescription)
+                    //self.googleBtn.enabled = true
+                }
+        })
+    }
+    
+    func saveGoogleTocken(idToken:String,accessToken:String ){
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let googleTokens = ["idToken":idToken,"accessToken":accessToken]
+        var facebookToken:[String:String]!
+        
+        if let loginToken = userDefaults.valueForKey("loginToken") as? [String:AnyObject]{
+            if let fbtoken = loginToken["Facebooktoken"]{
+                facebookToken = fbtoken as! [String : String]
+            }
+        }
+        
+        var token = [String:AnyObject]()
+        if facebookToken != nil{
+            token["Facebooktoken"] = facebookToken
+        }
+        token["googletoken"] = googleTokens
+        token["emailToken"] = nil
+        userDefaults.setValue(token, forKey: "loginToken")
+        userDefaults.synchronize()
+    }
+    
     func loginWithSavedCredentials(){
         // KRProgressHUD.show(progressHUDStyle: .White, message: "Loading...")
         
@@ -181,8 +244,9 @@ class SplashScreenViewController: UIViewController,ThemeChangeable {
                     
                     }, failure: { (error) in
                         KRProgressHUD.dismiss()
-                        self.moveToNextScreen(false)
-                        print(error.localizedDescription)
+                        self.loginWithGoogle()
+//                        self.moveToNextScreen(false)
+//                        print(error.localizedDescription)
                 })
             }
             else  if ((credential.valueForKey("emailToken") as? [String:String]) != nil){
