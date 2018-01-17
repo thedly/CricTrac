@@ -70,6 +70,13 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     var playerID = ""
     var playerDob = ""
     
+    var separatorSize:CGFloat = 15
+    var singleBattingSize:CGFloat = 25
+    var doubleBattingSize:CGFloat = 20
+    var singleBowlingSize:CGFloat = 25
+    var doubleBowlingSize:CGFloat = 18
+    var captionSize:CGFloat = 10
+    
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
@@ -97,6 +104,21 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         tableView1.hidden = true
         tableview2.hidden = true
         tableView3.hidden = true
+        
+        if screensize == "1" {
+            
+        }
+        else if screensize == "2" {
+            
+        }
+        else if screensize == "4" {
+            separatorSize = 15
+            singleBattingSize = 30
+            doubleBattingSize = 25
+            singleBowlingSize = 30
+            doubleBowlingSize = 25
+            captionSize = 12
+        }
 
     }
     
@@ -275,15 +297,34 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                     }
                     totalBallsFaced += Int(value["BallsFaced"] as! String)!
                     totalRuns += Int(value["RunsTaken"] as! String)!
+                }
+                
+                //second innings
+                if value["RunsTaken2"] != nil && value["RunsTaken2"] as! String != "-" {
+                    toatalBattingmatches += 1
+                    let dismissal2 = value["Dismissal2"] as? String
+                    if  dismissal2 == "Not out" || dismissal2 == "Retired hurt" {
+                        totalDismissal += 1
                     }
+                    totalBallsFaced += Int(value["BallsFaced2"] as! String)!
+                    totalRuns += Int(value["RunsTaken2"] as! String)!
+                }
                 
                 if value["OversBowled"] as! String != "-" {
                     toatalBowlingMatches += 1
                     totalOvers += Float(value["OversBowled"] as! String)!
                     totalRunsGiven += Int(value["RunsGiven"] as! String)!
                     TotalWicketsTaken += Int(value["WicketsTaken"] as! String)!
-                    }
                 }
+                
+                //second innings
+                if value["OversBowled2"] != nil && value["OversBowled2"] as! String != "-" {
+                    toatalBowlingMatches += 1
+                    totalOvers += Float(value["OversBowled2"] as! String)!
+                    totalRunsGiven += Int(value["RunsGiven2"] as! String)!
+                    TotalWicketsTaken += Int(value["WicketsTaken2"] as! String)!
+                }
+            }
             
             else if ageGroupDropdown.text != "Age Group" && levelDropdown.text != "Level" && yearDropdown.text != "Year"{
                 
@@ -294,21 +335,40 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                     if value["RunsTaken"] as! String != "-" {
                         toatalBattingmatches += 1
                         let dismissal = value["Dismissal"] as? String
-                      if dismissal == "Not out" || dismissal == "Retired hurt" {
+                        if dismissal == "Not out" || dismissal == "Retired hurt" {
                             totalDismissal += 1
                         }
                         totalBallsFaced += Int(value["BallsFaced"] as! String)!
                         totalRuns += Int(value["RunsTaken"] as! String)!
+                    }
+                    
+                    //second innings
+                    if value["RunsTaken2"] != nil && value["RunsTaken2"] as! String != "-" {
+                        toatalBattingmatches += 1
+                        let dismissal2 = value["Dismissal2"] as? String
+                        if dismissal2 == "Not out" || dismissal2 == "Retired hurt" {
+                            totalDismissal += 1
                         }
+                        totalBallsFaced += Int(value["BallsFaced2"] as! String)!
+                        totalRuns += Int(value["RunsTaken2"] as! String)!
+                    }
  
                     if value["OversBowled"] as! String != "-" {
                        toatalBowlingMatches += 1
                         totalOvers += Float(value["OversBowled"] as! String)!
                         totalRunsGiven += Int(value["RunsGiven"] as! String)!
                         TotalWicketsTaken += Int(value["WicketsTaken"] as! String)!
-                        }
+                    }
+                    
+                    //second innings
+                    if value["OversBowled2"] != nil && value["OversBowled2"] as! String != "-" {
+                        toatalBowlingMatches += 1
+                        totalOvers += Float(value["OversBowled2"] as! String)!
+                        totalRunsGiven += Int(value["RunsGiven2"] as! String)!
+                        TotalWicketsTaken += Int(value["WicketsTaken2"] as! String)!
                     }
                 }
+            }
                 
         else {
             if ageGroupDropdown.text != "Age Group"   && levelDropdown.text != "Level" {
@@ -316,21 +376,40 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                     self.matchDataSource.append(value)
                     self.matches.append(makeSummaryCell(value))
                 
-                if value["RunsTaken"] as! String != "-" {
-                    toatalBattingmatches += 1
-                    let dismissal = value["Dismissal"] as? String
-                    if  dismissal == "Not out" || dismissal == "Retired hurt" {
-                        totalDismissal += 1
+                    if value["RunsTaken"] as! String != "-" {
+                        toatalBattingmatches += 1
+                        let dismissal = value["Dismissal"] as? String
+                        if  dismissal == "Not out" || dismissal == "Retired hurt" {
+                            totalDismissal += 1
+                        }
+                        totalBallsFaced += Int(value["BallsFaced"] as! String)!
+                        totalRuns += Int(value["RunsTaken"] as! String)!
                     }
-                    totalBallsFaced += Int(value["BallsFaced"] as! String)!
-                    totalRuns += Int(value["RunsTaken"] as! String)!
+                        
+                    //second innings
+                    if value["RunsTaken2"] != nil && value["RunsTaken2"] as! String != "-" {
+                        toatalBattingmatches += 1
+                        let dismissal2 = value["Dismissal2"] as? String
+                        if  dismissal2 == "Not out" || dismissal2 == "Retired hurt" {
+                            totalDismissal += 1
+                        }
+                        totalBallsFaced += Int(value["BallsFaced2"] as! String)!
+                        totalRuns += Int(value["RunsTaken2"] as! String)!
                     }
                 
-                if value["OversBowled"] as! String != "-" {
-                    toatalBowlingMatches += 1
-                    totalOvers += Float(value["OversBowled"] as! String)!
-                    totalRunsGiven += Int(value["RunsGiven"] as! String)!
-                    TotalWicketsTaken += Int(value["WicketsTaken"] as! String)!
+                    if value["OversBowled"] as! String != "-" {
+                        toatalBowlingMatches += 1
+                        totalOvers += Float(value["OversBowled"] as! String)!
+                        totalRunsGiven += Int(value["RunsGiven"] as! String)!
+                        TotalWicketsTaken += Int(value["WicketsTaken"] as! String)!
+                    }
+                    
+                    //second innings
+                    if value["OversBowled2"] != nil && value["OversBowled2"] as! String != "-" {
+                        toatalBowlingMatches += 1
+                        totalOvers += Float(value["OversBowled2"] as! String)!
+                        totalRunsGiven += Int(value["RunsGiven2"] as! String)!
+                        TotalWicketsTaken += Int(value["WicketsTaken2"] as! String)!
                     }
                 }
             }
@@ -348,16 +427,35 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                         }
                         totalBallsFaced += Int(value["BallsFaced"] as! String)!
                         totalRuns += Int(value["RunsTaken"] as! String)!
+                    }
+                    
+                    //second innings
+                    if value["RunsTaken2"] != nil && value["RunsTaken2"] as! String != "-" {
+                        toatalBattingmatches += 1
+                        let dismissal2 = value["Dismissal2"] as? String
+                        if  dismissal2 == "Not out" || dismissal2 == "Retired hurt" {
+                            totalDismissal += 1
                         }
+                        totalBallsFaced += Int(value["BallsFaced2"] as! String)!
+                        totalRuns += Int(value["RunsTaken2"] as! String)!
+                    }
                     
                     if value["OversBowled"] as! String != "-" {
                         toatalBowlingMatches += 1
                         totalOvers += Float(value["OversBowled"] as! String)!
                         totalRunsGiven += Int(value["RunsGiven"] as! String)!
                         TotalWicketsTaken += Int(value["WicketsTaken"] as! String)!
-                        }
+                    }
+                    
+                    //second innings
+                    if value["OversBowled2"] != nil && value["OversBowled2"] as! String != "-" {
+                        toatalBowlingMatches += 1
+                        totalOvers += Float(value["OversBowled2"] as! String)!
+                        totalRunsGiven += Int(value["RunsGiven2"] as! String)!
+                        TotalWicketsTaken += Int(value["WicketsTaken2"] as! String)!
                     }
                 }
+            }
             
         else if levelDropdown.text != "Level" && yearDropdown.text != "Year" {
             if levelDropdown.text == value["Level"] as? String && yearDropdown.text == String(matchYear) {
@@ -372,16 +470,35 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                     }
                     totalBallsFaced += Int(value["BallsFaced"] as! String)!
                     totalRuns += Int(value["RunsTaken"] as! String)!
+                }
+                
+                //second innings
+                if value["RunsTaken2"] != nil && value["RunsTaken2"] as! String != "-" {
+                    toatalBattingmatches += 1
+                    let dismissal2 = value["Dismissal2"] as? String
+                    if  dismissal2 == "Not out" || dismissal2 == "Retired hurt" {
+                        totalDismissal += 1
                     }
+                    totalBallsFaced += Int(value["BallsFaced2"] as! String)!
+                    totalRuns += Int(value["RunsTaken2"] as! String)!
+                }
                 
                 if value["OversBowled"] as! String != "-" {
                     toatalBowlingMatches += 1
                     totalOvers += Float(value["OversBowled"] as! String)!
                     totalRunsGiven += Int(value["RunsGiven"] as! String)!
                     TotalWicketsTaken += Int(value["WicketsTaken"] as! String)!
-                    }
+                }
+                
+                //second innings
+                if value["OversBowled2"] != nil && value["OversBowled2"] as! String != "-" {
+                    toatalBowlingMatches += 1
+                    totalOvers += Float(value["OversBowled2"] as! String)!
+                    totalRunsGiven += Int(value["RunsGiven2"] as! String)!
+                    TotalWicketsTaken += Int(value["WicketsTaken2"] as! String)!
                 }
             }
+        }
                 
         else if ageGroupDropdown.text != "Age Group" {
             if ageGroupDropdown.text == value["AgeGroup"] as? String {
@@ -396,16 +513,35 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                     }
                      totalBallsFaced += Int(value["BallsFaced"] as! String)!
                      totalRuns += Int(value["RunsTaken"] as! String)!
+                }
+                
+                //second innings
+                if value["RunsTaken2"] != nil && value["RunsTaken2"] as! String != "-" {
+                    toatalBattingmatches += 1
+                    let dismissal2 = value["Dismissal2"] as? String
+                    if  dismissal2 == "Not out" || dismissal2 == "Retired hurt" {
+                        totalDismissal += 1
                     }
+                    totalBallsFaced += Int(value["BallsFaced2"] as! String)!
+                    totalRuns += Int(value["RunsTaken2"] as! String)!
+                }
 
                 if value["OversBowled"] as! String != "-" {
                     toatalBowlingMatches += 1
                     totalOvers += Float(value["OversBowled"] as! String)!
                     totalRunsGiven += Int(value["RunsGiven"] as! String)!
                     TotalWicketsTaken += Int(value["WicketsTaken"] as! String)!
-                    }
+                }
+                
+                //second innings
+                if value["OversBowled2"] != nil && value["OversBowled2"] as! String != "-" {
+                    toatalBowlingMatches += 1
+                    totalOvers += Float(value["OversBowled2"] as! String)!
+                    totalRunsGiven += Int(value["RunsGiven2"] as! String)!
+                    TotalWicketsTaken += Int(value["WicketsTaken2"] as! String)!
                 }
             }
+        }
             
         else if levelDropdown.text != "Level" {
           if levelDropdown.text == value["Level"] as? String {
@@ -420,16 +556,35 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 }
                 totalBallsFaced += Int(value["BallsFaced"] as! String)!
                 totalRuns += Int(value["RunsTaken"] as! String)!
+            }
+            
+            //second innings
+            if value["RunsTaken2"] != nil && value["RunsTaken2"] as! String != "-" {
+                toatalBattingmatches += 1
+                let dismissal2 = value["Dismissal2"] as? String
+                if  dismissal2 == "Not out" || dismissal2 == "Retired hurt" {
+                    totalDismissal += 1
                 }
+                totalBallsFaced += Int(value["BallsFaced2"] as! String)!
+                totalRuns += Int(value["RunsTaken2"] as! String)!
+            }
             
             if value["OversBowled"] as! String != "-" {
                 toatalBowlingMatches += 1
                 totalOvers += Float(value["OversBowled"] as! String)!
                 totalRunsGiven += Int(value["RunsGiven"] as! String)!
                 TotalWicketsTaken += Int(value["WicketsTaken"] as! String)!
-                }
+            }
+            
+            //second innings
+            if value["OversBowled2"] != nil && value["OversBowled2"] as! String != "-" {
+                toatalBowlingMatches += 1
+                totalOvers += Float(value["OversBowled2"] as! String)!
+                totalRunsGiven += Int(value["RunsGiven2"] as! String)!
+                TotalWicketsTaken += Int(value["WicketsTaken2"] as! String)!
             }
         }
+    }
             
         else if yearDropdown.text != "Year" {
           if yearDropdown.text == String(matchYear) {
@@ -444,16 +599,35 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 }
                 totalBallsFaced += Int(value["BallsFaced"] as! String)!
                 totalRuns += Int(value["RunsTaken"] as! String)!
+            }
+            
+            //second innings
+            if value["RunsTaken2"] != nil && value["RunsTaken2"] as! String != "-" {
+                toatalBattingmatches += 1
+                let dismissal2 = value["Dismissal2"] as? String
+                if  dismissal2 == "Not out" || dismissal2 == "Retired hurt" {
+                    totalDismissal += 1
                 }
+                totalBallsFaced += Int(value["BallsFaced2"] as! String)!
+                totalRuns += Int(value["RunsTaken2"] as! String)!
+            }
             
             if value["OversBowled"] as! String != "-" {
                 toatalBowlingMatches += 1
                 totalOvers += Float(value["OversBowled"] as! String)!
                 totalRunsGiven += Int(value["RunsGiven"] as! String)!
                 TotalWicketsTaken += Int(value["WicketsTaken"] as! String)!
-                }
             }
-          }
+            
+            //second innings
+            if value["OversBowled2"] != nil && value["OversBowled2"] as! String != "-" {
+                toatalBowlingMatches += 1
+                totalOvers += Float(value["OversBowled2"] as! String)!
+                totalRunsGiven += Int(value["RunsGiven2"] as! String)!
+                TotalWicketsTaken += Int(value["WicketsTaken2"] as! String)!
+            }
+        }
+        }
         }
       }
     }
@@ -471,32 +645,134 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         let mData = MatchSummaryData()
         mData.matchId = value["key"] as! String
         
-        if let runsTaken = value["RunsTaken"]{
-            mData.BattingSectionHidden = (runsTaken as! String == "-")
-            if mData.BattingSectionHidden == false {
-                if let dismissal = value["Dismissal"] as? String where dismissal == "Not out"{
-                    battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("*", fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
+        //code added by Sajith for Double Innings
+        var matchFormat = ""
+        var batting1 = false
+        var batting2 = false
+        var bowling1 = false
+        var bowling2 = false
+        
+        if value["MatchFormat"] as? String != "" && value["MatchFormat"] != nil {
+            matchFormat = value["MatchFormat"] as! String
+        }
+        
+        if matchFormat == "Double Innings" {
+            //data for first innings
+            if let runsTaken = value["RunsTaken"]{
+                mData.BattingSectionHidden = (runsTaken as! String == "-")
+                if mData.BattingSectionHidden == false {
+                    batting1 = true
+                    if let dismissal = value["Dismissal"] as? String where dismissal == "Not out"{
+                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: doubleBattingSize).bold("*", fontName: appFont_black, fontSize: doubleBattingSize)
+                    }
+                    else{
+                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: doubleBattingSize)
+                    }
                 }
-                else{
-                    battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
+            }
+            //data for second innings
+            if let runsTaken2 = value["RunsTaken2"]{
+                mData.BattingSectionHidden = (runsTaken2 as! String == "-")
+                if mData.BattingSectionHidden == false {
+                    if batting1 == true {
+                        battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: separatorSize)
+                    }
+                    else {
+                        battingBowlingScore.bold("DNB, ", fontName: appFont_black, fontSize: separatorSize)
+                    }
+                    batting2 = true
+                    if let dismissal2 = value["Dismissal2"] as? String where dismissal2 == "Not out"{
+                        battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: doubleBattingSize).bold("*", fontName: appFont_black, fontSize: doubleBattingSize)
+                    }
+                    else{
+                        battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: doubleBattingSize)
+                    }
+                }
+            }
+            
+            if batting1 == true || batting2 == true {
+                mData.BattingSectionHidden = false
+                battingBowlingScore.bold("\nRUNS", fontName: appFont_black, fontSize: captionSize)
+            }
+        }
+        else {
+            if let runsTaken = value["RunsTaken"]{
+                mData.BattingSectionHidden = (runsTaken as! String == "-")
+                if mData.BattingSectionHidden == false {
+                    if let dismissal = value["Dismissal"] as? String where dismissal == "Not out"{
+                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: singleBattingSize).bold("*", fontName: appFont_black, fontSize: singleBattingSize).bold("\nRUNS", fontName: appFont_black, fontSize: captionSize)
+                    }
+                    else{
+                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: singleBattingSize).bold("\nRUNS", fontName: appFont_black, fontSize: captionSize)
+                    }
                 }
             }
         }
         
-        if let wicketsTaken = value["WicketsTaken"], let runsGiven = value["RunsGiven"] {
-            mData.BowlingSectionHidden = (runsGiven as! String == "-")
-            if mData.BowlingSectionHidden == false {
-                if battingBowlingScore.length > 0 {
-                    battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 25).bold("\nWICKETS", fontName: appFont_black, fontSize: 10)
+        
+        if matchFormat == "Double Innings" {
+            //data for first innings
+            if let wicketsTaken = value["WicketsTaken"], let runsGiven = value["RunsGiven"] {
+                mData.BowlingSectionHidden = (runsGiven as! String == "-")
+                if mData.BowlingSectionHidden == false {
+                    bowling1 = true
+                    if battingBowlingScore.length > 0 {
+                        battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: doubleBowlingSize)
+                    }
+                    else{
+                        battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: doubleBowlingSize)
+                    }
                 }
-                else{
-                    battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 25).bold("\nWICKETS", fontName: appFont_black, fontSize: 10)
+            }
+            //data for second innings
+            if let wicketsTaken2 = value["WicketsTaken2"], let runsGiven2 = value["RunsGiven2"] {
+                mData.BowlingSectionHidden = (runsGiven2 as! String == "-")
+                if mData.BowlingSectionHidden == false {
+                    if bowling1 == true {
+                        battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: separatorSize)
+                    }
+                    else {
+                        battingBowlingScore.bold("\nDNB, ", fontName: appFont_black, fontSize: separatorSize)
+                    }
+                    bowling2 = true
+                    if battingBowlingScore.length > 0 {
+                        battingBowlingScore.bold("\n\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: doubleBowlingSize)
+                    }
+                    else{
+                        battingBowlingScore.bold("\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: doubleBowlingSize)
+                    }
+                }
+            }
+            
+            if bowling1 == true || bowling2 == true {
+                mData.BowlingSectionHidden = false
+            }
+            
+            if bowling1 == false && bowling2 == false {
+            }
+            else if bowling2 == false {
+                    battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: captionSize)
+            }
+            else if batting1 == false && batting2 == false {
+                    battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: captionSize)
+            }
+        }
+        else {
+            if let wicketsTaken = value["WicketsTaken"], let runsGiven = value["RunsGiven"] {
+                mData.BowlingSectionHidden = (runsGiven as! String == "-")
+                if mData.BowlingSectionHidden == false {
+                    if battingBowlingScore.length > 0 {
+                        battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: singleBowlingSize).bold("\nWICKETS", fontName: appFont_black, fontSize: captionSize)
+                    }
+                    else{
+                        battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: singleBowlingSize).bold("\nWICKETS", fontName: appFont_black, fontSize: captionSize)
+                    }
                 }
             }
         }
         
         if battingBowlingScore.length == 0 {
-            battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize: 30)
+            battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize:25)
         }
         
         if let date = value["MatchDate"]{
@@ -551,11 +827,45 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             }
         }
         
+        //second innings
+        if let ballsFaced2 = value["BallsFaced2"] as? String where ballsFaced2 != "-", let runsScored2 = value["RunsTaken2"] as? String where runsScored2 != "-" && mData.BattingSectionHidden == false {
+            
+            if ballsFaced2 == "0" {
+                if mData.strikerate != nil {
+                    mData.strikerate = mData.strikerate + Float("0.00")!
+                }
+                else {
+                    mData.strikerate = Float("0.00")
+                }
+            }
+            else {
+                let strikeRate2 = String(format: "%.1f",(Float(runsScored2)!)*100/Float(ballsFaced2)!)
+                if mData.strikerate != nil {
+                    mData.strikerate = (mData.strikerate + Float(strikeRate2)!)/2
+                }
+                else {
+                    mData.strikerate = Float(strikeRate2)
+                }
+            }
+        }
+        
         if let oversBowled = value["OversBowled"] as? String where oversBowled != "-", let runsGiven = value["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
             
             let economy = String(format: "%.1f",(Float(runsGiven)!)/Float(oversBowled)!)
             mData.economy = Float(economy)
             //matchVenueAndDate.appendContentsOf("\n Economy: \(economy)")
+        }
+        
+        //second innings
+        if let oversBowled2 = value["OversBowled2"] as? String where oversBowled2 != "-", let runsGiven2 = value["RunsGiven2"] as? String where runsGiven2 != "-" && mData.BowlingSectionHidden == false {
+            
+            let economy2 = String(format: "%.1f",(Float(runsGiven2)!)/Float(oversBowled2)!)
+            if mData.economy != nil {
+                mData.economy = (mData.economy + Float(economy2)!)/2
+            }
+            else {
+                mData.economy = Float(economy2)
+            }
         }
         
         if let opponent  = value["Opponent"]{
@@ -612,12 +922,12 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 if let sRate = currentMatch.strikerate {
                     aCell.strikeRateLabel.hidden = false
                     aCell.economyLabel.hidden = true
-                    aCell.strikeRateLabel.text = "Strike Rate : \(sRate)"
+                    aCell.strikeRateLabel.text = "Strike Rate: \(sRate)"
                 }
                 
                 if let economy = currentMatch.economy {
                     aCell.economyLabel.hidden = false
-                    aCell.economyLabel.text = "Economy : \(economy)"
+                    aCell.economyLabel.text = "Economy: \(economy)"
                 }
             }
             

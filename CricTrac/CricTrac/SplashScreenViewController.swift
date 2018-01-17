@@ -41,6 +41,18 @@ class SplashScreenViewController: UIViewController,ThemeChangeable, GIDSignInDel
         
         //setUIBackgroundTheme(self.view)
         // Do any additional setup after loading the view.
+        
+        
+        //screensize: 1-iPhone4, 2-iPhone5, 3-iPhone6, 4-iPhone6 plus
+        if modelName == "iPhone 4"  || modelName == "iPhone 4s" {
+            screensize = "1"
+        }
+        else if modelName == "iPhone 5"  || modelName == "iPhone 5s" || modelName == "iPhone 5c" {
+            screensize = "2"
+        }
+        else if modelName == "iPhone 6 Plus"  || modelName == "iPhone 6s Plus" || modelName == "iPhone 7 Plus" || modelName == "iPhone 7s Plus" || modelName == "iPhone 8 Plus" || modelName == "iPhone X" {
+            screensize = "4"
+        }
     }
     
     override func viewDidAppear(animated: Bool) {

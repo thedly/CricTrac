@@ -259,4 +259,7 @@ let nameCharacterLimit = 30
 let networkErrorMessage = "Please check your internet connection."
 let feedbackEmail = "contact@crictrac.com"
 
+var screensize = "3"
+
+
 
