@@ -106,17 +106,35 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         tableView3.hidden = true
         
         if screensize == "1" {
-            
+            separatorSize = 12
+            singleBattingSize = 20
+            doubleBattingSize = 15
+            singleBowlingSize = 20
+            doubleBowlingSize = 15
+            captionSize = 10
         }
         else if screensize == "2" {
-            
+            separatorSize = 12
+            singleBattingSize = 20
+            doubleBattingSize = 16
+            singleBowlingSize = 20
+            doubleBowlingSize = 16
+            captionSize = 10
+        }
+        else if screensize == "3" {
+            separatorSize = 15
+            singleBattingSize = 25
+            doubleBattingSize = 18
+            singleBowlingSize = 25
+            doubleBowlingSize = 18
+            captionSize = 10
         }
         else if screensize == "4" {
             separatorSize = 15
             singleBattingSize = 30
-            doubleBattingSize = 25
+            doubleBattingSize = 23
             singleBowlingSize = 30
-            doubleBowlingSize = 25
+            doubleBowlingSize = 20
             captionSize = 12
         }
 
@@ -750,7 +768,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             
             if bowling1 == false && bowling2 == false {
             }
-            else if bowling2 == false {
+            else if bowling1 == true || bowling2 == true {
                     battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: captionSize)
             }
             else if batting1 == false && batting2 == false {
@@ -851,7 +869,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         if let oversBowled = value["OversBowled"] as? String where oversBowled != "-", let runsGiven = value["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
             
-            let economy = String(format: "%.1f",(Float(runsGiven)!)/Float(oversBowled)!)
+            let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
             mData.economy = Float(economy)
             //matchVenueAndDate.appendContentsOf("\n Economy: \(economy)")
         }
@@ -859,7 +877,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         //second innings
         if let oversBowled2 = value["OversBowled2"] as? String where oversBowled2 != "-", let runsGiven2 = value["RunsGiven2"] as? String where runsGiven2 != "-" && mData.BowlingSectionHidden == false {
             
-            let economy2 = String(format: "%.1f",(Float(runsGiven2)!)/Float(oversBowled2)!)
+            let economy2 = String(format: "%.2f",(Float(runsGiven2)!)/Float(oversBowled2)!)
             if mData.economy != nil {
                 mData.economy = (mData.economy + Float(economy2)!)/2
             }

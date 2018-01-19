@@ -143,6 +143,13 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     var alertMessage = "Change picture"
     
+    var separatorSize:CGFloat = 15
+    var singleBattingSize:CGFloat = 25
+    var doubleBattingSize:CGFloat = 20
+    var singleBowlingSize:CGFloat = 25
+    var doubleBowlingSize:CGFloat = 18
+    var captionSize:CGFloat = 10
+    
     @IBAction func editImageBtnPressed(sender: AnyObject) {
         
         if friendId == nil {
@@ -705,11 +712,43 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         let currentTheme = cricTracTheme.currentTheme
         myCoachesButton.backgroundColor = currentTheme.bottomColor
 
-
-       setBackgroundColor()
+        setBackgroundColor()
         initView()
         setDashboardData()
         TeamsTable.reloadData()
+        
+        if screensize == "1" {
+            separatorSize = 12
+            singleBattingSize = 20
+            doubleBattingSize = 15
+            singleBowlingSize = 20
+            doubleBowlingSize = 15
+            captionSize = 10
+        }
+        else if screensize == "2" {
+            separatorSize = 12
+            singleBattingSize = 20
+            doubleBattingSize = 16
+            singleBowlingSize = 20
+            doubleBowlingSize = 16
+            captionSize = 10
+        }
+        else if screensize == "3" {
+            separatorSize = 15
+            singleBattingSize = 25
+            doubleBattingSize = 18
+            singleBowlingSize = 25
+            doubleBowlingSize = 18
+            captionSize = 10
+        }
+        else if screensize == "4" {
+            separatorSize = 15
+            singleBattingSize = 30
+            doubleBattingSize = 20
+            singleBowlingSize = 30
+            doubleBowlingSize = 20
+            captionSize = 12
+        }
     }
     
     func resizeCoverImage(image: UIImage, newWidth: CGFloat) -> UIImage {
@@ -923,25 +962,124 @@ func setDashboardData(){
                             var srEconomy = ""
                             let mData = MatchSummaryData()
                             
-                            if let runsTaken = data["RunsTaken"]{
-                                mData.BattingSectionHidden = (runsTaken as! String == "-")
-                                if mData.BattingSectionHidden == false {
-                                    if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
-                                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("*", fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
+                            //code for Double Innings
+                            var matchFormat = ""
+                            var batting1 = false
+                            var batting2 = false
+                            var bowling1 = false
+                            var bowling2 = false
+                            
+                            if data["MatchFormat"] as? String != "" && data["MatchFormat"] != nil {
+                                matchFormat = data["MatchFormat"] as! String
+                            }
+
+                            if matchFormat == "Double Innings" {
+                                //data for first innings
+                                if let runsTaken = data["RunsTaken"]{
+                                    mData.BattingSectionHidden = (runsTaken as! String == "-")
+                                    if mData.BattingSectionHidden == false {
+                                        batting1 = true
+                                        if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.doubleBattingSize).bold("*", fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                        }
+                                        else{
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                        }
                                     }
-                                    else{
-                                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
+                                }
+                                //data for second innings
+                                if let runsTaken2 = data["RunsTaken2"]{
+                                    mData.BattingSectionHidden = (runsTaken2 as! String == "-")
+                                    if mData.BattingSectionHidden == false {
+                                        if batting1 == true {
+                                            battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: self.separatorSize)
+                                        }
+                                        else {
+                                            battingBowlingScore.bold("DNB, ", fontName: appFont_black, fontSize: self.separatorSize)
+                                        }
+                                        batting2 = true
+                                        if let dismissal2 = data["Dismissal2"] as? String where dismissal2 == "Not out"{
+                                            battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: self.doubleBattingSize).bold("*", fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                        }
+                                        else{
+                                            battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                        }
+                                    }
+                                }
+                                
+                                if batting1 == true || batting2 == true {
+                                    mData.BattingSectionHidden = false
+                                    battingBowlingScore.bold("\nRUNS", fontName: appFont_black, fontSize: self.captionSize)
+                                }
+                            }
+                            else {
+                                if let runsTaken = data["RunsTaken"]{
+                                    mData.BattingSectionHidden = (runsTaken as! String == "-")
+                                    if mData.BattingSectionHidden == false {
+                                        batting1 = true
+                                        if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.singleBattingSize).bold("*", fontName: appFont_black, fontSize: self.singleBattingSize).bold("\nRUNS", fontName: appFont_black, fontSize: self.captionSize)
+                                        }
+                                        else{
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.singleBattingSize).bold("\nRUNS", fontName: appFont_black, fontSize: self.captionSize)
+                                        }
                                     }
                                 }
                             }
-                            if let wicketsTaken = data["WicketsTaken"], let runsGiven = data["RunsGiven"] {
-                                mData.BowlingSectionHidden = (runsGiven as! String == "-")
-                                if mData.BowlingSectionHidden == false {
-                                    if battingBowlingScore.length > 0 {
-                                        battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 25).bold("\nWICKETS", fontName: appFont_black, fontSize: 10)
+                            
+                            if matchFormat == "Double Innings" {
+                                //data for first innings
+                                if let wicketsTaken = data["WicketsTaken"], let runsGiven = data["RunsGiven"] {
+                                    mData.BowlingSectionHidden = (runsGiven as! String == "-")
+                                    if mData.BowlingSectionHidden == false {
+                                        bowling1 = true
+                                        if battingBowlingScore.length > 0 {
+                                            battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                        }
+                                        else{
+                                            battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                        }
                                     }
-                                    else{
-                                        battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 25).bold("\nWICKETS", fontName: appFont_black, fontSize: 10)
+                                }
+                                //data for second innings
+                                if let wicketsTaken2 = data["WicketsTaken2"], let runsGiven2 = data["RunsGiven2"] {
+                                    mData.BowlingSectionHidden = (runsGiven2 as! String == "-")
+                                    if mData.BowlingSectionHidden == false {
+                                        if bowling1 == true {
+                                            battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: self.separatorSize)
+                                        }
+                                        else {
+                                            battingBowlingScore.bold("\nDNB, ", fontName: appFont_black, fontSize: self.separatorSize)
+                                        }
+                                        bowling2 = true
+                                        if battingBowlingScore.length > 0 {
+                                            battingBowlingScore.bold("\n\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                        }
+                                        else{
+                                            battingBowlingScore.bold("\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                        }
+                                    }
+                                }
+                                
+                               if bowling1 == true || bowling2 == true {
+                                    mData.BowlingSectionHidden = false
+                                    battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: self.captionSize)
+                                }
+                                else if batting1 == false && batting2 == false {
+                                    battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: self.captionSize)
+                                }
+                            }
+                            else {
+                                if let wicketsTaken = data["WicketsTaken"], let runsGiven = data["RunsGiven"] {
+                                    mData.BowlingSectionHidden = (runsGiven as! String == "-")
+                                    if mData.BowlingSectionHidden == false {
+                                        if battingBowlingScore.length > 0 {
+                                            bowling1 = true
+                                            battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.singleBowlingSize).bold("\nWICKETS", fontName: appFont_black, fontSize: self.captionSize)
+                                        }
+                                        else{
+                                            battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.singleBowlingSize).bold("\nWICKETS", fontName: appFont_black, fontSize: self.captionSize)
+                                        }
                                     }
                                 }
                             }
@@ -982,35 +1120,97 @@ func setDashboardData(){
                             
                             groundVenue = groundData
                             
-//                            if let ground = data["Ground"]{
-//                                mData.ground = ground as! String
-//                                
-//                                if let venue = data["Venue"] as? String where venue != "-" {
-//                                    mData.ground = "\(ground), \(venue)"
-//                                }
-//                                groundVenue = ("\(mData.ground)")
-//                            }
-                            
                             self.summaryViewHeightConstraint1.constant = 70
                             self.summaryStackViewHeightConstraint.constant = 80
-                            if let ballsFaced = data["BallsFaced"] as? String where ballsFaced != "-", let runsScored = data["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
+                            
+                            if (batting1 == true || batting2 == true) && mData.BattingSectionHidden == false {
+                                //if let ballsFaced = data["BallsFaced"] as? String where ballsFaced != "-", let runsScored = data["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
                                 
-                                if ballsFaced == "0" {
-                                    mData.strikerate = Float("0.00")
+                                var totalStrikeRate = Float("0.00")
+                                var strikerate1 = Float("0.00")
+                                var strikerate2 = Float("0.00")
+                                
+                                if batting1 == true {
+                                    let ballsFaced1 = data["BallsFaced"] as? String
+                                    let runsScored1 = data["RunsTaken"] as? String
+                                    
+                                    if ballsFaced1 == "0" {
+                                        strikerate1 = Float("0.00")
+                                    }
+                                    else {
+                                        let strikeRate1 = String(format: "%.1f",(Float(runsScored1!))!*100/Float(ballsFaced1!)!)
+                                        strikerate1 = Float(strikeRate1)
+                                    }
+                                }
+                                if batting2 == true {
+                                    let ballsFaced2 = data["BallsFaced2"] as? String
+                                    let runsScored2 = data["RunsTaken2"] as? String
+                                    
+                                    if ballsFaced2 == "0" {
+                                        strikerate2 = Float("0.00")
+                                    }
+                                    else {
+                                        let strikeRate2 = String(format: "%.1f",(Float(runsScored2!))!*100/Float(ballsFaced2!)!)
+                                        strikerate2 = Float(strikeRate2)
+                                    }
+                                }
+                                
+                                if batting1 == true && batting2 == true {
+                                    totalStrikeRate = (strikerate1! + strikerate2!)/2
                                 }
                                 else {
-                                    let strikeRate = String(format: "%.1f",(Float(runsScored)!)*100/Float(ballsFaced)!)
-                                    mData.strikerate = Float(strikeRate)
-                                    srEconomy = ("Strike Rate: \(strikeRate)")
-                                    
+                                    totalStrikeRate = strikerate1! + strikerate2!
                                 }
+                                srEconomy = ("Strike Rate: \(String(format: "%.1f",totalStrikeRate!))")
+                                
                                 self.summaryViewHeightConstraint1.constant = 90
                                 self.summaryStackViewHeightConstraint.constant = self.summaryStackViewHeightConstraint.constant + 20
                             }
                             
-                            if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
+                            
+//                            if let ballsFaced = data["BallsFaced"] as? String where ballsFaced != "-", let runsScored = data["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
+//                                
+//                                if ballsFaced == "0" {
+//                                    mData.strikerate = Float("0.00")
+//                                }
+//                                else {
+//                                    let strikeRate = String(format: "%.1f",(Float(runsScored)!)*100/Float(ballsFaced)!)
+//                                    mData.strikerate = Float(strikeRate)
+//                                    srEconomy = ("Strike Rate: \(strikeRate)")
+//                                    
+//                                }
+//                                self.summaryViewHeightConstraint1.constant = 90
+//                                self.summaryStackViewHeightConstraint.constant = self.summaryStackViewHeightConstraint.constant + 20
+//                            }
+                            
+                            if (bowling1 == true || bowling2 == true) && mData.BowlingSectionHidden == false {
+                                //if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
                                 
-                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
+                                var totalEconomy = Float("0.00")
+                                var economy1 = Float("0.00")
+                                var economy2 = Float("0.00")
+                                
+                                if bowling1 == true {
+                                    let runsGiven1 = data["RunsGiven"] as? String
+                                    let oversBowled1 = data["OversBowled"] as? String
+                                    let econ1 = String(format: "%.2f",(Float(runsGiven1!)!)/Float(oversBowled1!)!)
+                                    economy1 = Float(econ1)
+                                }
+                                if bowling2 == true {
+                                    let runsGiven2 = data["RunsGiven2"] as? String
+                                    let oversBowled2 = data["OversBowled2"] as? String
+                                    let econ2 = String(format: "%.2f",(Float(runsGiven2!)!)/Float(oversBowled2!)!)
+                                    economy2 = Float(econ2)
+                                }
+                                
+                                if bowling1 == true && bowling2 == true {
+                                    totalEconomy = (economy1! + economy2!)/2
+                                }
+                                else {
+                                    totalEconomy = economy1! + economy2!
+                                }
+                                let economy = String(format: "%.2f",totalEconomy!)
+                                
                                 mData.economy = Float(economy)
                                 if srEconomy.length > 0 {
                                     srEconomy.appendContentsOf("\nEconomy: \(economy)")
@@ -1023,6 +1223,23 @@ func setDashboardData(){
                                     self.summaryStackViewHeightConstraint.constant = self.summaryStackViewHeightConstraint.constant + 20
                                 }
                             }
+
+                            
+//                            if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
+//                                
+//                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
+//                                mData.economy = Float(economy)
+//                                if srEconomy.length > 0 {
+//                                    srEconomy.appendContentsOf("\nEconomy: \(economy)")
+//                                     self.summaryViewHeightConstraint1.constant = 110
+//                                    self.summaryStackViewHeightConstraint.constant = self.summaryStackViewHeightConstraint.constant + 20
+//                                }
+//                                else {
+//                                    srEconomy = ("Economy: \(economy)")
+//                                     self.summaryViewHeightConstraint1.constant = 90
+//                                    self.summaryStackViewHeightConstraint.constant = self.summaryStackViewHeightConstraint.constant + 20
+//                                }
+//                            }
                             
                             if let opponent  = data["Opponent"]{
                                 opponentName = opponent as! String
@@ -1063,25 +1280,124 @@ func setDashboardData(){
                             var srEconomy = ""
                             let mData = MatchSummaryData()
                             
-                            if let runsTaken = data["RunsTaken"]{
-                                mData.BattingSectionHidden = (runsTaken as! String == "-")
-                                if mData.BattingSectionHidden == false {
-                                    if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
-                                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("*", fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
+                            //code for Double Innings
+                            var matchFormat = ""
+                            var batting1 = false
+                            var batting2 = false
+                            var bowling1 = false
+                            var bowling2 = false
+                            
+                            if data["MatchFormat"] as? String != "" && data["MatchFormat"] != nil {
+                                matchFormat = data["MatchFormat"] as! String
+                            }
+
+                            if matchFormat == "Double Innings" {
+                                //data for first innings
+                                if let runsTaken = data["RunsTaken"]{
+                                    mData.BattingSectionHidden = (runsTaken as! String == "-")
+                                    if mData.BattingSectionHidden == false {
+                                        batting1 = true
+                                        if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.doubleBattingSize).bold("*", fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                        }
+                                        else{
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                        }
                                     }
-                                    else{
-                                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
+                                }
+                                //data for second innings
+                                if let runsTaken2 = data["RunsTaken2"]{
+                                    mData.BattingSectionHidden = (runsTaken2 as! String == "-")
+                                    if mData.BattingSectionHidden == false {
+                                        if batting1 == true {
+                                            battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: self.separatorSize)
+                                        }
+                                        else {
+                                            battingBowlingScore.bold("DNB, ", fontName: appFont_black, fontSize: self.separatorSize)
+                                        }
+                                        batting2 = true
+                                        if let dismissal2 = data["Dismissal2"] as? String where dismissal2 == "Not out"{
+                                            battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: self.doubleBattingSize).bold("*", fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                        }
+                                        else{
+                                            battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                        }
+                                    }
+                                }
+                                
+                                if batting1 == true || batting2 == true {
+                                    mData.BattingSectionHidden = false
+                                    battingBowlingScore.bold("\nRUNS", fontName: appFont_black, fontSize: self.captionSize)
+                                }
+                            }
+                            else {
+                                if let runsTaken = data["RunsTaken"]{
+                                    mData.BattingSectionHidden = (runsTaken as! String == "-")
+                                    if mData.BattingSectionHidden == false {
+                                        batting1 = true
+                                        if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.singleBattingSize).bold("*", fontName: appFont_black, fontSize: self.singleBattingSize).bold("\nRUNS", fontName: appFont_black, fontSize: self.captionSize)
+                                        }
+                                        else{
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.singleBattingSize).bold("\nRUNS", fontName: appFont_black, fontSize: self.captionSize)
+                                        }
                                     }
                                 }
                             }
-                            if let wicketsTaken = data["WicketsTaken"], let runsGiven = data["RunsGiven"] {
-                                mData.BowlingSectionHidden = (runsGiven as! String == "-")
-                                if mData.BowlingSectionHidden == false {
-                                    if battingBowlingScore.length > 0 {
-                                        battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 25).bold("\nWICKETS", fontName: appFont_black, fontSize: 10)
+                            
+                            if matchFormat == "Double Innings" {
+                                //data for first innings
+                                if let wicketsTaken = data["WicketsTaken"], let runsGiven = data["RunsGiven"] {
+                                    mData.BowlingSectionHidden = (runsGiven as! String == "-")
+                                    if mData.BowlingSectionHidden == false {
+                                        bowling1 = true
+                                        if battingBowlingScore.length > 0 {
+                                            battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                        }
+                                        else{
+                                            battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                        }
                                     }
-                                    else{
-                                        battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 25).bold("\nWICKETS", fontName: appFont_black, fontSize: 10)
+                                }
+                                //data for second innings
+                                if let wicketsTaken2 = data["WicketsTaken2"], let runsGiven2 = data["RunsGiven2"] {
+                                    mData.BowlingSectionHidden = (runsGiven2 as! String == "-")
+                                    if mData.BowlingSectionHidden == false {
+                                        if bowling1 == true {
+                                            battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: self.separatorSize)
+                                        }
+                                        else {
+                                            battingBowlingScore.bold("\nDNB, ", fontName: appFont_black, fontSize: self.separatorSize)
+                                        }
+                                        bowling2 = true
+                                        if battingBowlingScore.length > 0 {
+                                            battingBowlingScore.bold("\n\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                        }
+                                        else{
+                                            battingBowlingScore.bold("\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                        }
+                                    }
+                                }
+                                
+                                if bowling1 == true || bowling2 == true {
+                                    mData.BowlingSectionHidden = false
+                                    battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: self.captionSize)
+                                }
+                                else if batting1 == false && batting2 == false {
+                                    battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: self.captionSize)
+                                }
+                            }
+                            else {
+                                if let wicketsTaken = data["WicketsTaken"], let runsGiven = data["RunsGiven"] {
+                                    mData.BowlingSectionHidden = (runsGiven as! String == "-")
+                                    if mData.BowlingSectionHidden == false {
+                                        if battingBowlingScore.length > 0 {
+                                            bowling1 = true
+                                            battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.singleBowlingSize).bold("\nWICKETS", fontName: appFont_black, fontSize: self.captionSize)
+                                        }
+                                        else{
+                                            battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.singleBowlingSize).bold("\nWICKETS", fontName: appFont_black, fontSize: self.captionSize)
+                                        }
                                     }
                                 }
                             }
@@ -1122,34 +1438,82 @@ func setDashboardData(){
                             
                             groundVenue = groundData
                             
-//                            if let ground = data["Ground"]{
-//                                mData.ground = ground as! String
-//                                
-//                                if let venue = data["Venue"] as? String where venue != "-" {
-//                                    mData.ground = "\(ground), \(venue)"
-//                                }
-//                                groundVenue = ("\(mData.ground)")
-//                            }
-                            
                             self.summaryViewHeightConstraint2.constant = 70
                             self.summaryStackViewHeightConstraint.constant = self.summaryStackViewHeightConstraint.constant + 70
-                            if let ballsFaced = data["BallsFaced"] as? String where ballsFaced != "-", let runsScored = data["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
+                            
+                            if (batting1 == true || batting2 == true) && mData.BattingSectionHidden == false {
+                            //if let ballsFaced = data["BallsFaced"] as? String where ballsFaced != "-", let runsScored = data["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
                                 
-                                if ballsFaced == "0" {
-                                    mData.strikerate = Float("0.00")
+                                var totalStrikeRate = Float("0.00")
+                                var strikerate1 = Float("0.00")
+                                var strikerate2 = Float("0.00")
+                                
+                                if batting1 == true {
+                                    let ballsFaced1 = data["BallsFaced"] as? String
+                                    let runsScored1 = data["RunsTaken"] as? String
+                                    
+                                    if ballsFaced1 == "0" {
+                                        strikerate1 = Float("0.00")
+                                    }
+                                    else {
+                                        let strikeRate1 = String(format: "%.1f",(Float(runsScored1!))!*100/Float(ballsFaced1!)!)
+                                        strikerate1 = Float(strikeRate1)
+                                    }
+                                }
+                                if batting2 == true {
+                                    let ballsFaced2 = data["BallsFaced2"] as? String
+                                    let runsScored2 = data["RunsTaken2"] as? String
+                                    
+                                    if ballsFaced2 == "0" {
+                                        strikerate2 = Float("0.00")
+                                    }
+                                    else {
+                                        let strikeRate2 = String(format: "%.1f",(Float(runsScored2!))!*100/Float(ballsFaced2!)!)
+                                        strikerate2 = Float(strikeRate2)
+                                    }
+                                }
+                                
+                                if batting1 == true && batting2 == true {
+                                    totalStrikeRate = (strikerate1! + strikerate2!)/2
                                 }
                                 else {
-                                    let strikeRate = String(format: "%.1f",(Float(runsScored)!)*100/Float(ballsFaced)!)
-                                    mData.strikerate = Float(strikeRate)
-                                    srEconomy = ("Strike Rate: \(strikeRate)")
+                                    totalStrikeRate = strikerate1! + strikerate2!
                                 }
+                                srEconomy = ("Strike Rate: \(String(format: "%.1f",totalStrikeRate!))")
+                                
                                 self.summaryViewHeightConstraint2.constant = 90
                                 self.summaryStackViewHeightConstraint.constant = self.summaryStackViewHeightConstraint.constant + 20
                             }
                             
-                            if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
+                            if (bowling1 == true || bowling2 == true) && mData.BowlingSectionHidden == false {
+                            //if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
                                 
-                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
+                                var totalEconomy = Float("0.00")
+                                var economy1 = Float("0.00")
+                                var economy2 = Float("0.00")
+                                
+                                if bowling1 == true {
+                                    let runsGiven1 = data["RunsGiven"] as? String
+                                    let oversBowled1 = data["OversBowled"] as? String
+                                    let econ1 = String(format: "%.2f",(Float(runsGiven1!)!)/Float(oversBowled1!)!)
+                                    economy1 = Float(econ1)
+                                }
+                                if bowling2 == true {
+                                    let runsGiven2 = data["RunsGiven2"] as? String
+                                    let oversBowled2 = data["OversBowled2"] as? String
+                                    let econ2 = String(format: "%.2f",(Float(runsGiven2!)!)/Float(oversBowled2!)!)
+                                    economy2 = Float(econ2)
+                                }
+                                
+                                if bowling1 == true && bowling2 == true {
+                                    totalEconomy = (economy1! + economy2!)/2
+                                }
+                                else {
+                                    totalEconomy = economy1! + economy2!
+                                }
+                                let economy = String(format: "%.2f",totalEconomy!)
+                                
+                                //let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
                                 mData.economy = Float(economy)
                                 if srEconomy.length > 0 {
                                     srEconomy.appendContentsOf("\nEconomy: \(economy)")
@@ -1210,14 +1574,65 @@ func setDashboardData(){
                             var srEconomy = ""
                             let mData = MatchSummaryData()
                             
-                            if let runsTaken = data["RunsTaken"]{
-                                mData.BattingSectionHidden = (runsTaken as! String == "-")
-                                if mData.BattingSectionHidden == false {
-                                    if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
-                                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("*", fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
+                            //code for Double Innings
+                            var matchFormat = ""
+                            var batting1 = false
+                            var batting2 = false
+                            
+                            if data["MatchFormat"] as? String != "" && data["MatchFormat"] != nil {
+                                matchFormat = data["MatchFormat"] as! String
+                            }
+                            
+                            if matchFormat == "Double Innings" {
+                                //data for first innings
+                                if let runsTaken = data["RunsTaken"]{
+                                    mData.BattingSectionHidden = (runsTaken as! String == "-")
+                                    if mData.BattingSectionHidden == false {
+                                        batting1 = true
+                                        if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.doubleBattingSize).bold("*", fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                        }
+                                        else{
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                        }
                                     }
-                                    else{
-                                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
+                                }
+                                //data for second innings
+                                if let runsTaken2 = data["RunsTaken2"]{
+                                    mData.BattingSectionHidden = (runsTaken2 as! String == "-")
+                                    if mData.BattingSectionHidden == false {
+                                        if batting1 == true {
+                                            battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: self.separatorSize)
+                                        }
+                                        else {
+                                            battingBowlingScore.bold("DNB, ", fontName: appFont_black, fontSize: self.separatorSize)
+                                        }
+                                        batting2 = true
+                                        if let dismissal2 = data["Dismissal2"] as? String where dismissal2 == "Not out"{
+                                            battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: self.doubleBattingSize).bold("*", fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                        }
+                                        else{
+                                            battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                        }
+                                    }
+                                }
+                                
+                                if batting1 == true || batting2 == true {
+                                    mData.BattingSectionHidden = false
+                                    battingBowlingScore.bold("\nRUNS", fontName: appFont_black, fontSize: self.captionSize)
+                                }
+                            }
+                            else {
+                                if let runsTaken = data["RunsTaken"]{
+                                    mData.BattingSectionHidden = (runsTaken as! String == "-")
+                                    if mData.BattingSectionHidden == false {
+                                        batting1 = true
+                                        if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.singleBattingSize).bold("*", fontName: appFont_black, fontSize: self.singleBattingSize).bold("\nRUNS", fontName: appFont_black, fontSize: self.captionSize)
+                                        }
+                                        else{
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.singleBattingSize).bold("\nRUNS", fontName: appFont_black, fontSize: self.captionSize)
+                                        }
                                     }
                                 }
                             }
@@ -1257,37 +1672,80 @@ func setDashboardData(){
                             
                             groundVenue = groundData
                             
-//                            if let ground = data["Ground"]{
-//                                mData.ground = ground as! String
-//                                
-//                                if let venue = data["Venue"] as? String where venue != "-" {
-//                                    mData.ground = "\(ground), \(venue)"
-//                                }
-//                                groundVenue = ("\(mData.ground)")
-//                            }
-                            
-                            if let ballsFaced = data["BallsFaced"] as? String where ballsFaced != "-", let runsScored = data["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
+                            if (batting1 == true || batting2 == true) && mData.BattingSectionHidden == false {
+                                //if let ballsFaced = data["BallsFaced"] as? String where ballsFaced != "-", let runsScored = data["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
                                 
-                                if ballsFaced == "0" {
-                                    mData.strikerate = Float("0.00")
+                                var totalStrikeRate = Float("0.00")
+                                var strikerate1 = Float("0.00")
+                                var strikerate2 = Float("0.00")
+                                
+                                if batting1 == true {
+                                    let ballsFaced1 = data["BallsFaced"] as? String
+                                    let runsScored1 = data["RunsTaken"] as? String
+                                    
+                                    if ballsFaced1 == "0" {
+                                        strikerate1 = Float("0.00")
+                                    }
+                                    else {
+                                        let strikeRate1 = String(format: "%.1f",(Float(runsScored1!))!*100/Float(ballsFaced1!)!)
+                                        strikerate1 = Float(strikeRate1)
+                                    }
+                                }
+                                if batting2 == true {
+                                    let ballsFaced2 = data["BallsFaced2"] as? String
+                                    let runsScored2 = data["RunsTaken2"] as? String
+                                    
+                                    if ballsFaced2 == "0" {
+                                        strikerate2 = Float("0.00")
+                                    }
+                                    else {
+                                        let strikeRate2 = String(format: "%.1f",(Float(runsScored2!))!*100/Float(ballsFaced2!)!)
+                                        strikerate2 = Float(strikeRate2)
+                                    }
+                                }
+                                
+                                if batting1 == true && batting2 == true {
+                                    totalStrikeRate = (strikerate1! + strikerate2!)/2
                                 }
                                 else {
-                                    let strikeRate = String(format: "%.1f",(Float(runsScored)!)*100/Float(ballsFaced)!)
-                                    mData.strikerate = Float(strikeRate)
-                                    srEconomy = ("Strike Rate: \(strikeRate)")
+                                    totalStrikeRate = strikerate1! + strikerate2!
                                 }
+                                srEconomy = ("Strike Rate: \(String(format: "%.1f",totalStrikeRate!))")
+                                
+                                if let opponent  = data["Opponent"]{
+                                    opponentName = opponent as! String
+                                }
+                                
+                                self.FirstRecentMatchScore.attributedText = battingBowlingScore
+                                self.FirstRecentMatchOpponent.text = opponentName
+                                self.FirstRecentMatchDateAndLocation.text = matchVenueAndDate
+                                self.FirstRecentMatchBattingGroundVenue.text = groundVenue
+                                self.FirstRecentMatchBattingStrikeRate.text = srEconomy
                             }
                             
-                            if let opponent  = data["Opponent"]{
-                                opponentName = opponent as! String
-                            }
                             
-                            self.FirstRecentMatchScore.attributedText = battingBowlingScore
-                            self.FirstRecentMatchOpponent.text = opponentName
-                            self.FirstRecentMatchDateAndLocation.text = matchVenueAndDate
-                            self.FirstRecentMatchBattingGroundVenue.text = groundVenue
-                            self.FirstRecentMatchBattingStrikeRate.text = srEconomy
-
+//                            if let ballsFaced = data["BallsFaced"] as? String where ballsFaced != "-", let runsScored = data["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
+//                                
+//                                if ballsFaced == "0" {
+//                                    mData.strikerate = Float("0.00")
+//                                }
+//                                else {
+//                                    let strikeRate = String(format: "%.1f",(Float(runsScored)!)*100/Float(ballsFaced)!)
+//                                    mData.strikerate = Float(strikeRate)
+//                                    srEconomy = ("Strike Rate: \(strikeRate)")
+//                                }
+//                            }
+                            
+//                            if let opponent  = data["Opponent"]{
+//                                opponentName = opponent as! String
+//                            }
+//                            
+//                            self.FirstRecentMatchScore.attributedText = battingBowlingScore
+//                            self.FirstRecentMatchOpponent.text = opponentName
+//                            self.FirstRecentMatchDateAndLocation.text = matchVenueAndDate
+//                            self.FirstRecentMatchBattingGroundVenue.text = groundVenue
+//                            self.FirstRecentMatchBattingStrikeRate.text = srEconomy
+//
                         }
                     })
                     
@@ -1326,14 +1784,67 @@ func setDashboardData(){
                             var srEconomy = ""
                             let mData = MatchSummaryData()
                             
-                            if let runsTaken = data["RunsTaken"]{
-                                mData.BattingSectionHidden = (runsTaken as! String == "-")
-                                if mData.BattingSectionHidden == false {
-                                    if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
-                                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("*", fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
+                            //code for Double Innings
+                            var matchFormat = ""
+                            var batting1 = false
+                            var batting2 = false
+                            var bowling1 = false
+                            var bowling2 = false
+                            
+                            if data["MatchFormat"] as? String != "" && data["MatchFormat"] != nil {
+                                matchFormat = data["MatchFormat"] as! String
+                            }
+                            
+                            if matchFormat == "Double Innings" {
+                                //data for first innings
+                                if let runsTaken = data["RunsTaken"]{
+                                    mData.BattingSectionHidden = (runsTaken as! String == "-")
+                                    if mData.BattingSectionHidden == false {
+                                        batting1 = true
+                                        if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.doubleBattingSize).bold("*", fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                        }
+                                        else{
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                        }
                                     }
-                                    else{
-                                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: 25).bold("\nRUNS", fontName: appFont_black, fontSize: 10)
+                                }
+                                //data for second innings
+                                if let runsTaken2 = data["RunsTaken2"]{
+                                    mData.BattingSectionHidden = (runsTaken2 as! String == "-")
+                                    if mData.BattingSectionHidden == false {
+                                        if batting1 == true {
+                                            battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: self.separatorSize)
+                                        }
+                                        else {
+                                            battingBowlingScore.bold("DNB, ", fontName: appFont_black, fontSize: self.separatorSize)
+                                        }
+                                        batting2 = true
+                                        if let dismissal2 = data["Dismissal2"] as? String where dismissal2 == "Not out"{
+                                            battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: self.doubleBattingSize).bold("*", fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                        }
+                                        else{
+                                            battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                        }
+                                    }
+                                }
+                                
+                                if batting1 == true || batting2 == true {
+                                    mData.BattingSectionHidden = false
+                                    battingBowlingScore.bold("\nRUNS", fontName: appFont_black, fontSize: self.captionSize)
+                                }
+                            }
+                            else {
+                                if let runsTaken = data["RunsTaken"]{
+                                    mData.BattingSectionHidden = (runsTaken as! String == "-")
+                                    if mData.BattingSectionHidden == false {
+                                        batting1 = true
+                                        if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.singleBattingSize).bold("*", fontName: appFont_black, fontSize: self.singleBattingSize).bold("\nRUNS", fontName: appFont_black, fontSize: self.captionSize)
+                                        }
+                                        else{
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.singleBattingSize).bold("\nRUNS", fontName: appFont_black, fontSize: self.captionSize)
+                                        }
                                     }
                                 }
                             }
@@ -1373,36 +1884,78 @@ func setDashboardData(){
                             
                             groundVenue = groundData
                             
-//                            if let ground = data["Ground"]{
-//                                mData.ground = ground as! String
-//                                
-//                                if let venue = data["Venue"] as? String where venue != "-" {
-//                                    mData.ground = "\(ground), \(venue)"
-//                                }
-//                                groundVenue = ("\(mData.ground)")
-//                            }
-                            
-                            if let ballsFaced = data["BallsFaced"] as? String where ballsFaced != "-", let runsScored = data["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
+                            if (batting1 == true || batting2 == true) && mData.BattingSectionHidden == false {
+                                //if let ballsFaced = data["BallsFaced"] as? String where ballsFaced != "-", let runsScored = data["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
                                 
-                                if ballsFaced == "0" {
-                                    mData.strikerate = Float("0.00")
+                                var totalStrikeRate = Float("0.00")
+                                var strikerate1 = Float("0.00")
+                                var strikerate2 = Float("0.00")
+                                
+                                if batting1 == true {
+                                    let ballsFaced1 = data["BallsFaced"] as? String
+                                    let runsScored1 = data["RunsTaken"] as? String
+                                    
+                                    if ballsFaced1 == "0" {
+                                        strikerate1 = Float("0.00")
+                                    }
+                                    else {
+                                        let strikeRate1 = String(format: "%.1f",(Float(runsScored1!))!*100/Float(ballsFaced1!)!)
+                                        strikerate1 = Float(strikeRate1)
+                                    }
+                                }
+                                if batting2 == true {
+                                    let ballsFaced2 = data["BallsFaced2"] as? String
+                                    let runsScored2 = data["RunsTaken2"] as? String
+                                    
+                                    if ballsFaced2 == "0" {
+                                        strikerate2 = Float("0.00")
+                                    }
+                                    else {
+                                        let strikeRate2 = String(format: "%.1f",(Float(runsScored2!))!*100/Float(ballsFaced2!)!)
+                                        strikerate2 = Float(strikeRate2)
+                                    }
+                                }
+                                
+                                if batting1 == true && batting2 == true {
+                                    totalStrikeRate = (strikerate1! + strikerate2!)/2
                                 }
                                 else {
-                                    let strikeRate = String(format: "%.1f",(Float(runsScored)!)*100/Float(ballsFaced)!)
-                                    mData.strikerate = Float(strikeRate)
-                                    srEconomy = ("Strike Rate: \(strikeRate)")
+                                    totalStrikeRate = strikerate1! + strikerate2!
                                 }
+                                srEconomy = ("Strike Rate: \(String(format: "%.1f",totalStrikeRate!))")
+                                
+                                if let opponent  = data["Opponent"]{
+                                    opponentName = opponent as! String
+                                }
+                                
+                                self.SecondRecentMatchScore.attributedText = battingBowlingScore
+                                self.SecondRecentMatchOpponent.text = opponentName
+                                self.SecondRecentMatchDateAndLocation.text = matchVenueAndDate
+                                self.SecondRecentMatchBattingGroundVenue.text = groundVenue
+                                self.SecondRecentMatchBattingStrikeRate.text = srEconomy
                             }
                             
-                            if let opponent  = data["Opponent"]{
-                                opponentName = opponent as! String
-                            }
+//                            if let ballsFaced = data["BallsFaced"] as? String where ballsFaced != "-", let runsScored = data["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
+//                                
+//                                if ballsFaced == "0" {
+//                                    mData.strikerate = Float("0.00")
+//                                }
+//                                else {
+//                                    let strikeRate = String(format: "%.1f",(Float(runsScored)!)*100/Float(ballsFaced)!)
+//                                    mData.strikerate = Float(strikeRate)
+//                                    srEconomy = ("Strike Rate: \(strikeRate)")
+//                                }
+//                            }
                             
-                            self.SecondRecentMatchScore.attributedText = battingBowlingScore
-                            self.SecondRecentMatchOpponent.text = opponentName
-                            self.SecondRecentMatchDateAndLocation.text = matchVenueAndDate
-                            self.SecondRecentMatchBattingGroundVenue.text = groundVenue
-                            self.SecondRecentMatchBattingStrikeRate.text = srEconomy
+//                            if let opponent  = data["Opponent"]{
+//                                opponentName = opponent as! String
+//                            }
+//                            
+//                            self.SecondRecentMatchScore.attributedText = battingBowlingScore
+//                            self.SecondRecentMatchOpponent.text = opponentName
+//                            self.SecondRecentMatchDateAndLocation.text = matchVenueAndDate
+//                            self.SecondRecentMatchBattingGroundVenue.text = groundVenue
+//                            self.SecondRecentMatchBattingStrikeRate.text = srEconomy
                         }
                     })
                     
@@ -1442,10 +1995,60 @@ func setDashboardData(){
                             var srEconomy = ""
                             let mData = MatchSummaryData()
                             
-                            if let wicketsTaken = data["WicketsTaken"], let runsGiven = data["RunsGiven"] {
-                                mData.BowlingSectionHidden = (runsGiven as! String == "-")
-                                if mData.BowlingSectionHidden == false {
-                                    battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 25).bold("\nWICKETS", fontName: appFont_black, fontSize: 10)
+                            //code for Double Innings
+                            var matchFormat = ""
+                            var bowling1 = false
+                            var bowling2 = false
+                            
+                            if data["MatchFormat"] as? String != "" && data["MatchFormat"] != nil {
+                                matchFormat = data["MatchFormat"] as! String
+                            }
+                            
+                            if matchFormat == "Double Innings" {
+                                //data for first innings
+                                if let wicketsTaken = data["WicketsTaken"], let runsGiven = data["RunsGiven"] {
+                                    mData.BowlingSectionHidden = (runsGiven as! String == "-")
+                                    if mData.BowlingSectionHidden == false {
+                                        bowling1 = true
+                                        if battingBowlingScore.length > 0 {
+                                            battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                        }
+                                        else{
+                                            battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                        }
+                                    }
+                                }
+                                //data for second innings
+                                if let wicketsTaken2 = data["WicketsTaken2"], let runsGiven2 = data["RunsGiven2"] {
+                                    mData.BowlingSectionHidden = (runsGiven2 as! String == "-")
+                                    if mData.BowlingSectionHidden == false {
+                                        if bowling1 == true {
+                                            battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: self.separatorSize)
+                                        }
+                                        else {
+                                            battingBowlingScore.bold("\nDNB, ", fontName: appFont_black, fontSize: self.separatorSize)
+                                        }
+                                        bowling2 = true
+                                        if battingBowlingScore.length > 0 {
+                                            battingBowlingScore.bold("\n\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                        }
+                                        else{
+                                            battingBowlingScore.bold("\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                        }
+                                    }
+                                }
+                                if bowling1 == true || bowling1 == true {
+                                    mData.BowlingSectionHidden = false
+                                    battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: self.captionSize)
+                                }
+                            }
+                            else {
+                                if let wicketsTaken = data["WicketsTaken"], let runsGiven = data["RunsGiven"] {
+                                    mData.BowlingSectionHidden = (runsGiven as! String == "-")
+                                    if mData.BowlingSectionHidden == false {
+                                        bowling1 = true
+                                        battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.singleBowlingSize).bold("\nWICKETS", fontName: appFont_black, fontSize: self.captionSize)
+                                    }
                                 }
                             }
                             
@@ -1485,21 +2088,44 @@ func setDashboardData(){
                             
                             groundVenue = groundData
                             
-//                            if let ground = data["Ground"]{
-//                                mData.ground = ground as! String
-//                                
-//                                if let venue = data["Venue"] as? String where venue != "-" {
-//                                    mData.ground = "\(ground), \(venue)"
-//                                }
-//                                groundVenue = ("\(mData.ground)")
-//                            }
-                            
-                            if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
+                            if (bowling1 == true || bowling2 == true) && mData.BowlingSectionHidden == false {
+                                //if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
                                 
-                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
+                                var totalEconomy = Float("0.00")
+                                var economy1 = Float("0.00")
+                                var economy2 = Float("0.00")
+                                
+                                if bowling1 == true {
+                                    let runsGiven1 = data["RunsGiven"] as? String
+                                    let oversBowled1 = data["OversBowled"] as? String
+                                    let econ1 = String(format: "%.2f",(Float(runsGiven1!)!)/Float(oversBowled1!)!)
+                                    economy1 = Float(econ1)
+                                }
+                                if bowling2 == true {
+                                    let runsGiven2 = data["RunsGiven2"] as? String
+                                    let oversBowled2 = data["OversBowled2"] as? String
+                                    let econ2 = String(format: "%.2f",(Float(runsGiven2!)!)/Float(oversBowled2!)!)
+                                    economy2 = Float(econ2)
+                                }
+                                
+                                if bowling1 == true && bowling2 == true {
+                                    totalEconomy = (economy1! + economy2!)/2
+                                }
+                                else {
+                                    totalEconomy = economy1! + economy2!
+                                }
+                                
+                                let economy = String(format: "%.2f",totalEconomy!)
                                 mData.economy = Float(economy)
                                 srEconomy = ("Economy: \(economy)")
                             }
+                            
+//                            if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
+//                                
+//                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
+//                                mData.economy = Float(economy)
+//                                srEconomy = ("Economy: \(economy)")
+//                            }
                             
                             if let opponent  = data["Opponent"]{
                                 opponentName = opponent as! String
@@ -1549,10 +2175,58 @@ func setDashboardData(){
                             var srEconomy = ""
                             let mData = MatchSummaryData()
                             
-                            if let wicketsTaken = data["WicketsTaken"], let runsGiven = data["RunsGiven"] {
-                                mData.BowlingSectionHidden = (runsGiven as! String == "-")
-                                if mData.BowlingSectionHidden == false {
-                                    battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: 25).bold("\nWICKETS", fontName: appFont_black, fontSize: 10)
+                            //code for Double Innings
+                            var matchFormat = ""
+                            var bowling1 = false
+                            var bowling2 = false
+                            
+                            if data["MatchFormat"] as? String != "" && data["MatchFormat"] != nil {
+                                matchFormat = data["MatchFormat"] as! String
+                            }
+
+                            if matchFormat == "Double Innings" {
+                                //data for first innings
+                                if let wicketsTaken = data["WicketsTaken"], let runsGiven = data["RunsGiven"] {
+                                    mData.BowlingSectionHidden = (runsGiven as! String == "-")
+                                    if mData.BowlingSectionHidden == false {
+                                        bowling1 = true
+                                        if battingBowlingScore.length > 0 {
+                                            battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                        }
+                                        else{
+                                            battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                        }
+                                    }
+                                }
+                                //data for second innings
+                                if let wicketsTaken2 = data["WicketsTaken2"], let runsGiven2 = data["RunsGiven2"] {
+                                    mData.BowlingSectionHidden = (runsGiven2 as! String == "-")
+                                    if mData.BowlingSectionHidden == false {
+                                        if bowling1 == true {
+                                            battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: self.separatorSize)
+                                        }
+                                        else {
+                                            battingBowlingScore.bold("\nDNB, ", fontName: appFont_black, fontSize: self.separatorSize)
+                                        }
+                                        bowling2 = true
+                                        if battingBowlingScore.length > 0 {
+                                            battingBowlingScore.bold("\n\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                        }
+                                        else{
+                                            battingBowlingScore.bold("\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                        }
+                                    }
+                                }
+                            
+                                battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: self.captionSize)
+                            }
+                            else {
+                                if let wicketsTaken = data["WicketsTaken"], let runsGiven = data["RunsGiven"] {
+                                    mData.BowlingSectionHidden = (runsGiven as! String == "-")
+                                    if mData.BowlingSectionHidden == false {
+                                        bowling1 = true
+                                        battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.singleBowlingSize).bold("\nWICKETS", fontName: appFont_black, fontSize: self.captionSize)
+                                    }
                                 }
                             }
                             
@@ -1592,21 +2266,44 @@ func setDashboardData(){
                             
                             groundVenue = groundData
                             
-//                            if let ground = data["Ground"]{
-//                                mData.ground = ground as! String
-//                                
-//                                if let venue = data["Venue"] as? String where venue != "-" {
-//                                    mData.ground = "\(ground), \(venue)"
-//                                }
-//                                groundVenue = ("\(mData.ground)")
-//                            }
-                            
-                            if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
+                            if (bowling1 == true || bowling2 == true) && mData.BowlingSectionHidden == false {
+                                //if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
                                 
-                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
+                                var totalEconomy = Float("0.00")
+                                var economy1 = Float("0.00")
+                                var economy2 = Float("0.00")
+                                
+                                if bowling1 == true {
+                                    let runsGiven1 = data["RunsGiven"] as? String
+                                    let oversBowled1 = data["OversBowled"] as? String
+                                    let econ1 = String(format: "%.2f",(Float(runsGiven1!)!)/Float(oversBowled1!)!)
+                                    economy1 = Float(econ1)
+                                }
+                                if bowling2 == true {
+                                    let runsGiven2 = data["RunsGiven2"] as? String
+                                    let oversBowled2 = data["OversBowled2"] as? String
+                                    let econ2 = String(format: "%.2f",(Float(runsGiven2!)!)/Float(oversBowled2!)!)
+                                    economy2 = Float(econ2)
+                                }
+                                
+                                if bowling1 == true && bowling2 == true {
+                                    totalEconomy = (economy1! + economy2!)/2
+                                }
+                                else {
+                                    totalEconomy = economy1! + economy2!
+                                }
+                                
+                                let economy = String(format: "%.2f",totalEconomy!)
                                 mData.economy = Float(economy)
                                 srEconomy = ("Economy: \(economy)")
                             }
+                            
+//                            if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
+//                                
+//                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
+//                                mData.economy = Float(economy)
+//                                srEconomy = ("Economy: \(economy)")
+//                            }
                             
                             if let opponent  = data["Opponent"]{
                                 opponentName = opponent as! String
@@ -1617,22 +2314,15 @@ func setDashboardData(){
                             self.SecondRecentMatchBowlingDateAndLocation.text = matchVenueAndDate
                             self.SecondRecentMatchBowlingGroundVenue.text = groundVenue
                             self.SecondRecentMatchBowlingEconomy.text = srEconomy
-                            
                         }
                     })
                     
-                    
                     dispatch_async(dispatch_get_main_queue(),{
-                        
                         self.SecondRecentMatchBowlingView.hidden = false
                        // self.TeamsTable.reloadData()
                         self.updateDashBoardMatches()
-                        
-                        
                     })
                 }
-
- 
             },
             completion: { (val) in
                 // KRProgressHUD.dismiss()
@@ -1640,11 +2330,8 @@ func setDashboardData(){
         }
     }
 }
-    
 
     func updateDashBoardMatches() {
-        
-       
         
         //Data for Top Batting section
         self.FirstRecentMatchView.hidden = (DashboardDetails.TopBatting1stMatchDispScore == nil || String(DashboardDetails.TopBatting1stMatchDispScore) == "-")
