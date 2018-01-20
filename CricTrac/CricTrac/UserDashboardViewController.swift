@@ -143,12 +143,11 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     
     var alertMessage = "Change picture"
     
-    var separatorSize:CGFloat = 15
-    var singleBattingSize:CGFloat = 25
-    var doubleBattingSize:CGFloat = 20
-    var singleBowlingSize:CGFloat = 25
-    var doubleBowlingSize:CGFloat = 18
-    var captionSize:CGFloat = 10
+    var sizeOne:CGFloat = 10
+    var sizeTwo:CGFloat = 15
+    var sizeThree:CGFloat = 18
+    var sizeFour:CGFloat = 20
+    var sizeFive:CGFloat = 25
     
     @IBAction func editImageBtnPressed(sender: AnyObject) {
         
@@ -292,16 +291,12 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
 //        
 //        
         let viewPhotoAction = UIAlertAction(title: "View Photo", style: .Default) { (action) in
-            
             self.viewImage(option)
-            
         }
         
         alertController.addAction(viewPhotoAction)
         
-        
         self.presentViewController(alertController, animated: true) {
-            // ...
         }
     }
     
@@ -313,17 +308,16 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         batImageAttachment.bounds = CGRect(x: 0, y: -2, width: 15, height: 15)
         let imageAttachmentString = NSAttributedString(attachment: batImageAttachment)
         
-        
         let ballImageAttachment = NSTextAttachment()
         ballImageAttachment.image = UIImage(named: "BallIcon")
         ballImageAttachment.bounds = CGRect(x: 0, y: -2, width: 14, height: 14)
         let ballImageAttachmentString = NSAttributedString(attachment: ballImageAttachment)
         
-        
         if userProfileData.BattingStyle == "Right-hand" {
             formattedStr.appendAttributedString(imageAttachmentString)
             formattedStr.bold(" RH", fontName: appFont_bold, fontSize: 15)
-        }else{
+        }
+        else{
             formattedStr.appendAttributedString(imageAttachmentString)
             formattedStr.bold(" LH", fontName: appFont_bold, fontSize: 15)
         }
@@ -419,14 +413,12 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             {
                 image = img
                 self.userProfileImage.image = img
-                
             }
             else if let img = info[UIImagePickerControllerOriginalImage] as? UIImage
             {
                 image = img
                 self.userProfileImage.image = img
             }
-            
             
             //self.userProfileImage.image = image
             self.dismissViewControllerAnimated(true) {
@@ -455,14 +447,20 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 addCoverImageData(self.resizeCoverImage(image, newWidth: 800))
             }
         }
-
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //disable ADs for Premium users
+        if showAds == "1" {
+            if profileData.UserStatus == "Premium" {
+                showAds = "0"
+            }
+        }
+        
         addTapGestureToUserName()
         TeamsTable.reloadData()
-        
         
         myCoachesButton.layer.cornerRadius = 10
         myCoachesButton.clipsToBounds = true
@@ -477,19 +475,14 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         }
         
         loadBannerAds()
-
     }
     
-    
     @IBAction func myCoachesButtonTapped(sender: AnyObject) {
-       
         let myCoachesVC = viewControllerFrom("Main", vcid: "PlayerCoachesListVC") as! PlayerCoachesListVC
         self.navigationController?.pushViewController(myCoachesVC, animated: false)
-        
     }
     
     func initView() {
-        
         if let value = friendProfile{
             userProfileData = Profile(usrObj: value)
            // closeButton.hidden = false
@@ -535,7 +528,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         let currentCountryList = CountriesList.filter({$0.name == userProfileData.Country})
         let currentISO = currentCountryList[0].iso
         
-        //For age calculating
+        //calculating age
         let  dob = userProfileData.DateOfBirth
         
         let dateFormater = NSDateFormatter()
@@ -568,28 +561,13 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         let ageString = "\(years) yrs \(months) months"
 
         
-        
         let df = NSDateFormatter()
         df.dateFormat = "dd/MM/yyyy"
         self.PlayerName.text = userProfileData.fullName
         let formattedString = NSMutableAttributedString()
         let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State), ", fontName: appFont_black, fontSize: 15).bold("\(currentISO)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.DateOfBirth)\n", fontName: appFont_black, fontSize: 15).bold("Age: \(ageString)\n", fontName: appFont_black, fontSize: 15)
         self.PlayerLocation.attributedText = locationText
-//        self.userProfileImage.image = LoggedInUserImage
-//        self.imgCoverPhoto.image = LoggedInUserCoverImage
-        
-        
-//        let proPic = userProfileData.ProfileImageURL
-//        if proPic == "-"{
-//            let imageName = defaultProfileImage
-//            let image = UIImage(named: imageName)
-//            userProfileImage.image = image!
-//        }else{
-//            if let imageURL = NSURL(string:proPic){
-//                userProfileImage.kf_setImageWithURL(imageURL)
-//            }
-//        }
-        
+
         if friendId == nil {
             currentUserId = (currentUser?.uid)!
         }
@@ -612,17 +590,6 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
             }
         })
         
-//        let coverPic = userProfileData.CoverPhotoURL
-//        if coverPic == "-"{
-//            let imageName = defaultProfileImage
-//            let image = UIImage(named: imageName)
-//            imgCoverPhoto.image = image!
-//        }else{
-//            if let imageURL = NSURL(string:coverPic){
-//                imgCoverPhoto.kf_setImageWithURL(imageURL)
-//            }
-//        }
-        
         fetchCoverPhoto(currentUserId, sucess: { (result) in
             let coverPic = result["coverPic"]
             
@@ -637,35 +604,6 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 }
             }
         })
-        
-//        if userProfileData.ProfileImageURL != "-" {
-//                getImageFromFirebase(userProfileData.ProfileImageURL) { (imgData) in
-//                    self.currentUserProfileImage = imgData
-//            }
-//        }
-//        else {
-//            let imageName = defaultProfileImage
-//            let image = UIImage(named: imageName)
-//            self.currentUserProfileImage = image!
-//        }
-//        
-//        if userProfileData.CoverPhotoURL != "-" {
-//            getImageFromFirebase(userProfileData.CoverPhotoURL) { (imgData) in
-//                self.currentUserCoverImage = imgData
-//            }
-//        }
-//        else {
-//            let imageName = defaultProfileImage
-//            let image = UIImage(named: imageName)
-//            self.currentUserCoverImage = image!
-//        }
-//        
-//        self.userProfileImage.image = currentUserProfileImage
-//        self.imgCoverPhoto.image = currentUserCoverImage
-        
-        //getMatchData()
-                
-        //setBackgroundColor()
         
         // Do any additional setup after loading the view.
         setNavigationBarProperties()
@@ -687,7 +625,6 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         }
     }
 
-    
     func tapCoverPhoto()  {
         if friendId == nil {
             // network reachability test
@@ -718,36 +655,32 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         TeamsTable.reloadData()
         
         if screensize == "1" {
-            separatorSize = 12
-            singleBattingSize = 20
-            doubleBattingSize = 15
-            singleBowlingSize = 20
-            doubleBowlingSize = 15
-            captionSize = 10
+            sizeOne = 10
+            sizeTwo = 12
+            sizeThree = 15
+            sizeFour = 16
+            sizeFive = 20
         }
         else if screensize == "2" {
-            separatorSize = 12
-            singleBattingSize = 20
-            doubleBattingSize = 16
-            singleBowlingSize = 20
-            doubleBowlingSize = 16
-            captionSize = 10
+            sizeOne = 10
+            sizeTwo = 12
+            sizeThree = 16
+            sizeFour = 18
+            sizeFive = 20
         }
         else if screensize == "3" {
-            separatorSize = 15
-            singleBattingSize = 25
-            doubleBattingSize = 18
-            singleBowlingSize = 25
-            doubleBowlingSize = 18
-            captionSize = 10
+            sizeOne = 10
+            sizeTwo = 15
+            sizeThree = 18
+            sizeFour = 20
+            sizeFive = 25
         }
         else if screensize == "4" {
-            separatorSize = 15
-            singleBattingSize = 30
-            doubleBattingSize = 20
-            singleBowlingSize = 30
-            doubleBowlingSize = 20
-            captionSize = 12
+            sizeOne = 12
+            sizeTwo = 15
+            sizeThree = 20
+            sizeFour = 25
+            sizeFive = 30
         }
     }
     
@@ -762,11 +695,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         return newImage!
     }
-
-    
     
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
-        
         let scale =  image.size.width
         let newHeight = image.size.height
         UIGraphicsBeginImageContext(CGSizeMake(scale, newHeight))
@@ -794,11 +724,6 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         // Dispose of any resources that can be recreated.
     }
     
-    
-    // MARK: - Methods
-    
-    
-    
     func viewImage(option:String){
         
         let profileImageVc = viewControllerFrom("Main", vcid: "ProfileImageExpandingVC") as! ProfileImageExpandingVC
@@ -812,27 +737,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         if profileData.ProfileImageURL != "-" {
              self.presentViewController(profileImageVc, animated: true) {}
         }
-       
-        
-//        let newImageView = UIImageView()
-//        if option == "CoverPhoto" {
-//            newImageView.image = imgCoverPhoto.image
-//        }else {
-//            newImageView.image = userProfileImage.image
-//        }
-//        newImageView.frame = self.view.frame
-//        newImageView.backgroundColor = .blackColor()
-//        newImageView.contentMode = .ScaleAspectFit
-//        newImageView.userInteractionEnabled = true
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(UserDashboardViewController.dismissFullscreenImage(_:)))
-//        newImageView.addGestureRecognizer(tap)
-//        //        self.view.addSubview(navBarView)
-//        self.view.addSubview(newImageView)
-        
     }
-    
-    
-    
+
     @IBAction func imageTapped(sender: UITapGestureRecognizer) {
         let imageView = sender.view as! UIImageView
         //        let navBarView = UIView(frame: CGRectMake(0, 0, (sender.view?.frame.size.width)!, 50))
@@ -896,17 +802,14 @@ func setDashboardData(){
                 
                 let winPercent = Double(String(DashboardDetails.WinPercentage))
                 self.winPerc.text = String(format:"%.1f",winPercent!)
-                //self.winPerc.text = String(DashboardDetails.WinPercentage)
                 
                 //data for Batting Card
                 self.totalRunsScored.text = String(DashboardDetails.TotalRuns)
                 self.battingInnings.text = String(DashboardDetails.BattingInnings)
                 let battingAverage = Double(String(DashboardDetails.TotalBattingAverage))
                 self.battingAverage.text = String(format:"%.1f",battingAverage!)
-                //self.battingAverage.text = String(DashboardDetails.TotalBattingAverage)
                 let strikeRate = Double(String(DashboardDetails.TotalStrikeRate))
                 self.strikeRate.text = String(format:"%.1f",strikeRate!)
-                //self.strikeRate.text = String(DashboardDetails.TotalStrikeRate)
                 self.hundreds.text = String(DashboardDetails.Total100s)
                 self.fifties.text = String(DashboardDetails.Total50s)
                 self.sixes.text = String(DashboardDetails.Total6s)
@@ -917,20 +820,15 @@ func setDashboardData(){
                 self.totalWickets.text = String(DashboardDetails.TotalWickets)
                 let bowlingAverageDouble = Double(String(DashboardDetails.TotalBowlingAverage))
                 self.bowlingAverage.text = String(format:"%.1f",bowlingAverageDouble!)
-                //self.bowlingAverage.text = String(DashboardDetails.TotalBowlingAverage)
-                
                 let bowlingEconomyDouble = Double(String(DashboardDetails.TotalEconomy))
                 self.bowlingEconomy.text = String(format:"%.2f",bowlingEconomyDouble!)
-                //self.bowlingEconomy.text = String(DashboardDetails.TotalEconomy)
                 self.TotalThreeWicketsPerMatch.text = String(DashboardDetails.Total3Wkts)
                 self.TotalMaidens.text = String(DashboardDetails.TotalMaidens)
                 self.TotalFiveWicketsPerMatch.text = String(DashboardDetails.Total5Wkts)
                 let PlayerOversBowldDouble = Double(String(DashboardDetails.TotalOvers))
                 self.PlayerOversBowld.text = String(format:"%.1f",PlayerOversBowldDouble!)
-                //self.PlayerOversBowld.text = String(DashboardDetails.TotalOvers)
                 
                 dispatch_async(dispatch_get_main_queue(),{
-                    
                     //sajith - new code for Recent First Match
                     self.FirstRecentMatchSummary.hidden = true
                     self.SecondRecentMatchSummary.hidden = true
@@ -939,10 +837,8 @@ func setDashboardData(){
                     self.FirstRecentMatchBowlingView.hidden = true
                     self.SecondRecentMatchBowlingView.hidden = true
                    
-                   self.TeamsTable.reloadData()
-
+                    self.TeamsTable.reloadData()
                     self.updateDashBoardMatches()
-                    
                 })
                 
 
@@ -980,10 +876,10 @@ func setDashboardData(){
                                     if mData.BattingSectionHidden == false {
                                         batting1 = true
                                         if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
-                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.doubleBattingSize).bold("*", fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.sizeThree).bold("*", fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                         else{
-                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                     }
                                 }
@@ -992,24 +888,24 @@ func setDashboardData(){
                                     mData.BattingSectionHidden = (runsTaken2 as! String == "-")
                                     if mData.BattingSectionHidden == false {
                                         if batting1 == true {
-                                            battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: self.separatorSize)
+                                            battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: self.sizeTwo)
                                         }
                                         else {
-                                            battingBowlingScore.bold("DNB, ", fontName: appFont_black, fontSize: self.separatorSize)
+                                            battingBowlingScore.bold("DNB, ", fontName: appFont_black, fontSize: self.sizeTwo)
                                         }
                                         batting2 = true
                                         if let dismissal2 = data["Dismissal2"] as? String where dismissal2 == "Not out"{
-                                            battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: self.doubleBattingSize).bold("*", fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                            battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: self.sizeThree).bold("*", fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                         else{
-                                            battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                            battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                     }
                                 }
                                 
                                 if batting1 == true || batting2 == true {
                                     mData.BattingSectionHidden = false
-                                    battingBowlingScore.bold("\nRUNS", fontName: appFont_black, fontSize: self.captionSize)
+                                    battingBowlingScore.bold("\nRUNS", fontName: appFont_black, fontSize: self.sizeOne)
                                 }
                             }
                             else {
@@ -1018,10 +914,10 @@ func setDashboardData(){
                                     if mData.BattingSectionHidden == false {
                                         batting1 = true
                                         if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
-                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.singleBattingSize).bold("*", fontName: appFont_black, fontSize: self.singleBattingSize).bold("\nRUNS", fontName: appFont_black, fontSize: self.captionSize)
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.sizeFive).bold("*", fontName: appFont_black, fontSize: self.sizeFive).bold("\nRUNS", fontName: appFont_black, fontSize: self.sizeOne)
                                         }
                                         else{
-                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.singleBattingSize).bold("\nRUNS", fontName: appFont_black, fontSize: self.captionSize)
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.sizeFive).bold("\nRUNS", fontName: appFont_black, fontSize: self.sizeOne)
                                         }
                                     }
                                 }
@@ -1034,10 +930,10 @@ func setDashboardData(){
                                     if mData.BowlingSectionHidden == false {
                                         bowling1 = true
                                         if battingBowlingScore.length > 0 {
-                                            battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                            battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                         else{
-                                            battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                            battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                     }
                                 }
@@ -1046,27 +942,27 @@ func setDashboardData(){
                                     mData.BowlingSectionHidden = (runsGiven2 as! String == "-")
                                     if mData.BowlingSectionHidden == false {
                                         if bowling1 == true {
-                                            battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: self.separatorSize)
+                                            battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: self.sizeTwo)
                                         }
                                         else {
-                                            battingBowlingScore.bold("\nDNB, ", fontName: appFont_black, fontSize: self.separatorSize)
+                                            battingBowlingScore.bold("\nDNB, ", fontName: appFont_black, fontSize: self.sizeTwo)
                                         }
                                         bowling2 = true
                                         if battingBowlingScore.length > 0 {
-                                            battingBowlingScore.bold("\n\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                            battingBowlingScore.bold("\n\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                         else{
-                                            battingBowlingScore.bold("\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                            battingBowlingScore.bold("\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                     }
                                 }
                                 
                                if bowling1 == true || bowling2 == true {
                                     mData.BowlingSectionHidden = false
-                                    battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: self.captionSize)
+                                    battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: self.sizeOne)
                                 }
                                 else if batting1 == false && batting2 == false {
-                                    battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: self.captionSize)
+                                    battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: self.sizeOne)
                                 }
                             }
                             else {
@@ -1075,10 +971,10 @@ func setDashboardData(){
                                     if mData.BowlingSectionHidden == false {
                                         if battingBowlingScore.length > 0 {
                                             bowling1 = true
-                                            battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.singleBowlingSize).bold("\nWICKETS", fontName: appFont_black, fontSize: self.captionSize)
+                                            battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.sizeFive).bold("\nWICKETS", fontName: appFont_black, fontSize: self.sizeOne)
                                         }
                                         else{
-                                            battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.singleBowlingSize).bold("\nWICKETS", fontName: appFont_black, fontSize: self.captionSize)
+                                            battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.sizeFive).bold("\nWICKETS", fontName: appFont_black, fontSize: self.sizeOne)
                                         }
                                     }
                                 }
@@ -1253,16 +1149,12 @@ func setDashboardData(){
                         }
                     })
                     dispatch_async(dispatch_get_main_queue(),{
-                        
                         self.FirstRecentMatchSummary.hidden = false
                         self.recentMatchesNotAvailable.hidden = true
                         
                         //self.TeamsTable.reloadData()
                         self.updateDashBoardMatches()
-                        
-                        
                     })
-                    
                 }
                 
                 //sajith - new code for Recent Second Match
@@ -1272,7 +1164,6 @@ func setDashboardData(){
                     fireBaseRef.child("Users").child(userId).child("Matches").child(matchId).observeEventType(.Value, withBlock: { snapshot in
                         
                         if let data = snapshot.value! as? [String:AnyObject]{
-                            
                             let battingBowlingScore = NSMutableAttributedString()
                             var matchVenueAndDate = ""
                             var opponentName = ""
@@ -1298,10 +1189,10 @@ func setDashboardData(){
                                     if mData.BattingSectionHidden == false {
                                         batting1 = true
                                         if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
-                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.doubleBattingSize).bold("*", fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.sizeThree).bold("*", fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                         else{
-                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                     }
                                 }
@@ -1310,24 +1201,24 @@ func setDashboardData(){
                                     mData.BattingSectionHidden = (runsTaken2 as! String == "-")
                                     if mData.BattingSectionHidden == false {
                                         if batting1 == true {
-                                            battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: self.separatorSize)
+                                            battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: self.sizeTwo)
                                         }
                                         else {
-                                            battingBowlingScore.bold("DNB, ", fontName: appFont_black, fontSize: self.separatorSize)
+                                            battingBowlingScore.bold("DNB, ", fontName: appFont_black, fontSize: self.sizeTwo)
                                         }
                                         batting2 = true
                                         if let dismissal2 = data["Dismissal2"] as? String where dismissal2 == "Not out"{
-                                            battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: self.doubleBattingSize).bold("*", fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                            battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: self.sizeThree).bold("*", fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                         else{
-                                            battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                            battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                     }
                                 }
                                 
                                 if batting1 == true || batting2 == true {
                                     mData.BattingSectionHidden = false
-                                    battingBowlingScore.bold("\nRUNS", fontName: appFont_black, fontSize: self.captionSize)
+                                    battingBowlingScore.bold("\nRUNS", fontName: appFont_black, fontSize: self.sizeOne)
                                 }
                             }
                             else {
@@ -1336,10 +1227,10 @@ func setDashboardData(){
                                     if mData.BattingSectionHidden == false {
                                         batting1 = true
                                         if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
-                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.singleBattingSize).bold("*", fontName: appFont_black, fontSize: self.singleBattingSize).bold("\nRUNS", fontName: appFont_black, fontSize: self.captionSize)
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.sizeFive).bold("*", fontName: appFont_black, fontSize: self.sizeFive).bold("\nRUNS", fontName: appFont_black, fontSize: self.sizeOne)
                                         }
                                         else{
-                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.singleBattingSize).bold("\nRUNS", fontName: appFont_black, fontSize: self.captionSize)
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.sizeFive).bold("\nRUNS", fontName: appFont_black, fontSize: self.sizeOne)
                                         }
                                     }
                                 }
@@ -1352,10 +1243,10 @@ func setDashboardData(){
                                     if mData.BowlingSectionHidden == false {
                                         bowling1 = true
                                         if battingBowlingScore.length > 0 {
-                                            battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                            battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                         else{
-                                            battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                            battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                     }
                                 }
@@ -1364,27 +1255,27 @@ func setDashboardData(){
                                     mData.BowlingSectionHidden = (runsGiven2 as! String == "-")
                                     if mData.BowlingSectionHidden == false {
                                         if bowling1 == true {
-                                            battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: self.separatorSize)
+                                            battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: self.sizeTwo)
                                         }
                                         else {
-                                            battingBowlingScore.bold("\nDNB, ", fontName: appFont_black, fontSize: self.separatorSize)
+                                            battingBowlingScore.bold("\nDNB, ", fontName: appFont_black, fontSize: self.sizeTwo)
                                         }
                                         bowling2 = true
                                         if battingBowlingScore.length > 0 {
-                                            battingBowlingScore.bold("\n\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                            battingBowlingScore.bold("\n\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                         else{
-                                            battingBowlingScore.bold("\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                            battingBowlingScore.bold("\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                     }
                                 }
                                 
                                 if bowling1 == true || bowling2 == true {
                                     mData.BowlingSectionHidden = false
-                                    battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: self.captionSize)
+                                    battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: self.sizeOne)
                                 }
                                 else if batting1 == false && batting2 == false {
-                                    battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: self.captionSize)
+                                    battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: self.sizeOne)
                                 }
                             }
                             else {
@@ -1393,10 +1284,10 @@ func setDashboardData(){
                                     if mData.BowlingSectionHidden == false {
                                         if battingBowlingScore.length > 0 {
                                             bowling1 = true
-                                            battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.singleBowlingSize).bold("\nWICKETS", fontName: appFont_black, fontSize: self.captionSize)
+                                            battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.sizeFive).bold("\nWICKETS", fontName: appFont_black, fontSize: self.sizeOne)
                                         }
                                         else{
-                                            battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.singleBowlingSize).bold("\nWICKETS", fontName: appFont_black, fontSize: self.captionSize)
+                                            battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.sizeFive).bold("\nWICKETS", fontName: appFont_black, fontSize: self.sizeOne)
                                         }
                                     }
                                 }
@@ -1539,7 +1430,6 @@ func setDashboardData(){
                         }
                     })
     
-                    
                     dispatch_async(dispatch_get_main_queue(),{
                         self.SecondRecentMatchSummary.hidden = false
                         self.recentMatchesNotAvailable.hidden = true
@@ -1590,10 +1480,10 @@ func setDashboardData(){
                                     if mData.BattingSectionHidden == false {
                                         batting1 = true
                                         if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
-                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.doubleBattingSize).bold("*", fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.sizeThree).bold("*", fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                         else{
-                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                     }
                                 }
@@ -1602,24 +1492,24 @@ func setDashboardData(){
                                     mData.BattingSectionHidden = (runsTaken2 as! String == "-")
                                     if mData.BattingSectionHidden == false {
                                         if batting1 == true {
-                                            battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: self.separatorSize)
+                                            battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: self.sizeTwo)
                                         }
                                         else {
-                                            battingBowlingScore.bold("DNB, ", fontName: appFont_black, fontSize: self.separatorSize)
+                                            battingBowlingScore.bold("DNB, ", fontName: appFont_black, fontSize: self.sizeTwo)
                                         }
                                         batting2 = true
                                         if let dismissal2 = data["Dismissal2"] as? String where dismissal2 == "Not out"{
-                                            battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: self.doubleBattingSize).bold("*", fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                            battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: self.sizeThree).bold("*", fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                         else{
-                                            battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                            battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                     }
                                 }
                                 
                                 if batting1 == true || batting2 == true {
                                     mData.BattingSectionHidden = false
-                                    battingBowlingScore.bold("\nRUNS", fontName: appFont_black, fontSize: self.captionSize)
+                                    battingBowlingScore.bold("\nRUNS", fontName: appFont_black, fontSize: self.sizeOne)
                                 }
                             }
                             else {
@@ -1628,10 +1518,10 @@ func setDashboardData(){
                                     if mData.BattingSectionHidden == false {
                                         batting1 = true
                                         if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
-                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.singleBattingSize).bold("*", fontName: appFont_black, fontSize: self.singleBattingSize).bold("\nRUNS", fontName: appFont_black, fontSize: self.captionSize)
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.sizeFive).bold("*", fontName: appFont_black, fontSize: self.sizeFive).bold("\nRUNS", fontName: appFont_black, fontSize: self.sizeOne)
                                         }
                                         else{
-                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.singleBattingSize).bold("\nRUNS", fontName: appFont_black, fontSize: self.captionSize)
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.sizeFive).bold("\nRUNS", fontName: appFont_black, fontSize: self.sizeOne)
                                         }
                                     }
                                 }
@@ -1788,8 +1678,6 @@ func setDashboardData(){
                             var matchFormat = ""
                             var batting1 = false
                             var batting2 = false
-                            var bowling1 = false
-                            var bowling2 = false
                             
                             if data["MatchFormat"] as? String != "" && data["MatchFormat"] != nil {
                                 matchFormat = data["MatchFormat"] as! String
@@ -1802,10 +1690,10 @@ func setDashboardData(){
                                     if mData.BattingSectionHidden == false {
                                         batting1 = true
                                         if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
-                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.doubleBattingSize).bold("*", fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.sizeThree).bold("*", fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                         else{
-                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                     }
                                 }
@@ -1814,24 +1702,24 @@ func setDashboardData(){
                                     mData.BattingSectionHidden = (runsTaken2 as! String == "-")
                                     if mData.BattingSectionHidden == false {
                                         if batting1 == true {
-                                            battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: self.separatorSize)
+                                            battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: self.sizeTwo)
                                         }
                                         else {
-                                            battingBowlingScore.bold("DNB, ", fontName: appFont_black, fontSize: self.separatorSize)
+                                            battingBowlingScore.bold("DNB, ", fontName: appFont_black, fontSize: self.sizeTwo)
                                         }
                                         batting2 = true
                                         if let dismissal2 = data["Dismissal2"] as? String where dismissal2 == "Not out"{
-                                            battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: self.doubleBattingSize).bold("*", fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                            battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: self.sizeThree).bold("*", fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                         else{
-                                            battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: self.doubleBattingSize)
+                                            battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                     }
                                 }
                                 
                                 if batting1 == true || batting2 == true {
                                     mData.BattingSectionHidden = false
-                                    battingBowlingScore.bold("\nRUNS", fontName: appFont_black, fontSize: self.captionSize)
+                                    battingBowlingScore.bold("\nRUNS", fontName: appFont_black, fontSize: self.sizeOne)
                                 }
                             }
                             else {
@@ -1840,10 +1728,10 @@ func setDashboardData(){
                                     if mData.BattingSectionHidden == false {
                                         batting1 = true
                                         if let dismissal = data["Dismissal"] as? String where dismissal == "Not out"{
-                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.singleBattingSize).bold("*", fontName: appFont_black, fontSize: self.singleBattingSize).bold("\nRUNS", fontName: appFont_black, fontSize: self.captionSize)
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.sizeFive).bold("*", fontName: appFont_black, fontSize: self.sizeFive).bold("\nRUNS", fontName: appFont_black, fontSize: self.sizeOne)
                                         }
                                         else{
-                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.singleBattingSize).bold("\nRUNS", fontName: appFont_black, fontSize: self.captionSize)
+                                            battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: self.sizeFive).bold("\nRUNS", fontName: appFont_black, fontSize: self.sizeOne)
                                         }
                                     }
                                 }
@@ -1959,14 +1847,10 @@ func setDashboardData(){
                         }
                     })
                     
-                    
                     dispatch_async(dispatch_get_main_queue(),{
-                        
                         self.SecondRecentMatchView.hidden = false
                         // self.TeamsTable.reloadData()
                         self.updateDashBoardMatches()
-                        
-                        
                     })
                 }
 
@@ -2010,12 +1894,12 @@ func setDashboardData(){
                                     mData.BowlingSectionHidden = (runsGiven as! String == "-")
                                     if mData.BowlingSectionHidden == false {
                                         bowling1 = true
-                                        if battingBowlingScore.length > 0 {
-                                            battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
-                                        }
-                                        else{
-                                            battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
-                                        }
+                                        //if battingBowlingScore.length > 0 {
+                                          //  battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.sizeThree)
+                                        //}
+                                        //else{
+                                            battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.sizeThree)
+                                        //}
                                     }
                                 }
                                 //data for second innings
@@ -2023,23 +1907,23 @@ func setDashboardData(){
                                     mData.BowlingSectionHidden = (runsGiven2 as! String == "-")
                                     if mData.BowlingSectionHidden == false {
                                         if bowling1 == true {
-                                            battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: self.separatorSize)
+                                            battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: self.sizeTwo)
                                         }
                                         else {
-                                            battingBowlingScore.bold("\nDNB, ", fontName: appFont_black, fontSize: self.separatorSize)
+                                            battingBowlingScore.bold("\nDNB, ", fontName: appFont_black, fontSize: self.sizeTwo)
                                         }
                                         bowling2 = true
                                         if battingBowlingScore.length > 0 {
-                                            battingBowlingScore.bold("\n\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                            battingBowlingScore.bold("\n\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                         else{
-                                            battingBowlingScore.bold("\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                            battingBowlingScore.bold("\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                     }
                                 }
                                 if bowling1 == true || bowling1 == true {
                                     mData.BowlingSectionHidden = false
-                                    battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: self.captionSize)
+                                    battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: self.sizeOne)
                                 }
                             }
                             else {
@@ -2047,7 +1931,7 @@ func setDashboardData(){
                                     mData.BowlingSectionHidden = (runsGiven as! String == "-")
                                     if mData.BowlingSectionHidden == false {
                                         bowling1 = true
-                                        battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.singleBowlingSize).bold("\nWICKETS", fontName: appFont_black, fontSize: self.captionSize)
+                                        battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.sizeFive).bold("\nWICKETS", fontName: appFont_black, fontSize: self.sizeOne)
                                     }
                                 }
                             }
@@ -2190,12 +2074,12 @@ func setDashboardData(){
                                     mData.BowlingSectionHidden = (runsGiven as! String == "-")
                                     if mData.BowlingSectionHidden == false {
                                         bowling1 = true
-                                        if battingBowlingScore.length > 0 {
-                                            battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
-                                        }
-                                        else{
-                                            battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
-                                        }
+                                        //if battingBowlingScore.length > 0 {
+                                          //  battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.sizeThree)
+                                        //}
+                                        //else{
+                                            battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.sizeThree)
+                                        //}
                                     }
                                 }
                                 //data for second innings
@@ -2203,29 +2087,29 @@ func setDashboardData(){
                                     mData.BowlingSectionHidden = (runsGiven2 as! String == "-")
                                     if mData.BowlingSectionHidden == false {
                                         if bowling1 == true {
-                                            battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: self.separatorSize)
+                                            battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: self.sizeTwo)
                                         }
                                         else {
-                                            battingBowlingScore.bold("\nDNB, ", fontName: appFont_black, fontSize: self.separatorSize)
+                                            battingBowlingScore.bold("\nDNB, ", fontName: appFont_black, fontSize: self.sizeTwo)
                                         }
                                         bowling2 = true
                                         if battingBowlingScore.length > 0 {
-                                            battingBowlingScore.bold("\n\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                            battingBowlingScore.bold("\n\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                         else{
-                                            battingBowlingScore.bold("\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: self.doubleBowlingSize)
+                                            battingBowlingScore.bold("\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: self.sizeThree)
                                         }
                                     }
                                 }
                             
-                                battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: self.captionSize)
+                                battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: self.sizeOne)
                             }
                             else {
                                 if let wicketsTaken = data["WicketsTaken"], let runsGiven = data["RunsGiven"] {
                                     mData.BowlingSectionHidden = (runsGiven as! String == "-")
                                     if mData.BowlingSectionHidden == false {
                                         bowling1 = true
-                                        battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.singleBowlingSize).bold("\nWICKETS", fontName: appFont_black, fontSize: self.captionSize)
+                                        battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: self.sizeFive).bold("\nWICKETS", fontName: appFont_black, fontSize: self.sizeOne)
                                     }
                                 }
                             }
@@ -2381,7 +2265,7 @@ func setDashboardData(){
             }
         }
         
-        //Top Balling view
+        //Top bowling view
         if !self.topBowlingNotAvailable.hidden {
             self.topBallingStackViewHeightConstraint.constant = 0
         }

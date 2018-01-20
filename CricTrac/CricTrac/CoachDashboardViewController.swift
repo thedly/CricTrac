@@ -195,10 +195,10 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
 
                             if isAccepted == "0" {
                                 
-                                self.coachFrndButton.setTitle("Cancel Request", forState: .Normal)
+                                self.coachFrndButton.setTitle("CANCEL REQUEST", forState: .Normal)
                             }
                             else{
-                                self.coachFrndButton.setTitle("Remove Coach", forState: .Normal)
+                                self.coachFrndButton.setTitle("REMOVE COACH", forState: .Normal)
                             }
                             break
                         }
@@ -212,7 +212,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         }
        
         else if profileData.UserProfile == "Coach" {
-            coachFrndButton.setTitle("My Players", forState: .Normal)
+            coachFrndButton.setTitle("MY PLAYERS", forState: .Normal)
 //            coachFrndBtnHeightConstraint.constant = 30
 //            pendingRequests.hidden = false
             
@@ -463,53 +463,99 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                     matchdays = days.day
                 }
 
-            if matchdays <= 365  {
-
-                if value["RunsTaken"] as! String != "-" {
-                    let runsTaken = Int(value["RunsTaken"] as! String)!
-                    totalBatInnings += 1
-                    let dismissal = value["Dismissal"] as? String
-                    if  dismissal == "Not out" || dismissal == "Retired hurt" {
-                        totalNotouts += 1
-                    }
-                    totalBallsFaced += Int(value["BallsFaced"] as! String)!
-                    totalRunsTaken += Int(value["RunsTaken"] as! String)!
-                    
-                    if runsTaken >= tempHS {
+                if matchdays <= 365  {
+                    //first innings
+                    if value["RunsTaken"] as! String != "-" {
+                        let runsTaken = Int(value["RunsTaken"] as! String)!
+                        totalBatInnings += 1
+                        let dismissal = value["Dismissal"] as? String
                         if  dismissal == "Not out" || dismissal == "Retired hurt" {
-                            tempHS = runsTaken
-                            dispHS = String(runsTaken) + "*"
+                            totalNotouts += 1
                         }
-                        else {
-                            tempHS = runsTaken
-                            dispHS = String(runsTaken)
+                        totalBallsFaced += Int(value["BallsFaced"] as! String)!
+                        totalRunsTaken += Int(value["RunsTaken"] as! String)!
+                        
+                        if runsTaken >= tempHS {
+                            if  dismissal == "Not out" || dismissal == "Retired hurt" {
+                                tempHS = runsTaken
+                                dispHS = String(runsTaken) + "*"
+                            }
+                            else {
+                                tempHS = runsTaken
+                                dispHS = String(runsTaken)
+                            }
                         }
                     }
-                }
-                
-                if value["OversBowled"] as! String != "-" {
-                    let wicketsTaken = Int(value["WicketsTaken"] as! String)!
-                    let runsGiven = Int(value["RunsGiven"] as! String)!
-                    totalBowlInnings += 1
-                    totalOversBowled += Float(value["OversBowled"] as! String)!
-                    totalRunsGiven += Int(value["RunsGiven"] as! String)!
-                    totalWicketsTaken += Int(value["WicketsTaken"] as! String)!
                     
-                    if wicketsTaken > tempWicketsTaken {
-                        tempWicketsTaken = wicketsTaken
-                        tempRunsGiven = runsGiven
-                        dispBB = String(wicketsTaken) + "-" + String(runsGiven)
+                    //second innings
+                    if value["RunsTaken2"] != nil && value["RunsTaken2"] as! String != "-" {
+                        let runsTaken2 = Int(value["RunsTaken2"] as! String)!
+                        totalBatInnings += 1
+                        let dismissal2 = value["Dismissal2"] as? String
+                        if  dismissal2 == "Not out" || dismissal2 == "Retired hurt" {
+                            totalNotouts += 1
+                        }
+                        totalBallsFaced += Int(value["BallsFaced2"] as! String)!
+                        totalRunsTaken += Int(value["RunsTaken2"] as! String)!
+                        
+                        if runsTaken2 >= tempHS {
+                            if  dismissal2 == "Not out" || dismissal2 == "Retired hurt" {
+                                tempHS = runsTaken2
+                                dispHS = String(runsTaken2) + "*"
+                            }
+                            else {
+                                tempHS = runsTaken2
+                                dispHS = String(runsTaken2)
+                            }
+                        }
                     }
-                    else if wicketsTaken == tempWicketsTaken {
-                        if runsGiven <= tempRunsGiven {
+                    
+                    //first innings
+                    if value["OversBowled"] as! String != "-" {
+                        let wicketsTaken = Int(value["WicketsTaken"] as! String)!
+                        let runsGiven = Int(value["RunsGiven"] as! String)!
+                        totalBowlInnings += 1
+                        totalOversBowled += Float(value["OversBowled"] as! String)!
+                        totalRunsGiven += Int(value["RunsGiven"] as! String)!
+                        totalWicketsTaken += Int(value["WicketsTaken"] as! String)!
+                        
+                        if wicketsTaken > tempWicketsTaken {
                             tempWicketsTaken = wicketsTaken
                             tempRunsGiven = runsGiven
                             dispBB = String(wicketsTaken) + "-" + String(runsGiven)
                         }
+                        else if wicketsTaken == tempWicketsTaken {
+                            if runsGiven <= tempRunsGiven {
+                                tempWicketsTaken = wicketsTaken
+                                tempRunsGiven = runsGiven
+                                dispBB = String(wicketsTaken) + "-" + String(runsGiven)
+                            }
+                        }
+                    }
+                    
+                    //second innings
+                    if value["OversBowled2"] != nil && value["OversBowled2"] as! String != "-" {
+                        let wicketsTaken2 = Int(value["WicketsTaken2"] as! String)!
+                        let runsGiven2 = Int(value["RunsGiven2"] as! String)!
+                        totalBowlInnings += 1
+                        totalOversBowled += Float(value["OversBowled2"] as! String)!
+                        totalRunsGiven += Int(value["RunsGiven2"] as! String)!
+                        totalWicketsTaken += Int(value["WicketsTaken2"] as! String)!
+                        
+                        if wicketsTaken2 > tempWicketsTaken {
+                            tempWicketsTaken = wicketsTaken2
+                            tempRunsGiven = runsGiven2
+                            dispBB = String(wicketsTaken2) + "-" + String(runsGiven2)
+                        }
+                        else if wicketsTaken2 == tempWicketsTaken {
+                            if runsGiven2 <= tempRunsGiven {
+                                tempWicketsTaken = wicketsTaken2
+                                tempRunsGiven = runsGiven2
+                                dispBB = String(wicketsTaken2) + "-" + String(runsGiven2)
+                            }
+                        }
                     }
                 }
-                }
-
             }
             
         }
@@ -608,7 +654,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             self.presentViewController(actionSheetController, animated: true, completion: nil)
                 break
             
-        case "Cancel Request":
+        case "CANCEL REQUEST":
         
             let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to Cancel this coach request?", preferredStyle: .ActionSheet)
             
@@ -631,7 +677,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         
             break
             
-        case "Remove Coach":
+        case "REMOVE COACH":
             
             let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to Remove this coach?", preferredStyle: .ActionSheet)
             
@@ -906,7 +952,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         var valueToReturn = 0
         valueToReturn = (userProfileData.CoachCurrentTeams.count) + userProfileData.CoachPastTeams.count
         if valueToReturn == 0 {
-            noTeamsLbl.text = "No Teams"
+            noTeamsLbl.text = "No Teams Added"
         }
         else{
             noTeamsLbl.text = ""

@@ -46,6 +46,7 @@ class SliderMenuViewController: UIViewController,UITableViewDataSource,UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         //setBackgroundColor()
+        
         userName.text = profileData.fullName
         profilePic = profileData.ProfileImageURL
         

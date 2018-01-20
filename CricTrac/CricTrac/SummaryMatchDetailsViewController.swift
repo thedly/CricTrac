@@ -90,6 +90,12 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     var isFriendDashboard: Bool!  = false
     var isCoach: Bool! = false
     var playerDob = ""
+    
+    var sizeOne:CGFloat = 10
+    var sizeTwo:CGFloat = 20
+    var sizeThree:CGFloat = 30
+    var sizeFour:CGFloat = 40
+    var sizeFive:CGFloat = 50
 
     
     @IBAction func deleteActionPressed(sender: UIButton) {
@@ -224,7 +230,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     }
     
     @IBAction func ShareActionPressed(sender: UIButton) {
-        print(self.ScreenShot.bounds.size)
+        //print(self.ScreenShot.bounds.size)
         UIGraphicsBeginImageContext(self.ScreenShot.bounds.size);
         self.ScreenShot.layer.renderInContext(UIGraphicsGetCurrentContext()!)
         let screenShot = UIGraphicsGetImageFromCurrentImageContext();
@@ -244,6 +250,36 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if screensize == "1" {
+            sizeOne = 10
+            sizeTwo = 12
+            sizeThree = 20
+            sizeFour = 30
+            sizeFive = 50
+        }
+        else if screensize == "2" {
+            sizeOne = 10
+            sizeTwo = 14
+            sizeThree = 20
+            sizeFour = 30
+            sizeFive = 50
+        }
+        else if screensize == "3" {
+            sizeOne = 10
+            sizeTwo = 15
+            sizeThree = 30
+            sizeFour = 40
+            sizeFive = 60
+        }
+        else if screensize == "4" {
+            sizeOne = 20
+            sizeTwo = 18
+            sizeThree = 40
+            sizeFour = 60
+            sizeFive = 80
+        }
+
         
         setBackgroundColor()
         setNavigationBarProperties()
@@ -376,8 +412,8 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             fieldingRoleViewHeightConstaraint.constant = 0
         }
         
-        if matchDetailsData["Stumpings"] != nil && matchDetailsData["Catches"]  != nil && matchDetailsData["Runouts"] != nil {
-            if (matchDetailsData["Stumpings"]!) as! String == "0" && (matchDetailsData["Catches"]!) as! String == "0" && (matchDetailsData["Runouts"]!) as! String == "0" {
+        if matchDetailsData["Stumpings"] != nil && matchDetailsData["Catches"] != nil && matchDetailsData["Runouts"] != nil {
+            if (matchDetailsData["Stumpings"]!) as! String == "-" && (matchDetailsData["Catches"]!) as! String == "-" && (matchDetailsData["Runouts"]!) as! String == "-" {
                 additionalInfoView.hidden = true
                 additionalInfoViewHeightConstraint.constant = 0
             }
@@ -430,20 +466,17 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                 self.dismissal.text = "(\(dismissal))"
             }
             if  let dismissal = matchDetailsData["Dismissal"] as? String where dismissal == "Not out"{
-                formattedString.bold(runs+"*" , fontName: appFont_black, fontSize: 83)
+                formattedString.bold(runs+"*" , fontName: appFont_black, fontSize: sizeFive)
             }
             else{
-                 formattedString.bold(runs , fontName: appFont_black, fontSize: 83)
+                 formattedString.bold(runs , fontName: appFont_black, fontSize: sizeFive)
             }
             
             let fullRange = NSRange(location: 0,length: formattedString.length)
-           // let batLength = formattedString.length
             
             if let Balls = matchDetailsData["BallsFaced"] {
-                formattedString.bold("(\(Balls))", fontName: appFont_bold, fontSize: 30)
-//                let ballRange = NSRange(location: batLength,length: formattedString.length-batLength)
+                formattedString.bold("(\(Balls))", fontName: appFont_bold, fontSize: sizeThree)
                 formattedString.addAttribute(NSBaselineOffsetAttributeName, value: NSNumber(float:-14), range: fullRange)
-//                formattedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(hex: "1a6a00") , range: ballRange)
             }
                 
             batRuns.attributedText = formattedString
@@ -470,18 +503,17 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         
         if let dat = matchDetailsData["MatchDate"] {
             var dob = ""
-                if isFriendDashboard == false {
-                        if isCoach == true {
-                            dob = playerDob
-                        }
-                        else{
-                             dob = profileData.DateOfBirth
-                        }
-                    }
-               
-                else{
-                    dob = friendDOB
+            if isFriendDashboard == false {
+                if isCoach == true {
+                    dob = playerDob
                 }
+                else{
+                     dob = profileData.DateOfBirth
+                }
+            }
+            else {
+                dob = friendDOB
+            }
             
             let dateFormater = NSDateFormatter()
             dateFormater.dateFormat = "dd-MM-yyyy"
@@ -499,8 +531,8 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             let groundAttachmentString = NSAttributedString(attachment: groundImageAttachment)
             
             let formattedString = NSMutableAttributedString()
-            formattedString.appendAttributedString(dateAttachmentString)
-            formattedString.bold("  \(dat)  ", fontName: appFont_bold, fontSize: 15)
+            //formattedString.appendAttributedString(dateAttachmentString)
+            formattedString.bold("  \(dat)  ", fontName: appFont_bold, fontSize: sizeTwo)
             let calender:NSCalendar  = NSCalendar.currentCalendar()
             
             let matchMonth = calender.component(.Month, fromDate: matchDate!)
@@ -525,20 +557,20 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             
             let ageStr = "Age on Match: \(years) yrs \(months) months"
            
-            formattedString.bold(" |  \(ageStr)\n", fontName: appFont_bold, fontSize: 15)
+            formattedString.bold(" |  \(ageStr)\n", fontName: appFont_bold, fontSize: sizeTwo)
             
             let groundData = matchDetailsData["Ground"] as? String
             let formattedString1 = NSMutableAttributedString()
             if let grnd = matchDetailsData["Ground"] as? String where grnd != "-" {
-                formattedString1.appendAttributedString(groundAttachmentString)
-                formattedString1.bold(" \(grnd)", fontName: appFont_bold, fontSize: 15)
+                //formattedString1.appendAttributedString(groundAttachmentString)
+                formattedString1.bold("Venue: \(grnd)", fontName: appFont_bold, fontSize: sizeTwo)
             }
             
             if let venue = matchDetailsData["Venue"] as? String where venue != "-"  {
-                if groundData == "-" {
-                    formattedString1.appendAttributedString(groundAttachmentString)
-                }
-                    formattedString1.bold(" \(venue)", fontName: appFont_bold, fontSize: 15)
+//                if groundData == "-" {
+//                    formattedString1.appendAttributedString(groundAttachmentString)
+//                }
+                    formattedString1.bold(" \(venue)", fontName: appFont_bold, fontSize: sizeTwo)
             }
             ground.attributedText = formattedString1
             matchDateAndVenue.attributedText = formattedString
@@ -551,9 +583,8 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         }
         
         setStrikeRate()
-        //calculateStrikeRate()
         
-        if let Overs: String = matchDetailsData["Maidens"] as? String { // in overs eg: 2, 3, 4
+        if let Overs: String = matchDetailsData["Maidens"] as? String {
             overs.text = Overs
         }
         
@@ -615,11 +646,8 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             if let overs = matchDetailsData["MatchOvers"] as? String where overs != "-"  {
                 group.appendContentsOf("  |  \(overs) Overs")
             }
-            
-            //if let val =  tournament as? String where val != "-"{
-               //tournamentText = formattedString.bold("\(tournament)", fontName: appFont_black, fontSize: 19).bold("\n\(group)", fontName: appFont_bold, fontSize: 15)
-            //}
-            tournamentText = formattedString.bold("\(group)", fontName: appFont_bold, fontSize: 15)
+ 
+            tournamentText = formattedString.bold("\(group)", fontName: appFont_bold, fontSize: sizeTwo)
                tournamentName.attributedText = tournamentText
         
         var firstTeamScore = "-"
@@ -707,14 +735,14 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         //sajith modified the bowling section
         if let oversBowled = matchDetailsData["OversBowled"] as? String  where oversBowled != "-" {
             let formattedString = NSMutableAttributedString()
-            formattedString.bold(matchDetailsData["WicketsTaken"] as! String, fontName: appFont_black, fontSize: 83)
+            formattedString.bold(matchDetailsData["WicketsTaken"] as! String, fontName: appFont_black, fontSize: sizeFive)
             
             if let runsGiven = matchDetailsData["RunsGiven"] {
-                formattedString.bold("-\(runsGiven)", fontName: appFont_bold, fontSize: 83)
+                formattedString.bold("-\(runsGiven)", fontName: appFont_bold, fontSize: sizeFive)
             }
             
             let fullRange = NSRange(location: 0,length: formattedString.length)
-                formattedString.bold("(\(String(format: "%.1f",(Float(oversBowled)!))))", fontName: appFont_bold, fontSize: 30)
+                formattedString.bold("(\(String(format: "%.1f",(Float(oversBowled)!))))", fontName: appFont_bold, fontSize: sizeThree)
                 formattedString.addAttribute(NSBaselineOffsetAttributeName, value: NSNumber(float:-14), range: fullRange)
             totalWickets.attributedText = formattedString
         }

@@ -461,7 +461,7 @@ class AddMatchDetailsViewController: ButtonBarPagerTabStripViewController,MatchP
         
         confirmAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction!)-> Void in
            // self.dismissViewControllerAnimated(true, completion: nil)
-            let dashboardVC = viewControllerFrom("Main", vcid: "timeline") as! TimeLineViewController
+            let dashboardVC = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
            
              self.navigationController?.pushViewController(dashboardVC, animated: true)
             

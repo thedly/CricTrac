@@ -70,13 +70,11 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
     var playerID = ""
     var playerDob = ""
     
-    var separatorSize:CGFloat = 15
-    var singleBattingSize:CGFloat = 25
-    var doubleBattingSize:CGFloat = 20
-    var singleBowlingSize:CGFloat = 25
-    var doubleBowlingSize:CGFloat = 18
-    var captionSize:CGFloat = 10
-    
+    var sizeOne:CGFloat = 10
+    var sizeTwo:CGFloat = 15
+    var sizeThree:CGFloat = 18
+    var sizeFour:CGFloat = 20
+    var sizeFive:CGFloat = 25
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
@@ -104,45 +102,40 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         tableView1.hidden = true
         tableview2.hidden = true
         tableView3.hidden = true
-        
-        if screensize == "1" {
-            separatorSize = 12
-            singleBattingSize = 20
-            doubleBattingSize = 15
-            singleBowlingSize = 20
-            doubleBowlingSize = 15
-            captionSize = 10
-        }
-        else if screensize == "2" {
-            separatorSize = 12
-            singleBattingSize = 20
-            doubleBattingSize = 16
-            singleBowlingSize = 20
-            doubleBowlingSize = 16
-            captionSize = 10
-        }
-        else if screensize == "3" {
-            separatorSize = 15
-            singleBattingSize = 25
-            doubleBattingSize = 18
-            singleBowlingSize = 25
-            doubleBowlingSize = 18
-            captionSize = 10
-        }
-        else if screensize == "4" {
-            separatorSize = 15
-            singleBattingSize = 30
-            doubleBattingSize = 23
-            singleBowlingSize = 30
-            doubleBowlingSize = 20
-            captionSize = 12
-        }
-
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-  
+        
+        if screensize == "1" {
+            sizeOne = 10
+            sizeTwo = 12
+            sizeThree = 15
+            sizeFour = 16
+            sizeFive = 20
+        }
+        else if screensize == "2" {
+            sizeOne = 10
+            sizeTwo = 12
+            sizeThree = 16
+            sizeFour = 18
+            sizeFive = 20
+        }
+        else if screensize == "3" {
+            sizeOne = 10
+            sizeTwo = 15
+            sizeThree = 18
+            sizeFour = 20
+            sizeFive = 25
+        }
+        else if screensize == "4" {
+            sizeOne = 12
+            sizeTwo = 15
+            sizeThree = 20
+            sizeFour = 23
+            sizeFive = 30
+        }
+
         upgradeButton.setTitle("UPGRADE", forState: UIControlState.Normal)
         
         userProfileData = profileData
@@ -152,10 +145,8 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         }
         else {
             setColorForViewsWithSameTag(bottomView)
-
             //upgradeButton.hidden = false
             upgradeBtnHeight.constant = 50
-            
         }
         
         //In App Purchase
@@ -681,10 +672,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 if mData.BattingSectionHidden == false {
                     batting1 = true
                     if let dismissal = value["Dismissal"] as? String where dismissal == "Not out"{
-                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: doubleBattingSize).bold("*", fontName: appFont_black, fontSize: doubleBattingSize)
+                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: sizeFour).bold("*", fontName: appFont_black, fontSize: sizeFour)
                     }
                     else{
-                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: doubleBattingSize)
+                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: sizeFour)
                     }
                 }
             }
@@ -693,24 +684,24 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 mData.BattingSectionHidden = (runsTaken2 as! String == "-")
                 if mData.BattingSectionHidden == false {
                     if batting1 == true {
-                        battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: separatorSize)
+                        battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: sizeTwo)
                     }
                     else {
-                        battingBowlingScore.bold("DNB, ", fontName: appFont_black, fontSize: separatorSize)
+                        battingBowlingScore.bold("DNB, ", fontName: appFont_black, fontSize: sizeTwo)
                     }
                     batting2 = true
                     if let dismissal2 = value["Dismissal2"] as? String where dismissal2 == "Not out"{
-                        battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: doubleBattingSize).bold("*", fontName: appFont_black, fontSize: doubleBattingSize)
+                        battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: sizeFour).bold("*", fontName: appFont_black, fontSize: sizeFour)
                     }
                     else{
-                        battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: doubleBattingSize)
+                        battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: sizeFour)
                     }
                 }
             }
             
             if batting1 == true || batting2 == true {
                 mData.BattingSectionHidden = false
-                battingBowlingScore.bold("\nRUNS", fontName: appFont_black, fontSize: captionSize)
+                battingBowlingScore.bold("\nRUNS", fontName: appFont_black, fontSize: sizeOne)
             }
         }
         else {
@@ -718,10 +709,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 mData.BattingSectionHidden = (runsTaken as! String == "-")
                 if mData.BattingSectionHidden == false {
                     if let dismissal = value["Dismissal"] as? String where dismissal == "Not out"{
-                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: singleBattingSize).bold("*", fontName: appFont_black, fontSize: singleBattingSize).bold("\nRUNS", fontName: appFont_black, fontSize: captionSize)
+                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: sizeFive).bold("*", fontName: appFont_black, fontSize: sizeFive).bold("\nRUNS", fontName: appFont_black, fontSize: sizeOne)
                     }
                     else{
-                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: singleBattingSize).bold("\nRUNS", fontName: appFont_black, fontSize: captionSize)
+                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: sizeFive).bold("\nRUNS", fontName: appFont_black, fontSize: sizeOne)
                     }
                 }
             }
@@ -735,10 +726,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 if mData.BowlingSectionHidden == false {
                     bowling1 = true
                     if battingBowlingScore.length > 0 {
-                        battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: doubleBowlingSize)
+                        battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: sizeThree)
                     }
                     else{
-                        battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: doubleBowlingSize)
+                        battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: sizeThree)
                     }
                 }
             }
@@ -747,17 +738,17 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 mData.BowlingSectionHidden = (runsGiven2 as! String == "-")
                 if mData.BowlingSectionHidden == false {
                     if bowling1 == true {
-                        battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: separatorSize)
+                        battingBowlingScore.bold(", ", fontName: appFont_black, fontSize: sizeTwo)
                     }
                     else {
-                        battingBowlingScore.bold("\nDNB, ", fontName: appFont_black, fontSize: separatorSize)
+                        battingBowlingScore.bold("\nDNB, ", fontName: appFont_black, fontSize: sizeTwo)
                     }
                     bowling2 = true
                     if battingBowlingScore.length > 0 {
-                        battingBowlingScore.bold("\n\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: doubleBowlingSize)
+                        battingBowlingScore.bold("\n\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: sizeThree)
                     }
                     else{
-                        battingBowlingScore.bold("\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: doubleBowlingSize)
+                        battingBowlingScore.bold("\(wicketsTaken2)-\(runsGiven2)", fontName: appFont_black, fontSize: sizeThree)
                     }
                 }
             }
@@ -769,10 +760,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             if bowling1 == false && bowling2 == false {
             }
             else if bowling1 == true || bowling2 == true {
-                    battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: captionSize)
+                    battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: sizeOne)
             }
             else if batting1 == false && batting2 == false {
-                    battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: captionSize)
+                    battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: sizeOne)
             }
         }
         else {
@@ -780,10 +771,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 mData.BowlingSectionHidden = (runsGiven as! String == "-")
                 if mData.BowlingSectionHidden == false {
                     if battingBowlingScore.length > 0 {
-                        battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: singleBowlingSize).bold("\nWICKETS", fontName: appFont_black, fontSize: captionSize)
+                        battingBowlingScore.bold("\n\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: sizeFive).bold("\nWICKETS", fontName: appFont_black, fontSize: sizeOne)
                     }
                     else{
-                        battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: singleBowlingSize).bold("\nWICKETS", fontName: appFont_black, fontSize: captionSize)
+                        battingBowlingScore.bold("\(wicketsTaken)-\(runsGiven)", fontName: appFont_black, fontSize: sizeFive).bold("\nWICKETS", fontName: appFont_black, fontSize: sizeOne)
                     }
                 }
             }
@@ -1260,7 +1251,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 numberFormatter.locale = product.priceLocale
                 numberFormatter.numberStyle = .CurrencyStyle
                 let priceString = numberFormatter.stringFromNumber(product.price ?? 0) ?? ""
-                print("Product: \(product.localizedDescription), price: \(priceString)")
+                //print("Product: \(product.localizedDescription), price: \(priceString)")
                 self.inAppProductPrice = priceString
             }
             else if let invalidProductId = result.invalidProductIDs.first {
