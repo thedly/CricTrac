@@ -25,6 +25,9 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     @IBOutlet weak var scrollView:UIScrollView!
     @IBInspectable var placeholderColor: UIColor = UIColor.blackColor()
 
+    @IBOutlet weak var matchFormat: UITextField!
+    
+    
     var teamOROpponentFieldChanged : Bool = false
     var selectedText:UITextField!
     var scrollViewTop:CGFloat!
@@ -33,6 +36,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     let ctDatePicker = CTDatePicker()
     lazy var ctDataPicker = DataPicker()
     weak var parent:MatchParent?
+    
     var data:[String:String]{
     
     var matchDateVal = ""
@@ -69,6 +73,12 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
     if let val = ageGroup{
         ageGroupVal = val.textVal
     }
+        
+    var matchFormatVal = ""
+      
+        if let val = matchFormat {
+          matchFormatVal = val.textVal
+        }
     
     var playingLevelVal = ""
     if let val = playingLevel{
@@ -85,7 +95,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         venueVal = val.textVal.trim()
     }
     
-    return ["MatchDate":matchDateVal,"Team":teamVal,"Opponent":opponentVal,"Ground":groundVal,"MatchOvers":oversVal,"Tournament":tournamentVal, "AgeGroup":ageGroupVal, "Level": playingLevelVal, "MatchStage":stageVal, "Venue": venueVal]
+    return ["MatchDate":matchDateVal,"Team":teamVal,"Opponent":opponentVal,"Ground":groundVal,"MatchOvers":oversVal,"Tournament":tournamentVal, "AgeGroup":ageGroupVal, "Level": playingLevelVal, "MatchStage":stageVal, "Venue": venueVal, "MatchFormat": matchFormatVal]
     }
     
     
@@ -116,6 +126,7 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         self.tournamentText.delegate = self
         self.venueText.delegate = self
         self.ageGroup.delegate = self
+        self.matchFormat.delegate = self
         self.playingLevel.delegate = self
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MatchViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
@@ -173,6 +184,9 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         
         let plLevel = "Club"
         playingLevel.textVal = plLevel
+        
+        let mFormat = "Single Innings"
+        matchFormat.textVal = mFormat
     }
     
     
@@ -211,6 +225,10 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
                 
             if let ag = selectedData["AgeGroup"] as? String{
                 ageGroup.textVal = ag
+            }
+            
+            if let mf = selectedData["MatchFormat"] as? String {
+                matchFormat.textVal = mf
             }
 
             if let pl = selectedData["Level"] as? String {
@@ -276,6 +294,15 @@ extension MatchViewController:UITextFieldDelegate
             ctDataPicker.showPicker(self, inputText: textField, data: AgeGroupData,selectedValueIndex: indexPos)
            // ctDataPicker.showPicker(self, inputText: textField, data: AgeGroupData )
         }
+            
+        if textField == matchFormat {
+            ctDataPicker = DataPicker()
+            let indexPos = matchFormatData.indexOf(matchFormat.text!) ?? 0
+            ctDataPicker.showPicker(self, inputText: textField, data: matchFormatData,selectedValueIndex: indexPos)
+        }
+
+            
+        
         else if textField == playingLevel {
             ctDataPicker = DataPicker()
             let indexPos = PlayingLevels.indexOf(playingLevel.text!) ?? 0
@@ -371,7 +398,7 @@ extension MatchViewController:UITextFieldDelegate
         else if textField == oversText {
             return newLength <= 3
         }
-        else if textField == dateText || textField == ageGroup || textField == playingLevel || textField == stage {
+        else if textField == dateText || textField == ageGroup || textField == playingLevel || textField == stage || textField == matchFormat {
             return false
         }
         else{

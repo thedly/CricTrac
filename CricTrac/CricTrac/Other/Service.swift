@@ -48,6 +48,7 @@ func loadInitialValues(){
             Achievements = value
         }
     })
+   
     
     fireBaseRef.child("BattingStyle").observeSingleEventOfType(.Value, withBlock: { snapshot in
         if let value = snapshot.value as? [String]{

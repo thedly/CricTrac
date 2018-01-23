@@ -41,6 +41,7 @@ var BattingStyles = [String]()
 var BowlingStyles = [String]()
 var PlayingRoles = [String]()
 var AgeGroupData = [String]()
+var matchFormatData = ["Single Innings","Double Innings"]
 
 var friendsDataArray = [Friends]()
 

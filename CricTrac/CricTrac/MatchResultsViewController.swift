@@ -32,6 +32,17 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     @IBOutlet weak var coachAnalysisView: UIView!
     var achievementsTextValue :String?
     
+    // for second innings
+    
+    @IBOutlet weak var secondInningsView1: UIView!
+    @IBOutlet weak var secondInningsViewHeightConstraint1: NSLayoutConstraint!
+    
+    @IBOutlet weak var secondInningsView2: UIView!
+    @IBOutlet weak var secondInningsViewHeightConstarint2: NSLayoutConstraint!
+    
+    @IBOutlet weak var secondBattingHeightConstarint: NSLayoutConstraint!
+    @IBOutlet weak var firstBattingHeightConstraint1: NSLayoutConstraint!
+    
      lazy var ctDataPicker = DataPicker()
     
     var firstBatText: String!
@@ -65,20 +76,33 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         setNavigationProperties()
         //layoutSubViewForAnalysis()
         
+       // for second innings
+        
+        let matchVCInstance = parent?.matchVC
+        let matchFormat = matchVCInstance?.matchFormat.text
+        
+        if matchFormat! == "Single Innings" {
+            secondInningsViewHeightConstraint1.constant = 0
+            secondInningsViewHeightConstarint2.constant = 0
+            secondInningsView1.hidden = true
+            secondInningsView2.hidden = true
+            firstBattingHeightConstraint1.constant = 295
+            secondBattingHeightConstarint.constant = 295
+            screenShotHeight.constant = screenShotHeight.constant - 125
+        }
+        else {
+            secondInningsViewHeightConstraint1.constant = 125
+            secondInningsViewHeightConstarint2.constant = 0
+            secondInningsView1.hidden = false
+            secondInningsView2.hidden = false
+            firstBattingHeightConstraint1.constant = 420
+            secondBattingHeightConstarint.constant = 420
+            screenShotHeight.constant = screenShotHeight.constant + 125
+        }
+        
     }
+    
    
-//    
-//    func layoutSubViewForAnalysis() {
-// 
-//                _ = selfAnalysisTextView.text
-//                let contentSize = selfAnalysisTextView.sizeThatFits(selfAnalysisTextView.bounds.size)
-//                var frame = selfAnalysisTextView.frame
-//                frame.size.height = contentSize.height
-//                selfAnalysisTextView.frame = frame
-//                selfAnalysisHeightConstarint.constant = contentSize.height
-//                selfAnalysisViewHeightConstraint.constant = contentSize.height + 15
-//    
-//    }
     
     func setNavigationProperties() {
         if profileData.UserProfile == "Coach" {
@@ -122,8 +146,18 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         secondOversText.keyboardType = UIKeyboardType.DecimalPad
         secondScoreText.delegate = self
         secondWicketsText.delegate = self
+        
         resultText.delegate = self
         AchievementsText.delegate = self
+        
+        firstOversText2.delegate = self
+        firstOversText2.keyboardType = UIKeyboardType.DecimalPad
+        firstScoreText2.delegate = self
+        firstWicketsText2.delegate = self
+        secondOversText2.delegate = self
+        secondOversText2.keyboardType = UIKeyboardType.DecimalPad
+        secondScoreText2.delegate = self
+        secondWicketsText2.delegate = self
         
         let resultsViewHolder = UIView(frame: CGRectMake(0, 30, UIScreen.mainScreen().bounds.width, 100))
         
@@ -191,6 +225,14 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     @IBOutlet weak var secondWicketsText:UITextField!
     @IBOutlet weak var resultText:UITextField!
     
+    // 
+    @IBOutlet weak var firstOversText2: UITextField!
+    @IBOutlet weak var firstScoreText2:UITextField!
+    @IBOutlet weak var firstWicketsText2:UITextField!
+    @IBOutlet weak var secondOversText2:UITextField!
+    @IBOutlet weak var secondScoreText2:UITextField!
+    @IBOutlet weak var secondWicketsText2:UITextField!
+    
     weak var matchDetails:MatchDetailsTrackable?
     var teams = [String]()
     weak var parent:MatchParent?
@@ -241,6 +283,37 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             secondWicketsVal = "0"
         }
         
+        //
+        var firstScoreVal2 = ""
+        if let val = firstScoreText2?.text where val != ""{
+            firstScoreVal2 = val
+        }
+        else{
+            firstScoreVal2 = "0"
+        }
+        
+        var firstWicketsVal2 = ""
+        if let val = firstWicketsText2{
+            firstWicketsVal2 = val.textVal
+        }
+        
+        var secondScoreVal2 = ""
+        if let val = secondScoreText2?.text where val != ""{
+            secondScoreVal2 = val
+        }
+        else{
+            secondScoreVal2 = "0"
+        }
+        
+        var secondWicketsVal2 = "0"
+        if let val = secondWicketsText2?.text where val != ""{
+            secondWicketsVal2 = val
+        }
+        else{
+            secondWicketsVal2 = "0"
+        }
+
+        
         var resultVal = ""
         if let val = resultText{
             resultVal = val.textVal
@@ -248,7 +321,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         
         var firstOversVal = "0"
         //sajith - added code for checking the Decimal value for Overs
-        if let firstOvers = firstOversText.text {
+        if let firstOvers = firstOversText.text  {
             if firstOvers.length > 0 && Float(firstOvers) >= 0 {
                 firstOversVal = firstOversText.text!
                 
@@ -305,6 +378,68 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             }
         }
         
+    // for second innings
+        
+        var firstOversVal2 = "0"
+        //sajith - added code for checking the Decimal value for Overs
+        if let firstOvers = firstOversText2.text  {
+            if firstOvers.length > 0 && Float(firstOvers) >= 0 {
+                firstOversVal2 = firstOversText2.text!
+                
+                //check the decimal part of OversBowled
+                let floatOvers = firstOversVal2.componentsSeparatedByString(".")
+                if floatOvers.count > 1 {
+                    let intOvers = floatOvers[0]
+                    var decOvers = "0"
+                    if floatOvers[1].length != 0 {
+                        decOvers = floatOvers[1]
+                    }
+                    
+                    if decOvers == "0" {
+                        firstOversVal2 = intOvers
+                    }
+                    else if Int(decOvers) > 5 {
+                        let newIntOvers = (Int(intOvers) ?? 0) + 1
+                        firstOversVal2 = String(newIntOvers)
+                    }
+                    else {
+                        firstOversVal2 = firstOversText2.text!
+                    }
+                }
+            }
+        }
+        
+        
+        var secondOversVal2 = "0"
+        //sajith - added code for checking the Decimal value for Overs
+        if let secondOvers = secondOversText2.text {
+            if secondOvers.length > 0 && Float(secondOvers) >= 0 {
+                secondOversVal2 = secondOversText2.text!
+                
+                //check the decimal part of OversBowled
+                let floatOvers = secondOversVal2.componentsSeparatedByString(".")
+                if floatOvers.count > 1 {
+                    let intOvers = floatOvers[0]
+                    var decOvers = "0"
+                    if floatOvers[1].length != 0 {
+                        decOvers = floatOvers[1]
+                    }
+                    
+                    if decOvers == "0" {
+                        secondOversVal2 = intOvers
+                    }
+                    else if Int(decOvers) > 5 {
+                        let newIntOvers = (Int(intOvers) ?? 0) + 1
+                        secondOversVal2 = String(newIntOvers)
+                    }
+                    else {
+                        secondOversVal2 = secondOversText2.text!
+                    }
+                }
+            }
+        }
+
+        
         var AchievementsVal = ""
         if let val = AchievementsText{
             AchievementsVal = val.text!
@@ -329,7 +464,13 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             }
         }
         
-        return ["TossWonBy":tossVal,"FirstBatting":firstBatVal,"FirstBattingScore":firstScoreVal,"FirstBattingWickets":firstWicketsVal,"SecondBatting":secondBatVal, "SecondBattingScore":secondScoreVal,"SecondBattingWickets":secondWicketsVal,"Result":resultVal,"FirstBattingOvers":firstOversVal,"SecondBattingOvers":secondOversVal,"Achievements":AchievementsVal,"SelfAnalysis": selfAnalysis,"CoachAnalysis":coachAnalysis]
+        if parent?.matchVC.matchFormat.text == "Single Innings" {
+            return ["TossWonBy":tossVal,"FirstBatting":firstBatVal,"FirstBattingScore":firstScoreVal,"FirstBattingWickets":firstWicketsVal,"SecondBatting":secondBatVal, "SecondBattingScore":secondScoreVal,"SecondBattingWickets":secondWicketsVal,"Result":resultVal,"FirstBattingOvers":firstOversVal,"SecondBattingOvers":secondOversVal,"Achievements":AchievementsVal,"SelfAnalysis": selfAnalysis,"CoachAnalysis":coachAnalysis]
+        }
+        else {
+           return ["TossWonBy":tossVal,"FirstBatting":firstBatVal,"FirstBattingScore":firstScoreVal,"FirstBattingWickets":firstWicketsVal,"SecondBatting":secondBatVal, "SecondBattingScore":secondScoreVal,"SecondBattingWickets":secondWicketsVal,"Result":resultVal,"FirstBattingOvers":firstOversVal,"SecondBattingOvers":secondOversVal,"Achievements":AchievementsVal,"SelfAnalysis": selfAnalysis,"CoachAnalysis":coachAnalysis,"FirstBattingScore2":firstScoreVal2,"FirstBattingWickets2":firstWicketsVal2,"FirstBattingOvers2":firstOversVal2,"SecondBattingScore2":secondScoreVal2,"SecondBattingWickets2":secondWicketsVal2,"SecondBattingOvers2":secondOversVal2]
+        }
+        
     }
     
     @IBAction func FirstTeamWicketsIncrement(sender: AnyObject) {
@@ -415,6 +556,11 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         
         firstOversText.text = parent!.selecetedData!["FirstBattingOvers"] as? String ?? "-"
         
+        firstScoreText2.textVal = parent!.selecetedData!["FirstBattingScore2"]! as? String ?? "-"
+        firstWicketsText2.textVal = parent!.selecetedData!["FirstBattingWickets2"]! as? String ?? "-"
+        firstOversText2.text = parent!.selecetedData!["FirstBattingOvers2"] as? String ?? "-"
+        
+        
         firstTeamTossBtn.alpha = 0.2
         secondTeamTossBtn.alpha = 0.2
         isTeambattingSetBtn.alpha = 0.3
@@ -435,6 +581,10 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         secondOversText.textVal = parent!.selecetedData!["SecondBattingOvers"] as? String ?? "-"
         secondWicketsText.textVal = parent!.selecetedData!["SecondBattingWickets"]! as? String ?? "-"
         resultText.textVal = parent!.selecetedData!["Result"]! as? String ?? "-"
+        
+        secondScoreText2.textVal = parent!.selecetedData!["SecondBattingScore2"]! as? String ?? "-"
+        secondOversText2.textVal = parent!.selecetedData!["SecondBattingOvers2"] as? String ?? "-"
+        secondWicketsText2.textVal = parent!.selecetedData!["SecondBattingWickets2"]! as? String ?? "-"
     }
     
     func allRequiredFieldsHaveFilledProperly()->Bool{
@@ -568,6 +718,18 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             let tempWickets = firstWicketsText
             firstWicketsText = secondWicketsText
             secondWicketsText = tempWickets
+            
+            let tempOvers2 = firstOversText2
+            firstOversText2 = secondOversText2
+            secondOversText2 = tempOvers2
+            
+            let tempScore2 = firstScoreText2
+            firstScoreText2 = secondScoreText2
+            secondScoreText2 = tempScore2
+            
+            let tempWickets2 = firstWicketsText2
+            firstWicketsText2 = secondWicketsText2
+            secondWicketsText2 = tempWickets2
             
             let tempPt = FirstBattingView.center
             
@@ -836,13 +998,13 @@ extension MatchResultsViewController:UITextFieldDelegate{
    
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         let newlength = textField.text!.characters.count + string.characters.count - range.length
-        if textField == firstScoreText || textField == secondScoreText {
+        if textField == firstScoreText || textField == secondScoreText || textField == firstScoreText2 || textField == secondScoreText2 {
            return newlength <= 4
         }
-        else if textField == firstOversText || textField == secondOversText {
+        else if textField == firstOversText || textField == secondOversText || textField == firstOversText2 || textField == secondOversText2 {
             return newlength <= 5
         }
-        else if textField == firstWicketsText || textField == secondWicketsText {
+        else if textField == firstWicketsText || textField == secondWicketsText || textField == firstWicketsText2 || textField == secondWicketsText2 {
             return newlength <= 2
         }
         else if textField == AchievementsText {
