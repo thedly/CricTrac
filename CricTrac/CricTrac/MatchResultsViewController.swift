@@ -582,7 +582,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         
        
         
-        if  parent!.selecetedData!["MatchFormat"]! as! String == "Double Innings" && parent!.selecetedData!["MatchFormat"]  != nil {
+        if  parent!.selecetedData!["MatchFormat"] as? String == "Double Innings" && parent!.selecetedData!["MatchFormat"]  != nil {
             
             firstScoreText2.textVal = parent!.selecetedData!["FirstBattingScore2"]! as? String ?? "-"
             firstWicketsText2.textVal = parent!.selecetedData!["FirstBattingWickets2"]! as? String ?? "-"

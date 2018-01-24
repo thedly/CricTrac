@@ -552,7 +552,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         maidensText.textVal = parent!.selecetedData!["Maidens"] as! String
         
         // second innings
-        if parent!.selecetedData!["MatchFormat"]! as! String == "Double Innings" && parent!.selecetedData!["MatchFormat"]  != nil {
+        if parent!.selecetedData!["MatchFormat"] as? String == "Double Innings" && parent!.selecetedData!["MatchFormat"]  != nil {
         
             runsText2.textVal = parent!.selecetedData!["RunsTaken2"]! as! String
             ballsPlayedText2.textVal = parent!.selecetedData!["BallsFaced2"]! as! String
@@ -654,40 +654,36 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         maidensText.delegate = self
         runsGivenText.delegate = self
         
+        //second innings
         
-    //second innings
+        bowledOvers2 = (parent?.selecetedData?["OversBowled2"] ?? "-") as! String
+        WicketsTaken2 = (parent?.selecetedData?["WicketsTaken2"] ?? "-") as! String
+        RunsGiven2 = (parent?.selecetedData?["RunsGiven2"] ?? "-") as! String
+        NoBalls2 = (parent?.selecetedData?["NoBalls2"] ?? "-") as! String
+        Wides2 = (parent?.selecetedData?["Wides2"] ?? "-") as! String
+        Maidens2 = (parent?.selecetedData?["Maidens2"] ?? "-") as! String
         
-        if  parent?.selecetedData!["MatchFormat"]! as! String == "Double Innings" && parent?.selecetedData!["MatchFormat"]  != nil {
+        RunsTaken2 = (parent?.selecetedData?["RunsTaken2"] ?? "-") as! String
+        BallsFaced2 = (parent?.selecetedData?["BallsFaced2"] ?? "-") as! String
+        Fours2 = (parent?.selecetedData?["Fours2"] ?? "-") as! String
+        Sixes2 = (parent?.selecetedData?["Sixes2"] ?? "-") as! String
+        Position2 = (parent?.selecetedData?["Position2"] ?? "-") as! String
+        Dismissal2 = (parent?.selecetedData?["Dismissal2"] ?? "-") as! String
         
-            bowledOvers2 = (parent?.selecetedData?["OversBowled2"] ?? "-") as! String
-            WicketsTaken2 = (parent?.selecetedData?["WicketsTaken2"] ?? "-") as! String
-            RunsGiven2 = (parent?.selecetedData?["RunsGiven2"] ?? "-") as! String
-            NoBalls2 = (parent?.selecetedData?["NoBalls2"] ?? "-") as! String
-            Wides2 = (parent?.selecetedData?["Wides2"] ?? "-") as! String
-            Maidens2 = (parent?.selecetedData?["Maidens2"] ?? "-") as! String
-            
-            RunsTaken2 = (parent?.selecetedData?["RunsTaken2"] ?? "-") as! String
-            BallsFaced2 = (parent?.selecetedData?["BallsFaced2"] ?? "-") as! String
-            Fours2 = (parent?.selecetedData?["Fours2"] ?? "-") as! String
-            Sixes2 = (parent?.selecetedData?["Sixes2"] ?? "-") as! String
-            Position2 = (parent?.selecetedData?["Position2"] ?? "-") as! String
-            Dismissal2 = (parent?.selecetedData?["Dismissal2"] ?? "-") as! String
-            
-            dismissalText2.delegate = self
-            runsText2.delegate = self
-            oversText2.delegate = self
-            oversText2.keyboardType = UIKeyboardType.DecimalPad
-            ballsPlayedText2.delegate = self
-            foursText2.delegate = self
-            sixesText2.delegate = self
-            positionText2.delegate = self
-            wicketsText2.delegate = self
-            noballText2.delegate = self
-            widesText2.delegate = self
-            maidensText2.delegate = self
-            runsGivenText2.delegate = self
-            
-        }
+        dismissalText2.delegate = self
+        runsText2.delegate = self
+        oversText2.delegate = self
+        oversText2.keyboardType = UIKeyboardType.DecimalPad
+        ballsPlayedText2.delegate = self
+        foursText2.delegate = self
+        sixesText2.delegate = self
+        positionText2.delegate = self
+        wicketsText2.delegate = self
+        noballText2.delegate = self
+        widesText2.delegate = self
+        maidensText2.delegate = self
+        runsGivenText2.delegate = self
+        
         
         roleText.delegate = self
         catchesText.delegate = self
