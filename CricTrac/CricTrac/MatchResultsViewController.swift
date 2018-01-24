@@ -81,7 +81,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         let matchVCInstance = parent?.matchVC
         let matchFormat = matchVCInstance?.matchFormat.text
         
-        if matchFormat! == "Single Innings" {
+        if matchFormat! == "Single Innings" || matchFormat! == "" {
             secondInningsViewHeightConstraint1.constant = 0
             secondInningsViewHeightConstarint2.constant = 0
             secondInningsView1.hidden = true
@@ -92,14 +92,13 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         }
         else {
             secondInningsViewHeightConstraint1.constant = 125
-            secondInningsViewHeightConstarint2.constant = 0
+            secondInningsViewHeightConstarint2.constant = 125
             secondInningsView1.hidden = false
             secondInningsView2.hidden = false
             firstBattingHeightConstraint1.constant = 420
             secondBattingHeightConstarint.constant = 420
             screenShotHeight.constant = screenShotHeight.constant + 125
         }
-        
     }
     
    
@@ -150,14 +149,15 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         resultText.delegate = self
         AchievementsText.delegate = self
         
-        firstOversText2.delegate = self
-        firstOversText2.keyboardType = UIKeyboardType.DecimalPad
-        firstScoreText2.delegate = self
-        firstWicketsText2.delegate = self
-        secondOversText2.delegate = self
-        secondOversText2.keyboardType = UIKeyboardType.DecimalPad
-        secondScoreText2.delegate = self
-        secondWicketsText2.delegate = self
+        
+            firstOversText2.delegate = self
+            firstOversText2.keyboardType = UIKeyboardType.DecimalPad
+            firstScoreText2.delegate = self
+            firstWicketsText2.delegate = self
+            secondOversText2.delegate = self
+            secondOversText2.keyboardType = UIKeyboardType.DecimalPad
+            secondScoreText2.delegate = self
+            secondWicketsText2.delegate = self
         
         let resultsViewHolder = UIView(frame: CGRectMake(0, 30, UIScreen.mainScreen().bounds.width, 100))
         
@@ -464,7 +464,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             }
         }
         
-        if parent?.matchVC.matchFormat.text == "Single Innings" {
+        if (parent?.matchVC.matchFormat.text)! == "Single Innings" {
             return ["TossWonBy":tossVal,"FirstBatting":firstBatVal,"FirstBattingScore":firstScoreVal,"FirstBattingWickets":firstWicketsVal,"SecondBatting":secondBatVal, "SecondBattingScore":secondScoreVal,"SecondBattingWickets":secondWicketsVal,"Result":resultVal,"FirstBattingOvers":firstOversVal,"SecondBattingOvers":secondOversVal,"Achievements":AchievementsVal,"SelfAnalysis": selfAnalysis,"CoachAnalysis":coachAnalysis]
         }
         else {
@@ -556,9 +556,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         
         firstOversText.text = parent!.selecetedData!["FirstBattingOvers"] as? String ?? "-"
         
-        firstScoreText2.textVal = parent!.selecetedData!["FirstBattingScore2"]! as? String ?? "-"
-        firstWicketsText2.textVal = parent!.selecetedData!["FirstBattingWickets2"]! as? String ?? "-"
-        firstOversText2.text = parent!.selecetedData!["FirstBattingOvers2"] as? String ?? "-"
+        
         
         
         firstTeamTossBtn.alpha = 0.2
@@ -582,9 +580,19 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         secondWicketsText.textVal = parent!.selecetedData!["SecondBattingWickets"]! as? String ?? "-"
         resultText.textVal = parent!.selecetedData!["Result"]! as? String ?? "-"
         
-        secondScoreText2.textVal = parent!.selecetedData!["SecondBattingScore2"]! as? String ?? "-"
-        secondOversText2.textVal = parent!.selecetedData!["SecondBattingOvers2"] as? String ?? "-"
-        secondWicketsText2.textVal = parent!.selecetedData!["SecondBattingWickets2"]! as? String ?? "-"
+       
+        
+        if  parent!.selecetedData!["MatchFormat"]! as! String == "Double Innings" && parent!.selecetedData!["MatchFormat"]  != nil {
+            
+            firstScoreText2.textVal = parent!.selecetedData!["FirstBattingScore2"]! as? String ?? "-"
+            firstWicketsText2.textVal = parent!.selecetedData!["FirstBattingWickets2"]! as? String ?? "-"
+            firstOversText2.text = parent!.selecetedData!["FirstBattingOvers2"] as? String ?? "-"
+            
+            secondScoreText2.textVal = parent!.selecetedData!["SecondBattingScore2"]! as? String ?? "-"
+            secondOversText2.textVal = parent!.selecetedData!["SecondBattingOvers2"] as? String ?? "-"
+            secondWicketsText2.textVal = parent!.selecetedData!["SecondBattingWickets2"]! as? String ?? "-"
+        }
+        
     }
     
     func allRequiredFieldsHaveFilledProperly()->Bool{
@@ -918,9 +926,10 @@ extension MatchResultsViewController:UITextFieldDelegate{
             animateViewMoving(true, moveValue: 210)
         }
         
-//        if textField == firstWicketsText {
-//            animateViewMoving(true, moveValue: 160)
-//        }
+        if textField == firstWicketsText || textField == secondWicketsText || textField == firstWicketsText2 || textField == secondWicketsText2 {
+             showPicker(self, inputText: textField, data: maxWickets)
+        }
+
         
         if textField == resultText{
              //resultText.becomeFirstResponder()

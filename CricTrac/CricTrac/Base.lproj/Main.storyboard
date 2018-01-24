@@ -7747,43 +7747,27 @@
                                                             <action selector="tossBtnTapped:" destination="akr-wt-TN6" eventType="touchUpInside" id="dVL-2d-Xpg"/>
                                                         </connections>
                                                     </button>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IYV-NO-MT5">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fDW-Ij-0r2">
                                                         <rect key="frame" x="0.0" y="290" width="285" height="125"/>
                                                         <subviews>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="SCORE" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lph-sf-af3" userLabel="FirstScore" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                                <rect key="frame" x="5" y="31" width="114" height="38"/>
-                                                                <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="13"/>
-                                                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="color" keyPath="titleTextColour">
-                                                                        <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="color" keyPath="titleActiveTextColour">
-                                                                        <color key="value" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
-                                                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
-                                                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
-                                                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
-                                                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </textField>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" placeholder="WICKETS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xmy-gF-dWQ" userLabel="FirstScore" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Apr-eQ-a5x">
+                                                                <rect key="frame" x="225" y="42" width="20" height="20"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="20" id="4wq-NI-tA3"/>
+                                                                    <constraint firstAttribute="height" constant="20" id="qdR-bn-bBd"/>
+                                                                </constraints>
+                                                                <state key="normal" image="OkFilled"/>
+                                                                <connections>
+                                                                    <action selector="tossBtnTapped:" destination="akr-wt-TN6" eventType="touchUpInside" id="4Fc-5S-ydb"/>
+                                                                </connections>
+                                                            </button>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dec" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sje-xB-GgP">
+                                                                <rect key="frame" x="248" y="41" width="27" height="22"/>
+                                                                <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
+                                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" placeholder="WICKETS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XWj-0w-gss" userLabel="FirstScore" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                                 <rect key="frame" x="163" y="79" width="114" height="39"/>
                                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -7816,30 +7800,46 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
-                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lae-LT-SPV">
-                                                                <rect key="frame" x="225" y="42" width="20" height="20"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="20" id="pHV-yo-uTA"/>
-                                                                    <constraint firstAttribute="height" constant="20" id="w4v-3D-r4n"/>
-                                                                </constraints>
-                                                                <state key="normal" image="OkFilled"/>
-                                                                <connections>
-                                                                    <action selector="tossBtnTapped:" destination="akr-wt-TN6" eventType="touchUpInside" id="ng8-7h-Yma"/>
-                                                                </connections>
-                                                            </button>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dec" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hXD-7o-8b2">
-                                                                <rect key="frame" x="248" y="41" width="27" height="22"/>
-                                                                <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
-                                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Second Innings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEk-75-kFL">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Second Innings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kpd-CW-ryG">
                                                                 <rect key="frame" x="5" y="5" width="107" height="21"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="16"/>
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OVERS" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gN8-As-61q" userLabel="FirstScore" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="SCORE" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FEQ-LY-1ks" userLabel="FirstScore" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                                <rect key="frame" x="5" y="31" width="114" height="38"/>
+                                                                <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="13"/>
+                                                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="titleTextColour">
+                                                                        <color key="value" red="0.42745098040000001" green="0.58039215690000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="titleActiveTextColour">
+                                                                        <color key="value" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                                                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
+                                                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </textField>
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OVERS" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qud-vH-CHa" userLabel="FirstScore" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                                 <rect key="frame" x="5" y="79" width="114" height="39"/>
                                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -7875,33 +7875,28 @@
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstItem="Xmy-gF-dWQ" firstAttribute="width" secondItem="gN8-As-61q" secondAttribute="width" id="0bH-PC-uG4"/>
-                                                            <constraint firstItem="Lph-sf-af3" firstAttribute="leading" secondItem="IYV-NO-MT5" secondAttribute="leading" constant="8" id="10V-UN-qOP"/>
-                                                            <constraint firstItem="Lph-sf-af3" firstAttribute="top" secondItem="SEk-75-kFL" secondAttribute="bottom" constant="5" id="2oM-h3-DRF"/>
-                                                            <constraint firstItem="SEk-75-kFL" firstAttribute="top" secondItem="IYV-NO-MT5" secondAttribute="top" constant="5" id="4Jp-cG-z2I"/>
-                                                            <constraint firstItem="SEk-75-kFL" firstAttribute="leading" secondItem="IYV-NO-MT5" secondAttribute="leading" constant="5" id="5pv-uV-DZQ"/>
-                                                            <constraint firstItem="gN8-As-61q" firstAttribute="width" secondItem="Lph-sf-af3" secondAttribute="width" id="BY1-n3-pWX"/>
-                                                            <constraint firstItem="Lph-sf-af3" firstAttribute="top" secondItem="SEk-75-kFL" secondAttribute="bottom" constant="5" id="DtD-iY-Okf"/>
-                                                            <constraint firstItem="Lph-sf-af3" firstAttribute="width" secondItem="IYV-NO-MT5" secondAttribute="width" multiplier="0.4" id="Egi-Ld-G2r"/>
-                                                            <constraint firstItem="hXD-7o-8b2" firstAttribute="leading" secondItem="lae-LT-SPV" secondAttribute="trailing" constant="3" id="F9T-sJ-0xC"/>
-                                                            <constraint firstItem="Xmy-gF-dWQ" firstAttribute="top" secondItem="hXD-7o-8b2" secondAttribute="bottom" constant="16" id="FK1-ib-RrK"/>
-                                                            <constraint firstItem="gN8-As-61q" firstAttribute="top" secondItem="Lph-sf-af3" secondAttribute="bottom" constant="10" id="PZ7-ac-POd"/>
-                                                            <constraint firstItem="gN8-As-61q" firstAttribute="width" secondItem="Lph-sf-af3" secondAttribute="width" id="RLU-RD-Xgt"/>
-                                                            <constraint firstAttribute="height" constant="125" id="Yl5-pg-H06"/>
-                                                            <constraint firstAttribute="trailing" secondItem="Xmy-gF-dWQ" secondAttribute="trailing" constant="8" id="f5v-JG-C0p"/>
-                                                            <constraint firstItem="Xmy-gF-dWQ" firstAttribute="top" secondItem="gN8-As-61q" secondAttribute="top" id="iw9-pu-bHE"/>
-                                                            <constraint firstItem="lae-LT-SPV" firstAttribute="centerY" secondItem="hXD-7o-8b2" secondAttribute="centerY" id="mVP-Xe-IyS"/>
-                                                            <constraint firstItem="Lph-sf-af3" firstAttribute="leading" secondItem="SEk-75-kFL" secondAttribute="leading" id="oJR-2f-BOO"/>
-                                                            <constraint firstItem="gN8-As-61q" firstAttribute="leading" secondItem="IYV-NO-MT5" secondAttribute="leading" constant="8" id="vd7-7w-4hk"/>
-                                                            <constraint firstAttribute="trailing" secondItem="hXD-7o-8b2" secondAttribute="trailing" constant="10" id="wdX-KA-6F8"/>
-                                                            <constraint firstItem="gN8-As-61q" firstAttribute="leading" secondItem="Lph-sf-af3" secondAttribute="leading" id="whe-Ll-K2U"/>
+                                                            <constraint firstItem="qud-vH-CHa" firstAttribute="width" secondItem="FEQ-LY-1ks" secondAttribute="width" id="3Yg-Lw-xEL"/>
+                                                            <constraint firstItem="Kpd-CW-ryG" firstAttribute="leading" secondItem="fDW-Ij-0r2" secondAttribute="leading" constant="5" id="56v-ci-DF8"/>
+                                                            <constraint firstItem="FEQ-LY-1ks" firstAttribute="top" secondItem="Kpd-CW-ryG" secondAttribute="bottom" constant="5" id="89L-Kg-NNk"/>
+                                                            <constraint firstItem="XWj-0w-gss" firstAttribute="top" secondItem="Sje-xB-GgP" secondAttribute="bottom" constant="16" id="AKZ-y8-67c"/>
+                                                            <constraint firstItem="Apr-eQ-a5x" firstAttribute="centerY" secondItem="Sje-xB-GgP" secondAttribute="centerY" id="CST-FX-WhE"/>
+                                                            <constraint firstItem="XWj-0w-gss" firstAttribute="width" secondItem="qud-vH-CHa" secondAttribute="width" id="Gyy-de-g0n"/>
+                                                            <constraint firstAttribute="trailing" secondItem="XWj-0w-gss" secondAttribute="trailing" constant="8" id="HHT-vo-cjS"/>
+                                                            <constraint firstItem="Sje-xB-GgP" firstAttribute="leading" secondItem="Apr-eQ-a5x" secondAttribute="trailing" constant="3" id="N2X-Tm-ikb"/>
+                                                            <constraint firstItem="qud-vH-CHa" firstAttribute="trailing" secondItem="FEQ-LY-1ks" secondAttribute="trailing" id="Or0-4p-d9H"/>
+                                                            <constraint firstItem="XWj-0w-gss" firstAttribute="top" secondItem="qud-vH-CHa" secondAttribute="top" id="TeI-ja-U2s"/>
+                                                            <constraint firstItem="qud-vH-CHa" firstAttribute="top" secondItem="FEQ-LY-1ks" secondAttribute="bottom" constant="10" id="VYv-xM-wFH"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Sje-xB-GgP" secondAttribute="trailing" constant="10" id="bh1-Zd-Gse"/>
+                                                            <constraint firstItem="FEQ-LY-1ks" firstAttribute="width" secondItem="fDW-Ij-0r2" secondAttribute="width" multiplier="0.4" id="fcY-wT-2T5"/>
+                                                            <constraint firstItem="qud-vH-CHa" firstAttribute="leading" secondItem="FEQ-LY-1ks" secondAttribute="leading" id="i5i-C4-n3c"/>
+                                                            <constraint firstItem="FEQ-LY-1ks" firstAttribute="leading" secondItem="Kpd-CW-ryG" secondAttribute="leading" id="k6n-p0-zuD"/>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="125" id="s38-Ot-oc4"/>
+                                                            <constraint firstItem="Kpd-CW-ryG" firstAttribute="top" secondItem="fDW-Ij-0r2" secondAttribute="top" constant="5" id="w6d-iW-0XE"/>
+                                                            <constraint firstAttribute="height" constant="125" id="xDG-3X-m9u"/>
                                                         </constraints>
                                                         <variation key="default">
                                                             <mask key="constraints">
-                                                                <exclude reference="10V-UN-qOP"/>
-                                                                <exclude reference="DtD-iY-Okf"/>
-                                                                <exclude reference="RLU-RD-Xgt"/>
-                                                                <exclude reference="vd7-7w-4hk"/>
+                                                                <exclude reference="s38-Ot-oc4"/>
                                                             </mask>
                                                         </variation>
                                                     </view>
@@ -7912,7 +7907,6 @@
                                                     <constraint firstItem="m4d-Ny-d1g" firstAttribute="leading" secondItem="CsF-v6-Ado" secondAttribute="leading" constant="5" id="2d1-3E-8D2"/>
                                                     <constraint firstItem="p8M-Pn-UZo" firstAttribute="leading" secondItem="NmI-8D-PQ6" secondAttribute="leading" id="3ES-44-MmG"/>
                                                     <constraint firstItem="MDV-fN-w93" firstAttribute="top" secondItem="CsF-v6-Ado" secondAttribute="top" constant="10" id="3wU-ea-2yd"/>
-                                                    <constraint firstAttribute="trailing" secondItem="IYV-NO-MT5" secondAttribute="trailing" id="5BM-hc-xdb"/>
                                                     <constraint firstAttribute="trailing" secondItem="Oib-Qd-hmf" secondAttribute="trailing" constant="10" id="7dL-sE-mG9"/>
                                                     <constraint firstItem="P35-ea-1Oh" firstAttribute="leading" secondItem="CsF-v6-Ado" secondAttribute="leading" constant="40" id="9lD-EN-m47"/>
                                                     <constraint firstItem="NmI-8D-PQ6" firstAttribute="top" secondItem="sOF-Eb-kDB" secondAttribute="bottom" constant="5" id="AYt-e7-BUt"/>
@@ -7921,9 +7915,9 @@
                                                     <constraint firstItem="491-HM-GrZ" firstAttribute="top" secondItem="Oib-Qd-hmf" secondAttribute="bottom" constant="21" id="D41-xo-c9L"/>
                                                     <constraint firstItem="m4d-Ny-d1g" firstAttribute="top" secondItem="MDV-fN-w93" secondAttribute="bottom" constant="10" id="Ema-Ui-os5"/>
                                                     <constraint firstItem="sOF-Eb-kDB" firstAttribute="top" secondItem="M6L-YP-Kej" secondAttribute="bottom" constant="10" id="F5a-YX-awy"/>
+                                                    <constraint firstItem="fDW-Ij-0r2" firstAttribute="top" secondItem="491-HM-GrZ" secondAttribute="bottom" constant="5" id="FTF-uY-nAX"/>
                                                     <constraint firstAttribute="trailing" secondItem="MDV-fN-w93" secondAttribute="trailing" constant="10" id="MBV-8e-GEb"/>
                                                     <constraint firstItem="491-HM-GrZ" firstAttribute="top" secondItem="p8M-Pn-UZo" secondAttribute="top" id="MRc-h1-kdH"/>
-                                                    <constraint firstItem="IYV-NO-MT5" firstAttribute="leading" secondItem="CsF-v6-Ado" secondAttribute="leading" id="NKJ-AM-wke"/>
                                                     <constraint firstAttribute="height" constant="420" id="PTM-oH-pVd"/>
                                                     <constraint firstItem="sOF-Eb-kDB" firstAttribute="leading" secondItem="M6L-YP-Kej" secondAttribute="leading" id="R6h-W2-EIf"/>
                                                     <constraint firstAttribute="trailing" secondItem="491-HM-GrZ" secondAttribute="trailing" constant="10" id="Rws-vn-r2k"/>
@@ -7938,10 +7932,12 @@
                                                     <constraint firstAttribute="trailing" secondItem="NmI-8D-PQ6" secondAttribute="trailing" constant="188" id="e4P-r2-ciA"/>
                                                     <constraint firstItem="P35-ea-1Oh" firstAttribute="top" secondItem="m4d-Ny-d1g" secondAttribute="bottom" constant="20" id="gf6-wZ-cNb"/>
                                                     <constraint firstItem="NmI-8D-PQ6" firstAttribute="width" secondItem="CsF-v6-Ado" secondAttribute="width" multiplier="0.4" id="kKD-qH-gau"/>
+                                                    <constraint firstItem="fDW-Ij-0r2" firstAttribute="top" secondItem="p8M-Pn-UZo" secondAttribute="bottom" constant="5" id="p1L-x1-NeW"/>
                                                     <constraint firstItem="MDV-fN-w93" firstAttribute="centerX" secondItem="CsF-v6-Ado" secondAttribute="centerX" id="qqL-Z9-tyA"/>
                                                     <constraint firstItem="NmI-8D-PQ6" firstAttribute="top" secondItem="P35-ea-1Oh" secondAttribute="bottom" constant="40" id="rBU-B7-0ml"/>
-                                                    <constraint firstItem="IYV-NO-MT5" firstAttribute="top" secondItem="491-HM-GrZ" secondAttribute="bottom" constant="5" id="rkC-vr-xK0"/>
+                                                    <constraint firstItem="fDW-Ij-0r2" firstAttribute="leading" secondItem="CsF-v6-Ado" secondAttribute="leading" id="rDS-iu-ad5"/>
                                                     <constraint firstItem="CLu-dU-Lk5" firstAttribute="centerY" secondItem="Oib-Qd-hmf" secondAttribute="centerY" id="rqS-UD-dX0"/>
+                                                    <constraint firstAttribute="trailing" secondItem="fDW-Ij-0r2" secondAttribute="trailing" id="s9Q-fs-n2Q"/>
                                                     <constraint firstItem="M6L-YP-Kej" firstAttribute="centerY" secondItem="P35-ea-1Oh" secondAttribute="centerY" id="vxt-Xv-B1N"/>
                                                     <constraint firstAttribute="trailing" secondItem="M6L-YP-Kej" secondAttribute="trailing" constant="10" id="zZ9-Ib-CEk"/>
                                                 </constraints>
@@ -7957,6 +7953,7 @@
                                                         <exclude reference="9lD-EN-m47"/>
                                                         <exclude reference="e4P-r2-ciA"/>
                                                         <exclude reference="rBU-B7-0ml"/>
+                                                        <exclude reference="FTF-uY-nAX"/>
                                                     </mask>
                                                 </variation>
                                             </view>
@@ -8259,17 +8256,17 @@
                         <outlet property="secondBattingHeaderText" destination="PvG-dd-rht" id="lTK-w1-kcG"/>
                         <outlet property="secondBattingHeightConstarint" destination="PTM-oH-pVd" id="A0v-aU-Kk0"/>
                         <outlet property="secondInningsView1" destination="o36-ZV-lWr" id="kOR-zd-cQR"/>
-                        <outlet property="secondInningsView2" destination="IYV-NO-MT5" id="YiT-eE-htu"/>
-                        <outlet property="secondInningsViewHeightConstarint2" destination="Yl5-pg-H06" id="Xf5-ui-0Bc"/>
+                        <outlet property="secondInningsView2" destination="fDW-Ij-0r2" id="CXC-Zu-POt"/>
+                        <outlet property="secondInningsViewHeightConstarint2" destination="xDG-3X-m9u" id="Ylp-mv-fjh"/>
                         <outlet property="secondInningsViewHeightConstraint1" destination="rMK-fv-169" id="s09-Wb-wuW"/>
                         <outlet property="secondOversText" destination="p8M-Pn-UZo" id="P8L-J1-DDu"/>
-                        <outlet property="secondOversText2" destination="gN8-As-61q" id="X7r-m3-AgK"/>
+                        <outlet property="secondOversText2" destination="qud-vH-CHa" id="wa8-lJ-fPr"/>
                         <outlet property="secondScoreText" destination="NmI-8D-PQ6" id="2hY-K7-wdj"/>
-                        <outlet property="secondScoreText2" destination="Lph-sf-af3" id="c1V-0F-XSJ"/>
+                        <outlet property="secondScoreText2" destination="FEQ-LY-1ks" id="wFA-cx-UAo"/>
                         <outlet property="secondTeamTitle" destination="MDV-fN-w93" id="uQJ-Jc-BR4"/>
                         <outlet property="secondTeamTossBtn" destination="M6L-YP-Kej" id="xia-u2-zx7"/>
                         <outlet property="secondWicketsText" destination="491-HM-GrZ" id="MJW-Xx-WdV"/>
-                        <outlet property="secondWicketsText2" destination="Xmy-gF-dWQ" id="19n-1Z-hIQ"/>
+                        <outlet property="secondWicketsText2" destination="XWj-0w-gss" id="Bj5-Pp-oqd"/>
                         <outlet property="selfAnalysisHeightConstarint" destination="4js-6M-KIi" id="R56-Do-39Z"/>
                         <outlet property="selfAnalysisTextView" destination="QWq-g3-VFk" id="q9B-JC-fTU"/>
                         <outlet property="selfAnalysisView" destination="olB-b2-hMw" id="qA7-2d-rLM"/>

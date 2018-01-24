@@ -98,7 +98,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     
     var BowlingData:[String:String]{
         
-        if parent?.matchVC.matchFormat.text == "Single Innings" {
+        if (parent?.matchVC.matchFormat.text)! == "Single Innings" {
            return ["OversBowled":bowledOvers,"WicketsTaken":WicketsTaken,"RunsGiven":RunsGiven,"NoBalls":NoBalls,"Wides":Wides, "Maidens": Maidens]
         }
         else {
@@ -527,7 +527,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     
     var BattingData:[String:String]{
         
-        if parent?.matchVC.matchFormat.text == "Single Innings" {
+        if (parent?.matchVC.matchFormat.text)! == "Single Innings" {
             return ["RunsTaken":RunsTaken,"BallsFaced":BallsFaced,"Fours":Fours,"Sixes":Sixes,"Position":Position,"Dismissal":Dismissal]
         }
         else {
@@ -552,22 +552,22 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         maidensText.textVal = parent!.selecetedData!["Maidens"] as! String
         
         // second innings
+        if parent!.selecetedData!["MatchFormat"]! as! String == "Double Innings" && parent!.selecetedData!["MatchFormat"]  != nil {
         
-        runsText2.textVal = parent!.selecetedData!["RunsTaken2"]! as! String
-        ballsPlayedText2.textVal = parent!.selecetedData!["BallsFaced2"]! as! String
-        foursText2.textVal = parent!.selecetedData!["Fours2"]! as! String
-        sixesText2.textVal = parent!.selecetedData!["Sixes2"]! as! String
-        positionText2.textVal = parent!.selecetedData!["Position2"]! as! String
-        dismissalText2.textVal = parent!.selecetedData!["Dismissal2"]! as! String
-        
-        oversText2.textVal = parent!.selecetedData!["OversBowled2"]! as! String
-        wicketsText2.textVal = parent!.selecetedData!["WicketsTaken2"]! as! String
-        runsGivenText2.textVal = parent!.selecetedData!["RunsGiven2"]! as! String
-        noballText2.textVal = parent!.selecetedData!["NoBalls2"]! as! String
-        widesText2.textVal = parent!.selecetedData!["Wides2"]! as! String
-        maidensText2.textVal = parent!.selecetedData!["Maidens2"] as! String
-
-        
+            runsText2.textVal = parent!.selecetedData!["RunsTaken2"]! as! String
+            ballsPlayedText2.textVal = parent!.selecetedData!["BallsFaced2"]! as! String
+            foursText2.textVal = parent!.selecetedData!["Fours2"]! as! String
+            sixesText2.textVal = parent!.selecetedData!["Sixes2"]! as! String
+            positionText2.textVal = parent!.selecetedData!["Position2"]! as! String
+            dismissalText2.textVal = parent!.selecetedData!["Dismissal2"]! as! String
+            
+            oversText2.textVal = parent!.selecetedData!["OversBowled2"]! as! String
+            wicketsText2.textVal = parent!.selecetedData!["WicketsTaken2"]! as! String
+            runsGivenText2.textVal = parent!.selecetedData!["RunsGiven2"]! as! String
+            noballText2.textVal = parent!.selecetedData!["NoBalls2"]! as! String
+            widesText2.textVal = parent!.selecetedData!["Wides2"]! as! String
+            maidensText2.textVal = parent!.selecetedData!["Maidens2"]! as! String
+        }
         
         if parent!.selecetedData!["FieldingRole"]  != nil {
             roleText.textVal = parent!.selecetedData!["FieldingRole"] as! String
@@ -597,7 +597,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         let matchVCInstance = parent?.matchVC
         let matchFormat = matchVCInstance?.matchFormat.text
         
-        if matchFormat! == "Single Innings" {
+        if matchFormat! == "Single Innings" || matchFormat! == "" {
           secondInningsViewHeightConstraint.constant = 0
           secondInningsView.hidden = true
           baseView.constant = 736
@@ -657,33 +657,37 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         
     //second innings
         
-        bowledOvers2 = (parent?.selecetedData?["OversBowled2"] ?? "-") as! String
-        WicketsTaken2 = (parent?.selecetedData?["WicketsTaken2"] ?? "-") as! String
-        RunsGiven2 = (parent?.selecetedData?["RunsGiven2"] ?? "-") as! String
-        NoBalls2 = (parent?.selecetedData?["NoBalls2"] ?? "-") as! String
-        Wides2 = (parent?.selecetedData?["Wides2"] ?? "-") as! String
-        Maidens2 = (parent?.selecetedData?["Maidens2"] ?? "-") as! String
+        if  parent?.selecetedData!["MatchFormat"]! as! String == "Double Innings" && parent?.selecetedData!["MatchFormat"]  != nil {
         
-        RunsTaken2 = (parent?.selecetedData?["RunsTaken2"] ?? "-") as! String
-        BallsFaced2 = (parent?.selecetedData?["BallsFaced2"] ?? "-") as! String
-        Fours2 = (parent?.selecetedData?["Fours2"] ?? "-") as! String
-        Sixes2 = (parent?.selecetedData?["Sixes2"] ?? "-") as! String
-        Position2 = (parent?.selecetedData?["Position2"] ?? "-") as! String
-        Dismissal2 = (parent?.selecetedData?["Dismissal2"] ?? "-") as! String
-        
-        dismissalText2.delegate = self
-        runsText2.delegate = self
-        oversText2.delegate = self
-        oversText2.keyboardType = UIKeyboardType.DecimalPad
-        ballsPlayedText2.delegate = self
-        foursText2.delegate = self
-        sixesText2.delegate = self
-        positionText2.delegate = self
-        wicketsText2.delegate = self
-        noballText2.delegate = self
-        widesText2.delegate = self
-        maidensText2.delegate = self
-        runsGivenText2.delegate = self
+            bowledOvers2 = (parent?.selecetedData?["OversBowled2"] ?? "-") as! String
+            WicketsTaken2 = (parent?.selecetedData?["WicketsTaken2"] ?? "-") as! String
+            RunsGiven2 = (parent?.selecetedData?["RunsGiven2"] ?? "-") as! String
+            NoBalls2 = (parent?.selecetedData?["NoBalls2"] ?? "-") as! String
+            Wides2 = (parent?.selecetedData?["Wides2"] ?? "-") as! String
+            Maidens2 = (parent?.selecetedData?["Maidens2"] ?? "-") as! String
+            
+            RunsTaken2 = (parent?.selecetedData?["RunsTaken2"] ?? "-") as! String
+            BallsFaced2 = (parent?.selecetedData?["BallsFaced2"] ?? "-") as! String
+            Fours2 = (parent?.selecetedData?["Fours2"] ?? "-") as! String
+            Sixes2 = (parent?.selecetedData?["Sixes2"] ?? "-") as! String
+            Position2 = (parent?.selecetedData?["Position2"] ?? "-") as! String
+            Dismissal2 = (parent?.selecetedData?["Dismissal2"] ?? "-") as! String
+            
+            dismissalText2.delegate = self
+            runsText2.delegate = self
+            oversText2.delegate = self
+            oversText2.keyboardType = UIKeyboardType.DecimalPad
+            ballsPlayedText2.delegate = self
+            foursText2.delegate = self
+            sixesText2.delegate = self
+            positionText2.delegate = self
+            wicketsText2.delegate = self
+            noballText2.delegate = self
+            widesText2.delegate = self
+            maidensText2.delegate = self
+            runsGivenText2.delegate = self
+            
+        }
         
         roleText.delegate = self
         catchesText.delegate = self
