@@ -672,10 +672,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 if mData.BattingSectionHidden == false {
                     batting1 = true
                     if let dismissal = value["Dismissal"] as? String where dismissal == "Not out"{
-                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: sizeFour).bold("*", fontName: appFont_black, fontSize: sizeFour)
+                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: sizeThree).bold("*", fontName: appFont_black, fontSize: sizeThree)
                     }
                     else{
-                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: sizeFour)
+                        battingBowlingScore.bold(runsTaken as! String, fontName: appFont_black, fontSize: sizeThree)
                     }
                 }
             }
@@ -691,10 +691,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                     }
                     batting2 = true
                     if let dismissal2 = value["Dismissal2"] as? String where dismissal2 == "Not out"{
-                        battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: sizeFour).bold("*", fontName: appFont_black, fontSize: sizeFour)
+                        battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: sizeThree).bold("*", fontName: appFont_black, fontSize: sizeThree)
                     }
                     else{
-                        battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: sizeFour)
+                        battingBowlingScore.bold(runsTaken2 as! String, fontName: appFont_black, fontSize: sizeThree)
                     }
                 }
             }

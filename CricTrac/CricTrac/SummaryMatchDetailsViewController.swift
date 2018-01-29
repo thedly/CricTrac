@@ -108,7 +108,13 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     @IBOutlet weak var maidens2: UILabel!
     @IBOutlet weak var secondInningsTextLabel: UILabel!
     
+    @IBOutlet weak var firstInningsLabelHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var secondInningsLabelHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var firstInningsStackView: UIStackView!
+    
+    @IBOutlet weak var secondInningsStatckView: UIStackView!
     
     
     var isFriendDashboard: Bool!  = false
@@ -281,6 +287,8 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
         // navigationController!.navigationBar.barTintColor = currentTheme.topColor
+        setPlainShadow(firstInningsStackView, color: currentTheme.bottomColor.CGColor)
+        setPlainShadow(secondInningsStatckView, color: currentTheme.bottomColor.CGColor)
     }
     
     override func viewDidLoad() {
@@ -624,10 +632,13 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         }
         
         if (battingViewHidden2 == true) {
-            //self.battingView.hidden = true
+           self.battingView2.hidden = true
+            firstInningsLabelHeightConstraint.constant = 0
             self.screenShotHeightConstraint.constant -= 190
         }
         else {
+             self.battingView2.hidden = false
+            firstInningsLabelHeightConstraint.constant = 22
             self.screenShotHeightConstraint.constant += 190
         }
         
@@ -675,7 +686,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                 let fullRange = NSRange(location: 0,length: formattedString.length)
                 formattedString.bold("(\(String(format: "%.1f",(Float(oversBowled)!))))", fontName: appFont_bold, fontSize: sizeThree)
                 formattedString.addAttribute(NSBaselineOffsetAttributeName, value: NSNumber(float:-14), range: fullRange)
-                totalWickets.attributedText = formattedString
+                totalWickets2.attributedText = formattedString
                 
                 
                 if let Maidens: String = matchDetailsData["Maidens2"] as? String {
@@ -726,10 +737,13 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         }
         
         if (bowlingViewHidden2 == true) {
-            //self.bowlingView.hidden = true
+            self.bowlingView2.hidden = true
+            secondInningsLabelHeightConstraint.constant = 0
             self.screenShotHeightConstraint.constant -= 190
         }
         else{
+             self.bowlingView2.hidden = false
+            secondInningsLabelHeightConstraint.constant = 22
             self.screenShotHeightConstraint.constant += 190
         }
         
