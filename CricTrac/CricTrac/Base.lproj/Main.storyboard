@@ -565,6 +565,7 @@
             <string>SourceSansPro-Bold</string>
             <string>SourceSansPro-Bold</string>
             <string>SourceSansPro-Bold</string>
+            <string>SourceSansPro-Bold</string>
         </mutableArray>
         <mutableArray key="SourceSansPro-Regular.otf">
             <string>SourceSansPro-Regular</string>
@@ -3816,13 +3817,22 @@
                                 <rect key="frame" x="0.0" y="60" width="600" height="1490"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ck6-Q4-mi6">
-                                        <rect key="frame" x="0.0" y="26" width="600" height="1100"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="1102"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-20" translatesAutoresizingMaskIntoConstraints="NO" id="aDi-ZL-JVJ">
-                                                <rect key="frame" x="10" y="0.0" width="580" height="349"/>
+                                                <rect key="frame" x="10" y="0.0" width="580" height="351"/>
                                                 <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Innings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p4b-JS-TGS">
+                                                        <rect key="frame" x="0.0" y="0.0" width="580" height="22"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="22" id="Gpc-UU-JaJ"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MQT-R0-Mdi">
-                                                        <rect key="frame" x="0.0" y="0.0" width="580" height="190"/>
+                                                        <rect key="frame" x="0.0" y="2" width="580" height="190"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="POSITION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gWm-dL-e76">
                                                                 <rect key="frame" x="37" y="166" width="71" height="21"/>
@@ -4194,7 +4204,7 @@
                                                         </variation>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xGk-lJ-Dxu">
-                                                        <rect key="frame" x="0.0" y="170" width="580" height="179"/>
+                                                        <rect key="frame" x="0.0" y="172" width="580" height="179"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MAIDENS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tv4-7g-ZJa">
                                                                 <rect key="frame" x="39" y="150" width="66" height="21"/>
@@ -4561,12 +4571,17 @@
                                                         </variation>
                                                     </view>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="p4b-JS-TGS" firstAttribute="leading" secondItem="aDi-ZL-JVJ" secondAttribute="leading" id="2Ms-EU-TuX"/>
+                                                    <constraint firstAttribute="trailing" secondItem="p4b-JS-TGS" secondAttribute="trailing" id="2Xc-YX-Omi"/>
+                                                    <constraint firstItem="p4b-JS-TGS" firstAttribute="top" secondItem="aDi-ZL-JVJ" secondAttribute="top" id="F1T-Cl-vEc"/>
+                                                </constraints>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fa2-ML-Lss">
-                                                <rect key="frame" x="10" y="860" width="580" height="240"/>
+                                                <rect key="frame" x="10" y="862" width="580" height="240"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" text="Tournament" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q54-dV-D1i">
-                                                        <rect key="frame" x="8" y="10" width="564" height="22"/>
+                                                        <rect key="frame" x="8" y="2" width="564" height="22"/>
                                                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
                                                         <nil key="highlightedColor"/>
                                                         <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
@@ -4574,7 +4589,7 @@
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="748" text="Bangalore Cricketers won by 21 runs" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="e4u-Zt-lAa">
-                                                        <rect key="frame" x="8" y="208" width="564" height="22"/>
+                                                        <rect key="frame" x="8" y="217" width="564" height="22"/>
                                                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
                                                         <nil key="highlightedColor"/>
                                                         <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
@@ -4582,7 +4597,7 @@
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Achievement" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hFU-VG-skt">
-                                                        <rect key="frame" x="2" y="186" width="576" height="17"/>
+                                                        <rect key="frame" x="2" y="200" width="576" height="17"/>
                                                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="13"/>
                                                         <nil key="highlightedColor"/>
                                                         <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
@@ -4590,7 +4605,7 @@
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ChG-Rs-hJf">
-                                                        <rect key="frame" x="0.0" y="35" width="580" height="22"/>
+                                                        <rect key="frame" x="0.0" y="27" width="580" height="22"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="Gaz-Gw-A1i"/>
                                                         </constraints>
@@ -4655,7 +4670,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ground" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ET1-60-xWH">
-                                                        <rect key="frame" x="0.0" y="60" width="580" height="22"/>
+                                                        <rect key="frame" x="0.0" y="52" width="580" height="22"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="7kb-Vg-jJK"/>
                                                         </constraints>
@@ -4673,7 +4688,7 @@
                                                             </mask>
                                                         </variation>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" text="Bangalore Cricketers*  246/10 (48.4)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vxv-4j-neZ">
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" text="Bangalore Cricketers*  246/10 (48.4)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vxv-4j-neZ">
                                                         <rect key="frame" x="0.0" y="130" width="232" height="46"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="PO6-8C-pPc"/>
@@ -4691,7 +4706,7 @@
                                                             <rect key="frame" x="18" y="114" width="255" height="42"/>
                                                         </variation>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" text="Jawans Cricket club  225/8 (50)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2kH-KE-whD">
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" text="Jawans Cricket club  225/8 (50)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2kH-KE-whD">
                                                         <rect key="frame" x="348" y="130" width="232" height="46"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="80" id="Og2-LZ-x2c"/>
@@ -4718,10 +4733,10 @@
                                                     <constraint firstAttribute="trailing" secondItem="e4u-Zt-lAa" secondAttribute="trailing" constant="8" id="3BT-8c-Qhj"/>
                                                     <constraint firstItem="Q54-dV-D1i" firstAttribute="top" secondItem="Fa2-ML-Lss" secondAttribute="top" constant="15" id="3kU-oA-Qnp"/>
                                                     <constraint firstItem="ChG-Rs-hJf" firstAttribute="leading" secondItem="Fa2-ML-Lss" secondAttribute="leading" id="3uf-Ao-VMZ"/>
-                                                    <constraint firstItem="e4u-Zt-lAa" firstAttribute="top" secondItem="hFU-VG-skt" secondAttribute="bottom" constant="5" id="47v-gc-vgu"/>
+                                                    <constraint firstItem="e4u-Zt-lAa" firstAttribute="top" secondItem="hFU-VG-skt" secondAttribute="bottom" id="47v-gc-vgu"/>
                                                     <constraint firstItem="8Q2-gA-6cX" firstAttribute="centerX" secondItem="2kH-KE-whD" secondAttribute="centerX" id="4zh-vs-Fxu"/>
                                                     <constraint firstAttribute="trailing" secondItem="Vxv-4j-neZ" secondAttribute="trailing" constant="8" id="5Yj-0e-NCN"/>
-                                                    <constraint firstItem="Q54-dV-D1i" firstAttribute="top" secondItem="Fa2-ML-Lss" secondAttribute="top" constant="10" id="6Db-ZQ-ftK"/>
+                                                    <constraint firstItem="Q54-dV-D1i" firstAttribute="top" secondItem="Fa2-ML-Lss" secondAttribute="top" constant="2" id="6Db-ZQ-ftK"/>
                                                     <constraint firstItem="2kH-KE-whD" firstAttribute="bottom" secondItem="Vxv-4j-neZ" secondAttribute="bottom" id="75J-pb-KFq"/>
                                                     <constraint firstItem="ChG-Rs-hJf" firstAttribute="leading" secondItem="Fa2-ML-Lss" secondAttribute="leading" constant="8" id="8kk-zI-FS1"/>
                                                     <constraint firstAttribute="height" constant="240" id="9Qd-1R-snb"/>
@@ -4768,7 +4783,7 @@
                                                     <constraint firstItem="Vxv-4j-neZ" firstAttribute="width" secondItem="Fa2-ML-Lss" secondAttribute="width" multiplier="0.3" id="gT5-sG-0TB"/>
                                                     <constraint firstAttribute="trailing" secondItem="2kH-KE-whD" secondAttribute="trailing" id="hZz-ww-g0s"/>
                                                     <constraint firstItem="e4u-Zt-lAa" firstAttribute="top" secondItem="Fa2-ML-Lss" secondAttribute="top" constant="25" id="hlk-FN-IjF"/>
-                                                    <constraint firstAttribute="bottom" secondItem="e4u-Zt-lAa" secondAttribute="bottom" constant="10" id="hu8-J9-81s"/>
+                                                    <constraint firstAttribute="bottom" secondItem="e4u-Zt-lAa" secondAttribute="bottom" constant="1" id="hu8-J9-81s"/>
                                                     <constraint firstItem="2kH-KE-whD" firstAttribute="bottom" secondItem="Vxv-4j-neZ" secondAttribute="bottom" id="jxs-Ui-Acf"/>
                                                     <constraint firstAttribute="trailing" secondItem="hFU-VG-skt" secondAttribute="trailing" constant="2" id="kxp-E3-dli"/>
                                                     <constraint firstItem="hFU-VG-skt" firstAttribute="leading" secondItem="Fa2-ML-Lss" secondAttribute="leading" constant="2" id="l8j-2Q-52g"/>
@@ -4836,7 +4851,7 @@
                                                 </variation>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bR7-S9-1X3">
-                                                <rect key="frame" x="10" y="768" width="580" height="84"/>
+                                                <rect key="frame" x="10" y="770" width="580" height="84"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STUMPINGS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Vk-15-ckA">
                                                         <rect key="frame" x="115" y="58" width="86" height="21"/>
@@ -4946,7 +4961,7 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="DuL-B8-S9o">
-                                                <rect key="frame" x="10" y="357" width="580" height="404"/>
+                                                <rect key="frame" x="10" y="359" width="580" height="404"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Second Innings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IPj-tK-rBV">
                                                         <rect key="frame" x="0.0" y="0.0" width="580" height="22"/>
@@ -5204,7 +5219,7 @@
                                                                     </mask>
                                                                 </variation>
                                                             </view>
-                                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30*" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbi-mV-GOH">
+                                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30*" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbi-mV-GOH">
                                                                 <rect key="frame" x="212" y="0.0" width="156" height="90"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="90" id="ekE-gs-97E"/>
@@ -5439,7 +5454,7 @@
                                         </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ddl-hj-CRG" userLabel="Self analysis">
-                                        <rect key="frame" x="8" y="1126" width="584" height="60"/>
+                                        <rect key="frame" x="8" y="1130" width="584" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SELF ANALYSIS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L60-8P-unU">
                                                 <rect key="frame" x="8" y="0.0" width="98" height="19"/>
@@ -5472,7 +5487,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hho-e4-B3u" userLabel="coach analysis">
-                                        <rect key="frame" x="8" y="1188" width="584" height="60"/>
+                                        <rect key="frame" x="8" y="1192" width="584" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COACH ANALYSIS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lt1-ur-4vw">
                                                 <rect key="frame" x="8" y="0.0" width="111" height="19"/>
@@ -5550,7 +5565,7 @@
                                     <constraint firstItem="hho-e4-B3u" firstAttribute="trailing" secondItem="Ddl-hj-CRG" secondAttribute="trailing" id="Ac7-cY-Hyn"/>
                                     <constraint firstItem="ck6-Q4-mi6" firstAttribute="leading" secondItem="qNG-QM-eJb" secondAttribute="leading" id="Fyp-1e-VUp"/>
                                     <constraint firstItem="ck6-Q4-mi6" firstAttribute="top" secondItem="qNG-QM-eJb" secondAttribute="top" constant="30" id="O5j-xb-eQo"/>
-                                    <constraint firstItem="ck6-Q4-mi6" firstAttribute="top" secondItem="A20-jC-mKK" secondAttribute="bottom" id="QdK-WG-LbN"/>
+                                    <constraint firstItem="ck6-Q4-mi6" firstAttribute="top" secondItem="A20-jC-mKK" secondAttribute="bottom" constant="2" id="QdK-WG-LbN"/>
                                     <constraint firstItem="Ddl-hj-CRG" firstAttribute="leading" secondItem="qNG-QM-eJb" secondAttribute="leading" constant="8" id="ReA-ip-y3q"/>
                                     <constraint firstItem="ck6-Q4-mi6" firstAttribute="top" secondItem="qNG-QM-eJb" secondAttribute="top" id="YVb-wA-DFG"/>
                                     <constraint firstAttribute="trailing" secondItem="Ddl-hj-CRG" secondAttribute="trailing" constant="8" id="a7e-bf-UG2"/>
@@ -5635,6 +5650,8 @@
                         <outlet property="fieldingRole" destination="0Nt-NT-q7i" id="1zz-lw-0OS"/>
                         <outlet property="fieldingRoleView" destination="A20-jC-mKK" id="i04-rm-nfG"/>
                         <outlet property="fieldingRoleViewHeightConstaraint" destination="xsC-cx-z3B" id="TN5-Cy-CWR"/>
+                        <outlet property="firstInningsTextLabel" destination="p4b-JS-TGS" id="SSr-hI-L9b"/>
+                        <outlet property="firstInningsView" destination="aDi-ZL-JVJ" id="izz-jo-HvH"/>
                         <outlet property="firstTeamTossBtn" destination="zI7-ZL-8gy" id="wA4-wX-S9j"/>
                         <outlet property="fours" destination="LvN-6R-Zie" id="jxs-nb-4RR"/>
                         <outlet property="fours2" destination="u5v-z4-XZA" id="Fft-ai-QBu"/>
@@ -5652,6 +5669,7 @@
                         <outlet property="runoutsText" destination="1oL-02-aQP" id="9od-2w-99K"/>
                         <outlet property="screenShotHeightConstraint" destination="7U7-B9-RUn" id="zty-05-4aO"/>
                         <outlet property="secondInningsTextLabel" destination="IPj-tK-rBV" id="Vgj-9R-79q"/>
+                        <outlet property="secondInningsView" destination="DuL-B8-S9o" id="2TF-qU-T0A"/>
                         <outlet property="secondTeamTossBtn" destination="8Q2-gA-6cX" id="GsS-Lg-6OA"/>
                         <outlet property="selfAnalysisHeightConstraint" destination="bLk-Pi-AVb" id="2XX-DL-eXP"/>
                         <outlet property="selfAnalysisTextView" destination="uSy-20-bLq" id="Cc1-Ua-ZQh"/>

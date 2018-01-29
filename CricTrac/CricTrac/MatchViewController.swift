@@ -141,6 +141,9 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
         tournamentText.resignFirstResponder()
         groundText.resignFirstResponder()
         oversText.resignFirstResponder()
+        
+        
+        
  
     }
     
@@ -227,9 +230,16 @@ class MatchViewController: UIViewController,IndicatorInfoProvider,MatchDetailsTr
                 ageGroup.textVal = ag
             }
             
-            if let mf = selectedData["MatchFormat"] as? String {
+            if let mf = selectedData["MatchFormat"] as? String  {
                 matchFormat.textVal = mf
+                
             }
+            
+            if  selectedData["MatchFormat"] as? String == nil {
+                matchFormat.textVal = "Single Innings"
+            }
+
+            
 
             if let pl = selectedData["Level"] as? String {
                 playingLevel.textVal = pl
