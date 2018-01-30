@@ -3551,10 +3551,10 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="5ry-lR-KaS">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="5ry-lR-KaS">
                                 <rect key="frame" x="146" y="566" width="307" height="19"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="By signing up I agree to the" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AU0-QT-mAy">
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By signing up I agree to the" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AU0-QT-mAy">
                                         <rect key="frame" x="0.0" y="0.0" width="168" height="19"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="19" id="uBj-zZ-d38"/>
@@ -3563,7 +3563,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" alpha="0.5" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0t8-mK-6c4">
+                                    <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0t8-mK-6c4">
                                         <rect key="frame" x="170" y="0.0" width="137" height="19"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="19" id="Ohg-Da-umO"/>
@@ -7863,7 +7863,7 @@
                                                         </constraints>
                                                         <state key="normal" image="OkFilled"/>
                                                         <connections>
-                                                            <action selector="tossBtnTapped:" destination="akr-wt-TN6" eventType="touchUpInside" id="QgZ-mk-pfJ"/>
+                                                            <action selector="declaredBtnTapped:" destination="akr-wt-TN6" eventType="touchUpInside" id="bqQ-Mg-ZOa"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dec" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adp-4R-Gzv">
@@ -7953,7 +7953,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
-                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fha-VK-soR">
+                                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fha-VK-soR">
                                                                 <rect key="frame" x="225" y="42" width="20" height="20"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="20" id="8Kr-6t-lT1"/>
@@ -7961,7 +7961,7 @@
                                                                 </constraints>
                                                                 <state key="normal" image="OkFilled"/>
                                                                 <connections>
-                                                                    <action selector="tossBtnTapped:" destination="akr-wt-TN6" eventType="touchUpInside" id="baE-SY-rbO"/>
+                                                                    <action selector="declaredBtnTapped:" destination="akr-wt-TN6" eventType="touchUpInside" id="qmW-W7-Wsg"/>
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dec" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iLH-WU-ex0">
@@ -8238,7 +8238,7 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
-                                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CLu-dU-Lk5">
+                                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CLu-dU-Lk5">
                                                         <rect key="frame" x="225" y="204" width="20" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="vQO-42-cig"/>
@@ -8246,7 +8246,7 @@
                                                         </constraints>
                                                         <state key="normal" image="OkFilled"/>
                                                         <connections>
-                                                            <action selector="tossBtnTapped:" destination="akr-wt-TN6" eventType="touchUpInside" id="HGb-3h-xn2"/>
+                                                            <action selector="declaredBtnTapped:" destination="akr-wt-TN6" eventType="touchUpInside" id="82X-Xa-qub"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dec" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oib-Qd-hmf">
@@ -8275,7 +8275,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fDW-Ij-0r2">
                                                         <rect key="frame" x="0.0" y="290" width="285" height="125"/>
                                                         <subviews>
-                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Apr-eQ-a5x">
+                                                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Apr-eQ-a5x">
                                                                 <rect key="frame" x="225" y="42" width="20" height="20"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="20" id="4wq-NI-tA3"/>
@@ -8283,7 +8283,7 @@
                                                                 </constraints>
                                                                 <state key="normal" image="OkFilled"/>
                                                                 <connections>
-                                                                    <action selector="tossBtnTapped:" destination="akr-wt-TN6" eventType="touchUpInside" id="4Fc-5S-ydb"/>
+                                                                    <action selector="declaredBtnTapped:" destination="akr-wt-TN6" eventType="touchUpInside" id="XT7-rR-hsP"/>
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dec" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sje-xB-GgP">
@@ -8764,6 +8764,10 @@
                         <outlet property="coachAnalysisTextViewHeightConstarint" destination="nfA-D7-mQN" id="IyE-8E-jmP"/>
                         <outlet property="coachAnalysisView" destination="zCQ-Un-z6y" id="Nkj-85-Tjd"/>
                         <outlet property="coachAnalysisViewHeightConstarint" destination="QTi-It-deN" id="BPZ-mI-ZZQ"/>
+                        <outlet property="firstBattingDeclaredBtn1" destination="gKl-JP-Nfz" id="L7X-KR-eit"/>
+                        <outlet property="firstBattingDeclaredBtn2" destination="CLu-dU-Lk5" id="P6v-0K-iV2"/>
+                        <outlet property="firstBattingDeclaredLabel1" destination="adp-4R-Gzv" id="IUe-t9-Yfm"/>
+                        <outlet property="firstBattingDeclaredLabel2" destination="Oib-Qd-hmf" id="IFc-eF-oYB"/>
                         <outlet property="firstBattingHeaderText" destination="GYX-3q-xuR" id="KVX-7S-N3G"/>
                         <outlet property="firstBattingHeightConstraint1" destination="hiS-UD-dbh" id="8KQ-qp-Rzu"/>
                         <outlet property="firstOversText" destination="pVC-Co-ENM" id="DOs-Z2-Nz1"/>
@@ -8778,6 +8782,8 @@
                         <outlet property="refreshBtn" destination="LtK-ZQ-9nD" id="zqB-gh-crl"/>
                         <outlet property="resultText" destination="gw3-t9-nyz" id="oAh-eT-Ihc"/>
                         <outlet property="screenShotHeight" destination="PQ6-UY-hnl" id="9R5-Bp-gtY"/>
+                        <outlet property="secondBattingDeclaredBtn1" destination="Fha-VK-soR" id="2ML-MN-oY0"/>
+                        <outlet property="secondBattingDeclaredBtn2" destination="Apr-eQ-a5x" id="iGd-8A-J2C"/>
                         <outlet property="secondBattingHeaderText" destination="PvG-dd-rht" id="lTK-w1-kcG"/>
                         <outlet property="secondBattingHeightConstarint" destination="PTM-oH-pVd" id="A0v-aU-Kk0"/>
                         <outlet property="secondInningsView1" destination="o36-ZV-lWr" id="kOR-zd-cQR"/>

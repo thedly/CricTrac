@@ -211,10 +211,10 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     func changeThemeSettigs() {
-      //  let currentTheme = cricTracTheme.currentTheme
-      //  navigationController?.navigationBar.barTintColor = currentTheme.topColor
-        //currentTheme.boxColor
-        //baseView.backgroundColor = UIColor.clearColor()
+        let currentTheme = cricTracTheme.currentTheme
+        navigationController?.navigationBar.barTintColor = currentTheme.topColor
+        currentTheme.boxColor
+        self.view.backgroundColor = currentTheme.topColor
     }
     
     @IBAction func didMenuButtonTapp(sender: UIButton){

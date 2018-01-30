@@ -43,6 +43,20 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     @IBOutlet weak var secondBattingHeightConstarint: NSLayoutConstraint!
     @IBOutlet weak var firstBattingHeightConstraint1: NSLayoutConstraint!
     
+    @IBOutlet weak var firstBattingDeclaredBtn1: UIButton!
+    
+    @IBOutlet weak var firstBattingDeclaredLabel1: UILabel!
+    
+    @IBOutlet weak var firstBattingDeclaredBtn2: UIButton!
+    
+    @IBOutlet weak var firstBattingDeclaredLabel2: UILabel!
+    
+    @IBOutlet weak var secondBattingDeclaredBtn1: UIButton!
+    
+    @IBOutlet weak var secondBattingDeclaredBtn2: UIButton!
+    
+    
+    
      lazy var ctDataPicker = DataPicker()
     
     var firstBatText: String!
@@ -236,9 +250,15 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     weak var matchDetails:MatchDetailsTrackable?
     var teams = [String]()
     weak var parent:MatchParent?
+    
+    var firstBattingDeclared1 = "0"
+    var firstBattingDeclared2 = "0"
+    var secondBattingDeclared1 = "0"
+    var secondBattingDeclared2 = "0"
 
     
     var data:[String:String]{
+        
         var tossVal = ""
         if let val = tossText{
             tossVal = val.trim()
@@ -312,6 +332,40 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         else{
             secondWicketsVal2 = "0"
         }
+        
+        var firstBatDec1 = "0"
+        if firstBattingDeclaredBtn1.alpha == 1  {
+            firstBatDec1 = "1"
+        }
+        else{
+            firstBatDec1 = "0"
+        }
+        
+        var firstBatDec2 = "0"
+        if firstBattingDeclaredBtn2.alpha == 1  {
+            firstBatDec2 = "1"
+        }
+        else{
+            firstBatDec2 = "0"
+        }
+        
+        var secBatDec1 = "0"
+        if secondBattingDeclaredBtn1.alpha == 1  {
+            secBatDec1 = "1"
+        }
+        else{
+            secBatDec1 = "0"
+        }
+        
+        var secBatDec2 = "0"
+        if secondBattingDeclaredBtn2.alpha == 1  {
+            secBatDec2 = "1"
+        }
+        else{
+            secBatDec2 = "0"
+        }
+       
+        
 
         
         var resultVal = ""
@@ -468,7 +522,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             return ["TossWonBy":tossVal,"FirstBatting":firstBatVal,"FirstBattingScore":firstScoreVal,"FirstBattingWickets":firstWicketsVal,"SecondBatting":secondBatVal, "SecondBattingScore":secondScoreVal,"SecondBattingWickets":secondWicketsVal,"Result":resultVal,"FirstBattingOvers":firstOversVal,"SecondBattingOvers":secondOversVal,"Achievements":AchievementsVal,"SelfAnalysis": selfAnalysis,"CoachAnalysis":coachAnalysis]
         }
         else {
-           return ["TossWonBy":tossVal,"FirstBatting":firstBatVal,"FirstBattingScore":firstScoreVal,"FirstBattingWickets":firstWicketsVal,"SecondBatting":secondBatVal, "SecondBattingScore":secondScoreVal,"SecondBattingWickets":secondWicketsVal,"Result":resultVal,"FirstBattingOvers":firstOversVal,"SecondBattingOvers":secondOversVal,"Achievements":AchievementsVal,"SelfAnalysis": selfAnalysis,"CoachAnalysis":coachAnalysis,"FirstBattingScore2":firstScoreVal2,"FirstBattingWickets2":firstWicketsVal2,"FirstBattingOvers2":firstOversVal2,"SecondBattingScore2":secondScoreVal2,"SecondBattingWickets2":secondWicketsVal2,"SecondBattingOvers2":secondOversVal2]
+            return ["TossWonBy":tossVal,"FirstBatting":firstBatVal,"FirstBattingScore":firstScoreVal,"FirstBattingWickets":firstWicketsVal,"SecondBatting":secondBatVal, "SecondBattingScore":secondScoreVal,"SecondBattingWickets":secondWicketsVal,"Result":resultVal,"FirstBattingOvers":firstOversVal,"SecondBattingOvers":secondOversVal,"Achievements":AchievementsVal,"SelfAnalysis": selfAnalysis,"CoachAnalysis":coachAnalysis,"FirstBattingScore2":firstScoreVal2,"FirstBattingWickets2":firstWicketsVal2,"FirstBattingOvers2":firstOversVal2,"SecondBattingScore2":secondScoreVal2,"SecondBattingWickets2":secondWicketsVal2,"SecondBattingOvers2":secondOversVal2,"FirstBattingDeclared1":firstBatDec1,"FirstBattingDeclared2":firstBatDec2,"SecondBattingDeclared1":secBatDec1,"SecondBattingDeclared2":secBatDec2]
         }
         
     }
@@ -523,7 +577,108 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             tossText = secondTeamTitle.text
         }
     }
-
+    
+    func setDeclaredData() {
+        
+        if (parent?.matchVC.matchFormat.text)! == "Single Innings" {
+        
+            firstBattingDeclaredBtn1.hidden = true
+            firstBattingDeclaredBtn2.hidden = true
+            firstBattingDeclaredLabel1.hidden = true
+            firstBattingDeclaredLabel2.hidden = true
+        }
+        else {
+            firstBattingDeclaredBtn1.hidden = false
+            firstBattingDeclaredBtn2.hidden = false
+            firstBattingDeclaredLabel1.hidden = false
+            firstBattingDeclaredLabel2.hidden = false
+            
+            let firstBatDecVal1 = parent?.selecetedData!["FirstBattingDeclared1"] as? String ?? ""
+            let firstBatDecVal2 = parent?.selecetedData!["FirstBattingDeclared2"] as? String ?? ""
+            let secBatDecVal1 = parent?.selecetedData!["SecondBattingDeclared1"] as? String ?? ""
+            let secBatDecVal2 = parent?.selecetedData!["SecondBattingDeclared2"] as? String ?? ""
+            
+            if firstBatDecVal1 == "0" {
+                firstBattingDeclaredBtn1.alpha = 0.2
+            }
+            else {
+                firstBattingDeclaredBtn1.alpha = 1
+            }
+            
+            if firstBatDecVal2 == "0" {
+                firstBattingDeclaredBtn2.alpha = 0.2
+            }
+            else {
+                firstBattingDeclaredBtn2.alpha = 1
+            }
+            
+            if secBatDecVal1 == "0" {
+                secondBattingDeclaredBtn1.alpha = 0.2
+            }
+            else {
+                secondBattingDeclaredBtn1.alpha = 1
+            }
+            
+            if secBatDecVal2 == "0" {
+                secondBattingDeclaredBtn2.alpha = 0.2
+            }
+            else {
+                secondBattingDeclaredBtn2.alpha = 1
+            }
+            
+            
+        }
+        
+    }
+    
+    
+    @IBAction func declaredBtnTapped(sender: UIButton) {
+       
+        if sender.tag == 1 {
+            if firstBattingDeclaredBtn1.alpha == 1 {
+                firstBattingDeclaredBtn1.alpha = 0.2
+            }
+            else {
+                firstBattingDeclaredBtn1.alpha = 1
+            }
+            
+        }
+        
+        if sender.tag == 2 {
+            if firstBattingDeclaredBtn2.alpha == 1 {
+                firstBattingDeclaredBtn2.alpha = 0.2
+            }
+            else {
+                firstBattingDeclaredBtn2.alpha = 1
+            }
+            
+        }
+        
+        if sender.tag == 3 {
+            
+            if secondBattingDeclaredBtn1.alpha == 1 {
+                secondBattingDeclaredBtn1.alpha = 0.2
+            }
+            else {
+                secondBattingDeclaredBtn1.alpha = 1
+            }
+           
+        }
+        
+        if sender.tag == 4 {
+            if secondBattingDeclaredBtn2.alpha == 1 {
+                secondBattingDeclaredBtn2.alpha = 0.2
+            }
+            else {
+                secondBattingDeclaredBtn2.alpha = 1
+            }
+            
+        }
+        
+    }
+    
+    
+    
     func setValueFromMultiSelectAchievements(valueSent: String)
     {
         AchievementsText.text = valueSent
@@ -531,6 +686,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     
     override func viewDidAppear(animated: Bool) {
         setTeamData()
+        setDeclaredData()
     }
     
     func loadEditData(){
