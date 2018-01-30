@@ -45,11 +45,11 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
         super.viewDidLoad()
         password.delegate = self
         facebookBtn.hidden = true
-        googleBtn.hidden = true
+       // googleBtn.hidden = true
         
-        fbGoogleButtonsHeightConstraint.constant = 0
+        //fbGoogleButtonsHeightConstraint.constant = 0
         facebookBtnHeightConstraint.constant = 0
-        googleBtnHeightConstraint.constant = 0
+       // googleBtnHeightConstraint.constant = 0
         //username.text = ""
         // password.text = ""
         // Do any additional setup after loading the view.
