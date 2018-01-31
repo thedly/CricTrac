@@ -19,6 +19,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     @IBOutlet weak var FirstBattingView: UIView!
     @IBOutlet weak var SecondBattingView: UIView!
     
+    @IBOutlet weak var baseView: UIView!
     @IBOutlet weak var screenShotHeight: NSLayoutConstraint!
     // player and coach analysis
     
@@ -102,7 +103,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             secondInningsView2.hidden = true
             firstBattingHeightConstraint1.constant = 295
             secondBattingHeightConstarint.constant = 295
-            screenShotHeight.constant = screenShotHeight.constant - 125
+            screenShotHeight.constant -=  125
         }
         else {
             secondInningsViewHeightConstraint1.constant = 125
@@ -111,12 +112,11 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             secondInningsView2.hidden = false
             firstBattingHeightConstraint1.constant = 420
             secondBattingHeightConstarint.constant = 420
-            screenShotHeight.constant = screenShotHeight.constant + 125
+            screenShotHeight.constant +=  125
         }
     }
     
    
-    
     func setNavigationProperties() {
         if profileData.UserProfile == "Coach" {
             selfAnalysisView.hidden = true

@@ -612,9 +612,13 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         
         if (battingViewHidden == true) {
             //self.battingView.hidden = true
+            firstInningsLabelHeightConstraint.constant = 0
             self.screenShotHeightConstraint.constant -= 240
         }
         else {
+            if matchDetailsData["MatchFormat"] as? String == "Double Innings" {
+                firstInningsLabelHeightConstraint.constant = 22
+            }
             self.screenShotHeightConstraint.constant += 240
         }
         
@@ -633,12 +637,12 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         
         if (battingViewHidden2 == true) {
            self.battingView2.hidden = true
-            firstInningsLabelHeightConstraint.constant = 0
+            secondInningsLabelHeightConstraint.constant = 0
             self.screenShotHeightConstraint.constant -= 190
         }
         else {
              self.battingView2.hidden = false
-            firstInningsLabelHeightConstraint.constant = 22
+            secondInningsLabelHeightConstraint.constant = 22
             self.screenShotHeightConstraint.constant += 190
         }
         
@@ -717,9 +721,13 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         
         if (bowlingViewHidden == true) {
             //self.bowlingView.hidden = true
+            firstInningsLabelHeightConstraint.constant = 0
             self.screenShotHeightConstraint.constant -= 280
         }
         else{
+            if matchDetailsData["MatchFormat"] as? String == "Double Innings" {
+                firstInningsLabelHeightConstraint.constant = 22
+            }
             self.screenShotHeightConstraint.constant += 240
         }
         
@@ -745,6 +753,18 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
              self.bowlingView2.hidden = false
             secondInningsLabelHeightConstraint.constant = 22
             self.screenShotHeightConstraint.constant += 190
+        }
+        
+        if (bowlingViewHidden2 == true && battingViewHidden2 == false) || (bowlingViewHidden2 == false && battingViewHidden2 == true) {
+            secondInningsLabelHeightConstraint.constant = 22
+        }
+        
+        // single Innings label 
+        if matchDetailsData["MatchFormat"] as? String == "Double Innings" {
+            if (bowlingViewHidden == true && battingViewHidden == false) || (bowlingViewHidden == false && battingViewHidden == true)  {
+               
+                firstInningsLabelHeightConstraint.constant = 22
+            }
         }
         
         if let dat = matchDetailsData["MatchDate"] {

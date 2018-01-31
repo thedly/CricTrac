@@ -32,7 +32,7 @@ class SuggestionView: UIView,UITableViewDelegate,UITableViewDataSource,UITextFie
     
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
-        suggestionTable.backgroundColor = currentTheme.topColor
+        suggestionTable.backgroundColor = currentTheme.bottomColor
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
@@ -127,6 +127,7 @@ var  suggestionView:SuggestionView{
 
     suggestionView.suggestionTable.registerNib(UINib.init(nibName: "SuggestionCell", bundle: nil), forCellReuseIdentifier: "suggCell")
     suggestionView.backgroundColor = cricTracTheme.currentTheme.bottomColor
+    suggestionView.suggestionTable.backgroundColor = cricTracTheme.currentTheme.bottomColor
     
     return suggestionView
     
