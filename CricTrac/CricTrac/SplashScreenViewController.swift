@@ -175,10 +175,16 @@ class SplashScreenViewController: UIViewController,ThemeChangeable, GIDSignInDel
         }
         else
         {
-            let loginVC = viewControllerFrom("Main", vcid: "LoginViewController")
-            window?.rootViewController = loginVC
+//            let loginVC = viewControllerFrom("Main", vcid: "LoginViewController")
+//            window?.rootViewController = loginVC
+//            KRProgressHUD.dismiss()
+//            self.presentViewController((self.window?.rootViewController)!, animated: true, completion: nil)
+            
+            let registerVC = viewControllerFrom("Main", vcid: "RegisterViewController")
+            window?.rootViewController = registerVC
             KRProgressHUD.dismiss()
             self.presentViewController((self.window?.rootViewController)!, animated: true, completion: nil)
+            
         }
     }
     

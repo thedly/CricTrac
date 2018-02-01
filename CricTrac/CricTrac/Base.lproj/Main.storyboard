@@ -3464,8 +3464,7 @@
                                     <rect key="frame" x="169" y="389" width="62" height="32"/>
                                 </variation>
                                 <connections>
-                                    <action selector="closeRegisterViewTapped:" destination="bft-UM-cta" eventType="touchUpInside" id="J7w-N9-2h8"/>
-                                    <action selector="registerBtnTapped:" destination="DCq-4c-QM9" eventType="touchUpInside" id="68b-ZD-jp8"/>
+                                    <action selector="signInBtnTapped:" destination="bft-UM-cta" eventType="touchUpInside" id="N48-wr-H6z"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" alpha="0.29999999999999999" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4OS-SI-nzr" userLabel="Confirm Password">
@@ -3511,16 +3510,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h3l-lY-X7Q">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQR-mr-iVL">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQR-mr-iVL">
                                         <rect key="frame" x="15" y="23" width="32" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="94P-z6-hRP"/>
                                             <constraint firstAttribute="width" constant="32" id="KWE-7O-rLA"/>
                                         </constraints>
-                                        <state key="normal" image="Delete Filled-100 (1)"/>
-                                        <connections>
-                                            <action selector="closeRegisterViewTapped:" destination="bft-UM-cta" eventType="touchUpInside" id="ETa-HW-RYA"/>
-                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REGISTER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vZ-2x-Si3">
                                         <rect key="frame" x="261" y="29" width="79" height="23"/>
@@ -5762,8 +5757,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cbq-kR-OTY" userLabel="BatView">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="1220"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="BALLS FACED" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0mL-Ud-EZh" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="340" y="72" width="240" height="41"/>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="BALLS FACED" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0mL-Ud-EZh" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <rect key="frame" x="340" y="68" width="240" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -5796,8 +5791,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="DISMISSAL" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wiR-Fz-Dh5" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="340" y="215" width="240" height="41"/>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="DISMISSAL" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wiR-Fz-Dh5" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <rect key="frame" x="340" y="211" width="240" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="15"/>
@@ -5829,8 +5824,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="STRIKE RATE" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fKe-Yg-seb" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="340" y="286" width="240" height="41"/>
+                                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="STRIKE RATE" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fKe-Yg-seb" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <rect key="frame" x="340" y="282" width="240" height="40"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="15"/>
@@ -5862,8 +5857,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="POSITION" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NSq-XX-qow" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="80" y="215" width="120" height="41"/>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="POSITION" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NSq-XX-qow" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <rect key="frame" x="80" y="211" width="120" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
                                                 <constraints>
@@ -5899,8 +5894,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="6s" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WBU-Si-SBd" userLabel="6S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="400" y="143" width="120" height="42"/>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="6s" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WBU-Si-SBd" userLabel="6S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <rect key="frame" x="400" y="139" width="120" height="42"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -5934,8 +5929,8 @@
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="6s"/>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="4s" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mcK-yi-ifH" userLabel="4S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="80" y="143" width="120" height="42"/>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="4s" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mcK-yi-ifH" userLabel="4S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <rect key="frame" x="80" y="139" width="120" height="42"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
                                                 <constraints>
@@ -5972,18 +5967,18 @@
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="4s"/>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BATTING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xjv-1E-8rg">
-                                                <rect key="frame" x="20" y="40" width="72" height="22"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="BATTING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xjv-1E-8rg">
+                                                <rect key="frame" x="20" y="38" width="80" height="20"/>
                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BOWLING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJf-ba-rdm">
-                                                <rect key="frame" x="20" y="306" width="72" height="22"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="BOWLING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJf-ba-rdm">
+                                                <rect key="frame" x="20" y="302" width="80" height="20"/>
                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ac-1k-3YC">
-                                                <rect key="frame" x="43" y="158" width="32" height="32"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ac-1k-3YC">
+                                                <rect key="frame" x="43" y="154" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="32" id="GWz-Lc-vkw"/>
                                                     <constraint firstAttribute="height" constant="32" id="hoO-OF-Brj"/>
@@ -5993,8 +5988,8 @@
                                                     <action selector="decrementFours:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="IUi-mk-UOL"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0U-jC-fOq">
-                                                <rect key="frame" x="43" y="230" width="32" height="32"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0U-jC-fOq">
+                                                <rect key="frame" x="43" y="226" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="32" id="bbh-kX-6Ve"/>
                                                     <constraint firstAttribute="height" constant="32" id="hzH-DZ-bIc"/>
@@ -6004,8 +5999,8 @@
                                                     <action selector="decrementPosition:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="Ywb-cF-Lrq"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dWX-rq-szp">
-                                                <rect key="frame" x="525" y="158" width="32" height="32"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dWX-rq-szp">
+                                                <rect key="frame" x="525" y="154" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="K6Y-S8-Te1"/>
                                                     <constraint firstAttribute="width" constant="32" id="jL9-NQ-eGR"/>
@@ -6015,8 +6010,8 @@
                                                     <action selector="incrementSixes:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="DFs-Rf-bFk"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ap-lV-PAS">
-                                                <rect key="frame" x="205" y="158" width="32" height="32"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ap-lV-PAS">
+                                                <rect key="frame" x="205" y="154" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="OuC-eA-ag5"/>
                                                     <constraint firstAttribute="width" constant="32" id="vfd-4K-mFG"/>
@@ -6026,8 +6021,8 @@
                                                     <action selector="incrementFours:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="Bcc-9N-h96"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4VD-mw-bXV">
-                                                <rect key="frame" x="205" y="230" width="32" height="32"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4VD-mw-bXV">
+                                                <rect key="frame" x="205" y="226" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="0bf-GJ-GOb"/>
                                                     <constraint firstAttribute="width" constant="32" id="QfV-pV-RLK"/>
@@ -6037,8 +6032,8 @@
                                                     <action selector="incrementPosition:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="unW-jw-BgJ"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OVERS BOWLED" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fud-iT-rhg" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="20" y="338" width="240" height="42"/>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OVERS BOWLED" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fud-iT-rhg" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <rect key="frame" x="20" y="332" width="240" height="42"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
                                                 <constraints>
@@ -6074,8 +6069,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="NO BALLS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zrU-8R-qlg" userLabel="6S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="400" y="486" width="120" height="42"/>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="NO BALLS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zrU-8R-qlg" userLabel="6S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <rect key="frame" x="400" y="477" width="120" height="42"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
                                                 <constraints>
@@ -6112,8 +6107,8 @@
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="NO BALLS"/>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="4S" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kqo-Fi-Uvg" userLabel="4S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="80" y="482" width="120" height="42"/>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="4S" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kqo-Fi-Uvg" userLabel="4S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <rect key="frame" x="80" y="474" width="120" height="42"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
                                                 <constraints>
@@ -6150,8 +6145,8 @@
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="WIDES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DT2-GD-CpS">
-                                                <rect key="frame" x="43" y="497" width="32" height="32"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DT2-GD-CpS">
+                                                <rect key="frame" x="43" y="489" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="32" id="Kzo-Pd-fEa"/>
                                                     <constraint firstAttribute="height" constant="32" id="QoA-Rl-bap"/>
@@ -6161,8 +6156,8 @@
                                                     <action selector="decrementWides:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="iVt-nI-nJz"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FYS-vQ-aKI">
-                                                <rect key="frame" x="525" y="501" width="32" height="32"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FYS-vQ-aKI">
+                                                <rect key="frame" x="525" y="492" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="32" id="GQT-oP-SUW"/>
                                                     <constraint firstAttribute="height" constant="32" id="jqU-fx-6XQ"/>
@@ -6172,8 +6167,8 @@
                                                     <action selector="incrementNoBalls:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="pRg-yI-UVn"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GJT-lK-73k">
-                                                <rect key="frame" x="205" y="497" width="32" height="32"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GJT-lK-73k">
+                                                <rect key="frame" x="205" y="489" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="0az-4Y-1yF"/>
                                                     <constraint firstAttribute="width" constant="32" id="0sv-Tp-Bjx"/>
@@ -6183,8 +6178,8 @@
                                                     <action selector="incrementWides:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="q8e-ZM-Uh7"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cF5-r0-yl0">
-                                                <rect key="frame" x="363" y="501" width="32" height="32"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cF5-r0-yl0">
+                                                <rect key="frame" x="363" y="492" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="SCG-qr-opT"/>
                                                     <constraint firstAttribute="width" constant="32" id="nb6-Kl-olp"/>
@@ -6194,8 +6189,8 @@
                                                     <action selector="decrementNoBalls:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="brx-cV-NXe"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PPk-lg-n4Y">
-                                                <rect key="frame" x="363" y="158" width="32" height="32"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PPk-lg-n4Y">
+                                                <rect key="frame" x="363" y="154" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="LgZ-vH-gwY"/>
                                                     <constraint firstAttribute="width" constant="32" id="wWc-nv-Jrh"/>
@@ -6205,8 +6200,8 @@
                                                     <action selector="decrementSixes:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="rfb-Jl-LSg"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="MAIDENS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oDG-7W-Ndm" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="400" y="410" width="120" height="40"/>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="MAIDENS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oDG-7W-Ndm" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <rect key="frame" x="400" y="402" width="120" height="39"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -6239,8 +6234,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iw7-1y-nKa">
-                                                <rect key="frame" x="525" y="424" width="32" height="32"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iw7-1y-nKa">
+                                                <rect key="frame" x="525" y="415" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="iPv-BT-hVj"/>
                                                     <constraint firstAttribute="width" constant="32" id="yqU-FZ-8Mh"/>
@@ -6250,8 +6245,8 @@
                                                     <action selector="incrementMaidens:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="RBA-WT-dPo"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ge1-HS-sig">
-                                                <rect key="frame" x="363" y="424" width="32" height="32"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ge1-HS-sig">
+                                                <rect key="frame" x="363" y="415" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="32" id="J6z-mc-bMW"/>
                                                     <constraint firstAttribute="height" constant="32" id="fEs-FQ-zf5"/>
@@ -6261,15 +6256,15 @@
                                                     <action selector="decrementMaidens:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="nqO-GH-0Rl"/>
                                                 </connections>
                                             </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DropdownIcon" translatesAutoresizingMaskIntoConstraints="NO" id="NXN-Cr-U0w">
-                                                <rect key="frame" x="564" y="226" width="16" height="16"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="DropdownIcon" translatesAutoresizingMaskIntoConstraints="NO" id="NXN-Cr-U0w">
+                                                <rect key="frame" x="564" y="222" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="16" id="SLG-kZ-zaN"/>
                                                     <constraint firstAttribute="width" constant="16" id="Y2K-AT-j0L"/>
                                                 </constraints>
                                             </imageView>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="RUNS TAKEN" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x2V-5v-hev" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="20" y="72" width="240" height="41"/>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="RUNS TAKEN" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x2V-5v-hev" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <rect key="frame" x="20" y="68" width="240" height="41"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="41" id="By8-eT-ud7"/>
@@ -6304,8 +6299,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <view alpha="0.60000002384185802" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9il-ng-PMx">
-                                                <rect key="frame" x="10" y="281" width="580" height="5"/>
+                                            <view alpha="0.60000002384185802" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9il-ng-PMx">
+                                                <rect key="frame" x="10" y="277" width="580" height="5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="greyMatter"/>
                                                 <constraints>
@@ -6318,8 +6313,8 @@
                                                     </mask>
                                                 </variation>
                                             </view>
-                                            <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AER-OL-nB4">
-                                                <rect key="frame" x="10" y="548" width="580" height="5"/>
+                                            <view alpha="0.60000002384185791" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AER-OL-nB4">
+                                                <rect key="frame" x="10" y="539" width="580" height="5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="greyMatter"/>
                                                 <constraints>
@@ -6334,13 +6329,13 @@
                                                     </mask>
                                                 </variation>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FIELDING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kxu-rw-gz0">
-                                                <rect key="frame" x="20" y="1052" width="71" height="22"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="FIELDING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kxu-rw-gz0">
+                                                <rect key="frame" x="20" y="1043" width="76" height="20"/>
                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ROLE" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T27-30-5qq" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="20" y="1089" width="240" height="42"/>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ROLE" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T27-30-5qq" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <rect key="frame" x="20" y="1078" width="240" height="40"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="15"/>
@@ -6372,15 +6367,15 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DropdownIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Lmk-RX-SYm">
-                                                <rect key="frame" x="244" y="1101" width="16" height="16"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="DropdownIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Lmk-RX-SYm">
+                                                <rect key="frame" x="244" y="1088" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="16" id="rhg-hn-rGX"/>
                                                     <constraint firstAttribute="width" constant="16" id="zSx-3E-NtF"/>
                                                 </constraints>
                                             </imageView>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="CATCHES" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gB9-eD-LaA" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="400" y="1089" width="120" height="42"/>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="CATCHES" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gB9-eD-LaA" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <rect key="frame" x="400" y="1078" width="120" height="40"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -6413,8 +6408,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhT-Jf-fuU">
-                                                <rect key="frame" x="363" y="1104" width="32" height="32"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhT-Jf-fuU">
+                                                <rect key="frame" x="363" y="1092" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="32" id="GLA-0F-c6k"/>
                                                     <constraint firstAttribute="height" constant="32" id="MwR-hD-e49"/>
@@ -6424,8 +6419,8 @@
                                                     <action selector="decrementCatches:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="V1J-3R-5cn"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UQd-wz-r62">
-                                                <rect key="frame" x="516" y="1104" width="32" height="32"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UQd-wz-r62">
+                                                <rect key="frame" x="516" y="1092" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="Poh-P1-XTH"/>
                                                     <constraint firstAttribute="width" constant="32" id="y0L-X0-Zj3"/>
@@ -6435,8 +6430,8 @@
                                                     <action selector="incrementCatches:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="v7e-RX-SUR"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="STUMPINGS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cb0-gc-fNk" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="75" y="1147" width="125" height="42"/>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="STUMPINGS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cb0-gc-fNk" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <rect key="frame" x="75" y="1134" width="125" height="40"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -6469,8 +6464,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rV3-C2-aJt">
-                                                <rect key="frame" x="38" y="1162" width="32" height="32"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rV3-C2-aJt">
+                                                <rect key="frame" x="38" y="1148" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="32" id="ug5-SK-ksr"/>
                                                     <constraint firstAttribute="height" constant="32" id="ywA-rR-n8f"/>
@@ -6480,8 +6475,8 @@
                                                     <action selector="decrementStumpings:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="5fa-J2-4Zk"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fb4-nI-iSv">
-                                                <rect key="frame" x="205" y="1162" width="32" height="32"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fb4-nI-iSv">
+                                                <rect key="frame" x="205" y="1148" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="32" id="8Jf-Ec-yRu"/>
                                                     <constraint firstAttribute="height" constant="32" id="VoV-xg-jgD"/>
@@ -6491,8 +6486,8 @@
                                                     <action selector="incrementStumpings:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="BoY-qa-QpL"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="RUNOUTS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AFE-IQ-Epm" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="400" y="1147" width="120" height="42"/>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="RUNOUTS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AFE-IQ-Epm" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <rect key="frame" x="400" y="1134" width="120" height="40"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -6525,8 +6520,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRo-PW-8Y0">
-                                                <rect key="frame" x="363" y="1162" width="32" height="32"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRo-PW-8Y0">
+                                                <rect key="frame" x="363" y="1148" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="32" id="GM8-Cy-uDs"/>
                                                     <constraint firstAttribute="height" constant="32" id="eIY-ry-yiP"/>
@@ -6536,8 +6531,8 @@
                                                     <action selector="decrementRunouts:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="kDk-CY-6WJ"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IRu-dX-lRX">
-                                                <rect key="frame" x="516" y="1162" width="32" height="32"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IRu-dX-lRX">
+                                                <rect key="frame" x="516" y="1148" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="MHM-xm-fMA"/>
                                                     <constraint firstAttribute="width" constant="32" id="N4V-aq-wQX"/>
@@ -6547,22 +6542,22 @@
                                                     <action selector="incrementRunouts:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="JWk-Px-TP9"/>
                                                 </connections>
                                             </button>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ifi-9b-Low">
-                                                <rect key="frame" x="0.0" y="554" width="600" height="484"/>
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ifi-9b-Low">
+                                                <rect key="frame" x="0.0" y="545" width="600" height="484"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BATTING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E8j-0o-Mzf">
-                                                        <rect key="frame" x="20" y="31" width="65" height="22"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="BATTING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E8j-0o-Mzf">
+                                                        <rect key="frame" x="20" y="29" width="71" height="20"/>
                                                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Second Innings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wpk-Kt-ctA">
-                                                        <rect key="frame" x="243" y="5" width="114" height="22"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Second Innings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wpk-Kt-ctA">
+                                                        <rect key="frame" x="241" y="5" width="119" height="20"/>
                                                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="BALLS FACED" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mfT-Or-Rnn" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                        <rect key="frame" x="340" y="63" width="240" height="41"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="BALLS FACED" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mfT-Or-Rnn" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                        <rect key="frame" x="340" y="59" width="240" height="41"/>
                                                         <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -6595,8 +6590,8 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="4s" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p8F-bA-avY" userLabel="4S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                        <rect key="frame" x="80" y="126" width="120" height="42"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="4s" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p8F-bA-avY" userLabel="4S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                        <rect key="frame" x="80" y="122" width="120" height="42"/>
                                                         <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
                                                         <constraints>
@@ -6633,8 +6628,8 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="4s"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dLO-he-Acb">
-                                                        <rect key="frame" x="43" y="141" width="32" height="32"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dLO-he-Acb">
+                                                        <rect key="frame" x="43" y="137" width="32" height="32"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="32" id="g7O-B3-XvF"/>
                                                             <constraint firstAttribute="width" constant="32" id="y9g-Wh-Dns"/>
@@ -6644,8 +6639,8 @@
                                                             <action selector="decrementFours2:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="AFA-t5-7oV"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BFA-B4-gxd">
-                                                        <rect key="frame" x="205" y="141" width="32" height="32"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BFA-B4-gxd">
+                                                        <rect key="frame" x="205" y="137" width="32" height="32"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="32" id="4tm-3t-eKa"/>
                                                             <constraint firstAttribute="width" constant="32" id="TDp-Fj-m0M"/>
@@ -6655,8 +6650,8 @@
                                                             <action selector="incrementFours2:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="eRt-D4-KID"/>
                                                         </connections>
                                                     </button>
-                                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="6s" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y0m-4f-y1L" userLabel="6S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                        <rect key="frame" x="400" y="126" width="120" height="42"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="6s" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y0m-4f-y1L" userLabel="6S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                        <rect key="frame" x="400" y="122" width="120" height="42"/>
                                                         <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -6690,8 +6685,8 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="6s"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qfu-Ll-QhP">
-                                                        <rect key="frame" x="525" y="141" width="32" height="32"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qfu-Ll-QhP">
+                                                        <rect key="frame" x="525" y="137" width="32" height="32"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="32" id="NP2-1O-muw"/>
                                                             <constraint firstAttribute="height" constant="32" id="s0f-1A-x7s"/>
@@ -6701,8 +6696,8 @@
                                                             <action selector="incrementSixes2:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="i5i-uA-JHc"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fC7-y2-KPR">
-                                                        <rect key="frame" x="363" y="141" width="32" height="32"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fC7-y2-KPR">
+                                                        <rect key="frame" x="363" y="137" width="32" height="32"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="32" id="RqO-KA-flC"/>
                                                             <constraint firstAttribute="width" constant="32" id="lcW-Q7-XF9"/>
@@ -6712,8 +6707,8 @@
                                                             <action selector="decrementSixes2:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="WjO-Vf-chc"/>
                                                         </connections>
                                                     </button>
-                                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="DISMISSAL" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dxX-Yy-TaG" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                        <rect key="frame" x="340" y="195" width="240" height="41"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="DISMISSAL" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dxX-Yy-TaG" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                        <rect key="frame" x="340" y="191" width="240" height="41"/>
                                                         <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="15"/>
@@ -6745,8 +6740,8 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="POSITION" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kJh-hj-WKp" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                        <rect key="frame" x="80" y="195" width="120" height="41"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="POSITION" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kJh-hj-WKp" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                        <rect key="frame" x="80" y="191" width="120" height="41"/>
                                                         <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
                                                         <constraints>
@@ -6782,8 +6777,8 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JKN-rI-fII">
-                                                        <rect key="frame" x="43" y="209" width="32" height="32"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JKN-rI-fII">
+                                                        <rect key="frame" x="43" y="205" width="32" height="32"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="32" id="4do-IB-lfp"/>
                                                             <constraint firstAttribute="width" constant="32" id="np7-v0-DR8"/>
@@ -6793,8 +6788,8 @@
                                                             <action selector="decrementPosition2:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="IaO-Tp-FRf"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x0a-Th-Nif">
-                                                        <rect key="frame" x="205" y="209" width="32" height="32"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x0a-Th-Nif">
+                                                        <rect key="frame" x="205" y="205" width="32" height="32"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="32" id="K54-fE-6fe"/>
                                                             <constraint firstAttribute="height" constant="32" id="M8u-BG-GAb"/>
@@ -6804,15 +6799,15 @@
                                                             <action selector="incrementPosition2:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="rcb-dq-ZA4"/>
                                                         </connections>
                                                     </button>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DropdownIcon" translatesAutoresizingMaskIntoConstraints="NO" id="c63-Ju-SkE">
-                                                        <rect key="frame" x="564" y="206" width="16" height="16"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="DropdownIcon" translatesAutoresizingMaskIntoConstraints="NO" id="c63-Ju-SkE">
+                                                        <rect key="frame" x="564" y="202" width="16" height="16"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="16" id="8PR-4g-mXM"/>
                                                             <constraint firstAttribute="height" constant="16" id="g98-Rb-vO5"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h59-xE-0rE">
-                                                        <rect key="frame" x="10" y="256" width="580" height="5"/>
+                                                    <view alpha="0.60000002384185791" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h59-xE-0rE">
+                                                        <rect key="frame" x="10" y="252" width="580" height="5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         <accessibility key="accessibilityConfiguration" identifier="greyMatter"/>
                                                         <constraints>
@@ -6825,8 +6820,8 @@
                                                             </mask>
                                                         </variation>
                                                     </view>
-                                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OVERS BOWLED" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k6v-VT-USZ" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                        <rect key="frame" x="20" y="313" width="240" height="42"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OVERS BOWLED" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k6v-VT-USZ" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                        <rect key="frame" x="20" y="307" width="240" height="42"/>
                                                         <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
                                                         <constraints>
@@ -6862,13 +6857,13 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BOWLING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZfD-jq-Xlk">
-                                                        <rect key="frame" x="20" y="281" width="72" height="22"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="BOWLING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZfD-jq-Xlk">
+                                                        <rect key="frame" x="20" y="277" width="80" height="20"/>
                                                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UJI-0e-34e">
-                                                        <rect key="frame" x="525" y="387" width="32" height="32"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UJI-0e-34e">
+                                                        <rect key="frame" x="525" y="381" width="32" height="32"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="32" id="giq-Bc-vzh"/>
                                                             <constraint firstAttribute="width" constant="32" id="jXS-ik-zjb"/>
@@ -6878,8 +6873,8 @@
                                                             <action selector="incrementMaidens2:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="Opr-Wt-eKy"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LjJ-TQ-NB4">
-                                                        <rect key="frame" x="363" y="387" width="32" height="32"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LjJ-TQ-NB4">
+                                                        <rect key="frame" x="363" y="381" width="32" height="32"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="32" id="w4E-XF-Jsg"/>
                                                             <constraint firstAttribute="width" constant="32" id="zyR-9i-fX2"/>
@@ -6889,8 +6884,8 @@
                                                             <action selector="decrementMaidens2:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="wh6-Ce-lZ6"/>
                                                         </connections>
                                                     </button>
-                                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="NO BALLS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TxJ-Vy-ZM6" userLabel="6S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                        <rect key="frame" x="400" y="426" width="120" height="42"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="NO BALLS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TxJ-Vy-ZM6" userLabel="6S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                        <rect key="frame" x="400" y="419" width="120" height="42"/>
                                                         <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
                                                         <constraints>
@@ -6927,8 +6922,8 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="NO BALLS"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="4S" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qHB-XB-eec" userLabel="4S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                        <rect key="frame" x="80" y="426" width="120" height="42"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="4S" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qHB-XB-eec" userLabel="4S" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                        <rect key="frame" x="80" y="419" width="120" height="42"/>
                                                         <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
                                                         <constraints>
@@ -6965,8 +6960,8 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="WIDES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zgx-yg-0Er">
-                                                        <rect key="frame" x="43" y="441" width="32" height="32"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zgx-yg-0Er">
+                                                        <rect key="frame" x="43" y="434" width="32" height="32"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="32" id="MQO-bH-YOe"/>
                                                             <constraint firstAttribute="height" constant="32" id="PIi-JK-wCd"/>
@@ -6976,8 +6971,8 @@
                                                             <action selector="decrementWides2:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="YVo-s4-3xy"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1o1-61-OTy">
-                                                        <rect key="frame" x="525" y="441" width="32" height="32"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1o1-61-OTy">
+                                                        <rect key="frame" x="525" y="434" width="32" height="32"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="32" id="LXx-1r-yAT"/>
                                                             <constraint firstAttribute="height" constant="32" id="PYg-03-6mx"/>
@@ -6987,8 +6982,8 @@
                                                             <action selector="incrementNoBalls2:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="NsE-uy-SN7"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cCN-UE-ete">
-                                                        <rect key="frame" x="205" y="441" width="32" height="32"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cCN-UE-ete">
+                                                        <rect key="frame" x="205" y="434" width="32" height="32"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="32" id="mF4-V3-hov"/>
                                                             <constraint firstAttribute="height" constant="32" id="rAU-yz-yvM"/>
@@ -6998,8 +6993,8 @@
                                                             <action selector="incrementWides2:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="X44-mr-aFw"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cZn-Dk-urC">
-                                                        <rect key="frame" x="363" y="441" width="32" height="32"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cZn-Dk-urC">
+                                                        <rect key="frame" x="363" y="434" width="32" height="32"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="32" id="Hfk-0X-smd"/>
                                                             <constraint firstAttribute="height" constant="32" id="bTp-W2-HyV"/>
@@ -7009,8 +7004,8 @@
                                                             <action selector="decrementNoBalls2:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="iOE-Ch-ZWQ"/>
                                                         </connections>
                                                     </button>
-                                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="MAIDENS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jbG-iE-cOV" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                        <rect key="frame" x="400" y="373" width="120" height="40"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="MAIDENS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jbG-iE-cOV" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                        <rect key="frame" x="400" y="367" width="120" height="39"/>
                                                         <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -7043,8 +7038,8 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="RUNS TAKEN" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="52y-6E-xqz" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                        <rect key="frame" x="20" y="63" width="240" height="41"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="RUNS TAKEN" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="52y-6E-xqz" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                        <rect key="frame" x="20" y="59" width="240" height="41"/>
                                                         <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="52y-6E-xqz" secondAttribute="height" multiplier="240:41" id="Fh2-hP-twV"/>
@@ -7085,8 +7080,8 @@
                                                             </mask>
                                                         </variation>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="RUNS GIVEN" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aeu-0L-7u9" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                        <rect key="frame" x="340" y="313" width="240" height="42"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="RUNS GIVEN" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aeu-0L-7u9" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                        <rect key="frame" x="340" y="307" width="240" height="42"/>
                                                         <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -7119,8 +7114,8 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="WICKETS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Coe-Sd-FIc" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                        <rect key="frame" x="80" y="373" width="120" height="47"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="WICKETS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Coe-Sd-FIc" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                        <rect key="frame" x="80" y="367" width="120" height="46"/>
                                                         <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -7153,8 +7148,8 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ym9-oi-3DV">
-                                                        <rect key="frame" x="43" y="391" width="32" height="32"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ym9-oi-3DV">
+                                                        <rect key="frame" x="43" y="385" width="32" height="32"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="32" id="FLK-FR-k9k"/>
                                                             <constraint firstAttribute="height" constant="32" id="ZXf-BF-Fwi"/>
@@ -7164,8 +7159,8 @@
                                                             <action selector="decrementWickets2:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="VUX-pr-87y"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IoE-DH-py2">
-                                                        <rect key="frame" x="205" y="391" width="32" height="32"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IoE-DH-py2">
+                                                        <rect key="frame" x="205" y="385" width="32" height="32"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="32" id="Eam-0W-QNk"/>
                                                             <constraint firstAttribute="height" constant="32" id="kca-wu-0nD"/>
@@ -7175,8 +7170,8 @@
                                                             <action selector="incrementWickets2:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="PyE-0d-u0f"/>
                                                         </connections>
                                                     </button>
-                                                    <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P4G-ui-IZb">
-                                                        <rect key="frame" x="10" y="483" width="580" height="5"/>
+                                                    <view alpha="0.60000002384185791" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P4G-ui-IZb">
+                                                        <rect key="frame" x="10" y="476" width="580" height="5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         <accessibility key="accessibilityConfiguration" identifier="greyMatter"/>
                                                         <constraints>
@@ -7296,14 +7291,14 @@
                                                     </mask>
                                                 </variation>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Innings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4w8-N5-z1R">
-                                                <rect key="frame" x="254" y="13" width="93" height="22"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="First Innings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4w8-N5-z1R">
+                                                <rect key="frame" x="254" y="13" width="93" height="20"/>
                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nxw-BQ-U5g">
-                                                <rect key="frame" x="43" y="425" width="32" height="32"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nxw-BQ-U5g">
+                                                <rect key="frame" x="43" y="418" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="32" id="1i4-fA-0Pl"/>
                                                     <constraint firstAttribute="height" constant="32" id="cDa-mB-kg7"/>
@@ -7313,8 +7308,8 @@
                                                     <action selector="decrementWickets:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="ygD-Lg-b8V"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oK-hb-QAM">
-                                                <rect key="frame" x="205" y="425" width="32" height="32"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oK-hb-QAM">
+                                                <rect key="frame" x="205" y="418" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="32" id="Rmh-T4-eAi"/>
                                                     <constraint firstAttribute="height" constant="32" id="eUW-Km-Sx7"/>
@@ -7324,8 +7319,8 @@
                                                     <action selector="incrementWickets:" destination="CmZ-BX-GlB" eventType="touchUpInside" id="W79-yI-nR1"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="WICKETS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PnU-0b-T4X" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="80" y="410" width="120" height="42"/>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="WICKETS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PnU-0b-T4X" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <rect key="frame" x="80" y="404" width="120" height="40"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -7358,8 +7353,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="RUNS GIVEN" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tkq-66-sER" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="340" y="338" width="240" height="42"/>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="RUNS GIVEN" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tkq-66-sER" userLabel="Balls" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                                                <rect key="frame" x="340" y="332" width="240" height="40"/>
                                                 <color key="tintColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="textWithNumPad"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -9373,8 +9368,8 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="570" height="44"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJx-My-m72">
-                                                                    <rect key="frame" x="8" y="13" width="34" height="18"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJx-My-m72">
+                                                                    <rect key="frame" x="8" y="14" width="35" height="17"/>
                                                                     <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="14"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -9422,8 +9417,8 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="570" height="34"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLV-LD-J5G">
-                                                                    <rect key="frame" x="8" y="8" width="34" height="18"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLV-LD-J5G">
+                                                                    <rect key="frame" x="8" y="9" width="35" height="17"/>
                                                                     <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="14"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -16278,8 +16273,8 @@
                                                                     </constraints>
                                                                     <state key="normal" image="Minus-100"/>
                                                                 </button>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfD-No-uqk">
-                                                                    <rect key="frame" x="23" y="8" width="34" height="18"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfD-No-uqk">
+                                                                    <rect key="frame" x="23" y="9" width="35" height="17"/>
                                                                     <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="14"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
@@ -16318,8 +16313,8 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="570" height="34"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZO2-jw-g4a">
-                                                                    <rect key="frame" x="23" y="8" width="34" height="18"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZO2-jw-g4a">
+                                                                    <rect key="frame" x="23" y="9" width="35" height="17"/>
                                                                     <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="14"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
@@ -16440,8 +16435,8 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="570" height="34"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NCz-8t-tMK">
-                                                                    <rect key="frame" x="23" y="8" width="34" height="18"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NCz-8t-tMK">
+                                                                    <rect key="frame" x="23" y="9" width="35" height="17"/>
                                                                     <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="14"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
@@ -16496,8 +16491,8 @@
                                                                     </constraints>
                                                                     <state key="normal" image="Minus-100"/>
                                                                 </button>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z20-cn-dc4">
-                                                                    <rect key="frame" x="23" y="8" width="34" height="18"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z20-cn-dc4">
+                                                                    <rect key="frame" x="23" y="9" width="35" height="17"/>
                                                                     <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="14"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
@@ -16898,8 +16893,8 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="570" height="34"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sNu-HR-gpo">
-                                                                    <rect key="frame" x="8" y="8" width="34" height="18"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sNu-HR-gpo">
+                                                                    <rect key="frame" x="8" y="9" width="35" height="17"/>
                                                                     <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="14"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
@@ -16995,8 +16990,8 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="570" height="34"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gl4-vR-usz">
-                                                                    <rect key="frame" x="8" y="8" width="34" height="18"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gl4-vR-usz">
+                                                                    <rect key="frame" x="8" y="9" width="35" height="17"/>
                                                                     <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="14"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
@@ -17062,8 +17057,8 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="570" height="34"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mz5-jU-yTa">
-                                                                    <rect key="frame" x="8" y="8" width="37" height="19"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mz5-jU-yTa">
+                                                                    <rect key="frame" x="8" y="9" width="37" height="18"/>
                                                                     <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="15"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
@@ -17110,8 +17105,8 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="570" height="34"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fK7-Eb-3Ra">
-                                                                    <rect key="frame" x="8" y="8" width="34" height="18"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fK7-Eb-3Ra">
+                                                                    <rect key="frame" x="8" y="9" width="35" height="17"/>
                                                                     <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="14"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
@@ -17675,21 +17670,43 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen05-org" translatesAutoresizingMaskIntoConstraints="NO" id="O7d-1x-edF">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="540"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen05-faded" translatesAutoresizingMaskIntoConstraints="NO" id="DjH-Xc-5HT" userLabel="Image View2">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="540"/>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W7i-pL-1bB">
+                                <rect key="frame" x="0.0" y="540" width="600" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TKh-wK-sr5">
+                                        <rect key="frame" x="15" y="15" width="46" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="46" id="vmk-pN-MnW"/>
+                                            <constraint firstAttribute="height" constant="30" id="voF-bi-Crd"/>
+                                        </constraints>
+                                        <state key="normal" title="SKIP"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.40784313729999999" green="0.73333333329999995" blue="0.0078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="TKh-wK-sr5" secondAttribute="bottom" constant="15" id="70Q-mE-ik5"/>
+                                    <constraint firstAttribute="height" constant="60" id="8Za-ep-fz9"/>
+                                    <constraint firstItem="TKh-wK-sr5" firstAttribute="leading" secondItem="W7i-pL-1bB" secondAttribute="leading" constant="15" id="GdO-Hp-5va"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="DjH-Xc-5HT" secondAttribute="bottom" id="5rk-xi-fwy"/>
+                            <constraint firstAttribute="bottom" secondItem="DjH-Xc-5HT" secondAttribute="bottom" constant="60" id="5rk-xi-fwy"/>
+                            <constraint firstAttribute="trailing" secondItem="W7i-pL-1bB" secondAttribute="trailing" id="D0q-y4-gz0"/>
+                            <constraint firstItem="8xB-H1-NDP" firstAttribute="top" secondItem="W7i-pL-1bB" secondAttribute="bottom" id="QJ9-xf-BU5"/>
                             <constraint firstAttribute="trailing" secondItem="O7d-1x-edF" secondAttribute="trailing" id="Rq8-ui-rAc"/>
                             <constraint firstItem="O7d-1x-edF" firstAttribute="leading" secondItem="VLf-qi-1JN" secondAttribute="leading" id="ZdS-xB-ReK"/>
                             <constraint firstItem="DjH-Xc-5HT" firstAttribute="leading" secondItem="VLf-qi-1JN" secondAttribute="leading" id="cg7-Zo-B54"/>
+                            <constraint firstItem="W7i-pL-1bB" firstAttribute="leading" secondItem="VLf-qi-1JN" secondAttribute="leading" id="gFa-JC-8e5"/>
                             <constraint firstAttribute="trailing" secondItem="DjH-Xc-5HT" secondAttribute="trailing" id="mDN-Bd-PP6"/>
                             <constraint firstItem="O7d-1x-edF" firstAttribute="top" secondItem="VLf-qi-1JN" secondAttribute="top" id="mS6-BS-j2X"/>
                             <constraint firstItem="DjH-Xc-5HT" firstAttribute="top" secondItem="VLf-qi-1JN" secondAttribute="top" id="uRC-23-lyx"/>
-                            <constraint firstItem="8xB-H1-NDP" firstAttribute="top" secondItem="O7d-1x-edF" secondAttribute="bottom" id="vOK-Xd-8RS"/>
+                            <constraint firstItem="8xB-H1-NDP" firstAttribute="top" secondItem="O7d-1x-edF" secondAttribute="bottom" constant="60" id="vOK-Xd-8RS"/>
                         </constraints>
                     </view>
                     <connections>
@@ -20618,12 +20635,12 @@
         <image name="Like-100" width="19" height="18"/>
         <image name="Mail" width="128" height="128"/>
         <image name="Message-100 (1)" width="24" height="21"/>
-        <image name="Minus-100" width="100" height="100"/>
+        <image name="Minus-100" width="79" height="80"/>
         <image name="Ok Filled-100" width="100" height="100"/>
         <image name="OkFilled" width="49" height="49"/>
         <image name="Password-100 (1)" width="20" height="24"/>
         <image name="Plus" width="50" height="50"/>
-        <image name="Plus-100" width="100" height="100"/>
+        <image name="Plus-100" width="79" height="80"/>
         <image name="Screen01-faded" width="250" height="444"/>
         <image name="Screen01-org" width="750" height="1334"/>
         <image name="Screen02-faded" width="250" height="444"/>

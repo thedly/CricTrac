@@ -68,6 +68,13 @@ class RegisterViewController: UIViewController,IndicatorInfoProvider,ThemeChange
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func signInBtnTapped(sender: UIButton) {
+        
+        let loginVC = viewControllerFrom("Main", vcid: "LoginViewController")
+        self.presentViewController(loginVC, animated: true, completion: nil)
+    }
+    
+    
     func loginWithGoogle(){
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         GIDSignIn.sharedInstance().uiDelegate = self
