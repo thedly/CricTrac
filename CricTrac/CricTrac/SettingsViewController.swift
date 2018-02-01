@@ -151,6 +151,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             let vc = storyboard.instantiateViewControllerWithIdentifier(vcName as! String)
             self.navigationController?.pushViewController(vc, animated: true)
         }
+        else if vcName == "CelebrityDashboardViewController" {
+            let vc = storyboard.instantiateViewControllerWithIdentifier(vcName as! String)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         else if vcName == "Feedback" {
             openMailApp()
         }
