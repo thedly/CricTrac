@@ -961,9 +961,6 @@ func setDashboardData(){
                                     mData.BowlingSectionHidden = false
                                     battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: self.sizeOne)
                                 }
-                                else if batting1 == false && batting2 == false {
-                                    battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: self.sizeOne)
-                                }
                             }
                             else {
                                 if let wicketsTaken = data["WicketsTaken"], let runsGiven = data["RunsGiven"] {
@@ -1272,9 +1269,6 @@ func setDashboardData(){
                                 
                                 if bowling1 == true || bowling2 == true {
                                     mData.BowlingSectionHidden = false
-                                    battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: self.sizeOne)
-                                }
-                                else if batting1 == false && batting2 == false {
                                     battingBowlingScore.bold("\nWICKETS", fontName: appFont_black, fontSize: self.sizeOne)
                                 }
                             }

@@ -149,6 +149,7 @@
 		B83389381F668D830049357D /* PlayerMatchesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83389371F668D830049357D /* PlayerMatchesData.swift */; };
 		B833893A1F6933080049357D /* TopBattingPlayersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83389391F6933070049357D /* TopBattingPlayersList.swift */; };
 		B833893C1F69332E0049357D /* TopBowlingPlayersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B833893B1F69332E0049357D /* TopBowlingPlayersList.swift */; };
+		B8353A9820232A4200B81248 /* CelebrityDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8353A9720232A4100B81248 /* CelebrityDashboardViewController.swift */; };
 		B835B3501EE94BF7001048A6 /* AppIntroductionScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B34F1EE94BF7001048A6 /* AppIntroductionScreens.swift */; };
 		B835B3521EE9622B001048A6 /* AppIntroductionFinalScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3511EE9622B001048A6 /* AppIntroductionFinalScreen.swift */; };
 		B835B3541EEA7D2F001048A6 /* AppIntroFirstScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B835B3531EEA7D2F001048A6 /* AppIntroFirstScreen.swift */; };
@@ -334,6 +335,7 @@
 		B83389371F668D830049357D /* PlayerMatchesData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerMatchesData.swift; sourceTree = "<group>"; };
 		B83389391F6933070049357D /* TopBattingPlayersList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBattingPlayersList.swift; sourceTree = "<group>"; };
 		B833893B1F69332E0049357D /* TopBowlingPlayersList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBowlingPlayersList.swift; sourceTree = "<group>"; };
+		B8353A9720232A4100B81248 /* CelebrityDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityDashboardViewController.swift; sourceTree = "<group>"; };
 		B835B34F1EE94BF7001048A6 /* AppIntroductionScreens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroductionScreens.swift; sourceTree = "<group>"; };
 		B835B3511EE9622B001048A6 /* AppIntroductionFinalScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroductionFinalScreen.swift; sourceTree = "<group>"; };
 		B835B3531EEA7D2F001048A6 /* AppIntroFirstScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIntroFirstScreen.swift; sourceTree = "<group>"; };
@@ -661,6 +663,7 @@
 				B82436112004A574004220B6 /* FollowingViewController.swift */,
 				B82436132004A59C004220B6 /* FollowerListViewController.swift */,
 				B8F33F27201EF0E100D116C1 /* SummaryMatchDetailsViewController.swift */,
+				B8353A9720232A4100B81248 /* CelebrityDashboardViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -921,6 +924,7 @@
 				8909FACB1DB9B49900066FC5 /* DoneButton.swift in Sources */,
 				B89A3F631FEB944500A9506A /* Follow.swift in Sources */,
 				895BC3CC1E266B500033D330 /* StaticPageViewController.swift in Sources */,
+				B8353A9820232A4200B81248 /* CelebrityDashboardViewController.swift in Sources */,
 				892520B21E336044006946C0 /* CoachDashboardViewController.swift in Sources */,
 				B835B3981EEE6947001048A6 /* AppIntroBasicScreen.swift in Sources */,
 				4642DAA51D5039DD001F039D /* LoginViewController.swift in Sources */,
