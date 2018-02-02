@@ -26,6 +26,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var interstedSportsheightConstraint: NSLayoutConstraint!
     @IBOutlet weak var supportingTeamHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var hobbiesHeightConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var topBarHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bannerView: GADBannerView!
@@ -70,6 +71,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     func photoOptionsToCoverPic(option:String)  {
+        
         let alertController = UIAlertController(title: nil, message: alertMessage, preferredStyle: .ActionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
             // ...
