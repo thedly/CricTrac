@@ -168,6 +168,7 @@
 		B89A3F611FEA8B8500A9506A /* FollowerAndFollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89A3F601FEA8B8500A9506A /* FollowerAndFollowingViewController.swift */; };
 		B89A3F631FEB944500A9506A /* Follow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89A3F621FEB944500A9506A /* Follow.swift */; };
 		B8F33F28201EF0E100D116C1 /* SummaryMatchDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F33F27201EF0E100D116C1 /* SummaryMatchDetailsViewController.swift */; };
+		E15C37E22024317B0081A43F /* Celebrity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15C37E12024317B0081A43F /* Celebrity.swift */; };
 		E1A655851F8B76F000213719 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1A655841F8B76F000213719 /* GoogleService-Info.plist */; };
 		E1B593691EB4E63A00C8A553 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B593681EB4E63A00C8A553 /* NotificationsViewController.swift */; };
 		F7856BE080406499CCB071C8 /* Pods_CricTrac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA2224284F64FAE77B7776D9 /* Pods_CricTrac.framework */; };
@@ -355,6 +356,7 @@
 		B89A3F621FEB944500A9506A /* Follow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Follow.swift; sourceTree = "<group>"; };
 		B8F33F27201EF0E100D116C1 /* SummaryMatchDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryMatchDetailsViewController.swift; sourceTree = "<group>"; };
 		DA2224284F64FAE77B7776D9 /* Pods_CricTrac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CricTrac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E15C37E12024317B0081A43F /* Celebrity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Celebrity.swift; sourceTree = "<group>"; };
 		E1A655841F8B76F000213719 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E1B593681EB4E63A00C8A553 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -627,6 +629,7 @@
 				895E04001D5CCEDE002E322E /* FriendRequestsViewController.swift */,
 				895E04041D5CE24B002E322E /* FriendSearchViewController.swift */,
 				896407CD1DA7FE51002212EB /* SplashScreenViewController.swift */,
+				E15C37E12024317B0081A43F /* Celebrity.swift */,
 				895E04061D5CE283002E322E /* FriendSuggestViewController.swift */,
 				895E04081D5CE33E002E322E /* FriendBaseViewController.swift */,
 				899206231D61BA0700F99A97 /* FriendsViewController.swift */,
@@ -956,6 +959,7 @@
 				B81E08631F4C560300460B0F /* CoachTopBattingBowlingTableViewCell.swift in Sources */,
 				8997D56C1DBCFCA000F201B6 /* CurrentTeamsTableViewCell.swift in Sources */,
 				B85ECAB91EF91CC900CC29E5 /* AddMatchSceIntroScreen.swift in Sources */,
+				E15C37E22024317B0081A43F /* Celebrity.swift in Sources */,
 				894625001E1580E700FE79C2 /* TeamCollectionViewCell.swift in Sources */,
 				B846FA751FE25469000F24D2 /* CoachPlayers.swift in Sources */,
 				466AD3FC1D7A8EC10033289C /* CTPicker.swift in Sources */,

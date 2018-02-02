@@ -57,6 +57,7 @@ var stumpings = [String]()
 var runouts = [String]()
 
 var DashboardDetails : DashboardData!
+var CelebrityDetails : Celebrity!
 
 var PlayingLevels = [String]()
 var genders = [String]()

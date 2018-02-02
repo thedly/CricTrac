@@ -17,10 +17,8 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var topBarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var userProfileImage: UIImageView!
-    
-    
 
-    
+    @IBOutlet weak var battingStyle: UILabel!
     @IBOutlet weak var playingRole: UILabel!
     @IBOutlet weak var bowlingStyle: UILabel!
     @IBOutlet weak var majorTeams: UILabel!
@@ -223,6 +221,31 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
     @IBOutlet weak var careerListA: UIView!
     @IBOutlet weak var careerT20sView: UIView!
     
+    @IBOutlet weak var BatTestsView: UIView!
+    @IBOutlet weak var BatODIsView: UIView!
+    @IBOutlet weak var BatT20IsView: UIView!
+    @IBOutlet weak var BatFirstclassView: UIView!
+    @IBOutlet weak var BatListAView: UIView!
+    @IBOutlet weak var BatT20sView: UIView!
+    
+    @IBOutlet weak var BowlTestsView: UIView!
+    @IBOutlet weak var BowlODIsView: UIView!
+    @IBOutlet weak var BowlT20IsView: UIView!
+    @IBOutlet weak var BowlFirstclassView: UIView!
+    @IBOutlet weak var BowlListAView: UIView!
+    @IBOutlet weak var BowlT20sView: UIView!
+    
+    @IBOutlet weak var careerViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var BatViewWidth: NSLayoutConstraint!
+    @IBOutlet weak var BowlViewWidth: NSLayoutConstraint!
+    
+    
+    var friendId:String? = "7pV4HRyRjqcv1qjDPFcwB0bVhFs2"
+    var currentUserId = ""
+    var isFriendDashboard = false
+    
+    var celebrityData:Celebrity!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadBannerAds()
@@ -232,6 +255,19 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
     
     override func viewWillAppear(animated: Bool) {
         setBackgroundColor()
+        
+        if friendId == nil {
+            currentUserId = (currentUser?.uid)!
+        }
+        else {
+            currentUserId = friendId!
+        }
+        
+        careerViewHeight.constant = 10
+        BatViewWidth.constant = 80
+        BowlViewWidth.constant = 80
+        
+        setDashboardData()
     }
     
     func loadBannerAds() {
@@ -244,6 +280,413 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
         else {
             self.bannerViewHeightConstraint.constant = 0
         }
+    }
+    
+    func setDashboardData() {
+        fireBaseRef.child("Celebrity").child(friendId!).child("Profile").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            if let data = snapshot.value! as? [String:AnyObject]{
+                //profile data
+                self.battingStyle.text = data["BattingStyle"] as? String
+                self.bowlingStyle.text = data["BowlingStyle"] as? String
+                self.playingRole.text = data["PlayingRole"] as? String
+                self.majorTeams.text = data["MajorTeams"] as? String
+                self.profile.text = data["Description"] as? String
+                
+                //career data
+                if data["TestDebut"] as? String != "" {
+                    self.TestDebut.text = data["TestDebut"] as? String
+                    self.LastTest.text = data["LastTest"] as? String
+                    self.careerTestView.hidden = false
+                    self.careerViewHeight.constant += 50
+                }
+                else {
+                    self.careerTestView.hidden = true
+                }
+                
+                if data["ODIDebut"] as? String != "" {
+                    self.ODIDebut.text = data["ODIDebut"] as? String
+                    self.LastODI.text = data["LastODI"] as? String
+                    self.careerODIView.hidden = false
+                    self.careerViewHeight.constant += 50
+                }
+                else {
+                    self.careerODIView.hidden = true
+                }
+                
+                if data["T20IDebut"] as? String != "" {
+                    self.T20IDebut.text = data["T20IDebut"] as? String
+                    self.LastT20I.text = data["LastT20I"] as? String
+                    self.careerT20IView.hidden = false
+                    self.careerViewHeight.constant += 50
+                }
+                else {
+                    self.careerT20IView.hidden = true
+                }
+                
+                if data["FirstclassDebut"] as? String != "" {
+                    self.FirstclassDebut.text = data["FirstclassDebut"] as? String
+                    self.LastFirstclass.text = data["LastFirstclass"] as? String
+                    self.careerFirstclassView.hidden = false
+                    self.careerViewHeight.constant += 50
+                }
+                else {
+                    self.careerFirstclassView.hidden = true
+                }
+                
+                if data["ListADebut"] as? String != "" {
+                    self.ListADebut.text = data["ListADebut"] as? String
+                    self.LastListA.text = data["LastListA"] as? String
+                    self.careerListA.hidden = false
+                    self.careerViewHeight.constant += 50
+                }
+                else {
+                    self.careerListA.hidden = true
+                }
+                
+                if data["T20sDebut"] as? String != "" {
+                    self.T20sDebut.text = data["T20sDebut"] as? String
+                    self.LastT20s.text = data["LastT20s"] as? String
+                    self.careerT20sView.hidden = false
+                    self.careerViewHeight.constant += 50
+                }
+                else {
+                    self.careerT20sView.hidden = true
+                }
+            }
+        })
+        
+        //Batting data
+        //Firstclass
+        fireBaseRef.child("Celebrity").child(friendId!).child("Batting").child("Firstclass").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            if let data = snapshot.value! as? [String:AnyObject]{
+                if data["Mat"] as? String != "" {
+                    self.BatFirstclass50.text = data["50"] as? String
+                    self.BatFirstclass100.text = data["100"] as? String
+                    self.BatFirstclass4s.text = data["4s"] as? String
+                    self.BatFirstclass6s.text = data["6s"] as? String
+                    self.BatFirstclassAve.text = data["Ave"] as? String
+                    self.BatFirstclassBF.text = data["BF"] as? String
+                    self.BatFirstclassCt.text = data["Ct"] as? String
+                    self.BatFirstclassHS.text = data["HS"] as? String
+                    self.BatFirstclassInns.text = data["Inns"] as? String
+                    self.BatFirstclassMat.text = data["Mat"] as? String
+                    self.BatFirstclassNO.text = data["NO"] as? String
+                    self.BatFirstclassRuns.text = data["Runs"] as? String
+                    self.BatFirstclassSR.text = data["SR"] as? String
+                    self.BatFirstclassSt.text = data["St"] as? String
+                    
+                    self.BatFirstclassView.hidden = false
+                    self.BatViewWidth.constant += 80
+                }
+                else {
+                    self.BatFirstclassView.hidden = true
+                }
+                
+            }
+        })
+        
+        //ListA
+        fireBaseRef.child("Celebrity").child(friendId!).child("Batting").child("ListA").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            if let data = snapshot.value! as? [String:AnyObject]{
+                if data["Mat"] as? String != "" {
+                    self.BatListA50.text = data["50"] as? String
+                    self.BatListA100.text = data["100"] as? String
+                    self.BatListA4s.text = data["4s"] as? String
+                    self.BatListA6s.text = data["6s"] as? String
+                    self.BatListAAve.text = data["Ave"] as? String
+                    self.BatListABF.text = data["BF"] as? String
+                    self.BatListACt.text = data["Ct"] as? String
+                    self.BatListAHS.text = data["HS"] as? String
+                    self.BatListAInns.text = data["Inns"] as? String
+                    self.BatListAMat.text = data["Mat"] as? String
+                    self.BatListANO.text = data["NO"] as? String
+                    self.BatListARuns.text = data["Runs"] as? String
+                    self.BatListASR.text = data["SR"] as? String
+                    self.BatListASt.text = data["St"] as? String
+                    
+                    self.BatListAView.hidden = false
+                    self.BatViewWidth.constant += 80
+                }
+                else {
+                    self.BatListAView.hidden = true
+                }
+            }
+        })
+        
+        //ODIs
+        fireBaseRef.child("Celebrity").child(friendId!).child("Batting").child("ODIs").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            if let data = snapshot.value! as? [String:AnyObject]{
+                if data["Mat"] as? String != "" {
+                    self.BatODIs50.text = data["50"] as? String
+                    self.BatODIs100.text = data["100"] as? String
+                    self.BatODIs4s.text = data["4s"] as? String
+                    self.BatODIs6s.text = data["6s"] as? String
+                    self.BatODIsAve.text = data["Ave"] as? String
+                    self.BatODIsBF.text = data["BF"] as? String
+                    self.BatODIsCt.text = data["Ct"] as? String
+                    self.BatODIsHS.text = data["HS"] as? String
+                    self.BatODIsInns.text = data["Inns"] as? String
+                    self.BatODIsMat.text = data["Mat"] as? String
+                    self.BatODIsNO.text = data["NO"] as? String
+                    self.BatODIsRuns.text = data["Runs"] as? String
+                    self.BatODIsSR.text = data["SR"] as? String
+                    self.BatODIsSt.text = data["St"] as? String
+                    
+                    self.BatODIsView.hidden = false
+                    self.BatViewWidth.constant += 80
+                }
+                else {
+                    self.BatODIsView.hidden = true
+                }
+            }
+        })
+        
+        //T20Is
+        fireBaseRef.child("Celebrity").child(friendId!).child("Batting").child("T20Is").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            if let data = snapshot.value! as? [String:AnyObject]{
+                if data["Mat"] as? String != "" {
+                    self.BatT20Is50.text = data["50"] as? String
+                    self.BatT20Is100.text = data["100"] as? String
+                    self.BatT20Is4s.text = data["4s"] as? String
+                    self.BatT20Is6s.text = data["6s"] as? String
+                    self.BatT20IsAve.text = data["Ave"] as? String
+                    self.BatT20IsBF.text = data["BF"] as? String
+                    self.BatT20IsCt.text = data["Ct"] as? String
+                    self.BatT20IsHS.text = data["HS"] as? String
+                    self.BatT20IsInns.text = data["Inns"] as? String
+                    self.BatT20IsMat.text = data["Mat"] as? String
+                    self.BatT20IsNO.text = data["NO"] as? String
+                    self.BatT20IsRuns.text = data["Runs"] as? String
+                    self.BatT20IsSR.text = data["SR"] as? String
+                    self.BatT20IsSt.text = data["St"] as? String
+                    
+                    self.BatT20IsView.hidden = false
+                    self.BatViewWidth.constant += 80
+                }
+                else {
+                    self.BatT20IsView.hidden = true
+                }
+            }
+        })
+        
+        //T20s
+        fireBaseRef.child("Celebrity").child(friendId!).child("Batting").child("T20s").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            if let data = snapshot.value! as? [String:AnyObject]{
+                if data["Mat"] as? String != "" {
+                    self.BatT20s50.text = data["50"] as? String
+                    self.BatT20s100.text = data["100"] as? String
+                    self.BatT20s4s.text = data["4s"] as? String
+                    self.BatT20s6s.text = data["6s"] as? String
+                    self.BatT20sAve.text = data["Ave"] as? String
+                    self.BatT20sBF.text = data["BF"] as? String
+                    self.BatT20sCt.text = data["Ct"] as? String
+                    self.BatT20sHS.text = data["HS"] as? String
+                    self.BatT20sInns.text = data["Inns"] as? String
+                    self.BatT20sMat.text = data["Mat"] as? String
+                    self.BatT20sNO.text = data["NO"] as? String
+                    self.BatT20sRuns.text = data["Runs"] as? String
+                    self.BatT20sSR.text = data["SR"] as? String
+                    self.BatT20sSt.text = data["St"] as? String
+                    
+                    self.BatT20sView.hidden = false
+                    self.BatViewWidth.constant += 80
+                }
+                else {
+                    self.BatT20sView.hidden = true
+                }
+            }
+        })
+        
+        //Tests
+        fireBaseRef.child("Celebrity").child(friendId!).child("Batting").child("Tests").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            if let data = snapshot.value! as? [String:AnyObject]{
+                if data["Mat"] as? String != "" {
+                    self.BatTests50.text = data["50"] as? String
+                    self.BatTests100.text = data["100"] as? String
+                    self.BatTests4s.text = data["4s"] as? String
+                    self.BatTests6s.text = data["6s"] as? String
+                    self.BatTestsAve.text = data["Ave"] as? String
+                    self.BatTestsBF.text = data["BF"] as? String
+                    self.BatTestsCt.text = data["Ct"] as? String
+                    self.BatTestsHS.text = data["HS"] as? String
+                    self.BatTestsInns.text = data["Inns"] as? String
+                    self.BatTestsMat.text = data["Mat"] as? String
+                    self.BatTestsNO.text = data["NO"] as? String
+                    self.BatTestsRuns.text = data["Runs"] as? String
+                    self.BatTestsSR.text = data["SR"] as? String
+                    self.BatTestsSt.text = data["St"] as? String
+                    
+                    self.BatTestsView.hidden = false
+                    self.BatViewWidth.constant += 80
+                }
+                else {
+                    self.BatTestsView.hidden = true
+                }
+            }
+        })
+        
+        //Bowling data
+        //Firstclass
+        fireBaseRef.child("Celebrity").child(friendId!).child("Bowling").child("Firstclass").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            if let data = snapshot.value! as? [String:AnyObject]{
+                if data["Mat"] as? String != "" {
+                    self.BowlFirstclass10w.text = data["10w"] as? String
+                    self.BowlFirstclass5w.text = data["5w"] as? String
+                    self.BowlFirstclass4w.text = data["4w"] as? String
+                    self.BowlFirstclassAve.text = data["Ave"] as? String
+                    self.BowlFirstclassBBI.text = data["BBI"] as? String
+                    self.BowlFirstclassBBM.text = data["BBM"] as? String
+                    self.BowlFirstclassBalls.text = data["Balls"] as? String
+                    self.BowlFirstclassEcon.text = data["Econ"] as? String
+                    self.BowlFirstclassInns.text = data["Inns"] as? String
+                    self.BowlFirstclassMat.text = data["Mat"] as? String
+                    self.BowlFirstclassRuns.text = data["Runs"] as? String
+                    self.BowlFirstclassSR.text = data["SR"] as? String
+                    self.BowlFirstclassWkts.text = data["Wkts"] as? String
+                    
+                    self.BowlFirstclassView.hidden = false
+                    self.BowlViewWidth.constant += 80
+                }
+                else {
+                    self.BowlFirstclassView.hidden = true
+                }
+            }
+        })
+        
+        //ListA
+        fireBaseRef.child("Celebrity").child(friendId!).child("Bowling").child("ListA").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            if let data = snapshot.value! as? [String:AnyObject]{
+                if data["Mat"] as? String != "" {
+                    self.BowlListA10w.text = data["10w"] as? String
+                    self.BowlListA5w.text = data["5w"] as? String
+                    self.BowlListA4w.text = data["4w"] as? String
+                    self.BowlListAAve.text = data["Ave"] as? String
+                    self.BowlListABBI.text = data["BBI"] as? String
+                    self.BowlListABBM.text = data["BBM"] as? String
+                    self.BowlListABalls.text = data["Balls"] as? String
+                    self.BowlListAEcon.text = data["Econ"] as? String
+                    self.BowlListAInns.text = data["Inns"] as? String
+                    self.BowlListAMat.text = data["Mat"] as? String
+                    self.BowlListARuns.text = data["Runs"] as? String
+                    self.BowlListASR.text = data["SR"] as? String
+                    self.BowlListAWkts.text = data["Wkts"] as? String
+                    
+                    self.BowlListAView.hidden = false
+                    self.BowlViewWidth.constant += 80
+                }
+                else {
+                    self.BowlListAView.hidden = true
+                }
+            }
+        })
+        
+        //ODIs
+        fireBaseRef.child("Celebrity").child(friendId!).child("Bowling").child("ODIs").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            if let data = snapshot.value! as? [String:AnyObject]{
+                if data["Mat"] as? String != "" {
+                    self.BowlODIs10w.text = data["10w"] as? String
+                    self.BowlODIs5w.text = data["5w"] as? String
+                    self.BowlODIs4w.text = data["4w"] as? String
+                    self.BowlODIsAve.text = data["Ave"] as? String
+                    self.BowlODIsBBI.text = data["BBI"] as? String
+                    self.BowlODIsBBM.text = data["BBM"] as? String
+                    self.BowlODIsBalls.text = data["Balls"] as? String
+                    self.BowlODIsEcon.text = data["Econ"] as? String
+                    self.BowlODIsInns.text = data["Inns"] as? String
+                    self.BowlODIsMat.text = data["Mat"] as? String
+                    self.BowlODIsRuns.text = data["Runs"] as? String
+                    self.BowlODIsSR.text = data["SR"] as? String
+                    self.BowlODIsWkts.text = data["Wkts"] as? String
+                    
+                    self.BowlODIsView.hidden = false
+                    self.BowlViewWidth.constant += 80
+                }
+                else {
+                    self.BowlODIsView.hidden = true
+                }
+            }
+        })
+        
+        //T20Is
+        fireBaseRef.child("Celebrity").child(friendId!).child("Bowling").child("T20Is").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            if let data = snapshot.value! as? [String:AnyObject]{
+                if data["Mat"] as? String != "" {
+                    self.BowlT20Is10w.text = data["10w"] as? String
+                    self.BowlT20Is5w.text = data["5w"] as? String
+                    self.BowlT20Is4w.text = data["4w"] as? String
+                    self.BowlT20IsAve.text = data["Ave"] as? String
+                    self.BowlT20IsBBI.text = data["BBI"] as? String
+                    self.BowlT20IsBBM.text = data["BBM"] as? String
+                    self.BowlT20IsBalls.text = data["Balls"] as? String
+                    self.BowlT20IsEcon.text = data["Econ"] as? String
+                    self.BowlT20IsInns.text = data["Inns"] as? String
+                    self.BowlT20IsMat.text = data["Mat"] as? String
+                    self.BowlT20IsRuns.text = data["Runs"] as? String
+                    self.BowlT20IsSR.text = data["SR"] as? String
+                    self.BowlT20IsWkts.text = data["Wkts"] as? String
+                    
+                    self.BowlT20IsView.hidden = false
+                    self.BowlViewWidth.constant += 80
+                }
+                else {
+                    self.BowlT20IsView.hidden = true
+                }
+            }
+        })
+        
+        //T20s
+        fireBaseRef.child("Celebrity").child(friendId!).child("Bowling").child("T20s").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            if let data = snapshot.value! as? [String:AnyObject]{
+                if data["Mat"] as? String != "" {
+                    self.BowlT20s10w.text = data["10w"] as? String
+                    self.BowlT20s5w.text = data["5w"] as? String
+                    self.BowlT20s4w.text = data["4w"] as? String
+                    self.BowlT20sAve.text = data["Ave"] as? String
+                    self.BowlT20sBBI.text = data["BBI"] as? String
+                    self.BowlT20sBBM.text = data["BBM"] as? String
+                    self.BowlT20sBalls.text = data["Balls"] as? String
+                    self.BowlT20sEcon.text = data["Econ"] as? String
+                    self.BowlT20sInns.text = data["Inns"] as? String
+                    self.BowlT20sMat.text = data["Mat"] as? String
+                    self.BowlT20sRuns.text = data["Runs"] as? String
+                    self.BowlT20sSR.text = data["SR"] as? String
+                    self.BowlT20sWkts.text = data["Wkts"] as? String
+                    
+                    self.BowlT20sView.hidden = false
+                    self.BowlViewWidth.constant += 80
+                }
+                else {
+                    self.BowlT20sView.hidden = true
+                }
+            }
+        })
+        
+        //Tests
+        fireBaseRef.child("Celebrity").child(friendId!).child("Bowling").child("Tests").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            if let data = snapshot.value! as? [String:AnyObject]{
+                if data["Mat"] as? String != "" {
+                    self.BowlTests10w.text = data["10w"] as? String
+                    self.BowlTests5w.text = data["5w"] as? String
+                    self.BowlTests4w.text = data["4w"] as? String
+                    self.BowlTestsAve.text = data["Ave"] as? String
+                    self.BowlTestsBBI.text = data["BBI"] as? String
+                    self.BowlTestsBBM.text = data["BBM"] as? String
+                    self.BowlTestsBalls.text = data["Balls"] as? String
+                    self.BowlTestsEcon.text = data["Econ"] as? String
+                    self.BowlTestsInns.text = data["Inns"] as? String
+                    self.BowlTestsMat.text = data["Mat"] as? String
+                    self.BowlTestsRuns.text = data["Runs"] as? String
+                    self.BowlTestsSR.text = data["SR"] as? String
+                    self.BowlTestsWkts.text = data["Wkts"] as? String
+                    
+                    self.BowlTestsView.hidden = false
+                    self.BowlViewWidth.constant += 80
+                }
+                else {
+                    self.BowlTestsView.hidden = true
+                }
+            }
+        })
     }
 
     
