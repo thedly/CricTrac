@@ -239,11 +239,22 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
     @IBOutlet weak var BatViewWidth: NSLayoutConstraint!
     @IBOutlet weak var BowlViewWidth: NSLayoutConstraint!
     
+    @IBOutlet weak var closeBtn: UIButton!
+    @IBOutlet weak var profilePic: UIImageView!
+    @IBOutlet weak var coverPic: UIImageView!
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var city: UILabel!
     
-    var friendId:String? = "7pV4HRyRjqcv1qjDPFcwB0bVhFs2"
+    var friendId:String? = nil
     var currentUserId = ""
     var isFriendDashboard = false
     
+    var friendProfile:[String:AnyObject]?
+    var userProfileData:Profile!
+    
+    @IBAction func closeBtn(sender: UIButton) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     var celebrityData:Celebrity!
     
     override func viewDidLoad() {
@@ -256,12 +267,101 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
     override func viewWillAppear(animated: Bool) {
         setBackgroundColor()
         
+        if let value = friendProfile{
+            userProfileData = Profile(usrObj: value)
+            // closeButton.hidden = false
+        }
+        else{
+            userProfileData = profileData
+            // closeButton.hidden = true
+        }
+        
+        userProfileImage.layer.cornerRadius = userProfileImage.bounds.size.width/2
+        userProfileImage.clipsToBounds = true
+        
+        
+        let currentCountryList = CountriesList.filter({$0.name == userProfileData.Country})
+        let currentISO = currentCountryList[0].iso
+        
+        //calculating age
+        let  dob = userProfileData.DateOfBirth
+        
+        let dateFormater = NSDateFormatter()
+        dateFormater.dateFormat = "dd-MM-yyyy"
+        let birthdayDate = dateFormater.dateFromString(dob)
+        
+        let date = NSDate()
+        
+        let calender:NSCalendar  = NSCalendar.currentCalendar()
+        
+        let currentMonth = calender.component(.Month, fromDate: date)
+        let birthmonth = calender.component(.Month, fromDate: birthdayDate!)
+        
+        var years = calender.component(.Year, fromDate: date) - calender.component(.Year, fromDate: birthdayDate!)
+        
+        var months = currentMonth - birthmonth
+        
+        if months < 0 {
+            years = years - 1
+            months = 12 - birthmonth + currentMonth
+            if calender.component(.Day, fromDate: date) < calender.component(.Day, fromDate: birthdayDate!){
+                months = months - 1
+            }
+        }
+        else if months == 0 && calender.component(.Day, fromDate: date) < calender.component(.Day, fromDate: birthdayDate!)
+        {
+            years = years - 1
+            months = 11
+        }
+        let ageString = "\(years) yrs \(months) months"
+        
+        
+        let df = NSDateFormatter()
+        df.dateFormat = "dd/MM/yyyy"
+        self.name.text = userProfileData.fullName
+        let formattedString = NSMutableAttributedString()
+        let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State), ", fontName: appFont_black, fontSize: 15).bold("\(currentISO)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.DateOfBirth)\n", fontName: appFont_black, fontSize: 15).bold("Age: \(ageString)\n", fontName: appFont_black, fontSize: 15)
+        self.city.attributedText = locationText
+        
         if friendId == nil {
             currentUserId = (currentUser?.uid)!
         }
         else {
             currentUserId = friendId!
         }
+        
+        
+        
+        fetchBasicProfile(currentUserId, sucess: { (result) in
+            let proPic = result["proPic"]
+            
+            if proPic! == "-"{
+                let imageName = defaultProfileImage
+                let image = UIImage(named: imageName)
+                self.profilePic.image = image
+            }
+            else{
+                if let imageURL = NSURL(string:proPic!){
+                    self.profilePic.kf_setImageWithURL(imageURL)
+                }
+            }
+        })
+        
+        fetchCoverPhoto(currentUserId, sucess: { (result) in
+            let coverPic = result["coverPic"]
+            
+            if coverPic! == "-"{
+                let imageName = defaultCoverImage
+                let image = UIImage(named: imageName)
+                self.coverPic.image = image
+            }
+            else{
+                if let imageURL = NSURL(string:coverPic!){
+                    self.coverPic.kf_setImageWithURL(imageURL)
+                }
+            }
+        })
+
         
         careerViewHeight.constant = 10
         BatViewWidth.constant = 80

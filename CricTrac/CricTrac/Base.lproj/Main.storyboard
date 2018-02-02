@@ -623,13 +623,13 @@
             <string>SourceSansPro-Bold</string>
             <string>SourceSansPro-Bold</string>
             <string>SourceSansPro-Bold</string>
+            <string>SourceSansPro-Bold</string>
+            <string>SourceSansPro-Bold</string>
+            <string>SourceSansPro-Bold</string>
+            <string>SourceSansPro-Bold</string>
+            <string>SourceSansPro-Bold</string>
         </mutableArray>
         <mutableArray key="SourceSansPro-Regular.otf">
-            <string>SourceSansPro-Regular</string>
-            <string>SourceSansPro-Regular</string>
-            <string>SourceSansPro-Regular</string>
-            <string>SourceSansPro-Regular</string>
-            <string>SourceSansPro-Regular</string>
             <string>SourceSansPro-Regular</string>
             <string>SourceSansPro-Regular</string>
             <string>SourceSansPro-Regular</string>
@@ -20872,15 +20872,15 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iFM-nJ-5fm" userLabel="ProfileView">
                                                 <rect key="frame" x="0.0" y="201" width="600" height="194"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playing Role" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9VZ-tp-Alu">
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Playing Role" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9VZ-tp-Alu">
                                                         <rect key="frame" x="5" y="5" width="72" height="18"/>
-                                                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="14"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bowling Style" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WiH-Tk-SHT">
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Bowling Style" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WiH-Tk-SHT">
                                                         <rect key="frame" x="172" y="5" width="80" height="18"/>
-                                                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="14"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -20889,22 +20889,22 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="120" id="7BW-gw-hXo"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="14"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Batting Style" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9rb-eT-zDH">
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Batting Style" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9rb-eT-zDH">
                                                         <rect key="frame" x="87" y="5" width="75" height="18"/>
-                                                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="14"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team names" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3dM-tm-zJm" userLabel="Team Names">
-                                                        <rect key="frame" x="8" y="31" width="587" height="18"/>
+                                                        <rect key="frame" x="5" y="31" width="590" height="18"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="18" id="DwA-8f-z1I"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="14"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                         <variation key="default">
@@ -20931,7 +20931,7 @@
                                                     <constraint firstItem="uGx-TM-p6b" firstAttribute="leading" secondItem="9VZ-tp-Alu" secondAttribute="leading" id="ivK-1u-1hG"/>
                                                     <constraint firstItem="9VZ-tp-Alu" firstAttribute="top" secondItem="iFM-nJ-5fm" secondAttribute="top" constant="5" id="ncU-Ir-kvQ"/>
                                                     <constraint firstItem="3dM-tm-zJm" firstAttribute="firstBaseline" secondItem="9rb-eT-zDH" secondAttribute="baseline" id="p5Z-JU-Zxl"/>
-                                                    <constraint firstItem="3dM-tm-zJm" firstAttribute="leading" secondItem="iFM-nJ-5fm" secondAttribute="leading" constant="8" id="tuG-Da-g0v"/>
+                                                    <constraint firstItem="3dM-tm-zJm" firstAttribute="leading" secondItem="iFM-nJ-5fm" secondAttribute="leading" constant="5" id="tuG-Da-g0v"/>
                                                     <constraint firstItem="uGx-TM-p6b" firstAttribute="top" secondItem="3dM-tm-zJm" secondAttribute="bottom" constant="5" id="vmw-xA-7EW"/>
                                                 </constraints>
                                                 <variation key="default">
@@ -20946,7 +20946,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jSF-88-QPc" userLabel="BattingView">
                                                 <rect key="frame" x="0.0" y="403" width="600" height="385"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Batting Average" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eFK-JD-3yK">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Batting Average" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eFK-JD-3yK">
                                                         <rect key="frame" x="5" y="5" width="119" height="22"/>
                                                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -22050,7 +22050,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wpY-fT-lGe" userLabel="BowlingView">
                                                 <rect key="frame" x="0.0" y="788" width="600" height="365"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bowling Average" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LPk-vw-m0i">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bowling Average" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LPk-vw-m0i">
                                                         <rect key="frame" x="5" y="5" width="125" height="22"/>
                                                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -23091,7 +23091,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C2h-an-Vrv" userLabel="Career View">
                                                 <rect key="frame" x="0.0" y="1153" width="592" height="300"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185802" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Career Statistics" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAs-72-aH6">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Career Statistics" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAs-72-aH6">
                                                         <rect key="frame" x="5" y="2" width="123" height="22"/>
                                                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -23474,7 +23474,7 @@
                                         <rect key="frame" x="265" y="605" width="70" height="70"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ARJUN KUMAR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GS2-Me-M7J">
-                                        <rect key="frame" x="130" y="119" width="112" height="22"/>
+                                        <rect key="frame" x="130" y="96" width="112" height="22"/>
                                         <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -23486,7 +23486,7 @@
                                         <rect key="frame" x="20" y="100" width="90" height="90"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BANGALORE" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iiE-We-ef3">
-                                        <rect key="frame" x="130" y="141" width="82" height="19"/>
+                                        <rect key="frame" x="130" y="118" width="82" height="19"/>
                                         <fontDescription key="fontDescription" name="SourceSansPro-Black" family="Source Sans Pro" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -23497,7 +23497,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Pq9-pd-SMx" firstAttribute="top" secondItem="fsf-Ii-RbW" secondAttribute="top" id="3c4-GH-qvG"/>
-                                    <constraint firstItem="GS2-Me-M7J" firstAttribute="centerY" secondItem="GKs-5W-ETY" secondAttribute="centerY" constant="-15" id="3uD-20-B00"/>
+                                    <constraint firstItem="GS2-Me-M7J" firstAttribute="centerY" secondItem="GKs-5W-ETY" secondAttribute="centerY" constant="-38" id="3uD-20-B00"/>
                                     <constraint firstItem="Pq9-pd-SMx" firstAttribute="centerX" secondItem="fsf-Ii-RbW" secondAttribute="centerX" id="4zg-uz-ima"/>
                                     <constraint firstItem="iiE-We-ef3" firstAttribute="centerX" secondItem="GS2-Me-M7J" secondAttribute="centerX" id="82x-6l-fzK"/>
                                     <constraint firstItem="GKs-5W-ETY" firstAttribute="centerX" secondItem="fsf-Ii-RbW" secondAttribute="centerX" id="95V-BP-eBw"/>
@@ -23565,15 +23565,35 @@
                                             </mask>
                                         </variation>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HbR-yg-hdR">
+                                        <rect key="frame" x="15" y="18" width="26" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="26" id="NFU-8g-nsX"/>
+                                            <constraint firstAttribute="height" constant="36" id="dsh-nP-WCR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                        <state key="normal" image="shape"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="dsh-nP-WCR"/>
+                                                <exclude reference="NFU-8g-nsX"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="closeBtn:" destination="dul-H9-m2k" eventType="touchUpInside" id="Gmy-gy-TYB"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="h6k-NS-P9X" firstAttribute="leading" secondItem="J4K-6v-5CN" secondAttribute="leading" constant="15" id="9aN-gi-QIg"/>
+                                    <constraint firstItem="HbR-yg-hdR" firstAttribute="baseline" secondItem="h6k-NS-P9X" secondAttribute="baseline" id="DDP-yo-ahC"/>
                                     <constraint firstItem="xZy-M0-icL" firstAttribute="centerX" secondItem="J4K-6v-5CN" secondAttribute="centerX" id="U7b-5q-qmn"/>
                                     <constraint firstItem="xZy-M0-icL" firstAttribute="centerY" secondItem="J4K-6v-5CN" secondAttribute="centerY" constant="10" id="YMf-Cs-fwX"/>
                                     <constraint firstAttribute="height" constant="56" id="f8e-wv-3QT"/>
                                     <constraint firstItem="xZy-M0-icL" firstAttribute="top" secondItem="J4K-6v-5CN" secondAttribute="top" constant="28" id="hIx-1k-8cJ"/>
                                     <constraint firstItem="h6k-NS-P9X" firstAttribute="top" secondItem="J4K-6v-5CN" secondAttribute="top" constant="18" id="oFB-Jv-qIP"/>
+                                    <constraint firstItem="HbR-yg-hdR" firstAttribute="leading" secondItem="h6k-NS-P9X" secondAttribute="leading" id="wcW-wq-4XY"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ewm-pe-Cd6" customClass="GADBannerView">
@@ -23823,9 +23843,14 @@
                         <outlet property="careerT20sView" destination="vtj-ur-5j4" id="HcH-h3-KTD"/>
                         <outlet property="careerTestView" destination="eU0-h4-CY9" id="nD7-mD-J0o"/>
                         <outlet property="careerViewHeight" destination="ubQ-aj-cia" id="bTZ-mw-VMy"/>
+                        <outlet property="city" destination="iiE-We-ef3" id="qh3-Zh-VBZ"/>
+                        <outlet property="closeBtn" destination="HbR-yg-hdR" id="azY-KH-1DT"/>
+                        <outlet property="coverPic" destination="LO1-9G-4xf" id="8qp-SF-3O8"/>
                         <outlet property="majorTeams" destination="3dM-tm-zJm" id="MaO-Vl-1Hj"/>
+                        <outlet property="name" destination="GS2-Me-M7J" id="lsK-pp-MnQ"/>
                         <outlet property="playingRole" destination="9VZ-tp-Alu" id="7Ue-8r-tQt"/>
                         <outlet property="profile" destination="uGx-TM-p6b" id="drd-Lh-ezV"/>
+                        <outlet property="profilePic" destination="GKs-5W-ETY" id="2l4-U1-hFP"/>
                         <outlet property="topBarView" destination="J4K-6v-5CN" id="aGU-KZ-FIh"/>
                         <outlet property="userProfileImage" destination="GKs-5W-ETY" id="eQ2-Qb-fx0"/>
                     </connections>

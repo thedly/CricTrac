@@ -46,12 +46,20 @@ class FriendsCell: UITableViewCell {
     func didTapFriendName(){
         if friendId != nil{
             getFriendProfileInfo(friendId, sucess: { (friendInfo) in
-                if let friendType = friendInfo["UserProfile"] as? String{
-                    switch friendType{
-                    case "Player": self.moveToPlayer(friendInfo)
-                    case "Coach": self.moveToCoach(friendInfo)
-                    case "Cricket Fan": self.moveToFan(friendInfo)
-                    default: break
+                if friendInfo["isCelebrity"] != nil {
+                    let dashBoard = viewControllerFrom("Main", vcid: "CelebrityDashboardViewController") as! CelebrityDashboardViewController
+                    dashBoard.friendId = self.friendId
+                    dashBoard.friendProfile = friendInfo
+                    self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
+                }
+                else {
+                    if let friendType = friendInfo["UserProfile"] as? String{
+                        switch friendType{
+                        case "Player": self.moveToPlayer(friendInfo)
+                        case "Coach": self.moveToCoach(friendInfo)
+                        case "Cricket Fan": self.moveToFan(friendInfo)
+                        default: break
+                        }
                     }
                 }
             })
