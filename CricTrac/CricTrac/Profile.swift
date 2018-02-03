@@ -46,6 +46,7 @@ class Profile {
     var UserLastLoggedin: AnyObject = ""
     var userExists: Bool = false
     var DeviceInfo: String = ""
+    var Celebrity: String = ""
     
     init(usrObj : [String: AnyObject]) {
         
@@ -129,7 +130,6 @@ class Profile {
             self.Certifications = certifications
             
         }
-       
         
         if let fname = self.FirstName as? String, let lName = self.LastName as? String {
             self.fullName = "\(fname) \(lName)"
@@ -179,6 +179,9 @@ class Profile {
         if let coachPlayedFor = usrObj["CoachPlayedFor"] as? [String] {
             self.CoachPlayedFor = coachPlayedFor
         }
+        if let celebrity = usrObj["Celebrity"] as? String where celebrity != "" {
+            self.Celebrity = celebrity
+        }
     }
     
     var ProfileObject: [String:AnyObject] {
@@ -206,7 +209,8 @@ class Profile {
                 "UserStatus": self.UserStatus,
                 "UserAddedDate" : self.UserAddedDate,
                 "UserEditedDate" : self.UserEditedDate,
-                "UserLastLoggedin": self.UserLastLoggedin
+                "UserLastLoggedin": self.UserLastLoggedin,
+                "Celebrity": self.Celebrity
             ]
         }
         else if self.UserProfile == String(userProfileType.Player.rawValue) {
@@ -235,7 +239,8 @@ class Profile {
                 "UserStatus": self.UserStatus,
                 "UserAddedDate" : self.UserAddedDate,
                 "UserEditedDate" : self.UserEditedDate,
-                "UserLastLoggedin": self.UserLastLoggedin
+                "UserLastLoggedin": self.UserLastLoggedin,
+                "Celebrity": self.Celebrity
             ]
         }
         else {
@@ -264,7 +269,8 @@ class Profile {
                 "UserStatus": self.UserStatus,
                 "UserAddedDate" : self.UserAddedDate,
                 "UserEditedDate" : self.UserEditedDate,
-                "UserLastLoggedin": self.UserLastLoggedin
+                "UserLastLoggedin": self.UserLastLoggedin,
+                "Celebrity": self.Celebrity
             ]
         }
     }

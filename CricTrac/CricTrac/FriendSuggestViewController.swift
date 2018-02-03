@@ -174,20 +174,25 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                     let city =   result["city"]
                     let userProfile = result["userProfile"]
                     let playingRole = result["playingRole"]
+                    let celebrity = result["celebrity"]
                     
                     aCell.userCity.text = city
                     
-                    if userProfile == "Player" {
-                     aCell.userRole.text = playingRole
+                    if celebrity != "-" {
+                        aCell.userRole.text = celebrity
                     }
-                        
-                    else if userProfile == "Coach" {
-                        aCell.userRole.text = "Coach"
+                    else {
+                        if userProfile == "Player" {
+                         aCell.userRole.text = playingRole
+                        }
+                            
+                        else if userProfile == "Coach" {
+                            aCell.userRole.text = "Coach"
+                        }
+                        else if userProfile == "Cricket Fan" {
+                            aCell.userRole.text = "Cricket Fan"
+                        }
                     }
-                    else if userProfile == "Cricket Fan" {
-                        aCell.userRole.text = "Cricket Fan"
-                    }
-
                     
                     
                     if proPic! == "-"{

@@ -61,12 +61,17 @@ class APostTableViewCell: UITableViewCell {
         if postOwnerName.text != "CricTrac" {
             if  postOwnerId != nil{
                 getFriendProfileInfo(postOwnerId, sucess: { (friendInfo) in
-                    if let friendType = friendInfo["UserProfile"] as? String{
-                        switch friendType{
-                            case "Player": self.moveToPlayer(friendInfo)
-                            case "Coach": self.moveToCoach(friendInfo)
-                            case "Cricket Fan": self.moveToFan(friendInfo)
-                            default: break
+                    if friendInfo["Celebrity"] != nil && friendInfo["Celebrity"] as? String != "-" {
+                        self.moveToCelebrity(friendInfo)
+                    }
+                    else {
+                        if let friendType = friendInfo["UserProfile"] as? String{
+                            switch friendType{
+                                case "Player": self.moveToPlayer(friendInfo)
+                                case "Coach": self.moveToCoach(friendInfo)
+                                case "Cricket Fan": self.moveToFan(friendInfo)
+                                default: break
+                            }
                         }
                     }
                 })
@@ -82,6 +87,15 @@ class APostTableViewCell: UITableViewCell {
                 commentPage.postIndex = postIndex
                 parentVC.presentViewController(commentPage, animated: true) {}
             }
+        }
+    }
+    
+    func moveToCelebrity(userInfo:[String : AnyObject]){
+        if let parentVC = parent as? UIViewController{
+            let dashBoard = viewControllerFrom("Main", vcid: "CelebrityDashboardViewController") as! CelebrityDashboardViewController
+            dashBoard.friendId = postOwnerId
+            dashBoard.friendProfile = userInfo
+            parentVC.presentViewController(dashBoard, animated: true) {}
         }
     }
     

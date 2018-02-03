@@ -120,21 +120,28 @@ class FollowingViewController: UIViewController,IndicatorInfoProvider,ThemeChang
             let userProfile = result["userProfile"]
             let playingRole = result["playingRole"]
             let followerName = "\(result["firstname"]!) \(result["lastname"]!)"
+            let celebrity = result["celebrity"]
             
             aCell.FriendName.text = followerName
             
             aCell.FriendCity.text = city
             
-            if userProfile == "Player" {
-                aCell.friendRole.text = playingRole
+            if celebrity != "-" {
+                aCell.friendRole.text = celebrity
             }
-                
-            else if userProfile == "Coach" {
-                aCell.friendRole.text = "Coach"
+            else {
+                if userProfile == "Player" {
+                    aCell.friendRole.text = playingRole
+                }
+                    
+                else if userProfile == "Coach" {
+                    aCell.friendRole.text = "Coach"
+                }
+                else if userProfile == "Cricket Fan" {
+                    aCell.friendRole.text = "Cricket Fan"
+                }
             }
-            else if userProfile == "Cricket Fan" {
-                aCell.friendRole.text = "Cricket Fan"
-            }
+            
             
             if proPic! == "-"{
                 let imageName = defaultProfileImage

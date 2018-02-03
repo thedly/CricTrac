@@ -140,20 +140,26 @@ class FollowerListViewController: UIViewController,IndicatorInfoProvider,ThemeCh
             let userProfile = result["userProfile"]
             let playingRole = result["playingRole"]
             let followerName = "\(result["firstname"]!) \(result["lastname"]!)"
+            let celebrity = result["celebrity"]
             
             aCell.FriendName.text = followerName
             
             aCell.FriendCity.text = city
             
-            if userProfile == "Player" {
-                aCell.FriendRole.text = playingRole
+            if celebrity != "-" {
+                aCell.FriendRole.text = celebrity
             }
-                
-            else if userProfile == "Coach" {
-                aCell.FriendRole.text = "Coach"
-            }
-            else if userProfile == "Cricket Fan" {
-                aCell.FriendRole.text = "Cricket Fan"
+            else {
+                if userProfile == "Player" {
+                    aCell.FriendRole.text = playingRole
+                }
+                    
+                else if userProfile == "Coach" {
+                    aCell.FriendRole.text = "Coach"
+                }
+                else if userProfile == "Cricket Fan" {
+                    aCell.FriendRole.text = "Cricket Fan"
+                }
             }
             
             if proPic! == "-"{

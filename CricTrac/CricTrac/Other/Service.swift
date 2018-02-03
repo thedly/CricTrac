@@ -398,6 +398,7 @@ func fetchFriendDetail(id:String,sucess:(result:[String:String])->Void){
 func fetchBasicProfile(id:String,sucess:(result:[String:String])->Void){
     var playingRole = ""
     var battingStyle = ""
+    var celebrity = "-"
     fireBaseRef.child("Users").child(id).child("UserProfile").observeEventType(.Value, withBlock: { snapshot in
         if let data = snapshot.value {
             guard let firstname = data["FirstName"]! as? String else {return }
@@ -407,12 +408,16 @@ func fetchBasicProfile(id:String,sucess:(result:[String:String])->Void){
             guard let userProfile = data["UserProfile"]! as? String else {return }
             guard let dob = data["DateOfBirth"]! as? String else {return }
             
+            if data["Celebrity"] as? String != nil {
+                celebrity = (data["Celebrity"]! as? String)!
+            }
+            
             if userProfile == "Player" {
                 playingRole = (data["PlayingRole"]! as? String)!
                 battingStyle = (data["BattingStyle"]! as? String)!
             }
             
-            sucess(result: ["proPic":proPic,"city":city,"firstname":firstname,"lastname":lastname,"userProfile":userProfile,"dob":dob,"playingRole":playingRole,"battingStyle":battingStyle])
+            sucess(result: ["proPic":proPic,"city":city,"firstname":firstname,"lastname":lastname,"userProfile":userProfile,"dob":dob,"playingRole":playingRole,"battingStyle":battingStyle,"celebrity":celebrity])
         }
     })
 }
@@ -460,6 +465,7 @@ func addUserProfileData(data:[String:AnyObject], sucessBlock:([String:AnyObject]
         if userRegistered == nil
             //if !profileData.userExists
         {
+            dataToBeModified["Celebrity"] = "-" //Not a celebrity by default
             dataToBeModified["UserAddedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
             dataToBeModified["UserEditedDate"] = NSDate().getCurrentTimeStamp()//formatter.stringFromDate(NSDate())
             dataToBeModified["DeviceInfo"] = modelName + "|" + systemVersion + "|" + versionAndBuildNumber //Device info and App info

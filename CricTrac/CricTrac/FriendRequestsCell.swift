@@ -55,15 +55,32 @@ class FriendRequestsCell: UITableViewCell {
     func didTapFriendName(){
         if friendId != nil{
             getFriendProfileInfo(friendId, sucess: { (friendInfo) in
-                if let friendType = friendInfo["UserProfile"] as? String{
-                    switch friendType{
-                    case "Player": self.moveToPlayer(friendInfo)
-                    case "Coach": self.moveToCoach(friendInfo)
-                    case "Cricket Fan": self.moveToFan(friendInfo)
-                    default: break
+                if friendInfo["Celebrity"] != nil && friendInfo["Celebrity"] as? String != "-" {
+                    self.moveToCelebrity(friendInfo)
+                }
+                else {
+                    if let friendType = friendInfo["UserProfile"] as? String{
+                        switch friendType{
+                        case "Player": self.moveToPlayer(friendInfo)
+                        case "Coach": self.moveToCoach(friendInfo)
+                        case "Cricket Fan": self.moveToFan(friendInfo)
+                        default: break
+                        }
                     }
                 }
             })
+        }
+    }
+    
+    func moveToCelebrity(userInfo:[String : AnyObject]){
+        let dashBoard = viewControllerFrom("Main", vcid: "CelebrityDashboardViewController") as! CelebrityDashboardViewController
+        dashBoard.friendId = friendId
+        dashBoard.friendProfile = userInfo
+        if let parentVc = parent as? UIViewController{
+            parentVc.presentViewController(dashBoard, animated: true, completion: nil)
+        }
+        else{
+            self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
         }
     }
     

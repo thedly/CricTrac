@@ -46,11 +46,8 @@ class FriendsCell: UITableViewCell {
     func didTapFriendName(){
         if friendId != nil{
             getFriendProfileInfo(friendId, sucess: { (friendInfo) in
-                if friendInfo["isCelebrity"] != nil {
-                    let dashBoard = viewControllerFrom("Main", vcid: "CelebrityDashboardViewController") as! CelebrityDashboardViewController
-                    dashBoard.friendId = self.friendId
-                    dashBoard.friendProfile = friendInfo
-                    self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
+                if friendInfo["Celebrity"] != nil && friendInfo["Celebrity"] as? String != "-" {
+                    self.moveToCelebrity(friendInfo)
                 }
                 else {
                     if let friendType = friendInfo["UserProfile"] as? String{
@@ -66,6 +63,13 @@ class FriendsCell: UITableViewCell {
         }
     }
 
+    func moveToCelebrity(userInfo:[String : AnyObject]){
+        let dashBoard = viewControllerFrom("Main", vcid: "CelebrityDashboardViewController") as! CelebrityDashboardViewController
+        dashBoard.friendId = self.friendId
+        dashBoard.friendProfile = userInfo
+        self.window?.rootViewController?.presentViewController(dashBoard, animated: true) {}
+    }
+    
     func moveToPlayer(userInfo:[String : AnyObject]){
         let dashBoard = viewControllerFrom("Main", vcid: "UserDashboardViewController") as! UserDashboardViewController
         dashBoard.friendId = friendId
