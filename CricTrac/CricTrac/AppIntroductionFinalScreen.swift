@@ -36,7 +36,6 @@ class AppIntroductionFinalScreen: UIViewController{
     }
     
     
-    
     @IBAction func doneButtonTapped(sender: AnyObject) {
       //  self.doneButton.setTitle("Loading...", forState: .Normal)
         //doneButton!.setTitle("Loading...", forState: .Normal)
@@ -45,6 +44,7 @@ class AppIntroductionFinalScreen: UIViewController{
         appDelegate.application(UIApplication.sharedApplication(), didFinishLaunchingWithOptions: nil)
    
     }
+    
 
     
     

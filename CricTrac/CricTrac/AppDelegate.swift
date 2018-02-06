@@ -86,7 +86,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //self.didTapPurchaseButton()
         }
         
-        
         return true
     }
     

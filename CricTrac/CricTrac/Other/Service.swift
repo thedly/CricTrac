@@ -442,7 +442,6 @@ func fetchAdDetails(sucess:(result:[String:String])->Void){
     })
 }
 
-
 func enableSync(){
     //fireBaseRef.database.persistenceEnabled = true
     fireBaseRef.keepSynced(true)
