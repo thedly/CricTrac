@@ -32,6 +32,13 @@ class AppIntroSecondScrren:UIViewController {
             }, completion: nil)
     }
     
+    @IBAction func skipBtnTapped(sender: UIButton) {
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        appDelegate.application(UIApplication.sharedApplication(), didFinishLaunchingWithOptions: nil)
+        
+    }
 
     
 }

@@ -34,6 +34,13 @@ class AppIntroFifthScreen:UIViewController {
             }, completion: nil)
     }
 
+    @IBAction func doneBtnTapped(sender: UIButton) {
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        appDelegate.application(UIApplication.sharedApplication(), didFinishLaunchingWithOptions: nil)
+        
+    }
 
 
 }

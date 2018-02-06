@@ -16,11 +16,23 @@ class AppIntroductionScreens: UIPageViewController,UIPageViewControllerDelegate,
                 self.VCInstance("SecondScreenVC"),
                 self.VCInstance("ThirdScreenVC"),
                 self.VCInstance("FourthScreenVC"),
-                self.VCInstance("FifthScreenVC"),
-                self.VCInstance("FinalScreenVC")
+                self.VCInstance("FifthScreenVC")
             
                 ]
     }()
+    
+//    lazy var vcArray:[UIViewController] = {
+//        return [self.VCInstance("AppIntroBasicScreen"),
+//                self.VCInstance("FirstScreenVC"),
+//                self.VCInstance("SecondScreenVC"),
+//                self.VCInstance("ThirdScreenVC"),
+//                self.VCInstance("FourthScreenVC"),
+//                self.VCInstance("FifthScreenVC"),
+//                self.VCInstance("FinalScreenVC")
+//            
+//        ]
+//    }()
+
     private func VCInstance(name:String) -> UIViewController {
         return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(name)
         
