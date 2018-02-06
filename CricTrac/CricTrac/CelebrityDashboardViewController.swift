@@ -274,9 +274,7 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
          self.careerODIView.layer.cornerRadius = 10
          self.careerListA.layer.cornerRadius = 10
          self.careerTestView.layer.cornerRadius = 10
-        
-        
-        
+                
         // Do any additional setup after loading the view.
     }
     
@@ -402,11 +400,32 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
         fireBaseRef.child("Celebrity").child(friendId!).child("Profile").observeSingleEventOfType(.Value, withBlock: { snapshot in
             if let data = snapshot.value! as? [String:AnyObject]{
                 //profile data
-                self.battingStyle.text = data["BattingStyle"] as? String
-                self.bowlingStyle.text = data["BowlingStyle"] as? String
-                self.playingRole.text = data["PlayingRole"] as? String
+                let playingRole = data["PlayingRole"] as? String
+                let bowlStyle = data["BowlingStyle"] as? String
+                //self.playingRole.text = data["PlayingRole"] as? String
+                self.battingStyle.text = ""
                 self.majorTeams.text = data["MajorTeams"] as? String
                 self.profile.text = data["Description"] as? String
+                
+                let formattedStrBat = NSMutableAttributedString()
+                let formattedStrBowl = NSMutableAttributedString()
+                
+                let batImageAttachment = NSTextAttachment()
+                batImageAttachment.image = UIImage(named: "BatIcon")
+                batImageAttachment.bounds = CGRect(x: 0, y: -2, width: 15, height: 15)
+                let imageAttachmentString = NSAttributedString(attachment: batImageAttachment)
+                formattedStrBat.appendAttributedString(imageAttachmentString)
+                formattedStrBat.bold("\(playingRole!)   ", fontName: appFont_bold, fontSize: 15)
+                
+                let ballImageAttachment = NSTextAttachment()
+                ballImageAttachment.image = UIImage(named: "BallIcon")
+                ballImageAttachment.bounds = CGRect(x: 0, y: -2, width: 14, height: 14)
+                let ballImageAttachmentString = NSAttributedString(attachment: ballImageAttachment)
+                formattedStrBowl.appendAttributedString(ballImageAttachmentString)
+                formattedStrBowl.bold("\(bowlStyle!)", fontName: appFont_bold, fontSize: 15)
+                
+                self.playingRole.attributedText = formattedStrBat
+                self.bowlingStyle.attributedText = formattedStrBowl
                 
                 //career data
                 if data["TestDebut"] as? String != "" {
@@ -427,6 +446,7 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
                 }
                 else {
                     self.careerODIView.hidden = true
+                    //baseViewHeightConstraint.constant -= 50
                 }
                 
                 if data["T20IDebut"] as? String != "" {

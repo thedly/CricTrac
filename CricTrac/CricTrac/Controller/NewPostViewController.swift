@@ -35,7 +35,7 @@ class NewPostViewController: UIViewController,ThemeChangeable,UITextViewDelegate
         
         //postContent.keyboardAppearance
         
-        postContent.delegate = self
+        //postContent.delegate = self
         let postOwnerId = currentUser?.uid
         fetchFriendDetail(postOwnerId!, sucess: { (result) in
             let proPic = result["proPic"]
