@@ -18318,14 +18318,19 @@
                                 <rect key="frame" x="0.0" y="540" width="600" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FGS-xL-Scy">
-                                        <rect key="frame" x="15" y="1" width="46" height="30"/>
+                                        <rect key="frame" x="15" y="1" width="73" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="46" id="9UU-VX-Y3U"/>
                                             <constraint firstAttribute="height" constant="30" id="QCX-ZO-QWt"/>
                                         </constraints>
-                                        <state key="normal" title="SKIP"/>
+                                        <state key="normal" title="PREVIOUS"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="9UU-VX-Y3U"/>
+                                            </mask>
+                                        </variation>
                                         <connections>
-                                            <action selector="doneBtnTapped:" destination="SyJ-eV-PPW" eventType="touchUpInside" id="9ay-wL-3eA"/>
+                                            <segue destination="rHm-3z-T5u" kind="show" id="3ih-hg-VVy"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VE1-SB-4wr">
@@ -18334,9 +18339,9 @@
                                             <constraint firstAttribute="width" constant="45" id="BwP-7w-QhF"/>
                                             <constraint firstAttribute="height" constant="30" id="dI9-lR-HDC"/>
                                         </constraints>
-                                        <state key="normal" title="NEXT"/>
+                                        <state key="normal" title="DONE"/>
                                         <connections>
-                                            <segue destination="kcy-vk-KIK" kind="show" id="hn7-mQ-c2j"/>
+                                            <action selector="doneBtnTapped:" destination="SyJ-eV-PPW" eventType="touchUpInside" id="spd-d9-Z9q"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -24227,4 +24232,7 @@
         <image name="propic" width="32" height="32"/>
         <image name="shape" width="26" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="3ih-hg-VVy"/>
+    </inferredMetricsTieBreakers>
 </document>
