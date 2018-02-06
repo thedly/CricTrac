@@ -16,6 +16,9 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
     @IBOutlet weak var noPlayersLbl: UILabel!
     @IBOutlet weak var topBarTitle: UILabel!
     @IBOutlet weak var topBarViewHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var sortedByAgeHeightConstraint: NSLayoutConstraint!
+    
     let currentTheme = cricTracTheme.currentTheme
     
    // var myPlayers = [String]()

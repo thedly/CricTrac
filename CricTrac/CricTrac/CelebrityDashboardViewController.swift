@@ -23,6 +23,7 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
     @IBOutlet weak var bowlingStyle: UILabel!
     @IBOutlet weak var majorTeams: UILabel!
     @IBOutlet weak var profile: UILabel!
+    @IBOutlet weak var profileView: UIView!
     
     //batting
     @IBOutlet weak var BatTestsMat: UILabel!
@@ -114,6 +115,8 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
     @IBOutlet weak var BatT20s6s: UILabel!
     @IBOutlet weak var BatT20sCt: UILabel!
     @IBOutlet weak var BatT20sSt: UILabel!
+    @IBOutlet weak var battingAvgTextLabel: UILabel!
+    @IBOutlet weak var battingView: UIView!
     
     //bowling
     @IBOutlet weak var BowlTestsMat: UILabel!
@@ -199,6 +202,7 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
     @IBOutlet weak var BowlT20s4w: UILabel!
     @IBOutlet weak var BowlT20s5w: UILabel!
     @IBOutlet weak var BowlT20s10w: UILabel!
+    @IBOutlet weak var bowlingView: UIView!
 
     //career
     @IBOutlet weak var TestDebut: UILabel!
@@ -234,6 +238,7 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
     @IBOutlet weak var BowlFirstclassView: UIView!
     @IBOutlet weak var BowlListAView: UIView!
     @IBOutlet weak var BowlT20sView: UIView!
+    @IBOutlet weak var careerView: UIView!
     
     @IBOutlet weak var careerViewHeight: NSLayoutConstraint!
     @IBOutlet weak var BatViewWidth: NSLayoutConstraint!
@@ -244,6 +249,7 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
     @IBOutlet weak var coverPic: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var city: UILabel!
+    @IBOutlet weak var baseViewHeightConstraint: NSLayoutConstraint!
     
     var friendId:String? = nil
     var currentUserId = ""
@@ -260,6 +266,16 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadBannerAds()
+        self.battingView.layer.cornerRadius = 10
+        self.bowlingView.layer.cornerRadius = 10
+        self.careerT20sView.layer.cornerRadius = 10
+         self.careerFirstclassView.layer.cornerRadius = 10
+         self.careerT20IView.layer.cornerRadius = 10
+         self.careerODIView.layer.cornerRadius = 10
+         self.careerListA.layer.cornerRadius = 10
+         self.careerTestView.layer.cornerRadius = 10
+        
+        
         
         // Do any additional setup after loading the view.
     }
@@ -795,6 +811,30 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
         topBarView.backgroundColor = currentTheme.topColor
         currentTheme.boxColor
         self.view.backgroundColor = currentTheme.topColor
+        self.battingView.backgroundColor =  currentTheme.bottomColor
+        setPlainShadow(battingView, color: currentTheme.bottomColor.CGColor)
+        
+        self.bowlingView.backgroundColor =  currentTheme.bottomColor
+        setPlainShadow(bowlingView, color: currentTheme.bottomColor.CGColor)
+        
+        self.careerTestView.backgroundColor =  currentTheme.bottomColor
+        setPlainShadow(careerTestView, color: currentTheme.bottomColor.CGColor)
+        
+        self.careerListA.backgroundColor =  currentTheme.bottomColor
+        setPlainShadow(careerListA, color: currentTheme.bottomColor.CGColor)
+        
+        self.careerODIView.backgroundColor =  currentTheme.bottomColor
+        setPlainShadow(careerODIView, color: currentTheme.bottomColor.CGColor)
+        
+        self.careerT20IView.backgroundColor =  currentTheme.bottomColor
+        setPlainShadow(careerT20IView, color: currentTheme.bottomColor.CGColor)
+        
+        self.careerT20sView.backgroundColor =  currentTheme.bottomColor
+        setPlainShadow(careerT20sView, color: currentTheme.bottomColor.CGColor)
+        
+        self.careerFirstclassView.backgroundColor =  currentTheme.bottomColor
+        setPlainShadow(careerFirstclassView, color: currentTheme.bottomColor.CGColor)
+        
     }
     
     
