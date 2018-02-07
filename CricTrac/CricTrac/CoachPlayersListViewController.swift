@@ -63,42 +63,10 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
             friendID = (currentUser?.uid)!
         }
         
-//        getMyFollowingList { (data) in
-//            self.followingIds.removeAll()
-//            self.followingNodeId.removeAll()
-//            self.followingNodeIdOther.removeAll()
-//            
-//            for(_,req) in data {
-//                let followingId = req["FollowingId"] as? String
-//                self.followingIds.append(followingId!)
-//                self.followingNodeId.append(req["FollowingNodeId"] as! String)
-//                self.followingNodeIdOther.append(req["FollowingNodeIdOther"] as! String)
-//            }
-//        }
-        
-        getMyPlayers1(friendID,playingRole: playingRole) { (data) in
+        getMyPlayersSplit(friendID,playingRole: playingRole) { (data) in
             self.myPlayers = data
             self.CoachPlayersTableView.reloadData()
-            
         }
-        
-//        getMyPlayers(friendID) { (data) in
-//            for(_,req) in data {
-//                let pendingReq = req 
-//                let isAcceptVal = pendingReq["isAccepted"]!
-//                if isAcceptVal as! NSObject == 1 {
-//                    let pendingReqs = pendingReq["PlayerID"]!
-////                    self.coachNodeIds.append(pendingReq["PlayerNodeIdOther"]! as! String)
-////                    self.playerNodeIdOthers.append(pendingReq["CoachNodeID"]! as! String)
-//                    self.myPlayers.append(pendingReqs as! String)
-//                }
-//            }
-//        }
-    }
-    
-    // for parent class
-    func deletebuttonTapped(){
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -110,13 +78,11 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
     }
     
     @IBAction func backButtonTapped(sender: AnyObject) {
-        
         self.dismissViewControllerAnimated(false, completion: nil)
     }
     
     func initializeView() {
         CoachPlayersTableView.registerNib(UINib.init(nibName: "FriendSuggestionsCell", bundle: nil), forCellReuseIdentifier: "FriendSuggestionsCell")
-        
         CoachPlayersTableView.allowsSelection = false
         CoachPlayersTableView.separatorStyle = .None
     }
@@ -124,16 +90,14 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
     func changeThemeSettigs() {
         self.view.backgroundColor = currentTheme.topColor
         self.CoachPlayersTableView.backgroundColor = currentTheme.topColor
-        
     }
     
     func setNavigationProperties() {
         
         if friendID != (currentUser?.uid)! && friendID != ""{
-             topBarView.hidden = false
+            topBarView.hidden = false
             topBarViewHeightConstraint.constant = 56
             self.topBarView.backgroundColor = currentTheme.topColor
-
         }
         else{
             topBarView.hidden = true
@@ -151,6 +115,10 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
         }
     }
     
+    func deletebuttonTapped() {
+        
+    }
+    
     func backButtonTapp() {
         self.navigationController?.popViewControllerAnimated(false)
     }
@@ -163,133 +131,137 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         switch playingRole {
-            
-        case  "AllPlayers" :
-            
-            topBarTitle.text = "ALL PLAYERS"
-            title = "ALL PLAYERS"
-            return myPlayers.count
-
-        case  "Batsmen" :
-            
-            topBarTitle.text = "BATSMEN"
-            title = "BATSMEN"
-            return myPlayers.count
-            
-        case  "Bowlers" :
-            
-            topBarTitle.text = "BOWLERS"
-            title = "BOWLERS"
-            return myPlayers.count
-        case "WicketKeeper" :
-           
-            topBarTitle.text = "WICKET KEEPERS"
-            title = "WICKET KEEPERS"
-            return myPlayers.count
-            
-        case  "AllRounder" :
-            
-            topBarTitle.text = "ALL-ROUNDERS"
-            title = "ALL-ROUNDERS"
-            return myPlayers.count
-            
-        default:
-            
-             topBarTitle.text = "MY PLAYERS"
-            if myPlayers.count == 0 {
-                noPlayersLbl.text = "No Players"
-            }
-            else{
-                noPlayersLbl.text = ""
-            }
-            return myPlayers.count
+            case  "AllPlayers" :
+                topBarTitle.text = "ALL PLAYERS"
+                title = "ALL PLAYERS"
+                return myPlayers.count
+            case  "Batsmen" :
+                topBarTitle.text = "BATSMEN"
+                title = "BATSMEN"
+                return myPlayers.count
+            case  "Bowlers" :
+                topBarTitle.text = "BOWLERS"
+                title = "BOWLERS"
+                return myPlayers.count
+            case "WicketKeeper" :
+                topBarTitle.text = "WICKET KEEPERS"
+                title = "WICKET KEEPERS"
+                return myPlayers.count
+            case  "AllRounder" :
+                topBarTitle.text = "ALL-ROUNDERS"
+                title = "ALL-ROUNDERS"
+                return myPlayers.count
+            default:
+                topBarTitle.text = "MY PLAYERS"
+                if myPlayers.count == 0 {
+                    noPlayersLbl.text = "No Players"
+                }
+                else{
+                    noPlayersLbl.text = ""
+                }
+                return myPlayers.count
         }
-        
     }
-    
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 85
     }
     
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         var coachNodeId = ""
         var playerNodeIdOther = ""
         tableView.backgroundColor = currentTheme.topColor
         let aCell = tableView.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as! FriendSuggestionsCell
         aCell.parent = self
-        
        
         switch playingRole {
-        
             case "AllPlayers" :
-                
                 aCell.AddFriendBtn.hidden = true
                 break
-        
             case "Batsmen" :
-                
                 aCell.AddFriendBtn.hidden = true
                 break
-            
             case "Bowlers" :
-                
                 aCell.AddFriendBtn.hidden = true
                 break
-                
              case "WicketKeeper" :
-                
                 aCell.AddFriendBtn.hidden = true
                 break
-            
             case  "AllRounder" :
-                
-                 aCell.AddFriendBtn.hidden = true
+                aCell.AddFriendBtn.hidden = true
                 break
-            
             default:
-               
                 break
         }
         
-            if myPlayers.count != 0 {
-                
-                let playerData = myPlayers[indexPath.row]
-                
-                let proPic = playerData["ProfilePic"]! as! String
-                let city =   playerData["City"]! as! String
-                let name = "\(playerData["FirstName"]!) \(playerData["LastName"]!)"
-                let userProfile = playerData["UserProfile"]! as! String
-                let playingRole = playerData["PlayingRole"]! as! String
-                
-                aCell.userCity.text = city
-                aCell.userName.text = name
-                aCell.userCity.text = playerData["DOB"]! as? String
-                if userProfile == "Player" {
-                    aCell.userRole.text = playingRole
+        if myPlayers.count != 0 {
+            let playerData = myPlayers[indexPath.row]
+            let proPic = playerData["ProfilePic"]! as! String
+            //let city =   playerData["City"]! as! String
+            let name = "\(playerData["FirstName"]!) \(playerData["LastName"]!)"
+            let userProfile = playerData["UserProfile"]! as! String
+            let playingRole = playerData["PlayingRole"]! as! String
+            
+            //aCell.userCity.text = city
+            aCell.userName.text = name
+            //aCell.userCity.text = playerData["DOB"]! as? String
+            if userProfile == "Player" {
+                aCell.userRole.text = playingRole
+            }
+            else{
+                fireBaseRef.child("Users").child(self.playerReqId).child("MyCoaches").child(coachNodeId).removeValue()
+                fireBaseRef.child("Users").child(currentUser!.uid).child("MyPlayers").child(playerNodeIdOther).removeValue()
+            }
+            
+            if proPic == "-"{
+                let imageName = defaultProfileImage
+                let image = UIImage(named: imageName)
+                aCell.userProfileView.image = image
+            }else{
+                if let imageURL = NSURL(string:proPic){
+                    aCell.userProfileView.kf_setImageWithURL(imageURL)
                 }
-                else{
-                    fireBaseRef.child("Users").child(self.playerReqId).child("MyCoaches").child(coachNodeId).removeValue()
-                    fireBaseRef.child("Users").child(currentUser!.uid).child("MyPlayers").child(playerNodeIdOther).removeValue()
+            }
+            
+            //calculating age
+            let  dob = playerData["DOB"]! as? String
+            let dateFormater = NSDateFormatter()
+            dateFormater.dateFormat = "dd-MM-yyyy"
+            let birthdayDate = dateFormater.dateFromString(dob!)
+            
+            let date = NSDate()
+            let calender:NSCalendar  = NSCalendar.currentCalendar()
+            
+            let currentMonth = calender.component(.Month, fromDate: date)
+            let birthmonth = calender.component(.Month, fromDate: birthdayDate!)
+            var years = calender.component(.Year, fromDate: date) - calender.component(.Year, fromDate: birthdayDate!)
+            var months = currentMonth - birthmonth
+            
+            if months < 0 {
+                years = years - 1
+                months = 12 - birthmonth + currentMonth
+                if calender.component(.Day, fromDate: date) < calender.component(.Day, fromDate: birthdayDate!){
+                    months = months - 1
                 }
-                
-                if proPic == "-"{
-                    let imageName = defaultProfileImage
-                    let image = UIImage(named: imageName)
-                    aCell.userProfileView.image = image
-                }else{
-                    if let imageURL = NSURL(string:proPic){
-                        aCell.userProfileView.kf_setImageWithURL(imageURL)
-                    }
-                }
-                
-                
-                playerReqId = playerData["playerId"]! as! String
-                coachNodeId = playerData["playerNodeIdOther"]! as! String
-                playerNodeIdOther = playerData["coachNodeId"]! as! String
-                
+            }
+            else if months == 0 && calender.component(.Day, fromDate: date) < calender.component(.Day, fromDate: birthdayDate!)
+            {
+                years = years - 1
+                months = 11
+            }
+            let ageString = "\(years)y \(months)m)"
+            let playerDOB = playerData["DOB"]! as? String
+            
+            let formattedString = NSMutableAttributedString()
+            let citytext = formattedString.normal("\(playerDOB!)", fontName: appFont_regular, fontSize: 13).normal("  (Age:\(ageString)", fontName: appFont_regular, fontSize: 13)
+            
+            
+            aCell.userCity.attributedText = citytext
+            
+            playerReqId = playerData["playerId"]! as! String
+            coachNodeId = playerData["playerNodeIdOther"]! as! String
+            playerNodeIdOther = playerData["coachNodeId"]! as! String
+            
 //                if followingIds.contains(playerData["playerId"]! as! String) {
 //                    
 //                    aCell.FollowBtn.setTitle("FOLLOWING", forState: .Normal)
@@ -318,9 +290,9 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
 //                
 //                aCell.FollowBtn.accessibilityIdentifier = playerData["playerId"]! as? String
 //                aCell.FollowBtn.tag = indexPath.row
-                
+            
 
-                
+            
 //                aCell.friendId = playerReqId
 //                aCell.AddFriendBtn.accessibilityIdentifier = coachNodeId
 //                aCell.AddFriendBtn.restorationIdentifier = playerNodeIdOther
@@ -330,24 +302,22 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
 //                aCell.AddFriendBtn.titleLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 12)
 //                
 //                aCell.AddFriendBtn.addTarget(self, action: #selector(CoachPlayersListViewController.removePlayer(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-                
-                aCell.friendId = playerReqId
-                aCell.FollowBtn.accessibilityIdentifier = coachNodeId
-                aCell.FollowBtn.restorationIdentifier = playerNodeIdOther
-                aCell.FollowBtn.accessibilityValue = playerReqId
-                aCell.FollowBtn.setTitle("REMOVE", forState: .Normal)
-                aCell.FollowBtn.setTitleColor(UIColor(red: 0.76, green: 0.18, blue: 0.25, alpha: 1.0), forState: .Normal)
-                aCell.FollowBtn.titleLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 12)
-                
-                aCell.FollowBtn.addTarget(self, action: #selector(CoachPlayersListViewController.removePlayer(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-                
-                aCell.backgroundColor = UIColor.clearColor()
-                aCell.baseView.backgroundColor = currentTheme.bottomColor
-                aCell.baseView.alpha = 1
-                CoachPlayersTableView.backgroundColor = currentTheme.topColor
-                
-            }
-
+            
+            aCell.friendId = playerReqId
+            aCell.FollowBtn.accessibilityIdentifier = coachNodeId
+            aCell.FollowBtn.restorationIdentifier = playerNodeIdOther
+            aCell.FollowBtn.accessibilityValue = playerReqId
+            aCell.FollowBtn.setTitle("REMOVE", forState: .Normal)
+            aCell.FollowBtn.setTitleColor(UIColor(red: 0.76, green: 0.18, blue: 0.25, alpha: 1.0), forState: .Normal)
+            aCell.FollowBtn.titleLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 12)
+            
+            aCell.FollowBtn.addTarget(self, action: #selector(CoachPlayersListViewController.removePlayer(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            
+            aCell.backgroundColor = UIColor.clearColor()
+            aCell.baseView.backgroundColor = currentTheme.bottomColor
+            aCell.baseView.alpha = 1
+            CoachPlayersTableView.backgroundColor = currentTheme.topColor
+        }
          return aCell
     }
     
@@ -389,18 +359,12 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
         actionSheetController.addAction(cancelAction)
         
         let removeAction = UIAlertAction(title: "Yes", style: .Default) { action -> Void in
-            
             fireBaseRef.child("Users").child(playerId!).child("MyCoaches").child(coachNodeId!).removeValue()
-            
             fireBaseRef.child("Users").child((currentUser?.uid)!).child("MyPlayers").child(playerNodeId!).removeValue()
-            
             self.reloadData()
         }
         actionSheetController.addAction(removeAction)
         
         self.presentViewController(actionSheetController, animated: false, completion: nil)
-        
-        
     }
-    
 }

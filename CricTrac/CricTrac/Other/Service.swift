@@ -1236,7 +1236,7 @@ func getMyPlayers(friendId:String? = nil,sucessBlock:([String: AnyObject])->Void
 }
 
 
-func getMyPlayers1(friendId:String? = nil,playingRole:String,sucess:(data:[[String: AnyObject]])->Void){
+func getMyPlayersSplit(friendId:String? = nil,playingRole:String,sucess:(data:[[String: AnyObject]])->Void){
     let ref = fireBaseRef.child("Users").child(friendId!).child("MyPlayers")
     ref.observeEventType(.Value, withBlock: { snapshot in
         if let data = snapshot.value as? [String:[String:AnyObject]] {
