@@ -1063,6 +1063,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                  aCell.runs.text = String(totalRuns)
                  aCell.wickets.text = String(TotalWicketsTaken)
                 
+                
                 // TotalBattingAvg
                 if (toatalBattingmatches - totalDismissal) > 0 {
                      aCell.battingAvg.text = String(format: "%.1f",(Float(totalRuns))/Float(toatalBattingmatches - totalDismissal))
@@ -1073,13 +1074,18 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 
                 //Total Economy & TotalBowlingAvg
                 if totalRunsGiven != 0 {
-                     aCell.bowlingAvg.text = String(format: "%.1f",Float(totalRunsGiven) / Float(TotalWicketsTaken))
-                     aCell.economy.text = String(format: "%.1f",Float(totalRunsGiven) / Float(totalOvers))
+                    if TotalWicketsTaken == 0 {
+                        aCell.bowlingAvg.text = "0.0"
                     }
-                    else{
-                        aCell.bowlingAvg.text = "-"
-                        aCell.economy.text = "-"
+                    else {
+                        aCell.bowlingAvg.text = String(format: "%.1f",Float(totalRunsGiven) / Float(TotalWicketsTaken))
                     }
+                    aCell.economy.text = String(format: "%.1f",Float(totalRunsGiven) / Float(totalOvers))
+                }
+                else{
+                    aCell.bowlingAvg.text = "-"
+                    aCell.economy.text = "-"
+                }
                 // TotalStrikeRate
                 if totalBallsFaced != 0 {
                     let strikeRate = String(format: "%.1f",(Float(totalRuns))*100/Float(totalBallsFaced))
