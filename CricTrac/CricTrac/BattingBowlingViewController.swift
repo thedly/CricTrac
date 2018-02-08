@@ -36,9 +36,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     @IBOutlet weak var roleText: SkyFloatingLabelTextField!
     @IBOutlet weak var catchesText: SkyFloatingLabelTextField!
     @IBOutlet weak var stumpingsText: SkyFloatingLabelTextField!
-    
     @IBOutlet weak var runoutsText: SkyFloatingLabelTextField!
-    
     
     // SECOND INNINGS
     @IBOutlet weak var runsText2: SkyFloatingLabelTextField!
@@ -73,7 +71,6 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     var Dismissal: String!
     
     // second innings
-    
     var bowledOvers2: String!
     var WicketsTaken2: String!
     var RunsGiven2: String!
@@ -93,23 +90,16 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     var stumpings: String!
     var runouts: String!
     
-    
-    
-    
     var BowlingData:[String:String]{
-        
         if (parent?.matchVC.matchFormat.text)! == "Single Innings" {
            return ["OversBowled":bowledOvers,"WicketsTaken":WicketsTaken,"RunsGiven":RunsGiven,"NoBalls":NoBalls,"Wides":Wides, "Maidens": Maidens]
         }
         else {
             return ["OversBowled":bowledOvers,"WicketsTaken":WicketsTaken,"RunsGiven":RunsGiven,"NoBalls":NoBalls,"Wides":Wides, "Maidens": Maidens,"OversBowled2":bowledOvers2,"WicketsTaken2":WicketsTaken2,"RunsGiven2":RunsGiven2,"NoBalls2":NoBalls2,"Wides2":Wides2, "Maidens2": Maidens2]
         }
-        
     }
     
-    
     var FieldingData:[String:String] {
-        
         if roleText.text != ""{
             FieldingRole = roleText.text
         }
@@ -197,9 +187,7 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
             }
         }
         
-        
-    // second innings
-        
+        // second innings
         if let runText = runsText2.text {
             if runText.trimWhiteSpace.length > 0 && Int(runText)! >= 0  {
                 RunsTaken2 = runText
@@ -238,15 +226,8 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
                 Dismissal2 = "-"
                 Position2 = "-"
                 BallsFaced2 = "-"
-                
-                // foursText.userInteractionEnabled = false
-                // sixesText.userInteractionEnabled = false
-                // dismissalText.userInteractionEnabled = false
-                // positionText.userInteractionEnabled = false
-                // ballsPlayedText.userInteractionEnabled = false
             }
         }
-
     }
     
     func validateOvers() -> Void {
@@ -320,7 +301,6 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         }
         
         // second innings
-        
         if let overText2 = oversText2.text {
             if overText2.length > 0 && Float(overText2) > 0 {
                 bowledOvers2 = oversText2.text
@@ -381,12 +361,6 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
                 Maidens2 = "-"
                 RunsGiven2 = "-"
                 bowledOvers2 = "-"
-                
-                //                widesText.userInteractionEnabled = false
-                //                noballText.userInteractionEnabled = false
-                //                wicketsText.userInteractionEnabled = false
-                //                maidensText.userInteractionEnabled = false
-                //                runsGivenText.userInteractionEnabled = false
             }
         }
 
@@ -526,7 +500,6 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     
     
     var BattingData:[String:String]{
-        
         if (parent?.matchVC.matchFormat.text)! == "Single Innings" {
             return ["RunsTaken":RunsTaken,"BallsFaced":BallsFaced,"Fours":Fours,"Sixes":Sixes,"Position":Position,"Dismissal":Dismissal]
         }
@@ -581,7 +554,6 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         if parent!.selecetedData!["Runouts"] != nil {
         runoutsText.textVal = parent!.selecetedData!["Runouts"] as! String
         }
-
     }
     
     func changeThemeSettigs() {
@@ -636,9 +608,6 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         Position = (parent?.selecetedData?["Position"] ?? "-") as! String
         Dismissal = (parent?.selecetedData?["Dismissal"] ?? "-") as! String
         
-        
-        
-        
         dismissalText.delegate = self
         runsText.delegate = self
         oversText.delegate = self
@@ -655,7 +624,6 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         runsGivenText.delegate = self
         
         //second innings
-        
         bowledOvers2 = (parent?.selecetedData?["OversBowled2"] ?? "-") as! String
         WicketsTaken2 = (parent?.selecetedData?["WicketsTaken2"] ?? "-") as! String
         RunsGiven2 = (parent?.selecetedData?["RunsGiven2"] ?? "-") as! String
@@ -684,13 +652,10 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         maidensText2.delegate = self
         runsGivenText2.delegate = self
         
-        
         roleText.delegate = self
         catchesText.delegate = self
         stumpingsText.delegate = self
         runoutsText.delegate = self
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -766,9 +731,6 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     }
 
 }
-
-
-
 
 extension BattingBowlingViewController:UITextFieldDelegate{
     func textFieldShouldReturn(textField: UITextField) -> Bool {

@@ -21,8 +21,8 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     
     @IBOutlet weak var baseView: UIView!
     @IBOutlet weak var screenShotHeight: NSLayoutConstraint!
-    // player and coach analysis
     
+    //player and coach analysis
     @IBOutlet weak var selfAnalysisView: UIView!
     @IBOutlet weak var selfAnalysisViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var selfAnalysisTextView: UITextView!
@@ -33,32 +33,21 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     @IBOutlet weak var coachAnalysisView: UIView!
     var achievementsTextValue :String?
     
-    // for second innings
-    
+    //second innings
     @IBOutlet weak var secondInningsView1: UIView!
     @IBOutlet weak var secondInningsViewHeightConstraint1: NSLayoutConstraint!
-    
     @IBOutlet weak var secondInningsView2: UIView!
     @IBOutlet weak var secondInningsViewHeightConstarint2: NSLayoutConstraint!
-    
     @IBOutlet weak var secondBattingHeightConstarint: NSLayoutConstraint!
     @IBOutlet weak var firstBattingHeightConstraint1: NSLayoutConstraint!
-    
     @IBOutlet weak var firstBattingDeclaredBtn1: UIButton!
-    
     @IBOutlet weak var firstBattingDeclaredLabel1: UILabel!
-    
     @IBOutlet weak var firstBattingDeclaredBtn2: UIButton!
-    
     @IBOutlet weak var firstBattingDeclaredLabel2: UILabel!
-    
     @IBOutlet weak var secondBattingDeclaredBtn1: UIButton!
-    
     @IBOutlet weak var secondBattingDeclaredBtn2: UIButton!
     
-    
-    
-     lazy var ctDataPicker = DataPicker()
+    lazy var ctDataPicker = DataPicker()
     
     var firstBatText: String!
     var secondBatText: String!
@@ -91,8 +80,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         setNavigationProperties()
         //layoutSubViewForAnalysis()
         
-       // for second innings
-        
+        //second innings
         let matchVCInstance = parent?.matchVC
         let matchFormat = matchVCInstance?.matchFormat.text
         
@@ -103,7 +91,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             secondInningsView2.hidden = true
             firstBattingHeightConstraint1.constant = 295
             secondBattingHeightConstarint.constant = 295
-            screenShotHeight.constant -=  125
+            screenShotHeight.constant -= 125
         }
         else {
             secondInningsViewHeightConstraint1.constant = 125
@@ -112,15 +100,14 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             secondInningsView2.hidden = false
             firstBattingHeightConstraint1.constant = 420
             secondBattingHeightConstarint.constant = 420
-            screenShotHeight.constant +=  125
+            screenShotHeight.constant += 125
         }
     }
-    
    
     func setNavigationProperties() {
         if profileData.UserProfile == "Coach" {
             selfAnalysisView.hidden = true
-           selfAnalysisViewHeightConstraint.constant = 0
+            selfAnalysisViewHeightConstraint.constant = 0
             coachAnalysisView.hidden = false
             
             _ = coachAnalysisTextView.text
@@ -130,7 +117,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             coachAnalysisTextView.frame = frame
             coachAnalysisTextViewHeightConstarint.constant = contentSize.height
             coachAnalysisViewHeightConstarint.constant = contentSize.height + 15
-            
         }
         else {
             selfAnalysisView.hidden = false
@@ -144,7 +130,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             selfAnalysisTextView.frame = frame
             selfAnalysisHeightConstarint.constant = contentSize.height
             selfAnalysisViewHeightConstraint.constant = contentSize.height + 15
-
         }
     }
     
@@ -159,22 +144,18 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         secondOversText.keyboardType = UIKeyboardType.DecimalPad
         secondScoreText.delegate = self
         secondWicketsText.delegate = self
-        
         resultText.delegate = self
         AchievementsText.delegate = self
-        
-        
-            firstOversText2.delegate = self
-            firstOversText2.keyboardType = UIKeyboardType.DecimalPad
-            firstScoreText2.delegate = self
-            firstWicketsText2.delegate = self
-            secondOversText2.delegate = self
-            secondOversText2.keyboardType = UIKeyboardType.DecimalPad
-            secondScoreText2.delegate = self
-            secondWicketsText2.delegate = self
+        firstOversText2.delegate = self
+        firstOversText2.keyboardType = UIKeyboardType.DecimalPad
+        firstScoreText2.delegate = self
+        firstWicketsText2.delegate = self
+        secondOversText2.delegate = self
+        secondOversText2.keyboardType = UIKeyboardType.DecimalPad
+        secondScoreText2.delegate = self
+        secondWicketsText2.delegate = self
         
         let resultsViewHolder = UIView(frame: CGRectMake(0, 30, UIScreen.mainScreen().bounds.width, 100))
-        
         resultsViewHolder.backgroundColor = UIColor.redColor()
         
         let firstBattingText = NSMutableAttributedString()
@@ -194,22 +175,19 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         secondBattingHeaderText.attributedText = secondBattingformattedStringCollection.joinWithSeparator("\n")
         
         if ((parent?.selecetedData) != nil){ inEditMode = true; loadEditData() }
-        
         //setBackgroundColor()
-        
         self.view.backgroundColor = UIColor.clearColor()
-        
         //setUIBackgroundTheme(self.view)
         
-       FirstBattingView.backgroundColor = cricTracTheme.currentTheme.bottomColor
+        FirstBattingView.backgroundColor = cricTracTheme.currentTheme.bottomColor
         self.FirstBattingView.alpha = 1
         SecondBattingView.backgroundColor = cricTracTheme.currentTheme.bottomColor
         self.SecondBattingView.alpha = 1
-        // Do any additional setup after loading the view.
         
         if swapBtnVal == nil {
             swapBtnVal = 0
         }
+        
         if resultText.text == "" {
             resultText.text = "Won"
         }
@@ -238,8 +216,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     @IBOutlet weak var secondScoreText:UITextField!
     @IBOutlet weak var secondWicketsText:UITextField!
     @IBOutlet weak var resultText:UITextField!
-    
-    // 
     @IBOutlet weak var firstOversText2: UITextField!
     @IBOutlet weak var firstScoreText2:UITextField!
     @IBOutlet weak var firstWicketsText2:UITextField!
@@ -256,7 +232,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     var secondBattingDeclared1 = "0"
     var secondBattingDeclared2 = "0"
 
-    
     var data:[String:String]{
         
         var tossVal = ""
@@ -303,7 +278,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             secondWicketsVal = "0"
         }
         
-        //
         var firstScoreVal2 = ""
         if let val = firstScoreText2?.text where val != ""{
             firstScoreVal2 = val
@@ -365,9 +339,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             secBatDec2 = "0"
         }
        
-        
-
-        
         var resultVal = ""
         if let val = resultText{
             resultVal = val.textVal
@@ -402,7 +373,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             }
         }
         
-        
         var secondOversVal = "0"
         //sajith - added code for checking the Decimal value for Overs
         if let secondOvers = secondOversText.text {
@@ -432,8 +402,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             }
         }
         
-    // for second innings
-        
+        //second innings
         var firstOversVal2 = "0"
         //sajith - added code for checking the Decimal value for Overs
         if let firstOvers = firstOversText2.text  {
@@ -462,7 +431,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
                 }
             }
         }
-        
         
         var secondOversVal2 = "0"
         //sajith - added code for checking the Decimal value for Overs
@@ -493,7 +461,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             }
         }
 
-        
         var AchievementsVal = ""
         if let val = AchievementsText{
             AchievementsVal = val.text!
@@ -524,7 +491,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         else {
             return ["TossWonBy":tossVal,"FirstBatting":firstBatVal,"FirstBattingScore":firstScoreVal,"FirstBattingWickets":firstWicketsVal,"SecondBatting":secondBatVal, "SecondBattingScore":secondScoreVal,"SecondBattingWickets":secondWicketsVal,"Result":resultVal,"FirstBattingOvers":firstOversVal,"SecondBattingOvers":secondOversVal,"Achievements":AchievementsVal,"SelfAnalysis": selfAnalysis,"CoachAnalysis":coachAnalysis,"FirstBattingScore2":firstScoreVal2,"FirstBattingWickets2":firstWicketsVal2,"FirstBattingOvers2":firstOversVal2,"SecondBattingScore2":secondScoreVal2,"SecondBattingWickets2":secondWicketsVal2,"SecondBattingOvers2":secondOversVal2,"FirstBattingDeclared1":firstBatDec1,"FirstBattingDeclared2":firstBatDec2,"SecondBattingDeclared1":secBatDec1,"SecondBattingDeclared2":secBatDec2]
         }
-        
     }
     
     @IBAction func FirstTeamWicketsIncrement(sender: AnyObject) {
@@ -579,61 +545,75 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     }
     
     func setDeclaredData() {
-        
-        if (parent?.matchVC.matchFormat.text)! == "Single Innings" {
-        
-            firstBattingDeclaredBtn1.hidden = true
-            firstBattingDeclaredBtn2.hidden = true
-            firstBattingDeclaredLabel1.hidden = true
-            firstBattingDeclaredLabel2.hidden = true
+        if inEditMode {
+            if (parent?.matchVC.matchFormat.text)! == "Single Innings" {
+                firstBattingDeclaredBtn1.hidden = true
+                firstBattingDeclaredBtn2.hidden = true
+                firstBattingDeclaredLabel1.hidden = true
+                firstBattingDeclaredLabel2.hidden = true
+            }
+            else {
+                firstBattingDeclaredBtn1.hidden = false
+                firstBattingDeclaredBtn2.hidden = false
+                firstBattingDeclaredLabel1.hidden = false
+                firstBattingDeclaredLabel2.hidden = false
+                
+                let firstBatDecVal1 = parent?.selecetedData!["FirstBattingDeclared1"] as? String ?? ""
+                let firstBatDecVal2 = parent?.selecetedData!["FirstBattingDeclared2"] as? String ?? ""
+                let secBatDecVal1 = parent?.selecetedData!["SecondBattingDeclared1"] as? String ?? ""
+                let secBatDecVal2 = parent?.selecetedData!["SecondBattingDeclared2"] as? String ?? ""
+                
+                if firstBatDecVal1 == "1" {
+                    firstBattingDeclaredBtn1.alpha = 1
+                }
+                else {
+                    firstBattingDeclaredBtn1.alpha = 0.2
+                }
+                
+                if firstBatDecVal2 == "1" {
+                    firstBattingDeclaredBtn2.alpha = 1
+                }
+                else {
+                    firstBattingDeclaredBtn2.alpha = 0.2
+                }
+                
+                if secBatDecVal1 == "1" {
+                    secondBattingDeclaredBtn1.alpha = 1
+                }
+                else {
+                    secondBattingDeclaredBtn1.alpha = 0.2
+                }
+                
+                if secBatDecVal2 == "1" {
+                    secondBattingDeclaredBtn2.alpha = 1
+                }
+                else {
+                    secondBattingDeclaredBtn2.alpha = 0.2
+                }
+            }
         }
         else {
-            firstBattingDeclaredBtn1.hidden = false
-            firstBattingDeclaredBtn2.hidden = false
-            firstBattingDeclaredLabel1.hidden = false
-            firstBattingDeclaredLabel2.hidden = false
-            
-            let firstBatDecVal1 = parent?.selecetedData!["FirstBattingDeclared1"] as? String ?? ""
-            let firstBatDecVal2 = parent?.selecetedData!["FirstBattingDeclared2"] as? String ?? ""
-            let secBatDecVal1 = parent?.selecetedData!["SecondBattingDeclared1"] as? String ?? ""
-            let secBatDecVal2 = parent?.selecetedData!["SecondBattingDeclared2"] as? String ?? ""
-            
-            if firstBatDecVal1 == "0" {
+            if (parent?.matchVC.matchFormat.text)! == "Single Innings" {
+                firstBattingDeclaredBtn1.hidden = true
+                firstBattingDeclaredBtn2.hidden = true
+                firstBattingDeclaredLabel1.hidden = true
+                firstBattingDeclaredLabel2.hidden = true
+            }
+            else {
+                firstBattingDeclaredBtn1.hidden = false
+                firstBattingDeclaredBtn2.hidden = false
+                firstBattingDeclaredLabel1.hidden = false
+                firstBattingDeclaredLabel2.hidden = false
+                
                 firstBattingDeclaredBtn1.alpha = 0.2
-            }
-            else {
-                firstBattingDeclaredBtn1.alpha = 1
-            }
-            
-            if firstBatDecVal2 == "0" {
                 firstBattingDeclaredBtn2.alpha = 0.2
-            }
-            else {
-                firstBattingDeclaredBtn2.alpha = 1
-            }
-            
-            if secBatDecVal1 == "0" {
                 secondBattingDeclaredBtn1.alpha = 0.2
-            }
-            else {
-                secondBattingDeclaredBtn1.alpha = 1
-            }
-            
-            if secBatDecVal2 == "0" {
                 secondBattingDeclaredBtn2.alpha = 0.2
             }
-            else {
-                secondBattingDeclaredBtn2.alpha = 1
-            }
-            
-            
         }
-        
     }
     
-    
     @IBAction func declaredBtnTapped(sender: UIButton) {
-       
         if sender.tag == 1 {
             if firstBattingDeclaredBtn1.alpha == 1 {
                 firstBattingDeclaredBtn1.alpha = 0.2
@@ -641,7 +621,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             else {
                 firstBattingDeclaredBtn1.alpha = 1
             }
-            
         }
         
         if sender.tag == 2 {
@@ -651,18 +630,15 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             else {
                 firstBattingDeclaredBtn2.alpha = 1
             }
-            
         }
         
         if sender.tag == 3 {
-            
             if secondBattingDeclaredBtn1.alpha == 1 {
                 secondBattingDeclaredBtn1.alpha = 0.2
             }
             else {
                 secondBattingDeclaredBtn1.alpha = 1
             }
-           
         }
         
         if sender.tag == 4 {
@@ -672,12 +648,8 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             else {
                 secondBattingDeclaredBtn2.alpha = 1
             }
-            
         }
-        
     }
-    
-    
     
     func setValueFromMultiSelectAchievements(valueSent: String)
     {
@@ -712,9 +684,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         
         firstOversText.text = parent!.selecetedData!["FirstBattingOvers"] as? String ?? "-"
         
-        
-        
-        
         firstTeamTossBtn.alpha = 0.2
         secondTeamTossBtn.alpha = 0.2
         isTeambattingSetBtn.alpha = 0.3
@@ -736,8 +705,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         secondWicketsText.textVal = parent!.selecetedData!["SecondBattingWickets"]! as? String ?? "-"
         resultText.textVal = parent!.selecetedData!["Result"]! as? String ?? "-"
         
-       
-        
         if  parent!.selecetedData!["MatchFormat"] as? String == "Double Innings" && parent!.selecetedData!["MatchFormat"]  != nil {
             
             firstScoreText2.textVal = parent!.selecetedData!["FirstBattingScore2"]! as? String ?? "-"
@@ -748,7 +715,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             secondOversText2.textVal = parent!.selecetedData!["SecondBattingOvers2"] as? String ?? "-"
             secondWicketsText2.textVal = parent!.selecetedData!["SecondBattingWickets2"]! as? String ?? "-"
         }
-        
     }
     
     func allRequiredFieldsHaveFilledProperly()->Bool{
@@ -756,7 +722,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     }
     
     func setTeamData(){
-        
         if !inEditMode {
             if let matchVCInstance = parent?.matchVC {
                 firstTeamTitle.text = matchVCInstance.teamText.text
@@ -1004,6 +969,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         }
         return true
     }
+    
     func textViewShouldEndEditing(textView: UITextView) -> Bool {
         if textView == selfAnalysisTextView {
             if selfAnalysisTextView.text == "" {
@@ -1017,15 +983,16 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
         }
         return true
     }
+    
     func textViewDidEndEditing(textView: UITextView) {
         if textView == selfAnalysisTextView {
             if selfAnalysisHeightConstarint.constant >= 50 {
-                screenShotHeight.constant = screenShotHeight.constant + 35
+                screenShotHeight.constant += 35
             }
         }
         if textView == coachAnalysisTextView{
             if selfAnalysisHeightConstarint.constant >= 50 {
-                screenShotHeight.constant = screenShotHeight.constant + 35
+                screenShotHeight.constant += 35
             }
         }
     }
@@ -1143,13 +1110,10 @@ extension MatchResultsViewController:UITextFieldDelegate{
 //        if textField == firstWicketsText {
 //            animateViewMoving(false, moveValue: 160)
 //        }
-
-        
         
         if textField == resultText{
              AchievementsText.userInteractionEnabled = true
         }
-        
     }
     
     override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {

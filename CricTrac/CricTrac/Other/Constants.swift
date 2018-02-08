@@ -255,7 +255,7 @@ let appFont_regular = "SourceSansPro-Regular"
 let appFont_light = "SourceSansPro-Light"
 
 //Marks -- profileSettings
-let nameCharacterLimit = 30
+let nameCharacterLimit = 40
 let networkErrorMessage = "Please check your internet connection."
 let feedbackEmail = "contact@crictrac.com"
 

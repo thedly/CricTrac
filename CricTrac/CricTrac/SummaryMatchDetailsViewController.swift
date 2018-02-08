@@ -455,6 +455,9 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         else if matchDetailsData["Result"]! as! String == "Tied" {
             result.text = "Match Tied"
         }
+        else if matchDetailsData["Result"]! as! String == "Drawn" {
+            result.text = "Match Drawn"
+        }
         else {
             result.text = "\(matchDetailsData["Team"]!) \(matchDetailsData["Result"]!)"
         }
@@ -533,6 +536,10 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             if let dismissal = matchDetailsData["Dismissal"] as? String where dismissal != "Not out" {
                 self.dismissal.text = "(\(dismissal))"
             }
+            else {
+                self.dismissal.text = ""
+            }
+
             if  let dismissal = matchDetailsData["Dismissal"] as? String where dismissal == "Not out"{
                 formattedString.bold(runs+"*" , fontName: appFont_black, fontSize: sizeFive)
             }
@@ -567,10 +574,14 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         if matchDetailsData["MatchFormat"] as? String == "Double Innings" && matchDetailsData["MatchFormat"]  != nil {
             if let runs = matchDetailsData["RunsTaken2"] as? String  where runs != "-" {
                 let formattedString = NSMutableAttributedString()
-                if let dismissal = matchDetailsData["Dismissal2"] as? String where dismissal != "Not out" {
-                    self.dismissal2.text = "(\(dismissal))"
+                if let dismissal2 = matchDetailsData["Dismissal2"] as? String where dismissal2 != "Not out" {
+                    self.dismissal2.text = "(\(dismissal2))"
                 }
-                if  let dismissal = matchDetailsData["Dismissal2"] as? String where dismissal == "Not out"{
+                else {
+                    self.dismissal2.text = ""
+                }
+                
+                if  let dismissal2 = matchDetailsData["Dismissal2"] as? String where dismissal2 == "Not out"{
                     formattedString.bold(runs+"*" , fontName: appFont_black, fontSize: sizeFive)
                 }
                 else{
@@ -926,10 +937,32 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                 }
             }
             
+            var FBDeclared1 = ""
+            var FBDeclared2 = ""
+            var SBDeclared1 = ""
+            var SBDeclared2 = ""
+            
+            if matchDetailsData["FirstBattingDeclared1"] != nil && matchDetailsData["FirstBattingDeclared1"] as? String == "1" {
+                FBDeclared1 = " d"
+            }
+            
+            if matchDetailsData["FirstBattingDeclared2"] != nil && matchDetailsData["FirstBattingDeclared2"] as? String == "1" {
+                FBDeclared2 = " d"
+            }
+
+            if matchDetailsData["SecondBattingDeclared1"] != nil && matchDetailsData["SecondBattingDeclared1"] as? String == "1" {
+                SBDeclared1 = " d"
+            }
+            
+            if matchDetailsData["SecondBattingDeclared2"] != nil && matchDetailsData["SecondBattingDeclared2"] as? String == "1" {
+                SBDeclared2 = " d"
+            }
+
+            
             if let firstScore = matchDetailsData["FirstBattingScore"] {
                 if let firstWickets = matchDetailsData["FirstBattingWickets"] {
                     let firstTeamOvers: String = (matchDetailsData["FirstBattingOvers"] ?? "-") as! String
-                    homeTeam.text?.appendContentsOf("\n\(firstScore)/\(firstWickets)\n\(firstTeamOvers) Overs")
+                    homeTeam.text?.appendContentsOf("\n\(firstScore)/\(firstWickets)\(FBDeclared1)\n\(firstTeamOvers) overs")
                 }
                 firstTeamScore = firstScore as! String
             }
@@ -937,20 +970,17 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             if let secondScore = matchDetailsData["SecondBattingScore"] {
                 if let secondWickets = matchDetailsData["SecondBattingWickets"] {
                     let secondTeamOvers: String = (matchDetailsData["SecondBattingOvers"] ?? "-") as! String
-                    awayTeam.text?.appendContentsOf("\n\(secondScore)/\(secondWickets)\n\(secondTeamOvers) Overs")
-                    
+                    awayTeam.text?.appendContentsOf("\n\(secondScore)/\(secondWickets)\(FBDeclared2)\n\(secondTeamOvers) overs")
                 }
                 secondTeamScore = secondScore as! String
             }
             
             // for second innings
-            
             if matchDetailsData["MatchFormat"] as? String == "Double Innings" && matchDetailsData["MatchFormat"]  != nil {
-                
                 if let firstScore = matchDetailsData["FirstBattingScore2"] {
                     if let firstWickets = matchDetailsData["FirstBattingWickets2"] {
                         let firstTeamOvers: String = (matchDetailsData["FirstBattingOvers2"] ?? "-") as! String
-                        homeTeam.text?.appendContentsOf("\n\(firstScore)/\(firstWickets)\n\(firstTeamOvers) Overs")
+                        homeTeam.text?.appendContentsOf("\n\(firstScore)/\(firstWickets)\(SBDeclared1)\n\(firstTeamOvers) overs")
                     }
                     firstTeamScore = firstScore as! String
                 }
@@ -958,14 +988,11 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                 if let secondScore = matchDetailsData["SecondBattingScore2"] {
                     if let secondWickets = matchDetailsData["SecondBattingWickets2"] {
                         let secondTeamOvers: String = (matchDetailsData["SecondBattingOvers2"] ?? "-") as! String
-                        awayTeam.text?.appendContentsOf("\n\(secondScore)/\(secondWickets)\n\(secondTeamOvers) Overs")
-                        
+                        awayTeam.text?.appendContentsOf("\n\(secondScore)/\(secondWickets)\(SBDeclared2)\n\(secondTeamOvers) overs")
                     }
                     secondTeamScore = secondScore as! String
                 }
             }
-            
-            
             
             //set White Color for Player's Team and Gray Color for Opponent team
             
