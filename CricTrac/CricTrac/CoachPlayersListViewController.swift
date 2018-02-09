@@ -19,6 +19,7 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
     
     @IBOutlet weak var sortedByAgeHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var sortedByAgeLbl: UILabel!
     let currentTheme = cricTracTheme.currentTheme
     
    // var myPlayers = [String]()
@@ -75,6 +76,7 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
        // self.view.backgroundColor = currentTheme.topColor
         setBackgroundColor()
         setNavigationProperties()
+        self.sortedByAgeLbl.text = "Sorted by Age"
     }
     
     @IBAction func backButtonTapped(sender: AnyObject) {
@@ -90,6 +92,7 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
     func changeThemeSettigs() {
         self.view.backgroundColor = currentTheme.topColor
         self.CoachPlayersTableView.backgroundColor = currentTheme.topColor
+        setPlainShadow(topBarView, color: currentTheme.bottomColor.CGColor)
     }
     
     func setNavigationProperties() {
@@ -111,6 +114,7 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
             navigationItem.leftBarButtonItem = leftbarButton
             navigationController!.navigationBar.barTintColor = currentTheme.topColor
             self.view.backgroundColor = currentTheme.topColor
+            topBarViewHeightConstraint.constant = 0
            // title = "MY PLAYERS"
         }
     }

@@ -432,61 +432,66 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
                     self.TestDebut.text = data["TestDebut"] as? String
                     self.LastTest.text = data["LastTest"] as? String
                     self.careerTestView.hidden = false
-                    self.careerViewHeight.constant += 50
+                    self.careerViewHeight.constant += 55
                 }
                 else {
                     self.careerTestView.hidden = true
+                    self.baseViewHeightConstraint.constant -= 55
                 }
                 
                 if data["ODIDebut"] as? String != "" {
                     self.ODIDebut.text = data["ODIDebut"] as? String
                     self.LastODI.text = data["LastODI"] as? String
                     self.careerODIView.hidden = false
-                    self.careerViewHeight.constant += 50
+                    self.careerViewHeight.constant += 55
                 }
                 else {
                     self.careerODIView.hidden = true
-                    //baseViewHeightConstraint.constant -= 50
+                    self.baseViewHeightConstraint.constant -= 55
                 }
                 
                 if data["T20IDebut"] as? String != "" {
                     self.T20IDebut.text = data["T20IDebut"] as? String
                     self.LastT20I.text = data["LastT20I"] as? String
                     self.careerT20IView.hidden = false
-                    self.careerViewHeight.constant += 50
+                    self.careerViewHeight.constant += 55
                 }
                 else {
                     self.careerT20IView.hidden = true
+                    self.baseViewHeightConstraint.constant -= 55
                 }
                 
                 if data["FirstclassDebut"] as? String != "" {
                     self.FirstclassDebut.text = data["FirstclassDebut"] as? String
                     self.LastFirstclass.text = data["LastFirstclass"] as? String
                     self.careerFirstclassView.hidden = false
-                    self.careerViewHeight.constant += 50
+                    self.careerViewHeight.constant += 55
                 }
                 else {
                     self.careerFirstclassView.hidden = true
+                    self.baseViewHeightConstraint.constant -= 55
                 }
                 
                 if data["ListADebut"] as? String != "" {
                     self.ListADebut.text = data["ListADebut"] as? String
                     self.LastListA.text = data["LastListA"] as? String
                     self.careerListA.hidden = false
-                    self.careerViewHeight.constant += 50
+                    self.careerViewHeight.constant += 55
                 }
                 else {
                     self.careerListA.hidden = true
+                    self.baseViewHeightConstraint.constant -= 55
                 }
                 
                 if data["T20sDebut"] as? String != "" {
                     self.T20sDebut.text = data["T20sDebut"] as? String
                     self.LastT20s.text = data["LastT20s"] as? String
                     self.careerT20sView.hidden = false
-                    self.careerViewHeight.constant += 50
+                    self.careerViewHeight.constant += 55
                 }
                 else {
                     self.careerT20sView.hidden = true
+                    self.baseViewHeightConstraint.constant -= 55
                 }
             }
         })
