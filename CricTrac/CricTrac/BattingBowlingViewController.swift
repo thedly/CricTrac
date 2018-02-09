@@ -54,6 +54,8 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
     @IBOutlet weak var secondInningsView: UIView!
     @IBOutlet weak var secondInningsViewHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var firstInningsTextLabelHeight: NSLayoutConstraint!
+    
     @IBOutlet weak var baseView: NSLayoutConstraint!
    
     var bowledOvers: String!
@@ -572,12 +574,14 @@ class BattingBowlingViewController: UIViewController,IndicatorInfoProvider,Theme
         if matchFormat! == "Single Innings" || matchFormat! == "" {
           secondInningsViewHeightConstraint.constant = 0
           secondInningsView.hidden = true
-          baseView.constant = 736
+          baseView.constant = 725
+          firstInningsTextLabelHeight.constant = 0
         }
         else {
-            secondInningsViewHeightConstraint.constant = 484
+            secondInningsViewHeightConstraint.constant = 510
             secondInningsView.hidden = false
-            baseView.constant = 1220
+            baseView.constant = 1235
+            firstInningsTextLabelHeight.constant = 22
         }
     }
    

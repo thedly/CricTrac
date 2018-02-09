@@ -91,7 +91,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             secondInningsView2.hidden = true
             firstBattingHeightConstraint1.constant = 295
             secondBattingHeightConstarint.constant = 295
-            screenShotHeight.constant -= 125
+            screenShotHeight.constant = 662
         }
         else {
             secondInningsViewHeightConstraint1.constant = 125
@@ -100,7 +100,7 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             secondInningsView2.hidden = false
             firstBattingHeightConstraint1.constant = 420
             secondBattingHeightConstarint.constant = 420
-            screenShotHeight.constant += 125
+            screenShotHeight.constant = 787
         }
     }
    
