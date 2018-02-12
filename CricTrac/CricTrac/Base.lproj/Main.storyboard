@@ -21274,10 +21274,10 @@
                                 <rect key="frame" x="0.0" y="56" width="600" height="1694"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pq9-pd-SMx">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="1672"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="1500"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iFM-nJ-5fm" userLabel="ProfileView">
-                                                <rect key="frame" x="5" y="201" width="590" height="255"/>
+                                                <rect key="frame" x="5" y="201" width="590" height="100"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playing Role" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9VZ-tp-Alu">
                                                         <rect key="frame" x="5" y="5" width="77" height="18"/>
@@ -21367,7 +21367,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="eum-xr-LZh" secondAttribute="trailing" constant="5" id="EMA-9w-mUS"/>
                                                     <constraint firstItem="t7M-Oz-OxR" firstAttribute="leading" secondItem="iFM-nJ-5fm" secondAttribute="leading" id="Isj-i3-9dO"/>
                                                     <constraint firstItem="9rb-eT-zDH" firstAttribute="baseline" secondItem="WiH-Tk-SHT" secondAttribute="baseline" id="Jna-Bi-stO"/>
-                                                    <constraint firstAttribute="height" constant="255" id="Lh0-TQ-su3"/>
+                                                    <constraint firstAttribute="height" constant="100" id="Lh0-TQ-su3"/>
                                                     <constraint firstAttribute="bottom" secondItem="uGx-TM-p6b" secondAttribute="bottom" constant="5" id="Oh3-bg-Qhl"/>
                                                     <constraint firstAttribute="trailing" secondItem="3dM-tm-zJm" secondAttribute="trailing" constant="5" id="Ugd-jK-CfY"/>
                                                     <constraint firstAttribute="height" constant="194" id="Ulf-q9-UsQ"/>
@@ -21402,7 +21402,7 @@
                                                 </variation>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jSF-88-QPc" userLabel="BattingView">
-                                                <rect key="frame" x="5" y="491" width="590" height="385"/>
+                                                <rect key="frame" x="5" y="336" width="590" height="385"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Batting Average" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eFK-JD-3yK">
                                                         <rect key="frame" x="5" y="0.0" width="585" height="22"/>
@@ -22512,7 +22512,7 @@
                                                 </variation>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wpY-fT-lGe" userLabel="BowlingView">
-                                                <rect key="frame" x="5" y="891" width="590" height="365"/>
+                                                <rect key="frame" x="5" y="736" width="590" height="365"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bowling Average" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LPk-vw-m0i">
                                                         <rect key="frame" x="5" y="0.0" width="125" height="22"/>
@@ -23558,7 +23558,7 @@
                                                 </variation>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C2h-an-Vrv" userLabel="Career View">
-                                                <rect key="frame" x="5" y="1271" width="590" height="400"/>
+                                                <rect key="frame" x="5" y="1116" width="590" height="400"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Career Statistics" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAs-72-aH6">
                                                         <rect key="frame" x="5" y="0.0" width="123" height="22"/>
@@ -23917,7 +23917,7 @@
                                             <constraint firstItem="wpY-fT-lGe" firstAttribute="leading" secondItem="Pq9-pd-SMx" secondAttribute="leading" constant="5" id="kNf-ff-HET"/>
                                             <constraint firstItem="jSF-88-QPc" firstAttribute="leading" secondItem="Pq9-pd-SMx" secondAttribute="leading" constant="5" id="oqg-RZ-HPx"/>
                                             <constraint firstItem="C2h-an-Vrv" firstAttribute="leading" secondItem="Pq9-pd-SMx" secondAttribute="leading" constant="5" id="sgh-7Q-4U5"/>
-                                            <constraint firstAttribute="height" priority="250" constant="1672" id="yHb-3h-1wE"/>
+                                            <constraint firstAttribute="height" priority="250" constant="1500" id="yHb-3h-1wE"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -23961,6 +23961,9 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RVe-S0-XZr">
                                         <rect key="frame" x="20" y="100" width="90" height="90"/>
+                                        <connections>
+                                            <action selector="imageViewBtn:" destination="dul-H9-m2k" eventType="touchUpInside" id="hPk-jj-yu3"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BANGALORE" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iiE-We-ef3">
                                         <rect key="frame" x="130" y="118" width="82" height="19"/>
@@ -24334,6 +24337,7 @@
                         <outlet property="profile" destination="uGx-TM-p6b" id="drd-Lh-ezV"/>
                         <outlet property="profilePic" destination="GKs-5W-ETY" id="2l4-U1-hFP"/>
                         <outlet property="profileView" destination="iFM-nJ-5fm" id="gKI-fe-A4p"/>
+                        <outlet property="profileViewHeightConstraint" destination="Lh0-TQ-su3" id="9GA-ro-Lfy"/>
                         <outlet property="topBarView" destination="J4K-6v-5CN" id="aGU-KZ-FIh"/>
                         <outlet property="userProfileImage" destination="GKs-5W-ETY" id="eQ2-Qb-fx0"/>
                     </connections>

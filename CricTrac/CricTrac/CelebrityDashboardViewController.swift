@@ -240,6 +240,7 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
     @IBOutlet weak var BowlT20sView: UIView!
     @IBOutlet weak var careerView: UIView!
     
+    @IBOutlet weak var profileViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var careerViewHeight: NSLayoutConstraint!
     @IBOutlet weak var BatViewWidth: NSLayoutConstraint!
     @IBOutlet weak var BowlViewWidth: NSLayoutConstraint!
@@ -258,9 +259,18 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
     var friendProfile:[String:AnyObject]?
     var userProfileData:Profile!
     
+    @IBAction func imageViewBtn(sender: UIButton) {
+        let profileImageVc = viewControllerFrom("Main", vcid: "ProfileImageExpandingVC") as! ProfileImageExpandingVC
+        profileImageVc.imageString = userProfileData.ProfileImageURL
+        if userProfileData.ProfileImageURL != "-" {
+            self.presentViewController(profileImageVc, animated: true) {}
+        }
+    }
+    
     @IBAction func closeBtn(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
     var celebrityData:Celebrity!
     
     override func viewDidLoad() {
@@ -276,11 +286,14 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
          self.careerTestView.layer.cornerRadius = 10
                 
         // Do any additional setup after loading the view.
+        initView()
     }
     
     override func viewWillAppear(animated: Bool) {
         setBackgroundColor()
-        
+    }
+    
+    func initView()  {
         if let value = friendProfile{
             userProfileData = Profile(usrObj: value)
             // closeButton.hidden = false
@@ -344,8 +357,6 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
             currentUserId = friendId!
         }
         
-        
-        
         fetchBasicProfile(currentUserId, sucess: { (result) in
             let proPic = result["proPic"]
             
@@ -405,6 +416,28 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
                 //self.playingRole.text = data["PlayingRole"] as? String
                 self.battingStyle.text = ""
                 self.majorTeams.text = data["MajorTeams"] as? String
+                
+                let profileDescription = data["Description"] as? String
+                let lengthProfile = profileDescription?.characters.count
+                var noOfLines = lengthProfile!/50
+                
+                if screensize == "1" { //iPhone 4
+                    noOfLines = lengthProfile!/40
+                }
+                else if screensize == "2" { //iPhone 5
+                    noOfLines = lengthProfile!/40
+                }
+                else if screensize == "3" {  //iPhone 6
+                    noOfLines = lengthProfile!/50
+                }
+                else {  //iPhone Plus
+                    noOfLines = lengthProfile!/60
+                }
+                
+                self.profileViewHeightConstraint.constant += CGFloat(noOfLines) * 18
+                self.baseViewHeightConstraint.constant += CGFloat(noOfLines) * 18
+                self.profile.numberOfLines = noOfLines + 1
+                
                 self.profile.text = data["Description"] as? String
                 
                 let formattedStrBat = NSMutableAttributedString()
@@ -432,10 +465,10 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
                     self.TestDebut.text = data["TestDebut"] as? String
                     self.LastTest.text = data["LastTest"] as? String
                     self.careerTestView.hidden = false
-                    self.careerViewHeight.constant += 55
                 }
                 else {
                     self.careerTestView.hidden = true
+                    self.careerViewHeight.constant -= 55
                     self.baseViewHeightConstraint.constant -= 55
                 }
                 
@@ -443,10 +476,10 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
                     self.ODIDebut.text = data["ODIDebut"] as? String
                     self.LastODI.text = data["LastODI"] as? String
                     self.careerODIView.hidden = false
-                    self.careerViewHeight.constant += 55
                 }
                 else {
                     self.careerODIView.hidden = true
+                    self.careerViewHeight.constant -= 55
                     self.baseViewHeightConstraint.constant -= 55
                 }
                 
@@ -454,10 +487,10 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
                     self.T20IDebut.text = data["T20IDebut"] as? String
                     self.LastT20I.text = data["LastT20I"] as? String
                     self.careerT20IView.hidden = false
-                    self.careerViewHeight.constant += 55
                 }
                 else {
                     self.careerT20IView.hidden = true
+                    self.careerViewHeight.constant -= 55
                     self.baseViewHeightConstraint.constant -= 55
                 }
                 
@@ -465,10 +498,10 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
                     self.FirstclassDebut.text = data["FirstclassDebut"] as? String
                     self.LastFirstclass.text = data["LastFirstclass"] as? String
                     self.careerFirstclassView.hidden = false
-                    self.careerViewHeight.constant += 55
                 }
                 else {
                     self.careerFirstclassView.hidden = true
+                    self.careerViewHeight.constant -= 55
                     self.baseViewHeightConstraint.constant -= 55
                 }
                 
@@ -476,10 +509,10 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
                     self.ListADebut.text = data["ListADebut"] as? String
                     self.LastListA.text = data["LastListA"] as? String
                     self.careerListA.hidden = false
-                    self.careerViewHeight.constant += 55
                 }
                 else {
                     self.careerListA.hidden = true
+                    self.careerViewHeight.constant -= 55
                     self.baseViewHeightConstraint.constant -= 55
                 }
                 
@@ -487,10 +520,10 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
                     self.T20sDebut.text = data["T20sDebut"] as? String
                     self.LastT20s.text = data["LastT20s"] as? String
                     self.careerT20sView.hidden = false
-                    self.careerViewHeight.constant += 55
                 }
                 else {
                     self.careerT20sView.hidden = true
+                    self.careerViewHeight.constant -= 55
                     self.baseViewHeightConstraint.constant -= 55
                 }
             }
