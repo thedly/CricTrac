@@ -19,7 +19,6 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
     
     @IBOutlet weak var sortedByAgeHeightConstraint: NSLayoutConstraint!
     
-    //@IBOutlet weak var sortedByAgeLbl: UILabel!
     let currentTheme = cricTracTheme.currentTheme
     
    // var myPlayers = [String]()
@@ -114,7 +113,6 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
             navigationItem.leftBarButtonItem = leftbarButton
             navigationController!.navigationBar.barTintColor = currentTheme.topColor
             self.view.backgroundColor = currentTheme.topColor
-            //topBarViewHeightConstraint.constant = 0
            // title = "MY PLAYERS"
         }
     }

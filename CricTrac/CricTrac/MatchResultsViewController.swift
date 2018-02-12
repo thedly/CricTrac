@@ -227,10 +227,15 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
     var teams = [String]()
     weak var parent:MatchParent?
     
-    var firstBattingDeclared1 = "0"
-    var firstBattingDeclared2 = "0"
-    var secondBattingDeclared1 = "0"
-    var secondBattingDeclared2 = "0"
+//    var firstBattingDeclared1 = "0"
+//    var firstBattingDeclared2 = "0"
+//    var secondBattingDeclared1 = "0"
+//    var secondBattingDeclared2 = "0"
+    
+    var firstBatDec1 = "0"
+    var firstBatDec2 = "0"
+    var secBatDec1 = "0"
+    var secBatDec2 = "0"
 
     var data:[String:String]{
         
@@ -252,9 +257,12 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             firstScoreVal = "0"
         }
         
-        var firstWicketsVal = ""
-        if let val = firstWicketsText{
-            firstWicketsVal = val.textVal
+        var firstWicketsVal = "0"
+        if let val = firstWicketsText?.text where val != ""{
+            firstWicketsVal = val
+        }
+        else{
+            firstWicketsVal = "0"
         }
         
         var secondBatVal = ""
@@ -286,9 +294,12 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             firstScoreVal2 = "0"
         }
         
-        var firstWicketsVal2 = ""
-        if let val = firstWicketsText2{
-            firstWicketsVal2 = val.textVal
+        var firstWicketsVal2 = "0"
+        if let val = firstWicketsText2?.text where val != ""{
+            firstWicketsVal2 = val
+        }
+        else {
+            firstWicketsVal2 = "0"
         }
         
         var secondScoreVal2 = ""
@@ -307,7 +318,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             secondWicketsVal2 = "0"
         }
         
-        var firstBatDec1 = "0"
         if firstBattingDeclaredBtn1.alpha == 1  {
             firstBatDec1 = "1"
         }
@@ -315,7 +325,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             firstBatDec1 = "0"
         }
         
-        var firstBatDec2 = "0"
         if firstBattingDeclaredBtn2.alpha == 1  {
             firstBatDec2 = "1"
         }
@@ -323,7 +332,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             firstBatDec2 = "0"
         }
         
-        var secBatDec1 = "0"
         if secondBattingDeclaredBtn1.alpha == 1  {
             secBatDec1 = "1"
         }
@@ -331,7 +339,6 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             secBatDec1 = "0"
         }
         
-        var secBatDec2 = "0"
         if secondBattingDeclaredBtn2.alpha == 1  {
             secBatDec2 = "1"
         }
@@ -605,10 +612,30 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
                 firstBattingDeclaredLabel1.hidden = false
                 firstBattingDeclaredLabel2.hidden = false
                 
-                firstBattingDeclaredBtn1.alpha = 0.2
-                firstBattingDeclaredBtn2.alpha = 0.2
-                secondBattingDeclaredBtn1.alpha = 0.2
-                secondBattingDeclaredBtn2.alpha = 0.2
+                if firstBattingDeclaredBtn1.alpha == 1 {
+                    firstBattingDeclaredBtn1.alpha = 1
+                }
+                else {
+                    firstBattingDeclaredBtn1.alpha = 0.2
+                }
+                if firstBattingDeclaredBtn2.alpha == 1 {
+                    firstBattingDeclaredBtn2.alpha = 1
+                }
+                else {
+                    firstBattingDeclaredBtn2.alpha = 0.2
+                }
+                if secondBattingDeclaredBtn1.alpha == 1 {
+                    secondBattingDeclaredBtn1.alpha = 1
+                }
+                else {
+                    secondBattingDeclaredBtn1.alpha = 0.2
+                }
+                if secondBattingDeclaredBtn2.alpha == 1 {
+                    secondBattingDeclaredBtn2.alpha = 1
+                }
+                else {
+                    secondBattingDeclaredBtn2.alpha = 0.2
+                }
             }
         }
     }
@@ -859,6 +886,14 @@ class MatchResultsViewController: UIViewController, IndicatorInfoProvider,ThemeC
             let tempWickets2 = firstWicketsText2
             firstWicketsText2 = secondWicketsText2
             secondWicketsText2 = tempWickets2
+            
+            let tempFirstBatDec1 = firstBattingDeclaredBtn1
+            firstBattingDeclaredBtn1 = firstBattingDeclaredBtn2
+            firstBattingDeclaredBtn2 = tempFirstBatDec1
+            
+            let tempSecondBatDec1 = secondBattingDeclaredBtn1
+            secondBattingDeclaredBtn1 = secondBattingDeclaredBtn2
+            secondBattingDeclaredBtn2 = tempSecondBatDec1
             
             let tempPt = FirstBattingView.center
             
