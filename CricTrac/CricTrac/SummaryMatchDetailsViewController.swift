@@ -296,7 +296,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         
         if screensize == "1" {
             sizeOne = 10
-            sizeTwo = 12
+            sizeTwo = 13
             sizeThree = 20
             sizeFour = 30
             sizeFive = 50

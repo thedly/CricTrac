@@ -109,14 +109,14 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         if screensize == "1" {
             sizeOne = 10
-            sizeTwo = 12
+            sizeTwo = 13
             sizeThree = 15
             sizeFour = 16
             sizeFive = 20
         }
         else if screensize == "2" {
             sizeOne = 10
-            sizeTwo = 12
+            sizeTwo = 13
             sizeThree = 16
             sizeFour = 18
             sizeFive = 20
@@ -130,10 +130,10 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         }
         else if screensize == "4" {
             sizeOne = 12
-            sizeTwo = 15
+            sizeTwo = 16
             sizeThree = 20
             sizeFour = 23
-            sizeFive = 30
+            sizeFive = 28
         }
 
         upgradeButton.setTitle("UPGRADE", forState: UIControlState.Normal)
@@ -781,7 +781,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         }
         
         if battingBowlingScore.length == 0 {
-            battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize:25)
+            battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize: sizeFive)
         }
         
         if let date = value["MatchDate"]{
@@ -911,9 +911,19 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             let currentMatch = self.matches[indexPath.row - 1]
            
             aCell.BattingOrBowlingScore.attributedText = currentMatch.battingBowlingScore
-            aCell.matchDateAndVenue.text = currentMatch.matchDateAndVenue
-            aCell.oponentName.text = currentMatch.opponentName
-            aCell.stadiumLabel.text = currentMatch.ground
+            
+            let formattedStringName = NSMutableAttributedString()
+            let formattedOpponentName = formattedStringName.bold(currentMatch.opponentName, fontName: appFont_black, fontSize: self.sizeThree)
+            
+            let formattedStringDate = NSMutableAttributedString()
+            let formattedDate = formattedStringDate.bold(currentMatch.matchDateAndVenue, fontName: appFont_black, fontSize: self.sizeTwo)
+            
+            let formattedStringGround = NSMutableAttributedString()
+            let formattedGround = formattedStringGround.bold(currentMatch.ground, fontName: appFont_black, fontSize: self.sizeTwo)
+            
+            aCell.oponentName.attributedText = formattedOpponentName
+            aCell.matchDateAndVenue.attributedText = formattedDate
+            aCell.stadiumLabel.attributedText = formattedGround
             
             if let isHidden = currentMatch.BattingSectionHidden where isHidden == true{
                 
@@ -924,7 +934,6 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                     aCell.strikeRateLabel.hidden = true
                 }
                 aCell.economyLabel.hidden = true
-                
             }
             else
             {
