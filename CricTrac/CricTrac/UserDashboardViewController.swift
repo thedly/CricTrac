@@ -656,14 +656,14 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         if screensize == "1" {
             sizeOne = 10
-            sizeTwo = 12
+            sizeTwo = 13
             sizeThree = 15
             sizeFour = 16
             sizeFive = 20
         }
         else if screensize == "2" {
             sizeOne = 10
-            sizeTwo = 12
+            sizeTwo = 14
             sizeThree = 16
             sizeFour = 18
             sizeFive = 20
@@ -677,10 +677,10 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         }
         else if screensize == "4" {
             sizeOne = 12
-            sizeTwo = 15
+            sizeTwo = 16
             sizeThree = 20
             sizeFour = 25
-            sizeFive = 30
+            sizeFive = 28
         }
     }
     
@@ -978,7 +978,7 @@ func setDashboardData(){
                             }
                             
                             if battingBowlingScore.length == 0 {
-                                battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize: 30)
+                                battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize: self.sizeFive)
                             }
                             
                             
@@ -1117,32 +1117,23 @@ func setDashboardData(){
                                 }
                             }
 
+                            let formattedStringName = NSMutableAttributedString()
+                            let formattedOpponentName = formattedStringName.bold((data["Opponent"] as? String)!, fontName: appFont_black, fontSize: self.sizeThree)
                             
-//                            if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
-//                                
-//                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
-//                                mData.economy = Float(economy)
-//                                if srEconomy.length > 0 {
-//                                    srEconomy.appendContentsOf("\nEconomy: \(economy)")
-//                                     self.summaryViewHeightConstraint1.constant = 110
-//                                    self.summaryStackViewHeightConstraint.constant = self.summaryStackViewHeightConstraint.constant + 20
-//                                }
-//                                else {
-//                                    srEconomy = ("Economy: \(economy)")
-//                                     self.summaryViewHeightConstraint1.constant = 90
-//                                    self.summaryStackViewHeightConstraint.constant = self.summaryStackViewHeightConstraint.constant + 20
-//                                }
-//                            }
+                            let formattedStringDate = NSMutableAttributedString()
+                            let formattedDate = formattedStringDate.bold(matchVenueAndDate, fontName: appFont_black, fontSize: self.sizeTwo)
                             
-                            if let opponent  = data["Opponent"]{
-                                opponentName = opponent as! String
-                            }
+                            let formattedStringGround = NSMutableAttributedString()
+                            let formattedGround = formattedStringGround.bold(groundVenue, fontName: appFont_black, fontSize: self.sizeTwo)
+                            
+                            let formattedStringSR = NSMutableAttributedString()
+                            let formattedSR = formattedStringSR.bold(srEconomy, fontName: appFont_black, fontSize: self.sizeTwo)
                             
                             self.firstRecentMatchScoreCard.attributedText = battingBowlingScore
-                            self.firstRecentMatchOpponentName.text = opponentName
-                            self.firstRecentMatchDateAndVenue.text = matchVenueAndDate
-                            self.FirstRecentMatchGroundVenue.text = groundVenue
-                            self.FirstRecentMatchStrikeRate.text = srEconomy
+                            self.firstRecentMatchOpponentName.attributedText = formattedOpponentName
+                            self.firstRecentMatchDateAndVenue.attributedText = formattedDate
+                            self.FirstRecentMatchGroundVenue.attributedText = formattedGround
+                            self.FirstRecentMatchStrikeRate.attributedText = formattedSR
                         }
                     })
                     dispatch_async(dispatch_get_main_queue(),{
@@ -1288,7 +1279,7 @@ func setDashboardData(){
                             }
                             
                             if battingBowlingScore.length == 0 {
-                                battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize: 30)
+                                battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize: self.sizeFive)
                             }
                             
                             
@@ -1412,15 +1403,23 @@ func setDashboardData(){
                                 }
                             }
                             
-                            if let opponent  = data["Opponent"]{
-                                opponentName = opponent as! String
-                            }
+                            let formattedStringName = NSMutableAttributedString()
+                            let formattedOpponentName = formattedStringName.bold((data["Opponent"] as? String)!, fontName: appFont_black, fontSize: self.sizeThree)
+                            
+                            let formattedStringDate = NSMutableAttributedString()
+                            let formattedDate = formattedStringDate.bold(matchVenueAndDate, fontName: appFont_black, fontSize: self.sizeTwo)
+                            
+                            let formattedStringGround = NSMutableAttributedString()
+                            let formattedGround = formattedStringGround.bold(groundVenue, fontName: appFont_black, fontSize: self.sizeTwo)
+                            
+                            let formattedStringSR = NSMutableAttributedString()
+                            let formattedSR = formattedStringSR.bold(srEconomy, fontName: appFont_black, fontSize: self.sizeTwo)
                             
                             self.secondRecentMatchScoreCard.attributedText = battingBowlingScore
-                            self.secondRecentMatchOpponentName.text = opponentName
-                            self.secondRecentMatchDateAndVenue.text = matchVenueAndDate
-                            self.SecondRecentMatchGroundVenue.text = groundVenue
-                            self.SecondRecentMatchStrikeRate.text = srEconomy
+                            self.secondRecentMatchOpponentName.attributedText = formattedOpponentName
+                            self.secondRecentMatchDateAndVenue.attributedText = formattedDate
+                            self.SecondRecentMatchGroundVenue.attributedText = formattedGround
+                            self.SecondRecentMatchStrikeRate.attributedText = formattedSR
                         }
                     })
     
@@ -1522,7 +1521,7 @@ func setDashboardData(){
                             }
                             
                             if battingBowlingScore.length == 0 {
-                                battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize: 30)
+                                battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize: self.sizeFive)
                             }
                             
                             if let date = data["MatchDate"]{
@@ -1596,51 +1595,32 @@ func setDashboardData(){
                                 }
                                 srEconomy = ("Strike Rate: \(String(format: "%.1f",totalStrikeRate!))")
                                 
-                                if let opponent  = data["Opponent"]{
-                                    opponentName = opponent as! String
-                                }
+                                let formattedStringName = NSMutableAttributedString()
+                                let formattedOpponentName = formattedStringName.bold((data["Opponent"] as? String)!, fontName: appFont_black, fontSize: self.sizeThree)
+                                
+                                let formattedStringDate = NSMutableAttributedString()
+                                let formattedDate = formattedStringDate.bold(matchVenueAndDate, fontName: appFont_black, fontSize: self.sizeTwo)
+                                
+                                let formattedStringGround = NSMutableAttributedString()
+                                let formattedGround = formattedStringGround.bold(groundVenue, fontName: appFont_black, fontSize: self.sizeTwo)
+                                
+                                let formattedStringSR = NSMutableAttributedString()
+                                let formattedSR = formattedStringSR.bold(srEconomy, fontName: appFont_black, fontSize: self.sizeTwo)
                                 
                                 self.FirstRecentMatchScore.attributedText = battingBowlingScore
-                                self.FirstRecentMatchOpponent.text = opponentName
-                                self.FirstRecentMatchDateAndLocation.text = matchVenueAndDate
-                                self.FirstRecentMatchBattingGroundVenue.text = groundVenue
-                                self.FirstRecentMatchBattingStrikeRate.text = srEconomy
+                                self.FirstRecentMatchOpponent.attributedText = formattedOpponentName
+                                self.FirstRecentMatchDateAndLocation.attributedText = formattedDate
+                                self.FirstRecentMatchBattingGroundVenue.attributedText = formattedGround
+                                self.FirstRecentMatchBattingStrikeRate.attributedText = formattedSR
                             }
-                            
-                            
-//                            if let ballsFaced = data["BallsFaced"] as? String where ballsFaced != "-", let runsScored = data["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
-//                                
-//                                if ballsFaced == "0" {
-//                                    mData.strikerate = Float("0.00")
-//                                }
-//                                else {
-//                                    let strikeRate = String(format: "%.1f",(Float(runsScored)!)*100/Float(ballsFaced)!)
-//                                    mData.strikerate = Float(strikeRate)
-//                                    srEconomy = ("Strike Rate: \(strikeRate)")
-//                                }
-//                            }
-                            
-//                            if let opponent  = data["Opponent"]{
-//                                opponentName = opponent as! String
-//                            }
-//                            
-//                            self.FirstRecentMatchScore.attributedText = battingBowlingScore
-//                            self.FirstRecentMatchOpponent.text = opponentName
-//                            self.FirstRecentMatchDateAndLocation.text = matchVenueAndDate
-//                            self.FirstRecentMatchBattingGroundVenue.text = groundVenue
-//                            self.FirstRecentMatchBattingStrikeRate.text = srEconomy
-//
                         }
                     })
                     
-                    
                     dispatch_async(dispatch_get_main_queue(),{
-                        
                         self.FirstRecentMatchView.hidden = false
                         
                          //self.TeamsTable.reloadData()
                         self.updateDashBoardMatches()
-                        
                     })
                 }
 
@@ -1732,7 +1712,7 @@ func setDashboardData(){
                             }
                             
                             if battingBowlingScore.length == 0 {
-                                battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize: 30)
+                                battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize: self.sizeFive)
                             }
                             
                             if let date = data["MatchDate"]{
@@ -1806,38 +1786,24 @@ func setDashboardData(){
                                 }
                                 srEconomy = ("Strike Rate: \(String(format: "%.1f",totalStrikeRate!))")
                                 
-                                if let opponent  = data["Opponent"]{
-                                    opponentName = opponent as! String
-                                }
+                                let formattedStringName = NSMutableAttributedString()
+                                let formattedOpponentName = formattedStringName.bold((data["Opponent"] as? String)!, fontName: appFont_black, fontSize: self.sizeThree)
+                                
+                                let formattedStringDate = NSMutableAttributedString()
+                                let formattedDate = formattedStringDate.bold(matchVenueAndDate, fontName: appFont_black, fontSize: self.sizeTwo)
+                                
+                                let formattedStringGround = NSMutableAttributedString()
+                                let formattedGround = formattedStringGround.bold(groundVenue, fontName: appFont_black, fontSize: self.sizeTwo)
+                                
+                                let formattedStringSR = NSMutableAttributedString()
+                                let formattedSR = formattedStringSR.bold(srEconomy, fontName: appFont_black, fontSize: self.sizeTwo)
                                 
                                 self.SecondRecentMatchScore.attributedText = battingBowlingScore
-                                self.SecondRecentMatchOpponent.text = opponentName
-                                self.SecondRecentMatchDateAndLocation.text = matchVenueAndDate
-                                self.SecondRecentMatchBattingGroundVenue.text = groundVenue
-                                self.SecondRecentMatchBattingStrikeRate.text = srEconomy
+                                self.SecondRecentMatchOpponent.attributedText = formattedOpponentName
+                                self.SecondRecentMatchDateAndLocation.attributedText = formattedDate
+                                self.SecondRecentMatchBattingGroundVenue.attributedText = formattedGround
+                                self.SecondRecentMatchBattingStrikeRate.attributedText = formattedSR
                             }
-                            
-//                            if let ballsFaced = data["BallsFaced"] as? String where ballsFaced != "-", let runsScored = data["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
-//                                
-//                                if ballsFaced == "0" {
-//                                    mData.strikerate = Float("0.00")
-//                                }
-//                                else {
-//                                    let strikeRate = String(format: "%.1f",(Float(runsScored)!)*100/Float(ballsFaced)!)
-//                                    mData.strikerate = Float(strikeRate)
-//                                    srEconomy = ("Strike Rate: \(strikeRate)")
-//                                }
-//                            }
-                            
-//                            if let opponent  = data["Opponent"]{
-//                                opponentName = opponent as! String
-//                            }
-//                            
-//                            self.SecondRecentMatchScore.attributedText = battingBowlingScore
-//                            self.SecondRecentMatchOpponent.text = opponentName
-//                            self.SecondRecentMatchDateAndLocation.text = matchVenueAndDate
-//                            self.SecondRecentMatchBattingGroundVenue.text = groundVenue
-//                            self.SecondRecentMatchBattingStrikeRate.text = srEconomy
                         }
                     })
                     
@@ -1931,7 +1897,7 @@ func setDashboardData(){
                             }
                             
                             if battingBowlingScore.length == 0 {
-                                battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize: 30)
+                                battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize: self.sizeFive)
                             }
                             
                             
@@ -1998,33 +1964,30 @@ func setDashboardData(){
                                 srEconomy = ("Economy: \(economy)")
                             }
                             
-//                            if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
-//                                
-//                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
-//                                mData.economy = Float(economy)
-//                                srEconomy = ("Economy: \(economy)")
-//                            }
+                            let formattedStringName = NSMutableAttributedString()
+                            let formattedOpponentName = formattedStringName.bold((data["Opponent"] as? String)!, fontName: appFont_black, fontSize: self.sizeThree)
                             
-                            if let opponent  = data["Opponent"]{
-                                opponentName = opponent as! String
-                            }
+                            let formattedStringDate = NSMutableAttributedString()
+                            let formattedDate = formattedStringDate.bold(matchVenueAndDate, fontName: appFont_black, fontSize: self.sizeTwo)
+                            
+                            let formattedStringGround = NSMutableAttributedString()
+                            let formattedGround = formattedStringGround.bold(groundVenue, fontName: appFont_black, fontSize: self.sizeTwo)
+                            
+                            let formattedStringSR = NSMutableAttributedString()
+                            let formattedSR = formattedStringSR.bold(srEconomy, fontName: appFont_black, fontSize: self.sizeTwo)
                             
                             self.FirstRecentMatchBowlingScore.attributedText = battingBowlingScore
-                            self.FirstRecentMatchBowlingOpponent.text = opponentName
-                            self.FirstRecentMatchBowlingDateAndLocation.text = matchVenueAndDate
-                            self.FirstRecentMatchBowlingGroundVenue.text = groundVenue
-                            self.FirstRecentMatchBowlingEconomy.text = srEconomy
+                            self.FirstRecentMatchBowlingOpponent.attributedText = formattedOpponentName
+                            self.FirstRecentMatchBowlingDateAndLocation.attributedText = formattedDate
+                            self.FirstRecentMatchBowlingGroundVenue.attributedText = formattedGround
+                            self.FirstRecentMatchBowlingEconomy.attributedText = formattedSR
                         }
                     })
                     
-                    
                     dispatch_async(dispatch_get_main_queue(),{
-                        
                         self.FirstRecentMatchBowlingView.hidden = false
                         //  self.TeamsTable.reloadData()
                         self.updateDashBoardMatches()
-                       
-                        
                     })
                 }
 
@@ -2109,7 +2072,7 @@ func setDashboardData(){
                             }
                             
                             if battingBowlingScore.length == 0 {
-                                battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize: 30)
+                                battingBowlingScore.bold("DNB", fontName: appFont_black, fontSize: self.sizeFive)
                             }
                             
                             
@@ -2176,22 +2139,23 @@ func setDashboardData(){
                                 srEconomy = ("Economy: \(economy)")
                             }
                             
-//                            if let oversBowled = data["OversBowled"] as? String where oversBowled != "-", let runsGiven = data["RunsGiven"] as? String where runsGiven != "-" && mData.BowlingSectionHidden == false {
-//                                
-//                                let economy = String(format: "%.2f",(Float(runsGiven)!)/Float(oversBowled)!)
-//                                mData.economy = Float(economy)
-//                                srEconomy = ("Economy: \(economy)")
-//                            }
+                            let formattedStringName = NSMutableAttributedString()
+                            let formattedOpponentName = formattedStringName.bold((data["Opponent"] as? String)!, fontName: appFont_black, fontSize: self.sizeThree)
                             
-                            if let opponent  = data["Opponent"]{
-                                opponentName = opponent as! String
-                            }
+                            let formattedStringDate = NSMutableAttributedString()
+                            let formattedDate = formattedStringDate.bold(matchVenueAndDate, fontName: appFont_black, fontSize: self.sizeTwo)
+                            
+                            let formattedStringGround = NSMutableAttributedString()
+                            let formattedGround = formattedStringGround.bold(groundVenue, fontName: appFont_black, fontSize: self.sizeTwo)
+                            
+                            let formattedStringSR = NSMutableAttributedString()
+                            let formattedSR = formattedStringSR.bold(srEconomy, fontName: appFont_black, fontSize: self.sizeTwo)
                             
                             self.SecondRecentMatchBowlingScore.attributedText = battingBowlingScore
-                            self.SecondRecentMatchBowlingOpponent.text = opponentName
-                            self.SecondRecentMatchBowlingDateAndLocation.text = matchVenueAndDate
-                            self.SecondRecentMatchBowlingGroundVenue.text = groundVenue
-                            self.SecondRecentMatchBowlingEconomy.text = srEconomy
+                            self.SecondRecentMatchBowlingOpponent.attributedText = formattedOpponentName
+                            self.SecondRecentMatchBowlingDateAndLocation.attributedText = formattedDate
+                            self.SecondRecentMatchBowlingGroundVenue.attributedText = formattedGround
+                            self.SecondRecentMatchBowlingEconomy.attributedText = formattedSR
                         }
                     })
                     

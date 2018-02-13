@@ -259,6 +259,12 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
     var friendProfile:[String:AnyObject]?
     var userProfileData:Profile!
     
+    var sizeOne:CGFloat = 10
+    var sizeTwo:CGFloat = 15
+    var sizeThree:CGFloat = 18
+    var sizeFour:CGFloat = 20
+    var sizeFive:CGFloat = 25
+    
     @IBAction func imageViewBtn(sender: UIButton) {
         let profileImageVc = viewControllerFrom("Main", vcid: "ProfileImageExpandingVC") as! ProfileImageExpandingVC
         profileImageVc.imageString = userProfileData.ProfileImageURL
@@ -286,6 +292,36 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
          self.careerTestView.layer.cornerRadius = 10
                 
         // Do any additional setup after loading the view.
+        
+        if screensize == "1" {
+            sizeOne = 10
+            sizeTwo = 13
+            sizeThree = 15
+            sizeFour = 16
+            sizeFive = 20
+        }
+        else if screensize == "2" {
+            sizeOne = 10
+            sizeTwo = 14
+            sizeThree = 16
+            sizeFour = 18
+            sizeFive = 20
+        }
+        else if screensize == "3" {
+            sizeOne = 10
+            sizeTwo = 15
+            sizeThree = 18
+            sizeFour = 20
+            sizeFive = 25
+        }
+        else if screensize == "4" {
+            sizeOne = 12
+            sizeTwo = 15
+            sizeThree = 20
+            sizeFour = 25
+            sizeFive = 28
+        }
+
         initView()
     }
     
@@ -345,9 +381,12 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
         
         let df = NSDateFormatter()
         df.dateFormat = "dd/MM/yyyy"
-        self.name.text = userProfileData.fullName
+        let formattedStringName = NSMutableAttributedString()
+        let nameText = formattedStringName.bold(userProfileData.fullName, fontName: appFont_black, fontSize: sizeTwo)
+        self.name.attributedText = nameText
+        
         let formattedString = NSMutableAttributedString()
-        let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State), ", fontName: appFont_black, fontSize: 15).bold("\(currentISO)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.DateOfBirth)\n", fontName: appFont_black, fontSize: 15).bold("Age: \(ageString)\n", fontName: appFont_black, fontSize: 15)
+        let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: sizeTwo).bold("\(userProfileData.State), ", fontName: appFont_black, fontSize: sizeTwo).bold("\(currentISO)\n", fontName: appFont_black, fontSize: sizeTwo).bold("\(userProfileData.DateOfBirth)\n", fontName: appFont_black, fontSize: sizeTwo).bold("Age: \(ageString)\n", fontName: appFont_black, fontSize: sizeTwo)
         self.city.attributedText = locationText
         
         if friendId == nil {
@@ -448,14 +487,14 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
                 batImageAttachment.bounds = CGRect(x: 0, y: -2, width: 15, height: 15)
                 let imageAttachmentString = NSAttributedString(attachment: batImageAttachment)
                 formattedStrBat.appendAttributedString(imageAttachmentString)
-                formattedStrBat.bold("\(playingRole!)   ", fontName: appFont_bold, fontSize: 15)
+                formattedStrBat.bold("\(playingRole!)   ", fontName: appFont_bold, fontSize: self.sizeTwo)
                 
                 let ballImageAttachment = NSTextAttachment()
                 ballImageAttachment.image = UIImage(named: "BallIcon")
                 ballImageAttachment.bounds = CGRect(x: 0, y: -2, width: 14, height: 14)
                 let ballImageAttachmentString = NSAttributedString(attachment: ballImageAttachment)
                 formattedStrBowl.appendAttributedString(ballImageAttachmentString)
-                formattedStrBowl.bold("\(bowlStyle!)", fontName: appFont_bold, fontSize: 15)
+                formattedStrBowl.bold("\(bowlStyle!)", fontName: appFont_bold, fontSize: self.sizeTwo)
                 
                 self.playingRole.attributedText = formattedStrBat
                 self.bowlingStyle.attributedText = formattedStrBowl
