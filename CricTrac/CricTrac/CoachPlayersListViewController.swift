@@ -75,6 +75,7 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
        // self.view.backgroundColor = currentTheme.topColor
         setBackgroundColor()
         setNavigationProperties()
+        //self.sortedByAgeLbl.text = "Sorted by Age"
     }
     
     @IBAction func backButtonTapped(sender: AnyObject) {
@@ -90,6 +91,7 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
     func changeThemeSettigs() {
         self.view.backgroundColor = currentTheme.topColor
         self.CoachPlayersTableView.backgroundColor = currentTheme.topColor
+        setPlainShadow(topBarView, color: currentTheme.bottomColor.CGColor)
     }
     
     func setNavigationProperties() {
