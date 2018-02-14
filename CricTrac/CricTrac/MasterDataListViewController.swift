@@ -139,7 +139,7 @@ class MasterDataListViewController: UIViewController,UITableViewDelegate,UITable
         
         cell.textLabel?.text = teamNames[indexPath.row]
        
-        cell.textLabel?.textColor = UIColor.whiteColor()
+        cell.textLabel?.textColor = UIColor.blackColor()
         cell.textLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 17)
         }
         return cell

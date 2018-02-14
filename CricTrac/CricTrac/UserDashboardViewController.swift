@@ -475,6 +475,35 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         }
         
         loadBannerAds()
+        
+        if screensize == "1" {
+            sizeOne = 10
+            sizeTwo = 13
+            sizeThree = 15
+            sizeFour = 16
+            sizeFive = 20
+        }
+        else if screensize == "2" {
+            sizeOne = 10
+            sizeTwo = 14
+            sizeThree = 16
+            sizeFour = 18
+            sizeFive = 20
+        }
+        else if screensize == "3" {
+            sizeOne = 10
+            sizeTwo = 15
+            sizeThree = 18
+            sizeFour = 20
+            sizeFive = 25
+        }
+        else if screensize == "4" {
+            sizeOne = 12
+            sizeTwo = 15
+            sizeThree = 18
+            sizeFour = 25
+            sizeFive = 28
+        }
     }
     
     @IBAction func myCoachesButtonTapped(sender: AnyObject) {
@@ -563,9 +592,14 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         let df = NSDateFormatter()
         df.dateFormat = "dd/MM/yyyy"
-        self.PlayerName.text = userProfileData.fullName
+        
+        let formattedStringName = NSMutableAttributedString()
+        let nameText = formattedStringName.bold(userProfileData.fullName, fontName: appFont_black, fontSize: sizeTwo)
+        self.PlayerName.attributedText = nameText
+        //self.PlayerName.text = userProfileData.fullName
+        
         let formattedString = NSMutableAttributedString()
-        let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State), ", fontName: appFont_black, fontSize: 15).bold("\(currentISO)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.DateOfBirth)\n", fontName: appFont_black, fontSize: 15).bold("Age: \(ageString)\n", fontName: appFont_black, fontSize: 15)
+        let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: sizeTwo).bold("\(userProfileData.State), ", fontName: appFont_black, fontSize: sizeTwo).bold("\(currentISO)\n", fontName: appFont_black, fontSize: sizeTwo).bold("\(userProfileData.DateOfBirth)\n", fontName: appFont_black, fontSize: sizeTwo).bold("Age: \(ageString)\n", fontName: appFont_black, fontSize: sizeTwo)
         self.PlayerLocation.attributedText = locationText
 
         if friendId == nil {
@@ -653,35 +687,6 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         initView()
         setDashboardData()
         TeamsTable.reloadData()
-        
-        if screensize == "1" {
-            sizeOne = 10
-            sizeTwo = 13
-            sizeThree = 15
-            sizeFour = 16
-            sizeFive = 20
-        }
-        else if screensize == "2" {
-            sizeOne = 10
-            sizeTwo = 14
-            sizeThree = 16
-            sizeFour = 18
-            sizeFive = 20
-        }
-        else if screensize == "3" {
-            sizeOne = 10
-            sizeTwo = 15
-            sizeThree = 18
-            sizeFour = 20
-            sizeFive = 25
-        }
-        else if screensize == "4" {
-            sizeOne = 12
-            sizeTwo = 16
-            sizeThree = 20
-            sizeFour = 25
-            sizeFive = 28
-        }
     }
     
     func resizeCoverImage(image: UIImage, newWidth: CGFloat) -> UIImage {

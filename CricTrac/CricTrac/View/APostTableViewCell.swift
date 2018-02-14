@@ -58,7 +58,7 @@ class APostTableViewCell: UITableViewCell {
     }
     
     func didTapOwnerName(){
-        if postOwnerName.text != "CricTrac" {
+        //if postOwnerName.text != "CricTrac" {
             if  postOwnerId != nil{
                 getFriendProfileInfo(postOwnerId, sucess: { (friendInfo) in
                     if friendInfo["Celebrity"] != nil && friendInfo["Celebrity"] as? String != "-" {
@@ -76,7 +76,7 @@ class APostTableViewCell: UITableViewCell {
                     }
                 })
             }
-        }
+        //}
     }
     
     func didTapPost(){

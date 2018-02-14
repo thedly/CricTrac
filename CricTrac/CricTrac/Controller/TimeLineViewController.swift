@@ -319,7 +319,8 @@ class TimeLineViewController: UIViewController,UITableViewDataSource,UITableView
                                 let imageName = defaultProfileImage
                                 let image = UIImage(named: imageName)
                                 postCell.postOwnerPic.image = image
-                            }else{
+                            }
+                            else{
                                 if let imageURL = NSURL(string:proPic!){
                                     postCell.postOwnerPic.kf_setImageWithURL(imageURL)
                                 }

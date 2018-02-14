@@ -293,7 +293,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         if screensize == "1" {
             sizeOne = 10
             sizeTwo = 13
@@ -319,8 +318,8 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             sizeOne = 20
             sizeTwo = 18
             sizeThree = 40
-            sizeFour = 60
-            sizeFive = 80
+            sizeFour = 50
+            sizeFive = 60
         }
         
         
