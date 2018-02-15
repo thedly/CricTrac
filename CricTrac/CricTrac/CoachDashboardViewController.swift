@@ -27,7 +27,6 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     @IBOutlet weak var exprOfCoach: UILabel!
     @IBOutlet weak var noTeamsLbl: UILabel!
     
-    
     // for teams
     @IBOutlet weak var baseViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var coachTeams: UICollectionView!
@@ -36,7 +35,6 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     var myCoachFrndNodeId = ""
     var myPlayersFrndNodeId = ""
     let currentTheme = cricTracTheme.currentTheme
-    
     
     // for new features
     @IBOutlet weak var totalPlayers: UILabel!
@@ -50,16 +48,12 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     @IBOutlet weak var coachFrndButton: UIButton!
     @IBOutlet weak var pendingRequests: UIButton!
     @IBOutlet weak var coachFrndBtnHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var viewAllBtnForTopBatting: UIButton!
-    
     @IBOutlet weak var viewAllBtnForTopBattingHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var viewAllBtnForTopBowling: UIButton!
-    
     @IBOutlet weak var viewAllBtnForTopBowlingHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var battingTableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bowlingTableViewHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var noPlayersForBatting: UILabel!
     @IBOutlet weak var noPlayersForBowling: UILabel!
     
@@ -68,7 +62,6 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     var bowlers = [String]()
     var wicketKeepers = [String]()
     var allRounders = [String]()
-    
     
     //by sajith
     var avgAge:Float = 0
@@ -96,8 +89,6 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     var matches = [PlayerMatchesData]()
     var matchDataSource = [String:AnyObject]()
     
-    
-    
     @IBAction func CloseDashboardPressed(sender: AnyObject) {
         self.dismissViewControllerAnimated(false, completion: nil)
     }
@@ -107,6 +98,12 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     var coverOrProfile = ""
     var friendId:String? = nil
     var currentUserId = ""
+    
+    var sizeOne:CGFloat = 10
+    var sizeTwo:CGFloat = 15
+    var sizeThree:CGFloat = 18
+    var sizeFour:CGFloat = 20
+    var sizeFive:CGFloat = 25
     
     override func viewWillAppear(animated: Bool) {
          super.viewWillAppear(animated)
@@ -161,6 +158,35 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         
         topBowlingTableView.separatorStyle = .None
         topBattingtableView.separatorStyle = .None
+        
+        if screensize == "1" {
+            sizeOne = 10
+            sizeTwo = 13
+            sizeThree = 15
+            sizeFour = 16
+            sizeFive = 20
+        }
+        else if screensize == "2" {
+            sizeOne = 10
+            sizeTwo = 14
+            sizeThree = 16
+            sizeFour = 18
+            sizeFive = 20
+        }
+        else if screensize == "3" {
+            sizeOne = 10
+            sizeTwo = 15
+            sizeThree = 18
+            sizeFour = 20
+            sizeFive = 25
+        }
+        else if screensize == "4" {
+            sizeOne = 12
+            sizeTwo = 15
+            sizeThree = 18
+            sizeFour = 25
+            sizeFive = 28
+        }
         
     }
     
@@ -252,7 +278,11 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         
         let df = NSDateFormatter()
         df.dateFormat = "dd/MM/yyyy"
-        self.PlayerName.text = userProfileData.fullName
+        
+        let formattedStringName = NSMutableAttributedString()
+        let nameText = formattedStringName.bold(userProfileData.fullName, fontName: appFont_black, fontSize: sizeTwo)
+        self.PlayerName.attributedText = nameText
+        //self.PlayerName.text = userProfileData.fullName
         
         var coachExpr = ""
         var coachLevel = ""
@@ -266,15 +296,15 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         let formattedStr = NSMutableAttributedString()
         
         if coachExpr != "" {
-            formattedStr.bold("Exp: \(coachExpr) Years", fontName: appFont_black, fontSize: 15)
+            formattedStr.bold("Exp: \(coachExpr) Years", fontName: appFont_black, fontSize: sizeTwo)
         }
         if coachLevel != "" {
-            formattedStr.bold("\nLevel: \(coachLevel)", fontName: appFont_black, fontSize: 15)
+            formattedStr.bold("\nLevel: \(coachLevel)", fontName: appFont_black, fontSize: sizeTwo)
         }
         self.exprOfCoach.attributedText = formattedStr
         
         let formattedString = NSMutableAttributedString()
-        let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State), ", fontName: appFont_black, fontSize: 15).bold("\(currentISO) ", fontName: appFont_black, fontSize: 15)
+        let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: sizeTwo).bold("\(userProfileData.State), ", fontName: appFont_black, fontSize: sizeTwo).bold("\(currentISO) ", fontName: appFont_black, fontSize: sizeTwo)
         self.PlayerLocation.attributedText = locationText
         
         if friendId == nil {

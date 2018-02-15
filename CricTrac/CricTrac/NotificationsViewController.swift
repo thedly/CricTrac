@@ -90,7 +90,7 @@ class NotificationsViewController: UIViewController,UITableViewDataSource,UITabl
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if dataSource.count == 0 {
-            noNotificationLabel.text = "No notifications"
+            noNotificationLabel.text = "No new notifications"
         }
         else{
              noNotificationLabel.text = ""

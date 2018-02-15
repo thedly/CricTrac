@@ -37,6 +37,12 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     var coverOrProfile = ""
     var friendId:String? = nil
     var currentUserId = ""
+    
+    var sizeOne:CGFloat = 10
+    var sizeTwo:CGFloat = 15
+    var sizeThree:CGFloat = 18
+    var sizeFour:CGFloat = 20
+    var sizeFive:CGFloat = 25
 
     override func viewWillAppear(animated: Bool) {
         setBackgroundColor()
@@ -165,7 +171,35 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         super.viewDidLoad()
         loadBannerAds()
         
-     // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view.
+        if screensize == "1" {
+            sizeOne = 10
+            sizeTwo = 13
+            sizeThree = 15
+            sizeFour = 16
+            sizeFive = 20
+        }
+        else if screensize == "2" {
+            sizeOne = 10
+            sizeTwo = 14
+            sizeThree = 16
+            sizeFour = 18
+            sizeFive = 20
+        }
+        else if screensize == "3" {
+            sizeOne = 10
+            sizeTwo = 15
+            sizeThree = 18
+            sizeFour = 20
+            sizeFive = 25
+        }
+        else if screensize == "4" {
+            sizeOne = 12
+            sizeTwo = 15
+            sizeThree = 18
+            sizeFour = 25
+            sizeFive = 28
+        }
     }
     
     func loadBannerAds() {
@@ -280,9 +314,14 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         
         let df = NSDateFormatter()
         df.dateFormat = "dd/MM/yyyy"
-        self.PlayerName.text = userProfileData.fullName.uppercaseString
+        
+        let formattedStringName = NSMutableAttributedString()
+        let nameText = formattedStringName.bold(userProfileData.fullName, fontName: appFont_black, fontSize: sizeTwo)
+        self.PlayerName.attributedText = nameText
+        //self.PlayerName.text = userProfileData.fullName.uppercaseString
+        
         let formattedString = NSMutableAttributedString()
-        let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: 15).bold("\(userProfileData.State), ", fontName: appFont_black, fontSize: 15).bold("\(currentISO) ", fontName: appFont_black, fontSize: 15)
+        let locationText = formattedString.bold("\(userProfileData.City)\n", fontName: appFont_black, fontSize: sizeTwo).bold("\(userProfileData.State), ", fontName: appFont_black, fontSize: sizeTwo).bold("\(currentISO) ", fontName: appFont_black, fontSize: sizeTwo)
         self.PlayerLocation.attributedText = locationText
         
         if friendId == nil {

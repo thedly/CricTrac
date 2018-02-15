@@ -292,7 +292,6 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
          self.careerTestView.layer.cornerRadius = 10
                 
         // Do any additional setup after loading the view.
-        
         if screensize == "1" {
             sizeOne = 10
             sizeTwo = 13
