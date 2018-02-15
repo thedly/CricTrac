@@ -1710,7 +1710,7 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53y-qY-hlT">
-                                                <rect key="frame" x="243" y="364" width="75" height="34"/>
+                                                <rect key="frame" x="243" y="354" width="75" height="34"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="whiteMatter"/>
                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
                                                 <state key="normal" title="REGISTER">
@@ -1721,7 +1721,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0dt-3f-sL8">
-                                                <rect key="frame" x="30" y="229" width="500" height="33"/>
+                                                <rect key="frame" x="30" y="279" width="500" height="33"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="greyMatter"/>
                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="16"/>
                                                 <state key="normal" title="Forgot password? ">
@@ -1752,26 +1752,6 @@
                                                     </mask>
                                                 </variation>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wfw-7U-fqh">
-                                                <rect key="frame" x="215" y="272" width="130" height="40"/>
-                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="Df6-Az-mUr"/>
-                                                    <constraint firstAttribute="width" constant="130" id="mEb-26-A6a"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="SourceSansPro-Semibold" family="Source Sans Pro" pointSize="17"/>
-                                                <state key="normal" title="SIGN IN">
-                                                    <color key="titleColor" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="25"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="loginWithUserNamePassword" destination="DCq-4c-QM9" eventType="touchUpInside" id="d4h-Ve-42r"/>
-                                                </connections>
-                                            </button>
                                             <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="noX-JL-blx">
                                                 <rect key="frame" x="20" y="400" width="520" height="1"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -1780,7 +1760,7 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do not have an account? Create one" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="olA-A1-mct">
-                                                <rect key="frame" x="20" y="337" width="520" height="22"/>
+                                                <rect key="frame" x="20" y="327" width="520" height="22"/>
                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1810,6 +1790,26 @@
                                                     </mask>
                                                 </variation>
                                             </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wfw-7U-fqh">
+                                                <rect key="frame" x="215" y="229" width="130" height="40"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="Df6-Az-mUr"/>
+                                                    <constraint firstAttribute="width" constant="130" id="mEb-26-A6a"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SourceSansPro-Semibold" family="Source Sans Pro" pointSize="17"/>
+                                                <state key="normal" title="SIGN IN">
+                                                    <color key="titleColor" red="0.73333333329999995" green="0.2666666667" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="25"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="loginWithUserNamePassword" destination="DCq-4c-QM9" eventType="touchUpInside" id="d4h-Ve-42r"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -1822,7 +1822,7 @@
                                             <constraint firstItem="Y0V-rG-LP9" firstAttribute="leading" secondItem="h5N-Ry-xNg" secondAttribute="leading" id="9xg-iS-ucu"/>
                                             <constraint firstItem="Y0V-rG-LP9" firstAttribute="leading" secondItem="h5N-Ry-xNg" secondAttribute="leading" id="Bsm-lE-5iT"/>
                                             <constraint firstItem="noX-JL-blx" firstAttribute="top" secondItem="eOo-D9-dbQ" secondAttribute="top" constant="400" id="EqV-ZE-w6C"/>
-                                            <constraint firstItem="olA-A1-mct" firstAttribute="top" secondItem="Wfw-7U-fqh" secondAttribute="bottom" constant="25" id="GU5-26-7aA"/>
+                                            <constraint firstItem="olA-A1-mct" firstAttribute="top" secondItem="Wfw-7U-fqh" secondAttribute="bottom" constant="58" id="GU5-26-7aA"/>
                                             <constraint firstItem="Y0V-rG-LP9" firstAttribute="leading" secondItem="eOo-D9-dbQ" secondAttribute="leading" constant="10" id="IK8-Zd-Gc6"/>
                                             <constraint firstItem="noX-JL-blx" firstAttribute="leading" secondItem="eOo-D9-dbQ" secondAttribute="leading" constant="20" id="LO6-Lk-6SI"/>
                                             <constraint firstItem="Y0V-rG-LP9" firstAttribute="centerX" secondItem="eOo-D9-dbQ" secondAttribute="centerX" id="LQn-Ff-e7T"/>
@@ -1833,20 +1833,23 @@
                                             <constraint firstItem="noX-JL-blx" firstAttribute="leading" secondItem="olA-A1-mct" secondAttribute="leading" id="On7-FI-ALq"/>
                                             <constraint firstItem="0dt-3f-sL8" firstAttribute="leading" secondItem="h5N-Ry-xNg" secondAttribute="leading" id="VMH-fg-Kvp"/>
                                             <constraint firstItem="h5N-Ry-xNg" firstAttribute="top" secondItem="Y0V-rG-LP9" secondAttribute="bottom" constant="10" id="W3J-6u-QnX"/>
-                                            <constraint firstItem="0dt-3f-sL8" firstAttribute="top" secondItem="h5N-Ry-xNg" secondAttribute="bottom" constant="10" id="Wgn-L8-50P"/>
+                                            <constraint firstItem="0dt-3f-sL8" firstAttribute="top" secondItem="h5N-Ry-xNg" secondAttribute="bottom" constant="77" id="Wgn-L8-50P"/>
                                             <constraint firstItem="noX-JL-blx" firstAttribute="centerX" secondItem="hLX-r4-VfY" secondAttribute="centerX" id="XrA-Mn-0p5"/>
                                             <constraint firstItem="noX-JL-blx" firstAttribute="centerX" secondItem="0dt-3f-sL8" secondAttribute="centerX" id="eS2-rC-ine"/>
                                             <constraint firstItem="noX-JL-blx" firstAttribute="leading" secondItem="H62-W5-QCx" secondAttribute="leading" id="fhB-Vw-kuq"/>
+                                            <constraint firstItem="Wfw-7U-fqh" firstAttribute="top" secondItem="h5N-Ry-xNg" secondAttribute="bottom" constant="10" id="fuc-T6-biO"/>
                                             <constraint firstItem="0dt-3f-sL8" firstAttribute="leading" secondItem="Y0V-rG-LP9" secondAttribute="leading" id="guN-hS-0V1"/>
-                                            <constraint firstItem="Wfw-7U-fqh" firstAttribute="top" secondItem="0dt-3f-sL8" secondAttribute="bottom" constant="10" id="hGi-PF-U3h"/>
+                                            <constraint firstItem="Wfw-7U-fqh" firstAttribute="top" secondItem="0dt-3f-sL8" secondAttribute="bottom" constant="-90" id="hGi-PF-U3h"/>
                                             <constraint firstItem="53y-qY-hlT" firstAttribute="top" secondItem="olA-A1-mct" secondAttribute="bottom" constant="5" id="jbN-2G-OGO"/>
                                             <constraint firstItem="noX-JL-blx" firstAttribute="centerX" secondItem="53y-qY-hlT" secondAttribute="centerX" id="lyF-7P-AId"/>
                                             <constraint firstItem="noX-JL-blx" firstAttribute="centerX" secondItem="h5N-Ry-xNg" secondAttribute="centerX" id="niH-tG-0X8"/>
                                             <constraint firstItem="noX-JL-blx" firstAttribute="centerX" secondItem="eOo-D9-dbQ" secondAttribute="centerX" id="pdn-f3-Bie"/>
                                             <constraint firstItem="Y0V-rG-LP9" firstAttribute="leading" secondItem="eOo-D9-dbQ" secondAttribute="leading" constant="10" id="qDZ-sB-y6A"/>
+                                            <constraint firstItem="olA-A1-mct" firstAttribute="top" secondItem="0dt-3f-sL8" secondAttribute="bottom" constant="15" id="qUj-J0-v7Z"/>
                                             <constraint firstItem="hLX-r4-VfY" firstAttribute="top" secondItem="H62-W5-QCx" secondAttribute="bottom" constant="10" id="sLr-8X-Aws"/>
                                             <constraint firstItem="noX-JL-blx" firstAttribute="centerX" secondItem="c24-ML-Q9b" secondAttribute="centerX" id="sy2-hl-XBR"/>
                                             <constraint firstItem="Y0V-rG-LP9" firstAttribute="leading" secondItem="eOo-D9-dbQ" secondAttribute="leading" constant="30" id="xfJ-y7-kAu"/>
+                                            <constraint firstItem="0dt-3f-sL8" firstAttribute="top" secondItem="Wfw-7U-fqh" secondAttribute="bottom" constant="10" id="zTh-gI-3aK"/>
                                             <constraint firstItem="Y0V-rG-LP9" firstAttribute="top" secondItem="c24-ML-Q9b" secondAttribute="bottom" constant="20" id="zgH-e6-luI"/>
                                         </constraints>
                                         <variation key="default">
@@ -1855,7 +1858,10 @@
                                                 <exclude reference="IK8-Zd-Gc6"/>
                                                 <exclude reference="qDZ-sB-y6A"/>
                                                 <exclude reference="zgH-e6-luI"/>
+                                                <exclude reference="Wgn-L8-50P"/>
                                                 <exclude reference="guN-hS-0V1"/>
+                                                <exclude reference="hGi-PF-U3h"/>
+                                                <exclude reference="GU5-26-7aA"/>
                                                 <exclude reference="5hL-iJ-rGe"/>
                                                 <exclude reference="0V5-c3-TFY"/>
                                             </mask>
@@ -1866,7 +1872,7 @@
                                 <constraints>
                                     <constraint firstItem="eOo-D9-dbQ" firstAttribute="leading" secondItem="IBq-VZ-Iom" secondAttribute="leading" id="7kv-rn-yvW"/>
                                     <constraint firstItem="eOo-D9-dbQ" firstAttribute="top" secondItem="IBq-VZ-Iom" secondAttribute="top" constant="20" id="Pzm-bK-iJ1"/>
-                                    <constraint firstAttribute="bottom" secondItem="eOo-D9-dbQ" secondAttribute="bottom" constant="30" id="bMF-64-1ok"/>
+                                    <constraint firstAttribute="bottom" secondItem="eOo-D9-dbQ" secondAttribute="bottom" constant="-20" id="bMF-64-1ok"/>
                                     <constraint firstAttribute="trailing" secondItem="eOo-D9-dbQ" secondAttribute="trailing" id="dGx-LV-yE8"/>
                                     <constraint firstItem="eOo-D9-dbQ" firstAttribute="height" secondItem="IBq-VZ-Iom" secondAttribute="height" id="pgM-2g-3Vt"/>
                                     <constraint firstItem="eOo-D9-dbQ" firstAttribute="width" secondItem="IBq-VZ-Iom" secondAttribute="width" id="vel-dn-agj"/>
