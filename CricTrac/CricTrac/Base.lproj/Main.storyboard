@@ -1682,27 +1682,39 @@
                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="16"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hLX-r4-VfY">
-                                                <rect key="frame" x="220" y="437" width="120" height="50"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hLX-r4-VfY">
+                                                <rect key="frame" x="180" y="437" width="200" height="107"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jMn-aG-Kux">
-                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="52"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="50" id="Ty6-Ag-CXD"/>
                                                             <constraint firstAttribute="height" constant="50" id="qjq-NY-zzj"/>
                                                         </constraints>
                                                         <state key="normal" image="Facebook-96"/>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="Ty6-Ag-CXD"/>
+                                                                <exclude reference="qjq-NY-zzj"/>
+                                                            </mask>
+                                                        </variation>
                                                         <connections>
                                                             <action selector="loginWithFB:" destination="DCq-4c-QM9" eventType="touchUpInside" id="cIh-op-4YX"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSf-J1-fIr">
-                                                        <rect key="frame" x="70" y="0.0" width="50" height="50"/>
+                                                        <rect key="frame" x="0.0" y="72" width="200" height="35"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="50" id="KqC-tB-ZfU"/>
                                                             <constraint firstAttribute="height" constant="50" id="yKU-0J-g41"/>
                                                         </constraints>
-                                                        <state key="normal" image="Google Plus-96"/>
+                                                        <state key="normal" image="GoogleSignIn"/>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="KqC-tB-ZfU"/>
+                                                                <exclude reference="yKU-0J-g41"/>
+                                                            </mask>
+                                                        </variation>
                                                         <connections>
                                                             <action selector="loginWithGoogle:" destination="DCq-4c-QM9" eventType="touchUpInside" id="yRq-ZA-QFo"/>
                                                         </connections>
@@ -24345,6 +24357,7 @@
         <image name="Edit-100" width="30" height="30"/>
         <image name="Facebook-96" width="52" height="52"/>
         <image name="Google Plus-96" width="52" height="52"/>
+        <image name="GoogleSignIn" width="200" height="35"/>
         <image name="Iconlogo" width="838" height="645"/>
         <image name="Like-100" width="19" height="18"/>
         <image name="Mail" width="128" height="128"/>
