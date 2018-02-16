@@ -27,6 +27,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()
+        setBackgroundColor()
         // Do any additional setup after loading the view.
         
         UserProfilesData.removeAll()
@@ -47,6 +48,10 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         else {
             self.bannerViewHeightConstraint.constant = 0
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        setBackgroundColor()
     }
     
 //    override func viewWillAppear(animated: Bool) {
@@ -99,7 +104,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
         }
         
         backgroundThread(background: {
-            KRProgressHUD.showText("Loading ...")
+            KRProgressHUD.showText("Loading...")
             
             //sravani - mark for follow
             
@@ -111,11 +116,9 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                 
                 for(_,req) in data {
                     let followingId = req["FollowingId"] as? String
-                    
                     self.followingIds.append(followingId!)
                     self.followingNodeId.append(req["FollowingNodeId"] as! String)
                     self.followingNodeIdOther.append(req["FollowingNodeIdOther"] as! String)
-                    
                 }
             }
             
@@ -133,7 +136,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                 dispatch_async(dispatch_get_main_queue(),{
                     
                     self.SuggestsTblview.reloadData()
-                    KRProgressHUD.dismiss()
+//                    KRProgressHUD.dismiss()
                 })
             })
         })
@@ -164,6 +167,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     
     func getCellForSuggestionsRow(indexPath:NSIndexPath)->FriendSuggestionsCell{
         //if FriendRequestsData.filter({$0.Name == UserProfilesData[indexPath.row].fullName}).first == nil {
+            KRProgressHUD.dismiss()
             if let aCell =  SuggestsTblview.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as? FriendSuggestionsCell {
                 
                 let sugFriendUserId = UserProfilesData[indexPath.row].id
@@ -179,7 +183,16 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                     aCell.userCity.text = city
                     
                     if celebrity != "-" {
-                        aCell.userRole.text = celebrity
+                        let formattedStr = NSMutableAttributedString()
+                        let verifiedImageAttachment = NSTextAttachment()
+                        verifiedImageAttachment.image = UIImage(named: "VerifiedAccount")
+                        verifiedImageAttachment.bounds = CGRect(x: 2, y: -2, width: 15, height: 15)
+                        let imageAttachmentString = NSAttributedString(attachment: verifiedImageAttachment)
+                        
+                        formattedStr.bold(celebrity!, fontName: appFont_bold, fontSize: 13)
+                        formattedStr.appendAttributedString(imageAttachmentString)
+                        
+                        aCell.userRole.attributedText = formattedStr
                     }
                     else {
                         if userProfile == "Player" {
@@ -193,7 +206,6 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                             aCell.userRole.text = "Cricket Fan"
                         }
                     }
-                    
                     
                     if proPic! == "-"{
                         let imageName = defaultProfileImage
@@ -242,10 +254,8 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
                 }
                 
                 aCell.FollowBtn.tag = indexPath.row
-
-                
-               aCell.baseView.alpha = 1
-              aCell.baseView.backgroundColor = cricTracTheme.currentTheme.bottomColor
+                aCell.baseView.alpha = 1
+                aCell.baseView.backgroundColor = cricTracTheme.currentTheme.bottomColor
                 aCell.backgroundColor = UIColor.clearColor()
                 return aCell
             }
@@ -315,12 +325,9 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     // sravani - mark for follow 
-    
     func followBtnPressed(sender: UIButton) {
-        
         let indexP = NSIndexPath(forRow: sender.tag, inSection: 0)
         let cell = SuggestsTblview.cellForRowAtIndexPath(indexP) as! FriendSuggestionsCell
-        
         if followingIds.contains(sender.accessibilityIdentifier!) {
             
         }
@@ -332,9 +339,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
             
             //call the follow notification api
             followNotification(sender.accessibilityIdentifier!)
-            
         }
-        
     }
     
     /*

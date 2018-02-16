@@ -142,7 +142,16 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
                     aCell.userCity.text = city
                    
                     if celebrity != "-" {
-                        aCell.userRole.text = celebrity
+                        let formattedStr = NSMutableAttributedString()
+                        let verifiedImageAttachment = NSTextAttachment()
+                        verifiedImageAttachment.image = UIImage(named: "VerifiedAccount")
+                        verifiedImageAttachment.bounds = CGRect(x: 2, y: -2, width: 15, height: 15)
+                        let imageAttachmentString = NSAttributedString(attachment: verifiedImageAttachment)
+                        
+                        formattedStr.bold(celebrity!, fontName: appFont_bold, fontSize: 13)
+                        formattedStr.appendAttributedString(imageAttachmentString)
+                        
+                        aCell.userRole.attributedText = formattedStr
                     }
                         else {
                         if userProfile == "Player" {

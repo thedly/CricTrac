@@ -89,7 +89,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
                 let imagePicker = UIImagePickerController()
                 imagePicker.delegate = self
                 imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
-                imagePicker.allowsEditing = false
+                imagePicker.allowsEditing = true
                 self.presentViewController(imagePicker, animated: true, completion: nil)
             }
         }
@@ -101,7 +101,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
                 let imagePicker = UIImagePickerController()
                 imagePicker.delegate = self
                 imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
-                imagePicker.allowsEditing = false
+                imagePicker.allowsEditing = true
                 self.presentViewController(imagePicker, animated: true, completion: nil)
             }
         }
@@ -126,7 +126,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
                 let imagePicker = UIImagePickerController()
                 imagePicker.delegate = self
                 imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
-                imagePicker.allowsEditing = false
+                imagePicker.allowsEditing = true
                 self.presentViewController(imagePicker, animated: true, completion: nil)
             }
         }
@@ -138,7 +138,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
                 let imagePicker = UIImagePickerController()
                 imagePicker.delegate = self
                 imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
-                imagePicker.allowsEditing = false
+                imagePicker.allowsEditing = true
                 self.presentViewController(imagePicker, animated: true, completion: nil)
             }
         }
@@ -258,23 +258,56 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     }
     // MARK: - Collection view delegates
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+        var image : UIImage!
         if coverOrProfile == "Profile" {
-            self.userProfileImage.image = image
+            if let img = info[UIImagePickerControllerEditedImage] as? UIImage
+            {
+                image = img
+                self.userProfileImage.image = img
+            }
+            else if let img = info[UIImagePickerControllerOriginalImage] as? UIImage
+            {
+                image = img
+                self.userProfileImage.image = img
+            }
+            
             self.dismissViewControllerAnimated(true) {
                 addProfileImageData(self.resizeImage(image, newWidth: 200))
             }
         }
         else {
-            self.imgCoverPhoto.image = image
+            if let img = info[UIImagePickerControllerEditedImage] as? UIImage
+            {
+                image = img
+                self.imgCoverPhoto.image = image
+                
+            }
+            else if let img = info[UIImagePickerControllerOriginalImage] as? UIImage
+            {
+                image = img
+                self.imgCoverPhoto.image = image
+            }
+            
             self.dismissViewControllerAnimated(true) {
-                addCoverImageData(self.resizeImage(image, newWidth: 800))
+                addCoverImageData(self.resizeCoverImage(image, newWidth: 800))
             }
         }
     }
     
-    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+    func resizeCoverImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+        let scale =  newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
         
+        return newImage!
+    }
+    
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
         let scale = newWidth / image.size.width
         let newHeight = image.size.height * scale
         UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))

@@ -315,16 +315,16 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         if userProfileData.BattingStyle == "Right-hand" {
             formattedStr.appendAttributedString(imageAttachmentString)
-            formattedStr.bold(" RH", fontName: appFont_bold, fontSize: 15)
+            formattedStr.bold(" RH", fontName: appFont_bold, fontSize: sizeTwo)
         }
         else{
             formattedStr.appendAttributedString(imageAttachmentString)
-            formattedStr.bold(" LH", fontName: appFont_bold, fontSize: 15)
+            formattedStr.bold(" LH", fontName: appFont_bold, fontSize: sizeTwo)
         }
-        formattedStr.bold(" - \(userProfileData.PlayingRole)   ", fontName: appFont_bold, fontSize: 15)
+        formattedStr.bold(" - \(userProfileData.PlayingRole)   ", fontName: appFont_bold, fontSize: sizeTwo)
         if userProfileData.BowlingStyle != "-" {
             formattedStr.appendAttributedString(ballImageAttachmentString)
-            formattedStr.bold(" \(userProfileData.BowlingStyle)", fontName: appFont_bold, fontSize: 15)
+            formattedStr.bold(" \(userProfileData.BowlingStyle)", fontName: appFont_bold, fontSize: sizeTwo)
         }
         playerInfoLabel.attributedText = formattedStr
     }
@@ -407,8 +407,6 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
         
         var image : UIImage!
         if coverOrProfile == "Profile" {
-            //dispatch_async(dispatch_get_main_queue(),{
-            
             if let img = info[UIImagePickerControllerEditedImage] as? UIImage
             {
                 image = img
@@ -420,16 +418,11 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 self.userProfileImage.image = img
             }
             
-            //self.userProfileImage.image = image
             self.dismissViewControllerAnimated(true) {
                 addProfileImageData(self.resizeImage(image, newWidth: 200))
-                //self.initView()
             }
-            //})
         }
         else {
-            
-            
             if let img = info[UIImagePickerControllerEditedImage] as? UIImage
             {
                 image = img
@@ -442,7 +435,6 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 self.imgCoverPhoto.image = image
             }
             
-           // self.imgCoverPhoto.image = image
             self.dismissViewControllerAnimated(true) {
                 addCoverImageData(self.resizeCoverImage(image, newWidth: 800))
             }
