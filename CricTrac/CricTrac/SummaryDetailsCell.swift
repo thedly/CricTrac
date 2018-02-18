@@ -21,6 +21,7 @@ class SummaryDetailsCell: UITableViewCell {
     @IBOutlet weak var economyLabel: UILabel!
     
     @IBOutlet weak var matchDateAndVenue: UILabel!
+    @IBOutlet weak var vsImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

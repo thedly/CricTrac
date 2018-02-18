@@ -653,6 +653,7 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
         
         let mData = MatchSummaryData()
         mData.matchId = value["key"] as! String
+        mData.result = value["Result"] as! String
         
         //code added by Sajith for Double Innings
         var matchFormat = ""
@@ -924,6 +925,15 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
             aCell.oponentName.attributedText = formattedOpponentName
             aCell.matchDateAndVenue.attributedText = formattedDate
             aCell.stadiumLabel.attributedText = formattedGround
+            if currentMatch.result == "Won" {
+                aCell.vsImageView.image = UIImage(named: "thumbsup")
+            }
+            else if currentMatch.result == "Lost" {
+                aCell.vsImageView.image = UIImage(named: "thumbsdown")
+            }
+            else {
+                aCell.vsImageView.image = UIImage(named: "match-tie")
+            }
             
             if let isHidden = currentMatch.BattingSectionHidden where isHidden == true{
                 

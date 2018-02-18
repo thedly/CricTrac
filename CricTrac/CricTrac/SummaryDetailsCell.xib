@@ -15,9 +15,6 @@
             <string>SourceSansPro-Black</string>
             <string>SourceSansPro-Black</string>
         </mutableArray>
-        <mutableArray key="SourceSansPro-Semibold.otf">
-            <string>SourceSansPro-Semibold</string>
-        </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -32,17 +29,18 @@
                         <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="juz-ti-m9S">
                             <rect key="frame" x="192" y="52" width="20" height="20"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6J-Oc-KVZ">
-                                    <rect key="frame" x="5" y="4" width="10" height="12"/>
-                                    <fontDescription key="fontDescription" name="SourceSansPro-Semibold" family="Source Sans Pro" pointSize="9"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thumbsup" translatesAutoresizingMaskIntoConstraints="NO" id="HpK-wf-U2C">
+                                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="XmE-Cs-C4x"/>
+                                        <constraint firstAttribute="height" constant="20" id="ckQ-bq-bbZ"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="C6J-Oc-KVZ" firstAttribute="centerX" secondItem="juz-ti-m9S" secondAttribute="centerX" id="2Nw-Gt-Km2"/>
-                                <constraint firstItem="C6J-Oc-KVZ" firstAttribute="centerY" secondItem="juz-ti-m9S" secondAttribute="centerY" id="7xI-XT-1LD"/>
+                                <constraint firstItem="HpK-wf-U2C" firstAttribute="centerX" secondItem="juz-ti-m9S" secondAttribute="centerX" id="0di-gC-oVh"/>
+                                <constraint firstItem="HpK-wf-U2C" firstAttribute="centerY" secondItem="juz-ti-m9S" secondAttribute="centerY" id="eeP-ZM-e1K"/>
                                 <constraint firstAttribute="width" constant="20" id="lQl-mU-DvQ"/>
                                 <constraint firstAttribute="height" constant="20" id="uen-Il-Zgt"/>
                             </constraints>
@@ -151,9 +149,13 @@
                 <outlet property="oponentName" destination="aWf-eg-Bxn" id="Tb5-On-T4y"/>
                 <outlet property="stadiumLabel" destination="Fnn-i8-AfA" id="uP5-72-vSq"/>
                 <outlet property="strikeRateLabel" destination="VZA-dB-aZZ" id="ylh-Dd-xL1"/>
+                <outlet property="vsImageView" destination="HpK-wf-U2C" id="h6X-dp-Wdb"/>
                 <outlet property="vsView" destination="juz-ti-m9S" id="B23-3W-f4G"/>
             </connections>
             <point key="canvasLocation" x="406" y="217.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="thumbsup" width="90" height="97"/>
+    </resources>
 </document>

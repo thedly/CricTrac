@@ -179,7 +179,6 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
                     // sravani - mark for follow
                     
                     if self.followingIds.contains(searchFriendUserId) {
-                        
                         aCell.FollowBtn.setTitle("FOLLOWING", forState: .Normal)
                         let indexNub = self.followingIds.indexOf(searchFriendUserId)
                         print(indexNub)
@@ -188,9 +187,7 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
                         aCell.FollowBtn.userInteractionEnabled = false
                         //aCell.FollowBtn.alpha = 0.7
                         aCell.FollowBtn.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
-                        
                     }
-                        
                     else {
                         aCell.FollowBtn.setTitle("FOLLOW", forState: .Normal)
                         aCell.FollowBtn.userInteractionEnabled = true
@@ -199,7 +196,6 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
                         
                         aCell.FollowBtn.addTarget(self, action: #selector(self.followBtnPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                     }
-                    
                 })
                 
                 aCell.FollowBtn.accessibilityIdentifier = searchedProfiles[indexPath.row].id

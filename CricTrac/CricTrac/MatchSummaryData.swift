@@ -22,8 +22,6 @@ class MatchSummaryData {
     var matchDate: NSDate!
     var ageGroup: String!
     var level: String!
-    
-    
-   
+    var result: String!
     
 }
