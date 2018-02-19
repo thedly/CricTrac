@@ -140,6 +140,8 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
     @IBOutlet weak var scrollViewBottomElementConstraint : NSLayoutConstraint!
     
     @IBOutlet weak var myCoachesButton: UIButton!
+    @IBOutlet weak var FollowersCount: UILabel!
+    @IBOutlet weak var FollowingCount: UILabel!
     
     var alertMessage = "Change picture"
     

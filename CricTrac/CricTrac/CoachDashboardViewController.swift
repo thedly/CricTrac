@@ -57,6 +57,9 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     @IBOutlet weak var noPlayersForBatting: UILabel!
     @IBOutlet weak var noPlayersForBowling: UILabel!
     
+    @IBOutlet weak var FollowersCount: UILabel!
+    @IBOutlet weak var FollowingCount: UILabel!
+    
     var players = [String]()
     var batsmen = [String]()
     var bowlers = [String]()

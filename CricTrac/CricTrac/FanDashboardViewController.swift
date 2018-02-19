@@ -32,6 +32,9 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
   
+    @IBOutlet weak var FollowingCount: UILabel!
+    @IBOutlet weak var FollowersCount: UILabel!
+    
     var friendProfile:[String:AnyObject]?
     var userProfileData:Profile!
     var coverOrProfile = ""
