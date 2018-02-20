@@ -198,7 +198,12 @@ class FollowingViewController: UIViewController,IndicatorInfoProvider,ThemeChang
         let removeAction = UIAlertAction(title: "Yes", style: .Default) { action -> Void in
             
             fireBaseRef.child("Users").child(followerId!).child("Followers").child(followingNodeIdOther!).removeValue()
+            //api call to reset the followers count
+            followCount(followerId!)
+            
             fireBaseRef.child("Users").child((currentUser?.uid)!).child("Following").child(followingNodeId!).removeValue()
+            //api call to reset the following count
+            followCount((currentUser?.uid)!)
             
             self.getFollowingList()
             

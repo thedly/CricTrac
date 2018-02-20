@@ -58,11 +58,8 @@ class FriendBaseViewController: ButtonBarPagerTabStripViewController,ThemeChange
         settings.style.buttonBarItemLeftRightMargin = 0
         settings.style.buttonBarMinimumLineSpacing = 1
         
-      
-        
-       
         setNavigationBarProperties()
-       definesPresentationContext = true
+        definesPresentationContext = true
        
     }
 

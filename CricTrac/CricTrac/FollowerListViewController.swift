@@ -274,17 +274,21 @@ class FollowerListViewController: UIViewController,IndicatorInfoProvider,ThemeCh
             
             let removeAction = UIAlertAction(title: "Yes", style: .Default) { action -> Void in
                 
-                let followerId = sender.accessibilityIdentifier
-                let followerNodeId = sender.accessibilityValue
-                let followerOtherNodeId = sender.accessibilityHint
-                
-            
+            let followerId = sender.accessibilityIdentifier
+            let followerNodeId = sender.accessibilityValue
+            let followerOtherNodeId = sender.accessibilityHint
             fireBaseRef.child("Users").child((currentUser?.uid)!).child("Followers").child(followerNodeId!).child("isBlocked").setValue(1)
+                
+                //api call to reset the followers count
+                followCount((currentUser?.uid)!)
+                
                 
             fireBaseRef.child("Users").child(followerId!).child("Following").child(followerOtherNodeId!).child("isBlocked").setValue(1)
                 
+                //api call to reset the following count
+                followCount(followerId!)
+
                 self.getFollowersList()
-                
             }
             
             actionSheetController.addAction(removeAction)
@@ -313,7 +317,12 @@ class FollowerListViewController: UIViewController,IndicatorInfoProvider,ThemeCh
                 
                 fireBaseRef.child("Users").child((currentUser?.uid)!).child("Followers").child(followerNodeId!).child("isBlocked").setValue(0)
                 
+                //api call to reset the followers count
+                followCount((currentUser?.uid)!)
                 fireBaseRef.child("Users").child(followerId!).child("Following").child(followerOtherNodeId!).child("isBlocked").setValue(0)
+                
+                //api call to reset the following count
+                followCount(followerId!)
                 
                  self.getFollowersList()
             }

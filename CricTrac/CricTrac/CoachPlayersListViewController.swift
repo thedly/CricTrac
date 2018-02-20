@@ -305,15 +305,20 @@ class CoachPlayersListViewController: UIViewController,UITableViewDelegate,UITab
 //                
 //                aCell.AddFriendBtn.addTarget(self, action: #selector(CoachPlayersListViewController.removePlayer(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             
-            aCell.friendId = playerReqId
-            aCell.FollowBtn.accessibilityIdentifier = coachNodeId
-            aCell.FollowBtn.restorationIdentifier = playerNodeIdOther
-            aCell.FollowBtn.accessibilityValue = playerReqId
-            aCell.FollowBtn.setTitle("REMOVE", forState: .Normal)
-            aCell.FollowBtn.setTitleColor(UIColor(red: 0.76, green: 0.18, blue: 0.25, alpha: 1.0), forState: .Normal)
-            aCell.FollowBtn.titleLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 12)
-            
-            aCell.FollowBtn.addTarget(self, action: #selector(CoachPlayersListViewController.removePlayer(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            if friendID == currentUser?.uid {
+                aCell.friendId = playerReqId
+                aCell.FollowBtn.accessibilityIdentifier = coachNodeId
+                aCell.FollowBtn.restorationIdentifier = playerNodeIdOther
+                aCell.FollowBtn.accessibilityValue = playerReqId
+                aCell.FollowBtn.setTitle("REMOVE", forState: .Normal)
+                aCell.FollowBtn.setTitleColor(UIColor(red: 0.76, green: 0.18, blue: 0.25, alpha: 1.0), forState: .Normal)
+                aCell.FollowBtn.titleLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 12)
+                
+                aCell.FollowBtn.addTarget(self, action: #selector(CoachPlayersListViewController.removePlayer(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            }
+            else {
+                aCell.FollowBtn.hidden = true
+            }
             
             aCell.backgroundColor = UIColor.clearColor()
             aCell.baseView.backgroundColor = currentTheme.bottomColor

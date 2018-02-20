@@ -232,9 +232,7 @@ class FriendSearchViewController: UIViewController,IndicatorInfoProvider,ThemeCh
             
             //call the follow notification api
             followNotification(sender.accessibilityIdentifier!)
-            
         }
-        
     }
 
     func AddFriendBtnPressed(sender:UIButton) {

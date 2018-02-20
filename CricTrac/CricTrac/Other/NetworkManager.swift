@@ -160,6 +160,16 @@ func sendUpgradeMail(userId:String){
     dataTask?.resume()
 }
 
+func followCount(userId:String){
+    let followCountURL = serverBaseURL+"/followCount/\((userId))"
+    let request = NSMutableURLRequest(URL: NSURL(string:followCountURL)!)
+    request.HTTPMethod = "POST"
+    
+    dataTask = defaultSession.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+    })
+    dataTask?.resume()
+}
+
 
 
 var pageKey:String?

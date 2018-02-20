@@ -395,6 +395,28 @@ func fetchFriendDetail(id:String,sucess:(result:[String:String])->Void){
     })
 }
 
+func getFollowersCount(id:String,sucess:(followersCount:String)->Void){
+    fireBaseRef.child("Users").child(id).child("UserSettings").child("FollowersCount").observeEventType(.Value, withBlock: { snapshot in
+        if snapshot.value as? String != nil {
+            sucess(followersCount: snapshot.value as! String)
+        }
+        else {
+            sucess(followersCount: "0")
+        }
+    })
+}
+
+func getFollowingCount(id:String,sucess:(followingCount:String)->Void){
+    fireBaseRef.child("Users").child(id).child("UserSettings").child("FollowingCount").observeEventType(.Value, withBlock: { snapshot in
+        if snapshot.value as? String != nil {
+            sucess(followingCount: snapshot.value as! String)
+        }
+        else {
+            sucess(followingCount: "0")
+        }
+    })
+}
+
 func fetchBasicProfile(id:String,sucess:(result:[String:String])->Void){
     var playingRole = ""
     var battingStyle = ""
@@ -1161,6 +1183,8 @@ func createFollowingAndFollowers(userId: String) {
     
     refForFollowers.setValue(otherUserFollowersDictVal)
     
+    followCount(playerId)
+    followCount(followerId)
 }
 
 func getMyFollowingList(sucessBlock:([String: AnyObject])->Void) {

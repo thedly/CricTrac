@@ -109,7 +109,11 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     var sizeFive:CGFloat = 25
     
     override func viewWillAppear(animated: Bool) {
-         super.viewWillAppear(animated)
+        super.viewWillAppear(animated)
+        
+        if friendId == nil {
+            followCount((currentUser?.uid)!)
+        }
        
         setBackgroundColor()
 
@@ -224,10 +228,10 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
 
                             if isAccepted == "0" {
                                 
-                                self.coachFrndButton.setTitle("CANCEL REQUEST", forState: .Normal)
+                                self.coachFrndButton.setTitle("Cancel Request", forState: .Normal)
                             }
                             else{
-                                self.coachFrndButton.setTitle("REMOVE COACH", forState: .Normal)
+                                self.coachFrndButton.setTitle("Remove Coach", forState: .Normal)
                             }
                             break
                         }
@@ -241,7 +245,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         }
        
         else if profileData.UserProfile == "Coach" {
-            coachFrndButton.setTitle("MY PLAYERS", forState: .Normal)
+            coachFrndButton.setTitle("My Players", forState: .Normal)
 //            coachFrndBtnHeightConstraint.constant = 30
 //            pendingRequests.hidden = false
             
@@ -351,6 +355,54 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapCoverPhoto))
         tapGesture.numberOfTapsRequired = 1
         imgCoverPhoto.addGestureRecognizer(tapGesture)
+        
+        //set the Follower/Following counts
+        getFollowersCount(currentUserId, sucess: { (result) in
+            let followersCount = result
+            var followersDisp = "0"
+            if Double(followersCount)! > 999999 {
+                let followersCountValue = Double(followersCount)!/1000000
+                let followersCountComponent = String(followersCountValue).componentsSeparatedByString(".")
+                let followersCountInt = followersCountComponent[0]
+                let followersCountDec = followersCountComponent[1]
+                let followersCountDecExtract = String(followersCountDec.characters[followersCountDec.characters.startIndex])
+                followersDisp = followersCountInt + "." + followersCountDecExtract + " M"
+            }
+            else if Double(followersCount)! > 999 {
+                let followersCountValue = Double(followersCount)!/1000
+                let followersCountComponent = String(followersCountValue).componentsSeparatedByString(".")
+                let followersCountInt = followersCountComponent[0]
+                //let followersCountDec = followersCountComponent[1]
+                followersDisp = followersCountInt + " K"
+            }
+            else {
+                followersDisp = followersCount
+            }
+            self.FollowersCount.text = followersDisp
+        })
+        
+        getFollowingCount(currentUserId, sucess: { (result) in
+            let followingCount = result
+            var followingDisp = "0"
+            if Double(followingCount)! > 999999 {
+                let followingCountValue = Double(followingCount)!/1000000
+                let followingCountComponent = String(followingCountValue).componentsSeparatedByString(".")
+                let followingCountInt = followingCountComponent[0]
+                let followingCountDec = followingCountComponent[1]
+                let followingCountDecExtract = String(followingCountDec.characters[followingCountDec.characters.startIndex])
+                followingDisp = followingCountInt + "." + followingCountDecExtract + " M"
+            }
+            else if Double(followingCount)! > 999 {
+                let followingCountValue = Double(followingCount)!/1000
+                let followingCountComponent = String(followingCountValue).componentsSeparatedByString(".")
+                let followingCountInt = followingCountComponent[0]
+                followingDisp = followingCountInt + " K"
+            }
+            else {
+                followingDisp = followingCount
+            }
+            self.FollowingCount.text = followingDisp
+        })
     }
     
     //Coach Summary
@@ -687,7 +739,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
             self.presentViewController(actionSheetController, animated: true, completion: nil)
                 break
             
-        case "CANCEL REQUEST":
+        case "Cancel Request":
         
             let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to Cancel this coach request?", preferredStyle: .ActionSheet)
             
@@ -710,7 +762,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
         
             break
             
-        case "REMOVE COACH":
+        case "Remove Coach":
             
             let actionSheetController = UIAlertController(title: "", message: "Are you sure you want to Remove this coach?", preferredStyle: .ActionSheet)
             
@@ -1266,7 +1318,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     }
     
     @IBAction func CoachSummaryResultTapped(sender: UIButton) {
-        
+        if friendId == nil {
         switch sender.tag {
         case 1:
             if players.count != 0 {
@@ -1336,6 +1388,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 }
             }
             break
+        }
         }
      }
   

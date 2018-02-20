@@ -45,10 +45,10 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     @IBOutlet weak var achievements: UILabel!
     @IBOutlet weak var level: UILabel!
     @IBOutlet weak var ageGroup: UILabel!
+    
     var matchDetailsData : [String:AnyObject]!
     var battingViewHidden : Bool! = false
     var bowlingViewHidden : Bool!  = false
-    
     var battingViewHidden2 : Bool! = true
     var bowlingViewHidden2 : Bool!  = true
     
@@ -76,7 +76,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     @IBOutlet weak var coachAnalysisViewHeightConstarint: NSLayoutConstraint!
     @IBOutlet weak var coachAnalysisTextView: UITextView!
     @IBOutlet weak var coachAnalysisTextViewHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var selfAnalysisView: UIView!
     @IBOutlet weak var coachAnalysisView: UIView!
     @IBOutlet weak var additionalInfoView: UIView!
@@ -87,7 +86,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     @IBOutlet weak var catchesText: UILabel!
     @IBOutlet weak var runoutsText: UILabel!
     @IBOutlet weak var additionalInfoViewHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var fieldingRoleView: UIView!
     @IBOutlet weak var fieldingRoleViewHeightConstaraint: NSLayoutConstraint!
     
@@ -99,7 +97,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     @IBOutlet weak var sixes2: UILabel!
     @IBOutlet weak var strikeRateText2: UILabel!
     @IBOutlet weak var dismissal2: UILabel!
-    
     @IBOutlet weak var bowlingView2: UIView!
     @IBOutlet weak var economy2: UILabel!
     @IBOutlet weak var wides2: UILabel!
@@ -107,15 +104,11 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     @IBOutlet weak var noBalls2: UILabel!
     @IBOutlet weak var maidens2: UILabel!
     @IBOutlet weak var secondInningsTextLabel: UILabel!
-    
+    @IBOutlet weak var firstInningsTextLabel: UILabel!
     @IBOutlet weak var firstInningsLabelHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var secondInningsLabelHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var firstInningsStackView: UIStackView!
-    
     @IBOutlet weak var secondInningsStatckView: UIStackView!
-    
     
     var isFriendDashboard: Bool!  = false
     var isCoach: Bool! = false
@@ -126,7 +119,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     var sizeThree:CGFloat = 30
     var sizeFour:CGFloat = 40
     var sizeFive:CGFloat = 50
-    
     
     @IBAction func deleteActionPressed(sender: UIButton) {
         
@@ -159,17 +151,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         }
         setNavigationBarProperties()
         setBackgroundColor()
-        
-        //        if matchDetailsData["MatchFormat"] as? String != "Double Innings" {
-        //            battingView2.hidden = true
-        //            bowlingView2.hidden = true
-        //            secondInningsTextLabel.hidden = true
-        //        }
-        //        else {
-        //            battingView2.hidden = false
-        //            bowlingView2.hidden = false
-        //            secondInningsTextLabel.hidden = false
-        //        }
     }
     
     func deleteMatch(){
@@ -203,7 +184,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         navigationItem.leftBarButtonItem = leftbarButton
         
         if isFriendDashboard == false {
-            
             let addNewMatchButton: UIButton = UIButton(type:.Custom)
             addNewMatchButton.frame = CGRectMake(0, 0, 40, 40)
             addNewMatchButton.setImage(UIImage(named: "Edit-100"), forState: UIControlState.Normal)
@@ -225,7 +205,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                 self.bannerViewHeightConstraint.constant = 0
                 self.bottomViewHeightConstraint.constant = 50
             }
-            
         }
         else {
             barView.backgroundColor = currentTheme.topColor
@@ -238,17 +217,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             self.bottomViewHeightConstraint.constant = 0
         }
         title = "SCORECARD"
-        
-        //        if friendProfile == false {
-        //            self.bottomView.hidden = false
-        //        }
-        //        else {
-        //           self.bottomView.hidden = true
-        //        }
-        //let titleDict: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        // navigationController!.navigationBar.titleTextAttributes = titleDict
     }
-    
     
     @IBAction func didTapEditButton(sender: AnyObject) {
         let editMatch = viewController("AddMatchDetailsViewController") as! AddMatchDetailsViewController
@@ -256,22 +225,17 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         editMatch.previous = self
         editMatch.matchBeingEdited = true
         self.navigationController?.pushViewController(editMatch, animated: true)
-        //presentViewController(editMatch, animated: true) {}
-        // presentViewController(editMatch, animated: true) {}
     }
     
     @IBAction func didTapCancelOthers(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
-        //self.navigationController?.popViewControllerAnimated(true)
     }
     
     @IBAction func didTapCancel(sender: AnyObject) {
-        //dismissViewControllerAnimated(true, completion: nil)
         self.navigationController?.popViewControllerAnimated(true)
     }
     
     @IBAction func ShareActionPressed(sender: UIButton) {
-        //print(self.ScreenShot.bounds.size)
         UIGraphicsBeginImageContext(self.ScreenShot.bounds.size);
         self.ScreenShot.layer.renderInContext(UIGraphicsGetCurrentContext()!)
         let screenShot = UIGraphicsGetImageFromCurrentImageContext();
@@ -286,7 +250,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
     func changeThemeSettigs() {
         let currentTheme = cricTracTheme.currentTheme
         self.view.backgroundColor = currentTheme.topColor
-        // navigationController!.navigationBar.barTintColor = currentTheme.topColor
         setPlainShadow(firstInningsStackView, color: currentTheme.bottomColor.CGColor)
         setPlainShadow(secondInningsStatckView, color: currentTheme.bottomColor.CGColor)
     }
@@ -321,7 +284,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             sizeFour = 50
             sizeFive = 60
         }
-        
         
         setBackgroundColor()
         setNavigationBarProperties()
@@ -462,7 +424,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         }
         
         // for feilding
-        
         if matchDetailsData["FieldingRole"] != nil {
             // fieldingRole.text!.uppercaseString
             if matchDetailsData["FieldingRole"] as! String != "-" {
@@ -474,9 +435,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                 fieldingRoleViewHeightConstaraint.constant = 0
                 fieldingRole.text = ""
             }
-            
-            //fieldingRole.textColor = UIColor.whiteColor()
-            
         }
         else {
             fieldingRoleViewHeightConstaraint.constant = 0
@@ -499,8 +457,8 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             additionalInfoView.hidden = true
             additionalInfoViewHeightConstraint.constant = 0
         }
-        // sravani for self and coach analysis
         
+        // sravani for self and coach analysis
         if matchDetailsData["SelfAnalysis"] as? String != "" && matchDetailsData["SelfAnalysis"] != nil {
             selfAnalysisTextView.text = (matchDetailsData["SelfAnalysis"]!) as! String
             //selfAnalysisTextView.textColor = UIColor.whiteColor()
@@ -526,10 +484,11 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             coachAnalysisViewHeightConstarint.constant = 0
             coachAnalysisView.hidden = true
         }
-        
     }
     
     func initializeView() {
+        firstInningsLabelHeightConstraint.constant = 0
+        
         if let runs = matchDetailsData["RunsTaken"] as? String  where runs != "-" {
             let formattedString = NSMutableAttributedString()
             if let dismissal = matchDetailsData["Dismissal"] as? String where dismissal != "Not out" {
@@ -621,14 +580,9 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         }
         
         if (battingViewHidden == true) {
-            //self.battingView.hidden = true
-            firstInningsLabelHeightConstraint.constant = 0
             self.screenShotHeightConstraint.constant -= 240
         }
         else {
-            if matchDetailsData["MatchFormat"] as? String == "Double Innings" {
-                firstInningsLabelHeightConstraint.constant = 22
-            }
             self.screenShotHeightConstraint.constant += 240
         }
         
@@ -643,6 +597,12 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
                 self.battingView2.hidden = false
             }
             
+            if (battingViewHidden == true) {
+                firstInningsLabelHeightConstraint.constant = 0
+            }
+            else {
+                firstInningsLabelHeightConstraint.constant = 22
+            }
         }
         
         if (battingViewHidden2 == true) {
@@ -655,7 +615,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             secondInningsLabelHeightConstraint.constant = 22
             self.screenShotHeightConstraint.constant += 190
         }
-        
         
         //bowling section
         if let oversBowled = matchDetailsData["OversBowled"] as? String  where oversBowled != "-" {
@@ -718,8 +677,6 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             }
         }
         
-        
-        
         if let oversBowled = matchDetailsData["OversBowled"] as? String where oversBowled == "-" {
             bowlingViewHidden = true
             self.bowlingView.hidden = true
@@ -730,20 +687,14 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
         }
         
         if (bowlingViewHidden == true) {
-            //self.bowlingView.hidden = true
-            firstInningsLabelHeightConstraint.constant = 0
             self.screenShotHeightConstraint.constant -= 280
         }
         else{
-            if matchDetailsData["MatchFormat"] as? String == "Double Innings" {
-                firstInningsLabelHeightConstraint.constant = 22
-            }
             self.screenShotHeightConstraint.constant += 240
         }
         
         // second innings
         if matchDetailsData["MatchFormat"] as? String == "Double Innings" && matchDetailsData["MatchFormat"]  != nil {
-            
             if let oversBowled = matchDetailsData["OversBowled2"] as? String where oversBowled == "-" {
                 bowlingViewHidden2 = true
                 self.bowlingView2.hidden = true
@@ -751,6 +702,13 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             else {
                 bowlingViewHidden2 = false
                 self.bowlingView2.hidden = false
+            }
+            
+            if (bowlingViewHidden == true) {
+                firstInningsLabelHeightConstraint.constant = 0
+            }
+            else {
+                firstInningsLabelHeightConstraint.constant = 22
             }
         }
         
@@ -835,7 +793,7 @@ class SummaryMatchDetailsViewController: UIViewController,ThemeChangeable,previo
             
             formattedString.bold(" |  \(ageStr)\n", fontName: appFont_bold, fontSize: sizeTwo)
             
-            let groundData = matchDetailsData["Ground"] as? String
+            //let groundData = matchDetailsData["Ground"] as? String
             let formattedString1 = NSMutableAttributedString()
             if let grnd = matchDetailsData["Ground"] as? String where grnd != "-" {
                 //formattedString1.appendAttributedString(groundAttachmentString)

@@ -48,6 +48,10 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
     var sizeFive:CGFloat = 25
 
     override func viewWillAppear(animated: Bool) {
+        if friendId == nil {
+            followCount((currentUser?.uid)!)
+        }
+        
         setBackgroundColor()
         initView()
         self.updateFanDashBoard()
@@ -402,6 +406,53 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
         tapGesture.numberOfTapsRequired = 1
         imgCoverPhoto.addGestureRecognizer(tapGesture)
         
+        //set the Follower/Following counts
+        getFollowersCount(currentUserId, sucess: { (result) in
+            let followersCount = result
+            var followersDisp = "0"
+            if Double(followersCount)! > 999999 {
+                let followersCountValue = Double(followersCount)!/1000000
+                let followersCountComponent = String(followersCountValue).componentsSeparatedByString(".")
+                let followersCountInt = followersCountComponent[0]
+                let followersCountDec = followersCountComponent[1]
+                let followersCountDecExtract = String(followersCountDec.characters[followersCountDec.characters.startIndex])
+                followersDisp = followersCountInt + "." + followersCountDecExtract + " M"
+            }
+            else if Double(followersCount)! > 999 {
+                let followersCountValue = Double(followersCount)!/1000
+                let followersCountComponent = String(followersCountValue).componentsSeparatedByString(".")
+                let followersCountInt = followersCountComponent[0]
+                //let followersCountDec = followersCountComponent[1]
+                followersDisp = followersCountInt + " K"
+            }
+            else {
+                followersDisp = followersCount
+            }
+            self.FollowersCount.text = followersDisp
+        })
+        
+        getFollowingCount(currentUserId, sucess: { (result) in
+            let followingCount = result
+            var followingDisp = "0"
+            if Double(followingCount)! > 999999 {
+                let followingCountValue = Double(followingCount)!/1000000
+                let followingCountComponent = String(followingCountValue).componentsSeparatedByString(".")
+                let followingCountInt = followingCountComponent[0]
+                let followingCountDec = followingCountComponent[1]
+                let followingCountDecExtract = String(followingCountDec.characters[followingCountDec.characters.startIndex])
+                followingDisp = followingCountInt + "." + followingCountDecExtract + " M"
+            }
+            else if Double(followingCount)! > 999 {
+                let followingCountValue = Double(followingCount)!/1000
+                let followingCountComponent = String(followingCountValue).componentsSeparatedByString(".")
+                let followingCountInt = followingCountComponent[0]
+                followingDisp = followingCountInt + " K"
+            }
+            else {
+                followingDisp = followingCount
+            }
+            self.FollowingCount.text = followingDisp
+        })
     }
     
     func tapCoverPhoto()  {
