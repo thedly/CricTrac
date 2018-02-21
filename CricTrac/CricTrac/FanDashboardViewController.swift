@@ -429,6 +429,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
                 followersDisp = followersCount
             }
             self.FollowersCount.text = followersDisp
+            self.FollowersCount.sizeToFit()
         })
         
         getFollowingCount(currentUserId, sucess: { (result) in
@@ -452,6 +453,7 @@ class FanDashboardViewController: UIViewController, UICollectionViewDelegate, UI
                 followingDisp = followingCount
             }
             self.FollowingCount.text = followingDisp
+            self.FollowingCount.sizeToFit()
         })
     }
     

@@ -60,6 +60,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
     @IBOutlet weak var FollowersCount: UILabel!
     @IBOutlet weak var FollowingCount: UILabel!
     
+    
     var players = [String]()
     var batsmen = [String]()
     var bowlers = [String]()
@@ -379,6 +380,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 followersDisp = followersCount
             }
             self.FollowersCount.text = followersDisp
+            self.FollowersCount.sizeToFit()
         })
         
         getFollowingCount(currentUserId, sucess: { (result) in
@@ -402,6 +404,7 @@ class CoachDashboardViewController: UIViewController,  UIImagePickerControllerDe
                 followingDisp = followingCount
             }
             self.FollowingCount.text = followingDisp
+            self.FollowingCount.sizeToFit()
         })
     }
     

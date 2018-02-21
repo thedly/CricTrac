@@ -662,6 +662,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 followersDisp = followersCount
             }
             self.FollowersCount.text = followersDisp
+            self.FollowersCount.sizeToFit()
         })
         
         getFollowingCount(currentUserId, sucess: { (result) in
@@ -685,6 +686,7 @@ class UserDashboardViewController: UIViewController, UICollectionViewDelegate, U
                 followingDisp = followingCount
             }
             self.FollowingCount.text = followingDisp
+            self.FollowingCount.sizeToFit()
         })
     }
     
@@ -1072,34 +1074,40 @@ func setDashboardData(){
                                 var totalStrikeRate = Float("0.00")
                                 var strikerate1 = Float("0.00")
                                 var strikerate2 = Float("0.00")
+                                var ballsFaced1 = "0"
+                                var ballsFaced2 = "0"
+                                var runsScored1 = "0"
+                                var runsScored2 = "0"
                                 
                                 if batting1 == true {
-                                    let ballsFaced1 = data["BallsFaced"] as? String
-                                    let runsScored1 = data["RunsTaken"] as? String
+                                    ballsFaced1 = (data["BallsFaced"] as? String)!
+                                    runsScored1 = (data["RunsTaken"] as? String)!
                                     
                                     if ballsFaced1 == "0" {
                                         strikerate1 = Float("0.00")
                                     }
                                     else {
-                                        let strikeRate1 = String(format: "%.1f",(Float(runsScored1!))!*100/Float(ballsFaced1!)!)
+                                        let strikeRate1 = String(format: "%.1f",(Float(runsScored1))!*100/Float(ballsFaced1)!)
                                         strikerate1 = Float(strikeRate1)
                                     }
                                 }
                                 if batting2 == true {
-                                    let ballsFaced2 = data["BallsFaced2"] as? String
-                                    let runsScored2 = data["RunsTaken2"] as? String
+                                    ballsFaced2 = (data["BallsFaced2"] as? String)!
+                                    runsScored2 = (data["RunsTaken2"] as? String)!
                                     
                                     if ballsFaced2 == "0" {
                                         strikerate2 = Float("0.00")
                                     }
                                     else {
-                                        let strikeRate2 = String(format: "%.1f",(Float(runsScored2!))!*100/Float(ballsFaced2!)!)
+                                        let strikeRate2 = String(format: "%.1f",(Float(runsScored2))!*100/Float(ballsFaced2)!)
                                         strikerate2 = Float(strikeRate2)
                                     }
                                 }
                                 
                                 if batting1 == true && batting2 == true {
-                                    totalStrikeRate = (strikerate1! + strikerate2!)/2
+                                    let totalBallsFaced = Int(ballsFaced1)! + Int(ballsFaced2)!
+                                    let totalRunsScored = Int(runsScored1)! + Int(runsScored2)!
+                                    totalStrikeRate = Float(String(format: "%.1f",Float(totalRunsScored)*100/Float(totalBallsFaced)))
                                 }
                                 else {
                                     totalStrikeRate = strikerate1! + strikerate2!
@@ -1373,34 +1381,40 @@ func setDashboardData(){
                                 var totalStrikeRate = Float("0.00")
                                 var strikerate1 = Float("0.00")
                                 var strikerate2 = Float("0.00")
+                                var ballsFaced1 = "0"
+                                var ballsFaced2 = "0"
+                                var runsScored1 = "0"
+                                var runsScored2 = "0"
                                 
                                 if batting1 == true {
-                                    let ballsFaced1 = data["BallsFaced"] as? String
-                                    let runsScored1 = data["RunsTaken"] as? String
+                                    ballsFaced1 = (data["BallsFaced"] as? String)!
+                                    runsScored1 = (data["RunsTaken"] as? String)!
                                     
                                     if ballsFaced1 == "0" {
                                         strikerate1 = Float("0.00")
                                     }
                                     else {
-                                        let strikeRate1 = String(format: "%.1f",(Float(runsScored1!))!*100/Float(ballsFaced1!)!)
+                                        let strikeRate1 = String(format: "%.1f",(Float(runsScored1))!*100/Float(ballsFaced1)!)
                                         strikerate1 = Float(strikeRate1)
                                     }
                                 }
                                 if batting2 == true {
-                                    let ballsFaced2 = data["BallsFaced2"] as? String
-                                    let runsScored2 = data["RunsTaken2"] as? String
+                                    ballsFaced2 = (data["BallsFaced2"] as? String)!
+                                    runsScored2 = (data["RunsTaken2"] as? String)!
                                     
                                     if ballsFaced2 == "0" {
                                         strikerate2 = Float("0.00")
                                     }
                                     else {
-                                        let strikeRate2 = String(format: "%.1f",(Float(runsScored2!))!*100/Float(ballsFaced2!)!)
+                                        let strikeRate2 = String(format: "%.1f",(Float(runsScored2))!*100/Float(ballsFaced2)!)
                                         strikerate2 = Float(strikeRate2)
                                     }
                                 }
                                 
                                 if batting1 == true && batting2 == true {
-                                    totalStrikeRate = (strikerate1! + strikerate2!)/2
+                                    let totalBallsFaced = Int(ballsFaced1)! + Int(ballsFaced2)!
+                                    let totalRunsScored = Int(runsScored1)! + Int(runsScored2)!
+                                    totalStrikeRate = Float(String(format: "%.1f",Float(totalRunsScored)*100/Float(totalBallsFaced)))
                                 }
                                 else {
                                     totalStrikeRate = strikerate1! + strikerate2!
@@ -1611,34 +1625,40 @@ func setDashboardData(){
                                 var totalStrikeRate = Float("0.00")
                                 var strikerate1 = Float("0.00")
                                 var strikerate2 = Float("0.00")
+                                var ballsFaced1 = "0"
+                                var ballsFaced2 = "0"
+                                var runsScored1 = "0"
+                                var runsScored2 = "0"
                                 
                                 if batting1 == true {
-                                    let ballsFaced1 = data["BallsFaced"] as? String
-                                    let runsScored1 = data["RunsTaken"] as? String
+                                    ballsFaced1 = (data["BallsFaced"] as? String)!
+                                    runsScored1 = (data["RunsTaken"] as? String)!
                                     
                                     if ballsFaced1 == "0" {
                                         strikerate1 = Float("0.00")
                                     }
                                     else {
-                                        let strikeRate1 = String(format: "%.1f",(Float(runsScored1!))!*100/Float(ballsFaced1!)!)
+                                        let strikeRate1 = String(format: "%.1f",(Float(runsScored1))!*100/Float(ballsFaced1)!)
                                         strikerate1 = Float(strikeRate1)
                                     }
                                 }
                                 if batting2 == true {
-                                    let ballsFaced2 = data["BallsFaced2"] as? String
-                                    let runsScored2 = data["RunsTaken2"] as? String
+                                    ballsFaced2 = (data["BallsFaced2"] as? String)!
+                                    runsScored2 = (data["RunsTaken2"] as? String)!
                                     
                                     if ballsFaced2 == "0" {
                                         strikerate2 = Float("0.00")
                                     }
                                     else {
-                                        let strikeRate2 = String(format: "%.1f",(Float(runsScored2!))!*100/Float(ballsFaced2!)!)
+                                        let strikeRate2 = String(format: "%.1f",(Float(runsScored2))!*100/Float(ballsFaced2)!)
                                         strikerate2 = Float(strikeRate2)
                                     }
                                 }
                                 
                                 if batting1 == true && batting2 == true {
-                                    totalStrikeRate = (strikerate1! + strikerate2!)/2
+                                    let totalBallsFaced = Int(ballsFaced1)! + Int(ballsFaced2)!
+                                    let totalRunsScored = Int(runsScored1)! + Int(runsScored2)!
+                                    totalStrikeRate = Float(String(format: "%.1f",Float(totalRunsScored)*100/Float(totalBallsFaced)))
                                 }
                                 else {
                                     totalStrikeRate = strikerate1! + strikerate2!
@@ -1802,34 +1822,40 @@ func setDashboardData(){
                                 var totalStrikeRate = Float("0.00")
                                 var strikerate1 = Float("0.00")
                                 var strikerate2 = Float("0.00")
+                                var ballsFaced1 = "0"
+                                var ballsFaced2 = "0"
+                                var runsScored1 = "0"
+                                var runsScored2 = "0"
                                 
                                 if batting1 == true {
-                                    let ballsFaced1 = data["BallsFaced"] as? String
-                                    let runsScored1 = data["RunsTaken"] as? String
+                                    ballsFaced1 = (data["BallsFaced"] as? String)!
+                                    runsScored1 = (data["RunsTaken"] as? String)!
                                     
                                     if ballsFaced1 == "0" {
                                         strikerate1 = Float("0.00")
                                     }
                                     else {
-                                        let strikeRate1 = String(format: "%.1f",(Float(runsScored1!))!*100/Float(ballsFaced1!)!)
+                                        let strikeRate1 = String(format: "%.1f",(Float(runsScored1))!*100/Float(ballsFaced1)!)
                                         strikerate1 = Float(strikeRate1)
                                     }
                                 }
                                 if batting2 == true {
-                                    let ballsFaced2 = data["BallsFaced2"] as? String
-                                    let runsScored2 = data["RunsTaken2"] as? String
+                                    ballsFaced2 = (data["BallsFaced2"] as? String)!
+                                    runsScored2 = (data["RunsTaken2"] as? String)!
                                     
                                     if ballsFaced2 == "0" {
                                         strikerate2 = Float("0.00")
                                     }
                                     else {
-                                        let strikeRate2 = String(format: "%.1f",(Float(runsScored2!))!*100/Float(ballsFaced2!)!)
+                                        let strikeRate2 = String(format: "%.1f",(Float(runsScored2))!*100/Float(ballsFaced2)!)
                                         strikerate2 = Float(strikeRate2)
                                     }
                                 }
                                 
                                 if batting1 == true && batting2 == true {
-                                    totalStrikeRate = (strikerate1! + strikerate2!)/2
+                                    let totalBallsFaced = Int(ballsFaced1)! + Int(ballsFaced2)!
+                                    let totalRunsScored = Int(runsScored1)! + Int(runsScored2)!
+                                    totalStrikeRate = Float(String(format: "%.1f",Float(totalRunsScored)*100/Float(totalBallsFaced)))
                                 }
                                 else {
                                     totalStrikeRate = strikerate1! + strikerate2!

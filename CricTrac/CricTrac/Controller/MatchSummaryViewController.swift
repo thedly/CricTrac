@@ -826,7 +826,13 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
 //            }
 //        }
         
+        var ballsFaced1 = 0
+        var runsScored1 = 0
+        
         if let ballsFaced = value["BallsFaced"] as? String where ballsFaced != "-", let runsScored = value["RunsTaken"] as? String where runsScored != "-" && mData.BattingSectionHidden == false {
+            
+            ballsFaced1 = Int(ballsFaced)!
+            runsScored1 = Int(runsScored)!
             
             if ballsFaced == "0" {
                 mData.strikerate = Float("0.00")
@@ -849,9 +855,11 @@ class MatchSummaryViewController: UIViewController,UITableViewDataSource,UITable
                 }
             }
             else {
-                let strikeRate2 = String(format: "%.1f",(Float(runsScored2)!)*100/Float(ballsFaced2)!)
-                if mData.strikerate != nil {
-                    mData.strikerate = (mData.strikerate + Float(strikeRate2)!)/2
+                let totalBallsFaced = ballsFaced1 + Int(ballsFaced2)!
+                let totalRunsScored = runsScored1 + Int(runsScored2)!
+                let strikeRate2 = String(format: "%.1f",Float(totalRunsScored)*100/Float(totalBallsFaced))
+                if totalBallsFaced == 0 {
+                    mData.strikerate = Float("0.00")
                 }
                 else {
                     mData.strikerate = Float(strikeRate2)

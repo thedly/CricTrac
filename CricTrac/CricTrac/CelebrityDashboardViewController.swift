@@ -254,8 +254,6 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
     
     @IBOutlet weak var FollowersCount: UILabel!
     @IBOutlet weak var FollowingCount: UILabel!
-    @IBOutlet weak var FollowersCountWidth: NSLayoutConstraint!
-    @IBOutlet weak var FollowingCountWidth: NSLayoutConstraint!
     
     var friendId:String? = nil
     var currentUserId = ""
@@ -460,6 +458,7 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
                 followersDisp = followersCount
             }
             self.FollowersCount.text = followersDisp
+            self.FollowersCount.sizeToFit()
         })
         
         getFollowingCount(currentUserId, sucess: { (result) in
@@ -483,6 +482,7 @@ class CelebrityDashboardViewController: UIViewController,ThemeChangeable {
                 followingDisp = followingCount
             }
             self.FollowingCount.text = followingDisp
+            self.FollowingCount.sizeToFit()
         })
     }
     

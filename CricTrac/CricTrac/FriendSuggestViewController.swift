@@ -17,6 +17,8 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
      @IBOutlet weak var bannerView: GADBannerView!
      @IBOutlet weak var bannerViewHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var pageHeaderLabel: UILabel!
+    
     var currentTheme:CTTheme!
     
     var followingIds = [String]()
@@ -26,6 +28,7 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.pageHeaderLabel.text = ""
         initializeView()
         setBackgroundColor()
         // Do any additional setup after loading the view.
@@ -158,6 +161,12 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if UserProfilesData.count == 0 {
+            self.pageHeaderLabel.text = "Loading suggestions..."
+        }
+        else {
+            self.pageHeaderLabel.text = "People you may know"
+        }
         return UserProfilesData.count
     }
     
@@ -168,7 +177,8 @@ class FriendSuggestViewController: UIViewController, UITableViewDataSource, UITa
     func getCellForSuggestionsRow(indexPath:NSIndexPath)->FriendSuggestionsCell{
         //if FriendRequestsData.filter({$0.Name == UserProfilesData[indexPath.row].fullName}).first == nil {
             KRProgressHUD.dismiss()
-            if let aCell =  SuggestsTblview.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as? FriendSuggestionsCell {
+        self.pageHeaderLabel.text = "People you may know"
+        if let aCell =  SuggestsTblview.dequeueReusableCellWithIdentifier("FriendSuggestionsCell", forIndexPath: indexPath) as? FriendSuggestionsCell {
                 
                 let sugFriendUserId = UserProfilesData[indexPath.row].id
                 aCell.friendId = sugFriendUserId
